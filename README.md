@@ -15,7 +15,7 @@ Built with [PrismLibrary/Prism](https://github.com/PrismLibrary/Prism) and for t
 	- Possibility to send the data file to your colleges and friends to share logins
 	- Easy backup & restore
 - Everything works local
-	- No accounts needed
+	- No extra account for the app is needed
 	- No Internet connection needed
 	- but the options exists to use a WebDAV Server (ownCloud or nextCloud) [currently work in progress]
 - Free
@@ -44,6 +44,7 @@ The following steps will help if you want to contribute or work on the applicati
 - Visual Studio
 	- Don't forget to select the *Mobile development with .NET* package in the installation process 
 - Windows 10, version >= `1809`, October update 2018 (for the universal Windows application)
+	- The latest Windows 10 SDK is required because the target is set to this one
 - Android, version >= 7.0 (for the Android application)
 	* Remember to trust 3rd party Apps by enabling this in the Android developer settings if you want to build from source
 

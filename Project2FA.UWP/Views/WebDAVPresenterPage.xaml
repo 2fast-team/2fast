@@ -1,0 +1,81 @@
+﻿<Page
+    x:Class="Project2FA.UWP.Views.WebDAVPresenterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Project2FA.Repository.Models"
+    xmlns:mux="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Name="WebDAVItemTemplate" x:DataType="models:WebDAVFileOrFolderModel">
+                <Grid DoubleTapped="WebDAVItemTemplate_DoubleTapped">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" MinHeight="32"/>
+                        <RowDefinition Height="Auto" MinHeight="32"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="64"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid
+                        Height="48" 
+                        Width="48"
+                        Grid.RowSpan="2"
+                        Margin="0,0,4,0"
+                        Background="{ThemeResource SystemAccentColor}">
+                        <FontIcon 
+                            Glyph="{x:Bind Glyph}" 
+                            FontSize="36"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Foreground="White"/>
+                    </Grid>
+
+                    <TextBlock
+                        Grid.Row="0" 
+                        Grid.Column="1"
+                        Text="{x:Bind Name}" 
+                        FontSize="16"
+                        TextWrapping="NoWrap" 
+                        VerticalAlignment="Bottom"
+                        TextTrimming="CharacterEllipsis"/>
+
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        Orientation="Horizontal">
+                        <TextBlock 
+                            FontSize="16"
+                            Text="{x:Bind Size, Converter={StaticResource BytesToHumanReadableConverter}}"
+                            Foreground="{StaticResource SystemControlForegroundChromeDisabledLowBrush}"
+                            Margin="0,0,6,0"/>
+                        <TextBlock 
+                            FontSize="16"
+                            TextWrapping="NoWrap" 
+                            TextTrimming="CharacterEllipsis"
+                            Text="{x:Bind LastModified, Converter={StaticResource DateTimeToStringConverter}}"
+                            Foreground="{StaticResource SystemControlForegroundChromeDisabledLowBrush}"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <Grid>
+        <ListView 
+            x:Name="LV_WebDAVItems"
+            ItemsSource="{x:Bind ViewModel.Directory.FilesAndFolders,Mode=OneWay}"
+            ItemTemplate="{StaticResource WebDAVItemTemplate}"/>
+        <!--<mux:TeachingTip 
+            Target="{x:Bind LV_WebDAVItems}" 
+            Title="#Ordnerwechsel"
+            Subtitle="#Doppelklick zum Ordnerwechseln"
+            IsOpen="True"/>-->
+    </Grid>
+</Page>

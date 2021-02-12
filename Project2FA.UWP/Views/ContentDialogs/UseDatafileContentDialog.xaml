@@ -1,0 +1,242 @@
+﻿<ContentDialog
+    x:Class="Project2FA.UWP.Views.UseDatafileContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+    mc:Ignorable="d"
+    Title="~UseDatafileContentDialogMain.Title"
+    PrimaryButtonText="#Datendatei nutzen"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    CloseButtonText="#abbrechen"
+    PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
+    x:Uid="UseDatafileContentDialogMain">
+
+    <ContentDialog.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentDialog.Resources>
+
+    <Grid>
+        <Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
+            <PivotItem 
+                Header="#Auswahl" 
+                MinHeight="400" 
+                x:Uid="UseDatafileContentDialogPivotItemKind">
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock
+                            TextWrapping="Wrap"
+                            Text="~UseDatafileContentDialogInfo.Text"
+                            x:Uid="UseDatafileContentDialogInfo"
+                            Margin="0,10,0,10" />
+                        <Button 
+                            x:Name="BTN_LocalFile"
+                            Margin="0,10,0,10"
+                            Style="{StaticResource AccentButtonStyle}"
+                            Click="BTN_LocalFile_Click"
+                            MinWidth="200">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE8F4;" 
+                                          FontSize="30"/>
+                                <TextBlock
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center" 
+                                    x:Uid="UseDatafileContentDialogLocalPath"
+                                    Text="~UseDatafileContentDialogLocalPath.Text"/>
+                            </StackPanel>
+                        </Button>
+                        <Button 
+                            x:Name="BTN_WebDAV" 
+                            Style="{StaticResource AccentButtonStyle}"
+                            Margin="0,10,0,10"
+                            IsEnabled="False"
+                            Command="{x:Bind ViewModel.UseWebDAVCommand}"
+                            MinWidth="200">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+                                <FontIcon Glyph="&#xE753;" FontSize="30"/>
+                                <TextBlock 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="UseDatafileContentDialogWebDAV"
+                                    Text="~UseDatafileContentDialogWebDAV.Text"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem 
+                x:Name="FolderPivotItem"
+                Header="#Datendatei"
+                MinHeight="400"
+                x:Uid="UseDatafileContentDialogDatafilePivotItem">
+                <Grid>
+                    <ScrollViewer VerticalScrollMode="Auto">
+                        <StackPanel Padding="0,0,22,0">
+                            <TextBlock 
+                                TextWrapping="Wrap"
+                                Text="~UseDatafileContentDialogLoadInfo.Text"
+                                x:Uid="UseDatafileContentDialogLoadInfo"
+                                Margin="0,10,0,10" />
+                            <TextBox 
+                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}"
+                                x:Uid="UseDatafileContentDialogFilename"
+                                IsEnabled="False"
+                                IsReadOnly="True"
+                                Header="#Dateiname"
+                                Margin="0,5,0,5"/>
+                            <Button 
+                                x:Uid="UseDatafileContentDialogChangeDatafile" 
+                                Command="{x:Bind ViewModel.UseDatafileCommand}"
+                                Content="#Datendatei ändern"/>
+                            <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
+                            <PasswordBox
+                                x:Name="PB_LocalPassword"
+                                x:Uid="Password"
+                                Header="#Password" 
+                                InputScope="Password"
+                                Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                KeyDown="PB_LocalPassword_KeyDown"/>
+                            <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
+
+                            <TextBox 
+                                Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}"
+                                x:Uid="UseDatafileContentDialogFolderPath"
+                                IsEnabled="False"
+                                IsReadOnly="True"
+                                Header="#Ordnerpfad"
+                                Margin="0,5,0,18"/>
+
+                            <!--Argon2 not working mit dotnet native-->
+                            <toolkit:Expander 
+                                x:Uid="PasswordAdvancedHashOption"
+                                Background="{ThemeResource ButtonBackground}"
+                                Visibility="Collapsed"
+                                Header="~PasswordAdvancedHashOption.Header">
+                                <CheckBox 
+                                    x:Uid="PasswordAdvancedHashOptionText"
+                                    IsChecked="{x:Bind ViewModel.UseExtendedHash,Mode=TwoWay}"/>
+                            </toolkit:Expander>
+                            
+                        </StackPanel>
+                    </ScrollViewer>
+                    <toolkit:Loading IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" Background="{ThemeResource TranslucentBackgroundHighBrush}">
+                        <ProgressRing 
+                            IsActive="True" 
+                            Foreground="{ThemeResource SystemAccentColor}" 
+                            Width="80" 
+                            Height="80"/>
+                    </toolkit:Loading>
+                    <toolkit:Loading IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" Background="{ThemeResource TranslucentBackgroundHighBrush}">
+                        <StackPanel>
+                            <muxc:AnimatedVisualPlayer 
+                                MaxHeight="120"
+                                x:Name="LottiePlayer" 
+                                PlaybackRate="0.5"
+                                AutoPlay="True">
+                                <lottie:LottieVisualSource  
+                                    UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
+                            </muxc:AnimatedVisualPlayer>
+                            <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
+                            <Button x:Uid="BTNTryAgain" Margin="0,10,0,0" Command="{x:Bind ViewModel.ConfirmErrorCommand}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </toolkit:Loading>
+                </Grid>
+            </PivotItem>
+            <PivotItem 
+                x:Name="WebDAVPivotItem" 
+                Header="#WebDAV" 
+                MinHeight="400" 
+                x:Uid="UseDatafileContentDialogWebDAVPivotItem">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Frame Visibility="Collapsed"/>
+                    <ScrollViewer
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
+                        VerticalScrollBarVisibility="Hidden">
+                        <StackPanel 
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Stretch" >
+                            <TextBox 
+                                x:Uid="ServerAddress"
+                                Header="Server address"
+                                PlaceholderText="https://..."
+                                InputScope="Url"
+                                Text="{x:Bind ViewModel.ServerAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Background="Transparent"
+                                Margin="0,0,0,20"/>
+
+                            <TextBox 
+                                x:Name="TB_Username"
+                                x:Uid="Username"
+                                Header="Username" 
+                                InputScope="Default"
+                                Text="{x:Bind ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Background="Transparent"
+                                Margin="0,0,0,20"/>
+
+                            <PasswordBox 
+                                x:Name="PB_WebDAVPassword"
+                                x:Uid="Password" 
+                                Header="Password" 
+                                Password="{x:Bind ViewModel.WebDAVPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Background="Transparent"
+                                Margin="0,0,0,32" />
+
+                            <Button
+                                x:Uid="Connect" 
+                                Content="#Connect" 
+                                Style="{StaticResource AccentButtonStyle}"
+                                HorizontalAlignment="Stretch"
+                                Command="{x:Bind ViewModel.WebDAVSaveSettingsCommand}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <CommandBar Grid.Row="1">
+                        <CommandBar.PrimaryCommands>
+                            <AppBarButton Label="#akzeptieren" Icon="Accept"/>
+                        </CommandBar.PrimaryCommands>
+                    </CommandBar>
+                    <!--<Grid Grid.Row="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="#bestätigen"></Button>
+                        <Button Grid.Column="1" HorizontalAlignment="Right">BTN1</Button>
+                    </Grid>-->
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="WebDAVFolderPivotItem" Header="#Datendatei" MinHeight="400">
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock Text="{x:Bind ViewModel.LocalStorageFolder.DisplayName,Mode=OneWay}"/>
+                        <TextBlock Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}"/>
+                        <TextBlock Text="{x:Bind ViewModel.LocalStorageFolder.DateCreated,Mode=OneWay}"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</ContentDialog>

@@ -1,0 +1,66 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <AcrylicBrush 
+        x:Key="ShellAcrylicWindowBrush"
+        BackgroundSource="HostBackdrop" 
+        TintColor="{StaticResource SystemChromeAltHighColor}"
+        TintOpacity="0.8"
+        FallbackColor="Black" />
+    <SolidColorBrush x:Name="TranslucentBackgroundHighBrush" Opacity="0.9" Color="Black"/>
+    <SolidColorBrush x:Name="TranslucentBackgroundMediumBrush" Opacity="0.75" Color="Black"/>
+
+     <!--Resources for Windows.UI.Xaml.Controls.Button--> 
+    <StaticResource x:Key="ButtonBackground" ResourceKey="SystemControlBackgroundBaseLowBrush" />
+    <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="SystemControlBackgroundBaseLowBrush" />
+    <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SystemControlBackgroundBaseMediumLowBrush" />
+    <StaticResource x:Key="ButtonBackgroundDisabled" ResourceKey="SystemControlBackgroundBaseLowBrush" />
+    <StaticResource x:Key="ButtonForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
+    <StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="SystemControlHighlightBaseHighBrush" />
+    <StaticResource x:Key="ButtonForegroundPressed" ResourceKey="SystemControlHighlightBaseHighBrush" />
+    <StaticResource x:Key="ButtonForegroundDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+    <StaticResource x:Key="ButtonBorderBrush" ResourceKey="SystemControlForegroundTransparentBrush" />
+    <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
+    <StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="SystemControlHighlightTransparentBrush" />
+    <StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="SystemControlDisabledTransparentBrush" />
+     <!--Resources for Windows.UI.Xaml.Controls.RadioButton--> 
+    <StaticResource x:Key="RadioButtonForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
+    <StaticResource x:Key="RadioButtonForegroundPointerOver" ResourceKey="SystemControlForegroundBaseHighBrush" />
+    <StaticResource x:Key="RadioButtonForegroundPressed" ResourceKey="SystemControlForegroundBaseHighBrush" />
+    <StaticResource x:Key="RadioButtonForegroundDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+    <StaticResource x:Key="RadioButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseStroke" ResourceKey="SystemControlForegroundBaseMediumHighBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseStrokePointerOver" ResourceKey="SystemControlHighlightBaseHighBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseStrokePressed" ResourceKey="SystemControlHighlightBaseMediumBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseStrokeDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseFill" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseFillPointerOver" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseFillPressed" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseFillDisabled" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedStroke" ResourceKey="SystemControlHighlightAccentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemControlHighlightAccentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemControlHighlightBaseMediumBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedFill" ResourceKey="SystemControlHighlightAltTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="SystemControlHighlightTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="SystemControlHighlightTransparentBrush" />
+    <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillDisabled" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphFill" ResourceKey="SystemControlHighlightBaseMediumHighBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphFillPointerOver" ResourceKey="SystemControlHighlightAltBaseHighBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphFillPressed" ResourceKey="SystemControlHighlightAltBaseMediumBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphFillDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphStroke" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphStrokePointerOver" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphStrokePressed" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="RadioButtonCheckGlyphStrokeDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+    <StaticResource x:Key="TwoFABackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor"/>
+</ResourceDictionary>

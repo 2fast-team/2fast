@@ -1,0 +1,13 @@
+﻿[*.cs]
+
+# CA2007: Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2007.severity = none
+
+# CA2000: Dispose objects before losing scope
+dotnet_diagnostic.CA2000.severity = none
+
+# CA1307: Specify StringComparison
+dotnet_diagnostic.CA1307.severity = none
+
+# CA1054: Uri parameters should not be strings
+dotnet_diagnostic.CA1054.severity = none

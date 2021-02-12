@@ -1,0 +1,116 @@
+﻿[
+  {
+    "Name": "Otp.NET",
+    "LicenseName": "MIT",
+    "Authors": "Kyle Spearrin",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://raw.githubusercontent.com/kspearrin/Otp.NET/master/LICENSE.txt"
+  },
+  {
+    "Name": "Microsoft.EntityFrameworkCore.Sqlite",
+    "Authors": "Microsoft",
+    "LicenseName": "Apache License 2.0",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/dotnet/efcore/blob/main/LICENSE.txt"
+  },
+  {
+    "Name": "Microsoft.CodeAnalysis.NetAnalyzers",
+    "Authors": "Microsoft",
+    "LicenseName": "Apache License 2.0",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/dotnet/roslyn-analyzers/blob/master/License.txt"
+  },
+  {
+    "Name": "Microsoft.Toolkit.*",
+    "Authors": "Microsoft.Toolkit",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/windows-toolkit/WindowsCommunityToolkit/blob/master/license.md"
+  },
+  {
+    "Name": "Microsoft.UI.Xaml",
+    "Authors": "Microsoft",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/microsoft/microsoft-ui-xaml/blob/master/LICENSE"
+  },
+  {
+    "Name": "Microsoft.Xaml.Behaviors.Uwp.Managed",
+    "Authors": "Microsoft",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/microsoft/XamlBehaviors/blob/master/LICENSE"
+  },
+  {
+    "Name": "Newtonsoft.Json",
+    "Authors": "James Newton-King",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md"
+  },
+  {
+    "Name": "Newtonsoft.Json.Encryption",
+    "Authors": "Simon Cropp et al.",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/NServiceBusExtensions/Newtonsoft.Json.Encryption/blob/master/license.txt"
+  },
+  {
+    "Name": "NETStandard.Library",
+    "Authors": "Microsoft",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/dotnet/standard/blob/master/LICENSE.TXT"
+  },
+  {
+    "Name": "Prism.Core",
+    "Authors": "Brian Lagunas & Dan Siegel",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/PrismLibrary/Prism/blob/master/LICENSE"
+  },
+  {
+    "Name": "PortableWebDavLibrary",
+    "Authors": "DecaTec",
+    "LicenseName": "Microsoft Public License (Ms-PL)",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/DecaTec/Portable-WebDAV-Library/blob/master/LICENSE"
+  },
+  {
+    "Name": "System.Security.Cryptography.ProtectedData",
+    "Authors": "Microsoft",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/dotnet/runtime/blob/master/LICENSE.TXT"
+  },
+  {
+    "Name": "ZXing.Net.Mobile",
+    "Authors": "Redth",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/Redth/ZXing.Net.Mobile/blob/master/LICENSE.txt"
+  },
+  {
+    "Name": "Animation: search empty",
+    "Authors": "0440 Molly @ LottoFiles",
+    "LicenseName": "Creative Commons License 4.0",
+    "CategoryUid": "Asset",
+    "StringLicenseURL": "https://lottiefiles.com/page/license",
+    "StringURL": "https://lottiefiles.com/10223-search-empty"
+  },
+  {
+    "Name": "Animation: Error cross",
+    "Authors": "Rodrigo Bernardi @ LottoFiles",
+    "LicenseName": "Creative Commons License 4.0",
+    "CategoryUid": "Asset",
+    "StringLicenseURL": "https://lottiefiles.com/page/license",
+    "StringURL": "https://lottiefiles.com/3932-error-cross"
+  },
+  {
+    "Name": "Logo: Schlüssel",
+    "Authors": "freepik @ flaticon",
+    "CategoryUid": "Asset",
+    "StringLicenseURL": "",
+    "StringURL": "https://www.flaticon.com/de/kostenloses-icon/schlussel_2786386?related_item_id=2786386"
+  }
+]

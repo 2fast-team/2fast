@@ -1,0 +1,182 @@
+﻿<ContentDialog
+    x:Class="Project2FA.UWP.Views.AddAccountContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:extensions="using:Project2FA.UWP.Extensions"
+    xmlns:behaviors="using:Project2FA.UWP.Behaviors"
+    mc:Ignorable="d"
+    x:Uid="AddAccountContentDialog"
+    xmlns:strings="using:Project2FA.UWP.Strings"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
+    PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
+    PrimaryButtonStyle="{StaticResource AccentButtonStyle}">
+
+    <ContentDialog.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentDialog.Resources>
+
+    <Grid>
+        <Pivot x:Name="MainPivot"
+               SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex,Mode=TwoWay}">
+            <PivotItem Header="#Optionen" x:Uid="AddAccountContentDialogInputType">
+                <ScrollViewer>
+                    <StackPanel MinHeight="400">
+                        <toolkitControls:MarkdownTextBlock 
+                            Text="~AddAccountContentDialogInfo.Text" 
+                            TextWrapping="Wrap" 
+                            x:Uid="AddAccountContentDialogInfo"
+                            Margin="0,10,0,10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button 
+                            x:Name="BTN_QRCodeScan" 
+                            Margin="0,10,0,10" 
+                            Style="{StaticResource AccentButtonStyle}"
+                            Command="{x:Bind ViewModel.ScanQRCodeCommand}" 
+                            Click="BTN_QRCodeScan_Click"
+                            MinWidth="240">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xED14;" FontSize="30"/>
+                                    <TextBlock 
+                                    Text="~AddAccountContentDialogReadQRCode.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="AddAccountContentDialogReadQRCode" />
+                                </StackPanel>
+                                <Button.Resources>
+                                    <muxc:TeachingTip
+                                        x:Name="QRCodeScanTip"
+                                        x:Uid="AddAccountContentDialogReadQRCodeTip"
+                                        Target="{x:Bind BTN_QRCodeScan}"
+                                        IsLightDismissEnabled="True">
+                                        <muxc:TeachingTip.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Grid>
+                                                    <muxc:ProgressRing
+                                                Value="{x:Bind ViewModel.Seconds,Mode=OneWay}" 
+                                                Maximum="{x:Bind ViewModel.OpeningSeconds,Mode=OneWay}" 
+                                                Width="50"
+                                                Height="50"
+                                                IsIndeterminate="False"
+                                                Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
+                                                    <TextBlock 
+                                                Opacity="0.6"
+                                                Text="{x:Bind ViewModel.Seconds, Mode=OneWay}"
+                                                FontSize="16"
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center"/>
+                                                </Grid>
+                                                <TextBlock 
+                                                Margin="12,0,0,0"
+                                                Text="{x:Bind strings:Resources.AddAccountContentDialogReadQRCodeTeachingTipInfo}"
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </muxc:TeachingTip.Content>
+                                    </muxc:TeachingTip>
+                                </Button.Resources>
+                            </Button>
+                            <!--next version-->
+                            <!--<Button 
+                                CornerRadius="90"
+                                Margin="4,0,0,0"
+                                Width="40"
+                                Height="40"
+                                Content="?">
+                            </Button>-->
+                        </StackPanel>
+                        
+
+                        <Button 
+                            Margin="0,10,0,10" 
+                            Style="{StaticResource AccentButtonStyle}"
+                            Command="{x:Bind ViewModel.ManualInputCommand}"
+                            MinWidth="240">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE961;" FontSize="30"/>
+                                <TextBlock 
+                                    Text="~AddAccountContentDialogManualInput.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="AddAccountContentDialogManualInput" 
+                                    FontFamily="Segoe UI" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </PivotItem>
+            <PivotItem Header="#inputs" x:Uid="AddAccountContentDialogInputs">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid MinHeight="400">
+                        <StackPanel Margin="0,10,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox 
+                                Header="#Label" 
+                                PlaceholderText="#Name" 
+                                x:Uid="AddAccountContentDialogLabel" 
+                                Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}" 
+                                Margin="0,0,0,8">
+                                    <Interactivity:Interaction.Behaviors>
+                                        <behaviors:HighlightFormFieldOnErrors 
+                                            PropertyName="Label"
+                                            PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
+                                    </Interactivity:Interaction.Behaviors>
+                                </TextBox>
+                            </Grid>
+
+                            <TextBox 
+                                Header="#account name" 
+                                PlaceholderText="#E-Mail"
+                                x:Uid="AddAccountContentDialogAccountName" 
+                                Text="{x:Bind ViewModel.Issuer,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="0,0,0,8">
+                                <Interactivity:Interaction.Behaviors>
+                                    <behaviors:HighlightFormFieldOnErrors 
+                                        PropertyName="Issuer"
+                                        PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
+                                </Interactivity:Interaction.Behaviors>
+                            </TextBox>
+                            <CheckBox 
+                                x:Name="CB_ManualInput"
+                                x:Uid="AddAccountContentDialogManualInputCheckbox" 
+                                IsChecked="{x:Bind ViewModel.ManualInput,Mode=TwoWay}" 
+                                Content="#manual input" Margin="0,0,0,0"/>
+                            <TextBox 
+                                x:Uid="AddAccountContentDialogSecretKey"
+                                extensions:TextBoxRegex.ValidationMode="Dynamic"
+                                extensions:TextBoxRegex.Regex="^[A-Za-z2-7-/]*={0,6}$"
+                                extensions:TextBoxRegex.ValidationType="Custom"
+                                Header="#secret key" 
+                                PlaceholderText="#key" 
+                                IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
+                                Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
+                                Margin="0,0,0,8">
+                                <Interactivity:Interaction.Behaviors>
+                                    <behaviors:HighlightFormFieldOnErrors 
+                                        PropertyName="SecretKey"
+                                        PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
+                                </Interactivity:Interaction.Behaviors>
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</ContentDialog>

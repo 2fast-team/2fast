@@ -1,0 +1,158 @@
+﻿<Page
+    x:Class="Project2FA.UWP.Views.WelcomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mstoolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:mux="using:Microsoft.UI.Xaml.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Name="ShellHeaderTemplate">
+            <Grid Background="{ThemeResource TitleAcrylicWindowBrush}"/>
+        </DataTemplate>
+
+        <Style x:Key="LottiePlayer"
+               TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlHighlightAltListAccentMediumBrush}" />
+            <Setter Property="BorderThickness" Value="10" />
+            <Setter Property="Width" Value="400" />
+            <Setter Property="Height" Value="400" />
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="Root">
+        <Grid.Background>
+            <ImageBrush 
+                x:Name="MyImage"
+                ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg" 
+                Stretch="UniformToFill">
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <mstoolkitControls:DropShadowPanel x:Name="DropShadow"
+                                  HorizontalAlignment="Stretch" 
+                                  VerticalAlignment="Stretch"
+                                  HorizontalContentAlignment="Stretch"
+                                  VerticalContentAlignment="Stretch"
+                                  Color="{ThemeResource SystemChromeMediumColor}"
+                                  BlurRadius="40"
+                                  Grid.Column="1"
+                                  ShadowOpacity="0.4">
+            <Grid x:Name="RootGrid" >
+                <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:Blur AutomaticallyStart="True"
+                                        Delay="0"
+                                        Value="3"
+                                        Duration="0" />
+                    </interactivity:Interaction.Behaviors>
+                </Border>
+
+                <Grid x:Name="MasterGrid" >
+                    <ScrollViewer  Margin="0,40,0,0" VerticalScrollBarVisibility="Auto">
+                        <RelativePanel Margin="12,0,12,0" HorizontalAlignment="Center">
+                            <TextBlock 
+                                x:Name="TB_FirstSteps"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                Text="#First steps" 
+                                x:Uid="WelcomePageFirstSteps" 
+                                TextWrapping="Wrap" 
+                                HorizontalAlignment="Center" 
+                                FontWeight="Bold" 
+                                FontSize="25" 
+                                FontFamily="Segoe UI" 
+                                Margin="0,0,0,40" 
+                                TextAlignment="Center" />
+                            <TextBlock 
+                                x:Name="TB_IntroText"
+                                Text="#Intro text" 
+                                RelativePanel.Below="TB_FirstSteps"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                x:Uid="WelcomePageIntro" 
+                                TextWrapping="Wrap" 
+                                HorizontalAlignment="Center" 
+                                FontSize="16" 
+                                Margin="0,0,0,40" 
+                                TextAlignment="Center" />
+                            <StackPanel x:Name="SP_FirstStartOptions" 
+                                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                        RelativePanel.Below="TB_IntroText">
+                                <Button 
+                                x:Name="BTN_NewDataFile"
+                                Content="#Neue Datendatei" 
+                                x:Uid="WelcomePageCreateDatafile" 
+                                Command="{x:Bind ViewModel.NewDatefileCommand}" 
+                                Style="{StaticResource AccentButtonStyle}" 
+                                Margin="0,0,20,10" />
+                                <Button 
+                                RelativePanel.RightOf="BTN_NewDataFile"
+                                    Margin="0,0,20,10" 
+                                Content="#Datendatei laden" 
+                                x:Uid="WelcomePageLoadDatafile"
+                                Command="{x:Bind Path=ViewModel.UseExistDatefileCommand}" />
+                            </StackPanel>
+                            
+                        </RelativePanel>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </mstoolkitControls:DropShadowPanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="SP_FirstStartOptions.Orientation" Value="Vertical"/>
+                        <Setter Target="Root.ColumnDefinitions[0].Width" Value="0" />
+                        <Setter Target="Root.ColumnDefinitions[2].Width" Value="0" />
+                        <Setter Target="MasterGrid.ColumnDefinitions[1].Width" Value="*" />
+                        <!--<Setter Target="MasterGrid.RowDefinitions[0].Height" Value="*" />
+                        <Setter Target="MasterGrid.RowDefinitions[1].Height" Value="0" />-->
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="MediumHigherState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="852" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SP_FirstStartOptions.Orientation" Value="Horizontal"/>
+                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="Root.ColumnDefinitions[0].Width" Value="0" />
+                        <Setter Target="Root.ColumnDefinitions[2].Width" Value="0" />
+                        <Setter Target="MasterGrid.ColumnDefinitions[1].Width" Value="*" />
+                        <!--<Setter Target="MasterGrid.RowDefinitions[0].Height" Value="*" />
+                        <Setter Target="MasterGrid.RowDefinitions[1].Height" Value="0" />-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1100" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DropShadow.HorizontalAlignment" Value="Center" />
+                        <Setter Target="Root.ColumnDefinitions[1].MinWidth" Value="1055" />
+                        <Setter Target="SP_FirstStartOptions.Orientation" Value="Horizontal"/>
+                        <Setter Target="MasterGrid.MinWidth" Value="1055" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

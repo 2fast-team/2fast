@@ -1,0 +1,103 @@
+﻿[
+  {
+    "Name": "Otp.NET",
+    "LicenseName": "MIT",
+    "Authors": "Kyle Spearrin",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://raw.githubusercontent.com/kspearrin/Otp.NET/master/LICENSE.txt"
+  },
+  {
+    "Name": "Microsoft.EntityFrameworkCore.Sqlite",
+    "Authors": "Microsoft",
+    "LicenseName": "Apache License 2.0",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/dotnet/efcore/blob/main/LICENSE.txt"
+  },
+  {
+    "Name": "Microsoft.CodeAnalysis.NetAnalyzers",
+    "Authors": "Microsoft",
+    "LicenseName": "Apache License 2.0",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/dotnet/roslyn-analyzers/blob/master/License.txt"
+  },
+  {
+    "Name": "Isopoh.Cryptography.Argon2",
+    "Authors": "Michael Heyman",
+    "LicenseName": "Creative Commons Attributeion 4.0",
+    "CategoryUid": "Package",
+    "URL": "https://github.com/mheyman/Isopoh.Cryptography.Argon2/blob/master/LICENSE"
+  },
+  {
+    "Name": "Newtonsoft.Json",
+    "Authors": "James Newton-King",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md"
+  },
+  {
+    "Name": "Newtonsoft.Json.Encryption",
+    "Authors": "Simon Cropp et al.",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/NServiceBusExtensions/Newtonsoft.Json.Encryption/blob/master/license.txt"
+  },
+  {
+    "Name": "Xamarin.Android.Support.*",
+    "Authors": "Microsoft",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/xamarin/AndroidSupportComponents/blob/master/LICENSE.md"
+  },
+  {
+    "Name": "NETStandard.Library",
+    "Authors": "Microsoft",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/dotnet/standard/blob/master/LICENSE.TXT"
+  },
+  {
+    "Name": "Prism.Core",
+    "Authors": "Brian Lagunas & Dan Siegel",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/PrismLibrary/Prism/blob/master/LICENSE"
+  },
+  {
+    "Name": "PortableWebDavLibrary",
+    "Authors": "DecaTec",
+    "LicenseName": "Microsoft Public License (Ms-PL)",
+    "CategoryUid": "Package",
+    "LicenseURL": "https://github.com/DecaTec/Portable-WebDAV-Library/blob/master/LICENSE"
+  },
+  {
+    "Name": "System.Security.Cryptography.ProtectedData",
+    "Authors": "Microsoft",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "URL": "https://github.com/dotnet/runtime/blob/master/LICENSE.TXT"
+  },
+  {
+    "Name": "Animation: search empty",
+    "Authors": "0440 Molly @ LottoFiles",
+    "LicenseName": "Creative Commons License 4.0",
+    "CategoryUid": "Asset",
+    "LicenseURL": "https://lottiefiles.com/page/license",
+    "URL": "https://lottiefiles.com/10223-search-empty"
+  },
+  {
+    "Name": "Animation: Error cross",
+    "Authors": "Rodrigo Bernardi @ LottoFiles",
+    "LicenseName": "Creative Commons License 4.0",
+    "CategoryUid": "Asset",
+    "LicenseURL": "https://lottiefiles.com/page/license",
+    "URL": "https://lottiefiles.com/3932-error-cross"
+  },
+  {
+    "Name": "Logo: Schlüssel",
+    "Authors": "freepik @ flaticon",
+    "LicenseName": "",
+    "CategoryUid": "Asset",
+    "LicenseURL": "",
+    "URL": "https://www.flaticon.com/de/kostenloses-icon/schlussel_2786386?related_item_id=2786386"
+  }
+]

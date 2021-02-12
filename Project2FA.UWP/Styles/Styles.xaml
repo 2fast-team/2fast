@@ -1,0 +1,101 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/CheckBox.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
+        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/AutoSuggestBoxTextBox.xaml" />-->
+        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/RadioButton.xaml" />-->
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/ToggleSwitch.xaml" />
+        <!--<ResourceDictionary Source="ms-appx:///Styles/Expander.xaml" />-->
+        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBox.xaml" />-->
+        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/TextBox.xaml" />-->
+        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/PasswordBox.xaml" />-->
+    </ResourceDictionary.MergedDictionaries>
+
+    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
+    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+
+    <Thickness x:Key="MenuBarItemBorderThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="GridViewItemMultiselectBorderThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="CheckBoxBorderThemeThickness">2</Thickness>
+    <x:Double x:Key="GridViewItemSelectedBorderThemeThickness">2</x:Double>
+    <x:Double x:Key="RadioButtonBorderThemeThickness">2</x:Double>
+    <Thickness x:Key="ButtonBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="CalendarDatePickerBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="TimePickerBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="DatePickerBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="ToggleSwitchOuterBorderStrokeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="RepeatButtonBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="SearchBoxBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="ToggleButtonBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="TextControlBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="ButtonRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="RepeatButtonRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="ToggleButtonRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="AppBarEllipsisButtonRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="AppBarButtonRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="AppBarToggleButtonRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="ListViewItemRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="GridViewItemRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <Thickness x:Key="ComboBoxItemRevealBorderThemeThickness">2,2,2,2</Thickness>
+    <x:Double x:Key="PersonPictureEllipseBadgeStrokeThickness">2</x:Double>
+
+    <animations:AnimationCollection x:Key="ImplicitOffset">
+        <animations:OffsetAnimation Duration="0:0:0.3"/>
+    </animations:AnimationCollection>
+
+    <Style TargetType="muxc:TeachingTip">
+        <Setter Property="BorderBrush" Value="{ThemeResource SystemAccentColor}"/>
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+
+    <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="2,16,20,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter 
+                        CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                        ContentMargin="{TemplateBinding Padding}" 
+                        CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" 
+                        CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                        DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" 
+                        DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
+                        DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
+                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
+                        FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" 
+                        FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                        PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" 
+                        PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
+                        ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
+                        SelectionCheckMarkVisualEnabled="True" 
+                        SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" 
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="toolkit:MarkdownTextBlock">
+        <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <Style x:Key="HighlightTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+        <Setter Property="BorderBrush" Value="Red" />
+        <Setter Property="SelectionHighlightColor" Value="Red" />
+    </Style>
+
+    <Style x:Key="HighlightPasswordBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultPasswordBoxStyle}">
+        <Setter Property="BorderBrush" Value="Red" />
+        <!--<Setter Property="SelectionHighlightColor" Value="Red" />-->
+    </Style>
+</ResourceDictionary>

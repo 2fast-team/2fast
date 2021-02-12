@@ -1,0 +1,96 @@
+﻿<ContentDialog
+    x:Class="Project2FA.UWP.Views.EditAccountContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Title="~EditAccountContentDialog.Title"
+    x:Uid="EditAccountContentDialog"
+    PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
+    SecondaryButtonCommand="{x:Bind ViewModel.CancelButtonCommand}">
+
+    <ContentDialog.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="EmailTokenTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <Border CornerRadius="9999" Background="{Binding DisplayName, Converter={StaticResource NameToColorConverter}}"
+                Width="20" Height="20">
+                        <TextBlock Text="{Binding Initials}" Foreground="White"
+                     FontSize="10"
+                     FontWeight="Semibold"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="{Binding DisplayName}" Padding="4,0,0,0"/>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentDialog.Resources>
+
+    <Grid MinWidth="400">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+                <TextBox 
+                Header="~AddAccountContentDialogLabel.Header" 
+                x:Uid="AddAccountContentDialogLabel"  
+                Text="{x:Bind ViewModel.Label,Mode=TwoWay}"/>
+                <TextBox 
+                Header="~AddAccountContentDialogAccountName.Header"
+                x:Uid="AddAccountContentDialogAccountName" 
+                Text="{x:Bind ViewModel.Issuer,Mode=TwoWay}" 
+                Margin="0,10,0,20"/>
+                <!--Category for filter and sorting
+                <ListView/>-->
+                <!--<Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <toolkit:TokenizingTextBox
+                      x:Name="TokenBox"
+                      PlaceholderText="#Add Category"
+                      HorizontalAlignment="Stretch"
+                      TextMemberPath="Text"
+                      TokenDelimiter=",">
+                        <toolkit:TokenizingTextBox.SuggestedItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="{Binding Icon}"/>
+                                    <TextBlock Text="{Binding Text}" Padding="4,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </toolkit:TokenizingTextBox.SuggestedItemTemplate>
+                        <toolkit:TokenizingTextBox.TokenItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="{Binding Icon}"/>
+                                    <TextBlock Text="{Binding Text}" Padding="4,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </toolkit:TokenizingTextBox.TokenItemTemplate>
+                    </toolkit:TokenizingTextBox>
+                    <Border 
+                            BorderThickness="1,0,1,1" 
+                            Grid.Row="1"
+                            BorderBrush="{ThemeResource TextControlBorderBrush}">
+                        <ListView 
+                                x:Name="EmailList" 
+                                Height="200" 
+                                IsItemClickEnabled="True"
+                                ItemTemplate="{StaticResource EmailTokenTemplate}">
+                        </ListView>
+                    </Border>
+                </Grid>-->
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+</ContentDialog>

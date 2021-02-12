@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:local="clr-namespace:Project2FA"
+             x:Class="Project2FA.Views.WelcomePage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, Dark={StaticResource DarkPageBackgroundColor}}"
+             Title="{local:Translate Appname}">
+
+
+    <ContentPage.Content>
+        <StackLayout Margin="12">
+            <Label 
+                Text="{local:Translate WelcomePageFirstSteps}" 
+                FontSize="25" Margin="0,0,0,30" 
+                TextColor="{AppThemeBinding Dark=White, Light=Black}"
+                HorizontalTextAlignment="Center" />
+            <Label 
+                Text="{local:Translate WelcomePageIntro}" 
+                TextColor="{AppThemeBinding Dark=White, Light=Black}"
+                FontSize="18" 
+                Margin="0,0,0,20" 
+                HorizontalTextAlignment="Center" />
+
+            <Button Text="{local:Translate WelcomePageCreateDatafile}" 
+                    BackgroundColor="{StaticResource SystemAccentColor}" 
+                    TextColor="White" />
+            <Button Text="{local:Translate WelcomePageLoadDatafile}"
+                    TextColor="{AppThemeBinding Dark=White, Light=Black}" 
+                    Clicked="UseExistDatefileCommand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

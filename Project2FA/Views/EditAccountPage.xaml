@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:local="clr-namespace:Project2FA"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{local:Translate EditAccountPageTitle}"
+             mc:Ignorable="d"
+             x:Class="Project2FA.Views.EditAccountPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="{local:Translate AccountLabel}"/>
+                <Entry Text="{Binding TwoFACodeModel.Label,Mode=TwoWay}"/>
+                <Label Text="{local:Translate AccountUserName}" Margin="0,10,0,0"/>
+                <Entry Text="{Binding TwoFACodeModel.Issuer,Mode=TwoWay}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="{local:Translate Save}" Command="{Binding SaveButtonCommand}"/>
+                    <Button Text="{local:Translate Cancel}" Command="{Binding CancelButtonCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

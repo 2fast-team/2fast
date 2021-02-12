@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
+             mc:Ignorable="d"
+             x:Class="Project2FA.Views.ScanQRCodePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <zxing:ZXingScannerView x:Name="BarcodeScanView" IsVisible="false" HeightRequest="200"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

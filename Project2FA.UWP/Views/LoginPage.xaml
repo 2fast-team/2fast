@@ -1,0 +1,152 @@
+﻿<Page
+    x:Class="Project2FA.UWP.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mstoolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Page.Resources>
+
+    <Grid x:Name="RootGrid">
+        <Grid.Background>
+            <ImageBrush 
+                x:Name="MyImage"
+                ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg" 
+                Stretch="UniformToFill">
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid 
+            x:Name="AppTitleBar" 
+            Background="{ThemeResource TitleAcrylicWindowBrush}"
+            Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                x:Name="AppTitle" 
+                Grid.Column="1" 
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="2fast - two factor authenticator supporting TOTP"
+                Margin="12,8"/>
+        </Grid>
+
+        <mstoolkitControls:DropShadowPanel 
+            x:Name="DropShadow"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Color="{ThemeResource SystemChromeMediumColor}"
+            BlurRadius="40"
+            Grid.Column="1"
+            Grid.Row="2"
+            ShadowOpacity="0.4">
+            <Grid x:Name="MainGrid">
+                <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:Blur AutomaticallyStart="True"
+                                        Delay="0"
+                                        Value="3"
+                                        Duration="0" />
+                    </interactivity:Interaction.Behaviors>
+                </Border>
+
+                <StackPanel MaxWidth="320" MinHeight="500">
+                    <mstoolkitControls:ImageEx 
+                        Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
+                        MaxHeight="150" 
+                        Margin="0,30,0,10"/>
+                    <PasswordBox 
+                        x:Uid="LoginPagePassword"    
+                        Header="~LoginPagePassword.Header" 
+                        PlaceholderText="~LoginPagePassword.PlaceholderText" 
+                        Password="{x:Bind ViewModel.Password,Mode=TwoWay}" 
+                        Margin="0,5,0,10" 
+                        KeyDown="LoginKeydownCheckEnterSubmit" 
+                        InputScope="Password" />
+                    <StackPanel 
+                        x:Name="SP_LoginBTNs"
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Center">
+                        <Button 
+                            x:Uid="LoginPageLoginButton"
+                            Content="~LoginPageLoginButton.Content" 
+                            Command="{x:Bind ViewModel.LoginCommand}" 
+                            Style="{StaticResource AccentButtonStyle}" 
+                            MinWidth="100"
+                            Margin="0,10,10,0" 
+                            HorizontalAlignment="Center"/>
+                        <Button 
+                            x:Uid="LoginPageLoginWindowsHelloButton" 
+                            Content="#Login with Windows Hello" 
+                            Margin="0,10,0,0"
+                            Visibility="{x:Bind ViewModel.WindowsHelloIsUsable, Mode=OneWay}"
+                            Command="{x:Bind ViewModel.WindowsHelloLoginCommand}" 
+                            MinWidth="200" 
+                            HorizontalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </mstoolkitControls:DropShadowPanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="WidthNarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="0" />
+                        <Setter Target="RootGrid.ColumnDefinitions[2].Width" Value="0" />
+                        <Setter Target="RootGrid.RowDefinitions[1].Height" Value="0" />
+                        <Setter Target="RootGrid.RowDefinitions[3].Height" Value="0" />
+                        <Setter Target="SP_LoginBTNs.Orientation" Value="Vertical"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="WidthMediumHigherState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="852" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="*" />
+                        <Setter Target="RootGrid.ColumnDefinitions[1].MinWidth" Value="852" />
+                        <Setter Target="MainGrid.MinWidth" Value="852"/>
+                        <Setter Target="RootGrid.ColumnDefinitions[2].Width" Value="*" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

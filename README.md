@@ -33,8 +33,7 @@
 
 ### Screenshots
 
-<img src="https://i.postimg.cc/FzXQpK43/2fast-screenshot-1.png" alt="2fast Screenshot Login Screen" width="470" />
-<img src="https://i.postimg.cc/zv7PhDXJ/2fast-screenshot-2.png" alt="2fast Screenshot Account Screen" width="464" />
+<img src="https://i.postimg.cc/FzXQpK43/2fast-screenshot-1.png" alt="2fast Screenshot Login Screen" width="470" />  <img src="https://i.postimg.cc/zv7PhDXJ/2fast-screenshot-2.png" alt="2fast Screenshot Account Screen" width="464" />
 
 ## Installation
 

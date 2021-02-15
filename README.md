@@ -46,7 +46,7 @@ The following steps will help if you want to contribute or work on the applicati
 
 ### Prerequirements
 
-- Visual Studio
+- [Visual Studio 2019](https://visualstudio.microsoft.com/)
 	- Don't forget to select the *Mobile development with .NET* package in the installation process 
 - Windows 10, version >= `1809`, October update 2018 (for the universal Windows application)
 	- The latest Windows 10 SDK is required

@@ -17,9 +17,7 @@ using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
 using Template10.Services.Marketplace;
 using Project2FA.Repository.Models;
-using System.Collections.ObjectModel;
 using Project2FA.UWP.Utils;
-using Template10.Utilities;
 using System.Linq;
 using Windows.UI.Xaml.Data;
 using Microsoft.Toolkit.Collections;
@@ -380,7 +378,7 @@ namespace Project2FA.UWP.ViewModels
         public CollectionViewSource DependencyCollectionViewSource { get; } = new CollectionViewSource();
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 
-        public string DisplayName => Windows.ApplicationModel.Package.Current.DisplayName + " - two factor authenticator supporting TOTP";
+        public string DisplayName => Windows.ApplicationModel.Package.Current.DisplayName;
 
         public string Publisher => Windows.ApplicationModel.Package.Current.PublisherDisplayName;
 

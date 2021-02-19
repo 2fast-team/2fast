@@ -37,7 +37,7 @@ namespace Project2FA.UWP.Views
 
             // Hide default title bar.
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            Title = Windows.ApplicationModel.Package.Current.DisplayName + " - two factor authenticator supporting TOTP";
+            Title = Windows.ApplicationModel.Package.Current.DisplayName;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
             SetTitleBarAsDraggable();
@@ -144,7 +144,7 @@ namespace Project2FA.UWP.Views
             AppTitleBar.Height = coreTitleBar.Height;
             // Get the size of the caption controls area and back button 
             // (returned in logical pixels), and move your content around as necessary.
-            const int smallLeftIndent = 12, largeLeftIndent = 24;
+            const int smallLeftIndent = 12; // largeLeftIndent = 24;
 
             AppTitle.TranslationTransition = new Vector3Transition();
             AppTitle.Translation = new System.Numerics.Vector3(smallLeftIndent + (float)coreTitleBar.SystemOverlayLeftInset, 0, 0);
@@ -366,7 +366,7 @@ namespace Project2FA.UWP.Views
         /// support CallerMemberName.</param>
         /// <returns>True if the value was changed, false if the existing value matched the
         /// desired value.</returns>
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
 
@@ -389,7 +389,7 @@ namespace Project2FA.UWP.Views
         /// <param name="onChanged">Action that is called after the property value has been changed.</param>
         /// <returns>True if the value was changed, false if the existing value matched the
         /// desired value.</returns>
-        protected bool SetProperty<T>(ref T storage, T value, Action onChanged, [CallerMemberName] string propertyName = null)
+        private bool SetProperty<T>(ref T storage, T value, Action onChanged, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
 
@@ -406,7 +406,7 @@ namespace Project2FA.UWP.Views
         /// <param name="propertyName">Name of the property used to notify listeners. This
         /// value is optional and can be provided automatically when invoked from compilers
         /// that support <see cref="CallerMemberNameAttribute"/>.</param>
-        protected void RaisePropertyChanged([CallerMemberName]string propertyName = null)
+        private void RaisePropertyChanged([CallerMemberName]string propertyName = null)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
@@ -415,7 +415,7 @@ namespace Project2FA.UWP.Views
         /// Raises this object's PropertyChanged event.
         /// </summary>
         /// <param name="args">The PropertyChangedEventArgs</param>
-        protected void OnPropertyChanged(PropertyChangedEventArgs args)
+        private void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(this, args);
         }

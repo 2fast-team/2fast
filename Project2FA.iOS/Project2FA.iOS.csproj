@@ -269,7 +269,7 @@
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.6.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1931" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
     <PackageReference Include="Xamarin.Forms.PancakeView">
       <Version>2.3.0.763-beta</Version>

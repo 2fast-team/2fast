@@ -18,13 +18,13 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
-    <PackageCertificateKeyFile>Project2FA.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>
+    </PackageCertificateKeyFile>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>
-    </PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>B047F87A0C3AB762CB349947DE606FC822BD0274</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -312,7 +312,7 @@
       <Version>7.0.0-preview4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.6.0-prerelease.210129001</Version>
+      <Version>2.6.0-prerelease.210217002</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
@@ -337,6 +337,10 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\Generic\AppBarButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Generic\AutoSuggestBoxTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

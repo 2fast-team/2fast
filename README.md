@@ -37,7 +37,11 @@
 
 ## Installation
 
-This project is not yet available in the Windows or Google Play store, you have to build it from source. Watch it!
+For Windows operating systems:
+
+<a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
+
+This project is not yet available in the Google Play store, you have to build it from source. Watch it!
 
 
 ## Getting Started

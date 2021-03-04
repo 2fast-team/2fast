@@ -37,7 +37,11 @@
 
 ## Installation
 
-This project is not yet available in the Windows or Google Play store, you have to build it from source. Watch it!
+For Windows operating systems:
+
+<a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
+
+This project is not yet available in the Google Play store, you have to build it from source. Watch it!
 
 
 ## Getting Started
@@ -55,13 +59,13 @@ The following steps will help if you want to contribute or work on the applicati
 
 ### Installation
 
-1. Clone this repository with all its submodules
+1. Clone this repository with all its submodules (HTTPS example)
 ```sh
 git clone --recurse-submodules https://github.com/2fast-team/2fast.git
 ```
+2. Install [Microsoft Store Services SDK](https://marketplace.visualstudio.com/items?itemName=AdMediator.MicrosoftStoreServicesSDK) (Windows app only)
 2. Open the `.sln` file with Visual Studio
-	- Most of the important dependencies should be loaded automatically from Visual Studio
-	- Install [Microsoft Store Services SDK](https://marketplace.visualstudio.com/items?itemName=AdMediator.MicrosoftStoreServicesSDK) manually
+	- The dependencies are automatically loaded by Visual Studio
 3. Start working and debugging!
 	- Remember to select the correct start project and -platform before hitting the play button
 	  - e.g. `x64` and `UWP` for the Universal Windows Application
@@ -79,6 +83,10 @@ Feel free to fork the project, work in your personal branch and create a pull re
 Distributed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) License. See `LICENSE` for more information.
 A list of all used 3rd party libraries, images and information with their source and license can be found in the *Dependencies of the app* section in every installation.
 Current key-icon-logo by [freepik @ flaticon](https://www.flaticon.com/de/kostenloses-icon/schlussel_2786386?related_item_id=2786386).
+
+## Privacy
+
+UWP: The app does not use any own telemetry functions apart from the standardised telemetry functions by Microsoft (crashes, install from which country, versions in use, etc.).
 
 ## Contact
 

@@ -14,7 +14,6 @@ using Project2FA.UWP.Strings;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Microsoft.Toolkit.Uwp.UI.Controls;
-using System.Text;
 using Template10.Services.Secrets;
 
 namespace Project2FA.UWP.ViewModels
@@ -29,6 +28,7 @@ namespace Project2FA.UWP.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand WindowsHelloLoginCommand { get; }
         private IDialogService _dialogService { get; }
+        private string _applicationTitle;
 
         /// <summary>
         /// Constructor
@@ -38,13 +38,13 @@ namespace Project2FA.UWP.ViewModels
             _dialogService = App.Current.Container.Resolve<IDialogService>();
             LoginCommand = new DelegateCommand(CheckLogin);
             WindowsHelloLoginCommand = new DelegateCommand(WindowsHelloLogin);
-            CheckCapabilityWindowsHello();
+            ApplicationTitle = Windows.ApplicationModel.Package.Current.DisplayName;
         }
 
         /// <summary>
         /// Checks and starts Windows Hello login, if possible and desired
         /// </summary>
-        private async void CheckCapabilityWindowsHello()
+        public async void CheckCapabilityWindowsHello()
         {
             if (await KeyCredentialManager.IsSupportedAsync())
             {
@@ -201,6 +201,11 @@ namespace Project2FA.UWP.ViewModels
         { 
             get => _isLogout;
             set => SetProperty(ref _isLogout, value);
+        }
+        public string ApplicationTitle 
+        { 
+            get => _applicationTitle;
+            set => SetProperty(ref _applicationTitle, value);
         }
     }
 }

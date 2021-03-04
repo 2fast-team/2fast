@@ -7,6 +7,7 @@ using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.Parser;
 using Project2FA.Repository.Database;
 using Project2FA.UWP.Services;
+using Project2FA.UWP.Utils;
 using Project2FA.UWP.ViewModels;
 using Project2FA.UWP.Views;
 using System;
@@ -48,6 +49,20 @@ namespace Project2FA.UWP
             this.InitializeComponent();
             var settings = SettingsService.Instance;
             RequestedTheme = settings.AppStartSetTheme(RequestedTheme);
+            UnhandledException += App_UnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            e.SetObserved();
+            ErrorDialogs.ShowUnexpectedError(e.Exception);
+        }
+
+        private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            ErrorDialogs.ShowUnexpectedError(e.Exception);
         }
 
         public override void RegisterTypes(IContainerRegistry container)
@@ -95,7 +110,6 @@ namespace Project2FA.UWP
                 {
                     SystemInformation.Instance.TrackAppUse(e as LaunchActivatedEventArgs);
                     // set custom splash screen page
-                    // but is this relevant?
                     //Window.Current.Content = new SplashPage(e.SplashScreen);
                 }
                 if (await Repository.Password.GetAsync() is null)

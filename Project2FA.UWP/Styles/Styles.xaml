@@ -42,9 +42,9 @@
     <Thickness x:Key="ComboBoxItemRevealBorderThemeThickness">2,2,2,2</Thickness>
     <x:Double x:Key="PersonPictureEllipseBadgeStrokeThickness">2</x:Double>
 
-    <animations:AnimationCollection x:Key="ImplicitOffset">
+    <animations:ImplicitAnimationSet  x:Key="ImplicitOffset">
         <animations:OffsetAnimation Duration="0:0:0.3"/>
-    </animations:AnimationCollection>
+    </animations:ImplicitAnimationSet>
 
     <Style TargetType="muxc:TeachingTip">
         <Setter Property="BorderBrush" Value="{ThemeResource SystemAccentColor}"/>

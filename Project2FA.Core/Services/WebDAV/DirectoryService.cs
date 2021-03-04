@@ -17,8 +17,10 @@ namespace Project2FA.Core.Services.WebDAV
 {
     public class DirectoryService : BindableBase
     {
-        [ThreadStatic]
-        private static DirectoryService _instance;
+        /// <summary>
+        /// Gets public singleton property.
+        /// </summary>
+        public static DirectoryService Instance { get; } = new DirectoryService();
         private ObservableCollection<WebDAVFileOrFolderModel> _folders;
         private ObservableCollection<WebDAVFileOrFolderModel> _filesAndFolders;
         private ObservableCollection<WebDAVFileOrFolderModel> _groupedFilesAndFolders;
@@ -46,16 +48,10 @@ namespace Project2FA.Core.Services.WebDAV
                     IsRoot = true
                 }
             };
-            if (_instance == null)
-            {
-                _instance = this;
-            }
             // Arrange for the first time, so that the collections get filled.
             //_groupedFilesAndFolders.ArrangeItems(new NameSorter(SortSequence.Asc), x => x.Name.First().ToString().ToUpper());
             //_groupedFolders.ArrangeItems(new NameSorter(SortSequence.Asc), x => x.Name.First().ToString().ToUpper());
         }
-
-        public static DirectoryService Instance => _instance ??(_instance = new DirectoryService());
 
 
         public ObservableCollection<PathInfoModel> PathStack

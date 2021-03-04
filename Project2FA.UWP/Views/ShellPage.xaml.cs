@@ -35,9 +35,9 @@ namespace Project2FA.UWP.Views
             _navManager = SystemNavigationManager.GetForCurrentView();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
 
+            Title = Windows.ApplicationModel.Package.Current.DisplayName;
             // Hide default title bar.
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            Title = Windows.ApplicationModel.Package.Current.DisplayName;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
             SetTitleBarAsDraggable();

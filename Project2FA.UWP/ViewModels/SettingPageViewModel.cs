@@ -21,6 +21,7 @@ using Project2FA.UWP.Utils;
 using System.Linq;
 using Windows.UI.Xaml.Data;
 using Microsoft.Toolkit.Collections;
+using Windows.Security.Credentials;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -64,7 +65,7 @@ namespace Project2FA.UWP.ViewModels
     {
         private SettingsService _settings;
         private IDialogService _dialogService { get; }
-        private bool _isWindowsHelloActive;
+        private bool _isWindowsHelloSupported;
         public ICommand MakeFactoryResetCommand { get; }
 
         /// <summary>
@@ -79,6 +80,7 @@ namespace Project2FA.UWP.ViewModels
             _dialogService = dialogService;
 
             MakeFactoryResetCommand = new DelegateCommand(MakeFactoryReset);
+            CheckWindowsHelloIsSupported();
         }
 
         /// <summary>
@@ -168,20 +170,22 @@ namespace Project2FA.UWP.ViewModels
         }
         #endregion
 
-        public bool PreferWindowsHello
+        public bool IsWindowsHelloSupported
+        {
+            get => _isWindowsHelloSupported;
+            set => SetProperty(ref _isWindowsHelloSupported, value);
+        }
+
+        public bool IsWindowsHelloActive
         {
             get
             {
                 switch (_settings.PreferWindowsHello)
                 {
                     case WindowsHelloPreferEnum.None:
-                        IsWindowsHelloActive = false;
-                        return false;
                     case WindowsHelloPreferEnum.No:
-                        IsWindowsHelloActive = true;
                         return false;
                     case WindowsHelloPreferEnum.Prefer:
-                        IsWindowsHelloActive = true;
                         return true;
                     default:
                         return false;
@@ -197,7 +201,13 @@ namespace Project2FA.UWP.ViewModels
                 {
                     _settings.PreferWindowsHello = WindowsHelloPreferEnum.No;
                 }
+                RaisePropertyChanged(nameof(IsWindowsHelloActive));
             }
+        }
+
+        private async void CheckWindowsHelloIsSupported()
+        {
+            IsWindowsHelloSupported = await KeyCredentialManager.IsSupportedAsync();
         }
 
         public bool UseHeaderBackButton
@@ -233,12 +243,6 @@ namespace Project2FA.UWP.ViewModels
             {
                 return Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationViewTitleBar");
             }
-        }
-
-        public bool IsWindowsHelloActive
-        {
-            get => _isWindowsHelloActive;
-            set => SetProperty(ref _isWindowsHelloActive, value);
         }
     }
 

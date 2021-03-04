@@ -160,7 +160,7 @@
                             <TextBox 
                                 x:Uid="AddAccountContentDialogSecretKey"
                                 extensions:TextBoxRegex.ValidationMode="Dynamic"
-                                extensions:TextBoxRegex.Regex="^[A-Za-z2-7-/]*={0,6}$"
+                                extensions:TextBoxRegex.Regex="^[A-Za-z2-7-\s]*={0,6}$"
                                 extensions:TextBoxRegex.ValidationType="Custom"
                                 Header="#secret key" 
                                 PlaceholderText="#key" 

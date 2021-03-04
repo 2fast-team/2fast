@@ -96,16 +96,6 @@ namespace WebDAVClient
         {
         }
 
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="WebDAVClient"/> class.
-        ///// </summary>
-        ///// <param name="url">Nextcloud instance URL.</param>
-        ///// <param name="passwordCredential">The password credential.</param>
-        //public WebDAVClient(string url, NetworkCredential passwordCredential) 
-        //    : this(url, new HttpClientHandler() { Credentials = passwordCredential })
-        //{
-        //}
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WebDAVClient"/> class.
         /// </summary>

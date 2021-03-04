@@ -135,21 +135,21 @@
                                 x:Uid="SettingsThemeSelectMode"
                                 Text="~SettingsThemeSelectMode.Text"
                                 Margin="0,0,0,6"/>
-                                <RadioButton
+                                <muxc:RadioButtons>
+                                    <RadioButton
                                 x:Uid="SettingsThemeLight"
-                                GroupName="Theme"
                                 Content="~SettingsThemeLight.Content"
                                 IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsLight, Mode=TwoWay}"/>
-                                <RadioButton
+                                    <RadioButton
                                 x:Uid="SettingsThemeDark"
-                                GroupName="Theme"
                                 Content="~SettingsThemeDark.Content"
                                 IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsDark, Mode=TwoWay}"/>
-                                <RadioButton
+                                    <RadioButton
                                 x:Uid="SettingsThemeSystem"
-                                GroupName="Theme"
                                 Content="~SettingsThemeSystem.Content"
                                 IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsSystem, Mode=TwoWay}"/>
+                                </muxc:RadioButtons>
+                                
                                 <HyperlinkButton
                                 x:Uid="SettingsWindowsColor"
                                 Content="~SettingsWindowsColor.Content"
@@ -172,8 +172,8 @@
                                 x:Uid="SettingsWindowsHelloPrefer"
                                 Header="~SettingsWindowsHelloPrefer.Header"
                                 Margin="0,20,0,0"
-                                IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloActive, Mode=OneWay}"
-                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.PreferWindowsHello, Mode=TwoWay}"/>
+                                IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported, Mode=OneWay}"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloActive, Mode=TwoWay}"/>
 
                             <controls:HeaderedContentControl
                                 Margin="0,20,0,15"

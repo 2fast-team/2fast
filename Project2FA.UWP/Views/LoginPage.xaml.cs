@@ -21,6 +21,7 @@ namespace Project2FA.UWP.Views
             // Set XAML element as a draggable region.
             Window.Current.SetTitleBar(AppTitleBar);
             ViewModel.IsLogout = _isLogout;
+            ViewModel.CheckCapabilityWindowsHello();
         }
 
         private void LoginKeydownCheckEnterSubmit(object sender, KeyRoutedEventArgs e)

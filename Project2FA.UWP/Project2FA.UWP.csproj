@@ -71,6 +71,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <EnableGatekeeperAnalysis>false</EnableGatekeeperAnalysis>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -149,7 +151,6 @@
     <Compile Include="ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\AccountCodePageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\DatafileViewModelBase.cs" />
-    <Compile Include="ViewModels\ContentDialogs\DeleteAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\DeleteDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
@@ -177,9 +178,6 @@
     </Compile>
     <Compile Include="Views\ContentDialogs\DeleteDatafileContentDialog.xaml.cs">
       <DependentUpon>DeleteDatafileContentDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ContentDialogs\DeleteAccountContentDialog.xaml.cs">
-      <DependentUpon>DeleteAccountContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -293,23 +291,26 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.11" />
+    <PackageReference Include="Microsoft.Services.Store.Engagement">
+      <Version>10.1901.28001</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Toolkit">
-      <Version>7.0.0-preview4</Version>
+      <Version>7.0.0-preview5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Mvvm">
-      <Version>7.0.0-preview4</Version>
+      <Version>7.0.0-preview5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>7.0.0-preview4</Version>
+      <Version>7.0.0-preview5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.Markdown">
-      <Version>7.0.0-preview4</Version>
+      <Version>7.0.0-preview5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie">
       <Version>7.0.0-preview4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Media">
-      <Version>7.0.0-preview4</Version>
+      <Version>7.0.0-preview5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.6.0-prerelease.210217002</Version>
@@ -410,10 +411,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentDialogs\DeleteDatafileContentDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ContentDialogs\DeleteAccountContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

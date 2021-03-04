@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:uwpui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:strings="using:Project2FA.UWP.Strings"
@@ -89,8 +89,8 @@
                             <TextBlock TextWrapping="Wrap" x:Uid="NewDatafileContentDialogCreateInfo" />
                             <TextBox 
                                 x:Name="TB_LocalFolder" 
-                                extensions:TextBoxRegex.ValidationMode="Dynamic"
-                                extensions:TextBoxRegex.Regex="^[\w\-. ]+$"
+                                uwpui:TextBoxExtensions.ValidationMode="Dynamic"
+                                uwpui:TextBoxExtensions.Regex="^[\w\-. ]+$"
                                 x:Uid="NewDatafileContentDialogLocalFolder" 
                                 Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}" 
                                 Header="~NewDatafileContentDialogLocalFolder.Header"
@@ -272,14 +272,14 @@
                             <AppBarButton Label="#akzeptieren" Icon="Accept"/>
                         </CommandBar.PrimaryCommands>
                     </CommandBar>
-                    <!--<Grid Grid.Row="1" >
+                    <Grid Grid.Row="1" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Button Content="#bestätigen"></Button>
                         <Button Grid.Column="1" HorizontalAlignment="Right">BTN1</Button>
-                    </Grid>-->
+                    </Grid>
                 </Grid>
             </PivotItem>
             <PivotItem x:Name="WebDAVFolderPivotItem" Header="#Datendatei" MinHeight="400">

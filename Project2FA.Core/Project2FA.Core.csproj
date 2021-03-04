@@ -2,15 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
     <Platforms>x86;x64;ARM;ARM64</Platforms>
+    <Title>Project2FA Core</Title>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Services\SecureStorage\**" />
-    <EmbeddedResource Remove="Services\SecureStorage\**" />
-    <None Remove="Services\SecureStorage\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">

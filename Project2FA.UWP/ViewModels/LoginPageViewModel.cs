@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Template10.Services.Secrets;
+using Project2FA.Core;
 
 namespace Project2FA.UWP.ViewModels
 {

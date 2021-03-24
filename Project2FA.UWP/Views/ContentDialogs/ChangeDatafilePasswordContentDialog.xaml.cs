@@ -12,7 +12,7 @@ namespace Project2FA.UWP.Views
     /// </summary>
     public sealed partial class ChangeDatafilePasswordContentDialog : ContentDialog
     {
-        public ChangeDatafilePasswordContentDialogViewModel ViewModel;
+        public ChangeDatafilePasswordContentDialogViewModel ViewModel { get; } = new ChangeDatafilePasswordContentDialogViewModel();
 
         /// <summary>
         /// Constructor, initialize view model
@@ -20,7 +20,6 @@ namespace Project2FA.UWP.Views
         public ChangeDatafilePasswordContentDialog()
         {
             this.InitializeComponent();
-            ViewModel = new ChangeDatafilePasswordContentDialogViewModel();
         }
 
         /// <summary>

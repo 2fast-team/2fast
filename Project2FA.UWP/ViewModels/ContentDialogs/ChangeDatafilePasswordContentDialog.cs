@@ -6,6 +6,7 @@ using Template10.Services.Secrets;
 using Prism.Commands;
 using Project2FA.Core.Services;
 using Project2FA.UWP.Services;
+using Project2FA.Core;
 
 namespace Project2FA.UWP.ViewModels
 {

@@ -2,6 +2,7 @@
 using Project2FA.UWP.Services.Enums;
 using System;
 using Template10.Services.Settings;
+using Prism.Ioc;
 using Windows.UI.Xaml;
 
 namespace Project2FA.UWP.Services
@@ -11,7 +12,7 @@ namespace Project2FA.UWP.Services
         SettingsHelper _helper;
         private SettingsService()
         {
-            _helper = new SettingsHelper();
+            _helper = new SettingsHelper(App.Current.Container.Resolve<ISettingsAdapter>());
         }
 
         /// <summary>
@@ -61,6 +62,33 @@ namespace Project2FA.UWP.Services
             set
             {
                 _helper.TryWrite<bool>(nameof(UseExtendedHash), value);
+            }
+        }
+
+        public bool UseNTPServerCorrection
+        {
+            get { return _helper.SafeRead<bool>(nameof(UseNTPServerCorrection), false); }
+            set
+            {
+                _helper.TryWrite<bool>(nameof(UseNTPServerCorrection), value);
+            }
+        }
+
+        public string NTPServerString
+        {
+            get { return _helper.SafeRead<string>(nameof(UseExtendedHash), "time.windows.com"); }
+            set
+            {
+                _helper.TryWrite<string>(nameof(UseExtendedHash), value);
+            }
+        }
+
+        public string UnhandledExceptionStr
+        {
+            get { return _helper.SafeRead<string>(nameof(UnhandledExceptionStr), string.Empty); }
+            set
+            {
+                _helper.TryWrite<string>(nameof(UnhandledExceptionStr), value);
             }
         }
 
@@ -136,7 +164,7 @@ namespace Project2FA.UWP.Services
         {
             get
             {
-                return _helper.SafeReadEnum<DateTime>(nameof(LastCheckedSystemTime), new DateTime());
+                return _helper.SafeRead<DateTime>(nameof(LastCheckedSystemTime), new DateTime());
             }
             set
             {

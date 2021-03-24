@@ -24,20 +24,25 @@ using Windows.ApplicationModel.Core;
 using System.IO;
 using Microsoft.Toolkit.Uwp.UI;
 using Project2FA.UWP.Utils;
+using Microsoft.Toolkit.Uwp.Connectivity;
+using Project2FA.Core;
+using Project2FA.Core.Services.NTP;
 
 namespace Project2FA.UWP.Services
 {
     public class DataService : BindableBase, IDisposable
     {
         public SemaphoreSlim CollectionAccessSemaphore { get; } = new SemaphoreSlim(1, 1);
-
+        private bool _checkedTimeSynchronisation;
+        private TimeSpan _ntpServerTimeDifference;
         private ISecretService SecretService { get; }
         private IDialogService DialogService { get; }
         private ILoggerFacade Logger { get; }
         private IFileService FileService { get; }
+        private INetworkTimeService NetworkTimeService { get; }
         private bool _initialization, _errorOccurred;
 
-        private INewtonsoftJSONService _newtonsoftJSONService { get; }
+        private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
         public AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
@@ -57,11 +62,44 @@ namespace Project2FA.UWP.Services
             FileService = App.Current.Container.Resolve<IFileService>();
             Logger = App.Current.Container.Resolve<ILoggerFacade>();
             DialogService = App.Current.Container.Resolve<IDialogService>();
-            _newtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
+            NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
+            NetworkTimeService = App.Current.Container.Resolve<INetworkTimeService>();
             ACVCollection = new AdvancedCollectionView(Collection, true);
             ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
             CheckDatafile();
+            CheckTime();
+        }
+
+        /// <summary>
+        /// Check if the current time of the system is correct
+        /// </summary>
+        private async void CheckTime()
+        {
+            var difference = DateTime.UtcNow - SettingsService.Instance.LastCheckedSystemTime;
+            // check the time again after 8 hours
+            if (difference.TotalHours > 8)
+            {
+                if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable && SettingsService.Instance.UseNTPServerCorrection)
+                {
+                    try
+                    {
+                        var time = await NetworkTimeService.GetNetworkTimeAsync(SettingsService.Instance.NTPServerString);
+                        var timespan = time.Subtract(DateTime.UtcNow);
+                        if (Math.Abs(timespan.TotalSeconds) >= 30)
+                        {
+                            _ntpServerTimeDifference = timespan;
+                            SystemTimeNotCorrectError();
+                        }
+                        _checkedTimeSynchronisation = true;
+                        SettingsService.Instance.LastCheckedSystemTime = DateTime.UtcNow;
+                    }
+                    catch (Exception exc)
+                    {
+                        Logger.Log("NTP exception: " + exc.Message, Category.Exception, Priority.High);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -90,6 +128,7 @@ namespace Project2FA.UWP.Services
                     {
                         if (e.Action == NotifyCollectionChangedAction.Add)
                         {
+                            // initialize the newest (last) item
                             InitializeItem((sender as ObservableCollection<TwoFACodeModel>).Count -1);
                         }
                     }
@@ -170,10 +209,10 @@ namespace Project2FA.UWP.Services
                         if (!string.IsNullOrEmpty(datafileStr))
                         {
                             // read the iv for AES
-                            DatafileModel datafile = _newtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                            DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
                             var iv = datafile.IV;
 
-                            datafile = _newtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
+                            datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                                             SecretService.Helper.ReadSecret(Constants.ContainerName,dbHash.Hash),
                                                             iv,
                                                             datafileStr);
@@ -405,6 +444,26 @@ namespace Project2FA.UWP.Services
         }
 
         /// <summary>
+        /// Displays that the system time is not correct
+        /// </summary>
+        /// <returns></returns>
+        private async void SystemTimeNotCorrectError()
+        {
+            //TODO translate
+            var dialogService = App.Current.Container.Resolve<IDialogService>();
+            var dialog = new ContentDialog();
+            dialog.Title = Resources.AccountCodePageWrongTimeTitle;
+            dialog.Content = Resources.AccountCodePageWrongTimeContent;
+            dialog.PrimaryButtonText = Resources.AccountCodePageWrongTimeBTN;
+            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+            {
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
+            });
+            dialog.SecondaryButtonText = Resources.Confirm;
+            await dialogService.ShowAsync(dialog);
+        }
+
+        /// <summary>
         /// Writes the current accounts into the datafile
         /// </summary>
         public async void WriteLocalDatafile()
@@ -420,7 +479,7 @@ namespace Project2FA.UWP.Services
             var folder = await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
             await FileService.WriteStringAsync(
                     datafileDB.Name,
-                    _newtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
+                    NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
                     iv, 
                     file),
                     folder);
@@ -436,7 +495,14 @@ namespace Project2FA.UWP.Services
             try
             {
                 var totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
-                Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
+                if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
+                {
+                    Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
+                }
+                else
+                {
+                    Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
+                }
             }
             catch (Exception e)
             {
@@ -451,7 +517,7 @@ namespace Project2FA.UWP.Services
         {
             get => _emptyAccountCollectionTipIsOpen;
             set => SetProperty(ref _emptyAccountCollectionTipIsOpen, value);
-        }  
+        }
 
         public void Dispose()
         {

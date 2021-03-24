@@ -110,6 +110,11 @@ namespace Project2FA.UWP.Views
 
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(SettingsService.Instance.UnhandledExceptionStr))
+            {
+                CheckUnhandledExceptionLastSession();
+            }
+
             //Rate information for the user
             if (SystemInformation.Instance.LaunchCount == 5 || SystemInformation.Instance.LaunchCount == 15)
             {
@@ -184,6 +189,11 @@ namespace Project2FA.UWP.Views
         {
             _navManager.BackRequested += NavManager_BackRequested;
             ShellView.BackRequested += async (s, e) => await NavigationService.GoBackAsync();
+        }
+
+        private void CheckUnhandledExceptionLastSession()
+        {
+            ErrorDialogs.ShowUnexpectedError(SettingsService.Instance.UnhandledExceptionStr);
         }
 
         private async void NavManager_BackRequested(object sender, BackRequestedEventArgs e)

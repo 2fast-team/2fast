@@ -95,4 +95,10 @@
         <Setter Property="BorderBrush" Value="Red" />
         <!--<Setter Property="SelectionHighlightColor" Value="Red" />-->
     </Style>
+
+    <Style x:Key="ShellHeaderTitleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontWeight" Value="SemiLight" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+    </Style>
 </ResourceDictionary>

@@ -33,7 +33,7 @@
                                 DefaultLabelPosition="Right">
                                     <CommandBar.Content>
                                         <TextBlock 
-                                        Style="{StaticResource TitleTextBlockStyle}"
+                                        Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
                                         Text="{x:Bind Title,Mode=OneWay}"
                                         Margin="15,0,0,11"
                                         TextWrapping="NoWrap" 
@@ -54,8 +54,7 @@
                                                 BorderBrush="{ThemeResource SystemAccentColor}"
                                                 x:Uid="AccountCodePageEmptyCollectionTip"
                                                 BorderThickness="2"
-                                                ShouldConstrainToRootBounds="False"
-                                                IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=OneWay}"
+                                                IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
                                                 Target="{Binding ElementName=ABB_AddAccount, Mode=OneTime}">
                                                     <muxc:TeachingTip.HeroContent>
                                                         <muxc:AnimatedVisualPlayer 
@@ -169,7 +168,6 @@
                             x:Name="AccountCopyCodeButtonTip"
                             x:Uid="AccountCodePageCopyCodeTeachingTip"
                             AutoCloseInterval="1600"
-                            ShouldConstrainToRootBounds="False"
                             IsLightDismissEnabled="True"
                             BorderBrush="{ThemeResource SystemAccentColor}"
                             Target="{Binding ElementName=Root, Mode=OneTime}"
@@ -198,7 +196,7 @@
                             HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Stretch"
                             Color="{StaticResource SystemAccentColor}"
-                            BlurRadius="20"
+                            BlurRadius="30"
                             ShadowOpacity="1">
                                 <Border Background="{StaticResource SystemAccentColor}" />
                             </controls:DropShadowPanel>
@@ -211,8 +209,7 @@
                             Margin="15,10,20,0"
                             Grid.Column="1"
                             Grid.Row="0"
-                            Grid.RowSpan="2"
-                            >
+                            Grid.RowSpan="2">
                         </muxc:PersonPicture>
                         <RelativePanel 
                             Grid.Column="2" 
@@ -264,7 +261,6 @@
                                         x:Name="AccountCopyCodeButtonTipTwo"
                                         x:Uid="AccountCodePageCopyCodeTeachingTip"
                                         AutoCloseInterval="1600"
-                                        ShouldConstrainToRootBounds="False"
                                         IsLightDismissEnabled="True"
                                         BorderBrush="{ThemeResource SystemAccentColor}"
                                         Target="{Binding ElementName=BTN_CopyCode}"
@@ -370,7 +366,7 @@
             ItemTemplate="{StaticResource TwoFACodeCustomTemplate}" 
             ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}">
             <muxc:ItemsRepeater.Layout>
-                <appcontrols:WrapLayout 
+                <controls:WrapLayout 
                     VerticalSpacing="10" 
                     HorizontalSpacing="10"/>
             </muxc:ItemsRepeater.Layout>

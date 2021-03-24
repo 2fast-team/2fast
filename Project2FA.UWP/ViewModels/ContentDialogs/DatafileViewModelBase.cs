@@ -19,6 +19,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using Project2FA.UWP.Services;
 using System.ComponentModel;
+using Project2FA.Core;
 
 namespace Project2FA.UWP.ViewModels
 {

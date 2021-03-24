@@ -13,9 +13,7 @@ using Prism.Commands;
 using Project2FA.UWP.Strings;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
-using System.Net.Sockets;
-using System.Net;
-using System.Threading.Tasks;
+using Prism.Logging;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -23,7 +21,8 @@ namespace Project2FA.UWP.ViewModels
     {
         private DispatcherTimer _dispatcherTOTPTimer;
         private DispatcherTimer _dispatcherTimerDeletedModel;
-        private IDialogService _dialogService { get; }
+        private IDialogService PageDialogService { get; }
+        private ILoggerFacade Logger { get; }
         public ICommand AddAccountCommand { get; }
         public ICommand EditAccountCommand { get; }
         public ICommand DeleteAccountCommand { get; }
@@ -37,9 +36,10 @@ namespace Project2FA.UWP.ViewModels
         private TwoFACodeModel _tempDeletedTFAModel;
 
 
-        public AccountCodePageViewModel(IDialogService dialogService)
+        public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade)
         {
-            _dialogService = dialogService;
+            PageDialogService = dialogService;
+            Logger = loggerFacade;
             Title = "Accounts";
 
             _dispatcherTOTPTimer = new DispatcherTimer();
@@ -57,7 +57,7 @@ namespace Project2FA.UWP.ViewModels
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
                 var dialog = new AddAccountContentDialog();
-                await _dialogService.ShowAsync(dialog);
+                await PageDialogService.ShowAsync(dialog);
             });
 
             RefreshCommand = new DelegateCommand(() =>
@@ -65,12 +65,13 @@ namespace Project2FA.UWP.ViewModels
                 ReloadDatafileAndUpdateCollection();
             });
 
-            LogoutCommand = new DelegateCommand(() =>
+            LogoutCommand = new DelegateCommand(async() =>
             {
                 if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
                 {
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
+                await App.ShellPageInstance.NavigationService.NavigateAsync("/BlankPage");
                 var loginPage = new LoginPage(true);
                 Window.Current.Content = loginPage;
             });
@@ -96,52 +97,8 @@ namespace Project2FA.UWP.ViewModels
             }
 
             _dispatcherTOTPTimer.Start();
-
-            // TODO next version
-            //CheckSystemTime().ConfigureAwait(false);
-
-            //            var groupedList = Collection.GroupBy(x => x.Label.First())
-            //.Select(x => new GroupedTwoFACodeModel { GroupKey = x.Key, Items = x.ToObservableCollection() });
-            //            _groupedCollection.AddRange(groupedList);
         }
 
-
-        //TODO next version
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private async Task CheckSystemTime()
-        {
-            //var lastCheckedSystemTime = SettingsService.Instance.LastCheckedSystemTime;
-            //if ()
-            //{
-
-            //}
-            try
-            {
-                var networkTime = await GetNetworkTimeAsync();
-                var difference = DateTime.Now - networkTime;
-                if (difference.TotalMinutes > 1)
-                {
-                    //TODO translate
-                    var dialog = new ContentDialog();
-                    dialog.Title = Resources.AccountCodePageWrongTimeTitle;
-                    dialog.Content = Resources.AccountCodePageWrongTimeContent;
-                    dialog.PrimaryButtonText = Resources.AccountCodePageWrongTimeBTN;
-                    dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
-                    {
-                        await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
-                    });
-                    //dialog.SecondaryButtonText = Resources.Confirm;
-                    await _dialogService.ShowAsync(dialog);
-                }
-            }
-            catch (Exception)
-            {
-            }
-
-        }
 
         /// <summary>
         /// Timer for delete the temp model after 30 seconds
@@ -174,6 +131,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 if (TwoFADataService.Collection[i].Seconds == 0)
                 {
+                    //Logger.Log("")
                     TwoFADataService.Collection[i].Seconds = TwoFADataService.Collection[i].Period;
                     DataService.Instance.GenerateTOTP(i);
                 }
@@ -208,7 +166,7 @@ namespace Project2FA.UWP.ViewModels
         {
             if (parameter is TwoFACodeModel model)
             {
-                _dialogService.ShowAsync(new EditAccountContentDialog(model));
+                PageDialogService.ShowAsync(new EditAccountContentDialog(model));
             }
         }
 
@@ -230,7 +188,7 @@ namespace Project2FA.UWP.ViewModels
                 dialog.PrimaryButtonText = Resources.Confirm;
                 dialog.SecondaryButtonText = Resources.ButtonTextCancel;
                 dialog.SecondaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                var result = await _dialogService.ShowAsync(dialog);
+                var result = await PageDialogService.ShowAsync(dialog);
                 if (result == ContentDialogResult.Primary)
                 {
                     TempDeletedTFAModel = model;
@@ -263,68 +221,6 @@ namespace Project2FA.UWP.ViewModels
             _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
             return true;
         }
-
-        #region NTPServer
-        private async Task<DateTime> GetNetworkTimeAsync()
-        {
-            //GWDG time server
-            const string ntpServer = "ntps1.gwdg.de";
-
-            // NTP message size - 16 bytes of the digest (RFC 2030)
-            var ntpData = new byte[48];
-
-            //Setting the Leap Indicator, Version Number and Mode values
-            ntpData[0] = 0x1B; //LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
-
-            var addresses = Dns.GetHostEntry(ntpServer).AddressList;
-
-            //The UDP port number assigned to NTP is 123
-            var ipEndPoint = new IPEndPoint(addresses[0], 123);
-            //NTP uses UDP
-
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
-                await socket.ConnectAsync(ipEndPoint);
-
-                //Stops code hang if NTP is blocked
-                socket.ReceiveTimeout = 3000;
-
-                socket.Send(ntpData);
-                socket.Receive(ntpData);
-                socket.Close();
-            }
-
-            //Offset to get to the "Transmit Timestamp" field (time at which the reply 
-            //departed the server for the client, in 64-bit timestamp format."
-            const byte serverReplyTime = 40;
-
-            //Get the seconds part
-            ulong intPart = BitConverter.ToUInt32(ntpData, serverReplyTime);
-
-            //Get the seconds fraction
-            ulong fractPart = BitConverter.ToUInt32(ntpData, serverReplyTime + 4);
-
-            //Convert From big-endian to little-endian
-            intPart = SwapEndianness(intPart);
-            fractPart = SwapEndianness(fractPart);
-
-            var milliseconds = (intPart * 1000) + ((fractPart * 1000) / 0x100000000L);
-
-            //**UTC** time
-            var networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
-
-            return networkDateTime.ToLocalTime();
-        }
-
-        // stackoverflow.com/a/3294698/162671
-        private uint SwapEndianness(ulong x)
-        {
-            return (uint)(((x & 0x000000ff) << 24) +
-                           ((x & 0x0000ff00) << 8) +
-                           ((x & 0x00ff0000) >> 8) +
-                           ((x & 0xff000000) >> 24));
-        }
-        #endregion
 
         public DataService TwoFADataService => DataService.Instance;
 

@@ -3,11 +3,12 @@ using Microsoft.Toolkit.Uwp.Helpers;
 using Prism;
 using Prism.Ioc;
 using Prism.Unity;
+using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
+using Project2FA.Core.Services.NTP;
 using Project2FA.Core.Services.Parser;
 using Project2FA.Repository.Database;
 using Project2FA.UWP.Services;
-using Project2FA.UWP.Utils;
 using Project2FA.UWP.ViewModels;
 using Project2FA.UWP.Views;
 using System;
@@ -18,6 +19,7 @@ using Template10.Services.Settings;
 using Template10.Utilities;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Globalization;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -47,22 +49,21 @@ namespace Project2FA.UWP
         public App()
         {
             this.InitializeComponent();
-            var settings = SettingsService.Instance;
-            RequestedTheme = settings.AppStartSetTheme(RequestedTheme);
+            RequestedTheme = SettingsService.Instance.AppStartSetTheme(RequestedTheme);
             UnhandledException += App_UnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
         }
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            e.SetObserved();
-            ErrorDialogs.ShowUnexpectedError(e.Exception);
+            SettingsService.Instance.UnhandledExceptionStr = e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
+                + e.Exception.InnerException;
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
-            e.Handled = true;
-            ErrorDialogs.ShowUnexpectedError(e.Exception);
+            SettingsService.Instance.UnhandledExceptionStr = e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
+    + e.Exception.InnerException;
         }
 
         public override void RegisterTypes(IContainerRegistry container)
@@ -75,18 +76,24 @@ namespace Project2FA.UWP
             container.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>(); //netstandard for general access
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
+            container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();
             container.RegisterView<AccountCodePage, AccountCodePageViewModel>();
             container.RegisterView<WelcomePage, WelcomePageViewModel>();
             container.RegisterView<SettingPage, SettingPageViewModel>();
+            container.RegisterView<BlankPage, BlankPageViewModel>();
         }
 
         public override async Task OnStartAsync(IStartArgs args)
         {
             if (Window.Current.Content == null)
             {
+                //if (System.Diagnostics.Debugger.IsAttached)
+                //{
+                //    ApplicationLanguages.PrimaryLanguageOverride = "en";
+                //}
                 var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
                 if (!coreTitleBar.ExtendViewIntoTitleBar)
                 {
@@ -95,7 +102,7 @@ namespace Project2FA.UWP
                 Window.Current.Activated += Current_Activated;
                 bool loginRequiered = false;
                 // set DB
-                if (Repository == null)
+                if (Repository is null)
                 {
                     string databasePath = ApplicationData.Current.LocalFolder.Path + string.Format(@"\{0}.db", Constants.ContainerName);
                     var dbOptions = new DbContextOptionsBuilder<Project2FAContext>().UseSqlite("Data Source=" + databasePath);
@@ -123,7 +130,6 @@ namespace Project2FA.UWP
 
                 if (loginRequiered)
                 {
-                    // TODO sometimes debug exception
                     var loginPage = Container.Resolve<LoginPage>();
                     Window.Current.Content = loginPage;
                 }
@@ -147,7 +153,7 @@ namespace Project2FA.UWP
                     {
                         _focusLostTimer = new DispatcherTimer();
                         _focusLostTimer.Interval = new TimeSpan(0, 1, 0); //every minute
-                        _focusLostTimer.Tick += _focusLostTimer_Tick;
+                        _focusLostTimer.Tick += FocusLostTimer_Tick;
                     }
                     _focusLostTimer.Start();
                     _focusLostTime = DateTime.Now;
@@ -166,7 +172,7 @@ namespace Project2FA.UWP
             }
         }
 
-        private async void _focusLostTimer_Tick(object sender, object e)
+        private async void FocusLostTimer_Tick(object sender, object e)
         {
             if (await Repository.Password.GetAsync() is null)
             {
@@ -179,12 +185,13 @@ namespace Project2FA.UWP
                 _focusLostTimer.Stop();
                 bool isLogout = true;
                 var dialogService = Current.Container.Resolve<IDialogService>();
-                var loginPage = new LoginPage(isLogout);
-                Window.Current.Content = loginPage;
                 if (await dialogService.IsDialogRunning())
                 {
                     dialogService.CancelDialogs();
                 }
+                await ShellPageInstance.NavigationService.NavigateAsync("/BlankPage");
+                var loginPage = new LoginPage(isLogout);
+                Window.Current.Content = loginPage;
             }
         }
         #endregion

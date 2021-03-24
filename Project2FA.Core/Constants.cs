@@ -1,4 +1,4 @@
-﻿namespace Project2FA.UWP
+﻿namespace Project2FA.Core
 {
     public static class Constants
     {

@@ -795,6 +795,19 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region ErrorHandleDescriptionLastSession
+        /// <summary>
+        ///   Looks up a localized string similar to: An unhandled error occurred the last time the app was used, please submit the error details which can be seen in the box via the feedback hub, or use the error message via Github.
+        /// </summary>
+        public static string ErrorHandleDescriptionLastSession
+        {
+            get
+            {
+                return _resourceLoader.GetString("ErrorHandleDescriptionLastSession");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -866,6 +879,7 @@ namespace Project2FA.UWP.Strings{
             SettingsDependencyGroupPackages,
             RestartApp,
             ErrorCopyToClipboard,
+            ErrorHandleDescriptionLastSession,
         }
 
         private static ResourceLoader _resourceLoader;

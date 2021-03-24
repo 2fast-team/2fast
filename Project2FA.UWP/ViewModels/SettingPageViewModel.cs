@@ -22,6 +22,7 @@ using System.Linq;
 using Windows.UI.Xaml.Data;
 using Microsoft.Toolkit.Collections;
 using Windows.Security.Credentials;
+using Project2FA.Core.Services.NTP;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -33,6 +34,7 @@ namespace Project2FA.UWP.ViewModels
         public SettingsPartViewModel SettingsPartViewModel { get; }
         public AboutPartViewModel AboutPartViewModel { get; }
         public DatafilePartViewModel DatafilePartViewModel { get; }
+        public ICommand RateAppCommand { get; }
 
         private int _selectedItem;
         public SettingPageViewModel(IDialogService dialogService, IMarketplaceService marketplaceService)
@@ -40,6 +42,10 @@ namespace Project2FA.UWP.ViewModels
             SettingsPartViewModel = new SettingsPartViewModel(dialogService);
             DatafilePartViewModel = new DatafilePartViewModel(dialogService);
             AboutPartViewModel  = new AboutPartViewModel(marketplaceService);
+            RateAppCommand = new DelegateCommand(() =>
+            {
+                AboutPartViewModel.RateApp();
+            });
         }
 
         public void Initialize(INavigationParameters parameters)
@@ -66,7 +72,13 @@ namespace Project2FA.UWP.ViewModels
         private SettingsService _settings;
         private IDialogService _dialogService { get; }
         private bool _isWindowsHelloSupported;
+        private bool _manualNTPServerConfiurationChecked;
+        private bool _progressIsIndeterminate;
+        private string _ntpServerStr;
+        private bool _ntpServerEditValid;
+        private bool _ntpServerEditException;
         public ICommand MakeFactoryResetCommand { get; }
+        public ICommand SaveNTPServerAddressCommand { get; }
 
         /// <summary>
         /// View Model constructor
@@ -80,6 +92,11 @@ namespace Project2FA.UWP.ViewModels
             _dialogService = dialogService;
 
             MakeFactoryResetCommand = new DelegateCommand(MakeFactoryReset);
+            SaveNTPServerAddressCommand = new DelegateCommand(() =>
+            {
+                SettingsService.Instance.NTPServerString = _ntpServerStr;
+            });
+
             CheckWindowsHelloIsSupported();
         }
 
@@ -176,6 +193,62 @@ namespace Project2FA.UWP.ViewModels
             set => SetProperty(ref _isWindowsHelloSupported, value);
         }
 
+        public string NTPServerStr
+        {
+            get => _settings.NTPServerString;
+            set
+            {
+                if (value != _settings.NTPServerString)
+                {
+                    CheckNTPServer(value);
+                }
+                else
+                {
+                    NtpServerEditValid = false;
+                    NtpServerEditException = false;
+                }
+            }
+        }
+        private async void CheckNTPServer(string newAddress)
+        {
+            ProgressIsIndeterminate = true;
+            try
+            {
+                NtpServerEditException = false;
+                await App.Current.Container.Resolve<INetworkTimeService>().GetNetworkTimeAsync(newAddress);
+            }
+            catch (Exception)
+            {
+                NtpServerEditException = true;
+            }
+            finally
+            {
+                if (!NtpServerEditException)
+                {
+                    NtpServerEditValid = true;
+                    _ntpServerStr = newAddress;
+                }
+                else
+                {
+                    NtpServerEditValid = false;
+                }
+                ProgressIsIndeterminate = false;
+            }
+        }
+
+        public bool ProgressIsIndeterminate
+        {
+            get
+            {
+                return _progressIsIndeterminate;
+            }
+
+            set
+            {
+                SetProperty(ref _progressIsIndeterminate, value);
+            }
+        }
+
         public bool IsWindowsHelloActive
         {
             get
@@ -237,11 +310,41 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
-        public bool IsTitleBarSupported
+        //public bool IsTitleBarSupported
+        //{
+        //    get
+        //    {
+        //        return Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationViewTitleBar");
+        //    }
+        //}
+
+        public bool ManualNTPServerConfiurationChecked 
+        { 
+            get => _manualNTPServerConfiurationChecked;
+            set => SetProperty(ref _manualNTPServerConfiurationChecked, value);
+        }
+        public bool NtpServerEditValid 
         {
-            get
+            get => _ntpServerEditValid;
+            set => SetProperty(ref _ntpServerEditValid, value);
+        }
+        public bool NtpServerEditException 
+        { 
+            get => _ntpServerEditException;
+            set => SetProperty(ref _ntpServerEditException, value);
+        }
+
+        public bool UseNTPServerCorrection
+        {
+            get => _settings.UseNTPServerCorrection;
+            set
             {
-                return Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationViewTitleBar");
+                _settings.UseNTPServerCorrection = value;
+                if (!value)
+                {
+                    ManualNTPServerConfiurationChecked = false;
+                }
+                RaisePropertyChanged(nameof(UseNTPServerCorrection));
             }
         }
     }

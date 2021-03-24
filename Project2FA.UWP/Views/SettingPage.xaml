@@ -10,6 +10,8 @@
     xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -19,110 +21,96 @@
                     <TextBlock 
                         x:Uid="SettingsPageName"
                         Margin="15,0,0,0"
-                        Style="{StaticResource TitleTextBlockStyle}"
+                        Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
                         TextWrapping="NoWrap" 
                         VerticalAlignment="Top" />
                 </Grid>
             </DataTemplate>
 
             <DataTemplate x:Name="DependenciesListViewTemplate" x:DataType="models:DependencyModel">
-                <UserControl>
-                    <Grid x:Name="Root" Background="{ThemeResource TwoFABackgroundBrush}" Width="450">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock 
+                <Grid 
+                    x:Name="Root" 
+                    Background="{ThemeResource TwoFABackgroundBrush}" 
+                    Width="450">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
                         Text="{x:Bind Name, Mode=OneWay}"
                         FontSize="16"
                         Foreground="{ThemeResource SystemAccentColor}"
                         Padding="0,0,0,8"/>
-                        <StackPanel 
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Margin="0,8,0,0"
+                        Orientation="Horizontal">
+                        <TextBlock 
+                            x:Uid="SettingsDependencyAuthor"
                             Grid.Row="1" 
-                            Margin="0,8,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock 
-                                x:Uid="SettingsDependencyAuthor"
-                            Grid.Row="1" 
-                                VerticalAlignment="Center"
+                            VerticalAlignment="Center"
                             Margin="0,0,4,0" />
-                            <TextBlock 
-                                VerticalAlignment="Center"
+                        <TextBlock 
+                            VerticalAlignment="Center"
                             Text="{x:Bind Authors, Mode=OneWay}"/>
-                            <HyperlinkButton 
-                        Content="Link"
-                                Margin="4,0,0,0"
-                        Visibility="{x:Bind URL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
-                        NavigateUri="{x:Bind URL,Mode=OneWay}"/>
-                        </StackPanel>
-
-                        <StackPanel 
-                            Grid.Row="2" 
-                            Margin="0,8,0,0"
-                            Orientation="Horizontal">
-                            <TextBlock 
-                                x:Uid="SettingsDependencyLicence"
-                        Margin="0,0,4,0" 
-                                VerticalAlignment="Center"
-                        Grid.Row="2" 
-                            Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"/>
-                            <TextBlock 
-                                VerticalAlignment="Center"
-                        Text="{x:Bind LicenseName, Mode=OneWay}" 
-                        Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}" />
-                            <HyperlinkButton 
+                        <HyperlinkButton 
+                            Content="Link"
                             Margin="4,0,0,0"
-                        Content="Link"
-                        Visibility="{x:Bind LicenseURL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
-                        NavigateUri="{x:Bind LicenseURL,Mode=OneWay}" 
-                                VerticalAlignment="Center"/>
-                        </StackPanel>
+                            ToolTipService.ToolTip="{x:Bind URL,Mode=OneWay}"
+                            Visibility="{x:Bind URL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
+                            NavigateUri="{x:Bind URL,Mode=OneWay}"/>
+                    </StackPanel>
 
-                        <!--<VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="WindowStates">
-                                <VisualState x:Name="NarrowState">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="0" />
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        --><!--<Setter Target="Root.MinWidth" Value="478"/>--><!--
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="MediumState">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="720" />
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="Root.Width" Value="450"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>-->
-                    </Grid>
-                </UserControl>
-                
+                    <StackPanel 
+                        Grid.Row="2" 
+                        Margin="0,8,0,0"
+                        Orientation="Horizontal">
+                        <TextBlock 
+                            x:Uid="SettingsDependencyLicence"
+                            Margin="0,0,4,0" 
+                            VerticalAlignment="Center"
+                            Grid.Row="2" 
+                            Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"/>
+                        <TextBlock 
+                            VerticalAlignment="Center"
+                            Text="{x:Bind LicenseName, Mode=OneWay}" 
+                            Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}" />
+                        <HyperlinkButton 
+                            Margin="4,0,0,0"
+                            Content="Link"
+                            Visibility="{x:Bind LicenseURL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
+                            ToolTipService.ToolTip="{x:Bind LicenseURL,Mode=OneWay}"
+                            NavigateUri="{x:Bind LicenseURL,Mode=OneWay}" 
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="3,0,0,0">
         <Pivot x:Name="Main_Pivot" SelectedIndex="{x:Bind ViewModel.SelectedItem,Mode=TwoWay}" >
-            <PivotItem x:Uid="SettingsPivotItemOption" 
-                       Header="~SPIOption.Header">
-                <ScrollViewer VerticalScrollMode="Auto" Margin="0,10,0,0">
-                    <StackPanel>
-                        <Border 
-                            BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
-                            BorderThickness="0,0,0,1">
+            <PivotItem 
+                x:Uid="SettingsPivotItemOption" 
+                Header="~SPIOption.Header"
+                Margin="8,0,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MaxWidth="820"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer 
+                        VerticalScrollMode="Auto" 
+                        Margin="0,10,0,0">
+                        <StackPanel>
                             <TextBlock 
                             Margin="0,0,0,12"
                             FontSize="24"
                             Text="~SettingsOptionsDesignTitle.Text"
                             x:Uid="SettingsOptionsDesignTitle" />
-                        </Border>
-                        <StackPanel Margin="20,0,0,0">
-                            <ToggleSwitch 
+                            <StackPanel Margin="20,0,0,0">
+                                <ToggleSwitch 
                                 x:Name="SettingsBackButtonToggleSwtich"
                                 x:Uid="SettingsBackButtonToggleSwtich"
                                 Header="~SettingsBackButtonToggleSwtich.Header"
@@ -130,44 +118,44 @@
                                 OffContent="~SettingsBackButtonToggleSwtich.OffContent"
                                 OnContent="~SettingsBackButtonToggleSwtich.OnContent" 
                                 Margin="0,10,0,15" />
-                            <StackPanel Margin="0,10,0,15">
-                                <TextBlock
+                                <StackPanel Margin="0,10,0,15">
+                                    <TextBlock
                                 x:Uid="SettingsThemeSelectMode"
                                 Text="~SettingsThemeSelectMode.Text"
                                 Margin="0,0,0,6"/>
-                                <muxc:RadioButtons>
-                                    <RadioButton
+                                    <muxc:RadioButtons>
+                                        <RadioButton
                                 x:Uid="SettingsThemeLight"
                                 Content="~SettingsThemeLight.Content"
                                 IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsLight, Mode=TwoWay}"/>
-                                    <RadioButton
+                                        <RadioButton
                                 x:Uid="SettingsThemeDark"
                                 Content="~SettingsThemeDark.Content"
                                 IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsDark, Mode=TwoWay}"/>
-                                    <RadioButton
+                                        <RadioButton
                                 x:Uid="SettingsThemeSystem"
                                 Content="~SettingsThemeSystem.Content"
                                 IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsSystem, Mode=TwoWay}"/>
-                                </muxc:RadioButtons>
-                                
-                                <HyperlinkButton
+                                    </muxc:RadioButtons>
+
+                                    <HyperlinkButton
                                 x:Uid="SettingsWindowsColor"
                                 Content="~SettingsWindowsColor.Content"
                                 NavigateUri="ms-settings:personalization-colors"/>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
 
-                        <Border 
+                            <Border 
                             BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
-                            BorderThickness="0,0,0,1">
-                            <TextBlock 
-                            Margin="0,0,0,12"
+                            BorderThickness="0,1,0,0">
+                                <TextBlock 
+                            Margin="0,16,0,12"
                             FontSize="24"
                             Text="~SettingsOptionsFunctionsTitle.Text"
                             x:Uid="SettingsOptionsFunctionsTitle" />
-                        </Border>
-                        <StackPanel Margin="20,0,0,0">
-                            <ToggleSwitch 
+                            </Border>
+                            <StackPanel Margin="20,0,0,0">
+                                <ToggleSwitch 
                                 x:Name="SettingsWindowsHelloPrefer"
                                 x:Uid="SettingsWindowsHelloPrefer"
                                 Header="~SettingsWindowsHelloPrefer.Header"
@@ -175,54 +163,122 @@
                                 IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported, Mode=OneWay}"
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloActive, Mode=TwoWay}"/>
 
-                            <controls:HeaderedContentControl
+                                <controls:HeaderedContentControl
                                 Margin="0,20,0,15"
                                 Header="{x:Bind strings:Resources.SettingsQRScanningHeader}">
-                                <controls:HeaderedContentControl.HeaderTemplate>
-                                    <DataTemplate>
-                                        <TextBlock 
+                                    <controls:HeaderedContentControl.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock 
                                             Text="{Binding}"
                                             TextWrapping="WrapWholeWords"/>
-                                    </DataTemplate>
-                                </controls:HeaderedContentControl.HeaderTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="0,15,0,15">
-                                    <muxc:NumberBox 
+                                        </DataTemplate>
+                                    </controls:HeaderedContentControl.HeaderTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0,6,0,15">
+                                        <muxc:NumberBox 
                                         Value="{x:Bind ViewModel.SettingsPartViewModel.SetQRCodeScanSeconds,Mode=TwoWay}"
                                         Maximum="10"
                                         Minimum="3"
                                         SpinButtonPlacementMode="Inline"
                                         MaxWidth="150"
                                         HorizontalAlignment="Left">
-                                    </muxc:NumberBox>
-                                    <TextBlock 
+                                        </muxc:NumberBox>
+                                        <TextBlock 
                                         Text="{x:Bind strings:Resources.SettingsQRScanningSecondsRange}" 
                                         TextWrapping="WrapWholeWords" 
                                         Margin="10,0,0,0"
                                         VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </controls:HeaderedContentControl>
+                                    </StackPanel>
+                                </controls:HeaderedContentControl>
 
-
-                            <Button Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon Glyph="&#xE74D;" FontSize="20"/>
+                                <StackPanel
+                                Margin="0,20,0,25"
+                                HorizontalAlignment="Left">
                                     <TextBlock 
+                                        x:Uid="SettingsNTPServerDescribtion"
+                                        Text="~SettingsNTPServerDescribtion.Text"/>
+                                    <ToggleSwitch
+                                        x:Uid="SettingsUseNTPTimeCorrection"
+                                        Header="~SettingsUseNTPTimeCorrection.Header"
+                                        Margin="0,8,0,0"
+                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=TwoWay}"/>
+                                    <CheckBox 
+                                        x:Name="CB_ManualNTPServerConfiguration"
+                                        Margin="0,8,0,0"
+                                        IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}"
+                                        IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ManualNTPServerConfiurationChecked, Mode=TwoWay}"
+                                        Content="#set manuel ntp server"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox 
+                                            x:Name="TB_SettingsNTPServer"
+                                            IsEnabled="{Binding IsChecked, ElementName=CB_ManualNTPServerConfiguration}"
+                                            Width="280"
+                                            Text="{x:Bind ViewModel.SettingsPartViewModel.NTPServerStr, Mode=TwoWay}"/>
+                                        <CommandBar DefaultLabelPosition="Right">
+                                            <CommandBar.PrimaryCommands>
+                                                <AppBarButton 
+                                                    x:Name="ABB_SettingsSaveNTPServer"
+                                                    Command="{x:Bind ViewModel.SettingsPartViewModel.SaveNTPServerAddressCommand}"
+                                                    Icon="Save" 
+                                                    x:Uid="SettingsSaveNTPServer"
+                                                    Label="#save" 
+                                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid,Mode=OneWay}">
+                                                    <AppBarButton.Resources>
+                                                        <!--Binding: NtpServerEditValid OneWay, because it should not change the code behind value-->
+                                                        <appcontrols:AutoCloseTeachingTip 
+                                                x:Name="SaveIsPossibleTip"
+                                                AutoCloseInterval="4000"
+                                                BorderBrush="{ThemeResource SystemAccentColor}"
+                                                x:Uid="SettingsPageSaveIsPossibleTip"
+                                                BorderThickness="2" 
+                                                IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid, Mode=OneWay}"
+                                                Target="{Binding ElementName=ABB_SettingsSaveNTPServer, Mode=OneTime}">
+                                                        </appcontrols:AutoCloseTeachingTip>
+                                                        <appcontrols:AutoCloseTeachingTip
+                                                x:Name="SaveNotPossibleTip"
+                                                AutoCloseInterval="4000"
+                                                BorderBrush="{ThemeResource SystemAccentColor}"
+                                                x:Uid="SettingsPageSaveNotPossibleTip"
+                                                BorderThickness="2"
+                                                IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditException, Mode=TwoWay}"
+                                                Target="{Binding ElementName=TB_SettingsNTPServer, Mode=OneTime}">
+                                                        </appcontrols:AutoCloseTeachingTip>
+                                                    </AppBarButton.Resources>
+                                                </AppBarButton>
+                                            </CommandBar.PrimaryCommands>
+                                        </CommandBar>
+                                    </StackPanel>
+                                    <muxc:ProgressBar 
+                                        HorizontalAlignment="Left"
+                                        Width="280"
+                                        Visibility="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"
+                                        IsIndeterminate="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"/>
+                                </StackPanel>
+
+
+                                <Button 
+                                    Margin="0,15,0,0"
+                                    Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <FontIcon Glyph="&#xE74D;" FontSize="20"/>
+                                        <TextBlock 
                                         Text="~FactoryReset" 
                                         Margin="8,0,0,0" 
                                         HorizontalAlignment="Stretch" 
                                         VerticalAlignment="Center"
                                         x:Uid="SettingsOptionsFactoryResetButton"/>
-                                </StackPanel>
-                            </Button>
-                            
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </ScrollViewer>
+                    </ScrollViewer>
+                </Grid>
             </PivotItem>
             <PivotItem 
                 Header="#Datafile"
                 x:Name="SettingsPivotItemDatafile"
-                x:Uid="SettingsPivotItemDatafile" >
+                x:Uid="SettingsPivotItemDatafile" 
+                Margin="8,0,0,0">
                 <Grid>
                     <ScrollViewer Margin="0,10,0,0">
                         <StackPanel 
@@ -256,36 +312,6 @@
                             Margin="0,10,0,0"
                             Content="~SettingsDatafileBTNChangePassword.Content"
                             Command="{x:Bind ViewModel.DatafilePartViewModel.ChangeDatafilePasswordCommand}"/>
-
-                            <!--next version: -->
-                            <!--todo add security prompt, then activate again-->
-                            <!--<StackPanel Margin="0,10,0,0" Visibility="Collapsed">
-                                <Button Command="{x:Bind ViewModel.DatafilePartViewModel.ChangeDatafilePasswordCommand}"
-                                    Margin="0,10">
-                                    <StackPanel Orientation="Horizontal">
-                                        <FontIcon Glyph="&#xE72C;" FontSize="20"/>
-                                        <TextBlock 
-                                        x:Uid="SettingsChangePassword" 
-                                        Text="~SettingsChangePassword.Text"
-                                        Margin="8,0,0,0" 
-                                        HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Center" />
-                                    </StackPanel>
-                                </Button>
-                                <TextBlock Text="#Löscht durch die Bestätigung des Passwortes die aktuelle Datendatei" TextWrapping="WrapWholeWords"/>
-                                <Button Command="{x:Bind ViewModel.DatafilePartViewModel.DeleteDatafileCommand}"
-                                    Margin="0,10,0,0"
-                                    IsEnabled="False">
-                                    <StackPanel Orientation="Horizontal">
-                                        <FontIcon Glyph="&#xE74D;" FontSize="20"/>
-                                        <TextBlock 
-                                        Text="{x:Bind strings:Resources.Delete}" 
-                                        Margin="8,0,0,0" 
-                                        HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Center" />
-                                    </StackPanel>
-                                </Button>
-                            </StackPanel>-->
                         </StackPanel>
                     </ScrollViewer>
                     <muxc:InfoBar 
@@ -295,7 +321,10 @@
                         Title="{x:Bind strings:Resources.SettingsDatafileChangePasswordInfoTitle}"/>
                 </Grid>
             </PivotItem>
-            <PivotItem x:Uid="SettingsPivotItemAbout" Header="~SPIAbout.Header" Margin="0">
+            <PivotItem 
+                x:Uid="SettingsPivotItemAbout" 
+                Header="~SPIAbout.Header" 
+                Margin="8,0,0,0">
                 <UserControl>
                     <Grid>
                         <RelativePanel>
@@ -306,11 +335,10 @@
                             TextWrapping="WrapWholeWords"
                             FontSize="20" 
                             Text="{x:Bind ViewModel.AboutPartViewModel.DisplayName, Mode=OneWay}"/>
-                                    <Border 
+                                    <Border
                             MaxHeight="200" 
                             MaxWidth="200" 
                             HorizontalAlignment="Left"
-                            BorderBrush="DimGray"
                             BorderThickness="1"
                             IsHitTestVisible="False" 
                             Background="{ThemeResource SystemAccentColor}">
@@ -333,6 +361,21 @@
                             Content="~SettingsSourceCode.Content" 
                             NavigateUri="https://github.com/2fast-team/2fast"
                             ToolTipService.ToolTip="https://github.com/2fast-team/2fast"/>
+
+                                    <Button Margin="0,10" Command="{x:Bind ViewModel.RateAppCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon 
+                                    FontSize="30"
+                                    Glyph="&#xE00A;" />
+                                            <TextBlock 
+                                    Text="~SettingsRateApp.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="SettingsRateApp" 
+                                    FontFamily="Segoe UI" />
+                                        </StackPanel>
+                                    </Button>
                                 </StackPanel>
                             </ScrollViewer>
 
@@ -347,7 +390,6 @@
                                             BorderBrush="{ThemeResource SystemControlDisabledChromeDisabledLowBrush}">
                                             <TextBlock Text="{Binding}" FontSize="20"/>
                                         </Border>
-
                                     </DataTemplate>
                                 </controls:HeaderedContentControl.HeaderTemplate>
                                 <SemanticZoom 
@@ -363,7 +405,9 @@
                                                 <GroupStyle>
                                                     <GroupStyle.HeaderTemplate>
                                                         <DataTemplate >
-                                                            <TextBlock Text="{Binding Key}" FontSize="20"/>
+                                                            <TextBlock 
+                                                                Text="{Binding Key}" 
+                                                                FontSize="20"/>
                                                         </DataTemplate>
                                                     </GroupStyle.HeaderTemplate>
                                                     <GroupStyle.Panel>
@@ -375,11 +419,12 @@
                                             </GridView.GroupStyle>
                                             <GridView.ItemContainerStyle>
                                                 <Style TargetType="GridViewItem">
-                                                    <Setter Property="Padding" Value="4,4,4,4"></Setter>
-                                                    <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"></Setter>
+                                                    <Setter Property="Padding" 
+                                                            Value="4,4,4,4"/>
+                                                    <Setter Property="animations:Implicit.Animations" 
+                                                            Value="{StaticResource ImplicitOffset}"/>
                                                 </Style>
                                             </GridView.ItemContainerStyle>
-                                            <!--<Grid></Grid>-->
                                         </GridView>
                                     </SemanticZoom.ZoomedInView>
                                 </SemanticZoom>

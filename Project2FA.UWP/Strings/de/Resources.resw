@@ -403,7 +403,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Optionen</value>
   </data>
   <data name="SettingsRateApp.Text" xml:space="preserve">
-    <value>App bewerten</value>
+    <value>App im Store bewerten</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
     <value>Sind Sie sicher, dass die Datendatei endgültig und unwiderruflich gelöscht werden soll? Hierdurch gehen alle gespeicherten Accounts verloren.</value>
@@ -705,5 +705,26 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Bericht in Zwischenablage kopieren</value>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
+    <value>Die Adresse des NTP Servers ist valide und kann durch Ihre Betätigung gespeichert werden.</value>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
+    <value>Speichern?</value>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
+    <value>Speicherung der Adresse des NTP Servers nicht möglich, da der Server nicht gefunden wurde.</value>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
+    <value>Zeitserver zur Überprüfung der Systemzeit verwenden</value>
+  </data>
+  <data name="SettingsSaveNTPServer.Label" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
+    <value>Ein unbehandelter Fehler ist bei der letzten Nutzung der App aufgetreten, bitte senden Sie die Fehlerdetails welche in den Feld zu sehen sind über den Feedback-Hub, oder nutzen Sie die Fehlermeldung über Github.</value>
   </data>
 </root>

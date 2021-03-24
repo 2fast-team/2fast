@@ -37,6 +37,7 @@ namespace Project2FA.UWP.ViewModels
         private string _qrCodeStr;
         private bool _qrCodeScan, _launchScreenClip, _isButtonEnable;
         private bool _manualInput;
+        private bool _isCameraActive;
         private TwoFACodeModel _model;
         private int _selectedPivotIndex;
         private int _openingSeconds;
@@ -46,6 +47,7 @@ namespace Project2FA.UWP.ViewModels
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
+        public ICommand CameraScanCommand { get; }
         private ILoggerFacade _logger { get; }
         private IResourceService _resourceService { get; }
 
@@ -82,6 +84,12 @@ namespace Project2FA.UWP.ViewModels
                 //SecretKey = SecretKey.Replace("-", string.Empty);
                 DataService.Instance.Collection.Add(Model);
             });
+
+            CameraScanCommand = new DelegateCommand(() =>
+            {
+                IsCameraActive = true;
+            });
+
             _logger = App.Current.Container.Resolve<ILoggerFacade>();
             ErrorsChanged += Validation_ErrorsChanged;
 
@@ -408,6 +416,11 @@ namespace Project2FA.UWP.ViewModels
         { 
             get => _seconds;
             set => SetProperty(ref _seconds, value);
+        }
+        public bool IsCameraActive 
+        { 
+            get => _isCameraActive;
+            set => SetProperty(ref _isCameraActive, value);
         }
         #endregion
     }

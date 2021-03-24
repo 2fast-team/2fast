@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:uwpui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:mtui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:strings="using:Project2FA.UWP.Strings"
@@ -89,8 +89,8 @@
                             <TextBlock TextWrapping="Wrap" x:Uid="NewDatafileContentDialogCreateInfo" />
                             <TextBox 
                                 x:Name="TB_LocalFolder" 
-                                uwpui:TextBoxExtensions.ValidationMode="Dynamic"
-                                uwpui:TextBoxExtensions.Regex="^[\w\-. ]+$"
+                                mtui:TextBoxExtensions.ValidationMode="Dynamic"
+                                mtui:TextBoxExtensions.Regex="^[\w\-. ]+$"
                                 x:Uid="NewDatafileContentDialogLocalFolder" 
                                 Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}" 
                                 Header="~NewDatafileContentDialogLocalFolder.Header"
@@ -153,15 +153,14 @@
                                 Height="1" />
 
                             <!--Argon2 not working mit dotnet native-->
-                            <toolkit:Expander 
+                            <!--<toolkit:Expander 
                                 x:Uid="PasswordAdvancedHashOption"
                                 Background="{ThemeResource ButtonBackground}"
-                                Visibility="Collapsed"
                                 Header="~PasswordAdvancedHashOption.Header">
                                 <CheckBox 
                                     x:Uid="PasswordAdvancedHashOptionText"
                                     IsChecked="{x:Bind ViewModel.UseExtendedHash,Mode=TwoWay}"/>
-                            </toolkit:Expander>
+                            </toolkit:Expander>-->
 
                         </StackPanel>
                     </ScrollViewer>

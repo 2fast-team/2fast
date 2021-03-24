@@ -63,7 +63,6 @@ The following steps will help if you want to contribute or work on the applicati
 ```sh
 git clone --recurse-submodules https://github.com/2fast-team/2fast.git
 ```
-2. Install [Microsoft Store Services SDK](https://marketplace.visualstudio.com/items?itemName=AdMediator.MicrosoftStoreServicesSDK) (Windows app only)
 2. Open the `.sln` file with Visual Studio
 	- The dependencies are automatically loaded by Visual Studio
 3. Start working and debugging!

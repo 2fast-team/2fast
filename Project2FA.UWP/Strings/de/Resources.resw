@@ -727,4 +727,18 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
     <value>Ein unbehandelter Fehler ist bei der letzten Nutzung der App aufgetreten, bitte senden Sie die Fehlerdetails welche in den Feld zu sehen sind über den Feedback-Hub, oder nutzen Sie die Fehlermeldung über Github.</value>
   </data>
+  <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
+    <value>NTP Server manuell setzen</value>
+  </data>
+  <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
+    <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
+  </data>
+  <data name="NewAppFeaturesContent" xml:space="preserve">
+    <value>Es wurde die Möglichkeit zur Überprüfung der Systemzeit durch einen Abgleich eines Network Time Protocol (NTP) Servers hinzugefügt. Die Option ist Standardmäßig mit dieser Aktualisierung deaktiviert.
+
+Die Option kann unter den Einstellungen aktiviert werden.</value>
+  </data>
+  <data name="NewAppFeaturesTitle" xml:space="preserve">
+    <value>Neue Funktionen</value>
+  </data>
 </root>

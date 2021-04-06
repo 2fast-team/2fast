@@ -46,6 +46,8 @@ namespace Project2FA.Core.Services
 
             //    return sb.ToString();
             //}
+
+            // https://stackoverflow.com/questions/17292366/hashing-with-sha1-algorithm-in-c-sharp
             byte[] hash = CreateSHA512ByteArrayHash(input);
             var sb = new StringBuilder(hash.Length * 2);
 

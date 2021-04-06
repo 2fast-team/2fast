@@ -1,20 +1,17 @@
 ﻿using Prism.Mvvm;
-using Prism.Ioc;
 using Project2FA.Core.Utils;
 using Project2FA.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using WebDAVClient;
 using WebDAVClient.Exceptions;
 using WebDAVClient.Types;
 
 namespace Project2FA.Core.Services.WebDAV
 {
+    // based on https://github.com/nextcloud/windows-universal/blob/master/NextcloudApp/Services/DirectoryService.cs
     public class DirectoryService : BindableBase
     {
         /// <summary>

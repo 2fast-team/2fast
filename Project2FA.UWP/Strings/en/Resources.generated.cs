@@ -808,6 +808,32 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region NewAppFeaturesContent
+        /// <summary>
+        ///   Looks up a localized string similar to: Added the option to check the system time by synchronising a Network Time Protocol (NTP) server. The option is disabled by default with this update. The option can be activated under the settings.
+        /// </summary>
+        public static string NewAppFeaturesContent
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewAppFeaturesContent");
+            }
+        }
+        #endregion
+
+        #region NewAppFeaturesTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: New features
+        /// </summary>
+        public static string NewAppFeaturesTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewAppFeaturesTitle");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -880,6 +906,8 @@ namespace Project2FA.UWP.Strings{
             RestartApp,
             ErrorCopyToClipboard,
             ErrorHandleDescriptionLastSession,
+            NewAppFeaturesContent,
+            NewAppFeaturesTitle,
         }
 
         private static ResourceLoader _resourceLoader;

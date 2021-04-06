@@ -95,6 +95,7 @@ namespace Project2FA.UWP.ViewModels
             SaveNTPServerAddressCommand = new DelegateCommand(() =>
             {
                 SettingsService.Instance.NTPServerString = _ntpServerStr;
+                NtpServerEditValid = false;
             });
 
             CheckWindowsHelloIsSupported();
@@ -310,14 +311,6 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
-        //public bool IsTitleBarSupported
-        //{
-        //    get
-        //    {
-        //        return Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationViewTitleBar");
-        //    }
-        //}
-
         public bool ManualNTPServerConfiurationChecked 
         { 
             get => _manualNTPServerConfiurationChecked;
@@ -413,38 +406,6 @@ namespace Project2FA.UWP.ViewModels
             var dialog = new UpdateDatafileContentDialog();
             await _dialogService.ShowAsync(dialog);
         }
-        
-        ///// <summary>
-        ///// Deletes the current datafile
-        ///// </summary>
-        //private async void DeleteDatafile()
-        //{
-        //    // TODO dialog (security prompt) for the reset
-        //    var dialog = new ContentDialog();
-        //    dialog.Content = Resources.SettingsRemoveDatafileMessage;
-        //    dialog.PrimaryButtonText = Resources.No;
-        //    dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-        //    dialog.SecondaryButtonText = Resources.Yes;
-        //    var result = await _dialogService.ShowAsync(dialog);
-
-        //    switch (result)
-        //    {
-        //        case ContentDialogResult.Secondary:
-        //            // delete datafile from storage and local file DB
-        //            // TODO: Implement database deletion
-        //            // TODO delete password from secret vault
-        //            await App.Repository.Datafile.DeleteAsync();
-        //            await App.Repository.Password.DeleteAsync();
-        //            DataService.Instance.DeleteLocalDatafile();
-        //            break;
-        //        case ContentDialogResult.Primary:
-        //            break;
-        //        case ContentDialogResult.None:
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
 
         public string DatafilePath { get => _datafilePath; set => SetProperty(ref _datafilePath, value); }
         public string DatafileName { get => _datafileName; set => SetProperty(ref _datafileName, value); }

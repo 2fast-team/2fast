@@ -114,21 +114,31 @@ namespace Project2FA.UWP.Views
             {
                 CheckUnhandledExceptionLastSession();
             }
-
+            var dialogService = App.Current.Container.Resolve<IDialogService>();
             //Rate information for the user
             if (SystemInformation.Instance.LaunchCount == 5 || SystemInformation.Instance.LaunchCount == 15)
             {
                 if (!SettingsService.Instance.AppRated)
                 {
-                    var dialogService = App.Current.Container.Resolve<IDialogService>();
                     await dialogService.ShowAsync(new RateAppContentDialog());
                 }
             }
 
-            //TODO implement ContentDialog to present new app functions
             if (SystemInformation.Instance.IsAppUpdated)
             {
+                var dialog = new ContentDialog();
+                dialog.Title = Strings.Resources.NewAppFeaturesTitle;
+                dialog.Content = Strings.Resources.NewAppFeaturesContent;
+                dialog.PrimaryButtonText = Strings.Resources.Confirm;
+                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                await dialogService.ShowAsync(dialog);
+            }
 
+            // If this is the first run, activate the ntp server checks
+            // else => UseNTPServerCorrection is false
+            if (SystemInformation.Instance.IsFirstRun)
+            {
+                SettingsService.Instance.UseNTPServerCorrection = true;
             }
         }
 

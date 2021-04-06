@@ -709,7 +709,7 @@ Please synchronize the time in the settings.</value>
     <value>Saving?</value>
   </data>
   <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>The save of the NTP server address  is not possible because the server was not found.</value>
+    <value>The save of the NTP server address is not possible because the server was not found.</value>
   </data>
   <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
     <value>Error</value>
@@ -722,5 +722,19 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
     <value>An unhandled error occurred the last time the app was used, please submit the error details which can be seen in the box via the feedback hub, or use the error message via Github.</value>
+  </data>
+  <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
+    <value>set NTP server manually</value>
+  </data>
+  <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
+    <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
+  </data>
+  <data name="NewAppFeaturesContent" xml:space="preserve">
+    <value>Added the option to check the system time by synchronising a Network Time Protocol (NTP) server. The option is disabled by default with this update.
+
+The option can be activated under the settings.</value>
+  </data>
+  <data name="NewAppFeaturesTitle" xml:space="preserve">
+    <value>New features</value>
   </data>
 </root>

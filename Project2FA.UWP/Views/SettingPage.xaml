@@ -91,13 +91,13 @@
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="3,0,0,0">
         <Pivot x:Name="Main_Pivot" SelectedIndex="{x:Bind ViewModel.SelectedItem,Mode=TwoWay}" >
-            <PivotItem 
+            <PivotItem
                 x:Uid="SettingsPivotItemOption" 
                 Header="~SPIOption.Header"
                 Margin="8,0,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MaxWidth="820"/>
+                        <ColumnDefinition MaxWidth="920"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <ScrollViewer 
@@ -147,6 +147,7 @@
 
                             <Border 
                             BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Margin="0,0,12,0"
                             BorderThickness="0,1,0,0">
                                 <TextBlock 
                             Margin="0,16,0,12"
@@ -154,7 +155,7 @@
                             Text="~SettingsOptionsFunctionsTitle.Text"
                             x:Uid="SettingsOptionsFunctionsTitle" />
                             </Border>
-                            <StackPanel Margin="20,0,0,0">
+                            <StackPanel Margin="20,0,12,0">
                                 <ToggleSwitch 
                                 x:Name="SettingsWindowsHelloPrefer"
                                 x:Uid="SettingsWindowsHelloPrefer"
@@ -164,7 +165,7 @@
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloActive, Mode=TwoWay}"/>
 
                                 <controls:HeaderedContentControl
-                                Margin="0,20,0,15"
+                                Margin="0,20,0,0"
                                 Header="{x:Bind strings:Resources.SettingsQRScanningHeader}">
                                     <controls:HeaderedContentControl.HeaderTemplate>
                                         <DataTemplate>
@@ -191,10 +192,11 @@
                                 </controls:HeaderedContentControl>
 
                                 <StackPanel
-                                Margin="0,20,0,25"
+                                Margin="0,20,12,0"
                                 HorizontalAlignment="Left">
                                     <TextBlock 
                                         x:Uid="SettingsNTPServerDescribtion"
+                                        TextWrapping="WrapWholeWords"
                                         Text="~SettingsNTPServerDescribtion.Text"/>
                                     <ToggleSwitch
                                         x:Uid="SettingsUseNTPTimeCorrection"
@@ -203,6 +205,7 @@
                                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=TwoWay}"/>
                                     <CheckBox 
                                         x:Name="CB_ManualNTPServerConfiguration"
+                                        x:Uid="SettingsNTPServerCheckBoxText"
                                         Margin="0,8,0,0"
                                         IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}"
                                         IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ManualNTPServerConfiurationChecked, Mode=TwoWay}"
@@ -256,10 +259,12 @@
 
 
                                 <Button 
-                                    Margin="0,15,0,0"
+                                    Margin="0,30,0,0"
                                     Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
                                     <StackPanel Orientation="Horizontal">
-                                        <FontIcon Glyph="&#xE74D;" FontSize="20"/>
+                                        <FontIcon 
+                                            Glyph="&#xE74D;" 
+                                            FontSize="20"/>
                                         <TextBlock 
                                         Text="~FactoryReset" 
                                         Margin="8,0,0,0" 

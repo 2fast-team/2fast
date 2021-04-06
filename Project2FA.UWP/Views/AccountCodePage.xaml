@@ -157,12 +157,14 @@
             </DataTemplate>
 
             <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
-                <UserControl x:Name="Root" 
-                             RightTapped="TwoFACodeItem_RightTapped" 
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch"
-                             HorizontalContentAlignment="Stretch"
-                             VerticalContentAlignment="Stretch">
+                <UserControl 
+                    x:Name="Root" 
+                    MaxWidth="660"
+                    RightTapped="TwoFACodeItem_RightTapped" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
                     <UserControl.Resources>
                         <appcontrols:AutoCloseTeachingTip 
                             x:Name="AccountCopyCodeButtonTip"

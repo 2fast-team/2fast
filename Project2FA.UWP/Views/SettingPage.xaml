@@ -97,7 +97,7 @@
                 Margin="8,0,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MaxWidth="920"/>
+                        <ColumnDefinition MaxWidth="1080"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <ScrollViewer 

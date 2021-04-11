@@ -92,7 +92,7 @@ namespace Project2FA.UWP.Views
 
             ShellView.ItemInvoked += (sender, args) =>
             {
-                SelectedItem = (args.IsSettingsInvoked) ? ShellView.SettingsItem : Find(args.InvokedItemContainer as NavigationViewItem);
+                SelectedItem = args.IsSettingsInvoked ? ShellView.SettingsItem : Find(args.InvokedItemContainer as NavigationViewItem);
             };
 
             if (System.Diagnostics.Debugger.IsAttached)

@@ -131,7 +131,6 @@ namespace Project2FA.UWP.ViewModels
             {
                 if (TwoFADataService.Collection[i].Seconds == 0)
                 {
-                    //Logger.Log("")
                     TwoFADataService.Collection[i].Seconds = TwoFADataService.Collection[i].Period;
                     DataService.Instance.GenerateTOTP(i);
                 }

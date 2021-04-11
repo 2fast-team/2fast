@@ -23,7 +23,7 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
     <PackageCertificateThumbprint>B047F87A0C3AB762CB349947DE606FC822BD0274</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
@@ -131,6 +131,7 @@
     <Compile Include="Extensions\TextBoxRegex.Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="TrackingManager.cs" />
     <Compile Include="Utils\ErrorDialogs.cs" />
     <Compile Include="Utils\JSONUtil.cs" />
     <Compile Include="Services\JSON\SerializationService.cs" />
@@ -321,7 +322,7 @@
       <Version>7.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.6.0-prerelease.210405001</Version>
+      <Version>2.6.0-prerelease.210227001</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>

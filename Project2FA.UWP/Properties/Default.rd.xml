@@ -24,5 +24,6 @@
     <Assembly Name="*Application*" Dynamic="Required All" />
     <!-- Add your application specific runtime directives here. -->
     <Namespace Name="System.Text.Json.Serialization.Converters" Browse="Required All"/>
+    <Namespace Name="System.Text.Json.ReflectionMemberAccessor" Browse="Required All"/>
   </Application>
 </Directives>

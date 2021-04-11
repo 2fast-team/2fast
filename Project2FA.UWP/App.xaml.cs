@@ -19,7 +19,6 @@ using Template10.Services.Settings;
 using Template10.Utilities;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
-using Windows.Globalization;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -56,12 +55,14 @@ namespace Project2FA.UWP
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
+            TrackingManager.TrackException(e.Exception);
             SettingsService.Instance.UnhandledExceptionStr = e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
                 + e.Exception.InnerException;
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
+            TrackingManager.TrackException(e.Exception);
             SettingsService.Instance.UnhandledExceptionStr = e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
     + e.Exception.InnerException;
         }
@@ -109,7 +110,7 @@ namespace Project2FA.UWP
                     Repository = new DBProject2FARepository(dbOptions);
                 }
 
-                // built initial path
+                // built initial navigation path
                 var navigationPath = string.Empty;
 
                 // handle startup

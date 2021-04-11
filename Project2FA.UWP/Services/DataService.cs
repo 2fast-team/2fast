@@ -97,6 +97,7 @@ namespace Project2FA.UWP.Services
                     catch (Exception exc)
                     {
                         Logger.Log("NTP exception: " + exc.Message, Category.Exception, Priority.High);
+                        TrackingManager.TrackException(exc);
                     }
                 }
             }
@@ -266,6 +267,7 @@ namespace Project2FA.UWP.Services
                 else
                 {
                     _errorOccurred = true;
+                    TrackingManager.TrackException(exc);
                     ErrorDialogs.ShowUnexpectedError(exc);
                 }
 
@@ -449,7 +451,6 @@ namespace Project2FA.UWP.Services
         /// <returns></returns>
         private async void SystemTimeNotCorrectError()
         {
-            //TODO translate
             var dialogService = App.Current.Container.Resolve<IDialogService>();
             var dialog = new ContentDialog();
             dialog.Title = Resources.AccountCodePageWrongTimeTitle;
@@ -504,9 +505,10 @@ namespace Project2FA.UWP.Services
                     Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Logger.Log(e.Message, Category.Exception, Priority.High);
+                Logger.Log(ex.Message, Category.Exception, Priority.High);
+                TrackingManager.TrackException(ex);
             }
         }
 

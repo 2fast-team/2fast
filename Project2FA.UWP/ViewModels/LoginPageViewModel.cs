@@ -39,7 +39,8 @@ namespace Project2FA.UWP.ViewModels
             _dialogService = App.Current.Container.Resolve<IDialogService>();
             LoginCommand = new DelegateCommand(CheckLogin);
             WindowsHelloLoginCommand = new DelegateCommand(WindowsHelloLogin);
-            ApplicationTitle = Windows.ApplicationModel.Package.Current.DisplayName;
+            var title = Windows.ApplicationModel.Package.Current.DisplayName;
+            ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
         }
 
         /// <summary>

@@ -148,6 +148,7 @@
                                                 <!-- write it here and interfere. But these values work together to hide -->
                                                 <!-- the left pane. -->
                                                 <Setter Target="RootSplitView.CompactPaneLength" Value="0" />
+                                                <Setter Target="ShadowCaster.Width" Value="0" />
                                                 <Setter Target="PaneToggleButtonGrid.Visibility" Value="Collapsed" />
                                             </VisualState.Setters>
                                         </VisualState>
@@ -403,6 +404,8 @@
                                     <SplitView
                                 x:Name="RootSplitView"
                                 Background="{TemplateBinding Background}"
+                                BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
+                                BorderThickness="0"
                                 CompactPaneLength="{TemplateBinding CompactPaneLength}"
                                 DisplayMode="Inline"
                                 IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}"
@@ -473,7 +476,19 @@
                                                 x:Name="PaneAutoSuggestButton"
                                                 Visibility="Collapsed"
                                                 Style="{ThemeResource NavigationViewPaneSearchButtonStyle}"
-                                                Width="{TemplateBinding CompactPaneLength}"/>
+                                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}">
+                                                        <Button.Resources>
+                                                            <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="NavigationViewItemBackgroundPointerOver" />
+                                                            <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="NavigationViewItemBackgroundPressed" />
+                                                            <StaticResource x:Key="ButtonBackgroundDisabled" ResourceKey="NavigationViewItemBackgroundDisabled" />
+                                                            <StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="NavigationViewItemForegroundPointerOver" />
+                                                            <StaticResource x:Key="ButtonForegroundPressed" ResourceKey="NavigationViewItemForegroundPressed" />
+                                                            <StaticResource x:Key="ButtonForegroundDisabled" ResourceKey="NavigationViewItemForegroundDisabled" />
+                                                            <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="NavigationViewItemBorderBrushPointerOver" />
+                                                            <StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="NavigationViewItemBorderBrushPressed" />
+                                                            <StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="NavigationViewItemBorderBrushDisabled" />
+                                                        </Button.Resources>
+                                                    </Button>
                                                 </Grid>
 
                                                 <ContentControl
@@ -486,13 +501,13 @@
                                                 <!-- "Non header" content -->
                                                 <Grid x:Name="ItemsContainerGrid" Grid.Row="6" Margin="0,0,0,8">
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition x:Name="MenuItemsRow" Height="Auto" MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}"/>
+                                                        <RowDefinition Height="Auto"/>
                                                         <!-- MenuItems -->
-                                                        <RowDefinition Height="*" MinHeight="21"/>
+                                                        <RowDefinition Height="*" />
                                                         <!-- Fill spacing -->
-                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto"/>
                                                         <!-- PaneFooter -->
-                                                        <RowDefinition x:Name="FooterItemsRow" Height="Auto" MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}"/>
+                                                        <RowDefinition Height="Auto"/>
                                                         <!-- FooterItems -->
                                                     </Grid.RowDefinitions>
 
@@ -577,7 +592,15 @@
                                             </Grid>
                                         </SplitView.Content>
                                     </SplitView>
-
+                                    <Grid
+                                        x:Name="ShadowCaster"
+                                        Grid.RowSpan="2"
+                                        Width="{TemplateBinding OpenPaneLength}"
+                                        HorizontalAlignment="Left">
+                                        <Grid.RenderTransform>
+                                            <CompositeTransform x:Name="ShadowCasterTransform" />
+                                        </Grid.RenderTransform>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </ControlTemplate>

@@ -15,6 +15,7 @@ namespace Project2FA.UWP.Views
         public AccountCodePage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
             this.Loaded += AccountCodePage_Loaded;
         }
 

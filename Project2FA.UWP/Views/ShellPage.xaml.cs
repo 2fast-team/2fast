@@ -35,7 +35,9 @@ namespace Project2FA.UWP.Views
             _navManager = SystemNavigationManager.GetForCurrentView();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
 
-            Title = Windows.ApplicationModel.Package.Current.DisplayName;
+            var title = Windows.ApplicationModel.Package.Current.DisplayName;
+            Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
+            
             // Hide default title bar.
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;

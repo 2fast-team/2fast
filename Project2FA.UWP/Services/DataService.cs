@@ -97,7 +97,7 @@ namespace Project2FA.UWP.Services
                     catch (Exception exc)
                     {
                         Logger.Log("NTP exception: " + exc.Message, Category.Exception, Priority.High);
-                        TrackingManager.TrackException(exc);
+                        //TrackingManager.TrackException(exc);
                     }
                 }
             }

@@ -51,6 +51,9 @@
         <Setter Property="CornerRadius" Value="0"/>
     </Style>
 
+    <!--ProgressRing-->
+    <StaticResource x:Key="ProgressRingBackgroundThemeBrush" ResourceKey="ControlFillColorTertiaryBrush" />
+
     <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

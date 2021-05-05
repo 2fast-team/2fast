@@ -15,8 +15,8 @@ namespace Project2FA.UWP.ViewModels
 {
     public class NewDatafileContentDialogViewModel : DatafileViewModelBase
     {
-        private IFileService _fileService { get; }
-        private ISerializationService _serializationService { get; }
+        private IFileService FileService { get; }
+        private ISerializationService SerializationService { get; }
 
         private string _errorText;
 
@@ -25,19 +25,15 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public NewDatafileContentDialogViewModel()
         {
-            _serializationService = App.Current.Container.Resolve<ISerializationService>();
-            _fileService = App.Current.Container.Resolve<IFileService>();
+            SerializationService = App.Current.Container.Resolve<ISerializationService>();
+            FileService = App.Current.Container.Resolve<IFileService>();
             PrimaryButtonCommand = new DelegateCommand(async () =>
             {
-                //local filedata
-                if (SelectedIndex == 1)
-                {
-                    Password = Password.Replace(" ", string.Empty);
-                    await CreateLocalFileDB(false);
-                    var iv = new AesManaged().IV;
-                    DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
-                    await _fileService.WriteStringAsync(DateFileName, _serializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
-                }
+                Password = Password.Replace(" ", string.Empty);
+                await CreateLocalFileDB(false);
+                var iv = new AesManaged().IV;
+                DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
+                await FileService.WriteStringAsync(DateFileName, SerializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
             });
             CheckServerAddressCommand = new DelegateCommand(() =>
             {
@@ -86,7 +82,6 @@ namespace Project2FA.UWP.ViewModels
                     }
                     else
                     {
-                        //TODO translate
                         ShowError = true;
                         ErrorText = Resources.NewDatafileContentDialogDatafileExistsError;
                     }

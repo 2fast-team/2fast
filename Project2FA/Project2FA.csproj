@@ -47,10 +47,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.1.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.2.0-pre2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
-    <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
+    <PackageReference Include="Prism.Unity.Forms" Version="8.1.97" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.763-beta" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="3.1.0-beta2" />
   </ItemGroup>

@@ -41,9 +41,7 @@ namespace Project2FA.UWP.Services
         private IFileService FileService { get; }
         private INetworkTimeService NetworkTimeService { get; }
         private bool _initialization, _errorOccurred;
-
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
-
         public AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
         private bool _emptyAccountCollectionTipIsOpen;

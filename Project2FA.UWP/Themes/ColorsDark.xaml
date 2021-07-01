@@ -10,8 +10,23 @@
         FallbackColor="Black" />
     <SolidColorBrush x:Name="TranslucentBackgroundHighBrush" Opacity="0.9" Color="Black"/>
     <SolidColorBrush x:Name="TranslucentBackgroundMediumBrush" Opacity="0.75" Color="Black"/>
+    <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="Black"/>
 
-     <!--Resources for Windows.UI.Xaml.Controls.Button--> 
+    <!-- Resources for AccentButtonStyle -->
+    <!--<StaticResource x:Key="AccentButtonBackground" ResourceKey="SystemControlForegroundAccentBrush" />
+    <StaticResource x:Key="AccentButtonBackgroundPointerOver" ResourceKey="SystemControlForegroundAccentBrush" />
+    <StaticResource x:Key="AccentButtonBackgroundPressed" ResourceKey="SystemControlBackgroundBaseMediumLowBrush" />
+    <StaticResource x:Key="AccentButtonBackgroundDisabled" ResourceKey="SystemControlBackgroundBaseLowBrush" />-->
+    <StaticResource x:Key="AccentButtonForeground" ResourceKey="SystemControlBackgroundChromeWhiteBrush" />
+    <StaticResource x:Key="AccentButtonForegroundPointerOver" ResourceKey="SystemControlBackgroundChromeWhiteBrush" />
+    <StaticResource x:Key="AccentButtonForegroundPressed" ResourceKey="SystemControlHighlightBaseHighBrush" />
+    <StaticResource x:Key="AccentButtonForegroundDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+    <!--<StaticResource x:Key="AccentButtonBorderBrush" ResourceKey="SystemControlForegroundTransparentBrush" />
+    <StaticResource x:Key="AccentButtonBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
+    <StaticResource x:Key="AccentButtonBorderBrushPressed" ResourceKey="SystemControlHighlightTransparentBrush" />
+    <StaticResource x:Key="AccentButtonBorderBrushDisabled" ResourceKey="SystemControlDisabledTransparentBrush" />-->
+    
+    <!--Resources for Windows.UI.Xaml.Controls.Button-->
     <StaticResource x:Key="ButtonBackground" ResourceKey="SystemControlBackgroundBaseLowBrush" />
     <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="SystemControlBackgroundBaseLowBrush" />
     <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SystemControlBackgroundBaseMediumLowBrush" />
@@ -24,7 +39,8 @@
     <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
     <StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="SystemControlHighlightTransparentBrush" />
     <StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="SystemControlDisabledTransparentBrush" />
-     <!--Resources for Windows.UI.Xaml.Controls.RadioButton--> 
+
+    <!--Resources for Windows.UI.Xaml.Controls.RadioButton--> 
     <StaticResource x:Key="RadioButtonForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
     <StaticResource x:Key="RadioButtonForegroundPointerOver" ResourceKey="SystemControlForegroundBaseHighBrush" />
     <StaticResource x:Key="RadioButtonForegroundPressed" ResourceKey="SystemControlForegroundBaseHighBrush" />

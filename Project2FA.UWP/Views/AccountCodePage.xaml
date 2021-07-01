@@ -11,7 +11,8 @@
     xmlns:viewmodels="using:Project2FA.UWP.ViewModels"
     xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    d:DataContext="{d:DesignInstance Type=viewmodels:AccountCodePageViewModel}"
     x:Name="Page"
     mc:Ignorable="d">
 
@@ -105,10 +106,10 @@
                                         </CommandBar.PrimaryCommands>
                                     </CommandBar>
                                 </AppBarElementContainer>
-                                <AppBarElementContainer>
+                                <AppBarElementContainer Height="40">
                                     <AutoSuggestBox 
                                         Width="200"
-                                        Height="40"
+                                        
                                         QueryIcon="Find"
                                         VerticalAlignment="Center"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
@@ -165,17 +166,6 @@
                     VerticalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch">
-                    <UserControl.Resources>
-                        <appcontrols:AutoCloseTeachingTip 
-                            x:Name="AccountCopyCodeButtonTip"
-                            x:Uid="AccountCodePageCopyCodeTeachingTip"
-                            AutoCloseInterval="1600"
-                            IsLightDismissEnabled="True"
-                            BorderBrush="{ThemeResource SystemAccentColor}"
-                            Target="{Binding ElementName=Root, Mode=OneTime}"
-                            IsOpen="{x:Bind UserInfoCopyCodeRightClick, Mode=TwoWay}">
-                        </appcontrols:AutoCloseTeachingTip>
-                    </UserControl.Resources>
                     <Grid HorizontalAlignment="Stretch" Background="{ThemeResource TwoFABackgroundBrush}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -268,17 +258,6 @@
                                 Margin="8,0,4,0" 
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Glyph="&#xE8C8;" FontSize="24"/>
-                                <Button.Resources>
-                                    <appcontrols:AutoCloseTeachingTip 
-                                        x:Name="AccountCopyCodeButtonTipTwo"
-                                        x:Uid="AccountCodePageCopyCodeTeachingTip"
-                                        AutoCloseInterval="1600"
-                                        IsLightDismissEnabled="True"
-                                        BorderBrush="{ThemeResource SystemAccentColor}"
-                                        Target="{Binding ElementName=BTN_CopyCode}"
-                                        IsOpen="{x:Bind UserInfoCopyCodeBTN, Mode=TwoWay}">
-                                    </appcontrols:AutoCloseTeachingTip>
-                                </Button.Resources>
                             </Button>
                             <Grid  VerticalAlignment="Center">
                                 <controls:RadialProgressBar
@@ -357,7 +336,7 @@
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView 
             x:Name="LV_AccountCollection"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"

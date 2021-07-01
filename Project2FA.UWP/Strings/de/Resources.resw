@@ -564,7 +564,7 @@ Anleitung zum setzen der Berechtigung:
   <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
     <value>Sperren</value>
   </data>
-  <data name="AccountCodePageCopyCodeTeachingTip.Title" xml:space="preserve">
+  <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
     <value>Schlüssel in Zwischenablage kopiert</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">

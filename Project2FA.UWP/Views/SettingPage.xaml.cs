@@ -5,7 +5,7 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class SettingPage : Page
     {
-        SettingPageViewModel ViewModel => DataContext as SettingPageViewModel;
+        public SettingPageViewModel ViewModel => DataContext as SettingPageViewModel;
         public SettingPage()
         {
             this.InitializeComponent();

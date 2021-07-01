@@ -9,5 +9,7 @@
     <Thickness x:Key="AppBarButtonTextLabelMargin">2,0,2,8</Thickness>
     <Thickness x:Key="AppBarButtonTextLabelOnRightMargin">8,11,12,13</Thickness>
 
-    <Style TargetType="AppBarButton" BasedOn="{StaticResource AppBarButtonRevealStyle}" />
+    <Style TargetType="AppBarButton" BasedOn="{StaticResource AppBarButtonRevealStyle}">
+        <Setter Property="Height" Value="40"/>
+    </Style>
 </ResourceDictionary>

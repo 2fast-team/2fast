@@ -15,7 +15,7 @@ namespace Project2FA.UWP.Views
 
         private void WelcomePage_Loaded(object sender, RoutedEventArgs e)
         {
-            App.ShellPageInstance.ShellViewInternal.Header = string.Empty;
+            App.ShellPageInstance.ShellViewInternal.Header = ViewModel;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
         }
     }

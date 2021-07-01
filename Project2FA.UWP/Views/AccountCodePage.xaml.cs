@@ -1,10 +1,13 @@
 ﻿using Project2FA.Repository.Models;
+using Project2FA.UWP.Controls;
 using Project2FA.UWP.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Project2FA.UWP.Views
 {
@@ -15,7 +18,6 @@ namespace Project2FA.UWP.Views
         public AccountCodePage()
         {
             this.InitializeComponent();
-            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
             this.Loaded += AccountCodePage_Loaded;
         }
 
@@ -23,20 +25,6 @@ namespace Project2FA.UWP.Views
         {
             App.ShellPageInstance.ShellViewInternal.Header = ViewModel;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
-        }
-
-        /// <summary>
-        /// Copies the current generated TOTP of the entry into the clipboard
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BTN_CopyCode_Click(object sender, RoutedEventArgs e)
-        {
-            if ((e.OriginalSource as FrameworkElement).DataContext is TwoFACodeModel model)
-            {
-                model.UserInfoCopyCodeBTN = true; //determines where the element is displayed
-                Copy2FACodeToClipboard(model);
-            }
         }
 
         /// <summary>
@@ -53,6 +41,33 @@ namespace Project2FA.UWP.Views
             Clipboard.SetContent(dataPackage);
         }
 
+        private void CreateTeachingTip(FrameworkElement element)
+        {
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            {
+                Target = element,
+                Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
+                AutoCloseInterval = 1000,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            MainGrid.Children.Add(teachingTip);
+        }
+
+        /// <summary>
+        /// Copies the current generated TOTP of the entry into the clipboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTN_CopyCode_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
+            {
+                CreateTeachingTip(sender as FrameworkElement);
+                Copy2FACodeToClipboard(model);
+            }
+        }
+
         /// <summary>
         /// Copy the 2fa code to clipboard when click with 'right click' and create a user dialog
         /// </summary>
@@ -63,9 +78,9 @@ namespace Project2FA.UWP.Views
             e.Handled = true;
             if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Touch)
             {
-                if ((e.OriginalSource as FrameworkElement).DataContext is TwoFACodeModel model)
+                if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
                 {
-                    model.UserInfoCopyCodeRightClick = true; //determines where the element is displayed
+                    CreateTeachingTip(sender as FrameworkElement);
                     Copy2FACodeToClipboard(model);
                 }
             }
@@ -78,11 +93,11 @@ namespace Project2FA.UWP.Views
                 if (string.IsNullOrEmpty(sender.Text) == false)
                 {
                     List<string> _nameList = new List<string>();
-                    foreach (var item in ViewModel.TwoFADataService.Collection)
+                    foreach (TwoFACodeModel item in ViewModel.TwoFADataService.Collection)
                     {
                         _nameList.Add(item.Label);
                     }
-                    var listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                    List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
                     if (listSuggestion.Count == 0)
                     {
                         listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
@@ -96,8 +111,6 @@ namespace Project2FA.UWP.Views
                     if (ViewModel.TwoFADataService.ACVCollection.Filter != null)
                     {
                         ViewModel.TwoFADataService.ACVCollection.Filter = null;
-                        // TODO bad workaround for the TeachingTool Bug, see also the workaround in AccountCodePageViewModel
-                        ViewModel.ReloadDatafileAndUpdateCollection();
                     }
                 }
             }
@@ -105,7 +118,7 @@ namespace Project2FA.UWP.Views
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            var selectedItem = args.SelectedItem.ToString();
+            string selectedItem = args.SelectedItem.ToString();
             if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
             {
                 ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label == selectedItem;

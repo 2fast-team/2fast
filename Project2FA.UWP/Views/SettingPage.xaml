@@ -164,6 +164,22 @@
                                 IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported, Mode=OneWay}"
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloActive, Mode=TwoWay}"/>
 
+                                <Button 
+                                    Margin="0,30,0,0"
+                                    Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <FontIcon 
+                                            Glyph="&#xE74D;" 
+                                            FontSize="20"/>
+                                        <TextBlock 
+                                        Text="~FactoryReset" 
+                                        Margin="8,0,0,0" 
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Center"
+                                        x:Uid="SettingsOptionsFactoryResetButton"/>
+                                    </StackPanel>
+                                </Button>
+
                                 <controls:HeaderedContentControl
                                 Margin="0,20,0,0"
                                 Header="{x:Bind strings:Resources.SettingsQRScanningHeader}">
@@ -174,13 +190,15 @@
                                             TextWrapping="WrapWholeWords"/>
                                         </DataTemplate>
                                     </controls:HeaderedContentControl.HeaderTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="0,6,0,15">
+                                    <StackPanel 
+                                        Orientation="Horizontal" 
+                                        Margin="0,6,0,15">
                                         <muxc:NumberBox 
                                         Value="{x:Bind ViewModel.SettingsPartViewModel.SetQRCodeScanSeconds,Mode=TwoWay}"
                                         Maximum="10"
                                         Minimum="3"
                                         SpinButtonPlacementMode="Inline"
-                                        MaxWidth="150"
+                                        MinWidth="120"
                                         HorizontalAlignment="Left">
                                         </muxc:NumberBox>
                                         <TextBlock 
@@ -192,7 +210,7 @@
                                 </controls:HeaderedContentControl>
 
                                 <StackPanel
-                                Margin="0,20,12,0"
+                                Margin="0,20,12,28"
                                 HorizontalAlignment="Left">
                                     <TextBlock 
                                         x:Uid="SettingsNTPServerDescribtion"
@@ -256,23 +274,6 @@
                                         Visibility="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"
                                         IsIndeterminate="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"/>
                                 </StackPanel>
-
-
-                                <Button 
-                                    Margin="0,30,0,0"
-                                    Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
-                                    <StackPanel Orientation="Horizontal">
-                                        <FontIcon 
-                                            Glyph="&#xE74D;" 
-                                            FontSize="20"/>
-                                        <TextBlock 
-                                        Text="~FactoryReset" 
-                                        Margin="8,0,0,0" 
-                                        HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Center"
-                                        x:Uid="SettingsOptionsFactoryResetButton"/>
-                                    </StackPanel>
-                                </Button>
 
                             </StackPanel>
                         </StackPanel>

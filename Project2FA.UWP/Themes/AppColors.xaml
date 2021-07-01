@@ -4,65 +4,45 @@
 
     <!-- Global colors -->
     <Color x:Key="darkBlue">#013358</Color>
-    <AcrylicBrush x:Key="TitleAcrylicWindowBrush" BackgroundSource="HostBackdrop" TintColor="{ThemeResource SystemChromeAltHighColor}" TintOpacity="0.8" FallbackColor="{ThemeResource SystemAltHighColor}" />
+    <AcrylicBrush x:Key="TitleAcrylicWindowBrush" 
+                  BackgroundSource="HostBackdrop"
+                  TintColor="{ThemeResource SystemChromeAltHighColor}"
+                  TintOpacity="0.8" 
+                  FallbackColor="{ThemeResource SystemAltHighColor}" />
+    <!--ProgressRing-->
+    <StaticResource x:Key="ProgressRingBackgroundThemeBrush" ResourceKey="ControlFillColorTertiaryBrush" />
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/ColorsLight.xaml" x:Key="Light">
             <ResourceDictionary.MergedDictionaries>
-                <ColorPaletteResources Accent="#009BC1" />
+                <ColorPaletteResources Accent="#FF009BC1" />
                 <ResourceDictionary>
-                    <!--<Color x:Key="SystemAccentColor">#009BC1</Color>-->
-
-                    <SolidColorBrush x:Key="SystemControlBackgroundAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlDisabledAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlForegroundAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltListAccentHighBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.9" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltListAccentLowBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.6" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltListAccentMediumBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.8" />
-                    <SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.9" />
-                    <SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.6" />
-                    <SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.8" />
-                    <SolidColorBrush x:Key="SystemControlHyperlinkTextBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="ContentDialogBorderThemeBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="JumpListDefaultEnabledBackground" Color="{ThemeResource SystemAccentColor}" />
-                    <!--<Color x:Key="SystemChromeAltMediumHighColor">#CCFFFFFF</Color>
-                    <Color x:Key="SystemChromeAltHighColor">#FFFFFFFF</Color>
-                    <Color x:Key="SystemRevealListLowColor">#FFE6E6E6</Color>
-                    <Color x:Key="SystemRevealListMediumColor">#FFCCCCCC</Color>
-                    <RevealBackgroundBrush x:Key="SystemoCntrolHighlightListLowRevealBackgroundBrush" TargetTheme="Light" Color="{ThemeResource SystemRevealListMediumColor}" FallbackColor="{ StaticResource SystemListMediumColor}" />
+                    <!-- Override system generated accent colors -->
+                    <Color x:Key="SystemAccentColorLight1">#FF1CA8CA</Color>
+                    <Color x:Key="SystemAccentColorLight2">#FF38B5D4</Color>
+                    <Color x:Key="SystemAccentColorLight3">#FF55C3DD</Color>
+                    <Color x:Key="SystemAccentColorDark1">#FF0089B0</Color>
+                    <Color x:Key="SystemAccentColorDark2">#FF00789F</Color>
+                    <Color x:Key="SystemAccentColorDark3">#FF00668E</Color>
+                    <!--<RevealBackgroundBrush x:Key="SystemControlHighlightListLowRevealBackgroundBrush" TargetTheme="Light" Color="{ThemeResource SystemRevealListMediumColor}" FallbackColor="{ StaticResource SystemListMediumColor}" />-->
                     <Color x:Key="RegionColor">#FFFFFFFF</Color>
-                    <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />-->
+                    <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         <ResourceDictionary Source="ms-appx:///Themes/ColorsDark.xaml" x:Key="Default">
             <ResourceDictionary.MergedDictionaries>
-                <ColorPaletteResources Accent="#009BC1"/>
+                <ColorPaletteResources Accent="#FF009BC1" />
                 <ResourceDictionary>
-                    <!--<Color x:Key="SystemAccentColor">#009BC1</Color>-->
-
-                    <SolidColorBrush x:Key="SystemControlBackgroundAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlDisabledAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlForegroundAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltAccentBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltListAccentHighBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.9" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltListAccentLowBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.6" />
-                    <SolidColorBrush x:Key="SystemControlHighlightAltListAccentMediumBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.8" />
-                    <SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.9" />
-                    <SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.6" />
-                    <SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.8" />
-                    <SolidColorBrush x:Key="SystemControlHyperlinkTextBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="ContentDialogBorderThemeBrush" Color="{ThemeResource SystemAccentColor}" />
-                    <SolidColorBrush x:Key="JumpListDefaultEnabledBackground" Color="{ThemeResource SystemAccentColor}" />
-                    <!--<Color x:Key="SystemChromeAltMediumHighColor">#CC000000</Color>
-                    <Color x:Key="SystemChromeAltHighColor">#FF000000</Color>
-                    <Color x:Key="SystemRevealListLowColor">#FF1D1D1D</Color>
-                    <Color x:Key="SystemRevealListMediumColor">#FF333333</Color>
+                    <!-- Override system generated accent colors -->
+                    <Color x:Key="SystemAccentColorDark1">#FF1CA8CA</Color>
+                    <Color x:Key="SystemAccentColorDark2">#FF38B5D4</Color>
+                    <Color x:Key="SystemAccentColorDark3">#FF55C3DD</Color>
+                    <Color x:Key="SystemAccentColorLight1">#FF0089B0</Color>
+                    <Color x:Key="SystemAccentColorLight2">#FF00789F</Color>
+                    <Color x:Key="SystemAccentColorLight3">#FF00668E</Color>
                     <Color x:Key="RegionColor">#FF000000</Color>
-                    <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />-->
+                    <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

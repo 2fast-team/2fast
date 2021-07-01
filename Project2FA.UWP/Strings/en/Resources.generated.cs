@@ -445,6 +445,19 @@ namespace Project2FA.UWP.Strings{
         }
         #endregion
 
+        #region AccountCodePageCopyCodeTeachingTip
+        /// <summary>
+        ///   Looks up a localized string similar to: Key copied to clipboard
+        /// </summary>
+        public static string AccountCodePageCopyCodeTeachingTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageCopyCodeTeachingTip");
+            }
+        }
+        #endregion
+
         #region ChangePassword
         /// <summary>
         ///   Looks up a localized string similar to: Change password
@@ -878,6 +891,7 @@ namespace Project2FA.UWP.Strings{
             AuthorizationFileSystemContentDialogPrimaryBTN,
             AuthorizationFileSystemContentDialogSecondaryBTN,
             AuthorizationFileSystemContentDialogTitle,
+            AccountCodePageCopyCodeTeachingTip,
             ChangePassword,
             CloseApp,
             DeleteAccountContentDialogDescription,

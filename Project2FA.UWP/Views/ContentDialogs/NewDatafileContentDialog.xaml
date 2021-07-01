@@ -60,9 +60,9 @@
                         <Button 
                             x:Name="BTN_WebDAV"
                             Margin="0,10,0,10"
+                            IsEnabled="False"
                             Style="{StaticResource AccentButtonStyle}"
                             Click="BTN_WebDAV_Click"
-                            IsEnabled="False"
                             MinWidth="200">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE753;"
@@ -209,10 +209,16 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <FlipView
-                        SelectedIndex="{x:Bind ViewModel.FlipViewSelectedIndex,Mode=TwoWay}"
-                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                        KeyboardAcceleratorPlacementMode="Hidden"
-                                  >
+                SelectedIndex="{x:Bind ViewModel.FlipViewSelectedIndex,Mode=TwoWay}"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                KeyboardAcceleratorPlacementMode="Hidden"
+                Style="{StaticResource WebDAVFlipView}">
+                        <!--<FlipView.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter ManipulationMode="System"></ItemsPresenter>
+                            </ControlTemplate>
+                        </FlipView.Template>-->
+
                         <FlipViewItem>
                             <StackPanel 
                 HorizontalAlignment="Stretch" 
@@ -222,7 +228,7 @@
                     Header="Server address"
                     PlaceholderText="https://..."
                     InputScope="Url"
-                    Text="{x:Bind ViewModel.ServerAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{x:Bind ViewModel.ServerAddress, Mode=TwoWay}"
                     Background="Transparent"
                     Margin="0,0,0,20"/>
                                 <Button
@@ -235,10 +241,15 @@
                         <FlipViewItem>
                             <StackPanel>
                                 <Grid>
-                                    <toolkit:ImageEx Source="{x:Bind ViewModel.WebDAVServerBackgroundUrl,Mode=OneWay}"
-                                                     Height="150"
-                                                 Stretch="UniformToFill" />
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24">Servername</TextBlock>
+                                    <toolkit:ImageEx 
+                                        Source="{x:Bind ViewModel.WebDAVServerBackgroundUrl,Mode=OneWay}"
+                                        Height="150"
+                                        Stretch="UniformToFill" />
+                                    <TextBlock 
+                                        Text="{x:Bind ViewModel.WebDAVProductName, Mode=OneWay}"
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"
+                                        FontSize="24"/>
                                 </Grid>
 
                                 <TextBox 
@@ -263,14 +274,14 @@
                             <local:WebDAVPresenterPage x:Name="WebDAVView"/>
                         </FlipViewItem>
                     </FlipView>
-                    <CommandBar Grid.Row="1" IsEnabled="False">
+                    <!--<CommandBar Grid.Row="1" IsEnabled="False">
                         <CommandBar.PrimaryCommands>
                             <AppBarButton Label="#Back" Icon="Back"/>
                             <AppBarSeparator/>
                             <AppBarButton Label="#add" Icon="Add"/>
                             <AppBarButton Label="#akzeptieren" Icon="Accept"/>
                         </CommandBar.PrimaryCommands>
-                    </CommandBar>
+                    </CommandBar>-->
                     <Grid Grid.Row="1" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

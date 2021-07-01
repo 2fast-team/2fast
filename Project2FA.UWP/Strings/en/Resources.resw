@@ -558,7 +558,7 @@ Instructions for setting the authorisation:
   <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
     <value>lock app</value>
   </data>
-  <data name="AccountCodePageCopyCodeTeachingTip.Title" xml:space="preserve">
+  <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
     <value>Key copied to clipboard</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">

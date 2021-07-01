@@ -29,6 +29,7 @@ namespace Project2FA.UWP.ViewModels
         private string _username;
         private string _webDAVPassword;
         private string _webDAVServerBackgroundUrl;
+        private string _webDAVProductName;
         private int _selectedIndex;
         private int _flipViewSelectedIndex;
         private string _dateFileName;
@@ -145,6 +146,7 @@ namespace Project2FA.UWP.ViewModels
                     if (result.Installed == true && result.Maintenance == false)
                     {
                         FlipViewSelectedIndex = 1;
+                        WebDAVProductName = result.Productname;
                         WebDAVServerBackgroundUrl = ServerAddress + "/index.php/apps/theming/image/background";
                     }
                 }
@@ -371,7 +373,16 @@ namespace Project2FA.UWP.ViewModels
             get => _webDAVServerBackgroundUrl;
             set => SetProperty(ref _webDAVServerBackgroundUrl, value);
         }
-        public WebDAVPresenterPage WebDAVViewer { get => _webDAVViewer; set => _webDAVViewer = value; }
+        public WebDAVPresenterPage WebDAVViewer 
+        {
+            get => _webDAVViewer;
+            set => _webDAVViewer = value; 
+        }
+        public string WebDAVProductName 
+        { 
+            get => _webDAVProductName; 
+            set => SetProperty(ref _webDAVProductName, value); 
+        }
 
         #endregion
     }

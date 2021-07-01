@@ -17,7 +17,6 @@ using Project2FA.UWP.Services;
 using Windows.UI.Popups;
 using Template10.Services.Resources;
 using ZXing.QrCode;
-using ZXing.Mobile;
 using ZXing.Common;
 using ZXing;
 using System.ComponentModel.DataAnnotations;

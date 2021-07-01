@@ -85,8 +85,9 @@ namespace Project2FA.Repository.Models
             {
 #if __MOBILE__
                 _secretByteArray = value;
-#endif
+#else
                 _secretByteArray = ProtectData.Protect(value);
+#endif
             }
         }
 
@@ -100,22 +101,6 @@ namespace Project2FA.Repository.Models
                 Seconds = Period;
                 SetProperty(ref _twoFACode, value);
             }
-        }
-
-        private bool _userInfoCopyCodeBTN;
-        [JsonIgnore]
-        public bool UserInfoCopyCodeBTN
-        {
-            get => _userInfoCopyCodeBTN;
-            set => SetProperty(ref _userInfoCopyCodeBTN, value);
-        }
-
-        private bool _userInfoCopyCodeCodeRightClick;
-        [JsonIgnore]
-        public bool UserInfoCopyCodeRightClick
-        {
-            get => _userInfoCopyCodeCodeRightClick;
-            set => SetProperty(ref _userInfoCopyCodeCodeRightClick, value);
         }
 
         [JsonIgnore]

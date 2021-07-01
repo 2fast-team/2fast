@@ -14,6 +14,9 @@ using Project2FA.UWP.Strings;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
 using Prism.Logging;
+using Microsoft.Toolkit.Uwp.UI;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -35,7 +38,6 @@ namespace Project2FA.UWP.ViewModels
         private string _title;
         private TwoFACodeModel _tempDeletedTFAModel;
 
-
         public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade)
         {
             PageDialogService = dialogService;
@@ -50,13 +52,13 @@ namespace Project2FA.UWP.ViewModels
             _dispatcherTimerDeletedModel.Interval = new TimeSpan(0, 0, 1); //every second
             _dispatcherTimerDeletedModel.Tick += TimerDeletedModel;
 
-            AddAccountCommand = new DelegateCommand(async() =>
+            AddAccountCommand = new DelegateCommand(async () =>
             {
                 if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
                 {
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
-                var dialog = new AddAccountContentDialog();
+                AddAccountContentDialog dialog = new AddAccountContentDialog();
                 await PageDialogService.ShowAsync(dialog);
             });
 
@@ -65,7 +67,7 @@ namespace Project2FA.UWP.ViewModels
                 ReloadDatafileAndUpdateCollection();
             });
 
-            LogoutCommand = new DelegateCommand(async() =>
+            LogoutCommand = new DelegateCommand(async () =>
             {
                 if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
                 {
@@ -90,10 +92,10 @@ namespace Project2FA.UWP.ViewModels
             {
                 //TODO Navigation breaks the static collection with binding for the TeachingTip
                 //The workaround is the reload of the collection
-                ReloadDatafileAndUpdateCollection();
+                //ReloadDatafileAndUpdateCollection();
 
                 //Old: only reset the time and calc the new totp
-                //DataService.Instance.ResetCollection();
+                DataService.Instance.ResetCollection();
             }
 
             _dispatcherTOTPTimer.Start();
@@ -187,7 +189,7 @@ namespace Project2FA.UWP.ViewModels
                 dialog.PrimaryButtonText = Resources.Confirm;
                 dialog.SecondaryButtonText = Resources.ButtonTextCancel;
                 dialog.SecondaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                var result = await PageDialogService.ShowAsync(dialog);
+                ContentDialogResult result = await PageDialogService.ShowAsync(dialog);
                 if (result == ContentDialogResult.Primary)
                 {
                     TempDeletedTFAModel = model;
@@ -202,7 +204,7 @@ namespace Project2FA.UWP.ViewModels
         public void ReloadDatafileAndUpdateCollection()
         {
             TwoFADataService.Collection.Clear();
-            DataService.Instance.ReloadDatafile();
+            TwoFADataService.ReloadDatafile();
         }
 
         //detach the events
@@ -223,21 +225,15 @@ namespace Project2FA.UWP.ViewModels
 
         public DataService TwoFADataService => DataService.Instance;
 
-        public string Title 
-        { 
+        public string Title
+        {
             get => _title;
             set => SetProperty(ref _title, value);
         }
 
-        public bool IsModelDeleted
-        {
-            get => TempDeletedTFAModel != null;
-        }
+        public bool IsModelDeleted => TempDeletedTFAModel != null;
 
-        public bool IsModelNotDeleted
-        {
-            get => TempDeletedTFAModel == null;
-        }
+        public bool IsModelNotDeleted => TempDeletedTFAModel == null;
 
         public TwoFACodeModel TempDeletedTFAModel 
         {

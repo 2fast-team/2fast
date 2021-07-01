@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mstoolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -77,9 +78,9 @@
                 </Border>
 
                 <StackPanel MaxWidth="320" MinHeight="500">
-                    <mstoolkitControls:ImageEx 
-                        Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
-                        MaxHeight="150" 
+                    <muxc:ImageIcon 
+                        Source="ms-appx:///Assets/schluessel.svg"
+                        Height="150"
                         Margin="0,30,0,10"/>
                     <PasswordBox 
                         x:Uid="LoginPagePassword"    

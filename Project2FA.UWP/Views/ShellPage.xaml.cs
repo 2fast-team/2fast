@@ -17,6 +17,7 @@ using Template10.Services.Dialog;
 using Windows.ApplicationModel.Core;
 using Project2FA.UWP.Utils;
 using Prism.Navigation;
+using System.Threading.Tasks;
 
 namespace Project2FA.UWP.Views
 {
@@ -35,7 +36,8 @@ namespace Project2FA.UWP.Views
             _navManager = SystemNavigationManager.GetForCurrentView();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
 
-            var title = Windows.ApplicationModel.Package.Current.DisplayName;
+            string title = Windows.ApplicationModel.Package.Current.DisplayName;
+            // determine and set if the app is started in debug mode
             Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
             
             // Hide default title bar.
@@ -81,7 +83,7 @@ namespace Project2FA.UWP.Views
 
             _frame.Navigated += (s, e) =>
             {
-                if (TryFindItem(e.SourcePageType, e.Parameter, out var item))
+                if (TryFindItem(e.SourcePageType, e.Parameter, out object item))
                 {
                     SetSelectedItem(item, false);
                     // TODO test if nessasary
@@ -116,11 +118,11 @@ namespace Project2FA.UWP.Views
             {
                 CheckUnhandledExceptionLastSession();
             }
-            var dialogService = App.Current.Container.Resolve<IDialogService>();
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             //Rate information for the user
             if (SystemInformation.Instance.LaunchCount == 5 || SystemInformation.Instance.LaunchCount == 15)
             {
-                if (!SettingsService.Instance.AppRated)
+                if (!SettingsService.Instance.AppRated && (MainFrame.Content as FrameworkElement).GetType() != typeof(WelcomePage))
                 {
                     await dialogService.ShowAsync(new RateAppContentDialog());
                 }
@@ -128,7 +130,7 @@ namespace Project2FA.UWP.Views
 
             if (SystemInformation.Instance.IsAppUpdated)
             {
-                var dialog = new ContentDialog();
+                ContentDialog dialog = new ContentDialog();
                 dialog.Title = Strings.Resources.NewAppFeaturesTitle;
                 dialog.Content = Strings.Resources.NewAppFeaturesContent;
                 dialog.PrimaryButtonText = Strings.Resources.Confirm;
@@ -171,19 +173,12 @@ namespace Project2FA.UWP.Views
 
         private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
         {
-            if (sender.IsVisible)
-            {
-                AppTitleBar.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                AppTitleBar.Visibility = Visibility.Collapsed;
-            }
+            AppTitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public void SetupBackButton()
         {
-            var settings = SettingsService.Instance;
+            SettingsService settings = SettingsService.Instance;
             if (settings.UseHeaderBackButton)
             {
                 ShellView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
@@ -220,7 +215,7 @@ namespace Project2FA.UWP.Views
         private async void FeedbackItem_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             // https://docs.microsoft.com/en-us/windows/uwp/monetize/launch-feedback-hub-from-your-app
-            var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+            Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
             await launcher.LaunchAsync();
         }
 

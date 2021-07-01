@@ -33,7 +33,7 @@ namespace Project2FA.UWP.Views
             {
                 MainPivot.Items.Remove(WebDAVPivotItem);
             }
-            var result = await ViewModel.SetLocalPath();
+            bool result = await ViewModel.SetLocalPath();
             if (!result)
             {
                 if (MainPivot.Items.Contains(FolderPivotItem))
@@ -54,6 +54,7 @@ namespace Project2FA.UWP.Views
                 MainPivot.Items.Add(WebDAVPivotItem);
             }
             ViewModel.SelectedIndex = 1;
+            //WebDAVFrame.Navigate(typeof(WebDAVLoginPage));
         }
     }
 }

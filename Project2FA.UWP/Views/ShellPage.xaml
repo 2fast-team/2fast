@@ -7,8 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:localControls="using:Project2FA.UWP.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     mc:Ignorable="d"
     localControls:TitleBar.ButtonBackgroundColor="Transparent"
     localControls:TitleBar.ButtonInactiveBackgroundColor ="Transparent"
@@ -24,6 +26,90 @@
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+          
+
+            <!--<Style TargetType="primitives:NavigationViewItemPresenter" />-->
+
+            <!--<Style TargetType="muxc:NavigationViewItemHeader">
+                <Setter Property="IsEnabled" Value="False" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="MinHeight" Value="0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="AutomationProperties.AccessibilityView" Value="Raw"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="muxc:NavigationViewItemHeader">
+                            <Grid x:Name="NavigationViewItemHeaderRootGrid">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="PaneStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition From="HeaderTextCollapsed" To="HeaderTextVisible">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerHeaderGrid" Storyboard.TargetProperty="Height">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="40" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderText" Storyboard.TargetProperty="Visibility">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderText" Storyboard.TargetProperty="Opacity">
+                                                        <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
+                                                        <LinearDoubleKeyFrame KeyTime="0:0:0.1" Value="0.0"/>
+                                                        <SplineDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                KeySpline="0.0,0.35 0.15,1.0"
+                                                Value="1.0" />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualTransition>
+
+                                            <VisualTransition From="HeaderTextVisible" To="HeaderTextCollapsed">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerHeaderGrid" Storyboard.TargetProperty="Height">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="20" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderText" Storyboard.TargetProperty="Visibility">
+                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderText" Storyboard.TargetProperty="Opacity">
+                                                        <LinearDoubleKeyFrame KeyTime="0:0:0" Value="1.0"/>
+                                                        <SplineDoubleKeyFrame
+                                                KeyTime="0:0:0.1"
+                                                KeySpline="0.0,0.35 0.15,1.0"
+                                                Value="0.0" />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualTransition>
+                                        </VisualStateGroup.Transitions>
+
+                                        <VisualState x:Name="HeaderTextVisible"/>
+                                        <VisualState x:Name="HeaderTextCollapsed">
+                                            <VisualState.Setters>
+                                                <Setter Target="HeaderText.Visibility" Value="Collapsed" />
+                                                <Setter Target="InnerHeaderGrid.Height" Value="20"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid x:Name="InnerHeaderGrid" Height="40" HorizontalAlignment="Left" Margin="{ThemeResource NavigationViewItemInnerHeaderMargin}">
+                                    <TextBlock
+                                x:Name="HeaderText"
+                                VerticalAlignment="Center"
+                                Margin="0,-1,0,-1"
+                                Style="{StaticResource NavigationViewItemHeaderTextStyle}"
+                                Text="{TemplateBinding Content}"
+                                TextWrapping="NoWrap"/>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+
 
             <Style x:Key="MyNavigationViewStyle" TargetType="muxc:NavigationView">
                 <Setter Property="PaneToggleButtonStyle" Value="{StaticResource PaneToggleButtonStyle}" />
@@ -48,6 +134,7 @@
                                             <VisualState.Setters>
                                                 <Setter Target="TogglePaneButton.Background" Value="{ThemeResource ShellAcrylicWindowBrush}"/>
                                                 <Setter Target="HeaderContent.Margin" Value="0,0,0,0"/>
+                                                
                                             </VisualState.Setters>
                                         </VisualState>
 
@@ -57,6 +144,7 @@
                                             <VisualState.Setters>
                                                 <Setter Target="TogglePaneButton.Background" Value="{ThemeResource ShellAcrylicWindowBrush}"/>
                                                 <Setter Target="HeaderContent.Margin" Value="0,0,0,0"/>
+                                                
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
@@ -156,6 +244,7 @@
                                 </VisualStateManager.VisualStateGroups>
 
                                 <!-- Button grid -->
+                                <!-- Button grid -->
                                 <Grid
                             x:Name="PaneToggleButtonGrid"
                             Margin="0,0,0,8"
@@ -193,8 +282,7 @@
                                         <Button
                                     x:Name="TogglePaneButton"
                                     Style="{TemplateBinding PaneToggleButtonStyle}"
-                                    AutomationProperties.LandmarkType="Navigation"
-                                    HorizontalAlignment="Center"
+                                    AutomationProperties.LandmarkType="Navigation" HorizontalAlignment="Center"
                                     Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PaneToggleButtonVisibility}"
                                     VerticalAlignment="Top">
                                             <TextBlock

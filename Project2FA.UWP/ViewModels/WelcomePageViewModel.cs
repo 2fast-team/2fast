@@ -1,14 +1,11 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using Prism.Ioc;
 using Project2FA.UWP.Views;
 using System.Windows.Input;
 using Template10.Services.Dialog;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
 using Project2FA.UWP.Utils;
 
@@ -22,6 +19,8 @@ namespace Project2FA.UWP.ViewModels
 
         public ICommand UseExistDatefileCommand { get; }
 
+        private string _title;
+
         private bool _canNavigate;
 
         public WelcomePageViewModel(IDialogService dialogService, INavigationService navigationService)
@@ -29,6 +28,7 @@ namespace Project2FA.UWP.ViewModels
             _dialogService = dialogService;
             _navigationService = navigationService;
             App.ShellPageInstance.NavigationIsAllowed = false;
+            Title = "#Willkommen";
 
             NewDatefileCommand = new DelegateCommand(NewDatafile);
             UseExistDatefileCommand = new DelegateCommand(UseExistDatafile);
@@ -71,6 +71,8 @@ namespace Project2FA.UWP.ViewModels
                 ErrorDialogs.UnauthorizedAccessDialog();
             }
         }
+
+        public string Title { get => _title; set => SetProperty(ref _title, value); }
 
         public bool CanNavigate(INavigationParameters parameters)
         {

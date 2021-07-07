@@ -14,9 +14,6 @@ using Project2FA.UWP.Strings;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
 using Prism.Logging;
-using Microsoft.Toolkit.Uwp.UI;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -73,8 +70,9 @@ namespace Project2FA.UWP.ViewModels
                 {
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
+                // clear the navigation stack
                 await App.ShellPageInstance.NavigationService.NavigateAsync("/BlankPage");
-                var loginPage = new LoginPage(true);
+                LoginPage loginPage = new LoginPage(true);
                 Window.Current.Content = loginPage;
             });
 
@@ -90,11 +88,7 @@ namespace Project2FA.UWP.ViewModels
 
             if (TwoFADataService.Collection.Count != 0)
             {
-                //TODO Navigation breaks the static collection with binding for the TeachingTip
-                //The workaround is the reload of the collection
-                //ReloadDatafileAndUpdateCollection();
-
-                //Old: only reset the time and calc the new totp
+                //only reset the time and calc the new totp
                 DataService.Instance.ResetCollection();
             }
 
@@ -179,7 +173,7 @@ namespace Project2FA.UWP.ViewModels
         {
             if (parameter is TwoFACodeModel model)
             {
-                var dialog = new ContentDialog();
+                ContentDialog dialog = new ContentDialog();
                 dialog.Title = Resources.DeleteAccountContentDialogTitle;
                 var markdown = new MarkdownTextBlock
                 {

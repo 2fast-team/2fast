@@ -56,14 +56,14 @@ namespace Project2FA.UWP
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             TrackingManager.TrackException(e.Exception);
-            SettingsService.Instance.UnhandledExceptionStr = e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
+            SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
             TrackingManager.TrackException(e.Exception);
-            SettingsService.Instance.UnhandledExceptionStr = e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
+            SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
         }
 
@@ -95,7 +95,7 @@ namespace Project2FA.UWP
                 //{
                 //    ApplicationLanguages.PrimaryLanguageOverride = "en";
                 //}
-                var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+                CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
                 if (!coreTitleBar.ExtendViewIntoTitleBar)
                 {
                     coreTitleBar.ExtendViewIntoTitleBar = true;
@@ -111,7 +111,7 @@ namespace Project2FA.UWP
                 }
 
                 // built initial navigation path
-                var navigationPath = string.Empty;
+                string navigationPath = string.Empty;
 
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
@@ -131,7 +131,7 @@ namespace Project2FA.UWP
 
                 if (loginRequiered)
                 {
-                    var loginPage = Container.Resolve<LoginPage>();
+                    LoginPage loginPage = Container.Resolve<LoginPage>();
                     Window.Current.Content = loginPage;
                 }
                 else

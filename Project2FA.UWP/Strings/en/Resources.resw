@@ -737,4 +737,7 @@ The option can be activated under the settings.</value>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features</value>
   </data>
+  <data name="WelcomePageTitle" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
 </root>

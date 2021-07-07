@@ -847,6 +847,19 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region WelcomePageTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Welcome
+        /// </summary>
+        public static string WelcomePageTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("WelcomePageTitle");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -922,6 +935,7 @@ namespace Project2FA.UWP.Strings{
             ErrorHandleDescriptionLastSession,
             NewAppFeaturesContent,
             NewAppFeaturesTitle,
+            WelcomePageTitle,
         }
 
         private static ResourceLoader _resourceLoader;

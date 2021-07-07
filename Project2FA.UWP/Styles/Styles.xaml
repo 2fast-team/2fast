@@ -12,8 +12,9 @@
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/CheckBox.xaml" />-->
         <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/ToggleSwitch.xaml" />-->
-        <ResourceDictionary Source="ms-appx:///Styles/Generic/AppBarButton.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/CommandBarAndAppBar.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/RadioButton.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/NavigationView.xaml" />
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/AutoSuggestBoxTextBox.xaml" />-->
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/PasswordBox.xaml" />-->
     </ResourceDictionary.MergedDictionaries>
@@ -55,9 +56,7 @@
         <Setter Property="CornerRadius" Value="0"/>
     </Style>
 
-    <Style TargetType="CommandBar">
-        <Setter Property="Height" Value="40"/>
-    </Style>
+
 
     <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>

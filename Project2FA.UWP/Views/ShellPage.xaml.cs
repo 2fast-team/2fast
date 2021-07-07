@@ -128,15 +128,16 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            if (SystemInformation.Instance.IsAppUpdated)
-            {
-                ContentDialog dialog = new ContentDialog();
-                dialog.Title = Strings.Resources.NewAppFeaturesTitle;
-                dialog.Content = Strings.Resources.NewAppFeaturesContent;
-                dialog.PrimaryButtonText = Strings.Resources.Confirm;
-                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                await dialogService.ShowAsync(dialog);
-            }
+            // TODO add check for 1.0.3 to 1.0.4
+            //if (SystemInformation.Instance.IsAppUpdated)
+            //{
+            //    ContentDialog dialog = new ContentDialog();
+            //    dialog.Title = Strings.Resources.NewAppFeaturesTitle;
+            //    dialog.Content = Strings.Resources.NewAppFeaturesContent;
+            //    dialog.PrimaryButtonText = Strings.Resources.Confirm;
+            //    dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            //    await dialogService.ShowAsync(dialog);
+            //}
 
             // If this is the first run, activate the ntp server checks
             // else => UseNTPServerCorrection is false

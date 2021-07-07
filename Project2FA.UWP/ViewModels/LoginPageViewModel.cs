@@ -99,6 +99,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 var dbHash = await App.Repository.Password.GetAsync();
                 var secretService = App.Current.Container.Resolve<ISecretService>();
+                //TODO check if this is a problem
                 if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName,dbHash.Hash)))
                 {
                     ShowLoginError();

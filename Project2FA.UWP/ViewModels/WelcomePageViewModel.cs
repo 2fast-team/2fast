@@ -28,11 +28,12 @@ namespace Project2FA.UWP.ViewModels
             _dialogService = dialogService;
             _navigationService = navigationService;
             App.ShellPageInstance.NavigationIsAllowed = false;
-            Title = "#Willkommen";
+            Title = Strings.Resources.WelcomePageTitle;
 
             NewDatefileCommand = new DelegateCommand(NewDatafile);
             UseExistDatefileCommand = new DelegateCommand(UseExistDatafile);
         }
+
         private async void NewDatafile()
         {
             var dialog = new NewDatafileContentDialog();
@@ -44,6 +45,7 @@ namespace Project2FA.UWP.ViewModels
                 await _navigationService.NavigateAsync(navPath);
             }
         }
+
         private async void UseExistDatafile()
         {
             try

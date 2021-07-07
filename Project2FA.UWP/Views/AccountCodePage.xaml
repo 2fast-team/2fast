@@ -73,8 +73,7 @@
                                 </CommandBar>
                             </CommandBar.Content>
                             <CommandBar.PrimaryCommands>
-                                <AppBarElementContainer 
-                                    Height="40"
+                                <AppBarElementContainer
                                     Visibility="{x:Bind IsModelDeleted, Mode=OneWay}">
                                     <CommandBar 
                                         OverflowButtonVisibility="Collapsed"
@@ -100,16 +99,16 @@
                                         <CommandBar.PrimaryCommands>
                                             <AppBarButton  
                                             x:Name="ABB_UndoDelete"
+                                              
                                             x:Uid="AccountCodePageABBUndoDelete" 
                                             Command="{x:Bind UndoDeleteCommand}" 
                                             Icon="Undo" />
                                         </CommandBar.PrimaryCommands>
                                     </CommandBar>
                                 </AppBarElementContainer>
-                                <AppBarElementContainer Height="40">
+                                <AppBarElementContainer>
                                     <AutoSuggestBox 
                                         Width="200"
-                                        
                                         QueryIcon="Find"
                                         VerticalAlignment="Center"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
@@ -227,7 +226,7 @@
                                 </Bold>
                             </TextBlock>
                             <TextBlock 
-                                x:Name="Issuer"
+                                x:Name="IssuerName"
                                 FontWeight="Thin"
                                 Text="{x:Bind Issuer,Mode=OneWay}" 
                                 FontSize="22"
@@ -314,8 +313,8 @@
                                         <AdaptiveTrigger MinWindowWidth="0" />
                                     </VisualState.StateTriggers>
                                     <VisualState.Setters>
-                                        <Setter Target="Issuer.(RelativePanel.Below)" Value="AccountName"/>
-                                        <Setter Target="Issuer.Margin" Value="0,10,10,0"/>
+                                        <Setter Target="IssuerName.(RelativePanel.Below)" Value="AccountName"/>
+                                        <Setter Target="IssuerName.Margin" Value="0,10,10,0"/>
                                         <Setter Target="Root.MinWidth" Value="478"/>
                                     </VisualState.Setters>
                                 </VisualState>
@@ -325,8 +324,8 @@
                                     </VisualState.StateTriggers>
                                     <VisualState.Setters>
                                         <Setter Target="Root.MinWidth" Value="660"/>
-                                        <Setter Target="Issuer.(RelativePanel.RightOf)" Value="AccountName"/>
-                                        <Setter Target="Issuer.Margin" Value="10,10,10,0"/>
+                                        <Setter Target="IssuerName.(RelativePanel.RightOf)" Value="AccountName"/>
+                                        <Setter Target="IssuerName.Margin" Value="10,10,10,0"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>

@@ -17,7 +17,8 @@
     <Page.Resources>
         <ResourceDictionary>
             <DataTemplate x:Name="ShellHeaderTemplate">
-                <Grid Background="{ThemeResource ShellAcrylicWindowBrush}">
+                <Grid Background="{ThemeResource ShellAcrylicWindowBrush}" 
+                      Height="40">
                     <TextBlock 
                         x:Uid="SettingsPageName"
                         Margin="15,0,0,0"

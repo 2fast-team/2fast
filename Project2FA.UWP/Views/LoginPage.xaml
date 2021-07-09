@@ -78,9 +78,9 @@
                 </Border>
 
                 <StackPanel MaxWidth="320" MinHeight="500">
-                    <muxc:ImageIcon 
-                        Source="ms-appx:///Assets/schluessel.svg"
-                        Height="150"
+                    <mstoolkitControls:ImageEx 
+                        Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
+                        MaxHeight="150" 
                         Margin="0,30,0,10"/>
                     <PasswordBox 
                         x:Uid="LoginPagePassword"    

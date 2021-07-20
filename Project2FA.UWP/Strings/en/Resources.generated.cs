@@ -860,6 +860,32 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region CreateDatafile
+        /// <summary>
+        ///   Looks up a localized string similar to: Create datafile
+        /// </summary>
+        public static string CreateDatafile
+        {
+            get
+            {
+                return _resourceLoader.GetString("CreateDatafile");
+            }
+        }
+        #endregion
+
+        #region LoadDatafile
+        /// <summary>
+        ///   Looks up a localized string similar to: Load existing datafile
+        /// </summary>
+        public static string LoadDatafile
+        {
+            get
+            {
+                return _resourceLoader.GetString("LoadDatafile");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -936,6 +962,8 @@ namespace Project2FA.UWP.Strings{
             NewAppFeaturesContent,
             NewAppFeaturesTitle,
             WelcomePageTitle,
+            CreateDatafile,
+            LoadDatafile,
         }
 
         private static ResourceLoader _resourceLoader;

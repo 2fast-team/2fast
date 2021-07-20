@@ -27,7 +27,7 @@
 
     <Grid>
         <Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
-            <PivotItem 
+            <!--<PivotItem 
                 Header="#Auswahl" 
                 MinHeight="400" 
                 x:Uid="UseDatafileContentDialogPivotItemKind">
@@ -75,7 +75,7 @@
                         </Button>
                     </StackPanel>
                 </ScrollViewer>
-            </PivotItem>
+            </PivotItem>-->
             <PivotItem 
                 x:Name="FolderPivotItem"
                 Header="#Datendatei"
@@ -160,7 +160,7 @@
                     </toolkit:Loading>
                 </Grid>
             </PivotItem>
-            <PivotItem 
+            <!--<PivotItem 
                 x:Name="WebDAVPivotItem" 
                 Header="#WebDAV" 
                 MinHeight="400" 
@@ -209,7 +209,7 @@
                                 Content="#Connect" 
                                 Style="{StaticResource AccentButtonStyle}"
                                 HorizontalAlignment="Stretch"
-                                Command="{x:Bind ViewModel.WebDAVSaveSettingsCommand}"/>
+                                Command="{x:Bind ViewModel.WebDAVLoginCommand}"/>
                         </StackPanel>
                     </ScrollViewer>
                     <CommandBar Grid.Row="1">
@@ -217,17 +217,17 @@
                             <AppBarButton Label="#akzeptieren" Icon="Accept"/>
                         </CommandBar.PrimaryCommands>
                     </CommandBar>
-                    <!--<Grid Grid.Row="1" >
+                    --><!--<Grid Grid.Row="1" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Button Content="#bestätigen"></Button>
                         <Button Grid.Column="1" HorizontalAlignment="Right">BTN1</Button>
-                    </Grid>-->
+                    </Grid>--><!--
                 </Grid>
-            </PivotItem>
-            <PivotItem x:Name="WebDAVFolderPivotItem" Header="#Datendatei" MinHeight="400">
+            </PivotItem>-->
+            <!--<PivotItem x:Name="WebDAVFolderPivotItem" Header="#Datendatei" MinHeight="400">
                 <ScrollViewer>
                     <StackPanel>
                         <TextBlock Text="{x:Bind ViewModel.LocalStorageFolder.DisplayName,Mode=OneWay}"/>
@@ -236,7 +236,7 @@
                     </StackPanel>
                 </ScrollViewer>
 
-            </PivotItem>
+            </PivotItem>-->
         </Pivot>
     </Grid>
 </ContentDialog>

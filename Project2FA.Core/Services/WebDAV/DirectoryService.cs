@@ -24,6 +24,7 @@ namespace Project2FA.Core.Services.WebDAV
         private ObservableCollection<PathInfoModel> _pathStack;
         private int _selectedPathIndex;
         private bool _isSorting;
+        private bool _createDatafile;
         private bool _continueListing;
         private bool _isSelecting;
         private string _selectionMode;
@@ -65,13 +66,7 @@ namespace Project2FA.Core.Services.WebDAV
         }
 
 
-        public int GetPathDepth
-        {
-            get
-            {
-                return PathStack.Count - 1;
-            }
-        }
+        public int GetPathDepth => PathStack.Count - 1;
 
         public ObservableCollection<WebDAVFileOrFolderModel> FilesAndFolders
         {
@@ -119,12 +114,12 @@ namespace Project2FA.Core.Services.WebDAV
 
         private static string GetSizeHeader(ResourceInfoModel fileOrFolder)
         {
-            var sizeMb = fileOrFolder.Size / 1024f / 1024f;
+            float sizeMb = fileOrFolder.Size / 1024f / 1024f;
 
             long[] sizesValuesMb = { 1, 5, 10, 25, 50, 100, 250, 500, 1024, 5120, 10240, 102400, 1048576 };
             string[] sizesDisplay = { "<1MB", ">1MB", ">5MB", ">10MB", ">25MB", ">50MB", ">100MB", ">250MB", ">500MB", ">1GB", ">5GB", ">10GB", ">100GB", ">1TB" };
 
-            var index = 0;
+            int index = 0;
 
             foreach (var t in sizesValuesMb)
             {
@@ -141,19 +136,20 @@ namespace Project2FA.Core.Services.WebDAV
             return sizesDisplay[index];
         }
 
-        public async Task Refresh(bool createDatafile = false)
+        public Task Refresh(bool createDatafile = false)
         {
-            await StartDirectoryListing(createDatafile).ConfigureAwait(false);
+            return StartDirectoryListing(createDatafile);
         }
 
-        private async void SelectedIndexPathChanged()
+        private Task SelectedIndexPathChanged()
         {
-            await StartDirectoryListing(null).ConfigureAwait(false);
+            return StartDirectoryListing(null);
         }
 
-        public async Task StartDirectoryListing(bool createDatafile = false)
+        public Task StartDirectoryListing(bool createDatafile = false)
         {
-            await StartDirectoryListing(null).ConfigureAwait(false);
+            _createDatafile = createDatafile;
+            return StartDirectoryListing(null);
         }
 
         public async Task StartDirectoryListing(ResourceInfoModel resourceInfoToExclude, string viewName = null)
@@ -170,7 +166,7 @@ namespace Project2FA.Core.Services.WebDAV
             Folders.Clear();
             GroupedFilesAndFolders.Clear();
 
-            var client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
 
             if (client == null || IsSelecting)
             {
@@ -192,7 +188,7 @@ namespace Project2FA.Core.Services.WebDAV
                 });
             }
 
-            var path = PathStack.Count > 0 ? PathStack[GetPathDepth].ResourceInfo.Path : "/";
+            string path = PathStack.Count > 0 ? PathStack[GetPathDepth].ResourceInfo.Path : "/";
             List<ResourceInfoModel> list = null;
 
             try
@@ -220,28 +216,35 @@ namespace Project2FA.Core.Services.WebDAV
 
             if (list != null)
             {
-                foreach (var item in list)
+                foreach (ResourceInfoModel item in list)
                 {
                     if (resourceInfoToExclude != null && item == resourceInfoToExclude)
                     {
                         continue;
                     }
-                    if (item.Name.Contains(".2fa"))
+
+                    if (!_createDatafile)
                     {
-                        FilesAndFolders.Add(new WebDAVFileOrFolderModel(item));
+                        if (item.Name.Contains(".2fa"))
+                        {
+                            FilesAndFolders.Add(new WebDAVFileOrFolderModel(item));
+                        }
                     }
 
                     if (RemoveResourceInfos != null)
                     {
-                        var index = RemoveResourceInfos.FindIndex(
+                        int index = RemoveResourceInfos.FindIndex(
                             res => res.Path.Equals(item.Path, StringComparison.Ordinal));
                         if (index == -1)
                         {
-                            if (item.Name.Contains(".2fa"))
+                            if (!_createDatafile)
                             {
-                                FilesAndFolders.Add(new WebDAVFileOrFolderModel(item));
+                                if (item.Name.Contains(".2fa"))
+                                {
+                                    FilesAndFolders.Add(new WebDAVFileOrFolderModel(item));
+                                }
+                                Folders.Add(new WebDAVFileOrFolderModel(item));
                             }
-                            Folders.Add(new WebDAVFileOrFolderModel(item));
                         }
                     }
                     else
@@ -251,7 +254,6 @@ namespace Project2FA.Core.Services.WebDAV
                             FilesAndFolders.Add(new WebDAVFileOrFolderModel(item));
                             Folders.Add(new WebDAVFileOrFolderModel(item));
                         }
-                        
                     }
                 }
                 //Files.AddRange(FilesAndFolders.Where(x => x.IsDirectory == false));
@@ -262,10 +264,10 @@ namespace Project2FA.Core.Services.WebDAV
 
         private void SortList()
         {
-            var orderedFilesAndFolders = FilesAndFolders.OrderBy(x => !x.IsDirectory).ThenBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
+            List<WebDAVFileOrFolderModel> orderedFilesAndFolders = FilesAndFolders.OrderBy(x => !x.IsDirectory).ThenBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
             GroupedFilesAndFolders.AddRange(orderedFilesAndFolders);
 
-            var orderedFolders = Folders.OrderBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
+            List<WebDAVFileOrFolderModel> orderedFolders = Folders.OrderBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
             Folders.Clear();
             Folders.AddRange(orderedFolders);
         }
@@ -288,8 +290,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public string SelectionMode
         {
-            get
-            { return _selectionMode; }
+            get => _selectionMode;
             set
             {
                 if (_selectionMode == value)
@@ -302,8 +303,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public bool IsSelecting
         {
-            get
-            { return _isSelecting; }
+            get => _isSelecting;
             set
             {
                 if (_isSelecting == value)
@@ -317,10 +317,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public int SelectedPathIndex
         {
-            get
-            {
-                return _selectedPathIndex;
-            }
+            get => _selectedPathIndex;
 
             set
             {
@@ -358,15 +355,15 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> CreateDirectory(string directoryName)
         {
-            var client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
                 return false;
             }
 
-            var path = PathStack.Count > 0 ? PathStack[PathStack.Count - 1].ResourceInfo.Path : "";
-            var success = false;
+            string path = PathStack.Count > 0 ? PathStack[PathStack.Count - 1].ResourceInfo.Path : "";
+            bool success = false;
 
             try
             {
@@ -382,6 +379,7 @@ namespace Project2FA.Core.Services.WebDAV
 
             if (success)
             {
+                //Folders.Add
                 await StartDirectoryListing();
             }
 
@@ -390,37 +388,37 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> DeleteResource(ResourceInfoModel resourceInfo)
         {
-            var client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
                 return false;
             }
 
-            var path = resourceInfo.ContentType.Equals("dav/directory")
+            string path = resourceInfo.ContentType.Equals("dav/directory")
                 ? resourceInfo.Path
                 : resourceInfo.Path + "/" + resourceInfo.Name;
 
-            var success = await client.Delete(path);
+            bool success = await client.Delete(path);
             await StartDirectoryListing();
             return success;
         }
 
         public async Task<bool> DeleteSelected(List<ResourceInfoModel> resourceInfos)
         {
-            var client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
                 return false;
             }
 
-            foreach (var resourceInfo in resourceInfos)
+            foreach (ResourceInfoModel resourceInfo in resourceInfos)
             {
-                var path = resourceInfo.ContentType.Equals("dav/directory")
+                string path = resourceInfo.ContentType.Equals("dav/directory")
                 ? resourceInfo.Path
                 : resourceInfo.Path + "/" + resourceInfo.Name;
-                var success = await client.Delete(path);
+                bool success = await client.Delete(path);
                 if (!success)
                 {
                     return false;
@@ -433,15 +431,15 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> Rename(string oldName, string newName)
         {
-            var client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
                 return false;
             }
 
-            var path = PathStack.Count > 0 ? PathStack[PathStack.Count - 1].ResourceInfo.Path : "";
-            var success = false;
+            string path = PathStack.Count > 0 ? PathStack[PathStack.Count - 1].ResourceInfo.Path : "";
+            bool success = false;
 
             try
             {
@@ -464,7 +462,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> Move(string oldPath, string newPath)
         {
-            var client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {

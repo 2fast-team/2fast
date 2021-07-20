@@ -23,13 +23,14 @@ using Windows.UI.Xaml.Data;
 using Microsoft.Toolkit.Collections;
 using Windows.Security.Credentials;
 using Project2FA.Core.Services.NTP;
+using System.Threading.Tasks;
 
 namespace Project2FA.UWP.ViewModels
 {
     /// <summary>
     /// Navigation part from the settings page
     /// </summary>
-    public class SettingPageViewModel : BindableBase, IInitialize
+    public class SettingPageViewModel : BindableBase, IInitialize, IConfirmNavigationAsync
     {
         public SettingsPartViewModel SettingsPartViewModel { get; }
         public AboutPartViewModel AboutPartViewModel { get; }
@@ -50,15 +51,20 @@ namespace Project2FA.UWP.ViewModels
 
         public void Initialize(INavigationParameters parameters)
         {
-            int selectedItem;
-            if (parameters.TryGetValue<int>("PivotItem", out selectedItem))
+            if (parameters.TryGetValue<int>("PivotItem", out int selectedItem))
             {
                 SelectedItem = selectedItem;
             }
         }
 
-        public int SelectedItem 
-        { 
+        public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
+        {
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            return !await dialogService.IsDialogRunning();
+        }
+
+        public int SelectedItem
+        {
             get => _selectedItem;
             set => SetProperty(ref _selectedItem, value);
         }
@@ -106,22 +112,23 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         private async void MakeFactoryReset()
         {
-            var dialog = new ContentDialog();
+            ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.SettingsFactoryResetDialogTitle;
-            var markdown = new MarkdownTextBlock();
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.SettingsFactoryResetMessage;
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.No;
             dialog.SecondaryButtonText = Resources.Yes;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            var result = await _dialogService.ShowAsync(dialog);
+            ContentDialogResult result = await _dialogService.ShowAsync(dialog);
 
             switch (result)
             {
                 case ContentDialogResult.Secondary:
-                    var passwordHash = await App.Repository.Password.GetAsync();
+                    DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
                     //delete password in the secret vault
                     App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret(passwordHash.Hash);
+                    //TODO remove WebDAV login
                     // reset data and restart app
                     await ApplicationData.Current.ClearAsync();
                     //PrismApplication.Current.
@@ -239,15 +246,9 @@ namespace Project2FA.UWP.ViewModels
 
         public bool ProgressIsIndeterminate
         {
-            get
-            {
-                return _progressIsIndeterminate;
-            }
+            get => _progressIsIndeterminate;
 
-            set
-            {
-                SetProperty(ref _progressIsIndeterminate, value);
-            }
+            set => SetProperty(ref _progressIsIndeterminate, value);
         }
 
         public bool IsWindowsHelloActive
@@ -286,7 +287,7 @@ namespace Project2FA.UWP.ViewModels
 
         public bool UseHeaderBackButton
         {
-            get { return _settings.UseHeaderBackButton; }
+            get => _settings.UseHeaderBackButton;
             set
             {
                 if (_settings.UseHeaderBackButton != value)
@@ -316,7 +317,7 @@ namespace Project2FA.UWP.ViewModels
             get => _manualNTPServerConfiurationChecked;
             set => SetProperty(ref _manualNTPServerConfiurationChecked, value);
         }
-        public bool NtpServerEditValid 
+        public bool NtpServerEditValid
         {
             get => _ntpServerEditValid;
             set => SetProperty(ref _ntpServerEditValid, value);
@@ -366,6 +367,7 @@ namespace Project2FA.UWP.ViewModels
             InitializeDataFileAttributes();
 
             // open content dialog to change the password
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             ChangeDatafilePasswordCommand = new DelegateCommand(async() => {
                 var dialog = new ChangeDatafilePasswordContentDialog();
                 if (NotifyPasswordChanged)
@@ -381,6 +383,7 @@ namespace Project2FA.UWP.ViewModels
                     }
                 }
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
             EditDatafileCommand = new DelegateCommand(EditDatafile);
             //DeleteDatafileCommand = new DelegateCommand(DeleteDatafile);

@@ -1,7 +1,6 @@
 ﻿using Prism.Mvvm;
 using Project2FA.UWP.Views;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Template10.Services.File;
@@ -14,16 +13,13 @@ using Xamarin.Essentials;
 using Prism.Ioc;
 using Project2FA.Core.Services;
 using Project2FA.Repository.Models;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
 using Project2FA.UWP.Services;
-using System.ComponentModel;
 using Project2FA.Core;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class DatafileViewModelBase : ObservableValidator
+    public class DatafileViewModelBase : BindableBase
     {
         private string _serverAddress;
         private string _username;
@@ -31,34 +27,33 @@ namespace Project2FA.UWP.ViewModels
         private string _webDAVServerBackgroundUrl;
         private string _webDAVProductName;
         private int _selectedIndex;
-        private int _flipViewSelectedIndex;
         private string _dateFileName;
         private bool _isPrimaryBTNEnable;
         private bool _isLoading;
         private bool _showError;
         private StorageFolder _localStorageFolder;
         private string _password, _passwordRepeat;
-        private WebDAVPresenterPage _webDAVViewer;
 
         public ICommand PrimaryButtonCommand { get; set; }
         public ICommand ChangePathCommand { get; set; }
         public ICommand ConfirmErrorCommand { get; set; }
         public ICommand CheckServerAddressCommand { get; set; }
 
-        public ICommand UseWebDAVCommand { get; set; }
+        public ICommand ChooseWebDAVCommand { get; set; }
 
         public ICommand LoginCommand { get; set; }
 
-        public ICommand WebDAVSaveSettingsCommand { get; set; }
+        public ICommand WebDAVLoginCommand { get; set; }
 
-        private ISecretService _secretService { get; }
+        private ISecretService SecretService { get; }
+
         private IFileService _fileService { get; }
 
         public DatafileViewModelBase()
         {
-            _secretService = App.Current.Container.Resolve<ISecretService>();
+            SecretService = App.Current.Container.Resolve<ISecretService>();
             _fileService = App.Current.Container.Resolve<IFileService>();
-            ErrorsChanged += Model_ErrorsChanged;
+            //ErrorsChanged += Model_ErrorsChanged;
         }
 
         /// <summary>
@@ -69,16 +64,16 @@ namespace Project2FA.UWP.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Creates a local DB with the data from the datafile
         /// </summary>
         /// <param name="isWebDAV"></param>
         public async Task CreateLocalFileDB(bool isWebDAV)
         {
             //TODO WebDAV case
             // local filedata
-            var useArgonHash = SettingsService.Instance.UseExtendedHash;
-            var hash = CryptoService.CreateStringHash(Password, useArgonHash);
-            var passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
+            bool useArgonHash = SettingsService.Instance.UseExtendedHash;
+            string hash = CryptoService.CreateStringHash(Password, useArgonHash);
+            DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
             if (!DateFileName.Contains(".2fa"))
             {
                 DateFileName += ".2fa";
@@ -92,62 +87,63 @@ namespace Project2FA.UWP.ViewModels
                     Name = DateFileName
                 }); ;
             // write the password with the hash(key) in the secret vault
-            _secretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
+            SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
         }
 
         /// <summary>
         /// Check if a .2fa datafile exists.
         /// </summary>
         /// <returns>true if the datafile exists with the name, else false</returns>
-        public async Task<bool> CheckIfNameExists(string name)
+        public Task<bool> CheckIfNameExists(string name)
         {
-            return await _fileService.FileExistsAsync(name, LocalStorageFolder);
+            return _fileService.FileExistsAsync(name, LocalStorageFolder);
         }
 
 
-        private void Model_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(Errors)); // Update Errors on every Error change, so I can bind to it.
-        }
+        //private void Model_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        //{
+        //    OnPropertyChanged(nameof(Errors)); // Update Errors on every Error change, so I can bind to it.
+        //}
 
         #region WebDAV
         /// <summary>
         /// Checkes the web dav login credentials
         /// </summary>
-        public async void CheckLoginAsync()
+        public async Task<bool> CheckLoginAsync()
         {
-            var result = await WebDAVClient.Client.CheckUserLogin(ServerAddress, Username, WebDAVPassword);
+            bool result = await WebDAVClient.Client.CheckUserLogin(ServerAddress, Username, WebDAVPassword);
 
             if (result)
             {
-                await SecureStorage.SetAsync("WDPassword", WebDAVPassword);
-                await SecureStorage.SetAsync("WDServerAddress", ServerAddress);
-                await SecureStorage.SetAsync("WDUsername", Username);
+                SecretService.Helper.WriteSecret(Constants.ContainerName, "WDPassword", WebDAVPassword);
+                SecretService.Helper.WriteSecret(Constants.ContainerName, "WDServerAddress", ServerAddress);
+                SecretService.Helper.WriteSecret(Constants.ContainerName, "WDUsername", Username);
+
                 //var client = UWP.Services.WebDAV.WebDAVClientService.Instance.GetClient();
                 //var directory = new DirectoryService();
-                FlipViewSelectedIndex = 2;
-                bool createDatafile = true;
-                WebDAVViewer.ViewModel.StartLoading(createDatafile);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
         /// <summary>
         /// Checks the status of the web dav server
         /// </summary>
-        public async void CheckServerStatus()
+        public async Task<(bool success, Status result)> CheckServerStatus()
         {
-            var networkService = App.Current.Container.Resolve<INetworkService>();
+            INetworkService networkService = App.Current.Container.Resolve<INetworkService>();
 
             if (await networkService.GetIsInternetAvailableAsync())
             {
-                var result = await CheckAndFixServerAddress();
+                Status result = await CheckAndFixServerAddress();
                 if (result != null)
                 {
                     if (result.Installed == true && result.Maintenance == false)
                     {
-                        FlipViewSelectedIndex = 1;
-                        WebDAVProductName = result.Productname;
-                        WebDAVServerBackgroundUrl = ServerAddress + "/index.php/apps/theming/image/background";
+                        return (true, result);
                     }
                 }
             }
@@ -155,6 +151,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 //TODO Error Message: No internet is available
             }
+            return (false, null);
         }
 
         /// <summary>
@@ -172,7 +169,7 @@ namespace Project2FA.UWP.ViewModels
 
             try
             {
-                var response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
+                Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
                 if (response == null)
                 {
                     ServerAddress = ServerAddress.Replace("https:", "http:");
@@ -198,7 +195,7 @@ namespace Project2FA.UWP.ViewModels
 
             if (ignoreServerCertificateErrors)
             {
-                var response = await WebDAVClient.Client.GetServerStatus(ServerAddress, true);
+                Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress, ignoreServerCertificateErrors);
                 if (response == null)
                 {
                     ServerAddress = ServerAddress.Replace("https:", "http:");
@@ -211,7 +208,7 @@ namespace Project2FA.UWP.ViewModels
 
             try
             {
-                var response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
+                Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
                 if (response == null)
                 {
                     await ShowServerAddressNotFoundMessage();
@@ -242,18 +239,18 @@ namespace Project2FA.UWP.ViewModels
 
 
         #region GetSets
-        public List<(string name, string message)> Errors
-        {
-            get
-            {
-                var list = new List<(string name, string message)>();
-                foreach (var item in from ValidationResult e in GetErrors(null) select e)
-                {
-                    list.Add((item.MemberNames.FirstOrDefault(), item.ErrorMessage));
-                }
-                return list;
-            }
-        }
+        //public List<(string name, string message)> Errors
+        //{
+        //    get
+        //    {
+        //        var list = new List<(string name, string message)>();
+        //        foreach (var item in from ValidationResult e in GetErrors(null) select e)
+        //        {
+        //            list.Add((item.MemberNames.FirstOrDefault(), item.ErrorMessage));
+        //        }
+        //        return list;
+        //    }
+        //}
 
         public string ServerAddress
         {
@@ -291,7 +288,7 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 SettingsService.Instance.UseExtendedHash = value;
-                OnPropertyChanged(nameof(UseExtendedHash));
+                RaisePropertyChanged(nameof(UseExtendedHash));
             }
         }
 
@@ -301,7 +298,7 @@ namespace Project2FA.UWP.ViewModels
             get => _dateFileName;
             set
             {
-                if (SetProperty(ref _dateFileName, value, true))
+                if (SetProperty(ref _dateFileName, value))
                 {
                     CheckInputs();
                 }
@@ -320,7 +317,7 @@ namespace Project2FA.UWP.ViewModels
             get => _password;
             set
             {
-                SetProperty(ref _password, value, true);
+                SetProperty(ref _password, value);
                 CheckInputs();
             }
         }
@@ -348,7 +345,7 @@ namespace Project2FA.UWP.ViewModels
             get => _passwordRepeat;
             set
             {
-                SetProperty(ref _passwordRepeat, value, true);
+                SetProperty(ref _passwordRepeat, value);
                 CheckInputs();
             }
         }
@@ -362,26 +359,6 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _showError;
             set => SetProperty(ref _showError, value);
-        }
-        public int FlipViewSelectedIndex
-        {
-            get => _flipViewSelectedIndex;
-            set => SetProperty(ref _flipViewSelectedIndex, value);
-        }
-        public string WebDAVServerBackgroundUrl
-        {
-            get => _webDAVServerBackgroundUrl;
-            set => SetProperty(ref _webDAVServerBackgroundUrl, value);
-        }
-        public WebDAVPresenterPage WebDAVViewer 
-        {
-            get => _webDAVViewer;
-            set => _webDAVViewer = value; 
-        }
-        public string WebDAVProductName 
-        { 
-            get => _webDAVProductName; 
-            set => SetProperty(ref _webDAVProductName, value); 
         }
 
         #endregion

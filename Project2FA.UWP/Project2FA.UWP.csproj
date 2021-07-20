@@ -23,8 +23,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>
-    </PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>FD680E8AC2CDF32CCCD3E11E187A12B71B9CEBB0</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -133,6 +132,9 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\DialogService\PrismDialogManager.cs" />
     <Compile Include="Services\DialogService\PrismDialogService.cs" />
+    <Compile Include="Services\WebDAV\WebDAVDirectoryService.cs" />
+    <Compile Include="Services\WebDAV\ResponseErrorHandlerService.cs" />
+    <Compile Include="Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="TrackingManager.cs" />
     <Compile Include="Utils\ErrorDialogs.cs" />
     <Compile Include="Utils\JSONUtil.cs" />
@@ -155,13 +157,14 @@
     <Compile Include="ViewModels\ContentDialogs\DatafileViewModelBase.cs" />
     <Compile Include="ViewModels\ContentDialogs\DeleteDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
+    <Compile Include="ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\NewDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
     <Compile Include="ViewModels\ContentDialogs\UpdateDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\UseDatafileContentDialogViewModel.cs" />
-    <Compile Include="ViewModels\WebDAVPresenterPageViewModel.cs" />
+    <Compile Include="ViewModels\UseDataFilePageViewModel.cs" />
     <Compile Include="ViewModels\WelcomePageViewModel.cs" />
     <Compile Include="Views\BlankPage.xaml.cs">
       <DependentUpon>BlankPage.xaml</DependentUpon>
@@ -184,6 +187,9 @@
     <Compile Include="Views\ContentDialogs\DeleteDatafileContentDialog.xaml.cs">
       <DependentUpon>DeleteDatafileContentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContentDialogs\WebViewDatafileContentDialog.xaml.cs">
+      <DependentUpon>WebViewDatafileContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -192,6 +198,9 @@
     </Compile>
     <Compile Include="Views\ContentDialogs\RateAppContentDialog.xaml.cs">
       <DependentUpon>RateAppContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewDataFilePage.xaml.cs">
+      <DependentUpon>NewDataFilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
@@ -205,8 +214,8 @@
     <Compile Include="Views\ContentDialogs\UseDatafileContentDialog.xaml.cs">
       <DependentUpon>UseDatafileContentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WebDAVPresenterPage.xaml.cs">
-      <DependentUpon>WebDAVPresenterPage.xaml</DependentUpon>
+    <Compile Include="Views\UseDataFilePage.xaml.cs">
+      <DependentUpon>UseDataFilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
@@ -302,9 +311,6 @@
     <PackageReference Include="Microsoft.Toolkit">
       <Version>7.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Mvvm">
-      <Version>7.0.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Connectivity">
       <Version>7.0.2</Version>
     </PackageReference>
@@ -381,10 +387,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\Generic\TextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Styles\Generic\ToggleSwitch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -433,6 +435,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ContentDialogs\WebViewDatafileContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -442,6 +448,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentDialogs\RateAppContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewDataFilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -461,7 +471,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WebDAVPresenterPage.xaml">
+    <Page Include="Views\UseDataFilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

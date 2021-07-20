@@ -95,11 +95,6 @@
                                 Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}" 
                                 Header="~NewDatafileContentDialogLocalFolder.Header"
                                 Margin="0,10,0,10">
-                                <Interactivity:Interaction.Behaviors>
-                                    <behaviors:HighlightFormFieldOnErrors 
-                                            PropertyName="DateFileName"
-                                            PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
-                                </Interactivity:Interaction.Behaviors>
                             </TextBox>
                             <PasswordBox 
                                 x:Name="PB_LocalPassword"
@@ -107,13 +102,6 @@
                                 Header="~Password.Header" 
                                 InputScope="Password"
                                 Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <Interactivity:Interaction.Behaviors>
-                                    <behaviors:HighlightFormFieldOnErrors 
-                                            PropertyName="Password"
-                                            HighlightStyleName="HighlightPasswordBoxStyle"
-                                            OriginalStyleName="DefaultPasswordBoxStyle"
-                                            PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
-                                </Interactivity:Interaction.Behaviors>
                             </PasswordBox>
                             <PasswordBox 
                                 x:Name="PB_LocalPasswordRepeat" 
@@ -122,13 +110,6 @@
                                 InputScope="Password" 
                                 Password="{x:Bind ViewModel.PasswordRepeat,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 Margin="0,5,0,12">
-                                <Interactivity:Interaction.Behaviors>
-                                    <behaviors:HighlightFormFieldOnErrors 
-                                            PropertyName="PasswordRepeat"
-                                            HighlightStyleName="HighlightPasswordBoxStyle"
-                                            OriginalStyleName="DefaultPasswordBoxStyle"
-                                            PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
-                                </Interactivity:Interaction.Behaviors>
                             </PasswordBox>
                             <Border 
                                 Margin="0,12" 
@@ -198,7 +179,7 @@
                     </toolkit:Loading>
                 </Grid>
             </PivotItem>
-            <PivotItem 
+            <!--<PivotItem 
                 x:Name="WebDAVPivotItem" 
                 Header="#WebDAV" 
                 MinHeight="400" 
@@ -213,11 +194,11 @@
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 KeyboardAcceleratorPlacementMode="Hidden"
                 Style="{StaticResource WebDAVFlipView}">
-                        <!--<FlipView.Template>
+                        --><!--<FlipView.Template>
                             <ControlTemplate>
                                 <ItemsPresenter ManipulationMode="System"></ItemsPresenter>
                             </ControlTemplate>
-                        </FlipView.Template>-->
+                        </FlipView.Template>--><!--
 
                         <FlipViewItem>
                             <StackPanel 
@@ -271,17 +252,17 @@
                             </StackPanel>
                         </FlipViewItem>
                         <FlipViewItem>
-                            <local:WebDAVPresenterPage x:Name="WebDAVView"/>
+                            --><!--<local:WebDAVPresenterPage x:Name="WebDAVView"/>--><!--
                         </FlipViewItem>
                     </FlipView>
-                    <!--<CommandBar Grid.Row="1" IsEnabled="False">
+                    --><!--<CommandBar Grid.Row="1" IsEnabled="False">
                         <CommandBar.PrimaryCommands>
                             <AppBarButton Label="#Back" Icon="Back"/>
                             <AppBarSeparator/>
                             <AppBarButton Label="#add" Icon="Add"/>
                             <AppBarButton Label="#akzeptieren" Icon="Accept"/>
                         </CommandBar.PrimaryCommands>
-                    </CommandBar>-->
+                    </CommandBar>--><!--
                     <Grid Grid.Row="1" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -301,7 +282,7 @@
                     </StackPanel>
                 </ScrollViewer>
 
-            </PivotItem>
+            </PivotItem>-->
         </Pivot>
     </Grid>
 </ContentDialog>

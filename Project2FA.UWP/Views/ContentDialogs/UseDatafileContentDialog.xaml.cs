@@ -17,8 +17,8 @@ namespace Project2FA.UWP.Views
             this.InitializeComponent();
             ViewModel = new UseDatafileContentDialogViewModel();
             MainPivot.Items.Remove(FolderPivotItem);
-            MainPivot.Items.Remove(WebDAVPivotItem);
-            MainPivot.Items.Remove(WebDAVFolderPivotItem);
+            //MainPivot.Items.Remove(WebDAVPivotItem);
+            //MainPivot.Items.Remove(WebDAVFolderPivotItem);
         }
         
         /// <summary>
@@ -32,7 +32,7 @@ namespace Project2FA.UWP.Views
             {
                 MainPivot.Items.Add(FolderPivotItem);
             }
-            var result = await ViewModel.SetLocalFile();
+            bool result = await ViewModel.SetLocalFile();
             if (!result)
             {
                 if (MainPivot.Items.Contains(FolderPivotItem))

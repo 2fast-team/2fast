@@ -27,14 +27,18 @@ namespace Project2FA.UWP.ViewModels
         {
             SerializationService = App.Current.Container.Resolve<ISerializationService>();
             FileService = App.Current.Container.Resolve<IFileService>();
+
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             PrimaryButtonCommand = new DelegateCommand(async () =>
             {
                 Password = Password.Replace(" ", string.Empty);
                 await CreateLocalFileDB(false);
-                var iv = new AesManaged().IV;
+                byte[] iv = new AesManaged().IV;
                 DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
                 await FileService.WriteStringAsync(DateFileName, SerializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
             CheckServerAddressCommand = new DelegateCommand(() =>
             {
                 CheckServerStatus();
@@ -43,14 +47,19 @@ namespace Project2FA.UWP.ViewModels
             {
                 ShowError = false;
             });
-            LoginCommand = new DelegateCommand(CheckLoginAsync);
+
+            LoginCommand = new DelegateCommand(async () =>
+            {
+                CheckLoginAsync();
+            });
 
             ChangePathCommand = new DelegateCommand( async() =>
             {
-                await SetLocalPath(true); //change path is true
+                SetLocalPath(true); //change path is true
             });
 
-            UseWebDAVCommand = new DelegateCommand(() =>
+
+            ChooseWebDAVCommand = new DelegateCommand(() =>
             {
 
             });

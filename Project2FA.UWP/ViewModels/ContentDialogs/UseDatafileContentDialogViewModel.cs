@@ -48,7 +48,7 @@ namespace Project2FA.UWP.ViewModels
                 await SetLocalFile(true); //change path is true
             });
 
-            UseWebDAVCommand = new DelegateCommand(() =>
+            ChooseWebDAVCommand = new DelegateCommand(() =>
             {
 
             });
@@ -121,7 +121,7 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Creates a local DB with the data from the datafile
         /// </summary>
-        public async void CreateLocalFileDB()
+        public async Task CreateLocalFileDB()
         {
             // create local filedata
             if (SelectedIndex == 1)
@@ -136,7 +136,7 @@ namespace Project2FA.UWP.ViewModels
         /// <returns>boolean</returns>
         public async Task<bool> TestPassword()
         {
-            var file = await LocalStorageFolder.GetFileAsync(DateFileName);
+            Windows.Storage.StorageFile file = await LocalStorageFolder.GetFileAsync(DateFileName);
             if (file != null)
             {
                 string datafileStr = await FileService.ReadStringAsync(DateFileName, LocalStorageFolder);

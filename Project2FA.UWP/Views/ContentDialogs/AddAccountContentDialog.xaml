@@ -86,14 +86,16 @@
                                         </muxc:TeachingTip>
                                     </Button.Resources>
                                 </Button>
-                                <!--next version-->
-                                <!--<Button 
-                                CornerRadius="90"
-                                Margin="4,0,0,0"
-                                Width="40"
-                                Height="40"
-                                Content="?">
-                            </Button>-->
+                                <HyperlinkButton
+                                    Height="48"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    VerticalAlignment="Center">
+                                    <FontIcon
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"  />
+                                </HyperlinkButton>
                             </StackPanel>
 
 
@@ -158,11 +160,11 @@
                                 Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
                                 UpdateSourceTrigger=PropertyChanged}" 
                                 Margin="0,0,0,8">
-                                    <Interactivity:Interaction.Behaviors>
+                                    <!--<Interactivity:Interaction.Behaviors>
                                         <behaviors:HighlightFormFieldOnErrors 
                                             PropertyName="Label"
                                             PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
-                                    </Interactivity:Interaction.Behaviors>
+                                    </Interactivity:Interaction.Behaviors>-->
                                 </TextBox>
                             </Grid>
 
@@ -172,11 +174,11 @@
                                 x:Uid="AddAccountContentDialogAccountName" 
                                 Text="{x:Bind ViewModel.Issuer,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,0,0,8">
-                                <Interactivity:Interaction.Behaviors>
+                                <!--<Interactivity:Interaction.Behaviors>
                                     <behaviors:HighlightFormFieldOnErrors 
                                         PropertyName="Issuer"
                                         PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
-                                </Interactivity:Interaction.Behaviors>
+                                </Interactivity:Interaction.Behaviors>-->
                             </TextBox>
                             <CheckBox 
                                 x:Name="CB_ManualInput"
@@ -193,11 +195,11 @@
                                 IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
                                 Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
                                 Margin="0,0,0,8">
-                                <Interactivity:Interaction.Behaviors>
+                                <!--<Interactivity:Interaction.Behaviors>
                                     <behaviors:HighlightFormFieldOnErrors 
                                         PropertyName="SecretKey"
                                         PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
-                                </Interactivity:Interaction.Behaviors>
+                                </Interactivity:Interaction.Behaviors>-->
                             </TextBox>
                         </StackPanel>
                     </Grid>

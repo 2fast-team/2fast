@@ -1,0 +1,135 @@
+﻿<ContentDialog
+    x:Class="Project2FA.UWP.Views.ContentDialogs.WebViewDatafileContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UWP.Views.ContentDialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:models="using:Project2FA.Repository.Models"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:mtuic="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    PrimaryButtonText="#choose"
+    SecondaryButtonText="#cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.ChooseItemPossible, Mode=OneWay}"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <ContentDialog.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Name="WebDAVItemTemplate" x:DataType="models:WebDAVFileOrFolderModel">
+                <Grid 
+                    DoubleTapped="WebDAVItemTemplate_DoubleTapped" 
+                    Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" MinHeight="32"/>
+                        <RowDefinition Height="Auto" MinHeight="32"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="64"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid
+                        Height="36" 
+                        Width="36"
+                        Grid.RowSpan="2"
+                        Margin="0,0,4,0">
+                        <FontIcon 
+                            Glyph="{x:Bind Glyph,Mode=OneWay}" 
+                            FontFamily="Segoe UI Emoji"
+                            FontSize="36"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <TextBlock
+                        Grid.Row="0" 
+                        Grid.Column="1"
+                        Text="{x:Bind Name}" 
+                        FontSize="16"
+                        TextWrapping="NoWrap" 
+                        VerticalAlignment="Bottom"
+                        TextTrimming="CharacterEllipsis"/>
+
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        Orientation="Horizontal">
+                        <TextBlock 
+                            FontSize="16"
+                            Text="{x:Bind Size, Converter={StaticResource BytesToHumanReadableConverter}}"
+                            Foreground="{StaticResource SystemControlForegroundChromeDisabledLowBrush}"
+                            Margin="0,0,6,0"/>
+                        <TextBlock 
+                            FontSize="16"
+                            TextWrapping="NoWrap" 
+                            TextTrimming="CharacterEllipsis"
+                            Text="{x:Bind LastModified, Converter={StaticResource DateTimeToStringConverter}}"
+                            Foreground="{StaticResource SystemControlForegroundChromeDisabledLowBrush}"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentDialog.Resources>
+
+    <Grid MinWidth="420" MinHeight="600">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Image 
+                MaxHeight="120"
+                Source="{x:Bind ViewModel.WebDAVServerBackgroundUrl, Mode=OneWay}"
+                Stretch="UniformToFill"/>
+            <TextBlock
+                FontSize="28"
+                Text="{x:Bind ViewModel.WebDAVProductName, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <StackPanel 
+            Orientation="Horizontal" 
+            Grid.Row="1"
+            Background="Transparent">
+
+            <Button
+                Command="{x:Bind ViewModel.WebDAVBackCommand}"
+                IsEnabled="{x:Bind ViewModel.Directory.IsBackPossible, Mode=OneWay}"
+                Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+            <muxc:BreadcrumbBar 
+                x:Name="BB_PathItems"
+                Margin="0,0,0,4"
+                MaxWidth="400"
+                ItemsSource="{x:Bind ViewModel.Directory.PathStack, Mode=OneWay}"
+                ItemClicked="BreadcrumbBar_ItemClicked"
+                VerticalAlignment="Center">
+                <muxc:BreadcrumbBar.ItemTemplate>
+                    <DataTemplate x:DataType="models:PathInfoModel">
+                        <TextBlock Text="{x:Bind ResourceInfo.Name, Mode=OneWay}"/>
+                    </DataTemplate>
+                </muxc:BreadcrumbBar.ItemTemplate>
+            </muxc:BreadcrumbBar>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <muxc:ProgressBar IsIndeterminate="{x:Bind ViewModel.Directory.IsLoading, Mode=OneWay}"/>
+            <ListView 
+                Grid.Row="1"
+                x:Name="LV_WebDAVItems"
+                SelectedItem="{x:Bind ViewModel.SelectedItem,Mode=TwoWay}"
+                ItemsSource="{x:Bind ViewModel.Directory.FilesAndFolders,Mode=OneWay}"
+                ItemTemplate="{StaticResource WebDAVItemTemplate}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+    </Grid>
+</ContentDialog>

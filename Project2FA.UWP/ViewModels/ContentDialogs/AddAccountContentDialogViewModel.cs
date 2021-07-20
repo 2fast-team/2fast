@@ -20,18 +20,16 @@ using ZXing.QrCode;
 using ZXing.Common;
 using ZXing;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Project2FA.UWP.ViewModels
 {
     /// <summary>
     /// View model for adding an account countent dialog
     /// </summary>
-    public class AddAccountContentDialogViewModel : ObservableValidator
+    public class AddAccountContentDialogViewModel : BindableBase
     {
         private string _qrCodeStr;
         private bool _qrCodeScan, _launchScreenClip, _isButtonEnable;
@@ -47,19 +45,18 @@ namespace Project2FA.UWP.ViewModels
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
         public ICommand CameraScanCommand { get; }
-        private ILoggerFacade _logger { get; }
-        private IResourceService _resourceService { get; }
+        private ILoggerFacade Logger { get; }
+        private IResourceService ResourceService { get; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         public AddAccountContentDialogViewModel()
         {
-            _resourceService = App.Current.Container.Resolve<IResourceService>();
+            ResourceService = App.Current.Container.Resolve<IResourceService>();
 
             _dispatcherTimer = new DispatcherTimer();
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //every second
-            
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //every second        
 
             Model = new TwoFACodeModel();
             ManualInputCommand = new DelegateCommand(() =>
@@ -78,9 +75,6 @@ namespace Project2FA.UWP.ViewModels
             });
             PrimaryButtonCommand = new DelegateCommand(() =>
             {
-                // replace all whitespaces and minus, without the deletion, the totp creation crash
-                //SecretKey = SecretKey.Replace(" ", string.Empty);
-                //SecretKey = SecretKey.Replace("-", string.Empty);
                 DataService.Instance.Collection.Add(Model);
             });
 
@@ -89,8 +83,8 @@ namespace Project2FA.UWP.ViewModels
                 IsCameraActive = true;
             });
 
-            _logger = App.Current.Container.Resolve<ILoggerFacade>();
-            ErrorsChanged += Validation_ErrorsChanged;
+            Logger = App.Current.Container.Resolve<ILoggerFacade>();
+            //ErrorsChanged += Validation_ErrorsChanged;
 
             Window.Current.Activated += Current_Activated;
         }
@@ -104,20 +98,20 @@ namespace Project2FA.UWP.ViewModels
         {
             if (e.WindowActivationState == CoreWindowActivationState.Deactivated)
             {
-                _logger.Log("Focus lost/Deactivated " + DateTime.Now, Category.Info, Priority.Low);
+                Logger.Log("Focus lost/Deactivated " + DateTime.Now, Category.Info, Priority.Low);
                 // if the screenclip app is started, the focus of the application is lost
                 if (_launchScreenClip)
                 {
                     // now set the scan to true
                     _qrCodeScan = true;
-                    _logger.Log("QR-code scan is now active", Category.Info, Priority.Low);
+                    Logger.Log("QR-code scan is now active", Category.Info, Priority.Low);
                     // user has switch the application to scan the QR-code
                     _launchScreenClip = false;
                 }
             }
             else
             {
-                _logger.Log("Focus/Activated " + DateTime.Now, Category.Info, Priority.Low);
+                Logger.Log("Focus/Activated " + DateTime.Now, Category.Info, Priority.Low);
                 // if the app is focused again, check if a QR-Code is in the clipboard
                 if (_qrCodeScan)
                 {
@@ -130,7 +124,7 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Launch the MS screenclip app
         /// </summary>
-        public async void ScanQRCode()
+        public async Task ScanQRCode()
         {
             bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?delayInSeconds=" + OpeningSeconds));
             if (result)
@@ -156,9 +150,9 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Read the image (QR-code) from the clipboard
         /// </summary>
-        public async void ReadQRCodeFromClipboard()
+        public async Task ReadQRCodeFromClipboard()
         {
-            var dataPackageView = Clipboard.GetContent();
+            DataPackageView dataPackageView = Clipboard.GetContent();
             if (dataPackageView.Contains(StandardDataFormats.Bitmap))
             {
                 IRandomAccessStreamReference imageReceived = null;
@@ -168,18 +162,19 @@ namespace Project2FA.UWP.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    _logger.Log(ex.Message, Category.Exception, Priority.Medium);
+                    Logger.Log(ex.Message, Category.Exception, Priority.Medium);
                 }
                 finally
                 {
-                    if (imageReceived != null)
+                    try
                     {
-                        using (var imageStream = await imageReceived.OpenReadAsync())
+                        if (imageReceived != null)
                         {
+                            using IRandomAccessStreamWithContentType imageStream = await imageReceived.OpenReadAsync();
                             BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(imageStream);
                             SoftwareBitmap softwareBitmap = await bitmapDecoder.GetSoftwareBitmapAsync();
-                            
-                            var result = ReadQRCodeFromBitmap(softwareBitmap);
+
+                            string result = ReadQRCodeFromBitmap(softwareBitmap);
                             _qrCodeStr = HttpUtility.UrlDecode(result);
                             if (!string.IsNullOrEmpty(_qrCodeStr))
                             {
@@ -196,7 +191,7 @@ namespace Project2FA.UWP.ViewModels
                                 }
                                 else
                                 {
-                                    var dialog = new MessageDialog(_resourceService.GetLocalizedString("AddAccountContentDialogQRCodeContentError"), Strings.Resources.Error);
+                                    MessageDialog dialog = new MessageDialog(ResourceService.GetLocalizedString("AddAccountContentDialogQRCodeContentError"), Strings.Resources.Error);
                                     await dialog.ShowAsync();
                                     //move to the selection dialog
                                     SelectedPivotIndex = 0;
@@ -204,15 +199,21 @@ namespace Project2FA.UWP.ViewModels
                             }
                             else
                             {
-                                var dialog = new MessageDialog(_resourceService.GetLocalizedString("AddAccountContentDialogQRCodeContentError"), Strings.Resources.Error);
+                                MessageDialog dialog = new MessageDialog(ResourceService.GetLocalizedString("AddAccountContentDialogQRCodeContentError"), Strings.Resources.Error);
                                 await dialog.ShowAsync();
                             }
                         }
+                        else
+                        {
+                            //TODO add error: empty Clipboard?
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        //TODO add error: empty Clipboard?
+                        // TODO error by processing the image
+                        throw;
                     }
+
                 }
             }
         }
@@ -223,15 +224,15 @@ namespace Project2FA.UWP.ViewModels
         /// <returns>true if TOTP</returns>
         private bool ParseQRCode()
         {
-            var parser = App.Current.Container.Resolve<IProject2FAParser>();
-            var valuePair = parser.ParseQRCodeStr(_qrCodeStr);
+            IProject2FAParser parser = App.Current.Container.Resolve<IProject2FAParser>();
+            List<KeyValuePair<string, string>> valuePair = parser.ParseQRCodeStr(_qrCodeStr);
             if (valuePair.Count == 0)
             {
                 return false;
             }
 
             Model = new TwoFACodeModel();
-            foreach (var item in valuePair)
+            foreach (KeyValuePair<string, string> item in valuePair)
             {
                 switch (item.Key)
                 {
@@ -240,16 +241,16 @@ namespace Project2FA.UWP.ViewModels
                         break;
                     case "label":
                         Model.Label = item.Value;
-                        OnPropertyChanged(nameof(Label));
+                        RaisePropertyChanged(nameof(Label));
                         //RaisePropertyChanged(nameof(Label));
                         break;
                     case "issuer":
                         Model.Issuer = item.Value;
-                        OnPropertyChanged(nameof(Issuer));
+                        RaisePropertyChanged(nameof(Issuer));
                         //RaisePropertyChanged(nameof(Issuer));
                         break;
                     case "algorithm":
-                        var algo = item.Value.ToLower();
+                        string algo = item.Value.ToLower();
                         switch (algo)
                         {
                             case "sha1":
@@ -283,14 +284,7 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         private void CheckInputs()
         {
-            if (!string.IsNullOrEmpty(SecretKey) && !string.IsNullOrEmpty(Label) && !string.IsNullOrEmpty(Issuer))
-            {
-                IsPrimaryBTNEnable = true;
-            }
-            else
-            {
-                IsPrimaryBTNEnable = false;
-            }
+            IsPrimaryBTNEnable = !string.IsNullOrEmpty(SecretKey) && !string.IsNullOrEmpty(Label) && !string.IsNullOrEmpty(Issuer);
         }
 
         /// <summary>
@@ -305,36 +299,36 @@ namespace Project2FA.UWP.ViewModels
                 QRCodeReader qrReader = new QRCodeReader();
                 LuminanceSource luminance = new ZXing.SoftwareBitmapLuminanceSource(bitmap);
                 BinaryBitmap bbmap = new BinaryBitmap(new HybridBinarizer(luminance));
-                var result = qrReader.decode(bbmap);
+                Result result = qrReader.decode(bbmap);
                 return result == null ? string.Empty : result.Text;
             }
             catch (Exception ex)
             {
-                _logger.Log(ex.Message, Category.Exception, Priority.Medium);
-
+                Logger.Log(ex.Message, Category.Exception, Priority.Medium);
+                TrackingManager.TrackException(ex);
                 return string.Empty;
             }
         }
 
-        private void Validation_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(Errors)); // Update Errors on every Error change, so I can bind to it.
-        }
+        //private void Validation_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        //{
+        //    OnPropertyChanged(nameof(Errors)); // Update Errors on every Error change, so I can bind to it.
+        //}
 
         #region GetSet
 
-        public List<(string name, string message)> Errors
-        {
-            get
-            {
-                var list = new List<(string name, string message)>();
-                foreach (var item in from ValidationResult e in GetErrors(null) select e)
-                {
-                    list.Add((item.MemberNames.FirstOrDefault(), item.ErrorMessage));
-                }
-                return list;
-            }
-        }
+        //public List<(string name, string message)> Errors
+        //{
+        //    get
+        //    {
+        //        var list = new List<(string name, string message)>();
+        //        foreach (var item in from ValidationResult e in GetErrors(null) select e)
+        //        {
+        //            list.Add((item.MemberNames.FirstOrDefault(), item.ErrorMessage));
+        //        }
+        //        return list;
+        //    }
+        //}
 
         public TwoFACodeModel Model
         {
@@ -358,7 +352,7 @@ namespace Project2FA.UWP.ViewModels
             get => _secretKey;
             set
             {
-                if (SetProperty(ref _secretKey, value, true))
+                if (SetProperty(ref _secretKey, value))
                 {
                     if (!string.IsNullOrEmpty(value))
                     {
@@ -366,18 +360,17 @@ namespace Project2FA.UWP.ViewModels
                         if (Regex.IsMatch(value, "^[A-Z2-7]*={0,6}$"))
                         {
                             Model.SecretByteArray = Base32Encoding.ToBytes(value);
+                            CheckInputs();
                         }
                         else
                         {
 #pragma warning disable CA2011 // Avoid infinite recursion
-                            var secret = SecretKey.Replace("-", string.Empty);
+                            string secret = SecretKey.Replace("-", string.Empty);
                             secret = secret.Replace(" ", string.Empty);
                             SecretKey = secret.ToUpper();
 #pragma warning restore CA2011 // Avoid infinite recursion
                         }
-                        
                     }
-                    CheckInputs();
                 }
             }
         }
@@ -407,17 +400,17 @@ namespace Project2FA.UWP.ViewModels
             set => SetProperty(ref _manualInput, value);
         }
         public int OpeningSeconds 
-        { 
+        {
             get => _openingSeconds;
             set => SetProperty(ref _openingSeconds, value);
         }
         public int Seconds 
-        { 
+        {
             get => _seconds;
             set => SetProperty(ref _seconds, value);
         }
         public bool IsCameraActive 
-        { 
+        {
             get => _isCameraActive;
             set => SetProperty(ref _isCameraActive, value);
         }

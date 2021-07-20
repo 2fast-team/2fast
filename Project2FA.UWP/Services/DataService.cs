@@ -27,6 +27,7 @@ using Project2FA.UWP.Utils;
 using Microsoft.Toolkit.Uwp.Connectivity;
 using Project2FA.Core;
 using Project2FA.Core.Services.NTP;
+using System.Threading.Tasks;
 
 namespace Project2FA.UWP.Services
 {
@@ -72,19 +73,19 @@ namespace Project2FA.UWP.Services
         /// <summary>
         /// Check if the current time of the system is correct
         /// </summary>
-        private async void CheckTime()
+        private async Task CheckTime()
         {
-            var difference = DateTime.UtcNow - SettingsService.Instance.LastCheckedSystemTime;
-            // check the time again after 8 hours
-            if (difference.TotalHours > 8)
+            TimeSpan difference = DateTime.UtcNow - SettingsService.Instance.LastCheckedSystemTime;
+            // check the time again after 8 hours or always in debug mode
+            if (System.Diagnostics.Debugger.IsAttached || difference.TotalHours > 8)
             {
                 if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable && SettingsService.Instance.UseNTPServerCorrection)
                 {
                     try
                     {
-                        var time = await NetworkTimeService.GetNetworkTimeAsync(SettingsService.Instance.NTPServerString);
-                        var timespan = time.Subtract(DateTime.UtcNow);
-                        if (Math.Abs(timespan.TotalSeconds) >= 30)
+                        DateTime time = await NetworkTimeService.GetNetworkTimeAsync(SettingsService.Instance.NTPServerString);
+                        TimeSpan timespan = time.Subtract(DateTime.UtcNow);
+                        if (Math.Abs(timespan.TotalSeconds) >= 15) // difference of 15 seconds or more
                         {
                             _ntpServerTimeDifference = timespan;
                             SystemTimeNotCorrectError();

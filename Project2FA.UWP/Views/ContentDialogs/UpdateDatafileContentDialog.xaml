@@ -142,7 +142,7 @@
                     x:Uid="Connect" 
                     Content="Connect" 
                     HorizontalAlignment="Center"
-                    Command="{x:Bind ViewModel.WebDAVSaveSettingsCommand}"/>
+                    Command="{x:Bind ViewModel.WebDAVLoginCommand}"/>
 
                         </StackPanel>
                     </ScrollViewer>

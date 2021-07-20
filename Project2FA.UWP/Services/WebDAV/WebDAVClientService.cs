@@ -1,49 +1,40 @@
 ﻿using System;
 using Prism.Ioc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Template10.Services.Secrets;
 using WebDAVClient;
+using Project2FA.Core;
 
 namespace Project2FA.UWP.Services.WebDAV
 {
-    public class WebDAVClientService : IWebDAVClientService
+    public class WebDAVClientService : IDisposable
     {
-        /// <summary>
-        /// Private singleton field.
-        /// </summary>
-        [ThreadStatic]
-        private static WebDAVClientService _instance;
-
-        ISecretService _secretService { get; }
+        ISecretService SecretService { get; }
 
         /// <summary>
         /// Gets public singleton property.
         /// </summary>
-        public static WebDAVClientService Instance => _instance ?? (_instance = new WebDAVClientService());
+        public static WebDAVClientService Instance { get; } = new WebDAVClientService();
         private Client _client;
 
         public WebDAVClientService()
         {
-            _secretService = App.Current.Container.Resolve<ISecretService>();
+            SecretService = App.Current.Container.Resolve<ISecretService>();
         }
-        public async Task<Client> GetClient()
+        public Client GetClient()
         {
             if (_client != null)
             {
                 return _client;
             }
 
-            if (!string.IsNullOrEmpty(_secretService.Helper.ReadSecret("Project2FA", "WDServerAddress")) &&
-                !string.IsNullOrEmpty(_secretService.Helper.ReadSecret("Project2FA", "WDUsername")))
+            if (!string.IsNullOrEmpty(SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress")) &&
+                !string.IsNullOrEmpty(SecretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername")))
             {
 
                 string username, serveraddress, password;
-                username = _secretService.Helper.ReadSecret("Project2FA", "WDUsername");
-                password = _secretService.Helper.ReadSecret("Project2FA", "WDPassword");
-                serveraddress = _secretService.Helper.ReadSecret("Project2FA", "WDServerAddress");
+                username = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername");
+                password = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDPassword");
+                serveraddress = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress");
                 try
                 {
                     //var response = await OcsClient.GetServerStatusAsync(Configuration.ServerUrl);
@@ -101,6 +92,11 @@ namespace Project2FA.UWP.Services.WebDAV
         public void Reset()
         {
             _client = null;
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
         }
     }
 }

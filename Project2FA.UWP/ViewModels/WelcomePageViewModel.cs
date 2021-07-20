@@ -8,10 +8,11 @@ using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Prism.Navigation;
 using Project2FA.UWP.Utils;
+using System.Threading.Tasks;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class WelcomePageViewModel : BindableBase, IConfirmNavigation
+    public class WelcomePageViewModel : BindableBase
     {
         IDialogService _dialogService { get; }
         INavigationService _navigationService { get; }
@@ -21,7 +22,7 @@ namespace Project2FA.UWP.ViewModels
 
         private string _title;
 
-        private bool _canNavigate;
+        //private bool _canNavigate;
 
         public WelcomePageViewModel(IDialogService dialogService, INavigationService navigationService)
         {
@@ -30,32 +31,39 @@ namespace Project2FA.UWP.ViewModels
             App.ShellPageInstance.NavigationIsAllowed = false;
             Title = Strings.Resources.WelcomePageTitle;
 
-            NewDatefileCommand = new DelegateCommand(NewDatafile);
-            UseExistDatefileCommand = new DelegateCommand(UseExistDatafile);
+            NewDatefileCommand = new DelegateCommand(() =>
+            {
+                NewDatafile();
+            });
+            UseExistDatefileCommand = new DelegateCommand(async () =>
+            {
+                await _navigationService.NavigateAsync(nameof(UseDataFilePage));
+                //UseExistDatafile();
+            });
         }
 
-        private async void NewDatafile()
+        private async Task NewDatafile()
         {
             var dialog = new NewDatafileContentDialog();
             var result = await _dialogService.ShowAsync(dialog);
             if (result == ContentDialogResult.Primary)
             {
-                _canNavigate = true;
+                //_canNavigate = true;
                 string navPath = "/" + nameof(AccountCodePage);
                 await _navigationService.NavigateAsync(navPath);
             }
         }
 
-        private async void UseExistDatafile()
+        private async Task UseExistDatafile()
         {
             try
             {
                 //TODO current workaround: check permission to the file system (broadFileSystemAccess)
                 string path = @"C:\Windows\explorer.exe";
-                var file = await StorageFile.GetFileFromPathAsync(path);
+                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
 
-                var dialog = new UseDatafileContentDialog();
-                var result = await _dialogService.ShowAsync(dialog);
+                UseDatafileContentDialog dialog = new UseDatafileContentDialog();
+                ContentDialogResult result = await _dialogService.ShowAsync(dialog);
 
                 //result is also none, when the datafileDB is correct created
                 if (result == ContentDialogResult.None)
@@ -63,7 +71,7 @@ namespace Project2FA.UWP.ViewModels
                     var datafileDB = await App.Repository.Datafile.GetAsync();
                     if (datafileDB != null)
                     {
-                        _canNavigate = true;
+                        //_canNavigate = true;
                         await _navigationService.NavigateAsync("/" + nameof(AccountCodePage));
                     }
                 }
@@ -76,17 +84,17 @@ namespace Project2FA.UWP.ViewModels
 
         public string Title { get => _title; set => SetProperty(ref _title, value); }
 
-        public bool CanNavigate(INavigationParameters parameters)
-        {
-            if (_canNavigate)
-            {
-                App.ShellPageInstance.NavigationIsAllowed = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public bool CanNavigate(INavigationParameters parameters)
+        //{
+        //    if (_canNavigate)
+        //    {
+        //        App.ShellPageInstance.NavigationIsAllowed = true;
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
+    <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <DefineConstants>HAS_WINUI</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="exists('..\Project2FA.UWP')">
+    <EmbeddedResource Include="..\Project2FA.UWP\Package.appxmanifest" LogicalName="Package.appxmanifest" />
+    <Content Include="..\Project2FA.UWP\Assets\StoreLogo.png" Link="Assets\StoreLogo.png" />
+    <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Include="..\Project2FA.Shared\**\*.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="Prism.DryIoc.Uno" Version="8.1.97" />
+    <PackageReference Include="Uno.UI.Skia.Gtk" Version="3.8.13" />
+  </ItemGroup>
+  <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
+</Project>

@@ -1,7 +1,0 @@
-﻿[*.cs]
-
-# IDE0055: Fix formatting
-dotnet_diagnostic.IDE0055.severity = none
-
-# CA2007: Consider calling ConfigureAwait on the awaited task
-dotnet_diagnostic.CA2007.severity = none

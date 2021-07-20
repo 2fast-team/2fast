@@ -14,13 +14,13 @@ namespace Project2FA.UWP.Views
             ViewModel = new NewDatafileContentDialogViewModel();
             Loaded += NewDatafileContentDialog_Loaded;
             MainPivot.Items.Remove(FolderPivotItem);
-            MainPivot.Items.Remove(WebDAVPivotItem);
-            MainPivot.Items.Remove(WebDAVFolderPivotItem);
+            //MainPivot.Items.Remove(WebDAVPivotItem);
+            //MainPivot.Items.Remove(WebDAVFolderPivotItem);
         }
 
         private void NewDatafileContentDialog_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel.WebDAVViewer = WebDAVView;
+            //ViewModel.WebDAVViewer = WebDAVView;
         }
 
         private async void BTN_LocalPath_Click(object sender, RoutedEventArgs e)
@@ -29,10 +29,10 @@ namespace Project2FA.UWP.Views
             {
                 MainPivot.Items.Add(FolderPivotItem);
             }
-            if (MainPivot.Items.Contains(WebDAVPivotItem))
-            {
-                MainPivot.Items.Remove(WebDAVPivotItem);
-            }
+            //if (MainPivot.Items.Contains(WebDAVPivotItem))
+            //{
+            //    MainPivot.Items.Remove(WebDAVPivotItem);
+            //}
             bool result = await ViewModel.SetLocalPath();
             if (!result)
             {
@@ -49,10 +49,10 @@ namespace Project2FA.UWP.Views
             {
                 MainPivot.Items.Remove(FolderPivotItem);
             }
-            if (!MainPivot.Items.Contains(WebDAVPivotItem))
-            {
-                MainPivot.Items.Add(WebDAVPivotItem);
-            }
+            //if (!MainPivot.Items.Contains(WebDAVPivotItem))
+            //{
+            //    MainPivot.Items.Add(WebDAVPivotItem);
+            //}
             ViewModel.SelectedIndex = 1;
             //WebDAVFrame.Navigate(typeof(WebDAVLoginPage));
         }

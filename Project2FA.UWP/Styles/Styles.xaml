@@ -9,14 +9,10 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations">
 
     <ResourceDictionary.MergedDictionaries>
-        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/CheckBox.xaml" />-->
         <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
-        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/ToggleSwitch.xaml" />-->
         <ResourceDictionary Source="ms-appx:///Styles/Generic/CommandBarAndAppBar.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/RadioButton.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/NavigationView.xaml" />
-        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/AutoSuggestBoxTextBox.xaml" />-->
-        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/PasswordBox.xaml" />-->
     </ResourceDictionary.MergedDictionaries>
 
     <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>

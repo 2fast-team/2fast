@@ -85,6 +85,7 @@ namespace Project2FA.UWP
             container.RegisterView<WelcomePage, WelcomePageViewModel>();
             container.RegisterView<SettingPage, SettingPageViewModel>();
             container.RegisterView<BlankPage, BlankPageViewModel>();
+            container.RegisterView<UseDataFilePage, UseDataFilePageViewModel>();
         }
 
         public override async Task OnStartAsync(IStartArgs args)

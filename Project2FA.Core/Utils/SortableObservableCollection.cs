@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -19,14 +20,14 @@ namespace Project2FA.Core.Utils
                 || e.Action == NotifyCollectionChangedAction.Reset)
                 return;
 
-            var query = this
+            IEnumerable<(T Item, int Index)> query = this
               .Select((item, index) => (Item: item, Index: index));
             query = query.OrderBy(tuple => SortingSelector(tuple.Item));
 
-            var map = query.Select((tuple, index) => (OldIndex: tuple.Index, NewIndex: index))
+            IEnumerable<(int OldIndex, int NewIndex)> map = query.Select((tuple, index) => (OldIndex: tuple.Index, NewIndex: index))
              .Where(o => o.OldIndex != o.NewIndex);
 
-            using (var enumerator = map.GetEnumerator())
+            using (IEnumerator<(int OldIndex, int NewIndex)> enumerator = map.GetEnumerator())
                 if (enumerator.MoveNext())
                     Move(enumerator.Current.OldIndex, enumerator.Current.NewIndex);
         }

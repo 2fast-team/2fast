@@ -17,7 +17,6 @@ using Template10.Services.Dialog;
 using Windows.ApplicationModel.Core;
 using Project2FA.UWP.Utils;
 using Prism.Navigation;
-using System.Threading.Tasks;
 
 namespace Project2FA.UWP.Views
 {
@@ -39,9 +38,9 @@ namespace Project2FA.UWP.Views
             string title = Windows.ApplicationModel.Package.Current.DisplayName;
             // determine and set if the app is started in debug mode
             Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
-            
+
             // Hide default title bar.
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
             SetTitleBarAsDraggable();
@@ -285,7 +284,7 @@ namespace Project2FA.UWP.Views
         {
             // is page registered?
 
-            if (!PageNavigationRegistry.TryGetRegistration(type, out var info))
+            if (!PageNavigationRegistry.TryGetRegistration(type, out PageNavigationInfo info))
             {
                 item = null;
                 return false;
@@ -293,7 +292,7 @@ namespace Project2FA.UWP.Views
 
             // search settings
 
-            if (NavigationQueue.TryParse(_settingsNavigationStr, null, out var settings))
+            if (NavigationQueue.TryParse(_settingsNavigationStr, null, out NavigationQueue settings))
             {
                 if (type == settings.Last().View && (string)parameter == settings.Last().QueryString)
                 {
@@ -307,42 +306,40 @@ namespace Project2FA.UWP.Views
             }
 
             // filter menu items
-            var menuItems = ShellView.MenuItems
+            IEnumerable<(NavigationViewItem Item, string Path)> menuItems = ShellView.MenuItems
                 .OfType<NavigationViewItem>()
-                .Select(x => new
-                {
-                    Item = x,
-                    Path = x.Tag as string
-                })
+                .Select(x => (
+                    Item: x,
+                    Path: x.Tag as string
+                ))
                 .Where(x => !string.IsNullOrEmpty(x.Path));
 
             // search filtered items
 
-            foreach (var menuItem in menuItems)
+            foreach ((NavigationViewItem Item, string Path) in menuItems)
             {
-                if (NavigationQueue.TryParse(menuItem.Path, null, out var menuQueue)
+                if (NavigationQueue.TryParse(Path, null, out NavigationQueue menuQueue)
                     && Equals(menuQueue.Last().View, type) && menuQueue.Last().QueryString == (string)parameter)
                 {
-                    item = menuItem.Item;
+                    item = Item;
                     return true;
                 }
             }
 
             // filter footer menu items
-            var footerMenuItems = ShellView.FooterMenuItems
+            IEnumerable<(NavigationViewItem Item, string Path)> footerMenuItems = ShellView.FooterMenuItems
                 .OfType<NavigationViewItem>()
-                .Select(x => new
-                {
-                    Item = x,
-                    Path = x.Tag as string
-                })
+                .Select(x => (
+                    Item: x,
+                    Path: x.Tag as string
+                ))
                 .Where(x => !string.IsNullOrEmpty(x.Path));
 
             // search filtered items
 
-            foreach (var footerMenuItem in footerMenuItems)
+            foreach ((NavigationViewItem Item, string Path) footerMenuItem in footerMenuItems)
             {
-                if (NavigationQueue.TryParse(footerMenuItem.Path, null, out var menuQueue)
+                if (NavigationQueue.TryParse(footerMenuItem.Path, null, out NavigationQueue menuQueue)
                     && Equals(menuQueue.Last().View, type) && menuQueue.Last().QueryString == (string)parameter)
                 {
                     item = footerMenuItem.Item;
@@ -358,7 +355,7 @@ namespace Project2FA.UWP.Views
 
         private NavigationViewItem Find(NavigationViewItem item)
         {
-            var menuItem = ShellView.MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
+            NavigationViewItem menuItem = ShellView.MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
             if (menuItem is null)
             {
                 menuItem = ShellView.FooterMenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
@@ -442,8 +439,8 @@ namespace Project2FA.UWP.Views
         /// <summary>
         /// Allow or disable the NavigationView items
         /// </summary>
-        public bool NavigationIsAllowed 
-        { 
+        public bool NavigationIsAllowed
+        {
             get => _navigationIsAllowed;
             set => SetProperty(ref _navigationIsAllowed, value);
         }

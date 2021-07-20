@@ -133,18 +133,27 @@
     </Page.Resources>
 
     <Grid x:Name="Root">
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush 
                 x:Name="MyImage"
                 ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg" 
                 Stretch="UniformToFill">
             </ImageBrush>
-        </Grid.Background>
+        </Grid.Background>-->
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="3">
+            <muxc:ParallaxView x:Name="Parallax"
+                                    VerticalShift="50">
+                <Image Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                           Stretch="UniformToFill" />
+            </muxc:ParallaxView>
+        </Border>
 
         <mstoolkitControls:DropShadowPanel x:Name="DropShadow"
                                   HorizontalAlignment="Stretch" 
@@ -213,6 +222,8 @@
                 </Grid>
             </Grid>
         </mstoolkitControls:DropShadowPanel>
+        
+        
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

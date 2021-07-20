@@ -38,16 +38,16 @@ namespace Project2FA.Repository.Models
         {
             if (IsDirectory)
             {
-                return "\uE8B7";
+                return "\U0001F4C1";
             }
             else
             {
                 switch (ContentType)
                 {
                     case "application/2fa":
-                        return "\uE8D7";
+                        return "\U0001F511";
                     default:
-                        return "\uE8D7";//return "\uE8A5";
+                        return "\U0001F511"; //"\uE8D7";//return "\uE8A5"; //📁
                 }
             }
         }

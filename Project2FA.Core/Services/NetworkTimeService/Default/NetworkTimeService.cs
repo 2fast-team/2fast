@@ -43,9 +43,9 @@ namespace Project2FA.Core.Services.NTP
         /// Gets the current DateTime from time.windows.com.
         /// </summary>
         /// <returns>A DateTime containing the current time.</returns>
-        public async Task<DateTime> GetNetworkTimeAsync()
+        public Task<DateTime> GetNetworkTimeAsync()
         {
-            return await GetNetworkTimeAsync("time.windows.com");
+            return GetNetworkTimeAsync("time.windows.com");
         }
 
         /// <summary>
@@ -53,16 +53,18 @@ namespace Project2FA.Core.Services.NTP
         /// </summary>
         /// <param name="ntpServer">The hostname of the NTP server.</param>
         /// <returns>A DateTime containing the current time.</returns>
-        public async Task<DateTime> GetNetworkTimeAsync(string ntpServer)
+        public Task<DateTime> GetNetworkTimeAsync(string ntpServer)
         {
             IPAddress[] address = Dns.GetHostEntry(ntpServer).AddressList;
 
             if (address == null || address.Length == 0)
+            {
                 throw new ArgumentException("Could not resolve ip address from '" + ntpServer + "'.", "ntpServer");
+            }
 
             IPEndPoint ep = new IPEndPoint(address[0], 123);
 
-            return await GetNetworkTimeAsync(ep);
+            return GetNetworkTimeAsync(ep);
         }
 
         /// <summary>
@@ -79,10 +81,12 @@ namespace Project2FA.Core.Services.NTP
             byte[] ntpData = new byte[48]; // RFC 2030 
             ntpData[0] = 0x1B;
             for (int i = 1; i < 48; i++)
+            {
                 ntpData[i] = 0;
+            }
 
             //Stops code hang if NTP is blocked
-            s.ReceiveTimeout = 2000;
+            s.ReceiveTimeout = 1500;
 
             s.Send(ntpData);
             s.Receive(ntpData);
@@ -92,16 +96,20 @@ namespace Project2FA.Core.Services.NTP
             ulong fractpart = 0;
 
             for (int i = 0; i <= 3; i++)
-                intpart = 256 * intpart + ntpData[offsetTransmitTime + i];
+            {
+                intpart = (256 * intpart) + ntpData[offsetTransmitTime + i];
+            }
 
             for (int i = 4; i <= 7; i++)
-                fractpart = 256 * fractpart + ntpData[offsetTransmitTime + i];
+            {
+                fractpart = (256 * fractpart) + ntpData[offsetTransmitTime + i];
+            }
 
-            ulong milliseconds = (intpart * 1000 + (fractpart * 1000) / 0x100000000L);
+            ulong milliseconds = (intpart * 1000) + (fractpart * 1000 / 0x100000000L);
             s.Close();
 
             //**UTC** time
-            var networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
+            DateTime networkDateTime = new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds((long)milliseconds);
 
             return networkDateTime;
         }

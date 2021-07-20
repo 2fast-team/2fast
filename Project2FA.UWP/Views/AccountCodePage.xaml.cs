@@ -1,8 +1,12 @@
-﻿using Project2FA.Repository.Models;
+﻿using Prism.Navigation;
+using Prism.Ioc;
+using Project2FA.Repository.Models;
 using Project2FA.UWP.Controls;
 using Project2FA.UWP.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Template10.Services.Dialog;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -11,7 +15,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Project2FA.UWP.Views
 {
-    public sealed partial class AccountCodePage : Page
+    public sealed partial class AccountCodePage : Page, IConfirmNavigationAsync
     {
         AccountCodePageViewModel ViewModel => DataContext as AccountCodePageViewModel;
 
@@ -126,6 +130,19 @@ namespace Project2FA.UWP.Views
             else
             {
                 sender.Text = string.Empty;
+            }
+        }
+
+        async Task<bool> IConfirmNavigationAsync.CanNavigateAsync(INavigationParameters parameters)
+        {
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            if (await dialogService.IsDialogRunning())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

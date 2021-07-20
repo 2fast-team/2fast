@@ -24,7 +24,6 @@
                     <Color x:Key="SystemAccentColorDark1">#FF0089B0</Color>
                     <Color x:Key="SystemAccentColorDark2">#FF00789F</Color>
                     <Color x:Key="SystemAccentColorDark3">#FF00668E</Color>
-                    <!--<RevealBackgroundBrush x:Key="SystemControlHighlightListLowRevealBackgroundBrush" TargetTheme="Light" Color="{ThemeResource SystemRevealListMediumColor}" FallbackColor="{ StaticResource SystemListMediumColor}" />-->
                     <Color x:Key="RegionColor">#FFFFFFFF</Color>
                     <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />
                 </ResourceDictionary>

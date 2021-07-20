@@ -3,6 +3,7 @@ using System;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Prism.Mvvm;
+using Prism.Ioc;
 using Template10.Services.Dialog;
 using Project2FA.UWP.Services;
 using Project2FA.Core.Utils;
@@ -14,10 +15,11 @@ using Project2FA.UWP.Strings;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
 using Prism.Logging;
+using System.Threading.Tasks;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class AccountCodePageViewModel : BindableBase, IConfirmNavigation
+    public class AccountCodePageViewModel : BindableBase, IConfirmNavigationAsync
     {
         private DispatcherTimer _dispatcherTOTPTimer;
         private DispatcherTimer _dispatcherTimerDeletedModel;
@@ -49,6 +51,7 @@ namespace Project2FA.UWP.ViewModels
             _dispatcherTimerDeletedModel.Interval = new TimeSpan(0, 0, 1); //every second
             _dispatcherTimerDeletedModel.Tick += TimerDeletedModel;
 
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             AddAccountCommand = new DelegateCommand(async () =>
             {
                 if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
@@ -58,12 +61,14 @@ namespace Project2FA.UWP.ViewModels
                 AddAccountContentDialog dialog = new AddAccountContentDialog();
                 await PageDialogService.ShowAsync(dialog);
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
             RefreshCommand = new DelegateCommand(() =>
             {
                 ReloadDatafileAndUpdateCollection();
             });
 
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             LogoutCommand = new DelegateCommand(async () =>
             {
                 if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
@@ -75,6 +80,7 @@ namespace Project2FA.UWP.ViewModels
                 LoginPage loginPage = new LoginPage(true);
                 Window.Current.Content = loginPage;
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
             UndoDeleteCommand = new DelegateCommand(() =>
             {
@@ -86,7 +92,7 @@ namespace Project2FA.UWP.ViewModels
             DeleteAccountCommand = new RelayCommand(DeleteAccountFromCollection);
             Copy2FACodeToClipboardCommand = new RelayCommand(Copy2FACodeToClipboard);
 
-            if (TwoFADataService.Collection.Count != 0)
+            if (DataService.Instance.Collection.Count != 0)
             {
                 //only reset the time and calc the new totp
                 DataService.Instance.ResetCollection();
@@ -201,9 +207,9 @@ namespace Project2FA.UWP.ViewModels
             TwoFADataService.ReloadDatafile();
         }
 
-        //detach the events
-        public bool CanNavigate(INavigationParameters parameters)
+        public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
         {
+            //detach the events
             if (_dispatcherTOTPTimer.IsEnabled)
             {
                 _dispatcherTOTPTimer.Stop();
@@ -214,7 +220,8 @@ namespace Project2FA.UWP.ViewModels
                 _dispatcherTimerDeletedModel.Stop();
             }
             _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
-            return true;
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            return !await dialogService.IsDialogRunning();
         }
 
         public DataService TwoFADataService => DataService.Instance;

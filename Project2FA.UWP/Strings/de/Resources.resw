@@ -744,4 +744,13 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   <data name="WelcomePageTitle" xml:space="preserve">
     <value>Willkommen</value>
   </data>
+  <data name="UseDataFilePageName.Text" xml:space="preserve">
+    <value>Vorhandene Datendatei laden</value>
+  </data>
+  <data name="LoadDatafile" xml:space="preserve">
+    <value>Vorhandene Datendatei laden</value>
+  </data>
+  <data name="CreateDatafile" xml:space="preserve">
+    <value>Datendatei erstellen</value>
+  </data>
 </root>

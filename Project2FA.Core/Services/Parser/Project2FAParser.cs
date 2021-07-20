@@ -16,7 +16,7 @@ namespace Project2FA.Core.Services.Parser
             List<KeyValuePair<string, string>> qrParams = new List<KeyValuePair<string, string>>();
 
             //otpauth://TYPE/LABEL?PARAMETERS
-            var match = Regex.Match(qrCodeStr, @"otpauth://([^/]+)/([^?]+)", RegexOptions.IgnoreCase);
+            Match match = Regex.Match(qrCodeStr, @"otpauth://([^/]+)/([^?]+)", RegexOptions.IgnoreCase);
             if (match.Success)
             {
                 //check if the QR-Code contains a totp auth request
@@ -28,7 +28,7 @@ namespace Project2FA.Core.Services.Parser
                     //check if the first parameter contains the title of the service
                     if (issuer.Contains(":"))
                     {
-                        var issuerArray = issuer.Split(':');
+                        string[] issuerArray = issuer.Split(':');
                         label = issuerArray[0];
                         issuer = issuerArray[1];
                         qrParams.Add(new KeyValuePair<string, string>(nameof(label), label));
@@ -47,7 +47,7 @@ namespace Project2FA.Core.Services.Parser
                     qrCodeStr = qrCodeStr.Remove(0, match.Groups[0].Length + 1); //remove otpauth://totp/TitleIssuerName?
 
                     //create collection of the parameter values
-                    var nameValueCollection = HttpUtility.ParseQueryString(qrCodeStr);
+                    System.Collections.Specialized.NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(qrCodeStr);
                     if (string.IsNullOrEmpty(issuer))
                     {
                         collectionVar = nameValueCollection["issuer"];

@@ -41,6 +41,38 @@ namespace Project2FA.UWP.Utils
             await dialogService.ShowAsync(dialog);
         }
 
+        public async static void UnauthorizedAccessUseLocalFileDialog()
+        {
+            var dialog = new ContentDialog
+            {
+                Title = Strings.Resources.AuthorizationFileSystemContentDialogTitle
+            };
+            var markdown = new MarkdownTextBlock
+            {
+                Text = Strings.Resources.AuthorizationFileSystemContentDialogDescription
+            };
+            dialog.Content = markdown;
+            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+            {
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
+                Prism.PrismApplicationBase.Current.Exit();
+            });
+            dialog.CloseButtonCommand = new DelegateCommand(() =>
+            {
+                dialog.Hide();
+            });
+            dialog.CloseButtonText = Resources.ButtonTextCancel;
+            dialog.PrimaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
+            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            //dialog.SecondaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
+            //dialog.SecondaryButtonCommand = new DelegateCommand(() =>
+            //{
+            //    Prism.PrismApplicationBase.Current.Exit();
+            //});
+            var dialogService = App.Current.Container.Resolve<IDialogService>();
+            await dialogService.ShowAsync(dialog);
+        }
+
         public async static void ShowUnexpectedError(Exception exc)
         {
             var dialog = new ContentDialog

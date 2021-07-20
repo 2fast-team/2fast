@@ -109,19 +109,19 @@ namespace WebDAVClient
             }
 
             // In case URL has a trailing slash remove it
-            if (url.EndsWith("/"))
+            if (url.EndsWith("/", StringComparison.InvariantCulture))
             {
                 url = url.TrimEnd('/');
             }
 
             // Create PropFind which contains all NC specific properties.
-            var propFind = PropFind.CreatePropFindWithEmptyPropertiesAll();
-            var prop = (Prop)propFind.Item;
+            PropFind propFind = PropFind.CreatePropFindWithEmptyPropertiesAll();
+            Prop prop = (Prop)propFind.Item;
 
             XNamespace nsOc = "http://owncloud.org/ns";
 
-            var xElementList = new List<XElement>();
-            var xElement = new XElement(nsOc + WebDAVPropNameConstants.Checksums);
+            List<XElement> xElementList = new List<XElement>();
+            XElement xElement = new XElement(nsOc + WebDAVPropNameConstants.Checksums);
             xElementList.Add(xElement);
             xElement = new XElement(nsOc + WebDAVPropNameConstants.CommentsCount);
             xElementList.Add(xElement);
@@ -159,16 +159,14 @@ namespace WebDAVClient
                 Credentials = passwordCredential
             };
 
-            _httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => {
+            _httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
                 if (ignoreServerCertificateErrors)
                 {
                     IgnoreServerCertificateErrors = true;
                     // Specify which certificate errors should be ignored.
                     //TODO check if other errors should be ignored
-                    if (errors == System.Net.Security.SslPolicyErrors.RemoteCertificateNotAvailable)
-                        return true;
-                    else
-                        return false;
+                    return errors == System.Net.Security.SslPolicyErrors.RemoteCertificateNotAvailable;
                 }
                 else
                 {
@@ -188,7 +186,7 @@ namespace WebDAVClient
             _client = new HttpClient(_httpClientHandler);
             _client.DefaultRequestHeaders.Add("Pragma", "no-cache");
 
-            var encoded =
+            string encoded =
                 Convert.ToBase64String(
                     Encoding.GetEncoding("ISO-8859-1").GetBytes(
                         passwordCredential.UserName + ":" +
@@ -219,7 +217,7 @@ namespace WebDAVClient
             set;
         }
 
-#endregion
+        #endregion
 
         #region DAV
 
@@ -230,15 +228,15 @@ namespace WebDAVClient
         /// <returns>List of Resources.</returns>
         public async Task<List<ResourceInfoModel>> List(string path)
         {
-            var resources = new List<ResourceInfoModel>();
-            var result = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
+            List<ResourceInfoModel> resources = new List<ResourceInfoModel>();
+            IList<WebDavSessionItem> result = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
 
-            var baseUri = new Uri(_url);
+            Uri baseUri = new Uri(_url);
             baseUri = new Uri(baseUri, baseUri.AbsolutePath + (baseUri.AbsolutePath.EndsWith("/") ? "" : "/") + Davpath);
 
-            foreach (var item in result)
+            foreach (WebDavSessionItem item in result)
             {
-                var res = item.ToResourceInfo(baseUri);
+                ResourceInfoModel res = item.ToResourceInfo(baseUri);
 
                 if (!res.IsDirectory)
                 {
@@ -260,20 +258,20 @@ namespace WebDAVClient
         /// <param name="name">name of resource to get</param>
         public async Task<ResourceInfoModel> GetResourceInfo(string path, string name)
         {
-            var baseUri = new Uri(_url);
+            Uri baseUri = new Uri(_url);
             baseUri = new Uri(baseUri, baseUri.AbsolutePath + (baseUri.AbsolutePath.EndsWith("/") ? "" : "/") + Davpath);
 
-            var result = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
+            IList<WebDavSessionItem> result = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
 
             if (!result.Any())
             {
                 return null;
             }
-            foreach (var item in result)
+            foreach (WebDavSessionItem item in result)
             {
                 if (item.Name.Equals(name))
                 {
-                    var res = item.ToResourceInfo(baseUri);
+                    ResourceInfoModel res = item.ToResourceInfo(baseUri);
 
                     if (!res.IsDirectory)
                     {
@@ -292,27 +290,31 @@ namespace WebDAVClient
         /// <returns>List of shares.</returns>
         public async Task<List<ResourceInfoModel>> GetSharesView(string viewname)
         {
-            var param = new Tuple<string, string>("shared_with_me", "false");
-            if (viewname == "sharesIn") param = new Tuple<string, string>("shared_with_me", "true");
-            var shares = await GetShares(param);
+            Tuple<string, string> param = new Tuple<string, string>("shared_with_me", "false");
+            if (viewname == "sharesIn")
+            {
+                param = new Tuple<string, string>("shared_with_me", "true");
+            }
 
-            var sharesList = new List<ResourceInfoModel>();
+            List<Share> shares = await GetShares(param);
 
-            foreach (var item in shares)
+            List<ResourceInfoModel> sharesList = new List<ResourceInfoModel>();
+
+            foreach (Share item in shares)
             {
                 if (viewname == "sharesLink")
                 {
-                    var type = item.GetType().ToString();
+                    string type = item.GetType().ToString();
                     if (type != "NextcloudClient.Types.PublicShare")
                     {
                         continue;
                     }
-                    var itemShare = await GetResourceInfoByPath(item.Path);
+                    ResourceInfoModel itemShare = await GetResourceInfoByPath(item.Path);
                     sharesList.Add(itemShare);
                 }
                 else
                 {
-                    var itemShare = await GetResourceInfoByPath(item.Path);
+                    ResourceInfoModel itemShare = await GetResourceInfoByPath(item.Path);
                     sharesList.Add(itemShare);
                 }
             }
@@ -326,7 +328,7 @@ namespace WebDAVClient
         /// <returns>List of favorites.</returns>
         public async Task<List<ResourceInfoModel>> GetFavorites()
         {
-            var url = new UrlBuilder(_url + "/remote.php/webdav");
+            UrlBuilder url = new UrlBuilder(_url + "/remote.php/webdav");
 
             // See: https://docs.nextcloud.com/server/12/developer_manual/client_apis/WebDAV/index.html#listing-favorites
             // Also, for Props see: https://docs.nextcloud.com/server/12/developer_manual/client_apis/WebDAV/index.html
@@ -340,35 +342,37 @@ namespace WebDAVClient
                 + "</oc:filter-rules>"
                 + "</oc:filter-files>";
 
-            var request = new HttpRequestMessage(new HttpMethod("REPORT"), url.ToUri())
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("REPORT"), url.ToUri())
             {
                 Content = new StringContent(content, UnicodeEncoding.UTF8, "application/xml")
             };
 
-            var response = await _client.SendAsync(request);
+            HttpResponseMessage response = await _client.SendAsync(request);
 
-            var contentString = await response.Content.ReadAsStringAsync();
-            var multistatus = WebDavResponseContentParser.ParseMultistatusResponseContentString(contentString);
-            var favoritesList = new List<ResourceInfoModel>();
+            string contentString = await response.Content.ReadAsStringAsync();
+            Multistatus multistatus = WebDavResponseContentParser.ParseMultistatusResponseContentString(contentString);
+            List<ResourceInfoModel> favoritesList = new List<ResourceInfoModel>();
 
             if (multistatus.Response != null)
             {
-                foreach (var msResponse in multistatus.Response)
+                foreach (Response msResponse in multistatus.Response)
                 {
-                    foreach (var item in msResponse.Items)
+                    foreach (object item in msResponse.Items)
                     {
-                        var href = item as string;
+                        string href = item as string;
 
                         if (string.IsNullOrEmpty(href) || !href.Contains(Davpath))
+                        {
                             continue;
+                        }
 
                         href = href.TrimEnd('/');
                         href = href.Replace("/remote.php/webdav", "");
-                        var itemFav = await GetResourceInfoByPath(href);
+                        ResourceInfoModel itemFav = await GetResourceInfoByPath(href);
 
                         favoritesList.Add(itemFav);
                     }
-                }            
+                }
             }
 
             return favoritesList;
@@ -382,14 +386,14 @@ namespace WebDAVClient
         private async Task<ResourceInfoModel> GetResourceInfoByPath(string path)
         {
             path = Uri.UnescapeDataString(path);
-            var targetPath = "/" + path.Split('/')[path.Split('/').Length - 1];
-            var parentPath = path.Replace(targetPath, "/");
-            var itemName = targetPath.Replace("/", "");
+            string targetPath = "/" + path.Split('/')[path.Split('/').Length - 1];
+            string parentPath = path.Replace(targetPath, "/");
+            string itemName = targetPath.Replace("/", "");
 
-            var parentResource = await List(parentPath);
-            var itemResource = new ResourceInfoModel();
+            List<ResourceInfoModel> parentResource = await List(parentPath);
+            ResourceInfoModel itemResource = new ResourceInfoModel();
 
-            foreach (var item in parentResource)
+            foreach (ResourceInfoModel item in parentResource)
             {
                 if (item.Name == itemName)
                 {
@@ -408,22 +412,22 @@ namespace WebDAVClient
         /// <param name="cancellationToken"></param>
         /// <param name="progress"></param>
         /// <returns>File contents.</returns>
-        public async Task<bool> Download(string path, Stream localStream, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
+        public Task<bool> Download(string path, Stream localStream, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
         {
-            return await _dav.DownloadFileWithProgressAsync(GetDavUri(path), localStream, progress, cancellationToken);
+            return _dav.DownloadFileWithProgressAsync(GetDavUri(path), localStream, progress, cancellationToken);
         }
 
         public async Task<Stream> GetImage(ResourceInfoModel file)
         {
-            if (!file.ContentType.StartsWith(@"image/"))
+            if (!file.ContentType.StartsWith(@"image/", StringComparison.InvariantCulture))
             {
                 return null;
             }
 
-            var uri = new Uri(GetDavUri(file.Path, true) + "/" + Uri.EscapeDataString(file.Name));
+            Uri uri = new Uri(GetDavUri(file.Path, true) + "/" + Uri.EscapeDataString(file.Name));
             _client.DefaultRequestHeaders.Add("Cookie", "nc_sameSiteCookielax=true;nc_sameSiteCookiestrict=true");
 
-            var response = await _client.GetAsync(uri);
+            HttpResponseMessage response = await _client.GetAsync(uri);
 
             _client.DefaultRequestHeaders.Remove("Cookie");
 
@@ -447,9 +451,9 @@ namespace WebDAVClient
         /// <param name="cancellationToken"></param>
         /// <param name="progress"></param>
         /// <returns><c>true</c>, if upload successful, <c>false</c> otherwise.</returns>
-        public async Task<bool> Upload(string path, Stream stream, string contentType, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
+        public Task<bool> Upload(string path, Stream stream, string contentType, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
         {
-            return await _dav.UploadFileWithProgressAsync(GetDavUri(path), stream, contentType, progress, cancellationToken);
+            return _dav.UploadFileWithProgressAsync(GetDavUri(path), stream, contentType, progress, cancellationToken);
         }
 
         /// <summary>
@@ -457,9 +461,9 @@ namespace WebDAVClient
         /// </summary>
         /// <param name="path">remote Path.</param>
         /// <returns><c>true</c>, if remote path exists, <c>false</c> otherwise.</returns>
-        public async Task<bool> Exists(string path)
+        public Task<bool> Exists(string path)
         {
-            return await _dav.ExistsAsync(GetDavUri(path));
+            return _dav.ExistsAsync(GetDavUri(path));
         }
 
         /// <summary>
@@ -467,9 +471,9 @@ namespace WebDAVClient
         /// </summary>
         /// <returns><c>true</c>, if directory was created, <c>false</c> otherwise.</returns>
         /// <param name="path">remote Path.</param>
-        public async Task<bool> CreateDirectory(string path)
+        public Task<bool> CreateDirectory(string path)
         {
-            return await _dav.CreateDirectoryAsync(GetDavUri(path));
+            return _dav.CreateDirectoryAsync(GetDavUri(path));
         }
 
         /// <summary>
@@ -477,9 +481,9 @@ namespace WebDAVClient
         /// </summary>
         /// <param name="path">remote Path.</param>
         /// <returns><c>true</c>, if resource was deleted, <c>false</c> otherwise.</returns>
-        public async Task<bool> Delete(string path)
+        public Task<bool> Delete(string path)
         {
-            return await _dav.DeleteAsync(GetDavUri(path));
+            return _dav.DeleteAsync(GetDavUri(path));
         }
 
         /// <summary>
@@ -488,9 +492,9 @@ namespace WebDAVClient
         /// <param name="source">Source resoure path.</param>
         /// <param name="destination">Destination resource path.</param>
         /// <returns><c>true</c>, if resource was copied, <c>false</c> otherwise.</returns>
-        public async Task<bool> Copy(string source, string destination)
+        public Task<bool> Copy(string source, string destination)
         {
-            return await _dav.CopyAsync(GetDavUri(source), GetDavUri(destination));
+            return _dav.CopyAsync(GetDavUri(source), GetDavUri(destination));
         }
 
         /// <summary>
@@ -499,9 +503,9 @@ namespace WebDAVClient
         /// <param name="source">Source resource path.</param>
         /// <param name="destination">Destination resource path.</param>
         /// <returns><c>true</c>, if resource was moved, <c>false</c> otherwise.</returns>
-        public async Task<bool> Move(string source, string destination)
+        public Task<bool> Move(string source, string destination)
         {
-            return await _dav.MoveAsync(GetDavUri(source), GetDavUri(destination));
+            return _dav.MoveAsync(GetDavUri(source), GetDavUri(destination));
         }
 
         /// <summary>
@@ -512,24 +516,24 @@ namespace WebDAVClient
         /// <param name="cancellationToken"></param>
         /// <param name="progress"></param>
         /// <returns>File contents.</returns>
-        public async Task<bool> DownloadDirectoryAsZip(string path, Stream localStream, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
+        public Task<bool> DownloadDirectoryAsZip(string path, Stream localStream, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
         {
-            return await _dav.DownloadFileWithProgressAsync(GetDavUriZip(path), localStream, progress, cancellationToken);
+            return _dav.DownloadFileWithProgressAsync(GetDavUriZip(path), localStream, progress, cancellationToken);
         }
 
         public async Task<bool> ToggleFavorite(ResourceInfoModel res)
         {
-            var path = GetParentPath(res);
+            string path = GetParentPath(res);
 
-            var items = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
-            var item = items.FirstOrDefault(x => x.Name == res.Name);
+            IList<WebDavSessionItem> items = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
+            WebDavSessionItem item = items.FirstOrDefault(x => x.Name == res.Name);
 
             if (item == null)
             {
                 return false;
             }
 
-            var favString = item.AdditionalProperties[WebDAVPropNameConstants.Favorite];
+            string favString = item.AdditionalProperties[WebDAVPropNameConstants.Favorite];
 
             if (string.IsNullOrEmpty(favString) || string.CompareOrdinal(favString, "0") == 0)
             {
@@ -545,13 +549,13 @@ namespace WebDAVClient
 
         private static string GetParentPath(ResourceInfoModel resourceInfo)
         {
-            var path = resourceInfo.Path.TrimEnd('/');
-            var split = path.Split('/');
+            string path = resourceInfo.Path.TrimEnd('/');
+            string[] split = path.Split('/');
 
             if (resourceInfo.IsDirectory)
             {
                 path = string.Empty;
-                for (int i = 1; i < split.Length-1; i++)
+                for (int i = 1; i < split.Length - 1; i++)
                 {
                     path += "/" + split[i];
                 }
@@ -568,7 +572,7 @@ namespace WebDAVClient
 
         #region WebDAV
 
-#region Remote Shares
+        #region Remote Shares
 
         /// <summary>
         /// Gets the server status.
@@ -605,19 +609,24 @@ namespace WebDAVClient
                 return null;
             }
 
-            var httpClientHandler = new HttpClientHandler
+            HttpClientHandler httpClientHandler = new HttpClientHandler
             {
                 AllowAutoRedirect = false
             };
 
-            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => {
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
                 if (ignoreServerCertificateErrors)
                 {
                     // Specify which certificate errors should be ignored.
                     if (errors == System.Net.Security.SslPolicyErrors.RemoteCertificateNotAvailable)
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 }
                 else
                 {
@@ -634,7 +643,7 @@ namespace WebDAVClient
                 }
             };
 
-            var client = new HttpClient(httpClientHandler);
+            HttpClient client = new HttpClient(httpClientHandler);
 
             client.DefaultRequestHeaders.Add("Pragma", "no-cache");
 
@@ -661,7 +670,7 @@ namespace WebDAVClient
                 throw new ResponseError("The remote server returned an error: (401) Unauthorized.", "401");
             }
 
-            var content = await response.Content.ReadAsStringAsync();
+            string content = await response.Content.ReadAsStringAsync();
             if (string.IsNullOrEmpty(content))
             {
                 throw new ResponseError(response.ReasonPhrase);
@@ -683,9 +692,9 @@ namespace WebDAVClient
         /// <param name="userId">The user identifier.</param>
         /// <param name="password">The password.</param>
         /// <returns></returns>
-        public static async Task<bool> CheckUserLogin(string serverUrl, string userId, string password)
+        public static Task<bool> CheckUserLogin(string serverUrl, string userId, string password)
         {
-            return await CheckUserLogin(serverUrl, userId, password, false);
+            return CheckUserLogin(serverUrl, userId, password, false);
         }
 
         /// <summary>
@@ -711,7 +720,7 @@ namespace WebDAVClient
                 serverUrl += "/";
             }
 
-            var client = new Client(serverUrl, userId, password, ignoreServerCertificateErrors);
+            Client client = new Client(serverUrl, userId, password, ignoreServerCertificateErrors);
 
             User user = null;
 
@@ -724,7 +733,7 @@ namespace WebDAVClient
                 // ignored
             }
 
-            return user != null;    
+            return user != null;
         }
 
         /// <summary>
@@ -733,7 +742,7 @@ namespace WebDAVClient
         /// <returns>List of remote shares.</returns>
         public async Task<object> ListOpenRemoteShare()
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "remote_shares")
                 );
@@ -750,7 +759,7 @@ namespace WebDAVClient
         /// <returns>List of remote shares.</returns>
         public async Task<object> ListShare()
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "shares")
                 );
@@ -768,12 +777,12 @@ namespace WebDAVClient
         /// <param name="shareId">Share identifier.</param>
         public async Task<bool> AcceptRemoteShare(int shareId)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "remote_shares") + "/" + shareId
                 );
 
-            var responseObj = JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
+            OCS responseObj = JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
             {
@@ -793,12 +802,12 @@ namespace WebDAVClient
         /// <param name="shareId">Share identifier.</param>
         public async Task<bool> DeclineRemoteShare(int shareId)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceShare, "remote_shares") + "/" + shareId
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -812,9 +821,9 @@ namespace WebDAVClient
             throw new OcsResponseError(responseObj.Meta.Message, responseObj.Meta.StatusCode.ToString());
         }
 
-#endregion
+        #endregion
 
-#region Shares
+        #region Shares
 
         /// <summary>
         /// Unshares a file or directory.
@@ -823,12 +832,12 @@ namespace WebDAVClient
         /// <param name="shareId">Share identifier.</param>
         public async Task<bool> DeleteShare(int shareId)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceShare, "remote_shares") + "/" + shareId
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -860,7 +869,7 @@ namespace WebDAVClient
             }
 
             //var parameters = new List<KeyValuePair<string, string>>();
-            var parameters = new Dictionary<string, string>();
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
 
             if (perms != Convert.ToInt32(OcsPermission.None))
             {
@@ -884,13 +893,13 @@ namespace WebDAVClient
                     throw new ArgumentOutOfRangeException(nameof(publicUpload), publicUpload, null);
             }
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "PUT",
                 "/" + GetOcsPath(OcsServiceShare, "shares") + "/" + shareId,
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -915,7 +924,7 @@ namespace WebDAVClient
         public async Task<PublicShare> ShareWithLink(string path, int perms = -1, string password = null,
             OcsBoolParam publicUpload = OcsBoolParam.None)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"shareType", Convert.ToInt32(OcsShareType.Link).ToString()},
                 {"path", path}
@@ -943,11 +952,11 @@ namespace WebDAVClient
                     throw new ArgumentOutOfRangeException(nameof(publicUpload), publicUpload, null);
             }
 
-            var response = await DoApiRequest("POST", "/" + GetOcsPath(OcsServiceShare, "shares"));
+            string response = await DoApiRequest("POST", "/" + GetOcsPath(OcsServiceShare, "shares"));
 
-            var responseStr = response;
+            string responseStr = response;
 
-            var share = new PublicShare
+            PublicShare share = new PublicShare
             {
                 ShareId = Convert.ToInt32(GetFromData(responseStr, "id")),
                 Url = GetFromData(responseStr, "url"),
@@ -975,7 +984,7 @@ namespace WebDAVClient
                 return null;
             }
 
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"path", path},
                 {"shareWith", username},
@@ -991,15 +1000,15 @@ namespace WebDAVClient
                 }
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "shares"),
                 parameters
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
-            var share = new UserShare
+            UserShare share = new UserShare
             {
                 ShareId = Convert.ToInt32(GetFromData(responseStr, "id")),
                 TargetPath = path,
@@ -1024,7 +1033,7 @@ namespace WebDAVClient
                 return null;
             }
 
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"shareType", Convert.ToInt32(OcsShareType.Group).ToString()},
                 {"path", path},
@@ -1036,15 +1045,15 @@ namespace WebDAVClient
                 {"shareWith", groupName}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "shares"),
                 parameters
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
-            var share = new GroupShare
+            GroupShare share = new GroupShare
             {
                 ShareId = Convert.ToInt32(GetFromData(responseStr, "id")),
                 TargetPath = path,
@@ -1062,7 +1071,7 @@ namespace WebDAVClient
         /// <param name="path">path to the share to be checked.</param>
         public async Task<bool> IsShared(string path)
         {
-            var result = await GetShares(new Tuple<string, string>("path", path));
+            List<Share> result = await GetShares(new Tuple<string, string>("path", path));
             return result.Count > 0;
         }
 
@@ -1084,7 +1093,7 @@ namespace WebDAVClient
         public async Task<List<Share>> GetShares(Tuple<string, string> tParam, OcsBoolParam reshares = OcsBoolParam.None,
             OcsBoolParam subfiles = OcsBoolParam.None)
         {
-            var parameters = new Dictionary<string, string>();
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
 
             if (tParam != null)
             {
@@ -1118,20 +1127,20 @@ namespace WebDAVClient
                     throw new ArgumentOutOfRangeException(nameof(subfiles), subfiles, null);
             }
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "shares"),
                 parameters
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
             return GetShareList(responseStr);
         }
 
-#endregion
+        #endregion
 
-#region Users
+        #region Users
 
         /// <summary>
         /// Create a new user with an initial password via provisioning API.
@@ -1141,19 +1150,19 @@ namespace WebDAVClient
         /// <param name="initialPassword">password for user being created.</param>
         public async Task<bool> CreateUser(string username, string initialPassword)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"userid", username},
                 {"password", initialPassword}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "users"),
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1174,15 +1183,19 @@ namespace WebDAVClient
         /// <param name="username">name of user to be deleted.</param>
         public async Task<bool> DeleteUser(string username)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
-            if (responseObj == null) return false;
+            if (responseObj == null)
+            {
+                return false;
+            }
+
             if (responseObj.Meta.StatusCode == 100)
             {
                 return true;
@@ -1197,7 +1210,7 @@ namespace WebDAVClient
         /// <param name="username">name of user to be checked.</param>
         public async Task<bool> UserExists(string username)
         {
-            var result = await SearchUsers(username);
+            List<string> result = await SearchUsers(username);
             return result.Contains(username);
         }
 
@@ -1208,18 +1221,18 @@ namespace WebDAVClient
         /// <param name="username">name of user to be searched for.</param>
         public async Task<List<string>> SearchUsers(string username)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"search", username}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "users"),
                 parameters
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
             return GetDataElements(responseStr);
         }
@@ -1230,13 +1243,13 @@ namespace WebDAVClient
         /// <returns>The user attributes.</returns>
         /// <param name="username">Username.</param>
         public async Task<User> GetUserAttributes(string username)
-        {            
-            var response = await DoApiRequest(
+        {
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceCloud, "users") + "/" + username
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
             return GetUser(responseStr);
         }
@@ -1249,13 +1262,13 @@ namespace WebDAVClient
         /// <returns></returns>
         public async Task<Uri> GetUserAvatarUrl(string username, int size)
         {
-            var url = new Uri(_url + "/index.php/avatar/" + username + "/" + size);
-            var client = new HttpClient();
+            Uri url = new Uri(_url + "/index.php/avatar/" + username + "/" + size);
+            HttpClient client = new HttpClient();
 
-            client.DefaultRequestHeaders.Add("Pragma","no-cache");
+            client.DefaultRequestHeaders.Add("Pragma", "no-cache");
 
-            var request = new HttpRequestMessage(HttpMethod.Head, url);
-            var response = await client.SendAsync(request);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, url);
+            HttpResponseMessage response = await client.SendAsync(request);
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -1267,8 +1280,8 @@ namespace WebDAVClient
                 response = await client.GetAsync(url);
                 if (response != null)
                 {
-                    var stream = (await response.Content.ReadAsStreamAsync());
-                    using (var memStream = new MemoryStream())
+                    Stream stream = (await response.Content.ReadAsStreamAsync());
+                    using (MemoryStream memStream = new MemoryStream())
                     {
                         await stream.CopyToAsync(memStream);
                         return memStream.Length > 100 ? url : null;
@@ -1280,7 +1293,7 @@ namespace WebDAVClient
                 if (response != null)
                 {
                     IEnumerable<string> strLength;
-                    response.Headers.TryGetValues("Content-Length",out strLength);
+                    response.Headers.TryGetValues("Content-Length", out strLength);
                     long length;
                     long.TryParse(strLength.First(), out length);
                     if (length > 0)
@@ -1307,19 +1320,19 @@ namespace WebDAVClient
         /// <param name="value">value to set.</param>
         public async Task<bool> SetUserAttribute(string username, string key, string value)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"key", key},
                 {"value", value}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "PUT",
                 "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username,
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1341,18 +1354,18 @@ namespace WebDAVClient
         /// <param name="groupName">name of group user is to be added to.</param>
         public async Task<bool> AddUserToGroup(string username, string groupName)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"groupid", groupName}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username + "/groups",
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1373,12 +1386,12 @@ namespace WebDAVClient
         /// <param name="username">name of user to list groups.</param>
         public async Task<List<string>> GetUserGroups(string username)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username + "/groups"
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
             return GetDataElements(responseStr);
         }
@@ -1391,7 +1404,7 @@ namespace WebDAVClient
         /// <param name="groupName">name of group.</param>
         public async Task<bool> IsUserInGroup(string username, string groupName)
         {
-            var groups = await GetUserGroups(username);
+            List<string> groups = await GetUserGroups(username);
             return groups.Contains(groupName);
         }
 
@@ -1403,18 +1416,18 @@ namespace WebDAVClient
         /// <param name="groupName">name of group user is to be removed from.</param>
         public async Task<bool> RemoveUserFromGroup(string username, string groupName)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"groupid", groupName}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username + "/groups",
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1436,18 +1449,18 @@ namespace WebDAVClient
         /// <param name="groupName">name of subadmin group.</param>
         public async Task<bool> AddUserToSubAdminGroup(string username, string groupName)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"groupid", groupName}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username + "/subadmins",
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1472,7 +1485,7 @@ namespace WebDAVClient
 
             try
             {
-                var response = await DoApiRequest(
+                string response = await DoApiRequest(
                     "GET",
                     "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username + "/subadmins"
                     );
@@ -1498,7 +1511,7 @@ namespace WebDAVClient
         /// <param name="groupNname">name of subadmin group.</param>
         public async Task<bool> IsUserInSubAdminGroup(string username, string groupNname)
         {
-            var groups = await GetUserSubAdminGroups(username);
+            List<string> groups = await GetUserSubAdminGroups(username);
             return groups.Contains(groupNname);
         }
 
@@ -1510,18 +1523,18 @@ namespace WebDAVClient
         /// <param name="groupName">Group name.</param>
         public async Task<bool> RemoveUserFromSubAdminGroup(string username, string groupName)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"groupid", groupName}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceShare, "users") + "/" + username + "/subadmins",
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1535,9 +1548,9 @@ namespace WebDAVClient
             throw new OcsResponseError(responseObj.Meta.Message, responseObj.Meta.StatusCode.ToString());
         }
 
-#endregion
+        #endregion
 
-#region Groups
+        #region Groups
 
         /// <summary>
         /// Create a new group via provisioning API.
@@ -1546,18 +1559,18 @@ namespace WebDAVClient
         /// <param name="groupName">name of group to be created.</param>
         public async Task<bool> CreateGroup(string groupName)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"groupid", groupName}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "groups"),
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1578,12 +1591,12 @@ namespace WebDAVClient
         /// <param name="groupName">Group name.</param>
         public async Task<bool> DeleteGroup(string groupName)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceShare, "groups") + "/" + groupName
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1604,18 +1617,18 @@ namespace WebDAVClient
         /// <param name="groupName">name of group to be checked.</param>
         public async Task<bool> GroupExists(string groupName)
         {
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"search", groupName}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "groups"),
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1629,9 +1642,9 @@ namespace WebDAVClient
             throw new OcsResponseError(responseObj.Meta.Message, responseObj.Meta.StatusCode.ToString());
         }
 
-#endregion
+        #endregion
 
-#region Config
+        #region Config
 
         /// <summary>
         /// Returns Nextcloud config information.
@@ -1639,14 +1652,14 @@ namespace WebDAVClient
         /// <returns>The config.</returns>
         public async Task<Config> GetConfig()
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath("", "config")
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
-            var cfg = new Config
+            Config cfg = new Config
             {
                 Contact = GetFromData(responseStr, "contact"),
                 Host = GetFromData(responseStr, "host"),
@@ -1658,9 +1671,9 @@ namespace WebDAVClient
             return cfg;
         }
 
-#endregion
+        #endregion
 
-#region Application attributes
+        #region Application attributes
 
         /// <summary>
         /// Returns an application attribute
@@ -1670,7 +1683,7 @@ namespace WebDAVClient
         /// <param name="key">attribute key or None to retrieve all values for the given application.</param>
         public async Task<List<AppAttribute>> GetAttribute(string app = "", string key = "")
         {
-            var path = "getattribute";
+            string path = "getattribute";
             if (!app.Equals(""))
             {
                 path += "/" + app;
@@ -1680,12 +1693,12 @@ namespace WebDAVClient
                 }
             }
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceData, path)
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
             return GetAttributeList(responseStr);
         }
@@ -1699,20 +1712,20 @@ namespace WebDAVClient
         /// <param name="value">value to set.</param>
         public async Task<bool> SetAttribute(string app, string key, string value)
         {
-            var path = "setattribute" + "/" + app + "/" + System.Net.WebUtility.UrlEncode(key);
+            string path = "setattribute" + "/" + app + "/" + System.Net.WebUtility.UrlEncode(key);
 
-            var parameters = new Dictionary<string, string>
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"value", value}
             };
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceData, path),
                 parameters
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1734,14 +1747,14 @@ namespace WebDAVClient
         /// <param name="key">key of the attribute to delete.</param>
         public async Task<bool> DeleteAttribute(string app, string key)
         {
-            var path = "deleteattribute" + "/" + app + "/" + System.Net.WebUtility.UrlEncode(key);
+            string path = "deleteattribute" + "/" + app + "/" + System.Net.WebUtility.UrlEncode(key);
 
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceData, path)
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1755,9 +1768,9 @@ namespace WebDAVClient
             throw new OcsResponseError(responseObj.Meta.Message, responseObj.Meta.StatusCode.ToString());
         }
 
-#endregion
+        #endregion
 
-#region Apps
+        #region Apps
 
         /// <summary>
         /// List all enabled apps through the provisioning api.
@@ -1765,12 +1778,12 @@ namespace WebDAVClient
         /// <returns>a list of apps and their enabled state.</returns>
         public async Task<List<string>> GetApps()
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "apps")
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
             return GetDataElements(responseStr);
         }
@@ -1782,12 +1795,12 @@ namespace WebDAVClient
         /// <param name="appName">App name.</param>
         public async Task<AppInfo> GetApp(string appName)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "GET",
                 "/" + GetOcsPath(OcsServiceShare, "apps") + "/" + appName
                 );
 
-            var responseStr = response;
+            string responseStr = response;
 
             return GetAppInfo(responseStr);
         }
@@ -1799,12 +1812,12 @@ namespace WebDAVClient
         /// <param name="appName">Name of app to be enabled.</param>
         public async Task<bool> EnableApp(string appName)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "POST",
                 "/" + GetOcsPath(OcsServiceShare, "apps") + "/" + appName
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1825,12 +1838,12 @@ namespace WebDAVClient
         /// <param name="appName">Name of app to be disabled.</param>
         public async Task<bool> DisableApp(string appName)
         {
-            var response = await DoApiRequest(
+            string response = await DoApiRequest(
                 "DELETE",
                 "/" + GetOcsPath(OcsServiceShare, "apps") + "/" + appName
                 );
 
-            var responseObj =
+            OCS responseObj =
                 JsonSerializer.Deserialize<OCS>(response, _jsonSettings);
 
             if (responseObj == null)
@@ -1844,22 +1857,22 @@ namespace WebDAVClient
             throw new OcsResponseError(responseObj.Meta.Message, responseObj.Meta.StatusCode.ToString());
         }
 
-#endregion
+        #endregion
 
-#endregion
+        #endregion
 
         #region Url Handling
 
         private async Task<string> DoApiRequest(string method, string path, Dictionary<string, string> parameters = null)
         {
-            var url = new UrlBuilder(_url + "/" + Ocspath + path);
+            UrlBuilder url = new UrlBuilder(_url + "/" + Ocspath + path);
             HttpResponseMessage response;
             switch (method)
             {
                 case "GET":
                     if (parameters != null)
                     {
-                        foreach (var parameter in parameters)
+                        foreach (KeyValuePair<string, string> parameter in parameters)
                         {
                             url.AddQueryParameter(parameter.Key, parameter.Value);
                         }
@@ -1870,12 +1883,12 @@ namespace WebDAVClient
                     break;
 
                 default:
-                    var content2 = new FormUrlEncodedContent(parameters);
+                    FormUrlEncodedContent content2 = new FormUrlEncodedContent(parameters);
                     content2.Headers.Add("OCS-APIREQUEST", "true");
                     response = await _client.PostAsync(url.ToUri(), content2);
                     break;
             }
-            var message = await response.Content.ReadAsStringAsync();
+            string message = await response.Content.ReadAsStringAsync();
             CheckOcsStatus(response, message);
 
             return message;
@@ -1915,17 +1928,17 @@ namespace WebDAVClient
         /// <param name="path">remote Path.</param>
         private Uri GetDavUriZip(string path)
         {
-            var pathArry = path.Split('/');
-            var files = pathArry[pathArry.Length - 2 ];
-            path = path.Substring(0, path.Length - (files.Length + 1) );
+            string[] pathArry = path.Split('/');
+            string files = pathArry[pathArry.Length - 2];
+            path = path.Substring(0, path.Length - (files.Length + 1));
 
-            var url = new UrlBuilder(_url + "/index.php/apps/files/ajax/download.php");
-            var parameters = new Dictionary<string, string>
+            UrlBuilder url = new UrlBuilder(_url + "/index.php/apps/files/ajax/download.php");
+            Dictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"dir", path},
                 {"files", files}
             };
-            foreach (var parameter in parameters)
+            foreach (KeyValuePair<string, string> parameter in parameters)
             {
                 url.AddQueryParameter(parameter.Key, parameter.Value);
             }
@@ -1940,13 +1953,13 @@ namespace WebDAVClient
         /// <param name="action">Action.</param>
         private string GetOcsPath(string service, string action)
         {
-            var slash = string.IsNullOrEmpty(service) ? "" : "/";
+            string slash = string.IsNullOrEmpty(service) ? "" : "/";
             return service + slash + action;
         }
 
-#endregion
-    
-#region OCS Response parsing
+        #endregion
+
+        #region OCS Response parsing
 
         /// <summary>
         /// Get element value from OCS Meta.
@@ -1956,13 +1969,13 @@ namespace WebDAVClient
         /// <param name="elementName">XML Element name.</param>
         private static string GetFromMeta(string response, string elementName)
         {
-            var xdoc = XDocument.Parse(response);
+            XDocument xdoc = XDocument.Parse(response);
 
             return (from data in xdoc.Descendants(XName.Get("meta"))
-                select data.Element(XName.Get(elementName))
+                    select data.Element(XName.Get(elementName))
                 into node
-                where node != null
-                select node.Value).FirstOrDefault();
+                    where node != null
+                    select node.Value).FirstOrDefault();
         }
 
         /// <summary>
@@ -1973,13 +1986,13 @@ namespace WebDAVClient
         /// <param name="elementName">XML Element name.</param>
         private string GetFromData(string response, string elementName)
         {
-            var xdoc = XDocument.Parse(response);
+            XDocument xdoc = XDocument.Parse(response);
 
             return (from data in xdoc.Descendants(XName.Get("data"))
-                select data.Element(XName.Get(elementName))
+                    select data.Element(XName.Get(elementName))
                 into node
-                where node != null
-                select node.Value).FirstOrDefault();
+                    where node != null
+                    select node.Value).FirstOrDefault();
         }
 
         /// <summary>
@@ -1989,12 +2002,12 @@ namespace WebDAVClient
         /// <param name="response">XML OCS Response.</param>
         private List<string> GetDataElements(string response)
         {
-            var xdoc = XDocument.Parse(response);
+            XDocument xdoc = XDocument.Parse(response);
 
             return
                 (from data in xdoc.Descendants(XName.Get("data"))
-                    from node in data.Descendants(XName.Get("element"))
-                    select node.Value).ToList();
+                 from node in data.Descendants(XName.Get("element"))
+                 select node.Value).ToList();
         }
 
         /// <summary>
@@ -2004,20 +2017,20 @@ namespace WebDAVClient
         /// <param name="response">XML OCS Response.</param>
         private List<Share> GetShareList(string response)
         {
-            var shares = new List<Share>();
-            var xdoc = XDocument.Parse(response);
+            List<Share> shares = new List<Share>();
+            XDocument xdoc = XDocument.Parse(response);
 
-            foreach (var data in xdoc.Descendants(XName.Get("element")))
+            foreach (XElement data in xdoc.Descendants(XName.Get("element")))
             {
-                var node = data.Element(XName.Get("share_type"));
+                XElement node = data.Element(XName.Get("share_type"));
                 if (node == null)
                 {
                     continue;
                 }
 
-#region Share Type
+                #region Share Type
 
-                var shareType = Convert.ToInt32(node.Value);
+                int shareType = Convert.ToInt32(node.Value);
                 Share share;
                 if (shareType == Convert.ToInt32(OcsShareType.Link))
                 {
@@ -2037,9 +2050,9 @@ namespace WebDAVClient
                 }
                 share.AdvancedProperties = new AdvancedShareProperties();
 
-#endregion
+                #endregion
 
-#region General Properties
+                #region General Properties
 
                 node = data.Element(XName.Get("id"));
                 if (node != null)
@@ -2065,9 +2078,9 @@ namespace WebDAVClient
                     share.Perms = Convert.ToInt32(node.Value);
                 }
 
-#endregion
+                #endregion
 
-#region Advanced Properties
+                #region Advanced Properties
 
                 node = data.Element(XName.Get("item_type"));
                 if (node != null)
@@ -2147,22 +2160,22 @@ namespace WebDAVClient
                     share.AdvancedProperties.DisplaynameOwner = node.Value;
                 }
 
-#endregion
+                #endregion
 
-#region ShareType specific
+                #region ShareType specific
 
                 if (shareType == Convert.ToInt32(OcsShareType.Link))
                 {
                     node = data.Element(XName.Get("url"));
                     if (node != null)
                     {
-                        ((PublicShare) share).Url = node.Value;
+                        ((PublicShare)share).Url = node.Value;
                     }
 
                     node = data.Element(XName.Get("token"));
                     if (node != null)
                     {
-                        ((PublicShare) share).Token = node.Value;
+                        ((PublicShare)share).Token = node.Value;
                     }
                 }
                 else if (shareType == Convert.ToInt32(OcsShareType.User))
@@ -2170,7 +2183,7 @@ namespace WebDAVClient
                     node = data.Element(XName.Get("share_with"));
                     if (node != null)
                     {
-                        ((UserShare) share).SharedWith = node.Value;
+                        ((UserShare)share).SharedWith = node.Value;
                     }
                 }
                 else if (shareType == Convert.ToInt32(OcsShareType.Group))
@@ -2178,11 +2191,11 @@ namespace WebDAVClient
                     node = data.Element(XName.Get("share_with"));
                     if (node != null)
                     {
-                        ((GroupShare) share).SharedWith = node.Value;
+                        ((GroupShare)share).SharedWith = node.Value;
                     }
                 }
 
-#endregion
+                #endregion
 
                 shares.Add(share);
             }
@@ -2206,7 +2219,7 @@ namespace WebDAVClient
             {
                 throw new ResponseError(response.ReasonPhrase);
             }
-            var ocsStatus = GetFromMeta(xml, "statuscode");
+            string ocsStatus = GetFromMeta(xml, "statuscode");
             if (ocsStatus == null)
             {
                 throw new ResponseError("Empty response");
@@ -2226,16 +2239,16 @@ namespace WebDAVClient
         /// </returns>
         private List<AppAttribute> GetAttributeList(string response)
         {
-            var result = new List<AppAttribute>();
-            var xdoc = XDocument.Parse(response);
+            List<AppAttribute> result = new List<AppAttribute>();
+            XDocument xdoc = XDocument.Parse(response);
 
-            foreach (var data in xdoc.Descendants(XName.Get("data")))
+            foreach (XElement data in xdoc.Descendants(XName.Get("data")))
             {
-                foreach (var element in data.Descendants(XName.Get("element")))
+                foreach (XElement element in data.Descendants(XName.Get("element")))
                 {
-                    var attr = new AppAttribute();
+                    AppAttribute attr = new AppAttribute();
 
-                    var node = element.Element(XName.Get("app"));
+                    XElement node = element.Element(XName.Get("app"));
                     if (node != null)
                     {
                         attr.App = node.Value;
@@ -2267,15 +2280,15 @@ namespace WebDAVClient
         /// <param name="response">OCS XML Response.</param>
         private User GetUser(string response)
         {
-            var user = new User();
-            var xdoc = XDocument.Parse(response);
+            User user = new User();
+            XDocument xdoc = XDocument.Parse(response);
 
-            var data = xdoc.Descendants(XName.Get("data")).FirstOrDefault();
+            XElement data = xdoc.Descendants(XName.Get("data")).FirstOrDefault();
             if (data == null)
             {
                 return user;
             }
-            var node = data.Element(XName.Get("displayname"));
+            XElement node = data.Element(XName.Get("displayname"));
             if (node != null)
             {
                 user.DisplayName = node.Value;
@@ -2293,10 +2306,10 @@ namespace WebDAVClient
                 user.Enabled = node.Value.Equals("true");
             }
 
-            var quota = new Quota();
+            Quota quota = new Quota();
             user.Quota = quota;
 
-            var element = data.Descendants(XName.Get("quota")).FirstOrDefault();
+            XElement element = data.Descendants(XName.Get("quota")).FirstOrDefault();
             if (element == null)
             {
                 return user;
@@ -2342,12 +2355,12 @@ namespace WebDAVClient
         /// <returns></returns>
         private AppInfo GetAppInfo(string response)
         {
-            var app = new AppInfo();
-            var xdoc = XDocument.Parse(response);
+            AppInfo app = new AppInfo();
+            XDocument xdoc = XDocument.Parse(response);
 
-            foreach (var data in xdoc.Descendants(XName.Get("data")))
+            foreach (XElement data in xdoc.Descendants(XName.Get("data")))
             {
-                var node = data.Element(XName.Get("id"));
+                XElement node = data.Element(XName.Get("id"));
                 if (node != null)
                 {
                     app.Id = node.Value;
@@ -2449,9 +2462,9 @@ namespace WebDAVClient
             return element.Descendants().ToDictionary(node => node.Name.ToString(), node => node.Value);
         }
 
-#endregion
+        #endregion
 
-#region IDisposable
+        #region IDisposable
 
         public void Dispose()
         {
@@ -2467,6 +2480,6 @@ namespace WebDAVClient
             }
         }
 
-#endregion IDisposable
+        #endregion IDisposable
     }
 }

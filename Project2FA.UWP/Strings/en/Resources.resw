@@ -740,4 +740,13 @@ The option can be activated under the settings.</value>
   <data name="WelcomePageTitle" xml:space="preserve">
     <value>Welcome</value>
   </data>
+  <data name="UseDataFilePageName.Text" xml:space="preserve">
+    <value>Load existing datafile</value>
+  </data>
+  <data name="CreateDatafile" xml:space="preserve">
+    <value>Create datafile</value>
+  </data>
+  <data name="LoadDatafile" xml:space="preserve">
+    <value>Load existing datafile</value>
+  </data>
 </root>

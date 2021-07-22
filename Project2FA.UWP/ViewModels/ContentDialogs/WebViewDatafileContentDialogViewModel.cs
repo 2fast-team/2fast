@@ -20,12 +20,20 @@ namespace Project2FA.UWP.ViewModels.ContentDialogs
         private string _webDAVProductName;
         private WebDAVFileOrFolderModel _selectedItem;
         public ICommand WebDAVBackCommand { get; }
+        public ICommand PrimaryButtonCommand { get; }
 
         public WebViewDatafileContentDialogViewModel()
         {
             WebDAVBackCommand = new DelegateCommand(() =>
             {
                 Directory.SelectedPathIndex = Directory.GetPathDepth - 1;
+            });
+            PrimaryButtonCommand = new DelegateCommand(() =>
+            {
+                if (SelectedItem != null)
+                {
+                    ChoosenOneDatafile = SelectedItem;
+                }
             });
         }
 
@@ -91,7 +99,6 @@ namespace Project2FA.UWP.ViewModels.ContentDialogs
                     }
                 }
             }
-
         }
 
         public bool ChooseItemPossible 
@@ -99,5 +106,6 @@ namespace Project2FA.UWP.ViewModels.ContentDialogs
             get => _chooseItemPossible;
             set => SetProperty(ref _chooseItemPossible, value);
         }
+        public WebDAVFileOrFolderModel ChoosenOneDatafile { get; private set; }
     }
 }

@@ -109,9 +109,26 @@ namespace Project2FA.UWP.ViewModels
                     {
                         if (await CheckLoginAsync())
                         {
-                            await DialogService.ShowAsync(new WebViewDatafileContentDialog(false, result));
+                            var dialog = new WebViewDatafileContentDialog(false, result);
+                            var dialogresult = await DialogService.ShowAsync(dialog);
+                            if (dialogresult == Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
+                            {
+                                var test = dialog.ViewModel.ChoosenOneDatafile;
+                            }
+                        }
+                        else
+                        {
+                            //TODO error Message
                         }
                     }
+                    else
+                    {
+                        //TODO error Message
+                    }
+                }
+                else
+                {
+                    //TODO error Message
                 }
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -126,7 +143,7 @@ namespace Project2FA.UWP.ViewModels
                 }
                 else
                 {
-                    //error Message
+                    //TODO error Message
                 }
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates

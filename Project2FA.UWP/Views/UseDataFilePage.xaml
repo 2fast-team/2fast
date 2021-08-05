@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:msct="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+    xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -149,13 +150,13 @@
 
                         </StackPanel>
                     </ScrollViewer>
-                    <msct:Loading IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" Background="{ThemeResource TranslucentBackgroundHighBrush}">
+                    <!--<msct:Loading IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" Background="{ThemeResource TranslucentBackgroundHighBrush}">
                         <ProgressRing 
                             IsActive="True" 
                             Foreground="{ThemeResource SystemAccentColor}" 
                             Width="80" 
                             Height="80"/>
-                    </msct:Loading>
+                    </msct:Loading>-->
                     <msct:Loading IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" Background="{ThemeResource TranslucentBackgroundHighBrush}">
                         <StackPanel>
                             <muxc:AnimatedVisualPlayer 
@@ -181,7 +182,10 @@
                     <ScrollViewer
                         VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
-                            <muxc:Expander Header="#Login" Width="480">
+                            <muxc:Expander 
+                                Header="#Login"
+                                IsExpanded="{x:Bind ViewModel.WebDAVLoginRequiered, Mode=OneWay}"
+                                Width="480">
                                 <StackPanel 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Stretch" >
@@ -222,7 +226,10 @@
                                 Command="{x:Bind ViewModel.WebDAVLoginCommand}"/>
                                 </StackPanel>
                             </muxc:Expander>
-                            <muxc:Expander Header="#Datafile" Width="480">
+                            <muxc:Expander 
+                                Header="#Datafile" 
+                                IsExpanded="{x:Bind ViewModel.WebDAVDatafilePropertiesExpanded, Mode=OneWay}"
+                                Width="480">
                                 <StackPanel Padding="0,0,22,0">
                                     <TextBlock 
                                 TextWrapping="Wrap"
@@ -230,14 +237,14 @@
                                 x:Uid="UseDatafileContentDialogLoadInfo"
                                 Margin="0,10,0,10" />
                                     <TextBox 
-                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}"
+                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Name,Mode=TwoWay}"
                                 x:Uid="UseDatafileContentDialogFilename"
                                 IsReadOnly="True"
                                 Header="~UseDatafileContentDialogFilename.Header"
                                 Margin="0,5,0,5"/>
                                     <Button 
                                 x:Uid="UseDatafileContentDialogChangeDatafile" 
-                                Command="{x:Bind ViewModel.UseDatafileCommand}"
+                                Command="{x:Bind ViewModel.WebDAVLoginCommand}"
                                 Content="~UseDatafileContentDialogChangeDatafile.Content"/>
                                     <Border 
                                 Margin="0,12" 
@@ -255,7 +262,7 @@
                                 Height="1" />
 
                                     <TextBox 
-                                Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}"
+                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Path,Mode=OneWay}"
                                 x:Uid="UseDatafileContentDialogFolderPath"
                                 IsReadOnly="True"
                                 Header="~UseDatafileContentDialogFolderPath.Header"
@@ -263,6 +270,7 @@
 
                                     <Button 
                                 Content="#laden"
+                                        IsEnabled="{x:Bind ViewModel.IsWebDAVCreationButtonEnable, Mode=OneWay}"
                                 Command="{x:Bind ViewModel.SetAndCheckWebDAVDatafileCommand}"/>
 
                                 </StackPanel>
@@ -274,5 +282,14 @@
                 </Grid>
             </PivotItem>
         </Pivot>
+        <mtuc:Loading 
+            IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
+            Background="{ThemeResource TranslucentBackgroundHighBrush}">
+            <muxc:ProgressRing 
+                            IsActive="True" 
+                            Foreground="{ThemeResource SystemAccentColor}" 
+                            Width="80" 
+                            Height="80"/>
+        </mtuc:Loading>
     </Grid>
 </Page>

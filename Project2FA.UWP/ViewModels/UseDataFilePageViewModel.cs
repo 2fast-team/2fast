@@ -36,6 +36,11 @@ namespace Project2FA.UWP.ViewModels
 
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
+        private bool _webDAVLoginRequiered;
+        private bool _webDAVDatafilePropertiesExpanded;
+        private bool _isWebDAVCreationButtonEnable;
+        private WebDAVFileOrFolderModel _choosenOneWebDAVFile;
+
 
         /// <summary>
         /// Constructor to start the datafile selector
@@ -52,6 +57,7 @@ namespace Project2FA.UWP.ViewModels
             NetworkService = networkService;
             NewtonsoftJSONService = newtonsoftJSONService;
             FileService = fileService;
+            WebDAVLoginRequiered = true;
 
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
@@ -102,6 +108,8 @@ namespace Project2FA.UWP.ViewModels
 
             WebDAVLoginCommand = new DelegateCommand(async () =>
             {
+                WebDAVLoginRequiered = false;
+                IsLoading = true;
                 (bool success, Status result) = await CheckServerStatus();
                 if (success)
                 {
@@ -109,11 +117,14 @@ namespace Project2FA.UWP.ViewModels
                     {
                         if (await CheckLoginAsync())
                         {
+                            WebDAVDatafilePropertiesExpanded = true;
+                            
+                            IsLoading = false;
                             var dialog = new WebViewDatafileContentDialog(false, result);
                             var dialogresult = await DialogService.ShowAsync(dialog);
                             if (dialogresult == Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
                             {
-                                var test = dialog.ViewModel.ChoosenOneDatafile;
+                                ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
                             }
                         }
                         else
@@ -130,6 +141,7 @@ namespace Project2FA.UWP.ViewModels
                 {
                     //TODO error Message
                 }
+                IsLoading = false;
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
@@ -154,31 +166,26 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public override void CheckInputs()
         {
-            if (!string.IsNullOrEmpty(DateFileName))
+            if (ChoosenOneWebDAVFile != null)
             {
-                if (!string.IsNullOrEmpty(Password))
-                {
-                    IsPrimaryBTNEnable = true;
-                }
-                else
-                {
-                    IsPrimaryBTNEnable = false;
-                }
+                IsWebDAVCreationButtonEnable = !string.IsNullOrWhiteSpace(Password);
             }
             else
             {
-                IsPrimaryBTNEnable = false;
+                IsPrimaryBTNEnable = !string.IsNullOrEmpty(DateFileName) && !string.IsNullOrEmpty(Password);
             }
         }
 
         public void ChooseWebDAV()
         {
-            var secretService = App.Current.Container.Resolve<ISecretService>();
+            ISecretService secretService = App.Current.Container.Resolve<ISecretService>();
             if (secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") != string.Empty)
             {
                 ServerAddress = secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress");
                 WebDAVPassword = secretService.Helper.ReadSecret(Constants.ContainerName, "WDPassword");
                 Username = secretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername");
+                //WebDAVLoginRequiered = false;
+                //WebDAVDatafilePropertiesExpanded = true;
             }
         }
 
@@ -254,11 +261,11 @@ namespace Project2FA.UWP.ViewModels
                 string datafileStr = await FileService.ReadStringAsync(DateFileName, LocalStorageFolder);
                 //read the iv for AES
                 DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
-                var iv = datafile.IV;
+                byte[] iv = datafile.IV;
 
                 try
                 {
-                    var deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
+                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
                         (Password, iv, datafileStr);
                     return true;
                 }
@@ -284,5 +291,29 @@ namespace Project2FA.UWP.ViewModels
         }
 
         public bool ChangeDatafile { get; set; }
+
+        public bool WebDAVLoginRequiered
+        {
+            get => _webDAVLoginRequiered; 
+            set => SetProperty(ref _webDAVLoginRequiered, value);
+        }
+
+        public bool WebDAVDatafilePropertiesExpanded
+        {
+            get => _webDAVDatafilePropertiesExpanded; 
+            set => SetProperty(ref _webDAVDatafilePropertiesExpanded, value);
+        }
+
+        public WebDAVFileOrFolderModel ChoosenOneWebDAVFile
+        {
+            get => _choosenOneWebDAVFile;
+            set => SetProperty(ref _choosenOneWebDAVFile, value);
+        }
+
+        public bool IsWebDAVCreationButtonEnable
+        {
+            get => _isWebDAVCreationButtonEnable;
+            set => SetProperty(ref _isWebDAVCreationButtonEnable, value);
+        }
     }
 }

@@ -78,10 +78,10 @@
       <Version>8.1.97</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
-      <Version>3.8.13</Version>
+      <Version>3.9.7</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI.RemoteControl">
-      <Version>3.8.13</Version>
+      <Version>3.9.7</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />

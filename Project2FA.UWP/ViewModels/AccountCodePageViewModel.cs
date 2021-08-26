@@ -127,6 +127,7 @@ namespace Project2FA.UWP.ViewModels
         /// <param name="e"></param>
         private async void TOTPTimer(object sender, object e)
         {
+            bool success = true;
             //prevent the acccess 
             await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
@@ -134,11 +135,16 @@ namespace Project2FA.UWP.ViewModels
                 if (TwoFADataService.Collection[i].Seconds == 0)
                 {
                     TwoFADataService.Collection[i].Seconds = TwoFADataService.Collection[i].Period;
-                    DataService.Instance.GenerateTOTP(i);
+                    success = await DataService.Instance.GenerateTOTP(i);
                 }
                 else
                 {
                     TwoFADataService.Collection[i].Seconds--;
+                }
+                if (!success)
+                {
+                    // TODO error message
+                    return;
                 }
             }
             TwoFADataService.CollectionAccessSemaphore.Release();

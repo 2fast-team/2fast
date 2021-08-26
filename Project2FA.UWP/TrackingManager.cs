@@ -4,6 +4,7 @@
 
 using System;
 using Microsoft.Services.Store.Engagement;
+using Prism.Logging;
 
 namespace Project2FA.UWP
 {
@@ -36,11 +37,11 @@ namespace Project2FA.UWP
             }
         }
 
-        public static void TrackEvent(string category, string action, string label = "", long value = 0)
+        public static void TrackEvent(Category category, Priority priority, string label = "", long value = 0)
         {
             try
             {
-                logger.Log($"{category} - {action} - {label} - {value.ToString()}");
+                logger.Log($"{category} - {priority} - {label} - {value.ToString()}");
             }
             catch
             {

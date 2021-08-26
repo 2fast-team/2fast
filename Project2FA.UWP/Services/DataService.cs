@@ -66,8 +66,8 @@ namespace Project2FA.UWP.Services
             ACVCollection = new AdvancedCollectionView(Collection, true);
             ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
-            CheckDatafile();
             CheckTime();
+            CheckLocalDatafile();
         }
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace Project2FA.UWP.Services
                     {
                         DateTime time = await NetworkTimeService.GetNetworkTimeAsync(SettingsService.Instance.NTPServerString);
                         TimeSpan timespan = time.Subtract(DateTime.UtcNow);
+                        _checkedTimeSynchronisation = true;
                         if (Math.Abs(timespan.TotalSeconds) >= 15) // difference of 15 seconds or more
                         {
                             _ntpServerTimeDifference = timespan;
-                            SystemTimeNotCorrectError();
+                            await SystemTimeNotCorrectError();
                         }
-                        _checkedTimeSynchronisation = true;
                         SettingsService.Instance.LastCheckedSystemTime = DateTime.UtcNow;
                     }
                     catch (Exception exc)
@@ -107,7 +107,7 @@ namespace Project2FA.UWP.Services
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Accounts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private async void Accounts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
@@ -117,10 +117,10 @@ namespace Project2FA.UWP.Services
                     // normal mode
                     if (_initialization == false)
                     {
-                        WriteLocalDatafile();
+                        await WriteLocalDatafile();
                         if (e.Action == NotifyCollectionChangedAction.Add)
                         {
-                            ResetCollection();
+                            await ResetCollection();
                         }
                     }
                     // if the initialization is active
@@ -141,7 +141,7 @@ namespace Project2FA.UWP.Services
         /// <summary>
         /// Reset the TOTP code
         /// </summary>
-        public async void ResetCollection()
+        public async Task ResetCollection()
         {
             await CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < Collection.Count; i++)
@@ -164,43 +164,28 @@ namespace Project2FA.UWP.Services
         /// <summary>
         /// Reloads the datafile in the local database
         /// </summary>
-        public async void ReloadDatafile()
+        public async Task ReloadDatafile()
         {
             await CollectionAccessSemaphore.WaitAsync();
-            CheckDatafile();
+            await CheckLocalDatafile();
             CollectionAccessSemaphore.Release();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private async void CheckDatafile()
-        {
-            var dbDatafile = await App.Repository.Datafile.GetAsync();
-            if (dbDatafile.IsWebDAV)
-            {
-                //TODO Webdav implementation
-            }
-            else
-            {
-                CheckLocalDatafile(dbDatafile);
-            }
         }
 
         /// <summary>
         /// Checks and reads the current local datafile
         /// </summary>
         /// <param name="dbDatafile"></param>
-        private async void CheckLocalDatafile(DBDatafileModel dbDatafile)
+        private async Task CheckLocalDatafile()
         {
             try
             {
+                DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
 
                 StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
                 if (await FileService.FileExistsAsync(dbDatafile.Name, folder))
                 {
-                    var dbHash = await App.Repository.Password.GetAsync();
+                    DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
                     // prevent write of the datafile
                     _initialization = true;
                     try
@@ -210,7 +195,7 @@ namespace Project2FA.UWP.Services
                         {
                             // read the iv for AES
                             DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
-                            var iv = datafile.IV;
+                            byte[] iv = datafile.IV;
 
                             datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                                             SecretService.Helper.ReadSecret(Constants.ContainerName,dbHash.Hash),
@@ -278,10 +263,10 @@ namespace Project2FA.UWP.Services
         /// <summary>
         /// Deletes the datafile from storage
         /// </summary>
-        public async void DeleteLocalDatafile()
+        public async Task DeleteLocalDatafile()
         {
-            var dbDatafile = await App.Repository.Datafile.GetAsync();
-            var storageFile = await (await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path)).GetFileAsync(dbDatafile.Name);
+            DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
+            StorageFile storageFile = await (await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path)).GetFileAsync(dbDatafile.Name);
 
             if (storageFile != null)
             {
@@ -296,19 +281,21 @@ namespace Project2FA.UWP.Services
             App.ShellPageInstance.NavigationIsAllowed = true;
         }
 
-        private async void ShowUnauthorizedAccessError()
+        private async Task ShowUnauthorizedAccessError()
         {
             _errorOccurred = true;
-            var dialog = new ContentDialog();
+            ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.AuthorizationFileSystemContentDialogTitle;
-            var markdown = new MarkdownTextBlock();
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.AuthorizationFileSystemContentDialogDescription;
             dialog.Content = markdown;
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
                 Prism.PrismApplicationBase.Current.Exit();
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.PrimaryButtonText = Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
             dialog.SecondaryButtonText = Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
@@ -316,7 +303,7 @@ namespace Project2FA.UWP.Services
             {
                 Prism.PrismApplicationBase.Current.Exit();
             });
-            var result = await DialogService.ShowAsync(dialog);
+            ContentDialogResult result = await DialogService.ShowAsync(dialog);
             if (result == ContentDialogResult.None)
             {
                 Prism.PrismApplicationBase.Current.Exit();
@@ -326,19 +313,23 @@ namespace Project2FA.UWP.Services
         /// <summary>
         /// Displays a wrong password error message and option to change the password
         /// </summary>
-        private async void ShowPasswordError()
+        private async Task ShowPasswordError()
         {
             _errorOccurred = true;
-            var dialog = new ContentDialog
+            ContentDialog dialog = new ContentDialog
             {
                 Title = Resources.PasswordInvalidHeader,
                 Content = Resources.PasswordInvalidMessage,
                 PrimaryButtonText = Resources.ChangePassword,
                 PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style,
+
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
                 PrimaryButtonCommand = new DelegateCommand(async () =>
                 {
-                    var result = await DialogService.ShowAsync(new ChangeDatafilePasswordContentDialog(true));
+                    ContentDialogResult result = await DialogService.ShowAsync(new ChangeDatafilePasswordContentDialog(true));
                 }),
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
                 SecondaryButtonText = Resources.CloseApp,
                 SecondaryButtonCommand = new DelegateCommand(() =>
                 {
@@ -346,7 +337,7 @@ namespace Project2FA.UWP.Services
                 })
             };
 
-            var result = await DialogService.ShowAsync(dialog);
+            ContentDialogResult result = await DialogService.ShowAsync(dialog);
             if (result == ContentDialogResult.None)
             {
                 ShowPasswordError();
@@ -356,14 +347,14 @@ namespace Project2FA.UWP.Services
         /// <summary>
         /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
         /// </summary>
-        private async void ShowFileOrFolderNotFoundError()
+        private async Task ShowFileOrFolderNotFoundError()
         {
-            var dialogService = App.Current.Container.Resolve<IDialogService>();
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             try
             {
                 //TODO current workaround: check permission to the file system (broadFileSystemAccess)
                 string path = @"C:\Windows\explorer.exe";
-                var file = await StorageFile.GetFileFromPathAsync(path);
+                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
             }
             catch (UnauthorizedAccessException)
             {
@@ -375,47 +366,54 @@ namespace Project2FA.UWP.Services
             Logger.Log("no datafile found", Category.Exception, Priority.High);
             bool selectedOption = false;
 
-            var dialog = new ContentDialog();
+            ContentDialog dialog = new ContentDialog();
             dialog.Closed += Dialog_Closed;
             dialog.Title = Resources.ErrorHandle;
-            var markdown = new MarkdownTextBlock();
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.ExceptionDatafileNotFound;
-            var stackPanel = new StackPanel();
+            StackPanel stackPanel = new StackPanel();
             stackPanel.Children.Add(markdown);
 
-            var changePathBTN = new Button();
+            Button changePathBTN = new Button();
             changePathBTN.Margin = new Thickness(0, 10, 0, 0);
             changePathBTN.Content = Resources.ChangeDatafilePath;
-            changePathBTN.Command = new DelegateCommand(async() =>
+
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            changePathBTN.Command = new DelegateCommand(async () =>
             {
                 selectedOption = true;
                 dialog.Hide();
-                var result = await dialogService.ShowAsync(new UpdateDatafileContentDialog());
+                ContentDialogResult result = await dialogService.ShowAsync(new UpdateDatafileContentDialog());
                 if (result == ContentDialogResult.Primary)
                 {
                     ErrorResolved();
-                    CheckDatafile();
+                    await CheckLocalDatafile();
                 }
                 if (result == ContentDialogResult.None)
                 {
                     ShowFileOrFolderNotFoundError();
                 }
-                
+
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
             stackPanel.Children.Add(changePathBTN);
 
-            var factoryResetBTN = new Button();
+            Button factoryResetBTN = new Button();
             factoryResetBTN.Margin = new Thickness(0, 10, 0, 10);
             factoryResetBTN.Content = Resources.FactoryReset;
+
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             factoryResetBTN.Command = new DelegateCommand(async () =>
             {
-                var passwordHash = await App.Repository.Password.GetAsync();
+                DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
                 //delete password in the secret vault
                 SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordHash.Hash);
                 // reset data and restart app
                 await ApplicationData.Current.ClearAsync();
                 await CoreApplication.RequestRestartAsync("Factory reset");
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
             stackPanel.Children.Add(factoryResetBTN);
 
             dialog.Content = stackPanel;
@@ -448,35 +446,37 @@ namespace Project2FA.UWP.Services
         /// Displays that the system time is not correct
         /// </summary>
         /// <returns></returns>
-        private async void SystemTimeNotCorrectError()
+        private Task SystemTimeNotCorrectError()
         {
-            var dialogService = App.Current.Container.Resolve<IDialogService>();
-            var dialog = new ContentDialog();
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.AccountCodePageWrongTimeTitle;
             dialog.Content = Resources.AccountCodePageWrongTimeContent;
             dialog.PrimaryButtonText = Resources.AccountCodePageWrongTimeBTN;
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.SecondaryButtonText = Resources.Confirm;
-            await dialogService.ShowAsync(dialog);
+            return dialogService.ShowAsync(dialog);
         }
 
         /// <summary>
         /// Writes the current accounts into the datafile
         /// </summary>
-        public async void WriteLocalDatafile()
+        public async Task WriteLocalDatafile()
         {
-            var dbHash = await App.Repository.Password.GetAsync();
-            var datafileDB = await App.Repository.Datafile.GetAsync();
-            var iv = new AesManaged().IV;
+            DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
+            DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
+            byte[] iv = new AesManaged().IV;
 
             await CollectionAccessSemaphore.WaitAsync();
 
             DatafileModel file = new DatafileModel() { IV = iv, Collection = Collection };
 
-            var folder = await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
+            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
             await FileService.WriteStringAsync(
                     datafileDB.Name,
                     NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
@@ -490,24 +490,41 @@ namespace Project2FA.UWP.Services
         /// Generates a TOTP code for the i'th entry of a collection
         /// </summary>
         /// <param name="i"></param>
-        public void GenerateTOTP(int i)
+        public async Task<bool> GenerateTOTP(int i)
         {
             try
             {
-                var totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
-                if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
+                if (Collection[i].SecretByteArray is null)
                 {
-                    Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
+                    TrackingManager.TrackEvent(Category.Warn, Priority.High, "Secret key is empty!");
+                    await ReloadDatafile();
+                    return false;
                 }
                 else
                 {
-                    Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
+                    Totp totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
+                    int remainingTime = totp.RemainingSeconds();
+                    bool verified = totp.VerifyTotp(totp.ComputeTotp(), out long matched, VerificationWindow.RfcSpecifiedNetworkDelay);
+                    if (!verified)
+                    {
+                        return false;
+                    }
+                    if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
+                    {
+                        Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
+                    }
+                    else
+                    {
+                        Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
+                    }
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Logger.Log(ex.Message, Category.Exception, Priority.High);
                 TrackingManager.TrackException(ex);
+                return false;
             }
         }
 

@@ -136,14 +136,7 @@ namespace Project2FA.UWP.Views
         async Task<bool> IConfirmNavigationAsync.CanNavigateAsync(INavigationParameters parameters)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-            if (await dialogService.IsDialogRunning())
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !await dialogService.IsDialogRunning();
         }
     }
 }

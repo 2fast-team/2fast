@@ -23,7 +23,7 @@
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.DryIoc.Uno" Version="8.1.97" />
     <PackageReference Include="SkiaSharp.Views" Version="2.80.3" />
-    <PackageReference Include="Uno.UI.Skia.Tizen" Version="3.8.13" />
+    <PackageReference Include="Uno.UI.Skia.Tizen" Version="3.9.7" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
 </Project>

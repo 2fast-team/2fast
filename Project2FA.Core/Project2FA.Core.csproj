@@ -14,12 +14,15 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Project2FA.Repository\Project2FA.Repository.csproj" />
     <ProjectReference Include="..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\ServiceLogo\" />
   </ItemGroup>
 
 </Project>

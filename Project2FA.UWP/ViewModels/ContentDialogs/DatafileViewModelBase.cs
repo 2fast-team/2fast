@@ -9,7 +9,6 @@ using Template10.Services.Secrets;
 using WebDAVClient.Exceptions;
 using WebDAVClient.Types;
 using Windows.Storage;
-using Xamarin.Essentials;
 using Prism.Ioc;
 using Project2FA.Core.Services;
 using Project2FA.Repository.Models;
@@ -24,8 +23,6 @@ namespace Project2FA.UWP.ViewModels
         private string _serverAddress;
         private string _username;
         private string _webDAVPassword;
-        private string _webDAVServerBackgroundUrl;
-        private string _webDAVProductName;
         private int _selectedIndex;
         private string _dateFileName;
         private bool _isPrimaryBTNEnable;
@@ -33,6 +30,7 @@ namespace Project2FA.UWP.ViewModels
         private bool _showError;
         private StorageFolder _localStorageFolder;
         private string _password, _passwordRepeat;
+        internal WebDAVFileOrFolderModel _choosenOneWebDAVFile;
 
         public ICommand PrimaryButtonCommand { get; set; }
         public ICommand ChangePathCommand { get; set; }
@@ -71,21 +69,31 @@ namespace Project2FA.UWP.ViewModels
         {
             //TODO WebDAV case
             // local filedata
-            bool useArgonHash = SettingsService.Instance.UseExtendedHash;
-            string hash = CryptoService.CreateStringHash(Password, useArgonHash);
+            string hash = CryptoService.CreateStringHash(Password, false);
             DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
-            if (!DateFileName.Contains(".2fa"))
+            string tempDataFileName;
+            if (!isWebDAV)
             {
-                DateFileName += ".2fa";
+                if (!DateFileName.Contains(".2fa"))
+                {
+                    DateFileName += ".2fa";
+                }
+                tempDataFileName = DateFileName;
             }
+            else
+            {
+                tempDataFileName= _choosenOneWebDAVFile.Name;
+            }
+
+
             await App.Repository.Datafile.UpsertAsync(
                 new DBDatafileModel
                 {
                     DBPasswordHashModel = passwordModel,
                     IsWebDAV = isWebDAV,
-                    Path = isWebDAV ? string.Empty : LocalStorageFolder.Path,
-                    Name = DateFileName
-                }); ;
+                    Path = isWebDAV ? _choosenOneWebDAVFile.Path : LocalStorageFolder.Path,
+                    Name = tempDataFileName
+                });
             // write the password with the hash(key) in the secret vault
             SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
         }

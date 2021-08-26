@@ -749,4 +749,7 @@ The option can be activated under the settings.</value>
   <data name="LoadDatafile" xml:space="preserve">
     <value>Load existing datafile</value>
   </data>
+  <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
+    <value>first steps</value>
+  </data>
 </root>

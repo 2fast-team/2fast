@@ -43,10 +43,12 @@ namespace Project2FA.UWP.ViewModels
             {
                 ShowError = false;
             });
-            UseDatafileCommand = new DelegateCommand(async() =>
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            UseDatafileCommand = new DelegateCommand(async () =>
             {
                 await SetLocalFile(true); //change path is true
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
             ChooseWebDAVCommand = new DelegateCommand(() =>
             {

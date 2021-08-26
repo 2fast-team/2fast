@@ -12,7 +12,6 @@ namespace Project2FA.UWP.Views
         {
             this.InitializeComponent();
             this.Loaded += UseDataFilePage_Loaded;
-
         }
 
         private void UseDataFilePage_Loaded(object sender, RoutedEventArgs e)
@@ -27,11 +26,7 @@ namespace Project2FA.UWP.Views
         {
             if (e.Key == Windows.System.VirtualKey.Enter && !string.IsNullOrEmpty(ViewModel.Password))
             {
-                if (await ViewModel.TestPassword())
-                {
-                    await ViewModel.CreateLocalFileDB(false);
-                    //navigate to 
-                }
+                await ViewModel.SetAndCheckLocalDatafile();
             }
         }
 
@@ -62,14 +57,6 @@ namespace Project2FA.UWP.Views
             }
             ViewModel.SelectedIndex = 1;
             ViewModel.ChooseWebDAV();
-            //bool result = await ViewModel.SetLocalFile();
-            //if (!result)
-            //{
-            //    if (MainPivot.Items.Contains(FolderPivotItem))
-            //    {
-            //        MainPivot.Items.Remove(FolderPivotItem);
-            //    }
-            //}
         }
     }
 }

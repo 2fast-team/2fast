@@ -58,7 +58,7 @@ namespace Project2FA.Core.Services.Parser
                         }
                     }
                     //fallback to get the label from second issuer, if issuer already set
-                    else if(string.IsNullOrEmpty(label))
+                    else if (string.IsNullOrEmpty(label))
                     {
                         collectionVar = nameValueCollection["issuer"];
                         if (!string.IsNullOrEmpty(collectionVar))

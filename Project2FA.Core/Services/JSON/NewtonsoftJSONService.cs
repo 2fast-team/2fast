@@ -35,10 +35,14 @@ namespace Project2FA.Core.Services.JSON
         public string Serialize(object value)
         {
             if (value == null)
+            {
                 return null;
+            }
 
             if (string.IsNullOrEmpty(value.ToString()))
+            {
                 return string.Empty;
+            }
 
             // Serialize to json
             return JsonConvert.SerializeObject(value);
@@ -69,21 +73,19 @@ namespace Project2FA.Core.Services.JSON
             string serialized;
 
             // per serialize session
-            using (var algorithm = new AesManaged
+            using AesManaged algorithm = new AesManaged
             {
                 Key = byteArrayKey,
                 IV = initVectorArray
-            })
+            };
+            using (_encryptionFactory.GetEncryptSession(algorithm))
             {
-                using (_encryptionFactory.GetEncryptSession(algorithm))
+                StringBuilder builder = new StringBuilder();
+                using (StringWriter writer = new StringWriter(builder))
                 {
-                    var builder = new StringBuilder();
-                    using (var writer = new StringWriter(builder))
-                    {
-                        serializer.Serialize(writer, value);
-                    }
-                    return serialized = builder.ToString();
+                    serializer.Serialize(writer, value);
                 }
+                return serialized = builder.ToString();
             }
         }
 
@@ -94,10 +96,14 @@ namespace Project2FA.Core.Services.JSON
         public object Deserialize(string value)
         {
             if (value == null)
+            {
                 return null;
+            }
 
             if (string.IsNullOrEmpty(value))
+            {
                 return string.Empty;
+            }
 
             // Deserialize from json
             return JsonConvert.DeserializeObject(value);
@@ -109,10 +115,14 @@ namespace Project2FA.Core.Services.JSON
         public T Deserialize<T>(string value)
         {
             if (value == null)
+            {
                 return default(T);
+            }
 
             if (string.IsNullOrEmpty(value))
+            {
                 return default(T);
+            }
 
             // Deserialize from json
             return JsonConvert.DeserializeObject<T>(value);
@@ -132,13 +142,13 @@ namespace Project2FA.Core.Services.JSON
         {
             try
             {
-                var r = this.Deserialize<T>(value);
+                T r = Deserialize<T>(value);
                 if (r == null)
                 {
                     result = default(T);
                     return false;
                 }
-                result = (T)r;
+                result = r;
                 return true;
             }
             catch
@@ -158,18 +168,16 @@ namespace Project2FA.Core.Services.JSON
                 ContractResolver = _encryptionFactory.GetContractResolver()
             };
 
-            using (var algorithm = new AesManaged
+            using var algorithm = new AesManaged
             {
                 Key = byteArrayKey,
                 IV = initVector
-            })
+            };
+            using (_encryptionFactory.GetDecryptSession(algorithm))
+            using (var stringReader = new StringReader(value))
+            using (var jsonReader = new JsonTextReader(stringReader))
             {
-                using (_encryptionFactory.GetDecryptSession(algorithm))
-                using (var stringReader = new StringReader(value))
-                using (var jsonReader = new JsonTextReader(stringReader))
-                {
-                    return serializer.Deserialize<T>(jsonReader);
-                }
+                return serializer.Deserialize<T>(jsonReader);
             }
         }
 

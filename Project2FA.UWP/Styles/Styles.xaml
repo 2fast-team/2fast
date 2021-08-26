@@ -13,10 +13,12 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/CommandBarAndAppBar.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/RadioButton.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/NavigationView.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/ScrollBar_themeresources.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+    <CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
 
     <Thickness x:Key="MenuBarItemBorderThickness">2,2,2,2</Thickness>
     <Thickness x:Key="GridViewItemMultiselectBorderThickness">2,2,2,2</Thickness>
@@ -42,6 +44,17 @@
     <Thickness x:Key="GridViewItemRevealBorderThemeThickness">2,2,2,2</Thickness>
     <Thickness x:Key="ComboBoxItemRevealBorderThemeThickness">2,2,2,2</Thickness>
     <x:Double x:Key="PersonPictureEllipseBadgeStrokeThickness">2</x:Double>
+
+    <!-- Caret/Chevron Icons -->
+    <x:String x:Key="ScrollBarCaretLeft">&#xE0E2;</x:String>
+    <x:String x:Key="ScrollBarCaretRight">&#xE0E3;</x:String>
+    <x:String x:Key="ScrollBarCaretUp">&#xE0E4;</x:String>
+    <x:String x:Key="ScrollBarCaretDown">&#xE0E5;</x:String>
+
+    <x:String x:Key="FlipViewCaretLeft">&#xE0E2;</x:String>
+    <x:String x:Key="FlipViewCaretRight">&#xE0E3;</x:String>
+    <x:String x:Key="FlipViewCaretUp">&#xE0E4;</x:String>
+    <x:String x:Key="FlipViewCaretDown">&#xE0E5;</x:String>
 
     <animations:ImplicitAnimationSet  x:Key="ImplicitOffset">
         <animations:OffsetAnimation Duration="0:0:0.3"/>
@@ -105,7 +118,7 @@
         <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
     </Style>
 
-    <Style x:Key="WebDAVFlipView" TargetType="FlipView">
+    <!--<Style x:Key="WebDAVFlipView" TargetType="FlipView">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="FlipView">
@@ -259,13 +272,13 @@
                         <ScrollViewer x:Name="ScrollingHost" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalSnapPointsType="MandatorySingle" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" Padding="{TemplateBinding Padding}" TabNavigation="{TemplateBinding TabNavigation}" VerticalSnapPointsType="MandatorySingle" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="Disabled">
                             <ItemsPresenter/>
                         </ScrollViewer>
-                        <!--<Button x:Name="PreviousButtonHorizontal" HorizontalAlignment="Left" Height="36" IsTabStop="False" Template="{StaticResource HorizontalPreviousTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Center" Width="20"/>
+                        --><!--<Button x:Name="PreviousButtonHorizontal" HorizontalAlignment="Left" Height="36" IsTabStop="False" Template="{StaticResource HorizontalPreviousTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Center" Width="20"/>
                         <Button x:Name="NextButtonHorizontal" HorizontalAlignment="Right" Height="36" IsTabStop="False" Template="{StaticResource HorizontalNextTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Center" Width="20"/>
                         <Button x:Name="PreviousButtonVertical" HorizontalAlignment="Center" Height="20" IsTabStop="False" Template="{StaticResource VerticalPreviousTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Top" Width="36"/>
-                        <Button x:Name="NextButtonVertical" HorizontalAlignment="Center" Height="20" IsTabStop="False" Template="{StaticResource VerticalNextTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Bottom" Width="36"/>-->
+                        <Button x:Name="NextButtonVertical" HorizontalAlignment="Center" Height="20" IsTabStop="False" Template="{StaticResource VerticalNextTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Bottom" Width="36"/>--><!--
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 </ResourceDictionary>

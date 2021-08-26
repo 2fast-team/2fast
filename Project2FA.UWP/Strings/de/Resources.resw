@@ -753,4 +753,7 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   <data name="CreateDatafile" xml:space="preserve">
     <value>Datendatei erstellen</value>
   </data>
+  <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
+    <value>Erste Schritte</value>
+  </data>
 </root>

@@ -201,9 +201,17 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2">
+                            <!--<muxc:PersonPicture.ProfilePicture>
+                                <SvgImageSource 
+                                    UriSource="/Assets/schluessel.svg"
+                                    RasterizePixelHeight="80"
+                                    RasterizePixelWidth="80" />
+                            </muxc:PersonPicture.ProfilePicture>-->
                         </muxc:PersonPicture>
                         
                         <!--next version: Account pictures-->
+                        <!--ProfilePicture="/Assets/ServiceLogo/amazon-icon-1.svg"-->
+                        <!--DisplayName="{x:Bind Label,Mode=OneWay}"-->
                         <!--<Ellipse
                             Fill="Red"
                             Height="48"

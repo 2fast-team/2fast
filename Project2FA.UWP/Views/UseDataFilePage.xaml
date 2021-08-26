@@ -250,12 +250,25 @@
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
                                 Height="1" />
-                                    <PasswordBox
+                                    <StackPanel Orientation="Horizontal">
+                                        <PasswordBox
                                 x:Uid="Password"
                                 Header="~Password.Header" 
                                 InputScope="Password"
                                 Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 KeyDown="PB_LocalPassword_KeyDown"/>
+                                        <HyperlinkButton
+                                    Height="48"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    VerticalAlignment="Center">
+                                            <FontIcon
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"  />
+                                        </HyperlinkButton>
+                                    </StackPanel>
+                                    
                                     <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 

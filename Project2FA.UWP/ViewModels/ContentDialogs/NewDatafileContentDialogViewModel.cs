@@ -78,11 +78,11 @@ namespace Project2FA.UWP.ViewModels
                     {
                         if (Password == PasswordRepeat)
                         {
-                            IsPrimaryBTNEnable = true;
+                            DatafileBTNActive = true;
                         }
                         else
                         {
-                            IsPrimaryBTNEnable = false;
+                            DatafileBTNActive = false;
                         }
 
                         //ShowError = true;
@@ -97,12 +97,12 @@ namespace Project2FA.UWP.ViewModels
                 }
                 else
                 {
-                    IsPrimaryBTNEnable = false;
+                    DatafileBTNActive = false;
                 }
             }
             else
             {
-                IsPrimaryBTNEnable = false;
+                DatafileBTNActive = false;
             }
         }
 

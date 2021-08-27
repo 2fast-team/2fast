@@ -130,33 +130,15 @@
                                 IsReadOnly="True"
                                 Header="~UseDatafileContentDialogFolderPath.Header"
                                 Margin="0,5,0,18"/>
-                            
+
                             <Button 
-                                Content="#laden"
+                                x:Uid="UseDataFilePageLoadDatafile"
+                                IsEnabled="{x:Bind ViewModel.DatafileBTNActive,Mode=OneWay}"
+                                Content="~UseDataFilePageLoadDatafile.Content"
                                 Command="{x:Bind ViewModel.SetAndCheckLocalDatafileCommand}"/>
-
-
-
-                            <!--Argon2 not working mit dotnet native
-                            <msct:Expander 
-                                x:Uid="PasswordAdvancedHashOption"
-                                Background="{ThemeResource ButtonBackground}"
-                                Visibility="Collapsed"
-                                Header="~PasswordAdvancedHashOption.Header">
-                                <CheckBox 
-                                    x:Uid="PasswordAdvancedHashOptionText"
-                                    IsChecked="{x:Bind ViewModel.UseExtendedHash,Mode=TwoWay}"/>
-                            </msct:Expander>-->
 
                         </StackPanel>
                     </ScrollViewer>
-                    <!--<msct:Loading IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" Background="{ThemeResource TranslucentBackgroundHighBrush}">
-                        <ProgressRing 
-                            IsActive="True" 
-                            Foreground="{ThemeResource SystemAccentColor}" 
-                            Width="80" 
-                            Height="80"/>
-                    </msct:Loading>-->
                     <msct:Loading IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" Background="{ThemeResource TranslucentBackgroundHighBrush}">
                         <StackPanel>
                             <muxc:AnimatedVisualPlayer 
@@ -183,7 +165,9 @@
                         VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
                             <muxc:Expander 
-                                Header="#Login"
+                                Header="~UseDataFilePageLoginExpander.Header" 
+                                x:Uid="UseDataFilePageLoginExpander"
+                                IsEnabled="{x:Bind ViewModel.WebDAVLoginRequiered, Mode=OneWay}"
                                 IsExpanded="{x:Bind ViewModel.WebDAVLoginRequiered, Mode=OneWay}"
                                 Width="480">
                                 <StackPanel 
@@ -227,7 +211,9 @@
                                 </StackPanel>
                             </muxc:Expander>
                             <muxc:Expander 
-                                Header="#Datafile" 
+                                Header="~UseDataFilePageDatafileExpander.Header" 
+                                x:Uid="UseDataFilePageDatafileExpander"
+                                IsEnabled="{x:Bind ViewModel.WebDAVDatafilePropertiesEnabled, Mode=OneWay}"
                                 IsExpanded="{x:Bind ViewModel.WebDAVDatafilePropertiesExpanded, Mode=OneWay}"
                                 Width="480">
                                 <StackPanel Padding="0,0,22,0">
@@ -268,7 +254,7 @@
                                     Glyph="&#xE946;"  />
                                         </HyperlinkButton>
                                     </StackPanel>
-                                    
+
                                     <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
@@ -282,15 +268,12 @@
                                 Margin="0,5,0,18"/>
 
                                     <Button 
-                                Content="#laden"
-                                        IsEnabled="{x:Bind ViewModel.IsWebDAVCreationButtonEnable, Mode=OneWay}"
-                                Command="{x:Bind ViewModel.SetAndCheckWebDAVDatafileCommand}"/>
-
+                                      x:Uid="UseDataFilePageLoadDatafile"
+                                      IsEnabled="{x:Bind ViewModel.IsWebDAVCreationButtonEnable, Mode=OneWay}"
+                                      Command="{x:Bind ViewModel.SetAndCheckWebDAVDatafileCommand}"/>
                                 </StackPanel>
                             </muxc:Expander>
                         </StackPanel>
-                       
-                        
                     </ScrollViewer>
                 </Grid>
             </PivotItem>
@@ -299,7 +282,7 @@
             IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
             <muxc:ProgressRing 
-                            IsActive="True" 
+                            IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
                             Foreground="{ThemeResource SystemAccentColor}" 
                             Width="80" 
                             Height="80"/>

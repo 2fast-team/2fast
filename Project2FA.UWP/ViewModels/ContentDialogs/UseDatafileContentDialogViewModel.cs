@@ -65,16 +65,16 @@ namespace Project2FA.UWP.ViewModels
             {
                 if (!string.IsNullOrEmpty(Password))
                 {
-                    IsPrimaryBTNEnable = true;
+                    DatafileBTNActive = true;
                 }
                 else
                 {
-                    IsPrimaryBTNEnable = false;
+                    DatafileBTNActive = false;
                 }
             }
             else
             {
-                IsPrimaryBTNEnable = false;
+                DatafileBTNActive = false;
             }
         }
 

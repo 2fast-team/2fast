@@ -25,9 +25,10 @@ namespace Project2FA.UWP.ViewModels
         private string _webDAVPassword;
         private int _selectedIndex;
         private string _dateFileName;
-        private bool _isPrimaryBTNEnable;
+        private bool _datafileBTNActive;
         private bool _isLoading;
         private bool _showError;
+        private bool _webDAVDatafilePropertiesEnabled;
         private StorageFolder _localStorageFolder;
         private string _password, _passwordRepeat;
         internal WebDAVFileOrFolderModel _choosenOneWebDAVFile;
@@ -313,10 +314,10 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
-        public bool IsPrimaryBTNEnable
+        public bool DatafileBTNActive
         {
-            get => _isPrimaryBTNEnable;
-            set => SetProperty(ref _isPrimaryBTNEnable, value);
+            get => _datafileBTNActive;
+            set => SetProperty(ref _datafileBTNActive, value);
         }
 
         [Required]
@@ -367,6 +368,12 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _showError;
             set => SetProperty(ref _showError, value);
+        }
+
+        public bool WebDAVDatafilePropertiesEnabled
+        {
+            get => _webDAVDatafilePropertiesEnabled;
+            set => SetProperty(ref _webDAVDatafilePropertiesEnabled, value);
         }
 
         #endregion

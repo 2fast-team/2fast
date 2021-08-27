@@ -752,4 +752,7 @@ The option can be activated under the settings.</value>
   <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
     <value>first steps</value>
   </data>
+  <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
+    <value>load datafile</value>
+  </data>
 </root>

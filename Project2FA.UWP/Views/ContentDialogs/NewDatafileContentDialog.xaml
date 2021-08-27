@@ -14,7 +14,7 @@
     xmlns:behaviors="using:Project2FA.UWP.Behaviors"
     mc:Ignorable="d"
     PrimaryButtonText="Create datafile"
-    IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.DatafileBTNActive, Mode=OneWay}"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
     CloseButtonText="Cancel"
     PrimaryButtonStyle="{StaticResource AccentButtonStyle}"

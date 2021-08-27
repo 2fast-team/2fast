@@ -61,6 +61,7 @@ namespace Project2FA.UWP.ViewModels
             NewtonsoftJSONService = newtonsoftJSONService;
             FileService = fileService;
             WebDAVLoginRequiered = true;
+            WebDAVDatafilePropertiesEnabled = false;
 
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
@@ -102,7 +103,6 @@ namespace Project2FA.UWP.ViewModels
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             WebDAVLoginCommand = new DelegateCommand(async () =>
             {
-                WebDAVLoginRequiered = false;
                 IsLoading = true;
                 (bool success, Status result) = await CheckServerStatus();
                 if (success)
@@ -111,6 +111,8 @@ namespace Project2FA.UWP.ViewModels
                     {
                         if (await CheckLoginAsync())
                         {
+                            WebDAVLoginRequiered = false;
+                            WebDAVDatafilePropertiesEnabled = true;
                             WebDAVDatafilePropertiesExpanded = true;
 
                             IsLoading = false;
@@ -167,7 +169,7 @@ namespace Project2FA.UWP.ViewModels
             }
             else
             {
-                IsPrimaryBTNEnable = !string.IsNullOrEmpty(DateFileName) && !string.IsNullOrEmpty(Password);
+                DatafileBTNActive = !string.IsNullOrEmpty(DateFileName) && !string.IsNullOrEmpty(Password);
             }
         }
 

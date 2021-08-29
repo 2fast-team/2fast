@@ -156,9 +156,8 @@
                 </Grid>
             </PivotItem>
             <PivotItem 
-                x:Name="WebDAVPivotItem" 
-                Header="~WebDAVPivotItem.Header" 
-                
+                x:Name="WebDAVPivotItem"
+                Header="~WebDAVPivotItem.Header"
                 x:Uid="UseDatafileContentDialogWebDAVPivotItem">
                 <Grid MaxWidth="550" MinWidth="400" HorizontalAlignment="Left" >
                     <ScrollViewer
@@ -179,8 +178,8 @@
                             x:Uid="UseDatafileContentDialogInfo"
                             Margin="0,10,0,10" />
                                     <TextBox 
-                                x:Uid="ServerAddress"
-                                Header="#Server address"
+                                x:Uid="UseDatafileContentDialogWDServerAddress"
+                                Header="~UseDatafileContentDialogWDServerAddress.Header"
                                 PlaceholderText="https://..."
                                 InputScope="Url"
                                 Text="{x:Bind ViewModel.ServerAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -188,8 +187,8 @@
 
                                     <TextBox 
                                 x:Name="TB_Username"
-                                x:Uid="Username"
-                                Header="#Username" 
+                                x:Uid="UseDatafileContentDialogWDUsername"
+                                Header="~UseDatafileContentDialogWDUsername.Header" 
                                 InputScope="Default"
                                 Text="{x:Bind ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,0,0,20"/>
@@ -197,14 +196,14 @@
                                     <PasswordBox 
                                 x:Name="PB_WebDAVPassword"
                                 x:Uid="Password" 
-                                Header="#Password" 
+                                Header="~Password.Header" 
                                 Password="{x:Bind ViewModel.WebDAVPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,0,0,32" />
 
                                     <Button
-                                x:Uid="Connect" 
+                                x:Uid="UseDatafileContentDialogWDLogin" 
                                 MaxWidth="200"
-                                Content="~Connect.Content" 
+                                Content="~UseDatafileContentDialogWDLogin.Content" 
                                 Style="{StaticResource AccentButtonStyle}"
                                 HorizontalAlignment="Center"
                                 Command="{x:Bind ViewModel.WebDAVLoginCommand}"/>

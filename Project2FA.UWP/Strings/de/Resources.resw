@@ -759,4 +759,19 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
     <value>Datendatei laden</value>
   </data>
+  <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
+    <value>anmelden</value>
+  </data>
+  <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
+    <value>Serveradresse</value>
+  </data>
+  <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
+    <value>Datendatei</value>
+  </data>
+  <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
+    <value>Dienst-Anmeldung</value>
+  </data>
 </root>

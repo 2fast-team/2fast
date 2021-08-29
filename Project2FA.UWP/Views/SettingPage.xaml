@@ -301,7 +301,6 @@
                             <TextBox 
                             Margin="0,10,0,10" 
                             IsReadOnly="True"
-                            IsEnabled="False"
                             x:Uid="SettingsDatafilePath"
                             Header="~SettingsDatafilePath.Header"
                             Text="{x:Bind ViewModel.DatafilePartViewModel.DatafilePath, Mode=OneWay}"/>
@@ -309,7 +308,6 @@
                             <TextBox
                             Margin="0,10,0,10" 
                             IsReadOnly="True"
-                            IsEnabled="False"
                             x:Uid="SettingsDatafileName"
                             Header="~SettingsDatafileName.Header"
                             Text="{x:Bind ViewModel.DatafilePartViewModel.DatafileName, Mode=OneWay}"/>

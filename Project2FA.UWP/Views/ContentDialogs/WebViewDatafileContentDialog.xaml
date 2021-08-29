@@ -17,7 +17,7 @@
     <ContentDialog.Resources>
         <ResourceDictionary>
             <DataTemplate x:Name="WebDAVItemTemplate" x:DataType="models:WebDAVFileOrFolderModel">
-                <Grid 
+                <Grid
                     DoubleTapped="WebDAVItemTemplate_DoubleTapped" 
                     Background="Transparent">
                     <Grid.RowDefinitions>
@@ -73,7 +73,7 @@
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid MinWidth="420" MinHeight="600">
+    <Grid MinWidth="420" MinHeight="620">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>

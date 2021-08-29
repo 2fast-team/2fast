@@ -147,14 +147,23 @@ namespace Project2FA.UWP.ViewModels
 
             if (await networkService.GetIsInternetAvailableAsync())
             {
-                Status result = await CheckAndFixServerAddress();
-                if (result != null)
+                try
                 {
-                    if (result.Installed == true && result.Maintenance == false)
+                    Status result = await CheckAndFixServerAddress();
+                    if (result != null)
                     {
-                        return (true, result);
+                        if (result.Installed && result.Maintenance == false)
+                        {
+                            return (true, result);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    TrackingManager.TrackException(ex);
+                    return (false, null);
+                }
+
             }
             else
             {

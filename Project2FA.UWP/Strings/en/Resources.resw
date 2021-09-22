@@ -759,7 +759,7 @@ The option can be activated under the settings.</value>
     <value>login</value>
   </data>
   <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
-    <value>server adress</value>
+    <value>server address</value>
   </data>
   <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
     <value>username</value>

@@ -56,32 +56,11 @@ namespace Project2FA.Repository.Models
 
         private byte[] _secretByteArray;
         //no need for SetProperty, because no UI binding
-        //TODO not working with protect byte array & Android
         [Encrypt]
         public byte[] SecretByteArray
         {
-            get
-            {
-                if (_secretByteArray != null)
-                {
-#if __MOBILE__
-                    return _secretByteArray;
-#endif
-                    return ProtectData.Unprotect(_secretByteArray);
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
-            set =>
-#if __MOBILE__
-                _secretByteArray = value;
-#else
-                _secretByteArray = ProtectData.Protect(value);
-#endif
-
+            get => _secretByteArray != null ? ProtectData.Unprotect(_secretByteArray) : null;
+            set => _secretByteArray = ProtectData.Protect(value);
         }
 
         private string _twoFACode;
@@ -89,11 +68,7 @@ namespace Project2FA.Repository.Models
         public string TwoFACode
         {
             get => _twoFACode;
-            set
-            {
-                Seconds = Period;
-                SetProperty(ref _twoFACode, value);
-            }
+            set => SetProperty(ref _twoFACode, value);
         }
 
         //[JsonIgnore]

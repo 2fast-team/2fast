@@ -44,7 +44,7 @@ namespace Project2FA.UWP.ViewModels
             Title = "Accounts";
 
             _dispatcherTOTPTimer = new DispatcherTimer();
-            _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 1); //every second
+            _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 0, 1); //every second
             _dispatcherTOTPTimer.Tick += TOTPTimer;
 
             _dispatcherTimerDeletedModel = new DispatcherTimer();
@@ -76,7 +76,7 @@ namespace Project2FA.UWP.ViewModels
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
                 // clear the navigation stack
-                await App.ShellPageInstance.NavigationService.NavigateAsync("/BlankPage");
+                await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
                 LoginPage loginPage = new LoginPage(true);
                 Window.Current.Content = loginPage;
             });
@@ -91,11 +91,15 @@ namespace Project2FA.UWP.ViewModels
             EditAccountCommand = new RelayCommand(EditAccountFromCollection);
             DeleteAccountCommand = new RelayCommand(DeleteAccountFromCollection);
             Copy2FACodeToClipboardCommand = new RelayCommand(Copy2FACodeToClipboard);
+            StartTOTPLogic();
+        }
 
+        private async Task StartTOTPLogic()
+        {
             if (DataService.Instance.Collection.Count != 0)
             {
                 //only reset the time and calc the new totp
-                DataService.Instance.ResetCollection();
+                await DataService.Instance.ResetCollection();
             }
 
             _dispatcherTOTPTimer.Start();
@@ -132,9 +136,8 @@ namespace Project2FA.UWP.ViewModels
             await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
-                if (TwoFADataService.Collection[i].Seconds == 0)
+                if (TwoFADataService.Collection[i].Seconds == 1)
                 {
-                    TwoFADataService.Collection[i].Seconds = TwoFADataService.Collection[i].Period;
                     success = await DataService.Instance.GenerateTOTP(i);
                 }
                 else

@@ -99,7 +99,6 @@
                                         <CommandBar.PrimaryCommands>
                                             <AppBarButton  
                                             x:Name="ABB_UndoDelete"
-                                              
                                             x:Uid="AccountCodePageABBUndoDelete" 
                                             Command="{x:Bind UndoDeleteCommand}" 
                                             Icon="Undo" />

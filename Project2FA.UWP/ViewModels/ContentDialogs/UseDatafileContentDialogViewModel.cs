@@ -59,7 +59,7 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Checks the inputs and enables / disables the submit button
         /// </summary>
-        public override void CheckInputs()
+        public override Task CheckInputs()
         {
             if (!string.IsNullOrEmpty(DateFileName))
             {
@@ -76,6 +76,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 DatafileBTNActive = false;
             }
+            return Task.CompletedTask;
         }
 
         /// <summary>

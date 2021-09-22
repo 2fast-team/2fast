@@ -58,8 +58,9 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Checks the inputs and enables / disables the submit button
         /// </summary>
-        public virtual void CheckInputs()
+        public virtual Task CheckInputs()
         {
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -68,8 +69,6 @@ namespace Project2FA.UWP.ViewModels
         /// <param name="isWebDAV"></param>
         public async Task CreateLocalFileDB(bool isWebDAV)
         {
-            //TODO WebDAV case
-            // local filedata
             string hash = CryptoService.CreateStringHash(Password, false);
             DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
             string tempDataFileName;
@@ -127,9 +126,6 @@ namespace Project2FA.UWP.ViewModels
                 SecretService.Helper.WriteSecret(Constants.ContainerName, "WDPassword", WebDAVPassword);
                 SecretService.Helper.WriteSecret(Constants.ContainerName, "WDServerAddress", ServerAddress);
                 SecretService.Helper.WriteSecret(Constants.ContainerName, "WDUsername", Username);
-
-                //var client = UWP.Services.WebDAV.WebDAVClientService.Instance.GetClient();
-                //var directory = new DirectoryService();
                 return true;
             }
             else

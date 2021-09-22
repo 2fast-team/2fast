@@ -68,7 +68,7 @@
                             </CommandBar>
                         </CommandBar.Content>
                         <CommandBar.PrimaryCommands>
-                            <AppBarButton 
+                            <!--<AppBarButton 
                                 x:Name="ABB_Tutorial"
                                 x:Uid="WelcomePageABBTutorial" >
                                 <AppBarButton.Icon>
@@ -94,7 +94,7 @@
                                         </muxc:TeachingTip.HeroContent>
                                     </appcontrols:AutoCloseTeachingTip>
                                 </AppBarButton.Resources>
-                            </AppBarButton>
+                            </AppBarButton>-->
 
                         </CommandBar.PrimaryCommands>
                     </CommandBar>

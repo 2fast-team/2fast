@@ -28,6 +28,10 @@ using Microsoft.Toolkit.Uwp.Connectivity;
 using Project2FA.Core;
 using Project2FA.Core.Services.NTP;
 using System.Threading.Tasks;
+using DecaTec.WebDav;
+using Project2FA.UWP.Services.WebDAV;
+using Windows.Storage.Streams;
+using WebDAVClient.Types;
 
 namespace Project2FA.UWP.Services
 {
@@ -129,7 +133,7 @@ namespace Project2FA.UWP.Services
                         if (e.Action == NotifyCollectionChangedAction.Add)
                         {
                             // initialize the newest (last) item
-                            InitializeItem((sender as ObservableCollection<TwoFACodeModel>).Count -1);
+                            InitializeItem((sender as ObservableCollection<TwoFACodeModel>).Count - 1);
                         }
                     }
                     break;
@@ -157,7 +161,7 @@ namespace Project2FA.UWP.Services
         /// <param name="i">The index of the item in the collection</param>
         private void InitializeItem(int i)
         {
-            Collection[i].Seconds = Collection[i].Period;
+            //Collection[i].Seconds = Collection[i].Period;
             GenerateTOTP(i);
         }
 
@@ -177,12 +181,20 @@ namespace Project2FA.UWP.Services
         /// <param name="dbDatafile"></param>
         private async Task CheckLocalDatafile()
         {
+            DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
             try
             {
-                DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
-
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
+                StorageFolder folder;
+                if (dbDatafile.IsWebDAV)
+                {
+                    folder = ApplicationData.Current.LocalFolder;
+                    await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
+                }
+                else
+                {
+                    folder = await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
+                }
                 if (await FileService.FileExistsAsync(dbDatafile.Name, folder))
                 {
                     DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
@@ -197,13 +209,12 @@ namespace Project2FA.UWP.Services
                             DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
                             byte[] iv = datafile.IV;
 
-                            datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                                            SecretService.Helper.ReadSecret(Constants.ContainerName,dbHash.Hash),
-                                                            iv,
-                                                            datafileStr);
+                            datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
+                                            (SecretService.Helper.ReadSecret(Constants.ContainerName,dbHash.Hash),
+                                            iv,
+                                            datafileStr);
                             deserializeCollection = datafile.Collection;
                         }
-
                     }
                     catch (Exception)
                     {
@@ -218,6 +229,12 @@ namespace Project2FA.UWP.Services
 
                 if (deserializeCollection != null)
                 {
+                    if (deserializeCollection.Count > 0)
+                    {
+                        var temp = new Totp(deserializeCollection[0].SecretByteArray);
+                        int remainingTime = temp.RemainingSeconds();
+                    }
+
                     Collection.AddRange(deserializeCollection);
                     if (Collection.Count == 0)
                     {
@@ -246,7 +263,14 @@ namespace Project2FA.UWP.Services
                 }
                 else if(exc is FileNotFoundException)
                 {
-                    ShowFileOrFolderNotFoundError();
+                    if (dbDatafile.IsWebDAV)
+                    {
+                        // TODO add dialog for error
+                    }
+                    else
+                    {
+                        ShowFileOrFolderNotFoundError();
+                    }
                 }
                 else
                 {
@@ -261,17 +285,39 @@ namespace Project2FA.UWP.Services
         }
 
         /// <summary>
-        /// Deletes the datafile from storage
+        /// Check if the datafile is outdated
+        /// Yes => download the new datefile
         /// </summary>
-        public async Task DeleteLocalDatafile()
+        /// <param name="dbDatafile"></param>
+        /// <returns></returns>
+        private async Task CheckIfWebDAVDatafileIsOutdated(DBDatafileModel dbDatafile)
         {
-            DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
-            StorageFile storageFile = await (await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path)).GetFileAsync(dbDatafile.Name);
-
-            if (storageFile != null)
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+            ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
+            if (webDAVFile.LastModified > (await storageFile.GetBasicPropertiesAsync()).DateModified)
             {
-                await storageFile.DeleteAsync();
+                await DownloadWebDAVFile(storageFolder, dbDatafile);
             }
+        }
+
+        /// <summary>
+        /// Download the datafile in the local app storage
+        /// </summary>
+        /// <param name="storageFolder"></param>
+        /// <param name="dbDatafile"></param>
+        /// <returns></returns>
+        private async Task<StorageFile> DownloadWebDAVFile(StorageFolder storageFolder, DBDatafileModel dbDatafile)
+        {
+            StorageFile localFile;
+            localFile = await storageFolder.CreateFileAsync(dbDatafile.Name, CreationCollisionOption.ReplaceExisting);
+            IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+            using IRandomAccessStream randomAccessStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
+            Stream targetStream = randomAccessStream.AsStreamForWrite();
+            await client.Download(dbDatafile.Path + "/" + dbDatafile.Name, targetStream, progress, new CancellationToken());
+            return localFile;
         }
 
         private void ErrorResolved()
@@ -504,11 +550,14 @@ namespace Project2FA.UWP.Services
                 {
                     Totp totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
                     int remainingTime = totp.RemainingSeconds();
-                    bool verified = totp.VerifyTotp(totp.ComputeTotp(), out long matched, VerificationWindow.RfcSpecifiedNetworkDelay);
-                    if (!verified)
-                    {
-                        return false;
-                    }
+
+                    // debug
+                    //bool verified = totp.VerifyTotp(totp.ComputeTotp(), out long matched, VerificationWindow.RfcSpecifiedNetworkDelay);
+                    //if (!verified)
+                    //{
+                    //    return false;
+                    //}
+                    Collection[i].Seconds = remainingTime;
                     if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
                     {
                         Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));

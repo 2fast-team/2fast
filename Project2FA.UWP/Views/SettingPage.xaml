@@ -167,6 +167,7 @@
 
                                 <Button 
                                     Margin="0,30,0,0"
+                                    Style="{StaticResource ButtonRevealStyle}"
                                     Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
                                     <StackPanel Orientation="Horizontal">
                                         <FontIcon 
@@ -315,6 +316,7 @@
                             <Button
                             x:Uid="SettingsDatafileBTNChangePassword"
                             Margin="0,10,0,0"
+                            Style="{StaticResource ButtonRevealStyle}"
                             Content="~SettingsDatafileBTNChangePassword.Content"
                             Command="{x:Bind ViewModel.DatafilePartViewModel.ChangeDatafilePasswordCommand}"/>
                         </StackPanel>

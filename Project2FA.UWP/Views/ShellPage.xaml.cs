@@ -17,6 +17,7 @@ using Template10.Services.Dialog;
 using Windows.ApplicationModel.Core;
 using Project2FA.UWP.Utils;
 using Prism.Navigation;
+using System.Threading.Tasks;
 
 namespace Project2FA.UWP.Views
 {
@@ -24,7 +25,6 @@ namespace Project2FA.UWP.Views
     {
         private SystemNavigationManager _navManager;
         private bool _navigationIsAllowed = true;
-        private Frame _frame;
         private string _title;
         public INavigationService NavigationService { get; private set; }
         public NavigationView ShellViewInternal { get; private set; }
@@ -54,8 +54,8 @@ namespace Project2FA.UWP.Views
             }
 
             ShellViewInternal = ShellView;
-            ShellView.Content = _frame = new Frame();
-            NavigationService = NavigationFactory.Create(_frame).AttachGestures(Window.Current, Gesture.Back, Gesture.Forward, Gesture.Refresh);
+            ShellView.Content = MainFrame = new Frame();
+            NavigationService = NavigationFactory.Create(MainFrame).AttachGestures(Window.Current, Gesture.Back, Gesture.Forward, Gesture.Refresh);
 
             SetupGestures();
             SetupBackButton();
@@ -80,16 +80,11 @@ namespace Project2FA.UWP.Views
                 }
             };
 
-            _frame.Navigated += (s, e) =>
+            MainFrame.Navigated += (s, e) =>
             {
                 if (TryFindItem(e.SourcePageType, e.Parameter, out object item))
                 {
                     SetSelectedItem(item, false);
-                    // TODO test if nessasary
-                    if (item == null)
-                    {
-                        return;
-                    }
                 }
             };
 
@@ -140,10 +135,10 @@ namespace Project2FA.UWP.Views
 
             // If this is the first run, activate the ntp server checks
             // else => UseNTPServerCorrection is false
-            if (SystemInformation.Instance.IsFirstRun)
-            {
-                SettingsService.Instance.UseNTPServerCorrection = true;
-            }
+            //if (SystemInformation.Instance.IsFirstRun)
+            //{
+            //    SettingsService.Instance.UseNTPServerCorrection = true;
+            //}
         }
 
         public void SetTitleBarAsDraggable()
@@ -195,7 +190,9 @@ namespace Project2FA.UWP.Views
         private void SetupGestures()
         {
             _navManager.BackRequested += NavManager_BackRequested;
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             ShellView.BackRequested += async (s, e) => await NavigationService.GoBackAsync();
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
         private void CheckUnhandledExceptionLastSession()
@@ -228,7 +225,7 @@ namespace Project2FA.UWP.Views
             set => SetSelectedItem(value);
         }
 
-        private async void SetSelectedItem(object selectedItem, bool withNavigation = true)
+        private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
         {
             if (selectedItem == null)
             {
@@ -337,12 +334,12 @@ namespace Project2FA.UWP.Views
 
             // search filtered items
 
-            foreach ((NavigationViewItem Item, string Path) footerMenuItem in footerMenuItems)
+            foreach ((NavigationViewItem Item, string Path) in footerMenuItems)
             {
-                if (NavigationQueue.TryParse(footerMenuItem.Path, null, out NavigationQueue menuQueue)
+                if (NavigationQueue.TryParse(Path, null, out NavigationQueue menuQueue)
                     && Equals(menuQueue.Last().View, type) && menuQueue.Last().QueryString == (string)parameter)
                 {
-                    item = footerMenuItem.Item;
+                    item = Item;
                     return true;
                 }
             }
@@ -444,7 +441,7 @@ namespace Project2FA.UWP.Views
             get => _navigationIsAllowed;
             set => SetProperty(ref _navigationIsAllowed, value);
         }
-        public Frame MainFrame { get => _frame; set => _frame = value; }
+        public Frame MainFrame { get; }
         public string Title { get => _title; set => SetProperty(ref _title, value); }
 
 

@@ -35,12 +35,13 @@
                         Width="36"
                         Grid.RowSpan="2"
                         Margin="0,0,4,0">
-                        <FontIcon 
+                        <Image Source="/Assets/SmallTile.scale-400.png"/>
+                        <!--<FontIcon 
                             Glyph="{x:Bind Glyph,Mode=OneWay}" 
                             FontFamily="Segoe UI Emoji"
                             FontSize="36"
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Center"/>
+                            HorizontalAlignment="Center"/>-->
                     </Grid>
 
                     <TextBlock
@@ -70,10 +71,66 @@
                     </StackPanel>
                 </Grid>
             </DataTemplate>
+
+            <Style x:Key="WebDAVListViewItemStyle" TargetType="ListViewItem">
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+                <Setter Property="Background" Value="{ThemeResource ListViewItemBackground}" />
+                <Setter Property="Foreground" Value="{ThemeResource ListViewItemForeground}" />
+                <Setter Property="TabNavigation" Value="Local" />
+                <Setter Property="IsHoldingEnabled" Value="True" />
+                <Setter Property="Padding" Value="12,0,12,0" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
+                <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}" />
+                <Setter Property="AllowDrop" Value="False" />
+                <Setter Property="UseSystemFocusVisuals" Value="True" />
+                <Setter Property="FocusVisualMargin" Value="0" />
+                <Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource ListViewItemFocusVisualPrimaryBrush}" />
+                <Setter Property="FocusVisualPrimaryThickness" Value="2" />
+                <Setter Property="FocusVisualSecondaryBrush" Value="{ThemeResource ListViewItemFocusVisualSecondaryBrush}" />
+                <Setter Property="FocusVisualSecondaryThickness" Value="1" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}"
+                        Control.IsTemplateFocusTarget="True"
+                        FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
+                        FocusVisualPrimaryBrush="{TemplateBinding FocusVisualPrimaryBrush}"
+                        FocusVisualPrimaryThickness="{TemplateBinding FocusVisualPrimaryThickness}"
+                        FocusVisualSecondaryBrush="{TemplateBinding FocusVisualSecondaryBrush}"
+                        FocusVisualSecondaryThickness="{TemplateBinding FocusVisualSecondaryThickness}"
+                        SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}"
+                        CheckBrush="{ThemeResource ListViewItemCheckBrush}"
+                        CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
+                        DragBackground="{ThemeResource ListViewItemDragBackground}"
+                        DragForeground="{ThemeResource ListViewItemDragForeground}"
+                        FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
+                        SelectedBackground="{ThemeResource SystemChromeBlackMediumLowColor}"
+                        SelectedPointerOverBackground="{ThemeResource SystemControlAccentDark1AcrylicElementAccentDark1Brush}"
+                        FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
+                        PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
+                        PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}"
+                        PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}"
+                        SelectedForeground="White"
+                        PressedBackground="{ThemeResource ListViewItemBackgroundPressed}"
+                        SelectedPressedBackground="{ThemeResource SystemChromeBlackHighColor}"
+                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                        DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                        ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        ContentMargin="{TemplateBinding Padding}"
+                        CheckMode="{ThemeResource ListViewItemCheckMode}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid MinWidth="420" MinHeight="620">
+    <Grid MinWidth="420" MinHeight="600">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -121,13 +178,9 @@
                 Grid.Row="1"
                 x:Name="LV_WebDAVItems"
                 SelectedItem="{x:Bind ViewModel.SelectedItem,Mode=TwoWay}"
+                ItemContainerStyle="{StaticResource WebDAVListViewItemStyle}"
                 ItemsSource="{x:Bind ViewModel.Directory.FilesAndFolders,Mode=OneWay}"
                 ItemTemplate="{StaticResource WebDAVItemTemplate}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
             </ListView>
         </Grid>
     </Grid>

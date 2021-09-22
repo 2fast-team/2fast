@@ -86,7 +86,7 @@
                                         </muxc:TeachingTip>
                                     </Button.Resources>
                                 </Button>
-                                <HyperlinkButton
+                                <!--<HyperlinkButton
                                     Height="48"
                                     Width="48"
                                     Padding="4,4,4,4"
@@ -95,7 +95,7 @@
                                     FontSize="20"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE946;"  />
-                                </HyperlinkButton>
+                                </HyperlinkButton>-->
                             </StackPanel>
 
 

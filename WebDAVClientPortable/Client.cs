@@ -256,7 +256,7 @@ namespace WebDAVClient
         /// <returns>The resource info.</returns>
         /// <param name="path">remote Path.</param>
         /// <param name="name">name of resource to get</param>
-        public async Task<ResourceInfoModel> GetResourceInfo(string path, string name)
+        public async Task<ResourceInfoModel> GetResourceInfoAsync(string path, string name)
         {
             Uri baseUri = new Uri(_url);
             baseUri = new Uri(baseUri, baseUri.AbsolutePath + (baseUri.AbsolutePath.EndsWith("/") ? "" : "/") + Davpath);
@@ -269,7 +269,7 @@ namespace WebDAVClient
             }
             foreach (WebDavSessionItem item in result)
             {
-                if (item.Name.Equals(name))
+                if (item.Name.Equals(name, StringComparison.Ordinal))
                 {
                     ResourceInfoModel res = item.ToResourceInfo(baseUri);
 
@@ -414,7 +414,7 @@ namespace WebDAVClient
         /// <returns>File contents.</returns>
         public Task<bool> Download(string path, Stream localStream, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
         {
-            return _dav.DownloadFileWithProgressAsync(GetDavUri(path), localStream, progress, cancellationToken);
+            return _dav.DownloadFileWithProgressAsync(GetDavUri(path, true), localStream, progress, cancellationToken);
         }
 
         public async Task<Stream> GetImage(ResourceInfoModel file)

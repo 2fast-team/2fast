@@ -36,6 +36,7 @@ namespace Project2FA.UWP.ViewModels
                 byte[] iv = new AesManaged().IV;
                 DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
                 await FileService.WriteStringAsync(DateFileName, SerializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
+                App.ShellPageInstance.NavigationIsAllowed = true;
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
@@ -68,7 +69,7 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Checks the inputs and enables / disables the submit button
         /// </summary>
-        public override async void CheckInputs()
+        public override async Task CheckInputs()
         {
             if (!string.IsNullOrEmpty(DateFileName))
             {

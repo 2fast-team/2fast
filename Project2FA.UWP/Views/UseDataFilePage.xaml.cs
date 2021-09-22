@@ -26,7 +26,14 @@ namespace Project2FA.UWP.Views
         {
             if (e.Key == Windows.System.VirtualKey.Enter && !string.IsNullOrEmpty(ViewModel.Password))
             {
-                await ViewModel.SetAndCheckLocalDatafile();
+                if (MainPivot.Items.Contains(WebDAVPivotItem))
+                {
+                    await ViewModel.SetAndCheckLocalWebDAVDatafile();
+                }
+                else
+                {
+                    await ViewModel.SetAndCheckLocalDatafile();
+                }
             }
         }
 

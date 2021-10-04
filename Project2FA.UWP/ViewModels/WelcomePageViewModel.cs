@@ -28,6 +28,7 @@ namespace Project2FA.UWP.ViewModels
         {
             _dialogService = dialogService;
             _navigationService = navigationService;
+            // disable the navigation to other pages
             App.ShellPageInstance.NavigationIsAllowed = false;
             Title = Strings.Resources.WelcomePageTitle;
 
@@ -38,7 +39,6 @@ namespace Project2FA.UWP.ViewModels
             UseExistDatefileCommand = new DelegateCommand(async () =>
             {
                 await _navigationService.NavigateAsync(nameof(UseDataFilePage));
-                //UseExistDatafile();
             });
         }
 
@@ -83,18 +83,5 @@ namespace Project2FA.UWP.ViewModels
         }
 
         public string Title { get => _title; set => SetProperty(ref _title, value); }
-
-        //public bool CanNavigate(INavigationParameters parameters)
-        //{
-        //    if (_canNavigate)
-        //    {
-        //        App.ShellPageInstance.NavigationIsAllowed = true;
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
     }
 }

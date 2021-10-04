@@ -29,7 +29,7 @@
             </DataTemplate>
 
             <DataTemplate x:Name="DependenciesListViewTemplate" x:DataType="models:DependencyModel">
-                <Grid 
+                <Grid
                     x:Name="Root" 
                     Background="{ThemeResource TwoFABackgroundBrush}" 
                     Width="450">
@@ -38,24 +38,24 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock 
+                    <TextBlock
                         Text="{x:Bind Name, Mode=OneWay}"
                         FontSize="16"
                         Foreground="{ThemeResource SystemAccentColor}"
                         Padding="0,0,0,8"/>
-                    <StackPanel 
+                    <StackPanel
                         Grid.Row="1" 
                         Margin="0,8,0,0"
                         Orientation="Horizontal">
-                        <TextBlock 
+                        <TextBlock
                             x:Uid="SettingsDependencyAuthor"
                             Grid.Row="1" 
                             VerticalAlignment="Center"
                             Margin="0,0,4,0" />
-                        <TextBlock 
+                        <TextBlock
                             VerticalAlignment="Center"
                             Text="{x:Bind Authors, Mode=OneWay}"/>
-                        <HyperlinkButton 
+                        <HyperlinkButton
                             Content="Link"
                             Margin="4,0,0,0"
                             ToolTipService.ToolTip="{x:Bind URL,Mode=OneWay}"
@@ -63,21 +63,21 @@
                             NavigateUri="{x:Bind URL,Mode=OneWay}"/>
                     </StackPanel>
 
-                    <StackPanel 
+                    <StackPanel
                         Grid.Row="2" 
                         Margin="0,8,0,0"
                         Orientation="Horizontal">
-                        <TextBlock 
+                        <TextBlock
                             x:Uid="SettingsDependencyLicence"
                             Margin="0,0,4,0" 
                             VerticalAlignment="Center"
                             Grid.Row="2" 
                             Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"/>
-                        <TextBlock 
+                        <TextBlock
                             VerticalAlignment="Center"
                             Text="{x:Bind LicenseName, Mode=OneWay}" 
                             Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}" />
-                        <HyperlinkButton 
+                        <HyperlinkButton
                             Margin="4,0,0,0"
                             Content="Link"
                             Visibility="{x:Bind LicenseURL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
@@ -101,7 +101,7 @@
                         <ColumnDefinition MaxWidth="1080"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <ScrollViewer 
+                    <ScrollViewer
                         VerticalScrollMode="Auto" 
                         Margin="0,10,0,0">
                         <StackPanel>
@@ -369,7 +369,10 @@
                             NavigateUri="https://github.com/2fast-team/2fast"
                             ToolTipService.ToolTip="https://github.com/2fast-team/2fast"/>
 
-                                    <Button Margin="0,10" Command="{x:Bind ViewModel.RateAppCommand}">
+                                    <Button 
+                                        Margin="0,10" 
+                                        Style="{StaticResource ButtonRevealStyle}"
+                                        Command="{x:Bind ViewModel.RateAppCommand}">
                                         <StackPanel Orientation="Horizontal">
                                             <FontIcon 
                                     FontSize="30"

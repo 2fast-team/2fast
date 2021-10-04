@@ -6,6 +6,16 @@
     xmlns:local="using:Project2FA">
 	
 	<Application.Resources>
-		<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
+                <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+                <!--<ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+            <!--<Converters:BytesToHumanReadableConverter x:Key="BytesToHumanReadableConverter"/>
+            <Converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+            <Converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
+            <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>-->
+        </ResourceDictionary>
 	</Application.Resources>
 </prismUnity:PrismApplication>

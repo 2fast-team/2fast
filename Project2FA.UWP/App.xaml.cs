@@ -28,7 +28,7 @@ namespace Project2FA.UWP
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : PrismApplication
+    public sealed partial class App : PrismApplication
     {
         private DateTime _focusLostTime;
         private DispatcherTimer _focusLostTimer;
@@ -58,6 +58,7 @@ namespace Project2FA.UWP
             TrackingManager.TrackException(e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
+            // let the app crash...
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -65,6 +66,7 @@ namespace Project2FA.UWP
             TrackingManager.TrackException(e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
+            // let the app crash...
         }
 
         public override void RegisterTypes(IContainerRegistry container)
@@ -92,17 +94,13 @@ namespace Project2FA.UWP
         {
             if (Window.Current.Content == null)
             {
-                //if (System.Diagnostics.Debugger.IsAttached)
-                //{
-                //    ApplicationLanguages.PrimaryLanguageOverride = "en";
-                //}
+                // Hide default title bar
                 CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
                 if (!coreTitleBar.ExtendViewIntoTitleBar)
                 {
                     coreTitleBar.ExtendViewIntoTitleBar = true;
                 }
                 Window.Current.Activated += Current_Activated;
-                bool loginRequiered = false;
                 // set DB
                 if (Repository is null)
                 {
@@ -121,22 +119,15 @@ namespace Project2FA.UWP
                     // set custom splash screen page
                     //Window.Current.Content = new SplashPage(e.SplashScreen);
                 }
-                if (await Repository.Password.GetAsync() is null)
-                {
-                    navigationPath = "/WelcomePage";
-                }
-                else
-                {
-                    loginRequiered = true;
-                }
 
-                if (loginRequiered)
+                if (!(await Repository.Password.GetAsync() is null))
                 {
                     LoginPage loginPage = Container.Resolve<LoginPage>();
                     Window.Current.Content = loginPage;
                 }
                 else
                 {
+                    navigationPath = "/WelcomePage";
                     await ShellPageInstance.NavigationService.NavigateAsync(navigationPath);
                     Window.Current.Content = ShellPageInstance;
                 }
@@ -145,6 +136,11 @@ namespace Project2FA.UWP
         }
 
         #region AutoLogout
+        /// <summary>
+        /// Detects if the focus is lost for the app and start the timer for auto logout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Current_Activated(object sender, WindowActivatedEventArgs e)
         {
             if (e.WindowActivationState == CoreWindowActivationState.Deactivated)
@@ -181,7 +177,7 @@ namespace Project2FA.UWP
                 _focusLostTimer.Stop();
                 return;
             }
-            var timeDiff = DateTime.Now - _focusLostTime;
+            TimeSpan timeDiff = DateTime.Now - _focusLostTime;
             if (timeDiff.TotalMinutes >= 10)
             {
                 _focusLostTimer.Stop();

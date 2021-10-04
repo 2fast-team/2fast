@@ -39,7 +39,6 @@ namespace Project2FA.UWP.Views
             // determine and set if the app is started in debug mode
             Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
 
-            // Hide default title bar.
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
@@ -110,7 +109,7 @@ namespace Project2FA.UWP.Views
         {
             if (!string.IsNullOrEmpty(SettingsService.Instance.UnhandledExceptionStr))
             {
-                CheckUnhandledExceptionLastSession();
+                await CheckUnhandledExceptionLastSession();
             }
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             //Rate information for the user
@@ -122,16 +121,16 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            // TODO add check for 1.0.3 to 1.0.4
-            //if (SystemInformation.Instance.IsAppUpdated)
-            //{
-            //    ContentDialog dialog = new ContentDialog();
-            //    dialog.Title = Strings.Resources.NewAppFeaturesTitle;
-            //    dialog.Content = Strings.Resources.NewAppFeaturesContent;
-            //    dialog.PrimaryButtonText = Strings.Resources.Confirm;
-            //    dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            //    await dialogService.ShowAsync(dialog);
-            //}
+            // TODO add check for 1.0.4 to 1.0.5
+            if (SystemInformation.Instance.IsAppUpdated)
+            {
+                ContentDialog dialog = new ContentDialog();
+                dialog.Title = Strings.Resources.NewAppFeaturesTitle;
+                dialog.Content = Strings.Resources.NewAppFeaturesContent;
+                dialog.PrimaryButtonText = Strings.Resources.Confirm;
+                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                await dialogService.ShowAsync(dialog);
+            }
 
             // If this is the first run, activate the ntp server checks
             // else => UseNTPServerCorrection is false
@@ -195,9 +194,9 @@ namespace Project2FA.UWP.Views
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
-        private void CheckUnhandledExceptionLastSession()
+        private Task CheckUnhandledExceptionLastSession()
         {
-            ErrorDialogs.ShowUnexpectedError(SettingsService.Instance.UnhandledExceptionStr);
+            return ErrorDialogs.ShowUnexpectedError(SettingsService.Instance.UnhandledExceptionStr);
         }
 
         private async void NavManager_BackRequested(object sender, BackRequestedEventArgs e)

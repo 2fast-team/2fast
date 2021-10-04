@@ -9,12 +9,102 @@ using Project2FA.UWP.Strings;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
 using Project2FA.UWP.Services;
+using System.Threading.Tasks;
+using Project2FA.UWP.Views;
+using Windows.Storage;
+using Prism.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Project2FA.UWP.Utils
 {
     public static class ErrorDialogs
     {
-        public async static void UnauthorizedAccessDialog()
+        /// <summary>
+        /// Displays that the system time is not correct
+        /// </summary>
+        /// <returns></returns>
+        public static Task SystemTimeNotCorrectError()
+        {
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.AccountCodePageWrongTimeTitle;
+            dialog.Content = Resources.AccountCodePageWrongTimeContent;
+            dialog.PrimaryButtonText = Resources.AccountCodePageWrongTimeBTN;
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+            {
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
+            });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            dialog.SecondaryButtonText = Resources.Confirm;
+            return dialogService.ShowAsync(dialog);
+        }
+        public static async Task ShowUnauthorizedAccessError()
+        {
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.AuthorizationFileSystemContentDialogTitle;
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
+            markdown.Text = Resources.AuthorizationFileSystemContentDialogDescription;
+            dialog.Content = markdown;
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+            {
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
+                Prism.PrismApplicationBase.Current.Exit();
+            });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            dialog.PrimaryButtonText = Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
+            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.SecondaryButtonText = Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
+            dialog.SecondaryButtonCommand = new DelegateCommand(() =>
+            {
+                Prism.PrismApplicationBase.Current.Exit();
+            });
+            ContentDialogResult result = await dialogService.ShowAsync(dialog);
+            if (result == ContentDialogResult.None)
+            {
+                Prism.PrismApplicationBase.Current.Exit();
+            }
+        }
+
+        /// <summary>
+        /// Displays a wrong password error message and option to change the password
+        /// </summary>
+        public static async Task ShowPasswordError()
+        {
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = Resources.PasswordInvalidHeader,
+                Content = Resources.PasswordInvalidMessage,
+                PrimaryButtonText = Resources.ChangePassword,
+                PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style,
+
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+                PrimaryButtonCommand = new DelegateCommand(async () =>
+                {
+                    ContentDialogResult result = await dialogService.ShowAsync(new ChangeDatafilePasswordContentDialog(true));
+                }),
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
+                SecondaryButtonText = Resources.CloseApp,
+                SecondaryButtonCommand = new DelegateCommand(() =>
+                {
+                    Prism.PrismApplicationBase.Current.Exit();
+                })
+            };
+
+            ContentDialogResult result = await dialogService.ShowAsync(dialog);
+            if (result == ContentDialogResult.None)
+            {
+                ShowPasswordError();
+            }
+        }
+
+        
+
+        public static Task UnauthorizedAccessDialog()
         {
             var dialog = new ContentDialog
             {
@@ -38,10 +128,10 @@ namespace Project2FA.UWP.Utils
                 Prism.PrismApplicationBase.Current.Exit();
             });
             var dialogService = App.Current.Container.Resolve<IDialogService>();
-            await dialogService.ShowAsync(dialog);
+            return dialogService.ShowAsync(dialog);
         }
 
-        public async static void UnauthorizedAccessUseLocalFileDialog()
+        public static Task UnauthorizedAccessUseLocalFileDialog()
         {
             var dialog = new ContentDialog
             {
@@ -70,10 +160,10 @@ namespace Project2FA.UWP.Utils
             //    Prism.PrismApplicationBase.Current.Exit();
             //});
             var dialogService = App.Current.Container.Resolve<IDialogService>();
-            await dialogService.ShowAsync(dialog);
+            return dialogService.ShowAsync(dialog);
         }
 
-        public async static void ShowUnexpectedError(Exception exc)
+        public async static Task ShowUnexpectedError(Exception exc)
         {
             var dialog = new ContentDialog
             {
@@ -148,7 +238,7 @@ namespace Project2FA.UWP.Utils
             }
         }
 
-        public async static void ShowUnexpectedError(string errorDetail)
+        public async static Task ShowUnexpectedError(string errorDetail)
         {
             var dialog = new ContentDialog
             {

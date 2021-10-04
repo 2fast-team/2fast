@@ -5,6 +5,7 @@
     <TargetFramework>tizen50</TargetFramework>
     <OutputType>Exe</OutputType>
     <DefineConstants>$(DefineConstants);__TIZEN__;</DefineConstants>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="lib\" />
@@ -21,9 +22,11 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
-    <PackageReference Include="Prism.DryIoc.Uno" Version="8.1.97" />
+    <PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
     <PackageReference Include="SkiaSharp.Views" Version="2.80.3" />
-    <PackageReference Include="Uno.UI.Skia.Tizen" Version="3.10.7" />
+    <PackageReference Include="Uno.WinUI" Version="3.10.11" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="3.10.11" />
+    <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="3.10.11" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
 </Project>

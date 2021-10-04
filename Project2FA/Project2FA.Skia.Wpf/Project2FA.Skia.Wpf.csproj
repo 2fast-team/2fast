@@ -1,19 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <DefineConstants>HAS_WINUI</DefineConstants>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
-    <PackageReference Include="Prism.DryIoc.Uno" Version="8.1.97" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.10.7" />
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="3.10.7" />
+    <PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
+    <PackageReference Include="Uno.WinUI" Version="3.10.11" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="3.10.11" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="3.10.11" />
+    <PackageReference Include="Uno.WinUI.Skia.Wpf" Version="3.10.11" />
   </ItemGroup>
   <ItemGroup>
     <UpToDateCheckInput Include="..\Project2FA.Shared\**\*.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
 </Project>

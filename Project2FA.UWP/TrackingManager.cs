@@ -11,13 +11,13 @@ namespace Project2FA.UWP
     //https://github.com/windows-toolkit/WindowsCommunityToolkit/blob/master/Microsoft.Toolkit.Uwp.SampleApp/TrackingManager.cs
     public static class TrackingManager
     {
-        private static StoreServicesCustomEventLogger logger;
+        private static readonly StoreServicesCustomEventLogger _logger;
 
         static TrackingManager()
         {
             try
             {
-                logger = StoreServicesCustomEventLogger.GetDefault();
+                _logger = StoreServicesCustomEventLogger.GetDefault();
             }
             catch
             {
@@ -29,7 +29,7 @@ namespace Project2FA.UWP
         {
             try
             {
-                logger.Log($"exception - {ex.Message} - {ex.StackTrace}");
+                _logger.Log($"exception - {ex.Message} - {ex.StackTrace}");
             }
             catch
             {
@@ -41,7 +41,7 @@ namespace Project2FA.UWP
         {
             try
             {
-                logger.Log($"{category} - {priority} - {label} - {value.ToString()}");
+                _logger.Log($"{category} - {priority} - {label} - {value.ToString()}");
             }
             catch
             {
@@ -53,7 +53,7 @@ namespace Project2FA.UWP
         {
             try
             {
-                logger.Log($"pageView - {pageName}");
+                _logger.Log($"pageView - {pageName}");
             }
             catch
             {

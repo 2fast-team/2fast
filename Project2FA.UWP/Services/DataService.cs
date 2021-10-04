@@ -93,7 +93,7 @@ namespace Project2FA.UWP.Services
                         if (Math.Abs(timespan.TotalSeconds) >= 15) // difference of 15 seconds or more
                         {
                             _ntpServerTimeDifference = timespan;
-                            await SystemTimeNotCorrectError();
+                            await ErrorDialogs.SystemTimeNotCorrectError();
                         }
                         SettingsService.Instance.LastCheckedSystemTime = DateTime.UtcNow;
                     }
@@ -161,7 +161,6 @@ namespace Project2FA.UWP.Services
         /// <param name="i">The index of the item in the collection</param>
         private void InitializeItem(int i)
         {
-            //Collection[i].Seconds = Collection[i].Period;
             GenerateTOTP(i);
         }
 
@@ -218,12 +217,14 @@ namespace Project2FA.UWP.Services
                     }
                     catch (Exception)
                     {
-                        ShowPasswordError();
+                        _errorOccurred = true;
+                        ErrorDialogs.ShowPasswordError();
                     }
                 }
                 // file not found case
                 else
                 {
+                    _errorOccurred = true;
                     ShowFileOrFolderNotFoundError();
                 }
 
@@ -257,9 +258,10 @@ namespace Project2FA.UWP.Services
             catch (Exception exc)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
+                _errorOccurred = true;
                 if (exc is UnauthorizedAccessException)
                 {
-                    ShowUnauthorizedAccessError();
+                    ErrorDialogs.ShowUnauthorizedAccessError();
                 }
                 else if(exc is FileNotFoundException)
                 {
@@ -274,7 +276,6 @@ namespace Project2FA.UWP.Services
                 }
                 else
                 {
-                    _errorOccurred = true;
                     TrackingManager.TrackException(exc);
                     ErrorDialogs.ShowUnexpectedError(exc);
                 }
@@ -327,73 +328,10 @@ namespace Project2FA.UWP.Services
             App.ShellPageInstance.NavigationIsAllowed = true;
         }
 
-        private async Task ShowUnauthorizedAccessError()
-        {
-            _errorOccurred = true;
-            ContentDialog dialog = new ContentDialog();
-            dialog.Title = Resources.AuthorizationFileSystemContentDialogTitle;
-            MarkdownTextBlock markdown = new MarkdownTextBlock();
-            markdown.Text = Resources.AuthorizationFileSystemContentDialogDescription;
-            dialog.Content = markdown;
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
-            {
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
-                Prism.PrismApplicationBase.Current.Exit();
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            dialog.PrimaryButtonText = Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            dialog.SecondaryButtonText = Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
-            dialog.SecondaryButtonCommand = new DelegateCommand(() =>
-            {
-                Prism.PrismApplicationBase.Current.Exit();
-            });
-            ContentDialogResult result = await DialogService.ShowAsync(dialog);
-            if (result == ContentDialogResult.None)
-            {
-                Prism.PrismApplicationBase.Current.Exit();
-            }
-        }
-
-        /// <summary>
-        /// Displays a wrong password error message and option to change the password
-        /// </summary>
-        private async Task ShowPasswordError()
-        {
-            _errorOccurred = true;
-            ContentDialog dialog = new ContentDialog
-            {
-                Title = Resources.PasswordInvalidHeader,
-                Content = Resources.PasswordInvalidMessage,
-                PrimaryButtonText = Resources.ChangePassword,
-                PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style,
-
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-                PrimaryButtonCommand = new DelegateCommand(async () =>
-                {
-                    ContentDialogResult result = await DialogService.ShowAsync(new ChangeDatafilePasswordContentDialog(true));
-                }),
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
-
-                SecondaryButtonText = Resources.CloseApp,
-                SecondaryButtonCommand = new DelegateCommand(() =>
-                {
-                    Prism.PrismApplicationBase.Current.Exit();
-                })
-            };
-
-            ContentDialogResult result = await DialogService.ShowAsync(dialog);
-            if (result == ContentDialogResult.None)
-            {
-                ShowPasswordError();
-            }
-        }
-
         /// <summary>
         /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
         /// </summary>
-        private async Task ShowFileOrFolderNotFoundError()
+        public async Task ShowFileOrFolderNotFoundError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             try
@@ -406,10 +344,9 @@ namespace Project2FA.UWP.Services
             {
                 ErrorDialogs.UnauthorizedAccessDialog();
             }
-            _errorOccurred = true;
             // disable shell navigation
             App.ShellPageInstance.NavigationIsAllowed = false;
-            Logger.Log("no datafile found", Category.Exception, Priority.High);
+            //Logger.Log("no datafile found", Category.Exception, Priority.High);
             bool selectedOption = false;
 
             ContentDialog dialog = new ContentDialog();
@@ -484,29 +421,7 @@ namespace Project2FA.UWP.Services
                     }
                 }
             }
-
             await dialogService.ShowAsync(dialog);
-        }
-
-        /// <summary>
-        /// Displays that the system time is not correct
-        /// </summary>
-        /// <returns></returns>
-        private Task SystemTimeNotCorrectError()
-        {
-            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-            ContentDialog dialog = new ContentDialog();
-            dialog.Title = Resources.AccountCodePageWrongTimeTitle;
-            dialog.Content = Resources.AccountCodePageWrongTimeContent;
-            dialog.PrimaryButtonText = Resources.AccountCodePageWrongTimeBTN;
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
-            {
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            dialog.SecondaryButtonText = Resources.Confirm;
-            return dialogService.ShowAsync(dialog);
         }
 
         /// <summary>
@@ -551,12 +466,6 @@ namespace Project2FA.UWP.Services
                     Totp totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
                     int remainingTime = totp.RemainingSeconds();
 
-                    // debug
-                    //bool verified = totp.VerifyTotp(totp.ComputeTotp(), out long matched, VerificationWindow.RfcSpecifiedNetworkDelay);
-                    //if (!verified)
-                    //{
-                    //    return false;
-                    //}
                     Collection[i].Seconds = remainingTime;
                     if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
                     {

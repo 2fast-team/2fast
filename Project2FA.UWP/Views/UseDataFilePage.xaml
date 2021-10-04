@@ -69,7 +69,6 @@
                         </Button>
                         <Button 
                             x:Name="BTN_WebDAV"
-                            IsEnabled="False"
                             Style="{StaticResource AccentButtonStyle}"
                             Margin="0,10,0,10"
                             MinWidth="200" Click="BTN_WebDAV_Click">

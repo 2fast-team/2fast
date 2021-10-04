@@ -12,6 +12,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <ResourcesDirectory>..\Project2FA.Shared\Strings</ResourcesDirectory>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -117,15 +118,18 @@
       <Version>8.1.97</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Prism.DryIoc.Uno">
+    <PackageReference Include="Prism.DryIoc.Uno.WinUI">
       <Version>8.1.97</Version>
     </PackageReference>
     <PackageReference Include="Uno.Extensions.Logging.OSLog " Version="1.1.0" />
-    <PackageReference Include="Uno.UI">
-      <Version>3.10.7</Version>
+    <PackageReference Include="Uno.WinUI">
+      <Version>3.10.11</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI.RemoteControl">
-      <Version>3.10.7</Version>
+    <PackageReference Include="Uno.WinUI.Lottie">
+      <Version>3.10.11</Version>
+    </PackageReference>
+    <PackageReference Include="Uno.WinUI.RemoteControl">
+      <Version>3.10.11</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

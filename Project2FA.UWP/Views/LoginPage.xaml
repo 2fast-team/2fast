@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mstoolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     mc:Ignorable="d"
@@ -34,7 +35,7 @@
         </Grid.ColumnDefinitions>
 
         <Border 
-            x:Name="PageBackgroundBorder" 
+            x:Name="PageStaticBackgroundBorder" 
             Grid.RowSpan="4" 
             Grid.ColumnSpan="3"
             Visibility="Collapsed">
@@ -57,13 +58,15 @@
         </Border>
 
         <Border 
-            x:Name="PageImageBackgroundBorder" 
-            Grid.RowSpan="4" 
+            x:Name="PageImageBackgroundBorder"
+            Grid.RowSpan="4"
             Grid.ColumnSpan="3">
-            <muxc:ParallaxView x:Name="Parallax"
-                                    VerticalShift="50">
-                <Image Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
-                           Stretch="UniformToFill" />
+            <muxc:ParallaxView 
+                x:Name="Parallax"
+                VerticalShift="50">
+                <Image 
+                    Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                    Stretch="UniformToFill" />
             </muxc:ParallaxView>
         </Border>
 
@@ -91,12 +94,21 @@
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
             Color="{ThemeResource SystemChromeMediumColor}"
-            BlurRadius="40"
             Grid.Column="1"
             Grid.Row="2"
             ShadowOpacity="0.4">
+            <!--<ui:Effects.Shadow>
+                <media:AttachedCardShadow BlurRadius="8"
+                                    CornerRadius="32"
+                                    Color="Black"
+                                    Offset="4,4"
+                                    Opacity="1"/>
+            </ui:Effects.Shadow>-->
             <Grid x:Name="MainGrid">
-                <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                <Border 
+                    x:Name="DetailFirstShadowPanel" 
+                    CornerRadius="{ThemeResource OverlayCornerRadius}"
+                    Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                     <Border>
                         <Border.Background>
                             <media:BackdropBlurBrush Amount="2" />
@@ -104,7 +116,10 @@
                     </Border>
                 </Border>
 
-                <StackPanel MaxWidth="320" MinHeight="500">
+                <StackPanel 
+                    MaxWidth="320" 
+                    MinHeight="500" 
+                    CornerRadius="{ThemeResource OverlayCornerRadius}">
                     <mstoolkitControls:ImageEx 
                         Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
                         MaxHeight="150" 
@@ -133,6 +148,7 @@
                             x:Uid="LoginPageLoginWindowsHelloButton" 
                             Content="~LoginPageLoginWindowsHelloButton.Content" 
                             Margin="0,10,0,0"
+                            Style="{StaticResource ButtonRevealStyle}"
                             Visibility="{x:Bind ViewModel.WindowsHelloIsUsable, Mode=OneWay}"
                             Command="{x:Bind ViewModel.WindowsHelloLoginCommand}" 
                             MinWidth="200" 

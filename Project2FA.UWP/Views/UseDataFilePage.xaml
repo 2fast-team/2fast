@@ -129,6 +129,7 @@
                                     Height="36"
                                     Width="48"
                                     Padding="4,4,4,4"
+                                    Click="HLBTN_PasswordInfo"
                                     VerticalAlignment="Bottom">
                                     <FontIcon
                                     FontSize="20"
@@ -157,22 +158,7 @@
 
                         </StackPanel>
                     </ScrollViewer>
-                    <msct:Loading 
-                        IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
-                        Background="{ThemeResource TranslucentBackgroundHighBrush}">
-                        <StackPanel>
-                            <muxc:AnimatedVisualPlayer 
-                                MaxHeight="120"
-                                x:Name="LottiePlayer" 
-                                PlaybackRate="0.5"
-                                AutoPlay="True">
-                                <lottie:LottieVisualSource  
-                                    UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
-                            </muxc:AnimatedVisualPlayer>
-                            <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
-                            <Button x:Uid="BTNTryAgain" Margin="0,10,0,0" Command="{x:Bind ViewModel.ConfirmErrorCommand}" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </msct:Loading>
+
                 </Grid>
             </PivotItem>
             <PivotItem 
@@ -301,6 +287,22 @@
                 </Grid>
             </PivotItem>
         </Pivot>
+        <msct:Loading 
+                        IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
+                        Background="{ThemeResource TranslucentBackgroundHighBrush}">
+            <StackPanel>
+                <muxc:AnimatedVisualPlayer 
+                                MaxHeight="120"
+                                x:Name="LottiePlayer" 
+                                PlaybackRate="0.5"
+                                AutoPlay="True">
+                    <lottie:LottieVisualSource  
+                                    UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
+                </muxc:AnimatedVisualPlayer>
+                <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
+                <Button x:Uid="BTNTryAgain" Margin="0,10,0,0" Command="{x:Bind ViewModel.ConfirmErrorCommand}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </msct:Loading>
         <mtuc:Loading 
             IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
             Background="{ThemeResource TranslucentBackgroundHighBrush}">

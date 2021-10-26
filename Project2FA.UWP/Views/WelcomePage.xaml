@@ -155,15 +155,17 @@
             </muxc:ParallaxView>
         </Border>
 
-        <mstoolkitControls:DropShadowPanel x:Name="DropShadow"
-                                  HorizontalAlignment="Stretch" 
-                                  VerticalAlignment="Stretch"
-                                  HorizontalContentAlignment="Stretch"
-                                  VerticalContentAlignment="Stretch"
-                                  Color="{ThemeResource SystemChromeMediumColor}"
-                                  BlurRadius="40"
-                                  Grid.Column="1"
-                                  ShadowOpacity="0.4">
+        <mstoolkitControls:DropShadowPanel 
+            x:Name="DropShadow"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Color="{ThemeResource SystemChromeMediumColor}"
+            CornerRadius="{ThemeResource OverlayCornerRadius}"
+            BlurRadius="40"
+            Grid.Column="1"
+            ShadowOpacity="0.4">
             <Grid x:Name="RootGrid" >
                 <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                     <Border>

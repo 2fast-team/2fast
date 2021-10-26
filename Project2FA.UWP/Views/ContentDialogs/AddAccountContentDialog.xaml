@@ -13,6 +13,7 @@
     x:Uid="AddAccountContentDialog"
     xmlns:strings="using:Project2FA.UWP.Strings"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
+    SecondaryButtonStyle="{StaticResource ButtonRevealStyle}"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
     PrimaryButtonStyle="{StaticResource AccentButtonStyle}">
 
@@ -62,7 +63,7 @@
                                             <muxc:TeachingTip.Content>
                                                 <StackPanel Orientation="Horizontal">
                                                     <Grid>
-                                                        <muxc:ProgressRing
+                                                        <toolkitControls:RadialProgressBar
                                                 Value="{x:Bind ViewModel.Seconds,Mode=OneWay}" 
                                                 Maximum="{x:Bind ViewModel.OpeningSeconds,Mode=OneWay}" 
                                                 Width="50"
@@ -86,7 +87,7 @@
                                         </muxc:TeachingTip>
                                     </Button.Resources>
                                 </Button>
-                                <!--<HyperlinkButton
+                                <HyperlinkButton
                                     Height="48"
                                     Width="48"
                                     Padding="4,4,4,4"
@@ -95,7 +96,7 @@
                                     FontSize="20"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE946;"  />
-                                </HyperlinkButton>-->
+                                </HyperlinkButton>
                             </StackPanel>
 
 

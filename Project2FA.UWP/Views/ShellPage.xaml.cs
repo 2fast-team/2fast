@@ -18,16 +18,22 @@ using Windows.ApplicationModel.Core;
 using Project2FA.UWP.Utils;
 using Prism.Navigation;
 using System.Threading.Tasks;
+using Project2FA.UWP.Services.Enums;
+using Microsoft.Toolkit.Uwp.UI.Helpers;
+using Windows.UI.ViewManagement;
+using Windows.System;
 
 namespace Project2FA.UWP.Views
 {
     public sealed partial class ShellPage : Page, INotifyPropertyChanged
     {
+        public delegate void ThemeChangedHandler(Theme oldTheme, Theme newTheme);
         private SystemNavigationManager _navManager;
         private bool _navigationIsAllowed = true;
         private string _title;
         public INavigationService NavigationService { get; private set; }
         public NavigationView ShellViewInternal { get; private set; }
+        //private ThemeListener _listener;
 
         public ShellPage()
         {
@@ -102,8 +108,27 @@ namespace Project2FA.UWP.Views
                 Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = false;
             }
 
+            //_listener = new ThemeListener();
+            //_listener.ThemeChanged += Listener_ThemeChanged;
+
             Loaded += ShellPage_Loaded;
         }
+
+        //private void Listener_ThemeChanged(ThemeListener sender)
+        //{
+        //    ApplicationTheme theme = sender.CurrentTheme;
+        //    switch (theme)
+        //    {
+        //        case ApplicationTheme.Light:
+        //            SettingsService.Instance.AppTheme = Theme.Light;
+        //            break;
+        //        case ApplicationTheme.Dark:
+        //            SettingsService.Instance.AppTheme = Theme.Dark;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -124,6 +149,15 @@ namespace Project2FA.UWP.Views
             // TODO add check for 1.0.4 to 1.0.5
             if (SystemInformation.Instance.IsAppUpdated)
             {
+                //if (SystemInformation.Instance.PreviousVersionInstalled == new Windows.ApplicationModel.PackageVersion()
+                //{
+
+                //}
+                if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+                {
+                    // set the round corner for Windows 11+
+                    SettingsService.Instance.UseRoundCorner = true;
+                }
                 ContentDialog dialog = new ContentDialog();
                 dialog.Title = Strings.Resources.NewAppFeaturesTitle;
                 dialog.Content = Strings.Resources.NewAppFeaturesContent;
@@ -134,10 +168,51 @@ namespace Project2FA.UWP.Views
 
             // If this is the first run, activate the ntp server checks
             // else => UseNTPServerCorrection is false
-            //if (SystemInformation.Instance.IsFirstRun)
-            //{
-            //    SettingsService.Instance.UseNTPServerCorrection = true;
-            //}
+            if (SystemInformation.Instance.IsFirstRun)
+            {
+                SettingsService.Instance.UseNTPServerCorrection = true;
+                if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+                {
+                    // set the round corner for Windows 11+
+                    SettingsService.Instance.UseRoundCorner = true;
+                }
+            }
+
+            if (SettingsService.Instance.UseRoundCorner)
+            {
+                App.Current.Resources["ControlCornerRadius"] = new CornerRadius(4, 4, 4, 4);
+                App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8, 8, 8, 8);
+            }
+            else
+            {
+                App.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+            }
+            switch (SettingsService.Instance.AppTheme)
+            {
+                case Theme.System:
+                    if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
+                    {
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    }
+                    else
+                    {
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    }
+                    break;
+                case Theme.Dark:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    break;
+                case Theme.Light:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void SetTitleBarAsDraggable()

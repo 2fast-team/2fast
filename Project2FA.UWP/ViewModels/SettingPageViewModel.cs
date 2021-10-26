@@ -83,6 +83,7 @@ namespace Project2FA.UWP.ViewModels
         private string _ntpServerStr;
         private bool _ntpServerEditValid;
         private bool _ntpServerEditException;
+
         public ICommand MakeFactoryResetCommand { get; }
         public ICommand SaveNTPServerAddressCommand { get; }
 
@@ -113,6 +114,7 @@ namespace Project2FA.UWP.ViewModels
         private async void MakeFactoryReset()
         {
             ContentDialog dialog = new ContentDialog();
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Title = Resources.SettingsFactoryResetDialogTitle;
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.SettingsFactoryResetMessage;
@@ -217,7 +219,7 @@ namespace Project2FA.UWP.ViewModels
                 }
             }
         }
-        private async void CheckNTPServer(string newAddress)
+        private async Task CheckNTPServer(string newAddress)
         {
             ProgressIsIndeterminate = true;
             try
@@ -268,19 +270,12 @@ namespace Project2FA.UWP.ViewModels
             }
             set
             {
-                if (value)
-                {
-                    _settings.PreferWindowsHello = WindowsHelloPreferEnum.Prefer;
-                }
-                else
-                {
-                    _settings.PreferWindowsHello = WindowsHelloPreferEnum.No;
-                }
+                _settings.PreferWindowsHello = value ? WindowsHelloPreferEnum.Prefer : WindowsHelloPreferEnum.No;
                 RaisePropertyChanged(nameof(IsWindowsHelloActive));
             }
         }
 
-        private async void CheckWindowsHelloIsSupported()
+        private async Task CheckWindowsHelloIsSupported()
         {
             IsWindowsHelloSupported = await KeyCredentialManager.IsSupportedAsync();
         }
@@ -299,6 +294,50 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
+        public bool UseRoundCorner
+        {
+            get => _settings.UseRoundCorner;
+            set
+            {
+                if (_settings.UseRoundCorner != value)
+                {
+                    if (value)
+                    {
+                        App.Current.Resources["ControlCornerRadius"] = new CornerRadius(4, 4, 4, 4);
+                        App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8, 8, 8, 8);
+                    }
+                    else
+                    {
+                        App.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                        App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+                    }
+                    _settings.UseRoundCorner = value;
+                    RaisePropertyChanged(nameof(UseRoundCorner));
+                }
+            }
+        }
+
+        public int ThemeIndex
+        {
+            get => _settings.AppTheme switch
+            {
+                Theme.Dark => 1,
+                Theme.Light => 0,
+                Theme.System => 2,
+                _ => 2,
+            };
+
+            set
+            {
+                switch (value)
+                {
+                    case 0: ThemeAsLight = true; break;
+                    case 1: ThemeAsDark = true; break;
+                    case 2: ThemeAsSystem = true; break;
+                }
+            }
+        }
+
         public int SetQRCodeScanSeconds
         {
             get => _settings.QRCodeScanSeconds;
@@ -313,7 +352,7 @@ namespace Project2FA.UWP.ViewModels
         }
 
         public bool ManualNTPServerConfiurationChecked 
-        { 
+        {
             get => _manualNTPServerConfiurationChecked;
             set => SetProperty(ref _manualNTPServerConfiurationChecked, value);
         }
@@ -323,7 +362,7 @@ namespace Project2FA.UWP.ViewModels
             set => SetProperty(ref _ntpServerEditValid, value);
         }
         public bool NtpServerEditException 
-        { 
+        {
             get => _ntpServerEditException;
             set => SetProperty(ref _ntpServerEditException, value);
         }
@@ -393,7 +432,7 @@ namespace Project2FA.UWP.ViewModels
         /// Initialize the attributes for the datafile part
         /// </summary>
         /// <returns></returns>
-        private async void InitializeDataFileAttributes()
+        private async Task InitializeDataFileAttributes()
         {
             var dbDatafile = await App.Repository.Datafile.GetAsync();
 
@@ -461,15 +500,15 @@ namespace Project2FA.UWP.ViewModels
                 return ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString() + "." + ver.Revision.ToString();
             }
         }
-        public async void GiveFeedback()
+        public void GiveFeedback()
         {
             var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-            await launcher.LaunchAsync();
+            launcher.LaunchAsync();
         }
 
-        public async void RateApp()
+        public Task RateApp()
         {
-            await _marketplaceService.LaunchAppReviewInStoreAsync();
+            return _marketplaceService.LaunchAppReviewInStoreAsync();
         }
     }
 }

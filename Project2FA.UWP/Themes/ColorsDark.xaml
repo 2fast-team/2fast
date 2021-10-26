@@ -117,4 +117,8 @@
     <StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="SystemControlTransparentRevealBackgroundBrush" />
 
     <StaticResource x:Key="TwoFABackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor"/>
+
+    <StaticResource x:Key="CardBackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor" />
+    <StaticResource x:Key="CardBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
+    <StaticResource x:Key="CardPrimaryForegroundBrush" ResourceKey="TextFillColorPrimaryBrush" />
 </ResourceDictionary>

@@ -347,7 +347,7 @@ Sollte die App auf mehreren Geräten genutzt werden empfiehlt sich eine externe 
   <data name="SettingsActionRequiredRestart" xml:space="preserve">
     <value>Diese Änderung wird erst nach dem Neustart der App wirksam.</value>
   </data>
-  <data name="SettingsBackButtonToggleSwtich.Header" xml:space="preserve">
+  <data name="SettingsBackButtonCard.Header" xml:space="preserve">
     <value>Platzierung des Zurück-Buttons</value>
   </data>
   <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
@@ -378,13 +378,13 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="SettingsGiveFeedbackText" xml:space="preserve">
     <value>Feedback geben</value>
   </data>
-  <data name="SettingsOptionsDesignTitle.Text" xml:space="preserve">
-    <value>Design</value>
+  <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
+    <value>Darstellung</value>
   </data>
   <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
     <value>App auf Werkseinstellungen zurücksetzen</value>
   </data>
-  <data name="SettingsOptionsFunctionsTitle.Text" xml:space="preserve">
+  <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
     <value>Funktionen</value>
   </data>
   <data name="SettingsPageName.Text" xml:space="preserve">
@@ -773,5 +773,26 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   </data>
   <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
     <value>Dienst-Anmeldung</value>
+  </data>
+  <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
+    <value>Ecken abrunden</value>
+  </data>
+  <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
+    <value>Wenn die Option aktiviert ist, werden die Ecken der Steuerelemente abgerundet</value>
+  </data>
+  <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
+    <value>Werkseinstellungen</value>
+  </data>
+  <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
+    <value>Mit der Betätigung und der Bestätigung wird die App zurückgesetzt</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>Farbgebung der App</value>
+  </data>
+  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
+    <value>App-Farbschema</value>
+  </data>
+  <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
+    <value>QR-Code lesen</value>
   </data>
 </root>

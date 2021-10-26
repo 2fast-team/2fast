@@ -22,94 +22,99 @@ namespace Project2FA.UWP.Services
 
         public bool UseHeaderBackButton
         {
-            get { return _helper.SafeRead(nameof(UseHeaderBackButton), true); }
+            get => _helper.SafeRead(nameof(UseHeaderBackButton), true);
+            set => _helper.TryWrite(nameof(UseHeaderBackButton), value);
+        }
+
+        public bool UseRoundCorner
+        {
+            get => _helper.SafeRead(nameof(UseRoundCorner), false);
             set
             {
-                _helper.TryWrite<bool>(nameof(UseHeaderBackButton), value);
+                _helper.TryWrite(nameof(UseRoundCorner), value);
+                // workaround for switching the resources...
+                switch (AppTheme)
+                {
+                    case Theme.System:
+                        if (OriginalAppTheme == ApplicationTheme.Dark)
+                        {
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        }
+                        else
+                        {
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        }
+                        break;
+                    case Theme.Dark:
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        break;
+                    case Theme.Light:
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
         public int QRCodeScanSeconds
         {
-            get { return _helper.SafeRead<int>(nameof(QRCodeScanSeconds), 5); }
-            set
-            {
-                _helper.TryWrite<int>(nameof(QRCodeScanSeconds), value);
-            }
+            get => _helper.SafeRead(nameof(QRCodeScanSeconds), 5);
+            set => _helper.TryWrite(nameof(QRCodeScanSeconds), value);
         }
 
         public bool UseDarkOrWhiteTitleBar
         {
-            get { return _helper.SafeRead(nameof(UseDarkOrWhiteTitleBar), false); }
-            set
-            {
-                _helper.TryWrite<bool>(nameof(UseDarkOrWhiteTitleBar), value);
-            }
+            get => _helper.SafeRead(nameof(UseDarkOrWhiteTitleBar), false);
+            set => _helper.TryWrite(nameof(UseDarkOrWhiteTitleBar), value);
         }
 
         public bool AppRated
         {
-            get { return _helper.SafeRead<bool>(nameof(AppRated), false); }
-            set
-            {
-                _helper.TryWrite<bool>(nameof(AppRated), value);
-            }
+            get => _helper.SafeRead(nameof(AppRated), false);
+            set => _helper.TryWrite(nameof(AppRated), value);
         }
 
         public bool UseExtendedHash
         {
-            get { return _helper.SafeRead<bool>(nameof(UseExtendedHash), false); }
-            set
-            {
-                _helper.TryWrite<bool>(nameof(UseExtendedHash), value);
-            }
+            get => _helper.SafeRead(nameof(UseExtendedHash), false);
+            set => _helper.TryWrite(nameof(UseExtendedHash), value);
         }
 
         public bool UseNTPServerCorrection
         {
-            get { return _helper.SafeRead<bool>(nameof(UseNTPServerCorrection), false); }
-            set
-            {
-                _helper.TryWrite<bool>(nameof(UseNTPServerCorrection), value);
-            }
+            get => _helper.SafeRead(nameof(UseNTPServerCorrection), false);
+            set => _helper.TryWrite(nameof(UseNTPServerCorrection), value);
         }
 
         public string NTPServerString
         {
-            get { return _helper.SafeRead<string>(nameof(UseExtendedHash), "time.windows.com"); }
-            set
-            {
-                _helper.TryWrite<string>(nameof(UseExtendedHash), value);
-            }
+            get => _helper.SafeRead(nameof(UseExtendedHash), "time.windows.com");
+            set => _helper.TryWrite(nameof(UseExtendedHash), value);
         }
 
         public string UnhandledExceptionStr
         {
-            get { return _helper.SafeRead<string>(nameof(UnhandledExceptionStr), string.Empty); }
-            set
-            {
-                _helper.TryWrite<string>(nameof(UnhandledExceptionStr), value);
-            }
+            get => _helper.SafeRead(nameof(UnhandledExceptionStr), string.Empty);
+            set => _helper.TryWrite(nameof(UnhandledExceptionStr), value);
         }
 
         public WindowsHelloPreferEnum PreferWindowsHello
         {
-            get { return _helper.SafeReadEnum<WindowsHelloPreferEnum>(nameof(PreferWindowsHello), WindowsHelloPreferEnum.None); }
-            set
-            {
-                _helper.TryWrite<WindowsHelloPreferEnum>(nameof(PreferWindowsHello), value);
-            }
+            get => _helper.SafeReadEnum(nameof(PreferWindowsHello), WindowsHelloPreferEnum.None);
+            set => _helper.TryWrite(nameof(PreferWindowsHello), value);
         }
 
         public Theme AppTheme
         {
-            get
-            {
-                return _helper.SafeReadEnum<Theme>(nameof(AppTheme), Theme.System);
-            }
+            get => _helper.SafeReadEnum(nameof(AppTheme), Theme.System);
             set
             {
-                _helper.TryWrite<Theme>(nameof(AppTheme), value);
+                _helper.TryWrite(nameof(AppTheme), value);
                 switch (value)
                 {
                     default:
@@ -150,26 +155,14 @@ namespace Project2FA.UWP.Services
 
         public ApplicationTheme OriginalAppTheme
         {
-            get
-            {
-                return _helper.SafeReadEnum<ApplicationTheme>(nameof(OriginalAppTheme), ApplicationTheme.Light);
-            }
-            set
-            {
-                _helper.TryWrite<ApplicationTheme>(nameof(OriginalAppTheme), value);
-            }
+            get => _helper.SafeReadEnum(nameof(OriginalAppTheme), ApplicationTheme.Light);
+            set => _helper.TryWrite(nameof(OriginalAppTheme), value);
         }
 
         public DateTime LastCheckedSystemTime
         {
-            get
-            {
-                return _helper.SafeRead<DateTime>(nameof(LastCheckedSystemTime), new DateTime());
-            }
-            set
-            {
-                _helper.TryWrite<DateTime>(nameof(LastCheckedSystemTime), value);
-            }
+            get => _helper.SafeRead(nameof(LastCheckedSystemTime), new DateTime());
+            set => _helper.TryWrite(nameof(LastCheckedSystemTime), value);
         }
     }
 }

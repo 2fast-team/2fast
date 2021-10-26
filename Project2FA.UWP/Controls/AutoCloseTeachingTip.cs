@@ -23,8 +23,8 @@ namespace Project2FA.UWP.Controls
 
         public int AutoCloseInterval
         {
-            get { return (int)GetValue(AutoCloseIntervalProperty); }
-            set { SetValue(AutoCloseIntervalProperty, value); }
+            get => (int)GetValue(AutoCloseIntervalProperty);
+            set => SetValue(AutoCloseIntervalProperty, value);
         }
 
         public static readonly DependencyProperty AutoCloseIntervalProperty =

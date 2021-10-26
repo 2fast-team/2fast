@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Prism.Navigation;
 using Project2FA.UWP.Utils;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -36,15 +37,18 @@ namespace Project2FA.UWP.ViewModels
             {
                 NewDatafile();
             });
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             UseExistDatefileCommand = new DelegateCommand(async () =>
             {
                 await _navigationService.NavigateAsync(nameof(UseDataFilePage));
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
         private async Task NewDatafile()
         {
             var dialog = new NewDatafileContentDialog();
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             var result = await _dialogService.ShowAsync(dialog);
             if (result == ContentDialogResult.Primary)
             {
@@ -63,6 +67,7 @@ namespace Project2FA.UWP.ViewModels
                 StorageFile file = await StorageFile.GetFileFromPathAsync(path);
 
                 UseDatafileContentDialog dialog = new UseDatafileContentDialog();
+                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
                 ContentDialogResult result = await _dialogService.ShowAsync(dialog);
 
                 //result is also none, when the datafileDB is correct created

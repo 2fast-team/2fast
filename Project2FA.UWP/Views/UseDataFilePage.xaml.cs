@@ -65,5 +65,10 @@ namespace Project2FA.UWP.Views
             ViewModel.SelectedIndex = 1;
             ViewModel.ChooseWebDAV();
         }
+
+        private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

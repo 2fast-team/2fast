@@ -702,6 +702,7 @@
         <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
         <Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
+        <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
         <Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
         <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -825,6 +826,7 @@
 
                         <Border
                             x:Name="RevealBorder"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" />
                         <Grid x:Name="PresenterContentRootGrid">
@@ -849,6 +851,7 @@
                             <Grid
                                 HorizontalAlignment="Stretch"
                                 x:Name="ContentGrid"
+                                
                                 MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition x:Name="IconColumn" Width="{ThemeResource NavigationViewCompactPaneLength}" />
@@ -867,6 +870,7 @@
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
                                     Grid.Column="1"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
                                     Margin="{ThemeResource NavigationViewItemContentPresenterMargin}"
                                     ContentTransitions="{TemplateBinding ContentTransitions}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"

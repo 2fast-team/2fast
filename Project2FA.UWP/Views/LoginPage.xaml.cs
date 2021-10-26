@@ -1,4 +1,6 @@
-﻿using Project2FA.UWP.ViewModels;
+﻿using Project2FA.UWP.Services;
+using Project2FA.UWP.Services.Enums;
+using Project2FA.UWP.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -21,6 +23,41 @@ namespace Project2FA.UWP.Views
             // Set XAML element as a draggable region.
             Window.Current.SetTitleBar(AppTitleBar);
             ViewModel.IsLogout = _isLogout;
+            if (SettingsService.Instance.UseRoundCorner)
+            {
+                App.Current.Resources["ControlCornerRadius"] = new CornerRadius(4, 4, 4, 4);
+                App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8, 8, 8, 8);
+            }
+            else
+            {
+                App.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+            }
+            switch (SettingsService.Instance.AppTheme)
+            {
+                case Theme.System:
+                    if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
+                    {
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    }
+                    else
+                    {
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    }
+                    break;
+                case Theme.Dark:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    break;
+                case Theme.Light:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    break;
+                default:
+                    break;
+            }
             ViewModel.CheckCapabilityWindowsHello();
         }
 

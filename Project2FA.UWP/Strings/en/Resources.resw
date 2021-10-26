@@ -347,7 +347,7 @@ If you plan to use this application on several devices it makes sense to store t
   <data name="SettingsActionRequiredRestart" xml:space="preserve">
     <value>This change will take effect after restart of the app.</value>
   </data>
-  <data name="SettingsBackButtonToggleSwtich.Header" xml:space="preserve">
+  <data name="SettingsBackButtonCard.Header" xml:space="preserve">
     <value>Placement of back button</value>
   </data>
   <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
@@ -378,13 +378,13 @@ The datafile will **not** be removed in the reset progress.</value>
   <data name="SettingsGiveFeedbackText" xml:space="preserve">
     <value>give feedback</value>
   </data>
-  <data name="SettingsOptionsDesignTitle.Text" xml:space="preserve">
+  <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
     <value>Design</value>
   </data>
   <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
     <value>Reset app to factory defaults</value>
   </data>
-  <data name="SettingsOptionsFunctionsTitle.Text" xml:space="preserve">
+  <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
     <value>Functions</value>
   </data>
   <data name="SettingsPageName.Text" xml:space="preserve">
@@ -769,5 +769,23 @@ The option can be activated under the settings.</value>
   </data>
   <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
     <value>service login</value>
+  </data>
+  <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
+    <value>Round corners</value>
+  </data>
+  <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
+    <value>If the option is enabled, the corners of the controls will be rounded off</value>
+  </data>
+  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
+    <value>App color scheme</value>
+  </data>
+  <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
+    <value>Factory reset</value>
+  </data>
+  <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
+    <value>Pressing and confirming resets the app</value>
+  </data>
+  <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
+    <value>QR-Code scan</value>
   </data>
 </root>

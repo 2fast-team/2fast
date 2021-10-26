@@ -93,7 +93,7 @@ namespace Project2FA.UWP
         public override async Task OnStartAsync(IStartArgs args)
         {
             if (Window.Current.Content == null)
-            {
+            {  
                 // Hide default title bar
                 CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
                 if (!coreTitleBar.ExtendViewIntoTitleBar)

@@ -59,6 +59,7 @@ namespace Project2FA.UWP.ViewModels
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
                 AddAccountContentDialog dialog = new AddAccountContentDialog();
+                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
                 await PageDialogService.ShowAsync(dialog);
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -176,7 +177,9 @@ namespace Project2FA.UWP.ViewModels
         {
             if (parameter is TwoFACodeModel model)
             {
-                PageDialogService.ShowAsync(new EditAccountContentDialog(model));
+                var dialog = new EditAccountContentDialog(model);
+                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+                PageDialogService.ShowAsync(dialog);
             }
         }
 
@@ -189,6 +192,7 @@ namespace Project2FA.UWP.ViewModels
             if (parameter is TwoFACodeModel model)
             {
                 ContentDialog dialog = new ContentDialog();
+                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
                 dialog.Title = Resources.DeleteAccountContentDialogTitle;
                 var markdown = new MarkdownTextBlock
                 {

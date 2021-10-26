@@ -1,4 +1,6 @@
-﻿using Project2FA.UWP.ViewModels;
+﻿using Project2FA.UWP.Services;
+using Project2FA.UWP.Services.Enums;
+using Project2FA.UWP.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

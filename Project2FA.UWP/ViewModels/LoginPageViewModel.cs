@@ -46,7 +46,7 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Checks and starts Windows Hello login, if possible and desired
         /// </summary>
-        public async void CheckCapabilityWindowsHello()
+        public async Task CheckCapabilityWindowsHello()
         {
             if (await KeyCredentialManager.IsSupportedAsync())
             {
@@ -175,19 +175,19 @@ namespace Project2FA.UWP.ViewModels
                     return false;
                 }
             }
-
         }
 
         /// <summary>
         /// Shows a wrong password error to the user
         /// </summary>
-        private async void ShowLoginError()
+        private Task ShowLoginError()
         {
             var dialog = new ContentDialog();
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Title = Resources.Error;
             dialog.Content = Resources.LoginPagePasswordMismatch;
             dialog.PrimaryButtonText = Resources.Confirm;
-            await _dialogService.ShowAsync(dialog);
+            return _dialogService.ShowAsync(dialog);
         }
 
         public bool WindowsHelloIsUsable
@@ -200,13 +200,13 @@ namespace Project2FA.UWP.ViewModels
             get => _password;
             set => SetProperty(ref _password, value);
         }
-        public bool IsLogout 
-        { 
+        public bool IsLogout
+        {
             get => _isLogout;
             set => SetProperty(ref _isLogout, value);
         }
-        public string ApplicationTitle 
-        { 
+        public string ApplicationTitle
+        {
             get => _applicationTitle;
             set => SetProperty(ref _applicationTitle, value);
         }

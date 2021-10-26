@@ -119,7 +119,6 @@
                             <TextBox 
                                 Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}" 
                                 x:Uid="NewDatafileContentDialogPath"
-                                IsEnabled="False"
                                 IsReadOnly="True"
                                 Header="~NewDatafileContentDialogPath.Header"
                                 Margin="0,0,0,10"/>

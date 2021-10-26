@@ -9,6 +9,7 @@
     mc:Ignorable="d"
     Title="~EditAccountContentDialog.Title"
     x:Uid="EditAccountContentDialog"
+    PrimaryButtonStyle="{StaticResource ButtonRevealStyle}"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
     SecondaryButtonCommand="{x:Bind ViewModel.CancelButtonCommand}">
 

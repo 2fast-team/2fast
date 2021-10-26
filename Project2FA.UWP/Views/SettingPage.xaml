@@ -16,6 +16,11 @@
 
     <Page.Resources>
         <ResourceDictionary>
+            <Style TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemExpanded}">
+                <Setter Property="Padding" Value="2,16,20,0"/>
+                <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
+            </Style>
+
             <DataTemplate x:Name="ShellHeaderTemplate">
                 <Grid Background="{ThemeResource ShellAcrylicWindowBrush}" 
                       Height="40">
@@ -31,6 +36,7 @@
             <DataTemplate x:Name="DependenciesListViewTemplate" x:DataType="models:DependencyModel">
                 <Grid
                     x:Name="Root" 
+                    CornerRadius="{ThemeResource ControlCornerRadius}"
                     Background="{ThemeResource TwoFABackgroundBrush}" 
                     Width="450">
                     <Grid.RowDefinitions>
@@ -98,156 +104,189 @@
                 Margin="8,0,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MaxWidth="1080"/>
+                        <ColumnDefinition />
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <ScrollViewer
                         VerticalScrollMode="Auto" 
                         Margin="0,10,0,0">
-                        <StackPanel>
-                            <TextBlock 
-                            Margin="0,0,0,12"
-                            FontSize="24"
-                            Text="~SettingsOptionsDesignTitle.Text"
-                            x:Uid="SettingsOptionsDesignTitle" />
-                            <StackPanel Margin="20,0,0,0">
-                                <ToggleSwitch 
+
+                        <StackPanel 
+                            MaxWidth="1040" 
+                            HorizontalAlignment="Left" 
+                            Margin="0,0,16,0">
+                            <appcontrols:CardGroupControl 
+                                    x:Uid="SettingsOptionsDesignTitle"
+                                    Header="~SettingsOptionsDesignTitle.Header">
+                                <appcontrols:CardControl 
+                                    x:Uid="SettingsBackButtonCard"
+                                    Header="~SettingsBackButtonCard.Header">
+                                    <appcontrols:CardControl.ActionContent>
+                                        <ToggleSwitch 
                                 x:Name="SettingsBackButtonToggleSwtich"
                                 x:Uid="SettingsBackButtonToggleSwtich"
-                                Header="~SettingsBackButtonToggleSwtich.Header"
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHeaderBackButton, Mode=TwoWay}"
                                 OffContent="~SettingsBackButtonToggleSwtich.OffContent"
-                                OnContent="~SettingsBackButtonToggleSwtich.OnContent" 
-                                Margin="0,10,0,15" />
-                                <StackPanel Margin="0,10,0,15">
-                                    <TextBlock
-                                x:Uid="SettingsThemeSelectMode"
-                                Text="~SettingsThemeSelectMode.Text"
-                                Margin="0,0,0,6"/>
-                                    <muxc:RadioButtons>
-                                        <RadioButton
-                                x:Uid="SettingsThemeLight"
-                                Content="~SettingsThemeLight.Content"
-                                IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsLight, Mode=TwoWay}"/>
-                                        <RadioButton
-                                x:Uid="SettingsThemeDark"
-                                Content="~SettingsThemeDark.Content"
-                                IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsDark, Mode=TwoWay}"/>
-                                        <RadioButton
-                                x:Uid="SettingsThemeSystem"
-                                Content="~SettingsThemeSystem.Content"
-                                IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ThemeAsSystem, Mode=TwoWay}"/>
-                                    </muxc:RadioButtons>
+                                OnContent="~SettingsBackButtonToggleSwtich.OnContent"  />
+                                    </appcontrols:CardControl.ActionContent>
 
-                                    <HyperlinkButton
-                                x:Uid="SettingsWindowsColor"
-                                Content="~SettingsWindowsColor.Content"
-                                NavigateUri="ms-settings:personalization-colors"/>
-                                </StackPanel>
-                            </StackPanel>
+                                </appcontrols:CardControl>
 
-                            <Border 
-                            BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
-                                Margin="0,0,12,0"
-                            BorderThickness="0,1,0,0">
-                                <TextBlock 
-                            Margin="0,16,0,12"
-                            FontSize="24"
-                            Text="~SettingsOptionsFunctionsTitle.Text"
-                            x:Uid="SettingsOptionsFunctionsTitle" />
-                            </Border>
-                            <StackPanel Margin="20,0,12,0">
-                                <ToggleSwitch 
+                                <appcontrols:CardControl 
+                                    x:Uid="SettingsAppThemeMode"
+                                    Header="~SettingsAppThemeMode.Header">
+                                    <appcontrols:CardControl.Description>
+                                        <HyperlinkButton
+                                            x:Uid="SettingsWindowsColor"
+                                            Content="~SettingsWindowsColor.Content"
+                                            NavigateUri="ms-settings:personalization-colors"/>
+                                    </appcontrols:CardControl.Description>
+                                    <appcontrols:CardControl.ActionContent>
+                                        <StackPanel>
+                                            <ComboBox 
+                                            SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
+                                            MinWidth="{StaticResource CardActionControlMinWidth}">
+                                                <ComboBoxItem x:Uid="SettingsThemeLight"/>
+                                                <ComboBoxItem x:Uid="SettingsThemeDark"/>
+                                                <ComboBoxItem x:Uid="SettingsThemeSystem"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </appcontrols:CardControl.ActionContent>
+                                </appcontrols:CardControl>
+
+                                <appcontrols:CardControl 
+                                    x:Uid="SettingsAppCornorRadius"
+                                    Header="~SettingsAppCornorRadius.Header">
+                                    <appcontrols:CardControl.Description>
+                                        <TextBlock 
+                                            x:Uid="SettingsAppCornorRadiusDesc"
+                                            Text="~SettingsAppCornorRadiusDesc.Text" 
+                                            VerticalAlignment="Stretch" 
+                                            HorizontalAlignment="Stretch"/>
+                                    </appcontrols:CardControl.Description>
+                                    <appcontrols:CardControl.ActionContent>
+                                        <ToggleSwitch 
+                                x:Name="SettingsRoundCornerToggleSwtich"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
+                                    </appcontrols:CardControl.ActionContent>
+                                </appcontrols:CardControl>
+                            </appcontrols:CardGroupControl>
+
+                            <StackPanel>
+                                <appcontrols:CardGroupControl 
+                                    x:Uid="SettingsOptionsFunctionsTitle"
+                                    Header="~SettingsOptionsFunctionsTitle.Header">
+                                    <appcontrols:CardControl 
+                                        x:Uid="SettingsWindowsHelloPrefer"
+                                        Header="~SettingsWindowsHelloPrefer.Header" 
+                                        Icon="&#xF0FB;">
+                                        <appcontrols:CardControl.ActionContent>
+                                            <ToggleSwitch 
                                 x:Name="SettingsWindowsHelloPrefer"
-                                x:Uid="SettingsWindowsHelloPrefer"
-                                Header="~SettingsWindowsHelloPrefer.Header"
-                                Margin="0,20,0,0"
                                 IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported, Mode=OneWay}"
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloActive, Mode=TwoWay}"/>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
 
-                                <Button 
-                                    Margin="0,30,0,0"
+                                    <appcontrols:CardControl 
+                                        x:Uid="SettingsOptionsFactoryReset"
+                                        Icon="&#xE74D;"
+                                        Header="~SettingsOptionsFactoryReset.Header">
+                                        <appcontrols:CardControl.Description>
+                                            <TextBlock 
+                                                x:Uid="SettingsOptionsFactoryResetDesc"
+                                                Text="~SettingsOptionsFactoryResetDesc.Text"/>
+                                        </appcontrols:CardControl.Description>
+                                        <appcontrols:CardControl.ActionContent>
+                                            <Button
                                     Style="{StaticResource ButtonRevealStyle}"
                                     Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
-                                    <StackPanel Orientation="Horizontal">
-                                        <FontIcon 
-                                            Glyph="&#xE74D;" 
-                                            FontSize="20"/>
-                                        <TextBlock 
+                                                <TextBlock 
                                         Text="~FactoryReset" 
                                         Margin="8,0,0,0" 
                                         HorizontalAlignment="Stretch" 
                                         VerticalAlignment="Center"
                                         x:Uid="SettingsOptionsFactoryResetButton"/>
-                                    </StackPanel>
-                                </Button>
+                                            </Button>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
 
-                                <controls:HeaderedContentControl
-                                Margin="0,20,0,0"
-                                Header="{x:Bind strings:Resources.SettingsQRScanningHeader}">
-                                    <controls:HeaderedContentControl.HeaderTemplate>
-                                        <DataTemplate>
-                                            <TextBlock 
-                                            Text="{Binding}"
-                                            TextWrapping="WrapWholeWords"/>
-                                        </DataTemplate>
-                                    </controls:HeaderedContentControl.HeaderTemplate>
-                                    <StackPanel 
+
+                                    <appcontrols:CardControl 
+                                        x:Uid="SettingsOptionsQRScan"
+                                        Header="~SettingsOptionsQRScan.Header" 
+                                        Icon="&#xED14;">
+                                        <appcontrols:CardControl.Description>
+                                            <TextBlock Text="{x:Bind strings:Resources.SettingsQRScanningHeader}"/>
+                                        </appcontrols:CardControl.Description>
+                                        <appcontrols:CardControl.ActionContent>
+                                            <StackPanel 
                                         Orientation="Horizontal" 
                                         Margin="0,6,0,15">
-                                        <muxc:NumberBox 
+                                                <TextBlock 
+                                        Text="{x:Bind strings:Resources.SettingsQRScanningSecondsRange}" 
+                                        TextWrapping="WrapWholeWords" 
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Center"/>
+                                                <muxc:NumberBox 
                                         Value="{x:Bind ViewModel.SettingsPartViewModel.SetQRCodeScanSeconds,Mode=TwoWay}"
                                         Maximum="10"
                                         Minimum="3"
                                         SpinButtonPlacementMode="Inline"
                                         MinWidth="120"
                                         HorizontalAlignment="Left">
-                                        </muxc:NumberBox>
-                                        <TextBlock 
-                                        Text="{x:Bind strings:Resources.SettingsQRScanningSecondsRange}" 
-                                        TextWrapping="WrapWholeWords" 
-                                        Margin="10,0,0,0"
-                                        VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </controls:HeaderedContentControl>
+                                                </muxc:NumberBox>
+                                            </StackPanel>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
 
-                                <StackPanel
-                                Margin="0,20,12,28"
+                                    <appcontrols:CardExpanderControl Background="{ThemeResource CardBackgroundBrush}"
+                                        IsExpanded="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}">
+                                        <appcontrols:CardExpanderControl.Header>
+                                            <appcontrols:CardControl
+                                                Icon="&#xEE93;"
+                                                x:Uid="SettingsUseNTPTimeCorrection" 
+                                                Header="~SettingsUseNTPTimeCorrection.Header">
+                                                <appcontrols:CardControl.ActionContent>
+                                                    <ToggleSwitch
+                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=TwoWay}"/>
+                                                </appcontrols:CardControl.ActionContent>
+                                            </appcontrols:CardControl>
+                                        </appcontrols:CardExpanderControl.Header>
+                                        <appcontrols:CardExpanderControl.Content>
+                                            <StackPanel
+                                Margin="56,12,40,12"
                                 HorizontalAlignment="Left">
-                                    <TextBlock 
+                                                <TextBlock 
                                         x:Uid="SettingsNTPServerDescribtion"
                                         TextWrapping="WrapWholeWords"
                                         Text="~SettingsNTPServerDescribtion.Text"/>
-                                    <ToggleSwitch
-                                        x:Uid="SettingsUseNTPTimeCorrection"
-                                        Header="~SettingsUseNTPTimeCorrection.Header"
-                                        Margin="0,8,0,0"
-                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=TwoWay}"/>
-                                    <CheckBox 
+
+                                                <!--<CheckBox 
                                         x:Name="CB_ManualNTPServerConfiguration"
                                         x:Uid="SettingsNTPServerCheckBoxText"
                                         Margin="0,8,0,0"
                                         IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}"
                                         IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ManualNTPServerConfiurationChecked, Mode=TwoWay}"
-                                        Content="#set manuel ntp server"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBox 
+                                        Content="#set manuel ntp server"/>-->
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox 
+                                                        Margin="0,8,0,0"
                                             x:Name="TB_SettingsNTPServer"
-                                            IsEnabled="{Binding IsChecked, ElementName=CB_ManualNTPServerConfiguration}"
                                             Width="280"
                                             Text="{x:Bind ViewModel.SettingsPartViewModel.NTPServerStr, Mode=TwoWay}"/>
-                                        <CommandBar DefaultLabelPosition="Right">
-                                            <CommandBar.PrimaryCommands>
-                                                <AppBarButton 
+                                                    <CommandBar DefaultLabelPosition="Right">
+                                                        <CommandBar.PrimaryCommands>
+                                                            <AppBarButton 
                                                     x:Name="ABB_SettingsSaveNTPServer"
                                                     Command="{x:Bind ViewModel.SettingsPartViewModel.SaveNTPServerAddressCommand}"
                                                     Icon="Save" 
                                                     x:Uid="SettingsSaveNTPServer"
                                                     Label="#save" 
                                                     IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid,Mode=OneWay}">
-                                                    <AppBarButton.Resources>
-                                                        <!--Binding: NtpServerEditValid OneWay, because it should not change the code behind value-->
-                                                        <appcontrols:AutoCloseTeachingTip 
+                                                                <AppBarButton.Resources>
+                                                                    <!--Binding: NtpServerEditValid OneWay, because it should not change the code behind value-->
+                                                                    <appcontrols:AutoCloseTeachingTip 
                                                 x:Name="SaveIsPossibleTip"
                                                 AutoCloseInterval="4000"
                                                 BorderBrush="{ThemeResource SystemAccentColor}"
@@ -255,8 +294,8 @@
                                                 BorderThickness="2" 
                                                 IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid, Mode=OneWay}"
                                                 Target="{Binding ElementName=ABB_SettingsSaveNTPServer, Mode=OneTime}">
-                                                        </appcontrols:AutoCloseTeachingTip>
-                                                        <appcontrols:AutoCloseTeachingTip
+                                                                    </appcontrols:AutoCloseTeachingTip>
+                                                                    <appcontrols:AutoCloseTeachingTip
                                                 x:Name="SaveNotPossibleTip"
                                                 AutoCloseInterval="4000"
                                                 BorderBrush="{ThemeResource SystemAccentColor}"
@@ -264,18 +303,34 @@
                                                 BorderThickness="2"
                                                 IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditException, Mode=TwoWay}"
                                                 Target="{Binding ElementName=TB_SettingsNTPServer, Mode=OneTime}">
-                                                        </appcontrols:AutoCloseTeachingTip>
-                                                    </AppBarButton.Resources>
-                                                </AppBarButton>
-                                            </CommandBar.PrimaryCommands>
-                                        </CommandBar>
-                                    </StackPanel>
-                                    <muxc:ProgressBar 
+                                                                    </appcontrols:AutoCloseTeachingTip>
+                                                                </AppBarButton.Resources>
+                                                            </AppBarButton>
+                                                        </CommandBar.PrimaryCommands>
+                                                    </CommandBar>
+                                                </StackPanel>
+                                                <muxc:ProgressBar 
                                         HorizontalAlignment="Left"
                                         Width="280"
                                         Visibility="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"
                                         IsIndeterminate="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"/>
-                                </StackPanel>
+                                            </StackPanel> 
+                                        </appcontrols:CardExpanderControl.Content>
+                                    </appcontrols:CardExpanderControl>
+                                </appcontrols:CardGroupControl>
+
+
+                                
+
+                                <!--<appcontrols:CardControl>
+                                    <appcontrols:CardControl.ActionContent>
+
+                                    </appcontrols:CardControl.ActionContent>
+                                </appcontrols:CardControl>-->
+
+                                
+
+                                
 
                             </StackPanel>
                         </StackPanel>

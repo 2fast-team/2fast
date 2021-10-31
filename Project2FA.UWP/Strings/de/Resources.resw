@@ -795,4 +795,10 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
     <value>QR-Code lesen</value>
   </data>
+  <data name="UseDatafilePasswordInfo" xml:space="preserve">
+    <value>Für das Laden der Datendatei muss das Passwort eingegeben werden, welches bei der Erstellung der Datei konfiguriert wurde.</value>
+  </data>
+  <data name="ToolTipShowHelp" xml:space="preserve">
+    <value>Hilfe anzeigen</value>
+  </data>
 </root>

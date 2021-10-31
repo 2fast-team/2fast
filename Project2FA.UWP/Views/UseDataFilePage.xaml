@@ -9,6 +9,7 @@
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:strings="using:Project2FA.UWP.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -26,7 +27,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid>
+    <Grid x:Name="RootGrid">
         <!--<muxc:NavigationView 
             IsSettingsVisible="False"
             PaneDisplayMode="Top" 
@@ -129,6 +130,7 @@
                                     Height="36"
                                     Width="48"
                                     Padding="4,4,4,4"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                                     Click="HLBTN_PasswordInfo"
                                     VerticalAlignment="Bottom">
                                     <FontIcon

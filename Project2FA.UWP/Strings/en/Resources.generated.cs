@@ -886,6 +886,32 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region UseDatafilePasswordInfo
+        /// <summary>
+        ///   Looks up a localized string similar to: To load the data file, you must enter the password that was configured when the file was created.
+        /// </summary>
+        public static string UseDatafilePasswordInfo
+        {
+            get
+            {
+                return _resourceLoader.GetString("UseDatafilePasswordInfo");
+            }
+        }
+        #endregion
+
+        #region ToolTipShowHelp
+        /// <summary>
+        ///   Looks up a localized string similar to: show help
+        /// </summary>
+        public static string ToolTipShowHelp
+        {
+            get
+            {
+                return _resourceLoader.GetString("ToolTipShowHelp");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -964,6 +990,8 @@ namespace Project2FA.UWP.Strings{
             WelcomePageTitle,
             CreateDatafile,
             LoadDatafile,
+            UseDatafilePasswordInfo,
+            ToolTipShowHelp,
         }
 
         private static ResourceLoader _resourceLoader;

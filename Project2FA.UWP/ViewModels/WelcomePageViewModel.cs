@@ -18,8 +18,11 @@ namespace Project2FA.UWP.ViewModels
         IDialogService _dialogService { get; }
         INavigationService _navigationService { get; }
         public ICommand NewDatefileCommand { get; }
+        public ICommand TutorialCommand { get; }
+        public ICommand OpenTutorialCommand { get; }
 
         public ICommand UseExistDatefileCommand { get; }
+        private bool _isTutorialOpen;
 
         private string _title;
 
@@ -43,6 +46,14 @@ namespace Project2FA.UWP.ViewModels
                 await _navigationService.NavigateAsync(nameof(UseDataFilePage));
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            TutorialCommand = new DelegateCommand(() =>
+            {
+                IsTutorialOpen = !IsTutorialOpen;
+            });
+            OpenTutorialCommand = new DelegateCommand(() =>
+            {
+                //TODO new ContentDialog
+            });
         }
 
         private async Task NewDatafile()
@@ -88,5 +99,6 @@ namespace Project2FA.UWP.ViewModels
         }
 
         public string Title { get => _title; set => SetProperty(ref _title, value); }
+        public bool IsTutorialOpen { get => _isTutorialOpen; set => SetProperty(ref _isTutorialOpen, value); }
     }
 }

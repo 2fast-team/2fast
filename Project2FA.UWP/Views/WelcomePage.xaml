@@ -13,7 +13,9 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate x:Name="ShellHeaderTemplate" x:DataType="viewmodels:WelcomePageViewModel">
+        <DataTemplate 
+            x:Name="ShellHeaderTemplate" 
+            x:DataType="viewmodels:WelcomePageViewModel">
             <UserControl>
                 <Grid>
                     <CommandBar 
@@ -68,33 +70,37 @@
                             </CommandBar>
                         </CommandBar.Content>
                         <CommandBar.PrimaryCommands>
-                            <!--<AppBarButton 
+                            <AppBarButton 
                                 x:Name="ABB_Tutorial"
+                                Command="{x:Bind TutorialCommand}"
                                 x:Uid="WelcomePageABBTutorial" >
                                 <AppBarButton.Icon>
                                     <FontIcon Glyph="&#xE11B;"/>
                                 </AppBarButton.Icon>
                                 <AppBarButton.Resources>
                                     <appcontrols:AutoCloseTeachingTip 
-                                                x:Name="WelcomePageTutorialTip"
-                                                AutoCloseInterval="12000"
-                                                BorderBrush="{ThemeResource SystemAccentColor}"
-                                                x:Uid="WelcomePageTutorialTip"
-                                                BorderThickness="2"
-                                                IsOpen="True"
-                                                Target="{Binding ElementName=ABB_Tutorial, Mode=OneTime}">
+                                            x:Name="WelcomePageTutorialTip"
+                                            AutoCloseInterval="12000"
+                                            BorderBrush="{ThemeResource SystemAccentColor}"
+                                            x:Uid="WelcomePageTutorialTip"
+                                            BorderThickness="2"
+                                            IsOpen="{x:Bind IsTutorialOpen, Mode=TwoWay}"
+                                            Target="{Binding ElementName=ABB_Tutorial}"
+                                            ActionButtonCommand="{x:Bind OpenTutorialCommand}"
+	                                        ActionButtonContent="#Tutorial öffnen"
+	                                        CloseButtonContent="Got it!">       
                                         <muxc:TeachingTip.HeroContent>
                                             <muxc:AnimatedVisualPlayer 
-                                                        MaxHeight="120"
-                                                        x:Name="LottiePlayer"
-                                                        AutoPlay="True">
+                                                MaxHeight="120"
+                                                x:Name="LottiePlayer"
+                                                AutoPlay="True">
                                                 <lottie:LottieVisualSource  
-                                                                UriSource="ms-appx:///Assets/AnimatedVisuals/10223-search-empty.json"/>
+                                                    UriSource="ms-appx:///Assets/AnimatedVisuals/21398-online-tutorial.json"/>
                                             </muxc:AnimatedVisualPlayer>
                                         </muxc:TeachingTip.HeroContent>
                                     </appcontrols:AutoCloseTeachingTip>
                                 </AppBarButton.Resources>
-                            </AppBarButton>-->
+                            </AppBarButton>
 
                         </CommandBar.PrimaryCommands>
                     </CommandBar>

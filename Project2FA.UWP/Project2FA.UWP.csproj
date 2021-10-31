@@ -18,13 +18,12 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
-    <PackageCertificateKeyFile>
-    </PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Project2FA.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>583A559455C4B24A66C4F94AC2291D5A705427CC</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>9D4C72D93D3D65285AD1DFD815662C38BCBB8B45</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -140,17 +139,17 @@
     <Compile Include="Services\WebDAV\WebDAVDirectoryService.cs" />
     <Compile Include="Services\WebDAV\ResponseErrorHandlerService.cs" />
     <Compile Include="Services\WebDAV\WebDAVClientService.cs" />
+    <Compile Include="Strings\en\Resources.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resw</DependentUpon>
+    </Compile>
     <Compile Include="TrackingManager.cs" />
     <Compile Include="Utils\ErrorDialogs.cs" />
     <Compile Include="Utils\JSONUtil.cs" />
     <Compile Include="Services\JSON\SerializationService.cs" />
     <Compile Include="Services\SettingsService\SettingsService.cs" />
     <Compile Include="Services\SettingsService\Enums\WindowsHelloPreferEnum.cs" />
-    <Compile Include="Strings\en\Resources.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resw</DependentUpon>
-    </Compile>
     <Compile Include="Extensions\ApplicationThemeExtension.cs" />
     <Compile Include="Services\SettingsService\Enums\Theme.cs" />
     <Compile Include="Utils\WebDAVUtils.cs" />
@@ -283,6 +282,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\AnimatedVisuals\10223-search-empty.json" />
     <Content Include="Assets\JSONs\Dependencies.json" />
+    <Content Include="Assets\AnimatedVisuals\21398-online-tutorial.json" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

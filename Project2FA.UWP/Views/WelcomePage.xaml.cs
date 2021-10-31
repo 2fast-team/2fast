@@ -1,4 +1,5 @@
-﻿using Project2FA.UWP.Services;
+﻿using Microsoft.UI.Xaml.Controls;
+using Project2FA.UWP.Services;
 using Project2FA.UWP.Services.Enums;
 using Project2FA.UWP.ViewModels;
 using Windows.UI.Xaml;
@@ -19,6 +20,12 @@ namespace Project2FA.UWP.Views
         {
             App.ShellPageInstance.ShellViewInternal.Header = ViewModel;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
+            ViewModel.IsTutorialOpen = true;
+        }
+
+        private void WelcomePageTutorialTip_ActionButtonClick(TeachingTip sender, object args)
+        {
+
         }
     }
 }

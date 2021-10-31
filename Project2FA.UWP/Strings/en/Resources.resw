@@ -788,4 +788,10 @@ The option can be activated under the settings.</value>
   <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
     <value>QR-Code scan</value>
   </data>
+  <data name="UseDatafilePasswordInfo" xml:space="preserve">
+    <value>To load the data file, you must enter the password that was configured when the file was created.</value>
+  </data>
+  <data name="ToolTipShowHelp" xml:space="preserve">
+    <value>show help</value>
+  </data>
 </root>

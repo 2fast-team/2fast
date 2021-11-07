@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-
-//based on https://raw.githubusercontent.com/microsoft/PowerToys/master/src/settings-ui/Microsoft.PowerToys.Settings.UI/Controls/Setting/Setting.cs
+// Source https://raw.githubusercontent.com/microsoft/PowerToys/master/src/settings-ui/Microsoft.PowerToys.Settings.UI/Controls/Setting/Setting.cs
 
 using System.ComponentModel;
 using Windows.UI.Xaml;

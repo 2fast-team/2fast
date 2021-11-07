@@ -25,7 +25,7 @@ namespace Project2FA.UWP.Views
 
         private void WelcomePageTutorialTip_ActionButtonClick(TeachingTip sender, object args)
         {
-
+            
         }
     }
 }

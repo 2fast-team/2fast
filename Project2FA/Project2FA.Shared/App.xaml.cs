@@ -1,7 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DryIoc;
+using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Prism;
+using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Project2FA.Views;
@@ -14,13 +20,17 @@ namespace Project2FA
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App
+    public sealed partial class App : PrismApplication
     {
 #if NET5_0 && WINDOWS
         private Window _window;
 
 #else
         private Microsoft.UI.Xaml.Window _window;
+#endif
+
+#if HAS_UNO_WINUI || NETCOREAPP
+        public static XamlRoot MainXamlRoot { get; private set; }
 #endif
 
         /// <summary>
@@ -175,39 +185,50 @@ namespace Project2FA
             global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
         }
 
-        protected override void ConfigureViewModelLocator()
-        {
-            base.ConfigureViewModelLocator();
-            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
-            {
-                string viewName = viewType.FullName;
-                if (viewName == null)
-                {
-                    return null;
-                }
+        //protected override void ConfigureViewModelLocator()
+        //{
+        //    base.ConfigureViewModelLocator();
+        //    ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+        //    {
+        //        string viewName = viewType.FullName;
+        //        if (viewName == null)
+        //        {
+        //            return null;
+        //        }
 
-                if (viewName.EndsWith("View"))
-                {
-                    viewName = viewName.Substring(0, viewName.Length - 4);
-                }
+        //        if (viewName.EndsWith("View"))
+        //        {
+        //            viewName = viewName.Substring(0, viewName.Length - 4);
+        //        }
 
-                if (viewName.EndsWith("Control"))
-                {
-                    viewName = viewName.Substring(0, viewName.Length - 7);
-                }
+        //        if (viewName.EndsWith("Control"))
+        //        {
+        //            viewName = viewName.Substring(0, viewName.Length - 7);
+        //        }
 
-                viewName = viewName.Replace(".Views.", ".ViewModels.");
-                viewName = viewName.Replace(".Controls.", ".ControlViewModels.");
-                string viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-                string viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
-                return Type.GetType(viewModelName);
-            });
+        //        viewName = viewName.Replace(".Views.", ".ViewModels.");
+        //        viewName = viewName.Replace(".Controls.", ".ControlViewModels.");
+        //        string viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+        //        string viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
+        //        return Type.GetType(viewModelName);
+        //    });
 
-        }
+        //}
 
         protected override UIElement CreateShell()
         {
-            return Container.Resolve<Shell>();
+            var shell = Container.Resolve<ShellPage>();
+#if NET5_0 && WINDOWS
+            _window = new Window();
+            _window.Activate();
+            _window.Content = shell;
+#endif
+
+#if HAS_UNO_WINUI || NETCOREAPP
+            MainXamlRoot = shell.XamlRoot;
+#endif
+
+            return shell;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

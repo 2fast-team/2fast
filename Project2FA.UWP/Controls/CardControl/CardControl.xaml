@@ -83,12 +83,12 @@
                                             <Setter Property="TextWrapping" Value="WrapWholeWords"/>
                                         </Style.Setters>
                                     </Style>
-                                    <!--<Style TargetType="HyperlinkButton" BasedOn="{StaticResource TextButtonStyle}">
+                                    <Style TargetType="HyperlinkButton" BasedOn="{StaticResource TextButtonStyle}">
                                         <Style.Setters>
                                             <Setter Property="FontSize" Value="12"/>
                                             <Setter Property="Padding" Value="0,0,0,0"/>
                                         </Style.Setters>
-                                    </Style>-->
+                                    </Style>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>
                         </StackPanel>

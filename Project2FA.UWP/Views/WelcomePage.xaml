@@ -37,36 +37,6 @@
                                         TextWrapping="NoWrap" 
                                         VerticalAlignment="Top" />
                                 </CommandBar.Content>
-                                <!--<CommandBar.PrimaryCommands>
-                                    <AppBarSeparator/>
-                                    --><!--<AppBarButton 
-                                        x:Name="ABB_AddAccount"
-                                        x:Uid="AccountCodePageAddEntry"
-                                        Icon="Add" 
-                                        Command="{x:Bind AddAccountCommand}">
-                                        <AppBarButton.Resources>
-                                            --><!--user information for adding totp accounts--><!--
-                                            <appcontrols:AutoCloseTeachingTip 
-                                                x:Name="EmptyAccountCollectionTip"
-                                                AutoCloseInterval="10000"
-                                                BorderBrush="{ThemeResource SystemAccentColor}"
-                                                x:Uid="AccountCodePageEmptyCollectionTip"
-                                                BorderThickness="2"
-                                                IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
-                                                Target="{Binding ElementName=ABB_AddAccount, Mode=OneTime}">
-                                                <muxc:TeachingTip.HeroContent>
-                                                    <muxc:AnimatedVisualPlayer 
-                                                        MaxHeight="120"
-                                                        x:Name="LottiePlayer"
-                                                        AutoPlay="True">
-                                                        <lottie:LottieVisualSource  
-                                                                UriSource="ms-appx:///Assets/AnimatedVisuals/10223-search-empty.json"/>
-                                                    </muxc:AnimatedVisualPlayer>
-                                                </muxc:TeachingTip.HeroContent>
-                                            </appcontrols:AutoCloseTeachingTip>
-                                        </AppBarButton.Resources>
-                                    </AppBarButton>--><!--
-                                </CommandBar.PrimaryCommands>-->
                             </CommandBar>
                         </CommandBar.Content>
                         <CommandBar.PrimaryCommands>

@@ -50,10 +50,19 @@ namespace Project2FA.UWP.ViewModels
             {
                 IsTutorialOpen = !IsTutorialOpen;
             });
-            OpenTutorialCommand = new DelegateCommand(() =>
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            OpenTutorialCommand = new DelegateCommand(async() =>
             {
-                //TODO new ContentDialog
+                var dialog = new ContentDialog();
+                dialog.Title = "#test";
+                dialog.PrimaryButtonText = "#bla";
+                if (IsTutorialOpen)
+                {
+                    IsTutorialOpen = false;
+                }
+                await _dialogService.ShowAsync(dialog);
             });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
         private async Task NewDatafile()

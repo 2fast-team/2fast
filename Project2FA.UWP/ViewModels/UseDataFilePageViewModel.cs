@@ -23,6 +23,7 @@ using DecaTec.WebDav;
 using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
+using Windows.Storage.AccessCache;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -86,7 +87,8 @@ namespace Project2FA.UWP.ViewModels
             {
                 await SetAndCheckLocalDatafile();
             });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+#pragma warning restore AsyncFixer03 
+            // Fire-and-forget async-void methods or delegates
             //            ChooseWebDAVCommand = new DelegateCommand(() =>
             //            {
             //                SelectedIndex = 1;
@@ -249,7 +251,7 @@ namespace Project2FA.UWP.ViewModels
 
                 //set folder to the access list
                 //StorageApplicationPermissions.FutureAccessList.Add(LocalStorageFolder, "metadata");
-                //StorageApplicationPermissions.FutureAccessList.Add(file, "metadata");
+                StorageApplicationPermissions.FutureAccessList.Add(file, "metadata");
 
                 DateFileName = file.Name;
                 return true;
@@ -275,8 +277,7 @@ namespace Project2FA.UWP.ViewModels
         {
             if (_choosenOneWebDAVFile != null)
             {
-                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-                
+                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;              
                 return await TestPassword(await DownloadWebDAVFile(storageFolder), storageFolder);
             }
             else

@@ -801,4 +801,16 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   <data name="ToolTipShowHelp" xml:space="preserve">
     <value>Hilfe anzeigen</value>
   </data>
+  <data name="SettingsAutoLogoutDesc" xml:space="preserve">
+    <value>Automatische Sperrung nach inaktivität</value>
+  </data>
+  <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
+    <value>Minuten inaktivität</value>
+  </data>
+  <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
+    <value>Automatische Sperrung</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
 </root>

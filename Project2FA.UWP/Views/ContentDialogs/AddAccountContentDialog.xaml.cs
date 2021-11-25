@@ -1,9 +1,12 @@
-﻿using Project2FA.UWP.Extensions;
+﻿using Project2FA.UWP.Controls;
+using Project2FA.UWP.Extensions;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.Services.Enums;
 using Project2FA.UWP.ViewModels;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Project2FA.UWP.Views
 {
@@ -69,6 +72,21 @@ namespace Project2FA.UWP.Views
             //    UseFrontCameraIfAvailable = false
             //};
             //_barcodeScanner.Scan(_mobileBarcodeScanningOptions);
+        }
+
+
+        private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)
+        {
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            {
+                Target = sender as FrameworkElement,
+                Subtitle = Strings.Resources.UseDatafilePasswordInfo,
+                AutoCloseInterval = 8000,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            RootGrid.Children.Add(teachingTip);
         }
     }
 }

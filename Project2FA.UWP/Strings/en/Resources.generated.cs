@@ -912,6 +912,45 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region SettingsAutoLogoutDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: Automatic logout after inactivity
+        /// </summary>
+        public static string SettingsAutoLogoutDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("SettingsAutoLogoutDesc");
+            }
+        }
+        #endregion
+
+        #region SettingsAutoLogoutMinutes
+        /// <summary>
+        ///   Looks up a localized string similar to: minutes inactivity
+        /// </summary>
+        public static string SettingsAutoLogoutMinutes
+        {
+            get
+            {
+                return _resourceLoader.GetString("SettingsAutoLogoutMinutes");
+            }
+        }
+        #endregion
+
+        #region Close
+        /// <summary>
+        ///   Looks up a localized string similar to: Close
+        /// </summary>
+        public static string Close
+        {
+            get
+            {
+                return _resourceLoader.GetString("Close");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -992,6 +1031,9 @@ namespace Project2FA.UWP.Strings{
             LoadDatafile,
             UseDatafilePasswordInfo,
             ToolTipShowHelp,
+            SettingsAutoLogoutDesc,
+            SettingsAutoLogoutMinutes,
+            Close,
         }
 
         private static ResourceLoader _resourceLoader;

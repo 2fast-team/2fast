@@ -67,6 +67,12 @@ namespace Project2FA.UWP.Services
             set => _helper.TryWrite(nameof(QRCodeScanSeconds), value);
         }
 
+        public int AutoLogoutMinutes
+        {
+            get => _helper.SafeRead(nameof(AutoLogoutMinutes), 10);
+            set => _helper.TryWrite(nameof(AutoLogoutMinutes), value);
+        }
+
         public bool UseDarkOrWhiteTitleBar
         {
             get => _helper.SafeRead(nameof(UseDarkOrWhiteTitleBar), false);

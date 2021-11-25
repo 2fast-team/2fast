@@ -8,6 +8,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Style="{StaticResource MyContentDialogStyle}"
     PrimaryButtonText="#choose"
     SecondaryButtonText="#cancel"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"

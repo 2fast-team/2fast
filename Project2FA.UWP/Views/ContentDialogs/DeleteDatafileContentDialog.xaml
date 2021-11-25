@@ -9,6 +9,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:strings="using:Project2FA.UWP.Strings"
+    Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     Title="{x:Bind strings:Resources.DeleteDatafileContentDialogTitle}"
     PrimaryButtonText="{x:Bind strings:Resources.ButtonTextConfirm}"

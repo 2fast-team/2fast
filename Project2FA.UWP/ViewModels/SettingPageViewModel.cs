@@ -114,7 +114,6 @@ namespace Project2FA.UWP.ViewModels
         private async void MakeFactoryReset()
         {
             ContentDialog dialog = new ContentDialog();
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Title = Resources.SettingsFactoryResetDialogTitle;
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.SettingsFactoryResetMessage;
@@ -351,6 +350,19 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
+        public int SetAutoLogoutMinutes
+        {
+            get => _settings.AutoLogoutMinutes;
+            set
+            {
+                if (_settings.AutoLogoutMinutes != value)
+                {
+                    _settings.AutoLogoutMinutes = value;
+                    RaisePropertyChanged(nameof(SetAutoLogoutMinutes));
+                }
+            }
+        }
+
         public bool ManualNTPServerConfiurationChecked 
         {
             get => _manualNTPServerConfiurationChecked;
@@ -390,7 +402,7 @@ namespace Project2FA.UWP.ViewModels
         private IDialogService _dialogService { get; }
 
         public ICommand ChangeDatafilePasswordCommand { get; }
-        public ICommand EditDatafileCommand { get; }
+        //public ICommand EditDatafileCommand { get; }
         public ICommand DeleteDatafileCommand { get; }
 
         private string _datafilePath;
@@ -424,8 +436,7 @@ namespace Project2FA.UWP.ViewModels
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
-            EditDatafileCommand = new DelegateCommand(EditDatafile);
-            //DeleteDatafileCommand = new DelegateCommand(DeleteDatafile);
+            //EditDatafileCommand = new DelegateCommand(EditDatafile);
         }
 
         /// <summary>
@@ -443,11 +454,11 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Edit the current datafile
         /// </summary>
-        public async void EditDatafile()
-        {
-            var dialog = new UpdateDatafileContentDialog();
-            await _dialogService.ShowAsync(dialog);
-        }
+        //public async void EditDatafile()
+        //{
+        //    var dialog = new UpdateDatafileContentDialog();
+        //    await _dialogService.ShowAsync(dialog);
+        //}
 
         public string DatafilePath { get => _datafilePath; set => SetProperty(ref _datafilePath, value); }
         public string DatafileName { get => _datafileName; set => SetProperty(ref _datafileName, value); }

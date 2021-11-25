@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     Title="~EditAccountContentDialog.Title"
     x:Uid="EditAccountContentDialog"

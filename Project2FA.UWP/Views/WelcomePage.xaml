@@ -58,7 +58,7 @@
                                             Target="{Binding ElementName=ABB_Tutorial}"
                                             ActionButtonCommand="{x:Bind OpenTutorialCommand}"
 	                                        ActionButtonContent="#Tutorial öffnen"
-	                                        CloseButtonContent="Got it!">       
+	                                        CloseButtonContent="Got it!">
                                         <muxc:TeachingTip.HeroContent>
                                             <muxc:AnimatedVisualPlayer 
                                                 MaxHeight="120"
@@ -74,26 +74,6 @@
 
                         </CommandBar.PrimaryCommands>
                     </CommandBar>
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroup x:Name="WindowStates">
-                            <VisualState x:Name="NarrowState">
-                                <VisualState.StateTriggers>
-                                    <AdaptiveTrigger MinWindowWidth="0" />
-                                </VisualState.StateTriggers>
-                                <!--<VisualState.Setters>
-                                    <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
-                                    <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
-                                    <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
-                                    <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
-                                </VisualState.Setters>-->
-                            </VisualState>
-                            <VisualState x:Name="MediumState">
-                                <VisualState.StateTriggers>
-                                    <AdaptiveTrigger MinWindowWidth="850" />
-                                </VisualState.StateTriggers>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateManager.VisualStateGroups>
                 </Grid>
             </UserControl>
         </DataTemplate>

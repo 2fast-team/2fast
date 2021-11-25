@@ -11,9 +11,6 @@ using Windows.ApplicationModel.DataTransfer;
 using Project2FA.UWP.Services;
 using System.Threading.Tasks;
 using Project2FA.UWP.Views;
-using Windows.Storage;
-using Prism.Logging;
-using Microsoft.Extensions.Logging;
 
 namespace Project2FA.UWP.Utils
 {
@@ -120,6 +117,7 @@ namespace Project2FA.UWP.Utils
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
                 Prism.PrismApplicationBase.Current.Exit();
             });
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.PrimaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
             dialog.SecondaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
@@ -141,6 +139,7 @@ namespace Project2FA.UWP.Utils
             {
                 Text = Strings.Resources.AuthorizationFileSystemContentDialogDescription
             };
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Content = markdown;
             dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
             {
@@ -219,6 +218,7 @@ namespace Project2FA.UWP.Utils
             buttonStackPanel.Children.Add(feedbackHub);
             stackpanel.Children.Add(buttonStackPanel);
 
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Content = stackpanel;
             dialog.PrimaryButtonText = Resources.RestartApp;
             dialog.SecondaryButtonText = Resources.CloseApp;
@@ -292,6 +292,7 @@ namespace Project2FA.UWP.Utils
             buttonStackPanel.Children.Add(feedbackHub);
             stackpanel.Children.Add(buttonStackPanel);
 
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Content = stackpanel;
             dialog.PrimaryButtonText = Resources.Confirm;
             //dialog.SecondaryButtonText = Resources.CloseApp;

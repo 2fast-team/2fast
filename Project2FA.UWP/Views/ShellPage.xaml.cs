@@ -19,9 +19,6 @@ using Project2FA.UWP.Utils;
 using Prism.Navigation;
 using System.Threading.Tasks;
 using Project2FA.UWP.Services.Enums;
-using Microsoft.Toolkit.Uwp.UI.Helpers;
-using Windows.UI.ViewManagement;
-using Windows.System;
 
 namespace Project2FA.UWP.Views
 {
@@ -142,22 +139,23 @@ namespace Project2FA.UWP.Views
             {
                 if (!SettingsService.Instance.AppRated && (MainFrame.Content as FrameworkElement).GetType() != typeof(WelcomePage))
                 {
-                    await dialogService.ShowAsync(new RateAppContentDialog());
+                    var dialog = new RateAppContentDialog();
+                    await dialogService.ShowAsync(dialog);
                 }
             }
 
-            // TODO add check for 1.0.4 to 1.0.5
+            // TODO add check for 1.0.5 to 1.0.6
             if (SystemInformation.Instance.IsAppUpdated)
             {
-                //if (SystemInformation.Instance.PreviousVersionInstalled == new Windows.ApplicationModel.PackageVersion()
-                //{
-
-                //}
-                if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+                if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
                 {
-                    // set the round corner for Windows 11+
-                    SettingsService.Instance.UseRoundCorner = true;
+                    if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+                    {
+                        // set the round corner for Windows 11+
+                        SettingsService.Instance.UseRoundCorner = true;
+                    }
                 }
+
                 ContentDialog dialog = new ContentDialog();
                 dialog.Title = Strings.Resources.NewAppFeaturesTitle;
                 dialog.Content = Strings.Resources.NewAppFeaturesContent;
@@ -517,7 +515,5 @@ namespace Project2FA.UWP.Views
         }
         public Frame MainFrame { get; }
         public string Title { get => _title; set => SetProperty(ref _title, value); }
-
-
     }
 }

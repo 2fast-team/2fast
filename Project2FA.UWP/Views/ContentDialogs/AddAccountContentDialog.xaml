@@ -9,6 +9,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:extensions="using:Project2FA.UWP.Extensions"
     xmlns:behaviors="using:Project2FA.UWP.Behaviors"
+    Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     x:Uid="AddAccountContentDialog"
     xmlns:strings="using:Project2FA.UWP.Strings"
@@ -25,7 +26,7 @@
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid>
+    <Grid x:Name="RootGrid">
         <Pivot x:Name="MainPivot"
                SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex,Mode=TwoWay}">
             <PivotItem Header="#Optionen" x:Uid="AddAccountContentDialogInputType">
@@ -91,6 +92,8 @@
                                     Height="48"
                                     Width="48"
                                     Padding="4,4,4,4"
+                                    Click="HLBTN_QRCodeInfo"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                                     VerticalAlignment="Center">
                                     <FontIcon
                                     FontSize="20"

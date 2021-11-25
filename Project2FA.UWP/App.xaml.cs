@@ -178,7 +178,7 @@ namespace Project2FA.UWP
                 return;
             }
             TimeSpan timeDiff = DateTime.Now - _focusLostTime;
-            if (timeDiff.TotalMinutes >= 10)
+            if (timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
             {
                 _focusLostTimer.Stop();
                 bool isLogout = true;

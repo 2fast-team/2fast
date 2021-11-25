@@ -68,7 +68,6 @@ namespace Project2FA.UWP.ViewModels
         private async Task NewDatafile()
         {
             var dialog = new NewDatafileContentDialog();
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             var result = await _dialogService.ShowAsync(dialog);
             if (result == ContentDialogResult.Primary)
             {
@@ -87,7 +86,6 @@ namespace Project2FA.UWP.ViewModels
                 StorageFile file = await StorageFile.GetFileFromPathAsync(path);
 
                 UseDatafileContentDialog dialog = new UseDatafileContentDialog();
-                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
                 ContentDialogResult result = await _dialogService.ShowAsync(dialog);
 
                 //result is also none, when the datafileDB is correct created

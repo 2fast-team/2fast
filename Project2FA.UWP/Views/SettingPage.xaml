@@ -240,7 +240,37 @@
                                         </appcontrols:CardControl.ActionContent>
                                     </appcontrols:CardControl>
 
-                                    <appcontrols:CardExpanderControl Background="{ThemeResource CardBackgroundBrush}"
+                                    <appcontrols:CardControl 
+                                        x:Uid="SettingsOptionsAutoLogout"
+                                        Header="~SettingsOptionsAutoLogout.Header" 
+                                        Icon="&#xE1F6;">
+                                        <appcontrols:CardControl.Description>
+                                            <TextBlock Text="{x:Bind strings:Resources.SettingsAutoLogoutDesc}"/>
+                                        </appcontrols:CardControl.Description>
+                                        <appcontrols:CardControl.ActionContent>
+                                            <StackPanel 
+                                        Orientation="Horizontal" 
+                                        Margin="0,6,0,15">
+                                                <TextBlock 
+                                        Text="{x:Bind strings:Resources.SettingsAutoLogoutMinutes}" 
+                                        TextWrapping="WrapWholeWords" 
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Center"/>
+                                                <muxc:NumberBox 
+                                        Value="{x:Bind ViewModel.SettingsPartViewModel.SetAutoLogoutMinutes,Mode=TwoWay}"
+                                        Maximum="25"
+                                        Minimum="5"
+                                        SpinButtonPlacementMode="Inline"
+                                        MinWidth="120"
+                                        HorizontalAlignment="Left">
+                                                </muxc:NumberBox>
+                                            </StackPanel>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
+
+                                    <appcontrols:CardExpanderControl 
+                                        Background="{ThemeResource CardBackgroundBrush}"
+                                        Margin="0,0,0,20"
                                         IsExpanded="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}">
                                         <appcontrols:CardExpanderControl.Header>
                                             <appcontrols:CardControl

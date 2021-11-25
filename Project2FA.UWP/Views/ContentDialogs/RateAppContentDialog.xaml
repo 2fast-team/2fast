@@ -6,15 +6,16 @@
     xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d">
 
-    <ContentDialog.Resources>
+    <!--<ContentDialog.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </ContentDialog.Resources>
+    </ContentDialog.Resources>-->
 
     <StackPanel>
         <Border Background="{ThemeResource SystemAccentColor}">

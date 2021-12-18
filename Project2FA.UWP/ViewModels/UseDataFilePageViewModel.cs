@@ -5,7 +5,6 @@ using Project2FA.Core.Services.JSON;
 using Project2FA.Repository.Models;
 using Project2FA.UWP.Utils;
 using Project2FA.UWP.Views;
-using Project2FA.UWP.Views.ContentDialogs;
 using System;
 using System.ComponentModel.Design;
 using System.Threading.Tasks;

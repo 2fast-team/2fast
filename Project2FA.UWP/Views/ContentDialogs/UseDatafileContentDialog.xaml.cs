@@ -7,7 +7,7 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class UseDatafileContentDialog : ContentDialog
     {
-        public UseDatafileContentDialogViewModel ViewModel;
+        public UseDatafileContentDialogViewModel ViewModel => DataContext as UseDatafileContentDialogViewModel; 
 
         /// <summary>
         /// Constructor
@@ -15,7 +15,6 @@ namespace Project2FA.UWP.Views
         public UseDatafileContentDialog()
         {
             this.InitializeComponent();
-            ViewModel = new UseDatafileContentDialogViewModel();
             MainPivot.Items.Remove(FolderPivotItem);
             //MainPivot.Items.Remove(WebDAVPivotItem);
             //MainPivot.Items.Remove(WebDAVFolderPivotItem);

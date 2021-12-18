@@ -22,10 +22,5 @@ namespace Project2FA.UWP.Views
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
             ViewModel.IsTutorialOpen = true;
         }
-
-        private void WelcomePageTutorialTip_ActionButtonClick(TeachingTip sender, object args)
-        {
-            
-        }
     }
 }

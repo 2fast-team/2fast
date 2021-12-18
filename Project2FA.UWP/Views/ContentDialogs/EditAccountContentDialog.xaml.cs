@@ -10,11 +10,10 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class EditAccountContentDialog : ContentDialog
     {
-        EditAccountContentDialogViewModel ViewModel = new EditAccountContentDialogViewModel();
-        public EditAccountContentDialog(TwoFACodeModel model)
+        public EditAccountContentDialogViewModel ViewModel => DataContext as EditAccountContentDialogViewModel;
+        public EditAccountContentDialog()
         {
             this.InitializeComponent();
-            ViewModel.TwoFACodeModel = model;
             switch (SettingsService.Instance.AppTheme)
             {
                 case Theme.System:

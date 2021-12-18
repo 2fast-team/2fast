@@ -169,7 +169,7 @@
     <value>To create a new account for the two-factor-authentification you need a QR-code or a key (cryptical text) from the external service.
 
 # How should the key be imported?
-If you select the QR-code scan, a reading tool will open shortly after pushing the button. Change the window to the service and make a rectangle around the QR-code by holding down your left mouse key.</value>
+</value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
     <value>Inputs</value>
@@ -730,9 +730,11 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>Added the option to check the system time by synchronising a Network Time Protocol (NTP) server. The option is disabled by default with this update.
+    <value>The settings page has been fundamentally updated.
 
-The option can be activated under the settings.</value>
+Implemented the possibility to set the lock time, when the app will be locked in case of inactivity.
+
+A new design option has been implemented, where the corners of controls can be rounded. The option is disabled on Windows 10, enabled by default on Windows 11.</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features</value>
@@ -805,5 +807,8 @@ The option can be activated under the settings.</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
+    <value>If you select the QR-code scan, a reading tool will open shortly after pushing the button. Change the window to the service and make a rectangle around the QR-code by holding down your left mouse key.</value>
   </data>
 </root>

@@ -4,7 +4,6 @@ using Project2FA.Core.Services;
 using Project2FA.UWP.Services;
 using System;
 using System.Windows.Input;
-using Template10.Services.Dialog;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.UI.Xaml.Controls;
@@ -16,6 +15,7 @@ using Windows.UI.Xaml;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Template10.Services.Secrets;
 using Project2FA.Core;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -28,7 +28,7 @@ namespace Project2FA.UWP.ViewModels
         private string _password;
         public ICommand LoginCommand { get; }
         public ICommand WindowsHelloLoginCommand { get; }
-        private IDialogService _dialogService { get; }
+        private IDialogService DialogService { get; }
         private string _applicationTitle;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public LoginPageViewModel()
         {
-            _dialogService = App.Current.Container.Resolve<IDialogService>();
+            DialogService = App.Current.Container.Resolve<IDialogService>();
             LoginCommand = new DelegateCommand(CheckLogin);
             WindowsHelloLoginCommand = new DelegateCommand(WindowsHelloLogin);
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
@@ -62,7 +62,7 @@ namespace Project2FA.UWP.ViewModels
                     dialog.Content = markdown;
                     dialog.PrimaryButtonText = Resources.Yes;
                     dialog.SecondaryButtonText = Resources.No;
-                    var result = await _dialogService.ShowAsync(dialog);
+                    var result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
                     switch (result)
                     {
                         case ContentDialogResult.None:
@@ -102,7 +102,7 @@ namespace Project2FA.UWP.ViewModels
                 //TODO check if this is a problem
                 if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName,dbHash.Hash)))
                 {
-                    ShowLoginError();
+                    await ShowLoginError();
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 if (!await CheckNavigationRequest(Password))
                 {
-                    ShowLoginError();
+                    await ShowLoginError();
                     Password = string.Empty;
                 }
             }
@@ -187,7 +187,7 @@ namespace Project2FA.UWP.ViewModels
             dialog.Title = Resources.Error;
             dialog.Content = Resources.LoginPagePasswordMismatch;
             dialog.PrimaryButtonText = Resources.Confirm;
-            return _dialogService.ShowAsync(dialog);
+            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         public bool WindowsHelloIsUsable

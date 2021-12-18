@@ -2,6 +2,7 @@
 using Microsoft.Toolkit.Uwp.Helpers;
 using Prism;
 using Prism.Ioc;
+using Prism.Services.Dialogs;
 using Prism.Unity;
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
@@ -35,7 +36,7 @@ namespace Project2FA.UWP
         /// <summary>
         /// Creates the access of the static instance of the ShellPage
         /// </summary>
-        public static ShellPage ShellPageInstance { get; } = new ShellPage();
+        public static ShellPage ShellPageInstance { get; private set; } = new ShellPage();
 
         /// <summary>
         /// Pipeline for interacting with database.
@@ -55,7 +56,7 @@ namespace Project2FA.UWP
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            TrackingManager.TrackException(e.Exception);
+            TrackingManager.TrackExceptionUnhandled(e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
             // let the app crash...
@@ -63,10 +64,16 @@ namespace Project2FA.UWP
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
-            TrackingManager.TrackException(e.Exception);
+            TrackingManager.TrackExceptionUnhandled(e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
             // let the app crash...
+        }
+
+        protected override UIElement CreateShell()
+        {
+            ShellPageInstance = Container.Resolve<ShellPage>();
+            return ShellPageInstance;
         }
 
         public override void RegisterTypes(IContainerRegistry container)
@@ -83,11 +90,20 @@ namespace Project2FA.UWP
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();
-            container.RegisterView<AccountCodePage, AccountCodePageViewModel>();
-            container.RegisterView<WelcomePage, WelcomePageViewModel>();
-            container.RegisterView<SettingPage, SettingPageViewModel>();
-            container.RegisterView<BlankPage, BlankPageViewModel>();
-            container.RegisterView<UseDataFilePage, UseDataFilePageViewModel>();
+            container.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
+            container.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
+            container.RegisterForNavigation<SettingPage, SettingPageViewModel>();
+            container.RegisterForNavigation<BlankPage, BlankPageViewModel>();
+            container.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
+            //contentdialogs and view-models
+            container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
+            container.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();
+            container.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
+            container.RegisterDialog<NewDatafileContentDialog, NewDatafileContentDialogViewModel>();
+            container.RegisterDialog<RateAppContentDialog>();
+            container.RegisterDialog<UpdateDatafileContentDialog, UpdateDatafileContentDialogViewModel>();
+            container.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();
+            container.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
         }
 
         public override async Task OnStartAsync(IStartArgs args)
@@ -166,6 +182,7 @@ namespace Project2FA.UWP
                 if (_focusLostTimer.IsEnabled)
                 {
                     _focusLostTimer.Stop();
+                    _focusLostTimer.Tick -= FocusLostTimer_Tick;
                 }
             }
         }
@@ -175,17 +192,19 @@ namespace Project2FA.UWP
             if (await Repository.Password.GetAsync() is null)
             {
                 _focusLostTimer.Stop();
+                _focusLostTimer.Tick -= FocusLostTimer_Tick;
                 return;
             }
             TimeSpan timeDiff = DateTime.Now - _focusLostTime;
             if (timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
             {
                 _focusLostTimer.Stop();
+                _focusLostTimer.Tick -= FocusLostTimer_Tick;
                 bool isLogout = true;
-                var dialogService = Current.Container.Resolve<IDialogService>();
+                var dialogService = Current.Container.Resolve<Template10.Services.Dialog.IDialogService>();
                 if (await dialogService.IsDialogRunning())
                 {
-                    dialogService.CancelDialogs();
+                    dialogService.CloseDialogs();
                 }
                 await ShellPageInstance.NavigationService.NavigateAsync("/BlankPage");
                 var loginPage = new LoginPage(isLogout);

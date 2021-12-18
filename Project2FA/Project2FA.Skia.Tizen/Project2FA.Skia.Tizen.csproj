@@ -24,8 +24,8 @@
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
     <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.155" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.0.0-dev.5631" />
-    <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="4.0.0-dev.5631" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.0.11" />
+    <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="4.0.11" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
 </Project>

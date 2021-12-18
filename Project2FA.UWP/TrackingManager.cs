@@ -25,11 +25,35 @@ namespace Project2FA.UWP
             }
         }
 
+        public static void TrackExceptionUnhandled(Exception ex)
+        {
+            try
+            {
+                _logger.Log($"Unhandled exception - {ex.Message} - {ex.StackTrace}");
+            }
+            catch
+            {
+                // Ignore error
+            }
+        }
+
         public static void TrackException(Exception ex)
         {
             try
             {
                 _logger.Log($"exception - {ex.Message} - {ex.StackTrace}");
+            }
+            catch
+            {
+                // Ignore error
+            }
+        }
+
+        public static void TrackExceptionCatched(Exception ex)
+        {
+            try
+            {
+                _logger.Log($"exception - catched - {ex.Message} - {ex.InnerException} - {ex.StackTrace}");
             }
             catch
             {

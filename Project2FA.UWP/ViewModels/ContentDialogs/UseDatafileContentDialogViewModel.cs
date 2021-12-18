@@ -129,6 +129,7 @@ namespace Project2FA.UWP.ViewModels
             // create local filedata
             if (SelectedIndex == 1)
             {
+                IsLoading = true;
                 await CreateLocalFileDB(false);
             }
         }

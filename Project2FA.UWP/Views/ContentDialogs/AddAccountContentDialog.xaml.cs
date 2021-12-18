@@ -14,7 +14,7 @@ namespace Project2FA.UWP.Views
     {
         //MobileBarcodeScanner _barcodeScanner;
         //MobileBarcodeScanningOptions _mobileBarcodeScanningOptions;
-        public AddAccountContentDialogViewModel ViewModel { get; } = new AddAccountContentDialogViewModel();
+        public AddAccountContentDialogViewModel ViewModel => DataContext as AddAccountContentDialogViewModel;
 
         public AddAccountContentDialog()
         {
@@ -49,6 +49,7 @@ namespace Project2FA.UWP.Views
             }
         }
 
+
         private void _barcodeScanner_OnCameraInitialized()
         {
             ViewModel.IsCameraActive = true;
@@ -80,7 +81,7 @@ namespace Project2FA.UWP.Views
             AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
             {
                 Target = sender as FrameworkElement,
-                Subtitle = Strings.Resources.UseDatafilePasswordInfo,
+                Subtitle = Strings.Resources.AddAccountCodeContentDialogQRCodeHelp,
                 AutoCloseInterval = 8000,
                 IsLightDismissEnabled = true,
                 BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),

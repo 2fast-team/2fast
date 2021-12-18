@@ -10,15 +10,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Project2FA.UWP.Extensions
 {
-    /// <summary>
-    /// TextBoxRegex allows text validation using a regular expression.
-    /// </summary>
-    /// <remarks>
-    /// If <see cref="ValidationMode"> is set to Normal then IsValid will be set according to whether the regex is valid.</see>
-    /// If <see cref="ValidationMode"> is set to Forced then IsValid will be set according to whether the regex is valid, when TextBox lose focus and in case the TextBox is invalid clear its value. </see>
-    /// If <see cref="ValidationMode"> is set to Dynamic then IsValid will be set according to whether the regex is valid. If the newest character is invalid, the input will be canceled.</see>
-    /// </remarks>
-    public partial class TextBoxRegex
+    /// <inheritdoc cref="TextBoxExtensions"/>
+    public static partial class TextBoxExtensions
     {
         private static void TextBoxRegexPropertyOnChange(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -38,13 +31,25 @@ namespace Project2FA.UWP.Extensions
         private static void TextBox_BeforeTextChanging(TextBox textBox, TextBoxBeforeTextChangingEventArgs args)
         {
             var validationMode = (ValidationMode)textBox.GetValue(ValidationModeProperty);
+            var validationType = (ValidationType)textBox.GetValue(ValidationTypeProperty);
             var (valid, successful) = ValidateTextBox(textBox, args.NewText, validationMode != ValidationMode.Normal);
             if (successful &&
                 !valid &&
                 validationMode == ValidationMode.Dynamic &&
+                validationType != ValidationType.Email &&
+                validationType != ValidationType.PhoneNumber &&
                 args.NewText != string.Empty)
             {
                 args.Cancel = true;
+            }
+            else
+            {
+                // workaround for the valid charcaters after initial invalid input
+                // where the next valid input was set on wrong position
+                if (valid && textBox.Text.Length == 0 && args.NewText.Length == 1)
+                {
+                    textBox.SelectionStart = 1;
+                }
             }
         }
 
@@ -54,7 +59,7 @@ namespace Project2FA.UWP.Extensions
             ValidateTextBox(textBox, textBox.Text);
         }
 
-        private static (bool valid, bool successful) ValidateTextBox(TextBox textBox, string newText = "", bool force = true)
+        private static (bool valid, bool successful) ValidateTextBox(TextBox textBox, string newText, bool force = true)
         {
             var validationType = (ValidationType)textBox.GetValue(ValidationTypeProperty);
             string regex;

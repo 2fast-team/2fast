@@ -345,7 +345,9 @@
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid 
+        x:Name="MainGrid" 
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView 
             x:Name="LV_AccountCollection"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"

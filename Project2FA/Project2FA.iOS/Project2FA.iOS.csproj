@@ -123,10 +123,10 @@
     </PackageReference>
     <PackageReference Include="Uno.Extensions.Logging.OSLog " Version="1.1.0" />
     <PackageReference Include="Uno.WinUI.Lottie">
-      <Version>4.0.0-dev.5631</Version>
+      <Version>4.0.11</Version>
     </PackageReference>
     <PackageReference Include="Uno.WinUI.RemoteControl">
-      <Version>3.11.6</Version>
+      <Version>4.0.11</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

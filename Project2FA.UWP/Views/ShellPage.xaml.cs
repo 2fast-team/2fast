@@ -13,12 +13,12 @@ using System.Collections.Generic;
 using Prism.Services;
 using System.Linq;
 using Prism.Ioc;
-using Template10.Services.Dialog;
 using Windows.ApplicationModel.Core;
 using Project2FA.UWP.Utils;
 using Prism.Navigation;
 using System.Threading.Tasks;
 using Project2FA.UWP.Services.Enums;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.Views
 {
@@ -140,7 +140,7 @@ namespace Project2FA.UWP.Views
                 if (!SettingsService.Instance.AppRated && (MainFrame.Content as FrameworkElement).GetType() != typeof(WelcomePage))
                 {
                     var dialog = new RateAppContentDialog();
-                    await dialogService.ShowAsync(dialog);
+                    await dialogService.ShowDialogAsync(dialog, new DialogParameters());
                 }
             }
 
@@ -161,7 +161,7 @@ namespace Project2FA.UWP.Views
                 dialog.Content = Strings.Resources.NewAppFeaturesContent;
                 dialog.PrimaryButtonText = Strings.Resources.Confirm;
                 dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                await dialogService.ShowAsync(dialog);
+                await dialogService.ShowDialogAsync(dialog, new DialogParameters());
             }
 
             // If this is the first run, activate the ntp server checks

@@ -32,7 +32,7 @@ namespace Project2FA
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : PrismApplication
+    public sealed partial class App : PrismApplication
     {
         private static Window _window;
 
@@ -50,8 +50,8 @@ namespace Project2FA
 
             this.InitializeComponent();
 
-#if HAS_UNO || NETFX_CORE
-            this.Suspending += OnSuspending;
+#if !HAS_UNO_WINUI && !NETCOREAPP
+           //this.Suspending += OnSuspending;
 #endif
         }
 
@@ -80,6 +80,7 @@ namespace Project2FA
             throw new Exception($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
         }
 
+
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
         /// without knowing whether the application will be terminated or resumed with the contents
@@ -87,12 +88,12 @@ namespace Project2FA
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
-            deferral.Complete();
-        }
+        //protected override void OnSuspending(SuspendingEventArgs e)
+        //{
+        //    var deferral = e.SuspendingOperation.GetDeferral();
+        //    //TODO: Save application state and stop any background activity
+        //    deferral.Complete();
+        //}
 
         /// <summary>
         /// Configures global Uno Platform logging
@@ -184,7 +185,7 @@ namespace Project2FA
         {
             base.OnInitialized();
             var regionManager = Container.Resolve<IRegionManager>();
-            regionManager.RequestNavigate("InitialRegion", nameof(InitialView));
+            regionManager.RequestNavigate("ContentRegion", nameof(InitialView));
         }
 
         protected override UIElement CreateShell()
@@ -197,7 +198,9 @@ namespace Project2FA
 #endif
 
 #if HAS_UNO_WINUI || NETCOREAPP
-            MainXamlRoot = shell.XamlRoot;
+            shell.Loaded += (s, e) => {
+                MainXamlRoot = shell.XamlRoot;
+            };
 #endif
 
             return shell;

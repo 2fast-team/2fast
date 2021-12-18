@@ -1,6 +1,5 @@
 ﻿using Prism.Mvvm;
 using System;
-using Template10.Services.Dialog;
 using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Services.Enums;
 using Windows.Storage;
@@ -24,6 +23,7 @@ using Microsoft.Toolkit.Collections;
 using Windows.Security.Credentials;
 using Project2FA.Core.Services.NTP;
 using System.Threading.Tasks;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -121,7 +121,7 @@ namespace Project2FA.UWP.ViewModels
             dialog.PrimaryButtonText = Resources.No;
             dialog.SecondaryButtonText = Resources.Yes;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            ContentDialogResult result = await _dialogService.ShowAsync(dialog);
+            ContentDialogResult result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
 
             switch (result)
             {
@@ -129,7 +129,10 @@ namespace Project2FA.UWP.ViewModels
                     DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
                     //delete password in the secret vault
                     App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret(passwordHash.Hash);
-                    //TODO remove WebDAV login
+                    //remove WebDAV login
+                    App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret("WDServerAddress");
+                    App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret("WDUsername");
+                    App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret("WDPassword");
                     // reset data and restart app
                     await ApplicationData.Current.ClearAsync();
                     //PrismApplication.Current.
@@ -425,7 +428,7 @@ namespace Project2FA.UWP.ViewModels
                 {
                     NotifyPasswordChanged = false;
                 }
-                var result = await _dialogService.ShowAsync(dialog);
+                var result = await _dialogService.ShowDialogAsync(dialog,new DialogParameters());
                 if (result == ContentDialogResult.Primary)
                 {
                     if (dialog.ViewModel.PasswordChanged)

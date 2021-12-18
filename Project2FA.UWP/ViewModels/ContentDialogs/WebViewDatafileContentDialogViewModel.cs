@@ -9,7 +9,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Project2FA.Repository.Models;
 
-namespace Project2FA.UWP.ViewModels.ContentDialogs
+namespace Project2FA.UWP.ViewModels
 {
     public class WebViewDatafileContentDialogViewModel : BindableBase
     {

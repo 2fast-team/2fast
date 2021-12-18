@@ -40,7 +40,7 @@
                             </CommandBar>
                         </CommandBar.Content>
                         <CommandBar.PrimaryCommands>
-                            <AppBarButton 
+                            <!--<AppBarButton 
                                 x:Name="ABB_Tutorial"
                                 Command="{x:Bind TutorialCommand}"
                                 x:Uid="WelcomePageABBTutorial" >
@@ -70,7 +70,7 @@
                                         </muxc:TeachingTip.HeroContent>
                                     </appcontrols:AutoCloseTeachingTip>
                                 </AppBarButton.Resources>
-                            </AppBarButton>
+                            </AppBarButton>-->
 
                         </CommandBar.PrimaryCommands>
                     </CommandBar>
@@ -105,9 +105,9 @@
 
         <Border Grid.ColumnSpan="3">
             <muxc:ParallaxView x:Name="Parallax"
-                                    VerticalShift="50">
+                               VerticalShift="50">
                 <Image Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
-                           Stretch="UniformToFill" />
+                       Stretch="UniformToFill" />
             </muxc:ParallaxView>
         </Border>
 

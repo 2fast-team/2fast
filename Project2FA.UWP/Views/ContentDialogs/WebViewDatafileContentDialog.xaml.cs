@@ -1,15 +1,15 @@
 ﻿using Project2FA.Repository.Models;
-using Project2FA.UWP.ViewModels.ContentDialogs;
+using Project2FA.UWP.ViewModels;
 using WebDAVClient.Types;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Project2FA.UWP.Views.ContentDialogs
+namespace Project2FA.UWP.Views
 {
     public sealed partial class WebViewDatafileContentDialog : ContentDialog
     {
-        public WebViewDatafileContentDialogViewModel ViewModel = new WebViewDatafileContentDialogViewModel();
+        public WebViewDatafileContentDialogViewModel ViewModel => DataContext as WebViewDatafileContentDialogViewModel;
 
         public WebViewDatafileContentDialog(bool createDatafileCase, Status result)
         {

@@ -2,7 +2,6 @@
 using Prism.Commands;
 using System;
 using Prism.Ioc;
-using Template10.Services.Dialog;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Project2FA.UWP.Strings;
@@ -11,6 +10,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Project2FA.UWP.Services;
 using System.Threading.Tasks;
 using Project2FA.UWP.Views;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.Utils
 {
@@ -34,7 +34,7 @@ namespace Project2FA.UWP.Utils
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.SecondaryButtonText = Resources.Confirm;
-            return dialogService.ShowAsync(dialog);
+            return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
         public static async Task ShowUnauthorizedAccessError()
         {
@@ -58,7 +58,7 @@ namespace Project2FA.UWP.Utils
             {
                 Prism.PrismApplicationBase.Current.Exit();
             });
-            ContentDialogResult result = await dialogService.ShowAsync(dialog);
+            ContentDialogResult result = await dialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.None)
             {
                 Prism.PrismApplicationBase.Current.Exit();
@@ -81,7 +81,9 @@ namespace Project2FA.UWP.Utils
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
                 PrimaryButtonCommand = new DelegateCommand(async () =>
                 {
-                    ContentDialogResult result = await dialogService.ShowAsync(new ChangeDatafilePasswordContentDialog(true));
+                    var param = new DialogParameters();
+                    param.Add("boolean", true);
+                    await dialogService.ShowDialogAsync(new ChangeDatafilePasswordContentDialog(), param);
                 }),
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
@@ -92,7 +94,7 @@ namespace Project2FA.UWP.Utils
                 })
             };
 
-            ContentDialogResult result = await dialogService.ShowAsync(dialog);
+            ContentDialogResult result = await dialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.None)
             {
                 ShowPasswordError();
@@ -126,7 +128,7 @@ namespace Project2FA.UWP.Utils
                 Prism.PrismApplicationBase.Current.Exit();
             });
             var dialogService = App.Current.Container.Resolve<IDialogService>();
-            return dialogService.ShowAsync(dialog);
+            return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         public static Task UnauthorizedAccessUseLocalFileDialog()
@@ -159,7 +161,7 @@ namespace Project2FA.UWP.Utils
             //    Prism.PrismApplicationBase.Current.Exit();
             //});
             var dialogService = App.Current.Container.Resolve<IDialogService>();
-            return dialogService.ShowAsync(dialog);
+            return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         public async static Task ShowUnexpectedError(Exception exc)
@@ -231,7 +233,7 @@ namespace Project2FA.UWP.Utils
             {
                 Prism.PrismApplicationBase.Current.Exit();
             });
-            var result = await App.Current.Container.Resolve<IDialogService>().ShowAsync(dialog);
+            var result = await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.None)
             {
                 ShowUnexpectedError(exc);
@@ -305,7 +307,7 @@ namespace Project2FA.UWP.Utils
             //{
             //    Prism.PrismApplicationBase.Current.Exit();
             //});
-            var result = await App.Current.Container.Resolve<IDialogService>().ShowAsync(dialog);
+            var result = await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
             SettingsService.Instance.UnhandledExceptionStr = string.Empty;
         }
     }

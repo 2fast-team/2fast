@@ -169,7 +169,7 @@
     <value>Um einen neuen Account für die Zwei-Faktor-Authentifizierung einzurichten muss vom gewünschten Dienst ein QR-Code oder ein Schlüssel (kryptischer Text) vorhanden sein.
 
 # Wie soll dieser Schlüssel in die App importiert werden?
-Bei Wahl des QR-Code Scans öffnet sich kurze Zeit nach Klick auf dem Button ein Lesetool. Hierfür einfach zum Dienst wechseln und bei gedrückter linker Maustaste einen Rahmen um den QR-Code ziehen.</value>
+</value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
     <value>Eingaben</value>
@@ -734,9 +734,11 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>Es wurde die Möglichkeit zur Überprüfung der Systemzeit durch einen Abgleich eines Network Time Protocol (NTP) Servers hinzugefügt. Die Option ist Standardmäßig mit dieser Aktualisierung deaktiviert.
+    <value>Die Einstellungsseite wurde grundlegend aktualisiert.
 
-Die Option kann unter den Einstellungen aktiviert werden.</value>
+Es wurde die Möglichkeit implementiert die Zeit für die Sperrung einzustellen, bei der die App bei Inaktivität gesperrt wird.
+
+Eine neue Option für das Design wurde implementiert, bei dem die Ecken von Steuerelementen abgerundet werden können. Die Option ist unter Windows 10 deaktiviert, unter Windows 11 standardmäßig aktiviert.</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen</value>
@@ -812,5 +814,8 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Schließen</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
+    <value>Bei der Wahl des QR-Code Scans öffnet sich kurze Zeit nach Klick auf dem Button ein Lesetool, mit dem der QR-Code bei dem Dienst selektiert werden muss. Hierfür einfach zum Dienst wechseln und bei gedrückter linker Maustaste einen Rahmen um den QR-Code ziehen.</value>
   </data>
 </root>

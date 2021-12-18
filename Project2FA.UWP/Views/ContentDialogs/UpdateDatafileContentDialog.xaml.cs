@@ -7,7 +7,7 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class UpdateDatafileContentDialog : ContentDialog
     {
-        public UpdateDatafileContentDialogViewModel ViewModel;
+        public UpdateDatafileContentDialogViewModel ViewModel => DataContext as UpdateDatafileContentDialogViewModel;   
 
         /// <summary>
         /// Constructor
@@ -15,7 +15,6 @@ namespace Project2FA.UWP.Views
         public UpdateDatafileContentDialog()
         {
             this.InitializeComponent();
-            ViewModel = new UpdateDatafileContentDialogViewModel();
             SetPivotItem();
         }
 

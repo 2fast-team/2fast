@@ -824,7 +824,7 @@ namespace Project2FA.UWP.Strings{
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: Added the option to check the system time by synchronising a Network Time Protocol (NTP) server. The option is disabled by default with this update. The option can be activated under the settings.
+        ///   Looks up a localized string similar to: The settings page has been fundamentally updated. Implemented the possibility to set the lock time, when the app will be locked in case of inactivity. A new design option has been implemented, where the corners of controls can be rounded. The option is disabled on Windows 10, enabled by default on Windows 11.
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -951,6 +951,19 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region AddAccountCodeContentDialogQRCodeHelp
+        /// <summary>
+        ///   Looks up a localized string similar to: If you select the QR-code scan, a reading tool will open shortly after pushing the button. Change the window to the service and make a rectangle around the QR-code by holding down your left mouse key.
+        /// </summary>
+        public static string AddAccountCodeContentDialogQRCodeHelp
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddAccountCodeContentDialogQRCodeHelp");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1034,6 +1047,7 @@ namespace Project2FA.UWP.Strings{
             SettingsAutoLogoutDesc,
             SettingsAutoLogoutMinutes,
             Close,
+            AddAccountCodeContentDialogQRCodeHelp,
         }
 
         private static ResourceLoader _resourceLoader;

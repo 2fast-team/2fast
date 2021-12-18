@@ -4,7 +4,6 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Prism.Mvvm;
 using Prism.Ioc;
-using Template10.Services.Dialog;
 using Project2FA.UWP.Services;
 using Project2FA.Core.Utils;
 using Windows.ApplicationModel.DataTransfer;
@@ -16,6 +15,7 @@ using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
 using Prism.Logging;
 using System.Threading.Tasks;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -23,7 +23,7 @@ namespace Project2FA.UWP.ViewModels
     {
         private DispatcherTimer _dispatcherTOTPTimer;
         private DispatcherTimer _dispatcherTimerDeletedModel;
-        private IDialogService PageDialogService { get; }
+        private IDialogService DialogService { get; }
         private ILoggerFacade Logger { get; }
         public ICommand AddAccountCommand { get; }
         public ICommand EditAccountCommand { get; }
@@ -39,7 +39,7 @@ namespace Project2FA.UWP.ViewModels
 
         public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade)
         {
-            PageDialogService = dialogService;
+            DialogService = dialogService;
             Logger = loggerFacade;
             Title = "Accounts";
 
@@ -60,7 +60,8 @@ namespace Project2FA.UWP.ViewModels
                 }
                 AddAccountContentDialog dialog = new AddAccountContentDialog();
                 dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
-                await PageDialogService.ShowAsync(dialog);
+                var prismDialogService = App.Current.Container.Resolve<Prism.Services.Dialogs.IDialogService>();
+                await prismDialogService.ShowDialogAsync(dialog, new DialogParameters());
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
@@ -173,13 +174,15 @@ namespace Project2FA.UWP.ViewModels
         /// Starts the dialog to edit an existing account
         /// </summary>
         /// <param name="parameter"></param>
-        private void EditAccountFromCollection(object parameter)
+        private async void EditAccountFromCollection(object parameter)
         {
             if (parameter is TwoFACodeModel model)
             {
-                var dialog = new EditAccountContentDialog(model);
+                var dialog = new EditAccountContentDialog();
                 dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
-                PageDialogService.ShowAsync(dialog);
+                var param = new DialogParameters();
+                param.Add("model", model);
+                await DialogService.ShowDialogAsync(dialog, param);
             }
         }
 
@@ -202,7 +205,7 @@ namespace Project2FA.UWP.ViewModels
                 dialog.PrimaryButtonText = Resources.Confirm;
                 dialog.SecondaryButtonText = Resources.ButtonTextCancel;
                 dialog.SecondaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                ContentDialogResult result = await PageDialogService.ShowAsync(dialog);
+                ContentDialogResult result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
                 if (result == ContentDialogResult.Primary)
                 {
                     TempDeletedTFAModel = model;
@@ -233,8 +236,7 @@ namespace Project2FA.UWP.ViewModels
                 _dispatcherTimerDeletedModel.Stop();
             }
             _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
-            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-            return !await dialogService.IsDialogRunning();
+            return !await DialogService.IsDialogRunning();
         }
 
         public DataService TwoFADataService => DataService.Instance;

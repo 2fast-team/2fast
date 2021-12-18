@@ -481,7 +481,7 @@ namespace Project2FA.UWP.Services
             catch (Exception ex)
             {
                 Logger.Log(ex.Message, Category.Exception, Priority.High);
-                TrackingManager.TrackException(ex);
+                TrackingManager.TrackExceptionCatched(ex);
                 return false;
             }
         }

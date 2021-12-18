@@ -8,6 +8,7 @@
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,7)"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
@@ -34,6 +35,7 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
+        <!--for debug-->
         <Border 
             x:Name="PageStaticBackgroundBorder" 
             Grid.RowSpan="4" 
@@ -89,7 +91,7 @@
 
         <mstoolkitControls:DropShadowPanel 
             x:Name="DropShadow"
-            HorizontalAlignment="Stretch" 
+            HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
@@ -97,17 +99,16 @@
             Grid.Column="1"
             Grid.Row="2"
             ShadowOpacity="0.4">
-            <!--<ui:Effects.Shadow>
-                <media:AttachedCardShadow BlurRadius="8"
+            <Grid x:Name="MainGrid">
+                <!--<ui:Effects.Shadow>
+                    <media:AttachedCardShadow BlurRadius="8"
                                     CornerRadius="32"
                                     Color="Black"
                                     Offset="4,4"
                                     Opacity="1"/>
-            </ui:Effects.Shadow>-->
-            <Grid x:Name="MainGrid">
+                </ui:Effects.Shadow>-->
                 <Border 
                     x:Name="DetailFirstShadowPanel" 
-                    CornerRadius="{ThemeResource OverlayCornerRadius}"
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                     <Border>
                         <Border.Background>
@@ -115,11 +116,12 @@
                         </Border.Background>
                     </Border>
                 </Border>
-
+                <!--CornerRadius="{ThemeResource OverlayCornerRadius}"-->
                 <StackPanel 
+                    x:Name="MainStackPanel"
                     MaxWidth="320" 
                     MinHeight="500" 
-                    CornerRadius="{ThemeResource OverlayCornerRadius}">
+>
                     <mstoolkitControls:ImageEx 
                         Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
                         MaxHeight="150" 
@@ -165,10 +167,13 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="MainGrid.CornerRadius" Value="0"/>
+                        <Setter Target="MainStackPanel.CornerRadius" Value="0"/>
                         <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
                         <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="0" />
                         <Setter Target="RootGrid.ColumnDefinitions[2].Width" Value="0" />
                         <Setter Target="RootGrid.RowDefinitions[1].Height" Value="0" />
+                        <Setter Target="RootGrid.RowDefinitions[2].Height" Value="2.5*" />
                         <Setter Target="RootGrid.RowDefinitions[3].Height" Value="0" />
                         <Setter Target="SP_LoginBTNs.Orientation" Value="Vertical"/>
                     </VisualState.Setters>
@@ -179,6 +184,8 @@
                         <AdaptiveTrigger MinWindowWidth="852" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="MainGrid.CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
+                        <Setter Target="MainStackPanel.CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
                         <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
                         <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="*" />
                         <Setter Target="RootGrid.ColumnDefinitions[1].MinWidth" Value="852" />

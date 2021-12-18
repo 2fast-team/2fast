@@ -12,25 +12,14 @@ namespace Project2FA.UWP.Views
     /// </summary>
     public sealed partial class ChangeDatafilePasswordContentDialog : ContentDialog
     {
-        public ChangeDatafilePasswordContentDialogViewModel ViewModel { get; } = new ChangeDatafilePasswordContentDialogViewModel();
+        public ChangeDatafilePasswordContentDialogViewModel ViewModel => DataContext as ChangeDatafilePasswordContentDialogViewModel;
 
         /// <summary>
-        /// Constructor, initialize view model
+        /// Constructor
         /// </summary>
         public ChangeDatafilePasswordContentDialog()
         {
             this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Constructor, initialize view model
-        /// </summary>
-        /// <param name="invalidPassword">When true, </param>
-        public ChangeDatafilePasswordContentDialog(bool invalidPassword)
-        {
-            this.InitializeComponent();
-            ViewModel = new ChangeDatafilePasswordContentDialogViewModel();
-            ViewModel.InvalidPassword = invalidPassword;
         }
 
         /// <summary>
@@ -40,9 +29,8 @@ namespace Project2FA.UWP.Views
         /// <param name="args"></param>
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            var useArgonHash = SettingsService.Instance.UseExtendedHash;
             // first check if the given current password matches with the datafile
-            if ((await App.Repository.Password.GetAsync()).Hash == CryptoService.CreateStringHash(ViewModel.CurrentPassword, useArgonHash))
+            if ((await App.Repository.Password.GetAsync()).Hash == CryptoService.CreateStringHash(ViewModel.CurrentPassword))
             {
                 await ViewModel.ChangePasswordInFileAndDB();
             }

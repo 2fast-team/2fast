@@ -41,9 +41,9 @@
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.1.0" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="3.11.6" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.0.0" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.0.0" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.0.11" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.1.2" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.1.2" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" Condition="Exists('..\Project2FA.Shared\Project2FA.Shared.projitems')" />
 </Project>

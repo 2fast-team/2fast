@@ -40,8 +40,9 @@
                               Content="{TemplateBinding Icon}"
                               HorizontalAlignment="Center"
                               FontSize="20"
-                              Margin="2,0,18,0"
                               MaxWidth="26"
+                              Margin="2,0,18,0"
+                              RelativePanel.AlignVerticalCenterWithPanel="True"
                               AutomationProperties.AccessibilityView="Raw"
                               FontFamily="{ThemeResource SymbolThemeFontFamily}"
                               Foreground="{ThemeResource CardPrimaryForegroundBrush}"
@@ -51,6 +52,7 @@
                             x:Name="SubtitleStack"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
+                                    RelativePanel.AlignVerticalCenterWithPanel="True"
                             Margin="0,0,16,0">
 
                                     <TextBlock
@@ -107,7 +109,8 @@
                                         <AdaptiveTrigger MinWindowWidth="0" />
                                     </VisualState.StateTriggers>
                                     <VisualState.Setters>
-                                        <Setter Target="ContentPresenter.Margin" Value="0,10,0,0"/>
+                                        <Setter Target="IconPresenter.(RelativePanel.AlignVerticalCenterWithPanel)" Value="false"/>
+                                        <Setter Target="ContentPresenter.Margin" Value="0,0,0,0"/>
                                         <Setter Target="SubtitleStack.Margin" Value="0,10,10,0"/>
                                         <Setter Target="SubtitleStack.(RelativePanel.Below)" Value="IconPresenter"/>
                                     </VisualState.Setters>
@@ -118,6 +121,7 @@
                                     </VisualState.StateTriggers>
                                     <VisualState.Setters>
                                         <Setter Target="ContentPresenter.Margin" Value="0,0,0,0"/>
+                                        <Setter Target="SubtitleStack.Margin" Value="2,0,18,0"/>
                                         <Setter Target="SubtitleStack.(RelativePanel.RightOf)" Value="IconPresenter"/>
                                     </VisualState.Setters>
                                 </VisualState>

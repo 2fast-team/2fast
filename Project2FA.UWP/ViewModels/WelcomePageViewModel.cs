@@ -9,7 +9,6 @@ using Windows.UI.Xaml.Controls;
 using Prism.Navigation;
 using Project2FA.UWP.Utils;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 
 namespace Project2FA.UWP.ViewModels
 {

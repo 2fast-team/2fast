@@ -144,7 +144,6 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            // TODO add check for 1.0.5 to 1.0.6
             if (SystemInformation.Instance.IsAppUpdated)
             {
                 if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))

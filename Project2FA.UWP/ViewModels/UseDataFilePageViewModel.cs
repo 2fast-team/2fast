@@ -9,7 +9,6 @@ using System;
 using System.ComponentModel.Design;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Template10.Services.Dialog;
 using Template10.Services.File;
 using Template10.Services.Network;
 using WebDAVClient.Types;
@@ -23,6 +22,7 @@ using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using Windows.Storage.AccessCache;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -119,7 +119,7 @@ namespace Project2FA.UWP.ViewModels
 
                             IsLoading = false;
                             WebViewDatafileContentDialog dialog = new WebViewDatafileContentDialog(false, result);
-                            ContentDialogResult dialogresult = await DialogService.ShowAsync(dialog);
+                            ContentDialogResult dialogresult = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
                             if (dialogresult == ContentDialogResult.Primary)
                             {
                                 ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;

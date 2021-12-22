@@ -14,7 +14,6 @@ using Project2FA.UWP.ViewModels;
 using Project2FA.UWP.Views;
 using System;
 using System.Threading.Tasks;
-using Template10.Services.Dialog;
 using Template10.Services.Serialization;
 using Template10.Services.Settings;
 using Template10.Utilities;
@@ -167,8 +166,9 @@ namespace Project2FA.UWP
                     {
                         _focusLostTimer = new DispatcherTimer();
                         _focusLostTimer.Interval = new TimeSpan(0, 1, 0); //every minute
-                        _focusLostTimer.Tick += FocusLostTimer_Tick;
                     }
+                    _focusLostTimer.Tick -= FocusLostTimer_Tick;
+                    _focusLostTimer.Tick += FocusLostTimer_Tick;
                     _focusLostTimer.Start();
                     _focusLostTime = DateTime.Now;
                 }
@@ -182,7 +182,6 @@ namespace Project2FA.UWP
                 if (_focusLostTimer.IsEnabled)
                 {
                     _focusLostTimer.Stop();
-                    _focusLostTimer.Tick -= FocusLostTimer_Tick;
                 }
             }
         }
@@ -192,16 +191,14 @@ namespace Project2FA.UWP
             if (await Repository.Password.GetAsync() is null)
             {
                 _focusLostTimer.Stop();
-                _focusLostTimer.Tick -= FocusLostTimer_Tick;
                 return;
             }
             TimeSpan timeDiff = DateTime.Now - _focusLostTime;
             if (timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
             {
                 _focusLostTimer.Stop();
-                _focusLostTimer.Tick -= FocusLostTimer_Tick;
                 bool isLogout = true;
-                var dialogService = Current.Container.Resolve<Template10.Services.Dialog.IDialogService>();
+                var dialogService = Current.Container.Resolve<IDialogService>();
                 if (await dialogService.IsDialogRunning())
                 {
                     dialogService.CloseDialogs();

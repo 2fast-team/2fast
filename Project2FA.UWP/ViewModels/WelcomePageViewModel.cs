@@ -3,12 +3,12 @@ using Prism.Mvvm;
 using System;
 using Project2FA.UWP.Views;
 using System.Windows.Input;
-using Template10.Services.Dialog;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Prism.Navigation;
 using Project2FA.UWP.Utils;
 using System.Threading.Tasks;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -59,7 +59,7 @@ namespace Project2FA.UWP.ViewModels
                 {
                     IsTutorialOpen = false;
                 }
-                await _dialogService.ShowAsync(dialog);
+                await _dialogService.ShowDialogAsync(dialog,new DialogParameters());
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
@@ -67,7 +67,7 @@ namespace Project2FA.UWP.ViewModels
         private async Task NewDatafile()
         {
             var dialog = new NewDatafileContentDialog();
-            var result = await _dialogService.ShowAsync(dialog);
+            var result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.Primary)
             {
                 //_canNavigate = true;
@@ -85,7 +85,7 @@ namespace Project2FA.UWP.ViewModels
                 StorageFile file = await StorageFile.GetFileFromPathAsync(path);
 
                 UseDatafileContentDialog dialog = new UseDatafileContentDialog();
-                ContentDialogResult result = await _dialogService.ShowAsync(dialog);
+                ContentDialogResult result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
 
                 //result is also none, when the datafileDB is correct created
                 if (result == ContentDialogResult.None)

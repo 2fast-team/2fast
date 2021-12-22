@@ -4,7 +4,7 @@ using Template10.Services.Network;
 using Prism.Ioc;
 using WebDAVClient.Exceptions;
 using Template10.Services.Resources;
-using Template10.Services.Dialog;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.Utils
 {

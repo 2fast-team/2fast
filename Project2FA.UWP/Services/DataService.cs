@@ -10,7 +10,6 @@ using Windows.Storage;
 using System.Collections.Specialized;
 using OtpNet;
 using Windows.UI.Xaml.Controls;
-using Template10.Services.Dialog;
 using Prism.Commands;
 using Prism.Logging;
 using Project2FA.Core.Utils;
@@ -32,6 +31,7 @@ using DecaTec.WebDav;
 using Project2FA.UWP.Services.WebDAV;
 using Windows.Storage.Streams;
 using WebDAVClient.Types;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.Services
 {
@@ -366,7 +366,7 @@ namespace Project2FA.UWP.Services
             {
                 selectedOption = true;
                 dialog.Hide();
-                ContentDialogResult result = await dialogService.ShowAsync(new UpdateDatafileContentDialog());
+                ContentDialogResult result = await dialogService.ShowDialogAsync(new UpdateDatafileContentDialog(), new DialogParameters());
                 if (result == ContentDialogResult.Primary)
                 {
                     ErrorResolved();
@@ -417,11 +417,11 @@ namespace Project2FA.UWP.Services
                 {
                     if (!selectedOption)
                     {
-                        await dialogService.ShowAsync(dialog);
+                        await dialogService.ShowDialogAsync(dialog, new DialogParameters());
                     }
                 }
             }
-            await dialogService.ShowAsync(dialog);
+            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         /// <summary>

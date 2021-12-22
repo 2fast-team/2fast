@@ -6,12 +6,12 @@ using Project2FA.UWP.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Template10.Services.Dialog;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.Views
 {

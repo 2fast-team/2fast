@@ -19,11 +19,18 @@
     <UpToDateCheckInput Include="..\Project2FA.Shared\**\*.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
     <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.155" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Text.Json" Version="6.0.1" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Uno.WinUI.Lottie" Version="4.0.11" />
     <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="4.0.11" />
   </ItemGroup>

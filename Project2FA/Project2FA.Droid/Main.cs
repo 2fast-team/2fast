@@ -11,6 +11,13 @@ using Android.Views;
 using Android.Widget;
 using Com.Nostra13.Universalimageloader.Core;
 using Microsoft.UI.Xaml.Media;
+#if HAS_WINUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
+#else
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+#endif
 
 namespace Project2FA.Droid
 {
@@ -20,7 +27,7 @@ namespace Project2FA.Droid
         HardwareAccelerated = true,
         Theme = "@style/AppTheme"
     )]
-    public class Application : Microsoft.UI.Xaml.NativeApplication
+    public class Application : NativeApplication
     {
         public Application(IntPtr javaReference, JniHandleOwnership transfer)
             : base(() => new App(), javaReference, transfer)

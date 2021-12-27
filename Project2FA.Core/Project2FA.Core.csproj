@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\**" />
+    <EmbeddedResource Remove="Assets\**" />
+    <None Remove="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,10 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Project2FA.Repository\Project2FA.Repository.csproj" />
     <ProjectReference Include="..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Assets\ServiceLogo\" />
   </ItemGroup>
 
 </Project>

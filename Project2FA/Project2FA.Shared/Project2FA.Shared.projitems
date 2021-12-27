@@ -18,16 +18,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs">
-      <DependentUpon>Resources.resw</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\InitialView.xaml.cs">
-      <DependentUpon>InitialView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UseDataFilePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WelcomePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\UseDataFilePage.xaml.cs">
+      <DependentUpon>UseDataFilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -43,11 +43,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\InitialView.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\ShellPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\ShellPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\UseDataFilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -61,5 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background\mhellmeier_blue-hills.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Dialogs\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Dialogs\" />
   </ItemGroup>
 </Project>

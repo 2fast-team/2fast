@@ -7,8 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="clr-namespace:Microsoft.UI.Xaml.Media;assembly=Uno.UI"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-    xmlns:prismMvvm="using:Prism.Mvvm"
-    prismMvvm:ViewModelLocator.AutowireViewModel="True"
     mc:Ignorable="d">
 
     <Page.Resources>

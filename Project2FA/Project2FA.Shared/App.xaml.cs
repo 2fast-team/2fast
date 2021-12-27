@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.Storage;
 #else
 using Windows.UI.Xaml;
 using Windows.ApplicationModel;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 #endif
 using Prism;
 using Prism.DryIoc;
@@ -22,10 +24,12 @@ using Prism.Mvvm;
 using Project2FA.Views;
 using System;
 using System.Reflection;
-using Windows.ApplicationModel;
 using Prism.Regions;
 using Prism.Modularity;
-
+using Project2FA.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Project2FA.Repository.Database;
+using Project2FA.Core;
 
 namespace Project2FA
 {
@@ -39,7 +43,15 @@ namespace Project2FA
 #if HAS_UNO_WINUI || NETCOREAPP
         public static XamlRoot MainXamlRoot { get; private set; }
 #endif
+        /// <summary>
+        /// Creates the access of the static instance of the ShellPage
+        /// </summary>
+        //public static ShellPage ShellPageInstance { get; private set; } = new ShellPage();
 
+        /// <summary>
+        /// Pipeline for interacting with database.
+        /// </summary>
+        public static IProject2FARepository Repository { get; private set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -185,7 +197,14 @@ namespace Project2FA
         {
             base.OnInitialized();
             var regionManager = Container.Resolve<IRegionManager>();
-            regionManager.RequestNavigate("ContentRegion", nameof(InitialView));
+            // set DB
+            if (Repository is null)
+            {
+                string databasePath = ApplicationData.Current.LocalFolder.Path + string.Format(@"\{0}.db", Constants.ContainerName);
+                var dbOptions = new DbContextOptionsBuilder<Project2FAContext>().UseSqlite("Data Source=" + databasePath);
+                Repository = new DBProject2FARepository(dbOptions);
+            }
+            regionManager.RequestNavigate("ContentRegion", nameof(WelcomePage));
         }
 
         protected override UIElement CreateShell()
@@ -212,7 +231,10 @@ namespace Project2FA
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
+            containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
+            containerRegistry.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
+            //containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
         }
     }
 }

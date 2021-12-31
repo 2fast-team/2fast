@@ -36,12 +36,12 @@ namespace Project2FA.ViewModels
             _dialogService = dialogService;
             _regionManager = regionManager;
             // disable the navigation to other pages
-            //App.ShellPageInstance.NavigationIsAllowed = false;
-            //Title = Strings.Resources.WelcomePageTitle;
+            App.ShellPageInstance.NavigationIsAllowed = true;
+            Title = Strings.Resources.WelcomePageTitle;
 
             NewDatefileCommand = new DelegateCommand(() =>
             {
-                NewDatafile();
+                _regionManager.RequestNavigate("ContentRegion", nameof(NewDataFilePage));
             });
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             UseExistDatefileCommand = new DelegateCommand(() =>

@@ -169,7 +169,7 @@
     <value>Um einen neuen Account für die Zwei-Faktor-Authentifizierung einzurichten muss vom gewünschten Dienst ein QR-Code oder ein Schlüssel (kryptischer Text) vorhanden sein.
 
 # Wie soll dieser Schlüssel in die App importiert werden?
-Bei Wahl des QR-Code Scans öffnet sich kurze Zeit nach Klick auf dem Button ein Lesetool. Hierfür einfach zum Dienst wechseln und bei gedrückter linker Maustaste einen Rahmen um den QR-Code ziehen.</value>
+</value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
     <value>Eingaben</value>
@@ -347,7 +347,7 @@ Sollte die App auf mehreren Geräten genutzt werden empfiehlt sich eine externe 
   <data name="SettingsActionRequiredRestart" xml:space="preserve">
     <value>Diese Änderung wird erst nach dem Neustart der App wirksam.</value>
   </data>
-  <data name="SettingsBackButtonToggleSwtich.Header" xml:space="preserve">
+  <data name="SettingsBackButtonCard.Header" xml:space="preserve">
     <value>Platzierung des Zurück-Buttons</value>
   </data>
   <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
@@ -378,13 +378,13 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="SettingsGiveFeedbackText" xml:space="preserve">
     <value>Feedback geben</value>
   </data>
-  <data name="SettingsOptionsDesignTitle.Text" xml:space="preserve">
-    <value>Design</value>
+  <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
+    <value>Darstellung</value>
   </data>
   <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
     <value>App auf Werkseinstellungen zurücksetzen</value>
   </data>
-  <data name="SettingsOptionsFunctionsTitle.Text" xml:space="preserve">
+  <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
     <value>Funktionen</value>
   </data>
   <data name="SettingsPageName.Text" xml:space="preserve">
@@ -734,9 +734,11 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>Es wurde die Möglichkeit zur Überprüfung der Systemzeit durch einen Abgleich eines Network Time Protocol (NTP) Servers hinzugefügt. Die Option ist Standardmäßig mit dieser Aktualisierung deaktiviert.
+    <value>Die Einstellungsseite wurde grundlegend aktualisiert.
 
-Die Option kann unter den Einstellungen aktiviert werden.</value>
+Es wurde die Möglichkeit implementiert die Zeit für die Sperrung einzustellen, bei der die App bei Inaktivität gesperrt wird.
+
+Eine neue Option für das Design wurde implementiert, bei dem die Ecken von Steuerelementen abgerundet werden können. Die Option ist unter Windows 10 deaktiviert, unter Windows 11 standardmäßig aktiviert.</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen</value>
@@ -773,5 +775,47 @@ Die Option kann unter den Einstellungen aktiviert werden.</value>
   </data>
   <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
     <value>Dienst-Anmeldung</value>
+  </data>
+  <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
+    <value>Ecken abrunden</value>
+  </data>
+  <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
+    <value>Wenn die Option aktiviert ist, werden die Ecken der Steuerelemente abgerundet</value>
+  </data>
+  <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
+    <value>Werkseinstellungen</value>
+  </data>
+  <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
+    <value>Mit der Betätigung und der Bestätigung wird die App zurückgesetzt</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>Farbgebung der App</value>
+  </data>
+  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
+    <value>App-Farbschema</value>
+  </data>
+  <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
+    <value>QR-Code lesen</value>
+  </data>
+  <data name="UseDatafilePasswordInfo" xml:space="preserve">
+    <value>Für das Laden der Datendatei muss das Passwort eingegeben werden, welches bei der Erstellung der Datei konfiguriert wurde.</value>
+  </data>
+  <data name="ToolTipShowHelp" xml:space="preserve">
+    <value>Hilfe anzeigen</value>
+  </data>
+  <data name="SettingsAutoLogoutDesc" xml:space="preserve">
+    <value>Automatische Sperrung nach inaktivität</value>
+  </data>
+  <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
+    <value>Minuten inaktivität</value>
+  </data>
+  <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
+    <value>Automatische Sperrung</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
+    <value>Bei der Wahl des QR-Code Scans öffnet sich kurze Zeit nach Klick auf dem Button ein Lesetool, mit dem der QR-Code bei dem Dienst selektiert werden muss. Hierfür einfach zum Dienst wechseln und bei gedrückter linker Maustaste einen Rahmen um den QR-Code ziehen.</value>
   </data>
 </root>

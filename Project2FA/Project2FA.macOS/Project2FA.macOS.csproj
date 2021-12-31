@@ -94,6 +94,9 @@
     <PackageReference Include="Uno.UI.RemoteControl">
       <Version>4.0.11</Version>
     </PackageReference>
+    <PackageReference Include="ZXing.Net">
+      <Version>0.16.7</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
   <ItemGroup>

@@ -9,17 +9,20 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Linq;
+using Prism.Regions;
+using Prism.Ioc;
 
 namespace Project2FA.Views
 {
     public sealed partial class ShellPage : ContentControl, INotifyPropertyChanged
     {
-        //public NavigationView ShellViewInternal { get; private set; }
-        public ShellPage()
+        public NavigationView ShellViewInternal { get; private set; }
+        private IRegionManager navigationService;
+        public ShellPage(IRegionManager regionManager)
         {
             this.InitializeComponent();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
-
+            navigationService = regionManager;// containerProvider.Resolve<IRegionManager>();
 
             //MainFrame.Navigated += (s, e) =>
             //{
@@ -29,10 +32,10 @@ namespace Project2FA.Views
             //    }
             //};
 
-            //ShellViewInternal.ItemInvoked += (sender, args) =>
-            //{
-            //    SelectedItem = args.IsSettingsInvoked ? ShellViewInternal.SettingsItem : Find(args.InvokedItemContainer as NavigationViewItem);
-            //};
+            ShellView.ItemInvoked += (sender, args) =>
+            {
+                SelectedItem = args.IsSettingsInvoked ? ShellView.SettingsItem : Find(args.InvokedItemContainer as NavigationViewItem);
+            };
         }
 
         private string _settingsNavigationStr;
@@ -40,145 +43,155 @@ namespace Project2FA.Views
 
         private object PreviousItem { get; set; }
 
-        //private object SelectedItem
-        //{
-        //    set => SetSelectedItem(value);
-        //}
+        private object SelectedItem
+        {
+            set => SetSelectedItem(value);
+        }
 
-        //private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
-        //{
-        //    if (selectedItem == null)
-        //    {
-        //        ShellViewInternal.SelectedItem = null;
-        //    }
-        //    else if (selectedItem == PreviousItem)
-        //    {
-        //        // already set
-        //    }
-        //    //else if (selectedItem == ShellView.SettingsItem)
-        //    //{
-        //    //    if (withNavigation)
-        //    //    {
-        //    //        if ((await NavigationService.NavigateAsync(_settingsNavigationStr)).Success)
-        //    //        {
-        //    //            PreviousItem = selectedItem;
-        //    //            ShellView.SelectedItem = selectedItem;
-        //    //        }
-        //    //        else
-        //    //        {
-        //    //            ShellView.SelectedItem = null;
-        //    //        }
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        PreviousItem = selectedItem;
-        //    //        ShellView.SelectedItem = selectedItem;
-        //    //    }
-        //    //}
-        //    //else if (selectedItem is NavigationViewItem item)
-        //    //{
-        //    //    if (item.Tag is string path)
-        //    //    {
-        //    //        if (!withNavigation)
-        //    //        {
-        //    //            PreviousItem = item;
-        //    //            ShellView.SelectedItem = item;
-        //    //        }
-        //    //        else if ((await NavigationService.NavigateAsync(path)).Success)
-        //    //        {
-        //    //            PreviousItem = selectedItem;
-        //    //            ShellView.SelectedItem = selectedItem;
-        //    //        }
-        //    //        else
-        //    //        {
-        //    //            ShellView.SelectedItem = PreviousItem;
-        //    //        }
-        //    //    }
-        //    //}
-        //}
+        private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
+        {
+            if (selectedItem == null)
+            {
+                ShellView.SelectedItem = null;
+            }
+            else if (selectedItem == PreviousItem)
+            {
+                // already set
+            }
+            else if (selectedItem == ShellView.SettingsItem)
+            {
+                if (withNavigation)
+                {
+                    //TOOD Params
+                    navigationService.RequestNavigate("ContentRegion", nameof(SettingsPage));
+                    PreviousItem = selectedItem;
+                    ShellView.SelectedItem = selectedItem;
+                    //if ((navigationService.RequestNavigate("ContentRegion", _settingsNavigationStr)).Success)
+                    //{
+                    //    PreviousItem = selectedItem;
+                    //    ShellView.SelectedItem = selectedItem;
+                    //}
+                    //else
+                    //{
+                    //    ShellView.SelectedItem = null;
+                    //}
+                }
+                else
+                {
+                    PreviousItem = selectedItem;
+                    ShellView.SelectedItem = selectedItem;
+                }
+            }
+            else if (selectedItem is NavigationViewItem item)
+            {
+                if (item.Tag is string path)
+                {
+                    if (!withNavigation)
+                    {
+                        PreviousItem = item;
+                        ShellView.SelectedItem = item;
+                    }
+                    else
+                    {
+                        navigationService.RequestNavigate("ContentRegion", path);
+                        PreviousItem = selectedItem;
+                        ShellView.SelectedItem = selectedItem;
+                    }
+                    //else if ((await NavigationService.NavigateAsync(path)).Success)
+                    //{
+                    //    PreviousItem = selectedItem;
+                    //    ShellView.SelectedItem = selectedItem;
+                    //}
+                    //else
+                    //{
+                    //    ShellView.SelectedItem = PreviousItem;
+                    //}
+                }
+            }
+        }
 
-        //private bool TryFindItem(Type type, object parameter, out object item)
-        //{
-        //    // is page registered?
+        private bool TryFindItem(Type type, object parameter, out object item)
+        {
+            // is page registered?
 
-        //    //if (!PageNavigationRegistry.TryGetRegistration(type, out PageNavigationInfo info))
-        //    //{
-        //    //    item = null;
-        //    //    return false;
-        //    //}
+            //if (!PageNavigationRegistry.TryGetRegistration(type, out PageNavigationInfo info))
+            //{
+            //    item = null;
+            //    return false;
+            //}
 
-        //    // search settings
+            // search settings
 
-        //    //if (NavigationQueue.TryParse(_settingsNavigationStr, null, out NavigationQueue settings))
-        //    //{
-        //    //    if (type == settings.Last().View && (string)parameter == settings.Last().QueryString)
-        //    //    {
-        //    //        item = ShellView.SettingsItem;
-        //    //        return true;
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        // not settings
-        //    //    }
-        //    //}
+            //if (NavigationQueue.TryParse(_settingsNavigationStr, null, out NavigationQueue settings))
+            //{
+            //    if (type == settings.Last().View && (string)parameter == settings.Last().QueryString)
+            //    {
+            //        item = ShellView.SettingsItem;
+            //        return true;
+            //    }
+            //    else
+            //    {
+            //        // not settings
+            //    }
+            //}
 
-        //    // filter menu items
-        //    IEnumerable<(NavigationViewItem Item, string Path)> menuItems = this.ShellViewInternal.MenuItems
-        //        .OfType<NavigationViewItem>()
-        //        .Select(x => (
-        //            Item: x,
-        //            Path: x.Tag as string
-        //        ))
-        //        .Where(x => !string.IsNullOrEmpty(x.Path));
+            // filter menu items
+            IEnumerable<(NavigationViewItem Item, string Path)> menuItems = this.ShellView.MenuItems
+                .OfType<NavigationViewItem>()
+                .Select(x => (
+                    Item: x,
+                    Path: x.Tag as string
+                ))
+                .Where(x => !string.IsNullOrEmpty(x.Path));
 
-        //    // search filtered items
+            // search filtered items
 
-        //    //foreach ((NavigationViewItem Item, string Path) in menuItems)
-        //    //{
-        //    //    if (NavigationQueue.TryParse(Path, null, out NavigationQueue menuQueue)
-        //    //        && Equals(menuQueue.Last().View, type) && menuQueue.Last().QueryString == (string)parameter)
-        //    //    {
-        //    //        item = Item;
-        //    //        return true;
-        //    //    }
-        //    //}
+            //foreach ((NavigationViewItem Item, string Path) in menuItems)
+            //{
+            //    if (NavigationQueue.TryParse(Path, null, out NavigationQueue menuQueue)
+            //        && Equals(menuQueue.Last().View, type) && menuQueue.Last().QueryString == (string)parameter)
+            //    {
+            //        item = Item;
+            //        return true;
+            //    }
+            //}
 
-        //    // filter footer menu items
-        //    //IEnumerable<(NavigationViewItem Item, string Path)> footerMenuItems = ShellView.FooterMenuItems
-        //    //    .OfType<NavigationViewItem>()
-        //    //    .Select(x => (
-        //    //        Item: x,
-        //    //        Path: x.Tag as string
-        //    //    ))
-        //    //    .Where(x => !string.IsNullOrEmpty(x.Path));
+            // filter footer menu items
+            //IEnumerable<(NavigationViewItem Item, string Path)> footerMenuItems = ShellView.FooterMenuItems
+            //    .OfType<NavigationViewItem>()
+            //    .Select(x => (
+            //        Item: x,
+            //        Path: x.Tag as string
+            //    ))
+            //    .Where(x => !string.IsNullOrEmpty(x.Path));
 
-        //    // search filtered items
+            // search filtered items
 
-        //    //foreach ((NavigationViewItem Item, string Path) in footerMenuItems)
-        //    //{
-        //    //    if (NavigationQueue.TryParse(Path, null, out NavigationQueue menuQueue)
-        //    //        && Equals(menuQueue.Last().View, type) && menuQueue.Last().QueryString == (string)parameter)
-        //    //    {
-        //    //        item = Item;
-        //    //        return true;
-        //    //    }
-        //    //}
+            //foreach ((NavigationViewItem Item, string Path) in footerMenuItems)
+            //{
+            //    if (NavigationQueue.TryParse(Path, null, out NavigationQueue menuQueue)
+            //        && Equals(menuQueue.Last().View, type) && menuQueue.Last().QueryString == (string)parameter)
+            //    {
+            //        item = Item;
+            //        return true;
+            //    }
+            //}
 
-        //    // not found
+            // not found
 
-        //    item = null;
-        //    return false;
-        //}
+            item = null;
+            return false;
+        }
 
-        //private NavigationViewItem Find(NavigationViewItem item)
-        //{
-        //    NavigationViewItem menuItem = ShellViewInternal.MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
-        //    //if (menuItem is null)
-        //    //{
-        //    //    menuItem = ShellView.FooterMenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
-        //    //}
-        //    return menuItem;
-        //}
+        private NavigationViewItem Find(NavigationViewItem item)
+        {
+            NavigationViewItem menuItem = ShellView.MenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
+            //if (menuItem is null)
+            //{
+            //    menuItem = ShellView.FooterMenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
+            //}
+            return menuItem;
+        }
 
         #region NotifyPropertyChanged
         /// <summary>

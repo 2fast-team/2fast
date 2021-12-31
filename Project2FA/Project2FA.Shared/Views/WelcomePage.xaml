@@ -7,120 +7,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="clr-namespace:Microsoft.UI.Xaml.Media;assembly=Uno.UI"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+     xmlns:viewmodels="using:Project2FA.ViewModels"
     mc:Ignorable="d">
 
     <Page.Resources>
         <!--<DataTemplate x:Name="ShellHeaderTemplate" x:DataType="viewmodels:WelcomePageViewModel">
-            <UserControl>
-                <Grid>
-                    <CommandBar 
+            <Grid>
+                <CommandBar 
                     x:Name="HeaderCommandBar"
                     OverflowButtonVisibility="Auto"
                     DefaultLabelPosition="Right"
-                    VerticalAlignment="Top"
-                    Background="{ThemeResource ShellAcrylicWindowBrush}">
-                        <CommandBar.Content>
-                            <CommandBar 
+                    VerticalAlignment="Top">
+                    <CommandBar.Content>
+                        <CommandBar 
                                 OverflowButtonVisibility="Collapsed"
-                                Background="{ThemeResource ShellAcrylicWindowBrush}"
                                 DefaultLabelPosition="Right">
-                                <CommandBar.Content>
-                                    <TextBlock 
-                                        Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
+                            <CommandBar.Content>
+                                <TextBlock 
                                         Text="{x:Bind Title,Mode=OneWay}"
                                         Margin="15,0,0,11"
                                         TextWrapping="NoWrap" 
                                         VerticalAlignment="Top" />
-                                </CommandBar.Content>
-                                --><!--<CommandBar.PrimaryCommands>
-                                    <AppBarSeparator/>
-                                    -->
-                                <!--<AppBarButton 
-                                        x:Name="ABB_AddAccount"
-                                        x:Uid="AccountCodePageAddEntry"
-                                        Icon="Add" 
-                                        Command="{x:Bind AddAccountCommand}">
-                                        <AppBarButton.Resources>
-                                            -->
-                                <!--user information for adding totp accounts-->
-                                <!--
-                                            <appcontrols:AutoCloseTeachingTip 
-                                                x:Name="EmptyAccountCollectionTip"
-                                                AutoCloseInterval="10000"
-                                                BorderBrush="{ThemeResource SystemAccentColor}"
-                                                x:Uid="AccountCodePageEmptyCollectionTip"
-                                                BorderThickness="2"
-                                                IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
-                                                Target="{Binding ElementName=ABB_AddAccount, Mode=OneTime}">
-                                                <muxc:TeachingTip.HeroContent>
-                                                    <muxc:AnimatedVisualPlayer 
-                                                        MaxHeight="120"
-                                                        x:Name="LottiePlayer"
-                                                        AutoPlay="True">
-                                                        <lottie:LottieVisualSource  
-                                                                UriSource="ms-appx:///Assets/AnimatedVisuals/10223-search-empty.json"/>
-                                                    </muxc:AnimatedVisualPlayer>
-                                                </muxc:TeachingTip.HeroContent>
-                                            </appcontrols:AutoCloseTeachingTip>
-                                        </AppBarButton.Resources>
-                                    </AppBarButton>-->
-                                <!--
-                                </CommandBar.PrimaryCommands>--><!--
-                            </CommandBar>
-                        </CommandBar.Content>
-                        <CommandBar.PrimaryCommands>
-                            --><!--<AppBarButton 
-                                x:Name="ABB_Tutorial"
-                                x:Uid="WelcomePageABBTutorial" >
-                                <AppBarButton.Icon>
-                                    <FontIcon Glyph="&#xE11B;"/>
-                                </AppBarButton.Icon>
-                                <AppBarButton.Resources>
-                                    <appcontrols:AutoCloseTeachingTip 
-                                                x:Name="WelcomePageTutorialTip"
-                                                AutoCloseInterval="12000"
-                                                BorderBrush="{ThemeResource SystemAccentColor}"
-                                                x:Uid="WelcomePageTutorialTip"
-                                                BorderThickness="2"
-                                                IsOpen="True"
-                                                Target="{Binding ElementName=ABB_Tutorial, Mode=OneTime}">
-                                        <muxc:TeachingTip.HeroContent>
-                                            <muxc:AnimatedVisualPlayer 
-                                                        MaxHeight="120"
-                                                        x:Name="LottiePlayer"
-                                                        AutoPlay="True">
-                                                <lottie:LottieVisualSource  
-                                                                UriSource="ms-appx:///Assets/AnimatedVisuals/10223-search-empty.json"/>
-                                            </muxc:AnimatedVisualPlayer>
-                                        </muxc:TeachingTip.HeroContent>
-                                    </appcontrols:AutoCloseTeachingTip>
-                                </AppBarButton.Resources>
-                            </AppBarButton>--><!--
-
-                        </CommandBar.PrimaryCommands>
-                    </CommandBar>
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroup x:Name="WindowStates">
-                            <VisualState x:Name="NarrowState">
-                                <VisualState.StateTriggers>
-                                    <AdaptiveTrigger MinWindowWidth="0" />
-                                </VisualState.StateTriggers>
-                                --><!--<VisualState.Setters>
-                                    <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
-                                    <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
-                                    <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
-                                    <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
-                                </VisualState.Setters>--><!--
-                            </VisualState>
-                            <VisualState x:Name="MediumState">
-                                <VisualState.StateTriggers>
-                                    <AdaptiveTrigger MinWindowWidth="850" />
-                                </VisualState.StateTriggers>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateManager.VisualStateGroups>
-                </Grid>
-            </UserControl>
+                            </CommandBar.Content>
+                        </CommandBar>
+                    </CommandBar.Content>
+                </CommandBar>
+            </Grid>
         </DataTemplate>-->
 
         <!--<Style x:Key="LottiePlayer"
@@ -165,6 +77,9 @@
                                   BlurRadius="40"
                                   Grid.Column="1"
                                   ShadowOpacity="0.4">-->
+        <Border>
+            
+        </Border>
             <Grid x:Name="RootGrid" Grid.Column="1">
                 <Border x:Name="DetailFirstShadowPanel">
                     <!--<Border>
@@ -207,11 +122,12 @@
                                 x:Name="BTN_NewDataFile"
                                 Content="~WelcomePageCreateDatafile.Content" 
                                 x:Uid="WelcomePageCreateDatafile" 
-
+                                Command="{x:Bind ViewModel.NewDatefileCommand}"
                                 Margin="0,0,20,10" />
                                 <Button 
+                                Command="{x:Bind ViewModel.UseExistDatefileCommand}"
                                 RelativePanel.RightOf="BTN_NewDataFile"
-                                    Margin="0,0,20,10" 
+                                Margin="0,0,20,10" 
                                 Content="~WelcomePageLoadDatafile.Content" 
                                 x:Uid="WelcomePageLoadDatafile"
                                  />

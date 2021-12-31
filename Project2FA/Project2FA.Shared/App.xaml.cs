@@ -30,6 +30,7 @@ using Project2FA.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Project2FA.Repository.Database;
 using Project2FA.Core;
+using System.Threading.Tasks;
 
 namespace Project2FA
 {
@@ -46,7 +47,7 @@ namespace Project2FA
         /// <summary>
         /// Creates the access of the static instance of the ShellPage
         /// </summary>
-        //public static ShellPage ShellPageInstance { get; private set; } = new ShellPage();
+        public static ShellPage ShellPageInstance { get; private set; }
 
         /// <summary>
         /// Pipeline for interacting with database.
@@ -196,6 +197,11 @@ namespace Project2FA
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            StartApp();
+        }
+
+        protected async Task StartApp()
+        {
             var regionManager = Container.Resolve<IRegionManager>();
             // set DB
             if (Repository is null)
@@ -204,25 +210,35 @@ namespace Project2FA
                 var dbOptions = new DbContextOptionsBuilder<Project2FAContext>().UseSqlite("Data Source=" + databasePath);
                 Repository = new DBProject2FARepository(dbOptions);
             }
-            regionManager.RequestNavigate("ContentRegion", nameof(WelcomePage));
+
+            if (!(await Repository.Password.GetAsync() is null))
+            {
+                //LoginPage loginPage = Container.Resolve<LoginPage>();
+                //Window.Current.Content = loginPage;
+            }
+            else
+            {
+                regionManager.RequestNavigate("ContentRegion", nameof(WelcomePage));
+                Window.Current.Content = ShellPageInstance;
+            }
         }
 
         protected override UIElement CreateShell()
         {
-            var shell = Container.Resolve<ShellPage>();
+            ShellPageInstance = Container.Resolve<ShellPage>();
 #if NET5_0 && WINDOWS
             _window = new Window();
             _window.Activate();
-            _window.Content = shell;
+            _window.Content = ShellPageInstance;
 #endif
 
 #if HAS_UNO_WINUI || NETCOREAPP
-            shell.Loaded += (s, e) => {
-                MainXamlRoot = shell.XamlRoot;
+            ShellPageInstance.Loaded += (s, e) => {
+                MainXamlRoot = ShellPageInstance.XamlRoot;
             };
 #endif
 
-            return shell;
+            return ShellPageInstance;
         }
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
@@ -234,7 +250,9 @@ namespace Project2FA
             containerRegistry.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
-            //containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
+            containerRegistry.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
+            containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
         }
     }
 }

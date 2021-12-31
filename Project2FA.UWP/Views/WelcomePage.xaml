@@ -172,7 +172,7 @@
                                     Margin="0,0,20,10" 
                                 Content="~WelcomePageLoadDatafile.Content" 
                                 x:Uid="WelcomePageLoadDatafile"
-                                Command="{x:Bind Path=ViewModel.UseExistDatefileCommand}" />
+                                Command="{x:Bind ViewModel.UseExistDatefileCommand}" />
                             </StackPanel>
                             
                         </RelativePanel>

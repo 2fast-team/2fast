@@ -12,6 +12,7 @@
     mc:Ignorable="d">
 
     <NavigationView 
+        x:Name="ShellView"
         IsSettingsVisible="{x:Bind NavigationIsAllowed,Mode=OneWay}">
         <NavigationView.MenuItems>
             <NavigationViewItem

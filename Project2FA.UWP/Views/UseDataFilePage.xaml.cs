@@ -31,7 +31,7 @@ namespace Project2FA.UWP.Views
             {
                 if (MainPivot.Items.Contains(WebDAVPivotItem))
                 {
-                    await ViewModel.SetAndCheckLocalWebDAVDatafile();
+                    await ViewModel.SetAndCheckLocalDatafile(true);
                 }
                 else
                 {

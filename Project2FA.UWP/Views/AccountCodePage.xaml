@@ -313,6 +313,14 @@
                                             <FontIcon Glyph="&#xE107;"/>
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        x:Uid="AccountCodePageShowQRCode"
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding DataContext.ExportAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE72D;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>

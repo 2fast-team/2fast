@@ -16,6 +16,7 @@ using Prism.Navigation;
 using Prism.Logging;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
+using Microsoft.Toolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -32,6 +33,7 @@ namespace Project2FA.UWP.ViewModels
         public ICommand Copy2FACodeToClipboardCommand { get; }
         public ICommand RefreshCommand { get; }
         public ICommand UndoDeleteCommand { get; }
+        public ICommand ExportAccountCommand { get; }
 
         private int _deletedTFAModelSeconds;
         private string _title;
@@ -60,8 +62,7 @@ namespace Project2FA.UWP.ViewModels
                 }
                 AddAccountContentDialog dialog = new AddAccountContentDialog();
                 dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
-                var prismDialogService = App.Current.Container.Resolve<Prism.Services.Dialogs.IDialogService>();
-                await prismDialogService.ShowDialogAsync(dialog, new DialogParameters());
+                await DialogService.ShowDialogAsync(dialog, new DialogParameters());
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
@@ -90,9 +91,11 @@ namespace Project2FA.UWP.ViewModels
                 TempDeletedTFAModel = null;
             });
 
-            EditAccountCommand = new RelayCommand(EditAccountFromCollection);
-            DeleteAccountCommand = new RelayCommand(DeleteAccountFromCollection);
-            Copy2FACodeToClipboardCommand = new RelayCommand(Copy2FACodeToClipboard);
+            ExportAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(ExportQRCode);
+
+            EditAccountCommand = new RelayCommand<TwoFACodeModel>(EditAccountFromCollection);
+            DeleteAccountCommand = new RelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
+            Copy2FACodeToClipboardCommand = new RelayCommand<TwoFACodeModel>(Copy2FACodeToClipboard);
             StartTOTPLogic();
         }
 
@@ -133,9 +136,14 @@ namespace Project2FA.UWP.ViewModels
         /// <param name="e"></param>
         private async void TOTPTimer(object sender, object e)
         {
-            bool success = true;
+            TOTPTimerTask();
+        }
+
+        private async Task TOTPTimerTask()
+        {
             //prevent the acccess 
             await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
+            bool success = true;
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
                 if (TwoFADataService.Collection[i].Seconds == 1)
@@ -149,7 +157,6 @@ namespace Project2FA.UWP.ViewModels
                 if (!success)
                 {
                     // TODO error message
-                    return;
                 }
             }
             TwoFADataService.CollectionAccessSemaphore.Release();
@@ -245,6 +252,12 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        private async Task ExportQRCode(TwoFACodeModel model)
+        {
+            var dialog = new DisplayQRCodeContentDialog();
+            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         public bool IsModelDeleted => TempDeletedTFAModel != null;

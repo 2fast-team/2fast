@@ -2,15 +2,18 @@
     x:Class="Project2FA.UWP.Views.WebViewDatafileContentDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Project2FA.UWP.Views.ContentDialogs"
+    xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Style="{StaticResource MyContentDialogStyle}"
     PrimaryButtonText="#choose"
-    SecondaryButtonText="#cancel"
+    SecondaryButtonText="{x:Bind strings:Resources.ButtonTextCancel}"
+    Title="{x:Bind ViewModel.Title,Mode=OneWay}"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.ChooseItemPossible, Mode=OneWay}"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
@@ -36,13 +39,13 @@
                         Width="36"
                         Grid.RowSpan="2"
                         Margin="0,0,4,0">
-                        <Image Source="/Assets/SmallTile.scale-400.png"/>
-                        <!--<FontIcon 
+                        <!--<Image Source="/Assets/SmallTile.scale-400.png"/>-->
+                        <FontIcon 
                             Glyph="{x:Bind Glyph,Mode=OneWay}" 
                             FontFamily="Segoe UI Emoji"
                             FontSize="36"
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Center"/>-->
+                            HorizontalAlignment="Center"/>
                     </Grid>
 
                     <TextBlock
@@ -80,7 +83,7 @@
                 <Setter Property="Foreground" Value="{ThemeResource ListViewItemForeground}" />
                 <Setter Property="TabNavigation" Value="Local" />
                 <Setter Property="IsHoldingEnabled" Value="True" />
-                <Setter Property="Padding" Value="12,0,12,0" />
+                <Setter Property="Padding" Value="2,0,20,0"/>
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
@@ -95,7 +98,8 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListViewItem">
-                            <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}"
+                            <ListViewItemPresenter 
+                                ContentTransitions="{TemplateBinding ContentTransitions}"
                         Control.IsTemplateFocusTarget="True"
                         FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
                         FocusVisualPrimaryBrush="{TemplateBinding FocusVisualPrimaryBrush}"
@@ -109,12 +113,12 @@
                         DragForeground="{ThemeResource ListViewItemDragForeground}"
                         FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
                         SelectedBackground="{ThemeResource SystemChromeBlackMediumLowColor}"
-                        SelectedPointerOverBackground="{ThemeResource SystemControlAccentDark1AcrylicElementAccentDark1Brush}"
+                        SelectedPointerOverBackground="{ThemeResource SystemChromeBlackHighColor}"
                         FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
                         PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
                         PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}"
                         PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}"
-                        SelectedForeground="White"
+                        SelectedForeground="{ThemeResource ListViewItemForeground}"
                         PressedBackground="{ThemeResource ListViewItemBackgroundPressed}"
                         SelectedPressedBackground="{ThemeResource SystemChromeBlackHighColor}"
                         DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
@@ -123,7 +127,10 @@
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                         ContentMargin="{TemplateBinding Padding}"
-                        CheckMode="{ThemeResource ListViewItemCheckMode}" />
+                        CheckMode="{ThemeResource ListViewItemCheckMode}" 
+                        RevealBackground="{ThemeResource GridViewItemRevealBackground}"
+                        RevealBorderThickness="{ThemeResource GridViewItemRevealBorderThemeThickness}"
+                        RevealBorderBrush="{ThemeResource GridViewItemRevealBorderBrush}"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -131,7 +138,7 @@
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid MinWidth="420" MinHeight="600">
+    <Grid MinWidth="420" MinHeight="420">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -173,6 +180,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <muxc:ProgressBar IsIndeterminate="{x:Bind ViewModel.Directory.IsLoading, Mode=OneWay}"/>
             <ListView 
@@ -183,6 +191,20 @@
                 ItemsSource="{x:Bind ViewModel.Directory.FilesAndFolders,Mode=OneWay}"
                 ItemTemplate="{StaticResource WebDAVItemTemplate}">
             </ListView>
+            <StackPanel 
+                Grid.Row="2" 
+                Visibility="{x:Bind ViewModel.Directory.IsFolderEmpty,Mode=OneWay}">
+                <TextBlock 
+                    TextWrapping="WrapWholeWords"
+                    Text="#Dieser Ordner enthält keine Dateien die zur Auswahl gewählt werden können" FontSize="16"></TextBlock>
+                <muxc:AnimatedVisualPlayer 
+                    MaxHeight="120"
+                    x:Name="LottiePlayer"
+                    AutoPlay="True">
+                    <lottie:LottieVisualSource  
+                        UriSource="ms-appx:///Assets/AnimatedVisuals/10223-search-empty.json"/>
+                </muxc:AnimatedVisualPlayer>
+            </StackPanel>
         </Grid>
     </Grid>
 </ContentDialog>

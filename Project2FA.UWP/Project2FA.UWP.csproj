@@ -11,20 +11,19 @@
     <AssemblyName>Project2FA.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22000.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
-    <PackageCertificateKeyFile>
-    </PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Project2FA.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>583A559455C4B24A66C4F94AC2291D5A705427CC</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>9D4C72D93D3D65285AD1DFD815662C38BCBB8B45</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -159,6 +158,7 @@
     <Compile Include="ViewModels\AccountCodePageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\DatafileViewModelBase.cs" />
     <Compile Include="ViewModels\ContentDialogs\DeleteDatafileContentDialogViewModel.cs" />
+    <Compile Include="ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
@@ -189,6 +189,9 @@
     </Compile>
     <Compile Include="Views\ContentDialogs\WebViewDatafileContentDialog.xaml.cs">
       <DependentUpon>WebViewDatafileContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentDialogs\DisplayQRCodeContentDialog.xaml.cs">
+      <DependentUpon>DisplayQRCodeContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -453,6 +456,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentDialogs\WebViewDatafileContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentDialogs\DisplayQRCodeContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

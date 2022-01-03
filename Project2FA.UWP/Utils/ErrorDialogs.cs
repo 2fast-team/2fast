@@ -246,12 +246,12 @@ namespace Project2FA.UWP.Utils
             {
                 Title = Resources.ErrorHandle
             };
-            var errorTextBox = new TextBox()
+            var errorMarkdownTextBlock = new MarkdownTextBlock()
             {
                 Margin = new Thickness(0, 4, 0, 0)
             };
-            errorTextBox.Text = errorDetail;
-            errorTextBox.IsReadOnly = true;
+            errorMarkdownTextBlock.Text = errorDetail;
+            //errorMarkdownTextBlock.IsReadOnly = true;
             var stackpanel = new StackPanel();
             var clipboardButton = new Button();
             clipboardButton.Margin = new Thickness(0, 10, 0, 0);
@@ -262,12 +262,16 @@ namespace Project2FA.UWP.Utils
                 {
                     RequestedOperation = DataPackageOperation.Copy
                 };
-                dataPackage.SetText(errorTextBox.Text);
+                dataPackage.SetText(errorMarkdownTextBlock.Text);
                 Clipboard.SetContent(dataPackage);
             };
-            stackpanel.Children.Add(new TextBlock() { Text = Resources.ErrorHandleDescriptionLastSession, TextWrapping = TextWrapping.WrapWholeWords });
+            stackpanel.Children.Add(new TextBlock()
+            {
+                Text = Resources.ErrorHandleDescriptionLastSession,
+                TextWrapping = TextWrapping.WrapWholeWords }
+            );
             stackpanel.Children.Add(clipboardButton);
-            stackpanel.Children.Add(errorTextBox);
+            stackpanel.Children.Add(errorMarkdownTextBlock);
 
             var githubButton = new Button
             {

@@ -11,12 +11,9 @@ namespace Project2FA.UWP.Views
     {
         public WebViewDatafileContentDialogViewModel ViewModel => DataContext as WebViewDatafileContentDialogViewModel;
 
-        public WebViewDatafileContentDialog(bool createDatafileCase, Status result)
+        public WebViewDatafileContentDialog()
         {
             this.InitializeComponent();
-            ViewModel.LoadProperties(result);
-            Title = createDatafileCase ? Strings.Resources.CreateDatafile : Strings.Resources.LoadDatafile;
-            ViewModel.StartLoading(createDatafileCase);
         }
 
         private void WebDAVItemTemplate_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)

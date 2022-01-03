@@ -29,6 +29,7 @@ namespace Project2FA.UWP.Services.WebDAV
         private bool _isSelecting;
         private bool _isLoading;
         private bool _isBackPossible;
+        private bool _isFolderEmpty;
         private string _selectionMode;
         private Task<List<ResourceInfoModel>> _listingTask;
         private IResponseErrorHandlerService _responseErrorHandlerService { get; }
@@ -254,6 +255,14 @@ namespace Project2FA.UWP.Services.WebDAV
                 }
                 //Files.AddRange(FilesAndFolders.Where(x => x.IsDirectory == false));
             }
+            if (FilesAndFolders.Count == 0)
+            {
+                IsFolderEmpty = true;
+            }
+            else
+            {
+                IsFolderEmpty = false;
+            }
 
             SortList();
             IsLoading = false;
@@ -348,6 +357,11 @@ namespace Project2FA.UWP.Services.WebDAV
         {
             get => _isBackPossible;
             set => SetProperty(ref _isBackPossible, value);
+        }
+        public bool IsFolderEmpty 
+        { 
+            get => _isFolderEmpty;
+            set => SetProperty(ref _isFolderEmpty, value);
         }
 
         public void StopDirectoryListing()

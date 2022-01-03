@@ -230,12 +230,6 @@ namespace Project2FA.UWP.Services
 
                 if (deserializeCollection != null)
                 {
-                    if (deserializeCollection.Count > 0)
-                    {
-                        var temp = new Totp(deserializeCollection[0].SecretByteArray);
-                        int remainingTime = temp.RemainingSeconds();
-                    }
-
                     Collection.AddRange(deserializeCollection);
                     if (Collection.Count == 0)
                     {
@@ -290,17 +284,26 @@ namespace Project2FA.UWP.Services
         /// Yes => download the new datefile
         /// </summary>
         /// <param name="dbDatafile"></param>
-        /// <returns></returns>
-        private async Task CheckIfWebDAVDatafileIsOutdated(DBDatafileModel dbDatafile)
+        /// <returns>true of false</returns>
+        private async Task<bool> CheckIfWebDAVDatafileIsOutdated(DBDatafileModel dbDatafile)
         {
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
-            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-            ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
-            if (webDAVFile.LastModified > (await storageFile.GetBasicPropertiesAsync()).DateModified)
+            try
             {
-                await DownloadWebDAVFile(storageFolder, dbDatafile);
+                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+                StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
+                WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+                ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
+                if (webDAVFile.LastModified > (await storageFile.GetBasicPropertiesAsync()).DateModified)
+                {
+                    await DownloadWebDAVFile(storageFolder, dbDatafile);
+                }
+                return true;
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         /// <summary>

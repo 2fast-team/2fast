@@ -103,6 +103,7 @@ namespace Project2FA.UWP
             container.RegisterDialog<UpdateDatafileContentDialog, UpdateDatafileContentDialogViewModel>();
             container.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();
             container.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
+            container.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
         }
 
         public override async Task OnStartAsync(IStartArgs args)

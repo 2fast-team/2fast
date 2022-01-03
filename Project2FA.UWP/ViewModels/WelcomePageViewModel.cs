@@ -9,6 +9,7 @@ using Prism.Navigation;
 using Project2FA.UWP.Utils;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
+using Microsoft.Toolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -35,10 +36,7 @@ namespace Project2FA.UWP.ViewModels
             App.ShellPageInstance.NavigationIsAllowed = false;
             Title = Strings.Resources.WelcomePageTitle;
 
-            NewDatefileCommand = new DelegateCommand(() =>
-            {
-                NewDatafile();
-            });
+            NewDatefileCommand = new AsyncRelayCommand(NewDatafile);
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             UseExistDatefileCommand = new DelegateCommand(async () =>
             {

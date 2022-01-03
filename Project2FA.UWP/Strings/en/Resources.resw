@@ -811,4 +811,7 @@ A new design option has been implemented, where the corners of controls can be r
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
     <value>If you select the QR-code scan, a reading tool will open shortly after pushing the button. Change the window to the service and make a rectangle around the QR-code by holding down your left mouse key.</value>
   </data>
+  <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
+    <value>Display QR code for export</value>
+  </data>
 </root>

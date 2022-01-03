@@ -762,7 +762,7 @@ Eine neue Option für das Design wurde implementiert, bei dem die Ecken von Steu
     <value>Datendatei laden</value>
   </data>
   <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
-    <value>anmelden</value>
+    <value>Anmelden</value>
   </data>
   <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
     <value>Serveradresse</value>
@@ -817,5 +817,8 @@ Eine neue Option für das Design wurde implementiert, bei dem die Ecken von Steu
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
     <value>Bei der Wahl des QR-Code Scans öffnet sich kurze Zeit nach Klick auf dem Button ein Lesetool, mit dem der QR-Code bei dem Dienst selektiert werden muss. Hierfür einfach zum Dienst wechseln und bei gedrückter linker Maustaste einen Rahmen um den QR-Code ziehen.</value>
+  </data>
+  <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
+    <value>QR-Code für den Export anzeigen</value>
   </data>
 </root>

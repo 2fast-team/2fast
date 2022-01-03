@@ -175,40 +175,35 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            if (SettingsService.Instance.UseRoundCorner)
-            {
-                App.Current.Resources["ControlCornerRadius"] = new CornerRadius(4, 4, 4, 4);
-                App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8, 8, 8, 8);
-            }
-            else
+            if (!SettingsService.Instance.UseRoundCorner)
             {
                 App.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
                 App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
-            }
-            switch (SettingsService.Instance.AppTheme)
-            {
-                case Theme.System:
-                    if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
-                    {
+                switch (SettingsService.Instance.AppTheme)
+                {
+                    case Theme.System:
+                        if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
+                        {
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        }
+                        else
+                        {
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        }
+                        break;
+                    case Theme.Dark:
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                    }
-                    else
-                    {
+                        break;
+                    case Theme.Light:
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                    }
-                    break;
-                case Theme.Dark:
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                    break;
-                case Theme.Light:
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

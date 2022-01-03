@@ -8,15 +8,17 @@ using Project2FA.Core;
 using System.Windows.Input;
 using Prism.Commands;
 using Project2FA.Repository.Models;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class WebViewDatafileContentDialogViewModel : BindableBase
+    public class WebViewDatafileContentDialogViewModel : BindableBase, IDialogInitialize
     {
         private string _webDAVServerBackgroundUrl;
         private bool _createDatafile;
         private bool _isLoading;
         private bool _chooseItemPossible;
+        private string _title;
         private string _webDAVProductName;
         private WebDAVFileOrFolderModel _selectedItem;
         public ICommand WebDAVBackCommand { get; }
@@ -35,16 +37,28 @@ namespace Project2FA.UWP.ViewModels
                     ChoosenOneDatafile = SelectedItem;
                 }
             });
+
         }
 
-        public void LoadProperties(Status result)
+        public void Initialize(IDialogParameters parameters)
+        {
+            parameters.TryGetValue<bool>("CreateDatafileCase", out bool createDatafileCase);
+            if (parameters.TryGetValue<Status>("Status", out Status result))
+            {
+                LoadProperties(result);
+            }
+            Title = createDatafileCase ? Strings.Resources.CreateDatafile : Strings.Resources.LoadDatafile;
+            StartLoading(createDatafileCase);
+        }
+
+        private void LoadProperties(Status result)
         {
             WebDAVProductName = result.Productname;
             ISecretService secretService = App.Current.Container.Resolve<ISecretService>();
             WebDAVServerBackgroundUrl = secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + "/index.php/apps/theming/image/background";
         }
 
-        public Task StartLoading(bool createDatafile)
+        private Task StartLoading(bool createDatafile)
         {
             _createDatafile = createDatafile;
             return Directory.StartDirectoryListing(createDatafile);
@@ -107,5 +121,10 @@ namespace Project2FA.UWP.ViewModels
             set => SetProperty(ref _chooseItemPossible, value);
         }
         public WebDAVFileOrFolderModel ChoosenOneDatafile { get; private set; }
+        public string Title 
+        {
+            get => _title;
+            private set => SetProperty(ref _title, value);
+        }
     }
 }

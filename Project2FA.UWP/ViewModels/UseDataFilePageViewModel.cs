@@ -69,11 +69,6 @@ namespace Project2FA.UWP.ViewModels
                 ShowError = false;
             });
 
-            WebDAVLoginCommand = new DelegateCommand(() =>
-            {
-
-            });
-
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             UseDatafileCommand = new DelegateCommand(async () =>
             {
@@ -118,8 +113,11 @@ namespace Project2FA.UWP.ViewModels
                             WebDAVDatafilePropertiesExpanded = true;
 
                             IsLoading = false;
-                            WebViewDatafileContentDialog dialog = new WebViewDatafileContentDialog(false, result);
-                            ContentDialogResult dialogresult = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+                            var dialog = new WebViewDatafileContentDialog();
+                            var param = new DialogParameters();
+                            param.Add("CreateDatafileCase", false);
+                            param.Add("Status", result);
+                            ContentDialogResult dialogresult = await DialogService.ShowDialogAsync(dialog, param);
                             if (dialogresult == ContentDialogResult.Primary)
                             {
                                 ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
@@ -146,16 +144,7 @@ namespace Project2FA.UWP.ViewModels
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             SetAndCheckWebDAVDatafileCommand = new DelegateCommand(async () =>
             {
-                if (await TestPassword())
-                {
-                    await CreateLocalFileDB(true);
-
-                    await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
-                }
-                else
-                {
-                    //TODO error Message
-                }
+                await SetAndCheckLocalDatafile(true);
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
@@ -209,6 +198,7 @@ namespace Project2FA.UWP.ViewModels
 
         public async Task SetAndCheckLocalDatafile(bool isWebDAV = false)
         {
+            IsLoading = true;
             if (await TestPassword())
             {
                 await CreateLocalFileDB(isWebDAV);
@@ -219,11 +209,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 // TODO error Message
             }
-        }
-
-        public Task SetAndCheckLocalWebDAVDatafile()
-        {
-            return SetAndCheckLocalDatafile(true);
+            //IsLoading = false;
         }
 
         /// <summary>

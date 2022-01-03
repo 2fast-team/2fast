@@ -74,7 +74,6 @@
                             x:Name="BTN_WebDAV"
                             Style="{StaticResource AccentButtonStyle}"
                             Margin="0,10,0,10"
-                            IsEnabled="False"
                             MinWidth="200" 
                             Click="BTN_WebDAV_Click">
                             <StackPanel 
@@ -262,15 +261,17 @@
                                 Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 KeyDown="PB_LocalPassword_KeyDown"/>
                                         <HyperlinkButton
-                                            Grid.Column="1"
-                                            Height="36"
-                                            Width="48"
-                                            Padding="4,4,4,4"
-                                            VerticalAlignment="Bottom">
+                                    Grid.Column="1"
+                                    Height="36"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+                                    Click="HLBTN_PasswordInfo"
+                                    VerticalAlignment="Bottom">
                                             <FontIcon
-                                            FontSize="20"
-                                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                            Glyph="&#xE946;"/>    
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"/>
                                         </HyperlinkButton>
                                     </Grid>
                                     <Border 

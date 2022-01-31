@@ -4,9 +4,18 @@
 	<img src="https://raw.githubusercontent.com/2fast-team/2fast/master/Project2FA/Assets/schluessel.svg" width="100">
 </p>
 <p align="center">
-	<a href="https://github.com/2fast-team/2fast/issues" target="_blank" alt="Issues"><img src="https://img.shields.io/github/issues/2fast-team/2fast" /></a>
-	<a href="https://github.com/2fast-team/2fast/graphs/contributors" target="_blank" alt="Contributors"><img src="https://img.shields.io/github/contributors/2fast-team/2fast" /></a>
-	<a href="https://github.com/2fast-team/2fast/blob/master/LICENSE" target="_blank" alt="License"><img src="https://img.shields.io/github/license/2fast-team/2fast" /></a>
+	<a href="https://github.com/2fast-team/2fast/issues" target="_blank" alt="Issues">
+		<img src="https://img.shields.io/github/issues/2fast-team/2fast" />
+	</a>
+	<a href="https://github.com/2fast-team/2fast/graphs/contributors" target="_blank" alt="Contributors">
+		<img src="https://img.shields.io/github/contributors/2fast-team/2fast" />
+	</a>
+	<a style="text-decoration:none" href="https://github.com/2fast-team/2fast/releases">
+    		<img src="https://img.shields.io/badge/Sideload-Download-purple.svg?style=flat-round" alt="Sideload link" />
+	</a>
+	<a href="https://github.com/2fast-team/2fast/blob/master/LICENSE" target="_blank" alt="License">
+		<img src="https://img.shields.io/github/license/2fast-team/2fast" />
+	</a>
 </p>
 
 ## About 2fast

@@ -41,7 +41,10 @@ namespace Project2FA.UWP
         {
             try
             {
-                _logger.Log($"exception - {ex.Message} - {ex.StackTrace}");
+                if (!System.Diagnostics.Debugger.IsAttached)
+                {
+                    _logger.Log($"exception - {ex.Message} - {ex.StackTrace}");
+                }
             }
             catch
             {
@@ -53,7 +56,10 @@ namespace Project2FA.UWP
         {
             try
             {
-                _logger.Log($"exception - catched - {ex.Message} - {ex.InnerException} - {ex.StackTrace}");
+                if (!System.Diagnostics.Debugger.IsAttached)
+                {
+                    _logger.Log($"exception - catched - {ex.Message} - {ex.InnerException} - {ex.StackTrace}");
+                }
             }
             catch
             {
@@ -65,7 +71,10 @@ namespace Project2FA.UWP
         {
             try
             {
-                _logger.Log($"{category} - {priority} - {label} - {value.ToString()}");
+                if (!System.Diagnostics.Debugger.IsAttached)
+                {
+                    _logger.Log($"{category} - {priority} - {label} - {value.ToString()}");
+                }
             }
             catch
             {
@@ -77,7 +86,10 @@ namespace Project2FA.UWP
         {
             try
             {
-                _logger.Log($"pageView - {pageName}");
+                if (!System.Diagnostics.Debugger.IsAttached)
+                {
+                    _logger.Log($"pageView - {pageName}");
+                }
             }
             catch
             {

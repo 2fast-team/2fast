@@ -50,6 +50,10 @@ namespace Project2FA.UWP.Services
         public AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
         private bool _emptyAccountCollectionTipIsOpen;
+        private TwoFACodeModel _tempDeletedTFAModel;
+        const long unixEpochTicks = 621355968000000000L;
+
+        const long ticksToSeconds = 10000000L;
 
         /// <summary>
         /// Gets public singleton property.
@@ -68,7 +72,8 @@ namespace Project2FA.UWP.Services
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             NetworkTimeService = App.Current.Container.Resolve<INetworkTimeService>();
             ACVCollection = new AdvancedCollectionView(Collection, true);
-            ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
+            //ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
+            ACVCollection.SortDescriptions.Add(new SortDescription("IsFavouriteText", SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
             CheckTime();
             CheckLocalDatafile();
@@ -80,8 +85,8 @@ namespace Project2FA.UWP.Services
         private async Task CheckTime()
         {
             TimeSpan difference = DateTime.UtcNow - SettingsService.Instance.LastCheckedSystemTime;
-            // check the time again after 8 hours or always in debug mode
-            if (System.Diagnostics.Debugger.IsAttached || difference.TotalHours > 8)
+            // check the time again after 8 hours
+            if (difference.TotalHours > 8)
             {
                 if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable && SettingsService.Instance.UseNTPServerCorrection)
                 {
@@ -133,7 +138,7 @@ namespace Project2FA.UWP.Services
                         if (e.Action == NotifyCollectionChangedAction.Add)
                         {
                             // initialize the newest (last) item
-                            InitializeItem((sender as ObservableCollection<TwoFACodeModel>).Count - 1);
+                            await InitializeItem((sender as ObservableCollection<TwoFACodeModel>).Count - 1);
                         }
                     }
                     break;
@@ -150,7 +155,7 @@ namespace Project2FA.UWP.Services
             await CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < Collection.Count; i++)
             {
-                InitializeItem(i);
+                await InitializeItem(i);
             }
             CollectionAccessSemaphore.Release();
         }
@@ -159,9 +164,9 @@ namespace Project2FA.UWP.Services
         /// Reset the period and regnerate the TOTP code
         /// </summary>
         /// <param name="i">The index of the item in the collection</param>
-        private void InitializeItem(int i)
+        private Task InitializeItem(int i)
         {
-            GenerateTOTP(i);
+            return GenerateTOTP(i);
         }
 
         /// <summary>
@@ -184,20 +189,13 @@ namespace Project2FA.UWP.Services
             try
             {
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
-                StorageFolder folder;
-                if (dbDatafile.IsWebDAV)
-                {
-                    folder = ApplicationData.Current.LocalFolder;
-                    await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
-                }
-                else
-                {
-                    folder = await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
-                }
+                StorageFolder folder = dbDatafile.IsWebDAV ? 
+                    ApplicationData.Current.LocalFolder : 
+                    await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
                 if (await FileService.FileExistsAsync(dbDatafile.Name, folder))
                 {
                     DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
-                    // prevent write of the datafile
+                    // prevent write of the datafile to folder
                     _initialization = true;
                     try
                     {
@@ -214,37 +212,44 @@ namespace Project2FA.UWP.Services
                                             datafileStr);
                             deserializeCollection = datafile.Collection;
                         }
+                        if (deserializeCollection != null)
+                        {
+                            Collection.AddRange(deserializeCollection);
+                            if (Collection.Count == 0)
+                            {
+                                // if no error has occured
+                                if (!_errorOccurred)
+                                {
+                                    EmptyAccountCollectionTipIsOpen = true;
+                                }
+                            }
+                            else
+                            {
+                                if (EmptyAccountCollectionTipIsOpen)
+                                {
+                                    EmptyAccountCollectionTipIsOpen = false;
+                                }
+                            }
+                        }
                     }
                     catch (Exception)
                     {
                         _errorOccurred = true;
-                        ErrorDialogs.ShowPasswordError();
+                        await ErrorDialogs.ShowPasswordError();
                     }
                 }
                 // file not found case
                 else
                 {
-                    _errorOccurred = true;
-                    ShowFileOrFolderNotFoundError();
-                }
-
-                if (deserializeCollection != null)
-                {
-                    Collection.AddRange(deserializeCollection);
-                    if (Collection.Count == 0)
+                    if (dbDatafile.IsWebDAV)
                     {
-                        // if no error has occured
-                        if (!_errorOccurred)
-                        {
-                            EmptyAccountCollectionTipIsOpen = true;
-                        }
+                        var webDAVTask = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
+                        await CheckLocalDatafile();
                     }
                     else
                     {
-                        if (EmptyAccountCollectionTipIsOpen)
-                        {
-                            EmptyAccountCollectionTipIsOpen = false;
-                        }
+                        _errorOccurred = true;
+                        await ShowFileOrFolderNotFoundError();
                     }
                 }
             }
@@ -255,23 +260,38 @@ namespace Project2FA.UWP.Services
                 _errorOccurred = true;
                 if (exc is UnauthorizedAccessException)
                 {
-                    ErrorDialogs.ShowUnauthorizedAccessError();
+                    await ErrorDialogs.ShowUnauthorizedAccessError();
                 }
                 else if(exc is FileNotFoundException)
                 {
                     if (dbDatafile.IsWebDAV)
                     {
                         // TODO add dialog for error
+                        ///var webDAVTask = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
                     }
                     else
                     {
-                        ShowFileOrFolderNotFoundError();
+                        await ShowFileOrFolderNotFoundError();
                     }
                 }
                 else
                 {
                     TrackingManager.TrackException(exc);
-                    ErrorDialogs.ShowUnexpectedError(exc);
+                    await ErrorDialogs.ShowUnexpectedError(exc);
+                }
+            }
+            //check if a newer version is 
+            if (dbDatafile.IsWebDAV)
+            {
+                var (success, outdated) = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
+                if (success && outdated)
+                {
+                    // TODO Add info message to inform that the file was updated
+                    await CheckLocalDatafile();
+                }
+                else if (!success)
+                {
+                    // TODO add dialog for error, the path of the file is changed
                 }
 
             }
@@ -284,8 +304,7 @@ namespace Project2FA.UWP.Services
         /// Yes => download the new datefile
         /// </summary>
         /// <param name="dbDatafile"></param>
-        /// <returns>true of false</returns>
-        private async Task<bool> CheckIfWebDAVDatafileIsOutdated(DBDatafileModel dbDatafile)
+        private async Task<(bool success, bool outdated)> CheckIfWebDAVDatafileIsOutdated(DBDatafileModel dbDatafile)
         {
             try
             {
@@ -296,13 +315,26 @@ namespace Project2FA.UWP.Services
                 if (webDAVFile.LastModified > (await storageFile.GetBasicPropertiesAsync()).DateModified)
                 {
                     await DownloadWebDAVFile(storageFolder, dbDatafile);
+                    return (true, true);
                 }
-                return true;
+                else
+                {
+                    return (true, false);
+                }
+                
             }
             catch (Exception)
             {
-                return false;
+                return (false, false);
             }
+            //StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            //StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
+            //WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+            //ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
+            //if (webDAVFile.LastModified > (await storageFile.GetBasicPropertiesAsync()).DateModified)
+            //{
+            //    await DownloadWebDAVFile(storageFolder, dbDatafile);
+            //}
 
         }
 
@@ -336,7 +368,6 @@ namespace Project2FA.UWP.Services
         /// </summary>
         public async Task ShowFileOrFolderNotFoundError()
         {
-            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             try
             {
                 //TODO current workaround: check permission to the file system (broadFileSystemAccess)
@@ -345,7 +376,7 @@ namespace Project2FA.UWP.Services
             }
             catch (UnauthorizedAccessException)
             {
-                ErrorDialogs.UnauthorizedAccessDialog();
+                await ErrorDialogs.UnauthorizedAccessDialog();
             }
             // disable shell navigation
             App.ShellPageInstance.NavigationIsAllowed = false;
@@ -369,7 +400,7 @@ namespace Project2FA.UWP.Services
             {
                 selectedOption = true;
                 dialog.Hide();
-                ContentDialogResult result = await dialogService.ShowDialogAsync(new UpdateDatafileContentDialog(), new DialogParameters());
+                ContentDialogResult result = await DialogService.ShowDialogAsync(new UpdateDatafileContentDialog(), new DialogParameters());
                 if (result == ContentDialogResult.Primary)
                 {
                     ErrorResolved();
@@ -377,9 +408,8 @@ namespace Project2FA.UWP.Services
                 }
                 if (result == ContentDialogResult.None)
                 {
-                    ShowFileOrFolderNotFoundError();
+                    await ShowFileOrFolderNotFoundError();
                 }
-
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
             stackPanel.Children.Add(changePathBTN);
@@ -420,11 +450,11 @@ namespace Project2FA.UWP.Services
                 {
                     if (!selectedOption)
                     {
-                        await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+                        await DialogService.ShowDialogAsync(dialog, new DialogParameters());
                     }
                 }
             }
-            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         /// <summary>
@@ -437,24 +467,72 @@ namespace Project2FA.UWP.Services
             byte[] iv = new AesManaged().IV;
 
             await CollectionAccessSemaphore.WaitAsync();
+            DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
+            StorageFolder folder = datafileDB.IsWebDAV ?
+                ApplicationData.Current.LocalFolder :
+                await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
 
-            DatafileModel file = new DatafileModel() { IV = iv, Collection = Collection };
 
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
+            //TODO Bug: if the new file is created and the webdav upload started, the app downloads the file at the next time (newer create date)
+            if (datafileDB.IsWebDAV)
+            {
+                WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+                StorageFile file = await folder.GetFileAsync(datafileDB.Name);
+                IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
+                CancellationTokenSource cts = new CancellationTokenSource();
+                if (await client.ExistsAsync(datafileDB.Path + "/" + datafileDB.Name))
+                {
+                    var uploaded = await client.UploadAsync(datafileDB.Path + "/" + datafileDB.Name, await file.OpenStreamForReadAsync(), file.ContentType, progress, cts.Token);
+                    if (!uploaded)
+                    {
+                        // TODO webdav upload failed
+                    }
+                }
+                else
+                {
+                    // TODO webdav file was moved
+                }
+            }
+
             await FileService.WriteStringAsync(
                     datafileDB.Name,
                     NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
                     iv, 
-                    file),
+                    fileModel),
                     folder);
             CollectionAccessSemaphore.Release();
+
+
+        }
+
+        public TwoFACodeModel TempDeletedTFAModel
+        {
+            get => _tempDeletedTFAModel;
+            set
+            {
+                SetProperty(ref _tempDeletedTFAModel, value);
+            }
+        }
+
+        public bool RestoreDeletedModel()
+        {
+            if (_tempDeletedTFAModel != null)
+            {
+                Collection.Add(_tempDeletedTFAModel);
+                TempDeletedTFAModel = null;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
         /// Generates a TOTP code for the i'th entry of a collection
         /// </summary>
         /// <param name="i"></param>
-        public async Task<bool> GenerateTOTP(int i)
+        public async Task GenerateTOTP(int i)
         {
             try
             {
@@ -462,30 +540,31 @@ namespace Project2FA.UWP.Services
                 {
                     TrackingManager.TrackEvent(Category.Warn, Priority.High, "Secret key is empty!");
                     await ReloadDatafile();
-                    return false;
                 }
                 else
                 {
                     Totp totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
-                    int remainingTime = totp.RemainingSeconds();
-
-                    Collection[i].Seconds = remainingTime;
+                    int remainingTime;
+                    
                     if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
                     {
                         Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
+                        remainingTime = Collection[i].Period - 
+                            (int)((DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds).Ticks - unixEpochTicks) 
+                            / ticksToSeconds % Collection[i].Period);
                     }
                     else
                     {
                         Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
+                        remainingTime = Collection[i].Period - (int)((DateTime.UtcNow.Ticks - unixEpochTicks) / ticksToSeconds % Collection[i].Period);
                     }
-                    return true;
+                    Collection[i].Seconds = Convert.ToInt32(remainingTime);
                 }
             }
             catch (Exception ex)
             {
                 Logger.Log(ex.Message, Category.Exception, Priority.High);
                 TrackingManager.TrackExceptionCatched(ex);
-                return false;
             }
         }
 

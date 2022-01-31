@@ -21,6 +21,7 @@ namespace Project2FA.UWP.ViewModels
         private string _title;
         private string _webDAVProductName;
         private WebDAVFileOrFolderModel _selectedItem;
+        private string _primaryButtonText;
         public ICommand WebDAVBackCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
 
@@ -48,6 +49,7 @@ namespace Project2FA.UWP.ViewModels
                 LoadProperties(result);
             }
             Title = createDatafileCase ? Strings.Resources.CreateDatafile : Strings.Resources.LoadDatafile;
+            PrimaryButtonText = createDatafileCase ? "#create" : "#choose";
             StartLoading(createDatafileCase);
         }
 
@@ -125,6 +127,11 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _title;
             private set => SetProperty(ref _title, value);
+        }
+        public string PrimaryButtonText 
+        { 
+            get => _primaryButtonText;
+            set => SetProperty(ref _primaryButtonText, value);
         }
     }
 }

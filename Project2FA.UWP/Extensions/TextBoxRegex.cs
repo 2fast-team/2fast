@@ -26,6 +26,8 @@ namespace Project2FA.UWP.Extensions
             textBox.BeforeTextChanging -= TextBox_BeforeTextChanging;
             textBox.LostFocus += TextBox_LostFocus;
             textBox.BeforeTextChanging += TextBox_BeforeTextChanging;
+            textBox.GettingFocus -= TextBox_GettingFocus;
+            textBox.GettingFocus += TextBox_GettingFocus;
         }
 
         private static void TextBox_BeforeTextChanging(TextBox textBox, TextBoxBeforeTextChangingEventArgs args)
@@ -40,10 +42,12 @@ namespace Project2FA.UWP.Extensions
                 validationType != ValidationType.PhoneNumber &&
                 args.NewText != string.Empty)
             {
+                textBox.Tag = "ValidationError";
                 args.Cancel = true;
             }
             else
             {
+                textBox.Tag = string.Empty; //valid input
                 // workaround for the valid charcaters after initial invalid input
                 // where the next valid input was set on wrong position
                 if (valid && textBox.Text.Length == 0 && args.NewText.Length == 1)
@@ -57,6 +61,12 @@ namespace Project2FA.UWP.Extensions
         {
             var textBox = (TextBox)sender;
             ValidateTextBox(textBox, textBox.Text);
+        }
+
+        private static void TextBox_GettingFocus(UIElement sender, Windows.UI.Xaml.Input.GettingFocusEventArgs args)
+        {
+            var textBox = (TextBox)sender;
+            textBox.SelectionStart = textBox.Text.Length;
         }
 
         private static (bool valid, bool successful) ValidateTextBox(TextBox textBox, string newText, bool force = true)

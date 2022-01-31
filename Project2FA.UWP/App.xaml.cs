@@ -116,6 +116,7 @@ namespace Project2FA.UWP
                 {
                     coreTitleBar.ExtendViewIntoTitleBar = true;
                 }
+                Window.Current.Activated -= Current_Activated;
                 Window.Current.Activated += Current_Activated;
                 // set DB
                 if (Repository is null)

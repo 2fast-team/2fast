@@ -3,7 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations">
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" 
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:Windows10version1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 8)"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
@@ -13,6 +16,7 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/NavigationView.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/ScrollBar_themeresources.xaml" />
         <ResourceDictionary Source="ms-appx:///Controls/CardExpanderControl/CardExpanderControl.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/PersonPicture.xaml" />
 
 
     </ResourceDictionary.MergedDictionaries>
@@ -70,12 +74,23 @@
         <animations:OffsetAnimation Duration="0:0:0.3"/>
     </animations:ImplicitAnimationSet>
 
+    <media:AttachedCardShadow 
+        x:Key="CommonShadow" 
+        BlurRadius="30" 
+        Color="{ThemeResource SystemAccentColor}"/>
+
+    <Style x:Key="BorderShadowStyle" TargetType="Border">
+        <Setter Property="ui:Effects.Shadow" Value="{StaticResource CommonShadow}"/>
+    </Style>
+
     <Style TargetType="muxc:TeachingTip">
         <Setter Property="BorderBrush" Value="{ThemeResource SystemAccentColor}"/>
         <!--<Setter Property="CornerRadius" Value="0"/>-->
     </Style>
 
-
+    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource DefaultComboBoxItemStyle}">
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
 
     <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
@@ -126,6 +141,10 @@
         <Setter Property="FontWeight" Value="SemiLight" />
         <Setter Property="FontSize" Value="24" />
         <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+    </Style>
+
+    <Style TargetType="ContentDialog" BasedOn="{StaticResource MyContentDialogStyle}" >
+
     </Style>
 
     <Style x:Key="MyContentDialogStyle" TargetType="ContentDialog" BasedOn="{StaticResource DefaultContentDialogStyle}" >

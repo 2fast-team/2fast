@@ -54,7 +54,7 @@ namespace Project2FA.UWP.Views
             //first check if the given password matches with the datafile
             if (await ViewModel.TestPassword())
             {
-                ViewModel.CreateLocalFileDB();
+                await ViewModel.CreateLocalFileDB();
                 args.Cancel = false;
                 Hide();
             }
@@ -66,7 +66,7 @@ namespace Project2FA.UWP.Views
             {
                 if (await ViewModel.TestPassword())
                 {
-                    ViewModel.CreateLocalFileDB();
+                    await ViewModel.CreateLocalFileDB();
                     Hide();
                 }
             }

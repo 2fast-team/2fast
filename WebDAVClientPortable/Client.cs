@@ -451,17 +451,18 @@ namespace WebDAVClient
         /// <param name="cancellationToken"></param>
         /// <param name="progress"></param>
         /// <returns><c>true</c>, if upload successful, <c>false</c> otherwise.</returns>
-        public Task<bool> Upload(string path, Stream stream, string contentType, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
+        public Task<bool> UploadAsync(string path, Stream stream, string contentType, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
         {
-            return _dav.UploadFileWithProgressAsync(GetDavUri(path), stream, contentType, progress, cancellationToken);
+            return _dav.UploadFileWithProgressAsync(GetDavUri(path, true), stream, contentType, progress, cancellationToken);
         }
 
         /// <summary>
         /// Checks if the specified remote path exists.
         /// </summary>
         /// <param name="path">remote Path.</param>
+        /// <param name="fullPath">combine the full path of the server.</param>
         /// <returns><c>true</c>, if remote path exists, <c>false</c> otherwise.</returns>
-        public Task<bool> Exists(string path)
+        public Task<bool> ExistsAsync(string path, bool fullPath = false)
         {
             return _dav.ExistsAsync(GetDavUri(path));
         }

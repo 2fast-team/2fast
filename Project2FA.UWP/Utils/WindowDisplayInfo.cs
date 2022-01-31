@@ -20,113 +20,122 @@ namespace Project2FA.UWP.Utils
             }
             catch
             {
+                return false;
             }
-            return false;
         }
 
         public static WindowDisplayMode GetForCurrentView()
         {
-            ApplicationView applicationView = ApplicationView.GetForCurrentView();
-
-            switch (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily)
+            try
             {
-                case "Windows.Desktop":
-                    {
-                        if (ApiInformation.IsEnumNamedValuePresent("Windows.UI.ViewManagement.ApplicationViewMode", "CompactOverlay") && applicationView.ViewMode == ApplicationViewMode.CompactOverlay)
+                ApplicationView applicationView = ApplicationView.GetForCurrentView();
+
+                switch (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily)
+                {
+                    case "Windows.Desktop":
                         {
-                            return WindowDisplayMode.CompactOverlay;
-                        }
-                        if (LockApplicationHost.GetForCurrentView() != null)
-                        {
-                            // When an application is in kiosk mode, ApplicationView.ISFullScreenMode will return false
-                            // even if the application is in fact displayed full screen. We need to check manually if an application is
-                            // in kiosk mode and force the result to FullScreen.
-                            return WindowDisplayMode.FullScreen;
-                        }
-                        if (IsMixedReality())
-                        {
-                            return WindowDisplayMode.Windowed;
-                        }
-                        else
-                        {
-                            if (applicationView.IsFullScreenMode)
+                            if (ApiInformation.IsEnumNamedValuePresent("Windows.UI.ViewManagement.ApplicationViewMode", "CompactOverlay") && applicationView.ViewMode == ApplicationViewMode.CompactOverlay)
                             {
+                                return WindowDisplayMode.CompactOverlay;
+                            }
+                            if (LockApplicationHost.GetForCurrentView() != null)
+                            {
+                                // When an application is in kiosk mode, ApplicationView.ISFullScreenMode will return false
+                                // even if the application is in fact displayed full screen. We need to check manually if an application is
+                                // in kiosk mode and force the result to FullScreen.
                                 return WindowDisplayMode.FullScreen;
+                            }
+                            if (IsMixedReality())
+                            {
+                                return WindowDisplayMode.Windowed;
                             }
                             else
                             {
-                                switch (UIViewSettings.GetForCurrentView().UserInteractionMode)
+                                if (applicationView.IsFullScreenMode)
                                 {
-                                    case UserInteractionMode.Mouse:
+                                    return WindowDisplayMode.FullScreen;
+                                }
+                                else
+                                {
+                                    switch (UIViewSettings.GetForCurrentView().UserInteractionMode)
+                                    {
+                                        case UserInteractionMode.Mouse:
 #pragma warning disable CS0618 // Type or member is obsolete
-                                        return applicationView.IsFullScreen ? WindowDisplayMode.Maximized : WindowDisplayMode.Windowed;
+                                            return applicationView.IsFullScreen ? WindowDisplayMode.Maximized : WindowDisplayMode.Windowed;
 #pragma warning restore CS0618 // Type or member is obsolete
-                                    case UserInteractionMode.Touch:
-                                        {
-                                            if (applicationView.AdjacentToLeftDisplayEdge)
+                                        case UserInteractionMode.Touch:
                                             {
-                                                if (applicationView.AdjacentToRightDisplayEdge)
+                                                if (applicationView.AdjacentToLeftDisplayEdge)
                                                 {
-                                                    return WindowDisplayMode.FullScreenTabletMode;
+                                                    if (applicationView.AdjacentToRightDisplayEdge)
+                                                    {
+                                                        return WindowDisplayMode.FullScreenTabletMode;
+                                                    }
+                                                    else
+                                                    {
+                                                        return WindowDisplayMode.SnappedLeft;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    return WindowDisplayMode.SnappedLeft;
+                                                    return WindowDisplayMode.SnappedRight;
                                                 }
                                             }
-                                            else
-                                            {
-                                                return WindowDisplayMode.SnappedRight;
-                                            }
-                                        }
-                                    default:
-                                        return WindowDisplayMode.Unknown;
+                                        default:
+                                            return WindowDisplayMode.Unknown;
+                                    }
                                 }
                             }
                         }
-                    }
-                case "Windows.Mobile":
-                    {
-                        if (UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse)
+                    case "Windows.Mobile":
                         {
-                            // Continuum
-                            return applicationView.IsFullScreenMode ? WindowDisplayMode.Maximized : WindowDisplayMode.Windowed;
-                        }
-                        else
-                        {
-                            return WindowDisplayMode.FullScreen;
-                        }
-                    }
-                case "Windows.Holographic":
-                    {
-                        return WindowDisplayMode.Windowed;
-                    }
-                case "Windows.Xbox":
-                case "Windows.IoT":
-                    {
-                        return WindowDisplayMode.FullScreen;
-                    }
-                case "Windows.Team":
-                    {
-                        if (applicationView.AdjacentToLeftDisplayEdge)
-                        {
-                            if (applicationView.AdjacentToRightDisplayEdge)
+                            if (UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse)
                             {
-                                return WindowDisplayMode.FullScreenTabletMode;
+                                // Continuum
+                                return applicationView.IsFullScreenMode ? WindowDisplayMode.Maximized : WindowDisplayMode.Windowed;
                             }
                             else
                             {
-                                return WindowDisplayMode.SnappedLeft;
+                                return WindowDisplayMode.FullScreen;
                             }
                         }
-                        else
+                    case "Windows.Holographic":
                         {
-                            return WindowDisplayMode.SnappedRight;
+                            return WindowDisplayMode.Windowed;
                         }
-                    }
-                default:
-                    return WindowDisplayMode.Unknown;
+                    case "Windows.Xbox":
+                    case "Windows.IoT":
+                        {
+                            return WindowDisplayMode.FullScreen;
+                        }
+                    case "Windows.Team":
+                        {
+                            if (applicationView.AdjacentToLeftDisplayEdge)
+                            {
+                                if (applicationView.AdjacentToRightDisplayEdge)
+                                {
+                                    return WindowDisplayMode.FullScreenTabletMode;
+                                }
+                                else
+                                {
+                                    return WindowDisplayMode.SnappedLeft;
+                                }
+                            }
+                            else
+                            {
+                                return WindowDisplayMode.SnappedRight;
+                            }
+                        }
+                    default:
+                        return WindowDisplayMode.Unknown;
+                }
             }
+            catch (System.Exception exc)
+            {
+                TrackingManager.TrackExceptionCatched(exc);
+                return WindowDisplayMode.Unknown;
+            }
+
         }
     }
 }

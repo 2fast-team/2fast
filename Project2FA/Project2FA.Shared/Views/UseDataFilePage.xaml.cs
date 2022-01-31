@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Project2FA.ViewModels;
 #if HAS_WINUI
 using Microsoft.UI.Xaml.Controls;
 #else
@@ -21,6 +22,7 @@ namespace Project2FA.Views
 {
     public sealed partial class UseDataFilePage : Page
     {
+        public UseDataFilePageViewModel ViewModel => DataContext as UseDataFilePageViewModel;
         public UseDataFilePage()
         {
             this.InitializeComponent();

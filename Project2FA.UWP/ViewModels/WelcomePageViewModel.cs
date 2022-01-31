@@ -98,7 +98,7 @@ namespace Project2FA.UWP.ViewModels
             }
             catch (UnauthorizedAccessException)
             {
-                ErrorDialogs.UnauthorizedAccessDialog();
+                await ErrorDialogs.UnauthorizedAccessDialog();
             }
         }
 

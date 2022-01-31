@@ -11,7 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Style="{StaticResource MyContentDialogStyle}"
-    PrimaryButtonText="#choose"
+    PrimaryButtonText="{x:Bind ViewModel.PrimaryButtonText,Mode=OneWay}"
     SecondaryButtonText="{x:Bind strings:Resources.ButtonTextCancel}"
     Title="{x:Bind ViewModel.Title,Mode=OneWay}"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
@@ -43,7 +43,7 @@
                         <FontIcon 
                             Glyph="{x:Bind Glyph,Mode=OneWay}" 
                             FontFamily="Segoe UI Emoji"
-                            FontSize="36"
+                            FontSize="24"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"/>
                     </Grid>
@@ -63,14 +63,14 @@
                         Orientation="Horizontal">
                         <TextBlock 
                             FontSize="16"
-                            Text="{x:Bind Size, Converter={StaticResource BytesToHumanReadableConverter}}"
+                            Text="{x:Bind Size, Converter={StaticResource BytesToHumanReadableConverter},Mode=OneWay}"
                             Foreground="{StaticResource SystemControlForegroundChromeDisabledLowBrush}"
                             Margin="0,0,6,0"/>
                         <TextBlock 
                             FontSize="16"
                             TextWrapping="NoWrap" 
                             TextTrimming="CharacterEllipsis"
-                            Text="{x:Bind LastModified, Converter={StaticResource DateTimeToStringConverter}}"
+                            Text="{x:Bind LastModified, Converter={StaticResource DateTimeToStringConverter}, Mode=OneWay}"
                             Foreground="{StaticResource SystemControlForegroundChromeDisabledLowBrush}"/>
                     </StackPanel>
                 </Grid>

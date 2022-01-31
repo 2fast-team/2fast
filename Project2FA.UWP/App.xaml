@@ -16,6 +16,9 @@
             <Converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
             <Converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
             <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <Converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
+            <Converters:TrueWhenFalseConverter x:Key="TrueWhenFalseConverter"/>
+            <Converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

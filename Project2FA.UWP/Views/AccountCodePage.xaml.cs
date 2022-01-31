@@ -138,5 +138,14 @@ namespace Project2FA.UWP.Views
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             return !await dialogService.IsDialogRunning();
         }
+
+        private async void BTN_SetFavourite_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
+            {
+                model.IsFavourite = !model.IsFavourite;
+                await ViewModel.TwoFADataService.WriteLocalDatafile();
+            }
+        }
     }
 }

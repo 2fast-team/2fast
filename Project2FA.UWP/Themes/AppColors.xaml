@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Global colors -->
-    <Color x:Key="darkBlue">#013358</Color>
     <AcrylicBrush x:Key="TitleAcrylicWindowBrush" 
                   BackgroundSource="HostBackdrop"
                   TintColor="{ThemeResource SystemChromeAltHighColor}"

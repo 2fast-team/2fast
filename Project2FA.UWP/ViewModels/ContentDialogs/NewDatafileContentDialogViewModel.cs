@@ -10,6 +10,7 @@ using Project2FA.UWP.Strings;
 using System.Security.Cryptography;
 using Project2FA.Repository.Models;
 using Template10.Services.Serialization;
+using Microsoft.Toolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -28,33 +29,19 @@ namespace Project2FA.UWP.ViewModels
             SerializationService = App.Current.Container.Resolve<ISerializationService>();
             FileService = App.Current.Container.Resolve<IFileService>();
 
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            PrimaryButtonCommand = new DelegateCommand(async () =>
-            {
-                Password = Password.Replace(" ", string.Empty);
-                await CreateLocalFileDB(false);
-                byte[] iv = new AesManaged().IV;
-                DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
-                await FileService.WriteStringAsync(DateFileName, SerializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
-                App.ShellPageInstance.NavigationIsAllowed = true;
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            PrimaryButtonCommand = new AsyncRelayCommand(PrimaryButtonCommandTask);
 
-            CheckServerAddressCommand = new DelegateCommand(() =>
-            {
-                CheckServerStatus();
-            });
+
+            CheckServerAddressCommand = new AsyncRelayCommand(CheckServerStatus);
+
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
                 ShowError = false;
             });
 
-            LoginCommand = new DelegateCommand(async () =>
-            {
-                CheckLoginAsync();
-            });
+            LoginCommand = new AsyncRelayCommand(CheckLoginAsync);
 
-            ChangePathCommand = new DelegateCommand( async() =>
+            ChangePathCommand = new AsyncRelayCommand( async() =>
             {
                 SetLocalPath(true); //change path is true
             });
@@ -104,6 +91,27 @@ namespace Project2FA.UWP.ViewModels
             else
             {
                 DatafileBTNActive = false;
+            }
+        }
+
+        private async Task PrimaryButtonCommandTask()
+        {
+            try
+            {
+                Password = Password.Replace(" ", string.Empty);
+                await CreateLocalFileDB(false);
+                byte[] iv = new AesManaged().IV;
+                DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
+                await FileService.WriteStringAsync(DateFileName, SerializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
+                App.ShellPageInstance.NavigationIsAllowed = true;
+            }
+            catch (Exception exc)
+            {
+                if (exc is UnauthorizedAccessException)
+                {
+
+                }
+                throw;
             }
         }
 

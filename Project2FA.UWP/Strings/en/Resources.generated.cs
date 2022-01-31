@@ -824,7 +824,7 @@ namespace Project2FA.UWP.Strings{
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: The settings page has been fundamentally updated. Implemented the possibility to set the lock time, when the app will be locked in case of inactivity. A new design option has been implemented, where the corners of controls can be rounded. The option is disabled on Windows 10, enabled by default on Windows 11.
+        ///   Looks up a localized string similar to: Favourites can now be set for accounts, making them visible as top items in the list. QR codes can now be displayed for individual accounts in order to import them with a smartphone.
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -964,6 +964,58 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region DisplayQRCodeContentDialogTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: QR code display
+        /// </summary>
+        public static string DisplayQRCodeContentDialogTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("DisplayQRCodeContentDialogTitle");
+            }
+        }
+        #endregion
+
+        #region AddAccountCodeContentDialogInputSecretKeyHelp
+        /// <summary>
+        ///   Looks up a localized string similar to: The input is based on Base32 and therefore only allows the letters A-Z and the numbers from 2-7.
+        /// </summary>
+        public static string AddAccountCodeContentDialogInputSecretKeyHelp
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddAccountCodeContentDialogInputSecretKeyHelp");
+            }
+        }
+        #endregion
+
+        #region AccountCodePageTooltipDelete
+        /// <summary>
+        ///   Looks up a localized string similar to: Undo favourite
+        /// </summary>
+        public static string AccountCodePageTooltipDelete
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageTooltipDelete");
+            }
+        }
+        #endregion
+
+        #region AccountCodePageTooltipSet
+        /// <summary>
+        ///   Looks up a localized string similar to: Set as favourite
+        /// </summary>
+        public static string AccountCodePageTooltipSet
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageTooltipSet");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1048,6 +1100,10 @@ namespace Project2FA.UWP.Strings{
             SettingsAutoLogoutMinutes,
             Close,
             AddAccountCodeContentDialogQRCodeHelp,
+            DisplayQRCodeContentDialogTitle,
+            AddAccountCodeContentDialogInputSecretKeyHelp,
+            AccountCodePageTooltipDelete,
+            AccountCodePageTooltipSet,
         }
 
         private static ResourceLoader _resourceLoader;

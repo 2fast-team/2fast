@@ -35,6 +35,24 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _imageUrl, value);
         }
 
+        private bool _isFavourite;
+        public bool IsFavourite 
+        { 
+            get => _isFavourite;
+            set
+            {
+                if(SetProperty(ref _isFavourite, value))
+                {
+                    RaisePropertyChanged(nameof(IsFavouriteText));
+                }
+            }
+        }
+
+        public string IsFavouriteText
+        {
+            get => _isFavourite ? "AAA"+ Label : Label;
+        }
+
         //default seconds for renew the 2fa code
         //no need for SetProperty, because no UI binding(refresh)
         public int Period { get; set; } = 30;
@@ -70,6 +88,7 @@ namespace Project2FA.Repository.Models
             get => _twoFACode;
             set => SetProperty(ref _twoFACode, value);
         }
+
 
         //[JsonIgnore]
         //public List<(string name, string message)> Errors

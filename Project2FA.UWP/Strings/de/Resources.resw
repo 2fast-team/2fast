@@ -734,11 +734,9 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>Die Einstellungsseite wurde grundlegend aktualisiert.
+    <value>Favoriten können nun für Accounts gesetzt werden, wodurch diese als oberste Elemente in der Liste sichtbar sind.
 
-Es wurde die Möglichkeit implementiert die Zeit für die Sperrung einzustellen, bei der die App bei Inaktivität gesperrt wird.
-
-Eine neue Option für das Design wurde implementiert, bei dem die Ecken von Steuerelementen abgerundet werden können. Die Option ist unter Windows 10 deaktiviert, unter Windows 11 standardmäßig aktiviert.</value>
+QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Smartphone zu importieren.</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen</value>
@@ -819,6 +817,18 @@ Eine neue Option für das Design wurde implementiert, bei dem die Ecken von Steu
     <value>Bei der Wahl des QR-Code Scans öffnet sich kurze Zeit nach Klick auf dem Button ein Lesetool, mit dem der QR-Code bei dem Dienst selektiert werden muss. Hierfür einfach zum Dienst wechseln und bei gedrückter linker Maustaste einen Rahmen um den QR-Code ziehen.</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
-    <value>QR-Code für den Export anzeigen</value>
+    <value>QR-Code anzeigen</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogTitle" xml:space="preserve">
+    <value>QR-Code Anzeige</value>
+  </data>
+  <data name="AddAccountCodeContentDialogInputSecretKeyHelp" xml:space="preserve">
+    <value>Die Eingabe basiert auf Base32 und erlaubt deshalb nur die Buchstaben A-Z und die Nummern von 2-7.</value>
+  </data>
+  <data name="AccountCodePageTooltipDelete" xml:space="preserve">
+    <value>Als Favorit entfernen</value>
+  </data>
+  <data name="AccountCodePageTooltipSet" xml:space="preserve">
+    <value>Als Favorit setzen</value>
   </data>
 </root>

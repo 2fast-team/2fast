@@ -23,6 +23,7 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountCodePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DatafileViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewDataFilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UseDataFilePageViewModel.cs" />

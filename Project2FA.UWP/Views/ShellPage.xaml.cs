@@ -82,11 +82,11 @@ namespace Project2FA.UWP.Views
                 }
             };
 
-            MainFrame.Navigated += (s, e) =>
+            MainFrame.Navigated += async(s, e) =>
             {
                 if (TryFindItem(e.SourcePageType, e.Parameter, out object item))
                 {
-                    SetSelectedItem(item, false);
+                    await SetSelectedItem(item, false);
                 }
             };
 
@@ -167,7 +167,6 @@ namespace Project2FA.UWP.Views
             // else => UseNTPServerCorrection is false
             if (SystemInformation.Instance.IsFirstRun)
             {
-                SettingsService.Instance.UseNTPServerCorrection = true;
                 if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
                 {
                     // set the round corner for Windows 11+

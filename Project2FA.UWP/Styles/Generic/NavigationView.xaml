@@ -27,6 +27,7 @@
         <Setter Property="BorderBrush" Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}" />
         <Setter Property="BorderThickness" Value="{ThemeResource NavigationViewToggleBorderThickness}" />
         <Setter Property="Padding" Value="{ThemeResource NavigationViewItemButtonMargin}" />
+        <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -38,8 +39,7 @@
                         BorderThickness="{TemplateBinding BorderThickness}" 
                         Background="{TemplateBinding Background}"
                         HorizontalAlignment="Stretch"
-                        contract7Present:CornerRadius="{TemplateBinding CornerRadius}"
-                        contract7NotPresent:CornerRadius="{ThemeResource OverlayCornerRadius}">
+                        contract7Present:CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
@@ -79,14 +79,15 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Border Width="{TemplateBinding MinWidth}" Margin="4,0,0,0">
-                            <muxc:AnimatedIcon x:Name="Icon"
-                                                Width="16"
-                                                Height="16"
-                                                Foreground="{TemplateBinding Foreground}"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                AutomationProperties.AccessibilityView="Raw"
-                                                muxc:AnimatedIcon.State="Normal">
+                            <muxc:AnimatedIcon 
+                                x:Name="Icon"
+                                Width="16"
+                                Height="16"
+                                Foreground="{TemplateBinding Foreground}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                AutomationProperties.AccessibilityView="Raw"
+                                muxc:AnimatedIcon.State="Normal">
                                 <animatedvisuals:AnimatedGlobalNavigationButtonVisualSource/>
                                 <muxc:AnimatedIcon.FallbackIconSource>
                                     <muxc:FontIconSource
@@ -702,7 +703,7 @@
         <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
         <Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
-        <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
+        <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
         <Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
         <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -713,6 +714,7 @@
                         x:Name="LayoutRoot"
                         MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}"
                         Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
                         Control.IsTemplateFocusTarget="True">
                         <Grid.Resources>
                             <Storyboard x:Name="ExpandCollapseRotateExpandedStoryboard">

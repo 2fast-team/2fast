@@ -84,11 +84,11 @@
     "StringLicenseURL": "https://github.com/dotnet/runtime/blob/master/LICENSE.TXT"
   },
   {
-    "Name": "ZXing.Net.Mobile",
-    "Authors": "Redth",
-    "LicenseName": "MIT",
+    "Name": "ZXing.Net",
+    "Authors": "Michael Jahn ",
+    "LicenseName": "Apache License 2.0",
     "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/Redth/ZXing.Net.Mobile/blob/master/LICENSE.txt"
+    "StringLicenseURL": "https://github.com/micjahn/ZXing.Net/blob/master/COPYING"
   },
   {
     "Name": "Animation: search empty",

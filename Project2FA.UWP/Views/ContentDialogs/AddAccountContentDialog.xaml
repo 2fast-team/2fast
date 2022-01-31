@@ -6,9 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:extensions="using:Project2FA.UWP.Extensions"
-    xmlns:behaviors="using:Project2FA.UWP.Behaviors"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     x:Uid="AddAccountContentDialog"
@@ -144,7 +142,11 @@
                         </StackPanel>
                     </ScrollViewer>
                     <Border Visibility="{x:Bind ViewModel.IsCameraActive, Mode=OneWay}">
-                        <Frame x:Name="CameraFrame"/>
+                        <StackPanel>
+                            <Frame x:Name="CameraFrame"/>
+                            <Button>Test</Button>
+                        </StackPanel>
+                        
                     </Border>
                 </Grid>
             </PivotItem>
@@ -158,8 +160,8 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox 
-                                Header="#Label" 
-                                PlaceholderText="#Name" 
+                                Header="~AddAccountContentDialogLabel.Header" 
+                                PlaceholderText="~AddAccountContentDialogLabel.PlaceholderText" 
                                 x:Uid="AddAccountContentDialogLabel" 
                                 Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
                                 UpdateSourceTrigger=PropertyChanged}" 
@@ -173,8 +175,8 @@
                             </Grid>
 
                             <TextBox 
-                                Header="#account name" 
-                                PlaceholderText="#E-Mail"
+                                Header="~AddAccountContentDialogAccountName.Header" 
+                                PlaceholderText="~AddAccountContentDialogAccountName.PlaceholderText"
                                 x:Uid="AddAccountContentDialogAccountName" 
                                 Text="{x:Bind ViewModel.Issuer,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,0,0,8">
@@ -188,23 +190,24 @@
                                 x:Name="CB_ManualInput"
                                 x:Uid="AddAccountContentDialogManualInputCheckbox" 
                                 IsChecked="{x:Bind ViewModel.ManualInput,Mode=TwoWay}" 
-                                Content="#manual input" Margin="0,0,0,0"/>
+                                Content="~AddAccountContentDialogManualInputCheckbox.Content" Margin="0,0,0,0"/>
                             <TextBox 
+                                    x:Name="TB_AddAccountContentDialogSecretKey"
                                 x:Uid="AddAccountContentDialogSecretKey"
                                 extensions:TextBoxExtensions.ValidationMode="Dynamic"
                                 extensions:TextBoxExtensions.Regex="^[A-Za-z2-7-\s]*={0,6}$"
                                 extensions:TextBoxExtensions.ValidationType="Custom"
-                                Header="#secret key" 
-                                PlaceholderText="#key" 
+                                Header="~AddAccountContentDialogSecretKey.Header" 
+                                PlaceholderText="~AddAccountContentDialogSecretKey.PlaceholderText" 
                                 IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
-                                Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
-                                Margin="0,0,0,8">
+                                Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                                 <!--<Interactivity:Interaction.Behaviors>
                                     <behaviors:HighlightFormFieldOnErrors 
                                         PropertyName="SecretKey"
                                         PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
                                 </Interactivity:Interaction.Behaviors>-->
                             </TextBox>
+
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>

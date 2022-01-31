@@ -3,9 +3,7 @@ using System;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Prism.Mvvm;
-using Prism.Ioc;
 using Project2FA.UWP.Services;
-using Project2FA.Core.Utils;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Views;
@@ -35,9 +33,8 @@ namespace Project2FA.UWP.ViewModels
         public ICommand UndoDeleteCommand { get; }
         public ICommand ExportAccountCommand { get; }
 
-        private int _deletedTFAModelSeconds;
         private string _title;
-        private TwoFACodeModel _tempDeletedTFAModel;
+
 
         public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade)
         {
@@ -47,10 +44,12 @@ namespace Project2FA.UWP.ViewModels
 
             _dispatcherTOTPTimer = new DispatcherTimer();
             _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 0, 1); //every second
+            _dispatcherTOTPTimer.Tick -= TOTPTimer;
             _dispatcherTOTPTimer.Tick += TOTPTimer;
 
             _dispatcherTimerDeletedModel = new DispatcherTimer();
             _dispatcherTimerDeletedModel.Interval = new TimeSpan(0, 0, 1); //every second
+            _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
             _dispatcherTimerDeletedModel.Tick += TimerDeletedModel;
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -66,10 +65,7 @@ namespace Project2FA.UWP.ViewModels
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
-            RefreshCommand = new DelegateCommand(() =>
-            {
-                ReloadDatafileAndUpdateCollection();
-            });
+            RefreshCommand = new AsyncRelayCommand(ReloadDatafileAndUpdateCollection);
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             LogoutCommand = new DelegateCommand(async () =>
@@ -87,8 +83,10 @@ namespace Project2FA.UWP.ViewModels
 
             UndoDeleteCommand = new DelegateCommand(() =>
             {
-                TwoFADataService.Collection.Add(TempDeletedTFAModel);
-                TempDeletedTFAModel = null;
+                _dispatcherTimerDeletedModel.Stop();
+                TwoFADataService.RestoreDeletedModel();
+                RaisePropertyChanged(nameof(IsAccountDeleted));
+                RaisePropertyChanged(nameof(IsAccountNotDeleted));
             });
 
             ExportAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(ExportQRCode);
@@ -96,6 +94,10 @@ namespace Project2FA.UWP.ViewModels
             EditAccountCommand = new RelayCommand<TwoFACodeModel>(EditAccountFromCollection);
             DeleteAccountCommand = new RelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             Copy2FACodeToClipboardCommand = new RelayCommand<TwoFACodeModel>(Copy2FACodeToClipboard);
+            if (TwoFADataService.TempDeletedTFAModel != null)
+            {
+                _dispatcherTimerDeletedModel.Start();
+            }
             StartTOTPLogic();
         }
 
@@ -118,14 +120,16 @@ namespace Project2FA.UWP.ViewModels
         /// <param name="e"></param>
         private void TimerDeletedModel(object sender, object e)
         {
-            if (DeletedTFAModelSeconds > 0)
+            if (TwoFADataService.TempDeletedTFAModel.Seconds > 0)
             {
-                DeletedTFAModelSeconds--;
+                TwoFADataService.TempDeletedTFAModel.Seconds--;
             }
             else
             {
                 _dispatcherTimerDeletedModel.Stop();
-                TempDeletedTFAModel = null;
+                TwoFADataService.TempDeletedTFAModel = null;
+                RaisePropertyChanged(nameof(IsAccountDeleted));
+                RaisePropertyChanged(nameof(IsAccountNotDeleted));
             }
         }
 
@@ -136,27 +140,22 @@ namespace Project2FA.UWP.ViewModels
         /// <param name="e"></param>
         private async void TOTPTimer(object sender, object e)
         {
-            TOTPTimerTask();
+            await TOTPTimerTask();
         }
 
         private async Task TOTPTimerTask()
         {
-            //prevent the acccess 
+            //prevent the acccess for other Threads
             await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
-            bool success = true;
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
                 if (TwoFADataService.Collection[i].Seconds == 1)
                 {
-                    success = await DataService.Instance.GenerateTOTP(i);
+                    await DataService.Instance.GenerateTOTP(i);
                 }
                 else
                 {
                     TwoFADataService.Collection[i].Seconds--;
-                }
-                if (!success)
-                {
-                    // TODO error message
                 }
             }
             TwoFADataService.CollectionAccessSemaphore.Release();
@@ -181,53 +180,51 @@ namespace Project2FA.UWP.ViewModels
         /// Starts the dialog to edit an existing account
         /// </summary>
         /// <param name="parameter"></param>
-        private async void EditAccountFromCollection(object parameter)
+        private async void EditAccountFromCollection(TwoFACodeModel model)
         {
-            if (parameter is TwoFACodeModel model)
-            {
-                var dialog = new EditAccountContentDialog();
-                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
-                var param = new DialogParameters();
-                param.Add("model", model);
-                await DialogService.ShowDialogAsync(dialog, param);
-            }
+            var dialog = new EditAccountContentDialog();
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+            var param = new DialogParameters();
+            param.Add("model", model);
+            await DialogService.ShowDialogAsync(dialog, param);
         }
 
         /// <summary>
         /// Deletes an account from the collection
         /// </summary>
         /// <param name="parameter"></param>
-        private async void DeleteAccountFromCollection(object parameter)
+        private async void DeleteAccountFromCollection(TwoFACodeModel model)
         {
-            if (parameter is TwoFACodeModel model)
+            ContentDialog dialog = new ContentDialog();
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+            dialog.Title = Resources.DeleteAccountContentDialogTitle;
+            var markdown = new MarkdownTextBlock
             {
-                ContentDialog dialog = new ContentDialog();
-                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
-                dialog.Title = Resources.DeleteAccountContentDialogTitle;
-                var markdown = new MarkdownTextBlock
-                {
-                    Text = Resources.DeleteAccountContentDialogDescription
-                };
-                dialog.Content = markdown;
-                dialog.PrimaryButtonText = Resources.Confirm;
-                dialog.SecondaryButtonText = Resources.ButtonTextCancel;
-                dialog.SecondaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                ContentDialogResult result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
-                if (result == ContentDialogResult.Primary)
-                {
-                    TempDeletedTFAModel = model;
-                    TwoFADataService.Collection.Remove(model);
-                }
+                Text = Resources.DeleteAccountContentDialogDescription
+            };
+            dialog.Content = markdown;
+            dialog.PrimaryButtonText = Resources.Confirm;
+            dialog.SecondaryButtonText = Resources.ButtonTextCancel;
+            dialog.SecondaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            ContentDialogResult result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+            if (result == ContentDialogResult.Primary)
+            {
+                TwoFADataService.TempDeletedTFAModel = model;
+                TwoFADataService.TempDeletedTFAModel.Seconds = 30;
+                TwoFADataService.Collection.Remove(model);
+                RaisePropertyChanged(nameof(IsAccountDeleted));
+                RaisePropertyChanged(nameof(IsAccountNotDeleted));
+                _dispatcherTimerDeletedModel.Start();
             }
         }
 
         /// <summary>
         /// Reloads the datafile from the filesystem and updates the collection
         /// </summary>
-        public void ReloadDatafileAndUpdateCollection()
+        public async Task ReloadDatafileAndUpdateCollection()
         {
             TwoFADataService.Collection.Clear();
-            TwoFADataService.ReloadDatafile();
+            await TwoFADataService.ReloadDatafile();
         }
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
@@ -237,12 +234,10 @@ namespace Project2FA.UWP.ViewModels
             {
                 _dispatcherTOTPTimer.Stop();
             }
-            _dispatcherTOTPTimer.Tick -= TOTPTimer;
             if (_dispatcherTimerDeletedModel.IsEnabled)
             {
                 _dispatcherTimerDeletedModel.Stop();
             }
-            _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
             return !await DialogService.IsDialogRunning();
         }
 
@@ -256,36 +251,14 @@ namespace Project2FA.UWP.ViewModels
 
         private async Task ExportQRCode(TwoFACodeModel model)
         {
+            var param = new DialogParameters();
+            param.Add("Model", model);
             var dialog = new DisplayQRCodeContentDialog();
-            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+            await DialogService.ShowDialogAsync(dialog, param);
         }
 
-        public bool IsModelDeleted => TempDeletedTFAModel != null;
+        public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
-        public bool IsModelNotDeleted => TempDeletedTFAModel == null;
-
-        public TwoFACodeModel TempDeletedTFAModel 
-        {
-            get => _tempDeletedTFAModel;
-            set
-            {
-                if(SetProperty(ref _tempDeletedTFAModel, value))
-                {
-                    RaisePropertyChanged(nameof(IsModelDeleted));
-                    RaisePropertyChanged(nameof(IsModelNotDeleted));
-                    DeletedTFAModelSeconds = 30;
-                    if (_tempDeletedTFAModel != null)
-                    {
-                        _dispatcherTimerDeletedModel.Start();
-                    }
-                }
-            }
-        }
-
-        public int DeletedTFAModelSeconds 
-        {
-            get => _deletedTFAModelSeconds;
-            set => SetProperty(ref _deletedTFAModelSeconds, value);
-        }
+        public bool IsAccountNotDeleted => TwoFADataService.TempDeletedTFAModel == null;
     }
 }

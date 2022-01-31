@@ -9,6 +9,10 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="using:Project2FA.UWP.ViewModels"
+    xmlns:i="using:Microsoft.Xaml.Interactivity" 
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -17,6 +21,8 @@
 
     <Page.Resources>
         <ResourceDictionary>
+
+            
             <DataTemplate x:Name="ShellHeaderTemplate" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
                     <Grid>
@@ -73,7 +79,7 @@
                             </CommandBar.Content>
                             <CommandBar.PrimaryCommands>
                                 <AppBarElementContainer
-                                    Visibility="{x:Bind IsModelDeleted, Mode=OneWay}">
+                                    Visibility="{x:Bind IsAccountDeleted, Mode=OneWay}">
                                     <CommandBar 
                                         OverflowButtonVisibility="Collapsed"
                                         Background="{ThemeResource ShellAcrylicWindowBrush}"
@@ -81,15 +87,15 @@
                                         <CommandBar.Content>
                                             <Grid>
                                                 <controls:RadialProgressBar
-                                Value="{x:Bind DeletedTFAModelSeconds,Mode=OneWay}" 
-                                Maximum="{x:Bind TempDeletedTFAModel.Period, Mode=OneWay}" 
+                                Value="{x:Bind TwoFADataService.TempDeletedTFAModel.Seconds,Mode=OneWay}" 
+                                Maximum="{x:Bind TwoFADataService.TempDeletedTFAModel.Period, Mode=OneWay}" 
                                 Width="40"
                                 Height="40"
                                 IsIndeterminate="False"
                                 Foreground="{ThemeResource SystemAccentColor}"/>
                                                 <TextBlock 
                                 Opacity="0.6"
-                                Text="{x:Bind DeletedTFAModelSeconds,Mode=OneWay}"
+                                Text="{x:Bind TwoFADataService.TempDeletedTFAModel.Seconds,Mode=OneWay}"
                                 FontSize="12"
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center"/>
@@ -184,21 +190,22 @@
                         <Grid Grid.RowSpan="3" >
                             <controls:DropShadowPanel 
                             Width="2.5"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch"
                             Color="{StaticResource SystemAccentColor}"
                             BlurRadius="30"
                             ShadowOpacity="1">
-                                <Border Background="{StaticResource SystemAccentColor}" />
+                                <Border Width="2.5" Background="{StaticResource SystemAccentColor}" />
                             </controls:DropShadowPanel>
+                            <!--<Border 
+                                Width="2.5" 
+                                Background="{StaticResource SystemAccentColor}" 
+                                />-->
                         </Grid>
 
                         <muxc:PersonPicture 
                             Height="48"
                             Width="48"
                             DisplayName="{x:Bind Label,Mode=OneWay}"
+                            Visibility="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource TrueWhenFalseConverter}}"
                             Margin="15,10,20,0"
                             Grid.Column="1"
                             Grid.Row="0"
@@ -210,7 +217,21 @@
                                     RasterizePixelWidth="80" />
                             </muxc:PersonPicture.ProfilePicture>-->
                         </muxc:PersonPicture>
-                        
+
+                        <muxc:PersonPicture 
+                            Height="48"
+                            Width="48"
+                            Background="{ThemeResource SystemAccentColor}"
+                            BorderBrush="{ThemeResource SystemAccentColor}"
+                            DisplayName="{x:Bind Label,Mode=OneWay}"
+                            Margin="15,10,20,0"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Visibility="{x:Bind IsFavourite,Mode=OneWay}"
+                            Style="{StaticResource PersonPictureWithAccentShadow}"
+                            Grid.RowSpan="2">
+                        </muxc:PersonPicture>
+
                         <!--next version: Account pictures-->
                         <!--ProfilePicture="/Assets/ServiceLogo/amazon-icon-1.svg"-->
                         <!--DisplayName="{x:Bind Label,Mode=OneWay}"-->
@@ -266,7 +287,7 @@
                                 Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0" 
                                 HorizontalAlignment="Stretch" >
-                                <FontIcon Glyph="&#xE8C8;" FontSize="24"/>
+                                <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
                             <Grid  VerticalAlignment="Center">
                                 <controls:RadialProgressBar
@@ -285,6 +306,24 @@
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center"/>
                             </Grid>
+                            <Button 
+                                x:Name="BTN_SetFavourite"
+                                Grid.Column="4" 
+                                Grid.Row="1" 
+                                Width="48"
+                                Height="48"
+                                Click="BTN_SetFavourite_Click"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0" 
+                                ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
+                                HorizontalAlignment="Stretch" >
+                                <FontIcon 
+                                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                    FontSize="20"
+                                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
                         </StackPanel>
 
                         <Button 
@@ -306,7 +345,7 @@
                                     </MenuFlyoutItem>
                                     <MenuFlyoutItem 
                                         x:Uid="AccountCodePageDeleteEntry"
-                                        IsEnabled="{Binding DataContext.IsModelNotDeleted, ElementName=Page, Mode=OneWay}"
+                                        IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"
                                         CommandParameter="{Binding}"
                                         Command="{Binding DataContext.DeleteAccountCommand, ElementName=Page, Mode=OneTime}">
                                         <MenuFlyoutItem.Icon>
@@ -372,15 +411,5 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ListView>
-        <!--<muxc:ItemsRepeater 
-            ItemTemplate="{StaticResource TwoFACodeCustomTemplate}" 
-            ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}">
-            <muxc:ItemsRepeater.Layout>
-                <controls:WrapLayout 
-                    VerticalSpacing="10" 
-                    HorizontalSpacing="10"/>
-            </muxc:ItemsRepeater.Layout>
-        </muxc:ItemsRepeater>-->
     </Grid>
-
 </Page>

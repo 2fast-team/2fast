@@ -15,6 +15,7 @@ namespace Project2FA.UWP.Views
         //MobileBarcodeScanner _barcodeScanner;
         //MobileBarcodeScanningOptions _mobileBarcodeScanningOptions;
         public AddAccountContentDialogViewModel ViewModel => DataContext as AddAccountContentDialogViewModel;
+        long _tagToken;
 
         public AddAccountContentDialog()
         {
@@ -47,6 +48,7 @@ namespace Project2FA.UWP.Views
                 default:
                     break;
             }
+            _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, tbTagChangedCallback);
         }
 
 
@@ -75,6 +77,30 @@ namespace Project2FA.UWP.Views
             //_barcodeScanner.Scan(_mobileBarcodeScanningOptions);
         }
 
+        private void tbTagChangedCallback(DependencyObject sender, DependencyProperty dp)
+        {
+            if (dp == TextBlock.TagProperty)
+            {
+                if (((TextBox)sender).Tag is string tag)
+                {
+                    if (tag == "ValidationError")
+                    {
+                        AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+                        {
+                            Target = TB_AddAccountContentDialogSecretKey as FrameworkElement,
+                            Subtitle = Strings.Resources.AddAccountCodeContentDialogInputSecretKeyHelp,
+                            AutoCloseInterval = 3000,
+                            IsLightDismissEnabled = false,
+                            BorderThickness = new Thickness(2,2,2,2),
+                            BorderBrush = new SolidColorBrush(Color.FromArgb(255,255, 28,32)),
+                            IsOpen = true,
+                        };
+                        RootGrid.Children.Add(teachingTip);
+                    }
+                }
+            }
+        }
+
 
         private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)
         {
@@ -82,6 +108,20 @@ namespace Project2FA.UWP.Views
             {
                 Target = sender as FrameworkElement,
                 Subtitle = Strings.Resources.AddAccountCodeContentDialogQRCodeHelp,
+                AutoCloseInterval = 8000,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            RootGrid.Children.Add(teachingTip);
+        }
+
+        private void HLBTN_SecretKeyInfo(object sender, RoutedEventArgs e)
+        {
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            {
+                Target = sender as FrameworkElement,
+                Subtitle = Strings.Resources.AddAccountCodeContentDialogInputSecretKeyHelp,
                 AutoCloseInterval = 8000,
                 IsLightDismissEnabled = true,
                 BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),

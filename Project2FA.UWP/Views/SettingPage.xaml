@@ -112,7 +112,8 @@
                         Margin="0,10,0,0">
 
                         <StackPanel 
-                            MaxWidth="1040" 
+                            x:Name="Main_StackPanel"
+                            MaxWidth="1040"
                             HorizontalAlignment="Left" 
                             Margin="0,0,16,0">
                             <appcontrols:CardGroupControl 
@@ -146,7 +147,7 @@
                                             <ComboBox 
                                             SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
                                             MinWidth="{StaticResource CardActionControlMinWidth}">
-                                                <ComboBoxItem x:Uid="SettingsThemeLight"/>
+                                                <ComboBoxItem x:Uid="SettingsThemeLight" />
                                                 <ComboBoxItem x:Uid="SettingsThemeDark"/>
                                                 <ComboBoxItem x:Uid="SettingsThemeSystem"/>
                                             </ComboBox>
@@ -344,23 +345,16 @@
                                         Width="280"
                                         Visibility="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"
                                         IsIndeterminate="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"/>
-                                            </StackPanel> 
+                                            </StackPanel>
                                         </appcontrols:CardExpanderControl.Content>
                                     </appcontrols:CardExpanderControl>
                                 </appcontrols:CardGroupControl>
-
-
-                                
 
                                 <!--<appcontrols:CardControl>
                                     <appcontrols:CardControl.ActionContent>
 
                                     </appcontrols:CardControl.ActionContent>
                                 </appcontrols:CardControl>-->
-
-                                
-
-                                
 
                             </StackPanel>
                         </StackPanel>
@@ -418,9 +412,9 @@
                 Header="~SPIAbout.Header" 
                 Margin="8,0,0,0">
                 <UserControl>
-                    <Grid>
+                    <Grid Margin="0,10,0,0">
                         <RelativePanel>
-                            <ScrollViewer x:Name="SV_AboutTheApp">
+                            <ScrollViewer x:Name="SV_AboutTheApp" >
                                 <StackPanel>
                                     <TextBlock 
                             Margin="0,0,0,12" 
@@ -428,8 +422,8 @@
                             FontSize="20" 
                             Text="{x:Bind ViewModel.AboutPartViewModel.DisplayName, Mode=OneWay}"/>
                                     <Border
-                            MaxHeight="200" 
-                            MaxWidth="200" 
+                            MaxHeight="140" 
+                            MaxWidth="140" 
                             HorizontalAlignment="Left"
                             BorderThickness="1"
                             IsHitTestVisible="False" 
@@ -453,7 +447,6 @@
                             Content="~SettingsSourceCode.Content" 
                             NavigateUri="https://github.com/2fast-team/2fast"
                             ToolTipService.ToolTip="https://github.com/2fast-team/2fast"/>
-
                                     <Button 
                                         Margin="0,10" 
                                         Style="{StaticResource ButtonRevealStyle}"
@@ -477,6 +470,7 @@
                             <controls:HeaderedContentControl 
                                 x:Name="LV_Dependencies" 
                                 x:Uid="SettingsDependencies"
+                                Margin="0,10,0,0"
                                 Header="~SettingsDependencies.Header">
                                 <controls:HeaderedContentControl.HeaderTemplate>
                                     <DataTemplate>

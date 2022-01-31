@@ -82,5 +82,10 @@ namespace Project2FA.UWP.Views
             };
             RootGrid.Children.Add(teachingTip);
         }
+
+        private void UseDatafileContentDialogWDLogin_Click(object sender, RoutedEventArgs e)
+        {
+            PB_DatafileWebDAVPassword.Focus(FocusState.Programmatic);
+        }
     }
 }

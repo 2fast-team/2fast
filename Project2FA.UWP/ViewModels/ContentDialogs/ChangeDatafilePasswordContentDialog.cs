@@ -54,7 +54,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 // save new pw in the secret vault
                 _secretService.Helper.WriteSecret(Constants.ContainerName, passwordHash.Hash, NewPassword);
-                DataService.Instance.WriteLocalDatafile();
+                await DataService.Instance.WriteLocalDatafile();
             }
             PasswordChanged = true;
         }

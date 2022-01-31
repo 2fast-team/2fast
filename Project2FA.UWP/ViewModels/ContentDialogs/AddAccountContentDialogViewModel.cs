@@ -64,14 +64,14 @@ namespace Project2FA.UWP.ViewModels
                 SelectedPivotIndex = 1;
                 ManualInput = true;
             });
-            ScanQRCodeCommand = new DelegateCommand(() =>
+            ScanQRCodeCommand = new DelegateCommand( async() =>
             {
                 OpeningSeconds = SettingsService.Instance.QRCodeScanSeconds;
                 _dispatcherTimer.Tick -= OnTimedEvent;
                 _dispatcherTimer.Tick += OnTimedEvent;
                 Seconds = OpeningSeconds;
                 _dispatcherTimer.Start();
-                ScanQRCode();
+                await ScanQRCode();
             });
             PrimaryButtonCommand = new DelegateCommand(() =>
             {

@@ -5,11 +5,14 @@
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="using:Project2FA.UWP.Strings"
     mc:Ignorable="d"
-    Title="TITLE"
-    PrimaryButtonText="Button1"
-    SecondaryButtonText="Button2">
+    Style="{StaticResource MyContentDialogStyle}"
+    Title="{x:Bind strings:Resources.DisplayQRCodeContentDialogTitle}"
+    SecondaryButtonText="{x:Bind strings:Resources.Confirm}">
 
-    <Grid>
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="{x:Bind ViewModel.Header,Mode=OneWay}" Margin="0,12,0,12"/>
+        <Image MaxWidth="250" Source="{x:Bind ViewModel.QRImage,Mode=OneWay}"></Image>
+    </StackPanel>
 </ContentDialog>

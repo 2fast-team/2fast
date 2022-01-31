@@ -28,19 +28,6 @@
     </Page.Resources>
 
     <Grid x:Name="RootGrid">
-        <!--<muxc:NavigationView 
-            IsSettingsVisible="False"
-            PaneDisplayMode="Top" 
-            IsBackButtonVisible="Collapsed">
-            <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem  Content="Menu Item1" Tag="SamplePage1" />
-                <muxc:NavigationViewItem  Content="Menu Item2" Tag="SamplePage2" />
-                <muxc:NavigationViewItem  Content="Menu Item3" Tag="SamplePage3" />
-                <muxc:NavigationViewItem  Content="Menu Item4" Tag="SamplePage4" />
-            </muxc:NavigationView.MenuItems>
-            <Frame x:Name="contentFrame"/>
-
-        </muxc:NavigationView>-->
         <Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
             <PivotItem 
                 Header="#Auswahl"
@@ -72,6 +59,7 @@
                         </Button>
                         <Button 
                             x:Name="BTN_WebDAV"
+                            IsEnabled="False"
                             Style="{StaticResource AccentButtonStyle}"
                             Margin="0,10,0,10"
                             MinWidth="200" 
@@ -215,12 +203,13 @@
                                 Margin="0,0,0,32" />
 
                                     <Button
+                                x:Name="UseDatafileContentDialogWDLogin"
                                 x:Uid="UseDatafileContentDialogWDLogin" 
                                 MaxWidth="200"
                                 Content="~UseDatafileContentDialogWDLogin.Content" 
                                 Style="{StaticResource AccentButtonStyle}"
                                 HorizontalAlignment="Center"
-                                Command="{x:Bind ViewModel.WebDAVLoginCommand}"/>
+                                Command="{x:Bind ViewModel.WebDAVLoginCommand}" Click="UseDatafileContentDialogWDLogin_Click"/>
                                 </StackPanel>
                             </muxc:Expander>
                             <muxc:Expander 
@@ -255,6 +244,7 @@
                                             <ColumnDefinition  Width="auto"/>
                                         </Grid.ColumnDefinitions>
                                         <PasswordBox
+                                            x:Name="PB_DatafileWebDAVPassword"
                                 x:Uid="Password"
                                 Header="~Password.Header" 
                                 InputScope="Password"

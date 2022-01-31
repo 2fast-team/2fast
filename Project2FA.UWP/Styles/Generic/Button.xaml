@@ -3,7 +3,7 @@
     xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}"></Style>
+    <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}"/>
 
     <Style x:Key="TextButtonStyle" TargetType="ButtonBase">
         <Setter Property="Background" Value="{ThemeResource HyperlinkButtonBackground}" />
@@ -15,7 +15,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
-                    <Grid Margin="{TemplateBinding Padding}" CornerRadius="4" Background="{TemplateBinding Background}">
+                    <Grid 
+                        Margin="{TemplateBinding Padding}" 
+                        CornerRadius="4" 
+                        Background="{TemplateBinding Background}">
                         <ContentPresenter 
                             x:Name="Text"
                             Content="{TemplateBinding Content}"

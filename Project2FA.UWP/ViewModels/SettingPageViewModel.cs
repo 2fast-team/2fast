@@ -117,6 +117,7 @@ namespace Project2FA.UWP.ViewModels
             dialog.Title = Resources.SettingsFactoryResetDialogTitle;
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.SettingsFactoryResetMessage;
+            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.No;
             dialog.SecondaryButtonText = Resources.Yes;

@@ -18,9 +18,9 @@ namespace Project2FA.UWP.ViewModels
 
         public EditAccountContentDialogViewModel()
         {
-            PrimaryButtonCommand = new DelegateCommand(() =>
+            PrimaryButtonCommand = new DelegateCommand(async () =>
             {
-                DataService.Instance.WriteLocalDatafile();
+                await DataService.Instance.WriteLocalDatafile();
             });
             CancelButtonCommand = new DelegateCommand(() =>
             {

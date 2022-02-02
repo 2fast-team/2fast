@@ -137,7 +137,7 @@
     </PackageReference>
     <PackageReference Include="Uno.Extensions.Logging.OSLog " Version="1.1.0" />
     <PackageReference Include="Uno.UI.RemoteControl">
-      <Version>4.0.11</Version>
+      <Version>4.0.13</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net">
       <Version>0.16.7</Version>

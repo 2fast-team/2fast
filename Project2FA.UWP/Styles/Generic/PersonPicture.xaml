@@ -13,9 +13,16 @@
         Color="{ThemeResource SystemAccentColor}"
         CornerRadius="32"/>
 
+    <media:AttachedCardShadow 
+        x:Key="SignShadow" 
+        BlurRadius="22"
+        Color="{ThemeResource SystemAccentColor}"
+        CornerRadius="0"/>
+
     <!--Windows 1809 supports no Shadow API, so use the right style...-->
     <Windows10version1903:Style x:Key="PersonPictureWithAccentShadow" TargetType="muxc:PersonPicture" BasedOn="{StaticResource DefaultPersonPictureStyle}">
         <Setter Property="BorderBrush" Value="{ThemeResource SystemAccentColor}"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="ui:Effects.Shadow" Value="{StaticResource PersonPictureShadow}"/>
     </Windows10version1903:Style>
 

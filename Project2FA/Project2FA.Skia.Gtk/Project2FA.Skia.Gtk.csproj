@@ -25,11 +25,10 @@
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Uno.WinUI.Lottie" Version="4.0.13" />
     <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="4.0.13" />
-    <PackageReference Include="ZXing.Net" Version="0.16.7" />
+    <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />

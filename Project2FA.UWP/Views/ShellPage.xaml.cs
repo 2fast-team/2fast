@@ -90,9 +90,16 @@ namespace Project2FA.UWP.Views
                 }
             };
 
-            ShellView.ItemInvoked += (sender, args) =>
+            ShellView.ItemInvoked += async (sender, args) =>
             {
-                SelectedItem = args.IsSettingsInvoked ? ShellView.SettingsItem : Find(args.InvokedItemContainer as NavigationViewItem);
+                if (args.IsSettingsInvoked)
+                {
+                    await SetSelectedItem(ShellView.SettingsItem);
+                }
+                else
+                {
+                    await SetSelectedItem(Find(args.InvokedItemContainer as NavigationViewItem));
+                }
             };
 
             if (System.Diagnostics.Debugger.IsAttached)
@@ -284,11 +291,6 @@ namespace Project2FA.UWP.Views
         private string _settingsNavigationStr;
 
         private object PreviousItem { get; set; }
-
-        private object SelectedItem
-        {
-            set => SetSelectedItem(value);
-        }
 
         private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
         {

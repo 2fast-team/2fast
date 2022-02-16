@@ -1,8 +1,8 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>11.0</LangVersion>
     <Platforms>x86;x64;ARM;ARM64</Platforms>
     <Title>Project2FA Uno Core</Title>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -13,6 +13,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Uno.UI" Version="4.0.13" />
   </ItemGroup>
 
   <ItemGroup>

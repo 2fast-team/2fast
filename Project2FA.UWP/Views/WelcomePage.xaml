@@ -103,7 +103,30 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.ColumnSpan="3">
+        <!--for debug-->
+        <Border 
+            x:Name="PageStaticBackgroundBorder" 
+            Grid.ColumnSpan="3"
+            Visibility="Collapsed">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Red" Offset="0.000" />
+                    <GradientStop Color="Red" Offset="0.166" />
+                    <GradientStop Color="DarkOrange" Offset="0.167" />
+                    <GradientStop Color="DarkOrange" Offset="0.332" />
+                    <GradientStop Color="Goldenrod" Offset="0.333" />
+                    <GradientStop Color="Goldenrod" Offset="0.499" />
+                    <GradientStop Color="SeaGreen" Offset="0.500" />
+                    <GradientStop Color="SeaGreen" Offset="0.666" />
+                    <GradientStop Color="MediumBlue" Offset="0.667" />
+                    <GradientStop Color="MediumBlue" Offset="0.832" />
+                    <GradientStop Color="Indigo" Offset="0.833" />
+                    <GradientStop Color="Indigo" Offset="1.000" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border x:Name="PageImageBackgroundBorder" Grid.ColumnSpan="3">
             <muxc:ParallaxView x:Name="Parallax"
                                VerticalShift="50">
                 <Image Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"

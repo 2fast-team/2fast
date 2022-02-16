@@ -103,7 +103,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background\mhellmeier_blue-hills.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Dialogs\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Dialogs\" />
   </ItemGroup>
 </Project>

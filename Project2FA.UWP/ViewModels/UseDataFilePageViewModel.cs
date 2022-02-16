@@ -33,8 +33,6 @@ namespace Project2FA.UWP.ViewModels
         public ICommand SetAndCheckWebDAVDatafileCommand { get; }
 
         private IFileService FileService { get; }
-
-        private IResourceService ResourceService { get; }
         private INetworkService NetworkService { get; }
         private IDialogService DialogService { get; }
         private INavigationService NaviationService { get; }
@@ -44,7 +42,7 @@ namespace Project2FA.UWP.ViewModels
         private bool _webDAVLoginRequiered;
         private bool _webDAVDatafilePropertiesExpanded;
         private bool _isWebDAVCreationButtonEnable;
-
+        private bool _webDAVLoginError;
 
         /// <summary>
         /// Constructor to start the datafile selector
@@ -66,7 +64,15 @@ namespace Project2FA.UWP.ViewModels
 
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
-                ShowError = false;
+                if (ShowError)
+                {
+                    ShowError = false;
+                }
+
+                if (WebDAVLoginError)
+                {
+                    WebDAVLoginError = false;
+                }
             });
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -125,6 +131,7 @@ namespace Project2FA.UWP.ViewModels
                         }
                         else
                         {
+                            WebDAVLoginError = true;
                             //TODO error Message
                         }
                     }
@@ -348,6 +355,11 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _isWebDAVCreationButtonEnable;
             set => SetProperty(ref _isWebDAVCreationButtonEnable, value);
+        }
+        public bool WebDAVLoginError 
+        { 
+            get => _webDAVLoginError;
+            set => SetProperty(ref _webDAVLoginError, value);
         }
     }
 }

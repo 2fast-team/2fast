@@ -18,6 +18,11 @@ namespace Project2FA.UWP.Views
             App.ShellPageInstance.ShellViewInternal.Header = ViewModel;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
             ViewModel.IsTutorialOpen = true;
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                PageStaticBackgroundBorder.Visibility = Visibility.Visible;
+                PageImageBackgroundBorder.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ using Prism.Logging;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Microsoft.Toolkit.Mvvm.Input;
+using System.Diagnostics;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -32,7 +33,8 @@ namespace Project2FA.UWP.ViewModels
         public ICommand RefreshCommand { get; }
         public ICommand UndoDeleteCommand { get; }
         public ICommand ExportAccountCommand { get; }
-
+        public ICommand SetFavouriteCommand { get; }
+        private Stopwatch TOTPEventStopwatch { get; }
         private string _title;
 
 
@@ -42,6 +44,7 @@ namespace Project2FA.UWP.ViewModels
             Logger = loggerFacade;
             Title = "Accounts";
 
+            TOTPEventStopwatch = new Stopwatch();
             _dispatcherTOTPTimer = new DispatcherTimer();
             _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 0, 1); //every second
             _dispatcherTOTPTimer.Tick -= TOTPTimer;
@@ -94,11 +97,14 @@ namespace Project2FA.UWP.ViewModels
             EditAccountCommand = new RelayCommand<TwoFACodeModel>(EditAccountFromCollection);
             DeleteAccountCommand = new RelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             Copy2FACodeToClipboardCommand = new RelayCommand<TwoFACodeModel>(Copy2FACodeToClipboard);
+            SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
             if (TwoFADataService.TempDeletedTFAModel != null)
             {
                 _dispatcherTimerDeletedModel.Start();
             }
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             StartTOTPLogic();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         private async Task StartTOTPLogic()
@@ -108,8 +114,12 @@ namespace Project2FA.UWP.ViewModels
                 //only reset the time and calc the new totp
                 await DataService.Instance.ResetCollection();
             }
-
-            _dispatcherTOTPTimer.Start();
+            else
+            {
+                await DataService.Instance.StartService();
+            }
+            TOTPEventStopwatch.Start(); // stopwatch for the calculation of the remaining time for a valid totp code
+            _dispatcherTOTPTimer.Start(); // the event for the set of seconds and calculating the totp code
         }
 
 
@@ -149,15 +159,13 @@ namespace Project2FA.UWP.ViewModels
             await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
-                if (TwoFADataService.Collection[i].Seconds == 1)
+                TwoFADataService.Collection[i].Seconds -= TOTPEventStopwatch.Elapsed.TotalSeconds; // elapsed time (seconds) from the last event call
+                if (Convert.ToInt32(TwoFADataService.Collection[i].Seconds) <= 0)
                 {
                     await DataService.Instance.GenerateTOTP(i);
                 }
-                else
-                {
-                    TwoFADataService.Collection[i].Seconds--;
-                }
             }
+            TOTPEventStopwatch.Restart(); // reset the added time from the stopwatch => time+ / event
             TwoFADataService.CollectionAccessSemaphore.Release();
         }
 
@@ -173,6 +181,20 @@ namespace Project2FA.UWP.ViewModels
                 dataPackage.RequestedOperation = DataPackageOperation.Copy;
                 dataPackage.SetText(model.TwoFACode);
                 Clipboard.SetContent(dataPackage);
+            }
+        }
+
+        /// <summary>
+        /// Set the favourite status for an account
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        private async Task SetFavouriteForModel(object parameter)
+        {
+            if (parameter is TwoFACodeModel model)
+            {
+                model.IsFavourite = !model.IsFavourite;
+                await TwoFADataService.WriteLocalDatafile();
             }
         }
 
@@ -196,7 +218,6 @@ namespace Project2FA.UWP.ViewModels
         private async void DeleteAccountFromCollection(TwoFACodeModel model)
         {
             ContentDialog dialog = new ContentDialog();
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Title = Resources.DeleteAccountContentDialogTitle;
             var markdown = new MarkdownTextBlock
             {
@@ -224,7 +245,10 @@ namespace Project2FA.UWP.ViewModels
         public async Task ReloadDatafileAndUpdateCollection()
         {
             TwoFADataService.Collection.Clear();
+            TOTPEventStopwatch.Stop();
+            TOTPEventStopwatch.Reset();
             await TwoFADataService.ReloadDatafile();
+            TOTPEventStopwatch.Start();
         }
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
@@ -238,6 +262,8 @@ namespace Project2FA.UWP.ViewModels
             {
                 _dispatcherTimerDeletedModel.Stop();
             }
+            TOTPEventStopwatch.Stop();
+            TOTPEventStopwatch.Reset();
             return !await DialogService.IsDialogRunning();
         }
 

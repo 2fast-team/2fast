@@ -9,28 +9,31 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Repository.Models;
+using Project2FA.Uno.Core.File;
 using WebDAVClient.Types;
 using Windows.Storage;
+using Windows.Storage.Pickers;
+using DecaTec.WebDav;
+using Windows.Storage.Streams;
+using System.IO;
+using Project2FA.Uno.Core.Network;
+using Project2FA.Uno.Core.Secrets;
 #if HAS_WINUI
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.Storage.Pickers;
 #else
-using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
 #endif
 
 
 namespace Project2FA.ViewModels
 {
-    public class UseDataFilePageViewModel : DatafileViewModelBase, IConfirmNavigationAsync
+    public class UseDataFilePageViewModel : DatafileViewModelBase
     {
         public ICommand UseDatafileCommand { get; }
         public ICommand SetAndCheckLocalDatafileCommand { get; }
         public ICommand SetAndCheckWebDAVDatafileCommand { get; }
 
         private IFileService FileService { get; }
-
-        private IResourceService ResourceService { get; }
         private INetworkService NetworkService { get; }
         private IDialogService DialogService { get; }
         private IRegionManager NaviationService { get; }
@@ -109,15 +112,15 @@ namespace Project2FA.ViewModels
                             WebDAVDatafilePropertiesExpanded = true;
 
                             IsLoading = false;
-                            var dialog = new WebViewDatafileContentDialog();
-                            var param = new DialogParameters();
-                            param.Add("CreateDatafileCase", false);
-                            param.Add("Status", result);
-                            ContentDialogResult dialogresult = await DialogService.ShowDialogAsync(dialog, param);
-                            if (dialogresult == ContentDialogResult.Primary)
-                            {
-                                ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
-                            }
+                            //var dialog = new WebViewDatafileContentDialog();
+                            //var param = new DialogParameters();
+                            //param.Add("CreateDatafileCase", false);
+                            //param.Add("Status", result);
+                            //ContentDialogResult dialogresult = await DialogService.ShowDialogAsync(dialog, param);
+                            //if (dialogresult == ContentDialogResult.Primary)
+                            //{
+                            //    ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
+                            //}
                         }
                         else
                         {
@@ -163,15 +166,15 @@ namespace Project2FA.ViewModels
 
         public void ChooseWebDAV()
         {
-            ISecretService secretService = App.Current.Container.Resolve<ISecretService>();
-            if (secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") != string.Empty)
-            {
-                ServerAddress = secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress");
-                WebDAVPassword = secretService.Helper.ReadSecret(Constants.ContainerName, "WDPassword");
-                Username = secretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername");
-                //WebDAVLoginRequiered = false;
-                //WebDAVDatafilePropertiesExpanded = true;
-            }
+            //ISecretService secretService = App.Current.Container.Resolve<ISecretService>();
+            //if (secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") != string.Empty)
+            //{
+            //    ServerAddress = secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress");
+            //    WebDAVPassword = secretService.Helper.ReadSecret(Constants.ContainerName, "WDPassword");
+            //    Username = secretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername");
+            //    //WebDAVLoginRequiered = false;
+            //    //WebDAVDatafilePropertiesExpanded = true;
+            //}
         }
 
         public async Task<bool> UseExistDatafile()
@@ -183,7 +186,7 @@ namespace Project2FA.ViewModels
             }
             catch (UnauthorizedAccessException)
             {
-                ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
+                //ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
                 return false;
             }
         }
@@ -195,7 +198,7 @@ namespace Project2FA.ViewModels
             {
                 await CreateLocalFileDB(isWebDAV);
                 App.ShellPageInstance.NavigationIsAllowed = true;
-                await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+                //await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
             }
             else
             {
@@ -252,33 +255,35 @@ namespace Project2FA.ViewModels
         /// <returns>boolean</returns>
         public async Task<bool> TestPassword()
         {
-            if (_choosenOneWebDAVFile != null)
-            {
-                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-                return await TestPassword(await DownloadWebDAVFile(storageFolder), storageFolder);
-            }
-            else
-            {
-                StorageFile file = await LocalStorageFolder.GetFileAsync(DateFileName);
-                return await TestPassword(file, LocalStorageFolder);
-            }
+            //if (_choosenOneWebDAVFile != null)
+            //{
+            //    StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            //    return await TestPassword(await DownloadWebDAVFile(storageFolder), storageFolder);
+            //}
+            //else
+            //{
+            //    StorageFile file = await LocalStorageFolder.GetFileAsync(DateFileName);
+            //    return await TestPassword(file, LocalStorageFolder);
+            //}
+            StorageFile file = await LocalStorageFolder.GetFileAsync(DateFileName);
+            return await TestPassword(file, LocalStorageFolder);
         }
 
-        private async Task<StorageFile> DownloadWebDAVFile(StorageFolder storageFolder)
-        {
-            StorageFile localFile;
-            localFile = await storageFolder.CreateFileAsync(_choosenOneWebDAVFile.Name, CreationCollisionOption.ReplaceExisting);
-            IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
+        //private async Task<StorageFile> DownloadWebDAVFile(StorageFolder storageFolder)
+        //{
+        //    StorageFile localFile;
+        //    localFile = await storageFolder.CreateFileAsync(_choosenOneWebDAVFile.Name, CreationCollisionOption.ReplaceExisting);
+        //    IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
 
-            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-            using IRandomAccessStream randomAccessStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
-            Stream targetStream = randomAccessStream.AsStreamForWrite();
-            await client.Download(_choosenOneWebDAVFile.Path + "/" + _choosenOneWebDAVFile.Name, targetStream, progress, new System.Threading.CancellationToken());
-            //TODO manipulate the file with the correct date time
-            //var props = await localFile.Properties.GetDocumentPropertiesAsync();
-            //await props.RetrievePropertiesAsync();
-            return localFile;
-        }
+        //    WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+        //    using IRandomAccessStream randomAccessStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
+        //    Stream targetStream = randomAccessStream.AsStreamForWrite();
+        //    await client.Download(_choosenOneWebDAVFile.Path + "/" + _choosenOneWebDAVFile.Name, targetStream, progress, new System.Threading.CancellationToken());
+        //    //TODO manipulate the file with the correct date time
+        //    //var props = await localFile.Properties.GetDocumentPropertiesAsync();
+        //    //await props.RetrievePropertiesAsync();
+        //    return localFile;
+        //}
 
         private async Task<bool> TestPassword(StorageFile storageFile, StorageFolder storageFolder)
         {
@@ -310,11 +315,11 @@ namespace Project2FA.ViewModels
             return false;
         }
 
-        public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
-        {
-            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-            return !await dialogService.IsDialogRunning();
-        }
+        //public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
+        //{
+        //    IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+        //    return !await dialogService.IsDialogRunning();
+        //}
 
         public bool ChangeDatafile { get; set; }
 

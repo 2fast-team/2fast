@@ -15,14 +15,13 @@
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+    xmlns:Windows10version1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 8)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Page"
     mc:Ignorable="d">
 
     <Page.Resources>
         <ResourceDictionary>
-
-            
             <DataTemplate x:Name="ShellHeaderTemplate" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
                     <Grid>
@@ -162,7 +161,7 @@
             </DataTemplate>
 
             <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
-                <UserControl 
+                <UserControl
                     x:Name="Root" 
                     MaxWidth="660"
                     RightTapped="TwoFACodeItem_RightTapped" 
@@ -176,7 +175,7 @@
                         Background="{ThemeResource TwoFABackgroundBrush}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -188,24 +187,24 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.RowSpan="3" >
-                            <controls:DropShadowPanel 
+                            <!--<controls:DropShadowPanel 
                             Width="2.5"
                             Color="{StaticResource SystemAccentColor}"
                             BlurRadius="30"
                             ShadowOpacity="1">
                                 <Border Width="2.5" Background="{StaticResource SystemAccentColor}" />
-                            </controls:DropShadowPanel>
-                            <!--<Border 
+                            </controls:DropShadowPanel>-->
+                            <Border 
                                 Width="2.5" 
-                                Background="{StaticResource SystemAccentColor}" 
-                                />-->
+                                Windows10version1903:Shadow="{StaticResource SignShadow}"
+                                Background="{StaticResource SystemAccentColor}" />
                         </Grid>
 
                         <muxc:PersonPicture 
                             Height="48"
                             Width="48"
                             DisplayName="{x:Bind Label,Mode=OneWay}"
-                            Visibility="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource TrueWhenFalseConverter}}"
+                            Visibility="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                             Margin="15,10,20,0"
                             Grid.Column="1"
                             Grid.Row="0"
@@ -267,16 +266,16 @@
 
                         <StackPanel
                             Orientation="Horizontal"
-                            Grid.Row="2"
+                            Grid.Row="3"
                             Grid.Column="2"
                             Margin="0,0,0,8">
 
-                            <TextBlock 
+                            <TextBlock
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
                                 FontSize="28"
                                 VerticalAlignment="Center" 
                                 Foreground="{ThemeResource SystemAccentColor}" />
-                            <Button 
+                            <Button
                                 x:Name="BTN_CopyCode"
                                 x:Uid="AccountCopyCodeButton"
                                 Grid.Column="4" 
@@ -289,10 +288,11 @@
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
-                            <Grid  VerticalAlignment="Center">
+                            <Grid VerticalAlignment="Center">
                                 <controls:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
+                                Minimum="0"
                                 IsIndeterminate="False"
                                 Width="42"
                                 Height="42"
@@ -301,20 +301,21 @@
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
                                 Opacity="0.6"
-                                Text="{x:Bind Seconds, Mode=OneWay}"
+                                Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center"/>
                             </Grid>
-                            <Button 
+                            <Button
                                 x:Name="BTN_SetFavourite"
                                 Grid.Column="4" 
                                 Grid.Row="1" 
                                 Width="48"
                                 Height="48"
-                                Click="BTN_SetFavourite_Click"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.SetFavouriteCommand, ElementName=Page, Mode=OneTime}"
                                 Style="{StaticResource TransparentButtonStyle}"
-                                Margin="8,0,4,0" 
+                                Margin="8,0,4,0"
                                 ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
@@ -326,7 +327,7 @@
                             </Button>
                         </StackPanel>
 
-                        <Button 
+                        <Button
                             x:Uid="AccountCodePageItemMoreBTN"
                             Grid.Column="4" 
                             Margin="8,0,0,0" 

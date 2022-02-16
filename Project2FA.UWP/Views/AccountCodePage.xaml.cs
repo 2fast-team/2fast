@@ -12,6 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Prism.Services.Dialogs;
+using Microsoft.Toolkit.Uwp.UI;
 
 namespace Project2FA.UWP.Views
 {
@@ -35,27 +36,53 @@ namespace Project2FA.UWP.Views
         /// Copy the 2fa code to clipboard and create a user dialog
         /// </summary>
         /// <param name="model"></param>
-        private void Copy2FACodeToClipboard(TwoFACodeModel model)
+        private bool Copy2FACodeToClipboard(TwoFACodeModel model)
         {
-            DataPackage dataPackage = new DataPackage
+            try
             {
-                RequestedOperation = DataPackageOperation.Copy
-            };
-            dataPackage.SetText(model.TwoFACode);
-            Clipboard.SetContent(dataPackage);
+                DataPackage dataPackage = new DataPackage
+                {
+                    RequestedOperation = DataPackageOperation.Copy
+                };
+                dataPackage.SetText(model.TwoFACode);
+                Clipboard.SetContent(dataPackage);
+                return true;
+            }
+            catch (System.Exception)
+            {
+                //TODO create dialog to inform that another task have the Clipboard in access
+                return false;
+            }
+
         }
 
         private void CreateTeachingTip(FrameworkElement element)
         {
-            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            var control = MainGrid.FindDescendant("CopyTeachingTip");
+            if (control != null)
             {
-                Target = element,
-                Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
-                AutoCloseInterval = 1000,
-                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
-                IsOpen = true,
-            };
-            MainGrid.Children.Add(teachingTip);
+                var tooltip = (control as AutoCloseTeachingTip);
+                if (tooltip.IsOpen)
+                {
+                    tooltip.IsOpen = false;
+                }
+
+                tooltip.IsOpen = true;
+                tooltip.Target = element;
+            }
+            else
+            {
+                AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+                {
+                    Target = element,
+                    Name = "CopyTeachingTip",
+                    Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
+                    AutoCloseInterval = 1000,
+                    BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                    IsOpen = true,
+                };
+                MainGrid.Children.Add(teachingTip);
+            }
         }
 
         /// <summary>
@@ -67,8 +94,10 @@ namespace Project2FA.UWP.Views
         {
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
             {
-                CreateTeachingTip(sender as FrameworkElement);
-                Copy2FACodeToClipboard(model);
+                if(Copy2FACodeToClipboard(model))
+                {
+                    CreateTeachingTip(sender as FrameworkElement);
+                }
             }
         }
 
@@ -84,8 +113,10 @@ namespace Project2FA.UWP.Views
             {
                 if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
                 {
-                    CreateTeachingTip(sender as FrameworkElement);
-                    Copy2FACodeToClipboard(model);
+                    if(Copy2FACodeToClipboard(model))
+                    {
+                        CreateTeachingTip(sender as FrameworkElement);
+                    }
                 }
             }
         }
@@ -137,15 +168,6 @@ namespace Project2FA.UWP.Views
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             return !await dialogService.IsDialogRunning();
-        }
-
-        private async void BTN_SetFavourite_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
-            {
-                model.IsFavourite = !model.IsFavourite;
-                await ViewModel.TwoFADataService.WriteLocalDatafile();
-            }
         }
     }
 }

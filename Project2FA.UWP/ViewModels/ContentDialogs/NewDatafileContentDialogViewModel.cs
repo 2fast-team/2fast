@@ -43,7 +43,7 @@ namespace Project2FA.UWP.ViewModels
 
             ChangePathCommand = new AsyncRelayCommand( async() =>
             {
-                SetLocalPath(true); //change path is true
+                await SetLocalPath(true); //change path is true
             });
 
 

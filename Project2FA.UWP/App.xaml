@@ -17,8 +17,9 @@
             <Converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
             <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
             <Converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
-            <Converters:TrueWhenFalseConverter x:Key="TrueWhenFalseConverter"/>
+            <Converters:VisibleWhenFalseConverter x:Key="VisibleWhenFalseConverter"/>
             <Converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>
+            <Converters:DoubleToInt32ToStringConverter x:Key="DoubleToInt32ToStringConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

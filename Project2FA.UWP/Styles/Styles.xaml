@@ -143,9 +143,7 @@
         <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
     </Style>
 
-    <Style TargetType="ContentDialog" BasedOn="{StaticResource MyContentDialogStyle}" >
-
-    </Style>
+    <Style TargetType="ContentDialog" BasedOn="{StaticResource MyContentDialogStyle}" />
 
     <Style x:Key="MyContentDialogStyle" TargetType="ContentDialog" BasedOn="{StaticResource DefaultContentDialogStyle}" >
         <Setter Property="SecondaryButtonStyle" Value="{ThemeResource ButtonRevealStyle}" />

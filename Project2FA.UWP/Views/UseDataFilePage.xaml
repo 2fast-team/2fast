@@ -59,7 +59,6 @@
                         </Button>
                         <Button 
                             x:Name="BTN_WebDAV"
-                            IsEnabled="False"
                             Style="{StaticResource AccentButtonStyle}"
                             Margin="0,10,0,10"
                             MinWidth="200" 
@@ -288,29 +287,52 @@
             </PivotItem>
         </Pivot>
         <msct:Loading 
-                        IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
-                        Background="{ThemeResource TranslucentBackgroundHighBrush}">
+            IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
+            Background="{ThemeResource TranslucentBackgroundHighBrush}">
+            <StackPanel>
+                <muxc:AnimatedVisualPlayer 
+                    MaxHeight="120"
+                    PlaybackRate="0.5"
+                    AutoPlay="True">
+                    <lottie:LottieVisualSource  
+                        UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
+                </muxc:AnimatedVisualPlayer>
+                <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
+                <Button 
+                    x:Uid="BTNTryAgain" 
+                    Margin="0,10,0,0" 
+                    Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
+                    HorizontalAlignment="Center"/>
+            </StackPanel>
+        </msct:Loading>
+
+        <msct:Loading 
+            IsLoading="{x:Bind ViewModel.WebDAVLoginError,Mode=OneWay}" 
+            Background="{ThemeResource TranslucentBackgroundHighBrush}">
             <StackPanel>
                 <muxc:AnimatedVisualPlayer 
                                 MaxHeight="120"
-                                x:Name="LottiePlayer" 
                                 PlaybackRate="0.5"
                                 AutoPlay="True">
                     <lottie:LottieVisualSource  
                                     UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
                 </muxc:AnimatedVisualPlayer>
-                <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
-                <Button x:Uid="BTNTryAgain" Margin="0,10,0,0" Command="{x:Bind ViewModel.ConfirmErrorCommand}" HorizontalAlignment="Center"/>
+                <TextBlock x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
+                <Button 
+                    x:Uid="BTNTryAgain" 
+                    Margin="0,10,0,0" 
+                    Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
+                    HorizontalAlignment="Center"/>
             </StackPanel>
         </msct:Loading>
         <mtuc:Loading 
             IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
             <muxc:ProgressRing 
-                            IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
-                            Foreground="{ThemeResource SystemAccentColor}" 
-                            Width="80" 
-                            Height="80"/>
+                IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
+                Foreground="{ThemeResource SystemAccentColor}" 
+                Width="80" 
+                Height="80"/>
         </mtuc:Loading>
     </Grid>
 </Page>

@@ -51,9 +51,8 @@ namespace Project2FA.UWP.Services
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
         private bool _emptyAccountCollectionTipIsOpen;
         private TwoFACodeModel _tempDeletedTFAModel;
-        const long unixEpochTicks = 621355968000000000L;
-
-        const long ticksToSeconds = 10000000L;
+        private const long unixEpochTicks = 621355968000000000L;
+        private const long ticksToSeconds = 10000000L;
 
         /// <summary>
         /// Gets public singleton property.
@@ -75,8 +74,12 @@ namespace Project2FA.UWP.Services
             //ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
             ACVCollection.SortDescriptions.Add(new SortDescription("IsFavouriteText", SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
-            CheckTime();
-            CheckLocalDatafile();
+            CheckTime().ConfigureAwait(false);
+        }
+
+        public async Task StartService()
+        {
+            await CheckLocalDatafile();
         }
 
         /// <summary>
@@ -286,8 +289,9 @@ namespace Project2FA.UWP.Services
                 var (success, outdated) = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
                 if (success && outdated)
                 {
-                    // TODO Add info message to inform that the file was updated
+                    Collection.Clear();
                     await CheckLocalDatafile();
+                    // TODO Add info message to inform that the file was updated
                 }
                 else if (!success)
                 {
@@ -327,15 +331,6 @@ namespace Project2FA.UWP.Services
             {
                 return (false, false);
             }
-            //StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            //StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
-            //WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-            //ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
-            //if (webDAVFile.LastModified > (await storageFile.GetBasicPropertiesAsync()).DateModified)
-            //{
-            //    await DownloadWebDAVFile(storageFolder, dbDatafile);
-            //}
-
         }
 
         /// <summary>
@@ -474,6 +469,15 @@ namespace Project2FA.UWP.Services
 
 
             //TODO Bug: if the new file is created and the webdav upload started, the app downloads the file at the next time (newer create date)
+
+
+            await FileService.WriteStringAsync(
+                    datafileDB.Name,
+                    NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
+                    iv, 
+                    fileModel),
+                    folder);
+
             if (datafileDB.IsWebDAV)
             {
                 WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
@@ -493,16 +497,7 @@ namespace Project2FA.UWP.Services
                     // TODO webdav file was moved
                 }
             }
-
-            await FileService.WriteStringAsync(
-                    datafileDB.Name,
-                    NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
-                    iv, 
-                    fileModel),
-                    folder);
             CollectionAccessSemaphore.Release();
-
-
         }
 
         public TwoFACodeModel TempDeletedTFAModel
@@ -549,6 +544,7 @@ namespace Project2FA.UWP.Services
                     if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
                     {
                         Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
+                        //calc the remaining time for the TOTP code with the time correction
                         remainingTime = Collection[i].Period - 
                             (int)((DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds).Ticks - unixEpochTicks) 
                             / ticksToSeconds % Collection[i].Period);
@@ -556,9 +552,11 @@ namespace Project2FA.UWP.Services
                     else
                     {
                         Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
-                        remainingTime = Collection[i].Period - (int)((DateTime.UtcNow.Ticks - unixEpochTicks) / ticksToSeconds % Collection[i].Period);
+                        remainingTime = totp.RemainingSeconds();
                     }
-                    Collection[i].Seconds = Convert.ToInt32(remainingTime);
+                    Logger.Log("TOTP remaining Time: " + remainingTime.ToString(), Category.Debug, Priority.None);
+                    Collection[i].Seconds = remainingTime;
+                    
                 }
             }
             catch (Exception ex)

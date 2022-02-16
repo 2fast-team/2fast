@@ -24,6 +24,7 @@ using Windows.Security.Credentials;
 using Project2FA.Core.Services.NTP;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
+using Project2FA.Core;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -38,10 +39,10 @@ namespace Project2FA.UWP.ViewModels
         public ICommand RateAppCommand { get; }
 
         private int _selectedItem;
-        public SettingPageViewModel(IDialogService dialogService, IMarketplaceService marketplaceService)
+        public SettingPageViewModel(IDialogService dialogService, IMarketplaceService marketplaceService, ISecretService secretService)
         {
             SettingsPartViewModel = new SettingsPartViewModel(dialogService);
-            DatafilePartViewModel = new DatafilePartViewModel(dialogService);
+            DatafilePartViewModel = new DatafilePartViewModel(dialogService, secretService);
             AboutPartViewModel  = new AboutPartViewModel(marketplaceService);
             RateAppCommand = new DelegateCommand(() =>
             {
@@ -117,7 +118,6 @@ namespace Project2FA.UWP.ViewModels
             dialog.Title = Resources.SettingsFactoryResetDialogTitle;
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.SettingsFactoryResetMessage;
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.No;
             dialog.SecondaryButtonText = Resources.Yes;
@@ -408,6 +408,7 @@ namespace Project2FA.UWP.ViewModels
         public ICommand ChangeDatafilePasswordCommand { get; }
         //public ICommand EditDatafileCommand { get; }
         public ICommand DeleteDatafileCommand { get; }
+        ISecretService SecretService { get; }
 
         private string _datafilePath;
         private string _datafileName;
@@ -416,9 +417,10 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Datafile part view model constructor
         /// </summary>
-        public DatafilePartViewModel(IDialogService dialogService)
+        public DatafilePartViewModel(IDialogService dialogService, ISecretService secretService)
         {
             _dialogService = dialogService;
+            SecretService = secretService;
             InitializeDataFileAttributes();
 
             // open content dialog to change the password
@@ -452,7 +454,7 @@ namespace Project2FA.UWP.ViewModels
             var dbDatafile = await App.Repository.Datafile.GetAsync();
 
             DatafileName = dbDatafile.Name;
-            DatafilePath = dbDatafile.Path;
+            DatafilePath = dbDatafile.IsWebDAV? SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + dbDatafile.Path : dbDatafile.Path;
         }
         
         /// <summary>
@@ -515,10 +517,10 @@ namespace Project2FA.UWP.ViewModels
                 return ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString() + "." + ver.Revision.ToString();
             }
         }
-        public void GiveFeedback()
+        public async void GiveFeedback()
         {
             var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-            launcher.LaunchAsync();
+            await launcher.LaunchAsync();
         }
 
         public Task RateApp()

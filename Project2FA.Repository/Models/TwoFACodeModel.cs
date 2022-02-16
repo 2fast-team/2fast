@@ -63,10 +63,10 @@ namespace Project2FA.Repository.Models
         //no need for SetProperty, because no UI binding
         public int TotpSize { get; set; } = 6;
 
-        private int _seconds;
+        private double _seconds;
 
         [JsonIgnore]
-        public int Seconds
+        public double Seconds
         {
             get => _seconds;
             set => SetProperty(ref _seconds, value);

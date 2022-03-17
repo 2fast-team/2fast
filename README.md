@@ -1,7 +1,7 @@
 # 2fast – Two Factor Authenticator Supporting TOTP
 
 <p align="center">
-	<img src="https://github.com/2fast-team/2fast/blob/master/Project2FA.UWP/Assets/StoreLogo.scale-400.png" width="100">
+	<img src="https://github.com/2fast-team/2fast/blob/master/Project2FA/Project2FA.UWP/Assets/StoreLogo.scale-400.png" width="100">
 </p>
 <p align="center">
 	<a href="https://github.com/2fast-team/2fast/issues" target="_blank" alt="Issues">

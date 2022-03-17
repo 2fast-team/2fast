@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Regions;
-using Prism.Services.Dialogs;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Repository.Models;
 using Project2FA.Uno.Core.File;
@@ -18,6 +17,8 @@ using Windows.Storage.Streams;
 using System.IO;
 using Project2FA.Uno.Core.Network;
 using Project2FA.Uno.Core.Secrets;
+using Prism.Services.Dialogs;
+using Prism.Ioc;
 #if HAS_WINUI
 using Microsoft.UI.Xaml.Controls;
 #else
@@ -49,11 +50,12 @@ namespace Project2FA.ViewModels
         /// Constructor to start the datafile selector
         /// </summary>
         public UseDataFilePageViewModel(
+            IContainerProvider containerProvider,
             IFileService fileService,
             INewtonsoftJSONService newtonsoftJSONService,
             INetworkService networkService,
             IRegionManager navigationService,
-            IDialogService dialogService)
+            IDialogService dialogService):base(containerProvider)
         {
             NaviationService = navigationService;
             DialogService = dialogService;

@@ -15,7 +15,8 @@
 
     <media:AttachedCardShadow 
         x:Key="SignShadow" 
-        BlurRadius="22"
+        BlurRadius="32"
+        Offset="4"
         Color="{ThemeResource SystemAccentColor}"
         CornerRadius="0"/>
 
@@ -28,6 +29,7 @@
 
     <Windows10versionOlder1903:Style x:Key="PersonPictureWithAccentShadow" TargetType="muxc:PersonPicture" BasedOn="{StaticResource DefaultPersonPictureStyle}">
         <Setter Property="BorderBrush" Value="{ThemeResource SystemAccentColor}"/>
+        <Setter Property="Foreground" Value="White"/>
     </Windows10versionOlder1903:Style>
 
     <Style x:Key="DefaultPersonPictureStyle" TargetType="muxc:PersonPicture">

@@ -48,7 +48,7 @@ namespace Project2FA.Views
             set => SetSelectedItem(value);
         }
 
-        private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
+        private Task SetSelectedItem(object selectedItem, bool withNavigation = true)
         {
             if (selectedItem == null)
             {
@@ -108,6 +108,7 @@ namespace Project2FA.Views
                     //}
                 }
             }
+            return Task.CompletedTask;
         }
 
         private bool TryFindItem(Type type, object parameter, out object item)

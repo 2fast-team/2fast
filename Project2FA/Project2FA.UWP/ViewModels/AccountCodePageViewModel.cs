@@ -118,8 +118,10 @@ namespace Project2FA.UWP.ViewModels
             {
                 await DataService.Instance.StartService();
             }
+            
             TOTPEventStopwatch.Start(); // stopwatch for the calculation of the remaining time for a valid totp code
             _dispatcherTOTPTimer.Start(); // the event for the set of seconds and calculating the totp code
+            await DataService.Instance.ResetCollection();
         }
 
 
@@ -244,11 +246,19 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public async Task ReloadDatafileAndUpdateCollection()
         {
-            TwoFADataService.Collection.Clear();
-            TOTPEventStopwatch.Stop();
-            TOTPEventStopwatch.Reset();
-            await TwoFADataService.ReloadDatafile();
-            TOTPEventStopwatch.Start();
+            if (TwoFADataService.CollectionAccessSemaphore.CurrentCount > 0)
+            {
+                TwoFADataService.Collection.Clear();
+                TOTPEventStopwatch.Stop();
+                TOTPEventStopwatch.Reset();
+                await TwoFADataService.ReloadDatafile();
+                TOTPEventStopwatch.Start();
+            }
+            else
+            {
+                // TODO add info for the user, that the task is currently run
+            }
+
         }
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)

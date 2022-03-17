@@ -8,6 +8,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.UWP.Strings"
     mc:Ignorable="d"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     localControls:TitleBar.ButtonBackgroundColor="Transparent"
     localControls:TitleBar.ButtonInactiveBackgroundColor ="Transparent"
     localControls:TitleBar.ButtonForegroundColor="{ThemeResource SystemBaseHighColor}"
@@ -81,6 +82,20 @@
                         <FontIcon Glyph="&#xE9CE;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
+                <!--<muxc:NavigationViewItem 
+                    IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                    Tag="SettingPage?PivotItem=0">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:AnimatedIcon x:Name='AnimatedIcon'>
+                            <muxc:AnimatedIcon.Source>
+                                <animatedvisuals:AnimatedSettingsVisualSource/>
+                            </muxc:AnimatedIcon.Source>
+                            <muxc:AnimatedIcon.FallbackIconSource>
+                                <muxc:FontIconSource FontFamily="Segoe MDL2 Assets" Glyph="&#xE713;"/>
+                            </muxc:AnimatedIcon.FallbackIconSource>
+                        </muxc:AnimatedIcon>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>-->
             </muxc:NavigationView.FooterMenuItems>
         </muxc:NavigationView>
         <VisualStateManager.VisualStateGroups>

@@ -10,8 +10,10 @@ using Prism.Ioc;
 using Project2FA.Core.Services;
 using Project2FA.Repository.Models;
 using System.ComponentModel.DataAnnotations;
-using Project2FA.Services;
+using Project2FA.Uno.Core.Secrets;
 using Project2FA.Core;
+using Project2FA.Uno.Core.File;
+using Project2FA.Uno.Core.Network;
 
 namespace Project2FA.ViewModels
 {
@@ -29,6 +31,7 @@ namespace Project2FA.ViewModels
         private StorageFolder _localStorageFolder;
         private string _password, _passwordRepeat;
         internal WebDAVFileOrFolderModel _choosenOneWebDAVFile;
+        private readonly IContainerProvider _containerProvider;
 
         public ICommand PrimaryButtonCommand { get; set; }
         public ICommand ChangePathCommand { get; set; }
@@ -45,10 +48,11 @@ namespace Project2FA.ViewModels
 
         private IFileService _fileService { get; }
 
-        public DatafileViewModelBase()
+        public DatafileViewModelBase(IContainerProvider containerProvider)
         {
-            SecretService = App.Current.Container.Resolve<ISecretService>();
-            _fileService = App.Current.Container.Resolve<IFileService>();
+            _containerProvider = containerProvider;
+            SecretService = _containerProvider.Resolve<ISecretService>();
+            _fileService = _containerProvider.Resolve<IFileService>();
             //ErrorsChanged += Model_ErrorsChanged;
         }
 
@@ -136,7 +140,7 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task<(bool success, Status result)> CheckServerStatus()
         {
-            INetworkService networkService = App.Current.Container.Resolve<INetworkService>();
+            INetworkService networkService = _containerProvider.Resolve<INetworkService>();
 
             if (await networkService.GetIsInternetAvailableAsync())
             {
@@ -293,15 +297,15 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _localStorageFolder, value);
         }
 
-        public bool UseExtendedHash
-        {
-            get => SettingsService.Instance.UseExtendedHash;
-            set
-            {
-                SettingsService.Instance.UseExtendedHash = value;
-                RaisePropertyChanged(nameof(UseExtendedHash));
-            }
-        }
+        //public bool UseExtendedHash
+        //{
+        //    get => SettingsService.Instance.UseExtendedHash;
+        //    set
+        //    {
+        //        SettingsService.Instance.UseExtendedHash = value;
+        //        RaisePropertyChanged(nameof(UseExtendedHash));
+        //    }
+        //}
 
         public string DateFileName
         {

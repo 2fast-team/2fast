@@ -49,6 +49,7 @@ namespace Project2FA.UWP.ViewModels
                 LoadProperties(result);
             }
             Title = createDatafileCase ? Strings.Resources.CreateDatafile : Strings.Resources.LoadDatafile;
+            //TODO translation
             PrimaryButtonText = createDatafileCase ? "#create" : "#choose";
             StartLoading(createDatafileCase);
         }

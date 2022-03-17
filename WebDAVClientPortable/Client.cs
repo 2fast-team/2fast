@@ -17,6 +17,9 @@ using WebDAVClient.Extensions;
 using DecaTec.WebDav.Tools;
 using System.Net.Http;
 using System.Net;
+using DecaTec.WebDav.Headers;
+using System.Globalization;
+using System.Net.Http.Headers;
 
 //fork from https://github.com/nextcloud/windows-universal
 
@@ -261,6 +264,7 @@ namespace WebDAVClient
             Uri baseUri = new Uri(_url);
             baseUri = new Uri(baseUri, baseUri.AbsolutePath + (baseUri.AbsolutePath.EndsWith("/") ? "" : "/") + Davpath);
 
+            var temp = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
             IList<WebDavSessionItem> result = await _dav.ListAsync(GetDavUri(path), _webDAVPropFind);
 
             if (!result.Any())
@@ -449,12 +453,80 @@ namespace WebDAVClient
         /// <param name="stream"></param>
         /// <param name="contentType">File content type.</param>
         /// <param name="cancellationToken"></param>
+        /// <returns><c>true</c>, if upload successful, <c>false</c> otherwise.</returns>
+        public async Task<bool> UploadAsync(
+            string path,
+            Stream stream,
+            string contentType,
+            CancellationToken cancellationToken,
+            List<(string Key, string Value)> headerKeyValuePair)
+        {
+            var streamContent = new StreamContent(stream); //stream.Length
+
+            if (!string.IsNullOrEmpty(contentType))
+                streamContent.Headers.Add(HttpHeaderNames.ContentType, contentType);
+
+            streamContent.Headers.Add(HttpHeaderNames.ContentLength, stream.Length.ToString(CultureInfo.InvariantCulture));
+
+            for (int i = 0; i < headerKeyValuePair.Count; i++)
+            {
+                streamContent.Headers.Add(headerKeyValuePair[i].Key, headerKeyValuePair[i].Value);
+            }
+
+            var requestMethod = new HttpRequestMessage(HttpMethod.Put, GetDavUri(path, true))
+            {
+                Content = streamContent
+            };
+
+            requestMethod.Version = HttpVersion;
+            var result = await _client.SendAsync(requestMethod, cancellationToken);
+            return result.IsSuccessStatusCode;
+        }
+
+        /// <summary>
+        /// Upload the specified file to the specified path.
+        /// </summary>
+        /// <param name="path">remote Path.</param>
+        /// <param name="stream"></param>
+        /// <param name="contentType">File content type.</param>
+        /// <param name="cancellationToken"></param>
         /// <param name="progress"></param>
         /// <returns><c>true</c>, if upload successful, <c>false</c> otherwise.</returns>
-        public Task<bool> UploadAsync(string path, Stream stream, string contentType, IProgress<WebDavProgress> progress, CancellationToken cancellationToken)
-        {
-            return _dav.UploadFileWithProgressAsync(GetDavUri(path, true), stream, contentType, progress, cancellationToken);
-        }
+        //public async Task<bool> UploadAsync(
+        //    string path, 
+        //    Stream stream, 
+        //    string contentType,
+        //    CancellationToken cancellationToken, 
+        //    IProgress<WebDavProgress> progress,
+        //    List<(string Key, string Value)> headerKeyValuePair)
+        //{
+        //    var streamContent = new WebDavProgressStreamContent(stream, stream.Length, cancellationToken, progress);
+
+        //    if (!string.IsNullOrEmpty(contentType))
+        //        streamContent.Headers.Add(HttpHeaderNames.ContentType, contentType);
+
+        //    streamContent.Headers.Add(HttpHeaderNames.ContentLength, stream.Length.ToString(CultureInfo.InvariantCulture));
+
+        //    for (int i = 0; i < headerKeyValuePair.Count; i++)
+        //    {
+        //        streamContent.Headers.Add(headerKeyValuePair[i].Key, headerKeyValuePair[i].Value);
+        //    }
+
+        //    //if (lockToken != null)
+        //    //    streamContent.Headers.Add(WebDavRequestHeader.If, lockToken.IfHeaderNoTagListFormat.ToString());
+
+        //    var requestMethod = new HttpRequestMessage(HttpMethod.Put, GetDavUri(path, true))
+        //    {
+        //        Content = streamContent
+        //    };
+
+        //    requestMethod.Version = HttpVersion;
+        //    var result = await _client.SendAsync(requestMethod, cancellationToken);
+        //    return result.IsSuccessStatusCode;
+        //    //return _client.SendAsync(requestMethod, cancellationToken);
+        //    //return _dav.UploadFileWithProgressAsync(GetDavUri(path, true), stream, contentType, progress, cancellationToken);
+        //    //return _dav.UploadFileAsync(GetDavUri(path, true), stream, contentType, progress, cancellationToken, headerKeyValuePair);
+        //}
 
         /// <summary>
         /// Checks if the specified remote path exists.
@@ -912,6 +984,16 @@ namespace WebDAVClient
                 return true;
             }
             throw new OcsResponseError(responseObj.Meta.Message, responseObj.Meta.StatusCode.ToString());
+        }
+
+        /// <summary>
+        /// Unlocks a file or directory at the URL specified. 
+        /// </summary>
+        /// <param name="url">The URL of the file or directory to unlock.</param>
+        /// <returns>The <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task<bool> UnlockAsync(string url)
+        {
+            return _dav.UnlockAsync(GetDavUri(url, true));
         }
 
         /// <summary>

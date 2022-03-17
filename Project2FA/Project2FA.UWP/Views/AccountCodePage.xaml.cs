@@ -58,31 +58,50 @@ namespace Project2FA.UWP.Views
 
         private void CreateTeachingTip(FrameworkElement element)
         {
-            var control = MainGrid.FindDescendant("CopyTeachingTip");
-            if (control != null)
+            //var control = MainGrid.FindDescendant("CopyTeachingTip");
+            //if (control != null)
+            //{
+            //    var tooltip = (control as AutoCloseTeachingTip);
+            //    if (tooltip.IsOpen)
+            //    {
+            //        AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            //        {
+            //            Target = element,
+            //            Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
+            //            AutoCloseInterval = 1000,
+            //            BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+            //            IsOpen = true,
+            //        };
+            //        MainGrid.Children.Add(teachingTip);
+            //    }
+            //    else
+            //    {
+            //        tooltip.IsOpen = true;
+            //        tooltip.Target = element;
+            //    }
+            //}
+            //else
+            //{
+            //    AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            //    {
+            //        Target = element,
+            //        Name = "CopyTeachingTip",
+            //        Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
+            //        AutoCloseInterval = 1000,
+            //        BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+            //        IsOpen = true,
+            //    };
+            //    MainGrid.Children.Add(teachingTip);
+            //}
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
             {
-                var tooltip = (control as AutoCloseTeachingTip);
-                if (tooltip.IsOpen)
-                {
-                    tooltip.IsOpen = false;
-                }
-
-                tooltip.IsOpen = true;
-                tooltip.Target = element;
-            }
-            else
-            {
-                AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
-                {
-                    Target = element,
-                    Name = "CopyTeachingTip",
-                    Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
-                    AutoCloseInterval = 1000,
-                    BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
-                    IsOpen = true,
-                };
-                MainGrid.Children.Add(teachingTip);
-            }
+                Target = element,
+                Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
+                AutoCloseInterval = 1000,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            MainGrid.Children.Add(teachingTip);
         }
 
         /// <summary>

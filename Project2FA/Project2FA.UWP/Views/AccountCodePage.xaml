@@ -190,13 +190,13 @@
                             <!--<controls:DropShadowPanel 
                             Width="2.5"
                             Color="{StaticResource SystemAccentColor}"
-                            BlurRadius="30"
+                            BlurRadius="32"
                             ShadowOpacity="1">
                                 <Border Width="2.5" Background="{StaticResource SystemAccentColor}" />
                             </controls:DropShadowPanel>-->
                             <Border 
                                 Width="2.5" 
-                                Windows10version1903:Shadow="{StaticResource SignShadow}"
+                                ui:Effects.Shadow="{StaticResource SignShadow}"
                                 Background="{StaticResource SystemAccentColor}" />
                         </Grid>
 

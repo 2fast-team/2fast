@@ -9,6 +9,7 @@ using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
 using Project2FA.Core.Services.Parser;
 using Project2FA.Repository.Database;
+using Project2FA.UWP.Helpers;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.ViewModels;
 using Project2FA.UWP.Views;
@@ -109,7 +110,8 @@ namespace Project2FA.UWP
         public override async Task OnStartAsync(IStartArgs args)
         {
             if (Window.Current.Content == null)
-            {  
+            {
+                ThemeHelper.Initialize();
                 // Hide default title bar
                 CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
                 if (!coreTitleBar.ExtendViewIntoTitleBar)

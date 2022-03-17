@@ -161,7 +161,7 @@ namespace Project2FA
                 // builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug );
             });
 
-            global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
+            //global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
         }
 
         //protected override void ConfigureViewModelLocator()
@@ -247,7 +247,7 @@ namespace Project2FA
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
+           containerRegistry.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
             containerRegistry.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();

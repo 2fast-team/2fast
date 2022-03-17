@@ -28,7 +28,6 @@
         <!--<Setter Property="Background" Value="Transparent" />-->
         <Setter Property="BorderThickness" Value="0,1,0,0" />
         <Setter Property="BorderBrush" Value="{ThemeResource CardBorderBrush}" />
-        <Setter Property="CornerRadius" Value="0" />
         <Setter Property="Padding" Value="{StaticResource ExpanderSettingMargin}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>

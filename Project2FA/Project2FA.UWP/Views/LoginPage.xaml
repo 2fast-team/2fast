@@ -89,44 +89,31 @@
                 Margin="12,8"/>
         </Grid>
 
-        <mstoolkitControls:DropShadowPanel 
-            x:Name="DropShadow"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch"
-            Color="{ThemeResource SystemChromeMediumColor}"
+        <Grid 
+            x:Name="MainGrid"
             Grid.Column="1"
             Grid.Row="2"
-            ShadowOpacity="0.4">
-            <Grid x:Name="MainGrid">
-                <!--<ui:Effects.Shadow>
-                    <media:AttachedCardShadow BlurRadius="8"
-                                    CornerRadius="32"
-                                    Color="Black"
-                                    Offset="4,4"
-                                    Opacity="1"/>
-                </ui:Effects.Shadow>-->
-                <Border 
+            ui:Effects.Shadow="{StaticResource PageShadow}">
+            <Border 
                     x:Name="DetailFirstShadowPanel" 
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
-                    <Border>
-                        <Border.Background>
-                            <media:BackdropBlurBrush Amount="2" />
-                        </Border.Background>
-                    </Border>
+                <Border>
+                    <Border.Background>
+                        <media:BackdropBlurBrush Amount="2" />
+                    </Border.Background>
                 </Border>
-                <!--CornerRadius="{ThemeResource OverlayCornerRadius}"-->
-                <StackPanel 
+            </Border>
+            <!--CornerRadius="{ThemeResource OverlayCornerRadius}"-->
+            <StackPanel 
                     x:Name="MainStackPanel"
                     MaxWidth="320" 
                     MinHeight="500" 
 >
-                    <mstoolkitControls:ImageEx 
+                <mstoolkitControls:ImageEx 
                         Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
                         MaxHeight="150" 
                         Margin="0,30,0,10"/>
-                    <PasswordBox 
+                <PasswordBox 
                         x:Uid="LoginPagePassword"    
                         Header="~LoginPagePassword.Header" 
                         PlaceholderText="~LoginPagePassword.PlaceholderText" 
@@ -134,11 +121,11 @@
                         Margin="0,5,0,10" 
                         KeyDown="LoginKeydownCheckEnterSubmit" 
                         InputScope="Password" />
-                    <StackPanel 
+                <StackPanel 
                         x:Name="SP_LoginBTNs"
                         Orientation="Horizontal" 
                         HorizontalAlignment="Center">
-                        <Button 
+                    <Button 
                             x:Uid="LoginPageLoginButton"
                             Content="~LoginPageLoginButton.Content" 
                             Command="{x:Bind ViewModel.LoginCommand}" 
@@ -146,7 +133,7 @@
                             MinWidth="100"
                             Margin="0,10,10,0" 
                             HorizontalAlignment="Center"/>
-                        <Button 
+                    <Button 
                             x:Uid="LoginPageLoginWindowsHelloButton" 
                             Content="~LoginPageLoginWindowsHelloButton.Content" 
                             Margin="0,10,0,0"
@@ -155,10 +142,9 @@
                             Command="{x:Bind ViewModel.WindowsHelloLoginCommand}" 
                             MinWidth="200" 
                             HorizontalAlignment="Center" />
-                    </StackPanel>
                 </StackPanel>
-            </Grid>
-        </mstoolkitControls:DropShadowPanel>
+            </StackPanel>
+        </Grid>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
@@ -169,7 +155,7 @@
                     <VisualState.Setters>
                         <Setter Target="MainGrid.CornerRadius" Value="0"/>
                         <Setter Target="MainStackPanel.CornerRadius" Value="0"/>
-                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
+                        <!--<Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />-->
                         <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="0" />
                         <Setter Target="RootGrid.ColumnDefinitions[2].Width" Value="0" />
                         <Setter Target="RootGrid.RowDefinitions[1].Height" Value="0" />
@@ -186,7 +172,7 @@
                     <VisualState.Setters>
                         <Setter Target="MainGrid.CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
                         <Setter Target="MainStackPanel.CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
-                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
+                        <!--<Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />-->
                         <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="*" />
                         <Setter Target="RootGrid.ColumnDefinitions[1].MinWidth" Value="852" />
                         <Setter Target="MainGrid.MinWidth" Value="852"/>

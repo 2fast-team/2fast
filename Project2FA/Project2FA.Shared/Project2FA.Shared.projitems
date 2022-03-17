@@ -18,6 +18,30 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\MvvmHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Abstractions\IDialogInitialize.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Abstractions\IDialogInitializeAsync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Abstractions\IDialogParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Abstractions\IDialogService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Default\DialogManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Default\DialogParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Default\DialogService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Dialogs\Extensions\DialogExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\File\Abstractions\IFileService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\File\Abstractions\StorageStrategies.enum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\File\Default\FileService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Network\Abstractions\AvailabilityChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Network\Abstractions\ConnectionTypes.enum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Network\Abstractions\INetworkService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Network\Default\NetworkAvailableHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Network\Default\NetworkService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Network\Messages\NetworkAvailabilityChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Secrets\Abstractions\ISecretService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Secrets\Abstractions\SecretServiceBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Secrets\Default\SecretHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Secrets\Default\SecretService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\Abstractions\ISerializationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\Default\NullSerializationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

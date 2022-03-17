@@ -32,6 +32,7 @@ using Project2FA.UWP.Services.WebDAV;
 using Windows.Storage.Streams;
 using WebDAVClient.Types;
 using Prism.Services.Dialogs;
+using System.Collections.Generic;
 
 namespace Project2FA.UWP.Services
 {
@@ -177,9 +178,7 @@ namespace Project2FA.UWP.Services
         /// </summary>
         public async Task ReloadDatafile()
         {
-            await CollectionAccessSemaphore.WaitAsync();
             await CheckLocalDatafile();
-            CollectionAccessSemaphore.Release();
         }
 
         /// <summary>
@@ -217,6 +216,7 @@ namespace Project2FA.UWP.Services
                         }
                         if (deserializeCollection != null)
                         {
+                            await CollectionAccessSemaphore.WaitAsync();
                             Collection.AddRange(deserializeCollection);
                             if (Collection.Count == 0)
                             {
@@ -233,6 +233,7 @@ namespace Project2FA.UWP.Services
                                     EmptyAccountCollectionTipIsOpen = false;
                                 }
                             }
+                            CollectionAccessSemaphore.Release();
                         }
                     }
                     catch (Exception)
@@ -246,7 +247,7 @@ namespace Project2FA.UWP.Services
                 {
                     if (dbDatafile.IsWebDAV)
                     {
-                        var webDAVTask = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
+                        //var webDAVTask = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
                         await CheckLocalDatafile();
                     }
                     else
@@ -283,14 +284,14 @@ namespace Project2FA.UWP.Services
                     await ErrorDialogs.ShowUnexpectedError(exc);
                 }
             }
-            //check if a newer version is 
+            //check if a newer version is available or the current file must be uploaded
             if (dbDatafile.IsWebDAV)
             {
-                var (success, outdated) = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
+                var (success, outdated) = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
                 if (success && outdated)
                 {
                     Collection.Clear();
-                    await CheckLocalDatafile();
+                    await CheckLocalDatafile(); //reload the data file
                     // TODO Add info message to inform that the file was updated
                 }
                 else if (!success)
@@ -299,16 +300,15 @@ namespace Project2FA.UWP.Services
                 }
 
             }
-            // writing the data file is activated again
+            // writing status for the data file is activated again
             _initialization = false;
         }
 
         /// <summary>
         /// Check if the datafile is outdated
-        /// Yes => download the new datefile
         /// </summary>
         /// <param name="dbDatafile"></param>
-        private async Task<(bool success, bool outdated)> CheckIfWebDAVDatafileIsOutdated(DBDatafileModel dbDatafile)
+        private async Task<(bool successful, bool outdated)> CheckIfWebDAVDatafileIsEqual(DBDatafileModel dbDatafile)
         {
             try
             {
@@ -316,10 +316,22 @@ namespace Project2FA.UWP.Services
                 StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
                 WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
                 ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
-                if (webDAVFile.LastModified > (await storageFile.GetBasicPropertiesAsync()).DateModified)
+                var fileDateModified = (await storageFile.GetBasicPropertiesAsync()).DateModified.UtcDateTime;
+                DateTime trimmedFileLastModified = new DateTime(fileDateModified.Year, fileDateModified.Month, 
+                    fileDateModified.Day, fileDateModified.TimeOfDay.Hours,
+                    fileDateModified.TimeOfDay.Minutes, fileDateModified.TimeOfDay.Seconds);
+                var webDAVDateModified = webDAVFile.LastModified.ToUniversalTime();
+                if (webDAVDateModified > trimmedFileLastModified)
                 {
                     await DownloadWebDAVFile(storageFolder, dbDatafile);
                     return (true, true);
+                }
+                else if (webDAVDateModified < trimmedFileLastModified)
+                {
+                    DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
+                    // TODO check result
+                    (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(storageFolder, datafileDB);
+                    return (true, false);
                 }
                 else
                 {
@@ -327,8 +339,9 @@ namespace Project2FA.UWP.Services
                 }
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Log(ex.Message, Category.Exception, Priority.High);
                 return (false, false);
             }
         }
@@ -341,6 +354,7 @@ namespace Project2FA.UWP.Services
         /// <returns></returns>
         private async Task<StorageFile> DownloadWebDAVFile(StorageFolder storageFolder, DBDatafileModel dbDatafile)
         {
+            //todo create date is correct?
             StorageFile localFile;
             localFile = await storageFolder.CreateFileAsync(dbDatafile.Name, CreationCollisionOption.ReplaceExisting);
             IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
@@ -467,10 +481,6 @@ namespace Project2FA.UWP.Services
                 ApplicationData.Current.LocalFolder :
                 await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
 
-
-            //TODO Bug: if the new file is created and the webdav upload started, the app downloads the file at the next time (newer create date)
-
-
             await FileService.WriteStringAsync(
                     datafileDB.Name,
                     NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
@@ -480,24 +490,60 @@ namespace Project2FA.UWP.Services
 
             if (datafileDB.IsWebDAV)
             {
-                WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-                StorageFile file = await folder.GetFileAsync(datafileDB.Name);
-                IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
-                CancellationTokenSource cts = new CancellationTokenSource();
-                if (await client.ExistsAsync(datafileDB.Path + "/" + datafileDB.Name))
+                // TODO check result
+                (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder, datafileDB);
+                if (successful && statusResult)
                 {
-                    var uploaded = await client.UploadAsync(datafileDB.Path + "/" + datafileDB.Name, await file.OpenStreamForReadAsync(), file.ContentType, progress, cts.Token);
-                    if (!uploaded)
-                    {
-                        // TODO webdav upload failed
-                    }
+
                 }
                 else
                 {
-                    // TODO webdav file was moved
+
                 }
             }
             CollectionAccessSemaphore.Release();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="datafileDB"></param>
+        /// <returns></returns>
+        private async Task<(bool successful, bool statusResult)> UploadDatafileWithWebDAV(StorageFolder folder, DBDatafileModel datafileDB)
+        {
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+            StorageFile file = await folder.GetFileAsync(datafileDB.Name);
+            CancellationTokenSource cts = new CancellationTokenSource();
+            //IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
+            if (await client.ExistsAsync(datafileDB.Path + "/" + datafileDB.Name))
+            {
+                //set custom date properties (current file date) to prevent that a newer date with the upload is created
+                string modifiedDate = (await file.GetBasicPropertiesAsync()).DateModified.ToUniversalTime().ToUnixTimeSeconds().ToString();
+                List<(string Key, string Value)> headerPairs = new List<(string Key, string Value)>(); //custom http headers (owncloud and nextcloud)
+                headerPairs.Add(("X-OC-MTime", modifiedDate)); //last modified date
+                headerPairs.Add(("X-OC-CTime", file.DateCreated.ToUniversalTime().ToUnixTimeSeconds().ToString())); //creation date
+                var uploaded = await client.UploadAsync(
+                    datafileDB.Path + "/" + datafileDB.Name,
+                    await file.OpenStreamForReadAsync(),
+                    file.ContentType,
+                    cts.Token,
+                    headerPairs);
+                if (uploaded)
+                {
+                    // TODO webdav file upload failed
+                    return (true, true);
+                }
+                else
+                {
+                    return (false, false);
+                }
+            }
+            else
+            {
+                // TODO webdav file was moved
+                return (false, false);
+            }
         }
 
         public TwoFACodeModel TempDeletedTFAModel

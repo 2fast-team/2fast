@@ -54,7 +54,8 @@
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="PointerOver" />
-                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewButtonBackgroundPointerOver}" />
+                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
+                                        <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPointerOver}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPointerOver}" />
                                         <Setter Target="Icon.(local:AnimatedIcon.State)" Value="PointerOver"/>
@@ -63,7 +64,8 @@
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
                                         <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="Pressed" />
-                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewButtonBackgroundPressed}" />
+                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource ButtonRevealBackgroundPressed}" />
+                                        <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPressed}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPressed}" />
                                         <Setter Target="Icon.(local:AnimatedIcon.State)" Value="Pressed"/>
@@ -264,8 +266,12 @@
                             <Grid x:Name="ButtonHolderGrid" Grid.Row="1">
                                 <Button
                                     x:Name="NavigationViewBackButton"
-                                    Style="{StaticResource NavigationBackButtonNormalStyle}"
+                                    Style="{StaticResource TransparentButtonStyle}"
+                                    FontSize="16"
+                                    FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                    Content="&#xE72B;"
                                     VerticalAlignment="Top"
+                                    MinWidth="{StaticResource PaneToggleButtonWidth}"
                                     Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.BackButtonVisibility}"
                                     IsEnabled="{TemplateBinding IsBackEnabled}">
                                     <ToolTipService.ToolTip>

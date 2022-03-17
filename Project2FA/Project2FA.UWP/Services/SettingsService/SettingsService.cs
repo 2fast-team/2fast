@@ -61,6 +61,8 @@ namespace Project2FA.UWP.Services
             }
         }
 
+
+
         public int QRCodeScanSeconds
         {
             get => _helper.SafeRead(nameof(QRCodeScanSeconds), 5);
@@ -159,16 +161,35 @@ namespace Project2FA.UWP.Services
             }
         }
 
+        /// <summary>
+        /// Gets or sets (with LocalSettings persistence) the RequestedTheme of the root element.
+        /// </summary>
         public ApplicationTheme OriginalAppTheme
         {
             get => _helper.SafeReadEnum(nameof(OriginalAppTheme), ApplicationTheme.Light);
             set => _helper.TryWrite(nameof(OriginalAppTheme), value);
         }
 
+        public void ResetSystemTheme(ApplicationTheme theme)
+        {
+            OriginalAppTheme = theme;
+            switch (theme)
+            {
+                case ApplicationTheme.Light:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    break;
+                case ApplicationTheme.Dark:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public DateTime LastCheckedSystemTime
         {
             get => _helper.SafeRead(nameof(LastCheckedSystemTime), new DateTime());
-            set => _helper.TryWrite(nameof(LastCheckedSystemTime), value);
+            set =>_helper.TryWrite(nameof(LastCheckedSystemTime), value);
         }
     }
 }

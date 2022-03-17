@@ -25,7 +25,6 @@ namespace Project2FA.UWP.Services.WebDAV
         private int _selectedPathIndex;
         private bool _isSorting;
         private bool _createDatafile;
-        private bool _continueListing;
         private bool _isSelecting;
         private bool _isLoading;
         private bool _isBackPossible;
@@ -167,7 +166,7 @@ namespace Project2FA.UWP.Services.WebDAV
                 return;
             }
 
-            _continueListing = true;
+            //_continueListing = true;
 
             if (PathStack.Count == 0)
             {
@@ -366,12 +365,12 @@ namespace Project2FA.UWP.Services.WebDAV
 
         public void StopDirectoryListing()
         {
-            _continueListing = false;
+            //_continueListing = false;
         }
 
         public void ContinueDirectoryListing()
         {
-            _continueListing = true;
+            //_continueListing = true;
         }
 
         public async Task<bool> CreateDirectory(string directoryName)

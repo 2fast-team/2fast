@@ -52,7 +52,7 @@
                             x:Name="SubtitleStack"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
-                                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                    RelativePanel.AlignHorizontalCenterWithPanel="True"
                             Margin="0,0,16,0">
 
                                     <TextBlock
@@ -123,6 +123,7 @@
                                         <Setter Target="ContentPresenter.Margin" Value="0,0,0,0"/>
                                         <Setter Target="SubtitleStack.Margin" Value="2,0,18,0"/>
                                         <Setter Target="SubtitleStack.(RelativePanel.RightOf)" Value="IconPresenter"/>
+                                        <Setter Target="IconPresenter.(RelativePanel.AlignVerticalCenterWithPanel)" Value="true"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>

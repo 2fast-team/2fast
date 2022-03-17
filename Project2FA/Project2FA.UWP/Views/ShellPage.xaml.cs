@@ -24,13 +24,11 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class ShellPage : Page, INotifyPropertyChanged
     {
-        public delegate void ThemeChangedHandler(Theme oldTheme, Theme newTheme);
         private SystemNavigationManager _navManager;
         private bool _navigationIsAllowed = true;
         private string _title;
         public INavigationService NavigationService { get; private set; }
         public NavigationView ShellViewInternal { get; private set; }
-        //private ThemeListener _listener;
 
         public ShellPage()
         {
@@ -112,27 +110,8 @@ namespace Project2FA.UWP.Views
                 Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = false;
             }
 
-            //_listener = new ThemeListener();
-            //_listener.ThemeChanged += Listener_ThemeChanged;
-
             Loaded += ShellPage_Loaded;
         }
-
-        //private void Listener_ThemeChanged(ThemeListener sender)
-        //{
-        //    ApplicationTheme theme = sender.CurrentTheme;
-        //    switch (theme)
-        //    {
-        //        case ApplicationTheme.Light:
-        //            SettingsService.Instance.AppTheme = Theme.Light;
-        //            break;
-        //        case ApplicationTheme.Dark:
-        //            SettingsService.Instance.AppTheme = Theme.Dark;
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
 
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {

@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="RootGrid">
-        <Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
+        <!--<Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
             <PivotItem 
                 Header="#Auswahl"
                 x:Uid="UseDatafileContentDialogPivotItemKind">
@@ -141,7 +141,7 @@
                 x:Name="WebDAVPivotItem"
                 Header="~WebDAVPivotItem.Header"
                 x:Uid="UseDatafileContentDialogWebDAVPivotItem">
-                <Grid MaxWidth="550" MinWidth="400" HorizontalAlignment="Left" >
+                --><!--<Grid MaxWidth="550" MinWidth="400" HorizontalAlignment="Left" >
                     <ScrollViewer
                         VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
@@ -262,9 +262,9 @@
                             </muxc:Expander>
                         </StackPanel>
                     </ScrollViewer>
-                </Grid>
+                </Grid>--><!--
             </PivotItem>
-        </Pivot>
+        </Pivot>-->
         <!--<msct:Loading 
                         IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
                         Background="{ThemeResource TranslucentBackgroundHighBrush}">

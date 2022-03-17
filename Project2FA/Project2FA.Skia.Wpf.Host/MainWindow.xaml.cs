@@ -11,7 +11,7 @@ namespace Project2FA.WPF.Host
         {
             InitializeComponent();
 
-            root.Content = new Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new Project2FA.App());
+            root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new Project2FA.App());
         }
     }
 }

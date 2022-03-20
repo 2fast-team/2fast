@@ -52,7 +52,7 @@
                             x:Name="SubtitleStack"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
-                                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True"
                             Margin="0,0,16,0">
 
                                     <TextBlock

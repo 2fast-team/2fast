@@ -226,6 +226,7 @@
                                         Orientation="Horizontal" 
                                         Margin="0,6,0,15">
                                                 <TextBlock 
+                                                    x:Name="TB_QRCode_Description"
                                         Text="{x:Bind strings:Resources.SettingsQRScanningSecondsRange}" 
                                         TextWrapping="WrapWholeWords" 
                                         Margin="0,0,10,0"
@@ -351,7 +352,7 @@
                                                     </StackPanel>
                                                 </appcontrols:CardControl.Description>
                                             </appcontrols:CardControl>
-                                           
+
                                         </appcontrols:CardExpanderControl.Content>
                                     </appcontrols:CardExpanderControl>
                                 </appcontrols:CardGroupControl>
@@ -527,31 +528,33 @@
                             </controls:HeaderedContentControl>
                         </RelativePanel>
 
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="WindowStates">
-                                <VisualState x:Name="NarrowState">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="0" />
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="LV_Dependencies.Margin" Value="0,0,0,0"/>
-                                        <Setter Target="LV_Dependencies.(RelativePanel.Below)" Value="SV_AboutTheApp"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="MediumState">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="960" />
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="LV_Dependencies.Margin" Value="20,0,0,0"/>
-                                        <Setter Target="LV_Dependencies.(RelativePanel.RightOf)" Value="SV_AboutTheApp"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+
                     </Grid>
                 </UserControl>
             </PivotItem>
         </Pivot>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TB_QRCode_Description.MaxWidth" Value="100"/>
+                        <Setter Target="LV_Dependencies.Margin" Value="0,0,0,0"/>
+                        <Setter Target="LV_Dependencies.(RelativePanel.Below)" Value="SV_AboutTheApp"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MediumState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="960" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LV_Dependencies.Margin" Value="20,0,0,0"/>
+                        <Setter Target="LV_Dependencies.(RelativePanel.RightOf)" Value="SV_AboutTheApp"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

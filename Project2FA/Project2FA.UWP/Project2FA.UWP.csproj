@@ -340,7 +340,7 @@
       <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.7.1-prerelease.211026002</Version>
+      <Version>2.7.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
@@ -374,7 +374,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Generic\ComboBoxItem.xaml">
+    <Page Include="Styles\Generic\ComboBoxItemStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

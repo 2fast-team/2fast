@@ -54,7 +54,7 @@
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="PointerOver" />
-                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
+                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPointerOver}" />
                                         <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPointerOver}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPointerOver}" />
@@ -64,7 +64,7 @@
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
                                         <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="Pressed" />
-                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource ButtonRevealBackgroundPressed}" />
+                                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPressed}" />
                                         <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPressed}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewButtonForegroundPressed}" />
@@ -704,15 +704,14 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style TargetType="primitives:NavigationViewItemPresenter" x:Key="MUX_NavigationViewItemPresenterStyleWhenOnLeftPaneWithRevealFocus">
         <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
         <Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
-        <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
         <Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
         <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="primitives:NavigationViewItemPresenter">
@@ -723,18 +722,18 @@
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Control.IsTemplateFocusTarget="True">
                         <Grid.Resources>
-                            <Storyboard x:Name="ExpandCollapseRotateExpandedStoryboard">
+                            <contract7NotPresent:Storyboard x:Name="ExpandCollapseRotateExpandedStoryboard">
                                 <DoubleAnimation
                                     Storyboard.TargetName="ExpandCollapseChevronRotateTransform"
                                     Storyboard.TargetProperty="Angle"
                                     From="0.0" To="180.0" Duration="0:0:0.1"/>
-                            </Storyboard>
-                            <Storyboard x:Name="ExpandCollapseRotateCollapsedStoryboard">
+                            </contract7NotPresent:Storyboard>
+                            <contract7NotPresent:Storyboard x:Name="ExpandCollapseRotateCollapsedStoryboard">
                                 <DoubleAnimation
                                     Storyboard.TargetName="ExpandCollapseChevronRotateTransform"
                                     Storyboard.TargetProperty="Angle"
                                     From="180.0" To="0.0" Duration="0:0:0.1"/>
-                            </Storyboard>
+                            </contract7NotPresent:Storyboard>
                         </Grid.Resources>
 
                         <VisualStateManager.VisualStateGroups>
@@ -742,46 +741,50 @@
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <contract4Present:Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="PointerOver" />
+                                        <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="PointerOver" />
                                         <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPointerOver}" />
                                         <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushPointerOver}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+                                        <Setter Target="Icon.(muxc:AnimatedIcon.State)" Value="PointerOver"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <contract4Present:Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="Pressed" />
+                                        <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="Pressed" />
                                         <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPressed}" />
                                         <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushPressed}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+                                        <Setter Target="Icon.(muxc:AnimatedIcon.State)" Value="Pressed"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Selected">
                                     <VisualState.Setters>
                                         <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundSelected}" />
-                                        <contract4Present:Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushSelected}" />
+                                        <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushSelected}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOverSelected">
                                     <VisualState.Setters>
-                                        <contract4Present:Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="PointerOver" />
+                                        <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="PointerOver" />
                                         <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundSelectedPointerOver}" />
                                         <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushSelectedPointerOver}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelectedPointerOver}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelectedPointerOver}" />
+                                        <Setter Target="Icon.(muxc:AnimatedIcon.State)" Value="PointerOver"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PressedSelected">
                                     <VisualState.Setters>
-                                        <contract4Present:Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="Pressed" />
+                                        <Setter Target="LayoutRoot.(media:RevealBrush.State)" Value="Pressed" />
                                         <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundSelectedPressed}" />
                                         <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushSelectedPressed}" />
                                         <Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelectedPressed}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelectedPressed}" />
+                                        <Setter Target="Icon.(muxc:AnimatedIcon.State)" Value="Pressed"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -806,18 +809,70 @@
                                 </VisualState>
                             </VisualStateGroup>
 
+                            <VisualStateGroup x:Name="InfoBadgeStates">
+                                <VisualState x:Name="InfoBadgeVisible" />
+                                <VisualState x:Name="InfoBadgeCollapsed">
+                                    <VisualState.Setters>
+                                        <Setter Target="InfoBadgePresenter.Visibility" Value="Collapsed" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+
                             <VisualStateGroup x:Name="ChevronStates">
                                 <VisualState x:Name="ChevronHidden"/>
                                 <VisualState x:Name="ChevronVisibleOpen">
                                     <VisualState.Setters>
                                         <Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
-                                        <Setter Target="ExpandCollapseChevronRotateTransform.Angle" Value="180"/>
+                                        <contract7NotPresent:Setter Target="ExpandCollapseChevronRotateTransform.Angle" Value="180"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="ChevronVisibleClosed">
                                     <VisualState.Setters>
                                         <Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
-                                        <Setter Target="ExpandCollapseChevronRotateTransform.Angle" Value="0"/>
+                                        <contract7NotPresent:Setter Target="ExpandCollapseChevronRotateTransform.Angle" Value="0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="PointerChevronStates">
+                                <VisualState x:Name="NormalChevronHidden"/>
+                                <VisualState x:Name="NormalChevronVisibleOpen">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="NormalOn"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="NormalChevronVisibleClosed">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="NormalOff"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverChevronHidden">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="PointerOverOff"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverChevronVisibleOpen">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="PointerOverOn"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverChevronVisibleClosed">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="PointerOverOff"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PressedChevronHidden">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="PressedOff"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PressedChevronVisibleOpen">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="PressedOn"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PressedChevronVisibleClosed">
+                                    <VisualState.Setters>
+                                        <Setter Target="ExpandCollapseChevronIcon.(muxc:AnimatedIcon.State)" Value="PressedOff"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -827,6 +882,12 @@
                                 <VisualState x:Name="ClosedCompactAndTopLevelItem">
                                     <VisualState.Setters>
                                         <Setter Target="ContentPresenter.Margin" Value="{ThemeResource NavigationViewCompactItemContentPresenterMargin}" />
+                                        <Setter Target="ContentGrid.Margin" Value="0,0,0,0" />
+                                        <Setter Target="InfoBadgePresenter.(Grid.Column)" Value="0"/>
+                                        <Setter Target="InfoBadgePresenter.(Grid.ColumnSpan)" Value="4"/>
+                                        <Setter Target="InfoBadgePresenter.VerticalAlignment" Value="Top"/>
+                                        <Setter Target="InfoBadgePresenter.HorizontalAlignment" Value="Right"/>
+                                        <Setter Target="InfoBadgePresenter.Margin" Value="0,2,2,0"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -837,7 +898,7 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" />
-                        <Grid x:Name="PresenterContentRootGrid">
+                        <Grid x:Name="PresenterContentRootGrid" Margin="{ThemeResource NavigationViewItemButtonMargin}">
                             <!-- Wrap SelectionIndicator in a grid so that its offset is 0,0 - this enables the offset animation. -->
                             <Grid
                                 Margin="4,0,0,0"
@@ -857,32 +918,41 @@
                             </Grid>
 
                             <Grid
-                                HorizontalAlignment="Stretch"
                                 x:Name="ContentGrid"
-                                
-                                MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}">
+                                MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}"
+                                HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition x:Name="IconColumn" Width="{ThemeResource NavigationViewCompactPaneLength}" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Viewbox x:Name="IconBox"
-                                Height="16"
-                                Margin="{ThemeResource NavigationViewItemOnLeftIconBoxMargin}">
-                                    <ContentPresenter 
-                                    x:Name="Icon" 
-                                    Content="{TemplateBinding Icon}" />
-                                </Viewbox>
+                                <Border 
+                                    x:Name="IconColumn" 
+                                    Width="{ThemeResource NavigationViewCompactPaneLength}"
+                                    Margin="{ThemeResource NavigationViewItemOnLeftIconBoxMargin}">
+                                    <Viewbox x:Name="IconBox"
+                                        Height="{ThemeResource NavigationViewItemOnLeftIconBoxHeight}"
+                                        HorizontalAlignment="Center"
+                                        Margin="{ThemeResource NavigationViewItemOnLeftIconBoxMargin}">
+                                        <ContentPresenter 
+                                            x:Name="Icon"
+                                            Content="{TemplateBinding Icon}"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            muxc:AnimatedIcon.State="Normal"/>
+
+                                    </Viewbox>
+                                </Border>
 
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
                                     Grid.Column="1"
-                                    CornerRadius="{TemplateBinding CornerRadius}"
                                     Margin="{ThemeResource NavigationViewItemContentPresenterMargin}"
                                     ContentTransitions="{TemplateBinding ContentTransitions}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
                                     Content="{TemplateBinding Content}"
+                                    Foreground="{TemplateBinding Foreground}"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -891,27 +961,41 @@
 
                                 <Grid
                                     x:Name="ExpandCollapseChevron"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     Visibility="Collapsed"
                                     HorizontalAlignment="Right"
                                     Width="40"
                                     Margin="{ThemeResource NavigationViewItemExpandChevronMargin}"
                                     Background="Transparent">
-                                    <TextBlock
+                                    <muxc:AnimatedIcon
+                                        Width="12"
+                                        Height="12"
                                         RenderTransformOrigin="0.5, 0.5"
-                                        Foreground="{ThemeResource NavigationViewItemForeground}"
-                                        FontSize="{ThemeResource NavigationViewItemExpandedGlyphFontSize}"
-                                        Text="{StaticResource NavigationViewItemExpandedGlyph}"
-                                        FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                        x:Name="ExpandCollapseChevronIcon"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         AutomationProperties.AccessibilityView="Raw"
-                                        IsTextScaleFactorEnabled="False">
-                                        <TextBlock.RenderTransform>
-                                            <RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0"/>
-                                        </TextBlock.RenderTransform>
-                                    </TextBlock>
+                                        muxc:AnimatedIcon.State="NormalOff">
+                                        <animatedvisuals:AnimatedChevronUpDownSmallVisualSource/>
+                                        <muxc:AnimatedIcon.FallbackIconSource>
+                                            <muxc:FontIconSource
+                                                Foreground="{ThemeResource NavigationViewItemForeground}"
+                                                FontSize="{ThemeResource NavigationViewItemExpandedGlyphFontSize}"
+                                                Glyph="{StaticResource NavigationViewItemExpandedGlyph}"
+                                                FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        </muxc:AnimatedIcon.FallbackIconSource>
+                                        <muxc:AnimatedIcon.RenderTransform>
+                                            <contract7NotPresent:RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0"/>
+                                        </muxc:AnimatedIcon.RenderTransform>
+                                    </muxc:AnimatedIcon>
                                 </Grid>
+
+                                <ContentPresenter
+                                    x:Name="InfoBadgePresenter"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding InfoBadge}"/>
+
                             </Grid>
                         </Grid>
                     </Grid>
@@ -969,10 +1053,10 @@
                         <primitives:NavigationViewItemPresenter
                             x:Name="NavigationViewItemPresenter"
                             Icon="{TemplateBinding Icon}"
+                            InfoBadge="{TemplateBinding InfoBadge}"
                             ContentTransitions="{TemplateBinding ContentTransitions}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
-                            Margin="{TemplateBinding Margin}"
-                            Padding="{TemplateBinding Padding}"
+                            Padding="{TemplateBinding Padding}" 
                             Foreground="{TemplateBinding Foreground}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -984,6 +1068,7 @@
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                             Content="{TemplateBinding Content}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             IsTabStop="false"
                             Control.IsTemplateFocusTarget="True">
                         </primitives:NavigationViewItemPresenter>
@@ -1057,6 +1142,78 @@
         <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+
+    <Style x:Key="NavigationBackButtonNormalStyle" TargetType="Button">
+        <Setter Property="Background" Value="{ThemeResource NavigationViewBackButtonBackground}" />
+        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+        <Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Height" Value="{ThemeResource NavigationBackButtonHeight}" />
+        <Setter Property="Width" Value="{ThemeResource NavigationBackButtonWidth}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+        <Setter Property="Content" Value="&#xE72B;" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+
+                                <VisualState x:Name="PointerOver">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonBackgroundPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonForegroundPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonBackgroundPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonForegroundPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Disabled">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonForegroundDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+
+                        </VisualStateManager.VisualStateGroups>
+                        <FontIcon 
+                            x:Name="Content"
+                            FontSize="{TemplateBinding FontSize}"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            Glyph="{TemplateBinding Content}"
+                            MirroredWhenRightToLeft="True"
+                            Foreground="{TemplateBinding Foreground}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            AutomationProperties.AccessibilityView="Raw" />
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

@@ -382,7 +382,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Darstellung</value>
   </data>
   <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
-    <value>App auf Werkseinstellungen zurücksetzen</value>
+    <value>Werkseinstellungen</value>
   </data>
   <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
     <value>Funktionen</value>
@@ -478,7 +478,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Speicherart</value>
   </data>
   <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>WebDAV nutzen </value>
+    <value>WebDAV nutzen (Beta)</value>
   </data>
   <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>

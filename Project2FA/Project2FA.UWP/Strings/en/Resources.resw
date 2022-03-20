@@ -475,7 +475,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>Storage</value>
   </data>
   <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>Choose WebDAV</value>
+    <value>Choose WebDAV (beta)</value>
   </data>
   <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>

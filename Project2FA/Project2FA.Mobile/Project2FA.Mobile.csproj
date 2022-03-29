@@ -13,9 +13,9 @@
     <!-- Required for C# Hot Reload -->
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
     <IsUnoHead>true</IsUnoHead>
-    <Platforms>ARM32;x64;ARM64</Platforms>
+    <!--<Platforms>ARM32;x64;ARM64</Platforms>-->
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|ARM64'">
+  <!--<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|ARM64'">
     <RunAOTCompilation>False</RunAOTCompilation>
     <EnableLLVM>False</EnableLLVM>
     <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
@@ -145,15 +145,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-macos|x64'">
     <EnableLLVM>True</EnableLLVM>
     <AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
-  </PropertyGroup>
+  </PropertyGroup>-->
   <ItemGroup>
-    <PackageReference Include="Prism.DryIoc.Uno" Version="8.1.97" />
-    <PackageReference Include="Uno.UI" Version="4.1.8" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.1.8" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.8" />
+    <PackageReference Include="Uno.WinUI" Version="4.1.9" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.1.9" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.WinUI.Adapter.Microsoft.Extensions.Logging" Version="4.1.9" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
+	<PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0-android'">
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.5.0.1" />

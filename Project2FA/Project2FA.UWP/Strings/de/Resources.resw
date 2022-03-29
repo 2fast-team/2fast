@@ -305,7 +305,7 @@ Wichtig: Das Passwort wird bei jedem Start zur Entschlüsselung und Nutzung der 
     <value>Speicherart</value>
   </data>
   <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>WebDAV nutzen </value>
+    <value>WebDAV nutzen (Beta)</value>
   </data>
   <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>
@@ -825,10 +825,22 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
   <data name="AddAccountCodeContentDialogInputSecretKeyHelp" xml:space="preserve">
     <value>Die Eingabe basiert auf Base32 und erlaubt deshalb nur die Buchstaben A-Z und die Nummern von 2-7.</value>
   </data>
-  <data name="AccountCodePageTooltipDelete" xml:space="preserve">
+  <data name="AccountCodePageTooltipDeleteFavourite" xml:space="preserve">
     <value>Als Favorit entfernen</value>
   </data>
-  <data name="AccountCodePageTooltipSet" xml:space="preserve">
+  <data name="AccountCodePageTooltipSetFavourite" xml:space="preserve">
     <value>Als Favorit setzen</value>
+  </data>
+  <data name="AccountCodePageTooltipHideTOTP" xml:space="preserve">
+    <value>Schlüssel verstecken</value>
+  </data>
+  <data name="AccountCodePageTooltipShowTOTP" xml:space="preserve">
+    <value>Schlüssel anzeigen</value>
+  </data>
+  <data name="SettingsPreferHiddenTOTP.Header" xml:space="preserve">
+    <value>Schlüssel verstecken</value>
+  </data>
+  <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
+    <value>Die erzeugten Schlüssel werden versteckt und können optional eingeblendet werden.</value>
   </data>
 </root>

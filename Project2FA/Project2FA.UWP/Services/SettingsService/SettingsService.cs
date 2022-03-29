@@ -99,6 +99,12 @@ namespace Project2FA.UWP.Services
             set => _helper.TryWrite(nameof(UseNTPServerCorrection), value);
         }
 
+        public bool UseHiddenTOTP
+        {
+            get => _helper.SafeRead(nameof(UseHiddenTOTP), false);
+            set => _helper.TryWrite(nameof(UseHiddenTOTP), value);
+        }
+
         public string NTPServerString
         {
             get => _helper.SafeRead(nameof(UseExtendedHash), "time.windows.com");

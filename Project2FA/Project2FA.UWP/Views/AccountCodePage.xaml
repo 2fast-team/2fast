@@ -187,13 +187,6 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.RowSpan="3" >
-                            <!--<controls:DropShadowPanel 
-                            Width="2.5"
-                            Color="{StaticResource SystemAccentColor}"
-                            BlurRadius="32"
-                            ShadowOpacity="1">
-                                <Border Width="2.5" Background="{StaticResource SystemAccentColor}" />
-                            </controls:DropShadowPanel>-->
                             <Border 
                                 Width="2.5" 
                                 ui:Effects.Shadow="{StaticResource SignShadow}"
@@ -268,18 +261,45 @@
                             Orientation="Horizontal"
                             Grid.Row="3"
                             Grid.Column="2"
-                            Margin="0,0,0,8">
+                            Margin="0,0,0,4">
 
-                            <TextBlock
+                            <Button
+                                x:Name="BTN_ShowCode"
+                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                                Width="48"
+                                Height="48"
+                                Margin="0,0,4,0"
+                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                HorizontalAlignment="Stretch" >
+                                <FontIcon 
+                                    Glyph="&#xE18B;"
+                                    FontSize="20"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
+                            <Grid>
+                                <TextBlock
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
                                 FontSize="28"
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
+                                VerticalAlignment="Center"
+                                CharacterSpacing="60"
+                                Foreground="{ThemeResource SystemAccentColor}" />
+                                <TextBlock
+                                Text="______"
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
+                                FontSize="28"
+                                CharacterSpacing="205"
                                 VerticalAlignment="Center" 
                                 Foreground="{ThemeResource SystemAccentColor}" />
+                            </Grid>
+
                             <Button
                                 x:Name="BTN_CopyCode"
                                 x:Uid="AccountCopyCodeButton"
-                                Grid.Column="4" 
-                                Grid.Row="1" 
                                 Width="48"
                                 Height="48"
                                 Click="BTN_CopyCode_Click"
@@ -308,8 +328,6 @@
                             </Grid>
                             <Button
                                 x:Name="BTN_SetFavourite"
-                                Grid.Column="4" 
-                                Grid.Row="1" 
                                 Width="48"
                                 Height="48"
                                 CommandParameter="{Binding}"

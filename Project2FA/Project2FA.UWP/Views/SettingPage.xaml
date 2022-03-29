@@ -191,6 +191,22 @@
                                     </appcontrols:CardControl>
 
                                     <appcontrols:CardControl 
+                                        x:Uid="SettingsPreferHiddenTOTP"
+                                        Header="~SettingsPreferHiddenTOTP.Header" 
+                                        Icon="&#xE18B;">
+                                        <appcontrols:CardControl.Description>
+                                            <TextBlock 
+                                                x:Uid="SettingsPreferHiddenTOTPDesc"
+                                                Text="~SettingsPreferHiddenTOTPDesc.Text"/>
+                                        </appcontrols:CardControl.Description>
+                                        <appcontrols:CardControl.ActionContent>
+                                            <ToggleSwitch 
+                                x:Name="SettingsPreferHiddenTOTP"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
+
+                                    <appcontrols:CardControl 
                                         x:Uid="SettingsOptionsFactoryReset"
                                         Icon="&#xE74D;"
                                         Header="~SettingsOptionsFactoryReset.Header">

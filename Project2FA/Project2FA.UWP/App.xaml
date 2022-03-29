@@ -19,6 +19,7 @@
             <Converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
             <Converters:VisibleWhenFalseConverter x:Key="VisibleWhenFalseConverter"/>
             <Converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>
+            <Converters:TOTPVisibilityTooltipConverter x:Key="TOTPVisibilityTooltipConverter"/>
             <Converters:DoubleToInt32ToStringConverter x:Key="DoubleToInt32ToStringConverter"/>
         </ResourceDictionary>
     </Application.Resources>

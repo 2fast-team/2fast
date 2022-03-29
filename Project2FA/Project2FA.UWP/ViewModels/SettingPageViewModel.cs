@@ -206,6 +206,16 @@ namespace Project2FA.UWP.ViewModels
             set => SetProperty(ref _isWindowsHelloSupported, value);
         }
 
+        public bool UseHiddenTOTP
+        {
+            get => _settings.UseHiddenTOTP;
+            set
+            {
+                _settings.UseHiddenTOTP = value;
+                RaisePropertyChanged(nameof(UseHiddenTOTP));
+            }
+        }
+
         public string NTPServerStr
         {
             get => _settings.NTPServerString;

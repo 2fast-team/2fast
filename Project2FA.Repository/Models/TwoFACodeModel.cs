@@ -89,6 +89,13 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _twoFACode, value);
         }
 
+        private bool _hideTOTPCode;
+        [JsonIgnore]
+        public bool HideTOTPCode
+        {
+            get => _hideTOTPCode;
+            set => SetProperty(ref _hideTOTPCode, value);
+        }
 
         //[JsonIgnore]
         //public List<(string name, string message)> Errors

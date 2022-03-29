@@ -131,6 +131,7 @@
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\DoubleToInt32ToStringConverter.cs" />
     <Compile Include="Converters\FavouriteToIconConverter.cs" />
+    <Compile Include="Converters\TOTPVisibilityTooltipConverter.cs" />
     <Compile Include="Converters\FavouriteTooltipConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\VisibleWhenFalseConverter.cs" />

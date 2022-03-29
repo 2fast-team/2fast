@@ -13,6 +13,7 @@ namespace Project2FA.UWP.Helpers
         private static Window CurrentApplicationWindow;
         // Keep reference so it does not get optimized/garbage collected
         private static UISettings uiSettings;
+        private static bool initialTransparencyValue;
         private static bool _changeTheme;
 
 
@@ -23,6 +24,7 @@ namespace Project2FA.UWP.Helpers
 
             // Registering to color changes, thus we notice when user changes theme system wide
             uiSettings = new UISettings();
+            initialTransparencyValue = uiSettings.AdvancedEffectsEnabled;
             uiSettings.ColorValuesChanged += UiSettings_ColorValuesChanged;
         }
 
@@ -47,7 +49,8 @@ namespace Project2FA.UWP.Helpers
             // change only once
             if (!_changeTheme)
             {
-                if (SettingsService.Instance.AppTheme == Services.Enums.Theme.System)
+                if (SettingsService.Instance.AppTheme == Services.Enums.Theme.System &&
+                    initialTransparencyValue == uiSettings.AdvancedEffectsEnabled)
                 {
                     // invert the current theme
                     if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)

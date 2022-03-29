@@ -34,7 +34,9 @@ namespace Project2FA.UWP.ViewModels
         public ICommand UndoDeleteCommand { get; }
         public ICommand ExportAccountCommand { get; }
         public ICommand SetFavouriteCommand { get; }
+        public ICommand HideOrShowTOTPCodeCommand {get;}
         private Stopwatch TOTPEventStopwatch { get; }
+        private bool _codeVisibilityOptionEnabled;
         private string _title;
 
 
@@ -95,6 +97,7 @@ namespace Project2FA.UWP.ViewModels
             ExportAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(ExportQRCode);
 
             EditAccountCommand = new RelayCommand<TwoFACodeModel>(EditAccountFromCollection);
+            HideOrShowTOTPCodeCommand = new RelayCommand<TwoFACodeModel>(HideOrShowTOTPCode);
             DeleteAccountCommand = new RelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             Copy2FACodeToClipboardCommand = new RelayCommand<TwoFACodeModel>(Copy2FACodeToClipboard);
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
@@ -102,10 +105,13 @@ namespace Project2FA.UWP.ViewModels
             {
                 _dispatcherTimerDeletedModel.Start();
             }
+            CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             StartTOTPLogic();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
+
+
 
         private async Task StartTOTPLogic()
         {
@@ -198,6 +204,15 @@ namespace Project2FA.UWP.ViewModels
                 model.IsFavourite = !model.IsFavourite;
                 await TwoFADataService.WriteLocalDatafile();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void HideOrShowTOTPCode(TwoFACodeModel obj)
+        {
+            obj.HideTOTPCode = !obj.HideTOTPCode;
         }
 
         /// <summary>
@@ -296,5 +311,11 @@ namespace Project2FA.UWP.ViewModels
         public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
         public bool IsAccountNotDeleted => TwoFADataService.TempDeletedTFAModel == null;
+
+        public bool CodeVisibilityOptionEnabled 
+        { 
+            get => _codeVisibilityOptionEnabled;
+            private set => SetProperty(ref _codeVisibilityOptionEnabled, value); 
+        }
     }
 }

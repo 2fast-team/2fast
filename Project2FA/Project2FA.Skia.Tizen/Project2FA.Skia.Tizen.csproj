@@ -30,8 +30,8 @@
     <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.155" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.1.8" />
-    <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="4.1.8" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.1.9" />
+    <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="4.1.9" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />

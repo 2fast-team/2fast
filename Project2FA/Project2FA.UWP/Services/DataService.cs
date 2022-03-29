@@ -156,9 +156,11 @@ namespace Project2FA.UWP.Services
         /// </summary>
         public async Task ResetCollection()
         {
+            var useHiddenTOTP = SettingsService.Instance.UseHiddenTOTP;
             await CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < Collection.Count; i++)
             {
+                Collection[i].HideTOTPCode = useHiddenTOTP;
                 await InitializeItem(i);
             }
             CollectionAccessSemaphore.Release();

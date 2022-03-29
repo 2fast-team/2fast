@@ -991,28 +991,54 @@ namespace Project2FA.UWP.Strings{
         }
         #endregion
 
-        #region AccountCodePageTooltipDelete
+        #region AccountCodePageTooltipDeleteFavourite
         /// <summary>
         ///   Looks up a localized string similar to: Undo favourite
         /// </summary>
-        public static string AccountCodePageTooltipDelete
+        public static string AccountCodePageTooltipDeleteFavourite
         {
             get
             {
-                return _resourceLoader.GetString("AccountCodePageTooltipDelete");
+                return _resourceLoader.GetString("AccountCodePageTooltipDeleteFavourite");
             }
         }
         #endregion
 
-        #region AccountCodePageTooltipSet
+        #region AccountCodePageTooltipSetFavourite
         /// <summary>
         ///   Looks up a localized string similar to: Set as favourite
         /// </summary>
-        public static string AccountCodePageTooltipSet
+        public static string AccountCodePageTooltipSetFavourite
         {
             get
             {
-                return _resourceLoader.GetString("AccountCodePageTooltipSet");
+                return _resourceLoader.GetString("AccountCodePageTooltipSetFavourite");
+            }
+        }
+        #endregion
+
+        #region AccountCodePageTooltipHideTOTP
+        /// <summary>
+        ///   Looks up a localized string similar to: hide key
+        /// </summary>
+        public static string AccountCodePageTooltipHideTOTP
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageTooltipHideTOTP");
+            }
+        }
+        #endregion
+
+        #region AccountCodePageTooltipShowTOTP
+        /// <summary>
+        ///   Looks up a localized string similar to: show key
+        /// </summary>
+        public static string AccountCodePageTooltipShowTOTP
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageTooltipShowTOTP");
             }
         }
         #endregion
@@ -1102,8 +1128,10 @@ namespace Project2FA.UWP.Strings{
             AddAccountCodeContentDialogQRCodeHelp,
             DisplayQRCodeContentDialogTitle,
             AddAccountCodeContentDialogInputSecretKeyHelp,
-            AccountCodePageTooltipDelete,
-            AccountCodePageTooltipSet,
+            AccountCodePageTooltipDeleteFavourite,
+            AccountCodePageTooltipSetFavourite,
+            AccountCodePageTooltipHideTOTP,
+            AccountCodePageTooltipShowTOTP,
         }
 
         private static ResourceLoader _resourceLoader;

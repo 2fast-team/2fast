@@ -734,9 +734,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>Favoriten können nun für Accounts gesetzt werden, wodurch diese als oberste Elemente in der Liste sichtbar sind.
-
-QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Smartphone zu importieren.</value>
+    <value>Generierte Schlüssel können nun in den Einstellungen versteckt werden (Nutzung im öffentlichen Bereich).</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen</value>

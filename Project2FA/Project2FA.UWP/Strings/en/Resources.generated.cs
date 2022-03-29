@@ -824,7 +824,7 @@ namespace Project2FA.UWP.Strings{
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: Favourites can now be set for accounts, making them visible as top items in the list. QR codes can now be displayed for individual accounts in order to import them with a smartphone.
+        ///   Looks up a localized string similar to: Generated keys can now be hidden in the settings (for use in public area).
         /// </summary>
         public static string NewAppFeaturesContent
         {

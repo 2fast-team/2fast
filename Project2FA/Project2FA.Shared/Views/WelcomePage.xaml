@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="clr-namespace:Microsoft.UI.Xaml.Media;assembly=Uno.UI"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-     xmlns:viewmodels="using:Project2FA.ViewModels"
+    xmlns:viewmodels="using:Project2FA.ViewModels"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -137,9 +137,6 @@
                     </ScrollViewer>
                 </Grid>
             </Grid>
-        <!--</mstoolkitControls:DropShadowPanel>-->
-
-
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

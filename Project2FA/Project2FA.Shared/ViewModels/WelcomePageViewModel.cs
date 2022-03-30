@@ -36,7 +36,7 @@ namespace Project2FA.ViewModels
             _dialogService = dialogService;
             _regionManager = regionManager;
             // disable the navigation to other pages
-            App.ShellPageInstance.NavigationIsAllowed = true;
+            App.ShellPageInstance.NavigationIsAllowed = false;
             Title = Strings.Resources.WelcomePageTitle;
 
             NewDatefileCommand = new DelegateCommand(() =>

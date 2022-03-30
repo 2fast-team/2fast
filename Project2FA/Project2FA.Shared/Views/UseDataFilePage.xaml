@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="RootGrid">
-        <Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
+        <!--<Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
             <PivotItem 
                 Header="#Auswahl"
                 x:Uid="UseDatafileContentDialogPivotItemKind">
@@ -145,7 +145,7 @@
                     <ScrollViewer
                         VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
-                            <muxc:Expander 
+                            --><!--<muxc:Expander 
                                 Header="~UseDataFilePageLoginExpander.Header" 
                                 x:Uid="UseDataFilePageLoginExpander"
                                 IsEnabled="{x:Bind ViewModel.WebDAVLoginRequiered, Mode=OneWay}"
@@ -259,12 +259,12 @@
                                       IsEnabled="{x:Bind ViewModel.IsWebDAVCreationButtonEnable, Mode=OneWay}"
                                       Command="{x:Bind ViewModel.SetAndCheckWebDAVDatafileCommand}"/>
                                 </StackPanel>
-                            </muxc:Expander>
+                            </muxc:Expander>--><!--
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
             </PivotItem>
-        </Pivot>
+        </Pivot>-->
         <!--<msct:Loading 
                         IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
                         Background="{ThemeResource TranslucentBackgroundHighBrush}">

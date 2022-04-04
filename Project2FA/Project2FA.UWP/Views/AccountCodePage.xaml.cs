@@ -12,7 +12,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Prism.Services.Dialogs;
-using Microsoft.Toolkit.Uwp.UI;
 
 namespace Project2FA.UWP.Views
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Project2FA.Repository.Database
+﻿namespace Project2FA.Repository.Database
 {
     public interface IProject2FARepository
     {

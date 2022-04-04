@@ -160,6 +160,7 @@ namespace Project2FA.UWP.ViewModels
                 }
 
                 _settings.AppTheme = value;
+                DataService.Instance.ReloadAccountIconSVGs();
             }
         }
 

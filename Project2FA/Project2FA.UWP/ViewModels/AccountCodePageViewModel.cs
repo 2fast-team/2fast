@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Diagnostics;
+using Project2FA.UWP.Helpers;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -203,6 +204,14 @@ namespace Project2FA.UWP.ViewModels
             {
                 model.IsFavourite = !model.IsFavourite;
                 await TwoFADataService.WriteLocalDatafile();
+                if (!string.IsNullOrWhiteSpace(model.AccountIconName))
+                {
+                    var iconStr = await SVGColorHelper.ManipulateSVGColor(model, model.AccountIconName);
+                    if (!string.IsNullOrWhiteSpace(iconStr))
+                    {
+                        model.AccountSVGIcon = iconStr;
+                    }
+                }
             }
         }
 

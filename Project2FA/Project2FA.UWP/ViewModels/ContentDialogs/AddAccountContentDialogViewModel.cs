@@ -23,37 +23,59 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Project2FA.UWP.Helpers;
+using Template10.Services.File;
+using Prism.Services.Dialogs;
+using Template10.Services.Serialization;
+using Microsoft.Toolkit.Mvvm.Input;
+using System.IO;
 
 namespace Project2FA.UWP.ViewModels
 {
     /// <summary>
     /// View model for adding an account countent dialog
     /// </summary>
-    public class AddAccountContentDialogViewModel : BindableBase
+    public class AddAccountContentDialogViewModel : BindableBase, IDialogInitializeAsync
     {
         private string _qrCodeStr;
         private bool _qrCodeScan, _launchScreenClip, _isButtonEnable;
         private bool _manualInput;
         private bool _isCameraActive;
+        private bool _accountIconSavePossible;
         private TwoFACodeModel _model;
         private int _selectedPivotIndex;
         private int _openingSeconds;
         private int _seconds;
         private string _secretKey;
+        private string _tempAccountIconName;
         DispatcherTimer _dispatcherTimer;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
         public ICommand CameraScanCommand { get; }
+        public ICommand SaveAccountIconCommand { get; }
+        public ICommand DeleteAccountIconCommand { get; }
+        public ICommand CancelAccountIconCommand { get; }
         private ILoggerFacade Logger { get; }
         private IResourceService ResourceService { get; }
+        private ISerializationService SerializationService { get; }
+        private IFileService FileService { get; }
+        private IconNameCollectionModel _iconNameCollectionModel;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public AddAccountContentDialogViewModel()
+        public AddAccountContentDialogViewModel(
+            IResourceService resourceService, 
+            IFileService fileService, 
+            ISerializationService serializationService,
+            ILoggerFacade loggerFacade)
         {
-            ResourceService = App.Current.Container.Resolve<IResourceService>();
+            ResourceService = resourceService;
+            FileService = fileService;
+            SerializationService = serializationService;
+            Logger = loggerFacade;
 
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //every second        
@@ -83,10 +105,43 @@ namespace Project2FA.UWP.ViewModels
                 IsCameraActive = true;
             });
 
-            Logger = App.Current.Container.Resolve<ILoggerFacade>();
+            SaveAccountIconCommand = new AsyncRelayCommand(LoadIconSVG);
+
+            
             //ErrorsChanged += Validation_ErrorsChanged;
 
             Window.Current.Activated += Current_Activated;
+        }
+
+        private async Task LoadIconNameCollection()
+        {
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/IconNameCollection.json"));
+            IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
+            using (StreamReader r = new StreamReader(randomStream.AsStreamForRead()))
+            {
+                IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(await r.ReadToEndAsync());
+            }
+            //StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            //string name = "IconNameCollection.json";
+            //if (await FileService.FileExistsAsync(name, localFolder))
+            //{
+            //    var result = await FileService.ReadStringAsync(name, localFolder);
+            //    IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(result);
+            //}
+            //else
+            //{
+            //    //TODO should not happen
+            //}
+        }
+
+        public async Task LoadIconSVG()
+        {
+            Model.AccountIconName = TempAccountIconName;
+            string iconStr = await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
+            if (!string.IsNullOrWhiteSpace(iconStr))
+            {
+                Model.AccountSVGIcon = iconStr;
+            }
         }
 
         /// <summary>
@@ -180,7 +235,7 @@ namespace Project2FA.UWP.ViewModels
                             {
                                 //clear the clipboard, if the image is read as TOTP
                                 Clipboard.Clear();
-                                ParseQRCode();
+                                await ParseQRCode();
                                 //move to the input dialog
                                 SelectedPivotIndex = 1;
 
@@ -222,7 +277,7 @@ namespace Project2FA.UWP.ViewModels
         /// Parses the QR code by splitting the different parts
         /// </summary>
         /// <returns>true if TOTP</returns>
-        private bool ParseQRCode()
+        private async Task<bool> ParseQRCode()
         {
             IProject2FAParser parser = App.Current.Container.Resolve<IProject2FAParser>();
             List<KeyValuePair<string, string>> valuePair = parser.ParseQRCodeStr(_qrCodeStr);
@@ -240,14 +295,13 @@ namespace Project2FA.UWP.ViewModels
                         SecretKey= item.Value;
                         break;
                     case "label":
-                        Model.Label = item.Value;
+                        Label = item.Value;
+                        await CheckLabelForIcon();
                         RaisePropertyChanged(nameof(Label));
-                        //RaisePropertyChanged(nameof(Label));
                         break;
                     case "issuer":
                         Model.Issuer = item.Value;
                         RaisePropertyChanged(nameof(Issuer));
-                        //RaisePropertyChanged(nameof(Issuer));
                         break;
                     case "algorithm":
                         string algo = item.Value.ToLower();
@@ -279,6 +333,30 @@ namespace Project2FA.UWP.ViewModels
             return true;
         }
 
+        private async Task CheckLabelForIcon()
+        {
+            string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+            string path = root + @"\Assets\AccountIcons";
+            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+
+            //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()));
+            if (await FileService.FileExistsAsync(string.Format("{0}.svg", Label.ToLower()), folder))
+            {
+                Model.AccountIconName = Model.Label.ToLower();
+                Model.AccountSVGIcon = await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
+            }
+
+            //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+            //string path = root + @"\Assets\AccountIcons";
+            //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+            //var element = (await folder.GetFilesAsync()).Where(x => x.DisplayName.Contains("microsoft")).FirstOrDefault();
+            //if (element != null)
+            //{
+            //    Model.AccountIconName = element.DisplayName;
+            //    //Model.AccountSVGIcon = SV
+            //}
+        }
+
         /// <summary>
         /// Checks if the inputs are correct and enables / disables the submit button
         /// </summary>
@@ -308,6 +386,11 @@ namespace Project2FA.UWP.ViewModels
                 TrackingManager.TrackException(ex);
                 return string.Empty;
             }
+        }
+
+        public async Task InitializeAsync(IDialogParameters parameters)
+        {
+            await LoadIconNameCollection();
         }
 
         //private void Validation_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
@@ -414,6 +497,18 @@ namespace Project2FA.UWP.ViewModels
             get => _isCameraActive;
             set => SetProperty(ref _isCameraActive, value);
         }
+        public IconNameCollectionModel IconNameCollectionModel 
+        { 
+            get => _iconNameCollectionModel; 
+            private set => _iconNameCollectionModel = value; 
+        }
+        public string TempAccountIconName { get => _tempAccountIconName; set => _tempAccountIconName = value; }
+        public bool AccountIconSavePossible 
+        { 
+            get => _accountIconSavePossible; 
+            set => SetProperty(ref _accountIconSavePossible, value);
+        }
+
         #endregion
     }
 }

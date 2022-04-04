@@ -1,11 +1,16 @@
-﻿using Project2FA.UWP.Controls;
+﻿using Project2FA.Repository.Models;
+using Project2FA.UWP.Controls;
 using Project2FA.UWP.Extensions;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.Services.Enums;
 using Project2FA.UWP.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 
 namespace Project2FA.UWP.Views
@@ -48,7 +53,8 @@ namespace Project2FA.UWP.Views
                 default:
                     break;
             }
-            _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, tbTagChangedCallback);
+            //register an event for the changed Tag property of the input textbox
+            _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
         }
 
 
@@ -77,7 +83,7 @@ namespace Project2FA.UWP.Views
             //_barcodeScanner.Scan(_mobileBarcodeScanningOptions);
         }
 
-        private void tbTagChangedCallback(DependencyObject sender, DependencyProperty dp)
+        private void TBTagChangedCallback(DependencyObject sender, DependencyProperty dp)
         {
             if (dp == TextBlock.TagProperty)
             {
@@ -128,6 +134,73 @@ namespace Project2FA.UWP.Views
                 IsOpen = true,
             };
             RootGrid.Children.Add(teachingTip);
+        }
+
+        private void ShowMenu(bool isTransient)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+            {
+                FlyoutShowOptions myOption = new FlyoutShowOptions
+                {
+                    ShowMode = isTransient ? FlyoutShowMode.Transient : FlyoutShowMode.Standard,
+                    Placement = FlyoutPlacementMode.RightEdgeAlignedTop
+                };
+                CommandBarFlyout1.ShowAt(BTN_EditAccountIcon, myOption);
+            }
+            else
+            {
+                CommandBarFlyout1.ShowAt(BTN_EditAccountIcon);
+            }
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                if (string.IsNullOrEmpty(sender.Text) == false && sender.Text.Length >= 3)
+                {
+                    List<string> _nameList = new List<string>();
+                    foreach (IconNameModel item in ViewModel.IconNameCollectionModel.Collection)
+                    {
+                        _nameList.Add(item.Name);
+                    }
+                    List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                    if (listSuggestion.Count == 0)
+                    {
+                        listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
+                    }
+                    sender.ItemsSource = listSuggestion;
+                    //ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                }
+                else
+                {
+                    sender.ItemsSource = null;
+                    //if (ViewModel.TwoFADataService.ACVCollection.Filter != null)
+                    //{
+                    //    ViewModel.TwoFADataService.ACVCollection.Filter = null;
+                    //}
+                }
+            }
+        }
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            string selectedItem = args.SelectedItem.ToString();
+            if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
+            {
+                ViewModel.TempAccountIconName = selectedItem;
+                ViewModel.AccountIconSavePossible = true;
+            }
+            else
+            {
+                ViewModel.AccountIconSavePossible = false;
+                sender.Text = string.Empty;
+            }
+        }
+
+        private void BTN_EditAccountIcon_Click(object sender, RoutedEventArgs e)
+        {
+            ShowMenu(false);
         }
     }
 }

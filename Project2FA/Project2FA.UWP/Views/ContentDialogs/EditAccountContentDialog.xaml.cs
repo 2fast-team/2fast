@@ -38,5 +38,10 @@ namespace Project2FA.UWP.Views
                     break;
             }
         }
+
+        private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

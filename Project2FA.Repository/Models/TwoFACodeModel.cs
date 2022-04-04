@@ -97,6 +97,23 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _hideTOTPCode, value);
         }
 
+        private string _accountIconName;
+        [Encrypt]
+        public string AccountIconName
+        {
+            get => _accountIconName;
+            set => SetProperty(ref _accountIconName, value);
+        }
+
+        private string _accountSVGIcon;
+
+        [JsonIgnore]
+        public string AccountSVGIcon
+        {
+            get => _accountSVGIcon;
+            set => SetProperty(ref _accountSVGIcon, value);
+        }
+
         //[JsonIgnore]
         //public List<(string name, string message)> Errors
         //{

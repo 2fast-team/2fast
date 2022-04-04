@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
     Style="{StaticResource MyContentDialogStyle}"
@@ -21,6 +22,34 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <muxc:CommandBarFlyout 
+                x:Name="CommandBarFlyout1"
+                Placement="Right">
+                <muxc:CommandBarFlyout.PrimaryCommands>
+                    <AppBarButton Label="Delete" Icon="Delete" ToolTipService.ToolTip="Delete"  />
+                    <AppBarElementContainer>
+                        <AutoSuggestBox 
+                        Width="200"
+                        Height="40"
+                        QueryIcon="Find"
+                        VerticalAlignment="Center"
+                        PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                        TextChanged="AutoSuggestBox_TextChanged" 
+                        VerticalContentAlignment="Center"
+                        SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
+                        Margin="0,0,1,0" />
+                    </AppBarElementContainer>
+                    <AppBarButton 
+                        Label="Save" 
+                        Command="{x:Bind ViewModel.SaveAccountIconCommand}" 
+                        IsEnabled="{x:Bind ViewModel.AccountIconSavePossible,Mode=OneWay}"
+                        Icon="Save" 
+                        ToolTipService.ToolTip="Save"  />
+                    <AppBarButton Label="Cancel" Icon="Cancel" ToolTipService.ToolTip="Cancel"  />
+                </muxc:CommandBarFlyout.PrimaryCommands>
+            </muxc:CommandBarFlyout>
+
         </ResourceDictionary>
     </ContentDialog.Resources>
 
@@ -28,7 +57,7 @@
         <Pivot x:Name="MainPivot"
                SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex,Mode=TwoWay}">
             <PivotItem Header="#Optionen" x:Uid="AddAccountContentDialogInputType">
-                <Grid>
+                <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
                         <StackPanel MinHeight="400">
                             <toolkitControls:MarkdownTextBlock 
@@ -106,7 +135,7 @@
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.ManualInputCommand}"
                             MinWidth="240">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                     <FontIcon Glyph="&#xE961;" FontSize="30"/>
                                     <TextBlock 
                                     Text="~AddAccountContentDialogManualInput.Text" 
@@ -119,7 +148,7 @@
                             </Button>
 
                             <!--next version 1.1-->
-                            <!--<Button 
+                            <Button 
                             x:Name="BTN_QRCodeCameraScan"
                             Margin="0,10,0,10" 
                             Style="{StaticResource AccentButtonStyle}"
@@ -138,7 +167,7 @@
                                     x:Uid="AddAccountContentDialogCameraScan" 
                                     FontFamily="Segoe UI" />
                                 </StackPanel>
-                            </Button>-->
+                            </Button>
                         </StackPanel>
                     </ScrollViewer>
                     <Border Visibility="{x:Bind ViewModel.IsCameraActive, Mode=OneWay}">
@@ -152,20 +181,55 @@
             </PivotItem>
             <PivotItem Header="#inputs" x:Uid="AddAccountContentDialogInputs">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid MinHeight="400">
+                    <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                         <StackPanel Margin="0,10,0,0">
+                            <appcontrols:CardControl Header="#account icon">
+                                <appcontrols:CardControl.Description>
+                                    <Grid MinWidth="120" MinHeight="100">
+                                        <Ellipse 
+                                        Width="110" 
+                                        Height="110" 
+                                        Fill="{ThemeResource PersonPictureEllipseFillThemeBrush}"
+                                        Stroke="{ThemeResource PersonPictureEllipseFillStrokeBrush}"
+                                        StrokeThickness="{ThemeResource PersonPictureEllipseStrokeThickness}">
+                                        </Ellipse>
+                                        <toolkitControls:ImageEx 
+                                        Width="68" 
+                                        Height="68" 
+                                        Source="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
+                                            <!--<toolkit:ImageEx.Source>
+                                    <SvgImageSource UriSource="{x:Bind ViewModel.AccountPictureName,Mode=OneWay}"></SvgImageSource>
+                                </toolkit:ImageEx.Source>-->
+                                        </toolkitControls:ImageEx>
+                                        <Button 
+                                    x:Name="BTN_EditAccountIcon"
+                                    Background="{ThemeResource SystemChromeMediumColor}"
+                                    CornerRadius="32"
+                                    Width="44"
+                                    Height="44"
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Right" Margin="0,0,0,0" Click="BTN_EditAccountIcon_Click">
+                                            <FontIcon
+                                        FontSize="18"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE104;" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                                        </Button>
+                                    </Grid>
+                                </appcontrols:CardControl.Description>
+                            </appcontrols:CardControl>
+                            
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox 
-                                Header="~AddAccountContentDialogLabel.Header" 
-                                PlaceholderText="~AddAccountContentDialogLabel.PlaceholderText" 
-                                x:Uid="AddAccountContentDialogLabel" 
-                                Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
-                                UpdateSourceTrigger=PropertyChanged}" 
-                                Margin="0,0,0,8">
+                                    Header="~AddAccountContentDialogLabel.Header" 
+                                    PlaceholderText="~AddAccountContentDialogLabel.PlaceholderText" 
+                                    x:Uid="AddAccountContentDialogLabel"
+                                    Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
+                                    UpdateSourceTrigger=PropertyChanged}" 
+                                    Margin="0,0,0,8">
                                     <!--<Interactivity:Interaction.Behaviors>
                                         <behaviors:HighlightFormFieldOnErrors 
                                             PropertyName="Label"
@@ -207,6 +271,41 @@
                                         PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
                                 </Interactivity:Interaction.Behaviors>-->
                             </TextBox>
+
+                            <appcontrols:CardExpanderControl 
+                                x:Uid="AddAccountContentDialogExpertExpander" 
+                                Header="~AddAccountContentDialogExpertExpander.Header" 
+                                IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
+                                Margin="0,15,0,0">
+                                <StackPanel>
+                                    <appcontrols:CardControl 
+                                    x:Uid="AddAccountContentDialogHashAlgo"
+                                    BorderBrush="Transparent"
+                                    Header="~AddAccountContentDialogHashAlgo.Header">
+                                        <appcontrols:CardControl.ActionContent>
+                                            <ComboBox 
+                                            SelectedIndex="1" 
+                                            MinWidth="{StaticResource CardActionControlMinWidth}">
+                                                <ComboBoxItem Content="SHA1" />
+                                                <ComboBoxItem Content="SHA256"/>
+                                                <ComboBoxItem Content="SHA512"/>
+                                            </ComboBox>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
+                                    <appcontrols:CardControl 
+                                    x:Uid="AddAccountContentDialogTotpSize"
+                                    BorderBrush="Transparent"
+                                    Header="~AddAccountContentDialogTotpSize.Header">
+                                        <appcontrols:CardControl.ActionContent>
+                                            <muxc:NumberBox
+                                                MinWidth="120"
+                                                Minimum="4" 
+                                                Maximum="8" 
+                                                SpinButtonPlacementMode="Inline"/>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
+                                </StackPanel>
+                            </appcontrols:CardExpanderControl>
 
                         </StackPanel>
                     </Grid>

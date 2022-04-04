@@ -12,9 +12,14 @@ namespace Project2FA.Repository.Database
         {
             _db = db;
         }
-        public async Task DeleteAsync()
+        public Task DeleteAsync(DBDatafileModel dataFile)
         {
-            await _db.Datafile.FirstOrDefaultAsync();
+            using (_db)
+            {
+                _db.Remove(dataFile);
+                _db.SaveChanges();
+            }
+            return Task.CompletedTask;
         }
 
         public async Task<DBDatafileModel> GetAsync()

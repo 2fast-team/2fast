@@ -184,10 +184,10 @@
     <value>Anzuzeigender Name</value>
   </data>
   <data name="AddAccountContentDialogManualInput.Text" xml:space="preserve">
-    <value>Manuelle Schlüsseleingabe</value>
+    <value>Manuelle Eingabe</value>
   </data>
   <data name="AddAccountContentDialogManualInputCheckbox.Content" xml:space="preserve">
-    <value>Manuelle Schlüsseleingabe?</value>
+    <value>Manuelle Eingabe</value>
   </data>
   <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
     <value>Es konnten keine Informationen aus dem QR Code gelesen werden. Bitte erneut probieren oder den Schlüssel manuell übertragen.</value>
@@ -842,5 +842,14 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
   </data>
   <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
     <value>Die erzeugten Schlüssel werden versteckt und können optional eingeblendet werden.</value>
+  </data>
+  <data name="AddAccountContentDialogExpertExpander.Header" xml:space="preserve">
+    <value>Experteneinstellungen</value>
+  </data>
+  <data name="AddAccountContentDialogHashAlgo.Header" xml:space="preserve">
+    <value>Hash-Algorithmus</value>
+  </data>
+  <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
+    <value>Anzahl Ziffern</value>
   </data>
 </root>

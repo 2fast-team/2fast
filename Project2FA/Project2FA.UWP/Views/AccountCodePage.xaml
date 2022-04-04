@@ -121,6 +121,13 @@
                                         SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
                                         Margin="0,0,1,0" />
                                 </AppBarElementContainer>
+                                <AppBarButton
+                                    x:Name="ABB_SearchFilter"
+                                     x:Uid="AccountCodePageABBSearchFilter" >
+                                    <AppBarButton.Icon>
+                                        <FontIcon Glyph="&#xE16E;"/>
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 
@@ -196,45 +203,37 @@
                         <muxc:PersonPicture 
                             Height="48"
                             Width="48"
-                            DisplayName="{x:Bind Label,Mode=OneWay}"
+                            DisplayName="{Binding Converter={StaticResource PersonalPictureInitialsVisibilityConverter}}"
                             Visibility="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                             Margin="15,10,20,0"
                             Grid.Column="1"
                             Grid.Row="0"
-                            Grid.RowSpan="2">
+                            Grid.RowSpan="2"
+                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
                             <!--<muxc:PersonPicture.ProfilePicture>
-                                <SvgImageSource 
-                                    UriSource="/Assets/schluessel.svg"
-                                    RasterizePixelHeight="80"
-                                    RasterizePixelWidth="80" />
+                                <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
                             </muxc:PersonPicture.ProfilePicture>-->
                         </muxc:PersonPicture>
 
+                        <!--Favourite design-->
                         <muxc:PersonPicture 
                             Height="48"
                             Width="48"
                             Background="{ThemeResource SystemAccentColor}"
                             BorderBrush="{ThemeResource SystemAccentColor}"
-                            DisplayName="{x:Bind Label,Mode=OneWay}"
+                            DisplayName="{Binding Converter={StaticResource PersonalPictureInitialsVisibilityConverter}}"
                             Margin="15,10,20,0"
                             Grid.Column="1"
                             Grid.Row="0"
                             Visibility="{x:Bind IsFavourite,Mode=OneWay}"
                             Style="{StaticResource PersonPictureWithAccentShadow}"
+                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}"
                             Grid.RowSpan="2">
+                            <!--<muxc:PersonPicture.ProfilePicture>
+                                <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
+                            </muxc:PersonPicture.ProfilePicture>-->
                         </muxc:PersonPicture>
 
-                        <!--next version: Account pictures-->
-                        <!--ProfilePicture="/Assets/ServiceLogo/amazon-icon-1.svg"-->
-                        <!--DisplayName="{x:Bind Label,Mode=OneWay}"-->
-                        <!--<Ellipse
-                            Fill="Red"
-                            Height="48"
-                            Width="48"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            Grid.RowSpan="2">
-                        </Ellipse>-->
                         <RelativePanel 
                             Grid.Column="2" 
                             Grid.RowSpan="2" 

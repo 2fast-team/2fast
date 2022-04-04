@@ -33,6 +33,9 @@ using Windows.Storage.Streams;
 using WebDAVClient.Types;
 using Prism.Services.Dialogs;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using System.Linq;
+using Project2FA.UWP.Helpers;
 
 namespace Project2FA.UWP.Services
 {
@@ -142,7 +145,15 @@ namespace Project2FA.UWP.Services
                         if (e.Action == NotifyCollectionChangedAction.Add)
                         {
                             // initialize the newest (last) item
-                            await InitializeItem((sender as ObservableCollection<TwoFACodeModel>).Count - 1);
+                            int i = (sender as ObservableCollection<TwoFACodeModel>).Count - 1;
+                            // set the svg source
+                            var iconStr = await SVGColorHelper.ManipulateSVGColor(Collection[i], Collection[i].AccountIconName);
+                            if (!string.IsNullOrWhiteSpace(iconStr))
+                            {
+                                Collection[i].AccountSVGIcon = iconStr;
+                            }
+                            // calc the totp
+                            await InitializeItem(i);
                         }
                     }
                     break;
@@ -611,6 +622,18 @@ namespace Project2FA.UWP.Services
             {
                 Logger.Log(ex.Message, Category.Exception, Priority.High);
                 TrackingManager.TrackExceptionCatched(ex);
+            }
+        }
+
+        public async Task ReloadAccountIconSVGs()
+        {
+            for (int i = 0; i < Collection.Count; i++)
+            {
+                var iconStr = await SVGColorHelper.ManipulateSVGColor(Collection[i], Collection[i].AccountIconName);
+                if (!string.IsNullOrWhiteSpace(iconStr))
+                {
+                    Collection[i].AccountSVGIcon = iconStr;
+                }
             }
         }
 

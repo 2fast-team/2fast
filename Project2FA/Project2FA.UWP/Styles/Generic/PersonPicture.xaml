@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:toolkitcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:Windows10version1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 8)"
     xmlns:Windows10versionOlder1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,8)"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
@@ -15,10 +16,11 @@
 
     <media:AttachedCardShadow 
         x:Key="SignShadow" 
-        BlurRadius="32"
-        Offset="4"
+        BlurRadius="16"
+        Offset="2,0"
         Color="{ThemeResource SystemAccentColor}"
         CornerRadius="0"/>
+    <Style TargetType="muxc:PersonPicture" BasedOn="{StaticResource DefaultPersonPictureStyle}"></Style>
 
     <!--Windows 1809 supports no Shadow API, so use the right style...-->
     <Windows10version1903:Style x:Key="PersonPictureWithAccentShadow" TargetType="muxc:PersonPicture" BasedOn="{StaticResource DefaultPersonPictureStyle}">
@@ -35,7 +37,7 @@
     <Style x:Key="DefaultPersonPictureStyle" TargetType="muxc:PersonPicture">
         <Setter Property="Foreground" Value="{ThemeResource PersonPictureForegroundThemeBrush}" />
         <Setter Property="Background" Value="{ThemeResource PersonPictureEllipseFillThemeBrush}"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource SystemColorButtonTextColor}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource PersonPictureEllipseFillStrokeBrush}"/>
         <Setter Property="BorderThickness" Value="{ThemeResource PersonPictureEllipseStrokeThickness}"/>
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="100" />
@@ -59,9 +61,9 @@
                                 <VisualState x:Name="Initials" />
                                 <VisualState x:Name="NoPhotoOrInitials">
                                     <VisualState.Setters>
-                                        <Setter Target="InitialsTextBlock.FontFamily" Value="{ThemeResource SymbolThemeFontFamily}"/>
+                                        <!--<Setter Target="InitialsTextBlock.FontFamily" Value="{ThemeResource SymbolThemeFontFamily}"/>-->
                                         <!-- Placeholder symbol for 'Contact' (https://docs.microsoft.com/en-us/windows/uwp/design/style/segoe-ui-symbol-font) -->
-                                        <Setter Target="InitialsTextBlock.Text" Value="&#xE77B;"/>
+                                        <!--<Setter Target="InitialsTextBlock.Text" Value="&#xE77B;"/>-->
                                     </VisualState.Setters>
                                 </VisualState>
                                 <!-- Visual State when in Group mode -->
@@ -104,23 +106,28 @@
                         <TextBlock
                             x:Name="InitialsTextBlock"
                             AutomationProperties.AccessibilityView="Raw"
-                            FontSize="36"
+                            FontSize="20"
                             FontFamily="{TemplateBinding FontFamily}"
                             Foreground="{TemplateBinding Foreground}"
                             FontWeight="{TemplateBinding FontWeight}"
                             TextLineBounds="Tight"
+                            TextAlignment="Center"
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
                             IsTextScaleFactorEnabled="False"
                             Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ActualInitials}" />
 
-                        <Ellipse
+                        <Rectangle
                             x:Name="PersonPictureEllipse"
                             x:DeferLoadStrategy="Lazy"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}"
+                            Width="32"
+                            Height="32"
                             FlowDirection="LeftToRight">
-                        </Ellipse>
+                        </Rectangle>
+
+                        <toolkitcontrols:ImageEx 
+                            Width="32" 
+                            Height="32" 
+                            Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag, Converter={StaticResource SVGImageConverter}}"/>
 
                         <Grid
                             x:Name="BadgeGrid"

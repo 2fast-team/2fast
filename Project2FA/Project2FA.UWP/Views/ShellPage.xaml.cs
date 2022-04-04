@@ -19,6 +19,10 @@ using Prism.Navigation;
 using System.Threading.Tasks;
 using Project2FA.UWP.Services.Enums;
 using Prism.Services.Dialogs;
+using Windows.Storage;
+using Project2FA.Repository.Models;
+using Template10.Utilities;
+using Template10.Services.File;
 
 namespace Project2FA.UWP.Views
 {
@@ -109,7 +113,6 @@ namespace Project2FA.UWP.Views
                 //prevent screenshot capture for the app
                 Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = false;
             }
-
             Loaded += ShellPage_Loaded;
         }
 
@@ -192,7 +195,10 @@ namespace Project2FA.UWP.Views
                         break;
                 }
             }
+            
         }
+
+
 
         public void SetTitleBarAsDraggable()
         {

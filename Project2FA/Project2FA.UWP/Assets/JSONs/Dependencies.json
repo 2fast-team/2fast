@@ -119,5 +119,11 @@
     "CategoryUid": "Asset",
     "StringLicenseURL": "",
     "StringURL": "https://lottiefiles.com/21398-online-tutorial"
+  },
+  {
+    "Name": "simple-icons",
+    "Authors": "simple-icons",
+    "CategoryUid": "Asset",
+    "StringLicenseURL": "https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md"
   }
 ]

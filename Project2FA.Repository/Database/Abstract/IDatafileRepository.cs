@@ -22,6 +22,6 @@ namespace Project2FA.Repository.Database
         /// <summary>
         /// Deletes a datafile.
         /// </summary>
-        Task DeleteAsync();
+        Task DeleteAsync(DBDatafileModel dataFile);
     }
 }

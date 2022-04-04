@@ -128,8 +128,8 @@ namespace Project2FA.UWP.ViewModels
             {
                 if (!await CheckNavigationRequest(Password))
                 {
-                    await ShowLoginError();
                     Password = string.Empty;
+                    await ShowLoginError();
                 }
             }
         }

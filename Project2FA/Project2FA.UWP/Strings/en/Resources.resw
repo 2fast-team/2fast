@@ -184,10 +184,10 @@
     <value>Name to be displayed</value>
   </data>
   <data name="AddAccountContentDialogManualInput.Text" xml:space="preserve">
-    <value>Manual key entry</value>
+    <value>Manual input</value>
   </data>
   <data name="AddAccountContentDialogManualInputCheckbox.Content" xml:space="preserve">
-    <value>Manual key input?</value>
+    <value>Manual input</value>
   </data>
   <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
     <value>Can't get information from QR code. Please try again or add the secret key manually.</value>
@@ -199,7 +199,7 @@
     <value>A scan tool will open soon</value>
   </data>
   <data name="AddAccountContentDialogReadQRCodeTip.Title" xml:space="preserve">
-    <value>Go to the QR-code</value>
+    <value>Switch to the QR-code</value>
   </data>
   <data name="AddAccountContentDialogSecretKey.Header" xml:space="preserve">
     <value>Secret key</value>
@@ -835,5 +835,14 @@ QR codes can now be displayed for individual accounts in order to import them wi
   </data>
   <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
     <value>The generated keys are hidden and can optionally be faded in.</value>
+  </data>
+  <data name="AddAccountContentDialogExpertExpander.Header" xml:space="preserve">
+    <value>Expert settings</value>
+  </data>
+  <data name="AddAccountContentDialogHashAlgo.Header" xml:space="preserve">
+    <value>Hash algorithm</value>
+  </data>
+  <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
+    <value>Number of digits</value>
   </data>
 </root>

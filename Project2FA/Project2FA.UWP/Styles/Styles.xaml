@@ -149,6 +149,12 @@
         <Setter Property="PrimaryButtonStyle" Value="{ThemeResource ButtonRevealStyle}" />
     </Style>
 
+    <Style TargetType="muxc:Expander">
+        <!--<Setter Property="Background" Value="{ThemeResource TwoFABackgroundBrush}" />-->
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+
     <Style TargetType="ComboBoxItem" BasedOn="{StaticResource DefaultComboBoxItemStyle}">
         <Setter Property="CornerRadius" Value="{ThemeResource ComboBoxItemCornerRadius}"/>
         <!--<Setter Property="Template">

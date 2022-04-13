@@ -144,15 +144,12 @@ namespace Project2FA.UWP.Services
                     {
                         if (e.Action == NotifyCollectionChangedAction.Add)
                         {
+                            var useHiddenTOTP = SettingsService.Instance.UseHiddenTOTP;
                             // initialize the newest (last) item
                             int i = (sender as ObservableCollection<TwoFACodeModel>).Count - 1;
+                            Collection[i].HideTOTPCode = useHiddenTOTP;
                             // set the svg source
                             var iconStr = await SVGColorHelper.ManipulateSVGColor(Collection[i], Collection[i].AccountIconName);
-                            if (!string.IsNullOrWhiteSpace(iconStr))
-                            {
-                                Collection[i].AccountSVGIcon = iconStr;
-                            }
-                            // calc the totp
                             await InitializeItem(i);
                         }
                     }
@@ -630,10 +627,6 @@ namespace Project2FA.UWP.Services
             for (int i = 0; i < Collection.Count; i++)
             {
                 var iconStr = await SVGColorHelper.ManipulateSVGColor(Collection[i], Collection[i].AccountIconName);
-                if (!string.IsNullOrWhiteSpace(iconStr))
-                {
-                    Collection[i].AccountSVGIcon = iconStr;
-                }
             }
         }
 

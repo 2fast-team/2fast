@@ -1042,6 +1042,32 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region ButtonTextRetry
+        /// <summary>
+        ///   Looks up a localized string similar to: Try again
+        /// </summary>
+        public static string ButtonTextRetry
+        {
+            get
+            {
+                return _resourceLoader.GetString("ButtonTextRetry");
+            }
+        }
+        #endregion
+
+        #region ErrorClipboardTask
+        /// <summary>
+        ///   Looks up a localized string similar to: The clipboard has been occupied by another program, please try again.
+        /// </summary>
+        public static string ErrorClipboardTask
+        {
+            get
+            {
+                return _resourceLoader.GetString("ErrorClipboardTask");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1132,6 +1158,8 @@ namespace Project2FA.UWP.Strings{
             AccountCodePageTooltipSetFavourite,
             AccountCodePageTooltipHideTOTP,
             AccountCodePageTooltipShowTOTP,
+            ButtonTextRetry,
+            ErrorClipboardTask,
         }
 
         private static ResourceLoader _resourceLoader;

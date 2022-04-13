@@ -40,12 +40,12 @@
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid MinWidth="400" MinHeight="800">
+    <Grid MinWidth="400">
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
             <StackPanel>
                 <appcontrols:CardControl Header="#account icon">
                     <appcontrols:CardControl.Description>
-                        <Grid MinWidth="120" MinHeight="100">
+                        <Grid Margin="0,10,0,0" MinWidth="120" MinHeight="100">
                             <Ellipse 
                                 Width="110" 
                                 Height="110" 
@@ -57,7 +57,7 @@
                             <toolkit:ImageEx 
                                 Width="68" 
                                 Height="68" 
-                                Source="{x:Bind ViewModel.AccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
+                                Source="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
                             </toolkit:ImageEx>
                             <Button 
                                 Background="{ThemeResource SystemChromeMediumColor}"
@@ -85,7 +85,7 @@
                 Margin="0,10,0,20"/>
                 <!--Category for filter and sorting
                 <ListView/>-->
-                <Grid>
+                <!--<Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
@@ -119,6 +119,7 @@
                         Height="36"
                         Width="48"
                         Padding="4,4,4,4"
+                        Style="{StaticResource TransparentButtonStyle}"
                         ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                         Click="HLBTN_PasswordInfo"
                         VerticalAlignment="Bottom">
@@ -127,7 +128,7 @@
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Glyph="&#xE946;"/>
                     </Button>
-                </Grid>
+                </Grid>-->
 
 
             </StackPanel>

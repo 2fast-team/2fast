@@ -33,62 +33,53 @@ namespace Project2FA.UWP.ViewModels
             SerializationService = serializationService;
             PrimaryButtonCommand = new DelegateCommand(async () =>
             {
-                TwoFACodeModel.AccountSVGIcon = AccountSVGIcon;
                 await DataService.Instance.WriteLocalDatafile();
             });
             CancelButtonCommand = new DelegateCommand(() =>
             {
-                TwoFACodeModel.Issuer = _tempIssuer;
-                TwoFACodeModel.Label = _tempLabel;
-                TwoFACodeModel.AccountIconName = _tempAccountIconName;
+                Model.Issuer = TempIssuer;
+                Model.Label = TempLabel;
+                Model.AccountIconName = TempAccountIconName;
+                Model.AccountSVGIcon = TempAccountSVGIcon;
             });
         }
 
         public string Issuer
         {
-            get => TwoFACodeModel.Issuer;
+            get => Model.Issuer;
             set
             {
-                TwoFACodeModel.Issuer = value;
+                Model.Issuer = value;
             }
         }
         public string Label
         {
-            get => TwoFACodeModel.Label;
+            get => Model.Label;
             set
             {
-                TwoFACodeModel.Label = value;
+                Model.Label = value;
             }
         }
 
         public string AccountIconName
         {
-            get => TwoFACodeModel.AccountIconName;
+            get => Model.AccountIconName;
             set
             {
-                TwoFACodeModel.AccountIconName = value;
+                Model.AccountIconName = value;
                 RaisePropertyChanged(nameof(AccountIconName));
             }
         }
 
-        public string AccountSVGIcon
-        {
-            get => _tempAccountSVGIcon;
-            set
-            {
-                SetProperty(ref _tempAccountSVGIcon, value);
-            }
-        }
-
-        public TwoFACodeModel TwoFACodeModel
+        public TwoFACodeModel Model
         {
             get => _twoFACodeModel;
             set
             {
                 SetProperty(ref _twoFACodeModel, value);
-                _tempIssuer = TwoFACodeModel.Issuer;
-                _tempLabel = TwoFACodeModel.Label;
-                _tempAccountIconName = TwoFACodeModel.AccountIconName;
+                TempIssuer = Model.Issuer;
+                TempLabel = Model.Label;
+                TempAccountIconName = Model.AccountIconName;
             }
         }
 
@@ -97,6 +88,10 @@ namespace Project2FA.UWP.ViewModels
             get => _iconNameCollectionModel;
             private set => _iconNameCollectionModel = value;
         }
+        public string TempIssuer { get => _tempIssuer; set => _tempIssuer = value; }
+        public string TempLabel { get => _tempLabel; set => _tempLabel = value; }
+        public string TempAccountIconName { get => _tempAccountIconName; set => _tempAccountIconName = value; }
+        public string TempAccountSVGIcon { get => _tempAccountSVGIcon; set => _tempAccountSVGIcon = value; }
 
         private async Task LoadIconNameCollection()
         {
@@ -112,13 +107,9 @@ namespace Project2FA.UWP.ViewModels
         {
             if (parameters.TryGetValue<TwoFACodeModel>("model", out var model))
             {
-                TwoFACodeModel = model;
-                AccountIconName = TwoFACodeModel.AccountIconName;
-                string iconStr = await SVGColorHelper.ManipulateSVGColor(TwoFACodeModel, AccountIconName, TwoFACodeModel.IsFavourite);
-                if (!string.IsNullOrWhiteSpace(iconStr))
-                {
-                    AccountSVGIcon = iconStr;
-                }
+                Model = model;
+                AccountIconName = Model.AccountIconName;
+                var iconStr = await SVGColorHelper.ManipulateSVGColor(Model, AccountIconName, Model.IsFavourite);
                 await LoadIconNameCollection();
             }
         }

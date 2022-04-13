@@ -42,7 +42,6 @@ namespace Project2FA.UWP.ViewModels
         private bool _qrCodeScan, _launchScreenClip, _isButtonEnable;
         private bool _manualInput;
         private bool _isCameraActive;
-        private bool _accountIconSavePossible;
         private TwoFACodeModel _model;
         private int _selectedPivotIndex;
         private int _openingSeconds;
@@ -97,6 +96,7 @@ namespace Project2FA.UWP.ViewModels
             });
             PrimaryButtonCommand = new DelegateCommand(() =>
             {
+                Model.AccountIconName = TempAccountIconName;
                 DataService.Instance.Collection.Add(Model);
             });
 
@@ -137,11 +137,7 @@ namespace Project2FA.UWP.ViewModels
         public async Task LoadIconSVG()
         {
             Model.AccountIconName = TempAccountIconName;
-            string iconStr = await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
-            if (!string.IsNullOrWhiteSpace(iconStr))
-            {
-                Model.AccountSVGIcon = iconStr;
-            }
+            var iconStr = await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
         }
 
         /// <summary>
@@ -342,8 +338,11 @@ namespace Project2FA.UWP.ViewModels
             //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()));
             if (await FileService.FileExistsAsync(string.Format("{0}.svg", Label.ToLower()), folder))
             {
-                Model.AccountIconName = Model.Label.ToLower();
-                Model.AccountSVGIcon = await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
+                var transformName = Model.Label.ToLower();
+                transformName = transformName.Replace(" ", string.Empty);
+                transformName = transformName.Replace("-", string.Empty);
+                Model.AccountIconName = transformName;
+                await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
             }
 
             //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
@@ -412,6 +411,35 @@ namespace Project2FA.UWP.ViewModels
         //        return list;
         //    }
         //}
+        public int HashModeIndex
+        {
+            get => Model.HashMode switch
+            {
+                OtpHashMode.Sha1 => 0,
+                OtpHashMode.Sha256 => 1,
+                OtpHashMode.Sha512 => 2,
+                _ => 0,
+            };
+
+            set
+            {
+                switch (value)
+                {
+                    case 0:
+                        Model.HashMode = OtpHashMode.Sha1;
+                        break;
+                    case 1:
+                        Model.HashMode = OtpHashMode.Sha256;
+                        break;
+                    case 2:
+                        Model.HashMode = OtpHashMode.Sha512;
+                        break;
+                    default:
+                        Model.HashMode = OtpHashMode.Sha1;
+                        break;
+                }
+            }
+        }
 
         public TwoFACodeModel Model
         {
@@ -502,11 +530,16 @@ namespace Project2FA.UWP.ViewModels
             get => _iconNameCollectionModel; 
             private set => _iconNameCollectionModel = value; 
         }
-        public string TempAccountIconName { get => _tempAccountIconName; set => _tempAccountIconName = value; }
-        public bool AccountIconSavePossible 
+        public string TempAccountIconName 
         { 
-            get => _accountIconSavePossible; 
-            set => SetProperty(ref _accountIconSavePossible, value);
+            get => _tempAccountIconName;
+            set
+            {
+                if (SetProperty(ref _tempAccountIconName, value))
+                {
+                    SVGColorHelper.ManipulateSVGColor(Model, _tempAccountIconName);
+                }
+            }
         }
 
         #endregion

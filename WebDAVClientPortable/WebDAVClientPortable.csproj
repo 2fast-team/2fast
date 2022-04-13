@@ -5,7 +5,7 @@
     <LangVersion>9.0</LangVersion>
     <Title>WebDAVClientPortable</Title>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <Platforms>x86;x64;ARM;ARM64</Platforms>
+    <Platforms>x86;x64;ARM;ARM64;AnyCPU</Platforms>
   </PropertyGroup>
   
   <ItemGroup>
@@ -15,7 +15,7 @@
     </PackageReference>
     <PackageReference Include="PortableWebDavLibrary" Version="1.1.9" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
-    <PackageReference Include="System.Text.Json" Version="6.0.2" />
+    <PackageReference Include="System.Text.Json" Version="6.0.3" />
   </ItemGroup>
 
 </Project>

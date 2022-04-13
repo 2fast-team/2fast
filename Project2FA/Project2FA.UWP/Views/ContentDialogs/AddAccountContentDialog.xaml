@@ -24,7 +24,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <muxc:CommandBarFlyout 
-                x:Name="CommandBarFlyout1"
+                x:Name="AccountIconCommandBarFlyout"
                 Placement="Right">
                 <muxc:CommandBarFlyout.PrimaryCommands>
                     <AppBarButton Label="Delete" Icon="Delete" ToolTipService.ToolTip="Delete"  />
@@ -43,7 +43,6 @@
                     <AppBarButton 
                         Label="Save" 
                         Command="{x:Bind ViewModel.SaveAccountIconCommand}" 
-                        IsEnabled="{x:Bind ViewModel.AccountIconSavePossible,Mode=OneWay}"
                         Icon="Save" 
                         ToolTipService.ToolTip="Save"  />
                     <AppBarButton Label="Cancel" Icon="Cancel" ToolTipService.ToolTip="Cancel"  />
@@ -59,7 +58,7 @@
             <PivotItem Header="#Optionen" x:Uid="AddAccountContentDialogInputType">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
-                        <StackPanel MinHeight="400">
+                        <StackPanel MinHeight="400" Margin="0,0,16,0">
                             <toolkitControls:MarkdownTextBlock 
                             Text="~AddAccountContentDialogInfo.Text" 
                             TextWrapping="Wrap" 
@@ -181,8 +180,8 @@
             </PivotItem>
             <PivotItem Header="#inputs" x:Uid="AddAccountContentDialogInputs">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
-                        <StackPanel Margin="0,10,0,0">
+                    <Grid MinHeight="700">
+                        <StackPanel Margin="0,10,16,0">
                             <appcontrols:CardControl Header="#account icon">
                                 <appcontrols:CardControl.Description>
                                     <Grid MinWidth="120" MinHeight="100">
@@ -197,9 +196,6 @@
                                         Width="68" 
                                         Height="68" 
                                         Source="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
-                                            <!--<toolkit:ImageEx.Source>
-                                    <SvgImageSource UriSource="{x:Bind ViewModel.AccountPictureName,Mode=OneWay}"></SvgImageSource>
-                                </toolkit:ImageEx.Source>-->
                                         </toolkitControls:ImageEx>
                                         <Button 
                                     x:Name="BTN_EditAccountIcon"
@@ -207,8 +203,10 @@
                                     CornerRadius="32"
                                     Width="44"
                                     Height="44"
+                                    Flyout="{StaticResource AccountIconCommandBarFlyout}"
                                     VerticalAlignment="Bottom" 
-                                    HorizontalAlignment="Right" Margin="0,0,0,0" Click="BTN_EditAccountIcon_Click">
+                                    HorizontalAlignment="Right" 
+                                    Margin="0,0,0,0">
                                             <FontIcon
                                         FontSize="18"
                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -216,6 +214,23 @@
                                         </Button>
                                     </Grid>
                                 </appcontrols:CardControl.Description>
+                                <appcontrols:CardControl.ActionContent>
+                                    <StackPanel>
+                                        <AutoSuggestBox 
+                                            Header="#icon name" 
+                                            MinWidth="200"
+                                            QueryIcon="Find"
+                                            VerticalAlignment="Center"
+                                            PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                                            TextChanged="AutoSuggestBox_TextChanged" 
+                                            VerticalContentAlignment="Center"
+                                            SuggestionChosen="AutoSuggestBox_SuggestionChosen" />   
+                                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                            <Button Content="#delete" Margin="0,0,10,0"/>
+                                            <Button Content="#cancel"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </appcontrols:CardControl.ActionContent>
                             </appcontrols:CardControl>
                             
                             <Grid>
@@ -273,10 +288,29 @@
                             </TextBox>
 
                             <appcontrols:CardExpanderControl 
-                                x:Uid="AddAccountContentDialogExpertExpander" 
-                                Header="~AddAccountContentDialogExpertExpander.Header" 
                                 IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
                                 Margin="0,15,0,0">
+                                <appcontrols:CardExpanderControl.Header>
+                                    <appcontrols:CardControl
+                                                Icon="&#xEF58;"
+                                                x:Uid="AddAccountContentDialogExpertExpander" 
+                                                Header="~AddAccountContentDialogExpertExpander.Header">
+                                                <appcontrols:CardControl.ActionContent>
+                                            <Button
+                                                Grid.Column="1"
+                                                Height="36"
+                                                Width="48"
+                                                Padding="4,4,4,4"
+                                                Style="{StaticResource TransparentButtonStyle}"
+                                                ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+                                                VerticalAlignment="Bottom">
+                                                <FontIcon
+                                                    FontSize="20"
+                                                    Glyph="&#xE946;"/>
+                                            </Button>
+                                        </appcontrols:CardControl.ActionContent>
+                                            </appcontrols:CardControl>
+                                </appcontrols:CardExpanderControl.Header>
                                 <StackPanel>
                                     <appcontrols:CardControl 
                                     x:Uid="AddAccountContentDialogHashAlgo"
@@ -284,7 +318,7 @@
                                     Header="~AddAccountContentDialogHashAlgo.Header">
                                         <appcontrols:CardControl.ActionContent>
                                             <ComboBox 
-                                            SelectedIndex="1" 
+                                            SelectedIndex="{x:Bind ViewModel.HashModeIndex, Mode=TwoWay}" 
                                             MinWidth="{StaticResource CardActionControlMinWidth}">
                                                 <ComboBoxItem Content="SHA1" />
                                                 <ComboBoxItem Content="SHA256"/>
@@ -301,6 +335,7 @@
                                                 MinWidth="120"
                                                 Minimum="4" 
                                                 Maximum="8" 
+                                                Value="{x:Bind ViewModel.Model.TotpSize, Mode=OneWay}"
                                                 SpinButtonPlacementMode="Inline"/>
                                         </appcontrols:CardControl.ActionContent>
                                     </appcontrols:CardControl>

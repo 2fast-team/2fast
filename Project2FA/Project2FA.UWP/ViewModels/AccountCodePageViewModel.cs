@@ -30,7 +30,6 @@ namespace Project2FA.UWP.ViewModels
         public ICommand EditAccountCommand { get; }
         public ICommand DeleteAccountCommand { get; }
         public ICommand LogoutCommand { get; }
-        public ICommand Copy2FACodeToClipboardCommand { get; }
         public ICommand RefreshCommand { get; }
         public ICommand UndoDeleteCommand { get; }
         public ICommand ExportAccountCommand { get; }
@@ -100,7 +99,6 @@ namespace Project2FA.UWP.ViewModels
             EditAccountCommand = new RelayCommand<TwoFACodeModel>(EditAccountFromCollection);
             HideOrShowTOTPCodeCommand = new RelayCommand<TwoFACodeModel>(HideOrShowTOTPCode);
             DeleteAccountCommand = new RelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
-            Copy2FACodeToClipboardCommand = new RelayCommand<TwoFACodeModel>(Copy2FACodeToClipboard);
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
             if (TwoFADataService.TempDeletedTFAModel != null)
             {
@@ -179,21 +177,6 @@ namespace Project2FA.UWP.ViewModels
         }
 
         /// <summary>
-        /// Copies the current TOTP code from a specific entry in the collection to the clipboard
-        /// </summary>
-        /// <param name="parameter"></param>
-        private void Copy2FACodeToClipboard(object parameter)
-        {
-            if (parameter is TwoFACodeModel model)
-            {
-                DataPackage dataPackage = new DataPackage();
-                dataPackage.RequestedOperation = DataPackageOperation.Copy;
-                dataPackage.SetText(model.TwoFACode);
-                Clipboard.SetContent(dataPackage);
-            }
-        }
-
-        /// <summary>
         /// Set the favourite status for an account
         /// </summary>
         /// <param name="parameter"></param>
@@ -207,10 +190,6 @@ namespace Project2FA.UWP.ViewModels
                 if (!string.IsNullOrWhiteSpace(model.AccountIconName))
                 {
                     var iconStr = await SVGColorHelper.ManipulateSVGColor(model, model.AccountIconName);
-                    if (!string.IsNullOrWhiteSpace(iconStr))
-                    {
-                        model.AccountSVGIcon = iconStr;
-                    }
                 }
             }
         }

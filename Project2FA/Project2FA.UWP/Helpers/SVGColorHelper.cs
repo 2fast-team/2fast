@@ -16,7 +16,7 @@ namespace Project2FA.UWP.Helpers
     {
 
 
-        public async static Task<string> ManipulateSVGColor(TwoFACodeModel model, string name, bool overwriteFavourite = false)
+        public async static Task<bool> ManipulateSVGColor(TwoFACodeModel model, string name, bool overwriteFavourite = false)
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -32,36 +32,35 @@ namespace Project2FA.UWP.Helpers
                     }
                     else
                     {
-                        switch ((Window.Current.Content as FrameworkElement).RequestedTheme)
+                        switch (SettingsService.Instance.AppTheme)
                         {
-                            case ElementTheme.Default:
+                            case Services.Enums.Theme.System:
                                 if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
-                                {
-                                    pathAttr.SetAttributeValue("fill", "black");
-                                }
-                                else
                                 {
                                     pathAttr.SetAttributeValue("fill", "white");
                                 }
+                                else
+                                {
+                                    pathAttr.SetAttributeValue("fill", "black");
+                                }
                                 break;
-                            case ElementTheme.Dark:
+                            case Services.Enums.Theme.Dark:
                                 pathAttr.SetAttributeValue("fill", "white");
                                 break;
-                            case ElementTheme.Light:
+                            case Services.Enums.Theme.Light:
                                 pathAttr.SetAttributeValue("fill", "black");
                                 break;
-
                             default:
                                 break;
                         }
                     }
-
-                    return xmlDocument.ToString();
+                    model.AccountSVGIcon = xmlDocument.ToString();
+                    return true;
                 }
             }
             else
             {
-                return string.Empty;
+                return false;
             }
         }
     }

@@ -145,11 +145,11 @@ namespace Project2FA.UWP.Views
                     ShowMode = isTransient ? FlyoutShowMode.Transient : FlyoutShowMode.Standard,
                     Placement = FlyoutPlacementMode.RightEdgeAlignedTop
                 };
-                CommandBarFlyout1.ShowAt(BTN_EditAccountIcon, myOption);
+                AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon, myOption);
             }
             else
             {
-                CommandBarFlyout1.ShowAt(BTN_EditAccountIcon);
+                AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon);
             }
         }
 
@@ -157,7 +157,7 @@ namespace Project2FA.UWP.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                if (string.IsNullOrEmpty(sender.Text) == false && sender.Text.Length >= 3)
+                if (string.IsNullOrEmpty(sender.Text) == false && sender.Text.Length >= 2)
                 {
                     List<string> _nameList = new List<string>();
                     foreach (IconNameModel item in ViewModel.IconNameCollectionModel.Collection)
@@ -189,11 +189,9 @@ namespace Project2FA.UWP.Views
             if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
             {
                 ViewModel.TempAccountIconName = selectedItem;
-                ViewModel.AccountIconSavePossible = true;
             }
             else
             {
-                ViewModel.AccountIconSavePossible = false;
                 sender.Text = string.Empty;
             }
         }

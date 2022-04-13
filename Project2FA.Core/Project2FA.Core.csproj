@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>9.0</LangVersion>
-    <Platforms>x86;x64;ARM;ARM64</Platforms>
+    <Platforms>x86;x64;ARM;ARM64;AnyCPU</Platforms>
     <Title>Project2FA Core</Title>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>

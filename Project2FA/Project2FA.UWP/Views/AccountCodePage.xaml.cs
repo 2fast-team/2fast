@@ -12,6 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Prism.Services.Dialogs;
+using Prism.Commands;
 
 namespace Project2FA.UWP.Views
 {
@@ -35,7 +36,7 @@ namespace Project2FA.UWP.Views
         /// Copy the 2fa code to clipboard and create a user dialog
         /// </summary>
         /// <param name="model"></param>
-        private bool Copy2FACodeToClipboard(TwoFACodeModel model)
+        private async Task<bool> Copy2FACodeToClipboard(TwoFACodeModel model)
         {
             try
             {
@@ -49,7 +50,17 @@ namespace Project2FA.UWP.Views
             }
             catch (System.Exception)
             {
-                //TODO create dialog to inform that another task have the Clipboard in access
+                ContentDialog dialog = new ContentDialog();
+                dialog.Title = Strings.Resources.ErrorHandle;
+                dialog.Content = Strings.Resources.ErrorClipboardTask;
+                dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
+                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+                {
+                    await Copy2FACodeToClipboard(model);
+                });
+                dialog.SecondaryButtonText = Strings.Resources.ButtonTextCancel;
+                await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
                 return false;
             }
 
@@ -57,41 +68,6 @@ namespace Project2FA.UWP.Views
 
         private void CreateTeachingTip(FrameworkElement element)
         {
-            //var control = MainGrid.FindDescendant("CopyTeachingTip");
-            //if (control != null)
-            //{
-            //    var tooltip = (control as AutoCloseTeachingTip);
-            //    if (tooltip.IsOpen)
-            //    {
-            //        AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
-            //        {
-            //            Target = element,
-            //            Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
-            //            AutoCloseInterval = 1000,
-            //            BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
-            //            IsOpen = true,
-            //        };
-            //        MainGrid.Children.Add(teachingTip);
-            //    }
-            //    else
-            //    {
-            //        tooltip.IsOpen = true;
-            //        tooltip.Target = element;
-            //    }
-            //}
-            //else
-            //{
-            //    AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
-            //    {
-            //        Target = element,
-            //        Name = "CopyTeachingTip",
-            //        Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
-            //        AutoCloseInterval = 1000,
-            //        BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
-            //        IsOpen = true,
-            //    };
-            //    MainGrid.Children.Add(teachingTip);
-            //}
             AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
             {
                 Target = element,
@@ -108,11 +84,11 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BTN_CopyCode_Click(object sender, RoutedEventArgs e)
+        private async void BTN_CopyCode_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
             {
-                if(Copy2FACodeToClipboard(model))
+                if(await Copy2FACodeToClipboard(model))
                 {
                     CreateTeachingTip(sender as FrameworkElement);
                 }
@@ -124,14 +100,14 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TwoFACodeItem_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+        private async void TwoFACodeItem_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
         {
             e.Handled = true;
             if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Touch)
             {
                 if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
                 {
-                    if(Copy2FACodeToClipboard(model))
+                    if(await Copy2FACodeToClipboard(model))
                     {
                         CreateTeachingTip(sender as FrameworkElement);
                     }

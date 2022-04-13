@@ -852,4 +852,10 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
   <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
     <value>Anzahl Ziffern</value>
   </data>
+  <data name="ButtonTextRetry" xml:space="preserve">
+    <value>Erneut probieren</value>
+  </data>
+  <data name="ErrorClipboardTask" xml:space="preserve">
+    <value>Die Zwischenablage wurde von einem anderen Programm belegt, bitte versuchen Sie es erneut.</value>
+  </data>
 </root>

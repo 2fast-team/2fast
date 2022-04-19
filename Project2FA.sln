@@ -45,6 +45,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Project2FA\Project2FA.Shared\Project2FA.Shared.projitems*{23248569-9f8f-4c92-8f2e-f342c084ea8b}*SharedItemsImports = 4
 		Project2FA\Project2FA.Shared\Project2FA.Shared.projitems*{426c4f76-811d-4050-a3f8-2c810f317c7f}*SharedItemsImports = 5
+		Project2FA\Project2FA.Shared\Project2FA.Shared.projitems*{48f71dd5-805c-4d7e-8f8a-4da35a984919}*SharedItemsImports = 5
 		Project2FA\Project2FA.Shared\Project2FA.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
 		Project2FA\Project2FA.Shared\Project2FA.Shared.projitems*{bb5ffaab-e912-4ab9-b463-05a35d9c7dcb}*SharedItemsImports = 5
 		Project2FA\Project2FA.Shared\Project2FA.Shared.projitems*{c66b6e5c-b9a7-4e1d-848f-9f3f420e8503}*SharedItemsImports = 5

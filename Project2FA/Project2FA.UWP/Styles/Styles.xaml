@@ -90,6 +90,10 @@
         <Setter Property="BorderBrush" Value="{ThemeResource SystemAccentColor}"/>
     </Style>
 
+    <Style TargetType="muxc:ProgressRing">
+        <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+    </Style>
+
     <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

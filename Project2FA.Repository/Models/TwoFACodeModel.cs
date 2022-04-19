@@ -15,7 +15,13 @@ namespace Project2FA.Repository.Models
         public string Label
         {
             get => _label;
-            set => SetProperty(ref _label, value);
+            set
+            {
+                if(SetProperty(ref _label, value))
+                {
+                    //RaisePropertyChanged(nameof(Model));
+                }
+            }
         }
 
         private string _issuer;
@@ -102,7 +108,13 @@ namespace Project2FA.Repository.Models
         public string AccountIconName
         {
             get => _accountIconName;
-            set => SetProperty(ref _accountIconName, value);
+            set
+            {
+                if(SetProperty(ref _accountIconName, value))
+                {
+                    RaisePropertyChanged(nameof(Model));
+                }
+            }
         }
 
         private string _accountSVGIcon;
@@ -112,6 +124,20 @@ namespace Project2FA.Repository.Models
         {
             get => _accountSVGIcon;
             set => SetProperty(ref _accountSVGIcon, value);
+        }
+
+        private string _notes;
+        [Encrypt]
+        public string Notes
+        {
+            get => _notes;
+            set => SetProperty(ref _notes, value);
+        }
+
+        [JsonIgnore]
+        public TwoFACodeModel Model
+        {
+            get => this;
         }
 
         //[JsonIgnore]

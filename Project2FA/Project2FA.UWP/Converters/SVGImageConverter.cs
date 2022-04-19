@@ -12,20 +12,26 @@ namespace Project2FA.UWP.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var svg = new SvgImageSource();
-            try
+            if (value != null)
             {
-                var svgBuffer = CryptographicBuffer.ConvertStringToBinary(value.ToString(), BinaryStringEncoding.Utf8);
-
-                using (var stream = svgBuffer.AsStream())
+                try
                 {
-                    svg.SetSourceAsync(stream.AsRandomAccessStream()).AsTask().ConfigureAwait(false);
+                    var svgBuffer = CryptographicBuffer.ConvertStringToBinary(value.ToString(), BinaryStringEncoding.Utf8);
+
+                    using (var stream = svgBuffer.AsStream())
+                    {
+                        svg.SetSourceAsync(stream.AsRandomAccessStream()).AsTask().ConfigureAwait(false);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return null;
                 }
             }
-            catch (Exception ex)
+            else
             {
                 return null;
             }
-
             return svg;
         }
         public object ConvertBack(object value, Type targetType, object parameter, string language)

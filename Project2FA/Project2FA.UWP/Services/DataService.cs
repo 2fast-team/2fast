@@ -33,9 +33,8 @@ using Windows.Storage.Streams;
 using WebDAVClient.Types;
 using Prism.Services.Dialogs;
 using System.Collections.Generic;
-using System.Xml.Linq;
-using System.Linq;
 using Project2FA.UWP.Helpers;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace Project2FA.UWP.Services
 {
@@ -84,6 +83,25 @@ namespace Project2FA.UWP.Services
         public async Task StartService()
         {
             await CheckLocalDatafile();
+
+            if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.9.0")))
+            {
+                // try and set the account icon name
+                for (int i = 0; i < Instance.Collection.Count; i++)
+                {
+                    string label = Instance.Collection[i].Label;
+                    string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+                    string path = root + @"\Assets\AccountIcons";
+                    StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+                    label = label.ToLower().Replace("-", string.Empty).Replace(" ", string.Empty);
+                    if (await App.Current.Container.Resolve<IFileService>().FileExistsAsync(string.Format("{0}.svg", label), folder))
+                    {
+                        Instance.Collection[i].AccountIconName = label;
+                        await SVGColorHelper.GetSVGIconWithThemeColor(Instance.Collection[i], label);
+                    }
+                }
+                await Instance.WriteLocalDatafile();
+            }
         }
 
         /// <summary>
@@ -149,7 +167,7 @@ namespace Project2FA.UWP.Services
                             int i = (sender as ObservableCollection<TwoFACodeModel>).Count - 1;
                             Collection[i].HideTOTPCode = useHiddenTOTP;
                             // set the svg source
-                            var iconStr = await SVGColorHelper.ManipulateSVGColor(Collection[i], Collection[i].AccountIconName);
+                            var iconStr = await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
                             await InitializeItem(i);
                         }
                     }
@@ -515,7 +533,7 @@ namespace Project2FA.UWP.Services
         }
         
         /// <summary>
-        /// 
+        /// Upload the data file with custom WebDAV header
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="datafileDB"></param>
@@ -626,7 +644,7 @@ namespace Project2FA.UWP.Services
         {
             for (int i = 0; i < Collection.Count; i++)
             {
-                var iconStr = await SVGColorHelper.ManipulateSVGColor(Collection[i], Collection[i].AccountIconName);
+                var iconStr = await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
             }
         }
 

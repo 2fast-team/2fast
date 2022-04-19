@@ -47,13 +47,11 @@ namespace Project2FA.UWP.ViewModels
         private int _openingSeconds;
         private int _seconds;
         private string _secretKey;
-        private string _tempAccountIconName;
         DispatcherTimer _dispatcherTimer;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
         public ICommand CameraScanCommand { get; }
-        public ICommand SaveAccountIconCommand { get; }
         public ICommand DeleteAccountIconCommand { get; }
         public ICommand CancelAccountIconCommand { get; }
         private ILoggerFacade Logger { get; }
@@ -96,7 +94,7 @@ namespace Project2FA.UWP.ViewModels
             });
             PrimaryButtonCommand = new DelegateCommand(() =>
             {
-                Model.AccountIconName = TempAccountIconName;
+                //Model.AccountIconName = AccountIconName;
                 DataService.Instance.Collection.Add(Model);
             });
 
@@ -105,9 +103,14 @@ namespace Project2FA.UWP.ViewModels
                 IsCameraActive = true;
             });
 
-            SaveAccountIconCommand = new AsyncRelayCommand(LoadIconSVG);
+            //SaveAccountIconCommand = new AsyncRelayCommand(LoadIconSVG);
 
-            
+            DeleteAccountIconCommand = new DelegateCommand(() =>
+            {
+                Model.AccountSVGIcon = null;
+                Model.AccountIconName = null;
+            });
+
             //ErrorsChanged += Validation_ErrorsChanged;
 
             Window.Current.Activated += Current_Activated;
@@ -136,8 +139,8 @@ namespace Project2FA.UWP.ViewModels
 
         public async Task LoadIconSVG()
         {
-            Model.AccountIconName = TempAccountIconName;
-            var iconStr = await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
+            //Model.AccountIconName = TempAccountIconName;
+            await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
         }
 
         /// <summary>
@@ -335,14 +338,15 @@ namespace Project2FA.UWP.ViewModels
             string path = root + @"\Assets\AccountIcons";
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
 
+            var transformName = Model.Label.ToLower();
+            transformName = transformName.Replace(" ", string.Empty);
+            transformName = transformName.Replace("-", string.Empty);
             //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()));
-            if (await FileService.FileExistsAsync(string.Format("{0}.svg", Label.ToLower()), folder))
+            if (await FileService.FileExistsAsync(string.Format("{0}.svg", transformName), folder))
             {
-                var transformName = Model.Label.ToLower();
-                transformName = transformName.Replace(" ", string.Empty);
-                transformName = transformName.Replace("-", string.Empty);
+                
                 Model.AccountIconName = transformName;
-                await SVGColorHelper.ManipulateSVGColor(Model, Model.AccountIconName);
+                await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
             }
 
             //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
@@ -530,17 +534,18 @@ namespace Project2FA.UWP.ViewModels
             get => _iconNameCollectionModel; 
             private set => _iconNameCollectionModel = value; 
         }
-        public string TempAccountIconName 
-        { 
-            get => _tempAccountIconName;
-            set
-            {
-                if (SetProperty(ref _tempAccountIconName, value))
-                {
-                    SVGColorHelper.ManipulateSVGColor(Model, _tempAccountIconName);
-                }
-            }
-        }
+
+        //public string AccountIconName
+        //{
+        //    get => _accountIconName;
+        //    set
+        //    {
+        //        if (SetProperty(ref _accountIconName, value))
+        //        {
+        //            SVGColorHelper.ManipulateSVGColor(Model, _accountIconName);
+        //        }
+        //    }
+        //}
 
         #endregion
     }

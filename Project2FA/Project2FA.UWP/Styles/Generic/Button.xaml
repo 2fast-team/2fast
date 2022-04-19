@@ -155,6 +155,7 @@
             </Setter.Value>
         </Setter>
     </Style>-->
+    <StaticResource x:Key="ButtonRevealBackground" ResourceKey="SystemControlBackgroundBaseLowRevealBackgroundBrush" />
 
     <Style TargetType="Button" x:Key="ButtonRevealStyle">
         <Setter Property="Background" Value="{ThemeResource ButtonRevealBackground}" />

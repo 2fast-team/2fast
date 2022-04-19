@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.UWP.Strings"
     Style="{StaticResource MyContentDialogStyle}"
@@ -40,24 +41,28 @@
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid MinWidth="400">
+    <Grid MinWidth="400" MinHeight="650">
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
             <StackPanel>
-                <appcontrols:CardControl Header="#account icon">
+                <appcontrols:CardControl 
+                    Header="~AddAccountContentDialogAccountIcon.Header"
+                    x:Uid="AddAccountContentDialogAccountIcon">
                     <appcontrols:CardControl.Description>
-                        <Grid Margin="0,10,0,0" MinWidth="120" MinHeight="100">
+                        <Grid 
+                            Margin="0,10,0,0" 
+                            MinWidth="120" 
+                            MinHeight="100">
                             <Ellipse 
                                 Width="110" 
                                 Height="110" 
                                 Fill="{ThemeResource PersonPictureEllipseFillThemeBrush}"
                                 Stroke="{ThemeResource PersonPictureEllipseFillStrokeBrush}"
                                 StrokeThickness="{ThemeResource PersonPictureEllipseStrokeThickness}">
-
                             </Ellipse>
                             <toolkit:ImageEx 
                                 Width="68" 
                                 Height="68" 
-                                Source="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
+                                Source="{x:Bind ViewModel.TempAccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
                             </toolkit:ImageEx>
                             <Button 
                                 Background="{ThemeResource SystemChromeMediumColor}"
@@ -73,16 +78,75 @@
                             </Button>
                         </Grid>
                     </appcontrols:CardControl.Description>
+                    <appcontrols:CardControl.ActionContent>
+                        <StackPanel>
+                            <AutoSuggestBox 
+                                Header="#icon name" 
+                                MinWidth="200"
+                                QueryIcon="Find"
+                                VerticalAlignment="Center"
+                                PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                                TextChanged="AutoSuggestBox_TextChanged" 
+                                VerticalContentAlignment="Center"
+                                SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button 
+                                    Command="{x:Bind ViewModel.DeleteAccountIconCommand}"
+                                    Margin="0,0,10,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <SymbolIcon Symbol="Delete"/>
+                                        <TextBlock 
+                                    Text="~AddAccountContentDialogDeleteAccountIcon.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="AddAccountContentDialogDeleteAccountIcon" 
+                                    FontFamily="Segoe UI" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </appcontrols:CardControl.ActionContent>
                 </appcontrols:CardControl>
                 <TextBox 
                 Header="~AddAccountContentDialogLabel.Header" 
                 x:Uid="AddAccountContentDialogLabel"  
-                Text="{x:Bind ViewModel.Label,Mode=TwoWay}"/>
+                Text="{x:Bind ViewModel.TempLabel,Mode=TwoWay}"/>
                 <TextBox 
                 Header="~AddAccountContentDialogAccountName.Header"
                 x:Uid="AddAccountContentDialogAccountName" 
-                Text="{x:Bind ViewModel.Issuer,Mode=TwoWay}" 
+                Text="{x:Bind ViewModel.TempIssuer,Mode=TwoWay}" 
                 Margin="0,10,0,20"/>
+
+                <appcontrols:CardExpanderControl 
+                                Margin="0,15,0,8">
+                    <appcontrols:CardExpanderControl.Header>
+                        <appcontrols:CardControl
+                            Icon="&#xE104;"
+                            x:Uid="EditAccountContentDialogAccountNotes" 
+                            Header="~EditAccountContentDialogAccountNotes.Header">
+                        </appcontrols:CardControl>
+                    </appcontrols:CardExpanderControl.Header>
+                    <StackPanel>
+                        <toolkit:TextToolbar 
+                            x:Name="Toolbar"
+                            Editor="{Binding ElementName=REB_Notes}"
+                            IsEnabled="True"
+                            UseURIChecker="True"
+                            Margin="0,16,0,0"
+                            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                            <toolkit:TextToolbar.Formatter>
+                                <richText:RichTextFormatter/>
+                            </toolkit:TextToolbar.Formatter>
+                        </toolkit:TextToolbar>
+                        <RichEditBox
+                                x:Name="REB_Notes"
+                                Margin="0,0,0,8"
+                                MinHeight="80"
+                                TextChanged="REB_Notes_TextChanged">
+                        </RichEditBox>
+                    </StackPanel>
+                </appcontrols:CardExpanderControl>
                 <!--Category for filter and sorting
                 <ListView/>-->
                 <!--<Grid>

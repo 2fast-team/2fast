@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
     xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
     Style="{StaticResource MyContentDialogStyle}"
@@ -23,7 +24,7 @@
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <muxc:CommandBarFlyout 
+            <!--<muxc:CommandBarFlyout 
                 x:Name="AccountIconCommandBarFlyout"
                 Placement="Right">
                 <muxc:CommandBarFlyout.PrimaryCommands>
@@ -47,7 +48,7 @@
                         ToolTipService.ToolTip="Save"  />
                     <AppBarButton Label="Cancel" Icon="Cancel" ToolTipService.ToolTip="Cancel"  />
                 </muxc:CommandBarFlyout.PrimaryCommands>
-            </muxc:CommandBarFlyout>
+            </muxc:CommandBarFlyout>-->
 
         </ResourceDictionary>
     </ContentDialog.Resources>
@@ -147,7 +148,7 @@
                             </Button>
 
                             <!--next version 1.1-->
-                            <Button 
+                            <!--<Button 
                             x:Name="BTN_QRCodeCameraScan"
                             Margin="0,10,0,10" 
                             Style="{StaticResource AccentButtonStyle}"
@@ -166,7 +167,7 @@
                                     x:Uid="AddAccountContentDialogCameraScan" 
                                     FontFamily="Segoe UI" />
                                 </StackPanel>
-                            </Button>
+                            </Button>-->
                         </StackPanel>
                     </ScrollViewer>
                     <Border Visibility="{x:Bind ViewModel.IsCameraActive, Mode=OneWay}">
@@ -182,7 +183,9 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <Grid MinHeight="700">
                         <StackPanel Margin="0,10,16,0">
-                            <appcontrols:CardControl Header="#account icon">
+                            <appcontrols:CardControl
+                                x:Uid="AddAccountContentDialogAccountIcon"
+                                Header="~AddAccountContentDialogAccountIcon.Header">
                                 <appcontrols:CardControl.Description>
                                     <Grid MinWidth="120" MinHeight="100">
                                         <Ellipse 
@@ -197,13 +200,11 @@
                                         Height="68" 
                                         Source="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
                                         </toolkitControls:ImageEx>
-                                        <Button 
-                                    x:Name="BTN_EditAccountIcon"
+                                        <Button
                                     Background="{ThemeResource SystemChromeMediumColor}"
                                     CornerRadius="32"
                                     Width="44"
                                     Height="44"
-                                    Flyout="{StaticResource AccountIconCommandBarFlyout}"
                                     VerticalAlignment="Bottom" 
                                     HorizontalAlignment="Right" 
                                     Margin="0,0,0,0">
@@ -226,8 +227,20 @@
                                             VerticalContentAlignment="Center"
                                             SuggestionChosen="AutoSuggestBox_SuggestionChosen" />   
                                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                            <Button Content="#delete" Margin="0,0,10,0"/>
-                                            <Button Content="#cancel"/>
+                                            <Button 
+                                                Command="{x:Bind ViewModel.DeleteAccountIconCommand}"
+                                                Margin="0,0,10,0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <SymbolIcon Symbol="Delete"/>
+                                                    <TextBlock 
+                                    Text="~AddAccountContentDialogDeleteAccountIcon.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="AddAccountContentDialogDeleteAccountIcon" 
+                                    FontFamily="Segoe UI" />
+                                                </StackPanel>
+                                            </Button>
                                         </StackPanel>
                                     </StackPanel>
                                 </appcontrols:CardControl.ActionContent>
@@ -265,6 +278,37 @@
                                         PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
                                 </Interactivity:Interaction.Behaviors>-->
                             </TextBox>
+
+                            <appcontrols:CardExpanderControl 
+                                Margin="0,15,0,8">
+                                <appcontrols:CardExpanderControl.Header>
+                                    <appcontrols:CardControl
+                                                Icon="&#xE104;"
+                                                x:Uid="AddAccountContentDialogAccountNotes" 
+                                                Header="~AddAccountContentDialogAccountNotes.Header">
+                                    </appcontrols:CardControl>
+                                </appcontrols:CardExpanderControl.Header>
+                                <StackPanel>
+                                    <toolkitControls:TextToolbar 
+                                x:Name="Toolbar"
+                                Editor="{Binding ElementName=REB_Notes}"
+                                IsEnabled="True"
+                                UseURIChecker="True"
+                                Margin="0,16,0,0"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                        <toolkitControls:TextToolbar.Formatter>
+                                            <richText:RichTextFormatter/>
+                                        </toolkitControls:TextToolbar.Formatter>
+                                    </toolkitControls:TextToolbar>
+                                    <RichEditBox
+                                x:Name="REB_Notes"
+                                Margin="0,0,0,8"
+                                MinHeight="80"
+                                TextChanged="REB_Notes_TextChanged">
+                                    </RichEditBox>
+                                </StackPanel>
+                            </appcontrols:CardExpanderControl>
+
                             <CheckBox 
                                 x:Name="CB_ManualInput"
                                 x:Uid="AddAccountContentDialogManualInputCheckbox" 

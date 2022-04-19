@@ -858,4 +858,16 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
   <data name="ErrorClipboardTask" xml:space="preserve">
     <value>Die Zwischenablage wurde von einem anderen Programm belegt, bitte versuchen Sie es erneut.</value>
   </data>
+  <data name="AddAccountContentDialogDeleteAccountIcon.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
+    <value>Account Bild</value>
+  </data>
+  <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Notizen erstellen</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
 </root>

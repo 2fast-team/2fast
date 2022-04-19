@@ -203,7 +203,9 @@
                         <muxc:PersonPicture 
                             Height="48"
                             Width="48"
-                            DisplayName="{Binding Converter={StaticResource PersonalPictureInitialsVisibilityConverter}}"
+                            DisplayName="{x:Bind Model, 
+                            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                            Mode=OneWay}"
                             Visibility="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                             Margin="15,10,20,0"
                             Grid.Column="1"
@@ -221,7 +223,9 @@
                             Width="48"
                             Background="{ThemeResource SystemAccentColor}"
                             BorderBrush="{ThemeResource SystemAccentColor}"
-                            DisplayName="{Binding Converter={StaticResource PersonalPictureInitialsVisibilityConverter}}"
+                            DisplayName="{x:Bind Model, 
+                            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                            Mode=OneWay}"
                             Margin="15,10,20,0"
                             Grid.Column="1"
                             Grid.Row="0"
@@ -311,6 +315,7 @@
                                 <controls:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
+                                    
                                 Minimum="0"
                                 IsIndeterminate="False"
                                 Width="42"

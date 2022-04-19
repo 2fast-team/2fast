@@ -4,7 +4,6 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Prism.Mvvm;
 using Project2FA.UWP.Services;
-using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Views;
 using Prism.Commands;
@@ -110,8 +109,6 @@ namespace Project2FA.UWP.ViewModels
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
-
-
         private async Task StartTOTPLogic()
         {
             if (DataService.Instance.Collection.Count != 0)
@@ -123,7 +120,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 await DataService.Instance.StartService();
             }
-            
+
             TOTPEventStopwatch.Start(); // stopwatch for the calculation of the remaining time for a valid totp code
             _dispatcherTOTPTimer.Start(); // the event for the set of seconds and calculating the totp code
             await DataService.Instance.ResetCollection();
@@ -189,7 +186,7 @@ namespace Project2FA.UWP.ViewModels
                 await TwoFADataService.WriteLocalDatafile();
                 if (!string.IsNullOrWhiteSpace(model.AccountIconName))
                 {
-                    var iconStr = await SVGColorHelper.ManipulateSVGColor(model, model.AccountIconName);
+                    var iconStr = await SVGColorHelper.GetSVGIconWithThemeColor(model, model.AccountIconName);
                 }
             }
         }

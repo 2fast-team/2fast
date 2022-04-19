@@ -1,4 +1,5 @@
-﻿using Project2FA.Repository.Models;
+﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
+using Project2FA.Repository.Models;
 using Project2FA.UWP.Controls;
 using Project2FA.UWP.Extensions;
 using Project2FA.UWP.Services;
@@ -55,8 +56,15 @@ namespace Project2FA.UWP.Views
             }
             //register an event for the changed Tag property of the input textbox
             _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
+            Loaded += AddAccountContentDialog_Loaded;
         }
 
+        private void AddAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            Toolbar.DefaultButtons.RemoveAt(2);
+            //REB_Notes.Document.SetText(Windows.UI.Text.TextSetOptions.FormatRtf,ViewModel.Model.Notes);
+            //bool suc = Toolbar.DefaultButtons.Remove(Toolbar.GetDefaultButton(ButtonType.Link));
+        }
 
         private void _barcodeScanner_OnCameraInitialized()
         {
@@ -136,22 +144,22 @@ namespace Project2FA.UWP.Views
             RootGrid.Children.Add(teachingTip);
         }
 
-        private void ShowMenu(bool isTransient)
-        {
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
-            {
-                FlyoutShowOptions myOption = new FlyoutShowOptions
-                {
-                    ShowMode = isTransient ? FlyoutShowMode.Transient : FlyoutShowMode.Standard,
-                    Placement = FlyoutPlacementMode.RightEdgeAlignedTop
-                };
-                AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon, myOption);
-            }
-            else
-            {
-                AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon);
-            }
-        }
+        //private void ShowMenu(bool isTransient)
+        //{
+        //    if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+        //    {
+        //        FlyoutShowOptions myOption = new FlyoutShowOptions
+        //        {
+        //            ShowMode = isTransient ? FlyoutShowMode.Transient : FlyoutShowMode.Standard,
+        //            Placement = FlyoutPlacementMode.RightEdgeAlignedTop
+        //        };
+        //        AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon, myOption);
+        //    }
+        //    else
+        //    {
+        //        AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon);
+        //    }
+        //}
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
@@ -170,15 +178,10 @@ namespace Project2FA.UWP.Views
                         listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
                     }
                     sender.ItemsSource = listSuggestion;
-                    //ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
                 }
                 else
                 {
                     sender.ItemsSource = null;
-                    //if (ViewModel.TwoFADataService.ACVCollection.Filter != null)
-                    //{
-                    //    ViewModel.TwoFADataService.ACVCollection.Filter = null;
-                    //}
                 }
             }
         }
@@ -188,7 +191,8 @@ namespace Project2FA.UWP.Views
             string selectedItem = args.SelectedItem.ToString();
             if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
             {
-                ViewModel.TempAccountIconName = selectedItem;
+                ViewModel.Model.AccountIconName = selectedItem;
+                ViewModel.LoadIconSVG();
             }
             else
             {
@@ -198,7 +202,12 @@ namespace Project2FA.UWP.Views
 
         private void BTN_EditAccountIcon_Click(object sender, RoutedEventArgs e)
         {
-            ShowMenu(false);
+            //ShowMenu(false);
+        }
+
+        private void REB_Notes_TextChanged(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Model.Notes = Toolbar.Formatter?.Text;
         }
     }
 }

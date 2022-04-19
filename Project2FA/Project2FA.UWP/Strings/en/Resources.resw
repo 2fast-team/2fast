@@ -851,4 +851,16 @@ QR codes can now be displayed for individual accounts in order to import them wi
   <data name="ErrorClipboardTask" xml:space="preserve">
     <value>The clipboard has been occupied by another program, please try again.</value>
   </data>
+  <data name="AddAccountContentDialogDeleteAccountIcon.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
+    <value>Account icon</value>
+  </data>
+  <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Add notes</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Notes</value>
+  </data>
 </root>

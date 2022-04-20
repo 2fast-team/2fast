@@ -57,7 +57,7 @@ namespace Project2FA.UWP.Views
 
         private void REB_Notes_TextChanged(object sender, RoutedEventArgs e)
         {
-            ViewModel.Model.Notes = Toolbar.Formatter?.Text;
+            ViewModel.TempNotes = Toolbar.Formatter?.Text;
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

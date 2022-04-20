@@ -15,6 +15,7 @@ namespace Project2FA.UWP.Views
 
         private void WelcomePage_Loaded(object sender, RoutedEventArgs e)
         {
+            App.ShellPageInstance.SetTitleBarAsDraggable(); //TODO check workaround
             App.ShellPageInstance.ShellViewInternal.Header = ViewModel;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
             ViewModel.IsTutorialOpen = true;

@@ -90,14 +90,6 @@
     </Page.Resources>
 
     <Grid x:Name="Root">
-        <!--<Grid.Background>
-            <ImageBrush 
-                x:Name="MyImage"
-                ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg" 
-                Stretch="UniformToFill">
-            </ImageBrush>
-        </Grid.Background>-->
-        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
@@ -130,8 +122,10 @@
         <Border x:Name="PageImageBackgroundBorder" Grid.ColumnSpan="3">
             <muxc:ParallaxView x:Name="Parallax"
                                VerticalShift="50">
-                <Image Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                <muxc:ParallaxView.Source>
+                    <Image Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
                        Stretch="UniformToFill" />
+                </muxc:ParallaxView.Source>
             </muxc:ParallaxView>
         </Border>
 

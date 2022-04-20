@@ -84,23 +84,24 @@ namespace Project2FA.UWP.Services
         {
             await CheckLocalDatafile();
 
-            if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.9.0")))
+            if (SystemInformation.Instance.IsAppUpdated &&
+                SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.9.0"))) //SystemInformation.Instance.IsAppUpdated && 
             {
                 // try and set the account icon name
-                for (int i = 0; i < Instance.Collection.Count; i++)
+                for (int i = 0; i < Collection.Count; i++)
                 {
-                    string label = Instance.Collection[i].Label;
+                    string label = Collection[i].Label;
                     string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
                     string path = root + @"\Assets\AccountIcons";
                     StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
                     label = label.ToLower().Replace("-", string.Empty).Replace(" ", string.Empty);
-                    if (await App.Current.Container.Resolve<IFileService>().FileExistsAsync(string.Format("{0}.svg", label), folder))
+                    if (await FileService.FileExistsAsync(string.Format("{0}.svg", label), folder))
                     {
-                        Instance.Collection[i].AccountIconName = label;
-                        await SVGColorHelper.GetSVGIconWithThemeColor(Instance.Collection[i], label);
+                        Collection[i].AccountIconName = label;
+                        await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], label);
                     }
                 }
-                await Instance.WriteLocalDatafile();
+                await WriteLocalDatafile();
             }
         }
 

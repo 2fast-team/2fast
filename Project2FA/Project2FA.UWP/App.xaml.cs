@@ -9,15 +9,12 @@ using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
 using Project2FA.Core.Services.Parser;
 using Project2FA.Repository.Database;
-using Project2FA.Repository.Models;
 using Project2FA.UWP.Helpers;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.ViewModels;
 using Project2FA.UWP.Views;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Template10.Services.File;
 using Template10.Services.Serialization;
 using Template10.Services.Settings;
 using Template10.Utilities;
@@ -98,6 +95,7 @@ namespace Project2FA.UWP
             container.RegisterForNavigation<SettingPage, SettingPageViewModel>();
             container.RegisterForNavigation<BlankPage, BlankPageViewModel>();
             container.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
+            container.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
             //contentdialogs and view-models
             container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
             container.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();
@@ -108,6 +106,7 @@ namespace Project2FA.UWP
             container.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();
             container.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
             container.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
+            container.RegisterDialog<TutorialContentDialog, TutorialContentDialogViewModel>();
         }
 
         public override async Task OnStartAsync(IStartArgs args)
@@ -160,32 +159,32 @@ namespace Project2FA.UWP
         }
 
         /// <summary>
-        /// Indexing the list of svg names in one json file
+        /// Indexing the list of svg names in one json file, for development only
         /// </summary>
         /// <returns></returns>
-        private async Task LoadIconNames()
-        {
-            IFileService fileService = App.Current.Container.Resolve<IFileService>();
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            if (!await fileService.FileExistsAsync("IconNameCollection.json", localFolder))
-            {
-                string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-                string path = root + @"\Assets\AccountIcons";
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-                var elements = await folder.GetFilesAsync();
-                List<IconNameModel> iconList = new List<IconNameModel>();
-                foreach (var item in elements)
-                {
-                    iconList.Add(new IconNameModel() { Name = item.DisplayName });
-                }
-                var iconCollectionModel = new IconNameCollectionModel()
-                {
-                    AppVersion = SystemInformation.Instance.ApplicationVersion.ToString(),
-                    Collection = iconList.ToObservableCollection()
-                };
-                await fileService.WriteFileAsync("IconNameCollection.json", iconCollectionModel, localFolder);
-            }
-        }
+        //private async Task LoadIconNames()
+        //{
+        //    IFileService fileService = App.Current.Container.Resolve<IFileService>();
+        //    StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+        //    if (!await fileService.FileExistsAsync("IconNameCollection.json", localFolder))
+        //    {
+        //        string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+        //        string path = root + @"\Assets\AccountIcons";
+        //        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+        //        var elements = await folder.GetFilesAsync();
+        //        List<IconNameModel> iconList = new List<IconNameModel>();
+        //        foreach (var item in elements)
+        //        {
+        //            iconList.Add(new IconNameModel() { Name = item.DisplayName });
+        //        }
+        //        var iconCollectionModel = new IconNameCollectionModel()
+        //        {
+        //            AppVersion = SystemInformation.Instance.ApplicationVersion.ToString(),
+        //            Collection = iconList.ToObservableCollection()
+        //        };
+        //        await fileService.WriteFileAsync("IconNameCollection.json", iconCollectionModel, localFolder);
+        //    }
+        //}
 
         #region AutoLogout
         /// <summary>

@@ -22,6 +22,7 @@
             <Converters:TOTPVisibilityTooltipConverter x:Key="TOTPVisibilityTooltipConverter"/>
             <Converters:DoubleToInt32ToStringConverter x:Key="DoubleToInt32ToStringConverter"/>
             <Converters:PersonalPictureInitialsVisibilityConverter x:Key="PersonalPictureInitialsVisibilityConverter"/>
+            <Converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
             <Converters:SVGImageConverter x:Key="SVGImageConverter"/>
         </ResourceDictionary>
     </Application.Resources>

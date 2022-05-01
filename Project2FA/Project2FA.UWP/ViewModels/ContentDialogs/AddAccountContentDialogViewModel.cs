@@ -47,18 +47,20 @@ namespace Project2FA.UWP.ViewModels
         private int _openingSeconds;
         private int _seconds;
         private string _secretKey;
+        private bool _isEditBoxVisible;
         DispatcherTimer _dispatcherTimer;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
         public ICommand CameraScanCommand { get; }
         public ICommand DeleteAccountIconCommand { get; }
-        public ICommand CancelAccountIconCommand { get; }
+        public ICommand EditAccountIconCommand { get; }
         private ILoggerFacade Logger { get; }
         private IResourceService ResourceService { get; }
         private ISerializationService SerializationService { get; }
         private IFileService FileService { get; }
         private IconNameCollectionModel _iconNameCollectionModel;
+        private string _tempIconLabel;
 
         /// <summary>
         /// Constructor
@@ -94,7 +96,6 @@ namespace Project2FA.UWP.ViewModels
             });
             PrimaryButtonCommand = new DelegateCommand(() =>
             {
-                //Model.AccountIconName = AccountIconName;
                 DataService.Instance.Collection.Add(Model);
             });
 
@@ -103,7 +104,10 @@ namespace Project2FA.UWP.ViewModels
                 IsCameraActive = true;
             });
 
-            //SaveAccountIconCommand = new AsyncRelayCommand(LoadIconSVG);
+            EditAccountIconCommand = new DelegateCommand(() =>
+            {
+                IsEditBoxVisible = !IsEditBoxVisible;
+            });
 
             DeleteAccountIconCommand = new DelegateCommand(() =>
             {
@@ -341,14 +345,14 @@ namespace Project2FA.UWP.ViewModels
             var transformName = Model.Label.ToLower();
             transformName = transformName.Replace(" ", string.Empty);
             transformName = transformName.Replace("-", string.Empty);
-            //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()));
+;
             if (await FileService.FileExistsAsync(string.Format("{0}.svg", transformName), folder))
             {
                 
                 Model.AccountIconName = transformName;
                 await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
             }
-
+            //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()))
             //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
             //string path = root + @"\Assets\AccountIcons";
             //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
@@ -506,6 +510,7 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 Model.Label = value;
+                TempIconLabel = value;
                 CheckInputs();
             }
         }
@@ -535,18 +540,17 @@ namespace Project2FA.UWP.ViewModels
             private set => _iconNameCollectionModel = value; 
         }
 
-        //public string AccountIconName
-        //{
-        //    get => _accountIconName;
-        //    set
-        //    {
-        //        if (SetProperty(ref _accountIconName, value))
-        //        {
-        //            SVGColorHelper.ManipulateSVGColor(Model, _accountIconName);
-        //        }
-        //    }
-        //}
+        public bool IsEditBoxVisible
+        {
+            get => _isEditBoxVisible;
+            set => SetProperty(ref _isEditBoxVisible, value);
+        }
 
+        public string TempIconLabel
+        {
+            get => _tempIconLabel;
+            set => SetProperty(ref _tempIconLabel, value);
+        }
         #endregion
     }
 }

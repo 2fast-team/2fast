@@ -1,5 +1,4 @@
 ﻿using Prism.Mvvm;
-using Project2FA.UWP.Views;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -22,16 +21,22 @@ namespace Project2FA.UWP.ViewModels
     {
         private string _serverAddress;
         private string _username;
-        private string _webDAVPassword;
         private int _selectedIndex;
         private string _dateFileName;
         private bool _datafileBTNActive;
         private bool _isLoading;
         private bool _showError;
-        private bool _webDAVDatafilePropertiesEnabled;
+        
         private StorageFolder _localStorageFolder;
         private string _password, _passwordRepeat;
         internal WebDAVFileOrFolderModel _choosenOneWebDAVFile;
+
+        private string _webDAVPassword;
+        private bool _webDAVDatafilePropertiesEnabled;
+        private bool _webDAVLoginRequiered;
+        private bool _webDAVDatafilePropertiesExpanded;
+        private bool _isWebDAVCreationButtonEnable;
+        private bool _webDAVLoginError;
 
         public ICommand PrimaryButtonCommand { get; set; }
         public ICommand ChangePathCommand { get; set; }
@@ -46,12 +51,12 @@ namespace Project2FA.UWP.ViewModels
 
         private ISecretService SecretService { get; }
 
-        private IFileService _fileService { get; }
+        private IFileService FileService { get; }
 
-        public DatafileViewModelBase()
+        public DatafileViewModelBase(ISecretService secretService, IFileService fileService)
         {
-            SecretService = App.Current.Container.Resolve<ISecretService>();
-            _fileService = App.Current.Container.Resolve<IFileService>();
+            SecretService = secretService;
+            FileService = fileService;
             //ErrorsChanged += Model_ErrorsChanged;
         }
 
@@ -104,7 +109,7 @@ namespace Project2FA.UWP.ViewModels
         /// <returns>true if the datafile exists with the name, else false</returns>
         public Task<bool> CheckIfNameExists(string name)
         {
-            return _fileService.FileExistsAsync(name, LocalStorageFolder);
+            return FileService.FileExistsAsync(name, LocalStorageFolder);
         }
 
 
@@ -379,6 +384,35 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _webDAVDatafilePropertiesEnabled;
             set => SetProperty(ref _webDAVDatafilePropertiesEnabled, value);
+        }
+
+        public bool WebDAVLoginRequiered
+        {
+            get => _webDAVLoginRequiered;
+            set => SetProperty(ref _webDAVLoginRequiered, value);
+        }
+
+        public bool WebDAVDatafilePropertiesExpanded
+        {
+            get => _webDAVDatafilePropertiesExpanded;
+            set => SetProperty(ref _webDAVDatafilePropertiesExpanded, value);
+        }
+
+        public WebDAVFileOrFolderModel ChoosenOneWebDAVFile
+        {
+            get => _choosenOneWebDAVFile;
+            set => SetProperty(ref _choosenOneWebDAVFile, value);
+        }
+
+        public bool IsWebDAVCreationButtonEnable
+        {
+            get => _isWebDAVCreationButtonEnable;
+            set => SetProperty(ref _isWebDAVCreationButtonEnable, value);
+        }
+        public bool WebDAVLoginError
+        {
+            get => _webDAVLoginError;
+            set => SetProperty(ref _webDAVLoginError, value);
         }
 
         #endregion

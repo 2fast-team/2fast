@@ -144,23 +144,6 @@ namespace Project2FA.UWP.Views
             RootGrid.Children.Add(teachingTip);
         }
 
-        //private void ShowMenu(bool isTransient)
-        //{
-        //    if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
-        //    {
-        //        FlyoutShowOptions myOption = new FlyoutShowOptions
-        //        {
-        //            ShowMode = isTransient ? FlyoutShowMode.Transient : FlyoutShowMode.Standard,
-        //            Placement = FlyoutPlacementMode.RightEdgeAlignedTop
-        //        };
-        //        AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon, myOption);
-        //    }
-        //    else
-        //    {
-        //        AccountIconCommandBarFlyout.ShowAt(BTN_EditAccountIcon);
-        //    }
-        //}
-
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
@@ -208,6 +191,20 @@ namespace Project2FA.UWP.Views
         private void REB_Notes_TextChanged(object sender, RoutedEventArgs e)
         {
             ViewModel.Model.Notes = Toolbar.Formatter?.Text;
+        }
+
+        private void BTN_Expertsettings_Help_Click(object sender, RoutedEventArgs e)
+        {
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            {
+                Target = sender as FrameworkElement,
+                Subtitle = Strings.Resources.AddAccountCodeContentDialogExpertSettingsHelp,
+                AutoCloseInterval = 8000,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            RootGrid.Children.Add(teachingTip);
         }
     }
 }

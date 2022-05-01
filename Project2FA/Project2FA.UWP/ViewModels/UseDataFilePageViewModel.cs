@@ -39,11 +39,6 @@ namespace Project2FA.UWP.ViewModels
 
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
-        private bool _webDAVLoginRequiered;
-        private bool _webDAVDatafilePropertiesExpanded;
-        private bool _isWebDAVCreationButtonEnable;
-        private bool _webDAVLoginError;
-
         /// <summary>
         /// Constructor to start the datafile selector
         /// </summary>
@@ -52,7 +47,8 @@ namespace Project2FA.UWP.ViewModels
             INewtonsoftJSONService newtonsoftJSONService,
             INetworkService networkService,
             INavigationService navigationService,
-            IDialogService dialogService)
+            ISecretService secretService,
+            IDialogService dialogService) : base(secretService,fileService)
         {
             NaviationService = navigationService;
             DialogService = dialogService;
@@ -332,34 +328,5 @@ namespace Project2FA.UWP.ViewModels
         }
 
         public bool ChangeDatafile { get; set; }
-
-        public bool WebDAVLoginRequiered
-        {
-            get => _webDAVLoginRequiered; 
-            set => SetProperty(ref _webDAVLoginRequiered, value);
-        }
-
-        public bool WebDAVDatafilePropertiesExpanded
-        {
-            get => _webDAVDatafilePropertiesExpanded; 
-            set => SetProperty(ref _webDAVDatafilePropertiesExpanded, value);
-        }
-
-        public WebDAVFileOrFolderModel ChoosenOneWebDAVFile
-        {
-            get => _choosenOneWebDAVFile;
-            set => SetProperty(ref _choosenOneWebDAVFile, value);
-        }
-
-        public bool IsWebDAVCreationButtonEnable
-        {
-            get => _isWebDAVCreationButtonEnable;
-            set => SetProperty(ref _isWebDAVCreationButtonEnable, value);
-        }
-        public bool WebDAVLoginError 
-        { 
-            get => _webDAVLoginError;
-            set => SetProperty(ref _webDAVLoginError, value);
-        }
     }
 }

@@ -53,9 +53,9 @@
                             <VisualStateGroup x:Name="CommonStates">
                                 <!-- Visual State when a Photo is available for display -->
                                 <VisualState x:Name="Photo">
-                                    <VisualState.Setters>
+                                    <!--<VisualState.Setters>
                                         <Setter Target="PersonPictureEllipse.Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ActualImageBrush}"/>
-                                    </VisualState.Setters>
+                                    </VisualState.Setters>-->
                                 </VisualState>
                                 <!-- Visual State when no Photo is available (but there are initials).-->
                                 <VisualState x:Name="Initials" />
@@ -116,17 +116,17 @@
                             IsTextScaleFactorEnabled="False"
                             Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ActualInitials}" />
 
-                        <Rectangle
+                        <!--<Rectangle
                             x:Name="PersonPictureEllipse"
                             x:DeferLoadStrategy="Lazy"
                             Width="32"
                             Height="32"
                             FlowDirection="LeftToRight">
-                        </Rectangle>
+                        </Rectangle>-->
 
                         <toolkitcontrols:ImageEx 
-                            Width="32" 
-                            Height="32" 
+                            Width="{Binding Width, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource PersonPictureSizeConverter}}" 
+                            Height="{Binding Height, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource PersonPictureSizeConverter}}"  
                             Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag, Converter={StaticResource SVGImageConverter}}"/>
 
                         <Grid

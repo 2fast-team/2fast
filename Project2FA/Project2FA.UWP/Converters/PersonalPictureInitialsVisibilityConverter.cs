@@ -4,6 +4,9 @@ using Windows.UI.Xaml.Data;
 
 namespace Project2FA.UWP.Converters
 {
+    /// <summary>
+    /// Called twice because of two PersonPicture controls (binding):/
+    /// </summary>
     public class PersonalPictureInitialsVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

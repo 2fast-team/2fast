@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
     xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
@@ -187,49 +188,51 @@
                                 x:Uid="AddAccountContentDialogAccountIcon"
                                 Header="~AddAccountContentDialogAccountIcon.Header">
                                 <appcontrols:CardControl.Description>
-                                    <Grid MinWidth="120" MinHeight="100">
-                                        <Ellipse 
-                                        Width="110" 
-                                        Height="110" 
-                                        Fill="{ThemeResource PersonPictureEllipseFillThemeBrush}"
-                                        Stroke="{ThemeResource PersonPictureEllipseFillStrokeBrush}"
-                                        StrokeThickness="{ThemeResource PersonPictureEllipseStrokeThickness}">
-                                        </Ellipse>
-                                        <toolkitControls:ImageEx 
-                                        Width="68" 
-                                        Height="68" 
-                                        Source="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay, Converter={StaticResource SVGImageConverter}}">
-                                        </toolkitControls:ImageEx>
-                                        <Button
-                                    Background="{ThemeResource SystemChromeMediumColor}"
-                                    CornerRadius="32"
-                                    Width="44"
-                                    Height="44"
-                                    VerticalAlignment="Bottom" 
-                                    HorizontalAlignment="Right" 
-                                    Margin="0,0,0,0">
+                                    <Grid 
+                            Margin="0,10,0,0" 
+                            MinWidth="120" 
+                            MinHeight="100">
+                                        <muxc:PersonPicture
+                            Height="110"
+                            Width="110"
+                            DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
+                            Margin="0,10,20,0"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Tag="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay}">
+                                        </muxc:PersonPicture>
+                                        <Button 
+                                CornerRadius="32"
+                                Width="44"
+                                Height="44"
+                                Command="{x:Bind ViewModel.EditAccountIconCommand}"
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Right">
                                             <FontIcon
-                                        FontSize="18"
-                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                        Glyph="&#xE104;" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                            FontSize="18"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                            Glyph="&#xE104;" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                                         </Button>
                                     </Grid>
                                 </appcontrols:CardControl.Description>
                                 <appcontrols:CardControl.ActionContent>
-                                    <StackPanel>
+                                    <StackPanel 
+                                Visibility="{x:Bind ViewModel.IsEditBoxVisible, Mode=OneWay}">
                                         <AutoSuggestBox 
-                                            Header="#icon name" 
-                                            MinWidth="200"
-                                            QueryIcon="Find"
-                                            VerticalAlignment="Center"
-                                            PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
-                                            TextChanged="AutoSuggestBox_TextChanged" 
-                                            VerticalContentAlignment="Center"
-                                            SuggestionChosen="AutoSuggestBox_SuggestionChosen" />   
+                                Header="~AddAccountContentDialogSuggestionBox.Header" 
+                                x:Uid="AddAccountContentDialogSuggestionBox"
+                                Width="200"
+                                QueryIcon="Find"
+                                VerticalAlignment="Center"
+                                PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                                TextChanged="AutoSuggestBox_TextChanged" 
+                                VerticalContentAlignment="Center"
+                                SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
                                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                             <Button 
-                                                Command="{x:Bind ViewModel.DeleteAccountIconCommand}"
-                                                Margin="0,0,10,0">
+                                    Command="{x:Bind ViewModel.DeleteAccountIconCommand}"
+                                    Margin="0,0,10,0">
                                                 <StackPanel Orientation="Horizontal">
                                                     <SymbolIcon Symbol="Delete"/>
                                                     <TextBlock 
@@ -242,6 +245,12 @@
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>
+                                        <animations:Implicit.ShowAnimations>
+                                            <animations:OpacityAnimation Duration="0:0:1" From="0" To="1.0"/>
+                                        </animations:Implicit.ShowAnimations>
+                                        <!--<animations:Implicit.HideAnimations>
+                                <animations:OpacityAnimation Duration="0:0:1" From="1" To="0.0"/>
+                            </animations:Implicit.HideAnimations>-->
                                     </StackPanel>
                                 </appcontrols:CardControl.ActionContent>
                             </appcontrols:CardControl>
@@ -346,8 +355,9 @@
                                                 Width="48"
                                                 Padding="4,4,4,4"
                                                 Style="{StaticResource TransparentButtonStyle}"
+                                                x:Name="BTN_Expertsettings_Help"
                                                 ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
-                                                VerticalAlignment="Bottom">
+                                                VerticalAlignment="Bottom" Click="BTN_Expertsettings_Help_Click">
                                                 <FontIcon
                                                     FontSize="20"
                                                     Glyph="&#xE946;"/>

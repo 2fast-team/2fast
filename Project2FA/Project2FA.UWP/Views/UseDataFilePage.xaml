@@ -61,8 +61,7 @@
                             x:Name="BTN_WebDAV"
                             Style="{StaticResource AccentButtonStyle}"
                             Margin="0,10,0,10"
-                            MinWidth="200" 
-                            IsEnabled="False"
+                            MinWidth="200"
                             Click="BTN_WebDAV_Click">
                             <StackPanel 
                                 Orientation="Horizontal"

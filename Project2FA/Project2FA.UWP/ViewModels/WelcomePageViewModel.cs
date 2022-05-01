@@ -37,12 +37,9 @@ namespace Project2FA.UWP.ViewModels
             Title = Strings.Resources.WelcomePageTitle;
 
             NewDatefileCommand = new AsyncRelayCommand(NewDatafile);
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            UseExistDatefileCommand = new DelegateCommand(async () =>
-            {
-                await _navigationService.NavigateAsync(nameof(UseDataFilePage));
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
+            UseExistDatefileCommand = new AsyncRelayCommand(UseExistDatafile);
+
             TutorialCommand = new DelegateCommand(() =>
             {
                 IsTutorialOpen = !IsTutorialOpen;
@@ -50,9 +47,7 @@ namespace Project2FA.UWP.ViewModels
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             OpenTutorialCommand = new DelegateCommand(async() =>
             {
-                var dialog = new ContentDialog();
-                dialog.Title = "#test";
-                dialog.PrimaryButtonText = "#bla";
+                var dialog = new TutorialContentDialog();
                 if (IsTutorialOpen)
                 {
                     IsTutorialOpen = false;
@@ -64,42 +59,44 @@ namespace Project2FA.UWP.ViewModels
 
         private async Task NewDatafile()
         {
-            var dialog = new NewDatafileContentDialog();
-            var result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
-            if (result == ContentDialogResult.Primary)
-            {
-                //_canNavigate = true;
-                string navPath = "/" + nameof(AccountCodePage);
-                await _navigationService.NavigateAsync(navPath);
-            }
+            //var dialog = new NewDatafileContentDialog();
+            //var result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            //if (result == ContentDialogResult.Primary)
+            //{
+            //    //_canNavigate = true;
+            //    string navPath = "/" + nameof(AccountCodePage);
+            //    await _navigationService.NavigateAsync(navPath);
+            //}
+            await _navigationService.NavigateAsync(nameof(NewDataFilePage));
         }
 
         private async Task UseExistDatafile()
         {
-            try
-            {
-                //TODO current workaround: check permission to the file system (broadFileSystemAccess)
-                string path = @"C:\Windows\explorer.exe";
-                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
+            //try
+            //{
+            //    //TODO current workaround: check permission to the file system (broadFileSystemAccess)
+            //    string path = @"C:\Windows\explorer.exe";
+            //    StorageFile file = await StorageFile.GetFileFromPathAsync(path);
 
-                UseDatafileContentDialog dialog = new UseDatafileContentDialog();
-                ContentDialogResult result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            //    UseDatafileContentDialog dialog = new UseDatafileContentDialog();
+            //    ContentDialogResult result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
 
-                //result is also none, when the datafileDB is correct created
-                if (result == ContentDialogResult.None)
-                {
-                    var datafileDB = await App.Repository.Datafile.GetAsync();
-                    if (datafileDB != null)
-                    {
-                        //_canNavigate = true;
-                        await _navigationService.NavigateAsync("/" + nameof(AccountCodePage));
-                    }
-                }
-            }
-            catch (UnauthorizedAccessException)
-            {
-                await ErrorDialogs.UnauthorizedAccessDialog();
-            }
+            //    //result is also none, when the datafileDB is correct created
+            //    if (result == ContentDialogResult.None)
+            //    {
+            //        var datafileDB = await App.Repository.Datafile.GetAsync();
+            //        if (datafileDB != null)
+            //        {
+            //            //_canNavigate = true;
+            //            await _navigationService.NavigateAsync("/" + nameof(AccountCodePage));
+            //        }
+            //    }
+            //}
+            //catch (UnauthorizedAccessException)
+            //{
+            //    await ErrorDialogs.UnauthorizedAccessDialog();
+            //}
+            await _navigationService.NavigateAsync(nameof(UseDataFilePage));
         }
 
         public string Title { get => _title; set => SetProperty(ref _title, value); }

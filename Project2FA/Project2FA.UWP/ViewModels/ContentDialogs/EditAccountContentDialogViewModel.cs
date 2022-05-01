@@ -17,13 +17,15 @@ namespace Project2FA.UWP.ViewModels
     public class EditAccountContentDialogViewModel : BindableBase, IDialogInitializeAsync
     {
         private TwoFACodeModel _twoFACodeModel;
-        private string _tempIssuer, _tempLabel, _tempAccountIconName, _tempAccountSVGIcon, _tempNotes;
+        private string _tempIssuer, _tempLabel, _tempAccountIconName, 
+            _tempAccountSVGIcon, _tempNotes, _tempIconLabel;
         private IconNameCollectionModel _iconNameCollectionModel;
+        private bool _isEditBoxVisible;
 
         public ICommand CancelButtonCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
         public ICommand DeleteAccountIconCommand { get; }
-        public ICommand CancelAccountIconCommand { get; }
+        public ICommand EditAccountIconCommand { get; }
 
         private ISerializationService SerializationService { get; }
 
@@ -40,6 +42,10 @@ namespace Project2FA.UWP.ViewModels
                 {
                     Model.AccountSVGIcon = iconStr;
                 }
+                else
+                {
+                    Model.AccountSVGIcon = null;
+                }
                 Model.Notes = TempNotes;
                 await DataService.Instance.WriteLocalDatafile();
             });
@@ -52,8 +58,12 @@ namespace Project2FA.UWP.ViewModels
             });
             DeleteAccountIconCommand = new DelegateCommand(() =>
             {
-                Model.AccountSVGIcon = null;
-                Model.AccountIconName = null;
+                TempAccountSVGIcon = null;
+                TempAccountIconName = null;
+            });
+            EditAccountIconCommand = new DelegateCommand(() =>
+            {
+                IsEditBoxVisible = !IsEditBoxVisible;
             });
         }
 
@@ -71,6 +81,10 @@ namespace Project2FA.UWP.ViewModels
                     if(!string.IsNullOrWhiteSpace(value.Notes))
                     {
                         TempNotes = Model.Notes;
+                    }
+                    else
+                    {
+                        TempNotes = string.Empty;
                     }
                 }
             }
@@ -99,12 +113,35 @@ namespace Project2FA.UWP.ViewModels
         public string TempAccountIconName
         { 
             get => _tempAccountIconName;
-            set => SetProperty(ref _tempAccountIconName, value);
+            set
+            {
+                if(SetProperty(ref _tempAccountIconName, value))
+                {
+                    if (value != null)
+                    {
+                        TempIconLabel = string.Empty;
+                    }
+                    else
+                    {
+                        TempIconLabel = TempLabel;
+                    }
+                }
+            }
         }
         public string TempAccountSVGIcon 
         { 
             get => _tempAccountSVGIcon;
             set => SetProperty(ref _tempAccountSVGIcon, value); 
+        }
+        public string TempIconLabel 
+        { 
+            get => _tempIconLabel; 
+            set => SetProperty(ref _tempIconLabel, value);
+        }
+        public bool IsEditBoxVisible 
+        { 
+            get => _isEditBoxVisible; 
+            set => SetProperty(ref _isEditBoxVisible, value); 
         }
 
         private async Task LoadIconNameCollection()
@@ -132,10 +169,18 @@ namespace Project2FA.UWP.ViewModels
             {
                 Model = model;
                 TempAccountIconName = Model.AccountIconName;
-                (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
-                if (success)
+                if (!string.IsNullOrWhiteSpace(TempAccountIconName))
                 {
-                    TempAccountSVGIcon = iconStr;
+                    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
+                    if (success)
+                    {
+                        TempAccountSVGIcon = iconStr;
+                    }
+                    
+                }
+                else
+                {
+                    TempIconLabel = TempLabel;
                 }
                 await LoadIconNameCollection();
             }

@@ -863,4 +863,13 @@ QR codes can now be displayed for individual accounts in order to import them wi
   <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
     <value>Notes</value>
   </data>
+  <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
+    <value>search account picture</value>
+  </data>
+  <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
+    <value>Only change these settings if you are sure that the service requires them.</value>
+  </data>
+  <data name="NewDataFilePageTitle.Text" xml:space="preserve">
+    <value>New datafile</value>
+  </data>
 </root>

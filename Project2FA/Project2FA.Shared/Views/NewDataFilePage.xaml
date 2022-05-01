@@ -9,7 +9,150 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <!--<Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
+            <PivotItem 
+                Header="#Auswahl" 
+                MinHeight="400" 
+                x:Uid="NewDatafileContentDialogPivotItemKind">
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock 
+                            TextWrapping="Wrap" 
+                            Text="~NewLocalDatafileInfo.Text"
+                            x:Uid="NewLocalDatafileInfo"
+                            Margin="0,10,0,10" />
+                        <Button x:Name="BTN_LocalPath" 
+                                Margin="0,10,0,10" 
+                                Click="BTN_LocalPath_Click"
+                                MinWidth="200">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE8F4;"
+                                          FontSize="30"/>
+                                <TextBlock Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    Text="~NewDatafileContentDialogLocalPath.Text"
+                                    x:Uid="NewDatafileContentDialogLocalPath" />
+                            </StackPanel>
+                        </Button>
+                        <Button 
+                            x:Name="BTN_WebDAV"
+                            Margin="0,10,0,10"
+                            IsEnabled="False"
+                            Click="BTN_WebDAV_Click"
+                            MinWidth="200">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE753;"
+                                          FontSize="30"/>
+                                <TextBlock 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    Text="~NewDatafileContentDialogWebDAV.Text"
+                                    x:Uid="NewDatafileContentDialogWebDAV" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem 
+                x:Name="FolderPivotItem" 
+                Header="Datafile" 
+                MinHeight="400" 
+                x:Uid="NewDatafileContentDialogDatafilePivotItem">
+                <Grid>
+                    <ScrollViewer VerticalScrollMode="Auto">
+                        <StackPanel Padding="0,0,22,0">
+                            <TextBlock TextWrapping="Wrap" x:Uid="NewDatafileContentDialogCreateInfo" />
+                            <TextBox 
+                                x:Name="TB_LocalFolder" 
+                                x:Uid="NewDatafileContentDialogLocalFolder" 
+                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}" 
+                                Header="~NewDatafileContentDialogLocalFolder.Header"
+                                Margin="0,10,0,10">
+                            </TextBox>
+                            <PasswordBox 
+                                x:Name="PB_LocalPassword"
+                                x:Uid="Password"
+                                Header="~Password.Header" 
+                                InputScope="Password"
+                                Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            </PasswordBox>
+                            <PasswordBox 
+                                x:Name="PB_LocalPasswordRepeat" 
+                                x:Uid="PasswordRepeat"
+                                Header="~PasswordRepeat.Header" 
+                                InputScope="Password" 
+                                Password="{x:Bind ViewModel.PasswordRepeat,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                Margin="0,5,0,12">
+                            </PasswordBox>
+                            <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
 
+                            <TextBox 
+                                Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}" 
+                                x:Uid="NewDatafileContentDialogPath"
+                                IsReadOnly="True"
+                                Header="~NewDatafileContentDialogPath.Header"
+                                Margin="0,0,0,10"/>
+                            <Button 
+                                Command="{x:Bind ViewModel.ChangePathCommand}"
+                                x:Uid="NewDatafileContentDialogChangePath"
+                                Content="~NewDatafileContentDialogChangePath.Content"/>
 
+                            <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
+
+                            --><!--Argon2 not working mit dotnet native-->
+                            <!--<toolkit:Expander 
+                                x:Uid="PasswordAdvancedHashOption"
+                                Background="{ThemeResource ButtonBackground}"
+                                Header="~PasswordAdvancedHashOption.Header">
+                                <CheckBox 
+                                    x:Uid="PasswordAdvancedHashOptionText"
+                                    IsChecked="{x:Bind ViewModel.UseExtendedHash,Mode=TwoWay}"/>
+                            </toolkit:Expander>--><!--
+
+                        </StackPanel>
+                    </ScrollViewer>
+                    --><!--<toolkit:Loading 
+                        x:Name="LoadingControl" 
+                        IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
+                        Background="{ThemeResource TranslucentBackgroundHighBrush}">
+                        <ProgressRing 
+                            IsActive="True" 
+                            Foreground="{ThemeResource SystemAccentColor}" 
+                            Width="80" 
+                            Height="80"/>
+                    </toolkit:Loading>
+                    <toolkit:Loading 
+                        IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
+                        Background="{ThemeResource TranslucentBackgroundHighBrush}">
+                        <StackPanel>
+                            <muxc:AnimatedVisualPlayer 
+                                MaxHeight="120"
+                                x:Name="LottiePlayer" 
+                                PlaybackRate="0.5"
+                                AutoPlay="True">
+                                <lottie:LottieVisualSource  
+                                    UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
+                            </muxc:AnimatedVisualPlayer>
+                            <TextBlock 
+                                Text="{x:Bind ViewModel.ErrorText,Mode=OneWay}" 
+                                TextWrapping="WrapWholeWords"/>
+                            <Button 
+                                Content="{x:Bind strings:Resources.Confirm}" 
+                                Command="{x:Bind ViewModel.ConfirmErrorCommand}"
+                                Style="{StaticResource AccentButtonStyle}"
+                                HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </toolkit:Loading>--><!--
+                </Grid>
+            </PivotItem>
+        </Pivot>-->
     </Grid>
 </Page>

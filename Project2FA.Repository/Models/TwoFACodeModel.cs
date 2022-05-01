@@ -54,6 +54,7 @@ namespace Project2FA.Repository.Models
             }
         }
 
+        [JsonIgnore]
         public string IsFavouriteText
         {
             get => _isFavourite ? "AAA"+ Label : Label;

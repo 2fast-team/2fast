@@ -23,9 +23,6 @@ namespace Project2FA.UWP.ViewModels
 
         private IFileService FileService { get; }
 
-        private IResourceService ResourceService { get; }
-        private INetworkService NetworkService { get; }
-
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
         private bool _changeDatafile;
@@ -34,11 +31,15 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Constructor to start the datafile selector
         /// </summary>
-        public UseDatafileContentDialogViewModel()
+        public UseDatafileContentDialogViewModel(
+            ISecretService secretService,
+            IFileService fileService,
+            INewtonsoftJSONService newtonsoftJSONService
+            ) :base(secretService,fileService)
         {
-            SecretService = App.Current.Container.Resolve<ISecretService>();
-            FileService = App.Current.Container.Resolve<IFileService>();
-            NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
+            SecretService = secretService;
+            FileService = fileService;
+            NewtonsoftJSONService = newtonsoftJSONService;
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
                 ShowError = false;

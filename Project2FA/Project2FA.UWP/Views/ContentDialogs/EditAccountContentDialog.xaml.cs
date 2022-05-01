@@ -1,4 +1,5 @@
-﻿using Project2FA.Repository.Models;
+﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
+using Project2FA.Repository.Models;
 using Project2FA.UWP.Extensions;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.Services.Enums;
@@ -16,37 +17,70 @@ namespace Project2FA.UWP.Views
         public EditAccountContentDialog()
         {
             this.InitializeComponent();
+
+            Loaded += EditAccountContentDialog_Loaded;
+        }
+
+        private void EditAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
+        {
             switch (SettingsService.Instance.AppTheme)
             {
                 case Theme.System:
                     if (RequestedTheme != SettingsService.Instance.OriginalAppTheme.ToElementTheme())
                     {
                         RequestedTheme = SettingsService.Instance.OriginalAppTheme.ToElementTheme();
+                        switch (SettingsService.Instance.OriginalAppTheme)
+                        {
+                            case ApplicationTheme.Light:
+                                ReplaceNoteFontColor(true);
+                                break;
+                            case ApplicationTheme.Dark:
+                                ReplaceNoteFontColor(false);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     break;
                 case Theme.Dark:
                     if (RequestedTheme != ElementTheme.Dark)
                     {
                         RequestedTheme = ElementTheme.Dark;
+                        ReplaceNoteFontColor(false);
                     }
                     break;
                 case Theme.Light:
                     if (RequestedTheme != ElementTheme.Light)
                     {
                         RequestedTheme = ElementTheme.Light;
+                        ReplaceNoteFontColor(true);
                     }
                     break;
                 default:
                     break;
             }
-            Loaded += EditAccountContentDialog_Loaded;
-        }
-
-        private void EditAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
-        {
             if (!string.IsNullOrWhiteSpace(ViewModel.TempNotes))
             {
-                REB_Notes.Document.SetText(Windows.UI.Text.TextSetOptions.FormatRtf, ViewModel.TempNotes);
+                // TODO bug workaround https://github.com/microsoft/microsoft-ui-xaml/issues/1941
+                var options = Windows.UI.Text.TextSetOptions.FormatRtf | Windows.UI.Text.TextSetOptions.ApplyRtfDocumentDefaults;
+                REB_Notes.Document.SetText(options, ViewModel.TempNotes);
+            }
+            var linkButton = Toolbar.GetDefaultButton(ButtonType.Link);
+            if (linkButton != null)
+            {
+                linkButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ReplaceNoteFontColor(bool isLightTheme)
+        {
+            if (isLightTheme)
+            {
+                ViewModel.TempNotes = ViewModel.TempNotes.Replace(@"\red255\green255\blue255", @"\red0\green0\blue0");
+            }
+            else
+            {
+                ViewModel.TempNotes = ViewModel.TempNotes.Replace(@"\red0\green0\blue0", @"\red255\green255\blue255");
             }
         }
 

@@ -1,30 +1,18 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
 using Prism.Commands;
-using Prism.Ioc;
-using Project2FA.Core.Services.JSON;
 using Project2FA.Repository.Models;
-using Project2FA.Strings;
-using Project2FA.Uno.Core.File;
-using Project2FA.Uno.Core.Serialization;
 using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-#if HAS_WINUI
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.Storage;
-using Microsoft.Storage.AccessCache;
-using Microsoft.Storage.Pickers;
-#else
-using Windows.UI.Xaml.Controls;
-using Windows.Storage;
+using Template10.Services.File;
+using Template10.Services.Serialization;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
-#endif
+using Project2FA.UWP.Strings;
+using Windows.Storage;
+using Template10.Services.Secrets;
 
-
-namespace Project2FA.ViewModels
+namespace Project2FA.UWP.ViewModels
 {
     public class NewDataFilePageViewModel : DatafileViewModelBase
     {
@@ -37,9 +25,10 @@ namespace Project2FA.ViewModels
         /// Constructor
         /// </summary>
         public NewDataFilePageViewModel(
-            IContainerProvider containerProvider,
-            IFileService fileService,
-            ISerializationService serializationService) :base(containerProvider)
+            IFileService fileService, 
+            ISecretService secretService, 
+            ISerializationService serializationService) : 
+            base (secretService,fileService)
         {
             SerializationService = serializationService;
             FileService = fileService;
@@ -124,7 +113,7 @@ namespace Project2FA.ViewModels
             {
                 if (exc is UnauthorizedAccessException)
                 {
-
+                    //TODO error message?
                 }
                 throw;
             }
@@ -147,6 +136,8 @@ namespace Project2FA.ViewModels
             if (folder != null)
             {
                 IsLoading = false;
+                //set folder to the access list
+                StorageApplicationPermissions.FutureAccessList.Add(folder, "metadata");
                 LocalStorageFolder = folder;
                 return true;
             }

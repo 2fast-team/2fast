@@ -11,12 +11,14 @@ using System.Security.Cryptography;
 using Project2FA.Repository.Models;
 using Template10.Services.Serialization;
 using Microsoft.Toolkit.Mvvm.Input;
+using Template10.Services.Secrets;
 
 namespace Project2FA.UWP.ViewModels
 {
     public class NewDatafileContentDialogViewModel : DatafileViewModelBase
     {
         private IFileService FileService { get; }
+        private ISecretService SecretService { get; }
         private ISerializationService SerializationService { get; }
 
         private string _errorText;
@@ -24,10 +26,13 @@ namespace Project2FA.UWP.ViewModels
         /// <summary>
         /// Constructor
         /// </summary>
-        public NewDatafileContentDialogViewModel()
+        public NewDatafileContentDialogViewModel
+            (ISerializationService serializationService,
+            ISecretService secretService,
+            IFileService fileService) : base(secretService,fileService)
         {
-            SerializationService = App.Current.Container.Resolve<ISerializationService>();
-            FileService = App.Current.Container.Resolve<IFileService>();
+            SerializationService = serializationService;
+            FileService = fileService;
 
             PrimaryButtonCommand = new AsyncRelayCommand(PrimaryButtonCommandTask);
 
@@ -109,7 +114,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 if (exc is UnauthorizedAccessException)
                 {
-
+                    //TODO error message?
                 }
                 throw;
             }

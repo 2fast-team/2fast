@@ -14,7 +14,6 @@ using Prism.Logging;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Microsoft.Toolkit.Mvvm.Input;
-using System.Diagnostics;
 using Project2FA.UWP.Helpers;
 
 namespace Project2FA.UWP.ViewModels
@@ -34,7 +33,7 @@ namespace Project2FA.UWP.ViewModels
         public ICommand ExportAccountCommand { get; }
         public ICommand SetFavouriteCommand { get; }
         public ICommand HideOrShowTOTPCodeCommand {get;}
-        private Stopwatch TOTPEventStopwatch { get; }
+        
         private bool _codeVisibilityOptionEnabled;
         private string _title;
 
@@ -45,7 +44,6 @@ namespace Project2FA.UWP.ViewModels
             Logger = loggerFacade;
             Title = "Accounts";
 
-            TOTPEventStopwatch = new Stopwatch();
             _dispatcherTOTPTimer = new DispatcherTimer();
             _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 0, 1); //every second
             _dispatcherTOTPTimer.Tick -= TOTPTimer;
@@ -121,9 +119,9 @@ namespace Project2FA.UWP.ViewModels
                 await DataService.Instance.StartService();
             }
 
-            TOTPEventStopwatch.Start(); // stopwatch for the calculation of the remaining time for a valid totp code
+            //TOTPEventStopwatch.Start(); // stopwatch for the calculation of the remaining time for a valid totp code
             _dispatcherTOTPTimer.Start(); // the event for the set of seconds and calculating the totp code
-            await DataService.Instance.ResetCollection();
+            //await DataService.Instance.ResetCollection();
         }
 
 
@@ -163,13 +161,13 @@ namespace Project2FA.UWP.ViewModels
             await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
-                TwoFADataService.Collection[i].Seconds -= TOTPEventStopwatch.Elapsed.TotalSeconds; // elapsed time (seconds) from the last event call
+                TwoFADataService.Collection[i].Seconds -= TwoFADataService.TOTPEventStopwatch.Elapsed.TotalSeconds; // elapsed time (seconds) from the last event call
                 if (Convert.ToInt32(TwoFADataService.Collection[i].Seconds) <= 0)
                 {
                     await DataService.Instance.GenerateTOTP(i);
                 }
             }
-            TOTPEventStopwatch.Restart(); // reset the added time from the stopwatch => time+ / event
+            TwoFADataService.TOTPEventStopwatch.Restart(); // reset the added time from the stopwatch => time+ / event
             TwoFADataService.CollectionAccessSemaphore.Release();
         }
 
@@ -192,7 +190,7 @@ namespace Project2FA.UWP.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Show or hide the TOTP code
         /// </summary>
         /// <param name="obj"></param>
         private void HideOrShowTOTPCode(TwoFACodeModel obj)
@@ -249,10 +247,10 @@ namespace Project2FA.UWP.ViewModels
             if (TwoFADataService.CollectionAccessSemaphore.CurrentCount > 0)
             {
                 TwoFADataService.Collection.Clear();
-                TOTPEventStopwatch.Stop();
-                TOTPEventStopwatch.Reset();
+                //TOTPEventStopwatch.Stop();
+                //TOTPEventStopwatch.Reset();
                 await TwoFADataService.ReloadDatafile();
-                TOTPEventStopwatch.Start();
+                //TOTPEventStopwatch.Start();
             }
             else
             {
@@ -272,8 +270,8 @@ namespace Project2FA.UWP.ViewModels
             {
                 _dispatcherTimerDeletedModel.Stop();
             }
-            TOTPEventStopwatch.Stop();
-            TOTPEventStopwatch.Reset();
+            TwoFADataService.TOTPEventStopwatch.Stop();
+            //TOTPEventStopwatch.Reset();
             return !await DialogService.IsDialogRunning();
         }
 

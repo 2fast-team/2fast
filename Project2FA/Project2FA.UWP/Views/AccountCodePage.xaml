@@ -2,20 +2,15 @@
     x:Class="Project2FA.UWP.Views.AccountCodePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Project2FA.UWP.Views"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="using:Project2FA.UWP.ViewModels"
-    xmlns:i="using:Microsoft.Xaml.Interactivity" 
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
-    xmlns:Windows10version1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 8)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Page"
     mc:Ignorable="d">
@@ -233,9 +228,6 @@
                             Style="{StaticResource PersonPictureWithAccentShadow}"
                             Tag="{x:Bind AccountSVGIcon, Mode=OneWay}"
                             Grid.RowSpan="2">
-                            <!--<muxc:PersonPicture.ProfilePicture>
-                                <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
-                            </muxc:PersonPicture.ProfilePicture>-->
                         </muxc:PersonPicture>
 
                         <RelativePanel 

@@ -61,7 +61,6 @@
                         <Button 
                             x:Name="BTN_WebDAV"
                             Margin="0,10,0,10"
-                            IsEnabled="False"
                             Style="{StaticResource AccentButtonStyle}"
                             Click="BTN_WebDAV_Click"
                             MinWidth="200">
@@ -132,16 +131,6 @@
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
                                 Height="1" />
-
-                            <!--Argon2 not working mit dotnet native-->
-                            <!--<toolkit:Expander 
-                                x:Uid="PasswordAdvancedHashOption"
-                                Background="{ThemeResource ButtonBackground}"
-                                Header="~PasswordAdvancedHashOption.Header">
-                                <CheckBox 
-                                    x:Uid="PasswordAdvancedHashOptionText"
-                                    IsChecked="{x:Bind ViewModel.UseExtendedHash,Mode=TwoWay}"/>
-                            </toolkit:Expander>-->
 
                         </StackPanel>
                     </ScrollViewer>

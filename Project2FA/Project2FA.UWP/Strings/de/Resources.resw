@@ -870,4 +870,13 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
   <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
     <value>Notizen</value>
   </data>
+  <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
+    <value>Account Bild suchen</value>
+  </data>
+  <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
+    <value>Verändern Sie nur diese Einstellungen, wenn Sie sicher sind, dass der Dienst diese erfordert.</value>
+  </data>
+  <data name="NewDataFilePageTitle.Text" xml:space="preserve">
+    <value>Datendatei erstellen</value>
+  </data>
 </root>

@@ -8,7 +8,6 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.UWP.Strings"
     mc:Ignorable="d"
-    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     localControls:TitleBar.ButtonBackgroundColor="Transparent"
     localControls:TitleBar.ButtonInactiveBackgroundColor ="Transparent"
     localControls:TitleBar.ButtonForegroundColor="{ThemeResource SystemBaseHighColor}"

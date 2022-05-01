@@ -18,12 +18,13 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
-    <PackageCertificateKeyFile>Project2FA.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>
+    </PackageCertificateKeyFile>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>73A83508E163301475AD0C94A962BBB192230346</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>CB43D7C24F1174E990AA966B9E9FEB6C454736FE</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -131,6 +132,7 @@
     <Compile Include="Converters\PersonalPictureInitialsVisibilityConverter.cs" />
     <Compile Include="Converters\DoubleToInt32ToStringConverter.cs" />
     <Compile Include="Converters\FavouriteToIconConverter.cs" />
+    <Compile Include="Converters\PersonPictureSizeConverter.cs" />
     <Compile Include="Converters\SVGImageConverter.cs" />
     <Compile Include="Converters\TOTPVisibilityTooltipConverter.cs" />
     <Compile Include="Converters\FavouriteTooltipConverter.cs" />
@@ -165,17 +167,19 @@
     <Compile Include="ViewModels\BlankPageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\AccountCodePageViewModel.cs" />
-    <Compile Include="ViewModels\ContentDialogs\DatafileViewModelBase.cs" />
+    <Compile Include="ViewModels\DatafileViewModelBase.cs" />
     <Compile Include="ViewModels\ContentDialogs\DeleteDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\NewDatafileContentDialogViewModel.cs" />
+    <Compile Include="ViewModels\NewDataFilePageViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
     <Compile Include="ViewModels\ContentDialogs\UpdateDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\UseDatafileContentDialogViewModel.cs" />
+    <Compile Include="ViewModels\TutorialContentDialogViewModel.cs" />
     <Compile Include="ViewModels\UseDataFilePageViewModel.cs" />
     <Compile Include="ViewModels\WelcomePageViewModel.cs" />
     <Compile Include="Views\BlankPage.xaml.cs">
@@ -225,6 +229,9 @@
     </Compile>
     <Compile Include="Views\ContentDialogs\UseDatafileContentDialog.xaml.cs">
       <DependentUpon>UseDatafileContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentDialogs\TutorialContentDialog.xaml.cs">
+      <DependentUpon>TutorialContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UseDataFilePage.xaml.cs">
       <DependentUpon>UseDataFilePage.xaml</DependentUpon>
@@ -2726,6 +2733,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentDialogs\UseDatafileContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentDialogs\TutorialContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -33,7 +33,6 @@
     </Style>
 
     <!-- Card expander style -->
-
     <Style x:Key="CardExpanderStyle" TargetType="muxc:Expander">
         <Setter Property="Background" Value="{ThemeResource TwoFABackgroundBrush}" />
         <!--<Setter Property="BorderThickness" Value="{ThemeResource CardBorderThickness}" />

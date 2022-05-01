@@ -4,6 +4,8 @@ using Prism.Commands;
 using Project2FA.Core.Services;
 using Project2FA.UWP.Services;
 using Project2FA.Core;
+using Template10.Services.File;
+using Project2FA.Core.Services.JSON;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -12,14 +14,17 @@ namespace Project2FA.UWP.ViewModels
     /// </summary>
     public class UpdateDatafileContentDialogViewModel : UseDatafileContentDialogViewModel
     {
-        private ISecretService _secretService { get; }
+        private ISecretService SecretService { get; }
 
         /// <summary>
         /// Constructor to start the datafile selector
         /// </summary>
-        public UpdateDatafileContentDialogViewModel(): base()
+        public UpdateDatafileContentDialogViewModel(
+            ISecretService secretService,
+            INewtonsoftJSONService newtonsoftJSONService,
+            IFileService fileService) : base(secretService, fileService, newtonsoftJSONService)
         {
-            _secretService = App.Current.Container.Resolve<ISecretService>();
+            SecretService = App.Current.Container.Resolve<ISecretService>();
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
                 ShowError = false;
@@ -36,11 +41,11 @@ namespace Project2FA.UWP.ViewModels
             var hash = CryptoService.CreateStringHash(Password, SettingsService.Instance.UseExtendedHash);
             var passwordRepo = await App.Repository.Password.GetAsync();
             //delete password in the secret vault
-            _secretService.Helper.RemoveSecret(Constants.ContainerName, passwordRepo.Hash);
+            SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordRepo.Hash);
             passwordRepo.Hash = hash;
 
             //writes the hash in the db and the secret vault
-            _secretService.Helper.WriteSecret(Constants.ContainerName, passwordRepo.Hash, Password);
+            SecretService.Helper.WriteSecret(Constants.ContainerName, passwordRepo.Hash, Password);
             await App.Repository.Password.UpsertAsync(passwordRepo);
 
             var datafileDB = await App.Repository.Datafile.GetAsync();

@@ -35,6 +35,7 @@ using Prism.Services.Dialogs;
 using System.Collections.Generic;
 using Project2FA.UWP.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
+using System.Diagnostics;
 
 namespace Project2FA.UWP.Services
 {
@@ -50,6 +51,7 @@ namespace Project2FA.UWP.Services
         private INetworkTimeService NetworkTimeService { get; }
         private bool _initialization, _errorOccurred;
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
+        public Stopwatch TOTPEventStopwatch { get; }
         public AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
         private bool _emptyAccountCollectionTipIsOpen;
@@ -74,6 +76,7 @@ namespace Project2FA.UWP.Services
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             NetworkTimeService = App.Current.Container.Resolve<INetworkTimeService>();
             ACVCollection = new AdvancedCollectionView(Collection, true);
+            TOTPEventStopwatch = new Stopwatch();
             //ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
             ACVCollection.SortDescriptions.Add(new SortDescription("IsFavouriteText", SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
@@ -83,25 +86,32 @@ namespace Project2FA.UWP.Services
         public async Task StartService()
         {
             await CheckLocalDatafile();
+            TOTPEventStopwatch.Start();
 
-            if (SystemInformation.Instance.IsAppUpdated &&
-                SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.9.0"))) //SystemInformation.Instance.IsAppUpdated && 
+            //SystemInformation.Instance.PreviousVersionInstalled >= PackageVersionHelper.ToPackageVersion("1.0.9.0")
+            if (SystemInformation.Instance.IsAppUpdated) //SystemInformation.Instance.IsAppUpdated && 
             {
-                // try and set the account icon name
-                for (int i = 0; i < Collection.Count; i++)
+                var prevíousVersion = new Version(SystemInformation.Instance.PreviousVersionInstalled.ToFormattedString());
+                var compareVersion = new Version("1.0.9.0");
+                var result = compareVersion.CompareTo(prevíousVersion);
+                if (result >= 0)
                 {
-                    string label = Collection[i].Label;
-                    string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-                    string path = root + @"\Assets\AccountIcons";
-                    StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-                    label = label.ToLower().Replace("-", string.Empty).Replace(" ", string.Empty);
-                    if (await FileService.FileExistsAsync(string.Format("{0}.svg", label), folder))
+                    // try and set the account icon name
+                    for (int i = 0; i < Collection.Count; i++)
                     {
-                        Collection[i].AccountIconName = label;
-                        await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], label);
+                        string label = Collection[i].Label;
+                        string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+                        string path = root + @"\Assets\AccountIcons";
+                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+                        label = label.ToLower().Replace("-", string.Empty).Replace(" ", string.Empty);
+                        if (await FileService.FileExistsAsync(string.Format("{0}.svg", label), folder))
+                        {
+                            Collection[i].AccountIconName = label;
+                            await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], label);
+                        }
                     }
+                    await WriteLocalDatafile();
                 }
-                await WriteLocalDatafile();
             }
         }
 
@@ -190,6 +200,7 @@ namespace Project2FA.UWP.Services
                 Collection[i].HideTOTPCode = useHiddenTOTP;
                 await InitializeItem(i);
             }
+            TOTPEventStopwatch.Restart();
             CollectionAccessSemaphore.Release();
         }
 

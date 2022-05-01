@@ -1068,6 +1068,19 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region AddAccountCodeContentDialogExpertSettingsHelp
+        /// <summary>
+        ///   Looks up a localized string similar to: Only change these settings if you are sure that the service requires them.
+        /// </summary>
+        public static string AddAccountCodeContentDialogExpertSettingsHelp
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddAccountCodeContentDialogExpertSettingsHelp");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1160,6 +1173,7 @@ namespace Project2FA.UWP.Strings{
             AccountCodePageTooltipShowTOTP,
             ButtonTextRetry,
             ErrorClipboardTask,
+            AddAccountCodeContentDialogExpertSettingsHelp,
         }
 
         private static ResourceLoader _resourceLoader;

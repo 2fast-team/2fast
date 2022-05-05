@@ -18,7 +18,7 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/ScrollBar_themeresources.xaml" />
         <ResourceDictionary Source="ms-appx:///Controls/CardExpanderControl/CardExpanderControl.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/PersonPicture.xaml" />
-        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBoxItem.xaml" />-->
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBoxItemStyle.xaml" />
 
 
     </ResourceDictionary.MergedDictionaries>
@@ -159,9 +159,9 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
 
-    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource DefaultComboBoxItemStyle}">
+    <!--<Style TargetType="ComboBoxItem" BasedOn="{StaticResource DefaultComboBoxItemStyle}">
         <Setter Property="CornerRadius" Value="{ThemeResource ComboBoxItemCornerRadius}"/>
-        <!--<Setter Property="Template">
+        --><!--<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBoxItem">
                     <Grid x:Name="LayoutRoot"
@@ -343,7 +343,7 @@
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>-->
-    </Style>
+        </Setter>--><!--
+    </Style>-->
 
 </ResourceDictionary>

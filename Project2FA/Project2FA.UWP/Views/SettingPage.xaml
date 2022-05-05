@@ -325,6 +325,7 @@
                                                         Margin="0,8,0,0"
                                             x:Name="TB_SettingsNTPServer"
                                             Width="280"
+                                                                FontSize="16"
                                             Text="{x:Bind ViewModel.SettingsPartViewModel.NTPServerStr, Mode=TwoWay}"/>
                                                             <CommandBar DefaultLabelPosition="Right">
                                                                 <CommandBar.PrimaryCommands>

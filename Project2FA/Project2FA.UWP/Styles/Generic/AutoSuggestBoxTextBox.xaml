@@ -3,7 +3,7 @@
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="TextBox" x:Key="AutoSuggestBoxTextBoxStyle">
+    <!--<Style TargetType="TextBox" x:Key="AutoSuggestBoxTextBoxStyle">
         <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
         <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}" />
         <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}" />
@@ -184,13 +184,13 @@
                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver" />
                                         <Setter Target="Root.Background" Value="{ThemeResource AppBarButtonRevealBackgroundPointerOver}" />
                                         <Setter Target="BorderElement.BorderBrush" Value="{ThemeResource AppBarButtonRevealBorderBrushPointerOver}" />
-                                        <!--<Setter Target="BorderElement.Background" Value="{ThemeResource AppBarButtonRevealBackgroundPointerOver}" />-->
+                                        --><!--<Setter Target="BorderElement.Background" Value="{ThemeResource AppBarButtonRevealBackgroundPointerOver}" />--><!--
                                     </VisualState.Setters>
 
                                     <Storyboard>
-                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
+                                        --><!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
-                                        </ObjectAnimationUsingKeyFrames>-->
+                                        </ObjectAnimationUsingKeyFrames>--><!--
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Background">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBackgroundPointerOver}" />
                                         </ObjectAnimationUsingKeyFrames>
@@ -200,7 +200,7 @@
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlForegroundPointerOver}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <!--<PointerDownThemeAnimation Storyboard.TargetName="ContentElement" />-->
+                                        --><!--<PointerDownThemeAnimation Storyboard.TargetName="ContentElement" />--><!--
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Focused">
@@ -407,6 +407,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

@@ -1,10 +1,12 @@
 ﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
+using Microsoft.UI.Xaml.Controls;
 using Project2FA.Repository.Models;
 using Project2FA.UWP.Controls;
 using Project2FA.UWP.Extensions;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.Services.Enums;
 using Project2FA.UWP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation.Metadata;
@@ -13,6 +15,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Project2FA.UWP.Views
 {
@@ -56,14 +59,22 @@ namespace Project2FA.UWP.Views
             }
             //register an event for the changed Tag property of the input textbox
             _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
+            MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
             Loaded += AddAccountContentDialog_Loaded;
         }
 
+
+
         private void AddAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
         {
-            Toolbar.DefaultButtons.RemoveAt(2);
-            //REB_Notes.Document.SetText(Windows.UI.Text.TextSetOptions.FormatRtf,ViewModel.Model.Notes);
-            //bool suc = Toolbar.DefaultButtons.Remove(Toolbar.GetDefaultButton(ButtonType.Link));
+            MainPivot.Items.Remove(ImportAccountBackup);
+            var linkButton = Toolbar.GetDefaultButton(ButtonType.Link);
+            if (linkButton != null)
+            {
+                linkButton.Visibility = Visibility.Collapsed;
+            }
+
+            //listView.SelectedItems
         }
 
         private void _barcodeScanner_OnCameraInitialized()
@@ -71,7 +82,7 @@ namespace Project2FA.UWP.Views
             ViewModel.IsCameraActive = true;
         }
 
-        private void _barcodeScanner_OnCameraError(System.Collections.Generic.IEnumerable<string> errors)
+        private void _barcodeScanner_OnCameraError(IEnumerable<string> errors)
         {
             ViewModel.IsCameraActive = false;
             throw new System.NotImplementedException();
@@ -115,17 +126,36 @@ namespace Project2FA.UWP.Views
             }
         }
 
+        private void PivotItemChangedCallback(DependencyObject sender, DependencyProperty dp)
+        {
+            if(dp == Pivot.TagProperty)
+            {
+                if (((TextBox)sender).Tag is string tag)
+                {
+                    if (tag == "BackupPivot")
+                    {
+
+                    }
+                }
+            }
+        }
+
 
         private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)
         {
-            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            TeachingTip teachingTip = new TeachingTip
             {
                 Target = sender as FrameworkElement,
-                Subtitle = Strings.Resources.AddAccountCodeContentDialogQRCodeHelp,
-                AutoCloseInterval = 8000,
+                Subtitle = "adasdasd", //Strings.Resources.AddAccountCodeContentDialogQRCodeHelp
                 IsLightDismissEnabled = true,
                 BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
                 IsOpen = true,
+                HeroContent = new Image
+                {
+                    Source = new BitmapImage(new Uri("ms-appx:///Assets/Tutorials/2fast_createAccount.gif", UriKind.Absolute)),
+                    MinWidth = 250,
+                    MaxHeight = 450
+                }
             };
             RootGrid.Children.Add(teachingTip);
         }
@@ -175,6 +205,7 @@ namespace Project2FA.UWP.Views
             if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
             {
                 ViewModel.Model.AccountIconName = selectedItem;
+                ViewModel.AccountIconName = selectedItem;
                 ViewModel.LoadIconSVG();
             }
             else

@@ -51,10 +51,6 @@ namespace Project2FA.UWP.ViewModels
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
-            ChooseWebDAVCommand = new DelegateCommand(() =>
-            {
-
-            });
         }
 
         /// <summary>

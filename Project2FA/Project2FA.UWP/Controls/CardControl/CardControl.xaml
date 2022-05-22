@@ -6,6 +6,7 @@
     <Style TargetType="controls:CardControl">
         <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
         <Setter Property="Background" Value="{ThemeResource CardBackgroundBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
         <!--<Setter Property="BorderThickness" Value="{StaticResource CardBorderThickness}" />-->
         <!--<Setter Property="BorderBrush" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />-->
         <Setter Property="MinWidth" Value="{StaticResource CardActionControlMinWidth}"/>
@@ -44,7 +45,7 @@
                               Margin="2,0,18,0"
                               RelativePanel.AlignVerticalCenterWithPanel="True"
                               AutomationProperties.AccessibilityView="Raw"
-                              FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                              FontFamily="{TemplateBinding FontFamily}"
                               Foreground="{ThemeResource CardPrimaryForegroundBrush}"
                               VerticalAlignment="Center"/>
 
@@ -57,12 +58,14 @@
 
                                     <TextBlock
                                 x:Name="HeaderPresenter"
+                                FontFamily="Seguoe UI"
                                 Text="{TemplateBinding Header}"
                                 VerticalAlignment="Center"
                                 Foreground="{ThemeResource CardPrimaryForegroundBrush}" />
 
                                     <ContentPresenter
                                 x:Name="DescriptionPresenter"
+                                        FontFamily="Seguoe UI"
                                 Content="{TemplateBinding Description}"
                                 FontSize="{StaticResource SecondaryTextFontSize}"
                                 TextWrapping="WrapWholeWords"
@@ -87,6 +90,7 @@
                             <ContentPresenter
                             x:Name="ContentPresenter"
                             Grid.Column="1"
+                            FontFamily="Seguoe UI"
                             Content="{TemplateBinding ActionContent}"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right" />

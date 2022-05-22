@@ -34,9 +34,9 @@
 
     <!-- Card expander style -->
     <Style x:Key="CardExpanderStyle" TargetType="muxc:Expander">
-        <Setter Property="Background" Value="{ThemeResource TwoFABackgroundBrush}" />
-        <!--<Setter Property="BorderThickness" Value="{ThemeResource CardBorderThickness}" />
-        <Setter Property="BorderBrush" Value="{ThemeResource CardBorderBrush}" />-->
+        <!--<Setter Property="Background" Value="{ThemeResource TwoFABackgroundBrush}" />-->
+        <Setter Property="BorderThickness" Value="{ThemeResource CardBorderThickness}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource CardBorderBrush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>

@@ -172,6 +172,41 @@
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
                                     </appcontrols:CardControl.ActionContent>
                                 </appcontrols:CardControl>
+
+                                <appcontrols:CardExpanderControl 
+                                        Background="{ThemeResource CardBackgroundBrush}"
+                                        Margin="0,0,0,20"
+                                    IsExpanded="True">
+                                    <appcontrols:CardExpanderControl.Header>
+                                        <appcontrols:CardControl
+                                                Icon="&#xE771;"
+                                                x:Uid="SettingsCustomDesign"
+                                                Header="~SettingsCustomDesign.Header">
+                                        </appcontrols:CardControl>
+                                    </appcontrols:CardExpanderControl.Header>
+                                    <appcontrols:CardExpanderControl.Content>
+                                        <appcontrols:CardControl 
+                                    x:Uid="SettingsAppPrideMonthDesign"
+                                    Header="~SettingsAppPrideMonthDesign.Header"
+                                    FontFamily="Segoe UI Emoji"
+                                    Icon="🏳‍🌈">
+                                            <appcontrols:CardControl.Description>
+                                                <TextBlock 
+                                            x:Uid="SettingsAppPrideMonthDesignDesc"
+                                            Text="~SettingsAppPrideMonthDesignDesc.Text" 
+                                            VerticalAlignment="Stretch" 
+                                            HorizontalAlignment="Stretch"/>
+                                            </appcontrols:CardControl.Description>
+                                            <appcontrols:CardControl.ActionContent>
+                                                <ToggleSwitch 
+                                x:Name="SettingsAppPrideMonthDesignToggleSwtich"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.PrideMonthDesign, Mode=TwoWay}"/>
+                                            </appcontrols:CardControl.ActionContent>
+                                        </appcontrols:CardControl>
+                                    </appcontrols:CardExpanderControl.Content>
+                                </appcontrols:CardExpanderControl>
+
+                                
                             </appcontrols:CardGroupControl>
 
                             <StackPanel>
@@ -180,7 +215,7 @@
                                     Header="~SettingsOptionsFunctionsTitle.Header">
                                     <appcontrols:CardControl 
                                         x:Uid="SettingsWindowsHelloPrefer"
-                                        Header="~SettingsWindowsHelloPrefer.Header" 
+                                        Header="~SettingsWindowsHelloPrefer.Header"
                                         Icon="&#xF0FB;">
                                         <appcontrols:CardControl.ActionContent>
                                             <ToggleSwitch 
@@ -221,7 +256,6 @@
                                     Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
                                                 <TextBlock 
                                         Text="~FactoryReset" 
-                                        Margin="8,0,0,0" 
                                         HorizontalAlignment="Stretch" 
                                         VerticalAlignment="Center"
                                         x:Uid="SettingsOptionsFactoryResetButton"/>
@@ -313,13 +347,6 @@
                                         TextWrapping="WrapWholeWords"
                                         Text="~SettingsNTPServerDescribtion.Text"/>
 
-                                                        <!--<CheckBox 
-                                        x:Name="CB_ManualNTPServerConfiguration"
-                                        x:Uid="SettingsNTPServerCheckBoxText"
-                                        Margin="0,8,0,0"
-                                        IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}"
-                                        IsChecked="{x:Bind ViewModel.SettingsPartViewModel.ManualNTPServerConfiurationChecked, Mode=TwoWay}"
-                                        Content="#set manuel ntp server"/>-->
                                                         <StackPanel Orientation="Horizontal">
                                                             <TextBox 
                                                         Margin="0,8,0,0"
@@ -470,9 +497,7 @@
                                         Style="{StaticResource ButtonRevealStyle}"
                                         Command="{x:Bind ViewModel.RateAppCommand}">
                                         <StackPanel Orientation="Horizontal">
-                                            <FontIcon 
-                                    FontSize="30"
-                                    Glyph="&#xE00A;" />
+                                            <SymbolIcon Symbol="Like"/>
                                             <TextBlock 
                                     Text="~SettingsRateApp.Text" 
                                     Margin="8,0,0,0" 
@@ -482,6 +507,37 @@
                                     FontFamily="Segoe UI" />
                                         </StackPanel>
                                     </Button>
+                                    <Button 
+                                        Margin="0,10" 
+                                        Style="{StaticResource ButtonRevealStyle}"
+                                        Command="{x:Bind ViewModel.SendMailCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Account"/>
+                                            <TextBlock 
+                                    Text="~SettingsMailSupportApp.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="SettingsMailSupportApp" 
+                                    FontFamily="Segoe UI" />
+                                        </StackPanel>
+                                    </Button>
+                                    <!--<TextBlock 
+                                        x:Uid="SettingsPageAboDesc"
+                                        Margin="0,15,0,0" 
+                                        Text="~SettingsPageAboDesc.Text"/>
+                                    <Button Margin="0,0,0,20">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Tag"/>
+                                            <TextBlock 
+                                    Text="~SettingsPageAboButton.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="SettingsPageAboButton" 
+                                    FontFamily="Segoe UI" />
+                                        </StackPanel>
+                                    </Button>-->
                                 </StackPanel>
                             </ScrollViewer>
 

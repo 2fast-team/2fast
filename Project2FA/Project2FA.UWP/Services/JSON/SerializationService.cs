@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Template10.Services.Serialization;
 
 namespace Project2FA.UWP.Services
@@ -79,6 +81,18 @@ namespace Project2FA.UWP.Services
             return JsonSerializer.Deserialize<T>(value, Settings);
         }
 
+        public async Task<T> DeserializeAsync<T>(Stream utf8Json)
+        {
+            if (utf8Json == null)
+                return default(T);
+
+            //if (string.IsNullOrEmpty(utf8Json))
+            //    return default(Task<T>)
+
+            // Deserialize from utf8Json
+            return await JsonSerializer.DeserializeAsync<T>(utf8Json, Settings);
+        }
+
         /// <summary>
         /// Attempts to deserialize the value by absorbing the InvalidCastException that may occur.
         /// </summary>
@@ -108,5 +122,46 @@ namespace Project2FA.UWP.Services
                 return false;
             }
         }
+
+        public async Task<T> TryDeserializeAsync<T>(Stream stream)
+        {
+            try
+            {
+                var r = await DeserializeAsync<T>(stream);
+                if (r == null)
+                {
+                    return default(T);
+                }
+                return r;
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+
+
+
+        //public Task<bool> TrySerializeAsync(Stream stream, object parameter, out string result)
+        //{
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        Serializer.Serialize(memoryStream, person);
+        //        var byteArray = memoryStream.ToArray();
+        //    }
+        //    try
+        //    {
+        //        var memoryStream = new MemoryStream();
+        //        result = Serialize(parameter);
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        result = default(string);
+        //        return false;
+        //    }
+        //}
+
+
     }
 }

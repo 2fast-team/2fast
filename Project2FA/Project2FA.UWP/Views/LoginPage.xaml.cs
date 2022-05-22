@@ -58,7 +58,7 @@ namespace Project2FA.UWP.Views
                 default:
                     break;
             }
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (System.Diagnostics.Debugger.IsAttached || SettingsService.Instance.PrideMonthDesign)
             {
                 PageStaticBackgroundBorder.Visibility = Visibility.Visible;
                 PageImageBackgroundBorder.Visibility = Visibility.Collapsed;

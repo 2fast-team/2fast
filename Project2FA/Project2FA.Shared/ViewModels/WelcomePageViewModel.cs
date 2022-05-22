@@ -43,29 +43,16 @@ namespace Project2FA.ViewModels
             {
                 _regionManager.RequestNavigate("ContentRegion", nameof(NewDataFilePage));
             });
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
             UseExistDatefileCommand = new DelegateCommand(() =>
             {
                 _regionManager.RequestNavigate("ContentRegion", nameof(UseDataFilePage));
             });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
             TutorialCommand = new DelegateCommand(() =>
             {
                 IsTutorialOpen = !IsTutorialOpen;
             });
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            OpenTutorialCommand = new DelegateCommand(() =>
-            {
-                //var dialog = new ContentDialog();
-                //dialog.Title = "#test";
-                //dialog.PrimaryButtonText = "#bla";
-                //if (IsTutorialOpen)
-                //{
-                //    IsTutorialOpen = false;
-                //}
-                //await _dialogService.ShowDialog();
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
         private async Task NewDatafile()
@@ -79,31 +66,6 @@ namespace Project2FA.ViewModels
             //    _regionManager.RequestNavigate("ContentRegion", navPath);
             //}
         }
-
-        //private async Task UseExistDatafile()
-        //{
-        //    try
-        //    {
-        //        UseDatafileContentDialog dialog = new UseDatafileContentDialog();
-        //        ContentDialogResult result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
-
-        //        //result is also none, when the datafileDB is correct created
-        //        if (result == ContentDialogResult.None)
-        //        {
-        //            var datafileDB = await App.Repository.Datafile.GetAsync();
-        //            if (datafileDB != null)
-        //            {
-        //                //_canNavigate = true;
-        //                _regionManager.RequestNavigate("ContentRegion", nameof(AccountCodePage));
-        //                //await _navigationService.NavigateAsync("/" + nameof(AccountCodePage));
-        //            }
-        //        }
-        //    }
-        //    catch (UnauthorizedAccessException)
-        //    {
-        //        //ErrorDialogs.UnauthorizedAccessDialog();
-        //    }
-        //}
 
         public string Title { get => _title; set => SetProperty(ref _title, value); }
         public bool IsTutorialOpen { get => _isTutorialOpen; set => SetProperty(ref _isTutorialOpen, value); }

@@ -11,13 +11,21 @@ using Windows.Storage.Pickers;
 using Project2FA.UWP.Strings;
 using Windows.Storage;
 using Template10.Services.Secrets;
+using System.Windows.Input;
+using Prism.Navigation;
+using Project2FA.UWP.Views;
 
 namespace Project2FA.UWP.ViewModels
 {
     public class NewDataFilePageViewModel : DatafileViewModelBase
     {
+        public ICommand CreateWebDAVDatafileCommand;
         private IFileService FileService { get; }
         private ISerializationService SerializationService { get; }
+        private INavigationService NaviationService { get; }
+        public ICommand SetAndCreateLocalDatafileCommand { get; }
+        public ICommand SetAndCreateWebDAVDatafileCommand { get; }
+        private bool _selectWebDAV;
 
         private string _errorText;
 
@@ -26,14 +34,26 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public NewDataFilePageViewModel(
             IFileService fileService, 
-            ISecretService secretService, 
+            ISecretService secretService,
+            INavigationService navigationService,
             ISerializationService serializationService) : 
             base (secretService,fileService)
         {
+            NaviationService = navigationService;
             SerializationService = serializationService;
             FileService = fileService;
+            WebDAVLoginRequiered = true;
+            WebDAVDatafilePropertiesEnabled = false;
 
-            PrimaryButtonCommand = new AsyncRelayCommand(PrimaryButtonCommandTask);
+            SetAndCreateLocalDatafileCommand = new DelegateCommand(async () =>
+            {
+                await CreateLocalFile();
+            });
+
+            SetAndCreateWebDAVDatafileCommand = new DelegateCommand(async () =>
+            {
+                await CreateLocalFile(true);
+            });
 
 
             CheckServerAddressCommand = new AsyncRelayCommand(CheckServerStatus);
@@ -50,10 +70,15 @@ namespace Project2FA.UWP.ViewModels
                 await SetLocalPath(true); //change path is true
             });
 
-
-            ChooseWebDAVCommand = new DelegateCommand(() =>
+            CreateWebDAVDatafileCommand = new DelegateCommand(() =>
             {
 
+            });
+
+
+            WebDAVLoginCommand = new DelegateCommand(async() =>
+            {
+                await WebDAVLogin(true);
             });
         }
 
@@ -66,7 +91,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 if (!string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(PasswordRepeat))
                 {
-                    if (!await CheckIfNameExists(DateFileName + ".2fa"))
+                    if (SelectWebDAV)
                     {
                         if (Password == PasswordRepeat)
                         {
@@ -76,15 +101,29 @@ namespace Project2FA.UWP.ViewModels
                         {
                             DatafileBTNActive = false;
                         }
-
-                        //ShowError = true;
-                        //ErrorText = "#Die Passwörter stimmen nicht überein";
-
                     }
                     else
                     {
-                        ShowError = true;
-                        ErrorText = Resources.NewDatafileContentDialogDatafileExistsError;
+                        if (!await CheckIfNameExists(DateFileName + ".2fa"))
+                        {
+                            if (Password == PasswordRepeat)
+                            {
+                                DatafileBTNActive = true;
+                            }
+                            else
+                            {
+                                DatafileBTNActive = false;
+                            }
+
+                            //ShowError = true;
+                            //ErrorText = "#Die Passwörter stimmen nicht überein";
+
+                        }
+                        else
+                        {
+                            ShowError = true;
+                            ErrorText = Resources.NewDatafileContentDialogDatafileExistsError;
+                        }
                     }
                 }
                 else
@@ -98,16 +137,22 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
-        private async Task PrimaryButtonCommandTask()
+        private async Task CreateLocalFile (bool isWebDAV = false)
         {
             try
             {
+                if (isWebDAV)
+                {
+                    LocalStorageFolder = ApplicationData.Current.LocalFolder;
+                }
                 Password = Password.Replace(" ", string.Empty);
-                await CreateLocalFileDB(false);
+                await CreateLocalFileDB(isWebDAV);
                 byte[] iv = new AesManaged().IV;
                 DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
                 await FileService.WriteStringAsync(DateFileName, SerializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
                 App.ShellPageInstance.NavigationIsAllowed = true;
+                //uplaod is not necessary because the data file is empty.
+                await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
             }
             catch (Exception exc)
             {
@@ -161,6 +206,12 @@ namespace Project2FA.UWP.ViewModels
             {
                 SetProperty(ref _errorText, value);
             }
+        }
+
+        public bool SelectWebDAV 
+        { 
+            get => _selectWebDAV;
+            set => SetProperty(ref _selectWebDAV, value);
         }
     }
 }

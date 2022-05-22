@@ -6,21 +6,17 @@ using Project2FA.Repository.Models;
 using Project2FA.UWP.Utils;
 using Project2FA.UWP.Views;
 using System;
-using System.ComponentModel.Design;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Template10.Services.File;
 using Template10.Services.Network;
-using WebDAVClient.Types;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Template10.Services.Secrets;
-using Project2FA.Core;
 using Project2FA.UWP.Services.WebDAV;
 using DecaTec.WebDav;
 using System.IO;
 using Windows.Storage.Streams;
-using Windows.UI.Xaml.Controls;
 using Windows.Storage.AccessCache;
 using Prism.Services.Dialogs;
 
@@ -36,6 +32,7 @@ namespace Project2FA.UWP.ViewModels
         private INetworkService NetworkService { get; }
         private IDialogService DialogService { get; }
         private INavigationService NaviationService { get; }
+        private ISecretService SecretService { get; }
 
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
@@ -57,6 +54,7 @@ namespace Project2FA.UWP.ViewModels
             FileService = fileService;
             WebDAVLoginRequiered = true;
             WebDAVDatafilePropertiesEnabled = false;
+            SecretService =secretService;
 
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
@@ -84,65 +82,12 @@ namespace Project2FA.UWP.ViewModels
                 await SetAndCheckLocalDatafile();
             });
 #pragma warning restore AsyncFixer03 
-            // Fire-and-forget async-void methods or delegates
-            //            ChooseWebDAVCommand = new DelegateCommand(() =>
-            //            {
-            //                SelectedIndex = 1;
-            //                var secretService = App.Current.Container.Resolve<ISecretService>();
-            //                if (secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") != string.Empty)
-            //                {
-            //                    ServerAddress = secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress");
-            //                    Password = secretService.Helper.ReadSecret(Constants.ContainerName, "WDPassword");
-            //                    Username = secretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername");
-            //                }
-            //            });
 
-            //#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             WebDAVLoginCommand = new DelegateCommand(async () =>
             {
-                IsLoading = true;
-                (bool success, Status result) = await CheckServerStatus();
-                if (success)
-                {
-                    if (ServerAddress != string.Empty && Username != string.Empty && WebDAVPassword != string.Empty)
-                    {
-                        if (await CheckLoginAsync())
-                        {
-                            WebDAVLoginRequiered = false;
-                            WebDAVDatafilePropertiesEnabled = true;
-                            WebDAVDatafilePropertiesExpanded = true;
-
-                            IsLoading = false;
-                            var dialog = new WebViewDatafileContentDialog();
-                            var param = new DialogParameters();
-                            param.Add("CreateDatafileCase", false);
-                            param.Add("Status", result);
-                            ContentDialogResult dialogresult = await DialogService.ShowDialogAsync(dialog, param);
-                            if (dialogresult == ContentDialogResult.Primary)
-                            {
-                                ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
-                            }
-                        }
-                        else
-                        {
-                            WebDAVLoginError = true;
-                            //TODO error Message
-                        }
-                    }
-                    else
-                    {
-                        //TODO error Message
-                    }
-                }
-                else
-                {
-                    //TODO error Message
-                }
-                IsLoading = false;
+                await WebDAVLogin(false);
             });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             SetAndCheckWebDAVDatafileCommand = new DelegateCommand(async () =>
@@ -166,19 +111,6 @@ namespace Project2FA.UWP.ViewModels
                 DatafileBTNActive = !string.IsNullOrEmpty(DateFileName) && !string.IsNullOrEmpty(Password);
             }
             return Task.CompletedTask;
-        }
-
-        public void ChooseWebDAV()
-        {
-            ISecretService secretService = App.Current.Container.Resolve<ISecretService>();
-            if (secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") != string.Empty)
-            {
-                ServerAddress = secretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress");
-                WebDAVPassword = secretService.Helper.ReadSecret(Constants.ContainerName, "WDPassword");
-                Username = secretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername");
-                //WebDAVLoginRequiered = false;
-                //WebDAVDatafilePropertiesExpanded = true;
-            }
         }
 
         public async Task<bool> UseExistDatafile()

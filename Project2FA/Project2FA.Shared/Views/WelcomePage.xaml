@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="clr-namespace:Microsoft.UI.Xaml.Media;assembly=Uno.UI"
-    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:viewmodels="using:Project2FA.ViewModels"
     mc:Ignorable="d">
 

@@ -21,6 +21,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
     <PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
+    <PackageReference Include="protobuf-net" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>

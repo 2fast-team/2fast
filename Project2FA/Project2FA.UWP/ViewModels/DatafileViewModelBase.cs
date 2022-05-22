@@ -14,6 +14,9 @@ using Project2FA.Repository.Models;
 using System.ComponentModel.DataAnnotations;
 using Project2FA.UWP.Services;
 using Project2FA.Core;
+using Project2FA.UWP.Views;
+using Prism.Services.Dialogs;
+using Windows.UI.Xaml.Controls;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -43,7 +46,7 @@ namespace Project2FA.UWP.ViewModels
         public ICommand ConfirmErrorCommand { get; set; }
         public ICommand CheckServerAddressCommand { get; set; }
 
-        public ICommand ChooseWebDAVCommand { get; set; }
+        //public ICommand ChooseWebDAVCommand { get; set; }
 
         public ICommand LoginCommand { get; set; }
 
@@ -124,6 +127,7 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public async Task<bool> CheckLoginAsync()
         {
+            IsLoading = true;
             bool result = await WebDAVClient.Client.CheckUserLogin(ServerAddress, Username, WebDAVPassword);
 
             if (result)
@@ -131,10 +135,12 @@ namespace Project2FA.UWP.ViewModels
                 SecretService.Helper.WriteSecret(Constants.ContainerName, "WDPassword", WebDAVPassword);
                 SecretService.Helper.WriteSecret(Constants.ContainerName, "WDServerAddress", ServerAddress);
                 SecretService.Helper.WriteSecret(Constants.ContainerName, "WDUsername", Username);
+                IsLoading = false;
                 return true;
             }
             else
             {
+                IsLoading = false;
                 return false;
             }
         }
@@ -179,70 +185,131 @@ namespace Project2FA.UWP.ViewModels
         /// <returns></returns>
         public async Task<Status> CheckAndFixServerAddress()
         {
+            if (!string.IsNullOrWhiteSpace(ServerAddress))
+            {
+                bool ignoreServerCertificateErrors = false;
+                if (!ServerAddress.StartsWith("http"))
+                {
+                    ServerAddress = string.Format("https://{0}", ServerAddress);
+                }
 
-            bool ignoreServerCertificateErrors = false;
-            if (!ServerAddress.StartsWith("http"))
-            {
-                ServerAddress = string.Format("https://{0}", ServerAddress);
-            }
+                try
+                {
+                    Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
+                    if (response == null)
+                    {
+                        ServerAddress = ServerAddress.Replace("https:", "http:");
+                    }
+                    else
+                    {
+                        return response;
+                    }
+                }
+                catch (ResponseError e)
+                {
+                    if (e.Message.Equals("The certificate authority is invalid or incorrect"))
+                    {
+                        //TODO Error Message: The certificate authority is invalid or incorrect
+                    }
+                    return null;
+                }
+                //catch
+                //{
+                //    await ShowServerAddressNotFoundMessage();
+                //    return false;
+                //}
 
-            try
-            {
-                Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
-                if (response == null)
+                if (ignoreServerCertificateErrors)
                 {
-                    ServerAddress = ServerAddress.Replace("https:", "http:");
+                    Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress, ignoreServerCertificateErrors);
+                    if (response == null)
+                    {
+                        ServerAddress = ServerAddress.Replace("https:", "http:");
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
-                else
-                {
-                    return response;
-                }
-            }
-            catch (ResponseError e)
-            {
-                if (e.Message.Equals("The certificate authority is invalid or incorrect"))
-                {
-                    //TODO Error Message: The certificate authority is invalid or incorrect
-                }
-                return null;
-            }
-            //catch
-            //{
-            //    await ShowServerAddressNotFoundMessage();
-            //    return false;
-            //}
 
-            if (ignoreServerCertificateErrors)
-            {
-                Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress, ignoreServerCertificateErrors);
-                if (response == null)
+                try
                 {
-                    ServerAddress = ServerAddress.Replace("https:", "http:");
+                    Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
+                    if (response == null)
+                    {
+                        await ShowServerAddressNotFoundMessage();
+                        return null;
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
-                else
-                {
-                    return response;
-                }
-            }
-
-            try
-            {
-                Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
-                if (response == null)
+                catch
                 {
                     await ShowServerAddressNotFoundMessage();
                     return null;
                 }
-                else
-                {
-                    return response;
-                }
             }
-            catch
+            else
             {
-                await ShowServerAddressNotFoundMessage();
                 return null;
             }
+        }
+
+        public void ChooseWebDAV()
+        {
+            if (SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") != string.Empty)
+            {
+                ServerAddress = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress");
+                WebDAVPassword = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDPassword");
+                Username = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername");
+                //WebDAVLoginRequiered = false;
+                //WebDAVDatafilePropertiesExpanded = true;
+            }
+        }
+
+        public async Task WebDAVLogin(bool createDatafileCase)
+        {
+            IsLoading = true;
+            (bool success, Status result) = await CheckServerStatus();
+            if (success)
+            {
+                if (ServerAddress != string.Empty && Username != string.Empty && WebDAVPassword != string.Empty)
+                {
+                    if (await CheckLoginAsync())
+                    {
+                        WebDAVLoginRequiered = false;
+                        WebDAVDatafilePropertiesEnabled = true;
+                        WebDAVDatafilePropertiesExpanded = true;
+
+                        
+                        var dialog = new WebViewDatafileContentDialog();
+                        var param = new DialogParameters();
+                        param.Add("CreateDatafileCase", createDatafileCase);
+                        param.Add("Status", result);
+                        ContentDialogResult dialogresult = await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, param);
+                        if (dialogresult == ContentDialogResult.Primary)
+                        {
+                            ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
+                        }
+                    }
+                    else
+                    {
+                        WebDAVLoginError = true;
+                        //TODO error Message
+                    }
+                }
+                else
+                {
+                    //TODO error Message
+                }
+            }
+            else
+            {
+                //TODO error Message for server status
+            }
+            IsLoading = false;
         }
 
         /// <summary>
@@ -251,6 +318,7 @@ namespace Project2FA.UWP.ViewModels
         /// <returns></returns>
         public Task ShowServerAddressNotFoundMessage()
         {
+            // TODO add ContentDialog
             throw new NotImplementedException();
         }
 

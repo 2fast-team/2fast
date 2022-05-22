@@ -879,4 +879,43 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
   <data name="NewDataFilePageTitle.Text" xml:space="preserve">
     <value>Datendatei erstellen</value>
   </data>
+  <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
+    <value>Filtern</value>
+  </data>
+  <data name="AccountCodePageSearchFilter.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Filtern</value>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
+    <value>Datendatei auswählen</value>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFolder" xml:space="preserve">
+    <value>Order auswählen</value>
+  </data>
+  <data name="SettingsPageAboDesc.Text" xml:space="preserve">
+    <value>Unterstützen sie die Entwicklung der App mit wiederkehrenden Zahlungen.</value>
+  </data>
+  <data name="WebDAVEmptyFolderMessage.Text" xml:space="preserve">
+    <value>Dieser Ordner enthält keine Dateien die zur Auswahl gewählt werden können.</value>
+  </data>
+  <data name="NewDatafileCreateDatafile.Content" xml:space="preserve">
+    <value>Datendatei erstellen</value>
+  </data>
+  <data name="NewDatafilehangeDatafile.Content" xml:space="preserve">
+    <value>Ordner ändern</value>
+  </data>
+  <data name="SettingsAppPrideMonthDesign.Header" xml:space="preserve">
+    <value>Regenbogenfarben für Anmeldeseite</value>
+  </data>
+  <data name="SettingsAppPrideMonthDesignDesc.Text" xml:space="preserve">
+    <value>Einstellen der Regenbogenfarben für die Anmeldesite</value>
+  </data>
+  <data name="SettingsMailSupportApp.Text" xml:space="preserve">
+    <value>E-Mail Support</value>
+  </data>
+  <data name="SettingsCustomDesign.Header" xml:space="preserve">
+    <value>Besondere Designeinstellungen</value>
+  </data>
+  <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
+    <value>Sicherung einspielen</value>
+  </data>
 </root>

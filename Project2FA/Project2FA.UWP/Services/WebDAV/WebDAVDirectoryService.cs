@@ -256,7 +256,10 @@ namespace Project2FA.UWP.Services.WebDAV
             }
             if (FilesAndFolders.Count == 0)
             {
-                IsFolderEmpty = true;
+                if (!_createDatafile)
+                {
+                    IsFolderEmpty = true;
+                }
             }
             else
             {

@@ -50,12 +50,6 @@ namespace Project2FA.UWP.ViewModels
             {
                 await SetLocalPath(true); //change path is true
             });
-
-
-            ChooseWebDAVCommand = new DelegateCommand(() =>
-            {
-
-            });
         }
 
         /// <summary>

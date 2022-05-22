@@ -1081,6 +1081,32 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region WebViewDatafileContentDialogChooseFile
+        /// <summary>
+        ///   Looks up a localized string similar to: Choose file
+        /// </summary>
+        public static string WebViewDatafileContentDialogChooseFile
+        {
+            get
+            {
+                return _resourceLoader.GetString("WebViewDatafileContentDialogChooseFile");
+            }
+        }
+        #endregion
+
+        #region WebViewDatafileContentDialogChooseFolder
+        /// <summary>
+        ///   Looks up a localized string similar to: Choose folder
+        /// </summary>
+        public static string WebViewDatafileContentDialogChooseFolder
+        {
+            get
+            {
+                return _resourceLoader.GetString("WebViewDatafileContentDialogChooseFolder");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1174,6 +1200,8 @@ namespace Project2FA.UWP.Strings{
             ButtonTextRetry,
             ErrorClipboardTask,
             AddAccountCodeContentDialogExpertSettingsHelp,
+            WebViewDatafileContentDialogChooseFile,
+            WebViewDatafileContentDialogChooseFolder,
         }
 
         private static ResourceLoader _resourceLoader;

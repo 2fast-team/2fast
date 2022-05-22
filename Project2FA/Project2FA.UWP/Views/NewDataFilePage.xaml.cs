@@ -28,6 +28,8 @@ namespace Project2FA.UWP.Views
 
         private void NewDataFilePage_Loaded(object sender, RoutedEventArgs e)
         {
+            MainPivot.Items.Remove(FolderPivotItem);
+            MainPivot.Items.Remove(WebDAVPivotItem);
             App.ShellPageInstance.ShellViewInternal.Header = string.Empty;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
         }
@@ -37,14 +39,33 @@ namespace Project2FA.UWP.Views
 
         }
 
-        private void BTN_LocalPath_Click(object sender, RoutedEventArgs e)
+        private async void BTN_LocalPath_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!MainPivot.Items.Contains(FolderPivotItem))
+            {
+                MainPivot.Items.Add(FolderPivotItem);
+            }
+            ViewModel.SelectWebDAV = false;
+            bool result = await ViewModel.SetLocalPath();
+            if (!result)
+            {
+                if (MainPivot.Items.Contains(FolderPivotItem))
+                {
+                    MainPivot.Items.Remove(FolderPivotItem);
+                }
+            }
         }
 
         private void BTN_WebDAV_Click(object sender, RoutedEventArgs e)
         {
-
+            MainPivot.Items.Remove(FolderPivotItem);
+            if (!MainPivot.Items.Contains(WebDAVPivotItem))
+            {
+                MainPivot.Items.Add(WebDAVPivotItem);
+            }
+            ViewModel.SelectedIndex = 1;
+            ViewModel.SelectWebDAV = true;
+            ViewModel.ChooseWebDAV();
         }
 
         private void UseDatafileContentDialogWDLogin_Click(object sender, RoutedEventArgs e)

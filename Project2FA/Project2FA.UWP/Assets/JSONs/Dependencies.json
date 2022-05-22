@@ -63,7 +63,7 @@
     "StringLicenseURL": "https://github.com/dotnet/standard/blob/master/LICENSE.TXT"
   },
   {
-    "Name": "Prism.Core",
+    "Name": "Prism.*",
     "Authors": "Brian Lagunas & Dan Siegel",
     "LicenseName": "MIT",
     "CategoryUid": "Package",
@@ -85,10 +85,17 @@
   },
   {
     "Name": "ZXing.Net",
-    "Authors": "Michael Jahn ",
+    "Authors": "Michael Jahn",
     "LicenseName": "Apache License 2.0",
     "CategoryUid": "Package",
     "StringLicenseURL": "https://github.com/micjahn/ZXing.Net/blob/master/COPYING"
+  },
+  {
+    "Name": "protobuf-net",
+    "Authors": "Marc Gravell",
+    "LicenseName": "Apache License 2.0",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/protobuf-net/protobuf-net/blob/main/Licence.txt"
   },
   {
     "Name": "Animation: search empty",
@@ -123,6 +130,7 @@
   {
     "Name": "simple-icons",
     "Authors": "simple-icons",
+    "LicenseName": "Creative Commons Zero v1.0 Universal",
     "CategoryUid": "Asset",
     "StringLicenseURL": "https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md"
   }

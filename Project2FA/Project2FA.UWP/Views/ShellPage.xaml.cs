@@ -19,6 +19,8 @@ using Prism.Navigation;
 using System.Threading.Tasks;
 using Project2FA.UWP.Services.Enums;
 using Prism.Services.Dialogs;
+using Microsoft.Toolkit.Uwp.UI;
+using Windows.UI.Xaml.Media;
 
 namespace Project2FA.UWP.Views
 {
@@ -191,12 +193,28 @@ namespace Project2FA.UWP.Views
                         break;
                 }
             }
+            ChangeBackgroundColorSetting(false);
+
         }
 
         public void SetTitleBarAsDraggable()
         {
             // Set XAML element as a draggable region.
             Window.Current.SetTitleBar(AppTitleBar);
+        }
+
+        public void ChangeBackgroundColorSetting(bool isMicaStyle)
+        {
+            if (isMicaStyle)
+            {
+                var control = (ContentPresenter)ShellView.FindDescendant("ContentPresenterFrame");
+                control.Background = (AcrylicBrush)App.Current.Resources["ShellAcrylicWindowBrush"];
+            }
+            else
+            {
+                var control = (ContentPresenter)ShellView.FindDescendant("ContentPresenterFrame");
+                //control.Background = (SolidColorBrush)App.Current.Resources["SystemColorBackgroundThemeBrush"];
+            }
         }
 
         private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)

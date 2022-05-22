@@ -5,11 +5,13 @@
     <AcrylicBrush 
         x:Key="ShellAcrylicWindowBrush"
         BackgroundSource="HostBackdrop" 
-        TintColor="{StaticResource SystemChromeAltHighColor}"
+        TintColor="{ThemeResource SystemChromeAltHighColor}"
         TintOpacity="0.8"
         FallbackColor="Black" />
     <SolidColorBrush x:Name="TranslucentBackgroundHighBrush" Opacity="0.9" Color="Black"/>
     <SolidColorBrush x:Name="TranslucentBackgroundMediumBrush" Opacity="0.75" Color="Black"/>
+    <SolidColorBrush x:Name="TranslucentBackgroundLowBrush" Opacity="0.65" Color="Black"/>
+    
     <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="Black"/>
 
     <!-- Resources for AccentButtonStyle -->
@@ -116,7 +118,7 @@
     <StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="SystemControlHighlightListMediumRevealBackgroundBrush" />
     <StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="SystemControlTransparentRevealBackgroundBrush" />
 
-    <StaticResource x:Key="TwoFABackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor"/>
+    <StaticResource x:Key="TwoFABackgroundBrush" ResourceKey="SystemChromeAltHighColor"/>
 
     <StaticResource x:Key="ExpanderHeaderBackground" ResourceKey="SystemChromeAltMediumHighColor" />
     <StaticResource x:Key="CardBackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor" />

@@ -30,6 +30,8 @@ using Prism.Services.Dialogs;
 using Template10.Services.Serialization;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.IO;
+using Project2FA.Core.ProtoModels;
+using System.Collections.ObjectModel;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -38,6 +40,7 @@ namespace Project2FA.UWP.ViewModels
     /// </summary>
     public class AddAccountContentDialogViewModel : BindableBase, IDialogInitializeAsync
     {
+        public ObservableCollection<TwoFACodeModel> OTPList { get; } = new ObservableCollection<TwoFACodeModel>();
         private string _qrCodeStr;
         private bool _qrCodeScan, _launchScreenClip, _isButtonEnable;
         private bool _manualInput;
@@ -75,6 +78,7 @@ namespace Project2FA.UWP.ViewModels
             FileService = fileService;
             SerializationService = serializationService;
             Logger = loggerFacade;
+            OTPList = new ObservableCollection<TwoFACodeModel>();
 
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //every second        
@@ -113,6 +117,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 Model.AccountSVGIcon = null;
                 Model.AccountIconName = null;
+                AccountIconName = null;
             });
 
             //ErrorsChanged += Validation_ErrorsChanged;
@@ -238,26 +243,37 @@ namespace Project2FA.UWP.ViewModels
                             {
                                 //clear the clipboard, if the image is read as TOTP
                                 Clipboard.Clear();
-                                await ParseQRCode();
-                                //move to the input dialog
-                                SelectedPivotIndex = 1;
-
-                                if (!string.IsNullOrEmpty(SecretKey)
-                                   && !string.IsNullOrEmpty(Model.Issuer))  /*   && !string.IsNullOrEmpty(Model.Label)*/
+                                //migrate code import
+                                if (_qrCodeStr.StartsWith("otpauth-migration://"))
                                 {
-                                    IsPrimaryBTNEnable = true;
+                                    await ParseMigrationQRCode();
+                                    SelectedPivotIndex = 2;
                                 }
+                                // normal otpauth import
                                 else
                                 {
-                                    MessageDialog dialog = new MessageDialog(ResourceService.GetLocalizedString("AddAccountContentDialogQRCodeContentError"), Strings.Resources.Error);
-                                    await dialog.ShowAsync();
-                                    //move to the selection dialog
-                                    SelectedPivotIndex = 0;
+                                    await ParseQRCode();
+                                    //move to the input dialog
+                                    SelectedPivotIndex = 1;
+
+                                    if (!string.IsNullOrEmpty(SecretKey)
+                                       && !string.IsNullOrEmpty(Model.Issuer))  /*   && !string.IsNullOrEmpty(Model.Label)*/
+                                    {
+                                        IsPrimaryBTNEnable = true;
+                                    }
+                                    else
+                                    {
+                                        MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
+                                        await dialog.ShowAsync();
+                                        //move to the selection dialog
+                                        SelectedPivotIndex = 0;
+                                    }
                                 }
+
                             }
                             else
                             {
-                                MessageDialog dialog = new MessageDialog(ResourceService.GetLocalizedString("AddAccountContentDialogQRCodeContentError"), Strings.Resources.Error);
+                                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
                                 await dialog.ShowAsync();
                             }
                         }
@@ -274,6 +290,40 @@ namespace Project2FA.UWP.ViewModels
 
                 }
             }
+        }
+
+        private async Task<bool> ParseMigrationQRCode()
+        {
+            try
+            {
+                var otpmm = new OTPMigrationModel();
+                var param = HttpUtility.ParseQueryString(new Uri(_qrCodeStr).Query);
+                var dataByteArray = Convert.FromBase64String(param["data"]);
+                using (var memoryStream = new MemoryStream())
+                {
+                    memoryStream.Write(dataByteArray, 0, dataByteArray.Length);
+                    memoryStream.Position = 0;
+                    Stream myStream = memoryStream;
+                    otpmm = ProtoBuf.Serializer.Deserialize<OTPMigrationModel>(memoryStream);
+                    for (int i = 0; i < otpmm.otp_parameters.Count; i++)
+                    {
+                        OTPList.Add(new TwoFACodeModel {
+                            Label = otpmm.otp_parameters[i].Name,
+                            Issuer = otpmm.otp_parameters[i].Issuer,
+                            SecretByteArray = otpmm.otp_parameters[i].Secret
+                        });
+                    }
+                    //var test = await SerializationService.DeserializeAsync<string>(myStream);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -350,6 +400,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 
                 Model.AccountIconName = transformName;
+                AccountIconName = transformName;
                 await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
             }
             //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()))
@@ -512,6 +563,24 @@ namespace Project2FA.UWP.ViewModels
                 Model.Label = value;
                 TempIconLabel = value;
                 CheckInputs();
+            }
+        }
+        public string AccountIconName
+        {
+            get => Model.AccountIconName;
+            set
+            {
+
+                Model.AccountIconName = value;
+                RaisePropertyChanged(nameof(AccountIconName));
+                if (value != null)
+                {
+                    TempIconLabel = string.Empty;
+                }
+                else
+                {
+                    TempIconLabel = Label;
+                }
             }
         }
         public bool ManualInput

@@ -11,6 +11,7 @@
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+    xmlns:wctmedia="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Page"
     mc:Ignorable="d">
@@ -116,13 +117,13 @@
                                         SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
                                         Margin="0,0,1,0" />
                                 </AppBarElementContainer>
-                                <AppBarButton
+                                <!--<AppBarButton
                                     x:Name="ABB_SearchFilter"
-                                     x:Uid="AccountCodePageABBSearchFilter" >
+                                     x:Uid="AccountCodePageSearchFilter" >
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
                                     </AppBarButton.Icon>
-                                </AppBarButton>
+                                </AppBarButton>-->
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 
@@ -147,6 +148,7 @@
                                     <VisualState.Setters>
                                         <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
+                                        <!--<Setter Target="ABB_SearchFilter.LabelPosition" Value="Collapsed"/>-->
                                         <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
                                     </VisualState.Setters>
@@ -407,8 +409,9 @@
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
+    
     <Grid 
-        x:Name="MainGrid" 
+        x:Name="MainGrid"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView 
             x:Name="LV_AccountCollection"

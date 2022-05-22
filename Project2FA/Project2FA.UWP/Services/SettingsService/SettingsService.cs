@@ -105,6 +105,12 @@ namespace Project2FA.UWP.Services
             set => _helper.TryWrite(nameof(UseHiddenTOTP), value);
         }
 
+        public bool PrideMonthDesign
+        {
+            get => _helper.SafeRead(nameof(PrideMonthDesign), false);
+            set => _helper.TryWrite(nameof(PrideMonthDesign), value);
+        }
+
         public string NTPServerString
         {
             get => _helper.SafeRead(nameof(UseExtendedHash), "time.windows.com");

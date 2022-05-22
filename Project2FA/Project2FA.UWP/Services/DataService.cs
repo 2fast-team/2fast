@@ -96,13 +96,13 @@ namespace Project2FA.UWP.Services
                 var result = compareVersion.CompareTo(prevíousVersion);
                 if (result >= 0)
                 {
+                    string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+                    string path = root + @"\Assets\AccountIcons";
+                    StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
                     // try and set the account icon name
                     for (int i = 0; i < Collection.Count; i++)
                     {
                         string label = Collection[i].Label;
-                        string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-                        string path = root + @"\Assets\AccountIcons";
-                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
                         label = label.ToLower().Replace("-", string.Empty).Replace(" ", string.Empty);
                         if (await FileService.FileExistsAsync(string.Format("{0}.svg", label), folder))
                         {
@@ -288,7 +288,7 @@ namespace Project2FA.UWP.Services
                     if (dbDatafile.IsWebDAV)
                     {
                         //var webDAVTask = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
-                        await CheckLocalDatafile();
+                        //await CheckLocalDatafile();
                     }
                     else
                     {

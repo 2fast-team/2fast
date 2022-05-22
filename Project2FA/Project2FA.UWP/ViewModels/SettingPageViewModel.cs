@@ -25,6 +25,9 @@ using Project2FA.Core.Services.NTP;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Project2FA.Core;
+using Windows.ApplicationModel.Email;
+using Windows.UI.ViewManagement;
+using Microsoft.Toolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -37,6 +40,7 @@ namespace Project2FA.UWP.ViewModels
         public AboutPartViewModel AboutPartViewModel { get; }
         public DatafilePartViewModel DatafilePartViewModel { get; }
         public ICommand RateAppCommand { get; }
+        public ICommand SendMailCommand { get; }
 
         private int _selectedItem;
         public SettingPageViewModel(IDialogService dialogService, IMarketplaceService marketplaceService, ISecretService secretService)
@@ -48,6 +52,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 AboutPartViewModel.RateApp();
             });
+            SendMailCommand = new AsyncRelayCommand(SendMail);
         }
 
         public void Initialize(INavigationParameters parameters)
@@ -56,6 +61,19 @@ namespace Project2FA.UWP.ViewModels
             {
                 SelectedItem = selectedItem;
             }
+        }
+
+        private async Task SendMail()
+        {
+            EmailMessage emailMessage = new EmailMessage();
+            emailMessage.To.Add(new EmailRecipient("app-2fast@outlook.com"));
+            emailMessage.Subject = "Support 2fast";
+            //string messageBody = "Hallo " + ApplicationView.GetForCurrentView().Title.ToString().Trim() + ",\r\n\r\nAnbei sende ich Ihnen eine PDF mit ihrem aktuellem Warenkorb.\r\n\r\n" +
+            //    "Bei Fragen stehe ich ihnen gerne zur Verfügung.\r\n\r\n" +
+            //    "Mit freundlichen Grüßen";
+            //emailMessage.Body = messageBody;
+
+            await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
@@ -214,6 +232,16 @@ namespace Project2FA.UWP.ViewModels
             {
                 _settings.UseHiddenTOTP = value;
                 RaisePropertyChanged(nameof(UseHiddenTOTP));
+            }
+        }
+
+        public bool PrideMonthDesign
+        {
+            get => _settings.PrideMonthDesign;
+            set
+            {
+                _settings.PrideMonthDesign = value;
+                RaisePropertyChanged(nameof(PrideMonthDesign));
             }
         }
 

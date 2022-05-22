@@ -12,7 +12,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.UWP.Strings"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource AppBarBackgroundThemeBrush}">
 
     <Page.Resources>
         <DataTemplate x:Name="ShellHeaderTemplate">
@@ -84,7 +84,9 @@
                 <Grid>
                     <ScrollViewer VerticalScrollMode="Auto">
                         <StackPanel Padding="0,0,22,0">
-                            <TextBlock TextWrapping="Wrap" x:Uid="NewDatafileContentDialogCreateInfo" />
+                            <TextBlock 
+                                TextWrapping="Wrap" 
+                                x:Uid="NewDatafileContentDialogCreateInfo" />
                             <TextBox 
                                 x:Name="TB_LocalFolder" 
                                 extensions:TextBoxExtensions.ValidationMode="Dynamic"
@@ -226,7 +228,7 @@
                                 Header="~UseDataFilePageDatafileExpander.Header" 
                                 x:Uid="UseDataFilePageDatafileExpander"
                                 IsEnabled="{x:Bind ViewModel.WebDAVDatafilePropertiesEnabled, Mode=OneWay}"
-                                IsExpanded="{x:Bind ViewModel.WebDAVDatafilePropertiesExpanded, Mode=OneWay}"
+                                IsExpanded="True"
                                 Width="480">
                                 <StackPanel Padding="0,0,22,0">
                                     <TextBlock 
@@ -234,16 +236,19 @@
                                 Text="~UseDatafileContentDialogLoadInfo.Text"
                                 x:Uid="UseDatafileContentDialogLoadInfo"
                                 Margin="0,10,0,10" />
+
                                     <TextBox 
-                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Name,Mode=TwoWay}"
-                                x:Uid="UseDatafileContentDialogFilename"
+                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Path,Mode=OneWay}"
+                                x:Uid="NewDatafileFolderPath"
                                 IsReadOnly="True"
-                                Header="~UseDatafileContentDialogFilename.Header"
-                                Margin="0,5,0,5"/>
+                                Header="~NewDatafileFolderPath.Header"
+                                Margin="0,5,0,18"/>
+
                                     <Button 
-                                x:Uid="UseDatafileContentDialogChangeDatafile" 
+                                x:Uid="NewDatafileChangeDatafile"
                                 Command="{x:Bind ViewModel.WebDAVLoginCommand}"
-                                Content="~UseDatafileContentDialogChangeDatafile.Content"/>
+                                Content="~NewDatafilehangeDatafile.Content"/>
+
                                     <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
@@ -254,17 +259,18 @@
                                             <ColumnDefinition  Width="auto"/>
                                         </Grid.ColumnDefinitions>
                                         <PasswordBox
-                                            x:Name="PB_DatafileWebDAVPassword"
-                                x:Uid="Password"
-                                Header="~Password.Header" 
-                                InputScope="Password"
-                                Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                KeyDown="PB_LocalPassword_KeyDown"/>
-                                        <HyperlinkButton
+                                    x:Name="PB_DatafileWebDAVPassword"
+                                    x:Uid="Password"
+                                    Header="~Password.Header" 
+                                    InputScope="Password"
+                                    Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    KeyDown="PB_LocalPassword_KeyDown"/>
+                                        <Button
                                     Grid.Column="1"
                                     Height="36"
                                     Width="48"
                                     Padding="4,4,4,4"
+                                            Style="{StaticResource TransparentButtonStyle}"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                                     Click="HLBTN_PasswordInfo"
                                     VerticalAlignment="Bottom">
@@ -272,19 +278,40 @@
                                     FontSize="20"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE946;"/>
-                                        </HyperlinkButton>
+                                        </Button>
                                     </Grid>
+                                    <PasswordBox 
+                                x:Uid="PasswordRepeat"
+                                Header="~PasswordRepeat.Header" 
+                                InputScope="Password" 
+                                Password="{x:Bind ViewModel.PasswordRepeat,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                Margin="0,5,0,12">
+                                    </PasswordBox>
                                     <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
                                 Height="1" />
 
+
                                     <TextBox 
-                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Path,Mode=OneWay}"
-                                x:Uid="UseDatafileContentDialogFolderPath"
-                                IsReadOnly="True"
-                                Header="~UseDatafileContentDialogFolderPath.Header"
-                                Margin="0,5,0,18"/>
+                                extensions:TextBoxExtensions.ValidationMode="Dynamic"
+                                extensions:TextBoxExtensions.Regex="^[\w\-. ]+$"
+                                x:Uid="NewDatafileContentDialogLocalFolder" 
+                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                Header="~NewDatafileContentDialogLocalFolder.Header"
+                                Margin="0,5,0,5">
+                                    </TextBox>
+                                    <!--<TextBox 
+                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Name,Mode=TwoWay}"
+                                x:Uid="UseDatafileContentDialogFilename"
+                                Header="~UseDatafileContentDialogFilename.Header"
+                                Margin="0,5,0,5"/>-->
+
+                                    <Button 
+                                x:Uid="NewDatafileCreateDatafile"
+                                Command="{x:Bind ViewModel.SetAndCreateWebDAVDatafileCommand}"
+                                IsEnabled="{x:Bind ViewModel.DatafileBTNActive, Mode=OneWay}"
+                                Content="~NewDatafileCreateDatafile.Content"/>
 
                                     <!--<Button 
                                       x:Uid="UseDataFilePageLoadDatafile"
@@ -297,5 +324,53 @@
                 </Grid>
             </PivotItem>
         </Pivot>
+        <msct:Loading 
+            IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
+            Background="{ThemeResource TranslucentBackgroundHighBrush}">
+            <StackPanel>
+                <muxc:AnimatedVisualPlayer 
+                    MaxHeight="120"
+                    PlaybackRate="0.5"
+                    AutoPlay="True">
+                    <lottie:LottieVisualSource  
+                        UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
+                </muxc:AnimatedVisualPlayer>
+                <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
+                <Button 
+                    x:Uid="BTNTryAgain" 
+                    Margin="0,10,0,0" 
+                    Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
+                    HorizontalAlignment="Center"/>
+            </StackPanel>
+        </msct:Loading>
+
+        <msct:Loading 
+            IsLoading="{x:Bind ViewModel.WebDAVLoginError,Mode=OneWay}" 
+            Background="{ThemeResource TranslucentBackgroundHighBrush}">
+            <StackPanel>
+                <muxc:AnimatedVisualPlayer 
+                                MaxHeight="120"
+                                PlaybackRate="0.5"
+                                AutoPlay="True">
+                    <lottie:LottieVisualSource  
+                                    UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
+                </muxc:AnimatedVisualPlayer>
+                <TextBlock x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
+                <Button 
+                    x:Uid="BTNTryAgain" 
+                    Margin="0,10,0,0" 
+                    Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
+                    HorizontalAlignment="Center"/>
+            </StackPanel>
+        </msct:Loading>
+        <mtuc:Loading 
+            IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
+            Background="{ThemeResource TranslucentBackgroundHighBrush}">
+            <muxc:ProgressRing 
+                IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
+                Foreground="{ThemeResource SystemAccentColor}" 
+                Width="80" 
+                Height="80"/>
+        </mtuc:Loading>
     </Grid>
 </Page>

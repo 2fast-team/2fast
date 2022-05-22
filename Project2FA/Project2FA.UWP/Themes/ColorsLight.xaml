@@ -6,11 +6,12 @@
     <AcrylicBrush 
         x:Key="ShellAcrylicWindowBrush" 
         BackgroundSource="HostBackdrop" 
-        TintColor="{StaticResource SystemChromeAltHighColor}" 
+        TintColor="{ThemeResource SystemChromeAltHighColor}" 
         TintOpacity="0.8" 
         FallbackColor="White" />
     <SolidColorBrush x:Name="TranslucentBackgroundHighBrush" Opacity="0.9" Color="White"/>
     <SolidColorBrush x:Name="TranslucentBackgroundMediumBrush" Opacity="0.75" Color="White"/>
+    <SolidColorBrush x:Name="TranslucentBackgroundLowBrush" Opacity="0.55" Color="White"/>
     <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="White"/>
 
     <!-- Resources for AccentButtonStyle -->

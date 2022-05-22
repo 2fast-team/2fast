@@ -8,6 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:Name="ShellHeaderTemplate">
+            <Grid></Grid>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
 
     </Grid>

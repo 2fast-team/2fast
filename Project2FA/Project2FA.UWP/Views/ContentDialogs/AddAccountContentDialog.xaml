@@ -10,6 +10,8 @@
     xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
     xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:models="using:Project2FA.Repository.Models"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     x:Uid="AddAccountContentDialog"
@@ -24,6 +26,65 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
+                <UserControl
+                    x:Name="Root" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+                    <Grid 
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        Background="{ThemeResource TwoFABackgroundBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.RowSpan="3" >
+                            <Border 
+                                Width="2.5" 
+                                ui:Effects.Shadow="{StaticResource SignShadow}"
+                                Background="{StaticResource SystemAccentColor}" />
+                        </Grid>
+
+                        <StackPanel 
+                            Grid.Column="2" 
+                            Grid.RowSpan="2" 
+                            Grid.ColumnSpan="2">
+                            <TextBlock
+                                x:Name="AccountName"
+                                FontSize="22"
+                                Margin="0,10,10,0" 
+                                TextWrapping="WrapWholeWords"
+                                VerticalAlignment="Center">
+                                <Bold>
+                                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
+                                </Bold>
+                            </TextBlock>
+                            <TextBlock 
+                                x:Name="IssuerName"
+                                FontWeight="Thin"
+                                Margin="0,10,10,0"
+                                Text="{x:Bind Issuer,Mode=OneWay}" 
+                                FontSize="22"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                    </Grid>
+                </UserControl>
+            </DataTemplate>
 
             <!--<muxc:CommandBarFlyout 
                 x:Name="AccountIconCommandBarFlyout"
@@ -60,7 +121,7 @@
             <PivotItem Header="#Optionen" x:Uid="AddAccountContentDialogInputType">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
-                        <StackPanel MinHeight="400" Margin="0,0,16,0">
+                        <StackPanel Margin="0,0,16,0">
                             <toolkitControls:MarkdownTextBlock 
                             Text="~AddAccountContentDialogInfo.Text" 
                             TextWrapping="Wrap" 
@@ -116,18 +177,19 @@
                                         </muxc:TeachingTip>
                                     </Button.Resources>
                                 </Button>
-                                <HyperlinkButton
+                                <Button
                                     Height="48"
                                     Width="48"
                                     Padding="4,4,4,4"
                                     Click="HLBTN_QRCodeInfo"
+                                    Style="{StaticResource TransparentButtonStyle}"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                                     VerticalAlignment="Center">
                                     <FontIcon
                                     FontSize="20"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE946;"  />
-                                </HyperlinkButton>
+                                </Button>
                             </StackPanel>
 
 
@@ -171,13 +233,13 @@
                             </Button>-->
                         </StackPanel>
                     </ScrollViewer>
-                    <Border Visibility="{x:Bind ViewModel.IsCameraActive, Mode=OneWay}">
+                    <!--<Border Visibility="{x:Bind ViewModel.IsCameraActive, Mode=OneWay}">
                         <StackPanel>
                             <Frame x:Name="CameraFrame"/>
                             <Button>Test</Button>
                         </StackPanel>
                         
-                    </Border>
+                    </Border>-->
                 </Grid>
             </PivotItem>
             <PivotItem Header="#inputs" x:Uid="AddAccountContentDialogInputs">
@@ -303,17 +365,18 @@
                                 Editor="{Binding ElementName=REB_Notes}"
                                 IsEnabled="True"
                                 UseURIChecker="True"
-                                Margin="0,16,0,0"
                                 Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <toolkitControls:TextToolbar.Formatter>
                                             <richText:RichTextFormatter/>
                                         </toolkitControls:TextToolbar.Formatter>
                                     </toolkitControls:TextToolbar>
                                     <RichEditBox
-                                x:Name="REB_Notes"
-                                Margin="0,0,0,8"
-                                MinHeight="80"
-                                TextChanged="REB_Notes_TextChanged">
+                            x:Name="REB_Notes"
+                            Margin="0,0,0,8"
+                            MinHeight="120"
+                            SelectionFlyout="{x:Null}"
+                            IsColorFontEnabled="False"
+                            TextChanged="REB_Notes_TextChanged">
                                     </RichEditBox>
                                 </StackPanel>
                             </appcontrols:CardExpanderControl>
@@ -322,9 +385,9 @@
                                 x:Name="CB_ManualInput"
                                 x:Uid="AddAccountContentDialogManualInputCheckbox" 
                                 IsChecked="{x:Bind ViewModel.ManualInput,Mode=TwoWay}" 
-                                Content="~AddAccountContentDialogManualInputCheckbox.Content" Margin="0,0,0,0"/>
+                                Content="~AddAccountContentDialogManualInputCheckbox.Content" Margin="0,12,0,0"/>
                             <TextBox 
-                                    x:Name="TB_AddAccountContentDialogSecretKey"
+                                x:Name="TB_AddAccountContentDialogSecretKey"
                                 x:Uid="AddAccountContentDialogSecretKey"
                                 extensions:TextBoxExtensions.ValidationMode="Dynamic"
                                 extensions:TextBoxExtensions.Regex="^[A-Za-z2-7-\s]*={0,6}$"
@@ -332,6 +395,7 @@
                                 Header="~AddAccountContentDialogSecretKey.Header" 
                                 PlaceholderText="~AddAccountContentDialogSecretKey.PlaceholderText" 
                                 IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
+                                Margin="0,12,0,0"
                                 Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                                 <!--<Interactivity:Interaction.Behaviors>
                                     <behaviors:HighlightFormFieldOnErrors 
@@ -345,10 +409,10 @@
                                 Margin="0,15,0,0">
                                 <appcontrols:CardExpanderControl.Header>
                                     <appcontrols:CardControl
-                                                Icon="&#xEF58;"
-                                                x:Uid="AddAccountContentDialogExpertExpander" 
-                                                Header="~AddAccountContentDialogExpertExpander.Header">
-                                                <appcontrols:CardControl.ActionContent>
+                                        Icon="&#xEF58;"
+                                        x:Uid="AddAccountContentDialogExpertExpander" 
+                                        Header="~AddAccountContentDialogExpertExpander.Header">
+                                        <appcontrols:CardControl.ActionContent>
                                             <Button
                                                 Grid.Column="1"
                                                 Height="36"
@@ -399,6 +463,22 @@
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
+            </PivotItem>
+            <PivotItem 
+                Header="#import backup" 
+                x:Uid="AddAccountContentDialogImportBackup"
+                x:Name="ImportAccountBackup">
+                <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
+                    <ListView            
+                        SelectionMode="Multiple"
+                        ItemsSource="{x:Bind ViewModel.OTPList, Mode=OneWay}"
+                        ItemTemplate="{StaticResource TwoFACodeCustomTemplate}" 
+                        IsItemClickEnabled="False"
+                        ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
+                        HorizontalContentAlignment="Stretch"
+                        HorizontalAlignment="Stretch"/>
+                </Grid>
+                
             </PivotItem>
         </Pivot>
     </Grid>

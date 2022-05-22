@@ -15,9 +15,9 @@ namespace Project2FA.UWP.ViewModels
     public class WebViewDatafileContentDialogViewModel : BindableBase, IDialogInitialize
     {
         private string _webDAVServerBackgroundUrl;
-        private bool _createDatafile;
         private bool _isLoading;
         private bool _chooseItemPossible;
+        private bool _createDatafileCase;
         private string _title;
         private string _webDAVProductName;
         private WebDAVFileOrFolderModel _selectedItem;
@@ -43,15 +43,16 @@ namespace Project2FA.UWP.ViewModels
 
         public void Initialize(IDialogParameters parameters)
         {
-            parameters.TryGetValue<bool>("CreateDatafileCase", out bool createDatafileCase);
+            parameters.TryGetValue<bool>("CreateDatafileCase", out _createDatafileCase);
             if (parameters.TryGetValue<Status>("Status", out Status result))
             {
                 LoadProperties(result);
             }
-            Title = createDatafileCase ? Strings.Resources.CreateDatafile : Strings.Resources.LoadDatafile;
-            //TODO translation
-            PrimaryButtonText = createDatafileCase ? "#create" : "#choose";
-            StartLoading(createDatafileCase);
+            Title = _createDatafileCase ? Strings.Resources.CreateDatafile : Strings.Resources.LoadDatafile;
+            PrimaryButtonText = _createDatafileCase ? 
+                Strings.Resources.WebViewDatafileContentDialogChooseFolder :
+                Strings.Resources.WebViewDatafileContentDialogChooseFile;
+            StartLoading(_createDatafileCase);
         }
 
         private void LoadProperties(Status result)
@@ -63,7 +64,6 @@ namespace Project2FA.UWP.ViewModels
 
         private Task StartLoading(bool createDatafile)
         {
-            _createDatafile = createDatafile;
             return Directory.StartDirectoryListing(createDatafile);
         }
 
@@ -89,6 +89,10 @@ namespace Project2FA.UWP.ViewModels
             get => _selectedItem;
             set
             {
+                if (_createDatafileCase && value is null && _selectedItem != null)
+                {
+                    return;
+                }
                 if (SetProperty(ref _selectedItem, value))
                 {
                     bool notvalid = false;
@@ -100,6 +104,10 @@ namespace Project2FA.UWP.ViewModels
                             {
                                 ChooseItemPossible = true;
                             }
+                        }
+                        else if(value.IsDirectory && _createDatafileCase)
+                        {
+                            ChooseItemPossible = true;
                         }
                         else
                         {

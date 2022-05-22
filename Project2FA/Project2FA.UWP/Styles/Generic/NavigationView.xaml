@@ -681,6 +681,7 @@
                                             HorizontalContentAlignment="Stretch"/>
 
                                         <ContentPresenter
+                                            x:Name="ContentPresenter"
                                             AutomationProperties.LandmarkType="Main"
                                             Grid.Row="2"
                                             Grid.ColumnSpan="2"
@@ -690,10 +691,10 @@
                                 </SplitView.Content>
                             </SplitView>
                             <Grid
-                                        x:Name="ShadowCaster"
-                                        Grid.RowSpan="2"
-                                        Width="{TemplateBinding OpenPaneLength}"
-                                        HorizontalAlignment="Left">
+                                x:Name="ShadowCaster"
+                                Grid.RowSpan="2"
+                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OpenPaneWidth}"
+                                HorizontalAlignment="Left">
                                 <Grid.RenderTransform>
                                     <CompositeTransform x:Name="ShadowCasterTransform" />
                                 </Grid.RenderTransform>

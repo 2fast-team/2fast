@@ -13,6 +13,7 @@
     xmlns:strings="using:Project2FA.UWP.Strings"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
+    MinWidth="500"
     Title="~EditAccountContentDialog.Title"
     x:Uid="EditAccountContentDialog"
     PrimaryButtonStyle="{StaticResource ButtonRevealStyle}"
@@ -43,9 +44,12 @@
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid MinWidth="400" >
+    <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel MinHeight="650" Margin="0,0,16,0">
+            <StackPanel 
+                MinHeight="650" 
+                MinWidth="400"
+                Margin="0,0,16,0">
                 <appcontrols:CardControl 
                     Header="~AddAccountContentDialogAccountIcon.Header"
                     x:Uid="AddAccountContentDialogAccountIcon">
@@ -86,6 +90,7 @@
                                 x:Uid="AddAccountContentDialogSuggestionBox"
                                 Width="200"
                                 QueryIcon="Find"
+                                Text="{x:Bind ViewModel.TempAccountIconName,Mode=OneWay}"
                                 VerticalAlignment="Center"
                                 PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                 TextChanged="AutoSuggestBox_TextChanged" 
@@ -141,7 +146,6 @@
                             x:Name="Toolbar"
                             Editor="{Binding ElementName=REB_Notes}"
                             UseURIChecker="True"
-                            Margin="0,16,0,0"
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                             <toolkit:TextToolbar.Formatter>

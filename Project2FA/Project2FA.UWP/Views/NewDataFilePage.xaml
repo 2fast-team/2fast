@@ -131,6 +131,11 @@
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
                                 Height="1" />
+                            <Button 
+                                Command="{x:Bind ViewModel.SetAndCreateLocalDatafileCommand}"
+                                IsEnabled="{x:Bind ViewModel.DatafileBTNActive, Mode=OneWay}"
+                                x:Uid="NewDatafilePageCreateFileBTN"
+                                Content="~NewDatafilePageCreateFileBTN.Content"></Button>
 
                         </StackPanel>
                     </ScrollViewer>
@@ -238,16 +243,13 @@
                                 Margin="0,10,0,10" />
 
                                     <TextBox 
-                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Path,Mode=OneWay}"
-                                x:Uid="NewDatafileFolderPath"
-                                IsReadOnly="True"
-                                Header="~NewDatafileFolderPath.Header"
-                                Margin="0,5,0,18"/>
-
-                                    <Button 
-                                x:Uid="NewDatafileChangeDatafile"
-                                Command="{x:Bind ViewModel.WebDAVLoginCommand}"
-                                Content="~NewDatafilehangeDatafile.Content"/>
+                                extensions:TextBoxExtensions.ValidationMode="Dynamic"
+                                extensions:TextBoxExtensions.Regex="^[\w\-. ]+$"
+                                x:Uid="NewDatafileContentDialogLocalFolder" 
+                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                Header="~NewDatafileContentDialogLocalFolder.Header"
+                                Margin="0,5,0,5">
+                                    </TextBox>
 
                                     <Border 
                                 Margin="0,12" 
@@ -292,20 +294,22 @@
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
                                 Height="1" />
 
-
                                     <TextBox 
-                                extensions:TextBoxExtensions.ValidationMode="Dynamic"
-                                extensions:TextBoxExtensions.Regex="^[\w\-. ]+$"
-                                x:Uid="NewDatafileContentDialogLocalFolder" 
-                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                Header="~NewDatafileContentDialogLocalFolder.Header"
-                                Margin="0,5,0,5">
-                                    </TextBox>
-                                    <!--<TextBox 
-                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Name,Mode=TwoWay}"
-                                x:Uid="UseDatafileContentDialogFilename"
-                                Header="~UseDatafileContentDialogFilename.Header"
-                                Margin="0,5,0,5"/>-->
+                                Text="{x:Bind ViewModel.ChoosenOneWebDAVFile.Path,Mode=OneWay}"
+                                x:Uid="NewDatafileFolderPath"
+                                IsReadOnly="True"
+                                Header="~NewDatafileFolderPath.Header"
+                                Margin="0,5,0,18"/>
+
+                                    <Button 
+                                Command="{x:Bind ViewModel.WebDAVLoginCommand}"
+                                x:Uid="NewDatafileContentDialogChangePath"
+                                Content="~NewDatafileContentDialogChangePath.Content"/>
+                                    
+                                    <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
 
                                     <Button 
                                 x:Uid="NewDatafileCreateDatafile"

@@ -550,40 +550,48 @@ namespace Project2FA.UWP.Services
         /// <param name="folder"></param>
         /// <param name="datafileDB"></param>
         /// <returns></returns>
-        private async Task<(bool successful, bool statusResult)> UploadDatafileWithWebDAV(StorageFolder folder, DBDatafileModel datafileDB)
+        public async Task<(bool successful, bool statusResult)> UploadDatafileWithWebDAV(StorageFolder folder, DBDatafileModel datafileDB, bool initial=false)
         {
             WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-            StorageFile file = await folder.GetFileAsync(datafileDB.Name);
-            CancellationTokenSource cts = new CancellationTokenSource();
-            //IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
-            if (await client.ExistsAsync(datafileDB.Path + "/" + datafileDB.Name))
+            if (await FileService.FileExistsAsync(datafileDB.Name, folder))
             {
-                //set custom date properties (current file date) to prevent that a newer date with the upload is created
-                string modifiedDate = (await file.GetBasicPropertiesAsync()).DateModified.ToUniversalTime().ToUnixTimeSeconds().ToString();
-                List<(string Key, string Value)> headerPairs = new List<(string Key, string Value)>(); //custom http headers (owncloud and nextcloud)
-                headerPairs.Add(("X-OC-MTime", modifiedDate)); //last modified date
-                headerPairs.Add(("X-OC-CTime", file.DateCreated.ToUniversalTime().ToUnixTimeSeconds().ToString())); //creation date
-                var uploaded = await client.UploadAsync(
-                    datafileDB.Path + "/" + datafileDB.Name,
-                    await file.OpenStreamForReadAsync(),
-                    file.ContentType,
-                    cts.Token,
-                    headerPairs);
-                if (uploaded)
+                StorageFile file = await folder.GetFileAsync(datafileDB.Name);
+                CancellationTokenSource cts = new CancellationTokenSource();
+                //IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
+                if (initial || await client.ExistsAsync(datafileDB.Path + "/" + datafileDB.Name))
                 {
-                    // TODO webdav file upload failed
-                    return (true, true);
+                    //set custom date properties (current file date) to prevent that a newer date with the upload is created
+                    string modifiedDate = (await file.GetBasicPropertiesAsync()).DateModified.ToUniversalTime().ToUnixTimeSeconds().ToString();
+                    List<(string Key, string Value)> headerPairs = new List<(string Key, string Value)>(); //custom http headers (owncloud and nextcloud)
+                    headerPairs.Add(("X-OC-MTime", modifiedDate)); //last modified date
+                    headerPairs.Add(("X-OC-CTime", file.DateCreated.ToUniversalTime().ToUnixTimeSeconds().ToString())); //creation date
+                    var uploaded = await client.UploadAsync(
+                        datafileDB.Path + "/" + datafileDB.Name,
+                        await file.OpenStreamForReadAsync(),
+                        file.ContentType,
+                        cts.Token,
+                        headerPairs);
+                    if (uploaded)
+                    {
+                        // TODO webdav file upload failed
+                        return (true, true);
+                    }
+                    else
+                    {
+                        return (false, false);
+                    }
                 }
                 else
                 {
+                    // TODO webdav file was moved
                     return (false, false);
                 }
             }
             else
             {
-                // TODO webdav file was moved
                 return (false, false);
             }
+
         }
 
         public TwoFACodeModel TempDeletedTFAModel

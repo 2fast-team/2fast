@@ -33,8 +33,8 @@
     <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
     <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
     <PackageReference Include="Uno.Material" Version="1.3.3" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.3.5" />
-    <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="4.3.5" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.3.6" />
+    <PackageReference Include="Uno.WinUI.Skia.Tizen" Version="4.3.6" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />

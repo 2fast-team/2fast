@@ -14,6 +14,7 @@ using Template10.Services.Secrets;
 using System.Windows.Input;
 using Prism.Navigation;
 using Project2FA.UWP.Views;
+using Project2FA.UWP.Services;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -47,12 +48,12 @@ namespace Project2FA.UWP.ViewModels
 
             SetAndCreateLocalDatafileCommand = new DelegateCommand(async () =>
             {
-                await CreateLocalFile();
+                await SetAndCreateLocalDatafile(false);
             });
 
             SetAndCreateWebDAVDatafileCommand = new DelegateCommand(async () =>
             {
-                await CreateLocalFile(true);
+                await SetAndCreateLocalDatafile(true);
             });
 
 
@@ -137,32 +138,62 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
-        private async Task CreateLocalFile (bool isWebDAV = false)
+
+        private async Task SetAndCreateLocalDatafile(bool isWebDAV)
         {
-            try
+            Password = Password.Replace(" ", string.Empty);
+            if (!DateFileName.Contains(".2fa"))
             {
-                if (isWebDAV)
-                {
-                    LocalStorageFolder = ApplicationData.Current.LocalFolder;
-                }
-                Password = Password.Replace(" ", string.Empty);
-                await CreateLocalFileDB(isWebDAV);
-                byte[] iv = new AesManaged().IV;
-                DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
-                await FileService.WriteStringAsync(DateFileName, SerializationService.Serialize(file), await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
-                App.ShellPageInstance.NavigationIsAllowed = true;
-                //uplaod is not necessary because the data file is empty.
-                await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+                DateFileName += ".2fa";
             }
-            catch (Exception exc)
+
+            byte[] iv = new AesManaged().IV;
+            DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
+            if (isWebDAV)
             {
-                if (exc is UnauthorizedAccessException)
-                {
-                    //TODO error message?
-                }
-                throw;
+                LocalStorageFolder = ApplicationData.Current.LocalFolder;
             }
+
+            await FileService.WriteStringAsync(
+            DateFileName,
+            SerializationService.Serialize(file),
+            await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
+            await CreateLocalFileDB(isWebDAV);
+
+            App.ShellPageInstance.NavigationIsAllowed = true;
+            //uplaod is not necessary because the data file is empty.
+            await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
         }
+        //private async Task CreateLocalFile (bool isWebDAV = false)
+        //{
+        //    try
+        //    {
+        //        if (isWebDAV)
+        //        {
+        //            LocalStorageFolder = ApplicationData.Current.LocalFolder;
+        //        }
+        //        Password = Password.Replace(" ", string.Empty);
+        //        var dbDatafileModel = await CreateLocalFileDB(isWebDAV);
+        //        byte[] iv = new AesManaged().IV;
+        //        DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
+        //        await FileService.WriteStringAsync(
+        //            DateFileName, 
+        //            SerializationService.Serialize(file), 
+        //            await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
+        //        App.ShellPageInstance.NavigationIsAllowed = true;
+        //        await DataService.Instance.UploadDatafileWithWebDAV(LocalStorageFolder, dbDatafileModel);
+        //        //uplaod is not necessary because the data file is empty.
+        //        await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        if (exc is UnauthorizedAccessException)
+        //        {
+        //            //TODO error message?
+        //        }
+        //        throw;
+        //    }
+        //}
 
         /// <summary>
         /// Starts a folder picker to pick a datafile from a local path

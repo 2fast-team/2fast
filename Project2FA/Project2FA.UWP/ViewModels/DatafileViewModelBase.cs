@@ -75,35 +75,36 @@ namespace Project2FA.UWP.ViewModels
         /// Creates a local DB with the data from the datafile
         /// </summary>
         /// <param name="isWebDAV"></param>
-        public async Task CreateLocalFileDB(bool isWebDAV)
+        public async Task<DBDatafileModel> CreateLocalFileDB(bool isWebDAV)
         {
             string hash = CryptoService.CreateStringHash(Password, false);
             DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
             string tempDataFileName;
-            if (!isWebDAV)
+            if (!DateFileName.Contains(".2fa"))
             {
-                if (!DateFileName.Contains(".2fa"))
-                {
-                    DateFileName += ".2fa";
-                }
-                tempDataFileName = DateFileName;
+                DateFileName += ".2fa";
             }
-            else
+            tempDataFileName = DateFileName;
+
+            var model = new DBDatafileModel
             {
-                tempDataFileName= _choosenOneWebDAVFile.Name;
-            }
+                DBPasswordHashModel = passwordModel,
+                IsWebDAV = isWebDAV,
+                Path = isWebDAV ? _choosenOneWebDAVFile.Path : LocalStorageFolder.Path,
+                Name = tempDataFileName
+            };
 
 
-            await App.Repository.Datafile.UpsertAsync(
-                new DBDatafileModel
-                {
-                    DBPasswordHashModel = passwordModel,
-                    IsWebDAV = isWebDAV,
-                    Path = isWebDAV ? _choosenOneWebDAVFile.Path : LocalStorageFolder.Path,
-                    Name = tempDataFileName
-                });
+            await App.Repository.Datafile.UpsertAsync(model);
+            if (isWebDAV)
+            {
+                await DataService.Instance.UploadDatafileWithWebDAV(ApplicationData.Current.LocalFolder, model, true);
+            }
+            
             // write the password with the hash(key) in the secret vault
             SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
+
+            return model;
         }
 
         /// <summary>

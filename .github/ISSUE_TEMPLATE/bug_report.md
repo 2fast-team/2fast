@@ -18,7 +18,7 @@ A clear and concise description of what the bug is.
 
 Steps to reproduce the behavior:
 
-1. Given the following environment (Sample App w/ XAML, Project with Isolated setup, etc...)
+1. Given the following environment
 2. Go to '...'
 3. Click on '....'
 4. Scroll down to '....'
@@ -38,9 +38,7 @@ Steps to reproduce the behavior:
 
 <!-- Check one or more of the following options with "x" and replace the {build_number} and {minor_version} with the actual values -->
 
-NuGet Package(s): <!-- Which NuGet Packages have you used -->
-
-Package Version(s):
+App Version(s):
 
 Windows 10/11 Build Number:
 
@@ -51,12 +49,6 @@ Windows 10/11 Build Number:
 - [ ] May 2020 Update (19041)
 - [ ] Windows 11 21H2 Update (22000)
 - [ ] Insider Build ({build_number})
-
-Visual Studio version:
-
-- [ ] 2017 (15.{minor_version})
-- [ ] 2019 (16.{minor_version})
-- [ ] 2022 (17.{minor_version})
 
 ## Additional context
 

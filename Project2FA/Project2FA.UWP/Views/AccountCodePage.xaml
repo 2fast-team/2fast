@@ -54,8 +54,8 @@
                                                 AutoCloseInterval="10000"
                                                 BorderBrush="{ThemeResource SystemAccentColor}"
                                                 x:Uid="AccountCodePageEmptyCollectionTip"
+                                                    IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
                                                 BorderThickness="2"
-                                                IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
                                                 Target="{Binding ElementName=ABB_AddAccount, Mode=OneTime}">
                                                     <muxc:TeachingTip.HeroContent>
                                                         <muxc:AnimatedVisualPlayer 

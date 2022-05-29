@@ -135,6 +135,15 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _notes, value);
         }
 
+        private bool _isChecked  = true;
+
+        [JsonIgnore]
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set => SetProperty(ref _isChecked, value);
+        }
+
         [JsonIgnore]
         public TwoFACodeModel Model
         {

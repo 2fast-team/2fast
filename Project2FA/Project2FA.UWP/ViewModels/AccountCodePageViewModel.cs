@@ -261,17 +261,19 @@ namespace Project2FA.UWP.ViewModels
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
         {
-            //detach the events
-            if (_dispatcherTOTPTimer.IsEnabled)
+            if (!await DialogService.IsDialogRunning())
             {
-                _dispatcherTOTPTimer.Stop();
+                //detach the events
+                if (_dispatcherTOTPTimer.IsEnabled)
+                {
+                    _dispatcherTOTPTimer.Stop();
+                }
+                if (_dispatcherTimerDeletedModel.IsEnabled)
+                {
+                    _dispatcherTimerDeletedModel.Stop();
+                }
+                TwoFADataService.TOTPEventStopwatch.Stop();
             }
-            if (_dispatcherTimerDeletedModel.IsEnabled)
-            {
-                _dispatcherTimerDeletedModel.Stop();
-            }
-            TwoFADataService.TOTPEventStopwatch.Stop();
-            //TOTPEventStopwatch.Reset();
             return !await DialogService.IsDialogRunning();
         }
 

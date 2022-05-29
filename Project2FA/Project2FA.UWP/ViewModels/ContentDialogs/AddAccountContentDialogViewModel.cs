@@ -28,7 +28,6 @@ using Project2FA.UWP.Helpers;
 using Template10.Services.File;
 using Prism.Services.Dialogs;
 using Template10.Services.Serialization;
-using Microsoft.Toolkit.Mvvm.Input;
 using System.IO;
 using Project2FA.Core.ProtoModels;
 using System.Collections.ObjectModel;
@@ -51,6 +50,7 @@ namespace Project2FA.UWP.ViewModels
         private int _seconds;
         private string _secretKey;
         private bool _isEditBoxVisible;
+        private string _pivotViewSelectionName;
         DispatcherTimer _dispatcherTimer;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
@@ -100,7 +100,20 @@ namespace Project2FA.UWP.ViewModels
             });
             PrimaryButtonCommand = new DelegateCommand(() =>
             {
-                DataService.Instance.Collection.Add(Model);
+                if (OTPList.Count > 0)
+                {
+                    for (int i = 0; i < OTPList.Count; i++)
+                    {
+                        if (OTPList[i].IsChecked)
+                        {
+                            DataService.Instance.Collection.Add(OTPList[i]);
+                        }
+                    }
+                }
+                else
+                {
+                    DataService.Instance.Collection.Add(Model);
+                }
             });
 
             CameraScanCommand = new DelegateCommand(() =>
@@ -247,14 +260,15 @@ namespace Project2FA.UWP.ViewModels
                                 if (_qrCodeStr.StartsWith("otpauth-migration://"))
                                 {
                                     await ParseMigrationQRCode();
-                                    SelectedPivotIndex = 2;
+                                    PivotViewSelectionName = "ImportBackupAccounts";
+                                    CheckInputs();
                                 }
                                 // normal otpauth import
                                 else
                                 {
                                     await ParseQRCode();
                                     //move to the input dialog
-                                    SelectedPivotIndex = 1;
+                                    PivotViewSelectionName = "NormalInputAccount";
 
                                     if (!string.IsNullOrEmpty(SecretKey)
                                        && !string.IsNullOrEmpty(Model.Issuer))  /*   && !string.IsNullOrEmpty(Model.Label)*/
@@ -307,13 +321,24 @@ namespace Project2FA.UWP.ViewModels
                     otpmm = ProtoBuf.Serializer.Deserialize<OTPMigrationModel>(memoryStream);
                     for (int i = 0; i < otpmm.otp_parameters.Count; i++)
                     {
+                        string label = string.Empty, issuer = string.Empty;
+                        if (otpmm.otp_parameters[i].Name.Contains(":"))
+                        {
+                            string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
+                            label = issuerArray[0];
+                            issuer = issuerArray[1];
+                        }
+                        else
+                        {
+                            label = otpmm.otp_parameters[i].Name;
+                            issuer = otpmm.otp_parameters[i].Issuer;
+                        }
                         OTPList.Add(new TwoFACodeModel {
-                            Label = otpmm.otp_parameters[i].Name,
-                            Issuer = otpmm.otp_parameters[i].Issuer,
+                            Label = label,
+                            Issuer = issuer,
                             SecretByteArray = otpmm.otp_parameters[i].Secret
                         });
                     }
-                    //var test = await SerializationService.DeserializeAsync<string>(myStream);
                 }
                 return true;
             }
@@ -420,7 +445,14 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         private void CheckInputs()
         {
-            IsPrimaryBTNEnable = !string.IsNullOrEmpty(SecretKey) && !string.IsNullOrEmpty(Label) && !string.IsNullOrEmpty(Issuer);
+            if (OTPList.Count > 0)
+            {
+                IsPrimaryBTNEnable = true;
+            }
+            else
+            {
+                IsPrimaryBTNEnable = !string.IsNullOrEmpty(SecretKey) && !string.IsNullOrEmpty(Label) && !string.IsNullOrEmpty(Issuer);
+            }
         }
 
         /// <summary>
@@ -620,6 +652,10 @@ namespace Project2FA.UWP.ViewModels
             get => _tempIconLabel;
             set => SetProperty(ref _tempIconLabel, value);
         }
+        public string PivotViewSelectionName 
+        { 
+            get => _pivotViewSelectionName;
+            set => SetProperty(ref _pivotViewSelectionName, value); }
         #endregion
     }
 }

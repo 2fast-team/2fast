@@ -9,11 +9,9 @@ using Project2FA.UWP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -67,7 +65,7 @@ namespace Project2FA.UWP.Views
 
         private void AddAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
         {
-            MainPivot.Items.Remove(ImportAccountBackup);
+            MainPivot.Items.Remove(PI_ImportAccountBackup);
             var linkButton = Toolbar.GetDefaultButton(ButtonType.Link);
             if (linkButton != null)
             {
@@ -130,11 +128,25 @@ namespace Project2FA.UWP.Views
         {
             if(dp == Pivot.TagProperty)
             {
-                if (((TextBox)sender).Tag is string tag)
+                if (((Pivot)sender).Tag is string tag)
                 {
-                    if (tag == "BackupPivot")
+                    if (tag == "ImportBackupAccounts")
                     {
-
+                        if (MainPivot.Items.Contains(PI_AccountInput))
+                        {
+                            MainPivot.Items.Add(PI_ImportAccountBackup);
+                            MainPivot.Items.Remove(PI_AccountInput);
+                        }
+                        ViewModel.SelectedPivotIndex = 1;
+                    }
+                    if (tag == "NormalInputAccount")
+                    {
+                        if (MainPivot.Items.Contains(PI_ImportAccountBackup))
+                        {
+                            MainPivot.Items.Add(PI_AccountInput);
+                            MainPivot.Items.Remove(PI_ImportAccountBackup);
+                        }
+                        ViewModel.SelectedPivotIndex = 1;
                     }
                 }
             }
@@ -214,10 +226,14 @@ namespace Project2FA.UWP.Views
             }
         }
 
-        private void BTN_EditAccountIcon_Click(object sender, RoutedEventArgs e)
-        {
-            //ShowMenu(false);
-        }
+        //private void BTN_EditAccountIcon_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (!MainPivot.Items.Contains(PI_AccountInput))
+        //    {
+        //        MainPivot.Items.Add(PI_AccountInput);
+        //        MainPivot.Items.Remove(PI_ImportAccountBackup);
+        //    }
+        //}
 
         private void REB_Notes_TextChanged(object sender, RoutedEventArgs e)
         {
@@ -236,6 +252,22 @@ namespace Project2FA.UWP.Views
                 IsOpen = true,
             };
             RootGrid.Children.Add(teachingTip);
+        }
+
+        private void Root_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+        {
+            if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
+            {
+                model.IsChecked = !model.IsChecked;
+            }
+        }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is TwoFACodeModel model)
+            {
+                model.IsChecked = !model.IsChecked;
+            }
         }
     }
 }

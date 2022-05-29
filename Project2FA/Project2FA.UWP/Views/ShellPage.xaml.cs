@@ -193,7 +193,7 @@ namespace Project2FA.UWP.Views
                         break;
                 }
             }
-            ChangeBackgroundColorSetting(false);
+            // ChangeBackgroundColorSetting(false);
 
         }
 

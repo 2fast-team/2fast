@@ -8,7 +8,7 @@
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
-    xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:models="using:Project2FA.Repository.Models"
@@ -38,30 +38,19 @@
                         HorizontalAlignment="Stretch"
                         CornerRadius="{ThemeResource ControlCornerRadius}"
                         Background="{ThemeResource TwoFABackgroundBrush}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.RowSpan="3" >
-                            <Border 
-                                Width="2.5" 
-                                ui:Effects.Shadow="{StaticResource SignShadow}"
-                                Background="{StaticResource SystemAccentColor}" />
-                        </Grid>
+                        <CheckBox 
+                            IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
+                            MaxWidth="48"
+                            Grid.Row="0">
+                        </CheckBox>
 
                         <StackPanel 
-                            Grid.Column="2" 
-                            Grid.RowSpan="2" 
-                            Grid.ColumnSpan="2">
+                            Grid.Column="1" >
                             <TextBlock
                                 x:Name="AccountName"
                                 FontSize="22"
@@ -81,7 +70,6 @@
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center"/>
                         </StackPanel>
-
                     </Grid>
                 </UserControl>
             </DataTemplate>
@@ -117,12 +105,13 @@
 
     <Grid x:Name="RootGrid">
         <Pivot x:Name="MainPivot"
+               Tag="{x:Bind ViewModel.PivotViewSelectionName,Mode=OneWay}"
                SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex,Mode=TwoWay}">
             <PivotItem Header="#Optionen" x:Uid="AddAccountContentDialogInputType">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
                         <StackPanel Margin="0,0,16,0">
-                            <toolkitControls:MarkdownTextBlock 
+                            <toolkit:MarkdownTextBlock 
                             Text="~AddAccountContentDialogInfo.Text" 
                             TextWrapping="Wrap" 
                             x:Uid="AddAccountContentDialogInfo"
@@ -153,7 +142,7 @@
                                             <muxc:TeachingTip.Content>
                                                 <StackPanel Orientation="Horizontal">
                                                     <Grid>
-                                                        <toolkitControls:RadialProgressBar
+                                                        <toolkit:RadialProgressBar
                                                 Value="{x:Bind ViewModel.Seconds,Mode=OneWay}" 
                                                 Maximum="{x:Bind ViewModel.OpeningSeconds,Mode=OneWay}" 
                                                 Width="50"
@@ -242,7 +231,10 @@
                     </Border>-->
                 </Grid>
             </PivotItem>
-            <PivotItem Header="#inputs" x:Uid="AddAccountContentDialogInputs">
+            <PivotItem 
+                Header="#inputs" 
+                x:Name="PI_AccountInput"
+                x:Uid="AddAccountContentDialogInputs">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <Grid MinHeight="700">
                         <StackPanel Margin="0,10,16,0">
@@ -360,16 +352,16 @@
                                     </appcontrols:CardControl>
                                 </appcontrols:CardExpanderControl.Header>
                                 <StackPanel>
-                                    <toolkitControls:TextToolbar 
-                                x:Name="Toolbar"
-                                Editor="{Binding ElementName=REB_Notes}"
-                                IsEnabled="True"
-                                UseURIChecker="True"
-                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                        <toolkitControls:TextToolbar.Formatter>
-                                            <richText:RichTextFormatter/>
-                                        </toolkitControls:TextToolbar.Formatter>
-                                    </toolkitControls:TextToolbar>
+                                    <toolkit:TextToolbar 
+                            x:Name="Toolbar"
+                            Editor="{Binding ElementName=REB_Notes}"
+                            UseURIChecker="True"
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                        <toolkit:TextToolbar.Formatter>
+                                            <richText:RichTextFormatter />
+                                        </toolkit:TextToolbar.Formatter>
+                                    </toolkit:TextToolbar>
                                     <RichEditBox
                             x:Name="REB_Notes"
                             Margin="0,0,0,8"
@@ -467,16 +459,15 @@
             <PivotItem 
                 Header="#import backup" 
                 x:Uid="AddAccountContentDialogImportBackup"
-                x:Name="ImportAccountBackup">
+                x:Name="PI_ImportAccountBackup">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
-                    <ListView            
-                        SelectionMode="Multiple"
+                    <ListView
                         ItemsSource="{x:Bind ViewModel.OTPList, Mode=OneWay}"
                         ItemTemplate="{StaticResource TwoFACodeCustomTemplate}" 
-                        IsItemClickEnabled="False"
+                        IsItemClickEnabled="True"
                         ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
                         HorizontalContentAlignment="Stretch"
-                        HorizontalAlignment="Stretch"/>
+                        HorizontalAlignment="Stretch" ItemClick="ListView_ItemClick"/>
                 </Grid>
                 
             </PivotItem>

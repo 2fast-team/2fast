@@ -3,15 +3,61 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Project2FA.UWP.Views"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:strings="using:Project2FA.UWP.Strings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="TITLE"
-    PrimaryButtonText="Button1"
-    SecondaryButtonText="Button2"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    Title="Tutorial"
+    CloseButtonText="{x:Bind strings:Resources.Close}">
 
     <Grid>
+        <StackPanel>
+            <FlipView 
+                Margin="0,32,0,0" 
+                x:Name="FV_Tutorials">
+                <FlipViewItem>
+                    <StackPanel>
+                        <TextBlock 
+                            x:Uid="TutorialContentDialogFirstSteps"
+                            Text="~TutorialContentDialogFirstSteps.Text"/>
+                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                    </StackPanel>
+                </FlipViewItem>
+                <FlipViewItem>
+                    <StackPanel>
+                        <TextBlock 
+                            x:Uid="TutorialContentDialogAvailableMethods"
+                            Text="~TutorialContentDialogAvailableMethods.Text"/>
+                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                    </StackPanel>
+                </FlipViewItem>
+                <FlipViewItem>
+                    <StackPanel>
+                        <TextBlock 
+                            x:Uid="TutorialContentDialogQRCode"
+                            Text="~TutorialContentDialogQRCode.Text"/>
+                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                    </StackPanel>
+                </FlipViewItem>
+                <FlipViewItem>
+                    <StackPanel>
+                        <TextBlock 
+                            x:Uid="TutorialContentDialogSettings"
+                            Text="~TutorialContentDialogSettings.Text"/>
+                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                    </StackPanel>
+                </FlipViewItem>
+            </FlipView>
+            
+        </StackPanel>
+        <muxc:PipsPager 
+            x:Name="FlipViewPipsPager"
+      HorizontalAlignment="Center"
+      VerticalContentAlignment="Bottom"
+      NumberOfPages="4"
+      SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
     </Grid>
+
+    
 </ContentDialog>

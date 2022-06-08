@@ -120,18 +120,26 @@ namespace Project2FA.UWP.Views
             {
                 if (string.IsNullOrEmpty(sender.Text) == false)
                 {
-                    List<string> _nameList = new List<string>();
-                    foreach (TwoFACodeModel item in ViewModel.TwoFADataService.Collection)
+                    try
                     {
-                        _nameList.Add(item.Label);
+                        List<string> _nameList = new List<string>();
+                        foreach (TwoFACodeModel item in ViewModel.TwoFADataService.Collection)
+                        {
+                            _nameList.Add(item.Label);
+                        }
+                        List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                        if (listSuggestion.Count == 0)
+                        {
+                            listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
+                        }
+                        sender.ItemsSource = listSuggestion;
+                        ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
                     }
-                    List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
-                    if (listSuggestion.Count == 0)
+                    catch (System.Exception exc)
                     {
-                        listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
+                        TrackingManager.TrackException(exc);
                     }
-                    sender.ItemsSource = listSuggestion;
-                    ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                    
                 }
                 else
                 {

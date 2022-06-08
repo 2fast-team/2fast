@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
     <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
@@ -19,9 +19,9 @@
     <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
     <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
     <PackageReference Include="Uno.Material" Version="2.0.0" />
-    <PackageReference Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.3.6" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.3.6" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.6" />
+    <PackageReference Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.3.8" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.3.8" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.8" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />

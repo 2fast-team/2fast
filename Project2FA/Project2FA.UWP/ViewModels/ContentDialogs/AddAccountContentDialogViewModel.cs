@@ -306,7 +306,11 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
-        private async Task<bool> ParseMigrationQRCode()
+        /// <summary>
+        /// Parse the protobuf data to TwoFACodeModel list
+        /// </summary>
+        /// <returns></returns>
+        private Task<bool> ParseMigrationQRCode()
         {
             try
             {
@@ -321,34 +325,55 @@ namespace Project2FA.UWP.ViewModels
                     otpmm = ProtoBuf.Serializer.Deserialize<OTPMigrationModel>(memoryStream);
                     for (int i = 0; i < otpmm.otp_parameters.Count; i++)
                     {
-                        string label = string.Empty, issuer = string.Empty;
-                        if (otpmm.otp_parameters[i].Name.Contains(":"))
+                        if (otpmm.otp_parameters[i].Type == OTPMigrationModel.OtpType.OtpTypeTotp)
                         {
-                            string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
-                            label = issuerArray[0];
-                            issuer = issuerArray[1];
+                            string label = string.Empty, issuer = string.Empty;
+                            if (otpmm.otp_parameters[i].Name.Contains(":"))
+                            {
+                                string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
+                                label = issuerArray[0];
+                                issuer = issuerArray[1];
+                            }
+                            else
+                            {
+                                label = otpmm.otp_parameters[i].Name;
+                                issuer = otpmm.otp_parameters[i].Issuer;
+                            }
+                            int hashMode = 0;
+                            switch (otpmm.otp_parameters[i].Algorithm)
+                            {
+                                case OTPMigrationModel.Algorithm.AlgorithmSha1:
+                                    hashMode = 0;
+                                    break;
+                                case OTPMigrationModel.Algorithm.AlgorithmSha256:
+                                    hashMode = 1;
+                                    break;
+                                case OTPMigrationModel.Algorithm.AlgorithmSha512:
+                                    hashMode = 2;
+                                    break;
+                            }
+                            OTPList.Add(new TwoFACodeModel
+                            {
+                                Label = label,
+                                Issuer = issuer,
+                                SecretByteArray = otpmm.otp_parameters[i].Secret,
+                                HashMode = (OtpHashMode)hashMode
+                            });
                         }
                         else
                         {
-                            label = otpmm.otp_parameters[i].Name;
-                            issuer = otpmm.otp_parameters[i].Issuer;
+                            //TODO inform that not all accounts were imported
                         }
-                        OTPList.Add(new TwoFACodeModel {
-                            Label = label,
-                            Issuer = issuer,
-                            SecretByteArray = otpmm.otp_parameters[i].Secret
-                        });
                     }
                 }
-                return true;
+                return Task.FromResult(true);
             }
             catch (Exception)
             {
-
-                throw;
+                return Task.FromResult(false);
             }
 
-            return false;
+            
         }
 
         /// <summary>

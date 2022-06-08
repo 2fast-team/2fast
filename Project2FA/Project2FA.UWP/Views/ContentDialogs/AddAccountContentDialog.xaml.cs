@@ -32,6 +32,17 @@ namespace Project2FA.UWP.Views
             //_barcodeScanner.Dispatcher = this.Dispatcher;
             //_barcodeScanner.OnCameraError += _barcodeScanner_OnCameraError;
             //_barcodeScanner.OnCameraInitialized += _barcodeScanner_OnCameraInitialized;
+
+            //register an event for the changed Tag property of the input textbox
+            _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
+            MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
+            Loaded += AddAccountContentDialog_Loaded;
+        }
+
+
+
+        private void AddAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
+        {
             switch (SettingsService.Instance.AppTheme)
             {
                 case Theme.System:
@@ -55,23 +66,8 @@ namespace Project2FA.UWP.Views
                 default:
                     break;
             }
-            //register an event for the changed Tag property of the input textbox
-            _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
-            MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
-            Loaded += AddAccountContentDialog_Loaded;
-        }
 
-
-
-        private void AddAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
-        {
             MainPivot.Items.Remove(PI_ImportAccountBackup);
-            var linkButton = Toolbar.GetDefaultButton(ButtonType.Link);
-            if (linkButton != null)
-            {
-                linkButton.Visibility = Visibility.Collapsed;
-            }
-
             //listView.SelectedItems
         }
 
@@ -158,15 +154,16 @@ namespace Project2FA.UWP.Views
             TeachingTip teachingTip = new TeachingTip
             {
                 Target = sender as FrameworkElement,
-                Subtitle = "adasdasd", //Strings.Resources.AddAccountCodeContentDialogQRCodeHelp
+                MaxWidth = 400,
+                Subtitle = Strings.Resources.AddAccountCodeContentDialogQRCodeHelp,
                 IsLightDismissEnabled = true,
                 BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
                 IsOpen = true,
                 HeroContent = new Image
                 {
-                    Source = new BitmapImage(new Uri("ms-appx:///Assets/Tutorials/2fast_createAccount.gif", UriKind.Absolute)),
-                    MinWidth = 250,
-                    MaxHeight = 450
+                    Source = new BitmapImage(new Uri("ms-appx:///Assets/Tutorials/2fast_qrcode_scan.gif", UriKind.Absolute)),
+                    MaxWidth = 400,
+                    MaxHeight = 300
                 }
             };
             RootGrid.Children.Add(teachingTip);

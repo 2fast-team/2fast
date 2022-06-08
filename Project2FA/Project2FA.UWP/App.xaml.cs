@@ -100,7 +100,6 @@ namespace Project2FA.UWP
             container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
             container.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();
             container.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
-            container.RegisterDialog<NewDatafileContentDialog, NewDatafileContentDialogViewModel>();
             container.RegisterDialog<RateAppContentDialog>();
             container.RegisterDialog<UpdateDatafileContentDialog, UpdateDatafileContentDialogViewModel>();
             container.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();

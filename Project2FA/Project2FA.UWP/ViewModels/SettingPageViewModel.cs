@@ -52,7 +52,7 @@ namespace Project2FA.UWP.ViewModels
             {
                 AboutPartViewModel.RateApp();
             });
-            SendMailCommand = new AsyncRelayCommand(SendMail);
+            //SendMailCommand = new AsyncRelayCommand(SendMail);
         }
 
         public void Initialize(INavigationParameters parameters)
@@ -68,10 +68,6 @@ namespace Project2FA.UWP.ViewModels
             EmailMessage emailMessage = new EmailMessage();
             emailMessage.To.Add(new EmailRecipient("app-2fast@outlook.com"));
             emailMessage.Subject = "Support 2fast";
-            //string messageBody = "Hallo " + ApplicationView.GetForCurrentView().Title.ToString().Trim() + ",\r\n\r\nAnbei sende ich Ihnen eine PDF mit ihrem aktuellem Warenkorb.\r\n\r\n" +
-            //    "Bei Fragen stehe ich ihnen gerne zur Verfügung.\r\n\r\n" +
-            //    "Mit freundlichen Grüßen";
-            //emailMessage.Body = messageBody;
 
             await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }

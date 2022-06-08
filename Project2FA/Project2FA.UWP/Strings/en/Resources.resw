@@ -730,9 +730,12 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>Favourites can now be set for accounts, making them visible as top items in the list.
-
-QR codes can now be displayed for individual accounts in order to import them with a smartphone.</value>
+    <value>- Icons from a selection list can now be used for accounts
+- Note function has been added for accounts
+- QR code backups from the Google Authenticator can be imported.
+- The ability to create and use datafiles using WebDAV has been released as a beta version.
+- A tutorial has been implemented for explaining the functions
+- Expert settings have been added to the account creation</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features</value>
@@ -910,5 +913,42 @@ QR codes can now be displayed for individual accounts in order to import them wi
   </data>
   <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
     <value>Import backup</value>
+  </data>
+  <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
+    <value>Create datafile</value>
+  </data>
+  <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
+    <value>Open tutorial</value>
+  </data>
+  <data name="WelcomePageTutorialDesc" xml:space="preserve">
+    <value>Would you like to open the tutorial for the application?</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>Für die Speicherung und die Sicherung wird hierbei eine Datendatei erstellt bzw. genutzt, um die zuvor verknüpften Accounts in dieser Datei verschlüsselt zu speichern. Ein großer Vorteil der hieraus entsteht ist, dass durch die Datendatei das Backup entfällt, da die Datendatei an einem beliebigen Ort gespeichert werden kann. Empfohlen ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive und weitere Anbieter.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Im nachfolgenden wird die Funktionsweise dieser Anwendung in diesem Tutorial erläutert.</value>
+  </data>
+  <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
+    <value>This application is an authenticator for two-factor authentication (2FA) that uses the standard "Time-based One-time Password Algorithm" (TOTP) according to standardisation RFC 6238. Services that rely on the TOTP standard for 2FA can be used with this application.
+
+For storage and backup, a data file is created or used to store the linked accounts in this file in encrypted form. For storage, a cloud storage such as Nextcloud, ownCloud, Onedrive, etc. is recommended in order to achieve versioning and security against loss.
+
+In the following sections, the functionality of this application is explained in this tutorial.</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
+    <value>To create a data file, the first step is to select a folder in which the file is to be saved. This is followed by the name and password for encrypting the file. It is recommended to save the password in a password manager to prevent loss.</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
+    <value>To load the datafile, the first step is to select the data file. This is followed by the password with which the data file has been encrypted.</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
+    <value>Account creation</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
+    <value>Creation of a datafile</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
+    <value>Loading a datafile</value>
   </data>
 </root>

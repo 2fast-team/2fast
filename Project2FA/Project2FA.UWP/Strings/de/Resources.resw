@@ -734,9 +734,12 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>Favoriten können nun für Accounts gesetzt werden, wodurch diese als oberste Elemente in der Liste sichtbar sind.
-
-QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Smartphone zu importieren.</value>
+    <value>• Für Accounts können nun Bilder aus einer Auswahlliste verwendet werden
+• Notizfunktion wurde für Accounts hinzugefügt
+• QR-Code Backups aus dem Google Authentifikator können importiert werden
+• Die Möglichkeit zur Erstellung und zur Nutzung von Datendateien durch eine WebDAV-Anbindung ist als Beta-Version freigeschaltet worden
+• Ein Tutorial wurde für die Funktionserklärung implementiert
+• Experteneinstellungen wurden bei der Accounterstellung hinzugefügt</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen</value>
@@ -814,7 +817,7 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
     <value>Schließen</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
-    <value>Bei der Wahl des QR-Code Scans öffnet sich kurze Zeit nach Klick auf dem Button ein Lesetool, mit dem der QR-Code bei dem Dienst selektiert werden muss. Hierfür einfach zum Dienst wechseln und bei gedrückter linker Maustaste einen Rahmen um den QR-Code ziehen.</value>
+    <value>Bei der Wahl des QR-Code Scans öffnet sich nach wenigen Sekunden nach Klick auf dem Button ein Lesetool, mit dem der QR-Code bei dem Dienst selektiert werden muss. Ziehen Sie hierbei ziehen ein Rechteck um den QR-Code, indem Sie die linke Maustaste gedrückt halten.</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
     <value>QR-Code anzeigen</value>
@@ -917,5 +920,36 @@ QR-Codes können nun für einzelne Account angezeigt werden, um diese mit dem Sm
   </data>
   <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
     <value>Sicherung einspielen</value>
+  </data>
+  <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
+    <value>Datendatei erstellen</value>
+  </data>
+  <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
+    <value>Tutorial öffnen</value>
+  </data>
+  <data name="WelcomePageTutorialDesc" xml:space="preserve">
+    <value>Möchten Sie das Tutorial zu der Anwendung öffnen?</value>
+  </data>
+  <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
+    <value>Diese Anwendung ist ein Authentifikator für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „Time-based One-time Password Algorithmus“ (TOTP) nach Standardisierung RFC 6238 nutzt. Dienste die für die 2FA auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden.
+
+Für die Speicherung und die Sicherung wird hierbei eine Datendatei erstellt bzw. genutzt, um die verknüpften Accounts in dieser Datei verschlüsselt zu speichern. Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. empfohlen, um eine Versionerung und eine Sicherstellung gegen Verlust zu erlangen.
+
+In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in diesem Tutorial erläutert.</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
+    <value>Für die Erstellung einer Datendatei muss als erster Schritt ein Ordner gewählt werden, in dem die Datei gespeichert werden soll. Im Anschluss folgen der Name und das Passwort für die Verschlüsselung der Datei. Es wird die Speicherung des Passwortes in einem Passwortmanager empfohlen, um einen Verlust zu verhindern.</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
+    <value>Für das Laden einer Datendatei muss als erster Schritt die Datendatei ausgewählt werden. Im Anschluss folgt das Passwort, mit dem die Datendatei verschlüsselt worden ist.</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
+    <value>Erstellung eines Accounts</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
+    <value>Erstellung einer Datendatei</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
+    <value>Laden einer Datendatei</value>
   </data>
 </root>

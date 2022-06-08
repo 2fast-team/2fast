@@ -65,11 +65,6 @@ namespace Project2FA.UWP.Views
                 var options = Windows.UI.Text.TextSetOptions.FormatRtf | Windows.UI.Text.TextSetOptions.ApplyRtfDocumentDefaults;
                 REB_Notes.Document.SetText(options, ViewModel.TempNotes);
             }
-            var linkButton = Toolbar.GetDefaultButton(ButtonType.Link);
-            if (linkButton != null)
-            {
-                linkButton.Visibility = Visibility.Collapsed;
-            }
         }
 
         private void ReplaceNoteFontColor(bool isLightTheme)

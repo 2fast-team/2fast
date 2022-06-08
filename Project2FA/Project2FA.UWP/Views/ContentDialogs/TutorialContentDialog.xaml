@@ -14,38 +14,66 @@
     <Grid>
         <StackPanel>
             <FlipView 
-                Margin="0,32,0,0" 
+                Margin="0,32,0,0"
+                
                 x:Name="FV_Tutorials">
                 <FlipViewItem>
                     <StackPanel>
                         <TextBlock 
                             x:Uid="TutorialContentDialogFirstSteps"
-                            Text="~TutorialContentDialogFirstSteps.Text"/>
-                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                            Text="~TutorialContentDialogFirstSteps.Text"
+                            FontSize="16"
+                            TextWrapping="WrapWholeWords"/>
                     </StackPanel>
                 </FlipViewItem>
                 <FlipViewItem>
                     <StackPanel>
                         <TextBlock 
-                            x:Uid="TutorialContentDialogAvailableMethods"
-                            Text="~TutorialContentDialogAvailableMethods.Text"/>
-                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                            x:Uid="TutorialContentDialogCreateMethodHeader"
+                            Text="~TutorialContentDialogCreateMethodHeader.Text"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            TextWrapping="WrapWholeWords"
+                            Margin="0,0,0,12"/>
+                        <TextBlock 
+                            x:Uid="TutorialContentDialogCreateMethod"
+                            Text="~TutorialContentDialogCreateMethod.Text"
+                            FontSize="16"
+                            TextWrapping="WrapWholeWords"/>
+                        <Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />
                     </StackPanel>
                 </FlipViewItem>
                 <FlipViewItem>
                     <StackPanel>
                         <TextBlock 
-                            x:Uid="TutorialContentDialogQRCode"
-                            Text="~TutorialContentDialogQRCode.Text"/>
-                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                            x:Uid="TutorialContentDialogLoadMethodHeader"
+                            Text="~TutorialContentDialogLoadMethodHeader.Text"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            TextWrapping="WrapWholeWords"
+                            Margin="0,0,0,12"/>
+                        <TextBlock 
+                            x:Uid="TutorialContentDialogLoadMethod"
+                            Text="~TutorialContentDialogLoadMethod.Text"
+                            FontSize="16"
+                            TextWrapping="WrapWholeWords"/>
+                        <Image Source="/Assets/Tutorials/2fast_load_datafile.gif" />
                     </StackPanel>
                 </FlipViewItem>
                 <FlipViewItem>
                     <StackPanel>
                         <TextBlock 
-                            x:Uid="TutorialContentDialogSettings"
-                            Text="~TutorialContentDialogSettings.Text"/>
-                        <Image Source="/Assets/Square150x150Logo.scale-100.png" ></Image>
+                            x:Uid="AddAccountCodeContentDialogQRCodeHelpHeader"
+                            Text="~AddAccountCodeContentDialogQRCodeHelpHeader.Text"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            TextWrapping="WrapWholeWords"
+                            Margin="0,0,0,12"/>
+                        <TextBlock 
+                            Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
+                            FontSize="16"
+                            TextWrapping="WrapWholeWords"/>
+                        <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
                     </StackPanel>
                 </FlipViewItem>
             </FlipView>

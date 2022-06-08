@@ -824,7 +824,7 @@ namespace Project2FA.UWP.Strings{
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: Favourites can now be set for accounts, making them visible as top items in the list. QR codes can now be displayed for individual accounts in order to import them with a smartphone.
+        ///   Looks up a localized string similar to: - Icons from a selection list can now be used for accounts - Note function has been added for accounts - QR code backups from the Google Authenticator can be imported. - The ability to create and use datafiles using WebDAV has been released as a beta version. - A tutorial has been implemented for explaining the functions - Expert settings have been added to the account creation
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -1107,6 +1107,58 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region WelcomePageTutorialTipOpen
+        /// <summary>
+        ///   Looks up a localized string similar to: Open tutorial
+        /// </summary>
+        public static string WelcomePageTutorialTipOpen
+        {
+            get
+            {
+                return _resourceLoader.GetString("WelcomePageTutorialTipOpen");
+            }
+        }
+        #endregion
+
+        #region WelcomePageTutorialDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: Would you like to open the tutorial for the application?
+        /// </summary>
+        public static string WelcomePageTutorialDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("WelcomePageTutorialDesc");
+            }
+        }
+        #endregion
+
+        #region String
+        /// <summary>
+        ///   Looks up a localized string similar to: Für die Speicherung und die Sicherung wird hierbei eine Datendatei erstellt bzw. genutzt, um die zuvor verknüpften Accounts in dieser Datei verschlüsselt zu speichern. Ein großer Vorteil der hieraus entsteht ist, dass durch die Datendatei das Backup entfällt, da die Datendatei an einem beliebigen Ort gespeichert werden kann. Empfohlen ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive und weitere Anbieter.
+        /// </summary>
+        public static string String
+        {
+            get
+            {
+                return _resourceLoader.GetString("String");
+            }
+        }
+        #endregion
+
+        #region String1
+        /// <summary>
+        ///   Looks up a localized string similar to: Im nachfolgenden wird die Funktionsweise dieser Anwendung in diesem Tutorial erläutert.
+        /// </summary>
+        public static string String1
+        {
+            get
+            {
+                return _resourceLoader.GetString("String1");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1202,6 +1254,10 @@ namespace Project2FA.UWP.Strings{
             AddAccountCodeContentDialogExpertSettingsHelp,
             WebViewDatafileContentDialogChooseFile,
             WebViewDatafileContentDialogChooseFolder,
+            WelcomePageTutorialTipOpen,
+            WelcomePageTutorialDesc,
+            String,
+            String1,
         }
 
         private static ResourceLoader _resourceLoader;

@@ -116,6 +116,39 @@ namespace Project2FA.UWP.Views
 
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if (!SettingsService.Instance.UseRoundCorner)
+            {
+                App.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+                App.Current.Resources["ComboBoxItemCornerRadius"] = new CornerRadius(0);
+                App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(0);
+                switch (SettingsService.Instance.AppTheme)
+                {
+                    case Theme.System:
+                        if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
+                        {
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        }
+                        else
+                        {
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        }
+                        break;
+                    case Theme.Dark:
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        break;
+                    case Theme.Light:
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             if (!string.IsNullOrEmpty(SettingsService.Instance.UnhandledExceptionStr))
             {
                 await CheckUnhandledExceptionLastSession();
@@ -161,38 +194,7 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            if (!SettingsService.Instance.UseRoundCorner)
-            {
-                App.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
-                App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
-                App.Current.Resources["ComboBoxItemCornerRadius"] = new CornerRadius(0);
-                App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(0);
-                switch (SettingsService.Instance.AppTheme)
-                {
-                    case Theme.System:
-                        if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
-                        {
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        }
-                        else
-                        {
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        }
-                        break;
-                    case Theme.Dark:
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        break;
-                    case Theme.Light:
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        break;
-                    default:
-                        break;
-                }
-            }
+
             // ChangeBackgroundColorSetting(false);
 
         }
@@ -203,19 +205,19 @@ namespace Project2FA.UWP.Views
             Window.Current.SetTitleBar(AppTitleBar);
         }
 
-        public void ChangeBackgroundColorSetting(bool isMicaStyle)
-        {
-            if (isMicaStyle)
-            {
-                var control = (ContentPresenter)ShellView.FindDescendant("ContentPresenterFrame");
-                control.Background = (AcrylicBrush)App.Current.Resources["ShellAcrylicWindowBrush"];
-            }
-            else
-            {
-                var control = (ContentPresenter)ShellView.FindDescendant("ContentPresenterFrame");
-                //control.Background = (SolidColorBrush)App.Current.Resources["SystemColorBackgroundThemeBrush"];
-            }
-        }
+        //public void ChangeBackgroundColorSetting(bool isMicaStyle)
+        //{
+        //    if (isMicaStyle)
+        //    {
+        //        var control = (ContentPresenter)ShellView.FindDescendant("ContentPresenterFrame");
+        //        control.Background = (AcrylicBrush)App.Current.Resources["ShellAcrylicWindowBrush"];
+        //    }
+        //    else
+        //    {
+        //        var control = (ContentPresenter)ShellView.FindDescendant("ContentPresenterFrame");
+        //        //control.Background = (SolidColorBrush)App.Current.Resources["SystemColorBackgroundThemeBrush"];
+        //    }
+        //}
 
         private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
         {

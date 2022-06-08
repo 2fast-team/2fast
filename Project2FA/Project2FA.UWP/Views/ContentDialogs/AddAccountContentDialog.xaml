@@ -11,6 +11,7 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:utils="using:Project2FA.UWP.Utils"
     xmlns:models="using:Project2FA.Repository.Models"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
@@ -39,18 +40,19 @@
                         CornerRadius="{ThemeResource ControlCornerRadius}"
                         Background="{ThemeResource TwoFABackgroundBrush}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition MaxWidth="48"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <CheckBox 
                             IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
-                            MaxWidth="48"
-                            Grid.Row="0">
+                            Grid.Row="0"
+                            Grid.RowSpan="2">
                         </CheckBox>
 
                         <StackPanel 
-                            Grid.Column="1" >
+                            Grid.Column="1" 
+                            Margin="0,0,0,15">
                             <TextBlock
                                 x:Name="AccountName"
                                 FontSize="22"
@@ -359,7 +361,7 @@
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <toolkit:TextToolbar.Formatter>
-                                            <richText:RichTextFormatter />
+                                            <utils:CustomRichTextFormatter/>
                                         </toolkit:TextToolbar.Formatter>
                                     </toolkit:TextToolbar>
                                     <RichEditBox
@@ -445,7 +447,7 @@
                                                 MinWidth="120"
                                                 Minimum="4" 
                                                 Maximum="8" 
-                                                Value="{x:Bind ViewModel.Model.TotpSize, Mode=OneWay}"
+                                                Value="{x:Bind ViewModel.Model.TotpSize, Mode=TwoWay}"
                                                 SpinButtonPlacementMode="Inline"/>
                                         </appcontrols:CardControl.ActionContent>
                                     </appcontrols:CardControl>

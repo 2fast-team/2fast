@@ -11,6 +11,7 @@
     xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:utils="using:Project2FA.UWP.Utils"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     MinWidth="500"
@@ -149,7 +150,7 @@
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                             <toolkit:TextToolbar.Formatter>
-                                <richText:RichTextFormatter />
+                                <utils:CustomRichTextFormatter/>
                             </toolkit:TextToolbar.Formatter>
                         </toolkit:TextToolbar>
                         <RichEditBox

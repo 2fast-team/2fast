@@ -20,7 +20,7 @@ namespace Project2FA.UWP.ViewModels
 {
     public class NewDataFilePageViewModel : DatafileViewModelBase
     {
-        public ICommand CreateWebDAVDatafileCommand;
+        //public ICommand CreateWebDAVDatafileCommand;
         private IFileService FileService { get; }
         private ISerializationService SerializationService { get; }
         private INavigationService NaviationService { get; }
@@ -71,10 +71,10 @@ namespace Project2FA.UWP.ViewModels
                 await SetLocalPath(true); //change path is true
             });
 
-            CreateWebDAVDatafileCommand = new DelegateCommand(() =>
-            {
+            //CreateWebDAVDatafileCommand = new DelegateCommand(() =>
+            //{
 
-            });
+            //});
 
 
             WebDAVLoginCommand = new DelegateCommand(async() =>

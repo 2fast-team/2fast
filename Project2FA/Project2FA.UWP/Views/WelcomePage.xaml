@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:mstoolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:viewmodels="using:Project2FA.UWP.ViewModels"
+    xmlns:strings="using:Project2FA.UWP.Strings"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -46,20 +46,21 @@
                                 Command="{x:Bind TutorialCommand}"
                                 x:Uid="WelcomePageABBTutorial" >
                                 <AppBarButton.Icon>
-                                    <FontIcon Glyph="&#xE11B;"/>
+                                    <FontIcon Glyph="&#xE946;"/>
                                 </AppBarButton.Icon>
                                 <AppBarButton.Resources>
                                     <appcontrols:AutoCloseTeachingTip 
-                                            x:Name="WelcomePageTutorialTip"
-                                            AutoCloseInterval="12000"
-                                            BorderBrush="{ThemeResource SystemAccentColor}"
-                                            x:Uid="WelcomePageTutorialTip"
-                                            BorderThickness="2"
-                                            IsOpen="{x:Bind IsTutorialOpen, Mode=TwoWay}"
-                                            Target="{Binding ElementName=ABB_Tutorial}"
-                                            ActionButtonCommand="{x:Bind OpenTutorialCommand}"
-	                                        ActionButtonContent="#Tutorial öffnen"
-	                                        CloseButtonContent="Got it!">
+                                        x:Name="WelcomePageTutorialTip"
+                                        AutoCloseInterval="12000"
+                                        BorderBrush="{ThemeResource SystemAccentColor}"
+                                        Content="{x:Bind strings:Resources.WelcomePageTutorialDesc}"
+                                        x:Uid="WelcomePageTutorialTip"
+                                        BorderThickness="2"
+                                        IsOpen="{x:Bind IsTutorialOpen, Mode=TwoWay}"
+                                        Target="{Binding ElementName=ABB_Tutorial}"
+                                        ActionButtonCommand="{x:Bind OpenTutorialCommand}"
+	                                    ActionButtonContent="{x:Bind strings:Resources.WelcomePageTutorialTipOpen}"
+	                                    CloseButtonContent="{x:Bind strings:Resources.ButtonTextConfirm}">
                                         <muxc:TeachingTip.HeroContent>
                                             <muxc:AnimatedVisualPlayer 
                                                 MaxHeight="120"

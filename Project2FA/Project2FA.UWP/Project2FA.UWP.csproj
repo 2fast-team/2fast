@@ -11,7 +11,7 @@
     <AssemblyName>Project2FA.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22621.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>9F396FE4EB62E9D9620473AB60AD88D68E5F97E3</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>CB43D7C24F1174E990AA966B9E9FEB6C454736FE</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -132,6 +132,8 @@
     <Compile Include="Controls\CardGroupControl\CardGroupControl.cs" />
     <Compile Include="Controls\CardGroupControl\CardGroupAutomationPeer.cs" />
     <Compile Include="Controls\TitleBar.cs" />
+    <Compile Include="Utils\CustomRichTextButtonActions.cs" />
+    <Compile Include="Utils\CustomRichTextFormatter.cs" />
     <Compile Include="Converters\BoolToCommandBarVisibilityConverter.cs" />
     <Compile Include="Converters\BytesToHumanReadableConverter.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
@@ -179,7 +181,6 @@
     <Compile Include="ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
-    <Compile Include="ViewModels\ContentDialogs\NewDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\NewDataFilePageViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
@@ -214,9 +215,6 @@
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ContentDialogs\NewDatafileContentDialog.xaml.cs">
-      <DependentUpon>NewDatafileContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContentDialogs\RateAppContentDialog.xaml.cs">
       <DependentUpon>RateAppContentDialog.xaml</DependentUpon>
@@ -2516,7 +2514,9 @@
     <Content Include="Assets\StoreLogo.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
-    <Content Include="Assets\Tutorials\2fast_createAccount.gif" />
+    <Content Include="Assets\Tutorials\2fast_create_datafile.gif" />
+    <Content Include="Assets\Tutorials\2fast_load_datafile.gif" />
+    <Content Include="Assets\Tutorials\2fast_qrcode_scan.gif" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
@@ -2708,10 +2708,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ContentDialogs\NewDatafileContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

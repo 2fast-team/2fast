@@ -507,7 +507,7 @@
                                     FontFamily="Segoe UI" />
                                         </StackPanel>
                                     </Button>
-                                    <Button 
+                                    <!--<Button 
                                         Margin="0,10" 
                                         Style="{StaticResource ButtonRevealStyle}"
                                         Command="{x:Bind ViewModel.SendMailCommand}">
@@ -521,7 +521,7 @@
                                     x:Uid="SettingsMailSupportApp" 
                                     FontFamily="Segoe UI" />
                                         </StackPanel>
-                                    </Button>
+                                    </Button>-->
                                     <!--<TextBlock 
                                         x:Uid="SettingsPageAboDesc"
                                         Margin="0,15,0,0" 

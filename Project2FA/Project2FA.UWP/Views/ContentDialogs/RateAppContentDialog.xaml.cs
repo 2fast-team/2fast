@@ -22,7 +22,6 @@ namespace Project2FA.UWP.Views
             var setting = SettingsService.Instance;
             var service = App.Current.Container.Resolve<IMarketplaceService>();
             setting.AppRated = true;
-            //await App.Repository.Setting.UpsertAsync(setting);
             await service.LaunchAppReviewInStoreAsync();
             Hide();
         }
@@ -31,7 +30,6 @@ namespace Project2FA.UWP.Views
         {
             var setting = SettingsService.Instance;
             setting.AppRated = true;
-            //await App.Repository.Setting.UpsertAsync(setting);
             Hide();
         }
 

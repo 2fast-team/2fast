@@ -1,12 +1,8 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using System;
 using Project2FA.UWP.Views;
 using System.Windows.Input;
-using Windows.Storage;
-using Windows.UI.Xaml.Controls;
 using Prism.Navigation;
-using Project2FA.UWP.Utils;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -25,8 +21,6 @@ namespace Project2FA.UWP.ViewModels
         private bool _isTutorialOpen;
 
         private string _title;
-
-        //private bool _canNavigate;
 
         public WelcomePageViewModel(IDialogService dialogService, INavigationService navigationService)
         {
@@ -59,43 +53,11 @@ namespace Project2FA.UWP.ViewModels
 
         private async Task NewDatafile()
         {
-            //var dialog = new NewDatafileContentDialog();
-            //var result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
-            //if (result == ContentDialogResult.Primary)
-            //{
-            //    //_canNavigate = true;
-            //    string navPath = "/" + nameof(AccountCodePage);
-            //    await _navigationService.NavigateAsync(navPath);
-            //}
             await _navigationService.NavigateAsync(nameof(NewDataFilePage));
         }
 
         private async Task UseExistDatafile()
         {
-            //try
-            //{
-            //    //TODO current workaround: check permission to the file system (broadFileSystemAccess)
-            //    string path = @"C:\Windows\explorer.exe";
-            //    StorageFile file = await StorageFile.GetFileFromPathAsync(path);
-
-            //    UseDatafileContentDialog dialog = new UseDatafileContentDialog();
-            //    ContentDialogResult result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
-
-            //    //result is also none, when the datafileDB is correct created
-            //    if (result == ContentDialogResult.None)
-            //    {
-            //        var datafileDB = await App.Repository.Datafile.GetAsync();
-            //        if (datafileDB != null)
-            //        {
-            //            //_canNavigate = true;
-            //            await _navigationService.NavigateAsync("/" + nameof(AccountCodePage));
-            //        }
-            //    }
-            //}
-            //catch (UnauthorizedAccessException)
-            //{
-            //    await ErrorDialogs.UnauthorizedAccessDialog();
-            //}
             await _navigationService.NavigateAsync(nameof(UseDataFilePage));
         }
 

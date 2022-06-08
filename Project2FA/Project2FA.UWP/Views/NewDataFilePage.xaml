@@ -34,7 +34,7 @@
                 Header="#Auswahl" 
                 MinHeight="400" 
                 x:Uid="NewDatafileContentDialogPivotItemKind">
-                <ScrollViewer>
+                <ScrollViewer MaxWidth="800" HorizontalAlignment="Left">
                     <StackPanel>
                         <TextBlock 
                             TextWrapping="Wrap" 
@@ -81,9 +81,9 @@
                 Header="Datafile" 
                 MinHeight="400" 
                 x:Uid="NewDatafileContentDialogDatafilePivotItem">
-                <Grid>
+                <Grid MaxWidth="800" HorizontalAlignment="Left">
                     <ScrollViewer VerticalScrollMode="Auto">
-                        <StackPanel Padding="0,0,22,0">
+                        <StackPanel>
                             <TextBlock 
                                 TextWrapping="Wrap" 
                                 x:Uid="NewDatafileContentDialogCreateInfo" />
@@ -126,17 +126,17 @@
                                 Command="{x:Bind ViewModel.ChangePathCommand}"
                                 x:Uid="NewDatafileContentDialogChangePath"
                                 Content="~NewDatafileContentDialogChangePath.Content"/>
-
+                            
                             <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
                                 Height="1" />
                             <Button 
+                                Style="{StaticResource AccentButtonStyle}"
                                 Command="{x:Bind ViewModel.SetAndCreateLocalDatafileCommand}"
                                 IsEnabled="{x:Bind ViewModel.DatafileBTNActive, Mode=OneWay}"
                                 x:Uid="NewDatafilePageCreateFileBTN"
-                                Content="~NewDatafilePageCreateFileBTN.Content"></Button>
-
+                                Content="~NewDatafilePageCreateFileBTN.Content"/>
                         </StackPanel>
                     </ScrollViewer>
                     <msct:Loading 
@@ -233,7 +233,7 @@
                                 Header="~UseDataFilePageDatafileExpander.Header" 
                                 x:Uid="UseDataFilePageDatafileExpander"
                                 IsEnabled="{x:Bind ViewModel.WebDAVDatafilePropertiesEnabled, Mode=OneWay}"
-                                IsExpanded="True"
+                                IsExpanded="{x:Bind ViewModel.WebDAVDatafilePropertiesEnabled, Mode=OneWay}"
                                 Width="480">
                                 <StackPanel Padding="0,0,22,0">
                                     <TextBlock 
@@ -313,14 +313,10 @@
 
                                     <Button 
                                 x:Uid="NewDatafileCreateDatafile"
+                                Style="{StaticResource AccentButtonStyle}"
                                 Command="{x:Bind ViewModel.SetAndCreateWebDAVDatafileCommand}"
                                 IsEnabled="{x:Bind ViewModel.DatafileBTNActive, Mode=OneWay}"
                                 Content="~NewDatafileCreateDatafile.Content"/>
-
-                                    <!--<Button 
-                                      x:Uid="UseDataFilePageLoadDatafile"
-                                      IsEnabled="{x:Bind ViewModel.IsWebDAVCreationButtonEnable, Mode=OneWay}"
-                                      Command="{x:Bind ViewModel.SetAndCheckWebDAVDatafileCommand}"/>-->
                                 </StackPanel>
                             </muxc:Expander>
                         </StackPanel>

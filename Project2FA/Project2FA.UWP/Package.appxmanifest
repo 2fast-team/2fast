@@ -4,8 +4,8 @@
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" 
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          IgnorableNamespaces="uap mp rescap">
-  <Identity Name="38343JanPhilippWeber.2fastTwoFactorAuthenticatorSu" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="0.0.1.0" />
-  <mp:PhoneIdentity PhoneProductId="4baf9051-0675-4879-8fa8-e3447617f937" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="38343JanPhilippWeber.2fastTwoFactorAuthenticatorSu" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="fcd48287-4b21-4518-a521-413cec0a4781" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>2fast – Two Factor Authenticator Supporting TOTP</DisplayName>
     <PublisherDisplayName>Jan Philipp Weber</PublisherDisplayName>
@@ -19,7 +19,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Project2FA.UWP.App">
-      <uap:VisualElements DisplayName="[BETA] 2fast - two factor authenticator supporting TOTP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="transparent" Description="Project2FA">
+      <uap:VisualElements DisplayName="2fast - two factor authenticator supporting TOTP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="transparent" Description="Project2FA">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="2fast">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="wide310x150Logo"/>

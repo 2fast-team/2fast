@@ -23,8 +23,8 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>CB43D7C24F1174E990AA966B9E9FEB6C454736FE</PackageCertificateThumbprint>
+    <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>5603522399507011BC16B020D4E00718C66AB93F</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -2535,7 +2535,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\AnimatedVisuals\3932-error-cross.json" />
     <None Include=".editorconfig" />
-    <None Include="Project2FA.UWP_StoreKey.pfx" />
     <None Include="Project2FA.UWP_TemporaryKey.pfx" />
     <PRIResource Include="Strings\de\Resources.resw" />
   </ItemGroup>

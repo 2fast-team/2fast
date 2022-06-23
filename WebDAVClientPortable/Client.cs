@@ -801,7 +801,7 @@ namespace WebDAVClient
             {
                 user = await client.GetUserAttributes(userId);
             }
-            catch
+            catch(Exception ex)
             {
                 // ignored
             }

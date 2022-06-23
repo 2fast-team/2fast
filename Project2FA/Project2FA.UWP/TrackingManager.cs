@@ -12,11 +12,13 @@ namespace Project2FA.UWP
     public static class TrackingManager
     {
         private static readonly StoreServicesCustomEventLogger _logger;
+        private static bool _debugMode;
 
         static TrackingManager()
         {
             try
             {
+                _debugMode = System.Diagnostics.Debugger.IsAttached;
                 _logger = StoreServicesCustomEventLogger.GetDefault();
             }
             catch
@@ -29,7 +31,10 @@ namespace Project2FA.UWP
         {
             try
             {
-                _logger.Log($"Unhandled exception - {ex.Message} - {ex.StackTrace}");
+                if (!_debugMode)
+                {
+                    _logger.Log($"Unhandled exception - {ex.Message} - {ex.StackTrace}");
+                }
             }
             catch
             {
@@ -41,7 +46,7 @@ namespace Project2FA.UWP
         {
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
+                if (!_debugMode)
                 {
                     _logger.Log($"exception - {ex.Message} - {ex.StackTrace}");
                 }
@@ -56,7 +61,7 @@ namespace Project2FA.UWP
         {
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
+                if (!_debugMode)
                 {
                     _logger.Log($"exception - catched - {ex.Message} - {ex.InnerException} - {ex.StackTrace}");
                 }
@@ -71,7 +76,7 @@ namespace Project2FA.UWP
         {
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
+                if (!_debugMode)
                 {
                     _logger.Log($"{category} - {priority} - {label} - {value.ToString()}");
                 }
@@ -86,7 +91,7 @@ namespace Project2FA.UWP
         {
             try
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
+                if(!_debugMode)
                 {
                     _logger.Log($"pageView - {pageName}");
                 }

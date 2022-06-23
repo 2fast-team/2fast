@@ -19,7 +19,7 @@ namespace Project2FA.Repository.Models
             {
                 if(SetProperty(ref _label, value))
                 {
-                    //RaisePropertyChanged(nameof(Model));
+                    RaisePropertyChanged(nameof(Model));
                 }
             }
         }

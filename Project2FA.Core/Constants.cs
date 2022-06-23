@@ -6,5 +6,7 @@
         public const string SettingsRegionName = "SettingsContentRegion";
         public const string DatafileRegionName = "DatafileContentRegion";
         public const string AboutAppRegionName = "AboutAppContentRegion";
+        public const string ContentDialogStyleName = "MyContentDialogStyle";
+        public const string AccentButtonStyleName = "AccentButtonStyle";
     }
 }

@@ -166,14 +166,14 @@ namespace Project2FA.UWP.Views
 
             if (SystemInformation.Instance.IsAppUpdated)
             {
-                if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
-                {
-                    if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
-                    {
-                        // set the round corner for Windows 11+
-                        SettingsService.Instance.UseRoundCorner = true;
-                    }
-                }
+                //if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
+                //{
+                //    if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+                //    {
+                //        // set the round corner for Windows 11+
+                //        SettingsService.Instance.UseRoundCorner = true;
+                //    }
+                //}
 
                 ContentDialog dialog = new ContentDialog();
                 dialog.Title = Strings.Resources.NewAppFeaturesTitle;

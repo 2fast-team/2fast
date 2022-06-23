@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Microsoft.Toolkit.Mvvm.Input;
 using Project2FA.UWP.Helpers;
+using Project2FA.Core;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -62,7 +63,7 @@ namespace Project2FA.UWP.ViewModels
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
                 AddAccountContentDialog dialog = new AddAccountContentDialog();
-                dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+                dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
                 await DialogService.ShowDialogAsync(dialog, new DialogParameters());
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -119,9 +120,7 @@ namespace Project2FA.UWP.ViewModels
                 await DataService.Instance.StartService();
             }
 
-            //TOTPEventStopwatch.Start(); // stopwatch for the calculation of the remaining time for a valid totp code
             _dispatcherTOTPTimer.Start(); // the event for the set of seconds and calculating the totp code
-            //await DataService.Instance.ResetCollection();
         }
 
 
@@ -184,7 +183,7 @@ namespace Project2FA.UWP.ViewModels
                 await TwoFADataService.WriteLocalDatafile();
                 if (!string.IsNullOrWhiteSpace(model.AccountIconName))
                 {
-                    var iconStr = await SVGColorHelper.GetSVGIconWithThemeColor(model, model.AccountIconName);
+                    await SVGColorHelper.GetSVGIconWithThemeColor(model, model.AccountIconName);
                 }
             }
         }
@@ -205,7 +204,7 @@ namespace Project2FA.UWP.ViewModels
         private async void EditAccountFromCollection(TwoFACodeModel model)
         {
             var dialog = new EditAccountContentDialog();
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+            dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
             var param = new DialogParameters();
             param.Add("model", model);
             await DialogService.ShowDialogAsync(dialog, param);
@@ -226,7 +225,7 @@ namespace Project2FA.UWP.ViewModels
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.Confirm;
             dialog.SecondaryButtonText = Resources.ButtonTextCancel;
-            dialog.SecondaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.SecondaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             ContentDialogResult result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.Primary)
             {
@@ -247,10 +246,7 @@ namespace Project2FA.UWP.ViewModels
             if (TwoFADataService.CollectionAccessSemaphore.CurrentCount > 0)
             {
                 TwoFADataService.Collection.Clear();
-                //TOTPEventStopwatch.Stop();
-                //TOTPEventStopwatch.Reset();
                 await TwoFADataService.ReloadDatafile();
-                //TOTPEventStopwatch.Start();
             }
             else
             {
@@ -267,12 +263,13 @@ namespace Project2FA.UWP.ViewModels
                 if (_dispatcherTOTPTimer.IsEnabled)
                 {
                     _dispatcherTOTPTimer.Stop();
+                    _dispatcherTOTPTimer.Tick -= TOTPTimer;
                 }
                 if (_dispatcherTimerDeletedModel.IsEnabled)
                 {
                     _dispatcherTimerDeletedModel.Stop();
                 }
-                TwoFADataService.TOTPEventStopwatch.Stop();
+                TwoFADataService.TOTPEventStopwatch.Reset();
             }
             return !await DialogService.IsDialogRunning();
         }

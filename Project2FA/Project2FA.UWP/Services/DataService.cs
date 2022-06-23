@@ -58,6 +58,7 @@ namespace Project2FA.UWP.Services
         private TwoFACodeModel _tempDeletedTFAModel;
         private const long unixEpochTicks = 621355968000000000L;
         private const long ticksToSeconds = 10000000L;
+        int _reloadCollectionCounter = 0;
 
         /// <summary>
         /// Gets public singleton property.
@@ -88,8 +89,7 @@ namespace Project2FA.UWP.Services
             await CheckLocalDatafile();
             TOTPEventStopwatch.Start();
 
-            //SystemInformation.Instance.PreviousVersionInstalled >= PackageVersionHelper.ToPackageVersion("1.0.9.0")
-            if (SystemInformation.Instance.IsAppUpdated) //SystemInformation.Instance.IsAppUpdated && 
+            if (SystemInformation.Instance.IsAppUpdated)
             {
                 var prevíousVersion = new Version(SystemInformation.Instance.PreviousVersionInstalled.ToFormattedString());
                 var compareVersion = new Version("1.0.9.0");
@@ -140,7 +140,7 @@ namespace Project2FA.UWP.Services
                     }
                     catch (Exception exc)
                     {
-                        Logger.Log("NTP exception: " + exc.Message, Category.Exception, Priority.High);
+                        Logger.Log("NTP exception: " + exc.Message, Category.Exception, Priority.Low);
                         //TrackingManager.TrackException(exc);
                     }
                 }
@@ -178,7 +178,7 @@ namespace Project2FA.UWP.Services
                             int i = (sender as ObservableCollection<TwoFACodeModel>).Count - 1;
                             Collection[i].HideTOTPCode = useHiddenTOTP;
                             // set the svg source
-                            var iconStr = await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
+                            await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
                             await InitializeItem(i);
                         }
                     }
@@ -224,7 +224,6 @@ namespace Project2FA.UWP.Services
         /// <summary>
         /// Checks and reads the current local datafile
         /// </summary>
-        /// <param name="dbDatafile"></param>
         private async Task CheckLocalDatafile()
         {
             DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
@@ -342,67 +341,6 @@ namespace Project2FA.UWP.Services
             }
             // writing status for the data file is activated again
             _initialization = false;
-        }
-
-        /// <summary>
-        /// Check if the datafile is outdated
-        /// </summary>
-        /// <param name="dbDatafile"></param>
-        private async Task<(bool successful, bool outdated)> CheckIfWebDAVDatafileIsEqual(DBDatafileModel dbDatafile)
-        {
-            try
-            {
-                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-                StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
-                WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-                ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
-                var fileDateModified = (await storageFile.GetBasicPropertiesAsync()).DateModified.UtcDateTime;
-                DateTime trimmedFileLastModified = new DateTime(fileDateModified.Year, fileDateModified.Month, 
-                    fileDateModified.Day, fileDateModified.TimeOfDay.Hours,
-                    fileDateModified.TimeOfDay.Minutes, fileDateModified.TimeOfDay.Seconds);
-                var webDAVDateModified = webDAVFile.LastModified.ToUniversalTime();
-                if (webDAVDateModified > trimmedFileLastModified)
-                {
-                    await DownloadWebDAVFile(storageFolder, dbDatafile);
-                    return (true, true);
-                }
-                else if (webDAVDateModified < trimmedFileLastModified)
-                {
-                    DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
-                    // TODO check result
-                    (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(storageFolder, datafileDB);
-                    return (true, false);
-                }
-                else
-                {
-                    return (true, false);
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex.Message, Category.Exception, Priority.High);
-                return (false, false);
-            }
-        }
-
-        /// <summary>
-        /// Download the datafile in the local app storage
-        /// </summary>
-        /// <param name="storageFolder"></param>
-        /// <param name="dbDatafile"></param>
-        /// <returns></returns>
-        private async Task<StorageFile> DownloadWebDAVFile(StorageFolder storageFolder, DBDatafileModel dbDatafile)
-        {
-            //todo create date is correct?
-            StorageFile localFile;
-            localFile = await storageFolder.CreateFileAsync(dbDatafile.Name, CreationCollisionOption.ReplaceExisting);
-            IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
-            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-            using IRandomAccessStream randomAccessStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
-            Stream targetStream = randomAccessStream.AsStreamForWrite();
-            await client.Download(dbDatafile.Path + "/" + dbDatafile.Name, targetStream, progress, new CancellationToken());
-            return localFile;
         }
 
         private void ErrorResolved()
@@ -543,7 +481,9 @@ namespace Project2FA.UWP.Services
             }
             CollectionAccessSemaphore.Release();
         }
-        
+
+
+        #region WebDAV
         /// <summary>
         /// Upload the data file with custom WebDAV header
         /// </summary>
@@ -594,6 +534,68 @@ namespace Project2FA.UWP.Services
 
         }
 
+        /// <summary>
+        /// Download the datafile in the local app storage
+        /// </summary>
+        /// <param name="storageFolder"></param>
+        /// <param name="dbDatafile"></param>
+        /// <returns></returns>
+        private async Task<StorageFile> DownloadWebDAVFile(StorageFolder storageFolder, DBDatafileModel dbDatafile)
+        {
+            //todo create date is correct?
+            StorageFile localFile;
+            localFile = await storageFolder.CreateFileAsync(dbDatafile.Name, CreationCollisionOption.ReplaceExisting);
+            IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+            using IRandomAccessStream randomAccessStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
+            Stream targetStream = randomAccessStream.AsStreamForWrite();
+            await client.Download(dbDatafile.Path + "/" + dbDatafile.Name, targetStream, progress, new CancellationToken());
+            return localFile;
+        }
+
+        /// <summary>
+        /// Check if the datafile is outdated
+        /// </summary>
+        /// <param name="dbDatafile"></param>
+        private async Task<(bool successful, bool outdated)> CheckIfWebDAVDatafileIsEqual(DBDatafileModel dbDatafile)
+        {
+            try
+            {
+                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+                StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
+                WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+                ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
+                var fileDateModified = (await storageFile.GetBasicPropertiesAsync()).DateModified.UtcDateTime;
+                DateTime trimmedFileLastModified = new DateTime(fileDateModified.Year, fileDateModified.Month,
+                    fileDateModified.Day, fileDateModified.TimeOfDay.Hours,
+                    fileDateModified.TimeOfDay.Minutes, fileDateModified.TimeOfDay.Seconds);
+                var webDAVDateModified = webDAVFile.LastModified.ToUniversalTime();
+                if (webDAVDateModified > trimmedFileLastModified)
+                {
+                    await DownloadWebDAVFile(storageFolder, dbDatafile);
+                    return (true, true);
+                }
+                else if (webDAVDateModified < trimmedFileLastModified)
+                {
+                    DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
+                    // TODO check result
+                    (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(storageFolder, datafileDB);
+                    return (true, false);
+                }
+                else
+                {
+                    return (true, false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message, Category.Exception, Priority.High);
+                return (false, false);
+            }
+        }
+        #endregion
+
         public TwoFACodeModel TempDeletedTFAModel
         {
             get => _tempDeletedTFAModel;
@@ -625,22 +627,17 @@ namespace Project2FA.UWP.Services
         {
             try
             {
-                if (Collection[i].SecretByteArray is null)
-                {
-                    TrackingManager.TrackEvent(Category.Warn, Priority.High, "Secret key is empty!");
-                    await ReloadDatafile();
-                }
-                else
+                if (Collection[i].SecretByteArray != null)
                 {
                     Totp totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
                     int remainingTime;
-                    
+
                     if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
                     {
                         Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
                         //calc the remaining time for the TOTP code with the time correction
-                        remainingTime = Collection[i].Period - 
-                            (int)((DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds).Ticks - unixEpochTicks) 
+                        remainingTime = Collection[i].Period -
+                            (int)((DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds).Ticks - unixEpochTicks)
                             / ticksToSeconds % Collection[i].Period);
                     }
                     else
@@ -650,13 +647,28 @@ namespace Project2FA.UWP.Services
                     }
                     Logger.Log("TOTP remaining Time: " + remainingTime.ToString(), Category.Debug, Priority.None);
                     Collection[i].Seconds = remainingTime;
-                    
                 }
+                else
+                {
+                    //TODO  add dialog
+                }
+
             }
             catch (Exception ex)
             {
                 Logger.Log(ex.Message, Category.Exception, Priority.High);
-                TrackingManager.TrackExceptionCatched(ex);
+                TrackingManager.TrackException(ex);
+                _reloadCollectionCounter++;
+                if (_reloadCollectionCounter < 3)
+                {
+                    await ReloadDatafile();
+                }
+                else
+                {
+                    // TODO add dialog
+                    throw;
+                }
+                
             }
         }
 
@@ -664,7 +676,7 @@ namespace Project2FA.UWP.Services
         {
             for (int i = 0; i < Collection.Count; i++)
             {
-                var iconStr = await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
+                await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
             }
         }
 

@@ -141,7 +141,6 @@ namespace Project2FA.UWP.ViewModels
 
         private async Task SetAndCreateLocalDatafile(bool isWebDAV)
         {
-            Password = Password.Replace(" ", string.Empty);
             if (!DateFileName.Contains(".2fa"))
             {
                 DateFileName += ".2fa";
@@ -161,7 +160,6 @@ namespace Project2FA.UWP.ViewModels
             await CreateLocalFileDB(isWebDAV);
 
             App.ShellPageInstance.NavigationIsAllowed = true;
-            //uplaod is not necessary because the data file is empty.
             await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
         }
         //private async Task CreateLocalFile (bool isWebDAV = false)

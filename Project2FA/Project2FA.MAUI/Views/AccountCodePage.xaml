@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project2FA.MAUI.Views.AccountCodePage"
+             xmlns:models="clr-namespace:Project2FA.Repository.Models;assembly=Project2FA.Repository"
+             Title="AccountCodePage">
+    <Grid>
+        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TwoFACodeModel">
+                    <Frame>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label 
+                                Grid.Row="0" 
+                                Text="{x:Bind Label, Mode=OneWay}"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Margin="0,0,0,4"/>
+                            <Label 
+                                Grid.Row="1" 
+                                FontSize="18"
+                                Text="{x:Bind Issuer, Mode=OneWay}"
+                                Margin="0,4,0,4"/>
+                            <Label 
+                                Grid.Row="3"
+                                FontSize="20"
+                                CharacterSpacing="1"
+                                TextColor="{StaticResource Primary }"
+                                Text="{x:Bind TwoFACode, Mode=OneWay}"
+                                Margin="0,4,0,4"/>
+                            <Label 
+                                Grid.RowSpan="2" 
+                                Grid.Column="1"
+                                Text ="{x:Bind Seconds, Mode=OneWay}"
+                                MaxLines="5"/>
+                        </Grid>
+                        
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

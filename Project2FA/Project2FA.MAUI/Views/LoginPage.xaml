@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project2FA.MAUI.Views.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout>
+        <Entry IsPassword="True" Placeholder="#Password" Text="{x:Bind ViewModel.Password, Mode=TwoWay}"/>
+        <Button Text="#Login" Command="{x:Bind ViewModel.CheckLoginCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

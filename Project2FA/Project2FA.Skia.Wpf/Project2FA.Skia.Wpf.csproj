@@ -12,14 +12,14 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Prism.DryIoc.Uno" Version="8.1.97" />
-	<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.8" />
+	<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.4.5" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
     <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
-    <PackageReference Include="Uno.Material" Version="2.0.0" />
-	<PackageReference Include="Uno.UI.RemoteControl" Version="4.3.8" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.3.8" />
+    <PackageReference Include="Uno.Material" Version="2.2.0" />
+	<PackageReference Include="Uno.UI.RemoteControl" Version="4.4.5" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.4.5" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <ItemGroup>

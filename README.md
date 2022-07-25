@@ -44,13 +44,19 @@
 
 <img src="https://i.postimg.cc/FzXQpK43/2fast-screenshot-1.png" alt="2fast Screenshot Login Screen" width="470" />  <img src="https://i.postimg.cc/zv7PhDXJ/2fast-screenshot-2.png" alt="2fast Screenshot Account Screen" width="464" />
 
+### Nominations
+<a href='https://aka.ms/StoreAppAwardsWinners'><img width="720" alt="finalist_lock_up_light_on_dark_Utilities" src="https://user-images.githubusercontent.com/10946850/180846349-d0f8358d-5684-4616-92a0-5bc547087e42.png" width="250"></a>
+
 ## Installation
 
 For Windows operating systems:
 
 <a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
 
-This project is not yet available in the Google Play store, you have to build it from source. Watch it!
+
+
+
+This project is not yet available in the Google Play store or the Apple app store. A mobile application is currently being worked on and will be announced when it is released in the respective stores.
 
 
 ## Getting Started

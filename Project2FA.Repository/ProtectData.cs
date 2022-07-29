@@ -32,7 +32,6 @@ namespace Project2FA.Core
             //    Console.WriteLine(e.ToString());
             //    return null;
             //}
-
             return ProtectedData.Protect(data, AditionalEntropy, DataProtectionScope.CurrentUser);
         }
 

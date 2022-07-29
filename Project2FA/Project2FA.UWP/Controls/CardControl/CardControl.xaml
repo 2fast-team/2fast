@@ -18,25 +18,23 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:CardControl">
-                    <UserControl>
-                        <Grid x:Name="RootGrid"
-                          CornerRadius="{TemplateBinding CornerRadius}"
-                          Background="{TemplateBinding Background}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          Padding="{TemplateBinding Padding}"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Center"
-                          MinHeight="48">
-                            <Grid.ColumnDefinitions>
-                                <!-- Icon, Header and subtitle -->
-                                <ColumnDefinition Width="*"/>
-                                <!-- Action control -->
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
+                    <Grid 
+                        x:Name="RootGrid"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Padding="{TemplateBinding Padding}"
+                        MinHeight="48">
+                        <Grid.ColumnDefinitions>
+                            <!-- Icon, Header and subtitle -->
+                            <ColumnDefinition Width="*"/>
+                            <!-- Action control -->
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
 
-                            <RelativePanel  >
-                                <ContentPresenter 
+                        <RelativePanel>
+                            <ContentPresenter 
                               x:Name="IconPresenter"
                               Content="{TemplateBinding Icon}"
                               HorizontalAlignment="Center"
@@ -49,52 +47,53 @@
                               Foreground="{ThemeResource CardPrimaryForegroundBrush}"
                               VerticalAlignment="Center"/>
 
-                                <StackPanel
+                            <StackPanel
                             x:Name="SubtitleStack"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
                             RelativePanel.AlignVerticalCenterWithPanel="True"
                             Margin="0,0,16,0">
 
-                                    <TextBlock
+                                <TextBlock
                                 x:Name="HeaderPresenter"
                                 FontFamily="Seguoe UI"
                                 Text="{TemplateBinding Header}"
                                 VerticalAlignment="Center"
                                 Foreground="{ThemeResource CardPrimaryForegroundBrush}" />
 
-                                    <ContentPresenter
+                                <ContentPresenter
                                 x:Name="DescriptionPresenter"
                                         FontFamily="Seguoe UI"
                                 Content="{TemplateBinding Description}"
                                 FontSize="{StaticResource SecondaryTextFontSize}"
                                 TextWrapping="WrapWholeWords"
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                                        <ContentPresenter.Resources>
-                                            <Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
-                                                <Style.Setters>
-                                                    <Setter Property="TextWrapping" Value="WrapWholeWords"/>
-                                                </Style.Setters>
-                                            </Style>
-                                            <Style TargetType="HyperlinkButton" BasedOn="{StaticResource TextButtonStyle}">
-                                                <Style.Setters>
-                                                    <Setter Property="FontSize" Value="12"/>
-                                                    <Setter Property="Padding" Value="0,0,0,0"/>
-                                                </Style.Setters>
-                                            </Style>
-                                        </ContentPresenter.Resources>
-                                    </ContentPresenter>
-                                </StackPanel>
-                            </RelativePanel>
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+                                            <Style.Setters>
+                                                <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+                                            </Style.Setters>
+                                        </Style>
+                                        <Style TargetType="HyperlinkButton" BasedOn="{StaticResource TextButtonStyle}">
+                                            <Style.Setters>
+                                                <Setter Property="FontSize" Value="12"/>
+                                                <Setter Property="Padding" Value="0,0,0,0"/>
+                                            </Style.Setters>
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </StackPanel>
+                        </RelativePanel>
+                        
 
-                            <ContentPresenter
+                        <ContentPresenter
                             x:Name="ContentPresenter"
                             Grid.Column="1"
                             FontFamily="Seguoe UI"
                             Content="{TemplateBinding ActionContent}"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right" />
-                        </Grid>
+
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>
@@ -132,8 +131,8 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                    </UserControl>
-                    
+                    </Grid>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

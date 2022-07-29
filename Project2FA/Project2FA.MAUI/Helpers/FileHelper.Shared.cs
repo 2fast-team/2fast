@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Project2FA.MAUI.Helpers
 {
-	public static class FileHelper
+    public partial class FileHelper
     {
+        public bool StartAccessFile(string path)
+            => PlatformStartAccessFile(path);
 
+        public bool StopAccessFile(string path)
+             => PlatformStopAccessFile(path);
     }
 }

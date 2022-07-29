@@ -29,7 +29,7 @@ namespace Project2FA.MAUI.Services
 
         public bool UseHiddenTOTP
         {
-            get => Preferences.Get(nameof(UseHiddenTOTP), false);
+            get => Preferences.Get(nameof(UseHiddenTOTP), true);
             set => Preferences.Set(nameof(UseHiddenTOTP), value);
         }
 

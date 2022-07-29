@@ -8,11 +8,7 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Regions;
 using Project2FA.Views;
-#if HAS_WINUI
 using Microsoft.UI.Xaml.Controls;
-#else
-using Windows.UI.Xaml.Controls;
-#endif
 
 namespace Project2FA.ViewModels
 {

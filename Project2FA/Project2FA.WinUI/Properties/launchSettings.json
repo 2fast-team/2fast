@@ -1,0 +1,10 @@
+{
+	"profiles": {
+		"Project2FA.Windows (Package)": {
+			"commandName": "MsixPackage"
+		},
+		"Project2FA.Windows (Unpackaged)": {
+			"commandName": "Project"
+		}
+	}
+}

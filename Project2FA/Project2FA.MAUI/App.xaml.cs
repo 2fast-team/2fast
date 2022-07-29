@@ -52,19 +52,19 @@ public partial class App : Application
         if (await Repository.Password.GetAsync() is not null)
         {
             //MainPage = new LoginPage(new ViewModels.LoginPageViewModel());
-            await Shell.Current.GoToAsync(nameof(LoginPage));
+            await Shell.Current.GoToAsync("//" + nameof(LoginPage));
         }
         else
         {
             //MainPage = new AppShell();
-            await Shell.Current.GoToAsync(nameof(WelcomePage));
+            await Shell.Current.GoToAsync("//" + nameof(WelcomePage));
         }
 
         //remove the navigation stack
-        var existingPages = Shell.Current.Navigation.NavigationStack.ToList();
-        foreach (var page in existingPages)
-        {
-            Shell.Current.Navigation.RemovePage(page);
-        }
+        //var existingPages = Shell.Current.Navigation.NavigationStack.ToList();
+        //foreach (var page in existingPages)
+        //{
+        //    Shell.Current.Navigation.RemovePage(page);
+        //}
     }
 }

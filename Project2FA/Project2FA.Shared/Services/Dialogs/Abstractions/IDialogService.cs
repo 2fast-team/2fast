@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
 namespace Project2FA.Uno.Core.Dialogs
 {

@@ -1,4 +1,5 @@
 ﻿using Project2FA.Core.Services.JSON;
+using Project2FA.MAUI.Services.JSON;
 using Project2FA.MAUI.ViewModels;
 using Project2FA.MAUI.Views;
 
@@ -8,14 +9,17 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
-		var builder = MauiApp.CreateBuilder();
+        //https://github.com/microsoft/fluentui-system-icons/tree/master/fonts
+        var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+                fonts.AddFont("FluentSystemIcons-Filled.ttf", "FluentSystemIconsFilled");
+                fonts.AddFont("FluentSystemIcons-Regular.ttf", "FluentSystemIconsRegular");
+            });
 
         builder.Services.AddSingleton<BlankPage>();
         builder.Services.AddSingleton<BlankPageViewModel>();
@@ -33,6 +37,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<UseDataFilePageViewModel>();
 
         builder.Services.AddSingleton<INewtonsoftJSONService>(new NewtonsoftJSONService());
+        builder.Services.AddSingleton<ISerializationService>(new SerializationService());
 
         return builder.Build();
 	}

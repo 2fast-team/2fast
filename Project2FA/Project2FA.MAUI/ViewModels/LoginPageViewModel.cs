@@ -16,6 +16,11 @@ namespace Project2FA.MAUI.ViewModels
         private bool _windowsHelloIsUsable, _isLogout;
         private string _password;
 
+        public LoginPageViewModel()
+        {
+            Password = "test";
+        }
+
         /// <summary>
         /// Checks the password for the login
         /// </summary>
@@ -46,7 +51,7 @@ namespace Project2FA.MAUI.ViewModels
             if (dbHash.Hash == pwdhash)
             {
                 //App.Current.MainPage = App.AppShellInstance;
-                await Shell.Current.GoToAsync(nameof(AccountCodePage));
+                await Shell.Current.GoToAsync("//" + nameof(AccountCodePage));
                 return true;
             }
             else

@@ -1,8 +1,4 @@
-﻿#if HAS_WINUI
-using Microsoft.UI.Xaml.Controls;
-#else
-using Windows.UI.Xaml.Controls;
-#endif
+﻿using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

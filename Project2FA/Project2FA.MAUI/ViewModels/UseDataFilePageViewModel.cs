@@ -3,6 +3,8 @@ using Microsoft.Maui.Controls.PlatformConfiguration;
 using Prism.Commands;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.WebDAV;
+using Project2FA.MAUI.Helpers;
+using Project2FA.MAUI.Services.JSON;
 using Project2FA.MAUI.Views;
 using Project2FA.Repository.Models;
 using System;
@@ -20,6 +22,7 @@ namespace Project2FA.MAUI.ViewModels
         public ICommand SetAndCheckLocalDatafileCommand { get; }
         public ICommand SetAndCheckWebDAVDatafileCommand { get; }
 
+        private ISerializationService SerializationService { get; }
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
         private FileResult _selectedFile;
@@ -27,9 +30,10 @@ namespace Project2FA.MAUI.ViewModels
         /// <summary>
         /// Constructor to start the datafile selector
         /// </summary>
-        public UseDataFilePageViewModel()
+        public UseDataFilePageViewModel(ISerializationService serializationService, INewtonsoftJSONService newtonsoftJSONService)
         {
-            NewtonsoftJSONService = new NewtonsoftJSONService();
+            SerializationService = serializationService;
+            NewtonsoftJSONService = newtonsoftJSONService;
 
             ConfirmErrorCommand = new DelegateCommand(() =>
             {
@@ -61,6 +65,8 @@ namespace Project2FA.MAUI.ViewModels
                 await SetAndCheckLocalDatafile(true);
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
+            Password = "test";
         }
 
         /// <summary>
@@ -76,8 +82,17 @@ namespace Project2FA.MAUI.ViewModels
         {
             try
             {
-                await SetLocalFile();
-                return true;
+                PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+                if (status == PermissionStatus.Granted)
+                {
+                    await SetLocalFile();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
             catch (UnauthorizedAccessException)
             {
@@ -131,6 +146,7 @@ namespace Project2FA.MAUI.ViewModels
                 FileTypes = customFileType,
             };
 
+
             FileResult result = await FilePicker.Default.PickAsync(options);
 
             IsLoading = true;
@@ -164,6 +180,7 @@ namespace Project2FA.MAUI.ViewModels
                 }
                 return false;
             }
+
         }
 
 
@@ -183,13 +200,15 @@ namespace Project2FA.MAUI.ViewModels
 
             if(_selectedFile != null)
             {
-                string datafileStr;
-                using (StreamReader reader = new StreamReader(await _selectedFile.OpenReadAsync()))
-                {
-                    datafileStr = reader.ReadToEnd();
+                //string datafileStr;
+                //using (StreamReader reader = new StreamReader(await _selectedFile.OpenReadAsync()))
+                //{
+                //    datafileStr = reader.ReadToEnd();
 
-                }
-                //string datafileStr = await File.ReadAllTextAsync(storagePath);
+                //}
+                FileHelper fileHelper = new FileHelper();
+                fileHelper.StartAccessFile(storagePath);
+                string datafileStr = await File.ReadAllTextAsync(storagePath);
                 //read the iv for AES
                 DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
                 byte[] iv = datafile.IV;
@@ -206,6 +225,10 @@ namespace Project2FA.MAUI.ViewModels
                     Password = string.Empty;
 
                     return false;
+                }
+                finally
+                {
+                    fileHelper.StopAccessFile(storagePath);
                 }
             }
             else

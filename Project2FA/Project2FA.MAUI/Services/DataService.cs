@@ -1,23 +1,14 @@
-﻿using DecaTec.WebDav;
-using OtpNet;
-using Prism.Commands;
+﻿using OtpNet;
 using Prism.Mvvm;
 using Project2FA.Core.Utils;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
-using Project2FA.Core.Services.WebDAV;
 using Project2FA.MAUI.Helpers;
 using Project2FA.Repository.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using WebDAVClient.Types;
 
 namespace Project2FA.MAUI.Services
 {
@@ -32,8 +23,11 @@ namespace Project2FA.MAUI.Services
         private bool _initialization, _errorOccurred;
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
+
+        private static readonly ObservableCollection<TwoFACodeModel> twoFACodeModels = new ObservableCollection<TwoFACodeModel>();
+
         //public AdvancedCollectionView ACVCollection { get; }
-        public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
+        public ObservableCollection<TwoFACodeModel> Collection { get; } = twoFACodeModels;
         private bool _emptyAccountCollectionTipIsOpen;
         private TwoFACodeModel _tempDeletedTFAModel;
         private const long unixEpochTicks = 621355968000000000L;
@@ -195,19 +189,23 @@ private const long ticksToSeconds = 10000000L;
                 //    throw;
                 //}
                 
-                if (File.Exists(dbDatafile.Path))
+                if(true) //if (File.Exists(dbDatafile.Path))
                 {
                     DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
+                    //FileHelper fileHelper = new FileHelper();
                     // prevent write of the datafile to folder
                     _initialization = true;
                     try
                     {
                         //string datafileStr;
+                        //FileResult fileResult = new FileResult(dbDatafile.Path);
                         //using (StreamReader reader = new StreamReader(await fileResult.OpenReadAsync()))
                         //{
                         //    datafileStr = reader.ReadToEnd();
 
                         //}
+
+                        //fileHelper.StartAccessFile(dbDatafile.Path);
                         string datafileStr = await File.ReadAllTextAsync(dbDatafile.Path);
                         if (!string.IsNullOrEmpty(datafileStr))
                         {
@@ -247,6 +245,10 @@ private const long ticksToSeconds = 10000000L;
                     {
                         _errorOccurred = true;
                         //await ErrorDialogs.ShowPasswordError();
+                    }
+                    finally
+                    {
+                        //fileHelper.StopAccessFile(dbDatafile.Path);
                     }
                 }
                 // file not found case

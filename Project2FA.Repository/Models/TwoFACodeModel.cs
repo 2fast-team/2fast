@@ -19,7 +19,7 @@ namespace Project2FA.Repository.Models
             {
                 if(SetProperty(ref _label, value))
                 {
-                    RaisePropertyChanged(nameof(Model));
+                    //RaisePropertyChanged(nameof(Model));
                 }
             }
         }
@@ -80,12 +80,27 @@ namespace Project2FA.Repository.Models
         }
 
         private byte[] _secretByteArray;
-        //no need for SetProperty, because no UI binding
+        // no need for SetProperty, because no UI binding
+        // Android not support ProtectedData
         [Encrypt]
         public byte[] SecretByteArray
         {
-            get => _secretByteArray != null ? ProtectData.Unprotect(_secretByteArray) : null;
-            set => _secretByteArray = ProtectData.Protect(value);
+            get
+            {
+#if ANDROID || IOS
+                return _secretByteArray;
+#else
+                return _secretByteArray != null ? ProtectData.Unprotect(_secretByteArray) : null;
+#endif
+            }
+            set
+            {
+#if ANDROID || IOS
+                _secretByteArray = value;
+#else
+                _secretByteArray = ProtectData.Protect(value);
+#endif
+            }
         }
 
         private string _twoFACode;

@@ -1,22 +1,10 @@
 ﻿using DryIoc;
 using Microsoft.Extensions.Logging;
-#if HAS_WINUI
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.Storage;
-#else
-using Windows.UI.Xaml;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.Storage;
-#endif
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
@@ -31,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Project2FA.Repository.Database;
 using Project2FA.Core;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Project2FA
 {
@@ -73,15 +62,15 @@ namespace Project2FA
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
-        {
-#if __IOS__
-            // requires Xamarin Test Cloud Agent
-            Xamarin.Calabash.Start();
-#endif
+//        protected override void OnLaunched(LaunchActivatedEventArgs args)
+//        {
+//#if __IOS__
+//            // requires Xamarin Test Cloud Agent
+//            Xamarin.Calabash.Start();
+//#endif
 
-            base.OnLaunched(args);
-        }
+//            base.OnLaunched(args);
+//        }
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails

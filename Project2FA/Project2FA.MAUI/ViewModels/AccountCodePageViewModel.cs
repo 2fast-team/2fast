@@ -11,6 +11,7 @@ using Project2FA.Core.Utils;
 using Project2FA.MAUI.Services;
 using Microsoft.Maui.Dispatching;
 using Prism.Mvvm;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.MAUI.ViewModels
 {
@@ -19,6 +20,7 @@ namespace Project2FA.MAUI.ViewModels
         private IDispatcherTimer _dispatcherTOTPTimer;
         private IDispatcherTimer _dispatcherTimerDeletedModel;
         public INewtonsoftJSONService NewtonsoftJSONService { get; }
+        private bool _codeVisibilityOptionEnabled;
 
         public AccountCodePageViewModel(INewtonsoftJSONService newtonsoftJSONService)
         {
@@ -35,7 +37,7 @@ namespace Project2FA.MAUI.ViewModels
             _dispatcherTimerDeletedModel.Interval = new TimeSpan(0, 0, 1); //every second
             _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
             _dispatcherTimerDeletedModel.Tick += TimerDeletedModel;
-
+            CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
             StartTOTPLogic();
         }
 
@@ -104,6 +106,7 @@ namespace Project2FA.MAUI.ViewModels
         /// Show or hide the TOTP code
         /// </summary>
         /// <param name="obj"></param>
+        [RelayCommand]
         private void HideOrShowTOTPCode(TwoFACodeModel obj)
         {
             obj.HideTOTPCode = !obj.HideTOTPCode;
@@ -114,6 +117,12 @@ namespace Project2FA.MAUI.ViewModels
         public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
         public bool IsAccountNotDeleted => TwoFADataService.TempDeletedTFAModel == null;
+
+        public bool CodeVisibilityOptionEnabled
+        {
+            get => _codeVisibilityOptionEnabled;
+            private set => SetProperty(ref _codeVisibilityOptionEnabled, value);
+        }
 
 
         ///// <summary>

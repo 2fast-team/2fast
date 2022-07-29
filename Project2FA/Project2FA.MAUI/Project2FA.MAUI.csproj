@@ -26,20 +26,46 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<ProvisioningType>manual</ProvisioningType>
-		<CodesignProvision>VS Wildcard Development</CodesignProvision>
+		<CodesignProvision>Development Profile</CodesignProvision>
 		<CodesignKey>iPhone Developer</CodesignKey>
 		
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
 	  <CodesignEntitlements />
+	  <MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-ios|AnyCPU'">
 	  <CodesignEntitlements />
+	  <MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
+	  <MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-android|AnyCPU'">
+	  <MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-maccatalyst|AnyCPU'">
+	  <MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-maccatalyst|AnyCPU'">
+	  <MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows10.0.19041.0|AnyCPU'">
+	  <MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows10.0.19041.0|AnyCPU'">
+	  <MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -61,16 +87,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Helpers\FileHelper.Shared.cs" />
+	  <AndroidResource Remove="Helpers\FileSystemHelper\**" />
+	  <Compile Remove="Helpers\FileSystemHelper\**" />
+	  <EmbeddedResource Remove="Helpers\FileSystemHelper\**" />
+	  <MauiCss Remove="Helpers\FileSystemHelper\**" />
+	  <MauiXaml Remove="Helpers\FileSystemHelper\**" />
+	  <None Remove="Helpers\FileSystemHelper\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="Helpers\FileHelper.Shared.cs" />
+	  <None Remove="Resources\Fonts\FluentSystemIcons-Filled.ttf" />
+	  <None Remove="Resources\Fonts\FluentSystemIcons-Regular.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0-preview4" />
 	  <PackageReference Include="CompiledBindings.MAUI" Version="1.0.11" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.0" />
 	  <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="6.0.0" />
 	</ItemGroup>

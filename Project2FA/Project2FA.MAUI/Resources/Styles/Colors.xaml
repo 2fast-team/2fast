@@ -17,6 +17,16 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
+
+    <Color x:Key="SystemChromeMediumDarkColor">#FF2B2B2B</Color>
+    <Color x:Key="SystemChromeMediumLightColor">#FFF2F2F2</Color>
+
+    <Color x:Key="CardStrokeLightColorDefault">#0F000000</Color>
+    <Color x:Key="CardStrokeLightColorDefaultSolid">#EBEBEB</Color>
+
+    <Color x:Key="CardStrokeDarkColorDefault">#19000000</Color>
+    <Color x:Key="CardStrokeDarkColorDefaultSolid">#1C1C1C</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
@@ -30,6 +40,15 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+    <SolidColorBrush x:Key="CardLightBackgroundBrush" Color="{StaticResource CardStrokeLightColorDefault}"/>
+    <SolidColorBrush x:Key="CardStrokeLightColorDefaultSolidBrush" Color="{StaticResource CardStrokeLightColorDefaultSolid}" />
+
+    <SolidColorBrush x:Key="CardDarkBackgroundBrush" Color="{StaticResource CardStrokeDarkColorDefault}"/>
+    <SolidColorBrush x:Key="CardStrokeDarkColorDefaultSolidBrush" Color="{StaticResource CardStrokeDarkColorDefaultSolid}" />
+    <SolidColorBrush x:Key="CommandBarDarkBackground" Color="{StaticResource SystemChromeMediumDarkColor}"/>
+    <SolidColorBrush x:Key="CommandBarLightBackground" Color="{StaticResource SystemChromeMediumLightColor}"/>
+    <!--<SolidColorBrush x:Key="CardLightBorderBrush"  />
+        <SolidColorBrush x:Key="CardPrimaryLightForegroundBrush"  /> -->
 
 
     <Color x:Key="SystemAccentColorLight1">#FF1CA8CA</Color>

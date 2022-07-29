@@ -52,6 +52,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
+				<string>public.data</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
@@ -66,9 +67,33 @@
 				</array>
 			</dict>
 		</dict>
+
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>com.jpwtechnology.2fa</string>
+			<key>UTTypeDescription</key>
+			<string>2FA File</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.mime-type</key>
+				<string>application/octet-stream</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>2fa</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>2fast</string>
-
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 </dict>
 </plist>

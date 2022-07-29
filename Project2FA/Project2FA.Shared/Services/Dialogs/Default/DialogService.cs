@@ -3,11 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Prism.Common;
 using Prism.Ioc;
-#if HAS_WINUI
 using Microsoft.UI.Xaml.Controls;
-#else
-using Windows.UI.Xaml.Controls;
-#endif
 
 namespace Project2FA.Uno.Core.Dialogs
 {

@@ -2,13 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project2FA.MAUI.Views.AccountCodePage"
+             x:Name="Page"
              xmlns:models="clr-namespace:Project2FA.Repository.Models;assembly=Project2FA.Repository"
-             Title="AccountCodePage">
+             Shell.NavBarIsVisible="false"
+             Title="Accounts">
     <Grid>
-        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}" Margin="0,4,0,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:TwoFACodeModel">
-                    <Frame>
+                    <Frame 
+                        BackgroundColor="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}" 
+                        Margin="0,4,0,4">
+                        <Frame.Shadow>
+                            <Shadow Brush="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}"
+                                Offset="20,20"
+                                Radius="40"
+                                Opacity="0.8" />
+                        </Frame.Shadow>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -16,38 +30,105 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Label 
+                                Grid.Column="0"
                                 Grid.Row="0" 
                                 Text="{x:Bind Label, Mode=OneWay}"
                                 FontAttributes="Bold"
-                                FontSize="18"
+                                FontSize="20"
                                 Margin="0,0,0,4"/>
                             <Label 
+                                Grid.Column="0"
                                 Grid.Row="1" 
-                                FontSize="18"
+                                FontSize="20"
                                 Text="{x:Bind Issuer, Mode=OneWay}"
                                 Margin="0,4,0,4"/>
-                            <Label 
-                                Grid.Row="3"
-                                FontSize="20"
+                            <HorizontalStackLayout Grid.Column="0" Grid.Row="2">
+                                <Grid>
+                                    <Label 
+                                FontSize="24"
                                 CharacterSpacing="1"
                                 TextColor="{StaticResource Primary }"
                                 Text="{x:Bind TwoFACode, Mode=OneWay}"
                                 Margin="0,4,0,4"/>
+                                    <Label
+                                Text="______"
+                                IsVisible="{x:Bind HideTOTPCode, Mode=OneWay}"
+                                FontSize="24"
+                                CharacterSpacing="3"
+                                TextColor="{StaticResource Primary}" />
+                                </Grid>
+
+                                <Button
+                                WidthRequest="68" 
+                                HeightRequest="36"
+                                BackgroundColor="Transparent"
+                                IsVisible="{Binding Source={x:Reference Page},Path=ViewModel.CodeVisibilityOptionEnabled}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding Source={x:Reference Page},Path=ViewModel.HideOrShowTOTPCodeCommand,Mode=OneTime}">
+                                    <Button.ImageSource>
+                                        <FontImageSource 
+                                            Glyph="&#xE5F3;"
+                                             FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Android=FluentSystemIcons-Regular.ttf}"
+                                             Size="24" />
+                                    </Button.ImageSource>
+                                </Button>
+                                <Button 
+                                    WidthRequest="68" 
+                                    BackgroundColor="Transparent"
+                                    HeightRequest="36" >
+                                    <Button.ImageSource>
+                                        <FontImageSource 
+                                            Glyph="&#xF32A;"
+                                             FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Android=FluentSystemIcons-Regular.ttf}"
+                                             Size="24" />
+                                    </Button.ImageSource>
+                                </Button>
+                            </HorizontalStackLayout>
+
                             <Label 
                                 Grid.RowSpan="2" 
                                 Grid.Column="1"
                                 Text ="{x:Bind Seconds, Mode=OneWay}"
                                 MaxLines="5"/>
+
                         </Grid>
-                        
+
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Grid Grid.Row="1" Background="{x:AppThemeBinding Dark={StaticResource CommandBarDarkBackground},Light={StaticResource CommandBarLightBackground}}">
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button WidthRequest="96" BackgroundColor="Transparent">
+                    <Button.ImageSource>
+                        <FontImageSource 
+                            Glyph="&#xEA7E;"
+                            FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                            Size="{OnPlatform iOS=32, Android=28, Default=24}" />
+                    </Button.ImageSource>
+                </Button>
+                <Button WidthRequest="96" BackgroundColor="Transparent">
+                    <Button.ImageSource>
+                        <FontImageSource 
+                            Glyph="&#xE006;"
+                            FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                            Size="{OnPlatform iOS=32, Android=28, Default=24}" />
+                    </Button.ImageSource>
+                </Button>
+                <Button WidthRequest="96" BackgroundColor="Transparent">
+                    <Button.ImageSource>
+                        <FontImageSource 
+                            Glyph="&#xE758;"
+                            FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                            Size="{OnPlatform iOS=32, Android=28, Default=24}" />
+                    </Button.ImageSource>
+                </Button>
+            </HorizontalStackLayout>
+        </Grid>
     </Grid>
 </ContentPage>

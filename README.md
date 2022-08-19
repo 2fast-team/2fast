@@ -13,6 +13,9 @@
 	<a style="text-decoration:none" href="https://github.com/2fast-team/2fast/releases">
     		<img src="https://img.shields.io/badge/Sideload-Download-purple.svg?style=flat-round" alt="Sideload link" />
 	</a>
+	<a style="text-decoration:none" href="https://community.chocolatey.org/packages/2fast">
+    		<img src="https://img.shields.io/chocolatey/dt/2fast?color=blue&label=Chocolatey" alt="Chocolatey link" />
+	</a>
 	<a href="https://github.com/2fast-team/2fast/blob/master/LICENSE" target="_blank" alt="License">
 		<img src="https://img.shields.io/github/license/2fast-team/2fast" />
 	</a>
@@ -53,8 +56,10 @@ For Windows operating systems:
 
 <a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
 
-
-
+You can also install the app using [Chocolatey](https://community.chocolatey.org/packages/2fast):
+```powershell
+choco install 2fast
+```
 
 This project is not yet available in the Google Play store or the Apple app store. A mobile application is currently being worked on and will be announced when it is released in the respective stores.
 

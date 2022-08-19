@@ -4,10 +4,11 @@ using OtpNet;
 using System.ComponentModel.DataAnnotations;
 using Project2FA.Core;
 using Prism.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.Repository.Models
 {
-    public class TwoFACodeModel : BindableBase
+    public class TwoFACodeModel : ObservableObject
     {
         private string _label;
         [Encrypt]
@@ -49,7 +50,7 @@ namespace Project2FA.Repository.Models
             {
                 if(SetProperty(ref _isFavourite, value))
                 {
-                    RaisePropertyChanged(nameof(IsFavouriteText));
+                    OnPropertyChanged(nameof(IsFavouriteText));
                 }
             }
         }
@@ -128,7 +129,7 @@ namespace Project2FA.Repository.Models
             {
                 if(SetProperty(ref _accountIconName, value))
                 {
-                    RaisePropertyChanged(nameof(Model));
+                    OnPropertyChanged(nameof(Model));
                 }
             }
         }

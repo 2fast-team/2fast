@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text.Json;
-using Prism.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WebDAVClient.Types
 {
     /// <summary>
     /// File or directory information
     /// </summary>
-    public class ResourceInfoModel : BindableBase
+    public class ResourceInfoModel : ObservableObject
     {
         /// <summary>
         /// Gets or sets the base name of the file without path

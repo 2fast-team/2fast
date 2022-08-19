@@ -27,7 +27,6 @@ using Prism.Services.Dialogs;
 using Project2FA.Core;
 using Windows.ApplicationModel.Email;
 using Windows.UI.ViewManagement;
-using Microsoft.Toolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {

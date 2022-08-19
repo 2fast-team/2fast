@@ -7,22 +7,16 @@ namespace Project2FA.Core.Services.WebDAV
     public class WebDAVClientService
     {
         /// <summary>
-        /// Private singleton field.
-        /// </summary>
-        [ThreadStatic]
-        private static WebDAVClientService _instance;
-
-        /// <summary>
         /// Gets public singleton property.
         /// </summary>
-        public static WebDAVClientService Instance => _instance ?? (_instance = new WebDAVClientService());
+        public static WebDAVClientService Instance { get; } = new WebDAVClientService();
         private WebDAVClient.Client _client;
 
         public WebDAVClientService()
         {
 
         }
-        public async Task<Client> GetClient()
+        public Client GetClient()
         {
             if (_client != null)
             {
@@ -50,7 +44,7 @@ namespace Project2FA.Core.Services.WebDAV
             //    _client = new WebDAVClient.Client(serveraddress, username, password);
             //}  
 
-            return _client;
+            return null;
         }
 
         public void Reset()

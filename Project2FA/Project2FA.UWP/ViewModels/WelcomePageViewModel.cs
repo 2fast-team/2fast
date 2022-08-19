@@ -5,7 +5,7 @@ using System.Windows.Input;
 using Prism.Navigation;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
-using Microsoft.Toolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {

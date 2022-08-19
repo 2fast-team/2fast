@@ -15,6 +15,7 @@ namespace Project2FA.MAUI.Helpers
             try
             {
                 NSUrl filePath = NSUrl.FromString(path);
+
                 return filePath.StartAccessingSecurityScopedResource();
             }
             catch (Exception)

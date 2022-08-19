@@ -1,4 +1,4 @@
-﻿using Prism.Mvvm;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core.Utils;
 using Project2FA.Repository.Models;
 using System;
@@ -12,7 +12,7 @@ using WebDAVClient.Types;
 namespace Project2FA.Core.Services.WebDAV
 {
     // based on https://github.com/nextcloud/windows-universal/blob/master/NextcloudApp/Services/DirectoryService.cs
-    public class DirectoryService : BindableBase
+    public class DirectoryService : ObservableObject
     {
         /// <summary>
         /// Gets public singleton property.
@@ -166,7 +166,7 @@ namespace Project2FA.Core.Services.WebDAV
             Folders.Clear();
             GroupedFilesAndFolders.Clear();
 
-            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
 
             if (client == null || IsSelecting)
             {
@@ -335,7 +335,7 @@ namespace Project2FA.Core.Services.WebDAV
                 {
                     PathStack.RemoveAt(GetPathDepth);
                 }
-                RaisePropertyChanged(nameof(PathStack));
+                OnPropertyChanged(nameof(PathStack));
                 SelectedIndexPathChanged();
                 //ContinueDirectoryListing();
             }
@@ -355,7 +355,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> CreateDirectory(string directoryName)
         {
-            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
@@ -388,7 +388,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> DeleteResource(ResourceInfoModel resourceInfo)
         {
-            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
@@ -406,7 +406,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> DeleteSelected(List<ResourceInfoModel> resourceInfos)
         {
-            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
@@ -431,7 +431,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> Rename(string oldName, string newName)
         {
-            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
@@ -462,7 +462,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> Move(string oldPath, string newPath)
         {
-            WebDAVClient.Client client = await WebDAVClientService.Instance.GetClient();
+            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {
@@ -492,7 +492,7 @@ namespace Project2FA.Core.Services.WebDAV
 
         public async Task<bool> ToggleFavorite(ResourceInfoModel resourceInfo)
         {
-            var client = await WebDAVClientService.Instance.GetClient();
+            var client = WebDAVClientService.Instance.GetClient();
 
             if (client == null)
             {

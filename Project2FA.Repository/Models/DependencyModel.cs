@@ -1,9 +1,9 @@
-﻿using Prism.Mvvm;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
 namespace Project2FA.Repository.Models
 {
-    public class DependencyModel : BindableBase
+    public class DependencyModel : ObservableObject
     {
         private string _name;
 

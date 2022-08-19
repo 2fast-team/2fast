@@ -33,17 +33,15 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array/>
 			<key>CFBundleTypeName</key>
 			<string>2FA File</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.jpwtechnology.2fa</string>
+			</array>
+			<key>CFBundleTypeIconFiles</key>
+			<array>
+				<string>Square44x44Logo.altform-lightunplated_targetsize-256</string>
 			</array>
 		</dict>
 	</array>
@@ -67,7 +65,6 @@
 				</array>
 			</dict>
 		</dict>
-
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -95,5 +92,9 @@
 	<true/>
 	<key>UISupportsDocumentBrowser</key>
 	<true/>
+	<key>key.apple.security.application-groups</key>
+	<array>
+		<string>group.Project2fa.MAUI</string>
+	</array>
 </dict>
 </plist>

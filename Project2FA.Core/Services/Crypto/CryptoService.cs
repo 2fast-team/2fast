@@ -14,11 +14,6 @@ namespace Project2FA.Core.Services
                 return hash;
             }
         }
-
-        //public static string CreateArgon2StringHash(string input)
-        //{
-        //    return Argon2.Hash(input, timeCost:4, memoryCost:4096, parallelism: Environment.ProcessorCount);
-        //}
         public static byte[] CreateByteArrayKey(string secret, int keyByteSize = 32, int iterations = 1000)
         {
             byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
@@ -28,25 +23,6 @@ namespace Project2FA.Core.Services
 
         public static string CreateStringHash(string input, bool argonHash = false)
         {
-
-            //if (argonHash)
-            //{
-            //    return CreateArgon2StringHash(input);
-            //}
-            //else
-            //{
-            //    byte[] hash = CreateSHA512ByteArrayHash(input);
-            //    var sb = new StringBuilder(hash.Length * 2);
-
-            //    foreach (byte b in hash)
-            //    {
-            //        // can be "x2" if you want lowercase
-            //        sb.Append(b.ToString("X2"));
-            //    }
-
-            //    return sb.ToString();
-            //}
-
             // https://stackoverflow.com/questions/17292366/hashing-with-sha1-algorithm-in-c-sharp
             byte[] hash = CreateSHA512ByteArrayHash(input);
             var sb = new StringBuilder(hash.Length * 2);

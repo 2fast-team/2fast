@@ -13,13 +13,14 @@ using Prism.Navigation;
 using Prism.Logging;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
-using Microsoft.Toolkit.Mvvm.Input;
 using Project2FA.UWP.Helpers;
 using Project2FA.Core;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class AccountCodePageViewModel : BindableBase, IConfirmNavigationAsync
+    public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync
     {
         private DispatcherTimer _dispatcherTOTPTimer;
         private DispatcherTimer _dispatcherTimerDeletedModel;
@@ -88,8 +89,8 @@ namespace Project2FA.UWP.ViewModels
             {
                 _dispatcherTimerDeletedModel.Stop();
                 TwoFADataService.RestoreDeletedModel();
-                RaisePropertyChanged(nameof(IsAccountDeleted));
-                RaisePropertyChanged(nameof(IsAccountNotDeleted));
+                OnPropertyChanged(nameof(IsAccountDeleted));
+                OnPropertyChanged(nameof(IsAccountNotDeleted));
             });
 
             ExportAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(ExportQRCode);
@@ -139,8 +140,8 @@ namespace Project2FA.UWP.ViewModels
             {
                 _dispatcherTimerDeletedModel.Stop();
                 TwoFADataService.TempDeletedTFAModel = null;
-                RaisePropertyChanged(nameof(IsAccountDeleted));
-                RaisePropertyChanged(nameof(IsAccountNotDeleted));
+                OnPropertyChanged(nameof(IsAccountDeleted));
+                OnPropertyChanged(nameof(IsAccountNotDeleted));
             }
         }
 
@@ -232,8 +233,8 @@ namespace Project2FA.UWP.ViewModels
                 TwoFADataService.TempDeletedTFAModel = model;
                 TwoFADataService.TempDeletedTFAModel.Seconds = 30;
                 TwoFADataService.Collection.Remove(model);
-                RaisePropertyChanged(nameof(IsAccountDeleted));
-                RaisePropertyChanged(nameof(IsAccountNotDeleted));
+                OnPropertyChanged(nameof(IsAccountDeleted));
+                OnPropertyChanged(nameof(IsAccountNotDeleted));
                 _dispatcherTimerDeletedModel.Start();
             }
         }
@@ -245,7 +246,6 @@ namespace Project2FA.UWP.ViewModels
         {
             if (TwoFADataService.CollectionAccessSemaphore.CurrentCount > 0)
             {
-                TwoFADataService.Collection.Clear();
                 await TwoFADataService.ReloadDatafile();
             }
             else

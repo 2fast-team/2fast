@@ -1,5 +1,4 @@
-﻿using Prism.Mvvm;
-using Project2FA.Repository.Models;
+﻿using Project2FA.Repository.Models;
 using System;
 using System.Collections.ObjectModel;
 using Prism.Ioc;
@@ -36,10 +35,12 @@ using System.Collections.Generic;
 using Project2FA.UWP.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System.Diagnostics;
+using Windows.Storage.Search;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.UWP.Services
 {
-    public class DataService : BindableBase, IDisposable
+    public class DataService : ObservableRecipient, IDisposable
     {
         public SemaphoreSlim CollectionAccessSemaphore { get; } = new SemaphoreSlim(1, 1);
         private bool _checkedTimeSynchronisation;
@@ -59,6 +60,9 @@ namespace Project2FA.UWP.Services
         private const long unixEpochTicks = 621355968000000000L;
         private const long ticksToSeconds = 10000000L;
         int _reloadCollectionCounter = 0;
+        private StorageFileQueryResult _queryResult; // to reload the datafile if the file is modified
+        private bool _datafileWritten;
+        private int _queryChangedCounter;
 
         /// <summary>
         /// Gets public singleton property.
@@ -256,8 +260,8 @@ namespace Project2FA.UWP.Services
                         if (deserializeCollection != null)
                         {
                             await CollectionAccessSemaphore.WaitAsync();
-                            Collection.AddRange(deserializeCollection);
-                            if (Collection.Count == 0)
+
+                            if (Collection.AddRange(deserializeCollection, true) == 0) // clear the current Items and the new
                             {
                                 // if no error has occured
                                 if (!_errorOccurred)
@@ -272,20 +276,45 @@ namespace Project2FA.UWP.Services
                                     EmptyAccountCollectionTipIsOpen = false;
                                 }
                             }
+                            
+
+                            if (_queryResult == null)
+                            {
+                                try
+                                {
+                                    // monitors the folder of the datafile for changes and triggers the reload. 
+                                    List<string> fileTypeFilter = new List<string>();
+                                    fileTypeFilter.Add(".2fa");
+                                    var options = new QueryOptions(CommonFileQuery.DefaultQuery, fileTypeFilter);
+                                    _queryResult = folder.CreateFileQueryWithOptions(options);
+                                    //subscribe on query's ContentsChanged event
+                                    _queryResult.ContentsChanged += Query_DatafileChanged;
+                                    // call the query to get later changed elements
+                                    //TODO add this feature
+                                    //var files = await _queryResult.GetFilesAsync();
+                                }
+                                catch (Exception exc)
+                                {
+                                    // TODO exception
+                                    throw;
+                                }
+                            }
                             CollectionAccessSemaphore.Release();
                         }
                     }
-                    catch (Exception)
+                    catch (Exception exc)
                     {
                         _errorOccurred = true;
                         await ErrorDialogs.ShowPasswordError();
                     }
+
                 }
                 // file not found case
                 else
                 {
                     if (dbDatafile.IsWebDAV)
                     {
+                        // TODO show not found error
                         //var webDAVTask = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
                         //await CheckLocalDatafile();
                     }
@@ -337,10 +366,29 @@ namespace Project2FA.UWP.Services
                 {
                     // TODO add dialog for error, the path of the file is changed
                 }
-
             }
             // writing status for the data file is activated again
             _initialization = false;
+        }
+
+        private async void Query_DatafileChanged(IStorageQueryResultBase sender, object args)
+        {
+            if (_queryChangedCounter != 0)
+            {
+                _initialization = true;
+                // reload the datafile only, when the file is modified outside the app
+                if (!_datafileWritten)
+                {
+                    // TODO display information for reloading
+                    // reload the datafile, if the file is changed
+                    await ReloadDatafile();
+                }
+                else
+                {
+                    _datafileWritten = false;
+                }
+            }
+            _queryChangedCounter++;
         }
 
         private void ErrorResolved()
@@ -479,6 +527,7 @@ namespace Project2FA.UWP.Services
 
                 }
             }
+            _datafileWritten = true;
             CollectionAccessSemaphore.Release();
         }
 

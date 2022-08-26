@@ -1,6 +1,6 @@
-﻿using DecaTec.WebDav;
+﻿using CommunityToolkit.Mvvm.Input;
+using DecaTec.WebDav;
 using Microsoft.Maui.Controls.PlatformConfiguration;
-using Prism.Commands;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.WebDAV;
 using Project2FA.MAUI.Helpers;
@@ -35,7 +35,7 @@ namespace Project2FA.MAUI.ViewModels
             SerializationService = serializationService;
             NewtonsoftJSONService = newtonsoftJSONService;
 
-            ConfirmErrorCommand = new DelegateCommand(() =>
+            ConfirmErrorCommand = new RelayCommand(() =>
             {
                 if (ShowError)
                 {
@@ -44,14 +44,14 @@ namespace Project2FA.MAUI.ViewModels
             });
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            UseDatafileCommand = new DelegateCommand(async () =>
+            UseDatafileCommand = new RelayCommand(async () =>
             {
                 await SetLocalFile(true); //change path is true
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            SetAndCheckLocalDatafileCommand = new DelegateCommand(async () =>
+            SetAndCheckLocalDatafileCommand = new RelayCommand(async () =>
             {
                 await SetAndCheckLocalDatafile();
             });
@@ -60,7 +60,7 @@ namespace Project2FA.MAUI.ViewModels
 
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            SetAndCheckWebDAVDatafileCommand = new DelegateCommand(async () =>
+            SetAndCheckWebDAVDatafileCommand = new RelayCommand(async () =>
             {
                 await SetAndCheckLocalDatafile(true);
             });

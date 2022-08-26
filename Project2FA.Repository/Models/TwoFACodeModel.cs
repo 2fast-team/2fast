@@ -3,7 +3,6 @@ using Newtonsoft.Json.Encryption;
 using OtpNet;
 using System.ComponentModel.DataAnnotations;
 using Project2FA.Core;
-using Prism.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.Repository.Models

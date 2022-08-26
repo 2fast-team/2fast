@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using Project2FA.Core.Utils;
 using Project2FA.MAUI.Services;
 using Microsoft.Maui.Dispatching;
-using Prism.Mvvm;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.MAUI.ViewModels
 {
-    public partial class AccountCodePageViewModel : BindableBase
-{
+    public partial class AccountCodePageViewModel : ObservableObject
+    {
         private IDispatcherTimer _dispatcherTOTPTimer;
         private IDispatcherTimer _dispatcherTimerDeletedModel;
         public INewtonsoftJSONService NewtonsoftJSONService { get; }
@@ -97,8 +97,8 @@ namespace Project2FA.MAUI.ViewModels
             {
                 _dispatcherTimerDeletedModel.Stop();
                 TwoFADataService.TempDeletedTFAModel = null;
-                RaisePropertyChanged(nameof(IsAccountDeleted));
-                RaisePropertyChanged(nameof(IsAccountNotDeleted));
+                OnPropertyChanged(nameof(IsAccountDeleted));
+                OnPropertyChanged(nameof(IsAccountNotDeleted));
             }
         }
 

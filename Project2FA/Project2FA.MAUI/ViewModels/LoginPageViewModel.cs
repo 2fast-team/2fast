@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using Prism.Mvvm;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Project2FA.Core.Services;
 using Project2FA.MAUI.Views;
 using System;
@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Project2FA.MAUI.ViewModels
 {
-    public partial class LoginPageViewModel : BindableBase
+    public partial class LoginPageViewModel : ObservableObject
     {
         private bool _windowsHelloIsUsable, _isLogout;
         private string _password;

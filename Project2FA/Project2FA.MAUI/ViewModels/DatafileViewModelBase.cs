@@ -1,4 +1,4 @@
-﻿using Prism.Mvvm;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core.Services;
 using Project2FA.MAUI.Services;
 using Project2FA.Repository.Models;
@@ -13,7 +13,7 @@ using WebDAVClient.Exceptions;
 
 namespace Project2FA.MAUI.ViewModels
 {
-    public class DatafileViewModelBase : BindableBase
+    public class DatafileViewModelBase : ObservableObject
     {
         private string _serverAddress;
         private string _username;

@@ -1,11 +1,6 @@
 ﻿using Project2FA.MAUI.Services;
 using Project2FA.MAUI.Services.Settings.Enums;
 using Project2FA.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Project2FA.MAUI.Helpers

@@ -1,5 +1,4 @@
 ﻿using OtpNet;
-using Prism.Mvvm;
 using Project2FA.Core.Utils;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
@@ -9,10 +8,11 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.MAUI.Services
 {
-    public class DataService : BindableBase, IDisposable
+    public class DataService : ObservableObject, IDisposable
     {
         public SemaphoreSlim CollectionAccessSemaphore { get; } = new SemaphoreSlim(1, 1);
         private bool _checkedTimeSynchronisation;

@@ -55,14 +55,15 @@ namespace Project2FA.UWP.Services
         public Stopwatch TOTPEventStopwatch { get; }
         public AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
+        private StorageFile _openDatefile;
         private bool _emptyAccountCollectionTipIsOpen;
         private TwoFACodeModel _tempDeletedTFAModel;
         private const long unixEpochTicks = 621355968000000000L;
         private const long ticksToSeconds = 10000000L;
         int _reloadCollectionCounter = 0;
-        private StorageFileQueryResult _queryResult; // to reload the datafile if the file is modified
-        private bool _datafileWritten;
-        private int _queryChangedCounter;
+        //private StorageFileQueryResult _queryResult; // to reload the datafile if the file is modified
+        //private bool _datafileWritten;
+        //private int _queryChangedCounter;
 
         /// <summary>
         /// Gets public singleton property.
@@ -278,27 +279,27 @@ namespace Project2FA.UWP.Services
                             }
                             
 
-                            if (_queryResult == null)
-                            {
-                                try
-                                {
-                                    // monitors the folder of the datafile for changes and triggers the reload. 
-                                    List<string> fileTypeFilter = new List<string>();
-                                    fileTypeFilter.Add(".2fa");
-                                    var options = new QueryOptions(CommonFileQuery.DefaultQuery, fileTypeFilter);
-                                    _queryResult = folder.CreateFileQueryWithOptions(options);
-                                    //subscribe on query's ContentsChanged event
-                                    _queryResult.ContentsChanged += Query_DatafileChanged;
-                                    // call the query to get later changed elements
-                                    //TODO add this feature
-                                    //var files = await _queryResult.GetFilesAsync();
-                                }
-                                catch (Exception exc)
-                                {
-                                    // TODO exception
-                                    throw;
-                                }
-                            }
+                            //if (_queryResult == null)
+                            //{
+                            //    try
+                            //    {
+                            //        // monitors the folder of the datafile for changes and triggers the reload. 
+                            //        List<string> fileTypeFilter = new List<string>();
+                            //        fileTypeFilter.Add(".2fa");
+                            //        var options = new QueryOptions(CommonFileQuery.DefaultQuery, fileTypeFilter);
+                            //        _queryResult = folder.CreateFileQueryWithOptions(options);
+                            //        //subscribe on query's ContentsChanged event
+                            //        _queryResult.ContentsChanged += Query_DatafileChanged;
+                            //        // call the query to get later changed elements
+                            //        //TODO add this feature
+                            //        //var files = await _queryResult.GetFilesAsync();
+                            //    }
+                            //    catch (Exception exc)
+                            //    {
+                            //        // TODO exception
+                            //        throw;
+                            //    }
+                            //}
                             CollectionAccessSemaphore.Release();
                         }
                     }
@@ -371,25 +372,25 @@ namespace Project2FA.UWP.Services
             _initialization = false;
         }
 
-        private async void Query_DatafileChanged(IStorageQueryResultBase sender, object args)
-        {
-            if (_queryChangedCounter != 0)
-            {
-                _initialization = true;
-                // reload the datafile only, when the file is modified outside the app
-                if (!_datafileWritten)
-                {
-                    // TODO display information for reloading
-                    // reload the datafile, if the file is changed
-                    await ReloadDatafile();
-                }
-                else
-                {
-                    _datafileWritten = false;
-                }
-            }
-            _queryChangedCounter++;
-        }
+        //private async void Query_DatafileChanged(IStorageQueryResultBase sender, object args)
+        //{
+        //    if (_queryChangedCounter != 0)
+        //    {
+        //        _initialization = true;
+        //        // reload the datafile only, when the file is modified outside the app
+        //        if (!_datafileWritten)
+        //        {
+        //            // TODO display information for reloading
+        //            // reload the datafile, if the file is changed
+        //            await ReloadDatafile();
+        //        }
+        //        else
+        //        {
+        //            _datafileWritten = false;
+        //        }
+        //    }
+        //    _queryChangedCounter++;
+        //}
 
         private void ErrorResolved()
         {
@@ -527,7 +528,6 @@ namespace Project2FA.UWP.Services
 
                 }
             }
-            _datafileWritten = true;
             CollectionAccessSemaphore.Release();
         }
 
@@ -736,6 +736,11 @@ namespace Project2FA.UWP.Services
         {
             get => _emptyAccountCollectionTipIsOpen;
             set => SetProperty(ref _emptyAccountCollectionTipIsOpen, value);
+        }
+        public StorageFile OpenDatefile 
+        { 
+            get => _openDatefile;
+            set => SetProperty(ref _openDatefile, value);
         }
 
         public void Dispose()

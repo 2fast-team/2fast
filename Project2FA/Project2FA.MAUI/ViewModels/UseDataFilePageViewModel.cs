@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using DecaTec.WebDav;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Project2FA.Core.Services.JSON;
-using Project2FA.Core.Services.WebDAV;
 using Project2FA.MAUI.Helpers;
 using Project2FA.MAUI.Services.JSON;
 using Project2FA.MAUI.Views;
@@ -26,6 +24,7 @@ namespace Project2FA.MAUI.ViewModels
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
         private FileResult _selectedFile;
+        private string _errorTxt;
 
         /// <summary>
         /// Constructor to start the datafile selector
@@ -108,7 +107,7 @@ namespace Project2FA.MAUI.ViewModels
             {
                 await CreateLocalFileDB(isWebDAV);
                 //App.ShellPageInstance.NavigationIsAllowed = true;
-                await Shell.Current.GoToAsync(nameof(AccountCodePage));
+                await Shell.Current.GoToAsync("//" + nameof(AccountCodePage));
                 //await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
             }
             else
@@ -206,29 +205,23 @@ namespace Project2FA.MAUI.ViewModels
                 //    datafileStr = reader.ReadToEnd();
 
                 //}
-                FileHelper fileHelper = new FileHelper();
-                fileHelper.StartAccessFile(storagePath);
-                string datafileStr = await File.ReadAllTextAsync(storagePath);
-                //read the iv for AES
-                DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
-                byte[] iv = datafile.IV;
-
                 try
                 {
+                    string datafileStr = await File.ReadAllTextAsync(storagePath);
+                    //read the iv for AES
+                    DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                    byte[] iv = datafile.IV;
                     DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
                         (Password, iv, datafileStr);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception exc)
                 {
                     ShowError = true;
+                    ErrorTxt = exc.Message;
                     Password = string.Empty;
 
                     return false;
-                }
-                finally
-                {
-                    fileHelper.StopAccessFile(storagePath);
                 }
             }
             else
@@ -245,5 +238,10 @@ namespace Project2FA.MAUI.ViewModels
         //}
 
         public bool ChangeDatafile { get; set; }
+        public string ErrorTxt 
+        { 
+            get => _errorTxt;
+            set => SetProperty(ref _errorTxt, value);
+        }
     }
 }

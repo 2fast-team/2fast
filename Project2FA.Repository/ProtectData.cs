@@ -13,7 +13,7 @@ namespace Project2FA.Core
                 if (s_aditionalEntropy is null)
                 {
                     s_aditionalEntropy = new byte[5];
-                    new RNGCryptoServiceProvider().GetBytes(s_aditionalEntropy);
+                    RandomNumberGenerator.Create().GetBytes(s_aditionalEntropy);
                 }
                 return s_aditionalEntropy;
             }

@@ -31,7 +31,7 @@ namespace Project2FA.UWP.Services.WebDAV
         private bool _isFolderEmpty;
         private string _selectionMode;
         private Task<List<ResourceInfoModel>> _listingTask;
-        private IResponseErrorHandlerService _responseErrorHandlerService { get; }
+        //private IResponseErrorHandlerService _responseErrorHandlerService { get; }
 
         public WebDAVDirectoryService()
         {
@@ -207,7 +207,7 @@ namespace Project2FA.UWP.Services.WebDAV
             }
             catch (ResponseError e)
             {
-                _responseErrorHandlerService.HandleException(e);
+                //_responseErrorHandlerService.HandleException(e);
             }
 
             if (list != null)
@@ -396,7 +396,7 @@ namespace Project2FA.UWP.Services.WebDAV
             {
                 if (e.StatusCode != "400") // ProtocolError
                 {
-                    _responseErrorHandlerService.HandleException(e);
+                    //_responseErrorHandlerService.HandleException(e);
                 }
             }
 
@@ -472,7 +472,7 @@ namespace Project2FA.UWP.Services.WebDAV
             {
                 if (e.StatusCode != "400") // ProtocolError
                 {
-                    _responseErrorHandlerService.HandleException(e);
+                    //_responseErrorHandlerService.HandleException(e);
                 }
             }
 
@@ -502,7 +502,7 @@ namespace Project2FA.UWP.Services.WebDAV
             {
                 if (e.StatusCode != "400") // ProtocolError
                 {
-                    _responseErrorHandlerService.HandleException(e);
+                    //_responseErrorHandlerService.HandleException(e);
                 }
             }
 

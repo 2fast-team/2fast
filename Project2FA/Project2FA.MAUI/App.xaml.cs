@@ -48,17 +48,51 @@ public partial class App : Application
             Repository = new DBProject2FARepository(dbOptions);
         }
 
+        if (!Shell.Current.CurrentState.Location.ToString().Contains(nameof(AccountCodePage)))
+        {
+            //check if a file is activated with the app
+            if (string.IsNullOrWhiteSpace(DataService.Instance.StorageFileUrl) && string.IsNullOrWhiteSpace(DataService.Instance.StorageFileContent))
+            {
+                if (await Repository.Password.GetAsync() is not null)
+                {
+                    //MainPage = new LoginPage(new ViewModels.LoginPageViewModel());
+                    await Shell.Current.GoToAsync("//" + nameof(LoginPage));
+                }
+                else
+                {
+                    //MainPage = new AppShell();
+                    await Shell.Current.GoToAsync("//" + nameof(WelcomePage));
+                }
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("//" + nameof(FileActivationPage));
+            }
+        }
+        else 
+        {
+            if (string.IsNullOrWhiteSpace(DataService.Instance.StorageFileUrl) && string.IsNullOrWhiteSpace(DataService.Instance.StorageFileContent))
+            {
+                await Shell.Current.GoToAsync("//" + nameof(FileActivationPage));
+            }
+            else if (await Repository.Password.GetAsync() is not null)
+            {
+                await Shell.Current.GoToAsync("//" + nameof(LoginPage));
+            }
 
-        if (await Repository.Password.GetAsync() is not null)
-        {
-            //MainPage = new LoginPage(new ViewModels.LoginPageViewModel());
-            await Shell.Current.GoToAsync("//" + nameof(LoginPage));
+            if (true)
+            {
+                //var existingPages = Shell.Current.Navigation.NavigationStack.ToList();
+                //foreach (var page in existingPages)
+                //{
+                //    Shell.Current.Navigation.RemovePage(page);
+                //}
+            }
         }
-        else
-        {
-            //MainPage = new AppShell();
-            await Shell.Current.GoToAsync("//" + nameof(WelcomePage));
-        }
+
+
+
+
 
         //remove the navigation stack
         //var existingPages = Shell.Current.Navigation.NavigationStack.ToList();

@@ -13,7 +13,7 @@ namespace Project2FA.MAUI.ViewModels
 {
     public partial class LoginPageViewModel : ObservableObject
     {
-        private bool _windowsHelloIsUsable, _isLogout;
+        private bool _biometricUsable, _isLogout;
         private string _password;
 
         public LoginPageViewModel()
@@ -50,7 +50,6 @@ namespace Project2FA.MAUI.ViewModels
             string pwdhash = CryptoService.CreateStringHash(password);
             if (dbHash.Hash == pwdhash)
             {
-                //App.Current.MainPage = App.AppShellInstance;
                 await Shell.Current.GoToAsync("//" + nameof(AccountCodePage));
                 return true;
             }
@@ -60,10 +59,10 @@ namespace Project2FA.MAUI.ViewModels
             }
         }
 
-        public bool WindowsHelloIsUsable
+        public bool BiometricUsable
         {
-            get => _windowsHelloIsUsable;
-            set => SetProperty(ref _windowsHelloIsUsable, value);
+            get => _biometricUsable;
+            set => SetProperty(ref _biometricUsable, value);
         }
         public string Password
         {

@@ -180,6 +180,7 @@
     <Compile Include="ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
+    <Compile Include="ViewModels\FileActivationPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\NewDataFilePageViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel.cs" />
@@ -212,6 +213,9 @@
     </Compile>
     <Compile Include="Views\ContentDialogs\DisplayQRCodeContentDialog.xaml.cs">
       <DependentUpon>DisplayQRCodeContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FileActivationPage.xaml.cs">
+      <DependentUpon>FileActivationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -2700,6 +2704,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentDialogs\DisplayQRCodeContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FileActivationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

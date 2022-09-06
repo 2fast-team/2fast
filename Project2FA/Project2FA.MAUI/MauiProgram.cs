@@ -1,4 +1,6 @@
-﻿using Project2FA.Core.Services.JSON;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Markup;
+using Project2FA.Core.Services.JSON;
 using Project2FA.MAUI.Services.JSON;
 using Project2FA.MAUI.ViewModels;
 using Project2FA.MAUI.Views;
@@ -12,7 +14,9 @@ public static class MauiProgram
         //https://github.com/microsoft/fluentui-system-icons/tree/master/fonts
         var builder = MauiApp.CreateBuilder();
 		builder
-			.UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkitMarkup()
+            .UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -36,9 +40,17 @@ public static class MauiProgram
         builder.Services.AddSingleton<UseDataFilePage>();
         builder.Services.AddSingleton<UseDataFilePageViewModel>();
 
+        builder.Services.AddSingleton<FileActivationPage>();
+        builder.Services.AddSingleton<FileActivationPageViewModel>();
+
         builder.Services.AddSingleton<INewtonsoftJSONService>(new NewtonsoftJSONService());
         builder.Services.AddSingleton<ISerializationService>(new SerializationService());
 
         return builder.Build();
 	}
+
+    public static async Task FileActivationIOS()
+    {
+        await Shell.Current.GoToAsync("//" + nameof(FileActivationPage));
+    }
 }

@@ -35,13 +35,13 @@
 		<dict>
 			<key>CFBundleTypeName</key>
 			<string>2FA File</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.jpwtechnology.2fa</string>
-			</array>
-			<key>CFBundleTypeIconFiles</key>
-			<array>
-				<string>Square44x44Logo.altform-lightunplated_targetsize-256</string>
 			</array>
 		</dict>
 	</array>
@@ -96,5 +96,6 @@
 	<array>
 		<string>group.Project2fa.MAUI</string>
 	</array>
+
 </dict>
 </plist>

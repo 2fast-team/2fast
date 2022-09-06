@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Project2FA.MAUI</ApplicationTitle>
+		<ApplicationTitle>2fast – Two Factor Authenticator Supporting TOTP</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.JPW.project2fa.maui</ApplicationId>
@@ -28,13 +28,27 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<ProvisioningType>manual</ProvisioningType>
+		<ProvisioningType>automatic</ProvisioningType>
 		<CodesignProvision>Development Profile</CodesignProvision>
 		<CodesignKey>iPhone Developer</CodesignKey>
+		<Platforms>AnyCPU;x64</Platforms>
 		
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
+		<CodesignEntitlements />
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-ios|AnyCPU'">
+		<CodesignEntitlements />
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+	  <CodesignKey>Apple Development: Created via API (CB3KSUCNGR)</CodesignKey>
+	  <CodesignProvision>VS: Project2FA.MAUI Development</CodesignProvision>
+	</PropertyGroup>
+
+	<!--<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
 	  <CodesignEntitlements />
 	  <MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
@@ -66,11 +80,11 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows10.0.19041.0|AnyCPU'">
 	  <MtouchLink>SdkOnly</MtouchLink>
-	</PropertyGroup>
+	</PropertyGroup>-->
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FF009BC1" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FF009BC1" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FF009BC1" BaseSize="128,128" />
@@ -78,7 +92,6 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-		<!--<MauiImage Include="..\Project2FA.UWP\Assets\AccountIcons\*.svg" />-->
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -88,12 +101,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Controls\RadialProgressBar\**" />
 	  <AndroidResource Remove="Helpers\FileSystemHelper\**" />
+	  <Compile Remove="Controls\RadialProgressBar\**" />
 	  <Compile Remove="Helpers\FileSystemHelper\**" />
+	  <EmbeddedResource Remove="Controls\RadialProgressBar\**" />
 	  <EmbeddedResource Remove="Helpers\FileSystemHelper\**" />
+	  <MauiCss Remove="Controls\RadialProgressBar\**" />
 	  <MauiCss Remove="Helpers\FileSystemHelper\**" />
+	  <MauiXaml Remove="Controls\RadialProgressBar\**" />
 	  <MauiXaml Remove="Helpers\FileSystemHelper\**" />
+	  <None Remove="Controls\RadialProgressBar\**" />
 	  <None Remove="Helpers\FileSystemHelper\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Platforms\Android\FileActiviationActivity.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -104,17 +127,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="1.2.0" />
+	  <PackageReference Include="CommunityToolkit.Maui.Markup" Version="1.0.1" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="CompiledBindings.MAUI" Version="1.0.11" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	  <PackageReference Include="Prism.Core" Version="8.1.97" />
-	  <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.0" />
+	  <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.1" />
 	  <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
-	  <ProjectReference Include="..\..\Project2FA.Repository\Project2FA.Repository.csproj" />
 	  <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
 	</ItemGroup>
 
@@ -123,6 +146,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BlankPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FileActivationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
@@ -134,6 +160,10 @@
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controls\" />
 	</ItemGroup>
 
 </Project>

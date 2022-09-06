@@ -1,15 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core.Services;
-using Project2FA.MAUI.Services;
 using Project2FA.Repository.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using WebDAVClient.Exceptions;
 
 namespace Project2FA.MAUI.ViewModels
 {

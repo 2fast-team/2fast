@@ -27,4 +27,9 @@
         ContentTemplate="{DataTemplate views:WelcomePage}"
         Route="WelcomePage" />
 
+    <ShellContent
+        Title="FileActivationPage"
+        ContentTemplate="{DataTemplate views:FileActivationPage}"
+        Route="FileActivationPage" />
+
 </Shell>

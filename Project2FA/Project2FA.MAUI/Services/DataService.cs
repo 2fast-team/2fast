@@ -24,6 +24,10 @@ namespace Project2FA.MAUI.Services
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
 
+        private string _storageFileUrl;
+        private string _storageFileContent;
+        private string _filePasswordHash;
+
         private static readonly ObservableCollection<TwoFACodeModel> twoFACodeModels = new ObservableCollection<TwoFACodeModel>();
 
         //public AdvancedCollectionView ACVCollection { get; }
@@ -31,7 +35,7 @@ namespace Project2FA.MAUI.Services
         private bool _emptyAccountCollectionTipIsOpen;
         private TwoFACodeModel _tempDeletedTFAModel;
         private const long unixEpochTicks = 621355968000000000L;
-private const long ticksToSeconds = 10000000L;
+        private const long ticksToSeconds = 10000000L;
         int _reloadCollectionCounter = 0;
 
         /// <summary>
@@ -206,7 +210,9 @@ private const long ticksToSeconds = 10000000L;
                         //}
 
                         //fileHelper.StartAccessFile(dbDatafile.Path);
-                        string datafileStr = await File.ReadAllTextAsync(dbDatafile.Path);
+                        string path = string.IsNullOrWhiteSpace(FilePasswordHash) ? dbDatafile.Path : StorageFileUrl;
+                        string hash = string.IsNullOrWhiteSpace(FilePasswordHash) ? dbHash.Hash : FilePasswordHash;
+                        string datafileStr = !string.IsNullOrWhiteSpace(path) ? await File.ReadAllTextAsync(path): StorageFileContent;
                         if (!string.IsNullOrEmpty(datafileStr))
                         {
                             // read the iv for AES
@@ -214,7 +220,7 @@ private const long ticksToSeconds = 10000000L;
                             byte[] iv = datafile.IV;
 
                             datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                                            (await SecureStorage.Default.GetAsync(dbHash.Hash),
+                                            (await SecureStorage.Default.GetAsync(hash),
                                             iv,
                                             datafileStr);
                             deserializeCollection = datafile.Collection;
@@ -222,8 +228,7 @@ private const long ticksToSeconds = 10000000L;
                         if (deserializeCollection != null)
                         {
                             await CollectionAccessSemaphore.WaitAsync();
-                            Collection.AddRange(deserializeCollection);
-                            if (Collection.Count == 0)
+                            if (Collection.AddRange(deserializeCollection,true) == 0)
                             {
                                 // if no error has occured
                                 if (!_errorOccurred)
@@ -396,7 +401,7 @@ private const long ticksToSeconds = 10000000L;
             byte[] iv = aes.IV;
 
             await CollectionAccessSemaphore.WaitAsync();
-            //DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
+            DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
             //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
 
             
@@ -503,6 +508,22 @@ private const long ticksToSeconds = 10000000L;
         {
             get => _emptyAccountCollectionTipIsOpen;
             set => SetProperty(ref _emptyAccountCollectionTipIsOpen, value);
+        }
+        public string StorageFileUrl 
+        { 
+            get => _storageFileUrl;
+            set => SetProperty(ref _storageFileUrl, value);
+        }
+
+        public string StorageFileContent
+        {
+            get => _storageFileContent;
+            set => SetProperty(ref _storageFileContent, value);
+        }
+        public string FilePasswordHash 
+        {
+            get => _filePasswordHash;
+            set => SetProperty(ref _filePasswordHash, value);
         }
 
         public void Dispose()

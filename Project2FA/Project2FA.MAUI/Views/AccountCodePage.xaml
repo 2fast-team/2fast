@@ -3,15 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project2FA.MAUI.Views.AccountCodePage"
              x:Name="Page"
+             xmlns:converters="clr-namespace:Project2FA.MAUI.Converters"
              xmlns:models="clr-namespace:Project2FA.Repository.Models;assembly=Project2FA.Repository"
              Shell.NavBarIsVisible="false"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Accounts">
+
+    <ContentPage.Resources>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+        <converters:AvatarBackgroundConverter x:Key="AvatarBackgroundConverter"/>
+    </ContentPage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}" Margin="0,4,0,0">
+        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}">
+            <CollectionView.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0,8,0,0" />
+                    <On Platform="Android, WinPhone, Windows" Value="0,4,0,0" />
+                </OnPlatform>
+            </CollectionView.Margin>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:TwoFACodeModel">
                     <Frame 
@@ -30,36 +44,50 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label 
+                            <toolkit:AvatarView 
+                                WidthRequest="68"
+                                HeightRequest="68"
+                                CornerRadius="32"
+                                Margin="0,0,8,0"
+                                BackgroundColor="{x:Binding IsFavourite, Mode=OneWay, Converter={StaticResource AvatarBackgroundConverter}}"
+                                Text="{x:Bind Label, Mode=OneWay}"
                                 Grid.Column="0"
+                                Grid.RowSpan="2">
+                                
+                            </toolkit:AvatarView>
+                            <Label 
+                                Grid.Column="1"
                                 Grid.Row="0" 
                                 Text="{x:Bind Label, Mode=OneWay}"
                                 FontAttributes="Bold"
                                 FontSize="20"
                                 Margin="0,0,0,4"/>
                             <Label 
-                                Grid.Column="0"
+                                Grid.Column="1"
                                 Grid.Row="1" 
                                 FontSize="20"
                                 Text="{x:Bind Issuer, Mode=OneWay}"
                                 Margin="0,4,0,4"/>
-                            <HorizontalStackLayout Grid.Column="0" Grid.Row="2">
-                                <Grid>
+                            <HorizontalStackLayout Grid.Column="0" Grid.Row="2" >
+                                <Grid Margin="0,4,0,4">
                                     <Label 
                                 FontSize="24"
                                 CharacterSpacing="1"
+                                        MinimumHeightRequest="20"
+                                IsVisible="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
                                 TextColor="{StaticResource Primary }"
-                                Text="{x:Bind TwoFACode, Mode=OneWay}"
-                                Margin="0,4,0,4"/>
+                                Text="{x:Bind TwoFACode, Mode=OneWay}"/>
                                     <Label
                                 Text="______"
                                 IsVisible="{x:Bind HideTOTPCode, Mode=OneWay}"
                                 FontSize="24"
-                                CharacterSpacing="3"
+                                        MinimumHeightRequest="20"
+                                CharacterSpacing="3"    
                                 TextColor="{StaticResource Primary}" />
                                 </Grid>
 
@@ -69,30 +97,26 @@
                                 BackgroundColor="Transparent"
                                 IsVisible="{Binding Source={x:Reference Page},Path=ViewModel.CodeVisibilityOptionEnabled}"
                                 CommandParameter="{Binding}"
-                                Command="{Binding Source={x:Reference Page},Path=ViewModel.HideOrShowTOTPCodeCommand,Mode=OneTime}">
-                                    <Button.ImageSource>
-                                        <FontImageSource 
-                                            Glyph="&#xE5F3;"
-                                             FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Android=FluentSystemIcons-Regular.ttf}"
-                                             Size="24" />
-                                    </Button.ImageSource>
+                                Command="{Binding Source={x:Reference Page},Path=ViewModel.HideOrShowTOTPCodeCommand,Mode=OneTime}"
+                                FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                Text="&#xE5F3;">
                                 </Button>
                                 <Button 
+                                    x:Name="BTN_CopyToClipboard"
                                     WidthRequest="68" 
                                     BackgroundColor="Transparent"
-                                    HeightRequest="36" >
-                                    <Button.ImageSource>
-                                        <FontImageSource 
-                                            Glyph="&#xF32A;"
-                                             FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Android=FluentSystemIcons-Regular.ttf}"
-                                             Size="24" />
-                                    </Button.ImageSource>
+                                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                    FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                    Text="&#xF32A;"
+                                    HeightRequest="36" 
+                                    Clicked="BTN_CopyToClipboard_Clicked">
                                 </Button>
                             </HorizontalStackLayout>
 
                             <Label 
                                 Grid.RowSpan="2" 
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Text ="{x:Bind Seconds, Mode=OneWay}"
                                 MaxLines="5"/>
 
@@ -104,29 +128,52 @@
         </CollectionView>
         <Grid Grid.Row="1" Background="{x:AppThemeBinding Dark={StaticResource CommandBarDarkBackground},Light={StaticResource CommandBarLightBackground}}">
             <HorizontalStackLayout HorizontalOptions="Center">
-                <Button WidthRequest="96" BackgroundColor="Transparent">
-                    <Button.ImageSource>
+                <Button 
+                    WidthRequest="96" 
+                    BackgroundColor="Transparent" 
+                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                    FontSize="{OnPlatform iOS=32, Android=28, Default=24}"
+                    Text="&#xEA7E;">
+                    <!--<Label
+                        Margin="0,10"
+                        FontAttributes="Bold"
+                        FontFamily="FontAwesomeSolid"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static icons:FontAwesomeIcons.Video}"
+                        VerticalOptions="FillAndExpand" />-->
+                    <!--<Button.ImageSource>
                         <FontImageSource 
                             Glyph="&#xEA7E;"
                             FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                             Size="{OnPlatform iOS=32, Android=28, Default=24}" />
-                    </Button.ImageSource>
+                    </Button.ImageSource>-->
                 </Button>
-                <Button WidthRequest="96" BackgroundColor="Transparent">
-                    <Button.ImageSource>
+                <Button 
+                    WidthRequest="96" 
+                    BackgroundColor="Transparent" 
+                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                    FontSize="{OnPlatform iOS=32, Android=28, Default=24}"
+                    Text="&#xE006;">
+                    <!--<Button.ImageSource>
                         <FontImageSource 
                             Glyph="&#xE006;"
                             FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                             Size="{OnPlatform iOS=32, Android=28, Default=24}" />
-                    </Button.ImageSource>
+                    </Button.ImageSource>-->
                 </Button>
-                <Button WidthRequest="96" BackgroundColor="Transparent">
-                    <Button.ImageSource>
+                <Button 
+                    WidthRequest="96" 
+                    BackgroundColor="Transparent" 
+                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                    FontSize="{OnPlatform iOS=32, Android=28, Default=24}"
+                    Text="&#xE758;">
+                    <!--<Button.ImageSource>
                         <FontImageSource 
                             Glyph="&#xE758;"
                             FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                             Size="{OnPlatform iOS=32, Android=28, Default=24}" />
-                    </Button.ImageSource>
+                    </Button.ImageSource>-->
                 </Button>
             </HorizontalStackLayout>
         </Grid>

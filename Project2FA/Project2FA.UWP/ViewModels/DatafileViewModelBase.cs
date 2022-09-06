@@ -1,5 +1,4 @@
-﻿using Prism.Mvvm;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Template10.Services.File;
@@ -17,10 +16,11 @@ using Project2FA.Core;
 using Project2FA.UWP.Views;
 using Prism.Services.Dialogs;
 using Windows.UI.Xaml.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class DatafileViewModelBase : BindableBase
+    public class DatafileViewModelBase : ObservableObject
     {
         private string _serverAddress;
         private string _username;
@@ -376,7 +376,7 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 SettingsService.Instance.UseExtendedHash = value;
-                RaisePropertyChanged(nameof(UseExtendedHash));
+                OnPropertyChanged(nameof(UseExtendedHash));
             }
         }
 

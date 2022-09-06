@@ -2,7 +2,6 @@
 using System;
 using System.Windows.Input;
 using Windows.UI.Xaml;
-using Prism.Mvvm;
 using Project2FA.UWP.Services;
 using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Views;
@@ -14,7 +13,6 @@ using Prism.Logging;
 using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Project2FA.UWP.Helpers;
-using Project2FA.Core;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -57,14 +55,14 @@ namespace Project2FA.UWP.ViewModels
             _dispatcherTimerDeletedModel.Tick += TimerDeletedModel;
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            AddAccountCommand = new DelegateCommand(async () =>
+            AddAccountCommand = new RelayCommand(async () =>
             {
                 if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
                 {
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
                 AddAccountContentDialog dialog = new AddAccountContentDialog();
-                dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
+                dialog.Style = App.Current.Resources[Core.Constants.ContentDialogStyleName] as Style;
                 await DialogService.ShowDialogAsync(dialog, new DialogParameters());
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -205,7 +203,7 @@ namespace Project2FA.UWP.ViewModels
         private async void EditAccountFromCollection(TwoFACodeModel model)
         {
             var dialog = new EditAccountContentDialog();
-            dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
+            dialog.Style = App.Current.Resources[Project2FA.Core.Constants.ContentDialogStyleName] as Style;
             var param = new DialogParameters();
             param.Add("model", model);
             await DialogService.ShowDialogAsync(dialog, param);
@@ -226,7 +224,7 @@ namespace Project2FA.UWP.ViewModels
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.Confirm;
             dialog.SecondaryButtonText = Resources.ButtonTextCancel;
-            dialog.SecondaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
+            dialog.SecondaryButtonStyle = App.Current.Resources[Project2FA.Core.Constants.AccentButtonStyleName] as Style;
             ContentDialogResult result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.Primary)
             {

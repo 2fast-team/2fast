@@ -1,15 +1,6 @@
-﻿using OtpNet;
-using Project2FA.Core.Services.JSON;
+﻿using Project2FA.Core.Services.JSON;
 using Project2FA.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Project2FA.Core.Utils;
 using Project2FA.MAUI.Services;
-using Microsoft.Maui.Dispatching;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -38,20 +29,27 @@ namespace Project2FA.MAUI.ViewModels
             _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
             _dispatcherTimerDeletedModel.Tick += TimerDeletedModel;
             CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
-            StartTOTPLogic();
         }
 
-        private async Task StartTOTPLogic()
+        public async Task StartTOTPLogic(bool reloadDatafile = false)
         {
-            if (DataService.Instance.Collection.Count != 0)
+            if (reloadDatafile)
             {
-                //only reset the time and calc the new totp
-                await DataService.Instance.ResetCollection();
+                await DataService.Instance.ReloadDatafile();
             }
             else
             {
-                await DataService.Instance.StartService();
+                if (DataService.Instance.Collection.Count != 0)
+                {
+                    //only reset the time and calc the new totp
+                    await DataService.Instance.ResetCollection();
+                }
+                else
+                {
+                    await DataService.Instance.StartService();
+                }
             }
+
 
             _dispatcherTOTPTimer.Start(); // the event for the set of seconds and calculating the totp code
         }
@@ -61,7 +59,7 @@ namespace Project2FA.MAUI.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void TOTPTimer(object sender, object e)
+        public async void TOTPTimer(object sender, object e)
         {
             await TOTPTimerTask();
         }
@@ -123,6 +121,8 @@ namespace Project2FA.MAUI.ViewModels
             get => _codeVisibilityOptionEnabled;
             private set => SetProperty(ref _codeVisibilityOptionEnabled, value);
         }
+        public IDispatcherTimer DispatcherTOTPTimer { get => _dispatcherTOTPTimer; }
+        public IDispatcherTimer DispatcherTimerDeletedModel { get => _dispatcherTimerDeletedModel;}
 
 
         ///// <summary>

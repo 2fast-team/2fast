@@ -48,14 +48,13 @@
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="4.4.13" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.4.20" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
-    <ProjectReference Include="..\..\Project2FA.Uno.Core\Project2FA.Uno.Core.csproj" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" Condition="Exists('..\Project2FA.Shared\Project2FA.Shared.projitems')" />
 </Project>

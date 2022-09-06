@@ -10,8 +10,8 @@ namespace Project2FA.Core.Services.Parser
         /// Parse the QR-Code string into a list of KeyValuePair
         /// </summary>
         /// <param name="qrCodeStr"></param>
-        /// <returns>List<KeyValuePair<string,string></returns>
-        public List<KeyValuePair<string,string>> ParseQRCodeStr(string qrCodeStr)
+        /// <returns>list of keyvaluepair strings</returns>
+        public List<KeyValuePair<string, string>> ParseQRCodeStr(string qrCodeStr)
         {
             List<KeyValuePair<string, string>> qrParams = new List<KeyValuePair<string, string>>();
 

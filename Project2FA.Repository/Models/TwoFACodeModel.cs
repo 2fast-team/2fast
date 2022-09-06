@@ -33,14 +33,6 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _issuer, value);
         }
 
-        private string _imageUrl;
-        [Encrypt]
-        public string ImageUrl
-        {
-            get => _imageUrl;
-            set => SetProperty(ref _imageUrl, value);
-        }
-
         private bool _isFavourite;
         public bool IsFavourite 
         { 

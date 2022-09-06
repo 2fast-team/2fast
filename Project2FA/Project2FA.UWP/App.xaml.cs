@@ -14,6 +14,7 @@ using Project2FA.UWP.Services;
 using Project2FA.UWP.ViewModels;
 using Project2FA.UWP.Views;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Template10.Services.Serialization;
 using Template10.Services.Settings;
@@ -142,18 +143,35 @@ namespace Project2FA.UWP
                     //Window.Current.Content = new SplashPage(e.SplashScreen);
                 }
 
-                if (!(await Repository.Password.GetAsync() is null))
+                if (args.Arguments is FileActivatedEventArgs fileActivated)
                 {
-                    LoginPage loginPage = Container.Resolve<LoginPage>();
-                    Window.Current.Content = loginPage;
+                    var file = fileActivated.Files.FirstOrDefault();
+                    DataService.Instance.OpenDatefile = (StorageFile)file;
                 }
                 else
                 {
-                    navigationPath = "/WelcomePage";
-                    await ShellPageInstance.NavigationService.NavigateAsync(navigationPath);
-                    Window.Current.Content = ShellPageInstance;
+                    if (!(await Repository.Password.GetAsync() is null))
+                    {
+                        LoginPage loginPage = Container.Resolve<LoginPage>();
+                        Window.Current.Content = loginPage;
+                    }
+                    else
+                    {
+                        navigationPath = "/WelcomePage";
+                        await ShellPageInstance.NavigationService.NavigateAsync(navigationPath);
+                        Window.Current.Content = ShellPageInstance;
+                    }
                 }
             }
+            else
+            {
+                if (args.Arguments is FileActivatedEventArgs fileActivated)
+                {
+                    var file = fileActivated.Files.FirstOrDefault();
+                    DataService.Instance.OpenDatefile = (StorageFile)file;
+                }
+            }
+
             Window.Current.Activate();
         }
 

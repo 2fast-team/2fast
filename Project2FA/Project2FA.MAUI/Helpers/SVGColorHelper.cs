@@ -11,10 +11,10 @@ namespace Project2FA.MAUI.Helpers
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
-                string path = string.Format(FileSystem.Current.AppDataDirectory + "/Assets/AccountIcons/{0}.svg", name);
-                if (await FileSystem.Current.AppPackageFileExistsAsync(path))
+                string path = string.Format(Microsoft.Maui.Storage.FileSystem.Current.AppDataDirectory + "/Assets/AccountIcons/{0}.svg", name);
+                if (await Microsoft.Maui.Storage.FileSystem.Current.AppPackageFileExistsAsync(path))
                 {
-                    using (Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync(path))
+                    using (Stream fileStream = await Microsoft.Maui.Storage.FileSystem.Current.OpenAppPackageFileAsync(path))
                     {
                         XDocument xmlDocument = XDocument.Load(fileStream);
                         XElement pathAttr = xmlDocument.Descendants().SingleOrDefault(p => p.Name.LocalName == "path");
@@ -66,10 +66,10 @@ namespace Project2FA.MAUI.Helpers
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
-                string path = string.Format(FileSystem.Current.AppDataDirectory + "/Assets/AccountIcons/{0}.svg", name);
-                if (await FileSystem.Current.AppPackageFileExistsAsync(path))
+                string path = string.Format(Microsoft.Maui.Storage.FileSystem.Current.AppDataDirectory + "/Assets/AccountIcons/{0}.svg", name);
+                if (await Microsoft.Maui.Storage.FileSystem.Current.AppPackageFileExistsAsync(path))
                 {
-                    using (Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync(path))
+                    using (Stream fileStream = await Microsoft.Maui.Storage.FileSystem.Current.OpenAppPackageFileAsync(path))
                     {
                         XDocument xmlDocument = XDocument.Load(fileStream);
                         XElement pathAttr = xmlDocument.Descendants().SingleOrDefault(p => p.Name.LocalName == "path");

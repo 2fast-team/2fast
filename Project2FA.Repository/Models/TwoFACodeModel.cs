@@ -49,7 +49,7 @@ namespace Project2FA.Repository.Models
         [JsonIgnore]
         public string IsFavouriteText
         {
-            get => _isFavourite ? "AAA"+ Label : Label;
+            get => _isFavourite ? "1#"+ Label : Label;
         }
 
         //default seconds for renew the 2fa code

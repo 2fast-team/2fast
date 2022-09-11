@@ -154,7 +154,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\WebDAV\WebDAVDirectoryService.cs" />
-    <Compile Include="Services\WebDAV\ResponseErrorHandlerService.cs" />
     <Compile Include="Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="Strings\en\Resources.generated.cs">
       <AutoGen>True</AutoGen>
@@ -2757,27 +2756,27 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj">
-      <Project>{5a483a88-a340-40c6-a2b6-956aef81c854}</Project>
+      <Project>{8a7a480b-01f2-4693-b1b7-13e5bed8bbf6}</Project>
       <Name>Project2FA.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Project2FA.Repository\Project2FA.Repository.csproj">
-      <Project>{91dc4dee-f0b4-49d9-b1d8-cf8009c19b82}</Project>
+      <Project>{28233ceb-52b0-4e65-9a39-59b387e2768d}</Project>
       <Name>Project2FA.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Template10\Source\Prism.Unity.Windows\Prism.Unity.Windows.csproj">
-      <Project>{cc3018eb-6d2b-4306-94a1-3a7cba7a8f18}</Project>
+      <Project>{189019a6-fa1e-41c9-84f7-4849448953eb}</Project>
       <Name>Prism.Unity.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Template10\Source\Prism.Windows\Prism.Windows.csproj">
-      <Project>{47DF18D2-B674-4A9D-B7D9-3FA6C76F11F2}</Project>
+      <Project>{8d3d7e9c-1ea4-4580-b60e-c656a209e32d}</Project>
       <Name>Prism.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Template10\Source\Template10.Extras\Template10.Extras.csproj">
-      <Project>{9bb18d4b-bcdd-43c9-a7c2-416d13dd39a6}</Project>
+      <Project>{e2bd00dd-eee5-4709-b241-4d2a9b21b526}</Project>
       <Name>Template10.Extras</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj">
-      <Project>{3bb48d5f-b0ff-48bf-a4cc-e40effe478ed}</Project>
+      <Project>{ad7dca2a-7366-4038-9d87-eff5a2f38e97}</Project>
       <Name>WebDAVClientPortable</Name>
     </ProjectReference>
   </ItemGroup>

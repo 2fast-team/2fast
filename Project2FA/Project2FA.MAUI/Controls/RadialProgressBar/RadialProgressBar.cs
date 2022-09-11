@@ -1,7 +1,5 @@
 ﻿using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Controls.Shapes;
-using Project2FA.MAUI.Controls.RadialProgressBar.RadialProgressBar;
-using Project2FA.MAUI.Controls.RadialProgressBar.RadialProgressBar.RadialProgressBar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project2FA.MAUI.Controls.RadialProgressBar
+namespace Project2FA.MAUI.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RadialProgressBar : ProgressBar

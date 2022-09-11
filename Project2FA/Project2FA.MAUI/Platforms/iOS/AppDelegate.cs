@@ -44,6 +44,12 @@ public class AppDelegate : MauiUIApplicationDelegate
         //return base.OpenUrl(app, url, options);
     }
 
+    //public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    //{
+
+    //    return base.FinishedLaunching(application, launchOptions);
+    //}
+
 
     public override void WillTerminate(UIApplication application)
     {

@@ -18,6 +18,13 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
+    <Color x:Key="ControlAltFillDarkColorQuarternary">#12FFFFFF</Color>
+    <Color x:Key="ControlAltFillLightColorQuarternary">#18000000</Color>
+
+    <Color x:Key="SystemBaseMediumDarkColor">#99FFFFFF</Color>
+    <Color x:Key="SystemBaseMediumLightColor">#99000000</Color>
+    
+    
     <Color x:Key="SystemChromeMediumDarkColor">#FF2B2B2B</Color>
     <Color x:Key="SystemChromeMediumLightColor">#FFF2F2F2</Color>
 

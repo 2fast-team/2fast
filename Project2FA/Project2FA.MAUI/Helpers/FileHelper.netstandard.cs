@@ -13,11 +13,12 @@ namespace Project2FA.MAUI.Helpers
     {
         internal virtual bool PlatformStartAccessFile(string path)
         {
+
 #if IOS
             try
             {
-                NSString urlString = new NSString(path);
-                NSUrl filePath = NSUrl.FromString(urlString);
+                NSString urlString = new NSString(string.Format("file://{0}",path));
+                NSUrl filePath = NSUrl.CreateFileUrl(path, false, null); //new NSUrl(urlString);
                 return filePath.StartAccessingSecurityScopedResource();
             }
             catch (Exception exc)

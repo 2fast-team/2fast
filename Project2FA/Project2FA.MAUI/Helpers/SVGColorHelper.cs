@@ -11,7 +11,8 @@ namespace Project2FA.MAUI.Helpers
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
-                string path = string.Format(Microsoft.Maui.Storage.FileSystem.Current.AppDataDirectory + "/Assets/AccountIcons/{0}.svg", name);
+                string path = string.Format("AccountIcons/{0}.svg", name);
+                //string path = string.Format(Microsoft.Maui.Storage.FileSystem.Current.AppDataDirectory + "/AccountIcons/{0}.svg", name);
                 if (await Microsoft.Maui.Storage.FileSystem.Current.AppPackageFileExistsAsync(path))
                 {
                     using (Stream fileStream = await Microsoft.Maui.Storage.FileSystem.Current.OpenAppPackageFileAsync(path))
@@ -66,7 +67,7 @@ namespace Project2FA.MAUI.Helpers
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
-                string path = string.Format(Microsoft.Maui.Storage.FileSystem.Current.AppDataDirectory + "/Assets/AccountIcons/{0}.svg", name);
+                string path = string.Format("AccountIcons/{0}.svg", name);
                 if (await Microsoft.Maui.Storage.FileSystem.Current.AppPackageFileExistsAsync(path))
                 {
                     using (Stream fileStream = await Microsoft.Maui.Storage.FileSystem.Current.OpenAppPackageFileAsync(path))

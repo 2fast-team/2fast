@@ -53,8 +53,5 @@
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
-  </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" Condition="Exists('..\Project2FA.Shared\Project2FA.Shared.projitems')" />
 </Project>

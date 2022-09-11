@@ -24,7 +24,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.DryIoc.Uno.WinUI" Version="8.1.97" />
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.1" />
+    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.2" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
@@ -33,10 +33,6 @@
     <PackageReference Include="Uno.WinUI.Lottie" Version="4.4.20" />
     <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="4.4.20" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
-    <ProjectReference Include="..\..\Project2FA.Repository\Project2FA.Repository.csproj" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
 </Project>

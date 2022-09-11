@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Markup;
 using Project2FA.Core.Services.JSON;
+using Project2FA.MAUI.Controls;
 using Project2FA.MAUI.Services.JSON;
 using Project2FA.MAUI.ViewModels;
 using Project2FA.MAUI.Views;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace Project2FA.MAUI;
 
@@ -17,7 +19,8 @@ public static class MauiProgram
             .UseMauiCommunityToolkit()
             .UseMauiCommunityToolkitMarkup()
             .UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
+            .UseSkiaSharp()
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
@@ -45,6 +48,19 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<INewtonsoftJSONService>(new NewtonsoftJSONService());
         builder.Services.AddSingleton<ISerializationService>(new SerializationService());
+
+
+        builder.ConfigureMauiHandlers(collection =>
+        {
+#if __ANDROID__
+            collection.AddHandler(typeof(SvgImageSource), typeof(Platforms.Android.SvgImageSourceHandler));
+            Project2FA.MAUI.Platforms.Android.SvgImage.Init(Platform.AppContext);
+#endif
+#if __IOS__
+            collection.AddHandler(typeof(SvgImageSource), typeof(Project2FA.MAUI.Platforms.iOS.SvgImageSourceHandler));
+            Project2FA.MAUI.Platforms.iOS.SvgImage.Init();
+#endif
+        });
 
         return builder.Build();
 	}

@@ -101,16 +101,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Helpers\AdvancedCollectionView\**" />
 	  <AndroidResource Remove="Controls\RadialProgressBar\**" />
 	  <AndroidResource Remove="Helpers\FileSystemHelper\**" />
+	  <Compile Remove="Helpers\AdvancedCollectionView\**" />
 	  <Compile Remove="Controls\RadialProgressBar\**" />
 	  <Compile Remove="Helpers\FileSystemHelper\**" />
+	  <EmbeddedResource Remove="Helpers\AdvancedCollectionView\**" />
 	  <EmbeddedResource Remove="Controls\RadialProgressBar\**" />
 	  <EmbeddedResource Remove="Helpers\FileSystemHelper\**" />
+	  <MauiCss Remove="Helpers\AdvancedCollectionView\**" />
 	  <MauiCss Remove="Controls\RadialProgressBar\**" />
 	  <MauiCss Remove="Helpers\FileSystemHelper\**" />
+	  <MauiXaml Remove="Helpers\AdvancedCollectionView\**" />
 	  <MauiXaml Remove="Controls\RadialProgressBar\**" />
 	  <MauiXaml Remove="Helpers\FileSystemHelper\**" />
+	  <None Remove="Helpers\AdvancedCollectionView\**" />
 	  <None Remove="Controls\RadialProgressBar\**" />
 	  <None Remove="Helpers\FileSystemHelper\**" />
 	</ItemGroup>
@@ -127,18 +133,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Include="Helpers\AdvancedCollectionView\SortDescription.cs" />
+	  <Compile Include="Helpers\AdvancedCollectionView\SortDirection.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.2.0" />
 	  <PackageReference Include="CommunityToolkit.Maui.Markup" Version="1.0.1" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="CompiledBindings.MAUI" Version="1.0.11" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="SkiaSharp" Version="2.88.2" />
+	  <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.2" />
 	  <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.1" />
+	  <PackageReference Include="Svg.Skia" Version="0.5.16" />
 	  <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="6.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
-	  <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -163,7 +172,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controls\" />
+	  <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controls\RadialProgressBar\" />
 	</ItemGroup>
 
 </Project>

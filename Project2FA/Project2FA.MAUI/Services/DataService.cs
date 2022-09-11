@@ -137,6 +137,7 @@ namespace Project2FA.MAUI.Services
                 default:
                     break;
             }
+            OnPropertyChanged(nameof(CollectionSort));
         }
 
         /// <summary>
@@ -192,8 +193,15 @@ namespace Project2FA.MAUI.Services
 
                 //    throw;
                 //}
-                
-                if(true) //if (File.Exists(dbDatafile.Path))
+                if (!string.IsNullOrWhiteSpace(StorageFileUrl))
+                {
+                    FileHelper fileHelper = new FileHelper();
+                    var result = fileHelper.StartAccessFile(dbDatafile.Path);
+                }
+
+
+
+                if (true) //if (File.Exists(dbDatafile.Path))
                 {
                     DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
                     //FileHelper fileHelper = new FileHelper();
@@ -537,6 +545,15 @@ namespace Project2FA.MAUI.Services
             if (disposing)
             {
                 CollectionAccessSemaphore?.Dispose();
+            }
+        }
+
+        public ObservableCollection<TwoFACodeModel> CollectionSort
+        {
+            get
+            {
+                var collection = Collection.OrderBy(x => x.IsFavouriteText);
+                return new ObservableCollection<TwoFACodeModel>(collection);
             }
         }
     }

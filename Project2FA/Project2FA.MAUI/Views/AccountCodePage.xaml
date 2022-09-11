@@ -4,6 +4,7 @@
              x:Class="Project2FA.MAUI.Views.AccountCodePage"
              x:Name="Page"
              xmlns:converters="clr-namespace:Project2FA.MAUI.Converters"
+             xmlns:controls="clr-namespace:Project2FA.MAUI.Controls"
              xmlns:models="clr-namespace:Project2FA.Repository.Models;assembly=Project2FA.Repository"
              Shell.NavBarIsVisible="false"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -11,7 +12,9 @@
 
     <ContentPage.Resources>
         <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
-        <converters:AvatarBackgroundConverter x:Key="AvatarBackgroundConverter"/>
+        <converters:FavouriteIconConverter x:Key="FavouriteIconConverter"/>
+        <converters:NameInitialsConverter x:Key="NameInitialsConverter"/>
+        <converters:SVGImageConverter x:Key="SVGImageConverter"/>
     </ContentPage.Resources>
 
     <Grid>
@@ -19,7 +22,7 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.Collection, Mode=OneWay}">
+        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.CollectionSort, Mode=OneWay}">
             <CollectionView.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="iOS" Value="0,8,0,0" />
@@ -39,25 +42,45 @@
                         </Frame.Shadow>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="60"/>
+                             
                             </Grid.ColumnDefinitions>
+
+                            <!--ImageSource="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"-->
+
+                            <toolkit:AvatarView
+                                WidthRequest="68"
+                                IsVisible="{x:Bind IsFavourite,Mode=OneWay}"
+                                HeightRequest="68"
+                                CornerRadius="40"
+                                Margin="0,0,8,0"
+                                Style="{StaticResource AvatarViewAccent}"
+                                
+                                Text="{x:Bind Label, Mode=OneWay, Converter={StaticResource NameInitialsConverter}}"
+                                Grid.Column="0"
+                                Grid.RowSpan="2">
+                            </toolkit:AvatarView>
                             <toolkit:AvatarView 
                                 WidthRequest="68"
                                 HeightRequest="68"
-                                CornerRadius="32"
+                                CornerRadius="40"
                                 Margin="0,0,8,0"
-                                BackgroundColor="{x:Binding IsFavourite, Mode=OneWay, Converter={StaticResource AvatarBackgroundConverter}}"
-                                Text="{x:Bind Label, Mode=OneWay}"
+                                Style="{StaticResource AvatarViewImagesLarge}"
+                                IsVisible="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
+                                
+                                Text="{x:Bind Label, Mode=OneWay, Converter={StaticResource NameInitialsConverter}}"
                                 Grid.Column="0"
                                 Grid.RowSpan="2">
+                                <!--<toolkit:AvatarView.ImageSource>
+                                    <StreamImageSource Stream="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"/>
+                                </toolkit:AvatarView.ImageSource>-->
                                 
                             </toolkit:AvatarView>
                             <Label 
@@ -69,11 +92,12 @@
                                 Margin="0,0,0,4"/>
                             <Label 
                                 Grid.Column="1"
+                                Grid.ColumnSpan="2"
                                 Grid.Row="1" 
                                 FontSize="20"
                                 Text="{x:Bind Issuer, Mode=OneWay}"
                                 Margin="0,4,0,4"/>
-                            <HorizontalStackLayout Grid.Column="0" Grid.Row="2" >
+                            <HorizontalStackLayout Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" >
                                 <Grid Margin="0,4,0,4">
                                     <Label 
                                 FontSize="24"
@@ -112,6 +136,15 @@
                                     HeightRequest="36" 
                                     Clicked="BTN_CopyToClipboard_Clicked">
                                 </Button>
+                                <Button
+                                    WidthRequest="68" 
+                                    BackgroundColor="Transparent"
+                                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                    FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                    Text="&#xEB9F;"
+                                    HeightRequest="36" 
+                                    />
+                                <!--Text="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteIconConverter}}"-->
                             </HorizontalStackLayout>
 
                             <Label 
@@ -127,6 +160,21 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Grid Grid.Row="1" Background="{x:AppThemeBinding Dark={StaticResource CommandBarDarkBackground},Light={StaticResource CommandBarLightBackground}}">
+            <!--<toolkit:AvatarView
+                                WidthRequest="68"
+                                
+                                HeightRequest="68"
+                                CornerRadius="40"
+                                Margin="0,0,8,0"
+                                Style="{StaticResource AvatarViewAccent}"
+                                
+                                Text="ABC"
+                                Grid.Column="0"
+                                Grid.RowSpan="2">
+                <toolkit:AvatarView.ImageSource>
+                    <controls:SvgImageSource Source="AccountIcons/google.svg" Width="68" Height="68"/>
+                </toolkit:AvatarView.ImageSource>
+            </toolkit:AvatarView>-->
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Button 
                     WidthRequest="96" 
@@ -167,7 +215,7 @@
                     BackgroundColor="Transparent" 
                     FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                     FontSize="{OnPlatform iOS=32, Android=28, Default=24}"
-                    Text="&#xE758;">
+                    Text="&#xF6A8;">
                     <!--<Button.ImageSource>
                         <FontImageSource 
                             Glyph="&#xE758;"

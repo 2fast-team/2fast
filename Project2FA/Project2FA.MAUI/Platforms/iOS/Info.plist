@@ -48,6 +48,8 @@
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.jpwtechnology.2fa</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
@@ -66,6 +68,8 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.jpwtechnology.2fa</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
@@ -96,6 +100,7 @@
 	<array>
 		<string>group.Project2fa.MAUI</string>
 	</array>
-
+	<key>NSFaceIDUsageDescription</key>
+	<string>Use Face ID/Touch ID instead of a password to access your account</string>
 </dict>
 </plist>

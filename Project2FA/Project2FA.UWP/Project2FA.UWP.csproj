@@ -132,6 +132,7 @@
     <Compile Include="Controls\CardGroupControl\CardGroupControl.cs" />
     <Compile Include="Controls\CardGroupControl\CardGroupAutomationPeer.cs" />
     <Compile Include="Controls\TitleBar.cs" />
+    <Compile Include="Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="Utils\CustomRichTextButtonActions.cs" />
     <Compile Include="Utils\CustomRichTextFormatter.cs" />
     <Compile Include="Converters\BoolToCommandBarVisibilityConverter.cs" />
@@ -175,7 +176,6 @@
     <Compile Include="ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\AccountCodePageViewModel.cs" />
     <Compile Include="ViewModels\DatafileViewModelBase.cs" />
-    <Compile Include="ViewModels\ContentDialogs\DeleteDatafileContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />

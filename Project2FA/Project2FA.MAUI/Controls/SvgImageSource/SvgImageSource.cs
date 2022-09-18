@@ -141,15 +141,7 @@ namespace Project2FA.MAUI.Controls
         {
             if (typeHavingResource == null)
             {
-#if NETSTANDARD2_0
                 AssemblyCache = Assembly.GetCallingAssembly();
-#else
-                MethodInfo callingAssemblyMethod = typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly");
-                if (callingAssemblyMethod != null)
-                {
-                    AssemblyCache = (Assembly)callingAssemblyMethod.Invoke(null, new object[0]);
-                }
-#endif
             }
             else
             {
@@ -165,54 +157,11 @@ namespace Project2FA.MAUI.Controls
         /// <param name="width">Width.</param>
         /// <param name="height">Height.</param>
         /// <param name="color">Color.</param>
-        [Obsolete("FromSvg is obsolete. Please use FromSvgResource instead.")]
-        public static ImageSource FromSvg(string resource, double width, double height, Color color = default)
-        {
-#if NETSTANDARD2_0
-            AssemblyCache = AssemblyCache ?? Assembly.GetCallingAssembly();
-#endif
-            if (AssemblyCache == null)
-            {
-                return null;
-            }
-
-            return new SvgImageSource { StreamFunc = GetResourceStreamFunc(resource), Source = resource, Width = width, Height = height, Color = color };
-        }
-
-        /// <summary>
-        /// Froms the svg.
-        /// </summary>
-        /// <returns>The svg.</returns>
-        /// <param name="resource">Resource.</param>
-        /// <param name="color">Color.</param>
-        [Obsolete("FromSvg is obsolete. Please use FromSvgResource instead.")]
-        public static ImageSource FromSvg(string resource, Color color = default)
-        {
-#if NETSTANDARD2_0
-            AssemblyCache = AssemblyCache ?? Assembly.GetCallingAssembly();
-#endif
-            if (AssemblyCache == null)
-            {
-                return null;
-            }
-
-            return new SvgImageSource { StreamFunc = GetResourceStreamFunc(resource), Source = resource, Color = color };
-        }
-
-
-        /// <summary>
-        /// Froms the svg.
-        /// </summary>
-        /// <returns>The svg.</returns>
-        /// <param name="resource">Resource.</param>
-        /// <param name="width">Width.</param>
-        /// <param name="height">Height.</param>
-        /// <param name="color">Color.</param>
         public static ImageSource FromSvgResource(string resource, double width, double height, Color color = default)
         {
-#if NETSTANDARD2_0
+
             AssemblyCache = AssemblyCache ?? Assembly.GetCallingAssembly();
-#endif
+
             if (AssemblyCache == null)
             {
                 return null;
@@ -253,6 +202,11 @@ namespace Project2FA.MAUI.Controls
             return new SvgImageSource { StreamFunc = GethttpStreamFunc(uri), Source = uri, Width = width, Height = height, Color = color };
         }
 
+        //public Task<ImageSource> SetSourceAsync(Stream contentStream, double width, double height, Color color)
+        //{
+        //    return new SvgImageSource { StreamFunc = token => GetResourceStreamFunc(contentStream), Width = width, Height = height, Color = color };
+        //}
+
         /// <summary>
         /// Froms the svg stream.
         /// </summary>
@@ -277,6 +231,11 @@ namespace Project2FA.MAUI.Controls
             }
             return token => Task.Run(() => AssemblyCache.GetManifestResourceStream(realResource), token);
 
+        }
+
+        static Func<CancellationToken, Task<Stream>> GetResourceStreamFunc(Stream contentStream)
+        {
+            return token => Task.Run(async() => await SvgUtility.CreateImageTask(contentStream, 68, 68, Colors.Transparent), token);
         }
 
         static Func<CancellationToken, Task<Stream>> GethttpStreamFunc(string uri)
@@ -347,7 +306,7 @@ namespace Project2FA.MAUI.Controls
                         //OnLoadingCompleted(false);
                         return null;
                     }
-                    imageStream = await SvgUtility.CreateImage(stream, Width, Height, Color);
+                    imageStream = await SvgUtility.CreateImageTask(stream, Width, Height, Color);
                 }
 
                 //OnLoadingCompleted(false);

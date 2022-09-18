@@ -13,11 +13,17 @@
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:wctmedia="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:Project2FA.UWP.Helpers"
     x:Name="Page"
     mc:Ignorable="d">
 
     <Page.Resources>
         <ResourceDictionary>
+            <helpers:AccountAvatarTemplateSelector 
+                x:Key="AccountAvatarTemplateSelector"
+                Normal="{StaticResource TwoFACodeCustomTemplate}" 
+                Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
+
             <DataTemplate x:Name="ShellHeaderTemplate" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
                     <Grid>
@@ -203,7 +209,6 @@
                             DisplayName="{x:Bind Model, 
                             Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
                             Mode=OneWay}"
-                            Visibility="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                             Margin="15,10,20,0"
                             Grid.Column="1"
                             Grid.Row="0"
@@ -215,11 +220,9 @@
                         </muxc:PersonPicture>
 
                         <!--Favourite design-->
-                        <muxc:PersonPicture 
+                        <!--<muxc:PersonPicture 
                             Height="48"
                             Width="48"
-                            Background="{ThemeResource SystemAccentColor}"
-                            BorderBrush="{ThemeResource SystemAccentColor}"
                             DisplayName="{x:Bind Model, 
                             Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
                             Mode=OneWay}"
@@ -227,6 +230,230 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Visibility="{x:Bind IsFavourite,Mode=OneWay}"
+                            Style="{StaticResource PersonPictureWithAccentShadow}"
+                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}"
+                            Grid.RowSpan="2">
+                        </muxc:PersonPicture>-->
+
+                        <RelativePanel 
+                            Grid.Column="2" 
+                            Grid.RowSpan="2" 
+                            Grid.ColumnSpan="2">
+                            <TextBlock
+                                x:Name="AccountName"
+                                FontSize="22"
+                                Margin="0,10,10,0" 
+                                VerticalAlignment="Center">
+                                <Bold>
+                                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
+                                </Bold>
+                            </TextBlock>
+                            <TextBlock 
+                                x:Name="IssuerName"
+                                FontWeight="Thin"
+                                Text="{x:Bind Issuer,Mode=OneWay}" 
+                                FontSize="22"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"/>
+                        </RelativePanel>
+
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="0,0,0,4">
+
+                            <Button
+                                x:Name="BTN_ShowCode"
+                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                                Width="48"
+                                Height="48"
+                                Margin="0,0,4,0"
+                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                HorizontalAlignment="Stretch" >
+                                <FontIcon 
+                                    Glyph="&#xE18B;"
+                                    FontSize="20"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
+                            <Grid>
+                                <TextBlock
+                                Text="{x:Bind TwoFACode,Mode=OneWay}"
+                                FontSize="28"
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
+                                VerticalAlignment="Center"
+                                CharacterSpacing="60"
+                                Foreground="{ThemeResource SystemAccentColor}" />
+                                <TextBlock
+                                Text="______"
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
+                                FontSize="28"
+                                CharacterSpacing="205"
+                                VerticalAlignment="Center" 
+                                Foreground="{ThemeResource SystemAccentColor}" />
+                            </Grid>
+
+                            <Button
+                                x:Name="BTN_CopyCode"
+                                x:Uid="AccountCopyCodeButton"
+                                Width="48"
+                                Height="48"
+                                Click="BTN_CopyCode_Click"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0" 
+                                HorizontalAlignment="Stretch" >
+                                <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
+                            </Button>
+                            <Grid VerticalAlignment="Center">
+                                <controls:RadialProgressBar
+                                Value="{x:Bind Seconds,Mode=OneWay}" 
+                                Maximum="{x:Bind Period,Mode=OneWay}" 
+                                    
+                                Minimum="0"
+                                IsIndeterminate="False"
+                                Width="42"
+                                Height="42"
+                                x:Uid="AccountCodePageRemainingSeconds"
+                                Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
+                                <TextBlock 
+                                x:Uid="AccountCodePageRemainingSeconds"
+                                Opacity="0.6"
+                                Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
+                                FontSize="16"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"/>
+                            </Grid>
+                            <Button
+                                x:Name="BTN_SetFavourite"
+                                Width="48"
+                                Height="48"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.SetFavouriteCommand, ElementName=Page, Mode=OneTime}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0"
+                                ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
+                                HorizontalAlignment="Stretch" >
+                                <FontIcon 
+                                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                    FontSize="20"
+                                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+
+                        <Button
+                            x:Uid="AccountCodePageItemMoreBTN"
+                            Grid.Column="4" 
+                            Margin="8,0,0,0" 
+                            VerticalAlignment="Top" 
+                            Style="{StaticResource TransparentButtonStyle}">
+                            <FontIcon Glyph="&#xE712;"/>
+                            <Button.Flyout>
+                                <MenuFlyout Placement="Bottom">
+                                    <MenuFlyoutItem 
+                                        x:Uid="AccountCodePageEditEntry"
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding DataContext.EditAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE70F;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem 
+                                        x:Uid="AccountCodePageDeleteEntry"
+                                        IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding DataContext.DeleteAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE107;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        x:Uid="AccountCodePageShowQRCode"
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding DataContext.ExportAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE72D;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="WindowStates">
+                                <VisualState x:Name="NarrowState">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="0" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="IssuerName.(RelativePanel.Below)" Value="AccountName"/>
+                                        <Setter Target="IssuerName.Margin" Value="0,10,10,0"/>
+                                        <Setter Target="Root.MinWidth" Value="478"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="MediumState">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="720" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="Root.MinWidth" Value="660"/>
+                                        <Setter Target="IssuerName.(RelativePanel.RightOf)" Value="AccountName"/>
+                                        <Setter Target="IssuerName.Margin" Value="10,10,10,0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </UserControl>
+            </DataTemplate>
+
+            <DataTemplate x:Name="TwoFACodeCustomAccentTemplate" x:DataType="models:TwoFACodeModel">
+                <UserControl
+                    x:Name="Root" 
+                    MaxWidth="660"
+                    RightTapped="TwoFACodeItem_RightTapped" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+                    <Grid 
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        Background="{ThemeResource TwoFABackgroundBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.RowSpan="3" >
+                            <Border 
+                                Width="2.5" 
+                                ui:Effects.Shadow="{StaticResource SignShadow}"
+                                Background="{StaticResource SystemAccentColor}" />
+                        </Grid>
+
+                        <!--Favourite design-->
+                        <muxc:PersonPicture 
+                            Height="48"
+                            Width="48"
+                            DisplayName="{x:Bind Model, 
+                            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                            Mode=OneWay}"
+                            Margin="15,10,20,0"
+                            Grid.Column="1"
+                            Grid.Row="0"
                             Style="{StaticResource PersonPictureWithAccentShadow}"
                             Tag="{x:Bind AccountSVGIcon, Mode=OneWay}"
                             Grid.RowSpan="2">
@@ -416,7 +643,7 @@
         <ListView 
             x:Name="LV_AccountCollection"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
-            ItemTemplate="{StaticResource TwoFACodeCustomTemplate}" 
+            ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}" 
             IsItemClickEnabled="False"
             ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
             HorizontalContentAlignment="Stretch"

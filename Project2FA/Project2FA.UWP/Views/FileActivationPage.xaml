@@ -9,6 +9,7 @@
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:strings="using:Project2FA.UWP.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -35,7 +36,7 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
-        <!--for debug-->
+        <!--for debug and extra setting-->
         <Border 
             x:Name="PageStaticBackgroundBorder" 
             Grid.RowSpan="4" 
@@ -105,16 +106,16 @@
             </Border>
             <StackPanel 
                     x:Name="MainStackPanel"
-                    MaxWidth="320" 
+                    MaxWidth="400" 
                     MinHeight="500" 
 >
                 <mstoolkitControls:ImageEx 
                         Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
                         MaxHeight="150" 
                         Margin="0,30,0,10"/>
-                <TextBlock Text="#name of the file" FontSize="24"/>
-                <PasswordBox 
-                        x:Uid="LoginPagePassword"    
+                <TextBlock Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" FontSize="24"/>
+                <PasswordBox
+                        x:Uid="LoginPagePassword"
                         Header="~LoginPagePassword.Header" 
                         PlaceholderText="~LoginPagePassword.PlaceholderText" 
                         Password="{x:Bind ViewModel.Password,Mode=TwoWay}" 
@@ -133,15 +134,30 @@
                             MinWidth="100"
                             Margin="0,10,10,0" 
                             HorizontalAlignment="Center"/>
-                    <!--<Button 
+                    <StackPanel Orientation="Horizontal">
+                        <Button 
                             x:Uid="LoginPageLoginWindowsHelloButton" 
                             Content="~LoginPageLoginWindowsHelloButton.Content" 
                             Margin="0,10,0,0"
                             Style="{StaticResource ButtonRevealStyle}"
-                            Visibility="{x:Bind ViewModel.WindowsHelloIsUsable, Mode=OneWay}"
-                            Command="{x:Bind ViewModel.WindowsHelloLoginCommand}" 
+                            IsEnabled="False"
                             MinWidth="200" 
-                            HorizontalAlignment="Center" />-->
+                            HorizontalAlignment="Center" />
+                        <Button
+                            Margin="0,10,0,0"
+                            Padding="4,4,4,4"
+                            Width="48"
+                            Click="HLBTN_NotAvailableInfo"
+                            Style="{StaticResource TransparentButtonStyle}"
+                            ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+                            VerticalAlignment="Center">
+                            <FontIcon
+                                FontSize="20"
+                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                Glyph="&#xE946;"  />
+                        </Button>
+                    </StackPanel>
+                    
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -155,7 +171,6 @@
                     <VisualState.Setters>
                         <Setter Target="MainGrid.CornerRadius" Value="0"/>
                         <Setter Target="MainStackPanel.CornerRadius" Value="0"/>
-                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
                         <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="0" />
                         <Setter Target="RootGrid.ColumnDefinitions[2].Width" Value="0" />
                         <Setter Target="RootGrid.RowDefinitions[1].Height" Value="0" />
@@ -172,7 +187,6 @@
                     <VisualState.Setters>
                         <Setter Target="MainGrid.CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
                         <Setter Target="MainStackPanel.CornerRadius" Value="{ThemeResource OverlayCornerRadius}"/>
-                        <Setter Target="DropShadow.HorizontalAlignment" Value="Stretch" />
                         <Setter Target="RootGrid.ColumnDefinitions[0].Width" Value="*" />
                         <Setter Target="RootGrid.ColumnDefinitions[1].MinWidth" Value="852" />
                         <Setter Target="MainGrid.MinWidth" Value="852"/>

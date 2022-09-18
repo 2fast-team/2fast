@@ -20,7 +20,7 @@ namespace Project2FA.MAUI.Controls
         /// <param name="width">Width.</param>
         /// <param name="height">Height.</param>
         /// <param name="color">Color.</param>
-        public static Task<Stream> CreateImage(Stream stream, double width, double height, Color color)
+        public static Task<Stream> CreateImageTask(Stream stream, double width, double height, Color color)
         {
             var screenScale = SvgImageSource.ScreenScale;
 
@@ -50,6 +50,48 @@ namespace Project2FA.MAUI.Controls
                     encoded.SaveTo(imageStream);
                     imageStream.Position = 0;
                     return Task.FromResult(imageStream as Stream);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates the image.
+        /// </summary>
+        /// <returns>The image.</returns>
+        /// <param name="stream">Stream.</param>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
+        /// <param name="color">Color.</param>
+        public static Stream CreateImage(Stream stream, double width, double height, Color color)
+        {
+            var screenScale = SvgImageSource.ScreenScale;
+
+            var svg = new SKSvg();
+            svg.Load(stream);
+
+            var size = CalcSize(svg.Picture.CullRect.Size, width, height);
+            var scale = CalcScale(svg.Picture.CullRect.Size, size, screenScale);
+            var matrix = SKMatrix.CreateScale(scale.Item1, scale.Item2);
+
+            using (var bitmap = new SKBitmap((int)(size.Width * screenScale), (int)(size.Height * screenScale)))
+            using (var canvas = new SKCanvas(bitmap))
+            using (var paint = new SKPaint())
+            {
+                if (!color.IsDefault())
+                {
+                    paint.ColorFilter = SKColorFilter.CreateBlendMode(ToSKColor(color), SKBlendMode.SrcIn);
+                }
+
+                canvas.Clear(SKColors.Transparent); // very very important!
+                canvas.DrawPicture(svg.Picture, ref matrix, paint);
+
+                using (var image = SKImage.FromBitmap(bitmap))
+                using (var encoded = image.Encode())
+                {
+                    var imageStream = new MemoryStream();
+                    encoded.SaveTo(imageStream);
+                    imageStream.Position = 0;
+                    return imageStream;
                 }
             }
         }

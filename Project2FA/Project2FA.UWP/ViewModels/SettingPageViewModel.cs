@@ -26,7 +26,6 @@ using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Project2FA.Core;
 using Windows.ApplicationModel.Email;
-using Windows.UI.ViewManagement;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -147,6 +146,7 @@ namespace Project2FA.UWP.ViewModels
                     App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret("WDServerAddress");
                     App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret("WDUsername");
                     App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret("WDPassword");
+                    App.Current.Container.Resolve<ISecretService>().Helper.RemoveSecret(Constants.ActivatedDatafileHashName);
                     // reset data and restart app
                     await ApplicationData.Current.ClearAsync();
                     //PrismApplication.Current.
@@ -434,6 +434,16 @@ namespace Project2FA.UWP.ViewModels
                 RaisePropertyChanged(nameof(UseNTPServerCorrection));
             }
         }
+
+        public bool UseAutoLogout
+        {
+            get => _settings.UseAutoLogout;
+            set
+            {
+                _settings.UseAutoLogout = value;
+                RaisePropertyChanged(nameof(UseAutoLogout));
+            }
+        }
     }
 
     /// <summary>
@@ -465,11 +475,13 @@ namespace Project2FA.UWP.ViewModels
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             ChangeDatafilePasswordCommand = new DelegateCommand(async() => {
                 var dialog = new ChangeDatafilePasswordContentDialog();
+                var param = new DialogParameters();
+                param.Add("isInvalid", false);
                 if (NotifyPasswordChanged)
                 {
                     NotifyPasswordChanged = false;
                 }
-                var result = await _dialogService.ShowDialogAsync(dialog,new DialogParameters());
+                var result = await _dialogService.ShowDialogAsync(dialog, param);
                 if (result == ContentDialogResult.Primary)
                 {
                     if (dialog.ViewModel.PasswordChanged)
@@ -490,19 +502,26 @@ namespace Project2FA.UWP.ViewModels
         private async Task InitializeDataFileAttributes()
         {
             var dbDatafile = await App.Repository.Datafile.GetAsync();
-
-            DatafileName = dbDatafile.Name;
-            DatafilePath = dbDatafile.IsWebDAV? SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + dbDatafile.Path : dbDatafile.Path;
+            
+            if (dbDatafile.IsWebDAV)
+            {
+                DatafileName = dbDatafile.Name;
+                DatafilePath = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + dbDatafile.Path;
+            }
+            else
+            {
+                if (DataService.Instance.ActivatedDatafile != null)
+                {
+                    DatafilePath = DataService.Instance.ActivatedDatafile.Path;
+                    DatafileName = DataService.Instance.ActivatedDatafile.Name;
+                }
+                else
+                {
+                    DatafileName = dbDatafile.Name;
+                    DatafilePath = dbDatafile.Path;
+                }
+            }
         }
-        
-        /// <summary>
-        /// Edit the current datafile
-        /// </summary>
-        //public async void EditDatafile()
-        //{
-        //    var dialog = new UpdateDatafileContentDialog();
-        //    await _dialogService.ShowAsync(dialog);
-        //}
 
         public string DatafilePath { get => _datafilePath; set => SetProperty(ref _datafilePath, value); }
         public string DatafileName { get => _datafileName; set => SetProperty(ref _datafileName, value); }

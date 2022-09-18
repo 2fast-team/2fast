@@ -35,7 +35,7 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
-        <!--for debug-->
+        <!--for debug and extra setting-->
         <Border 
             x:Name="PageStaticBackgroundBorder" 
             Grid.RowSpan="4" 

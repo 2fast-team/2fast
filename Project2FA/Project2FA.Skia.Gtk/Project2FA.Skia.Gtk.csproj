@@ -29,9 +29,9 @@
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
     <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
-    <PackageReference Include="Uno.Material" Version="2.2.0" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.4.20" />
-    <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="4.4.20" />
+    <PackageReference Include="Uno.Material" Version="2.3.0" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.5.9" />
+    <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="4.5.9" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />

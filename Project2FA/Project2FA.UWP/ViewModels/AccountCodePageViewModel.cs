@@ -78,8 +78,17 @@ namespace Project2FA.UWP.ViewModels
                 }
                 // clear the navigation stack
                 await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
-                LoginPage loginPage = new LoginPage(true);
-                Window.Current.Content = loginPage;
+                if (TwoFADataService.ActivatedDatafile != null)
+                {
+                    FileActivationPage fileActivationPage = new FileActivationPage();
+                    Window.Current.Content = fileActivationPage;
+                }
+                else
+                {
+                    LoginPage loginPage = new LoginPage(true);
+                    Window.Current.Content = loginPage;
+                }
+
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
@@ -109,15 +118,23 @@ namespace Project2FA.UWP.ViewModels
 
         private async Task StartTOTPLogic()
         {
-            if (DataService.Instance.Collection.Count != 0)
-            {
-                //only reset the time and calc the new totp
-                await DataService.Instance.ResetCollection();
-            }
-            else
+            if (DataService.Instance.ActivatedDatafile != null)
             {
                 await DataService.Instance.StartService();
             }
+            else
+            {
+                if (DataService.Instance.Collection.Count != 0)
+                {
+                    //only reset the time and calc the new totp
+                    await DataService.Instance.ResetCollection();
+                }
+                else
+                {
+                    await DataService.Instance.StartService();
+                }
+            }
+
 
             _dispatcherTOTPTimer.Start(); // the event for the set of seconds and calculating the totp code
         }

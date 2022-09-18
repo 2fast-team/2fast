@@ -293,33 +293,51 @@
                                         </appcontrols:CardControl.ActionContent>
                                     </appcontrols:CardControl>
 
-                                    <appcontrols:CardControl 
+                                    <appcontrols:CardExpanderControl
+                                        Background="{ThemeResource CardBackgroundBrush}"
+                                        IsExpanded="True">
+                                        <appcontrols:CardExpanderControl.Header>
+                                            <appcontrols:CardControl
+                                                Icon="&#xE1F6;"
+                                                x:Uid="SettingsUseAutoLogout" 
+                                                Header="~SettingsUseAutoLogout.Header">
+                                                <appcontrols:CardControl.ActionContent>
+                                                    <ToggleSwitch
+                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseAutoLogout,Mode=TwoWay}"/>
+                                                </appcontrols:CardControl.ActionContent>
+                                            </appcontrols:CardControl>
+                                        </appcontrols:CardExpanderControl.Header>
+                                        <appcontrols:CardExpanderControl.Content>
+                                            <appcontrols:CardControl 
                                         x:Uid="SettingsOptionsAutoLogout"
-                                        Header="~SettingsOptionsAutoLogout.Header" 
-                                        Icon="&#xE1F6;">
-                                        <appcontrols:CardControl.Description>
-                                            <TextBlock Text="{x:Bind strings:Resources.SettingsAutoLogoutDesc}"/>
-                                        </appcontrols:CardControl.Description>
-                                        <appcontrols:CardControl.ActionContent>
-                                            <StackPanel 
+                                        Header="~SettingsOptionsAutoLogout.Header">
+                                                <appcontrols:CardControl.Description>
+                                                    <TextBlock Text="{x:Bind strings:Resources.SettingsAutoLogoutDesc}"/>
+                                                </appcontrols:CardControl.Description>
+                                                <appcontrols:CardControl.ActionContent>
+                                                    <StackPanel 
                                         Orientation="Horizontal" 
                                         Margin="0,6,0,15">
-                                                <TextBlock 
+                                                        <TextBlock 
                                         Text="{x:Bind strings:Resources.SettingsAutoLogoutMinutes}" 
                                         TextWrapping="WrapWholeWords" 
                                         Margin="0,0,10,0"
                                         VerticalAlignment="Center"/>
-                                                <muxc:NumberBox 
+                                                        <muxc:NumberBox 
                                         Value="{x:Bind ViewModel.SettingsPartViewModel.SetAutoLogoutMinutes,Mode=TwoWay}"
                                         Maximum="25"
                                         Minimum="5"
                                         SpinButtonPlacementMode="Inline"
                                         MinWidth="120"
                                         HorizontalAlignment="Left">
-                                                </muxc:NumberBox>
-                                            </StackPanel>
-                                        </appcontrols:CardControl.ActionContent>
-                                    </appcontrols:CardControl>
+                                                        </muxc:NumberBox>
+                                                    </StackPanel>
+                                                </appcontrols:CardControl.ActionContent>
+                                            </appcontrols:CardControl>
+                                        </appcontrols:CardExpanderControl.Content>
+                                    </appcontrols:CardExpanderControl>
+
+
 
                                     <appcontrols:CardExpanderControl 
                                         Background="{ThemeResource CardBackgroundBrush}"

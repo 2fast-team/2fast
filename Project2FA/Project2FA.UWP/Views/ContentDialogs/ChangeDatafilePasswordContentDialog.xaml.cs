@@ -1,9 +1,11 @@
 ﻿using Project2FA.Core.Services;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.ViewModels;
-using System;
+using Prism.Ioc;
+using Template10.Services.Secrets;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Project2FA.Core;
 
 namespace Project2FA.UWP.Views
 {
@@ -29,10 +31,28 @@ namespace Project2FA.UWP.Views
         /// <param name="args"></param>
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            // first check if the given current password matches with the datafile
-            if ((await App.Repository.Password.GetAsync()).Hash == CryptoService.CreateStringHash(ViewModel.CurrentPassword))
+            string hash;
+            if (DataService.Instance.ActivatedDatafile != null)
             {
-                await ViewModel.ChangePasswordInFileAndDB();
+                hash = CryptoService.CreateStringHash(App.Current.Container.Resolve<ISecretService>().Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName));
+            }
+            else
+            {
+                hash = (await App.Repository.Password.GetAsync()).Hash;
+            }
+            // first check if the given current password matches with the datafile
+            if (hash == CryptoService.CreateStringHash(ViewModel.CurrentPassword))
+            {
+                if (await ViewModel.TestPassword())
+                {
+                    await ViewModel.ChangePasswordInFileAndDB();
+                }
+                else
+                {
+                    // prevent the close of this ContentDialog
+                    args.Cancel = true;
+                    ViewModel.ShowError = true;
+                }
             }
             else
             {
@@ -40,7 +60,6 @@ namespace Project2FA.UWP.Views
                 args.Cancel = true;
                 ViewModel.ShowError = true;
             }
-
         }
 
         private void BTN_ConfirmBadPassword_Click(object sender, RoutedEventArgs e)

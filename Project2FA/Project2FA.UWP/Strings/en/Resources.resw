@@ -730,12 +730,9 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Icons from a selection list can now be used for accounts
-- Note function has been added for accounts
-- QR code backups from the Google Authenticator can be imported.
-- The ability to create and use datafiles using WebDAV has been released as a beta version.
-- A tutorial has been implemented for explaining the functions
-- Expert settings have been added to the account creation</value>
+    <value>• Link the data type ".2fa" with this app. Double-click on a datafile to open the app.
+• The automatic locking of the app can now be deactivated in the settings.
+• Fixed the problem that passwords with a space were saved incorrectly.</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features</value>
@@ -950,5 +947,35 @@ In the following sections, the functionality of this application is explained in
   </data>
   <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
     <value>Loading a datafile</value>
+  </data>
+  <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
+    <value>Automatic logout</value>
+  </data>
+  <data name="FunctionNotAvailable" xml:space="preserve">
+    <value>Function not available</value>
+  </data>
+  <data name="WindowsHelloNotAvailable" xml:space="preserve">
+    <value>Windows Hello cannot be executed because no password is stored for the datafile in the protected memory.</value>
+  </data>
+  <data name="ErrorGenerateTOTPCode" xml:space="preserve">
+    <value>The secret key for the account {0} is empty or unreadable. Please restart the app. If the problem persists, clean up the account {0} and add it again.</value>
+  </data>
+  <data name="TextFormatterBoldToolTip" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="TextFormatterItalicToolTip" xml:space="preserve">
+    <value>Italics</value>
+  </data>
+  <data name="TextFormatterStrikeToolTip" xml:space="preserve">
+    <value>Strikethrough</value>
+  </data>
+  <data name="TextFormatterUnderlineToolTip" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="TextFormatterListToolTip" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="TextFormatterOrderedToolTip" xml:space="preserve">
+    <value>Ordered list</value>
   </data>
 </root>

@@ -824,7 +824,7 @@ namespace Project2FA.UWP.Strings{
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: - Icons from a selection list can now be used for accounts - Note function has been added for accounts - QR code backups from the Google Authenticator can be imported. - The ability to create and use datafiles using WebDAV has been released as a beta version. - A tutorial has been implemented for explaining the functions - Expert settings have been added to the account creation
+        ///   Looks up a localized string similar to: • Link the data type ".2fa" with this app. Double-click on a datafile to open the app. • The automatic locking of the app can now be deactivated in the settings. • Fixed the problem that passwords with a space were saved incorrectly.
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -1159,6 +1159,123 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region FunctionNotAvailable
+        /// <summary>
+        ///   Looks up a localized string similar to: Function not available
+        /// </summary>
+        public static string FunctionNotAvailable
+        {
+            get
+            {
+                return _resourceLoader.GetString("FunctionNotAvailable");
+            }
+        }
+        #endregion
+
+        #region WindowsHelloNotAvailable
+        /// <summary>
+        ///   Looks up a localized string similar to: Windows Hello cannot be executed because no password is stored for the datafile in the protected memory.
+        /// </summary>
+        public static string WindowsHelloNotAvailable
+        {
+            get
+            {
+                return _resourceLoader.GetString("WindowsHelloNotAvailable");
+            }
+        }
+        #endregion
+
+        #region ErrorGenerateTOTPCode
+        /// <summary>
+        ///   Looks up a localized string similar to: The secret key for the account {0} is empty or unreadable. Please restart the app. If the problem persists, clean up the account {0} and add it again.
+        /// </summary>
+        public static string ErrorGenerateTOTPCode
+        {
+            get
+            {
+                return _resourceLoader.GetString("ErrorGenerateTOTPCode");
+            }
+        }
+        #endregion
+
+        #region TextFormatterBoldToolTip
+        /// <summary>
+        ///   Looks up a localized string similar to: Bold
+        /// </summary>
+        public static string TextFormatterBoldToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("TextFormatterBoldToolTip");
+            }
+        }
+        #endregion
+
+        #region TextFormatterItalicToolTip
+        /// <summary>
+        ///   Looks up a localized string similar to: Italics
+        /// </summary>
+        public static string TextFormatterItalicToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("TextFormatterItalicToolTip");
+            }
+        }
+        #endregion
+
+        #region TextFormatterStrikeToolTip
+        /// <summary>
+        ///   Looks up a localized string similar to: Strikethrough
+        /// </summary>
+        public static string TextFormatterStrikeToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("TextFormatterStrikeToolTip");
+            }
+        }
+        #endregion
+
+        #region TextFormatterUnderlineToolTip
+        /// <summary>
+        ///   Looks up a localized string similar to: Underline
+        /// </summary>
+        public static string TextFormatterUnderlineToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("TextFormatterUnderlineToolTip");
+            }
+        }
+        #endregion
+
+        #region TextFormatterListToolTip
+        /// <summary>
+        ///   Looks up a localized string similar to: List
+        /// </summary>
+        public static string TextFormatterListToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("TextFormatterListToolTip");
+            }
+        }
+        #endregion
+
+        #region TextFormatterOrderedToolTip
+        /// <summary>
+        ///   Looks up a localized string similar to: Ordered list
+        /// </summary>
+        public static string TextFormatterOrderedToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("TextFormatterOrderedToolTip");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1258,6 +1375,15 @@ namespace Project2FA.UWP.Strings{
             WelcomePageTutorialDesc,
             String,
             String1,
+            FunctionNotAvailable,
+            WindowsHelloNotAvailable,
+            ErrorGenerateTOTPCode,
+            TextFormatterBoldToolTip,
+            TextFormatterItalicToolTip,
+            TextFormatterStrikeToolTip,
+            TextFormatterUnderlineToolTip,
+            TextFormatterListToolTip,
+            TextFormatterOrderedToolTip,
         }
 
         private static ResourceLoader _resourceLoader;

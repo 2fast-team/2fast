@@ -28,7 +28,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
-    <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="protobuf-net" Version="3.1.17" />
   </ItemGroup>
 

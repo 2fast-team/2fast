@@ -130,11 +130,7 @@ namespace Project2FA.UWP
                     Repository = new DBProject2FARepository(dbOptions);
                 }
 
-                //LoadIconNames(); //only for development
-
-                // built initial navigation path
-                string navigationPath = string.Empty;
-
+                // LoadIconNames(); //only for development
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
@@ -146,7 +142,15 @@ namespace Project2FA.UWP
                 if (args.Arguments is FileActivatedEventArgs fileActivated)
                 {
                     var file = fileActivated.Files.FirstOrDefault();
-                    DataService.Instance.OpenDatefile = (StorageFile)file;
+                    DataService.Instance.ActivatedDatafile = (StorageFile)file;
+                    var dialogService = Current.Container.Resolve<IDialogService>();
+                    if (await dialogService.IsDialogRunning())
+                    {
+                        dialogService.CloseDialogs();
+                    }
+                    await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                    FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
+                    Window.Current.Content = fileActivationPage;
                 }
                 else
                 {
@@ -157,8 +161,7 @@ namespace Project2FA.UWP
                     }
                     else
                     {
-                        navigationPath = "/WelcomePage";
-                        await ShellPageInstance.NavigationService.NavigateAsync(navigationPath);
+                        await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
                         Window.Current.Content = ShellPageInstance;
                     }
                 }
@@ -168,7 +171,17 @@ namespace Project2FA.UWP
                 if (args.Arguments is FileActivatedEventArgs fileActivated)
                 {
                     var file = fileActivated.Files.FirstOrDefault();
-                    DataService.Instance.OpenDatefile = (StorageFile)file;
+                    DataService.Instance.ActivatedDatafile = (StorageFile)file;
+                    FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
+                    Window.Current.Content = fileActivationPage;
+                    //await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(FileActivationPage));
+                    //if (!(Window.Current.Content is ShellPage))
+                    //{
+                    //    Window.Current.Content = ShellPageInstance;
+                    //}
+                        
+                    //FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
+                    //Window.Current.Content = fileActivationPage;
                 }
             }
 
@@ -247,18 +260,29 @@ namespace Project2FA.UWP
                 return;
             }
             TimeSpan timeDiff = DateTime.Now - _focusLostTime;
-            if (timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
+            if (SettingsService.Instance.UseAutoLogout)
             {
-                _focusLostTimer.Stop();
-                bool isLogout = true;
-                var dialogService = Current.Container.Resolve<IDialogService>();
-                if (await dialogService.IsDialogRunning())
+                if (timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
                 {
-                    dialogService.CloseDialogs();
+                    _focusLostTimer.Stop();
+                    bool isLogout = true;
+                    var dialogService = Current.Container.Resolve<IDialogService>();
+                    if (await dialogService.IsDialogRunning())
+                    {
+                        dialogService.CloseDialogs();
+                    }
+                    await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                    if (DataService.Instance.ActivatedDatafile != null)
+                    {
+                        var fileActivationPage = new FileActivationPage();
+                        Window.Current.Content = fileActivationPage;
+                    }
+                    else
+                    {
+                        var loginPage = new LoginPage(isLogout);
+                        Window.Current.Content = loginPage;
+                    }
                 }
-                await ShellPageInstance.NavigationService.NavigateAsync("/BlankPage");
-                var loginPage = new LoginPage(isLogout);
-                Window.Current.Content = loginPage;
             }
         }
         #endregion

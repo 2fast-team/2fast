@@ -37,6 +37,8 @@ using Microsoft.Toolkit.Uwp.Helpers;
 using System.Diagnostics;
 using Windows.Storage.Search;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Project2FA.Core.Messenger;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Project2FA.UWP.Services
 {
@@ -61,6 +63,7 @@ namespace Project2FA.UWP.Services
         private const long unixEpochTicks = 621355968000000000L;
         private const long ticksToSeconds = 10000000L;
         int _reloadCollectionCounter = 0;
+
         //private StorageFileQueryResult _queryResult; // to reload the datafile if the file is modified
         //private bool _datafileWritten;
         //private int _queryChangedCounter;
@@ -235,17 +238,33 @@ namespace Project2FA.UWP.Services
             try
             {
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
-                StorageFolder folder = dbDatafile.IsWebDAV ? 
-                    ApplicationData.Current.LocalFolder : 
-                    await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
-                if (await FileService.FileExistsAsync(dbDatafile.Name, folder))
+                StorageFolder folder;
+                string datafilename, passwordHashName;
+                DBPasswordHashModel dbHash;
+                if (ActivatedDatafile != null)
                 {
-                    DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
+                    folder = await ActivatedDatafile.GetParentAsync();
+                    dbHash = null;
+                    passwordHashName = Constants.ActivatedDatafileHashName;
+                    datafilename = ActivatedDatafile.Name;
+                }
+                else
+                {
+                    folder = dbDatafile.IsWebDAV ?
+                    ApplicationData.Current.LocalFolder :
+                    await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
+                    dbHash = await App.Repository.Password.GetAsync();
+                    passwordHashName = dbHash.Hash;
+                    datafilename = dbDatafile.Name;
+                }
+                
+                if (await FileService.FileExistsAsync(datafilename, folder))
+                {
                     // prevent write of the datafile to folder
                     _initialization = true;
                     try
                     {
-                        string datafileStr = await FileService.ReadStringAsync(dbDatafile.Name, folder);
+                        string datafileStr = await FileService.ReadStringAsync(datafilename, folder);
                         if (!string.IsNullOrEmpty(datafileStr))
                         {
                             // read the iv for AES
@@ -253,7 +272,7 @@ namespace Project2FA.UWP.Services
                             byte[] iv = datafile.IV;
 
                             datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                                            (SecretService.Helper.ReadSecret(Constants.ContainerName,dbHash.Hash),
+                                            (SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName),
                                             iv,
                                             datafileStr);
                             deserializeCollection = datafile.Collection;
@@ -262,7 +281,7 @@ namespace Project2FA.UWP.Services
                         {
                             await CollectionAccessSemaphore.WaitAsync();
 
-                            if (Collection.AddRange(deserializeCollection, true) == 0) // clear the current Items and the new
+                            if (Collection.AddRange(deserializeCollection, true) == 0) // clear the current items and add the new
                             {
                                 // if no error has occured
                                 if (!_errorOccurred)
@@ -306,7 +325,10 @@ namespace Project2FA.UWP.Services
                     catch (Exception exc)
                     {
                         _errorOccurred = true;
+                        //SendPasswordStatusMessage(true, SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName));
                         await ErrorDialogs.ShowPasswordError();
+                        //CheckLocalDatafile();
+                        
                     }
 
                 }
@@ -354,7 +376,7 @@ namespace Project2FA.UWP.Services
                 }
             }
             //check if a newer version is available or the current file must be uploaded
-            if (dbDatafile.IsWebDAV)
+            if (dbDatafile.IsWebDAV && ActivatedDatafile == null)
             {
                 var (success, outdated) = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
                 if (success && outdated)
@@ -399,10 +421,16 @@ namespace Project2FA.UWP.Services
             App.ShellPageInstance.NavigationIsAllowed = true;
         }
 
+        private void SendPasswordStatusMessage(bool isinvalid, string hash)
+        {
+            Messenger.Send(new PasswordStatusChangedMessage(isinvalid, hash));
+        }
+
+        #region ErrorMessages
         /// <summary>
         /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
         /// </summary>
-        public async Task ShowFileOrFolderNotFoundError()
+        private async Task ShowFileOrFolderNotFoundError()
         {
             try
             {
@@ -493,6 +521,31 @@ namespace Project2FA.UWP.Services
             await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
+        private async Task ErrorSecretKey(string label)
+        {
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.Error;
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
+            markdown.Text = string.Format(Resources.ErrorGenerateTOTPCode, label);
+            dialog.Content = markdown;
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+            {
+                await CoreApplication.RequestRestartAsync("NullableSecretKey");
+            });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            dialog.PrimaryButtonText = Resources.RestartApp;
+            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.SecondaryButtonText = Resources.Confirm;
+            dialog.SecondaryButtonCommand = new DelegateCommand(() =>
+            {
+                //Prism.PrismApplicationBase.Current.Exit();
+            });
+            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+        }
+        #endregion
+
         /// <summary>
         /// Writes the current accounts into the datafile
         /// </summary>
@@ -500,22 +553,37 @@ namespace Project2FA.UWP.Services
         {
             DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
             DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
-            byte[] iv = new AesManaged().IV;
+            StorageFolder folder;
+            string fileName;
+            byte[] iv = Aes.Create().IV;
+            string hashName = ActivatedDatafile != null ? 
+                Constants.ActivatedDatafileHashName : 
+                dbHash.Hash;
 
             await CollectionAccessSemaphore.WaitAsync();
             DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
-            StorageFolder folder = datafileDB.IsWebDAV ?
+            if (ActivatedDatafile != null)
+            {
+                folder = await ActivatedDatafile.GetParentAsync();
+                fileName = ActivatedDatafile.Name;
+            }
+            else
+            {
+                folder = datafileDB.IsWebDAV ?
                 ApplicationData.Current.LocalFolder :
                 await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
+                fileName = datafileDB.Name;
+            }
+
 
             await FileService.WriteStringAsync(
-                    datafileDB.Name,
-                    NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash),
+                    fileName,
+                    NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, hashName),
                     iv, 
                     fileModel),
                     folder);
 
-            if (datafileDB.IsWebDAV)
+            if (datafileDB.IsWebDAV && ActivatedDatafile == null)
             {
                 // TODO check result
                 (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder, datafileDB);
@@ -699,9 +767,8 @@ namespace Project2FA.UWP.Services
                 }
                 else
                 {
-                    //TODO  add dialog
+                    throw new ArgumentNullException(Collection[i].Label);
                 }
-
             }
             catch (Exception ex)
             {
@@ -714,8 +781,8 @@ namespace Project2FA.UWP.Services
                 }
                 else
                 {
-                    // TODO add dialog
-                    throw;
+                    Collection[i].TwoFACode = string.Empty;
+                    ErrorSecretKey(Collection[i].Label);
                 }
                 
             }
@@ -737,7 +804,8 @@ namespace Project2FA.UWP.Services
             get => _emptyAccountCollectionTipIsOpen;
             set => SetProperty(ref _emptyAccountCollectionTipIsOpen, value);
         }
-        public StorageFile OpenDatefile 
+
+        public StorageFile ActivatedDatafile 
         { 
             get => _openDatefile;
             set => SetProperty(ref _openDatefile, value);

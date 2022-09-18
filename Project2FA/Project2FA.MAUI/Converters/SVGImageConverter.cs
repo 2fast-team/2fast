@@ -15,6 +15,7 @@ namespace Project2FA.MAUI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            ImageSource svg;
             if (value != null)
             {
                 //Stream fileStream = FileSystem.Current.OpenAppPackageFileAsync("AccountIcons/" + value.ToString()).Result;
@@ -29,9 +30,25 @@ namespace Project2FA.MAUI.Converters
                 //writer.Flush();
                 //stream.Position = 0;
 
-                
-                MemoryStream stream = new MemoryStream(Encoding.ASCII.GetBytes(value.ToString()));
-                StreamReader streamReader = new StreamReader(stream, Encoding.UTF8, true);
+
+                //MemoryStream stream = new MemoryStream(Encoding.ASCII.GetBytes(value.ToString()));
+                var utf8 = new UTF8Encoding();
+                var svgBuffer = utf8.GetBytes(value.ToString());
+
+
+                using (Stream contentStream = new MemoryStream(svgBuffer) { Position = 0 })
+                {
+                    svg = ImageSource.FromStream(() => SvgUtility.CreateImage(contentStream, 68, 68, Colors.Transparent));//SvgImageSource.FromSvgStream(() => contentStream, 68,68, Colors.Transparent);
+                }
+                if (svg != null)
+                {
+                    return svg;
+                }
+                else
+                {
+                    //return svg = new ImageSource();
+                }
+                //StreamReader streamReader = new StreamReader(stream, Encoding.UTF8, true);
 
                 //var imageStream = SvgUtility.CreateImage(stream, 68, 68, Colors.Transparent).Result;
 

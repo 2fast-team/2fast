@@ -11,6 +11,7 @@ using Project2FA.UWP.Services;
 using System.Threading.Tasks;
 using Project2FA.UWP.Views;
 using Prism.Services.Dialogs;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Project2FA.UWP.Utils
 {
@@ -81,9 +82,10 @@ namespace Project2FA.UWP.Utils
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
                 PrimaryButtonCommand = new DelegateCommand(async () =>
                 {
+                    var dialog = new ChangeDatafilePasswordContentDialog();
                     var param = new DialogParameters();
-                    param.Add("boolean", true);
-                    await dialogService.ShowDialogAsync(new ChangeDatafilePasswordContentDialog(), param);
+                    param.Add("isInvalid", true);
+                    await dialogService.ShowDialogAsync(dialog, param);
                 }),
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 

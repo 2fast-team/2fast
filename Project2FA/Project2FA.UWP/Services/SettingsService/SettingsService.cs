@@ -93,6 +93,12 @@ namespace Project2FA.UWP.Services
             set => _helper.TryWrite(nameof(UseExtendedHash), value);
         }
 
+        public bool UseAutoLogout
+        {
+            get => _helper.SafeRead(nameof(UseAutoLogout), true);
+            set => _helper.TryWrite(nameof(UseAutoLogout), value);
+        }
+
         public bool UseNTPServerCorrection
         {
             get => _helper.SafeRead(nameof(UseNTPServerCorrection), false);

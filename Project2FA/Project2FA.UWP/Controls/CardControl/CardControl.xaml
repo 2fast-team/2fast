@@ -14,7 +14,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="16" />
-        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Margin" Value="0,0,0,2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:CardControl">

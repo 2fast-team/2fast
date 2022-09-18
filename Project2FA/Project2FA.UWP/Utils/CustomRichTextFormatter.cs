@@ -114,17 +114,22 @@ namespace Project2FA.UWP.Utils
             get
             {
                 BoldButton = CommonButtons.Bold;
+                BoldButton.ToolTip = Strings.Resources.TextFormatterBoldToolTip;
                 ItalicButton = CommonButtons.Italics;
+                ItalicButton.ToolTip = Strings.Resources.TextFormatterItalicToolTip;
                 StrikeButton = CommonButtons.Strikethrough;
+                StrikeButton.ToolTip = Strings.Resources.TextFormatterStrikeToolTip;
                 Underline = new ToolbarButton
                 {
-                    //ToolTip = "WCT_TextToolbar_UnderlineLabel".GetLocalized("Microsoft.Toolkit.Uwp.UI.Controls.Core/Resources"),
+                    ToolTip = Strings.Resources.TextFormatterUnderlineToolTip,
                     Icon = new SymbolIcon { Symbol = Symbol.Underline },
                     ShortcutKey = VirtualKey.U,
                     Activation = ((CustomRichTextButtonActions)ButtonActions).FormatUnderline
                 };
                 ListButton = CommonButtons.List;
+                ListButton.ToolTip = Strings.Resources.TextFormatterListToolTip;
                 OrderedListButton = CommonButtons.OrderedList;
+                OrderedListButton.ToolTip = Strings.Resources.TextFormatterOrderedToolTip;
 
                 return new ButtonMap
                 {

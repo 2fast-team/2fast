@@ -734,12 +734,9 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>• Für Accounts können nun Bilder aus einer Auswahlliste verwendet werden
-• Notizfunktion wurde für Accounts hinzugefügt
-• QR-Code Backups aus dem Google Authentifikator können importiert werden
-• Die Möglichkeit zur Erstellung und zur Nutzung von Datendateien durch eine WebDAV-Anbindung ist als Beta-Version freigeschaltet worden
-• Ein Tutorial wurde für die Funktionserklärung implementiert
-• Experteneinstellungen wurden bei der Accounterstellung hinzugefügt</value>
+    <value>• Verknüpfung des Datentyps „.2fa“ mit dieser App. Mit einem Doppelklick auf eine Datendatei wird die App nun geöffnet
+• Die Automatische Sperrung der App kann nun in den Einstellungen deaktiviert werden
+• Es wurde das Problem behoben, das Passwörter mit einem Leerzeichen falsch gespeichert wurden</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen</value>
@@ -951,5 +948,35 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   </data>
   <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
     <value>Laden einer Datendatei</value>
+  </data>
+  <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
+    <value>Automatische Sperrung</value>
+  </data>
+  <data name="FunctionNotAvailable" xml:space="preserve">
+    <value>Funktion nicht verfügbar</value>
+  </data>
+  <data name="WindowsHelloNotAvailable" xml:space="preserve">
+    <value>Windows Hello ist nicht ausführbar, da für die Datendatei kein Password in dem geschützten Speicher hinterlegt ist.</value>
+  </data>
+  <data name="ErrorGenerateTOTPCode" xml:space="preserve">
+    <value>Der Geheime Schlüssel für den Account {0} ist leer oder nicht lesbar. Bitte starten Sie die App neu. Falls das Problem weiterhin bestehen sollte, bereinigen Sie den Account {0} und fügen Sie diesen erneut hinzu.</value>
+  </data>
+  <data name="TextFormatterBoldToolTip" xml:space="preserve">
+    <value>Fettdruck</value>
+  </data>
+  <data name="TextFormatterItalicToolTip" xml:space="preserve">
+    <value>Kursivschrift</value>
+  </data>
+  <data name="TextFormatterStrikeToolTip" xml:space="preserve">
+    <value>Durchgestrichen</value>
+  </data>
+  <data name="TextFormatterUnderlineToolTip" xml:space="preserve">
+    <value>Unterstreichen</value>
+  </data>
+  <data name="TextFormatterListToolTip" xml:space="preserve">
+    <value>Liste</value>
+  </data>
+  <data name="TextFormatterOrderedToolTip" xml:space="preserve">
+    <value>geordnete Liste</value>
   </data>
 </root>

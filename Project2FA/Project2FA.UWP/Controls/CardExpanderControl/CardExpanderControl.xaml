@@ -14,10 +14,9 @@
     <!-- Card used in a Expander header -->
     <Style x:Key="ExpanderHeaderSettingStyle" TargetType="controls:CardControl">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Padding" Value="0, 14, 0, 14" />
-        <Setter Property="Margin" Value="0"/>
+        <!--<Setter Property="BorderThickness" Value="0" />-->
+        <!--<Setter Property="BorderBrush" Value="Transparent" />-->
+        <!--<Setter Property="Padding" Value="0, 14, 0, 14" />-->
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
@@ -26,8 +25,8 @@
     <!-- Card used in a Expander header -->
     <Style x:Key="ExpanderContentSettingStyle" TargetType="controls:CardControl">
         <!--<Setter Property="Background" Value="Transparent" />-->
-        <Setter Property="BorderThickness" Value="0,1,0,0" />
-        <Setter Property="BorderBrush" Value="{ThemeResource CardBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <!--<Setter Property="BorderBrush" Value="{ThemeResource CardBorderBrush}" />-->
         <Setter Property="Padding" Value="{StaticResource ExpanderSettingMargin}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
@@ -35,10 +34,11 @@
     <!-- Card expander style -->
     <Style x:Key="CardExpanderStyle" TargetType="muxc:Expander">
         <!--<Setter Property="Background" Value="{ThemeResource TwoFABackgroundBrush}" />-->
-        <Setter Property="BorderThickness" Value="{ThemeResource CardBorderThickness}" />
-        <Setter Property="BorderBrush" Value="{ThemeResource CardBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <!--<Setter Property="BorderBrush" Value="{ThemeResource CardBorderBrush}" />-->
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="0,0,0,2"/>
     </Style>
 
     <Style x:Key="ExpanderSeparatorStyle" TargetType="Rectangle">

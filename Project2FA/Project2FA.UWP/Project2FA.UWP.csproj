@@ -11,7 +11,7 @@
     <AssemblyName>Project2FA.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22621.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -2473,6 +2473,7 @@
     <Content Include="Assets\AccountIcons\zwave.svg" />
     <Content Include="Assets\AccountIcons\zyte.svg" />
     <Content Include="Assets\Background\mhellmeier_blue-hills.jpg" />
+    <Content Include="Assets\FileLogo.png" />
     <Content Include="Assets\Infoelements\AuthSystemstorageDE.png" />
     <Content Include="Assets\Infoelements\AuthSystemstorageEN.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
@@ -2582,7 +2583,7 @@
       <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.8.1</Version>
+      <Version>2.7.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>

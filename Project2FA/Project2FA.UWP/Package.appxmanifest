@@ -4,8 +4,8 @@
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          IgnorableNamespaces="uap mp rescap">
-	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.1.0.0" />
-	<mp:PhoneIdentity PhoneProductId="2ec429e4-eb48-4c17-ad87-f4f3962c2cb2" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.2.0.0" />
+	<mp:PhoneIdentity PhoneProductId="81c17ee8-a49a-45af-ab75-4b390e1dc2e8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 	<Properties>
 		<DisplayName>2fast (Beta)</DisplayName>
 		<PublisherDisplayName>Jan Philipp Weber</PublisherDisplayName>
@@ -32,7 +32,7 @@
 			<Extensions>
 				<uap:Extension Category="windows.fileTypeAssociation">
 					<uap:FileTypeAssociation Name="2fa">
-						<uap:Logo>Assets\StoreLogo.scale-400.png</uap:Logo>
+						<uap:Logo>Assets\FileLogo.png</uap:Logo>
 						<uap:SupportedFileTypes>
 							<uap:FileType>.2fa</uap:FileType>
 						</uap:SupportedFileTypes>

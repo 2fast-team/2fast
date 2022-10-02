@@ -8,7 +8,7 @@ namespace Project2FA.Core.Services
     {
         public static byte[] CreateSHA512ByteArrayHash(string input)
         {
-            using (SHA512Managed sha512 = new SHA512Managed())
+            using (SHA512 sha512 = SHA512.Create())
             {
                 var hash = sha512.ComputeHash(Encoding.UTF8.GetBytes(input));
                 return hash;

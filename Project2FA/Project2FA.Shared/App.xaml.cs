@@ -26,7 +26,7 @@ namespace Project2FA
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : PrismApplication
+    public sealed partial class App : Application
     {
         private static Window _window;
 

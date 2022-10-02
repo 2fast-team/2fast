@@ -22,22 +22,17 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.4.13" />
+    <PackageReference Include="Uno.UI" Version="4.5.9" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.3.6" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.4.13" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.9" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
-	<PackageReference Include="Prism.DryIoc.Uno" Version="8.1.97" />
-	<PackageReference Include="Microsoft.Toolkit.Mvvm">
-		<Version>7.1.2</Version>
-	</PackageReference>
 	<PackageReference Include="Newtonsoft.Json.Encryption">
 		<Version>2.2.0</Version>
 	</PackageReference>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0-android'">
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.0" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0-ios' or '$(TargetFramework)'=='net6.0-maccatalyst'">

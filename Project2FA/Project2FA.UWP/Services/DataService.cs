@@ -9,7 +9,6 @@ using Windows.Storage;
 using System.Collections.Specialized;
 using OtpNet;
 using Windows.UI.Xaml.Controls;
-using Prism.Commands;
 using Prism.Logging;
 using Project2FA.Core.Utils;
 using Windows.UI.Xaml;
@@ -39,6 +38,7 @@ using Windows.Storage.Search;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core.Messenger;
 using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.Services
 {
@@ -460,7 +460,7 @@ namespace Project2FA.UWP.Services
             changePathBTN.Content = Resources.ChangeDatafilePath;
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            changePathBTN.Command = new DelegateCommand(async () =>
+            changePathBTN.Command = new RelayCommand(async () =>
             {
                 selectedOption = true;
                 dialog.Hide();
@@ -483,7 +483,7 @@ namespace Project2FA.UWP.Services
             factoryResetBTN.Content = Resources.FactoryReset;
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            factoryResetBTN.Command = new DelegateCommand(async () =>
+            factoryResetBTN.Command = new RelayCommand(async () =>
             {
                 DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
                 //delete password in the secret vault
@@ -499,7 +499,7 @@ namespace Project2FA.UWP.Services
             dialog.Content = stackPanel;
             dialog.PrimaryButtonText = Resources.CloseApp;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            dialog.PrimaryButtonCommand = new DelegateCommand(() =>
+            dialog.PrimaryButtonCommand = new RelayCommand(() =>
             {
                 Prism.PrismApplicationBase.Current.Exit();
             });
@@ -530,7 +530,7 @@ namespace Project2FA.UWP.Services
             markdown.Text = string.Format(Resources.ErrorGenerateTOTPCode, label);
             dialog.Content = markdown;
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+            dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
                 await CoreApplication.RequestRestartAsync("NullableSecretKey");
             });
@@ -538,7 +538,7 @@ namespace Project2FA.UWP.Services
             dialog.PrimaryButtonText = Resources.RestartApp;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
             dialog.SecondaryButtonText = Resources.Confirm;
-            dialog.SecondaryButtonCommand = new DelegateCommand(() =>
+            dialog.SecondaryButtonCommand = new RelayCommand(() =>
             {
                 //Prism.PrismApplicationBase.Current.Exit();
             });

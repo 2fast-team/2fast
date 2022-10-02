@@ -1,10 +1,8 @@
-﻿using Prism.Mvvm;
-using System;
+﻿using System;
 using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Services.Enums;
 using Windows.Storage;
 using System.Windows.Input;
-using Prism.Commands;
 using Windows.ApplicationModel.Core;
 using Project2FA.UWP.Strings;
 using Project2FA.UWP.Services;
@@ -26,13 +24,15 @@ using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 using Project2FA.Core;
 using Windows.ApplicationModel.Email;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
     /// <summary>
     /// Navigation part from the settings page
     /// </summary>
-    public class SettingPageViewModel : BindableBase, IInitialize, IConfirmNavigationAsync
+    public class SettingPageViewModel : ObservableObject, IInitialize, IConfirmNavigationAsync
     {
         public SettingsPartViewModel SettingsPartViewModel { get; }
         public AboutPartViewModel AboutPartViewModel { get; }
@@ -46,7 +46,7 @@ namespace Project2FA.UWP.ViewModels
             SettingsPartViewModel = new SettingsPartViewModel(dialogService);
             DatafilePartViewModel = new DatafilePartViewModel(dialogService, secretService);
             AboutPartViewModel  = new AboutPartViewModel(marketplaceService);
-            RateAppCommand = new DelegateCommand(() =>
+            RateAppCommand = new RelayCommand(() =>
             {
                 AboutPartViewModel.RateApp();
             });
@@ -86,7 +86,7 @@ namespace Project2FA.UWP.ViewModels
     /// <summary>
     /// Main content part of the settings page
     /// </summary>
-    public class SettingsPartViewModel : BindableBase
+    public class SettingsPartViewModel : ObservableObject
     {
         private SettingsService _settings;
         private IDialogService _dialogService { get; }
@@ -111,8 +111,8 @@ namespace Project2FA.UWP.ViewModels
                 _settings = SettingsService.Instance;
             _dialogService = dialogService;
 
-            MakeFactoryResetCommand = new DelegateCommand(MakeFactoryReset);
-            SaveNTPServerAddressCommand = new DelegateCommand(() =>
+            MakeFactoryResetCommand = new RelayCommand(MakeFactoryReset);
+            SaveNTPServerAddressCommand = new RelayCommand(() =>
             {
                 SettingsService.Instance.NTPServerString = _ntpServerStr;
                 NtpServerEditValid = false;
@@ -226,7 +226,7 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 _settings.UseHiddenTOTP = value;
-                RaisePropertyChanged(nameof(UseHiddenTOTP));
+                OnPropertyChanged(nameof(UseHiddenTOTP));
             }
         }
 
@@ -236,7 +236,7 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 _settings.PrideMonthDesign = value;
-                RaisePropertyChanged(nameof(PrideMonthDesign));
+                OnPropertyChanged(nameof(PrideMonthDesign));
             }
         }
 
@@ -308,7 +308,7 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 _settings.PreferWindowsHello = value ? WindowsHelloPreferEnum.Prefer : WindowsHelloPreferEnum.No;
-                RaisePropertyChanged(nameof(IsWindowsHelloActive));
+                OnPropertyChanged(nameof(IsWindowsHelloActive));
             }
         }
 
@@ -325,7 +325,7 @@ namespace Project2FA.UWP.ViewModels
                 if (_settings.UseHeaderBackButton != value)
                 {
                     _settings.UseHeaderBackButton = value;
-                    RaisePropertyChanged(nameof(UseHeaderBackButton));
+                    OnPropertyChanged(nameof(UseHeaderBackButton));
                     App.ShellPageInstance.SetupBackButton();
                 }
             }
@@ -353,7 +353,7 @@ namespace Project2FA.UWP.ViewModels
                         App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(0);
                     }
                     _settings.UseRoundCorner = value;
-                    RaisePropertyChanged(nameof(UseRoundCorner));
+                    OnPropertyChanged(nameof(UseRoundCorner));
                 }
             }
         }
@@ -387,7 +387,7 @@ namespace Project2FA.UWP.ViewModels
                 if (_settings.QRCodeScanSeconds != value)
                 {
                     _settings.QRCodeScanSeconds = value;
-                    RaisePropertyChanged(nameof(SetQRCodeScanSeconds));
+                    OnPropertyChanged(nameof(SetQRCodeScanSeconds));
                 }
             }
         }
@@ -400,7 +400,7 @@ namespace Project2FA.UWP.ViewModels
                 if (_settings.AutoLogoutMinutes != value)
                 {
                     _settings.AutoLogoutMinutes = value;
-                    RaisePropertyChanged(nameof(SetAutoLogoutMinutes));
+                    OnPropertyChanged(nameof(SetAutoLogoutMinutes));
                 }
             }
         }
@@ -431,7 +431,7 @@ namespace Project2FA.UWP.ViewModels
                 {
                     ManualNTPServerConfiurationChecked = false;
                 }
-                RaisePropertyChanged(nameof(UseNTPServerCorrection));
+                OnPropertyChanged(nameof(UseNTPServerCorrection));
             }
         }
 
@@ -441,7 +441,7 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 _settings.UseAutoLogout = value;
-                RaisePropertyChanged(nameof(UseAutoLogout));
+                OnPropertyChanged(nameof(UseAutoLogout));
             }
         }
     }
@@ -449,7 +449,7 @@ namespace Project2FA.UWP.ViewModels
     /// <summary>
     /// Datafile tab from the settings page
     /// </summary>
-    public class DatafilePartViewModel : BindableBase
+    public class DatafilePartViewModel : ObservableObject
     {
         private IDialogService _dialogService { get; }
 
@@ -473,7 +473,7 @@ namespace Project2FA.UWP.ViewModels
 
             // open content dialog to change the password
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            ChangeDatafilePasswordCommand = new DelegateCommand(async() => {
+            ChangeDatafilePasswordCommand = new RelayCommand(async() => {
                 var dialog = new ChangeDatafilePasswordContentDialog();
                 var param = new DialogParameters();
                 param.Add("isInvalid", false);
@@ -531,7 +531,7 @@ namespace Project2FA.UWP.ViewModels
     /// <summary>
     /// About tab from the settings page
     /// </summary>
-    public class AboutPartViewModel : BindableBase
+    public class AboutPartViewModel : ObservableObject
     {
         private IMarketplaceService _marketplaceService { get; }
         public AboutPartViewModel(IMarketplaceService marketplaceService)

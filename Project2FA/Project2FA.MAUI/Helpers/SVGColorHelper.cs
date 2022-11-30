@@ -70,7 +70,7 @@ namespace Project2FA.MAUI.Helpers
                 string path = string.Format("AccountIcons/{0}.svg", name);
                 if (await Microsoft.Maui.Storage.FileSystem.Current.AppPackageFileExistsAsync(path))
                 {
-                    using (Stream fileStream = await Microsoft.Maui.Storage.FileSystem.Current.OpenAppPackageFileAsync(path))
+                    using (Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync(path))
                     {
                         XDocument xmlDocument = XDocument.Load(fileStream);
                         XElement pathAttr = xmlDocument.Descendants().SingleOrDefault(p => p.Name.LocalName == "path");

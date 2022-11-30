@@ -1276,6 +1276,162 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region WriteDatafileErrorBTNCancel
+        /// <summary>
+        ///   Looks up a localized string similar to: Discard changes
+        /// </summary>
+        public static string WriteDatafileErrorBTNCancel
+        {
+            get
+            {
+                return _resourceLoader.GetString("WriteDatafileErrorBTNCancel");
+            }
+        }
+        #endregion
+
+        #region WriteDatafileErrorBTNRetry
+        /// <summary>
+        ///   Looks up a localized string similar to: Save again
+        /// </summary>
+        public static string WriteDatafileErrorBTNRetry
+        {
+            get
+            {
+                return _resourceLoader.GetString("WriteDatafileErrorBTNRetry");
+            }
+        }
+        #endregion
+
+        #region WriteDatafileErrorDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: The changes could not be saved. Do you want to save them again?
+        /// </summary>
+        public static string WriteDatafileErrorDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("WriteDatafileErrorDesc");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVServerNotFound
+        /// <summary>
+        ///   Looks up a localized string similar to: Address not found
+        /// </summary>
+        public static string DatafileViewModelWebDAVServerNotFound
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVServerNotFound");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVServerNotFoundDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: The address to the WebDAV service could not be found.
+        /// </summary>
+        public static string DatafileViewModelWebDAVServerNotFoundDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVServerNotFoundDesc");
+            }
+        }
+        #endregion
+
+        #region WebDAVAppPasswordInfo
+        /// <summary>
+        ///   Looks up a localized string similar to: An app password is required to log in to the WebDAV service, this can be created in the settings of the WebDAV service.
+        /// </summary>
+        public static string WebDAVAppPasswordInfo
+        {
+            get
+            {
+                return _resourceLoader.GetString("WebDAVAppPasswordInfo");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVCredentialsError
+        /// <summary>
+        ///   Looks up a localized string similar to: Login error
+        /// </summary>
+        public static string DatafileViewModelWebDAVCredentialsError
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVCredentialsError");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVCredentialsErrorDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: Your username or password is invalid.
+        /// </summary>
+        public static string DatafileViewModelWebDAVCredentialsErrorDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVCredentialsErrorDesc");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVMaintenanceError
+        /// <summary>
+        ///   Looks up a localized string similar to: Server in maintenance mode
+        /// </summary>
+        public static string DatafileViewModelWebDAVMaintenanceError
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVMaintenanceError");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVMaintenanceErrorDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: Login is currently not possible because the WebDAV service is currently in maintenance mode.
+        /// </summary>
+        public static string DatafileViewModelWebDAVMaintenanceErrorDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVMaintenanceErrorDesc");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVNotInstalledError
+        /// <summary>
+        ///   Looks up a localized string similar to: Server not installed
+        /// </summary>
+        public static string DatafileViewModelWebDAVNotInstalledError
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVNotInstalledError");
+            }
+        }
+        #endregion
+
+        #region DatafileViewModelWebDAVNotInstalledErrorDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: The WebDAV service is currently not properly installed.
+        /// </summary>
+        public static string DatafileViewModelWebDAVNotInstalledErrorDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("DatafileViewModelWebDAVNotInstalledErrorDesc");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1384,6 +1540,18 @@ namespace Project2FA.UWP.Strings{
             TextFormatterUnderlineToolTip,
             TextFormatterListToolTip,
             TextFormatterOrderedToolTip,
+            WriteDatafileErrorBTNCancel,
+            WriteDatafileErrorBTNRetry,
+            WriteDatafileErrorDesc,
+            DatafileViewModelWebDAVServerNotFound,
+            DatafileViewModelWebDAVServerNotFoundDesc,
+            WebDAVAppPasswordInfo,
+            DatafileViewModelWebDAVCredentialsError,
+            DatafileViewModelWebDAVCredentialsErrorDesc,
+            DatafileViewModelWebDAVMaintenanceError,
+            DatafileViewModelWebDAVMaintenanceErrorDesc,
+            DatafileViewModelWebDAVNotInstalledError,
+            DatafileViewModelWebDAVNotInstalledErrorDesc,
         }
 
         private static ResourceLoader _resourceLoader;

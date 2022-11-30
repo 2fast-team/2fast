@@ -105,6 +105,12 @@ namespace Project2FA.UWP.Services
             set => _helper.TryWrite(nameof(UseNTPServerCorrection), value);
         }
 
+        public bool AdvancedPasswordSecurity
+        {
+            get => _helper.SafeRead(nameof(AdvancedPasswordSecurity), false);
+            set => _helper.TryWrite(nameof(AdvancedPasswordSecurity), value);
+        }
+
         public bool UseHiddenTOTP
         {
             get => _helper.SafeRead(nameof(UseHiddenTOTP), false);
@@ -127,6 +133,12 @@ namespace Project2FA.UWP.Services
         {
             get => _helper.SafeRead(nameof(UnhandledExceptionStr), string.Empty);
             set => _helper.TryWrite(nameof(UnhandledExceptionStr), value);
+        }
+
+        public bool UseWindowsHello
+        {
+            get => _helper.SafeRead(nameof(UseWindowsHello), true);
+            set => _helper.TryWrite(nameof(UseWindowsHello), value);
         }
 
         public WindowsHelloPreferEnum PreferWindowsHello

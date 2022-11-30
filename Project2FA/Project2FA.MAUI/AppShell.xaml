@@ -20,7 +20,14 @@
     <ShellContent
         Title="Accounts"
         ContentTemplate="{DataTemplate views:AccountCodePage}"
-        Route="AccountCodePage" />
+        Route="AccountCodePage" >
+
+    </ShellContent>
+
+    <ShellContent
+        Title="SettingsPage"
+        ContentTemplate="{DataTemplate views:SettingsPage}"
+        Route="SettingsPage" />
 
     <ShellContent
         Title="WelcomePage"

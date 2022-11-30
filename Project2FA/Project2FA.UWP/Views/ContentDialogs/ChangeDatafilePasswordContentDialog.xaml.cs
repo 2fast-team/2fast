@@ -6,6 +6,7 @@ using Template10.Services.Secrets;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Project2FA.Core;
+using Template10.Services.Serialization;
 
 namespace Project2FA.UWP.Views
 {
@@ -32,9 +33,11 @@ namespace Project2FA.UWP.Views
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             string hash;
+            var secretService = App.Current.Container.Resolve<ISecretService>();
+            var jsonService = App.Current.Container.Resolve<ISerializationService>();
             if (DataService.Instance.ActivatedDatafile != null)
             {
-                hash = CryptoService.CreateStringHash(App.Current.Container.Resolve<ISecretService>().Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName));
+                hash = CryptoService.CreateStringHash(ProtectData.Unprotect(jsonService.Deserialize<byte[]>(secretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName))));
             }
             else
             {

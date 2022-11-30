@@ -1,14 +1,12 @@
 ﻿using Android.Content;
 using Android.Graphics;
+using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using Project2FA.MAUI.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Project2FA.MAUI.Platforms.Android;
 
 // based on https://github.com/muak/SvgImageSource/blob/922a0dbbbf0b175d6a5ee5766d2891ebb5b93fdf/SvgImageSource.Droid/SvgImageSourceHandler.cs
+[assembly: ExportRenderer(typeof(SvgImageSource), typeof(SvgImageSourceHandler))]
 namespace Project2FA.MAUI.Platforms.Android
 {
     /// <summary>

@@ -149,7 +149,8 @@
                                 x:Uid="UseDataFilePageLoadDatafile"
                                 IsEnabled="{x:Bind ViewModel.DatafileBTNActive,Mode=OneWay}"
                                 Content="~UseDataFilePageLoadDatafile.Content"
-                                Command="{x:Bind ViewModel.SetAndCheckLocalDatafileCommand}"/>
+                                Command="{x:Bind ViewModel.SetAndCheckLocalDatafileCommand}"
+                                Style="{StaticResource AccentButtonStyle}"/>
 
                         </StackPanel>
                     </ScrollViewer>
@@ -194,12 +195,33 @@
                                 Text="{x:Bind ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,0,0,20"/>
 
-                                    <PasswordBox 
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <PasswordBox 
                                 x:Name="PB_WebDAVPassword"
                                 x:Uid="Password" 
                                 Header="~Password.Header" 
                                 Password="{x:Bind ViewModel.WebDAVPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,0,0,32" />
+                                        <HyperlinkButton
+                                    Grid.Column="1"
+                                    Height="36"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    Margin="0,0,0,32"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+                                    Click="HLBTN_AppPasswordInfo"
+                                    VerticalAlignment="Bottom">
+                                            <FontIcon
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"/>
+                                        </HyperlinkButton>
+                                    </Grid>
+                                    
 
                                     <Button
                                 x:Name="UseDatafileContentDialogWDLogin"
@@ -208,6 +230,7 @@
                                 Content="~UseDatafileContentDialogWDLogin.Content" 
                                 Style="{StaticResource AccentButtonStyle}"
                                 HorizontalAlignment="Center"
+                                        IsEnabled="{x:Bind ViewModel.WebDAVCredentialsEntered,Mode=OneWay}"
                                 Command="{x:Bind ViewModel.WebDAVLoginCommand}" Click="UseDatafileContentDialogWDLogin_Click"/>
                                 </StackPanel>
                             </muxc:Expander>

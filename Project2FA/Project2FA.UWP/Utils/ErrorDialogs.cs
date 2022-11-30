@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Project2FA.UWP.Views;
 using Prism.Services.Dialogs;
 using System.Runtime.InteropServices.WindowsRuntime;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.Utils
 {
@@ -72,10 +73,12 @@ namespace Project2FA.UWP.Utils
         public static async Task ShowPasswordError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
+            markdown.Text = Resources.PasswordInvalidMessage;
             ContentDialog dialog = new ContentDialog
             {
                 Title = Resources.PasswordInvalidHeader,
-                Content = Resources.PasswordInvalidMessage,
+                Content = markdown,
                 PrimaryButtonText = Resources.ChangePassword,
                 PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style,
 
@@ -314,6 +317,28 @@ namespace Project2FA.UWP.Utils
             //});
             var result = await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
             SettingsService.Instance.UnhandledExceptionStr = string.Empty;
+        }
+
+        public async static Task WritingDatafilError()
+        {
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.Error;
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
+            markdown.Text = string.Format(Resources.WriteDatafileErrorDesc);
+            dialog.Content = markdown;
+            dialog.PrimaryButtonCommand = new RelayCommand(() =>
+            {
+                DataService.Instance.WriteLocalDatafile();
+            });
+            dialog.PrimaryButtonText = Resources.WriteDatafileErrorBTNRetry;
+            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.SecondaryButtonText = Resources.WriteDatafileErrorBTNCancel;
+            dialog.SecondaryButtonCommand = new RelayCommand(() =>
+            {
+                // ReloadDatafile();
+            });
+            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
     }
 }

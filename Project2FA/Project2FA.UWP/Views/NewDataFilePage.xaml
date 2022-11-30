@@ -111,6 +111,7 @@
                                 Password="{x:Bind ViewModel.PasswordRepeat,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 Margin="0,5,0,12">
                             </PasswordBox>
+
                             <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
@@ -126,7 +127,7 @@
                                 Command="{x:Bind ViewModel.ChangePathCommand}"
                                 x:Uid="NewDatafileContentDialogChangePath"
                                 Content="~NewDatafileContentDialogChangePath.Content"/>
-                            
+
                             <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 

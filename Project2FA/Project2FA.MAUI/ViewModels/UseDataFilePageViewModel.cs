@@ -127,8 +127,6 @@ namespace Project2FA.MAUI.ViewModels
             {
                 SelectedIndex = 1;
             }
-            //	public.folder
-            // "public.2fa-extension", "public.octet-stream", "com.jpwtechnology.2fa", "null", "application/octet-stream"
 
             var customFileType = new FilePickerFileType(
                 new Dictionary<DevicePlatform, IEnumerable<string>>
@@ -143,8 +141,8 @@ namespace Project2FA.MAUI.ViewModels
             {
                 PickerTitle = "Please select a comic file",
                 FileTypes = customFileType,
+                
             };
-
 
             FileResult result = await FilePicker.Default.PickAsync(options);
 

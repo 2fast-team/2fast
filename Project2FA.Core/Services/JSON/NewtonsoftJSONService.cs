@@ -88,6 +88,32 @@ namespace Project2FA.Core.Services.JSON
             }
         }
 
+        public string SerializeEncrypt(byte[] keyArray, byte[] initVectorArray, object value)
+        {
+            var byteArrayKey = CryptoService.CreateByteArrayKey(keyArray);
+            var serializer = new JsonSerializer
+            {
+                ContractResolver = _encryptionFactory.GetContractResolver()
+            };
+
+            string serialized;
+
+            // per serialize session
+            Aes algorithm = Aes.Create();
+            algorithm.Key = byteArrayKey;
+            algorithm.IV = initVectorArray;
+
+            using (_encryptionFactory.GetEncryptSession(algorithm))
+            {
+                StringBuilder builder = new StringBuilder();
+                using (StringWriter writer = new StringWriter(builder))
+                {
+                    serializer.Serialize(writer, value);
+                }
+                return serialized = builder.ToString();
+            }
+        }
+
 
         /// <summary>
         /// Deserializes the value.
@@ -161,6 +187,28 @@ namespace Project2FA.Core.Services.JSON
         {
             var byteArrayKey = CryptoService.CreateByteArrayKey(key);
             
+
+            var serializer = new JsonSerializer
+            {
+                ContractResolver = _encryptionFactory.GetContractResolver()
+            };
+
+            Aes algorithm = Aes.Create();
+            algorithm.Key = byteArrayKey;
+            algorithm.IV = initVector;
+
+            using (_encryptionFactory.GetDecryptSession(algorithm))
+            using (var stringReader = new StringReader(value))
+            using (var jsonReader = new JsonTextReader(stringReader))
+            {
+                return serializer.Deserialize<T>(jsonReader);
+            }
+        }
+
+        public T DeserializeDecrypt<T>(byte[] keyArray, byte[] initVector, string value)
+        {
+            var byteArrayKey = CryptoService.CreateByteArrayKey(keyArray);
+
 
             var serializer = new JsonSerializer
             {

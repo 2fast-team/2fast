@@ -6,7 +6,7 @@
 
     <!-- Thickness -->
     <Thickness x:Key="ExpanderContentPadding">0</Thickness>
-    <Thickness x:Key="ExpanderSettingMargin">56, 8, 40, 8</Thickness>
+    <Thickness x:Key="ExpanderSettingMargin">0, 8, 40, 8</Thickness>
 
     <SolidColorBrush x:Key="ExpanderChevronPointerOverBackground">Transparent</SolidColorBrush>
 
@@ -16,7 +16,7 @@
         <Setter Property="Background" Value="Transparent" />
         <!--<Setter Property="BorderThickness" Value="0" />-->
         <!--<Setter Property="BorderBrush" Value="Transparent" />-->
-        <!--<Setter Property="Padding" Value="0, 14, 0, 14" />-->
+        <Setter Property="Padding" Value="0, 14, 0, 14" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 

@@ -16,13 +16,15 @@ using Microsoft.Toolkit.Uwp.UI.Controls;
 using Template10.Services.Secrets;
 using Project2FA.Core;
 using Prism.Services.Dialogs;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
     /// <summary>
     /// View model for the login page
     /// </summary>
-    public class LoginPageViewModel : BindableBase
+    public class LoginPageViewModel : ObservableObject
     {
         private bool _windowsHelloIsUsable, _isLogout;
         private string _password;
@@ -37,8 +39,8 @@ namespace Project2FA.UWP.ViewModels
         public LoginPageViewModel()
         {
             DialogService = App.Current.Container.Resolve<IDialogService>();
-            LoginCommand = new DelegateCommand(CheckLogin);
-            WindowsHelloLoginCommand = new DelegateCommand(WindowsHelloLogin);
+            LoginCommand = new RelayCommand(CheckLogin);
+            WindowsHelloLoginCommand = new RelayCommand(WindowsHelloLogin);
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
         }

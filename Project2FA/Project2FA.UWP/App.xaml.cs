@@ -88,6 +88,21 @@ namespace Project2FA.UWP
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
+            // view models
+            //container.RegisterSingleton<AccountCodePageViewModel>();
+            //container.RegisterSingleton<WelcomePageViewModel>();
+            //container.RegisterSingleton<SettingPageViewModel>();
+            //container.RegisterSingleton<BlankPageViewModel>();
+            //container.RegisterSingleton<UseDataFilePageViewModel>();
+            //container.RegisterSingleton<NewDataFilePageViewModel>();
+            //container.RegisterSingleton<AddAccountContentDialogViewModel>();
+            //container.RegisterSingleton<ChangeDatafilePasswordContentDialogViewModel>();
+            //container.RegisterSingleton<EditAccountContentDialogViewModel>();
+            //container.RegisterSingleton<UpdateDatafileContentDialogViewModel>();
+            //container.RegisterSingleton<UseDatafileContentDialogViewModel>();
+            //container.RegisterSingleton<WebViewDatafileContentDialogViewModel>();
+            //container.RegisterSingleton<DisplayQRCodeContentDialogViewModel>();
+            //container.RegisterSingleton<TutorialContentDialogViewModel>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();
@@ -174,15 +189,8 @@ namespace Project2FA.UWP
                     DataService.Instance.ActivatedDatafile = (StorageFile)file;
                     FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
                     Window.Current.Content = fileActivationPage;
-                    //await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(FileActivationPage));
-                    //if (!(Window.Current.Content is ShellPage))
-                    //{
-                    //    Window.Current.Content = ShellPageInstance;
-                    //}
-                        
-                    //FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
-                    //Window.Current.Content = fileActivationPage;
                 }
+                // else invalid request
             }
 
             Window.Current.Activate();

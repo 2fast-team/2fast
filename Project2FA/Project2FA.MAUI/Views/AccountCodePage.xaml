@@ -6,118 +6,100 @@
              xmlns:converters="clr-namespace:Project2FA.MAUI.Converters"
              xmlns:controls="clr-namespace:Project2FA.MAUI.Controls"
              xmlns:models="clr-namespace:Project2FA.Repository.Models;assembly=Project2FA.Repository"
+             xmlns:helpers="clr-namespace:Project2FA.MAUI.Helpers"
              Shell.NavBarIsVisible="false"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Accounts">
 
     <ContentPage.Resources>
-        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
-        <converters:FavouriteIconConverter x:Key="FavouriteIconConverter"/>
-        <converters:NameInitialsConverter x:Key="NameInitialsConverter"/>
-        <converters:SVGImageConverter x:Key="SVGImageConverter"/>
-    </ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:FavouriteIconConverter x:Key="FavouriteIconConverter"/>
+            <converters:NameInitialsConverter x:Key="NameInitialsConverter"/>
+            <converters:SVGImageConverter x:Key="SVGImageConverter"/>
+            <converters:UrlToImageSourceConverter x:Key="UrlToImageSourceConverter"/>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <CollectionView ItemsSource="{x:Bind ViewModel.TwoFADataService.CollectionSort, Mode=OneWay}">
-            <CollectionView.Margin>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="iOS" Value="0,8,0,0" />
-                    <On Platform="Android, WinPhone, Windows" Value="0,4,0,0" />
-                </OnPlatform>
-            </CollectionView.Margin>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:TwoFACodeModel">
-                    <Frame 
-                        BackgroundColor="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}" 
-                        Margin="0,4,0,4">
-                        <Frame.Shadow>
-                            <Shadow Brush="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}"
+            <DataTemplate x:Key="NormalTwoFACodeTemplate" x:DataType="models:TwoFACodeModel">
+                <Frame 
+                    BackgroundColor="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}" 
+                    Margin="0,4,0,4">
+                    <Frame.Shadow>
+                        <Shadow Brush="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}"
                                 Offset="20,20"
                                 Radius="40"
                                 Opacity="0.8" />
-                        </Frame.Shadow>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="60"/>
-                             
-                            </Grid.ColumnDefinitions>
+                    </Frame.Shadow>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="60"/>
 
-                            <!--ImageSource="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"-->
+                        </Grid.ColumnDefinitions>
 
-                            <toolkit:AvatarView
-                                WidthRequest="68"
-                                IsVisible="{x:Bind IsFavourite,Mode=OneWay}"
-                                HeightRequest="68"
-                                CornerRadius="40"
-                                Margin="0,0,8,0"
-                                Style="{StaticResource AvatarViewAccent}"
-                                ImageSource="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"
-                                Text="{x:Bind Label, Mode=OneWay, Converter={StaticResource NameInitialsConverter}}"
-                                Grid.Column="0"
-                                Grid.RowSpan="2">
-                            </toolkit:AvatarView>
-                            <toolkit:AvatarView 
+                        <!--ImageSource="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"-->
+
+                        <toolkit:AvatarView 
                                 WidthRequest="68"
                                 HeightRequest="68"
                                 CornerRadius="40"
                                 Margin="0,0,8,0"
                                 Style="{StaticResource AvatarViewImagesLarge}"
-                                IsVisible="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
-                                ImageSource="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"
                                 Text="{x:Bind Label, Mode=OneWay, Converter={StaticResource NameInitialsConverter}}"
+                                ImageSource="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource UrlToImageSourceConverter}}"
                                 Grid.Column="0"
                                 Grid.RowSpan="2">
-                                <!--<toolkit:AvatarView.ImageSource>
-                                    <StreamImageSource Stream="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"/>
-                                </toolkit:AvatarView.ImageSource>-->
-                                
-                            </toolkit:AvatarView>
-                            <Label 
+                            <!--<GraphicsView HeightRequest="68" WidthRequest="68">
+                                <GraphicsView.Drawable>
+                                    <helpers:LoadImageDrawable/>
+                                </GraphicsView.Drawable>
+                            </GraphicsView>-->
+                            <!--<toolkit:AvatarView.ImageSource>
+                                <controls:SvgImageSource Source="acer.svg" Width="68" Height="68" Color="Green"/>
+                                --><!--<StreamImageSource Stream="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource SVGImageConverter}}"/>--><!--
+                            </toolkit:AvatarView.ImageSource>-->
+
+                        </toolkit:AvatarView>
+                        <Label 
                                 Grid.Column="1"
                                 Grid.Row="0" 
                                 Text="{x:Bind Label, Mode=OneWay}"
                                 FontAttributes="Bold"
                                 FontSize="20"
                                 Margin="0,0,0,4"/>
-                            <Label 
+                        <Label 
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
                                 Grid.Row="1" 
                                 FontSize="20"
                                 Text="{x:Bind Issuer, Mode=OneWay}"
                                 Margin="0,4,0,4"/>
-                            <HorizontalStackLayout Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" >
-                                <Grid Margin="0,4,0,4">
-                                    <Label 
+                        <HorizontalStackLayout Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" >
+                            <Grid Margin="0,4,0,4">
+                                <Label 
                                 FontSize="24"
                                 CharacterSpacing="1"
                                         MinimumHeightRequest="20"
                                 IsVisible="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
                                 TextColor="{StaticResource Primary }"
                                 Text="{x:Bind TwoFACode, Mode=OneWay}"/>
-                                    <Label
+                                <Label
                                 Text="______"
                                 IsVisible="{x:Bind HideTOTPCode, Mode=OneWay}"
                                 FontSize="24"
                                         MinimumHeightRequest="20"
                                 CharacterSpacing="3"    
                                 TextColor="{StaticResource Primary}" />
-                                </Grid>
+                            </Grid>
 
-                                <Button
+                            <Button
                                 WidthRequest="68" 
-                                HeightRequest="36"
+                                MinimumHeightRequest="36"
                                 BackgroundColor="Transparent"
                                 IsVisible="{Binding Source={x:Reference Page},Path=ViewModel.CodeVisibilityOptionEnabled}"
                                 CommandParameter="{Binding}"
@@ -125,56 +107,171 @@
                                 FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                                 FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
                                 Text="&#xE5F3;">
-                                </Button>
-                                <Button 
+                            </Button>
+                            <Button 
                                     x:Name="BTN_CopyToClipboard"
                                     WidthRequest="68" 
                                     BackgroundColor="Transparent"
                                     FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                                     FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
                                     Text="&#xF32A;"
-                                    HeightRequest="36" 
+                                    MinimumHeightRequest="36" 
                                     Clicked="BTN_CopyToClipboard_Clicked">
-                                </Button>
-                                <Button
+                            </Button>
+                            <Button
                                     WidthRequest="68" 
                                     BackgroundColor="Transparent"
                                     FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                                     FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
                                     Text="&#xEB9F;"
-                                    HeightRequest="36" 
+                                    MinimumHeightRequest="36" 
                                     />
-                                <!--Text="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteIconConverter}}"-->
-                            </HorizontalStackLayout>
+                            <!--Text="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteIconConverter}}"-->
+                        </HorizontalStackLayout>
 
-                            <Label 
+                        <Label 
                                 Grid.RowSpan="2" 
                                 Grid.Column="2"
                                 Text ="{x:Bind Seconds, Mode=OneWay}"
                                 MaxLines="5"/>
 
-                        </Grid>
+                    </Grid>
 
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                </Frame>
+            </DataTemplate>
+
+            <DataTemplate x:Key="AccentTwoFACodeTemplate" x:DataType="models:TwoFACodeModel">
+                <Frame 
+                        BackgroundColor="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}" 
+                        Margin="0,4,0,4">
+                    <Frame.Shadow>
+                        <Shadow Brush="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}"
+                                Offset="20,20"
+                                Radius="40"
+                                Opacity="0.8" />
+                    </Frame.Shadow>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+
+                        <toolkit:AvatarView
+                        WidthRequest="68"
+                        HeightRequest="68"
+                        CornerRadius="40"
+                        Margin="0,0,8,0"
+                        Style="{StaticResource AvatarViewAccent}"
+                        ImageSource="{x:Bind AccountSVGIcon,Mode=OneWay, Converter={StaticResource UrlToImageSourceConverter}}"
+                        Text="{x:Bind Label, Mode=OneWay, Converter={StaticResource NameInitialsConverter}}"
+                        Grid.Column="0"
+                        Grid.RowSpan="2">
+                            
+                            
+                        </toolkit:AvatarView>
+
+                        <Label 
+                        Grid.Column="1"
+                        Grid.Row="0" 
+                        Text="{x:Bind Label, Mode=OneWay}"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Margin="0,0,0,4"/>
+                        <Label 
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1" 
+                        FontSize="20"
+                        Text="{x:Bind Issuer, Mode=OneWay}"
+                        Margin="0,4,0,4"/>
+                        <HorizontalStackLayout Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" >
+                            <Grid Margin="0,4,0,4">
+                                <Label 
+                                FontSize="24"
+                                CharacterSpacing="1"
+                                        MinimumHeightRequest="20"
+                                IsVisible="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
+                                TextColor="{StaticResource Primary }"
+                                Text="{x:Bind TwoFACode, Mode=OneWay}"/>
+                                <Label
+                                Text="______"
+                                IsVisible="{x:Bind HideTOTPCode, Mode=OneWay}"
+                                FontSize="24"
+                                        MinimumHeightRequest="20"
+                                CharacterSpacing="3"    
+                                TextColor="{StaticResource Primary}" />
+                            </Grid>
+
+                            <Button
+                                WidthRequest="68" 
+                                MinimumHeightRequest="36"
+                                BackgroundColor="Transparent"
+                                IsVisible="{Binding Source={x:Reference Page},Path=ViewModel.CodeVisibilityOptionEnabled}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding Source={x:Reference Page},Path=ViewModel.HideOrShowTOTPCodeCommand,Mode=OneTime}"
+                                FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                Text="&#xE5F3;">
+                            </Button>
+                            <Button 
+                                    x:Name="BTN_CopyToClipboard"
+                                    WidthRequest="68" 
+                                    BackgroundColor="Transparent"
+                                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                    FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                    Text="&#xF32A;"
+                                    MinimumHeightRequest="36" 
+                                    Clicked="BTN_CopyToClipboard_Clicked">
+                            </Button>
+                            <Button
+                                    WidthRequest="68" 
+                                    BackgroundColor="Transparent"
+                                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                    FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                    Text="&#xEB9F;"
+                                    MinimumHeightRequest="36"/>
+                        </HorizontalStackLayout>
+
+                        <Label 
+                            Grid.RowSpan="2" 
+                            Grid.Column="2"
+                            Text ="{x:Bind Seconds, Mode=OneWay}"
+                            MaxLines="5"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.Resources>
+            <helpers:AccountAvatarTemplateSelector 
+                x:Key="AccountAvatarTemplateSelector"
+                Normal="{StaticResource NormalTwoFACodeTemplate}" 
+                Accent="{StaticResource AccentTwoFACodeTemplate}"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <CollectionView 
+            ItemsSource="{x:Bind ViewModel.TwoFADataService.CollectionSort, Mode=OneWay}"
+            ItemTemplate="{StaticResource AccountAvatarTemplateSelector}">
+            <CollectionView.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0,8,0,0" />
+                    <On Platform="Android, Windows" Value="0,4,0,0" />
+                </OnPlatform>
+            </CollectionView.Margin>
         </CollectionView>
         <Grid Grid.Row="1" Background="{x:AppThemeBinding Dark={StaticResource CommandBarDarkBackground},Light={StaticResource CommandBarLightBackground}}">
-            <!--<toolkit:AvatarView
-                                WidthRequest="68"
-                                
-                                HeightRequest="68"
-                                CornerRadius="40"
-                                Margin="0,0,8,0"
-                                Style="{StaticResource AvatarViewAccent}"
-                                
-                                Text="ABC"
-                                Grid.Column="0"
-                                Grid.RowSpan="2">
-                <toolkit:AvatarView.ImageSource>
-                    <controls:SvgImageSource Source="AccountIcons/google.svg" Width="68" Height="68"/>
-                </toolkit:AvatarView.ImageSource>
-            </toolkit:AvatarView>-->
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Button 
                     WidthRequest="96" 
@@ -213,6 +310,8 @@
                 <Button 
                     WidthRequest="96" 
                     BackgroundColor="Transparent" 
+                    TextColor="{x:AppThemeBinding Dark=White,Light=Black}"
+                    Command="{x:Bind ViewModel.NavigateToSettingsCommand}"
                     FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
                     FontSize="{OnPlatform iOS=32, Android=28, Default=24}"
                     Text="&#xF6A8;">

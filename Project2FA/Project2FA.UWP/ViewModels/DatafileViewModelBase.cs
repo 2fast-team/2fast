@@ -17,10 +17,13 @@ using Project2FA.UWP.Views;
 using Prism.Services.Dialogs;
 using Windows.UI.Xaml.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Prism.Commands;
+using Project2FA.UWP.Strings;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class DatafileViewModelBase : ObservableObject
+    public class DatafileViewModelBase : ObservableRecipient
     {
         private string _serverAddress;
         private string _username;
@@ -40,6 +43,7 @@ namespace Project2FA.UWP.ViewModels
         private bool _webDAVDatafilePropertiesExpanded;
         private bool _isWebDAVCreationButtonEnable;
         private bool _webDAVLoginError;
+        private bool _webDAVCredentialsEntered;
 
         public ICommand PrimaryButtonCommand { get; set; }
         public ICommand ChangePathCommand { get; set; }
@@ -56,10 +60,13 @@ namespace Project2FA.UWP.ViewModels
 
         private IFileService FileService { get; }
 
-        public DatafileViewModelBase(ISecretService secretService, IFileService fileService)
+        private IDialogService DialogService { get; }
+
+        public DatafileViewModelBase(ISecretService secretService, IFileService fileService, IDialogService dialogService)
         {
             SecretService = secretService;
             FileService = fileService;
+            DialogService = dialogService;
             //ErrorsChanged += Model_ErrorsChanged;
         }
 
@@ -238,7 +245,7 @@ namespace Project2FA.UWP.ViewModels
                     Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
                     if (response == null)
                     {
-                        await ShowServerAddressNotFoundMessage();
+                        await ShowServerAddressNotFoundError();
                         return null;
                     }
                     else
@@ -248,7 +255,7 @@ namespace Project2FA.UWP.ViewModels
                 }
                 catch
                 {
-                    await ShowServerAddressNotFoundMessage();
+                    await ShowServerAddressNotFoundError();
                     return null;
                 }
             }
@@ -276,38 +283,46 @@ namespace Project2FA.UWP.ViewModels
             (bool success, Status result) = await CheckServerStatus();
             if (success)
             {
-                if (ServerAddress != string.Empty && Username != string.Empty && WebDAVPassword != string.Empty)
+                if (await CheckLoginAsync())
                 {
-                    if (await CheckLoginAsync())
-                    {
-                        WebDAVLoginRequiered = false;
-                        WebDAVDatafilePropertiesEnabled = true;
-                        WebDAVDatafilePropertiesExpanded = true;
+                    WebDAVLoginRequiered = false;
+                    WebDAVDatafilePropertiesEnabled = true;
+                    WebDAVDatafilePropertiesExpanded = true;
 
-                        
-                        var dialog = new WebViewDatafileContentDialog();
-                        var param = new DialogParameters();
-                        param.Add("CreateDatafileCase", createDatafileCase);
-                        param.Add("Status", result);
-                        ContentDialogResult dialogresult = await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, param);
-                        if (dialogresult == ContentDialogResult.Primary)
-                        {
-                            ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
-                        }
-                    }
-                    else
+
+                    var dialog = new WebViewDatafileContentDialog();
+                    var param = new DialogParameters();
+                    param.Add("CreateDatafileCase", createDatafileCase);
+                    param.Add("Status", result);
+                    ContentDialogResult dialogresult = await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, param);
+                    if (dialogresult == ContentDialogResult.Primary)
                     {
-                        WebDAVLoginError = true;
-                        //TODO error Message
+                        ChoosenOneWebDAVFile = dialog.ViewModel.ChoosenOneDatafile;
                     }
                 }
                 else
                 {
-                    //TODO error Message
+                    await ShowServerCredentialsError();
                 }
             }
             else
             {
+                if (result != null)
+                {
+                    if (result.Maintenance)
+                    {
+
+                    }
+                    if (!result.Installed)
+                    {
+
+                    }
+                }
+                else
+                {
+
+                }
+                //Messenger.Send(new UsernameChangedMessage(Username));
                 //TODO error Message for server status
             }
             IsLoading = false;
@@ -317,15 +332,55 @@ namespace Project2FA.UWP.ViewModels
         /// Shows an error message that the sever address was not found
         /// </summary>
         /// <returns></returns>
-        public Task ShowServerAddressNotFoundMessage()
+        public Task ShowServerAddressNotFoundError()
         {
-            // TODO add ContentDialog
-            throw new NotImplementedException();
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.DatafileViewModelWebDAVServerNotFound;
+            dialog.Content = Resources.DatafileViewModelWebDAVServerNotFoundDesc;
+            dialog.PrimaryButtonText = Resources.Confirm;
+            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        public Task ShowServerCredentialsError()
+        {
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.DatafileViewModelWebDAVCredentialsError;
+            dialog.Content = Resources.DatafileViewModelWebDAVCredentialsErrorDesc;
+            dialog.PrimaryButtonText = Resources.Confirm;
+            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        public Task ShowServerMaintenanceError()
+        {
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.DatafileViewModelWebDAVMaintenanceError;
+            dialog.Content = Resources.DatafileViewModelWebDAVMaintenanceErrorDesc;
+            dialog.PrimaryButtonText = Resources.Confirm;
+            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        public Task ShowServerNotInstalledError()
+        {
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.DatafileViewModelWebDAVNotInstalledError;
+            dialog.Content = Resources.DatafileViewModelWebDAVNotInstalledErrorDesc;
+            dialog.PrimaryButtonText = Resources.Confirm;
+            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         #endregion
 
-
+        private void CheckWebDAVInputs()
+        {
+            if (!string.IsNullOrEmpty(_username) && !string.IsNullOrEmpty(_webDAVPassword) && !string.IsNullOrEmpty(ServerAddress))
+            {
+                WebDAVCredentialsEntered = true;
+            }
+            else
+            {
+                WebDAVCredentialsEntered = false;
+            }
+        }
         #region GetSets
         //public List<(string name, string message)> Errors
         //{
@@ -343,19 +398,37 @@ namespace Project2FA.UWP.ViewModels
         public string ServerAddress
         {
             get => _serverAddress;
-            set => SetProperty(ref _serverAddress, value);
+            set
+            {
+                if (SetProperty(ref _serverAddress, value))
+                {
+                    CheckWebDAVInputs();
+                }
+            }
         }
 
         public string Username
         {
             get => _username;
-            set => SetProperty(ref _username, value);
+            set
+            {
+                if(SetProperty(ref _username, value))
+                {
+                    CheckWebDAVInputs();
+                }
+            }
         }
 
         public string WebDAVPassword
         {
             get => _webDAVPassword;
-            set => SetProperty(ref _webDAVPassword, value);
+            set
+            {
+                if (SetProperty(ref _webDAVPassword, value))
+                {
+                    CheckWebDAVInputs();
+                }
+            }
         }
 
         public int SelectedIndex
@@ -482,6 +555,11 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _webDAVLoginError;
             set => SetProperty(ref _webDAVLoginError, value);
+        }
+        public bool WebDAVCredentialsEntered 
+        { 
+            get => _webDAVCredentialsEntered;
+            set => SetProperty(ref _webDAVCredentialsEntered, value);
         }
 
         #endregion

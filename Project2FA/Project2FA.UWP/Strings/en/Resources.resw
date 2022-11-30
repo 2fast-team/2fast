@@ -978,4 +978,43 @@ In the following sections, the functionality of this application is explained in
   <data name="TextFormatterOrderedToolTip" xml:space="preserve">
     <value>Ordered list</value>
   </data>
+  <data name="WriteDatafileErrorBTNCancel" xml:space="preserve">
+    <value>Discard changes</value>
+  </data>
+  <data name="WriteDatafileErrorBTNRetry" xml:space="preserve">
+    <value>Save again</value>
+  </data>
+  <data name="WriteDatafileErrorDesc" xml:space="preserve">
+    <value>The changes could not be saved. Do you want to save them again?</value>
+  </data>
+  <data name="SettingsCBNotStorePassword.Content" xml:space="preserve">
+    <value>Don't save the password in credential manager (Windows Hello is not available)</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFound" xml:space="preserve">
+    <value>Address not found</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFoundDesc" xml:space="preserve">
+    <value>The address to the WebDAV service could not be found.</value>
+  </data>
+  <data name="WebDAVAppPasswordInfo" xml:space="preserve">
+    <value>An app password is required to log in to the WebDAV service, this can be created in the settings of the WebDAV service.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsError" xml:space="preserve">
+    <value>Login error</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsErrorDesc" xml:space="preserve">
+    <value>Your username or password is invalid.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceError" xml:space="preserve">
+    <value>Server in maintenance mode</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc" xml:space="preserve">
+    <value>Login is currently not possible because the WebDAV service is currently in maintenance mode.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledError" xml:space="preserve">
+    <value>Server not installed</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
+    <value>The WebDAV service is currently not properly installed.</value>
+  </data>
 </root>

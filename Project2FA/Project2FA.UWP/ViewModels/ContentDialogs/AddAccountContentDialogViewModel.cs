@@ -296,10 +296,10 @@ namespace Project2FA.UWP.ViewModels
                             //TODO add error: empty Clipboard?
                         }
                     }
-                    catch (Exception)
+                    catch (Exception exc)
                     {
+                        TrackingManager.TrackException(exc);
                         // TODO error by processing the image
-                        throw;
                     }
 
                 }

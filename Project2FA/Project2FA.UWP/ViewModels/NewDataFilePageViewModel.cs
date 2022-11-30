@@ -14,8 +14,8 @@ using Template10.Services.Secrets;
 using System.Windows.Input;
 using Prism.Navigation;
 using Project2FA.UWP.Views;
-using Project2FA.UWP.Services;
 using CommunityToolkit.Mvvm.Input;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -36,10 +36,11 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public NewDataFilePageViewModel(
             IFileService fileService, 
+            IDialogService dialogService,
             ISecretService secretService,
             INavigationService navigationService,
             ISerializationService serializationService) : 
-            base (secretService,fileService)
+            base (secretService,fileService, dialogService)
         {
             NaviationService = navigationService;
             SerializationService = serializationService;
@@ -47,12 +48,12 @@ namespace Project2FA.UWP.ViewModels
             WebDAVLoginRequiered = true;
             WebDAVDatafilePropertiesEnabled = false;
 
-            SetAndCreateLocalDatafileCommand = new DelegateCommand(async () =>
+            SetAndCreateLocalDatafileCommand = new AsyncRelayCommand(async () =>
             {
                 await SetAndCreateLocalDatafile(false);
             });
 
-            SetAndCreateWebDAVDatafileCommand = new DelegateCommand(async () =>
+            SetAndCreateWebDAVDatafileCommand = new AsyncRelayCommand(async () =>
             {
                 await SetAndCreateLocalDatafile(true);
             });
@@ -78,10 +79,7 @@ namespace Project2FA.UWP.ViewModels
             //});
 
 
-            WebDAVLoginCommand = new DelegateCommand(async() =>
-            {
-                await WebDAVLogin(true);
-            });
+            WebDAVLoginCommand = new AsyncRelayCommand(WebDAVLoginCommandTask);
         }
 
         /// <summary>
@@ -139,6 +137,11 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
+        private async Task WebDAVLoginCommandTask()
+        {
+            await WebDAVLogin(true);
+        }
+
 
         private async Task SetAndCreateLocalDatafile(bool isWebDAV)
         {
@@ -153,15 +156,23 @@ namespace Project2FA.UWP.ViewModels
             {
                 LocalStorageFolder = ApplicationData.Current.LocalFolder;
             }
+            try
+            {
+                await FileService.WriteStringAsync(
+                    DateFileName,
+                    SerializationService.Serialize(file),
+                    await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
 
-            await FileService.WriteStringAsync(
-            DateFileName,
-            SerializationService.Serialize(file),
-            await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
-            await CreateLocalFileDB(isWebDAV);
+                await CreateLocalFileDB(isWebDAV);
+                App.ShellPageInstance.NavigationIsAllowed = true;
+                await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+            }
+            catch (Exception exc)
+            {
+                TrackingManager.TrackExceptionCatched(exc);
+                await Utils.ErrorDialogs.WritingDatafilError();
+            }
 
-            App.ShellPageInstance.NavigationIsAllowed = true;
-            await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
         }
         //private async Task CreateLocalFile (bool isWebDAV = false)
         //{

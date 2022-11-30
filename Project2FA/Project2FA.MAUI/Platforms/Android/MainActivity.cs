@@ -76,8 +76,7 @@ public class MainActivity : MauiAppCompatActivity
                 var result = IOUtil.GetPath(this, strLink);
                 if (result != null)
                 {
-                    contentStr = result;
-                    DataService.Instance.StorageFileUrl = contentStr;
+                    DataService.Instance.StorageFileUrl = result;
                 }
                 else
                 {

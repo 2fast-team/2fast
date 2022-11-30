@@ -1,9 +1,4 @@
 ﻿using Project2FA.MAUI.Services.Settings.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project2FA.MAUI.Services
 {
@@ -83,16 +78,12 @@ namespace Project2FA.MAUI.Services
         {
             if (ApplyTheme == Theme.Dark || ApplyTheme == Theme.Light)
             {
-                switch (ApplyTheme)
+                return ApplyTheme switch
                 {
-                    default:
-                    case Theme.System:
-                        return startTheme;
-                    case Theme.Dark:
-                        return AppTheme.Dark;
-                    case Theme.Light:
-                        return AppTheme.Light;
-                }
+                    Theme.Dark => AppTheme.Dark,
+                    Theme.Light => AppTheme.Light,
+                    _ => startTheme,
+                };
             }
             else
             {

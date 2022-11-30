@@ -63,7 +63,8 @@ namespace Project2FA.UWP
             {
                 if (!_debugMode)
                 {
-                    _logger.Log($"exception - catched - {ex.Message} - {ex.InnerException} - {ex.StackTrace}");
+                    _logger.Log($"exception - catched - {ex.StackTrace}");
+                    //_logger.Log($"exception - catched - {ex.Message} - {ex.InnerException} - {ex.StackTrace}");
                 }
             }
             catch

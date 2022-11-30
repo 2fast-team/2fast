@@ -34,11 +34,11 @@ using System.Collections.Generic;
 using Project2FA.UWP.Helpers;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System.Diagnostics;
-using Windows.Storage.Search;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core.Messenger;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Input;
+using System.Text;
 
 namespace Project2FA.UWP.Services
 {
@@ -102,6 +102,7 @@ namespace Project2FA.UWP.Services
                 var prevíousVersion = new Version(SystemInformation.Instance.PreviousVersionInstalled.ToFormattedString());
                 var compareVersion = new Version("1.0.9.0");
                 var result = compareVersion.CompareTo(prevíousVersion);
+                // only when the old version is lower or equal to version 1.0.9
                 if (result >= 0)
                 {
                     string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
@@ -265,16 +266,28 @@ namespace Project2FA.UWP.Services
                     try
                     {
                         string datafileStr = await FileService.ReadStringAsync(datafilename, folder);
-                        if (!string.IsNullOrEmpty(datafileStr))
+                        if (!string.IsNullOrWhiteSpace(datafileStr))
                         {
                             // read the iv for AES
                             DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
                             byte[] iv = datafile.IV;
 
-                            datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                                            (SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName),
-                                            iv,
-                                            datafileStr);
+                            if (SettingsService.Instance.AdvancedPasswordSecurity || ActivatedDatafile != null)
+                            {
+                                datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
+                                    ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
+                                    iv,
+                                    datafileStr);
+                            }
+                            else
+                            {
+                                datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
+                                    SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName),
+                                    iv,
+                                    datafileStr);
+                            }
+
+
                             deserializeCollection = datafile.Collection;
                         }
                         if (deserializeCollection != null)
@@ -521,7 +534,7 @@ namespace Project2FA.UWP.Services
             await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
-        private async Task ErrorSecretKey(string label)
+        private async Task SecretKeyError(string label)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
@@ -551,53 +564,66 @@ namespace Project2FA.UWP.Services
         /// </summary>
         public async Task WriteLocalDatafile()
         {
-            DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
-            DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
-            StorageFolder folder;
-            string fileName;
-            byte[] iv = Aes.Create().IV;
-            string hashName = ActivatedDatafile != null ? 
-                Constants.ActivatedDatafileHashName : 
-                dbHash.Hash;
-
-            await CollectionAccessSemaphore.WaitAsync();
-            DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
-            if (ActivatedDatafile != null)
+            try
             {
-                folder = await ActivatedDatafile.GetParentAsync();
-                fileName = ActivatedDatafile.Name;
-            }
-            else
-            {
-                folder = datafileDB.IsWebDAV ?
-                ApplicationData.Current.LocalFolder :
-                await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
-                fileName = datafileDB.Name;
-            }
+                DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
+                DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
+                StorageFolder folder;
+                string fileName;
+                byte[] iv = Aes.Create().IV;
+                string hashName = ActivatedDatafile != null ?
+                    Constants.ActivatedDatafileHashName :
+                    dbHash.Hash;
 
-
-            await FileService.WriteStringAsync(
-                    fileName,
-                    NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, hashName),
-                    iv, 
-                    fileModel),
-                    folder);
-
-            if (datafileDB.IsWebDAV && ActivatedDatafile == null)
-            {
-                // TODO check result
-                (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder, datafileDB);
-                if (successful && statusResult)
+                await CollectionAccessSemaphore.WaitAsync();
+                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
+                if (ActivatedDatafile != null)
                 {
-
+                    folder = await ActivatedDatafile.GetParentAsync();
+                    fileName = ActivatedDatafile.Name;
                 }
                 else
                 {
+                    folder = datafileDB.IsWebDAV ?
+                    ApplicationData.Current.LocalFolder :
+                    await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
+                    fileName = datafileDB.Name;
+                }
 
+
+                await FileService.WriteStringAsync(
+                        fileName,
+                        NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, hashName),
+                        iv,
+                        fileModel),
+                        folder);
+
+                if (datafileDB.IsWebDAV && ActivatedDatafile == null)
+                {
+                    // TODO check result
+                    (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder, datafileDB);
+                    if (successful && statusResult)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
-            CollectionAccessSemaphore.Release();
+            catch (Exception exc)
+            {
+                TrackingManager.TrackExceptionCatched(exc);
+                await Utils.ErrorDialogs.WritingDatafilError();
+            }
+            finally
+            {
+                CollectionAccessSemaphore.Release();
+            }
         }
+
+
 
 
         #region WebDAV
@@ -782,7 +808,7 @@ namespace Project2FA.UWP.Services
                 else
                 {
                     Collection[i].TwoFACode = string.Empty;
-                    ErrorSecretKey(Collection[i].Label);
+                    SecretKeyError(Collection[i].Label);
                 }
                 
             }

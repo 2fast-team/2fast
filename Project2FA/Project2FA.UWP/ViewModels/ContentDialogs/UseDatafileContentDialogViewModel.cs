@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Prism.Ioc;
 using System.Windows.Input;
 using Template10.Services.File;
 using Template10.Services.Secrets;
 using Prism.Commands;
 using Project2FA.Repository.Models;
 using Windows.Storage.Pickers;
-using Template10.Services.Resources;
-using Template10.Services.Network;
 using Project2FA.Core.Services.JSON;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -34,8 +32,9 @@ namespace Project2FA.UWP.ViewModels
         public UseDatafileContentDialogViewModel(
             ISecretService secretService,
             IFileService fileService,
-            INewtonsoftJSONService newtonsoftJSONService
-            ) :base(secretService,fileService)
+            INewtonsoftJSONService newtonsoftJSONService,
+            IDialogService dialogService
+            ) :base(secretService,fileService, dialogService)
         {
             SecretService = secretService;
             FileService = fileService;

@@ -19,6 +19,7 @@ using System.IO;
 using Windows.Storage.Streams;
 using Windows.Storage.AccessCache;
 using Prism.Services.Dialogs;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -45,7 +46,7 @@ namespace Project2FA.UWP.ViewModels
             INetworkService networkService,
             INavigationService navigationService,
             ISecretService secretService,
-            IDialogService dialogService) : base(secretService,fileService)
+            IDialogService dialogService) : base(secretService,fileService, dialogService)
         {
             NaviationService = navigationService;
             DialogService = dialogService;
@@ -56,7 +57,7 @@ namespace Project2FA.UWP.ViewModels
             WebDAVDatafilePropertiesEnabled = false;
             SecretService =secretService;
 
-            ConfirmErrorCommand = new DelegateCommand(() =>
+            ConfirmErrorCommand = new RelayCommand(() =>
             {
                 if (ShowError)
                 {
@@ -69,32 +70,28 @@ namespace Project2FA.UWP.ViewModels
                 }
             });
 
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            UseDatafileCommand = new DelegateCommand(async () =>
+
+            UseDatafileCommand = new AsyncRelayCommand(async () =>
             {
                 await SetLocalFile(true); //change path is true
             });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            SetAndCheckLocalDatafileCommand = new DelegateCommand(async () =>
+            SetAndCheckLocalDatafileCommand = new AsyncRelayCommand(async () =>
             {
                 await SetAndCheckLocalDatafile();
             });
-#pragma warning restore AsyncFixer03 
 
-            WebDAVLoginCommand = new DelegateCommand(async () =>
+
+            WebDAVLoginCommand = new AsyncRelayCommand(async () =>
             {
                 await WebDAVLogin(false);
             });
 
 
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            SetAndCheckWebDAVDatafileCommand = new DelegateCommand(async () =>
+            SetAndCheckWebDAVDatafileCommand = new AsyncRelayCommand(async () =>
             {
                 await SetAndCheckLocalDatafile(true);
             });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
         /// <summary>
@@ -255,8 +252,7 @@ namespace Project2FA.UWP.ViewModels
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
         {
-            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-            return !await dialogService.IsDialogRunning();
+            return !await DialogService.IsDialogRunning();
         }
 
         public bool ChangeDatafile { get; set; }

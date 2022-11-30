@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using SkiaSharp;
 using Svg.Skia;
+using SKSvg = Svg.Skia.SKSvg;
 
 // based on https://github.com/muak/SvgImageSource/blob/922a0dbbbf0b175d6a5ee5766d2891ebb5b93fdf/SvgImageSource/SvgUtility.cs
 namespace Project2FA.MAUI.Controls

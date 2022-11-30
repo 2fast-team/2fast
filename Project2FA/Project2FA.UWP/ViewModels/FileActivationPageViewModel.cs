@@ -17,6 +17,10 @@ using Template10.Services.File;
 using Project2FA.Repository.Models;
 using Project2FA.Core.Services.JSON;
 using Windows.Storage;
+using System.Text;
+using Project2FA.UWP.Views;
+using Windows.Security.Cryptography;
+using Windows.Storage.Streams;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -78,10 +82,16 @@ namespace Project2FA.UWP.ViewModels
         {
             if (await TestPassword(DataService.Instance.ActivatedDatafile))
             {
-                SecretService.Helper.WriteSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName, Password);
+                IBuffer buffer = CryptographicBuffer.ConvertStringToBinary(Password, BinaryStringEncoding.Utf8);
+                CryptographicBuffer.CopyToByteArray(buffer, out var encryptedBytes);
+
+                SecretService.Helper.WriteSecret(
+                    Constants.ContainerName, 
+                    Constants.ActivatedDatafileHashName,
+                    NewtonsoftJSONService.Serialize(ProtectData.Protect(encryptedBytes)));
                 App.ShellPageInstance.SetTitleBarAsDraggable();
                 App.ShellPageInstance.NavigationIsAllowed = true;
-                await App.ShellPageInstance.NavigationService.NavigateAsync("/AccountCodePage");
+                await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
                 Window.Current.Content = App.ShellPageInstance;
                 return true;
             }

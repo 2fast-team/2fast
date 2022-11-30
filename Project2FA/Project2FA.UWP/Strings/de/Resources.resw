@@ -979,4 +979,43 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   <data name="TextFormatterOrderedToolTip" xml:space="preserve">
     <value>geordnete Liste</value>
   </data>
+  <data name="WriteDatafileErrorBTNCancel" xml:space="preserve">
+    <value>Änderungen verwerfen</value>
+  </data>
+  <data name="WriteDatafileErrorBTNRetry" xml:space="preserve">
+    <value>Erneut speichern</value>
+  </data>
+  <data name="WriteDatafileErrorDesc" xml:space="preserve">
+    <value>Die Änderungen konnten nicht gespeichert werden. Möchten Sie die Speicherung erneut durchführen?</value>
+  </data>
+  <data name="SettingsCBNotStorePassword.Content" xml:space="preserve">
+    <value>Das Passwort nicht in der Anmeldeinformationsverwaltung speichern (Windows Hello ist nicht verfügbar)</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFound" xml:space="preserve">
+    <value>Adresse nicht gefunden</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFoundDesc" xml:space="preserve">
+    <value>Die Adresse zu dem WebDAV-Dienst konnte nicht gefunden werden.</value>
+  </data>
+  <data name="WebDAVAppPasswordInfo" xml:space="preserve">
+    <value>Für die Anmeldung an den WebDAV-Dienst ist ein App-Passwort erforderlich, dieses kann in den Einstellungen des WebDAV-Dienstes erstellt werden.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsError" xml:space="preserve">
+    <value>Anmeldefehler</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsErrorDesc" xml:space="preserve">
+    <value>Ihr Benutzername oder Passwort sind ungültig.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceError" xml:space="preserve">
+    <value>Server im Wartungsmodus</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc" xml:space="preserve">
+    <value>Eine Anmeldung kann derzeit nicht erfolgen, da der WebDAV-Dienst sich gerade in einem Wartungsmodus befindet.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledError" xml:space="preserve">
+    <value>Server nicht installiert</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
+    <value>Der WebDAV-Dienst ist derzeit nicht ordnungsgemäß installiert.</value>
+  </data>
 </root>

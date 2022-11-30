@@ -3,6 +3,7 @@ using Project2FA.Repository.Models;
 using Project2FA.MAUI.Services;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Project2FA.MAUI.Views;
 
 namespace Project2FA.MAUI.ViewModels
 {
@@ -108,6 +109,16 @@ namespace Project2FA.MAUI.ViewModels
         private void HideOrShowTOTPCode(TwoFACodeModel obj)
         {
             obj.HideTOTPCode = !obj.HideTOTPCode;
+        }
+
+        /// <summary>
+        /// Navigate to the SettingsPage
+        /// </summary>
+        /// <returns></returns>
+        [RelayCommand]
+        async Task NavigateToSettings()
+        {
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
         public DataService TwoFADataService => DataService.Instance;

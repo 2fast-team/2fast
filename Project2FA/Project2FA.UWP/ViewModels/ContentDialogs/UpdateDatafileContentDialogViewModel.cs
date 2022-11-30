@@ -6,6 +6,7 @@ using Project2FA.UWP.Services;
 using Project2FA.Core;
 using Template10.Services.File;
 using Project2FA.Core.Services.JSON;
+using Prism.Services.Dialogs;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -22,7 +23,8 @@ namespace Project2FA.UWP.ViewModels
         public UpdateDatafileContentDialogViewModel(
             ISecretService secretService,
             INewtonsoftJSONService newtonsoftJSONService,
-            IFileService fileService) : base(secretService, fileService, newtonsoftJSONService)
+            IDialogService dialogService,
+            IFileService fileService) : base(secretService, fileService, newtonsoftJSONService, dialogService)
         {
             SecretService = App.Current.Container.Resolve<ISecretService>();
             ConfirmErrorCommand = new DelegateCommand(() =>

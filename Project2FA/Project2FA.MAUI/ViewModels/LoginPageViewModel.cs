@@ -5,6 +5,7 @@ using Project2FA.MAUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -15,10 +16,14 @@ namespace Project2FA.MAUI.ViewModels
     {
         private bool _biometricUsable, _isLogout;
         private string _password;
+        private string _imagePath;
+        private Assembly svgAssembly;
 
         public LoginPageViewModel()
         {
             Password = "test";
+            SVGAssembly = GetType().Assembly;
+            ImagePath = "Project2FA.MAUI.Resources.Images.dotnet_bot.svg";
         }
 
         /// <summary>
@@ -74,5 +79,7 @@ namespace Project2FA.MAUI.ViewModels
             get => _isLogout;
             set => SetProperty(ref _isLogout, value);
         }
+        public string ImagePath { get => _imagePath; set => SetProperty(ref _imagePath, value); }
+        public Assembly SVGAssembly { get => svgAssembly; set => SetProperty(ref svgAssembly, value); }
     }
 }

@@ -224,12 +224,12 @@ namespace Project2FA.MAUI.Controls
 
         static Func<CancellationToken, Task<Stream>> GetResourceStreamFunc(string resource)
         {
-            var realResource = GetRealResource(resource);
-            if (realResource == null)
-            {
-                return null;
-            }
-            return token => Task.Run(() => AssemblyCache.GetManifestResourceStream(realResource), token);
+            //var realResource = GetRealResource(resource);
+            //if (realResource == null)
+            //{
+            //    return null;
+            //}
+            return token => Task.Run(() => AssemblyCache.GetManifestResourceStream(resource), token);
 
         }
 
@@ -286,13 +286,14 @@ namespace Project2FA.MAUI.Controls
                     StreamFunc = GetResourceStreamFunc(Source);
                 }
 
-                //OnSourceChanged();
+                OnSourceChanged();
             }
             base.OnPropertyChanged(propertyName);
         }
 
         internal virtual async Task<Stream> GetImageStreamAsync(CancellationToken userToken)
         {
+            //OnSourceChanged();
             //OnLoadingStarted();
             userToken.Register(new CancellationTokenSource().Cancel);
 

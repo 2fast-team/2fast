@@ -23,7 +23,11 @@ namespace Project2FA.MAUI.Converters
 
                 foreach (string item in nameSplit)
                 {
-                    initials += item.Substring(0, 1).ToUpper();
+                    string firstLetter = item.Substring(0, 1).ToUpper();
+                    if (Char.IsLetter(firstLetter,0))
+                    {
+                        initials += item.Substring(0, 1).ToUpper();
+                    }
                 }
 
                 return initials;

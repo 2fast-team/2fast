@@ -19,9 +19,9 @@
     <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
     <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
     <PackageReference Include="Uno.Material" Version="2.3.0" />
-    <PackageReference Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.5.12" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.5.12" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.12" />
+    <PackageReference Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.6.18" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.6.18" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.6.18" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <Import Project="..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />

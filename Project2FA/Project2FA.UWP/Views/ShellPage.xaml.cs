@@ -19,8 +19,6 @@ using Prism.Navigation;
 using System.Threading.Tasks;
 using Project2FA.UWP.Services.Enums;
 using Prism.Services.Dialogs;
-using Microsoft.Toolkit.Uwp.UI;
-using Windows.UI.Xaml.Media;
 
 namespace Project2FA.UWP.Views
 {

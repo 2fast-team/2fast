@@ -5,8 +5,22 @@
              Title="SettingsPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="#design"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Start" />
+        <Frame BackgroundColor="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}" >
+            <Picker 
+                SelectedIndex="{x:Bind ViewModel.ThemeIndex, Mode=TwoWay}" 
+                MaximumWidthRequest="{StaticResource CardActionControlMinWidth}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>~SettingsThemeLight</x:String>
+                        <x:String>~SettingsThemeDark</x:String>
+                        <x:String>~SettingsThemeSystem</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+
+            </Picker>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

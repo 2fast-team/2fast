@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using Project2FA.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 
+
 namespace Project2FA.Repository.Models
 {
     public class TwoFACodeModel : ObservableObject

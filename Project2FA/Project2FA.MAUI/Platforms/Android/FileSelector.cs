@@ -25,6 +25,7 @@ namespace Project2FA.MAUI.Platforms.Android
                 {
                     var uri = Uri.Parse($"package:{Application.Context?.ApplicationInfo?.PackageName}");
                     var permissionIntent = new Intent(Settings.ActionManageAppAllFilesAccessPermission, uri);
+                    permissionIntent.AddFlags(ActivityFlags.GrantPersistableUriPermission);
                     currentActivity.StartActivity(permissionIntent);
                 }
             }
@@ -35,6 +36,7 @@ namespace Project2FA.MAUI.Platforms.Android
 
 
             var intent = new Intent(Intent.ActionOpenDocument);
+            intent.AddFlags(ActivityFlags.GrantPersistableUriPermission);
             intent.AddCategory(Intent.CategoryOpenable);
             intent.SetType("application/json");
 

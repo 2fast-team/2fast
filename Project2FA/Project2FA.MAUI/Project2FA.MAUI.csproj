@@ -154,12 +154,12 @@
 	  <PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
 	  <PackageReference Include="CommunityToolkit.Maui.Markup" Version="2.0.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-	  <PackageReference Include="CompiledBindings.MAUI" Version="1.0.13" />
+	  <PackageReference Include="CompiledBindings.MAUI" Version="1.0.14" />
 	  <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="7.0.49" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	  <PackageReference Include="SkiaSharp" Version="2.88.3" />
 	  <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
-	  <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.2" />
+	  <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.3" />
 	  <PackageReference Include="Svg.Skia" Version="0.5.18" />
 	  <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="6.0.0" />
 	</ItemGroup>
@@ -189,6 +189,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Otp.NET\src\Otp.NET\Otp.NET.csproj" />
 	  <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
 	</ItemGroup>
 

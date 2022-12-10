@@ -1018,4 +1018,7 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
     <value>Der WebDAV-Dienst ist derzeit nicht ordnungsgemäß installiert.</value>
   </data>
+  <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
+    <value>Windows Hello als Anmeldeoption anbieten</value>
+  </data>
 </root>

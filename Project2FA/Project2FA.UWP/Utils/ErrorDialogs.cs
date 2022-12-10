@@ -319,7 +319,7 @@ namespace Project2FA.UWP.Utils
             SettingsService.Instance.UnhandledExceptionStr = string.Empty;
         }
 
-        public async static Task WritingDatafilError()
+        public async static Task WritingDatafileError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();

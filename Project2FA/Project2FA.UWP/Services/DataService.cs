@@ -564,19 +564,25 @@ namespace Project2FA.UWP.Services
         /// </summary>
         public async Task WriteLocalDatafile()
         {
+            string fileName = string.Empty;
+            StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
+            DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
+            // load the current file to allow the reset of the file
+            DatafileModel datafile = new DatafileModel();
             try
             {
-                DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
-                DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
-                StorageFolder folder;
-                string fileName;
+
                 byte[] iv = Aes.Create().IV;
-                string hashName = ActivatedDatafile != null ?
+                string passwordHashName = ActivatedDatafile != null ?
                     Constants.ActivatedDatafileHashName :
                     dbHash.Hash;
 
                 await CollectionAccessSemaphore.WaitAsync();
+                
+                // create the new datafile model
                 DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
+                
                 if (ActivatedDatafile != null)
                 {
                     folder = await ActivatedDatafile.GetParentAsync();
@@ -590,13 +596,30 @@ namespace Project2FA.UWP.Services
                     fileName = datafileDB.Name;
                 }
 
+                string datafileStr = await FileService.ReadStringAsync(fileName, folder);
+                datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
 
-                await FileService.WriteStringAsync(
+                if (SettingsService.Instance.AdvancedPasswordSecurity || ActivatedDatafile != null)
+                {
+                    await FileService.WriteStringAsync(
                         fileName,
-                        NewtonsoftJSONService.SerializeEncrypt(SecretService.Helper.ReadSecret(Constants.ContainerName, hashName),
-                        iv,
-                        fileModel),
+                        NewtonsoftJSONService.SerializeEncrypt(
+                            ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
+                            iv,
+                            fileModel),
                         folder);
+                }
+                else
+                {
+                    await FileService.WriteStringAsync(
+                        fileName,
+                        NewtonsoftJSONService.SerializeEncrypt(
+                            SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName), 
+                            iv, 
+                            fileModel),
+                        folder);
+                }
+
 
                 if (datafileDB.IsWebDAV && ActivatedDatafile == null)
                 {
@@ -611,16 +634,47 @@ namespace Project2FA.UWP.Services
 
                     }
                 }
+                CollectionAccessSemaphore.Release();
+            }
+            catch (Exception exc)
+            {
+                CollectionAccessSemaphore.Release();
+                TrackingManager.TrackExceptionCatched(exc);
+                var restoreSuccess = await RestoreLastDatafile(datafile, fileName, folder);
+                if (restoreSuccess)
+                {
+                    await Utils.ErrorDialogs.WritingDatafileError();
+                }
+                else
+                {
+                    // TODO Dialog
+                }
+
+            }
+        }
+
+        private async Task<bool> RestoreLastDatafile(DatafileModel datafile, string fileName, StorageFolder folder)
+        {
+            try
+            {
+                await CollectionAccessSemaphore.WaitAsync();
+                await FileService.WriteStringAsync(
+                    fileName,
+                    NewtonsoftJSONService.Serialize(datafile),
+                    folder);
+                return true;
             }
             catch (Exception exc)
             {
                 TrackingManager.TrackExceptionCatched(exc);
-                await Utils.ErrorDialogs.WritingDatafilError();
+                return false;
             }
             finally
             {
                 CollectionAccessSemaphore.Release();
             }
+            
+
         }
 
 

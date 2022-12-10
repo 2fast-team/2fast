@@ -229,7 +229,7 @@
                                                 Header="~SettingsUseWindowsHello.Header">
                                                 <appcontrols:CardControl.ActionContent>
                                                     <ToggleSwitch
-                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseAutoLogout,Mode=TwoWay}" 
+                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHello,Mode=TwoWay}" 
                                         IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported,Mode=TwoWay}" />
                                                 </appcontrols:CardControl.ActionContent>
                                             </appcontrols:CardControl>
@@ -247,8 +247,8 @@
                                                     <appcontrols:CardControl.ActionContent>
                                                         <ToggleSwitch 
                                 x:Name="SettingsWindowsHelloPrefer"
-                                IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported, Mode=OneWay}"
-                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloActive, Mode=TwoWay}"/>
+                                IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHello, Mode=OneWay}" 
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.PreferWindowsHelloLogin, Mode=TwoWay}"/>
                                                     </appcontrols:CardControl.ActionContent>
                                                 </appcontrols:CardControl>
                                             </StackPanel>

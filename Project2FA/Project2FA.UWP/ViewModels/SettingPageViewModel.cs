@@ -96,6 +96,7 @@ namespace Project2FA.UWP.ViewModels
         private string _ntpServerStr;
         private bool _ntpServerEditValid;
         private bool _ntpServerEditException;
+        private bool _activateWindowsHello;
 
         public ICommand MakeFactoryResetCommand { get; }
         public ICommand SaveNTPServerAddressCommand { get; }
@@ -118,7 +119,9 @@ namespace Project2FA.UWP.ViewModels
                 NtpServerEditValid = false;
             });
 
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             CheckWindowsHelloIsSupported();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         /// <summary>
@@ -173,7 +176,9 @@ namespace Project2FA.UWP.ViewModels
                 }
 
                 _settings.AppTheme = value;
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 DataService.Instance.ReloadAccountIconSVGs();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 
@@ -218,6 +223,12 @@ namespace Project2FA.UWP.ViewModels
         {
             get => _isWindowsHelloSupported;
             set => SetProperty(ref _isWindowsHelloSupported, value);
+        }
+
+        public bool ActivateWindowsHello
+        {
+            get => _activateWindowsHello;
+            set => SetProperty(ref _activateWindowsHello, value);
         }
 
         public bool UseHiddenTOTP
@@ -290,7 +301,7 @@ namespace Project2FA.UWP.ViewModels
             set => SetProperty(ref _progressIsIndeterminate, value);
         }
 
-        public bool IsWindowsHelloActive
+        public bool PreferWindowsHelloLogin
         {
             get
             {
@@ -308,13 +319,17 @@ namespace Project2FA.UWP.ViewModels
             set
             {
                 _settings.PreferWindowsHello = value ? WindowsHelloPreferEnum.Prefer : WindowsHelloPreferEnum.No;
-                OnPropertyChanged(nameof(IsWindowsHelloActive));
+                OnPropertyChanged(nameof(PreferWindowsHelloLogin));
             }
         }
 
         private async Task CheckWindowsHelloIsSupported()
         {
             IsWindowsHelloSupported = await KeyCredentialManager.IsSupportedAsync();
+            if (!IsWindowsHelloSupported)
+            {
+                ActivateWindowsHello = false;
+            }
         }
 
         public bool UseHeaderBackButton
@@ -469,7 +484,9 @@ namespace Project2FA.UWP.ViewModels
         {
             _dialogService = dialogService;
             SecretService = secretService;
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             InitializeDataFileAttributes();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             // open content dialog to change the password
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates

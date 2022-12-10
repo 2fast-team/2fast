@@ -1,3 +1,6 @@
 [submodule "Template10"]
 	path = Template10
 	url = https://github.com/2fast-team/Template10.git
+[submodule "Otp.NET"]
+	path = Otp.NET
+	url = https://github.com/2fast-team/Otp.NET.git

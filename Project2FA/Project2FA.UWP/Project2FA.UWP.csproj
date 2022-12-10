@@ -2557,7 +2557,7 @@
       <Version>8.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
-      <Version>7.0.0-preview1.22518.1</Version>
+      <Version>7.0.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -2755,6 +2755,10 @@
     <Folder Include="Assets\ServiceLogo\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Otp.NET\src\Otp.NET\Otp.NET.csproj">
+      <Project>{f3dc419d-d543-4eff-950b-85a926453ba9}</Project>
+      <Name>Otp.NET</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj">
       <Project>{8a7a480b-01f2-4693-b1b7-13e5bed8bbf6}</Project>
       <Name>Project2FA.Core</Name>

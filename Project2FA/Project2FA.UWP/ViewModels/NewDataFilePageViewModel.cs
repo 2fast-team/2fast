@@ -170,7 +170,7 @@ namespace Project2FA.UWP.ViewModels
             catch (Exception exc)
             {
                 TrackingManager.TrackExceptionCatched(exc);
-                await Utils.ErrorDialogs.WritingDatafilError();
+                await Utils.ErrorDialogs.WritingDatafileError();
             }
 
         }

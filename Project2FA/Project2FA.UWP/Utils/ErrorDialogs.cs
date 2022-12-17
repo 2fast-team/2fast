@@ -319,7 +319,7 @@ namespace Project2FA.UWP.Utils
             SettingsService.Instance.UnhandledExceptionStr = string.Empty;
         }
 
-        public async static Task WritingDatafileError()
+        public async static Task<ContentDialogResult> WritingDatafileError(bool isNewFile)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
@@ -329,7 +329,10 @@ namespace Project2FA.UWP.Utils
             dialog.Content = markdown;
             dialog.PrimaryButtonCommand = new RelayCommand(() =>
             {
-                DataService.Instance.WriteLocalDatafile();
+                if (!isNewFile)
+                {
+                    DataService.Instance.WriteLocalDatafile();
+                }
             });
             dialog.PrimaryButtonText = Resources.WriteDatafileErrorBTNRetry;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
@@ -338,7 +341,7 @@ namespace Project2FA.UWP.Utils
             {
                 // ReloadDatafile();
             });
-            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            return await dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
     }
 }

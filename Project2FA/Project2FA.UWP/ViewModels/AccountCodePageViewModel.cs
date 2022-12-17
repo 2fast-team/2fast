@@ -5,7 +5,6 @@ using Windows.UI.Xaml;
 using Project2FA.UWP.Services;
 using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Views;
-using Prism.Commands;
 using Project2FA.UWP.Strings;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Prism.Navigation;
@@ -15,6 +14,8 @@ using Prism.Services.Dialogs;
 using Project2FA.UWP.Helpers;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Project2FA.Core.Messenger;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -33,7 +34,12 @@ namespace Project2FA.UWP.ViewModels
         public ICommand ExportAccountCommand { get; }
         public ICommand SetFavouriteCommand { get; }
         public ICommand HideOrShowTOTPCodeCommand {get;}
-        
+
+        private bool _datafileUpdated;
+        private bool _datafileWebDAVUpToDate;
+        private bool _datafileWebDAVUpdated;
+        private bool _datafileNoInternetConnection;
+
         private bool _codeVisibilityOptionEnabled;
         private string _title;
 
@@ -70,7 +76,7 @@ namespace Project2FA.UWP.ViewModels
             RefreshCommand = new AsyncRelayCommand(ReloadDatafileAndUpdateCollection);
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            LogoutCommand = new DelegateCommand(async () =>
+            LogoutCommand = new RelayCommand(async () =>
             {
                 if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
                 {
@@ -92,7 +98,7 @@ namespace Project2FA.UWP.ViewModels
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
-            UndoDeleteCommand = new DelegateCommand(() =>
+            UndoDeleteCommand = new RelayCommand(() =>
             {
                 _dispatcherTimerDeletedModel.Stop();
                 TwoFADataService.RestoreDeletedModel();
@@ -110,11 +116,43 @@ namespace Project2FA.UWP.ViewModels
             {
                 _dispatcherTimerDeletedModel.Start();
             }
+
+
+            //register the messenger calls
+            Messenger.Register<AccountCodePageViewModel, DatafileWriteStatusChangedMessage>(this, (r, m) => r.DatafileUpdated = m.Value);
+            Messenger.Register<AccountCodePageViewModel, WebDAVStatusChangedMessage>(this, (r, m) =>
+            {
+                switch (m.Value)
+                {
+                    case Repository.Models.Enums.WebDAVStatus.Success:
+                        break;
+                    case Repository.Models.Enums.WebDAVStatus.NoInternet:
+                        DatafileNoInternetConnection = true;
+                        break;
+                    case Repository.Models.Enums.WebDAVStatus.Failed:
+                        break;
+                    case Repository.Models.Enums.WebDAVStatus.ServerMaintanance:
+                        break;
+                    case Repository.Models.Enums.WebDAVStatus.Updated:
+                        DatafileWebDAVUpdated = true;
+                        break;
+                    case Repository.Models.Enums.WebDAVStatus.UptoDate:
+                        DatafileWebDAVUpToDate = true;
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            //set the view setting from SettingsPage
             CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
+
+            //Start the app logic
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             StartTOTPLogic();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
+
 
         private async Task StartTOTPLogic()
         {
@@ -267,7 +305,6 @@ namespace Project2FA.UWP.ViewModels
             {
                 // TODO add info for the user, that the task is currently run
             }
-
         }
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
@@ -313,6 +350,26 @@ namespace Project2FA.UWP.ViewModels
         { 
             get => _codeVisibilityOptionEnabled;
             private set => SetProperty(ref _codeVisibilityOptionEnabled, value); 
+        }
+        public bool DatafileUpdated 
+        { 
+            get => _datafileUpdated;
+            set => SetProperty(ref _datafileUpdated, value);
+        }
+        public bool DatafileWebDAVUpToDate 
+        { 
+            get => _datafileWebDAVUpToDate; 
+            set => SetProperty(ref _datafileWebDAVUpToDate, value);
+        }
+        public bool DatafileNoInternetConnection 
+        {
+            get => _datafileNoInternetConnection;
+            set => SetProperty(ref _datafileNoInternetConnection, value);
+        }
+        public bool DatafileWebDAVUpdated 
+        { 
+            get => _datafileWebDAVUpdated; 
+            set => SetProperty(ref _datafileWebDAVUpdated, value); 
         }
     }
 }

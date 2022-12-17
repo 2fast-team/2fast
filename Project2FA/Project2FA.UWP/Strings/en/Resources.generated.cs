@@ -1432,6 +1432,58 @@ namespace Project2FA.UWP.Strings{
             }
         }
         #endregion
+
+        #region InfoBarDatafileNoInternet
+        /// <summary>
+        ///   Looks up a localized string similar to: Currently no internet connectivity is available for synchronisation. Please connect and confirm "Reload datafile".
+        /// </summary>
+        public static string InfoBarDatafileNoInternet
+        {
+            get
+            {
+                return _resourceLoader.GetString("InfoBarDatafileNoInternet");
+            }
+        }
+        #endregion
+
+        #region InfoBarDatafileTitleNoInternet
+        /// <summary>
+        ///   Looks up a localized string similar to: No internet connection
+        /// </summary>
+        public static string InfoBarDatafileTitleNoInternet
+        {
+            get
+            {
+                return _resourceLoader.GetString("InfoBarDatafileTitleNoInternet");
+            }
+        }
+        #endregion
+
+        #region InfoBarDatafileTitleUpdated
+        /// <summary>
+        ///   Looks up a localized string similar to: Datafile updated
+        /// </summary>
+        public static string InfoBarDatafileTitleUpdated
+        {
+            get
+            {
+                return _resourceLoader.GetString("InfoBarDatafileTitleUpdated");
+            }
+        }
+        #endregion
+
+        #region InfoBarDatafileUpdated
+        /// <summary>
+        ///   Looks up a localized string similar to: The data file has been successfully updated.
+        /// </summary>
+        public static string InfoBarDatafileUpdated
+        {
+            get
+            {
+                return _resourceLoader.GetString("InfoBarDatafileUpdated");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1552,6 +1604,10 @@ namespace Project2FA.UWP.Strings{
             DatafileViewModelWebDAVMaintenanceErrorDesc,
             DatafileViewModelWebDAVNotInstalledError,
             DatafileViewModelWebDAVNotInstalledErrorDesc,
+            InfoBarDatafileNoInternet,
+            InfoBarDatafileTitleNoInternet,
+            InfoBarDatafileTitleUpdated,
+            InfoBarDatafileUpdated,
         }
 
         private static ResourceLoader _resourceLoader;

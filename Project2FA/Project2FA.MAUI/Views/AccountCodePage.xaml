@@ -22,7 +22,7 @@
             <DataTemplate x:Key="NormalTwoFACodeTemplate" x:DataType="models:TwoFACodeModel">
                 <Frame 
                     BackgroundColor="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}" 
-                    Margin="0,4,0,4">
+                    Margin="0,12,0,12">
                     <Frame.Shadow>
                         <Shadow Brush="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}"
                                 Offset="20,20"
@@ -143,7 +143,7 @@
             <DataTemplate x:Key="AccentTwoFACodeTemplate" x:DataType="models:TwoFACodeModel">
                 <Frame 
                         BackgroundColor="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}" 
-                        Margin="0,4,0,4">
+                        Margin="0,12,0,12">
                     <Frame.Shadow>
                         <Shadow Brush="{x:AppThemeBinding Dark={StaticResource CardStrokeDarkColorDefaultSolid},Light={StaticResource CardStrokeLightColorDefaultSolid}}"
                                 Offset="20,20"
@@ -220,22 +220,22 @@
                                 Text="&#xE5F3;">
                             </Button>
                             <Button 
-                                    x:Name="BTN_CopyToClipboard"
-                                    WidthRequest="68" 
-                                    BackgroundColor="Transparent"
-                                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
-                                    FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
-                                    Text="&#xF32A;"
-                                    MinimumHeightRequest="36" 
-                                    Clicked="BTN_CopyToClipboard_Clicked">
+                                x:Name="BTN_CopyToClipboard"
+                                WidthRequest="68" 
+                                BackgroundColor="Transparent"
+                                FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                Text="&#xF32A;"
+                                MinimumHeightRequest="36" 
+                                Clicked="BTN_CopyToClipboard_Clicked">
                             </Button>
                             <Button
-                                    WidthRequest="68" 
-                                    BackgroundColor="Transparent"
-                                    FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
-                                    FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
-                                    Text="&#xEB9F;"
-                                    MinimumHeightRequest="36"/>
+                                WidthRequest="68" 
+                                BackgroundColor="Transparent"
+                                FontFamily="{OnPlatform iOS=FluentSystemIconsRegular, Default=FluentSystemIcons-Regular.ttf}"
+                                FontSize="{OnPlatform iOS=28, Android=28, Default=24}"
+                                Text="&#xEB9F;"
+                                MinimumHeightRequest="36"/>
                         </HorizontalStackLayout>
 
                         <Label 

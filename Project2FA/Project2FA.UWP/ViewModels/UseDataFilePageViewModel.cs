@@ -167,7 +167,6 @@ namespace Project2FA.UWP.ViewModels
                 LocalStorageFolder = await file.GetParentAsync();
 
                 //set folder to the access list
-                //StorageApplicationPermissions.FutureAccessList.Add(LocalStorageFolder, "metadata");
                 StorageApplicationPermissions.FutureAccessList.Add(file, "metadata");
 
                 DateFileName = file.Name;
@@ -188,18 +187,28 @@ namespace Project2FA.UWP.ViewModels
 
         private async Task<StorageFile> DownloadWebDAVFile(StorageFolder storageFolder)
         {
-            StorageFile localFile;
-            localFile = await storageFolder.CreateFileAsync(_choosenOneWebDAVFile.Name, CreationCollisionOption.ReplaceExisting);
-            IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
+            try
+            {
+                StorageFile localFile;
+                localFile = await storageFolder.CreateFileAsync(_choosenOneWebDAVFile.Name, CreationCollisionOption.ReplaceExisting);
+                IProgress<WebDavProgress> progress = new Progress<WebDavProgress>();
 
-            WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
-            using IRandomAccessStream randomAccessStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
-            Stream targetStream = randomAccessStream.AsStreamForWrite();
-            await client.Download(_choosenOneWebDAVFile.Path + "/" + _choosenOneWebDAVFile.Name, targetStream, progress, new System.Threading.CancellationToken());
-            //TODO manipulate the file with the correct date time
-            //var props = await localFile.Properties.GetDocumentPropertiesAsync();
-            //await props.RetrievePropertiesAsync();
-            return localFile;
+                WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
+                using IRandomAccessStream randomAccessStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
+                Stream targetStream = randomAccessStream.AsStreamForWrite();
+                await client.Download(_choosenOneWebDAVFile.Path + "/" + _choosenOneWebDAVFile.Name, targetStream, progress, new System.Threading.CancellationToken());
+                //TODO manipulate the file with the correct date time
+                //var props = await localFile.Properties.GetDocumentPropertiesAsync();
+                //await props.RetrievePropertiesAsync();
+                DateFileName = localFile.Name;
+                return localFile;
+            }
+            catch (Exception exc)
+            {
+                TrackingManager.TrackException(exc);
+                return null;
+            }
+
         }
 
         /// <summary>

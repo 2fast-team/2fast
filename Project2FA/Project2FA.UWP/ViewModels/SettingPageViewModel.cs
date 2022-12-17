@@ -96,7 +96,6 @@ namespace Project2FA.UWP.ViewModels
         private string _ntpServerStr;
         private bool _ntpServerEditValid;
         private bool _ntpServerEditException;
-        private bool _activateWindowsHello;
 
         public ICommand MakeFactoryResetCommand { get; }
         public ICommand SaveNTPServerAddressCommand { get; }
@@ -227,8 +226,13 @@ namespace Project2FA.UWP.ViewModels
 
         public bool ActivateWindowsHello
         {
-            get => _activateWindowsHello;
-            set => SetProperty(ref _activateWindowsHello, value);
+            get => _settings.ActivateWindowsHello;
+            set
+            {
+                _settings.ActivateWindowsHello = value;
+                OnPropertyChanged(nameof(ActivateWindowsHello));
+
+            }
         }
 
         public bool UseHiddenTOTP
@@ -519,24 +523,15 @@ namespace Project2FA.UWP.ViewModels
         private async Task InitializeDataFileAttributes()
         {
             var dbDatafile = await App.Repository.Datafile.GetAsync();
-            
-            if (dbDatafile.IsWebDAV)
+            if (DataService.Instance.ActivatedDatafile != null)
             {
-                DatafileName = dbDatafile.Name;
-                DatafilePath = SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + dbDatafile.Path;
+                DatafilePath = DataService.Instance.ActivatedDatafile.Path;
+                DatafileName = DataService.Instance.ActivatedDatafile.Name;
             }
             else
             {
-                if (DataService.Instance.ActivatedDatafile != null)
-                {
-                    DatafilePath = DataService.Instance.ActivatedDatafile.Path;
-                    DatafileName = DataService.Instance.ActivatedDatafile.Name;
-                }
-                else
-                {
-                    DatafileName = dbDatafile.Name;
-                    DatafilePath = dbDatafile.Path;
-                }
+                DatafileName = dbDatafile.Name;
+                DatafilePath = dbDatafile.IsWebDAV? SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + dbDatafile.Path : dbDatafile.Path;
             }
         }
 

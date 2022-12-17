@@ -1020,4 +1020,16 @@ In the following sections, the functionality of this application is explained in
   <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
     <value>Offer Windows Hello as a login option</value>
   </data>
+  <data name="InfoBarDatafileNoInternet" xml:space="preserve">
+    <value>Currently no internet connectivity is available for synchronisation. Please connect and confirm "Reload datafile".</value>
+  </data>
+  <data name="InfoBarDatafileTitleNoInternet" xml:space="preserve">
+    <value>No internet connection</value>
+  </data>
+  <data name="InfoBarDatafileTitleUpdated" xml:space="preserve">
+    <value>Datafile updated</value>
+  </data>
+  <data name="InfoBarDatafileUpdated" xml:space="preserve">
+    <value>The data file has been successfully updated.</value>
+  </data>
 </root>

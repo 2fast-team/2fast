@@ -34,12 +34,12 @@ namespace Project2FA.UWP.ViewModels
 
             UseExistDatefileCommand = new AsyncRelayCommand(UseExistDatafile);
 
-            TutorialCommand = new DelegateCommand(() =>
+            TutorialCommand = new RelayCommand(() =>
             {
                 IsTutorialOpen = !IsTutorialOpen;
             });
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            OpenTutorialCommand = new DelegateCommand(async() =>
+            OpenTutorialCommand = new RelayCommand(async() =>
             {
                 var dialog = new TutorialContentDialog();
                 if (IsTutorialOpen)

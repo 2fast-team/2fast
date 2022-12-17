@@ -39,6 +39,8 @@ using Project2FA.Core.Messenger;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Input;
 using System.Text;
+using Template10.Services.Network;
+using Project2FA.Repository.Models.Enums;
 
 namespace Project2FA.UWP.Services
 {
@@ -52,6 +54,7 @@ namespace Project2FA.UWP.Services
         private ILoggerFacade Logger { get; }
         private IFileService FileService { get; }
         private INetworkTimeService NetworkTimeService { get; }
+        private INetworkService NetworkService { get; }
         private bool _initialization, _errorOccurred;
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
@@ -84,6 +87,7 @@ namespace Project2FA.UWP.Services
             DialogService = App.Current.Container.Resolve<IDialogService>();
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             NetworkTimeService = App.Current.Container.Resolve<INetworkTimeService>();
+            NetworkService = App.Current.Container.Resolve<INetworkService>();
             ACVCollection = new AdvancedCollectionView(Collection, true);
             TOTPEventStopwatch = new Stopwatch();
             //ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
@@ -338,7 +342,6 @@ namespace Project2FA.UWP.Services
                     catch (Exception exc)
                     {
                         _errorOccurred = true;
-                        //SendPasswordStatusMessage(true, SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName));
                         await ErrorDialogs.ShowPasswordError();
                         //CheckLocalDatafile();
                         
@@ -374,6 +377,7 @@ namespace Project2FA.UWP.Services
                 {
                     if (dbDatafile.IsWebDAV)
                     {
+                        TrackingManager.TrackExceptionCatched(exc);
                         // TODO add dialog for error
                         ///var webDAVTask = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
                     }
@@ -391,17 +395,25 @@ namespace Project2FA.UWP.Services
             //check if a newer version is available or the current file must be uploaded
             if (dbDatafile.IsWebDAV && ActivatedDatafile == null)
             {
-                var (success, outdated) = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
-                if (success && outdated)
+                if (await NetworkService.GetIsInternetAvailableAsync())
                 {
-                    Collection.Clear();
-                    await CheckLocalDatafile(); //reload the data file
-                    // TODO Add info message to inform that the file was updated
+                    var (success, outdated) = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
+                    if (success && outdated)
+                    {
+                        Collection.Clear();
+                        await CheckLocalDatafile(); //reload the data file
+                        Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.Updated));
+                    }
+                    else if (!success)
+                    {
+                        // TODO add dialog for error, the path of the file is changed
+                    }
                 }
-                else if (!success)
+                else
                 {
-                    // TODO add dialog for error, the path of the file is changed
+                    Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.NoInternet));
                 }
+
             }
             // writing status for the data file is activated again
             _initialization = false;
@@ -634,6 +646,11 @@ namespace Project2FA.UWP.Services
 
                     }
                 }
+                else
+                {
+
+                }
+                Messenger.Send(new DatafileWriteStatusChangedMessage(true));
                 CollectionAccessSemaphore.Release();
             }
             catch (Exception exc)
@@ -643,7 +660,7 @@ namespace Project2FA.UWP.Services
                 var restoreSuccess = await RestoreLastDatafile(datafile, fileName, folder);
                 if (restoreSuccess)
                 {
-                    await Utils.ErrorDialogs.WritingDatafileError();
+                    await Utils.ErrorDialogs.WritingDatafileError(false);
                 }
                 else
                 {

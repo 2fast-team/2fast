@@ -135,10 +135,10 @@ namespace Project2FA.UWP.Services
             set => _helper.TryWrite(nameof(UnhandledExceptionStr), value);
         }
 
-        public bool UseWindowsHello
+        public bool ActivateWindowsHello
         {
-            get => _helper.SafeRead(nameof(UseWindowsHello), true);
-            set => _helper.TryWrite(nameof(UseWindowsHello), value);
+            get => _helper.SafeRead(nameof(ActivateWindowsHello), true);
+            set => _helper.TryWrite(nameof(ActivateWindowsHello), value);
         }
 
         public WindowsHelloPreferEnum PreferWindowsHello

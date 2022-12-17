@@ -114,10 +114,6 @@ namespace Project2FA.UWP.ViewModels
                             {
                                 DatafileBTNActive = false;
                             }
-
-                            //ShowError = true;
-                            //ErrorText = "#Die Passwörter stimmen nicht überein";
-
                         }
                         else
                         {
@@ -170,7 +166,11 @@ namespace Project2FA.UWP.ViewModels
             catch (Exception exc)
             {
                 TrackingManager.TrackExceptionCatched(exc);
-                await Utils.ErrorDialogs.WritingDatafileError();
+                var result = await Utils.ErrorDialogs.WritingDatafileError(true);
+                if (result == Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
+                {
+                    SetAndCreateLocalDatafile(isWebDAV);
+                }
             }
 
         }

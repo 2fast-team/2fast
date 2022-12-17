@@ -52,7 +52,7 @@ namespace Project2FA.UWP.ViewModels
         {
             if (await KeyCredentialManager.IsSupportedAsync())
             {
-                WindowsHelloIsUsable = true;
+                WindowsHelloIsUsable = SettingsService.Instance.ActivateWindowsHello;
                 var settings = SettingsService.Instance;
                 if (settings.PreferWindowsHello == Services.Enums.WindowsHelloPreferEnum.None)
                 {

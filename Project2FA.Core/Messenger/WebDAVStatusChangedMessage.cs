@@ -6,7 +6,7 @@ using Project2FA.Repository.Models.Enums;
 
 namespace Project2FA.Core.Messenger
 {
-    internal class WebDAVStatusChangedMessage : ValueChangedMessage<WebDAVStatus>
+    public class WebDAVStatusChangedMessage : ValueChangedMessage<WebDAVStatus>
     {
         public WebDAVStatusChangedMessage(WebDAVStatus value) : base(value)
         {

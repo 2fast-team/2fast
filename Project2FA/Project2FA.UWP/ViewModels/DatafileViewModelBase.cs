@@ -50,8 +50,6 @@ namespace Project2FA.UWP.ViewModels
         public ICommand ConfirmErrorCommand { get; set; }
         public ICommand CheckServerAddressCommand { get; set; }
 
-        //public ICommand ChooseWebDAVCommand { get; set; }
-
         public ICommand LoginCommand { get; set; }
 
         public ICommand WebDAVLoginCommand { get; set; }
@@ -105,6 +103,7 @@ namespace Project2FA.UWP.ViewModels
             await App.Repository.Datafile.UpsertAsync(model);
             if (isWebDAV)
             {
+                // initial file upload
                 await DataService.Instance.UploadDatafileWithWebDAV(ApplicationData.Current.LocalFolder, model, true);
             }
             
@@ -221,11 +220,6 @@ namespace Project2FA.UWP.ViewModels
                     }
                     return null;
                 }
-                //catch
-                //{
-                //    await ShowServerAddressNotFoundMessage();
-                //    return false;
-                //}
 
                 if (ignoreServerCertificateErrors)
                 {
@@ -311,19 +305,18 @@ namespace Project2FA.UWP.ViewModels
                 {
                     if (result.Maintenance)
                     {
-
+                        await ShowServerMaintenanceError();
                     }
                     if (!result.Installed)
                     {
-
+                        await ShowServerNotInstalledError();
                     }
                 }
                 else
                 {
-
+                    await ShowServerAddressNotFoundError();
                 }
                 //Messenger.Send(new UsernameChangedMessage(Username));
-                //TODO error Message for server status
             }
             IsLoading = false;
         }

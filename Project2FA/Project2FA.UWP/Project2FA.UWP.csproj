@@ -126,6 +126,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\HighlightFormFieldOnErrors.cs" />
+    <Compile Include="Controls\AutoCloseInfoBar.cs" />
     <Compile Include="Controls\AutoCloseTeachingTip.cs" />
     <Compile Include="Controls\CardControl\CardControl.cs" />
     <Compile Include="Controls\CardExpanderControl\CardExpanderControl.cs" />

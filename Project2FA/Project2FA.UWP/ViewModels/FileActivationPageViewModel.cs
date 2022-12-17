@@ -105,21 +105,29 @@ namespace Project2FA.UWP.ViewModels
         {
             try
             {
-                string datafileStr = await FileService.ReadStringAsync(storageFile.Name, await storageFile.GetParentAsync());
-                //read the iv for AES
-                DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
-                if (datafile.IV == null)
+                var folder = await storageFile.GetParentAsync();
+                if (folder == null)
                 {
+                    await Utils.ErrorDialogs.ShowUnauthorizedAccessError();
                     return false;
                 }
                 else
                 {
-                    byte[] iv = datafile.IV;
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                        (Password, iv, datafileStr);
-                    return true;
+                    string datafileStr = await FileService.ReadStringAsync(storageFile.Name, folder);
+                    //read the iv for AES
+                    DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                    if (datafile.IV == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        byte[] iv = datafile.IV;
+                        DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
+                            (Password, iv, datafileStr);
+                        return true;
+                    }
                 }
-
             }
             catch (Exception exc)
             {

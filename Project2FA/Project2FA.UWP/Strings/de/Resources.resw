@@ -1021,4 +1021,16 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
     <value>Windows Hello als Anmeldeoption anbieten</value>
   </data>
+  <data name="InfoBarDatafileNoInternet" xml:space="preserve">
+    <value>Derzeit ist keine Internetkonnektivität zur Synchronisierung verfügbar. Bitte stellen Sie eine Verbindung her und bestätigen Sie "Datendatei neuladen".</value>
+  </data>
+  <data name="InfoBarDatafileTitleNoInternet" xml:space="preserve">
+    <value>Keine Internetkonnektivität</value>
+  </data>
+  <data name="InfoBarDatafileTitleUpdated" xml:space="preserve">
+    <value>Datendatei aktualisiert</value>
+  </data>
+  <data name="InfoBarDatafileUpdated" xml:space="preserve">
+    <value>Die Datendatei wurde erfolgreich aktualisiert.</value>
+  </data>
 </root>

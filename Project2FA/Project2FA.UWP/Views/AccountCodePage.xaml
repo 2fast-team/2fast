@@ -656,5 +656,23 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ListView>
+        <!--<appcontrols:AutoCloseInfoBar
+            IsOpen="{x:Bind ViewModel.DatafileWebDAVUpdated,Mode=TwoWay}"
+            Severity="Success"
+            Title=""
+            MaxWidth="450"
+            Message="" />-->
+        <appcontrols:AutoCloseInfoBar
+            IsOpen="{x:Bind ViewModel.DatafileUpdated,Mode=TwoWay}"
+            Severity="Success"
+            Title="{x:Bind strings:Resources.InfoBarDatafileTitleUpdated}"
+            MaxWidth="450"
+            Message="{x:Bind strings:Resources.InfoBarDatafileUpdated}" />
+        <appcontrols:AutoCloseInfoBar
+            IsOpen="{x:Bind ViewModel.DatafileNoInternetConnection,Mode=TwoWay}"
+            Severity="Warning"
+            Title="{x:Bind strings:Resources.InfoBarDatafileTitleNoInternet}"
+            MaxWidth="450"
+            Message="{x:Bind strings:Resources.InfoBarDatafileNoInternet}" />
     </Grid>
 </Page>

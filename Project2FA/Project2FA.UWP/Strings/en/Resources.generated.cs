@@ -824,7 +824,7 @@ namespace Project2FA.UWP.Strings{
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: • Link the data type ".2fa" with this app. Double-click on a datafile to open the app. • The automatic locking of the app can now be deactivated in the settings. • Fixed the problem that passwords with a space were saved incorrectly.
+        ///   Looks up a localized string similar to: • Windows Hello can now be disabled in the settings for general login • Update of third party libraries • Fixed a bug where not all rights were available to read when starting .2fa files • Encryption of the password entered when starting .2fa files • Increased reliability of the WebDAV component
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -837,7 +837,7 @@ namespace Project2FA.UWP.Strings{
 
         #region NewAppFeaturesTitle
         /// <summary>
-        ///   Looks up a localized string similar to: New features
+        ///   Looks up a localized string similar to: New features & changes
         /// </summary>
         public static string NewAppFeaturesTitle
         {

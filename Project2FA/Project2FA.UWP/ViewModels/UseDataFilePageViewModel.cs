@@ -137,10 +137,6 @@ namespace Project2FA.UWP.ViewModels
                 App.ShellPageInstance.NavigationIsAllowed = true;
                 await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
             }
-            else
-            {
-                // TODO error Message
-            }
             IsLoading = false;
         }
 

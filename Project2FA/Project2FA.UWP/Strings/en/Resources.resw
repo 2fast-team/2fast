@@ -730,12 +730,14 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>• Link the data type ".2fa" with this app. Double-click on a datafile to open the app.
-• The automatic locking of the app can now be deactivated in the settings.
-• Fixed the problem that passwords with a space were saved incorrectly.</value>
+    <value>• Windows Hello can now be disabled in the settings for general login
+• Update of third party libraries
+• Fixed a bug where not all rights were available to read when starting .2fa files
+• Encryption of the password entered when starting .2fa files
+• Increased reliability of the WebDAV component</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
-    <value>New features</value>
+    <value>New features &amp; changes</value>
   </data>
   <data name="WelcomePageTitle" xml:space="preserve">
     <value>Welcome</value>

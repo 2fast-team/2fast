@@ -137,6 +137,7 @@ namespace Project2FA.UWP.Views
                     }
                     catch (System.Exception exc)
                     {
+                        ViewModel.TwoFADataService.ACVCollection.Filter = null;
                         TrackingManager.TrackException(exc);
                     }
                     

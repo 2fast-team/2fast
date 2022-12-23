@@ -736,7 +736,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>• Windows Hello kann nun in den Einstellungen für die generelle Anmeldung deaktiviert werden
 • Aktualisierung von Drittanbieter Bibliotheken
-• Behebung eines Fehlers, dass bei dem Starten von .2fa nicht alle Rechte zum Lesen zur Verfügung standen
+• Behebung eines Fehlers, dass bei dem Starten von .2fa Datendateien nicht alle Rechte zum Lesen zur Verfügung standen
 • Verschlüsselung des eingegebenen Passwortes bei dem Starten von .2fa Dateien
 • Zuverlässigkeit der WebDAV-Komponente wurde erhöht</value>
   </data>

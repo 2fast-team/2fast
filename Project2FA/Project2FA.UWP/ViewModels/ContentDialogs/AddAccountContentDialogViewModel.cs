@@ -1,5 +1,4 @@
 ﻿using OtpNet;
-using Prism.Commands;
 using Prism.Logging;
 using Prism.Mvvm;
 using Project2FA.Core.Services.Parser;
@@ -31,30 +30,45 @@ using Template10.Services.Serialization;
 using System.IO;
 using Project2FA.Core.ProtoModels;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Toolkit.Uwp.Helpers;
+using Windows.Media.Capture.Frames;
+using Template10.Utilities;
+using Windows.UI.Xaml.Controls;
+using Windows.Media.Core;
+using Windows.Media.Playback;
+using System.Linq;
+using Windows.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project2FA.UWP.ViewModels
 {
     /// <summary>
     /// View model for adding an account countent dialog
     /// </summary>
-    public class AddAccountContentDialogViewModel : BindableBase, IDialogInitializeAsync
+    public class AddAccountContentDialogViewModel : ObservableObject, IDialogInitializeAsync, IDisposable
     {
-        public ObservableCollection<TwoFACodeModel> OTPList { get; } = new ObservableCollection<TwoFACodeModel>();
+        public ObservableCollection<TwoFACodeModel> OTPList { get; private set; } = new ObservableCollection<TwoFACodeModel>();
+        public ObservableCollection<MediaFrameSourceGroup> CameraSourceGroup { get; private set; } = new ObservableCollection<MediaFrameSourceGroup>();
+        private CameraHelper _cameraHelper;
+        private MediaPlayer _mediaPlayer;
+        private MediaPlayerElement _mediaPlayerElementControl;
         private string _qrCodeStr;
         private bool _qrCodeScan, _launchScreenClip, _isButtonEnable;
         private bool _manualInput;
         private bool _isCameraActive;
         private TwoFACodeModel _model;
-        private int _selectedPivotIndex;
+        private int _selectedPivotIndex, _selectedCameraSource;
         private int _openingSeconds;
         private int _seconds;
         private string _secretKey;
         private bool _isEditBoxVisible;
         private string _pivotViewSelectionName;
-        DispatcherTimer _dispatcherTimer;
+        private DispatcherTimer _dispatcherTimer;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
+        public AsyncRelayCommand SecondayButtonCommand { get; }
         public ICommand CameraScanCommand { get; }
         public ICommand DeleteAccountIconCommand { get; }
         public ICommand EditAccountIconCommand { get; }
@@ -64,13 +78,14 @@ namespace Project2FA.UWP.ViewModels
         private IFileService FileService { get; }
         private IconNameCollectionModel _iconNameCollectionModel;
         private string _tempIconLabel;
+        private VideoFrame _currentVideoFrame;
 
         /// <summary>
         /// Constructor
         /// </summary>
         public AddAccountContentDialogViewModel(
-            IResourceService resourceService, 
-            IFileService fileService, 
+            IResourceService resourceService,
+            IFileService fileService,
             ISerializationService serializationService,
             ILoggerFacade loggerFacade)
         {
@@ -84,22 +99,15 @@ namespace Project2FA.UWP.ViewModels
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //every second        
 
             Model = new TwoFACodeModel();
-            ManualInputCommand = new DelegateCommand(() =>
+            ManualInputCommand = new RelayCommand(() =>
             {
                 SelectedPivotIndex = 1;
                 ManualInput = true;
             });
-            ScanQRCodeCommand = new DelegateCommand( async() =>
+            ScanQRCodeCommand = new AsyncRelayCommand(ScanQRCodeCommandTask);
+            PrimaryButtonCommand = new RelayCommand(async() =>
             {
-                OpeningSeconds = SettingsService.Instance.QRCodeScanSeconds;
-                _dispatcherTimer.Tick -= OnTimedEvent;
-                _dispatcherTimer.Tick += OnTimedEvent;
-                Seconds = OpeningSeconds;
-                _dispatcherTimer.Start();
-                await ScanQRCode();
-            });
-            PrimaryButtonCommand = new DelegateCommand(() =>
-            {
+                await CleanUpCamera();
                 if (OTPList.Count > 0)
                 {
                     for (int i = 0; i < OTPList.Count; i++)
@@ -114,24 +122,24 @@ namespace Project2FA.UWP.ViewModels
                 {
                     DataService.Instance.Collection.Add(Model);
                 }
+                
             });
 
-            CameraScanCommand = new DelegateCommand(() =>
-            {
-                IsCameraActive = true;
-            });
+            CameraScanCommand = new AsyncRelayCommand(CameraScanCommandTask);
 
-            EditAccountIconCommand = new DelegateCommand(() =>
+            EditAccountIconCommand = new RelayCommand(() =>
             {
                 IsEditBoxVisible = !IsEditBoxVisible;
             });
 
-            DeleteAccountIconCommand = new DelegateCommand(() =>
+            DeleteAccountIconCommand = new RelayCommand(() =>
             {
                 Model.AccountSVGIcon = null;
                 Model.AccountIconName = null;
                 AccountIconName = null;
             });
+
+            SecondayButtonCommand = new AsyncRelayCommand(SecondayButtonCommandTask);
 
             //ErrorsChanged += Validation_ErrorsChanged;
 
@@ -142,10 +150,8 @@ namespace Project2FA.UWP.ViewModels
         {
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/IconNameCollection.json"));
             IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
-            using (StreamReader r = new StreamReader(randomStream.AsStreamForRead()))
-            {
-                IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(await r.ReadToEndAsync());
-            }
+            using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
+            IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(await r.ReadToEndAsync());
             //StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             //string name = "IconNameCollection.json";
             //if (await FileService.FileExistsAsync(name, localFolder))
@@ -161,8 +167,33 @@ namespace Project2FA.UWP.ViewModels
 
         public async Task LoadIconSVG()
         {
-            //Model.AccountIconName = TempAccountIconName;
             await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
+        }
+
+        private async Task ScanQRCodeCommandTask()
+        {
+            OpeningSeconds = SettingsService.Instance.QRCodeScanSeconds;
+            _dispatcherTimer.Tick -= OnTimedEvent;
+            _dispatcherTimer.Tick += OnTimedEvent;
+            Seconds = OpeningSeconds;
+            _dispatcherTimer.Start();
+            await ScanClipboardQRCode();
+        }
+
+        private async Task CameraScanCommandTask()
+        {
+            _cameraHelper = new CameraHelper();
+            CameraSourceGroup.AddRange(await CameraHelper.GetFrameSourceGroupsAsync());
+            PivotViewSelectionName = "CameraInputAccount";
+            if (CameraSourceGroup.Count > 0)
+            {
+                await InitializeCameraAsync();
+            }
+        }
+
+        private async Task SecondayButtonCommandTask()
+        {
+            await CleanUpCamera();
         }
 
         /// <summary>
@@ -197,10 +228,12 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
+
+
         /// <summary>
         /// Launch the MS screenclip app
         /// </summary>
-        public async Task ScanQRCode()
+        public async Task ScanClipboardQRCode()
         {
             bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?delayInSeconds=" + OpeningSeconds));
             if (result)
@@ -256,34 +289,7 @@ namespace Project2FA.UWP.ViewModels
                             {
                                 //clear the clipboard, if the image is read as TOTP
                                 Clipboard.Clear();
-                                //migrate code import
-                                if (_qrCodeStr.StartsWith("otpauth-migration://"))
-                                {
-                                    await ParseMigrationQRCode();
-                                    PivotViewSelectionName = "ImportBackupAccounts";
-                                    CheckInputs();
-                                }
-                                // normal otpauth import
-                                else
-                                {
-                                    await ParseQRCode();
-                                    //move to the input dialog
-                                    PivotViewSelectionName = "NormalInputAccount";
-
-                                    if (!string.IsNullOrEmpty(SecretKey)
-                                       && !string.IsNullOrEmpty(Model.Issuer))  /*   && !string.IsNullOrEmpty(Model.Label)*/
-                                    {
-                                        IsPrimaryBTNEnable = true;
-                                    }
-                                    else
-                                    {
-                                        MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
-                                        await dialog.ShowAsync();
-                                        //move to the selection dialog
-                                        SelectedPivotIndex = 0;
-                                    }
-                                }
-
+                                await ReadAuthenticationFromString();
                             }
                             else
                             {
@@ -304,6 +310,40 @@ namespace Project2FA.UWP.ViewModels
 
                 }
             }
+        }
+
+        private async Task ReadAuthenticationFromString()
+        {
+            await App.ShellPageInstance.Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                //migrate code import
+                if (_qrCodeStr.StartsWith("otpauth-migration://"))
+                {
+                    await ParseMigrationQRCode();
+                    PivotViewSelectionName = "ImportBackupAccounts";
+                    CheckInputs();
+                }
+                // normal otpauth import
+                else
+                {
+                    await ParseQRCode();
+                    //move to the input dialog
+                    PivotViewSelectionName = "NormalInputAccount";
+
+                    if (!string.IsNullOrEmpty(SecretKey)
+                       && !string.IsNullOrEmpty(Model.Issuer))  /*   && !string.IsNullOrEmpty(Model.Label)*/
+                    {
+                        IsPrimaryBTNEnable = true;
+                    }
+                    else
+                    {
+                        MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
+                        await dialog.ShowAsync();
+                        //move to the selection dialog
+                        SelectedPivotIndex = 0;
+                    }
+                }
+            });
         }
 
         /// <summary>
@@ -384,6 +424,7 @@ namespace Project2FA.UWP.ViewModels
         {
             IProject2FAParser parser = App.Current.Container.Resolve<IProject2FAParser>();
             List<KeyValuePair<string, string>> valuePair = parser.ParseQRCodeStr(_qrCodeStr);
+
             if (valuePair.Count == 0)
             {
                 return false;
@@ -395,16 +436,16 @@ namespace Project2FA.UWP.ViewModels
                 switch (item.Key)
                 {
                     case "secret":
-                        SecretKey= item.Value;
+                        SecretKey = item.Value;
                         break;
                     case "label":
                         Label = item.Value;
                         await CheckLabelForIcon();
-                        RaisePropertyChanged(nameof(Label));
+                        OnPropertyChanged(nameof(Label));
                         break;
                     case "issuer":
                         Model.Issuer = item.Value;
-                        RaisePropertyChanged(nameof(Issuer));
+                        OnPropertyChanged(nameof(Issuer));
                         break;
                     case "algorithm":
                         string algo = item.Value.ToLower();
@@ -433,6 +474,8 @@ namespace Project2FA.UWP.ViewModels
                         break;
                 }
             }
+
+
             return true;
         }
 
@@ -508,6 +551,147 @@ namespace Project2FA.UWP.ViewModels
             await LoadIconNameCollection();
         }
 
+        private void SetMediaPlayerSource()
+        {
+            try
+            {
+                MediaFrameSource frameSource = _cameraHelper?.PreviewFrameSource;
+                if (frameSource != null)
+                {
+                    if (_mediaPlayer == null)
+                    {
+                        _mediaPlayer = new MediaPlayer
+                        {
+                            AutoPlay = true,
+                            RealTimePlayback = true
+                        };
+                    }
+
+                    _mediaPlayer.Source = MediaSource.CreateFromMediaFrameSource(frameSource);
+                    MediaPlayerElementControl.SetMediaPlayer(_mediaPlayer);
+                }
+            }
+            catch (Exception ex)
+            {
+                //InvokePreviewFailed(ex.Message);
+            }
+        }
+
+        #region Camera
+
+        public async Task CleanUpCamera()
+        {
+            if (_cameraHelper != null)
+            {
+                await _cameraHelper.CleanUpAsync();
+                //_mediaPlayer.SystemMediaTransportControls.IsPlayEnabled = false;
+                //MediaPlayerElementControl.SetMediaPlayer(null);
+                _mediaPlayer = null;
+                _cameraHelper = null;
+            }
+        }
+        private async Task InitializeCameraAsync()
+        {
+            if (CameraSourceGroup[SelectedCameraSource] is MediaFrameSourceGroup selectedGroup)
+            {
+                _cameraHelper.FrameSourceGroup = selectedGroup;
+                var result = await _cameraHelper.InitializeAndStartCaptureAsync();
+                if (result != CameraHelperResult.Success)
+                {
+                    //InvokePreviewFailed(result.ToString());
+                    MediaPlayerElementControl.SetMediaPlayer(null);
+                }
+                else
+                {
+                    SetMediaPlayerSource();
+                    // Subscribe to get frames as they arrive
+                    _cameraHelper.FrameArrived += CameraHelper_FrameArrived;
+                    var formatGroups = _cameraHelper.FrameFormatsAvailable.GroupBy(x => x.VideoFormat.Width);
+
+                    //_mediaCapture = new MediaCapture();
+                    // Setup a frame to use as the input settings
+                    //var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
+
+                    //var videoFrame = new VideoFrame(Windows.Graphics.Imaging.BitmapPixelFormat.Bgra8, (int)currentPreviewResolution.Width, (int)currentPreviewResolution.Height);
+                    // Get preview 
+                    //var frame = await _mediaCapture.GetPreviewFrameAsync();
+
+                    // Create our luminance source
+                    //var luminanceSource = new SoftwareBitmapLuminanceSource(frame.SoftwareBitmap);
+                }
+            }
+
+            //_frameSourceGroupButton.IsEnabled = IsFrameSourceGroupButtonAvailable;
+            //SetFrameSourceGroupButtonVisibility();
+        }
+
+        private async void CameraHelper_FrameArrived(object sender, FrameEventArgs e)
+        {
+            _currentVideoFrame = e.VideoFrame;
+            var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
+            if (luminanceSource != null)
+            {
+                var barcodeReader = new BarcodeReader
+                {
+                    AutoRotate = true,
+                    Options = { TryHarder = true }
+                };
+                var decodedStr = barcodeReader.Decode(luminanceSource);
+                if (decodedStr != null)
+                {
+                    //if (_qrCodeStr.StartsWith("otpauth-migration://"))
+                    if (decodedStr.Text.StartsWith("otpauth"))
+                    {
+                        await CleanUpCamera();
+                        _qrCodeStr = decodedStr.Text;
+                        await ReadAuthenticationFromString();
+                    }
+                }
+            }
+                
+        }
+
+
+        //async Task SetupCameraAutoFocus()
+        //{
+        //    if (IsFocusSupported)
+        //    {
+        //        var focusControl = _mediaCapture.VideoDeviceController.FocusControl;
+
+        //        var focusSettings = new FocusSettings();
+
+        //        //if (ScanningOptions.DisableAutofocus)
+        //        //{
+        //        //    focusSettings.Mode = FocusMode.Manual;
+        //        //    focusSettings.Distance = ManualFocusDistance.Nearest;
+        //        //    focusControl.Configure(focusSettings);
+        //        //    return;
+        //        //}
+
+        //        focusSettings.AutoFocusRange = focusControl.SupportedFocusRanges.Contains(AutoFocusRange.FullRange)
+        //            ? AutoFocusRange.FullRange
+        //            : focusControl.SupportedFocusRanges.FirstOrDefault();
+
+        //        var supportedFocusModes = focusControl.SupportedFocusModes;
+        //        if (supportedFocusModes.Contains(FocusMode.Continuous))
+        //        {
+        //            focusSettings.Mode = FocusMode.Continuous;
+        //        }
+        //        else if (supportedFocusModes.Contains(FocusMode.Auto))
+        //        {
+        //            focusSettings.Mode = FocusMode.Auto;
+        //        }
+
+        //        if (focusSettings.Mode == FocusMode.Continuous || focusSettings.Mode == FocusMode.Auto)
+        //        {
+        //            focusSettings.WaitForFocus = false;
+        //            focusControl.Configure(focusSettings);
+        //            await focusControl.FocusAsync();
+        //        }
+        //    }
+        //}
+        #endregion
+
         //private void Validation_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
         //{
         //    OnPropertyChanged(nameof(Errors)); // Update Errors on every Error change, so I can bind to it.
@@ -557,6 +741,11 @@ namespace Project2FA.UWP.ViewModels
             }
         }
 
+        //public bool IsFocusSupported
+        //    => _mediaCapture != null
+        //    && _mediaCapture.VideoDeviceController != null
+        //    && _mediaCapture.VideoDeviceController.FocusControl != null
+        //    && _mediaCapture.VideoDeviceController.FocusControl.Supported;
         public TwoFACodeModel Model
         {
             get => _model;
@@ -592,7 +781,7 @@ namespace Project2FA.UWP.ViewModels
                         else
                         {
 #pragma warning disable CA2011 // Avoid infinite recursion
-                            string secret = SecretKey.Replace("-", string.Empty);
+                            string secret = _secretKey.Replace("-", string.Empty);
                             secret = secret.Replace(" ", string.Empty);
                             SecretKey = secret.ToUpper();
 #pragma warning restore CA2011 // Avoid infinite recursion
@@ -629,7 +818,7 @@ namespace Project2FA.UWP.ViewModels
             {
 
                 Model.AccountIconName = value;
-                RaisePropertyChanged(nameof(AccountIconName));
+                OnPropertyChanged(nameof(AccountIconName));
                 if (value != null)
                 {
                     TempIconLabel = string.Empty;
@@ -681,6 +870,37 @@ namespace Project2FA.UWP.ViewModels
         { 
             get => _pivotViewSelectionName;
             set => SetProperty(ref _pivotViewSelectionName, value); }
+        public int SelectedCameraSource 
+        { 
+            get => _selectedCameraSource;
+            set
+            {
+                if(SetProperty(ref _selectedCameraSource, value))
+                {
+                    InitializeCameraAsync();
+                }
+            }
+        }
+        public MediaPlayerElement MediaPlayerElementControl 
+        { 
+            get => _mediaPlayerElementControl; 
+            set => SetProperty(ref _mediaPlayerElementControl, value);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _mediaPlayer?.Dispose();
+                _cameraHelper?.Dispose();
+            }
+        }
         #endregion
     }
 }

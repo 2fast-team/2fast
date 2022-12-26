@@ -68,8 +68,11 @@ namespace Project2FA.UWP.ViewModels
                     TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
                 }
                 AddAccountContentDialog dialog = new AddAccountContentDialog();
-                dialog.Style = App.Current.Resources[Core.Constants.ContentDialogStyleName] as Style;
-                await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+                var result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+                if (result == ContentDialogResult.None)
+                {
+                    await dialog.ViewModel.CleanUpCamera();
+                }
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 

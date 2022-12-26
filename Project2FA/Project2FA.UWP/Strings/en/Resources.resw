@@ -150,7 +150,7 @@
   <data name="AccountCopyCodeButton.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
     <value>copy code</value>
   </data>
-  <data name="AddAccountContentDialog.CloseButtonText" xml:space="preserve">
+  <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="AddAccountContentDialog.PrimaryButtonText" xml:space="preserve">
@@ -1033,5 +1033,11 @@ In the following sections, the functionality of this application is explained in
   </data>
   <data name="InfoBarDatafileUpdated" xml:space="preserve">
     <value>The data file has been successfully updated.</value>
+  </data>
+  <data name="AddAccountContentDialogCameraScan.Header" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="AddAccountContentDialogCameraScanBTN.Text" xml:space="preserve">
+    <value>Camera</value>
   </data>
 </root>

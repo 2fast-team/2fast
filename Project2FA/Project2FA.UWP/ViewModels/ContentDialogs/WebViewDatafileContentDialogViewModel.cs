@@ -9,10 +9,12 @@ using System.Windows.Input;
 using Prism.Commands;
 using Project2FA.Repository.Models;
 using Prism.Services.Dialogs;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class WebViewDatafileContentDialogViewModel : BindableBase, IDialogInitialize
+    public class WebViewDatafileContentDialogViewModel : ObservableObject, IDialogInitialize
     {
         private string _webDAVServerBackgroundUrl;
         private bool _isLoading;
@@ -27,11 +29,11 @@ namespace Project2FA.UWP.ViewModels
 
         public WebViewDatafileContentDialogViewModel()
         {
-            WebDAVBackCommand = new DelegateCommand(() =>
+            WebDAVBackCommand = new RelayCommand(() =>
             {
                 Directory.SelectedPathIndex = Directory.GetPathDepth - 1;
             });
-            PrimaryButtonCommand = new DelegateCommand(() =>
+            PrimaryButtonCommand = new RelayCommand(() =>
             {
                 if (SelectedItem != null)
                 {

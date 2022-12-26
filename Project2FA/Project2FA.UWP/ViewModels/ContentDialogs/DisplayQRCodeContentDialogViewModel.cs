@@ -1,4 +1,5 @@
-﻿using OtpNet;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using OtpNet;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Project2FA.Repository.Models;
@@ -11,7 +12,7 @@ using ZXing.QrCode;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class DisplayQRCodeContentDialogViewModel : BindableBase, IDialogInitialize
+    public class DisplayQRCodeContentDialogViewModel : ObservableObject, IDialogInitialize
     {
         private string _header;
         private WriteableBitmap _qrImage;

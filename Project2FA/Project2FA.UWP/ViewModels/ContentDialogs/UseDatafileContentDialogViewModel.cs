@@ -8,6 +8,7 @@ using Project2FA.Repository.Models;
 using Windows.Storage.Pickers;
 using Project2FA.Core.Services.JSON;
 using Prism.Services.Dialogs;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -39,12 +40,12 @@ namespace Project2FA.UWP.ViewModels
             SecretService = secretService;
             FileService = fileService;
             NewtonsoftJSONService = newtonsoftJSONService;
-            ConfirmErrorCommand = new DelegateCommand(() =>
+            ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
             });
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            UseDatafileCommand = new DelegateCommand(async () =>
+            UseDatafileCommand = new RelayCommand(async () =>
             {
                 await SetLocalFile(true); //change path is true
             });

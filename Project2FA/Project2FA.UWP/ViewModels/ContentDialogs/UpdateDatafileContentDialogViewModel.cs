@@ -7,6 +7,7 @@ using Project2FA.Core;
 using Template10.Services.File;
 using Project2FA.Core.Services.JSON;
 using Prism.Services.Dialogs;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -27,11 +28,11 @@ namespace Project2FA.UWP.ViewModels
             IFileService fileService) : base(secretService, fileService, newtonsoftJSONService, dialogService)
         {
             SecretService = App.Current.Container.Resolve<ISecretService>();
-            ConfirmErrorCommand = new DelegateCommand(() =>
+            ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
             });
-            UseDatafileCommand = new DelegateCommand(async() =>
+            UseDatafileCommand = new RelayCommand(async() =>
             {
                 await SetLocalFile(true).ConfigureAwait(false);
             });

@@ -11,10 +11,12 @@ using System;
 using Windows.Storage.Streams;
 using Project2FA.UWP.Helpers;
 using Template10.Services.Serialization;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
-    public class EditAccountContentDialogViewModel : BindableBase, IDialogInitializeAsync
+    public class EditAccountContentDialogViewModel : ObservableObject, IDialogInitializeAsync
     {
         private TwoFACodeModel _twoFACodeModel;
         private string _tempIssuer, _tempLabel, _tempAccountIconName, 
@@ -32,7 +34,7 @@ namespace Project2FA.UWP.ViewModels
         public EditAccountContentDialogViewModel(ISerializationService serializationService)
         {
             SerializationService = serializationService;
-            PrimaryButtonCommand = new DelegateCommand(async () =>
+            PrimaryButtonCommand = new RelayCommand(async () =>
             {
                 Model.Issuer = TempIssuer;
                 Model.Label = TempLabel;
@@ -49,19 +51,19 @@ namespace Project2FA.UWP.ViewModels
                 Model.Notes = TempNotes;
                 await DataService.Instance.WriteLocalDatafile();
             });
-            CancelButtonCommand = new DelegateCommand(() =>
+            CancelButtonCommand = new RelayCommand(() =>
             {
                 //Model.Issuer = TempIssuer;
                 //Model.Label = TempLabel;
                 //Model.AccountIconName = TempAccountIconName;
                 //Model.AccountSVGIcon = TempAccountSVGIcon;
             });
-            DeleteAccountIconCommand = new DelegateCommand(() =>
+            DeleteAccountIconCommand = new RelayCommand(() =>
             {
                 TempAccountSVGIcon = null;
                 TempAccountIconName = null;
             });
-            EditAccountIconCommand = new DelegateCommand(() =>
+            EditAccountIconCommand = new RelayCommand(() =>
             {
                 IsEditBoxVisible = !IsEditBoxVisible;
             });

@@ -9,6 +9,7 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:mediaSourceType="using:Windows.Media.Capture.Frames"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:utils="using:Project2FA.UWP.Utils"
@@ -19,6 +20,7 @@
     xmlns:strings="using:Project2FA.UWP.Strings"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
     SecondaryButtonStyle="{StaticResource ButtonRevealStyle}"
+    SecondaryButtonCommand="{x:Bind ViewModel.SecondayButtonCommand}"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
     PrimaryButtonStyle="{StaticResource AccentButtonStyle}">
 
@@ -75,32 +77,6 @@
                     </Grid>
                 </UserControl>
             </DataTemplate>
-
-            <!--<muxc:CommandBarFlyout 
-                x:Name="AccountIconCommandBarFlyout"
-                Placement="Right">
-                <muxc:CommandBarFlyout.PrimaryCommands>
-                    <AppBarButton Label="Delete" Icon="Delete" ToolTipService.ToolTip="Delete"  />
-                    <AppBarElementContainer>
-                        <AutoSuggestBox 
-                        Width="200"
-                        Height="40"
-                        QueryIcon="Find"
-                        VerticalAlignment="Center"
-                        PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
-                        TextChanged="AutoSuggestBox_TextChanged" 
-                        VerticalContentAlignment="Center"
-                        SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-                        Margin="0,0,1,0" />
-                    </AppBarElementContainer>
-                    <AppBarButton 
-                        Label="Save" 
-                        Command="{x:Bind ViewModel.SaveAccountIconCommand}" 
-                        Icon="Save" 
-                        ToolTipService.ToolTip="Save"  />
-                    <AppBarButton Label="Cancel" Icon="Cancel" ToolTipService.ToolTip="Cancel"  />
-                </muxc:CommandBarFlyout.PrimaryCommands>
-            </muxc:CommandBarFlyout>-->
 
         </ResourceDictionary>
     </ContentDialog.Resources>
@@ -201,36 +177,28 @@
                                 </StackPanel>
                             </Button>
 
-                            <!--next version 1.1-->
-                            <!--<Button 
+
+                            <Button 
                             x:Name="BTN_QRCodeCameraScan"
                             Margin="0,10,0,10" 
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.CameraScanCommand}"
-                            MinWidth="240" 
-                            Click="BTN_QRCodeCameraScan_Click">
+                            MinWidth="240" >
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon 
                                     FontSize="30"
                                     Glyph="" />
                                     <TextBlock 
-                                    Text="~AddAccountContentDialogCameraScan.Text" 
+                                    Text="~AddAccountContentDialogCameraScanBTN.Text" 
                                     Margin="8,0,0,0" 
                                     HorizontalAlignment="Stretch" 
                                     VerticalAlignment="Center" 
-                                    x:Uid="AddAccountContentDialogCameraScan" 
+                                    x:Uid="AddAccountContentDialogCameraScanBTN" 
                                     FontFamily="Segoe UI" />
                                 </StackPanel>
-                            </Button>-->
+                            </Button>
                         </StackPanel>
                     </ScrollViewer>
-                    <!--<Border Visibility="{x:Bind ViewModel.IsCameraActive, Mode=OneWay}">
-                        <StackPanel>
-                            <Frame x:Name="CameraFrame"/>
-                            <Button>Test</Button>
-                        </StackPanel>
-                        
-                    </Border>-->
                 </Grid>
             </PivotItem>
             <PivotItem 
@@ -472,6 +440,51 @@
                         HorizontalAlignment="Stretch" ItemClick="ListView_ItemClick"/>
                 </Grid>
                 
+            </PivotItem>
+            <PivotItem
+                Header="#camera"
+                x:Uid="AddAccountContentDialogCameraScan"
+                x:Name="PI_ScanQRCodeCamera">
+                <RelativePanel>
+                    <Grid x:Name="CameraGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ComboBox 
+                            MinWidth="250"
+                            Margin="0,12,0,12"
+                            ItemsSource="{x:Bind ViewModel.CameraSourceGroup,Mode=OneWay}"
+                            SelectedIndex="{x:Bind ViewModel.SelectedCameraSource,Mode=TwoWay}"
+                            VerticalContentAlignment="Center">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="mediaSourceType:MediaFrameSourceGroup">
+                                    <TextBlock Text="{x:Bind DisplayName}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <!--<CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right">
+                            <CommandBar.PrimaryCommands>
+                                <AppBarElementContainer>
+                                    
+                                </AppBarElementContainer>
+                                <AppBarButton 
+                                    Icon="Switch"
+                                    Label="switch"/>
+                            </CommandBar.PrimaryCommands>
+                        </CommandBar>-->
+                        <MediaPlayerElement 
+                            x:Name="CameraPlayerElement" 
+                            Grid.Row="1">
+
+                        </MediaPlayerElement>
+
+                        <Canvas Grid.Row="1">
+                            <Canvas Name="QRCodeCanvas" RenderTransformOrigin="0.5,0.5"/>
+                        </Canvas>
+                    </Grid>
+                </RelativePanel>
+
             </PivotItem>
         </Pivot>
     </Grid>

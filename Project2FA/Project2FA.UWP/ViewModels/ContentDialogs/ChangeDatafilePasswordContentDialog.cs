@@ -14,13 +14,15 @@ using Template10.Services.File;
 using Project2FA.Core.Services.JSON;
 using Prism.Services.Dialogs;
 using Template10.Utilities;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.ViewModels
 {
     /// <summary>
     /// View model for the content dialog to change the password of the current datafile
     /// </summary>
-    public class ChangeDatafilePasswordContentDialogViewModel : BindableBase, IDialogInitialize
+    public class ChangeDatafilePasswordContentDialogViewModel : ObservableObject, IDialogInitialize
     {
         private string _currentPassword, _newPassword, _newPasswordRepeat;
         private bool _isPrimaryBTNEnable;
@@ -42,7 +44,7 @@ namespace Project2FA.UWP.ViewModels
             SecretService = App.Current.Container.Resolve<ISecretService>();
             FileService = App.Current.Container.Resolve<IFileService>();
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
-            ConfirmErrorCommand = new DelegateCommand(() =>
+            ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
                 CurrentPassword = string.Empty;

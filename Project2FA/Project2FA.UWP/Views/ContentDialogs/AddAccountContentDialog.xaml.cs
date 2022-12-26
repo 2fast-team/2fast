@@ -19,22 +19,15 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class AddAccountContentDialog : ContentDialog
     {
-        //MobileBarcodeScanner _barcodeScanner;
-        //MobileBarcodeScanningOptions _mobileBarcodeScanningOptions;
         public AddAccountContentDialogViewModel ViewModel => DataContext as AddAccountContentDialogViewModel;
-        long _tagToken;
 
         public AddAccountContentDialog()
         {
             this.InitializeComponent();
-            //_barcodeScanner = new MobileBarcodeScanner(this.Dispatcher);
-            //_barcodeScanner.RootFrame = CameraFrame;
-            //_barcodeScanner.Dispatcher = this.Dispatcher;
-            //_barcodeScanner.OnCameraError += _barcodeScanner_OnCameraError;
-            //_barcodeScanner.OnCameraInitialized += _barcodeScanner_OnCameraInitialized;
 
-            //register an event for the changed Tag property of the input textbox
-            _tagToken = TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
+            //register an event for the changed Tag property of the input textbox (for validation)
+            TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
+            // register the change of the input
             MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
             Loaded += AddAccountContentDialog_Loaded;
         }
@@ -67,33 +60,17 @@ namespace Project2FA.UWP.Views
                     break;
             }
 
+            // remove custom PivotItems
             MainPivot.Items.Remove(PI_ImportAccountBackup);
-            //listView.SelectedItems
-        }
+            MainPivot.Items.Remove(PI_ScanQRCodeCamera);
 
-        private void _barcodeScanner_OnCameraInitialized()
-        {
-            ViewModel.IsCameraActive = true;
-        }
-
-        private void _barcodeScanner_OnCameraError(IEnumerable<string> errors)
-        {
-            ViewModel.IsCameraActive = false;
-            throw new System.NotImplementedException();
+            // initialize the camera control
+            ViewModel.MediaPlayerElementControl = CameraPlayerElement;
         }
 
         public void BTN_QRCodeScan_Click(object sender, RoutedEventArgs e)
         {
             QRCodeScanTip.IsOpen = true;
-        }
-
-        private void BTN_QRCodeCameraScan_Click(object sender, RoutedEventArgs e)
-        {
-            //_mobileBarcodeScanningOptions = new MobileBarcodeScanningOptions
-            //{
-            //    UseFrontCameraIfAvailable = false
-            //};
-            //_barcodeScanner.Scan(_mobileBarcodeScanningOptions);
         }
 
         private void TBTagChangedCallback(DependencyObject sender, DependencyProperty dp)
@@ -128,26 +105,44 @@ namespace Project2FA.UWP.Views
                 {
                     if (tag == "ImportBackupAccounts")
                     {
+                        MainPivot.Items.Add(PI_ImportAccountBackup);
                         if (MainPivot.Items.Contains(PI_AccountInput))
                         {
-                            MainPivot.Items.Add(PI_ImportAccountBackup);
                             MainPivot.Items.Remove(PI_AccountInput);
                         }
-                        ViewModel.SelectedPivotIndex = 1;
+                        if (MainPivot.Items.Contains(PI_ScanQRCodeCamera))
+                        {
+                            MainPivot.Items.Remove(PI_ScanQRCodeCamera);
+                        }
                     }
                     if (tag == "NormalInputAccount")
                     {
+                        MainPivot.Items.Add(PI_AccountInput);
                         if (MainPivot.Items.Contains(PI_ImportAccountBackup))
                         {
-                            MainPivot.Items.Add(PI_AccountInput);
                             MainPivot.Items.Remove(PI_ImportAccountBackup);
                         }
-                        ViewModel.SelectedPivotIndex = 1;
+                        if (MainPivot.Items.Contains(PI_ScanQRCodeCamera))
+                        {
+                            MainPivot.Items.Remove(PI_ScanQRCodeCamera);
+                        }
                     }
+                    if (tag == "CameraInputAccount")
+                    {
+                        MainPivot.Items.Add(PI_ScanQRCodeCamera);
+                        if (MainPivot.Items.Contains(PI_ImportAccountBackup))
+                        {
+                            MainPivot.Items.Remove(PI_ImportAccountBackup);
+                        }
+                        if (MainPivot.Items.Contains(PI_AccountInput))
+                        {
+                            MainPivot.Items.Remove(PI_AccountInput);
+                        }
+                    }
+                    ViewModel.SelectedPivotIndex = 1;
                 }
             }
         }
-
 
         private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)
         {

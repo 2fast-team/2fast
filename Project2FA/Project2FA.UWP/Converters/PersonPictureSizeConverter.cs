@@ -7,7 +7,7 @@ namespace Project2FA.UWP.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (int.TryParse(value.ToString(), out int size))
+            if (double.TryParse(value.ToString(), out double size))
             {
                 return (size/3)*2;
             }

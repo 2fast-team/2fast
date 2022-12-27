@@ -64,9 +64,6 @@
                             Width="110"
                             DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
                             Margin="0,10,20,0"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
                             Tag="{x:Bind ViewModel.TempAccountSVGIcon, Mode=OneWay}">
                             </muxc:PersonPicture>
                             <Button 

@@ -79,6 +79,8 @@ namespace Project2FA.UWP.ViewModels
         private IconNameCollectionModel _iconNameCollectionModel;
         private string _tempIconLabel;
         private VideoFrame _currentVideoFrame;
+        private long _videoFrameCounter;
+        private const int _vidioFrameDivider = 20; // every X frame for analyzing
 
         /// <summary>
         /// Constructor
@@ -101,29 +103,13 @@ namespace Project2FA.UWP.ViewModels
             Model = new TwoFACodeModel();
             ManualInputCommand = new RelayCommand(() =>
             {
+                PivotViewSelectionName = "NormalInputAccount";
+                CleanUpCamera();
                 SelectedPivotIndex = 1;
                 ManualInput = true;
             });
             ScanQRCodeCommand = new AsyncRelayCommand(ScanQRCodeCommandTask);
-            PrimaryButtonCommand = new RelayCommand(async() =>
-            {
-                await CleanUpCamera();
-                if (OTPList.Count > 0)
-                {
-                    for (int i = 0; i < OTPList.Count; i++)
-                    {
-                        if (OTPList[i].IsChecked)
-                        {
-                            DataService.Instance.Collection.Add(OTPList[i]);
-                        }
-                    }
-                }
-                else
-                {
-                    DataService.Instance.Collection.Add(Model);
-                }
-                
-            });
+            PrimaryButtonCommand = new AsyncRelayCommand(PrimaryButtonCommandTask);
 
             CameraScanCommand = new AsyncRelayCommand(CameraScanCommandTask);
 
@@ -172,6 +158,7 @@ namespace Project2FA.UWP.ViewModels
 
         private async Task ScanQRCodeCommandTask()
         {
+            await CleanUpCamera();
             OpeningSeconds = SettingsService.Instance.QRCodeScanSeconds;
             _dispatcherTimer.Tick -= OnTimedEvent;
             _dispatcherTimer.Tick += OnTimedEvent;
@@ -188,6 +175,25 @@ namespace Project2FA.UWP.ViewModels
             if (CameraSourceGroup.Count > 0)
             {
                 await InitializeCameraAsync();
+            }
+        }
+
+        private async Task PrimaryButtonCommandTask()
+        {
+            await CleanUpCamera();
+            if (OTPList.Count > 0)
+            {
+                for (int i = 0; i < OTPList.Count; i++)
+                {
+                    if (OTPList[i].IsChecked)
+                    {
+                        DataService.Instance.Collection.Add(OTPList[i]);
+                    }
+                }
+            }
+            else
+            {
+                DataService.Instance.Collection.Add(Model);
             }
         }
 
@@ -551,6 +557,8 @@ namespace Project2FA.UWP.ViewModels
             await LoadIconNameCollection();
         }
 
+        #region CameraRegion
+
         private void SetMediaPlayerSource()
         {
             try
@@ -576,8 +584,6 @@ namespace Project2FA.UWP.ViewModels
                 //InvokePreviewFailed(ex.Message);
             }
         }
-
-        #region Camera
 
         public async Task CleanUpCamera()
         {
@@ -605,50 +611,42 @@ namespace Project2FA.UWP.ViewModels
                 {
                     SetMediaPlayerSource();
                     // Subscribe to get frames as they arrive
+                    _cameraHelper.FrameArrived -= CameraHelper_FrameArrived;
                     _cameraHelper.FrameArrived += CameraHelper_FrameArrived;
-                    var formatGroups = _cameraHelper.FrameFormatsAvailable.GroupBy(x => x.VideoFormat.Width);
-
-                    //_mediaCapture = new MediaCapture();
-                    // Setup a frame to use as the input settings
-                    //var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
-
-                    //var videoFrame = new VideoFrame(Windows.Graphics.Imaging.BitmapPixelFormat.Bgra8, (int)currentPreviewResolution.Width, (int)currentPreviewResolution.Height);
-                    // Get preview 
-                    //var frame = await _mediaCapture.GetPreviewFrameAsync();
-
-                    // Create our luminance source
-                    //var luminanceSource = new SoftwareBitmapLuminanceSource(frame.SoftwareBitmap);
+                    //var formatGroups = _cameraHelper.FrameFormatsAvailable.GroupBy(x => x.VideoFormat.Width);
                 }
             }
-
-            //_frameSourceGroupButton.IsEnabled = IsFrameSourceGroupButtonAvailable;
-            //SetFrameSourceGroupButtonVisibility();
         }
 
         private async void CameraHelper_FrameArrived(object sender, FrameEventArgs e)
         {
             _currentVideoFrame = e.VideoFrame;
-            var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
-            if (luminanceSource != null)
+
+            // analyse only every _vidioFrameDivider value
+            if (_videoFrameCounter % _vidioFrameDivider == 0)
             {
-                var barcodeReader = new BarcodeReader
+                var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
+                if (luminanceSource != null)
                 {
-                    AutoRotate = true,
-                    Options = { TryHarder = true }
-                };
-                var decodedStr = barcodeReader.Decode(luminanceSource);
-                if (decodedStr != null)
-                {
-                    //if (_qrCodeStr.StartsWith("otpauth-migration://"))
-                    if (decodedStr.Text.StartsWith("otpauth"))
+                    var barcodeReader = new BarcodeReader
                     {
-                        await CleanUpCamera();
-                        _qrCodeStr = decodedStr.Text;
-                        await ReadAuthenticationFromString();
+                        AutoRotate = true,
+                        Options = { TryHarder = true }
+                    };
+                    var decodedStr = barcodeReader.Decode(luminanceSource);
+                    if (decodedStr != null)
+                    {
+                        if (decodedStr.Text.StartsWith("otpauth"))
+                        {
+                            await CleanUpCamera();
+                            _qrCodeStr = decodedStr.Text;
+                            await ReadAuthenticationFromString();
+                        }
                     }
                 }
             }
-                
+            _videoFrameCounter++;
+
         }
 
 

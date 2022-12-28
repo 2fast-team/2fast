@@ -63,15 +63,17 @@ namespace Project2FA.UWP.ViewModels
         private int _seconds;
         private string _secretKey;
         private bool _isEditBoxVisible;
+        private bool _noCameraFound, _noCameraPermission, _cameraSuccessfullyLoaded;
         private string _pivotViewSelectionName;
         private DispatcherTimer _dispatcherTimer;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
-        public AsyncRelayCommand SecondayButtonCommand { get; }
+        public ICommand SecondayButtonCommand { get; }
         public ICommand CameraScanCommand { get; }
         public ICommand DeleteAccountIconCommand { get; }
         public ICommand EditAccountIconCommand { get; }
+        public ICommand ReloadCameraCommand { get; }
         private ILoggerFacade Logger { get; }
         private IResourceService ResourceService { get; }
         private ISerializationService SerializationService { get; }
@@ -126,6 +128,7 @@ namespace Project2FA.UWP.ViewModels
             });
 
             SecondayButtonCommand = new AsyncRelayCommand(SecondayButtonCommandTask);
+            ReloadCameraCommand = new AsyncRelayCommand(InitializeCameraAsync);
 
             //ErrorsChanged += Validation_ErrorsChanged;
 
@@ -175,6 +178,10 @@ namespace Project2FA.UWP.ViewModels
             if (CameraSourceGroup.Count > 0)
             {
                 await InitializeCameraAsync();
+            }
+            else
+            {
+                NoCameraFound = true;
             }
         }
 
@@ -602,18 +609,31 @@ namespace Project2FA.UWP.ViewModels
             {
                 _cameraHelper.FrameSourceGroup = selectedGroup;
                 var result = await _cameraHelper.InitializeAndStartCaptureAsync();
-                if (result != CameraHelperResult.Success)
+                switch (result)
                 {
-                    //InvokePreviewFailed(result.ToString());
-                    MediaPlayerElementControl.SetMediaPlayer(null);
-                }
-                else
-                {
-                    SetMediaPlayerSource();
-                    // Subscribe to get frames as they arrive
-                    _cameraHelper.FrameArrived -= CameraHelper_FrameArrived;
-                    _cameraHelper.FrameArrived += CameraHelper_FrameArrived;
-                    //var formatGroups = _cameraHelper.FrameFormatsAvailable.GroupBy(x => x.VideoFormat.Width);
+                    case CameraHelperResult.Success:
+                        SetMediaPlayerSource();
+                        // Subscribe to get frames as they arrive
+                        _cameraHelper.FrameArrived -= CameraHelper_FrameArrived;
+                        _cameraHelper.FrameArrived += CameraHelper_FrameArrived;
+                        CameraSuccessfullyLoaded = true;
+                        break;
+                    default:
+                    case CameraHelperResult.CreateFrameReaderFailed:
+                    case CameraHelperResult.InitializationFailed_UnknownError:
+                    case CameraHelperResult.NoCompatibleFrameFormatAvailable:
+                    case CameraHelperResult.StartFrameReaderFailed:
+                    case CameraHelperResult.NoFrameSourceGroupAvailable:
+                    case CameraHelperResult.NoFrameSourceAvailable:
+                        //InvokePreviewFailed(result.ToString());
+                        CameraSuccessfullyLoaded = false;
+                        MediaPlayerElementControl.SetMediaPlayer(null);
+                        break;
+
+                    case CameraHelperResult.CameraAccessDenied:
+                        CameraSuccessfullyLoaded = false;
+                        NoCameraPermission = true;
+                        break;
                 }
             }
         }
@@ -621,9 +641,9 @@ namespace Project2FA.UWP.ViewModels
         private async void CameraHelper_FrameArrived(object sender, FrameEventArgs e)
         {
             _currentVideoFrame = e.VideoFrame;
-
+            
             // analyse only every _vidioFrameDivider value
-            if (_videoFrameCounter % _vidioFrameDivider == 0)
+            if (_videoFrameCounter % _vidioFrameDivider == 0 && SelectedPivotIndex == 1)
             {
                 var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
                 if (luminanceSource != null)
@@ -883,6 +903,21 @@ namespace Project2FA.UWP.ViewModels
         { 
             get => _mediaPlayerElementControl; 
             set => SetProperty(ref _mediaPlayerElementControl, value);
+        }
+        public bool NoCameraPermission 
+        { 
+            get => _noCameraPermission; 
+            set => SetProperty(ref _noCameraPermission, value); 
+        }
+        public bool NoCameraFound 
+        { 
+            get => _noCameraFound; 
+            set => SetProperty(ref _noCameraFound, value); 
+        }
+        public bool CameraSuccessfullyLoaded 
+        { 
+            get => _cameraSuccessfullyLoaded; 
+            set => SetProperty(ref _cameraSuccessfullyLoaded, value); 
         }
 
         public void Dispose()

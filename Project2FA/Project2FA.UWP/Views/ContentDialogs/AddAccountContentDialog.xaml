@@ -98,11 +98,14 @@
                                 <Button 
                             x:Name="BTN_QRCodeScan" 
                             Margin="0,10,0,10" 
+                            HorizontalContentAlignment="Left"
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.ScanQRCodeCommand}" 
                             Click="BTN_QRCodeScan_Click"
                             MinWidth="240">
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel 
+                                        Orientation="Horizontal" 
+                                        HorizontalAlignment="Left">
                                         <FontIcon Glyph="&#xED14;" FontSize="30"/>
                                         <TextBlock 
                                     Text="~AddAccountContentDialogReadQRCode.Text" 
@@ -164,8 +167,11 @@
                             Margin="0,10,0,10" 
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.ManualInputCommand}"
+                            HorizontalContentAlignment="Left"
                             MinWidth="240">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <StackPanel 
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
                                     <FontIcon Glyph="&#xE961;" FontSize="30"/>
                                     <TextBlock 
                                     Text="~AddAccountContentDialogManualInput.Text" 
@@ -181,10 +187,13 @@
                             <Button 
                             x:Name="BTN_QRCodeCameraScan"
                             Margin="0,10,0,10" 
+                            HorizontalContentAlignment="Left"
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.CameraScanCommand}"
                             MinWidth="240" >
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel 
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
                                     <FontIcon 
                                     FontSize="30"
                                     Glyph="" />
@@ -443,7 +452,7 @@
                 x:Uid="AddAccountContentDialogCameraScan"
                 x:Name="PI_ScanQRCodeCamera">
                 <RelativePanel>
-                    <Grid x:Name="CameraGrid">
+                    <Grid MinHeight="600">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
@@ -460,20 +469,38 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <!--<CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right">
-                            <CommandBar.PrimaryCommands>
-                                <AppBarElementContainer>
-                                    
-                                </AppBarElementContainer>
-                                <AppBarButton 
-                                    Icon="Switch"
-                                    Label="switch"/>
-                            </CommandBar.PrimaryCommands>
-                        </CommandBar>-->
+                        <Border 
+                            Margin="0,10,0,0"
+                            Visibility="{x:Bind ViewModel.NoCameraFound, Mode=OneWay}" 
+                            Grid.Row="1">
+                            <StackPanel>
+                                <TextBlock 
+                                    x:Uid="AddAccountContentDialogNoCamFound"
+                                    Text="~AddAccountContentDialogNoCamFound.Text"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Border 
+                            Margin="0,10,0,0"
+                            Visibility="{x:Bind ViewModel.NoCameraPermission, Mode=OneWay}" 
+                            Grid.Row="1">
+                            <StackPanel>
+                                <TextBlock
+                                    x:Uid="AddAccountContentDialogNoCamPermission"
+                                    Text="~AddAccountContentDialogNoCamPermission.Text"></TextBlock>
+                                <HyperlinkButton 
+                                    x:Uid="AddAccountContentDialogPrivacyWebcam"
+                                    Content="~AddAccountContentDialogPrivacyWebcam.Content" 
+                                    NavigateUri="ms-settings:privacy-webcam"/>
+                                <Button 
+                                    Command="{x:Bind ViewModel.ReloadCameraCommand}"
+                                    x:Uid="AddAccountContentDialogBTNCamRetry"
+                                    Content="~AddAccountContentDialogBTNCamRetry.Content" />
+                            </StackPanel>
+                        </Border>
                         <MediaPlayerElement 
                             x:Name="CameraPlayerElement" 
+                            Visibility="{x:Bind ViewModel.CameraSuccessfullyLoaded, Mode=OneWay}"
                             Grid.Row="1">
-
                         </MediaPlayerElement>
 
                         <Canvas Grid.Row="1">

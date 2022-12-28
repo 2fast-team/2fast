@@ -1040,4 +1040,16 @@ In the following sections, the functionality of this application is explained in
   <data name="AddAccountContentDialogCameraScanBTN.Text" xml:space="preserve">
     <value>Camera</value>
   </data>
+  <data name="AddAccountContentDialogBTNCamRetry.Content" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="AddAccountContentDialogNoCamFound.Text" xml:space="preserve">
+    <value>No camera is available.</value>
+  </data>
+  <data name="AddAccountContentDialogNoCamPermission.Text" xml:space="preserve">
+    <value>No consent has been given for the camera to be displayed.</value>
+  </data>
+  <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
 </root>

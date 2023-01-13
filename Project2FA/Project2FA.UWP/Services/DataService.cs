@@ -267,6 +267,7 @@ namespace Project2FA.UWP.Services
                 {
                     // prevent write of the datafile to folder
                     _initialization = true;
+                    await CollectionAccessSemaphore.WaitAsync();
                     try
                     {
                         string datafileStr = await FileService.ReadStringAsync(datafilename, folder);
@@ -296,8 +297,6 @@ namespace Project2FA.UWP.Services
                         }
                         if (deserializeCollection != null)
                         {
-                            await CollectionAccessSemaphore.WaitAsync();
-
                             if (Collection.AddRange(deserializeCollection, true) == 0) // clear the current items and add the new
                             {
                                 // if no error has occured
@@ -336,7 +335,7 @@ namespace Project2FA.UWP.Services
                             //        throw;
                             //    }
                             //}
-                            CollectionAccessSemaphore.Release();
+                            
                         }
                     }
                     catch (Exception exc)
@@ -377,7 +376,7 @@ namespace Project2FA.UWP.Services
                 {
                     if (dbDatafile.IsWebDAV)
                     {
-                        TrackingManager.TrackExceptionCatched(exc);
+                        TrackingManager.TrackExceptionCatched(nameof(CheckLocalDatafile) + " WebD", exc);
                         // TODO add dialog for error
                         ///var webDAVTask = await CheckIfWebDAVDatafileIsOutdated(dbDatafile);
                     }
@@ -388,10 +387,15 @@ namespace Project2FA.UWP.Services
                 }
                 else
                 {
-                    TrackingManager.TrackException(exc);
+                    TrackingManager.TrackException(nameof(CheckLocalDatafile),exc);
                     await ErrorDialogs.ShowUnexpectedError(exc);
                 }
             }
+            finally
+            {
+                CollectionAccessSemaphore.Release();
+            }
+
             //check if a newer version is available or the current file must be uploaded
             if (dbDatafile.IsWebDAV && ActivatedDatafile == null)
             {
@@ -656,7 +660,7 @@ namespace Project2FA.UWP.Services
             catch (Exception exc)
             {
                 CollectionAccessSemaphore.Release();
-                TrackingManager.TrackExceptionCatched(exc);
+                TrackingManager.TrackExceptionCatched(nameof(WriteLocalDatafile), exc);
                 var restoreSuccess = await RestoreLastDatafile(datafile, fileName, folder);
                 if (restoreSuccess)
                 {
@@ -683,7 +687,7 @@ namespace Project2FA.UWP.Services
             }
             catch (Exception exc)
             {
-                TrackingManager.TrackExceptionCatched(exc);
+                TrackingManager.TrackExceptionCatched(nameof(RestoreLastDatafile), exc);
                 return false;
             }
             finally
@@ -870,7 +874,7 @@ namespace Project2FA.UWP.Services
             catch (Exception ex)
             {
                 Logger.Log(ex.Message, Category.Exception, Priority.High);
-                TrackingManager.TrackException(ex);
+                TrackingManager.TrackExceptionCatched(nameof(GenerateTOTP), ex);
                 _reloadCollectionCounter++;
                 if (_reloadCollectionCounter < 3)
                 {
@@ -878,10 +882,11 @@ namespace Project2FA.UWP.Services
                 }
                 else
                 {
+                    // track if the creation finally failed
+                    TrackingManager.TrackExceptionUnhandled(nameof(GenerateTOTP), ex);
                     Collection[i].TwoFACode = string.Empty;
                     SecretKeyError(Collection[i].Label);
                 }
-                
             }
         }
 

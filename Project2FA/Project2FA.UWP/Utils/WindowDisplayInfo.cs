@@ -132,7 +132,7 @@ namespace Project2FA.UWP.Utils
             }
             catch (System.Exception exc)
             {
-                TrackingManager.TrackExceptionCatched(exc);
+                TrackingManager.TrackExceptionCatched(nameof(GetForCurrentView), exc);
                 return WindowDisplayMode.Unknown;
             }
 

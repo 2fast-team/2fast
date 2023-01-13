@@ -84,6 +84,13 @@ namespace Project2FA.UWP.ViewModels
         private long _videoFrameCounter;
         private const int _vidioFrameDivider = 20; // every X frame for analyzing
 
+        // future function: 
+        // create screen capture without third party app
+        // https://learn.microsoft.com/en-us/windows/uwp/audio-video-camera/screen-capture
+
+        // create PiP mode
+        // https://stackoverflow.com/questions/64644610/how-to-set-minimum-window-size-in-compact-overlay-mode-of-uwp-app
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -218,7 +225,7 @@ namespace Project2FA.UWP.ViewModels
         {
             if (e.WindowActivationState == CoreWindowActivationState.Deactivated)
             {
-                Logger.Log("Focus lost/Deactivated " + DateTime.Now, Category.Info, Priority.Low);
+                Logger.Log("Focus lost/Deactivated", Category.Info, Priority.Low);
                 // if the screenclip app is started, the focus of the application is lost
                 if (_launchScreenClip)
                 {
@@ -231,7 +238,7 @@ namespace Project2FA.UWP.ViewModels
             }
             else
             {
-                Logger.Log("Focus/Activated " + DateTime.Now, Category.Info, Priority.Low);
+                Logger.Log("Focus/Activated", Category.Info, Priority.Low);
                 // if the app is focused again, check if a QR-Code is in the clipboard
                 if (_qrCodeScan)
                 {
@@ -274,61 +281,71 @@ namespace Project2FA.UWP.ViewModels
         /// </summary>
         public async Task ReadQRCodeFromClipboard()
         {
-            DataPackageView dataPackageView = Clipboard.GetContent();
-            if (dataPackageView.Contains(StandardDataFormats.Bitmap))
+            try
             {
-                IRandomAccessStreamReference imageReceived = null;
-                try
+                DataPackageView dataPackageView = Clipboard.GetContent();
+                if (dataPackageView.Contains(StandardDataFormats.Bitmap))
                 {
-                    imageReceived = await dataPackageView.GetBitmapAsync();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log(ex.Message, Category.Exception, Priority.Medium);
-                }
-                finally
-                {
+                    IRandomAccessStreamReference imageReceived = null;
                     try
                     {
-                        if (imageReceived != null)
+                        imageReceived = await dataPackageView.GetBitmapAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(ex.Message, Category.Exception, Priority.Medium);
+                    }
+                    finally
+                    {
+                        try
                         {
-                            using IRandomAccessStreamWithContentType imageStream = await imageReceived.OpenReadAsync();
-                            BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(imageStream);
-                            SoftwareBitmap softwareBitmap = await bitmapDecoder.GetSoftwareBitmapAsync();
-
-                            string result = ReadQRCodeFromBitmap(softwareBitmap);
-                            _qrCodeStr = HttpUtility.UrlDecode(result);
-                            if (!string.IsNullOrEmpty(_qrCodeStr))
+                            if (imageReceived != null)
                             {
-                                //clear the clipboard, if the image is read as TOTP
-                                Clipboard.Clear();
-                                await ReadAuthenticationFromString();
+                                using IRandomAccessStreamWithContentType imageStream = await imageReceived.OpenReadAsync();
+                                BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(imageStream);
+                                SoftwareBitmap softwareBitmap = await bitmapDecoder.GetSoftwareBitmapAsync();
+
+                                string result = ReadQRCodeFromBitmap(softwareBitmap);
+                                _qrCodeStr = HttpUtility.UrlDecode(result);
+                                if (!string.IsNullOrEmpty(_qrCodeStr))
+                                {
+                                    //clear the clipboard, if the image is read as TOTP
+                                    Clipboard.Clear();
+                                    await ReadAuthenticationFromString();
+                                }
+                                else
+                                {
+                                    MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
+                                    await dialog.ShowAsync();
+                                }
                             }
                             else
                             {
-                                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
-                                await dialog.ShowAsync();
+                                //TODO add error: empty Clipboard?
                             }
                         }
-                        else
+                        catch (Exception exc)
                         {
-                            //TODO add error: empty Clipboard?
+                            TrackingManager.TrackException(nameof(ReadQRCodeFromClipboard), exc);
+                            // TODO error by processing the image
                         }
-                    }
-                    catch (Exception exc)
-                    {
-                        TrackingManager.TrackException(exc);
-                        // TODO error by processing the image
-                    }
 
+                    }
                 }
             }
+            catch (Exception exc)
+            {
+                TrackingManager.TrackException(nameof(ReadQRCodeFromClipboard), exc);
+            }
+
         }
 
         private async Task ReadAuthenticationFromString()
         {
             await App.ShellPageInstance.Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, async () =>
             {
+                SecretKey = string.Empty;
+                Issuer = string.Empty;
                 //migrate code import
                 if (_qrCodeStr.StartsWith("otpauth-migration://"))
                 {
@@ -339,12 +356,11 @@ namespace Project2FA.UWP.ViewModels
                 // normal otpauth import
                 else
                 {
-                    await ParseQRCode();
                     //move to the input dialog
                     PivotViewSelectionName = "NormalInputAccount";
 
-                    if (!string.IsNullOrEmpty(SecretKey)
-                       && !string.IsNullOrEmpty(Model.Issuer))  /*   && !string.IsNullOrEmpty(Model.Label)*/
+                    if (await ParseQRCode() && !string.IsNullOrEmpty(SecretKey)
+                       && !string.IsNullOrEmpty(Issuer))
                     {
                         IsPrimaryBTNEnable = true;
                     }
@@ -352,6 +368,7 @@ namespace Project2FA.UWP.ViewModels
                     {
                         MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
                         await dialog.ShowAsync();
+                        PivotViewSelectionName = "Overview";
                         //move to the selection dialog
                         SelectedPivotIndex = 0;
                     }
@@ -554,7 +571,7 @@ namespace Project2FA.UWP.ViewModels
             catch (Exception ex)
             {
                 Logger.Log(ex.Message, Category.Exception, Priority.Medium);
-                TrackingManager.TrackException(ex);
+                TrackingManager.TrackException(nameof(ReadQRCodeFromBitmap),ex);
                 return string.Empty;
             }
         }

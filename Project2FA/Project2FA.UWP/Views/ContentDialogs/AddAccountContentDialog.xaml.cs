@@ -105,7 +105,10 @@ namespace Project2FA.UWP.Views
                 {
                     if (tag == "ImportBackupAccounts")
                     {
-                        MainPivot.Items.Add(PI_ImportAccountBackup);
+                        if (!MainPivot.Items.Contains(PI_ImportAccountBackup))
+                        {
+                            MainPivot.Items.Add(PI_ImportAccountBackup);
+                        }
                         if (MainPivot.Items.Contains(PI_AccountInput))
                         {
                             MainPivot.Items.Remove(PI_AccountInput);
@@ -117,7 +120,10 @@ namespace Project2FA.UWP.Views
                     }
                     if (tag == "NormalInputAccount")
                     {
-                        MainPivot.Items.Add(PI_AccountInput);
+                        if (!MainPivot.Items.Contains(PI_AccountInput))
+                        {
+                            MainPivot.Items.Add(PI_AccountInput);
+                        }
                         if (MainPivot.Items.Contains(PI_ImportAccountBackup))
                         {
                             MainPivot.Items.Remove(PI_ImportAccountBackup);
@@ -129,7 +135,10 @@ namespace Project2FA.UWP.Views
                     }
                     if (tag == "CameraInputAccount")
                     {
-                        MainPivot.Items.Add(PI_ScanQRCodeCamera);
+                        if (!MainPivot.Items.Contains(PI_ScanQRCodeCamera))
+                        {
+                            MainPivot.Items.Add(PI_ScanQRCodeCamera);
+                        }
                         if (MainPivot.Items.Contains(PI_ImportAccountBackup))
                         {
                             MainPivot.Items.Remove(PI_ImportAccountBackup);

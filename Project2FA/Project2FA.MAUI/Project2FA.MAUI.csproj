@@ -44,10 +44,7 @@
 		<CodesignEntitlements />
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (CB3KSUCNGR)</CodesignKey>
-	  <CodesignProvision>VS: Project2FA.MAUI Development</CodesignProvision>
-	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'" />
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
 	  <CodesignKey>Apple Development: Created via API (CB3KSUCNGR)</CodesignKey>

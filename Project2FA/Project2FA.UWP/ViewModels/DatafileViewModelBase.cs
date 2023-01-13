@@ -174,7 +174,7 @@ namespace Project2FA.UWP.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    TrackingManager.TrackException(ex);
+                    TrackingManager.TrackException(nameof(CheckServerStatus),ex);
                     return (false, null);
                 }
 

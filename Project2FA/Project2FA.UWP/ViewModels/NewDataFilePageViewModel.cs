@@ -165,7 +165,7 @@ namespace Project2FA.UWP.ViewModels
             }
             catch (Exception exc)
             {
-                TrackingManager.TrackExceptionCatched(exc);
+                TrackingManager.TrackExceptionCatched(nameof(SetAndCreateLocalDatafile),exc);
                 var result = await Utils.ErrorDialogs.WritingDatafileError(true);
                 if (result == Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
                 {

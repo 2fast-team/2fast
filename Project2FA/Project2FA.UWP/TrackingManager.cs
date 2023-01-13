@@ -27,13 +27,13 @@ namespace Project2FA.UWP
             }
         }
 
-        public static void TrackExceptionUnhandled(Exception ex)
+        public static void TrackExceptionUnhandled(string method, Exception ex)
         {
             try
             {
                 if (!_debugMode)
                 {
-                    _logger.Log($"Unhandled exception - {ex.Message} - {ex.StackTrace}");
+                    _logger.Log($"crit {method}-{ex.Message}-{ex.StackTrace}");
                 }
             }
             catch
@@ -42,13 +42,13 @@ namespace Project2FA.UWP
             }
         }
 
-        public static void TrackException(Exception ex)
+        public static void TrackException(string method,Exception ex)
         {
             try
             {
                 if (!_debugMode)
                 {
-                    _logger.Log($"exception - {ex.Message} - {ex.StackTrace}");
+                    _logger.Log($"ex {method}-{ex.Message}-{ex.StackTrace}");
                 }
             }
             catch
@@ -57,44 +57,14 @@ namespace Project2FA.UWP
             }
         }
 
-        public static void TrackExceptionCatched(Exception ex)
+        public static void TrackExceptionCatched(string method, Exception ex)
         {
             try
             {
                 if (!_debugMode)
                 {
-                    _logger.Log($"exception - catched - {ex.StackTrace}");
+                    _logger.Log($"exc {method}-{ex.StackTrace}");
                     //_logger.Log($"exception - catched - {ex.Message} - {ex.InnerException} - {ex.StackTrace}");
-                }
-            }
-            catch
-            {
-                // Ignore error
-            }
-        }
-
-        public static void TrackEvent(Category category, Priority priority, string label = "", long value = 0)
-        {
-            try
-            {
-                if (!_debugMode)
-                {
-                    _logger.Log($"{category} - {priority} - {label} - {value.ToString()}");
-                }
-            }
-            catch
-            {
-                // Ignore error
-            }
-        }
-
-        public static void TrackPage(string pageName)
-        {
-            try
-            {
-                if(!_debugMode)
-                {
-                    _logger.Log($"pageView - {pageName}");
                 }
             }
             catch

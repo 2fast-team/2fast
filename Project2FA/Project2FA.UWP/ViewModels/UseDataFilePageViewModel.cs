@@ -201,7 +201,7 @@ namespace Project2FA.UWP.ViewModels
             }
             catch (Exception exc)
             {
-                TrackingManager.TrackException(exc);
+                TrackingManager.TrackException(nameof(DownloadWebDAVFile),exc);
                 return null;
             }
 

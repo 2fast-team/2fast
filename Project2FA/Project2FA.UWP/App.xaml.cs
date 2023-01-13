@@ -57,7 +57,7 @@ namespace Project2FA.UWP
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            TrackingManager.TrackExceptionUnhandled(e.Exception);
+            TrackingManager.TrackExceptionUnhandled("UnobservedTaskException", e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
             // let the app crash...
@@ -65,7 +65,7 @@ namespace Project2FA.UWP
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
-            TrackingManager.TrackExceptionUnhandled(e.Exception);
+            TrackingManager.TrackExceptionUnhandled(nameof(App_UnhandledException), e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
             // let the app crash...

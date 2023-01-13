@@ -219,22 +219,6 @@
                             </muxc:PersonPicture.ProfilePicture>-->
                         </muxc:PersonPicture>
 
-                        <!--Favourite design-->
-                        <!--<muxc:PersonPicture 
-                            Height="48"
-                            Width="48"
-                            DisplayName="{x:Bind Model, 
-                            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
-                            Mode=OneWay}"
-                            Margin="15,10,20,0"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            Visibility="{x:Bind IsFavourite,Mode=OneWay}"
-                            Style="{StaticResource PersonPictureWithAccentShadow}"
-                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}"
-                            Grid.RowSpan="2">
-                        </muxc:PersonPicture>-->
-
                         <RelativePanel 
                             Grid.Column="2" 
                             Grid.RowSpan="2" 
@@ -668,6 +652,7 @@
             Title="{x:Bind strings:Resources.InfoBarDatafileTitleUpdated}"
             MaxWidth="450"
             Message="{x:Bind strings:Resources.InfoBarDatafileUpdated}" />
+        
         <appcontrols:AutoCloseInfoBar
             IsOpen="{x:Bind ViewModel.DatafileNoInternetConnection,Mode=TwoWay}"
             Severity="Warning"

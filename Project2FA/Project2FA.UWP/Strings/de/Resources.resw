@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>Bearbeiten</value>
   </data>
-  <data name="AccountCodePageItemMoreBTN.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
     <value>Optionen anzeigen</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Löschen bestätigen</value>
   </data>
-  <data name="AccountCopyCodeButton.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
     <value>Schlüssel kopieren</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -438,7 +438,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <data name="ShellPageFeedbackNavigation.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
     <value>Feedback geben</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -506,7 +506,7 @@ Starten Sie direkt durch und bringen mehr Sicherheit durch einen zweiten Faktor 
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="AccountCodePageRemainingSeconds.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
     <value>Sekunden bis zur Neugenerierung</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -602,13 +602,13 @@ Anleitung zum setzen der Berechtigung:
 
 **Möchten Sie den Pfad der Datendatei editieren oder möchten Sie die App zu den Werkseinstellungen zurücksetzen?**</value>
   </data>
-  <data name="AccountCodePageABBLogout.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
     <value>Sperren</value>
   </data>
-  <data name="AccountCodePageAddEntry.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
     <value>Account hinzufügen</value>
   </data>
-  <data name="AccountCodePageReloadDatafile.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
     <value>Datendatei neu einlesen</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -624,7 +624,7 @@ Anleitung zum setzen der Berechtigung:
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Rückgängig (Löschung)</value>
   </data>
-  <data name="AccountCodePageABBUndoDelete.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
     <value>Rückgängig (Löschung)</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -884,7 +884,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Filtern</value>
   </data>
-  <data name="AccountCodePageSearchFilter.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
     <value>Filtern</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">

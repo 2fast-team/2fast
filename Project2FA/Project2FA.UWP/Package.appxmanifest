@@ -4,8 +4,8 @@
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          IgnorableNamespaces="uap mp rescap">
-	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.2.1.0" />
-	<mp:PhoneIdentity PhoneProductId="9c80d9ba-7d68-46a2-a49a-db9533541e3f" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.2.2.0" />
+	<mp:PhoneIdentity PhoneProductId="356e8ced-e7b4-4891-92c3-ee8bb8e506ce" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 	<Properties>
 		<DisplayName>2fast (Beta)</DisplayName>
 		<PublisherDisplayName>Jan Philipp Weber</PublisherDisplayName>

@@ -71,6 +71,7 @@
                         Content="Feedback"
                         IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
                         x:Uid="ShellPageFeedbackNavigation"
+                        ToolTipService.ToolTip="{x:Bind strings:Resources.ShellPageFeedbackNavigationToolTip}"
                         Icon="Flag"
                         Tapped="FeedbackItem_Tapped" />
                 <muxc:NavigationViewItem 

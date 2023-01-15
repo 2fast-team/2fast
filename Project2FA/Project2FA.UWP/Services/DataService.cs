@@ -597,7 +597,7 @@ namespace Project2FA.UWP.Services
                 await CollectionAccessSemaphore.WaitAsync();
                 
                 // create the new datafile model
-                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection };
+                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = 1 };
                 
                 if (ActivatedDatafile != null)
                 {

@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>edit</value>
   </data>
-  <data name="AccountCodePageItemMoreBTN.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
     <value>Show options</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Confirm deletion</value>
   </data>
-  <data name="AccountCopyCodeButton.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
     <value>copy code</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -217,7 +217,7 @@
     <value>Local Datafile</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogIntroText.Text" xml:space="preserve">
-    <value>In this dialog you can change the password of the current used datafile.</value>
+    <value>In this dialog you can change the password of the current used data file.</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText" xml:space="preserve">
     <value>Cancel</value>
@@ -268,7 +268,7 @@
     <value>input password</value>
   </data>
   <data name="LoginPagePasswordMismatch" xml:space="preserve">
-    <value>The password doesn't match the password of the datafile.</value>
+    <value>The password doesn't match the password of the data file.</value>
   </data>
   <data name="NewDatafileContentDialogChangePath.Content" xml:space="preserve">
     <value>Change path</value>
@@ -284,7 +284,7 @@ Important: You have to type in the password everytime you start the app!</value>
     <value>Filename</value>
   </data>
   <data name="NewDatafileContentDialogLocalFolder.PlaceholderText" xml:space="preserve">
-    <value>for example datafile</value>
+    <value>for example data file</value>
   </data>
   <data name="NewDatafileContentDialogLocalPath.Text" xml:space="preserve">
     <value>Choose local path</value>
@@ -293,10 +293,10 @@ Important: You have to type in the password everytime you start the app!</value>
     <value>Cancel</value>
   </data>
   <data name="NewDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Create datafile</value>
+    <value>Create data file</value>
   </data>
   <data name="NewDatafileContentDialogMain.Title" xml:space="preserve">
-    <value>Create datafile</value>
+    <value>Create data file</value>
   </data>
   <data name="NewDatafileContentDialogPath.Header" xml:space="preserve">
     <value>Path</value>
@@ -360,10 +360,10 @@ If you plan to use this application on several devices it makes sense to store t
     <value>Change Password</value>
   </data>
   <data name="SettingsDatafileFilePath.Text" xml:space="preserve">
-    <value>Datafile path:</value>
+    <value>Data file path:</value>
   </data>
   <data name="SettingsDatafileName.Text" xml:space="preserve">
-    <value>Datafile name:</value>
+    <value>Data file name:</value>
   </data>
   <data name="SettingsDatafileTitle.Text" xml:space="preserve">
     <value>Information about the current used datafile</value>
@@ -403,7 +403,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>rate app in store</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
-    <value>Are you sure you want to permanently delete the datafile? You will loose all your added accounts.</value>
+    <value>Are you sure you want to permanently delete the data file? You will loose all your added accounts.</value>
   </data>
   <data name="SettingsThemeDark.Content" xml:space="preserve">
     <value>Dark</value>
@@ -435,7 +435,7 @@ The datafile will **not** be removed in the reset progress.</value>
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <data name="ShellPageFeedbackNavigation.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
     <value>give feedback</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -454,7 +454,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>If you used the app before, please select if you want to load the existing datafile from your local storage or via WebDAV.</value>
   </data>
   <data name="UseDatafileContentDialogLoadInfo.Text" xml:space="preserve">
-    <value>Please select the existing datafile and enter the password.</value>
+    <value>Please select the existing data file and enter the password.</value>
   </data>
   <data name="UseDatafileContentDialogLocalPath.Text" xml:space="preserve">
     <value>Choose local path</value>
@@ -463,10 +463,10 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>Cancel</value>
   </data>
   <data name="UseDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Load datafile</value>
+    <value>Load data file</value>
   </data>
   <data name="UseDatafileContentDialogMain.Title" xml:space="preserve">
-    <value>Load datafile</value>
+    <value>Load data file</value>
   </data>
   <data name="UseDatafileContentDialogPasswordError.Text" xml:space="preserve">
     <value>The data file cannot be decrypted with the password.</value>
@@ -481,7 +481,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>WebDAV</value>
   </data>
   <data name="WelcomePageCreateDatafile.Content" xml:space="preserve">
-    <value>Create new datafile (first start)</value>
+    <value>Create new data file (first start)</value>
   </data>
   <data name="WelcomePageFirstSteps.Text" xml:space="preserve">
     <value>First steps towards safety ...</value>
@@ -492,7 +492,7 @@ The datafile will **not** be removed in the reset progress.</value>
 Start with another security factor in your daily life.</value>
   </data>
   <data name="WelcomePageLoadDatafile.Content" xml:space="preserve">
-    <value>Load existing datafile</value>
+    <value>Load existing data file</value>
   </data>
   <data name="WindowsHelloLoginMessage" xml:space="preserve">
     <value>Please verify now with your configured Windows Hello login.</value>
@@ -503,7 +503,7 @@ Start with another security factor in your daily life.</value>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="AccountCodePageRemainingSeconds.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
     <value>Seconds to refresh</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -595,13 +595,13 @@ Instructions for setting the authorisation:
     <value>The path to the current data file could not be found. Possibly the data file was moved by you. 
 **Do you want to edit the path?**</value>
   </data>
-  <data name="AccountCodePageABBLogout.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
     <value>lock app</value>
   </data>
-  <data name="AccountCodePageAddEntry.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
     <value>Add account</value>
   </data>
-  <data name="AccountCodePageReloadDatafile.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
     <value>Reload datafile</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -620,7 +620,7 @@ Instructions for setting the authorisation:
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Undo delete</value>
   </data>
-  <data name="AccountCodePageABBUndoDelete.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
     <value>Undo delete</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -743,7 +743,7 @@ Please synchronize the time in the settings.</value>
     <value>Welcome</value>
   </data>
   <data name="UseDataFilePageName.Text" xml:space="preserve">
-    <value>Load existing datafile</value>
+    <value>Load existing data file</value>
   </data>
   <data name="CreateDatafile" xml:space="preserve">
     <value>Create datafile</value>
@@ -755,7 +755,7 @@ Please synchronize the time in the settings.</value>
     <value>first steps</value>
   </data>
   <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
-    <value>load datafile</value>
+    <value>load data file</value>
   </data>
   <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
     <value>login</value>
@@ -767,7 +767,7 @@ Please synchronize the time in the settings.</value>
     <value>username</value>
   </data>
   <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
-    <value>datafile</value>
+    <value>data file</value>
   </data>
   <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
     <value>service login</value>
@@ -872,12 +872,12 @@ Please synchronize the time in the settings.</value>
     <value>Only change these settings if you are sure that the service requires them.</value>
   </data>
   <data name="NewDataFilePageTitle.Text" xml:space="preserve">
-    <value>New datafile</value>
+    <value>New data file</value>
   </data>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Filter</value>
   </data>
-  <data name="AccountCodePageSearchFilter.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
     <value>Filter</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -893,7 +893,7 @@ Please synchronize the time in the settings.</value>
     <value>This folder does not contain any files that can be selected.</value>
   </data>
   <data name="NewDatafileCreateDatafile.Content" xml:space="preserve">
-    <value>Create datafile</value>
+    <value>Create data file</value>
   </data>
   <data name="NewDatafilehangeDatafile.Content" xml:space="preserve">
     <value>Change folder</value>
@@ -914,19 +914,13 @@ Please synchronize the time in the settings.</value>
     <value>Import backup</value>
   </data>
   <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
-    <value>Create datafile</value>
+    <value>Create data file</value>
   </data>
   <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
     <value>Open tutorial</value>
   </data>
   <data name="WelcomePageTutorialDesc" xml:space="preserve">
     <value>Would you like to open the tutorial for the application?</value>
-  </data>
-  <data name="String" xml:space="preserve">
-    <value>Für die Speicherung und die Sicherung wird hierbei eine Datendatei erstellt bzw. genutzt, um die zuvor verknüpften Accounts in dieser Datei verschlüsselt zu speichern. Ein großer Vorteil der hieraus entsteht ist, dass durch die Datendatei das Backup entfällt, da die Datendatei an einem beliebigen Ort gespeichert werden kann. Empfohlen ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive und weitere Anbieter.</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>Im nachfolgenden wird die Funktionsweise dieser Anwendung in diesem Tutorial erläutert.</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
     <value>This application is an authenticator for two-factor authentication (2FA) that uses the standard "Time-based One-time Password Algorithm" (TOTP) according to standardisation RFC 6238. Services that rely on the TOTP standard for 2FA can be used with this application.
@@ -948,7 +942,7 @@ In the following sections, the functionality of this application is explained in
     <value>Creation of a datafile</value>
   </data>
   <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
-    <value>Loading a datafile</value>
+    <value>Loading a data file</value>
   </data>
   <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
     <value>Automatic logout</value>

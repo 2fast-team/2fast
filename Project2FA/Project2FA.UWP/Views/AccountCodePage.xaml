@@ -51,6 +51,7 @@
                                         <AppBarButton 
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
+                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip}"
                                         Icon="Add" 
                                         Command="{x:Bind AddAccountCommand}">
                                             <AppBarButton.Resources>
@@ -106,6 +107,7 @@
                                             <AppBarButton  
                                             x:Name="ABB_UndoDelete"
                                             x:Uid="AccountCodePageABBUndoDelete" 
+                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip}"
                                             Command="{x:Bind UndoDeleteCommand}" 
                                             Icon="Undo" />
                                         </CommandBar.PrimaryCommands>
@@ -125,6 +127,7 @@
                                 </AppBarElementContainer>
                                 <!--<AppBarButton
                                     x:Name="ABB_SearchFilter"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip}"
                                      x:Uid="AccountCodePageSearchFilter" >
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
@@ -133,6 +136,7 @@
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip}"
                                 Command="{x:Bind LogoutCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE1F6;"/>
@@ -141,6 +145,7 @@
                                 <AppBarButton 
                                 x:Name="ABB_Refresh"
                                 x:Uid="AccountCodePageReloadDatafile"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip}"
                                 Icon="Sync"
                                 Command="{x:Bind RefreshCommand}"/>
                             </CommandBar.PrimaryCommands>
@@ -289,6 +294,7 @@
                                 Click="BTN_CopyCode_Click"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0" 
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
@@ -302,9 +308,11 @@
                                 Width="42"
                                 Height="42"
                                 x:Uid="AccountCodePageRemainingSeconds"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
                                 Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
                                 Opacity="0.6"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
@@ -335,7 +343,8 @@
                             Grid.Column="4" 
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" 
-                            Style="{StaticResource TransparentButtonStyle}">
+                            Style="{StaticResource TransparentButtonStyle}"
+                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip}">
                             <FontIcon Glyph="&#xE712;"/>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">
@@ -513,6 +522,7 @@
                                 Click="BTN_CopyCode_Click"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0" 
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
@@ -526,10 +536,12 @@
                                 Width="42"
                                 Height="42"
                                 x:Uid="AccountCodePageRemainingSeconds"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
                                 Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
                                 Opacity="0.6"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
                                 VerticalAlignment="Center" 

@@ -2,13 +2,8 @@
 // The NuGet package ReswPlusLib is necessary to support Pluralization.
 using System;
 using Windows.ApplicationModel.Resources;
-#if WINDOWS_UWP
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Data;
-#else
-using Microsoft.UI.Xaml.Markup;
-using Microsoft.UI.Xaml.Data;
-#endif
 
 namespace Project2FA.UWP.Strings{
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -21,7 +16,7 @@ namespace Project2FA.UWP.Strings{
             _resourceLoader = ResourceLoader.GetForViewIndependentUse("Resources");
         }
 
-#region AccountCodePageCopied
+        #region AccountCodePageCopied
         /// <summary>
         ///   Looks up a localized string similar to: Copied to clipboard
         /// </summary>
@@ -32,9 +27,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageCopied");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageItemMoreBTNToolTip
+        #region AccountCodePageItemMoreBTNToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Show options
         /// </summary>
@@ -45,9 +40,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageItemMoreBTNToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageViewModelDeleteAccept
+        #region AccountCodePageViewModelDeleteAccept
         /// <summary>
         ///   Looks up a localized string similar to: Yes
         /// </summary>
@@ -58,9 +53,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageViewModelDeleteAccept");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageViewModelDeleteCancel
+        #region AccountCodePageViewModelDeleteCancel
         /// <summary>
         ///   Looks up a localized string similar to: No
         /// </summary>
@@ -71,9 +66,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageViewModelDeleteCancel");
             }
         }
-#endregion
+        #endregion
 
-#region DeleteDatafileContentDialogDeleteDescription
+        #region DeleteDatafileContentDialogDeleteDescription
         /// <summary>
         ///   Looks up a localized string similar to: Are you sure that you want to delete this account irrevocably?
         /// </summary>
@@ -84,9 +79,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DeleteDatafileContentDialogDeleteDescription");
             }
         }
-#endregion
+        #endregion
 
-#region DeleteDatafileContentDialogTitle
+        #region DeleteDatafileContentDialogTitle
         /// <summary>
         ///   Looks up a localized string similar to: Confirm deletion
         /// </summary>
@@ -97,9 +92,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DeleteDatafileContentDialogTitle");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCopyCodeButtonToolTip
+        #region AccountCopyCodeButtonToolTip
         /// <summary>
         ///   Looks up a localized string similar to: copy code
         /// </summary>
@@ -110,9 +105,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCopyCodeButtonToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region AddAccountContentDialogQRCodeContentError
+        #region AddAccountContentDialogQRCodeContentError
         /// <summary>
         ///   Looks up a localized string similar to: Can't get information from QR code. Please try again or add the secret key manually.
         /// </summary>
@@ -123,9 +118,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AddAccountContentDialogQRCodeContentError");
             }
         }
-#endregion
+        #endregion
 
-#region AddAccountContentDialogReadQRCodeTeachingTipInfo
+        #region AddAccountContentDialogReadQRCodeTeachingTipInfo
         /// <summary>
         ///   Looks up a localized string similar to: A scan tool will open soon
         /// </summary>
@@ -136,9 +131,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AddAccountContentDialogReadQRCodeTeachingTipInfo");
             }
         }
-#endregion
+        #endregion
 
-#region Confirm
+        #region Confirm
         /// <summary>
         ///   Looks up a localized string similar to: Confirm
         /// </summary>
@@ -149,9 +144,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("Confirm");
             }
         }
-#endregion
+        #endregion
 
-#region Delete
+        #region Delete
         /// <summary>
         ///   Looks up a localized string similar to: delete
         /// </summary>
@@ -162,9 +157,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("Delete");
             }
         }
-#endregion
+        #endregion
 
-#region Edit
+        #region Edit
         /// <summary>
         ///   Looks up a localized string similar to: edit
         /// </summary>
@@ -175,9 +170,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("Edit");
             }
         }
-#endregion
+        #endregion
 
-#region Error
+        #region Error
         /// <summary>
         ///   Looks up a localized string similar to: Error
         /// </summary>
@@ -188,9 +183,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("Error");
             }
         }
-#endregion
+        #endregion
 
-#region LoginPagePasswordMismatch
+        #region LoginPagePasswordMismatch
         /// <summary>
         ///   Looks up a localized string similar to: The password doesn't match the password of the data file.
         /// </summary>
@@ -201,9 +196,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("LoginPagePasswordMismatch");
             }
         }
-#endregion
+        #endregion
 
-#region No
+        #region No
         /// <summary>
         ///   Looks up a localized string similar to: No
         /// </summary>
@@ -214,9 +209,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("No");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsActionRequiredRestart
+        #region SettingsActionRequiredRestart
         /// <summary>
         ///   Looks up a localized string similar to: This change will take effect after restart of the app.
         /// </summary>
@@ -227,9 +222,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsActionRequiredRestart");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsFactoryResetMessage
+        #region SettingsFactoryResetMessage
         /// <summary>
         ///   Looks up a localized string similar to: Are you sure you want to reset the app to factory settings? **This process cannot be undone!** The datafile will **not** be removed in the reset progress.
         /// </summary>
@@ -240,9 +235,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsFactoryResetMessage");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsGiveFeedbackText
+        #region SettingsGiveFeedbackText
         /// <summary>
         ///   Looks up a localized string similar to: give feedback
         /// </summary>
@@ -253,9 +248,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsGiveFeedbackText");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsRemoveDatafileMessage
+        #region SettingsRemoveDatafileMessage
         /// <summary>
         ///   Looks up a localized string similar to: Are you sure you want to permanently delete the data file? You will loose all your added accounts.
         /// </summary>
@@ -266,9 +261,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsRemoveDatafileMessage");
             }
         }
-#endregion
+        #endregion
 
-#region ShellPageFeedbackNavigationToolTip
+        #region ShellPageFeedbackNavigationToolTip
         /// <summary>
         ///   Looks up a localized string similar to: give feedback
         /// </summary>
@@ -279,9 +274,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ShellPageFeedbackNavigationToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region WindowsHelloLoginMessage
+        #region WindowsHelloLoginMessage
         /// <summary>
         ///   Looks up a localized string similar to: Please verify now with your configured Windows Hello login.
         /// </summary>
@@ -292,9 +287,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WindowsHelloLoginMessage");
             }
         }
-#endregion
+        #endregion
 
-#region WindowsHelloPreferMessage
+        #region WindowsHelloPreferMessage
         /// <summary>
         ///   Looks up a localized string similar to: It is possible to log in with Windows Hello. Would you like to prefer this login in the future? You can change this option in the settings at any time.
         /// </summary>
@@ -305,9 +300,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WindowsHelloPreferMessage");
             }
         }
-#endregion
+        #endregion
 
-#region Yes
+        #region Yes
         /// <summary>
         ///   Looks up a localized string similar to: Yes
         /// </summary>
@@ -318,9 +313,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("Yes");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageRemainingSecondsToolTip
+        #region AccountCodePageRemainingSecondsToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Seconds to refresh
         /// </summary>
@@ -331,9 +326,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageRemainingSecondsToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region ButtonTextCancel
+        #region ButtonTextCancel
         /// <summary>
         ///   Looks up a localized string similar to: Cancel
         /// </summary>
@@ -344,9 +339,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ButtonTextCancel");
             }
         }
-#endregion
+        #endregion
 
-#region ButtonTextConfirm
+        #region ButtonTextConfirm
         /// <summary>
         ///   Looks up a localized string similar to: Confirm
         /// </summary>
@@ -357,9 +352,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ButtonTextConfirm");
             }
         }
-#endregion
+        #endregion
 
-#region ButtonTextNo
+        #region ButtonTextNo
         /// <summary>
         ///   Looks up a localized string similar to: No
         /// </summary>
@@ -370,9 +365,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ButtonTextNo");
             }
         }
-#endregion
+        #endregion
 
-#region ButtonTextYes
+        #region ButtonTextYes
         /// <summary>
         ///   Looks up a localized string similar to: Yes
         /// </summary>
@@ -383,9 +378,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ButtonTextYes");
             }
         }
-#endregion
+        #endregion
 
-#region RateAppContentDialogLaterButton
+        #region RateAppContentDialogLaterButton
         /// <summary>
         ///   Looks up a localized string similar to: recall later
         /// </summary>
@@ -396,9 +391,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("RateAppContentDialogLaterButton");
             }
         }
-#endregion
+        #endregion
 
-#region RateAppContentDialogNoButton
+        #region RateAppContentDialogNoButton
         /// <summary>
         ///   Looks up a localized string similar to: no, thanks
         /// </summary>
@@ -409,9 +404,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("RateAppContentDialogNoButton");
             }
         }
-#endregion
+        #endregion
 
-#region RateAppContentDialogQuestion
+        #region RateAppContentDialogQuestion
         /// <summary>
         ///   Looks up a localized string similar to: You have been using this app for some time now, please visit the store to rate it and write a review. You can also use the Windows Feedback App at any time to send us your feedback directly.
         /// </summary>
@@ -422,9 +417,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("RateAppContentDialogQuestion");
             }
         }
-#endregion
+        #endregion
 
-#region RateAppContentDialogYesButton
+        #region RateAppContentDialogYesButton
         /// <summary>
         ///   Looks up a localized string similar to: Rate now
         /// </summary>
@@ -435,9 +430,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("RateAppContentDialogYesButton");
             }
         }
-#endregion
+        #endregion
 
-#region RateAppContentDialogTitle
+        #region RateAppContentDialogTitle
         /// <summary>
         ///   Looks up a localized string similar to: Do you like this app?
         /// </summary>
@@ -448,9 +443,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("RateAppContentDialogTitle");
             }
         }
-#endregion
+        #endregion
 
-#region AuthorizationFileSystemContentDialogDescription
+        #region AuthorizationFileSystemContentDialogDescription
         /// <summary>
         ///   Looks up a localized string similar to: The application does not currently have the necessary access rights to access the data file. To set the rights, however, the application must be closed. Please grant the required rights in the settings and restart the application. Instructions for setting the authorisation: ![Instructions for setting the authorisation](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)
         /// </summary>
@@ -461,9 +456,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AuthorizationFileSystemContentDialogDescription");
             }
         }
-#endregion
+        #endregion
 
-#region AuthorizationFileSystemContentDialogPrimaryBTN
+        #region AuthorizationFileSystemContentDialogPrimaryBTN
         /// <summary>
         ///   Looks up a localized string similar to: Set authorization
         /// </summary>
@@ -474,9 +469,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AuthorizationFileSystemContentDialogPrimaryBTN");
             }
         }
-#endregion
+        #endregion
 
-#region AuthorizationFileSystemContentDialogSecondaryBTN
+        #region AuthorizationFileSystemContentDialogSecondaryBTN
         /// <summary>
         ///   Looks up a localized string similar to: Cancel (close application)
         /// </summary>
@@ -487,9 +482,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AuthorizationFileSystemContentDialogSecondaryBTN");
             }
         }
-#endregion
+        #endregion
 
-#region AuthorizationFileSystemContentDialogTitle
+        #region AuthorizationFileSystemContentDialogTitle
         /// <summary>
         ///   Looks up a localized string similar to: Authorization error
         /// </summary>
@@ -500,9 +495,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AuthorizationFileSystemContentDialogTitle");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageCopyCodeTeachingTip
+        #region AccountCodePageCopyCodeTeachingTip
         /// <summary>
         ///   Looks up a localized string similar to: Key copied to clipboard
         /// </summary>
@@ -513,9 +508,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageCopyCodeTeachingTip");
             }
         }
-#endregion
+        #endregion
 
-#region ChangePassword
+        #region ChangePassword
         /// <summary>
         ///   Looks up a localized string similar to: Change password
         /// </summary>
@@ -526,9 +521,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ChangePassword");
             }
         }
-#endregion
+        #endregion
 
-#region CloseApp
+        #region CloseApp
         /// <summary>
         ///   Looks up a localized string similar to: Close app
         /// </summary>
@@ -539,9 +534,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("CloseApp");
             }
         }
-#endregion
+        #endregion
 
-#region DeleteAccountContentDialogDescription
+        #region DeleteAccountContentDialogDescription
         /// <summary>
         ///   Looks up a localized string similar to: Are you sure you want to delete the account? After the deletion you have **30 seconds** to undo the deletion.
         /// </summary>
@@ -552,9 +547,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DeleteAccountContentDialogDescription");
             }
         }
-#endregion
+        #endregion
 
-#region DeleteAccountContentDialogTitle
+        #region DeleteAccountContentDialogTitle
         /// <summary>
         ///   Looks up a localized string similar to: Delete account
         /// </summary>
@@ -565,9 +560,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DeleteAccountContentDialogTitle");
             }
         }
-#endregion
+        #endregion
 
-#region ErrorHandle
+        #region ErrorHandle
         /// <summary>
         ///   Looks up a localized string similar to: Error handle
         /// </summary>
@@ -578,9 +573,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ErrorHandle");
             }
         }
-#endregion
+        #endregion
 
-#region ErrorHandleDescription
+        #region ErrorHandleDescription
         /// <summary>
         ///   Looks up a localized string similar to: An unhandled error has occurred, please send the error details which can be seen in the field via the feedback hub, or add a new issue via Github.
         /// </summary>
@@ -591,9 +586,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ErrorHandleDescription");
             }
         }
-#endregion
+        #endregion
 
-#region PasswordInvalidHeader
+        #region PasswordInvalidHeader
         /// <summary>
         ///   Looks up a localized string similar to: Password invalid
         /// </summary>
@@ -604,9 +599,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("PasswordInvalidHeader");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsQRScanningHeader
+        #region SettingsQRScanningHeader
         /// <summary>
         ///   Looks up a localized string similar to: Time delay to start reading the QR Code
         /// </summary>
@@ -617,9 +612,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsQRScanningHeader");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsQRScanningSecondsRange
+        #region SettingsQRScanningSecondsRange
         /// <summary>
         ///   Looks up a localized string similar to: Specified in seconds (3-10s allowed)
         /// </summary>
@@ -630,9 +625,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsQRScanningSecondsRange");
             }
         }
-#endregion
+        #endregion
 
-#region ExceptionDatafileNotFound
+        #region ExceptionDatafileNotFound
         /// <summary>
         ///   Looks up a localized string similar to: The path to the current data file could not be found. Possibly the data file was moved by you. **Do you want to edit the path?**
         /// </summary>
@@ -643,9 +638,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ExceptionDatafileNotFound");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageABBLogoutToolTip
+        #region AccountCodePageABBLogoutToolTip
         /// <summary>
         ///   Looks up a localized string similar to: lock app
         /// </summary>
@@ -656,9 +651,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageABBLogoutToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageAddEntryToolTip
+        #region AccountCodePageAddEntryToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Add account
         /// </summary>
@@ -669,9 +664,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageAddEntryToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageReloadDatafileToolTip
+        #region AccountCodePageReloadDatafileToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Reload datafile
         /// </summary>
@@ -682,9 +677,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageReloadDatafileToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region PasswordInvalidMessage
+        #region PasswordInvalidMessage
         /// <summary>
         ///   Looks up a localized string similar to: The password saved in this app is invalid for the data file. You may have changed the password in another machine for the data file. **Do you want to change the password now?
         /// </summary>
@@ -695,9 +690,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("PasswordInvalidMessage");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsFactoryResetDialogTitle
+        #region SettingsFactoryResetDialogTitle
         /// <summary>
         ///   Looks up a localized string similar to: Factory reset
         /// </summary>
@@ -708,9 +703,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsFactoryResetDialogTitle");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageABBUndoDeleteToolTip
+        #region AccountCodePageABBUndoDeleteToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Undo delete
         /// </summary>
@@ -721,9 +716,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageABBUndoDeleteToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region NewDatafileContentDialogDatafileExistsError
+        #region NewDatafileContentDialogDatafileExistsError
         /// <summary>
         ///   Looks up a localized string similar to: A data file with this name already exists in the folder. Please change the folder or the name of the file.
         /// </summary>
@@ -734,9 +729,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("NewDatafileContentDialogDatafileExistsError");
             }
         }
-#endregion
+        #endregion
 
-#region ErrorHandleSendError
+        #region ErrorHandleSendError
         /// <summary>
         ///   Looks up a localized string similar to: send error
         /// </summary>
@@ -747,9 +742,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ErrorHandleSendError");
             }
         }
-#endregion
+        #endregion
 
-#region FactoryReset
+        #region FactoryReset
         /// <summary>
         ///   Looks up a localized string similar to: factory reset
         /// </summary>
@@ -760,9 +755,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("FactoryReset");
             }
         }
-#endregion
+        #endregion
 
-#region ChangeDatafilePath
+        #region ChangeDatafilePath
         /// <summary>
         ///   Looks up a localized string similar to: Change file path
         /// </summary>
@@ -773,9 +768,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ChangeDatafilePath");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageWrongTimeBTN
+        #region AccountCodePageWrongTimeBTN
         /// <summary>
         ///   Looks up a localized string similar to: Open time settings
         /// </summary>
@@ -786,9 +781,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageWrongTimeBTN");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageWrongTimeContent
+        #region AccountCodePageWrongTimeContent
         /// <summary>
         ///   Looks up a localized string similar to: The current time display of the device is incorrect, so the codes for the accounts cannot be generated correctly. Please synchronize the time in the settings.
         /// </summary>
@@ -799,9 +794,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageWrongTimeContent");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageWrongTimeTitle
+        #region AccountCodePageWrongTimeTitle
         /// <summary>
         ///   Looks up a localized string similar to: Incorrect time display
         /// </summary>
@@ -812,9 +807,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageWrongTimeTitle");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsDatafileChangePasswordInfoTitle
+        #region SettingsDatafileChangePasswordInfoTitle
         /// <summary>
         ///   Looks up a localized string similar to: Password has been changed successfully
         /// </summary>
@@ -825,9 +820,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsDatafileChangePasswordInfoTitle");
             }
         }
-#endregion
+        #endregion
 
-#region ShellPagePaneTitle
+        #region ShellPagePaneTitle
         /// <summary>
         ///   Looks up a localized string similar to: Navigation menu
         /// </summary>
@@ -838,9 +833,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ShellPagePaneTitle");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageAutoSuggestBoxPlaceholder
+        #region AccountCodePageAutoSuggestBoxPlaceholder
         /// <summary>
         ///   Looks up a localized string similar to: Search
         /// </summary>
@@ -851,9 +846,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageAutoSuggestBoxPlaceholder");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageSearchNotFound
+        #region AccountCodePageSearchNotFound
         /// <summary>
         ///   Looks up a localized string similar to: No results found
         /// </summary>
@@ -864,9 +859,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageSearchNotFound");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsDependencyGroupAssets
+        #region SettingsDependencyGroupAssets
         /// <summary>
         ///   Looks up a localized string similar to: Assets
         /// </summary>
@@ -877,9 +872,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsDependencyGroupAssets");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsDependencyGroupPackages
+        #region SettingsDependencyGroupPackages
         /// <summary>
         ///   Looks up a localized string similar to: Packages
         /// </summary>
@@ -890,9 +885,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsDependencyGroupPackages");
             }
         }
-#endregion
+        #endregion
 
-#region RestartApp
+        #region RestartApp
         /// <summary>
         ///   Looks up a localized string similar to: restart app
         /// </summary>
@@ -903,9 +898,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("RestartApp");
             }
         }
-#endregion
+        #endregion
 
-#region ErrorCopyToClipboard
+        #region ErrorCopyToClipboard
         /// <summary>
         ///   Looks up a localized string similar to: Copy report to clipboard
         /// </summary>
@@ -916,9 +911,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ErrorCopyToClipboard");
             }
         }
-#endregion
+        #endregion
 
-#region ErrorHandleDescriptionLastSession
+        #region ErrorHandleDescriptionLastSession
         /// <summary>
         ///   Looks up a localized string similar to: An unhandled error occurred the last time the app was used, please submit the error details which can be seen in the box via the feedback hub, or use the error message via Github.
         /// </summary>
@@ -929,11 +924,11 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ErrorHandleDescriptionLastSession");
             }
         }
-#endregion
+        #endregion
 
-#region NewAppFeaturesContent
+        #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: • Windows Hello can now be disabled in the settings for general login • Update of third party libraries • Fixed a bug where not all rights were available to read when starting .2fa files • Encryption of the password entered when starting .2fa files • Increased reliability of the WebDAV component
+        ///   Looks up a localized string similar to: • Updating of third party libraries • Added camera support to create accounts
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -942,9 +937,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("NewAppFeaturesContent");
             }
         }
-#endregion
+        #endregion
 
-#region NewAppFeaturesTitle
+        #region NewAppFeaturesTitle
         /// <summary>
         ///   Looks up a localized string similar to: New features & changes
         /// </summary>
@@ -955,9 +950,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("NewAppFeaturesTitle");
             }
         }
-#endregion
+        #endregion
 
-#region WelcomePageTitle
+        #region WelcomePageTitle
         /// <summary>
         ///   Looks up a localized string similar to: Welcome
         /// </summary>
@@ -968,9 +963,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WelcomePageTitle");
             }
         }
-#endregion
+        #endregion
 
-#region CreateDatafile
+        #region CreateDatafile
         /// <summary>
         ///   Looks up a localized string similar to: Create datafile
         /// </summary>
@@ -981,9 +976,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("CreateDatafile");
             }
         }
-#endregion
+        #endregion
 
-#region LoadDatafile
+        #region LoadDatafile
         /// <summary>
         ///   Looks up a localized string similar to: Load existing datafile
         /// </summary>
@@ -994,9 +989,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("LoadDatafile");
             }
         }
-#endregion
+        #endregion
 
-#region UseDatafilePasswordInfo
+        #region UseDatafilePasswordInfo
         /// <summary>
         ///   Looks up a localized string similar to: To load the data file, you must enter the password that was configured when the file was created.
         /// </summary>
@@ -1007,9 +1002,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("UseDatafilePasswordInfo");
             }
         }
-#endregion
+        #endregion
 
-#region ToolTipShowHelp
+        #region ToolTipShowHelp
         /// <summary>
         ///   Looks up a localized string similar to: show help
         /// </summary>
@@ -1020,9 +1015,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ToolTipShowHelp");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsAutoLogoutDesc
+        #region SettingsAutoLogoutDesc
         /// <summary>
         ///   Looks up a localized string similar to: Automatic logout after inactivity
         /// </summary>
@@ -1033,9 +1028,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsAutoLogoutDesc");
             }
         }
-#endregion
+        #endregion
 
-#region SettingsAutoLogoutMinutes
+        #region SettingsAutoLogoutMinutes
         /// <summary>
         ///   Looks up a localized string similar to: minutes inactivity
         /// </summary>
@@ -1046,9 +1041,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("SettingsAutoLogoutMinutes");
             }
         }
-#endregion
+        #endregion
 
-#region Close
+        #region Close
         /// <summary>
         ///   Looks up a localized string similar to: Close
         /// </summary>
@@ -1059,9 +1054,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("Close");
             }
         }
-#endregion
+        #endregion
 
-#region AddAccountCodeContentDialogQRCodeHelp
+        #region AddAccountCodeContentDialogQRCodeHelp
         /// <summary>
         ///   Looks up a localized string similar to: If you select the QR-code scan, a reading tool will open shortly after pushing the button. Change the window to the service and make a rectangle around the QR-code by holding down your left mouse key.
         /// </summary>
@@ -1072,9 +1067,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AddAccountCodeContentDialogQRCodeHelp");
             }
         }
-#endregion
+        #endregion
 
-#region DisplayQRCodeContentDialogTitle
+        #region DisplayQRCodeContentDialogTitle
         /// <summary>
         ///   Looks up a localized string similar to: QR code display
         /// </summary>
@@ -1085,9 +1080,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DisplayQRCodeContentDialogTitle");
             }
         }
-#endregion
+        #endregion
 
-#region AddAccountCodeContentDialogInputSecretKeyHelp
+        #region AddAccountCodeContentDialogInputSecretKeyHelp
         /// <summary>
         ///   Looks up a localized string similar to: The input is based on Base32 and therefore only allows the letters A-Z and the numbers from 2-7.
         /// </summary>
@@ -1098,9 +1093,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AddAccountCodeContentDialogInputSecretKeyHelp");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageTooltipDeleteFavourite
+        #region AccountCodePageTooltipDeleteFavourite
         /// <summary>
         ///   Looks up a localized string similar to: Undo favourite
         /// </summary>
@@ -1111,9 +1106,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageTooltipDeleteFavourite");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageTooltipSetFavourite
+        #region AccountCodePageTooltipSetFavourite
         /// <summary>
         ///   Looks up a localized string similar to: Set as favourite
         /// </summary>
@@ -1124,9 +1119,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageTooltipSetFavourite");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageTooltipHideTOTP
+        #region AccountCodePageTooltipHideTOTP
         /// <summary>
         ///   Looks up a localized string similar to: hide key
         /// </summary>
@@ -1137,9 +1132,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageTooltipHideTOTP");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageTooltipShowTOTP
+        #region AccountCodePageTooltipShowTOTP
         /// <summary>
         ///   Looks up a localized string similar to: show key
         /// </summary>
@@ -1150,9 +1145,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageTooltipShowTOTP");
             }
         }
-#endregion
+        #endregion
 
-#region ButtonTextRetry
+        #region ButtonTextRetry
         /// <summary>
         ///   Looks up a localized string similar to: Try again
         /// </summary>
@@ -1163,9 +1158,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ButtonTextRetry");
             }
         }
-#endregion
+        #endregion
 
-#region ErrorClipboardTask
+        #region ErrorClipboardTask
         /// <summary>
         ///   Looks up a localized string similar to: The clipboard has been occupied by another program, please try again.
         /// </summary>
@@ -1176,9 +1171,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ErrorClipboardTask");
             }
         }
-#endregion
+        #endregion
 
-#region AddAccountCodeContentDialogExpertSettingsHelp
+        #region AddAccountCodeContentDialogExpertSettingsHelp
         /// <summary>
         ///   Looks up a localized string similar to: Only change these settings if you are sure that the service requires them.
         /// </summary>
@@ -1189,9 +1184,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AddAccountCodeContentDialogExpertSettingsHelp");
             }
         }
-#endregion
+        #endregion
 
-#region AccountCodePageSearchFilterToolTip
+        #region AccountCodePageSearchFilterToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Filter
         /// </summary>
@@ -1202,9 +1197,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("AccountCodePageSearchFilterToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region WebViewDatafileContentDialogChooseFile
+        #region WebViewDatafileContentDialogChooseFile
         /// <summary>
         ///   Looks up a localized string similar to: Choose file
         /// </summary>
@@ -1215,9 +1210,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WebViewDatafileContentDialogChooseFile");
             }
         }
-#endregion
+        #endregion
 
-#region WebViewDatafileContentDialogChooseFolder
+        #region WebViewDatafileContentDialogChooseFolder
         /// <summary>
         ///   Looks up a localized string similar to: Choose folder
         /// </summary>
@@ -1228,9 +1223,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WebViewDatafileContentDialogChooseFolder");
             }
         }
-#endregion
+        #endregion
 
-#region WelcomePageTutorialTipOpen
+        #region WelcomePageTutorialTipOpen
         /// <summary>
         ///   Looks up a localized string similar to: Open tutorial
         /// </summary>
@@ -1241,9 +1236,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WelcomePageTutorialTipOpen");
             }
         }
-#endregion
+        #endregion
 
-#region WelcomePageTutorialDesc
+        #region WelcomePageTutorialDesc
         /// <summary>
         ///   Looks up a localized string similar to: Would you like to open the tutorial for the application?
         /// </summary>
@@ -1254,9 +1249,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WelcomePageTutorialDesc");
             }
         }
-#endregion
+        #endregion
 
-#region FunctionNotAvailable
+        #region FunctionNotAvailable
         /// <summary>
         ///   Looks up a localized string similar to: Function not available
         /// </summary>
@@ -1267,9 +1262,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("FunctionNotAvailable");
             }
         }
-#endregion
+        #endregion
 
-#region WindowsHelloNotAvailable
+        #region WindowsHelloNotAvailable
         /// <summary>
         ///   Looks up a localized string similar to: Windows Hello cannot be executed because no password is stored for the datafile in the protected memory.
         /// </summary>
@@ -1280,9 +1275,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WindowsHelloNotAvailable");
             }
         }
-#endregion
+        #endregion
 
-#region ErrorGenerateTOTPCode
+        #region ErrorGenerateTOTPCode
         /// <summary>
         ///   Looks up a localized string similar to: The secret key for the account {0} is empty or unreadable. Please restart the app. If the problem persists, clean up the account {0} and add it again.
         /// </summary>
@@ -1293,9 +1288,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("ErrorGenerateTOTPCode");
             }
         }
-#endregion
+        #endregion
 
-#region TextFormatterBoldToolTip
+        #region TextFormatterBoldToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Bold
         /// </summary>
@@ -1306,9 +1301,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("TextFormatterBoldToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region TextFormatterItalicToolTip
+        #region TextFormatterItalicToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Italics
         /// </summary>
@@ -1319,9 +1314,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("TextFormatterItalicToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region TextFormatterStrikeToolTip
+        #region TextFormatterStrikeToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Strikethrough
         /// </summary>
@@ -1332,9 +1327,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("TextFormatterStrikeToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region TextFormatterUnderlineToolTip
+        #region TextFormatterUnderlineToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Underline
         /// </summary>
@@ -1345,9 +1340,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("TextFormatterUnderlineToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region TextFormatterListToolTip
+        #region TextFormatterListToolTip
         /// <summary>
         ///   Looks up a localized string similar to: List
         /// </summary>
@@ -1358,9 +1353,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("TextFormatterListToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region TextFormatterOrderedToolTip
+        #region TextFormatterOrderedToolTip
         /// <summary>
         ///   Looks up a localized string similar to: Ordered list
         /// </summary>
@@ -1371,9 +1366,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("TextFormatterOrderedToolTip");
             }
         }
-#endregion
+        #endregion
 
-#region WriteDatafileErrorBTNCancel
+        #region WriteDatafileErrorBTNCancel
         /// <summary>
         ///   Looks up a localized string similar to: Discard changes
         /// </summary>
@@ -1384,9 +1379,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WriteDatafileErrorBTNCancel");
             }
         }
-#endregion
+        #endregion
 
-#region WriteDatafileErrorBTNRetry
+        #region WriteDatafileErrorBTNRetry
         /// <summary>
         ///   Looks up a localized string similar to: Save again
         /// </summary>
@@ -1397,9 +1392,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WriteDatafileErrorBTNRetry");
             }
         }
-#endregion
+        #endregion
 
-#region WriteDatafileErrorDesc
+        #region WriteDatafileErrorDesc
         /// <summary>
         ///   Looks up a localized string similar to: The changes could not be saved. Do you want to save them again?
         /// </summary>
@@ -1410,9 +1405,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WriteDatafileErrorDesc");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVServerNotFound
+        #region DatafileViewModelWebDAVServerNotFound
         /// <summary>
         ///   Looks up a localized string similar to: Address not found
         /// </summary>
@@ -1423,9 +1418,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVServerNotFound");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVServerNotFoundDesc
+        #region DatafileViewModelWebDAVServerNotFoundDesc
         /// <summary>
         ///   Looks up a localized string similar to: The address to the WebDAV service could not be found.
         /// </summary>
@@ -1436,9 +1431,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVServerNotFoundDesc");
             }
         }
-#endregion
+        #endregion
 
-#region WebDAVAppPasswordInfo
+        #region WebDAVAppPasswordInfo
         /// <summary>
         ///   Looks up a localized string similar to: An app password is required to log in to the WebDAV service, this can be created in the settings of the WebDAV service.
         /// </summary>
@@ -1449,9 +1444,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("WebDAVAppPasswordInfo");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVCredentialsError
+        #region DatafileViewModelWebDAVCredentialsError
         /// <summary>
         ///   Looks up a localized string similar to: Login error
         /// </summary>
@@ -1462,9 +1457,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVCredentialsError");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVCredentialsErrorDesc
+        #region DatafileViewModelWebDAVCredentialsErrorDesc
         /// <summary>
         ///   Looks up a localized string similar to: Your username or password is invalid.
         /// </summary>
@@ -1475,9 +1470,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVCredentialsErrorDesc");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVMaintenanceError
+        #region DatafileViewModelWebDAVMaintenanceError
         /// <summary>
         ///   Looks up a localized string similar to: Server in maintenance mode
         /// </summary>
@@ -1488,9 +1483,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVMaintenanceError");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVMaintenanceErrorDesc
+        #region DatafileViewModelWebDAVMaintenanceErrorDesc
         /// <summary>
         ///   Looks up a localized string similar to: Login is currently not possible because the WebDAV service is currently in maintenance mode.
         /// </summary>
@@ -1501,9 +1496,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVMaintenanceErrorDesc");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVNotInstalledError
+        #region DatafileViewModelWebDAVNotInstalledError
         /// <summary>
         ///   Looks up a localized string similar to: Server not installed
         /// </summary>
@@ -1514,9 +1509,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVNotInstalledError");
             }
         }
-#endregion
+        #endregion
 
-#region DatafileViewModelWebDAVNotInstalledErrorDesc
+        #region DatafileViewModelWebDAVNotInstalledErrorDesc
         /// <summary>
         ///   Looks up a localized string similar to: The WebDAV service is currently not properly installed.
         /// </summary>
@@ -1527,9 +1522,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("DatafileViewModelWebDAVNotInstalledErrorDesc");
             }
         }
-#endregion
+        #endregion
 
-#region InfoBarDatafileNoInternet
+        #region InfoBarDatafileNoInternet
         /// <summary>
         ///   Looks up a localized string similar to: Currently no internet connectivity is available for synchronisation. Please connect and confirm "Reload datafile".
         /// </summary>
@@ -1540,9 +1535,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("InfoBarDatafileNoInternet");
             }
         }
-#endregion
+        #endregion
 
-#region InfoBarDatafileTitleNoInternet
+        #region InfoBarDatafileTitleNoInternet
         /// <summary>
         ///   Looks up a localized string similar to: No internet connection
         /// </summary>
@@ -1553,9 +1548,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("InfoBarDatafileTitleNoInternet");
             }
         }
-#endregion
+        #endregion
 
-#region InfoBarDatafileTitleUpdated
+        #region InfoBarDatafileTitleUpdated
         /// <summary>
         ///   Looks up a localized string similar to: Datafile updated
         /// </summary>
@@ -1566,9 +1561,9 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("InfoBarDatafileTitleUpdated");
             }
         }
-#endregion
+        #endregion
 
-#region InfoBarDatafileUpdated
+        #region InfoBarDatafileUpdated
         /// <summary>
         ///   Looks up a localized string similar to: The data file has been successfully updated.
         /// </summary>
@@ -1579,7 +1574,7 @@ namespace Project2FA.UWP.Strings{
                 return _resourceLoader.GetString("InfoBarDatafileUpdated");
             }
         }
-#endregion
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]

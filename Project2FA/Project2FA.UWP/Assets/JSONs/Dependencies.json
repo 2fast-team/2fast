@@ -1,5 +1,12 @@
 ﻿[
   {
+    "Name": "CommunityToolkit.*",
+    "LicenseName": "MIT",
+    "Authors": "Microsoft",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/CommunityToolkit/dotnet/blob/main/License.md#mit-license-mit"
+  },
+  {
     "Name": "Otp.NET",
     "LicenseName": "MIT",
     "Authors": "Kyle Spearrin",
@@ -128,7 +135,7 @@
     "StringURL": "https://lottiefiles.com/21398-online-tutorial"
   },
   {
-    "Name": "simple-icons",
+    "Name": "Icons: simple-icons",
     "Authors": "simple-icons",
     "LicenseName": "Creative Commons Zero v1.0 Universal",
     "CategoryUid": "Asset",

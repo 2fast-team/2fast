@@ -2,8 +2,13 @@
 // The NuGet package ReswPlusLib is necessary to support Pluralization.
 using System;
 using Windows.ApplicationModel.Resources;
+#if WINDOWS_UWP
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Data;
+#else
+using Microsoft.UI.Xaml.Markup;
+using Microsoft.UI.Xaml.Data;
+#endif
 
 namespace Project2FA.UWP.Strings{
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]

@@ -20,6 +20,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Prism.Commands;
 using Project2FA.UWP.Strings;
 using CommunityToolkit.Mvvm.Messaging;
+using Windows.Security.Cryptography.Core;
+using System.Security.Cryptography;
 
 namespace Project2FA.UWP.ViewModels
 {
@@ -82,35 +84,45 @@ namespace Project2FA.UWP.ViewModels
         /// <param name="isWebDAV"></param>
         public async Task<DBDatafileModel> CreateLocalFileDB(bool isWebDAV)
         {
-            string hash = CryptoService.CreateStringHash(Password, false);
-            DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
-            string tempDataFileName;
-            if (!DateFileName.Contains(".2fa"))
+            try
             {
-                DateFileName += ".2fa";
+                string hash = CryptoService.CreateStringHash(Password, false);
+                DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
+                string tempDataFileName;
+                if (!DateFileName.Contains(".2fa"))
+                {
+                    DateFileName += ".2fa";
+                }
+                tempDataFileName = DateFileName;
+
+                var model = new DBDatafileModel
+                {
+                    DBPasswordHashModel = passwordModel,
+                    IsWebDAV = isWebDAV,
+                    Path = isWebDAV ? _choosenOneWebDAVFile.Path : LocalStorageFolder.Path,
+                    Name = tempDataFileName
+                };
+
+
+                await App.Repository.Datafile.UpsertAsync(model);
+                if (isWebDAV)
+                {
+                    // initial file upload
+                    await DataService.Instance.UploadDatafileWithWebDAV(ApplicationData.Current.LocalFolder, model, true);
+                }
+
+                // write the password with the hash(key) in the secret vault
+                SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
+
+                return model;
             }
-            tempDataFileName = DateFileName;
-
-            var model = new DBDatafileModel
+            catch (Exception exc)
             {
-                DBPasswordHashModel = passwordModel,
-                IsWebDAV = isWebDAV,
-                Path = isWebDAV ? _choosenOneWebDAVFile.Path : LocalStorageFolder.Path,
-                Name = tempDataFileName
-            };
-
-
-            await App.Repository.Datafile.UpsertAsync(model);
-            if (isWebDAV)
-            {
-                // initial file upload
-                await DataService.Instance.UploadDatafileWithWebDAV(ApplicationData.Current.LocalFolder, model, true);
+                TrackingManager.TrackExceptionCatched(nameof(CreateLocalFileDB), exc);
+                return null;
             }
+
             
-            // write the password with the hash(key) in the secret vault
-            SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
-
-            return model;
         }
 
         /// <summary>
@@ -361,8 +373,6 @@ namespace Project2FA.UWP.ViewModels
             return DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
-        #endregion
-
         private void CheckWebDAVInputs()
         {
             if (!string.IsNullOrEmpty(_username) && !string.IsNullOrEmpty(_webDAVPassword) && !string.IsNullOrEmpty(ServerAddress))
@@ -374,6 +384,10 @@ namespace Project2FA.UWP.ViewModels
                 WebDAVCredentialsEntered = false;
             }
         }
+
+        #endregion
+
+
         #region GetSets
         //public List<(string name, string message)> Errors
         //{

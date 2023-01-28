@@ -23,7 +23,7 @@
 
 ## About 2fast
 
-**2fast** (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is the first free, open source, two factor authenticator for Windows and Android with the ability to store the sensitive data encrypted at a place of your choice instead of a 3rd party cloud location.
+**2fast** (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is the first free, open source, two factor authenticator for Windows and other platforms with the ability to store the sensitive data encrypted at a place of your choice instead of a 3rd party cloud location.
 
 ### Features
 
@@ -33,15 +33,21 @@
 	- Easy backup & restore in one single file
 - Everything works local
 	- No extra account, registration or login needed
-	- No Internet connection needed
-		- Add personal WebDAV server (e.g. ownCloud or Nextcloud) as storage location [currently work in progress]
-- Free
+	- No Internet connection needed except for WebDAV use
+- Synchronisation via a WebDAV server (e.g. ownCloud or Nextcloud) as storage location [currently in Beta]
+- Free for desktop OS / fee required for mobile OS
 - Open Source
 - Works on multiple platforms
-	- Currently Windows and Android [work in progress]
+	- Currently released for Windows 10+ (UWP) 
+	- under development (with UNO platform):
+		- Android
+		- iOS
+		- Linux
+		- macOS
 - Uses the widely accepted TOTP algorithm ([RFC 6238](https://tools.ietf.org/html/rfc6238))
 	- Works with accounts from Google, Microsoft, Facebook, PayPal, etc.
 - Build with [PrismLibrary/Prism](https://github.com/PrismLibrary/Prism) and a fork from [Template10](https://github.com/2fast-team/Template10?organization=2fast-team&organization=2fast-team) (for the UWP app)
+- 
 
 ### Screenshots
 
@@ -53,8 +59,10 @@
 ## Installation
 
 For Windows operating systems:
+<p align="center">
+	<a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
+</p>
 
-<a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
 
 You can also install the app using [Chocolatey](https://community.chocolatey.org/packages/2fast):
 ```powershell
@@ -72,10 +80,12 @@ The following steps will help if you want to contribute or work on the applicati
 
 - [Visual Studio 2022](https://visualstudio.microsoft.com/)
 	- Don't forget to select the *Mobile development with .NET* package in the installation process 
+	- .NET Multi-Platform App UI development
 - Windows 10, version >= `1809`, October update 2018 (for the universal Windows application)
 	- The latest Windows 10 SDK is required
 - Android, version >= 7.0 (for the Android application)
 	- Remember to trust 3rd party Apps by enabling this in the Android developer settings if you want to build from source
+
 
 ### Installation
 
@@ -105,7 +115,7 @@ Current key-icon-logo by [freepik @ flaticon](https://www.flaticon.com/de/kosten
 
 ## Privacy
 
-UWP: The app does not use any own telemetry functions apart from the standardised telemetry functions by Microsoft (crashes, install from which country, versions in use, etc.).
+UWP: The app does not use any own telemetry functions apart from the standardised telemetry functions by Microsoft (crashes, install from which country, versions in use, custom events etc.).
 
 ## Contact
 

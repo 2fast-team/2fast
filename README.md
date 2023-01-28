@@ -47,7 +47,6 @@
 - Uses the widely accepted TOTP algorithm ([RFC 6238](https://tools.ietf.org/html/rfc6238))
 	- Works with accounts from Google, Microsoft, Facebook, PayPal, etc.
 - Build with [PrismLibrary/Prism](https://github.com/PrismLibrary/Prism) and a fork from [Template10](https://github.com/2fast-team/Template10?organization=2fast-team&organization=2fast-team) (for the UWP app)
-- 
 
 ### Screenshots
 

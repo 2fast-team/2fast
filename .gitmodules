@@ -4,3 +4,6 @@
 [submodule "Otp.NET"]
 	path = Otp.NET
 	url = https://github.com/2fast-team/Otp.NET.git
+[submodule "UNOversalTemplate"]
+	path = UNOversalTemplate
+	url = https://github.com/jp-weber/UNOversalTemplate.git

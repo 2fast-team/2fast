@@ -5,7 +5,7 @@
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Style="{StaticResource MyContentDialogStyle}"
     Title="{x:Bind strings:Resources.DisplayQRCodeContentDialogTitle}"

@@ -1,8 +1,8 @@
-﻿using Template10.Services.Marketplace;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Prism.Ioc;
 using Windows.UI.Xaml.Controls;
-using Project2FA.UWP.Services;
+using Project2FA.Services;
+using Project2FA.Services.Marketplace;
 
 namespace Project2FA.UWP.Views
 {

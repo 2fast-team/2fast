@@ -1,0 +1,10 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <!--custom controls-->
+        <!--<ResourceDictionary Source="ms-appx:///Controls/CardControl/CardControl.xaml" />
+        
+        <ResourceDictionary Source="ms-appx:///Controls/CardGroupControl/CardGroupControl.xaml" />-->
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

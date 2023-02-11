@@ -7,13 +7,13 @@
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:viewmodels="using:Project2FA.UWP.ViewModels"
+    xmlns:viewmodels="using:Project2FA.ViewModels"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:strings="using:Project2FA.Strings"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
     xmlns:wctmedia="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:helpers="using:Project2FA.UWP.Helpers"
+    xmlns:helpers="using:Project2FA.Helpers"
     x:Name="Page"
     mc:Ignorable="d">
 

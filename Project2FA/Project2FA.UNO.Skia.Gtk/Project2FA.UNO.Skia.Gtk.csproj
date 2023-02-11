@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
+    <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup Condition="exists('..\Project2FA.UNO.Windows')">
+    <EmbeddedResource Include="..\Project2FA.UNO.Windows\Package.appxmanifest" LogicalName="Package.appxmanifest" />
+    <Content Include="..\Project2FA.UNO.Windows\Images\StoreLogo.png" Link="Assets\StoreLogo.png" />
+    <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Include="..\Project2FA.UNO.Shared\**\*.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.12" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    <PackageReference Include="DryIoc" Version="5.3.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="SkiaSharp.Skottie" Version="2.88.3" />
+    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.3" />
+    <PackageReference Include="Svg.Skia" Version="0.5.18" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.Connectivity" Version="7.1.100" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Core" Version="7.1.100" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.100" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.100" />
+    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.0-dev.23" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.0-dev.23" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.0-dev.281" />
+    <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="4.8.0-dev.281" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.0-dev.281" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.0-dev.281" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="4.8.0-dev.281" />
+    <PackageReference Include="ZXing.Net" Version="0.16.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Xamarin\2fast\Project2FA.Core\Project2FA.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Xamarin\2fast\Project2FA.Repository\Project2FA.Repository.csproj" />
+    <ProjectReference Include="..\..\..\..\Xamarin\2fast\WebDAVClientPortable\WebDAVClientPortable.csproj" />
+    <ProjectReference Include="..\..\Otp.NET\src\Otp.NET\Otp.NET.csproj" />
+  </ItemGroup>
+  <Import Project="..\Project2FA.UNO.Shared\Project2FA.UNO.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\UNOversalTemplate.Core\UNOversalTemplate.Core.projitems" Label="Shared" />
+  <Import Project="..\..\UNOversalTemplate.Services\UNOversalTemplate.Services.projitems" Label="Shared" />
+  <Import Project="..\..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.Core\UNOversalTemplate.Core.projitems" Label="Shared" />
+  <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.IoC.DryIoC\UNOversalTemplate.IoC.DryIoC.projitems" Label="Shared" />
+  <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.Services\UNOversalTemplate.Services.projitems" Label="Shared" />
+</Project>

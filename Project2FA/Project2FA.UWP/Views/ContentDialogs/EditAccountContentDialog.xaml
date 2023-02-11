@@ -10,7 +10,7 @@
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:strings="using:Project2FA.Strings"
     xmlns:utils="using:Project2FA.UWP.Utils"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"

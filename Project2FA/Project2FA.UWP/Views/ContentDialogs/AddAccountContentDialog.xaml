@@ -17,7 +17,7 @@
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     x:Uid="AddAccountContentDialog"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:strings="using:Project2FA.Strings"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
     SecondaryButtonStyle="{StaticResource ButtonRevealStyle}"
     SecondaryButtonCommand="{x:Bind ViewModel.SecondayButtonCommand}"

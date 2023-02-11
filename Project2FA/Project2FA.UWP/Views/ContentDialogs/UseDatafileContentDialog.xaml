@@ -126,7 +126,7 @@
                                 Margin="0,5,0,18"/>
 
                             <!--Argon2 not working mit dotnet native-->
-                            <toolkit:Expander 
+                            <!--<toolkit:Expander 
                                 x:Uid="PasswordAdvancedHashOption"
                                 Background="{ThemeResource ButtonBackground}"
                                 Visibility="Collapsed"
@@ -134,7 +134,7 @@
                                 <CheckBox 
                                     x:Uid="PasswordAdvancedHashOptionText"
                                     IsChecked="{x:Bind ViewModel.UseExtendedHash,Mode=TwoWay}"/>
-                            </toolkit:Expander>
+                            </toolkit:Expander>-->
                             
                         </StackPanel>
                     </ScrollViewer>

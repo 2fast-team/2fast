@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
+
+		<!-- This removes the ActionBar -->
+		<item name="windowActionBar">false</item>
+		<item name="android:windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+		<item name="android:windowNoTitle">true</item>
+
+		<!-- SplashScreen -->
+		<item name="android:windowBackground">@drawable/Splash</item>
+
+		<!-- Color style for toggle switch -->
+		<!--<item name="colorControlActivated">@color/MaterialPrimaryColor</item>-->
+		<!--<item name="colorSwitchThumbNormal">@color/MaterialSurfaceVariantColor</item>-->
+
+		<!-- Color style for Date and Time Pickers -->
+		<!--<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+		<item name="android:timePickerDialogTheme">@style/AppCompatDialogStyle</item>-->
+	</style>
+	<style name="Theme.AppCompat.Translucent">
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowAnimationStyle">@android:style/Animation</item>
+	</style>
+
+</resources>

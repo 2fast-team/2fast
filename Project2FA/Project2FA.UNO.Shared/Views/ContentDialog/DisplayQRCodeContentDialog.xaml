@@ -1,0 +1,19 @@
+﻿<ContentDialog
+    x:Class="Project2FA.UNO.Views.DisplayQRCodeContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UNO.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:strings="using:Project2FA.Strings"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Title="{x:Bind strings:Resources.DisplayQRCodeContentDialogTitle}"
+    SecondaryButtonText="{x:Bind strings:Resources.Confirm}">
+
+    <StackPanel>
+        <TextBlock Text="{x:Bind ViewModel.Header,Mode=OneWay}" Margin="0,12,0,12"/>
+        <Image MaxWidth="250" Source="{x:Bind ViewModel.QRImage,Mode=OneWay}"></Image>
+    </StackPanel>
+</ContentDialog>

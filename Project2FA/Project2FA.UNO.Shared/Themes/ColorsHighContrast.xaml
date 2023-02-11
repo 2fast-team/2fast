@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--<AcrylicBrush 
+        x:Key="ShellAcrylicWindowBrush"
+        BackgroundSource="HostBackdrop" 
+        TintColor="{StaticResource SystemChromeAltHighColor}"
+        TintOpacity="0.8"
+        FallbackColor="Black" />-->
+    <SolidColorBrush x:Name="TranslucentBackgroundHighBrush" Opacity="0.9" Color="Black"/>
+    <SolidColorBrush x:Name="TranslucentBackgroundMediumBrush" Opacity="0.75" Color="Black"/>
+
+    <StaticResource x:Key="TwoFABackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor"/>
+
+    <StaticResource x:Key="ExpanderHeaderBackground" ResourceKey="SystemColorButtonFaceColorBrush" />
+    <StaticResource x:Key="CardBackgroundBrush" ResourceKey="SystemColorButtonFaceColorBrush" />
+    <StaticResource x:Key="CardBorderBrush" ResourceKey="SystemColorButtonTextColorBrush" />
+    <StaticResource x:Key="CardPrimaryForegroundBrush" ResourceKey="SystemColorButtonTextColorBrush" />
+</ResourceDictionary>

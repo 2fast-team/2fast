@@ -9,8 +9,8 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    xmlns:viewmodels="using:Project2FA.UWP.ViewModels"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:viewmodels="using:Project2FA.ViewModels"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d">
 
     <Page.Resources>

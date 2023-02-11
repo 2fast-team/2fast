@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:localControls="using:Project2FA.UWP.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     localControls:TitleBar.ButtonBackgroundColor="Transparent"
     localControls:TitleBar.ButtonInactiveBackgroundColor ="Transparent"

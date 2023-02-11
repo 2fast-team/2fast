@@ -4,7 +4,6 @@
 
 using System;
 using Microsoft.Services.Store.Engagement;
-using Prism.Logging;
 
 namespace Project2FA.UWP
 {

@@ -7,7 +7,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:strings="using:Project2FA.Strings"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"

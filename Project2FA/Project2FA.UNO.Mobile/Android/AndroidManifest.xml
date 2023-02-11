@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest 
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	package="com.jpwtechnology.Project2FA.UNO" 
+	android:allowBackup="false"
+	android:icon="@mipmap/appicon"
+	android:roundIcon="@mipmap/appicon_round"
+	android:versionCode="1" 
+	android:versionName="1.0"
+	android:requestLegacyExternalStorage="true">
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="33" />
+	<application android:label="Project2FA.UNO"></application>
+</manifest>

@@ -26,7 +26,7 @@ namespace Project2FA.UWP.Controls
                 if (self.Header.GetType() == typeof(CardControl))
                 {
                     CardControl selfSetting = (CardControl)self.Header;
-                    selfSetting.Style = (Style)Prism.PrismApplicationBase.Current.Resources["ExpanderHeaderSettingStyle"];
+                    selfSetting.Style = (Style)App.Current.Resources["ExpanderHeaderSettingStyle"];
 
                     if (!string.IsNullOrEmpty(selfSetting.Header))
                     {

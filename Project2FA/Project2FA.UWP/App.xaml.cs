@@ -1,24 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Uwp.Helpers;
-using Prism;
 using Prism.Ioc;
-using Prism.Services.Dialogs;
-using Prism.Unity;
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
 using Project2FA.Core.Services.Parser;
+using Project2FA.Helpers;
 using Project2FA.Repository.Database;
-using Project2FA.UWP.Helpers;
-using Project2FA.UWP.Services;
-using Project2FA.UWP.ViewModels;
+using Project2FA.Services;
+using Project2FA.Services.Marketplace;
+using Project2FA.Services.Web;
 using Project2FA.UWP.Views;
+using Project2FA.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Template10.Services.Serialization;
-using Template10.Services.Settings;
-using Template10.Utilities;
+using Template10.Services.Compression;
+using UNOversal;
+using UNOversal.DryIoc;
+using UNOversal.Ioc;
+using UNOversal.Services.Dialogs;
+using UNOversal.Services.File;
+using UNOversal.Services.Network;
+using UNOversal.Services.Secrets;
+using UNOversal.Services.Serialization;
+using UNOversal.Services.Settings;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
@@ -30,14 +36,14 @@ namespace Project2FA.UWP
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : PrismApplication
+    public sealed partial class App : UNOversalApplication
     {
         private DateTime _focusLostTime;
         private DispatcherTimer _focusLostTimer;
         /// <summary>
         /// Creates the access of the static instance of the ShellPage
         /// </summary>
-        public static ShellPage ShellPageInstance { get; private set; } = new ShellPage();
+        public static ShellPage ShellPageInstance { get; private set; }
 
         /// <summary>
         /// Pipeline for interacting with database.
@@ -79,30 +85,22 @@ namespace Project2FA.UWP
 
         public override void RegisterTypes(IContainerRegistry container)
         {
-            // standard template 10 services
-            container.RegisterTemplate10Services();
             // custom services
+            container.RegisterSingleton<ICompressionService, CompressionService>();
+            container.RegisterSingleton<IDialogService, DialogService>();
+            container.RegisterSingleton<IFileService, FileService>();
+            container.RegisterSingleton<IMarketplaceService, MarketplaceService>();
+            container.RegisterSingleton<INetworkService, NetworkService>();
+            container.RegisterSingleton<ISecretService, SecretService>();
+            container.RegisterSingleton<ISettingsHelper, SettingsHelper>();
+            container.RegisterSingleton<IWebApiService, WebApiService>();
+            container.RegisterSingleton<IGestureService, GestureService>();
             container.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
             container.RegisterSingleton<ISerializationService, SerializationService>(); //for internal uwp services
             container.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>(); //netstandard for general access
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
-            // view models
-            //container.RegisterSingleton<AccountCodePageViewModel>();
-            //container.RegisterSingleton<WelcomePageViewModel>();
-            //container.RegisterSingleton<SettingPageViewModel>();
-            //container.RegisterSingleton<BlankPageViewModel>();
-            //container.RegisterSingleton<UseDataFilePageViewModel>();
-            //container.RegisterSingleton<NewDataFilePageViewModel>();
-            //container.RegisterSingleton<AddAccountContentDialogViewModel>();
-            //container.RegisterSingleton<ChangeDatafilePasswordContentDialogViewModel>();
-            //container.RegisterSingleton<EditAccountContentDialogViewModel>();
-            //container.RegisterSingleton<UpdateDatafileContentDialogViewModel>();
-            //container.RegisterSingleton<UseDatafileContentDialogViewModel>();
-            //container.RegisterSingleton<WebViewDatafileContentDialogViewModel>();
-            //container.RegisterSingleton<DisplayQRCodeContentDialogViewModel>();
-            //container.RegisterSingleton<TutorialContentDialogViewModel>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();
@@ -121,10 +119,10 @@ namespace Project2FA.UWP
             container.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();
             container.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
             container.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
-            container.RegisterDialog<TutorialContentDialog, TutorialContentDialogViewModel>();
+            //container.RegisterDialog<TutorialContentDialog, TutorialContentDialogViewModel>();
         }
 
-        public override async Task OnStartAsync(IStartArgs args)
+        public override async Task OnStartAsync(IApplicationArgs args)
         {
             if (Window.Current.Content == null)
             {

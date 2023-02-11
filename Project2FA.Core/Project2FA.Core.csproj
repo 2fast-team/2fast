@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net7.0-android; net7.0-ios; net7.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net7.0</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Platforms>x86;x64;ARM;ARM64;AnyCPU</Platforms>
     <Title>Project2FA Core</Title>
@@ -28,7 +28,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
-    <PackageReference Include="protobuf-net" Version="3.1.26" />
+    <PackageReference Include="protobuf-net" Version="3.1.33" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using Project2FA.UWP.ViewModels;
+﻿using Project2FA.ViewModels;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

@@ -9,7 +9,7 @@
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:strings="using:Project2FA.UWP.Strings"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 

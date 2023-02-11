@@ -1,7 +1,7 @@
 ﻿using Prism.Ioc;
 using Project2FA.Repository.Models;
 using Project2FA.UWP.Controls;
-using Project2FA.UWP.ViewModels;
+using Project2FA.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,8 +10,8 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Prism.Services.Dialogs;
-using Prism.Commands;
+using UNOversal.Services.Dialogs;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UWP.Views
 {
@@ -54,7 +54,7 @@ namespace Project2FA.UWP.Views
                 dialog.Content = Strings.Resources.ErrorClipboardTask;
                 dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
                 dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                dialog.PrimaryButtonCommand = new DelegateCommand(async () =>
+                dialog.PrimaryButtonCommand = new AsyncRelayCommand(async () =>
                 {
                     await Copy2FACodeToClipboard(model);
                 });

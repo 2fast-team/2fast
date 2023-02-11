@@ -1,0 +1,210 @@
+﻿<Page
+    x:Class="Project2FA.UNO.Views.UseDataFilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UNO.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <utu:NavigationBar 
+            Grid.Row="0"
+            Content="#UseDataFilePage"
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+            Background="{ThemeResource TwoFABackgroundBrush}">
+            <!--<utu:NavigationBar.MainCommand>
+                <AppBarButton Foreground="White" Icon=""/>
+            </utu:NavigationBar.MainCommand>-->
+        </utu:NavigationBar>
+        <Grid x:Name="RootGrid" Grid.Row="1">
+            <ScrollViewer VerticalScrollMode="Auto">
+                <StackPanel Padding="0,0,22,0">
+                    <TextBlock 
+                                TextWrapping="Wrap"
+                                Text="~UseDatafileContentDialogLoadInfo.Text"
+                                x:Uid="UseDatafileContentDialogLoadInfo"
+                                Margin="0,10,0,10" />
+                    <TextBox 
+                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}"
+                                x:Uid="UseDatafileContentDialogFilename"
+                                IsReadOnly="True"
+                                Header="~UseDatafileContentDialogFilename.Header"
+                                Margin="0,5,0,5"/>
+                    <Button 
+                                x:Uid="UseDatafileContentDialogChangeDatafile" 
+                                Command="{x:Bind ViewModel.UseDatafileCommand}"
+                                Content="~UseDatafileContentDialogChangeDatafile.Content"/>
+                    <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition  Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <PasswordBox
+                                x:Name="PB_LocalPassword"
+                                x:Uid="Password"
+                                Header="~Password.Header" 
+                                InputScope="Password"
+                                Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                KeyDown="PB_LocalPassword_KeyDown"/>
+                        <!--<HyperlinkButton
+                                    Grid.Column="1"
+                                    Height="36"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+
+                                    VerticalAlignment="Bottom">
+                                        <FontIcon
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"/>
+                                    </HyperlinkButton>-->
+                    </Grid>
+
+                    <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
+
+                    <TextBox 
+                                Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}"
+                                x:Uid="UseDatafileContentDialogFolderPath"
+                                IsReadOnly="True"
+                                Header="~UseDatafileContentDialogFolderPath.Header"
+                                Margin="0,5,0,18"/>
+
+                    <Button 
+                                x:Uid="UseDataFilePageLoadDatafile"
+                                IsEnabled="{x:Bind ViewModel.DatafileBTNActive,Mode=OneWay}"
+                                Content="~UseDataFilePageLoadDatafile.Content"
+                                Command="{x:Bind ViewModel.SetAndCheckLocalDatafileCommand}"/>
+
+                </StackPanel>
+            </ScrollViewer>
+            <!--<Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
+                --><!--<PivotItem 
+                Header="#Auswahl"
+                x:Uid="UseDatafileContentDialogPivotItemKind">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock
+                            TextWrapping="Wrap"
+                            Text="~UseDatafileContentDialogInfo.Text"
+                            x:Uid="UseDatafileContentDialogInfo"
+                            Margin="0,10,0,10" />
+                            <Button 
+                            x:Name="BTN_LocalFile"
+                            Margin="0,10,0,10"
+                            MinWidth="200" 
+                            Click="BTN_LocalFile_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon 
+                                    Glyph="&#xE8F4;" 
+                                    FontSize="30"/>
+                                    <TextBlock
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center" 
+                                    x:Uid="UseDatafileContentDialogLocalPath"
+                                    Text="~UseDatafileContentDialogLocalPath.Text"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </PivotItem>--><!--
+                <PivotItem 
+                x:Name="FolderPivotItem"
+                Header="~.DatafilePivotItem.Header"
+                x:Uid="UseDatafileContentDialogDatafilePivotItem">
+                    <Grid  HorizontalAlignment="Left">
+                        <ScrollViewer VerticalScrollMode="Auto">
+                            <StackPanel Padding="0,0,22,0">
+                                <TextBlock 
+                                TextWrapping="Wrap"
+                                Text="~UseDatafileContentDialogLoadInfo.Text"
+                                x:Uid="UseDatafileContentDialogLoadInfo"
+                                Margin="0,10,0,10" />
+                                <TextBox 
+                                Text="{x:Bind ViewModel.DateFileName,Mode=TwoWay}"
+                                x:Uid="UseDatafileContentDialogFilename"
+                                IsReadOnly="True"
+                                Header="~UseDatafileContentDialogFilename.Header"
+                                Margin="0,5,0,5"/>
+                                <Button 
+                                x:Uid="UseDatafileContentDialogChangeDatafile" 
+                                Command="{x:Bind ViewModel.UseDatafileCommand}"
+                                Content="~UseDatafileContentDialogChangeDatafile.Content"/>
+                                <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition  Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <PasswordBox
+                                x:Name="PB_LocalPassword"
+                                x:Uid="Password"
+                                Header="~Password.Header" 
+                                InputScope="Password"
+                                Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                KeyDown="PB_LocalPassword_KeyDown"/>
+                                    --><!--<HyperlinkButton
+                                    Grid.Column="1"
+                                    Height="36"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+
+                                    VerticalAlignment="Bottom">
+                                        <FontIcon
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"/>
+                                    </HyperlinkButton>--><!--
+                                </Grid>
+
+                                <Border 
+                                Margin="0,12" 
+                                Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
+                                Height="1" />
+
+                                <TextBox 
+                                Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}"
+                                x:Uid="UseDatafileContentDialogFolderPath"
+                                IsReadOnly="True"
+                                Header="~UseDatafileContentDialogFolderPath.Header"
+                                Margin="0,5,0,18"/>
+
+                                <Button 
+                                x:Uid="UseDataFilePageLoadDatafile"
+                                IsEnabled="{x:Bind ViewModel.DatafileBTNActive,Mode=OneWay}"
+                                Content="~UseDataFilePageLoadDatafile.Content"
+                                Command="{x:Bind ViewModel.SetAndCheckLocalDatafileCommand}"/>
+
+                            </StackPanel>
+                        </ScrollViewer>
+
+                    </Grid>
+                </PivotItem>
+            </Pivot>-->
+        </Grid>
+        <!--<Grid Grid.Row="1">
+            <Button Content="Navigation back" Command="{x:Bind ViewModel.NavigateBackCommand}"/>
+            --><!--<Button Content="Navigation back" Click="NavigateBack"/>-->
+            <!--<Button Content="Navigation back" Command="{Binding ViewModel.NavigateBack}"/>--><!--
+        </Grid>-->
+    </Grid>
+</Page>

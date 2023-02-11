@@ -1,5 +1,5 @@
-﻿using Project2FA.UWP.Services;
-using Project2FA.UWP.ViewModels;
+﻿using Project2FA.Services;
+using Project2FA.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

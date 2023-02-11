@@ -1,5 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Helpers;
-using Project2FA.UWP.Services;
+using Project2FA.Services;
 using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -10,15 +10,14 @@ using NavigationViewBackButtonVisible = Microsoft.UI.Xaml.Controls.NavigationVie
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
-using Prism.Services;
 using System.Linq;
 using Prism.Ioc;
 using Windows.ApplicationModel.Core;
-using Project2FA.UWP.Utils;
-using Prism.Navigation;
 using System.Threading.Tasks;
-using Project2FA.UWP.Services.Enums;
-using Prism.Services.Dialogs;
+using Project2FA.Services.Enums;
+using UNOversal.Navigation;
+using Project2FA.Utils;
+using UNOversal.Services.Dialogs;
 
 namespace Project2FA.UWP.Views
 {
@@ -55,6 +54,7 @@ namespace Project2FA.UWP.Views
 
             ShellViewInternal = ShellView;
             ShellView.Content = MainFrame = new Frame();
+            GestureService.SetupWindowListeners(Window.Current.CoreWindow);
             NavigationService = NavigationFactory.Create(MainFrame).AttachGestures(Window.Current, Gesture.Back, Gesture.Forward, Gesture.Refresh);
 
             SetupGestures();

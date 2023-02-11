@@ -1,5 +1,5 @@
 ﻿using Project2FA.Repository.Models;
-using Project2FA.UWP.ViewModels;
+using Project2FA.ViewModels;
 using WebDAVClient.Types;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

@@ -14,12 +14,17 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Project2FA.ViewModels;
 
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
 namespace Project2FA.UNO.Views
 {
-    public sealed partial class SettingPage : Page
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class NewDataFilePage : Page
     {
-        public SettingPageViewModel ViewModel => DataContext as SettingPageViewModel;
-        public SettingPage()
+        public NewDataFilePageViewModel ViewModel => DataContext as NewDataFilePageViewModel;
+        public NewDataFilePage()
         {
             this.InitializeComponent();
             // Refresh x:Bind when the DataContext changes.

@@ -24,6 +24,9 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Project2FA.UNO.Views
 {
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
     public sealed partial class AccountCodePage : Page
     {
         public AccountCodePageViewModel ViewModel => DataContext as AccountCodePageViewModel;

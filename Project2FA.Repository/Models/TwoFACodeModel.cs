@@ -79,18 +79,18 @@ namespace Project2FA.Repository.Models
         {
             get
             {
-#if ANDROID || IOS
-                return _secretByteArray;
-#else
+#if WINDOWS_UWP
                 return _secretByteArray != null ? ProtectData.Unprotect(_secretByteArray) : null;
+#else
+                return _secretByteArray;
 #endif
             }
             set
             {
-#if ANDROID || IOS
-                _secretByteArray = value;
-#else
+#if WINDOWS_UWP
                 _secretByteArray = ProtectData.Protect(value);
+#else
+                _secretByteArray = value;
 #endif
             }
         }

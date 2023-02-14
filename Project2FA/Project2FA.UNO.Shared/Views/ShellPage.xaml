@@ -13,18 +13,18 @@
             x:Name="ShellView"
             IsPaneToggleButtonVisible="False"
             CompactModeThresholdWidth="540"
-            IsSettingsVisible="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+            IsSettingsVisible="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
             IsPaneOpen="False">
 
             <NavigationView.MenuItems>
                 <NavigationViewItem
                     x:Uid="ShellPageAccountsNavigation"
-                    IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
                     Tag="/AccountCodePage"
                     Icon="Permissions" />
                 <NavigationViewItem 
                     x:Uid="ShellPageDatafileNavigation" 
-                    IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
                     Tag="SettingPage?PivotItem=1">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE8A6;"/>
@@ -41,7 +41,7 @@
                         Tapped="FeedbackItem_Tapped" />-->
                 <NavigationViewItem 
                     x:Uid="ShellPageAboutAppNavigation"
-                    IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
                     Tag="SettingPage?PivotItem=2">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE9CE;"/>

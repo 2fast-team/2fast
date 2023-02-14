@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Prism.Navigation;
+using Project2FA.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +15,14 @@ using Frame = Microsoft.UI.Xaml.Controls.Frame;
 
 namespace Project2FA.UNO.Views
 {
-    public sealed partial class ShellPage : Page, INotifyPropertyChanged
+    public sealed partial class ShellPage : Page
     {
         private SystemNavigationManager _navManager;
         private bool _navigationIsAllowed = true;
         public INavigationService NavigationService { get; private set; }
         public NavigationView ShellViewInternal { get; private set; }
+
+        public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
 
         public Frame MainFrame { get; }
 
@@ -190,86 +193,86 @@ namespace Project2FA.UNO.Views
             return menuItem;
         }
 
-        #region NotifyPropertyChanged
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        //#region NotifyPropertyChanged
+        ///// <summary>
+        ///// Occurs when a property value changes.
+        ///// </summary>
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Checks if a property already matches a desired value. Sets the property and
-        /// notifies listeners only when necessary.
-        /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="storage">Reference to a property with both getter and setter.</param>
-        /// <param name="value">Desired value for the property.</param>
-        /// <param name="propertyName">Name of the property used to notify listeners. This
-        /// value is optional and can be provided automatically when invoked from compilers that
-        /// support CallerMemberName.</param>
-        /// <returns>True if the value was changed, false if the existing value matched the
-        /// desired value.</returns>
-        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
+        ///// <summary>
+        ///// Checks if a property already matches a desired value. Sets the property and
+        ///// notifies listeners only when necessary.
+        ///// </summary>
+        ///// <typeparam name="T">Type of the property.</typeparam>
+        ///// <param name="storage">Reference to a property with both getter and setter.</param>
+        ///// <param name="value">Desired value for the property.</param>
+        ///// <param name="propertyName">Name of the property used to notify listeners. This
+        ///// value is optional and can be provided automatically when invoked from compilers that
+        ///// support CallerMemberName.</param>
+        ///// <returns>True if the value was changed, false if the existing value matched the
+        ///// desired value.</returns>
+        //private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        //{
+        //    if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
 
-            storage = value;
-            RaisePropertyChanged(propertyName);
+        //    storage = value;
+        //    RaisePropertyChanged(propertyName);
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        /// <summary>
-        /// Checks if a property already matches a desired value. Sets the property and
-        /// notifies listeners only when necessary.
-        /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="storage">Reference to a property with both getter and setter.</param>
-        /// <param name="value">Desired value for the property.</param>
-        /// <param name="propertyName">Name of the property used to notify listeners. This
-        /// value is optional and can be provided automatically when invoked from compilers that
-        /// support CallerMemberName.</param>
-        /// <param name="onChanged">Action that is called after the property value has been changed.</param>
-        /// <returns>True if the value was changed, false if the existing value matched the
-        /// desired value.</returns>
-        private bool SetProperty<T>(ref T storage, T value, Action onChanged, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
+        ///// <summary>
+        ///// Checks if a property already matches a desired value. Sets the property and
+        ///// notifies listeners only when necessary.
+        ///// </summary>
+        ///// <typeparam name="T">Type of the property.</typeparam>
+        ///// <param name="storage">Reference to a property with both getter and setter.</param>
+        ///// <param name="value">Desired value for the property.</param>
+        ///// <param name="propertyName">Name of the property used to notify listeners. This
+        ///// value is optional and can be provided automatically when invoked from compilers that
+        ///// support CallerMemberName.</param>
+        ///// <param name="onChanged">Action that is called after the property value has been changed.</param>
+        ///// <returns>True if the value was changed, false if the existing value matched the
+        ///// desired value.</returns>
+        //private bool SetProperty<T>(ref T storage, T value, Action onChanged, [CallerMemberName] string propertyName = null)
+        //{
+        //    if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
 
-            storage = value;
-            onChanged?.Invoke();
-            RaisePropertyChanged(propertyName);
+        //    storage = value;
+        //    onChanged?.Invoke();
+        //    RaisePropertyChanged(propertyName);
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        /// <summary>
-        /// Raises this object's PropertyChanged event.
-        /// </summary>
-        /// <param name="propertyName">Name of the property used to notify listeners. This
-        /// value is optional and can be provided automatically when invoked from compilers
-        /// that support <see cref="CallerMemberNameAttribute"/>.</param>
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
+        ///// <summary>
+        ///// Raises this object's PropertyChanged event.
+        ///// </summary>
+        ///// <param name="propertyName">Name of the property used to notify listeners. This
+        ///// value is optional and can be provided automatically when invoked from compilers
+        ///// that support <see cref="CallerMemberNameAttribute"/>.</param>
+        //private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        //}
 
-        /// <summary>
-        /// Raises this object's PropertyChanged event.
-        /// </summary>
-        /// <param name="args">The PropertyChangedEventArgs</param>
-        private void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            PropertyChanged?.Invoke(this, args);
-        }
+        ///// <summary>
+        ///// Raises this object's PropertyChanged event.
+        ///// </summary>
+        ///// <param name="args">The PropertyChangedEventArgs</param>
+        //private void OnPropertyChanged(PropertyChangedEventArgs args)
+        //{
+        //    PropertyChanged?.Invoke(this, args);
+        //}
 
-        #endregion
-        /// <summary>
-        /// Allow or disable the NavigationView items
-        /// </summary>
-        public bool NavigationIsAllowed
-        {
-            get => _navigationIsAllowed;
-            set => SetProperty(ref _navigationIsAllowed, value);
-        }
+        //#endregion
+        ///// <summary>
+        ///// Allow or disable the NavigationView items
+        ///// </summary>
+        //public bool NavigationIsAllowed
+        //{
+        //    get => _navigationIsAllowed;
+        //    set => SetProperty(ref _navigationIsAllowed, value);
+        //}
     }
 }

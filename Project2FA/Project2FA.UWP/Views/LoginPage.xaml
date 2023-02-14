@@ -8,7 +8,7 @@
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,7)"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
@@ -81,12 +81,23 @@
                 <ColumnDefinition/>
                 <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
             </Grid.ColumnDefinitions>
-            <TextBlock 
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock 
                 x:Name="AppTitle" 
                 Grid.Column="1" 
                 Style="{StaticResource CaptionTextBlockStyle}"
                 Text="{x:Bind ViewModel.ApplicationTitle, Mode=OneWay}"
                 Margin="12,8"/>
+                <TextBlock 
+                Margin="20,0,0,0"
+                x:Name="WarnTitle"
+                Visibility="{x:Bind ViewModel.IsScreenCaptureEnabled,Mode=OneWay}"
+                Text="{x:Bind strings:Resources.ShellPageWarnInfo,Mode=OneWay}"
+                VerticalAlignment="Center"
+                Foreground="Red"
+                Style="{StaticResource CaptionTextBlockStyle}" />
+            </StackPanel>
+
         </Grid>
 
         <Grid 

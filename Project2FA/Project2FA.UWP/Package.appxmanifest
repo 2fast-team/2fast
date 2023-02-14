@@ -38,6 +38,12 @@
 						</uap:SupportedFileTypes>
 					</uap:FileTypeAssociation>
 				</uap:Extension>
+				<uap:Extension Category="windows.protocol">
+					<uap:Protocol Name="twofastauth">
+						<uap:Logo>Assets\FileLogo.png</uap:Logo>
+						<uap:DisplayName>2fast</uap:DisplayName>
+					</uap:Protocol>
+				</uap:Extension>
 			</Extensions>
 		</Application>
 	</Applications>

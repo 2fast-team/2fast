@@ -151,7 +151,7 @@ namespace Project2FA.ViewModels
             if (await TestPassword())
             {
                 await CreateLocalFileDB(isWebDAV);
-                App.ShellPageInstance.NavigationIsAllowed = true;
+                App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
             }
             IsLoading = false;
@@ -172,7 +172,8 @@ namespace Project2FA.ViewModels
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
 #if __IOS__
-            filePicker.FileTypeFilter.Add("com.jpwtechnology.2fa");
+            //filePicker.FileTypeFilter.Add("com.jpwtechnology.2fa");
+            filePicker.FileTypeFilter.Add("*");
 #else
             filePicker.FileTypeFilter.Add(".2fa");
 #endif

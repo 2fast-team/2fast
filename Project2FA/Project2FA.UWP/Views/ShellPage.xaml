@@ -35,11 +35,22 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="AppTitle"
-                       Grid.Column="1"
-                       Text="{x:Bind Title,Mode=OneWay}"
-                       VerticalAlignment="Center"
-                       Style="{StaticResource CaptionTextBlockStyle}" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock 
+                x:Name="AppTitle"
+                Text="{x:Bind ViewModel.Title,Mode=OneWay}"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}" />
+                <TextBlock 
+                Margin="20,0,0,0"
+                x:Name="WarnTitle"
+                Visibility="{x:Bind ViewModel.IsScreenCaptureEnabled,Mode=OneWay}"
+                Text="{x:Bind strings:Resources.ShellPageWarnInfo,Mode=OneWay}"
+                VerticalAlignment="Center"
+                Foreground="Red"
+                Style="{StaticResource CaptionTextBlockStyle}" />
+            </StackPanel>
+
         </Grid>
         <muxc:NavigationView
             x:Name="ShellView"
@@ -47,18 +58,18 @@
             Style="{StaticResource MyNavigationViewStyle}"
             CompactModeThresholdWidth="540"
             PaneTitle="{x:Bind strings:Resources.ShellPagePaneTitle}"
-            IsSettingsVisible="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+            IsSettingsVisible="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
             IsPaneOpen="False">
 
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem
                     x:Uid="ShellPageAccountsNavigation"
-                    IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
                     Tag="/AccountCodePage"
                     Icon="Permissions" />
                 <muxc:NavigationViewItem 
                     x:Uid="ShellPageDatafileNavigation" 
-                    IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
                     Tag="SettingPage?PivotItem=1">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE8A6;"/>
@@ -69,14 +80,14 @@
             <muxc:NavigationView.FooterMenuItems>
                 <muxc:NavigationViewItem
                         Content="Feedback"
-                        IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                        IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
                         x:Uid="ShellPageFeedbackNavigation"
                         ToolTipService.ToolTip="{x:Bind strings:Resources.ShellPageFeedbackNavigationToolTip}"
                         Icon="Flag"
                         Tapped="FeedbackItem_Tapped" />
                 <muxc:NavigationViewItem 
                     x:Uid="ShellPageAboutAppNavigation"
-                    IsEnabled="{x:Bind NavigationIsAllowed,Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
                     Tag="SettingPage?PivotItem=2">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE9CE;"/>

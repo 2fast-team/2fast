@@ -9,6 +9,7 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/NavigationView.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/ScrollBar_themeresources.xaml" />
         <ResourceDictionary Source="ms-appx:///Controls/CardExpanderControl/CardExpanderControl.xaml" />-->
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/PersonPicture.xaml" />
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBoxItemStyle.xaml" />-->
 

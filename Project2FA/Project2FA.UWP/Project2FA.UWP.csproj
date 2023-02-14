@@ -529,7 +529,7 @@
       <Name>Otp.NET</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj">
-      <Project>{411595dc-9a03-4689-9e11-748fe8f876c4}</Project>
+      <Project>{8a7a480b-01f2-4693-b1b7-13e5bed8bbf6}</Project>
       <Name>Project2FA.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Project2FA.Repository\Project2FA.Repository.csproj">

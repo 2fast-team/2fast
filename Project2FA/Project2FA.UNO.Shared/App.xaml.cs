@@ -251,9 +251,9 @@ namespace Project2FA.UNO
                 }
             }
 
-            
+            // TODO iOS cannot currently open files
             Foundation.NSString str = Foundation.NSString.FromData(data, Foundation.NSStringEncoding.UTF8);
-            DataService.Instance.StorageFileUrl = url.Path.ToString();
+            //DataService.Instance.StorageFileUrl = url.Path.ToString();
 
             return base.OpenUrl(app, url, options);
         }
@@ -360,6 +360,7 @@ namespace Project2FA.UNO
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
 #if __IOS__ || __ANDROID__
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
 #else
             containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
 #endif

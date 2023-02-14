@@ -264,7 +264,7 @@ namespace Project2FA.Services
             {
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
                 StorageFile file = null;
-                StorageFolder folder;
+                StorageFolder folder = null;
                 string datafilename, passwordHashName, path;
                 DBPasswordHashModel dbHash;
                 if (ActivatedDatafile != null)
@@ -291,8 +291,6 @@ namespace Project2FA.Services
                     }
 #endif
 
-
-
                     dbHash = await App.Repository.Password.GetAsync();
                     passwordHashName = dbHash.Hash;
                     datafilename = dbDatafile.Name;
@@ -300,7 +298,7 @@ namespace Project2FA.Services
 
                 try
                 {
-#if ANDROID
+#if __ANDROID__
                     // create new thread for buggy Android, else NetworkOnMainThreadException 
                     await Task.Run(async () => {
                         Android.Net.Uri androidUri = Android.Net.Uri.Parse(path);
@@ -314,7 +312,7 @@ namespace Project2FA.Services
                 }
 
 
-#if ANDROID
+#if __ANDROID__ || __IOS__
                 if (file != null)
 #else
                 if (await FileService.FileExistsAsync(datafilename, folder))
@@ -327,7 +325,7 @@ namespace Project2FA.Services
                     {
                         string datafileStr = string.Empty;
 
-#if ANDROID
+#if __ANDROID__ || __IOS__
                         // create new thread for buggy Android, else NetworkOnMainThreadException 
                         await Task.Run(async () => {
                             datafileStr = await FileIO.ReadTextAsync(file);
@@ -525,7 +523,7 @@ namespace Project2FA.Services
         {
             _errorOccurred = false;
             // allow shell navigation
-            App.ShellPageInstance.NavigationIsAllowed = true;
+            App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
         }
 
         private void SendPasswordStatusMessage(bool isinvalid, string hash)
@@ -550,7 +548,7 @@ namespace Project2FA.Services
                 await ErrorDialogs.UnauthorizedAccessDialog();
             }
             // disable shell navigation
-            App.ShellPageInstance.NavigationIsAllowed = false;
+            App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             //Logger.Log("no datafile found", Category.Exception, Priority.High);
             bool selectedOption = false;
 

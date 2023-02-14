@@ -7,8 +7,6 @@ using Windows.UI.Xaml.Controls;
 using NavigationView = Microsoft.UI.Xaml.Controls.NavigationView;
 using NavigationViewItem = Microsoft.UI.Xaml.Controls.NavigationViewItem;
 using NavigationViewBackButtonVisible = Microsoft.UI.Xaml.Controls.NavigationViewBackButtonVisible;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Linq;
 using Prism.Ioc;
@@ -18,16 +16,18 @@ using Project2FA.Services.Enums;
 using UNOversal.Navigation;
 using Project2FA.Utils;
 using UNOversal.Services.Dialogs;
+using Project2FA.ViewModels;
 
 namespace Project2FA.UWP.Views
 {
-    public sealed partial class ShellPage : Page, INotifyPropertyChanged
+    public sealed partial class ShellPage : Page
     {
         private SystemNavigationManager _navManager;
-        private bool _navigationIsAllowed = true;
-        private string _title;
+
         public INavigationService NavigationService { get; private set; }
         public NavigationView ShellViewInternal { get; private set; }
+        public Frame MainFrame { get; }
+        public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
 
         public ShellPage()
         {
@@ -37,7 +37,7 @@ namespace Project2FA.UWP.Views
 
             string title = Windows.ApplicationModel.Package.Current.DisplayName;
             // determine and set if the app is started in debug mode
-            Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
+            ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
 
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
@@ -102,12 +102,12 @@ namespace Project2FA.UWP.Views
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = true;
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = ViewModel.IsScreenCaptureEnabled = true;
             }
             else
             {
                 //prevent screenshot capture for the app
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = false;
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = ViewModel.IsScreenCaptureEnabled = false;
             }
             Loaded += ShellPage_Loaded;
         }
@@ -424,89 +424,5 @@ namespace Project2FA.UWP.Views
             }
             return menuItem;
         }
-
-        #region NotifyPropertyChanged
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Checks if a property already matches a desired value. Sets the property and
-        /// notifies listeners only when necessary.
-        /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="storage">Reference to a property with both getter and setter.</param>
-        /// <param name="value">Desired value for the property.</param>
-        /// <param name="propertyName">Name of the property used to notify listeners. This
-        /// value is optional and can be provided automatically when invoked from compilers that
-        /// support CallerMemberName.</param>
-        /// <returns>True if the value was changed, false if the existing value matched the
-        /// desired value.</returns>
-        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
-
-            storage = value;
-            RaisePropertyChanged(propertyName);
-
-            return true;
-        }
-
-        /// <summary>
-        /// Checks if a property already matches a desired value. Sets the property and
-        /// notifies listeners only when necessary.
-        /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="storage">Reference to a property with both getter and setter.</param>
-        /// <param name="value">Desired value for the property.</param>
-        /// <param name="propertyName">Name of the property used to notify listeners. This
-        /// value is optional and can be provided automatically when invoked from compilers that
-        /// support CallerMemberName.</param>
-        /// <param name="onChanged">Action that is called after the property value has been changed.</param>
-        /// <returns>True if the value was changed, false if the existing value matched the
-        /// desired value.</returns>
-        private bool SetProperty<T>(ref T storage, T value, Action onChanged, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
-
-            storage = value;
-            onChanged?.Invoke();
-            RaisePropertyChanged(propertyName);
-
-            return true;
-        }
-
-        /// <summary>
-        /// Raises this object's PropertyChanged event.
-        /// </summary>
-        /// <param name="propertyName">Name of the property used to notify listeners. This
-        /// value is optional and can be provided automatically when invoked from compilers
-        /// that support <see cref="CallerMemberNameAttribute"/>.</param>
-        private void RaisePropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
-        /// Raises this object's PropertyChanged event.
-        /// </summary>
-        /// <param name="args">The PropertyChangedEventArgs</param>
-        private void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            PropertyChanged?.Invoke(this, args);
-        }
-
-        #endregion
-        /// <summary>
-        /// Allow or disable the NavigationView items
-        /// </summary>
-        public bool NavigationIsAllowed
-        {
-            get => _navigationIsAllowed;
-            set => SetProperty(ref _navigationIsAllowed, value);
-        }
-        public Frame MainFrame { get; }
-        public string Title { get => _title; set => SetProperty(ref _title, value); }
     }
 }

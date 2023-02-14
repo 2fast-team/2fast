@@ -15,6 +15,8 @@ using UNOversal.Services.Dialogs;
 using UNOversal.Services.Secrets;
 using UNOversal.Services.File;
 using Project2FA.Services;
+using CommunityToolkit.Mvvm.Messaging;
+using Project2FA.Core.Messenger;
 
 #if WINDOWS_UWP
 using Windows.Security.Cryptography;
@@ -38,7 +40,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class FileActivationPageViewModel : ObservableObject
+    public class FileActivationPageViewModel : ObservableRecipient
     {
         private string _password;
         public ICommand LoginCommand { get; }
@@ -47,6 +49,8 @@ namespace Project2FA.ViewModels
         private IFileService FileService { get; }
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         private string _applicationTitle;
+        private bool _isScreenCaptureEnabled;
+
         public FileActivationPageViewModel()
         {
             SecretService = App.Current.Container.Resolve<ISecretService>();
@@ -54,9 +58,11 @@ namespace Project2FA.ViewModels
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             FileService = App.Current.Container.Resolve<IFileService>();
             LoginCommand = new RelayCommand(CheckLogin);
-            App.ShellPageInstance.NavigationIsAllowed = false;
+            App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
+            //register the messenger calls
+            Messenger.Register<FileActivationPageViewModel, IsScreenCaptureEnabledChangedMessage>(this, (r, m) => r.IsScreenCaptureEnabled = m.Value);
         }
 
         /// <summary>
@@ -118,7 +124,7 @@ namespace Project2FA.ViewModels
                     Constants.ActivatedDatafileHashName,
                     NewtonsoftJSONService.Serialize(encryptedBytes));
 #endif
-                App.ShellPageInstance.NavigationIsAllowed = true;
+                App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
                 Window.Current.Content = App.ShellPageInstance;
                 return true;
@@ -203,6 +209,12 @@ namespace Project2FA.ViewModels
         {
             get => _applicationTitle;
             set => SetProperty(ref _applicationTitle, value);
+        }
+
+        internal bool IsScreenCaptureEnabled
+        {
+            get => _isScreenCaptureEnabled;
+            set => SetProperty(ref _isScreenCaptureEnabled, value);
         }
     }
 }

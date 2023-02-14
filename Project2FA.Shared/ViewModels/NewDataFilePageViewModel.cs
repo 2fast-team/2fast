@@ -174,7 +174,7 @@ namespace Project2FA.ViewModels
                     await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
 
                 await CreateLocalFileDB(isWebDAV);
-                App.ShellPageInstance.NavigationIsAllowed = true;
+                App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
             }
             catch (Exception exc)

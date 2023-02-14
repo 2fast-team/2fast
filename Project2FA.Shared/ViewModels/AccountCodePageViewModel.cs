@@ -336,6 +336,25 @@ namespace Project2FA.ViewModels
 #endif
         }
 
+#if __IOS__ || __ANDROID__
+        public async Task AddAccountManual()
+        {
+            await NavigateToAddAccountPage(true);
+        }
+
+        public async Task AddAccountWithCamera()
+        {
+            await NavigateToAddAccountPage(false);
+        }
+
+        private async Task NavigateToAddAccountPage(bool isManualInput)
+        {
+            var param = new NavigationParameters();
+            param.Add("isManualInput", isManualInput);
+            await NavigationService.NavigateAsync(nameof(AddAccountPage), param);
+        }
+#endif
+
         /// <summary>
         /// Deletes an account from the collection
         /// </summary>

@@ -64,7 +64,7 @@ namespace Project2FA.ViewModels
     {
         public ObservableCollection<TwoFACodeModel> OTPList { get; private set; } = new ObservableCollection<TwoFACodeModel>();
         public ObservableCollection<MediaFrameSourceGroup> CameraSourceGroup { get; private set; } = new ObservableCollection<MediaFrameSourceGroup>();
-        private MediaPlayer _mediaPlayer;
+        private Windows.Media.Playback.MediaPlayer _mediaPlayer;
         private MediaPlayerElement _mediaPlayerElementControl;
         private CameraHelper _cameraHelper;
 
@@ -624,7 +624,7 @@ namespace Project2FA.ViewModels
                 {
                     if (_mediaPlayer == null)
                     {
-                        _mediaPlayer = new MediaPlayer
+                        _mediaPlayer = new Windows.Media.Playback.MediaPlayer
                         {
                             AutoPlay = true
                         };

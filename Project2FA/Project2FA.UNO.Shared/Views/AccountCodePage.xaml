@@ -122,6 +122,7 @@
 
                             <Button
                                 x:Name="BTN_CopyCode"
+                                Style="{StaticResource TransparentButtonStyle}"
                                 x:Uid="AccountCopyCodeButton"
                                 Width="48"
                                 Height="48"
@@ -159,6 +160,7 @@
 
                         <Button
                             x:Uid="AccountCodePageItemMoreBTN"
+                            Style="{StaticResource TransparentButtonStyle}"
                             Grid.Column="4" 
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" >
@@ -324,6 +326,7 @@
 
                             <Button
                                 x:Name="BTN_CopyCode"
+                                Style="{StaticResource TransparentButtonStyle}"
                                 x:Uid="AccountCopyCodeButton"
                                 Width="48"
                                 Height="48"
@@ -362,6 +365,7 @@
                         <Button
                             x:Uid="AccountCodePageItemMoreBTN"
                             Grid.Column="4" 
+                            Style="{StaticResource TransparentButtonStyle}"
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" >
                             <FontIcon Glyph="&#xE712;"/>
@@ -457,25 +461,45 @@
             </ListView>
         </Grid>
 
-        <Grid Grid.Row="2" Height="52">
+        <Grid Grid.Row="2" Height="52" Background="{ThemeResource TwoFABackgroundBrush}">
             <StackPanel 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Bottom">
-                <Button Width="68">
+                <Button Width="76" Style="{StaticResource TransparentButtonStyle}">
                     <FontIcon 
                         FontSize="30"
-                        Glyph="" />
+                        Glyph="&#xE109;" />
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddCamera"
+                                Text="AccountCodePageAddCamera.Text~"
+                                Click="BTN_AddAccountCamera_Click">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE70F;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddManual"
+                                Text="AccountCodePageAddManual.Text~"
+                                Click="BTN_AddAccountManual_Click">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE1C2;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </Button.Flyout>
                 </Button>
-                <Button Width="68">
+                <Button Width="76" Style="{StaticResource TransparentButtonStyle}">
                     <FontIcon 
                         FontSize="30"
-                        Glyph="" />
+                        Glyph="&#xE11A;" />
                 </Button>
-                <Button Width="68">
+                <Button Width="76" Style="{StaticResource TransparentButtonStyle}">
                     <FontIcon 
                         FontSize="30"
-                        Glyph="" />
+                        Glyph="&#xE115;" />
                 </Button>
             </StackPanel>
         </Grid>

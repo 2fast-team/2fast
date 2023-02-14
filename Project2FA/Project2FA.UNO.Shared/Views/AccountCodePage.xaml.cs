@@ -72,15 +72,25 @@ namespace Project2FA.UNO.Views
         {
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
             {
-                ViewModel.EditAccountFromCollection(model);
+                await ViewModel.EditAccountFromCollection(model);
             }
+        }
+
+        private async void BTN_AddAccountManual_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.AddAccountManual();
+        }
+
+        private async void BTN_AddAccountCamera_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.AddAccountWithCamera();
         }
 
         private async void BTN_ShareItem_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
             {
-                ViewModel.ExportQRCode(model);
+                await ViewModel.ExportQRCode(model);
             }
         }
 
@@ -88,7 +98,7 @@ namespace Project2FA.UNO.Views
         {
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
             {
-                ViewModel.DeleteAccountFromCollection(model);   
+                await ViewModel.DeleteAccountFromCollection(model);   
             }
         }
     }

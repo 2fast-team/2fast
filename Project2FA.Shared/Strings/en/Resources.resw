@@ -1046,4 +1046,7 @@ In the following sections, the functionality of this application is explained in
   <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
     <value>Open settings</value>
   </data>
+  <data name="ShellPageWarnInfo" xml:space="preserve">
+    <value>Screen recording protection not active</value>
+  </data>
 </root>

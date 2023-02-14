@@ -1053,4 +1053,7 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
     <value>Zu den Einstellungen wechseln</value>
   </data>
+  <data name="ShellPageWarnInfo" xml:space="preserve">
+    <value>Bildschirmaufnahme-Schutz nicht aktiv</value>
+  </data>
 </root>

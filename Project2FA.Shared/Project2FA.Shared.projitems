@@ -21,7 +21,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVDirectoryService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WindowService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ErrorDialogs.cs" />
@@ -32,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\SoftwareBitmapLuminanceSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\WriteableBitmapRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountCodePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BlankPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
@@ -46,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewDataFilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ShellPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UseDataFilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WelcomePageViewModel.cs" />
   </ItemGroup>

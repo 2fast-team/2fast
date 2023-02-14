@@ -14,6 +14,7 @@ using Project2FA.UWP.Views;
 using Project2FA.ViewModels;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Template10.Services.Compression;
 using UNOversal;
@@ -27,6 +28,7 @@ using UNOversal.Services.Serialization;
 using UNOversal.Services.Settings;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -165,6 +167,23 @@ namespace Project2FA.UWP
                     FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
                     Window.Current.Content = fileActivationPage;
                 }
+                if(args.Arguments is  ProtocolActivatedEventArgs protoActivated)
+                {
+                    string content = protoActivated.Uri.ToString();
+                    var parser = App.Current.Container.Resolve<IProject2FAParser>();
+                    var cmdlist = parser.ParseCmdStr(content);
+                    for (int i = 0; i < cmdlist.Count; i++)
+                    {
+                        if (cmdlist[i].Key == "isScreenCaptureEnabled")
+                        {
+                            bool value;
+                            if (bool.TryParse(cmdlist[i].Value, out value))
+                            {
+                                ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
+                            }
+                        }
+                    }
+                }
                 else
                 {
                     if (!(await Repository.Password.GetAsync() is null))
@@ -187,6 +206,23 @@ namespace Project2FA.UWP
                     DataService.Instance.ActivatedDatafile = (StorageFile)file;
                     FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
                     Window.Current.Content = fileActivationPage;
+                }
+                if (args.Arguments is ProtocolActivatedEventArgs protoActivated)
+                {
+                    string content = protoActivated.Uri.ToString();
+                    var parser = App.Current.Container.Resolve<IProject2FAParser>();
+                    var cmdlist = parser.ParseCmdStr(content);
+                    for (int i = 0; i < cmdlist.Count; i++)
+                    {
+                        if (cmdlist[i].Key == "isScreenCaptureEnabled")
+                        {
+                            bool value;
+                            if(bool.TryParse(cmdlist[i].Value, out value))
+                            {
+                                ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
+                            }
+                        }
+                    }
                 }
                 // else invalid request
             }

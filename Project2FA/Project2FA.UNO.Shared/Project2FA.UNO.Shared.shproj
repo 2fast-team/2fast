@@ -11,9 +11,11 @@
   <Import Project="Project2FA.UNO.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
+    <UpToDateCheckInput Remove="Styles\Generic\Button.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\PersonPicture.xaml" />
     <UpToDateCheckInput Remove="Styles\Styles.xaml" />
     <UpToDateCheckInput Remove="Views\AccountCodePage.xaml" />
+    <UpToDateCheckInput Remove="Views\AddAccountPage.xaml" />
     <UpToDateCheckInput Remove="Views\AppAboutPage - Copy.xaml" />
     <UpToDateCheckInput Remove="Views\BlankPage - Copy.xaml" />
     <UpToDateCheckInput Remove="Views\BlankPage.xaml" />
@@ -52,6 +54,7 @@
     <_Globbed_Compile Remove="ViewModels\WelcomePageViewModel.cs" />
     <_Globbed_Compile Remove="Views\AccountCodePage.xaml.cs" />
     <_Globbed_Compile Remove="Views\AddAccountContentDialog.xaml.cs" />
+    <_Globbed_Compile Remove="Views\AddAccountPage.xaml.cs" />
     <_Globbed_Compile Remove="Views\AppAboutPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Views\AppAboutPage.xaml.cs" />
     <_Globbed_Compile Remove="Views\BlankPage - Copy.xaml.cs" />
@@ -122,8 +125,10 @@
     <_Globbed_Content Remove="Assets\Wide310x150Logo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbled_Page Remove="Styles\Generic\Button.xaml" />
     <_Globbled_Page Remove="Styles\Generic\PersonPicture.xaml" />
     <_Globbled_Page Remove="Styles\Styles.xaml" />
+    <_Globbled_Page Remove="Views\AddAccountPage.xaml" />
     <_Globbled_Page Remove="Views\AppAboutPage - Copy.xaml" />
     <_Globbled_Page Remove="Views\BlankPage - Copy.xaml" />
     <_Globbled_Page Remove="Views\BlankPage.xaml" />

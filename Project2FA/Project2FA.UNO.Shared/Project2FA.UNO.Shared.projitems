@@ -23,6 +23,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonalPictureInitialsVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonPictureSizeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\SVGImageConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\AddAccountPage.xaml.cs">
+      <DependentUpon>AddAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\EditAccountPage.xaml.cs">
       <DependentUpon>EditAccountPage.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Generic\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\AddAccountPage.xaml">
+      <XamlRuntime>WinUI</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\EditAccountPage.xaml">
       <XamlRuntime>WinUI</XamlRuntime>
       <SubType>Designer</SubType>

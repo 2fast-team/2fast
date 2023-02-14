@@ -12,6 +12,8 @@ using Windows.Security.Credentials.UI;
 using Project2FA.Core;
 using Project2FA.Services;
 using Project2FA.Strings;
+using CommunityToolkit.Mvvm.Messaging;
+using Project2FA.Core.Messenger;
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -35,7 +37,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class LoginPageViewModel : ObservableObject
+    public class LoginPageViewModel : ObservableRecipient
     {
         private bool _windowsHelloIsUsable, _isLogout;
         private string _password;
@@ -43,6 +45,7 @@ namespace Project2FA.ViewModels
         public ICommand WindowsHelloLoginCommand { get; }
         private IDialogService DialogService { get; }
         private string _applicationTitle;
+        private bool _isScreenCaptureEnabled;
 
         /// <summary>
         /// Constructor
@@ -56,6 +59,8 @@ namespace Project2FA.ViewModels
 #endif
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
+            //register the messenger calls
+            Messenger.Register<LoginPageViewModel, IsScreenCaptureEnabledChangedMessage>(this, (r, m) => r.IsScreenCaptureEnabled = m.Value);
         }
 
 #if WINDOWS_UWP
@@ -210,6 +215,12 @@ namespace Project2FA.ViewModels
         {
             get => _applicationTitle;
             set => SetProperty(ref _applicationTitle, value);
+        }
+
+        internal bool IsScreenCaptureEnabled
+        {
+            get => _isScreenCaptureEnabled;
+            set => SetProperty(ref _isScreenCaptureEnabled, value);
         }
     }
 }

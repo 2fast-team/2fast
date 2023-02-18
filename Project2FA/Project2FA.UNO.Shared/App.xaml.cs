@@ -21,7 +21,6 @@ using UNOversal.Services.Secrets;
 using UNOversal.Services.Settings;
 using UNOversal.Services.Serialization;
 using Project2FA.Core.Services.JSON;
-using Prism.Navigation;
 using UNOversal.Ioc;
 using UNOversal.DryIoc;
 using System.Linq;
@@ -31,6 +30,7 @@ using WinUIWindow = Microsoft.UI.Xaml.Window;
 using UNOversal;
 using Project2FA.Services;
 using Project2FA.Core.Services.NTP;
+using CommunityToolkit.WinUI.Helpers;
 
 namespace Project2FA.UNO
 {
@@ -60,58 +60,14 @@ namespace Project2FA.UNO
         {
             InitializeLogging();
 
+#if __IOS__ || __ANDROID__
+            Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+#endif
+
             this.InitializeComponent();
             RequestedTheme = SettingsService.Instance.AppStartSetTheme(RequestedTheme);
 
         }
-
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        //        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
-        //        {
-        //#if DEBUG
-        //            if (System.Diagnostics.Debugger.IsAttached)
-        //            {
-        //                // this.DebugSettings.EnableFrameRateCounter = true;
-        //            }
-        //#endif
-
-        //            _window = Microsoft.UI.Xaml.Window.Current;
-
-        //            //var rootFrame = _window.Content as Frame;
-
-        //            //// Do not repeat app initialization when the Window already has content,
-        //            //// just ensure that the window is active
-        //            //if (rootFrame == null)
-        //            //{
-        //            //    // Create a Frame to act as the navigation context and navigate to the first page
-        //            //    rootFrame = new Frame();
-
-        //            //    //rootFrame.NavigationFailed += OnNavigationFailed;
-
-        //            //    if (args.UWPLaunchActivatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
-        //            //    {
-        //            //        // TODO: Load state from previously suspended application
-        //            //    }
-
-        //            //    // Place the frame in the current Window
-        //            //    _window.Content = rootFrame;
-        //            //}
-
-        //            if (_window.Content == null)
-        //            {
-        //                CreateShell();
-        //                ShellPageInstance.NavigationService.NavigateAsync(nameof(MainPage));
-        //                _window.Content = ShellPageInstance;
-        //            }
-        //            // Ensure the current window is active
-        //            _window.Activate();
-
-
-        //        }
 
 //#if __IOS__ && DEBUG
 //        // Hot Restart support for debug only
@@ -122,27 +78,6 @@ namespace Project2FA.UNO
 //        }
 //#endif
 
-        //protected override void OnInitialized()
-        //{
-        //    // set DB
-        //    if (Repository is null)
-        //    {
-        //        string databasePath = ApplicationData.Current.LocalFolder.Path + string.Format(@"\{0}.db", Constants.ContainerName);
-        //        var dbOptions = new DbContextOptionsBuilder<Project2FAContext>().UseSqlite("Data Source=" + databasePath);
-        //        Repository = new DBProject2FARepository(dbOptions);
-        //    }
-
-        //    _window = Microsoft.UI.Xaml.Window.Current;
-        //    if (_window.Content == null)
-        //    {
-        //        CreateShell();
-        //        //ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
-        //        ShellPageInstance.NavigationService.NavigateAsync(nameof(WelcomePage));
-        //        _window.Content = ShellPageInstance;
-        //        // Ensure the current window is active
-        //        _window.Activate();
-        //    }
-        //}
 
         public override async Task OnStartAsync(IApplicationArgs args)
         {
@@ -171,7 +106,7 @@ namespace Project2FA.UNO
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
-                    //SystemInformation.Instance.TrackAppUse(e as LaunchActivatedEventArgs);
+                    SystemInformation.Instance.TrackAppUse(e);
                     // set custom splash screen page
                     //Window.Current.Content = new SplashPage(e.SplashScreen);
                 }

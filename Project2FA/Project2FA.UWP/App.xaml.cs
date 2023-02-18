@@ -176,8 +176,7 @@ namespace Project2FA.UWP
                     {
                         if (cmdlist[i].Key == "isScreenCaptureEnabled")
                         {
-                            bool value;
-                            if (bool.TryParse(cmdlist[i].Value, out value))
+                            if (bool.TryParse(cmdlist[i].Value, out bool value))
                             {
                                 ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
                             }

@@ -34,6 +34,7 @@
     <Compile Remove="Android\SoftwareBitmap.Android.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Android\Resources\drawable\splash.png" />
     <None Remove="Android\Resources\drawable\Splash.xml" />
     <None Remove="Android\Resources\values-night\colors.xml" />
     <None Remove="Android\Resources\values\colors.xml" />
@@ -41,7 +42,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.12" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-    <PackageReference Include="DryIoc" Version="5.3.2" />
+    <PackageReference Include="DryIoc" Version="5.3.3" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Svg.Skia" Version="0.5.18" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.Connectivity" Version="7.1.100" />
@@ -50,12 +51,12 @@
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.100" />
     <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.0-dev.23" />
     <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.0-dev.23" />
-    <PackageReference Include="Uno.WinUI" Version="4.8.0-dev.334" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.0-dev.334" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.0-dev.334" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.0-dev.334" />
+    <PackageReference Include="Uno.WinUI" Version="4.8.0-dev.440" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.0-dev.440" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.0-dev.440" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.0-dev.440" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="4.8.0-dev.334" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="4.8.0-dev.440" />
     <PackageReference Include="ZXing.Net" Version="0.16.8" />
   </ItemGroup>
   <Choose>
@@ -114,12 +115,6 @@
   <ItemGroup>
     <_Globbed_Compile Remove="Android\SoftwareBitmap.Android.cs" />
     <_Globbed_Compile Remove="iOS\AppDelegate.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Android\Resources\drawable-mdpi\splash.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Remove="iOS\AppDelegate.cs" />

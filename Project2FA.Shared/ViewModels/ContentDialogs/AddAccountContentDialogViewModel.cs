@@ -34,6 +34,7 @@ using Windows.UI.Core;
 using Project2FA.Core.Utils;
 using Project2FA.Services;
 using ZXing;
+using System.Linq;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -377,9 +378,18 @@ namespace Project2FA.ViewModels
             //migrate code import
             if (_qrCodeStr.StartsWith("otpauth-migration://"))
             {
-                await ParseMigrationQRCode();
-                PivotViewSelectionName = "ImportBackupAccounts";
-                CheckInputs();
+                if(await ParseMigrationQRCode())
+                {
+                    PivotViewSelectionName = "ImportBackupAccounts";
+                    CheckInputs();
+                }
+                else
+                {
+                    await QRReadError();
+                    PivotViewSelectionName = "Overview";
+                    //move to the selection dialog
+                    SelectedPivotIndex = 0;
+                }
             }
             // normal otpauth import
             else
@@ -394,13 +404,18 @@ namespace Project2FA.ViewModels
                 }
                 else
                 {
-                    MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
-                    await dialog.ShowAsync();
+                    await QRReadError();
                     PivotViewSelectionName = "Overview";
                     //move to the selection dialog
                     SelectedPivotIndex = 0;
                 }
             }
+        }
+
+        private async Task QRReadError()
+        {
+            MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
+            await dialog.ShowAsync();
         }
 
         /// <summary>
@@ -412,8 +427,10 @@ namespace Project2FA.ViewModels
             try
             {
                 var otpmm = new OTPMigrationModel();
+                var query = new Uri(_qrCodeStr).Query.Replace("?data=", string.Empty);
                 var param = HttpUtility.ParseQueryString(new Uri(_qrCodeStr).Query);
-                var dataByteArray = Convert.FromBase64String(param["data"]);
+                string test = HttpUtility.UrlDecode(param["data"]);
+                var dataByteArray = Convert.FromBase64String(query);
                 using (var memoryStream = new MemoryStream())
                 {
                     memoryStream.Write(dataByteArray, 0, dataByteArray.Length);
@@ -824,7 +841,16 @@ namespace Project2FA.ViewModels
         public int SelectedPivotIndex
         {
             get => _selectedPivotIndex;
-            set => SetProperty(ref _selectedPivotIndex, value);
+            set
+            {
+                if(SetProperty(ref _selectedPivotIndex, value))
+                {
+                    if(value== 0)
+                    {
+                        PivotViewSelectionName = "NormalInputAccount";
+                    }
+                }
+            }
         }
         public bool IsPrimaryBTNEnable
         {

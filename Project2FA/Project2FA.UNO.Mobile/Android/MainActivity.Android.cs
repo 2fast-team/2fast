@@ -26,8 +26,10 @@ namespace Project2FA.UNO
         {
             base.OnCreate(savedInstanceState);
             // disable screenshot capture
-            //Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
-
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
+            }
             Intent intent = this.Intent;
             var action = intent.Action;
             var strLink = intent.Data;

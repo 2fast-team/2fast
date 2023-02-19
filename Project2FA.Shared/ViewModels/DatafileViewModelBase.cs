@@ -123,7 +123,7 @@ namespace Project2FA.ViewModels
             {
                 DBPasswordHashModel = passwordModel,
                 IsWebDAV = isWebDAV,
-                Path = LocalStorageFolder == null ? LocalStorageFile.Path: LocalStorageFolder.Path,
+                Path = ChoosenOneWebDAVFile == null ? LocalStorageFolder.Path: ChoosenOneWebDAVFile.Path,
                 Name = tempDataFileName
             };
 

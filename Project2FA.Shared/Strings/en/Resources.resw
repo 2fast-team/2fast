@@ -1049,4 +1049,7 @@ In the following sections, the functionality of this application is explained in
   <data name="ShellPageWarnInfo" xml:space="preserve">
     <value>Screen recording protection not active</value>
   </data>
+  <data name="NewDatafileFolderPath.Header" xml:space="preserve">
+    <value>WebDAV folder path</value>
+  </data>
 </root>

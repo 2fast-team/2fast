@@ -151,6 +151,15 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _isChecked, value);
         }
 
+        private bool _isEnabled = true;
+
+        [JsonIgnore]
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => SetProperty(ref _isEnabled, value);
+        }
+
         [JsonIgnore]
         public TwoFACodeModel Model
         {

@@ -255,19 +255,14 @@ namespace Project2FA.UWP.Views
             RootGrid.Children.Add(teachingTip);
         }
 
-        private void Root_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
-        {
-            if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
-            {
-                model.IsChecked = !model.IsChecked;
-            }
-        }
-
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is TwoFACodeModel model)
             {
-                model.IsChecked = !model.IsChecked;
+                if (model.IsEnabled)
+                {
+                    model.IsChecked = !model.IsChecked;
+                }
             }
         }
     }

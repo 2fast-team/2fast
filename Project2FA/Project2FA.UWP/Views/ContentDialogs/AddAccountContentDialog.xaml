@@ -48,6 +48,7 @@
 
                         <CheckBox 
                             IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
+                            IsEnabled="{x:Bind IsEnabled, Mode=OneWay}"
                             Grid.Row="0"
                             Grid.RowSpan="2">
                         </CheckBox>

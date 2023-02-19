@@ -929,22 +929,31 @@ namespace Project2FA.Services
                 StorageFile storageFile = await storageFolder.GetFileAsync(dbDatafile.Name);
                 WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
                 ResourceInfoModel webDAVFile = await client.GetResourceInfoAsync(dbDatafile.Path, dbDatafile.Name);
-                var fileDateModified = (await storageFile.GetBasicPropertiesAsync()).DateModified.UtcDateTime;
+
+                DateTime fileDateModified = (await storageFile.GetBasicPropertiesAsync()).DateModified.UtcDateTime;
                 DateTime trimmedFileLastModified = new DateTime(fileDateModified.Year, fileDateModified.Month,
                     fileDateModified.Day, fileDateModified.TimeOfDay.Hours,
                     fileDateModified.TimeOfDay.Minutes, fileDateModified.TimeOfDay.Seconds);
-                var webDAVDateModified = webDAVFile.LastModified.ToUniversalTime();
-                if (webDAVDateModified > trimmedFileLastModified)
+
+                var webDAVDateModified = webDAVFile != null? webDAVFile.LastModified.ToUniversalTime() : trimmedFileLastModified;
+                if (webDAVDateModified > trimmedFileLastModified && webDAVFile != null)
                 {
                     await DownloadWebDAVFile(storageFolder, dbDatafile);
                     return (true, true);
                 }
-                else if (webDAVDateModified < trimmedFileLastModified)
+                else if (webDAVDateModified < trimmedFileLastModified || webDAVFile == null)
                 {
                     DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
-                    // TODO check result
-                    (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(storageFolder, datafileDB);
-                    return (true, false);
+                    if (webDAVFile == null)
+                    {
+                        (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(storageFolder, datafileDB, true);
+                        return (successful, false);
+                    }
+                    else
+                    {
+                        (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(storageFolder, datafileDB);
+                        return (successful, false);
+                    }
                 }
                 else
                 {

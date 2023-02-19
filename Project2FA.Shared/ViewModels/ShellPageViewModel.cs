@@ -16,7 +16,7 @@ namespace Project2FA.ViewModels
     {
         private bool _navigationIsAllowed = true;
         private string _title;
-        private bool _isScreenCaptureEnabled = false;
+        private bool _isScreenCaptureEnabled;
         public bool NavigationIsAllowed
         {
             get => _navigationIsAllowed;

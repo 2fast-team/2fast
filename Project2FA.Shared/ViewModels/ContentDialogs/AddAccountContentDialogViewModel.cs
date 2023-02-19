@@ -189,7 +189,7 @@ namespace Project2FA.ViewModels
         {
 
             await CleanUpCamera();
-
+            OTPList.Clear();
             OpeningSeconds = SettingsService.Instance.QRCodeScanSeconds;
             _dispatcherTimer.Tick -= OnTimedEvent;
             _dispatcherTimer.Tick += OnTimedEvent;
@@ -283,7 +283,6 @@ namespace Project2FA.ViewModels
             bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?delayInSeconds=" + OpeningSeconds));
             if (result)
             {
-                
                 _launchScreenClip = true;
             }
         }
@@ -428,14 +427,11 @@ namespace Project2FA.ViewModels
             {
                 var otpmm = new OTPMigrationModel();
                 var query = new Uri(_qrCodeStr).Query.Replace("?data=", string.Empty);
-                var param = HttpUtility.ParseQueryString(new Uri(_qrCodeStr).Query);
-                string test = HttpUtility.UrlDecode(param["data"]);
                 var dataByteArray = Convert.FromBase64String(query);
                 using (var memoryStream = new MemoryStream())
                 {
                     memoryStream.Write(dataByteArray, 0, dataByteArray.Length);
                     memoryStream.Position = 0;
-                    Stream myStream = memoryStream;
                     otpmm = ProtoBuf.Serializer.Deserialize<OTPMigrationModel>(memoryStream);
                     for (int i = 0; i < otpmm.otp_parameters.Count; i++)
                     {
@@ -476,7 +472,26 @@ namespace Project2FA.ViewModels
                         }
                         else
                         {
-                            //TODO inform that not all accounts were imported
+                            // no TOTP, not supported
+                            string label = string.Empty, issuer = string.Empty;
+                            if (otpmm.otp_parameters[i].Name.Contains(":"))
+                            {
+                                string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
+                                label = issuerArray[0];
+                                issuer = issuerArray[1];
+                            }
+                            else
+                            {
+                                label = otpmm.otp_parameters[i].Name;
+                                issuer = otpmm.otp_parameters[i].Issuer;
+                            }
+                            OTPList.Add(new TwoFACodeModel
+                            {
+                                Label = label,
+                                Issuer = issuer,
+                                IsChecked= false,
+                                IsEnabled= false
+                            });
                         }
                     }
                 }
@@ -845,10 +860,11 @@ namespace Project2FA.ViewModels
             {
                 if(SetProperty(ref _selectedPivotIndex, value))
                 {
-                    if(value== 0)
-                    {
-                        PivotViewSelectionName = "NormalInputAccount";
-                    }
+                    //OnPropertyChanged(nameof(PivotViewSelectionName));
+                    //if(value== 0)
+                    //{
+                    //    PivotViewSelectionName = "NormalInputAccount";
+                    //}
                 }
             }
         }

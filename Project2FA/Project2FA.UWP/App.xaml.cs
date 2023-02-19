@@ -14,7 +14,6 @@ using Project2FA.UWP.Views;
 using Project2FA.ViewModels;
 using System;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Template10.Services.Compression;
 using UNOversal;
@@ -28,7 +27,6 @@ using UNOversal.Services.Serialization;
 using UNOversal.Services.Settings;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
-using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -154,20 +152,7 @@ namespace Project2FA.UWP
                     //Window.Current.Content = new SplashPage(e.SplashScreen);
                 }
 
-                if (args.Arguments is FileActivatedEventArgs fileActivated)
-                {
-                    var file = fileActivated.Files.FirstOrDefault();
-                    DataService.Instance.ActivatedDatafile = (StorageFile)file;
-                    var dialogService = Current.Container.Resolve<IDialogService>();
-                    if (await dialogService.IsDialogRunning())
-                    {
-                        dialogService.CloseDialogs();
-                    }
-                    await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
-                    FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
-                    Window.Current.Content = fileActivationPage;
-                }
-                if(args.Arguments is  ProtocolActivatedEventArgs protoActivated)
+                if (args.Arguments is ProtocolActivatedEventArgs protoActivated)
                 {
                     string content = protoActivated.Uri.ToString();
                     var parser = App.Current.Container.Resolve<IProject2FAParser>();
@@ -182,6 +167,20 @@ namespace Project2FA.UWP
                             }
                         }
                     }
+                }
+
+                if (args.Arguments is FileActivatedEventArgs fileActivated)
+                {
+                    var file = fileActivated.Files.FirstOrDefault();
+                    DataService.Instance.ActivatedDatafile = (StorageFile)file;
+                    var dialogService = Current.Container.Resolve<IDialogService>();
+                    if (await dialogService.IsDialogRunning())
+                    {
+                        dialogService.CloseDialogs();
+                    }
+                    await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                    FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
+                    Window.Current.Content = fileActivationPage;
                 }
                 else
                 {

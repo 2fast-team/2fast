@@ -162,24 +162,24 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            if (SystemInformation.Instance.IsAppUpdated)
-            {
-                //if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
-                //{
-                //    if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
-                //    {
-                //        // set the round corner for Windows 11+
-                //        SettingsService.Instance.UseRoundCorner = true;
-                //    }
-                //}
+            //if (SystemInformation.Instance.IsAppUpdated)
+            //{
+            //    //if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
+            //    //{
+            //    //    if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+            //    //    {
+            //    //        // set the round corner for Windows 11+
+            //    //        SettingsService.Instance.UseRoundCorner = true;
+            //    //    }
+            //    //}
 
-                ContentDialog dialog = new ContentDialog();
-                dialog.Title = Strings.Resources.NewAppFeaturesTitle;
-                dialog.Content = Strings.Resources.NewAppFeaturesContent;
-                dialog.PrimaryButtonText = Strings.Resources.Confirm;
-                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                await dialogService.ShowDialogAsync(dialog, new DialogParameters());
-            }
+            //    ContentDialog dialog = new ContentDialog();
+            //    dialog.Title = Strings.Resources.NewAppFeaturesTitle;
+            //    dialog.Content = Strings.Resources.NewAppFeaturesContent;
+            //    dialog.PrimaryButtonText = Strings.Resources.Confirm;
+            //    dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            //    await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            //}
 
             // If this is the first run, activate the ntp server checks
             // else => UseNTPServerCorrection is false

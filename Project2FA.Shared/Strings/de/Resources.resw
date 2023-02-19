@@ -1056,4 +1056,7 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   <data name="ShellPageWarnInfo" xml:space="preserve">
     <value>Bildschirmaufnahme-Schutz nicht aktiv</value>
   </data>
+  <data name="NewDatafileFolderPath.Header" xml:space="preserve">
+    <value>WebDAV Ordnerpfad</value>
+  </data>
 </root>

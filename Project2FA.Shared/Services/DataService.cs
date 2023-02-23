@@ -263,7 +263,9 @@ namespace Project2FA.Services
             try
             {
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
+#if !WINDOWS_UWP
                 StorageFile file = null;
+#endif
                 StorageFolder folder = null;
                 string datafilename, passwordHashName, path;
                 DBPasswordHashModel dbHash;

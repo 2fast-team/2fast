@@ -16,6 +16,8 @@ using UNOversal.Services.Secrets;
 using UNOversal.Services.File;
 using Project2FA.Services;
 using Project2FA.Core.Utils;
+using Windows.Security.Cryptography;
+using Windows.Storage.Streams;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -79,8 +81,24 @@ namespace Project2FA.ViewModels
             if (DataService.Instance.ActivatedDatafile != null)
             {
                 SecretService.Helper.RemoveSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName);
-                //hash = CryptoService.CreateStringHash(NewPassword);
-                SecretService.Helper.WriteSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName, NewPassword);
+                byte[] encryptedBytes;
+#if WINDOWS_UWP
+                IBuffer buffer = CryptographicBuffer.ConvertStringToBinary(NewPassword, BinaryStringEncoding.Utf8);
+                CryptographicBuffer.CopyToByteArray(buffer, out encryptedBytes);
+#else
+                encryptedBytes = Encoding.UTF8.GetBytes(NewPassword);
+#endif
+#if WINDOWS_UWP
+                SecretService.Helper.WriteSecret(
+                    Constants.ContainerName,
+                    Constants.ActivatedDatafileHashName,
+                    NewtonsoftJSONService.Serialize(ProtectData.Protect(encryptedBytes)));
+#else
+                SecretService.Helper.WriteSecret(
+                    Constants.ContainerName,
+                    Constants.ActivatedDatafileHashName,
+                    NewtonsoftJSONService.Serialize(encryptedBytes));
+#endif
             }
             else
             {

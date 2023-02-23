@@ -119,6 +119,8 @@ namespace Project2FA.ViewModels
             Foundation.NSUserDefaults.StandardUserDefaults.Synchronize();
 #endif
 
+
+#if WINDOWS_UWP
             var model = new DBDatafileModel
             {
                 DBPasswordHashModel = passwordModel,
@@ -126,6 +128,15 @@ namespace Project2FA.ViewModels
                 Path = ChoosenOneWebDAVFile == null ? LocalStorageFolder.Path: ChoosenOneWebDAVFile.Path,
                 Name = tempDataFileName
             };
+#else
+            var model = new DBDatafileModel
+            {
+                DBPasswordHashModel = passwordModel,
+                IsWebDAV = isWebDAV,
+                Path = ChoosenOneWebDAVFile == null ? LocalStorageFile.Path : ChoosenOneWebDAVFile.Path,
+                Name = tempDataFileName
+            };
+#endif
 
 
             await App.Repository.Datafile.UpsertAsync(model);
@@ -146,7 +157,7 @@ namespace Project2FA.ViewModels
             return FileService.FileExistsAsync(name, LocalStorageFolder);
         }
 
-        #region WebDAV
+#region WebDAV
         /// <summary>
         /// Checkes the web dav login credentials
         /// </summary>
@@ -522,6 +533,6 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _webDAVCredentialsEntered, value);
         }
 
-        #endregion
+#endregion
     }
 }

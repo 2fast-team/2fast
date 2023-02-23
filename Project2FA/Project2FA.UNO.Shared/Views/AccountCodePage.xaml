@@ -431,7 +431,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="52" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <utu:NavigationBar             
@@ -448,20 +448,79 @@
             <ListView 
             x:Name="LV_AccountCollection"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
+                ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
             IsItemClickEnabled="False"
             HorizontalContentAlignment="Stretch"
                 ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}"
             HorizontalAlignment="Stretch">
-                <ListView.ItemContainerStyle>
+                <!--<ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="2,16,2,0"/>
                     </Style>
-                </ListView.ItemContainerStyle>
+                </ListView.ItemContainerStyle>-->
             </ListView>
         </Grid>
 
-        <Grid Grid.Row="2" Height="52" Background="{ThemeResource TwoFABackgroundBrush}">
+        <Grid Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{ThemeResource TwoFABackgroundBrush}" CornerRadius="0,32,0,0" Height="48" VerticalAlignment="Bottom">
+                <Button Width="76" HorizontalAlignment="Center" Style="{StaticResource TransparentButtonStyle}">
+                    <FontIcon 
+                        FontSize="30"
+                        Glyph="&#xE11A;" />
+                </Button>
+            </Border>
+
+            <Button 
+                Grid.Column="2"
+                Height="62" 
+                Width="62" 
+                CornerRadius="36" 
+                Background="#FF009BC1"
+                Foreground="White"
+                HorizontalAlignment="Center" >
+                <FontIcon 
+                        FontSize="30"
+                        Glyph="&#xE109;" />
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddCamera"
+                                Text="AccountCodePageAddCamera.Text~"
+                                Click="BTN_AddAccountCamera_Click">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE70F;"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddManual"
+                                Text="AccountCodePageAddManual.Text~"
+                                Click="BTN_AddAccountManual_Click">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE1C2;"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+
+            <Border Background="{ThemeResource TwoFABackgroundBrush}" Grid.Column="4" Height="48" CornerRadius="32,0,0,0" VerticalAlignment="Bottom">
+                <Button Width="76" HorizontalAlignment="Center" Style="{StaticResource TransparentButtonStyle}">
+                    <FontIcon 
+                        FontSize="30"
+                        Glyph="&#xE115;" />
+                </Button>
+            </Border>
+        </Grid>
+
+        <!--<Grid Grid.Row="2" Height="52" Background="{ThemeResource TwoFABackgroundBrush}">
             <StackPanel 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
@@ -502,7 +561,7 @@
                         Glyph="&#xE115;" />
                 </Button>
             </StackPanel>
-        </Grid>
+        </Grid>-->
 
         <!--<CommandBar Grid.Row="2">
             <CommandBar.PrimaryCommands>

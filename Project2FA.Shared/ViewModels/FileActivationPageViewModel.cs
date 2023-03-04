@@ -17,6 +17,7 @@ using UNOversal.Services.File;
 using Project2FA.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using Project2FA.Core.Messenger;
+using Project2FA.Core.Services.Crypto;
 
 #if WINDOWS_UWP
 using Windows.Security.Cryptography;
@@ -162,7 +163,7 @@ namespace Project2FA.ViewModels
                     {
                         byte[] iv = datafile.IV;
                         DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                            (Password, iv, datafileStr);
+                            (Password, iv, datafileStr, datafile.Version);
                         return true;
                     }
                 }

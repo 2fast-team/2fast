@@ -14,11 +14,14 @@ using Project2FA.Services;
 using Project2FA.Strings;
 using CommunityToolkit.Mvvm.Messaging;
 using Project2FA.Core.Messenger;
+using Project2FA.Core.Services.Crypto;
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Project2FA.UWP;
+using Project2FA.UWP.Views;
 using WinUIWindow = Windows.UI.Xaml.Window;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 #else
@@ -26,6 +29,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Data;
 using Project2FA.UNO;
+using Project2FA.UNO.Views;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
 
@@ -37,15 +41,9 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class LoginPageViewModel : ObservableRecipient
+    public class LoginPageViewModel : CredentialViewModelBase
     {
-        private bool _windowsHelloIsUsable, _isLogout;
-        private string _password;
-        public ICommand LoginCommand { get; }
-        public ICommand WindowsHelloLoginCommand { get; }
-        private IDialogService DialogService { get; }
-        private string _applicationTitle;
-        private bool _isScreenCaptureEnabled;
+
 
         /// <summary>
         /// Constructor
@@ -174,7 +172,7 @@ namespace Project2FA.ViewModels
 #if WINDOWS_UWP
                 App.ShellPageInstance.SetTitleBarAsDraggable();
 #endif
-                await App.ShellPageInstance.NavigationService.NavigateAsync("/AccountCodePage");
+                await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
                 WinUIWindow.Current.Content = App.ShellPageInstance;
                 return true;
             }
@@ -182,45 +180,6 @@ namespace Project2FA.ViewModels
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Shows a wrong password error to the user
-        /// </summary>
-        private Task ShowLoginError()
-        {
-            var dialog = new ContentDialog();
-            dialog.Title = Resources.Error;
-            dialog.Content = Resources.LoginPagePasswordMismatch;
-            dialog.PrimaryButtonText = Resources.Confirm;
-            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
-        }
-
-        public bool WindowsHelloIsUsable
-        {
-            get => _windowsHelloIsUsable;
-            set => SetProperty(ref _windowsHelloIsUsable, value);
-        }
-        public string Password
-        {
-            get => _password;
-            set => SetProperty(ref _password, value);
-        }
-        public bool IsLogout
-        {
-            get => _isLogout;
-            set => SetProperty(ref _isLogout, value);
-        }
-        public string ApplicationTitle
-        {
-            get => _applicationTitle;
-            set => SetProperty(ref _applicationTitle, value);
-        }
-
-        internal bool IsScreenCaptureEnabled
-        {
-            get => _isScreenCaptureEnabled;
-            set => SetProperty(ref _isScreenCaptureEnabled, value);
         }
     }
 }

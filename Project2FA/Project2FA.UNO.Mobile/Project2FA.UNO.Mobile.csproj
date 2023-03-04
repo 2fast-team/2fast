@@ -49,20 +49,20 @@
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Core" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.100" />
-    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.0-dev.25" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.0-dev.25" />
-    <PackageReference Include="Uno.WinUI" Version="4.8.0-dev.464" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.0-dev.464" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.0-dev.464" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.0-dev.464" />
+    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.0-dev.51" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.0-dev.51" />
+    <PackageReference Include="Uno.WinUI" Version="4.8.0-dev.640" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.0-dev.640" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.0-dev.640" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.0-dev.640" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="4.8.0-dev.464" />
-    <PackageReference Include="ZXing.Net" Version="0.16.8" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="4.8.0-dev.640" />
+    <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(TargetFramework)'=='net7.0-android'">
       <ItemGroup>
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.7.0.2" />
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.8.0" />
         <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
       </ItemGroup>
       <ItemGroup>

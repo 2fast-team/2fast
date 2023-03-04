@@ -73,7 +73,6 @@ namespace Project2FA.ViewModels
             DialogService = dialogService;
             Logger = loggerFacade;
             NavigationService = navigationService;
-            Title = "Accounts";
 
             _dispatcherTOTPTimer = new DispatcherTimer();
             _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 0, 1); //every second
@@ -423,12 +422,6 @@ namespace Project2FA.ViewModels
         }
 
         public DataService TwoFADataService => DataService.Instance;
-
-        public string Title
-        {
-            get => _title;
-            set => SetProperty(ref _title, value);
-        }
 
         /// <summary>
         /// Starts the dialog to share the account information as QR code

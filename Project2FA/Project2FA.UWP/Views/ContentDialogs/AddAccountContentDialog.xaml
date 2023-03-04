@@ -103,7 +103,7 @@
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.ScanQRCodeCommand}" 
                             Click="BTN_QRCodeScan_Click"
-                            MinWidth="240">
+                            MinWidth="255">
                                     <StackPanel 
                                         Orientation="Horizontal" 
                                         HorizontalAlignment="Left">
@@ -169,7 +169,7 @@
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.ManualInputCommand}"
                             HorizontalContentAlignment="Left"
-                            MinWidth="240">
+                            MinWidth="255">
                                 <StackPanel 
                                     Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
@@ -191,7 +191,7 @@
                             HorizontalContentAlignment="Left"
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.CameraScanCommand}"
-                            MinWidth="240" >
+                            MinWidth="255" >
                                 <StackPanel 
                                     Orientation="Horizontal" 
                                     HorizontalAlignment="Left">

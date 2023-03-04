@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountCodePageAddEntry.Label" xml:space="preserve">
-    <value>Account hinzufügen</value>
+    <value>Konto hinzufügen</value>
   </data>
   <data name="AccountCodePageCopied" xml:space="preserve">
     <value>In Zwischenablage kopiert</value>
@@ -142,7 +142,7 @@
     <value>Nein</value>
   </data>
   <data name="DeleteDatafileContentDialogDeleteDescription" xml:space="preserve">
-    <value>Soll der entsprechende Account wirklich unwiderruflich gelöscht werden?</value>
+    <value>Soll das entsprechende Konto wirklich unwiderruflich gelöscht werden?</value>
   </data>
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Löschen bestätigen</value>
@@ -154,21 +154,21 @@
     <value>Abbrechen</value>
   </data>
   <data name="AddAccountContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Account anlegen</value>
+    <value>Konto anlegen</value>
   </data>
   <data name="AddAccountContentDialog.Title" xml:space="preserve">
-    <value>Neuen Account anlegen</value>
+    <value>Neues Konto anlegen</value>
   </data>
   <data name="AddAccountContentDialogAccountName.Header" xml:space="preserve">
-    <value>Accountname</value>
+    <value>Kontoname</value>
   </data>
   <data name="AddAccountContentDialogAccountName.PlaceholderText" xml:space="preserve">
     <value>Meist E-Mail Adresse</value>
   </data>
   <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
-    <value>Um einen neuen Account für die Zwei-Faktor-Authentifizierung einzurichten muss vom gewünschten Dienst ein QR-Code oder ein Schlüssel (kryptischer Text) vorhanden sein.
+    <value>Um ein neues Konto für die Zwei-Faktor-Authentifizierung einzurichten, muss vom gewünschten Dienst ein QR-Code oder ein Schlüssel (kryptischer Text) vorhanden sein.
 
-# Wie soll dieser Schlüssel in die App importiert werden?
+# Mit welcher Funktion wollen Sie ein Konto hinzufügen?
 </value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
@@ -193,7 +193,7 @@
     <value>Es konnten keine Informationen aus dem QR Code gelesen werden. Bitte erneut probieren oder den Schlüssel manuell übertragen.</value>
   </data>
   <data name="AddAccountContentDialogReadQRCode.Text" xml:space="preserve">
-    <value>Schlüssel-QR-Code scannen</value>
+    <value>Schlüssel-QR-Code selektieren</value>
   </data>
   <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo" xml:space="preserve">
     <value>In Kürze startet das Lesetool</value>
@@ -250,7 +250,7 @@
     <value>Abbrechen</value>
   </data>
   <data name="EditAccountContentDialog.Title" xml:space="preserve">
-    <value>Account bearbeiten</value>
+    <value>Konto bearbeiten</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Fehler</value>
@@ -320,7 +320,7 @@ Wichtig: Das Passwort wird bei jedem Start zur Entschlüsselung und Nutzung der 
     <value>Ordnername</value>
   </data>
   <data name="NewLocalDatafileInfo.Text" xml:space="preserve">
-    <value>Zur Nutzung der App wird einmalig eine Datendatei angelegt. In dieser werden alle eingelesenen Accounts verschlüsselt gespeichert. Bitte wählen Sie einen Speicherort für diese Datendatei.
+    <value>Zur Nutzung der App wird einmalig eine Datendatei angelegt. In dieser werden alle eingelesenen Konten verschlüsselt gespeichert. Bitte wählen Sie einen Speicherort für diese Datendatei.
 Sollte die App auf mehreren Geräten genutzt werden empfiehlt sich eine externe Quelle (z. B. Cloud) als Ablageort.</value>
   </data>
   <data name="NewPasswordContentDialog.Header" xml:space="preserve">
@@ -430,7 +430,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Windows Hello zur Anmeldung präferieren</value>
   </data>
   <data name="ShellPageAccountsNavigation.Content" xml:space="preserve">
-    <value>Accounts</value>
+    <value>Konten</value>
   </data>
   <data name="ShellPageDatafileNavigation.Content" xml:space="preserve">
     <value>Datendatei</value>
@@ -574,10 +574,10 @@ Anleitung zum setzen der Berechtigung:
     <value>Anwendung schließen</value>
   </data>
   <data name="DeleteAccountContentDialogDescription" xml:space="preserve">
-    <value>Sind Sie sicher, dass die den Account löschen möchten? Nach der Löschung haben Sie **30 Sekunden** Zeit, um die Löschung rückgängig zu machen.</value>
+    <value>Sind Sie sicher, dass die das Konto löschen möchten? Nach der Löschung haben Sie **30 Sekunden** Zeit, um die Löschung rückgängig zu machen.</value>
   </data>
   <data name="DeleteAccountContentDialogTitle" xml:space="preserve">
-    <value>Account löschen</value>
+    <value>Konto löschen</value>
   </data>
   <data name="ErrorHandle" xml:space="preserve">
     <value>Ein Fehler ist aufgetreten</value>
@@ -606,7 +606,7 @@ Anleitung zum setzen der Berechtigung:
     <value>Sperren</value>
   </data>
   <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
-    <value>Account hinzufügen</value>
+    <value>Konto hinzufügen</value>
   </data>
   <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
     <value>Datendatei neu einlesen</value>
@@ -649,7 +649,7 @@ Anleitung zum setzen der Berechtigung:
     <value>Datendatei-Pfad ändern</value>
   </data>
   <data name="AccountCodePageEmptyCollectionTip.Subtitle" xml:space="preserve">
-    <value>Fügen Sie neue Accounts hinzu</value>
+    <value>Fügen Sie neue Konten hinzu</value>
   </data>
   <data name="AccountCodePageEmptyCollectionTip.Title" xml:space="preserve">
     <value>Leere Liste</value>
@@ -864,7 +864,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Löschen</value>
   </data>
   <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
-    <value>Account Bild</value>
+    <value>Konto-Bild</value>
   </data>
   <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
     <value>Notizen erstellen</value>
@@ -873,7 +873,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Notizen</value>
   </data>
   <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
-    <value>Account Bild suchen</value>
+    <value>Konto-Bild suchen</value>
   </data>
   <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
     <value>Verändern Sie nur diese Einstellungen, wenn Sie sicher sind, dass der Dienst diese erfordert.</value>
@@ -943,7 +943,7 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
     <value>Für das Laden einer Datendatei muss als erster Schritt die Datendatei ausgewählt werden. Im Anschluss folgt das Passwort, mit dem die Datendatei verschlüsselt worden ist.</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
-    <value>Erstellung eines Accounts</value>
+    <value>Erstellung eines Kontos</value>
   </data>
   <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
     <value>Erstellung einer Datendatei</value>
@@ -1058,5 +1058,8 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   </data>
   <data name="NewDatafileFolderPath.Header" xml:space="preserve">
     <value>WebDAV Ordnerpfad</value>
+  </data>
+  <data name="AccountCodePageTitle" xml:space="preserve">
+    <value>Konten</value>
   </data>
 </root>

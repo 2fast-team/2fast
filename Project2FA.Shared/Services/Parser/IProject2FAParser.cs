@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project2FA.Core.Services.Parser
+namespace Project2FA.Services.Parser
 {
     public interface IProject2FAParser
     {

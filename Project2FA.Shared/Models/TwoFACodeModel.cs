@@ -2,11 +2,19 @@
 using Newtonsoft.Json.Encryption;
 using OtpNet;
 using System.ComponentModel.DataAnnotations;
-using Project2FA.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Project2FA.Core;
+using Project2FA.Core.Services.Crypto;
+#if !WINDOWS_UWP
+using Microsoft.UI.Xaml.Data;
+#endif
+
 
 namespace Project2FA.Repository.Models
 {
+#if !WINDOWS_UWP
+    [Bindable]
+#endif
     public class TwoFACodeModel : ObservableObject
     {
         private string _label;

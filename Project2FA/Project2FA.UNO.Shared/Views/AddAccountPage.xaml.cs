@@ -12,12 +12,14 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Project2FA.ViewModels;
 
 namespace Project2FA.UNO.Views
 {
 
     public sealed partial class AddAccountPage : Page
     {
+        public AddAccountContentDialogViewModel ViewModel => DataContext as AddAccountContentDialogViewModel;
         public AddAccountPage()
         {
             this.InitializeComponent();

@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="SystemAccentColor">#FF009BC1</Color>
             <converters:SVGImageConverter x:Key="SVGImageConverter"/>
             <converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
             <converters:PersonalPictureInitialsVisibilityConverter x:Key="PersonalPictureInitialsVisibilityConverter"/>

@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Encryption;
+using Project2FA.Core.Services.Crypto;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -62,9 +64,18 @@ namespace Project2FA.Core.Services.JSON
             }
         }
 
-        public string SerializeEncrypt(string key, byte[] initVectorArray, object value)
+        public string SerializeEncrypt(string key, byte[] initVectorArray, object value, int encryptionVersion)
         {
-            var byteArrayKey = CryptoService.CreateByteArrayKey(key);
+            byte[] byteArrayKey;
+            if (encryptionVersion == 1)
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
+            }
+            else
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV2(key);
+            }
+             
             var serializer = new JsonSerializer
             {
                 ContractResolver = _encryptionFactory.GetContractResolver()
@@ -88,9 +99,18 @@ namespace Project2FA.Core.Services.JSON
             }
         }
 
-        public string SerializeEncrypt(byte[] keyArray, byte[] initVectorArray, object value)
+        public string SerializeEncrypt(byte[] keyArray, byte[] initVectorArray, object value, int encryptionVersion)
         {
-            var byteArrayKey = CryptoService.CreateByteArrayKey(keyArray);
+            byte[] byteArrayKey;
+            if (encryptionVersion == 1)
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV1(keyArray);
+            }
+            else
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV2(keyArray);
+            }
+
             var serializer = new JsonSerializer
             {
                 ContractResolver = _encryptionFactory.GetContractResolver()
@@ -183,10 +203,18 @@ namespace Project2FA.Core.Services.JSON
             }
         }
 
-        public T DeserializeDecrypt<T>(string key, byte[] initVector, string value)
+        public T DeserializeDecrypt<T>(string key, byte[] initVector, string value, int encryptionVersion)
         {
-            var byteArrayKey = CryptoService.CreateByteArrayKey(key);
-            
+            byte[] byteArrayKey;
+            if (encryptionVersion == 1)
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
+            }
+            else
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV2(key);
+            }
+
 
             var serializer = new JsonSerializer
             {
@@ -205,9 +233,17 @@ namespace Project2FA.Core.Services.JSON
             }
         }
 
-        public T DeserializeDecrypt<T>(byte[] keyArray, byte[] initVector, string value)
+        public T DeserializeDecrypt<T>(byte[] keyArray, byte[] initVector, string value, int encryptionVersion)
         {
-            var byteArrayKey = CryptoService.CreateByteArrayKey(keyArray);
+            byte[] byteArrayKey;
+            if (encryptionVersion == 1)
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV1(keyArray);
+            }
+            else
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV2(keyArray);
+            }
 
 
             var serializer = new JsonSerializer

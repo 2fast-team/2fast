@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:labs="clr-namespace:CommunityToolkit.Labs.WinUI;assembly=CommunityToolkit.Labs.WinUI.SettingsControls"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,6 +19,7 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar             
             Grid.Row="0"
+            
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
 			Content="#Edit">
@@ -193,7 +195,6 @@
 
         </Grid>
         <Grid 
-            x:Name="CommandSpace"
 			Grid.Row="2"
 			HorizontalAlignment="Stretch"
 			VerticalAlignment="Bottom"
@@ -206,6 +207,7 @@
             <Button 
                 x:Name="PrimaryButton"
 				Content="#confirm"
+                Command="{x:Bind ViewModel.PrimaryButtonCommand}"
 				ElementSoundMode="FocusOnly"
 				HorizontalAlignment="Stretch"
 				VerticalAlignment="Stretch"
@@ -213,6 +215,7 @@
 				Grid.Column="0" />
             <Button 
                 x:Name="SecondaryButton"
+                Command="{x:Bind ViewModel.CancelButtonCommand}"
 				Content="#cancel"
 				ElementSoundMode="FocusOnly"
 				HorizontalAlignment="Stretch"

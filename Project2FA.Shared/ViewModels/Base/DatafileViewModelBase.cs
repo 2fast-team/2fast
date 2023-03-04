@@ -6,18 +6,15 @@ using UNOversal.Services.File;
 using UNOversal.Services.Secrets;
 using Project2FA.Core;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Storage;
-using Prism.Navigation;
 using Prism.Ioc;
-using Windows.Storage.Pickers;
 using WebDAVClient.Types;
 using WebDAVClient.Exceptions;
 using UNOversal.Services.Network;
 using Project2FA.Strings;
+using Project2FA.Core.Services.Crypto;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -55,16 +52,16 @@ namespace Project2FA.ViewModels
         private bool _webDAVLoginError;
         private bool _webDAVCredentialsEntered;
 
-        public ICommand PrimaryButtonCommand { get; set; }
-        public ICommand ChangePathCommand { get; set; }
-        public ICommand ConfirmErrorCommand { get; set; }
-        public ICommand CheckServerAddressCommand { get; set; }
+        public ICommand PrimaryButtonCommand { get; internal set; }
+        public ICommand ChangePathCommand { get; internal set; }
+        public ICommand ConfirmErrorCommand { get; internal set; }
+        public ICommand CheckServerAddressCommand { get; internal set; }
 
         //public ICommand ChooseWebDAVCommand { get; set; }
 
         public ICommand LoginCommand { get; set; }
 
-        public ICommand WebDAVLoginCommand { get; set; }
+        public ICommand WebDAVLoginCommand { get; internal set; }
 
         private ISecretService SecretService { get; }
 
@@ -102,7 +99,8 @@ namespace Project2FA.ViewModels
         /// <param name="isWebDAV"></param>
         public async Task<DBDatafileModel> CreateLocalFileDB(bool isWebDAV)
         {
-            string hash = CryptoService.CreateStringHash(Password, false);
+            string hash = CryptoService.CreateStringHash(Password);
+            await App.Repository.Password.DeleteAsync();
             DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
             string tempDataFileName;
             if (!DateFileName.Contains(".2fa"))
@@ -137,7 +135,6 @@ namespace Project2FA.ViewModels
                 Name = tempDataFileName
             };
 #endif
-
 
             await App.Repository.Datafile.UpsertAsync(model);
 

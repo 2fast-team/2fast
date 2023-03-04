@@ -10,7 +10,6 @@ using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Data;
 #endif
 
-
 namespace Project2FA.Strings{
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1594,6 +1593,19 @@ namespace Project2FA.Strings{
             }
         }
         #endregion
+
+        #region AccountCodePageTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Accounts
+        /// </summary>
+        public static string AccountCodePageTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageTitle");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1726,6 +1738,7 @@ namespace Project2FA.Strings{
             InfoBarDatafileTitleUpdated,
             InfoBarDatafileUpdated,
             ShellPageWarnInfo,
+            AccountCodePageTitle,
         }
 
         private static ResourceLoader _resourceLoader;
@@ -1750,4 +1763,4 @@ namespace Project2FA.Strings{
             return Converter == null ? res : Converter.Convert(res, typeof(String), ConverterParameter, null);
         }
     }
-} //Project2FA.UWP.Extensions
+}

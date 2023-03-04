@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web;
+#if WINDOWS_UWP
+using Project2FA.UWP;
+#endif
 
-namespace Project2FA.Core.Services.Parser
+namespace Project2FA.Services.Parser
 {
     public class Project2FAParser : IProject2FAParser
     {
@@ -111,7 +114,7 @@ namespace Project2FA.Core.Services.Parser
             {
                 qrParams.Clear();
 #if WINDOWS_UWP
-                TrackingManager.TrackExceptionCatched(nameof(ParseQRCodeStr)", exc);
+                TrackingManager.TrackExceptionCatched(nameof(ParseQRCodeStr), exc);
 #endif
             }
             
@@ -158,7 +161,7 @@ namespace Project2FA.Core.Services.Parser
             {
                 cmdParams.Clear();
 #if WINDOWS_UWP
-                TrackingManager.TrackExceptionCatched(nameof(ParseCmdStr)", exc);
+                TrackingManager.TrackExceptionCatched(nameof(ParseCmdStr), exc);
 #endif
             }
 

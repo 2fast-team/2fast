@@ -8,7 +8,8 @@
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:models="clr-namespace:Project2FA.Repository.Models;assembly=Project2FA.Repository"
     xmlns:mstoolkitControls="clr-namespace:CommunityToolkit.WinUI.UI.Controls;assembly=CommunityToolkit.WinUI.UI.Controls.Core"
-    xmlns:helpers="clr-namespace:Project2FA.UNO.Helpers"
+    xmlns:strings="using:Project2FA.Strings"
+    xmlns:helpers="using:Project2FA.Helpers"
     x:Name="Page"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -39,7 +40,7 @@
                         <Grid Grid.RowSpan="3" >
                             <Border 
                                 Width="2.5" 
-                                Background="{StaticResource SystemAccentColor}" />
+                                Background="{ThemeResource  SystemColorControlAccentBrush}" />
                         </Grid>
 
                         <PersonPicture 
@@ -240,7 +241,7 @@
                         <Grid Grid.RowSpan="3" >
                             <Border 
                                 Width="2.5" 
-                                Background="{StaticResource SystemAccentColor}" />
+                                Background="{ThemeResource SystemAccentColor}" />
                         </Grid>
 
                         <PersonPicture 
@@ -439,7 +440,7 @@
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             MainCommandMode="Action"
-			Content="{x:Bind ViewModel.Title, Mode=OneWay}">
+			Content="{x:Bind strings:Resources.AccountCodePageTitle}">
         </utu:NavigationBar>
         <Grid 
         x:Name="MainGrid"

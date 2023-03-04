@@ -1052,4 +1052,7 @@ In the following sections, the functionality of this application is explained in
   <data name="NewDatafileFolderPath.Header" xml:space="preserve">
     <value>WebDAV folder path</value>
   </data>
+  <data name="AccountCodePageTitle" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
 </root>

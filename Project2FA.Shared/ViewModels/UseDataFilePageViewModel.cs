@@ -275,7 +275,7 @@ namespace Project2FA.ViewModels
                 try
                 {
                     DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                        (Password, iv, datafileStr);
+                        (Password, iv, datafileStr, datafile.Version);
                     return true;
                 }
                 catch (Exception)

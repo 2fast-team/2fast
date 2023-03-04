@@ -35,7 +35,6 @@ namespace Project2FA.ViewModels
 #endif
     public class NewDataFilePageViewModel : DatafileViewModelBase
     {
-        //public ICommand CreateWebDAVDatafileCommand;
         private IFileService FileService { get; }
         private ISerializationService SerializationService { get; }
         private INavigationService NaviationService { get; }
@@ -86,12 +85,6 @@ namespace Project2FA.ViewModels
             {
                 await SetLocalPath(true); //change path is true
             });
-
-            //CreateWebDAVDatafileCommand = new DelegateCommand(() =>
-            //{
-
-            //});
-
 
             WebDAVLoginCommand = new AsyncRelayCommand(WebDAVLoginCommandTask);
         }

@@ -18,6 +18,8 @@ using Project2FA.Services;
 using Project2FA.Core.Utils;
 using Windows.Security.Cryptography;
 using Windows.Storage.Streams;
+using System.Text;
+using Project2FA.Core.Services.Crypto;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -106,7 +108,7 @@ namespace Project2FA.ViewModels
                 //delete password in the secret vault
                 SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordHashDB.Hash);
                 //set new hash
-                passwordHashDB.Hash = CryptoService.CreateStringHash(NewPassword, SettingsService.Instance.UseExtendedHash);
+                passwordHashDB.Hash = CryptoService.CreateStringHash(NewPassword);
                 // update db with new pw hash
                 var model = await App.Repository.Password.UpsertAsync(passwordHashDB);
                 hash = model.Hash;
@@ -165,13 +167,13 @@ namespace Project2FA.ViewModels
                 // if the current password is invalid, try to load the datafile with the new password
                 if (InvalidPassword)
                 {
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(NewPassword, iv, datafileStr);
+                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(NewPassword, iv, datafileStr, datafile.Version);
                     // load the collection
                     DataService.Instance.Collection.AddRange(deserializeCollection.Collection, true);
                 }
                 else
                 {
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(CurrentPassword, iv, datafileStr);
+                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(CurrentPassword, iv, datafileStr, datafile.Version);
                 }
 
                 return true;

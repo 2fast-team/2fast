@@ -10,7 +10,36 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button 
+            x:Name="BTN_QRCodeCameraScan"
+            Margin="0,10,0,10" 
+            HorizontalContentAlignment="Left"
+            Style="{StaticResource AccentButtonStyle}"
+            Command="{x:Bind ViewModel.CameraScanCommand}"
+            MinWidth="255" >
+            <StackPanel 
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                <FontIcon 
+                                    FontSize="30"
+                                    Glyph="" />
+                <TextBlock 
+                                    Text="~AddAccountContentDialogCameraScanBTN.Text" 
+                                    Margin="8,0,0,0" 
+                                    HorizontalAlignment="Stretch" 
+                                    VerticalAlignment="Center" 
+                                    x:Uid="AddAccountContentDialogCameraScanBTN" 
+                                    FontFamily="Segoe UI" />
+            </StackPanel>
+        </Button>
+        <MediaPlayerElement 
+            x:Name="CameraPlayerElement" 
+            Visibility="{x:Bind ViewModel.CameraSuccessfullyLoaded, Mode=OneWay}"
+            Grid.Row="1">
+        </MediaPlayerElement>
     </Grid>
 </Page>

@@ -13,7 +13,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SVGColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SerializationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\Theme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\WindowsHelloPreferEnum.cs" />
@@ -36,6 +40,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\WriteableBitmapRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountCodePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\CredentialViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\EditAccountViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BlankPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
@@ -44,7 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UpdateDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UseDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DatafileViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\DatafileViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileActivationPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
@@ -53,10 +59,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ShellPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UseDataFilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WelcomePageViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\1001tracklists.svg" />
@@ -4555,5 +4557,9 @@
     <None Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\zulip.svg" />
     <None Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\zwave.svg" />
     <None Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\zyte.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
   </ItemGroup>
 </Project>

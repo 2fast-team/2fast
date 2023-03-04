@@ -55,7 +55,7 @@ namespace Project2FA.UWP.Views
             ShellViewInternal = ShellView;
             ShellView.Content = MainFrame = new Frame();
             GestureService.SetupWindowListeners(Window.Current.CoreWindow);
-            NavigationService = NavigationFactory.Create(MainFrame).AttachGestures(Window.Current, Gesture.Back, Gesture.Forward, Gesture.Refresh);
+            NavigationService = NavigationFactory.Create(MainFrame).AttachGestures(Window.Current, Gesture.Back, Gesture.Forward);
 
             SetupGestures();
             SetupBackButton();

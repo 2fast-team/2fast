@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Project2FA.Core
+namespace Project2FA.Core.Services.Crypto
 {
     public static class ProtectData
     {

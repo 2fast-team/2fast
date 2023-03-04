@@ -41,7 +41,7 @@
                                     <CommandBar.Content>
                                         <TextBlock 
                                         Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
-                                        Text="{x:Bind Title,Mode=OneWay}"
+                                        Text="{x:Bind strings:Resources.AccountCodePageTitle}"
                                         Margin="15,0,0,11"
                                         TextWrapping="NoWrap" 
                                         VerticalAlignment="Top" />

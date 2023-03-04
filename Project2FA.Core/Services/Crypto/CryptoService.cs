@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Project2FA.Core.Services
+namespace Project2FA.Core.Services.Crypto
 {
     public static class CryptoService
     {
@@ -23,21 +23,37 @@ namespace Project2FA.Core.Services
                 return hash;
             }
         }
-        public static byte[] CreateByteArrayKey(string secret, int keyByteSize = 32, int iterations = 1000)
+
+        public static byte[] CreateByteArrayKeyV1(string secret, int keyByteSize = 32, int iterations = 1000)
         {
             byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
-            var keyGenerator = new Rfc2898DeriveBytes(secret, salt, iterations);
+            var keyGenerator = new Rfc2898DeriveBytes(secret, salt, iterations, HashAlgorithmName.SHA1);
+
             return keyGenerator.GetBytes(keyByteSize);
         }
 
-        public static byte[] CreateByteArrayKey(byte[] secretByteArray, int keyByteSize = 32, int iterations = 1000)
+        public static byte[] CreateByteArrayKeyV2(string secret, int keyByteSize = 32, int iterations = 25000)
         {
             byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
-            var keyGenerator = new Rfc2898DeriveBytes(secretByteArray, salt, iterations);
+            var keyGenerator = new Rfc2898DeriveBytes(secret, salt, iterations, HashAlgorithmName.SHA256);
             return keyGenerator.GetBytes(keyByteSize);
         }
 
-        public static string CreateStringHash(string input, bool argonHash = false)
+        public static byte[] CreateByteArrayKeyV1(byte[] secretByteArray, int keyByteSize = 32, int iterations = 1000)
+        {
+            byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
+            var keyGenerator = new Rfc2898DeriveBytes(secretByteArray, salt, iterations, HashAlgorithmName.SHA1);
+            return keyGenerator.GetBytes(keyByteSize);
+        }
+
+        public static byte[] CreateByteArrayKeyV2(byte[] secretByteArray, int keyByteSize = 32, int iterations = 25000)
+        {
+            byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
+            var keyGenerator = new Rfc2898DeriveBytes(secretByteArray, salt, iterations, HashAlgorithmName.SHA256);
+            return keyGenerator.GetBytes(keyByteSize);
+        }
+
+        public static string CreateStringHash(string input)
         {
             // https://stackoverflow.com/questions/17292366/hashing-with-sha1-algorithm-in-c-sharp
             byte[] hash = CreateSHA512ByteArrayHash(input);
@@ -53,7 +69,7 @@ namespace Project2FA.Core.Services
 
         }
 
-        public static string CreateStringHash(byte[] inputByteArray, bool argonHash = false)
+        public static string CreateStringHash(byte[] inputByteArray)
         {
             // https://stackoverflow.com/questions/17292366/hashing-with-sha1-algorithm-in-c-sharp
             byte[] hash = CreateSHA512ByteArrayHash(inputByteArray);

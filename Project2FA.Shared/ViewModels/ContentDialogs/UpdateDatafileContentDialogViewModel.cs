@@ -9,6 +9,7 @@ using UNOversal.Services.Dialogs;
 using UNOversal.Services.File;
 using System.Threading.Tasks;
 using Project2FA.Services;
+using Project2FA.Core.Services.Crypto;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -51,7 +52,7 @@ namespace Project2FA.ViewModels
 
         public async Task UpdateLocalFileDB()
         {
-            var hash = CryptoService.CreateStringHash(Password, SettingsService.Instance.UseExtendedHash);
+            var hash = CryptoService.CreateStringHash(Password);
             var passwordRepo = await App.Repository.Password.GetAsync();
             //delete password in the secret vault
             SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordRepo.Hash);

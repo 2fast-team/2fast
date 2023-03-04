@@ -1,5 +1,4 @@
 ﻿using OtpNet;
-using Project2FA.Core.Services.Parser;
 using Project2FA.Repository.Models;
 using System;
 using System.Web;
@@ -35,6 +34,7 @@ using Project2FA.Core.Utils;
 using Project2FA.Services;
 using ZXing;
 using System.Linq;
+using Project2FA.Services.Parser;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -92,6 +92,7 @@ namespace Project2FA.ViewModels
         public ICommand ReloadCameraCommand { get; }
         private ILoggerFacade Logger { get; }
         private ISerializationService SerializationService { get; }
+        private IProject2FAParser Project2FAParser { get; }
         private IFileService FileService { get; }
         private IconNameCollectionModel _iconNameCollectionModel;
         private string _tempIconLabel;
@@ -112,11 +113,13 @@ namespace Project2FA.ViewModels
         public AddAccountContentDialogViewModel(
             IFileService fileService,
             ISerializationService serializationService,
-            ILoggerFacade loggerFacade)
+            ILoggerFacade loggerFacade,
+            IProject2FAParser project2FAParser)
         {
             FileService = fileService;
             SerializationService = serializationService;
             Logger = loggerFacade;
+            Project2FAParser = project2FAParser;
             OTPList = new ObservableCollection<TwoFACodeModel>();
 
             _dispatcherTimer = new DispatcherTimer();
@@ -511,8 +514,7 @@ namespace Project2FA.ViewModels
         /// <returns>true if TOTP</returns>
         private async Task<bool> ParseQRCode()
         {
-            IProject2FAParser parser = App.Current.Container.Resolve<IProject2FAParser>();
-            List<KeyValuePair<string, string>> valuePair = parser.ParseQRCodeStr(_qrCodeStr);
+            List<KeyValuePair<string, string>> valuePair = Project2FAParser.ParseQRCodeStr(_qrCodeStr);
 
             if (valuePair.Count == 0)
             {

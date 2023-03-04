@@ -11,7 +11,7 @@
     <AssemblyName>Project2FA.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22621.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -230,7 +230,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Background\mhellmeier_blue-hills.jpg" />
     <Content Include="Assets\FileLogo.png" />
     <Content Include="Assets\Infoelements\AuthSystemstorageDE.png" />
     <Content Include="Assets\Infoelements\AuthSystemstorageEN.png" />
@@ -284,11 +283,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\AnimatedVisuals\10223-search-empty.json" />
-    <Content Include="Assets\JSONs\Dependencies.json" />
     <Content Include="Assets\AnimatedVisuals\21398-online-tutorial.json" />
-    <Content Include="Assets\JSONs\IconNameCollection.json" />
-    <Content Include="Assets\JSONs\ProgressRingDeterminate.json" />
-    <Content Include="Assets\JSONs\ProgressRingIntdeterminate.json" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -351,7 +346,7 @@
       <Version>8.1.97</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net">
-      <Version>0.16.8</Version>
+      <Version>0.16.9</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

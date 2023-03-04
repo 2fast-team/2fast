@@ -35,7 +35,7 @@ using UNOversal.Logging;
 using UNOversal.Services.File;
 using UNOversal.Services.Network;
 using Project2FA.Utils;
-
+using Project2FA.Core.Services.Crypto;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -350,12 +350,14 @@ namespace Project2FA.Services
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                     ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
                                     iv,
-                                    datafileStr);
+                                    datafileStr,
+                                    datafile.Version);
 #else
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                     NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
                                     iv,
-                                    datafileStr);
+                                    datafileStr,
+                                    datafile.Version);
 #endif
                             }
                             else
@@ -363,7 +365,8 @@ namespace Project2FA.Services
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                     SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName),
                                     iv,
-                                    datafileStr);
+                                    datafileStr,
+                                    datafile.Version);
                             }
 
 
@@ -412,7 +415,7 @@ namespace Project2FA.Services
                             
                         }
                     }
-                    catch (Exception exc)
+                    catch (Exception)
                     {
                         _errorOccurred = true;
                         await ErrorDialogs.ShowPasswordError();
@@ -433,7 +436,7 @@ namespace Project2FA.Services
                     else
                     {
                         _errorOccurred = true;
-                        await ShowFileOrFolderNotFoundError();
+                        await ErrorDialogs.ShowFileOrFolderNotFoundError();
                     }
                 }
             }
@@ -458,7 +461,7 @@ namespace Project2FA.Services
                     }
                     else
                     {
-                        await ShowFileOrFolderNotFoundError();
+                        await ErrorDialogs.ShowFileOrFolderNotFoundError();
                     }
                 }
                 else
@@ -521,11 +524,9 @@ namespace Project2FA.Services
         //    _queryChangedCounter++;
         //}
 
-        private void ErrorResolved()
+        public void ErrorResolved()
         {
             _errorOccurred = false;
-            // allow shell navigation
-            App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
         }
 
         private void SendPasswordStatusMessage(bool isinvalid, string hash)
@@ -533,126 +534,6 @@ namespace Project2FA.Services
             Messenger.Send(new PasswordStatusChangedMessage(isinvalid, hash));
         }
 
-#region ErrorMessages
-        /// <summary>
-        /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
-        /// </summary>
-        private async Task ShowFileOrFolderNotFoundError()
-        {
-            try
-            {
-                //TODO current workaround: check permission to the file system (broadFileSystemAccess)
-                string path = @"C:\Windows\explorer.exe";
-                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                await ErrorDialogs.UnauthorizedAccessDialog();
-            }
-            // disable shell navigation
-            App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
-            //Logger.Log("no datafile found", Category.Exception, Priority.High);
-            bool selectedOption = false;
-
-            ContentDialog dialog = new ContentDialog();
-            dialog.Closed += Dialog_Closed;
-            dialog.Title = Resources.ErrorHandle;
-            StackPanel stackPanel = new StackPanel();
-            MarkdownTextBlock markdown = new MarkdownTextBlock();
-            markdown.Text = Resources.ExceptionDatafileNotFound;
-            stackPanel.Children.Add(markdown);
-
-            Button changePathBTN = new Button();
-            changePathBTN.Margin = new Thickness(0, 10, 0, 0);
-            changePathBTN.Content = Resources.ChangeDatafilePath;
-
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            changePathBTN.Command = new RelayCommand(async () =>
-            {
-                selectedOption = true;
-                dialog.Hide();
-                ContentDialogResult result = await DialogService.ShowDialogAsync(new UpdateDatafileContentDialog(), new DialogParameters());
-                if (result == ContentDialogResult.Primary)
-                {
-                    ErrorResolved();
-                    await CheckLocalDatafile();
-                }
-                if (result == ContentDialogResult.None)
-                {
-                    await ShowFileOrFolderNotFoundError();
-                }
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            stackPanel.Children.Add(changePathBTN);
-
-            Button factoryResetBTN = new Button();
-            factoryResetBTN.Margin = new Thickness(0, 10, 0, 10);
-            factoryResetBTN.Content = Resources.FactoryReset;
-
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            factoryResetBTN.Command = new RelayCommand(async () =>
-            {
-                DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
-                //delete password in the secret vault
-                SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordHash.Hash);
-                // reset data and restart app
-                await ApplicationData.Current.ClearAsync();
-                await CoreApplication.RequestRestartAsync("Factory reset");
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
-
-            stackPanel.Children.Add(factoryResetBTN);
-
-            dialog.Content = stackPanel;
-            dialog.PrimaryButtonText = Resources.CloseApp;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            dialog.PrimaryButtonCommand = new RelayCommand(() =>
-            {
-                App.Current.Exit();
-            });
-
-            async void Dialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
-            {
-                if (!(Window.Current.Content is ShellPage))
-                {
-                    App.Current.Exit();
-                }
-                else
-                {
-                    if (!selectedOption)
-                    {
-                        await DialogService.ShowDialogAsync(dialog, new DialogParameters());
-                    }
-                }
-            }
-            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
-        }
-
-        private async Task SecretKeyError(string label)
-        {
-            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-            ContentDialog dialog = new ContentDialog();
-            dialog.Title = Resources.Error;
-            MarkdownTextBlock markdown = new MarkdownTextBlock();
-            markdown.Text = string.Format(Resources.ErrorGenerateTOTPCode, label);
-            dialog.Content = markdown;
-
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            dialog.PrimaryButtonCommand = new RelayCommand(async () =>
-            {
-                await CoreApplication.RequestRestartAsync("NullableSecretKey");
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            dialog.PrimaryButtonText = Resources.RestartApp;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            dialog.SecondaryButtonText = Resources.Confirm;
-            dialog.SecondaryButtonCommand = new RelayCommand(() =>
-            {
-                //Prism.PrismApplicationBase.Current.Exit();
-            });
-            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
-        }
-#endregion
 
         /// <summary>
         /// Writes the current accounts into the datafile
@@ -661,6 +542,7 @@ namespace Project2FA.Services
         {
             string fileName = string.Empty;
             StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile file = null;
             DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
             DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
             // load the current file to allow the reset of the file
@@ -674,9 +556,11 @@ namespace Project2FA.Services
                     dbHash.Hash;
 
                 await CollectionAccessSemaphore.WaitAsync();
-                
+
+
+
                 // create the new datafile model
-                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = 1 };
+                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = 2 };
                 
                 if (ActivatedDatafile != null)
                 {
@@ -689,31 +573,61 @@ namespace Project2FA.Services
                     ApplicationData.Current.LocalFolder :
                     await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
                     fileName = datafileDB.Name;
+#if __ANDROID__
+                    // create new thread for buggy Android, else NetworkOnMainThreadException 
+                    await Task.Run(async () => {
+                        Android.Net.Uri androidUri = Android.Net.Uri.Parse(datafileDB.Path);
+                        file = StorageFile.GetFromSafUri(androidUri);
+                    });
+#endif
+#if __IOS__
+                    
+#endif
                 }
 
+#if WINDOWS_UWP
                 // backup the last version before write
                 string datafileStr = await FileService.ReadStringAsync(fileName, folder);
                 datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+#endif
 
-                if (SettingsService.Instance.AdvancedPasswordSecurity || ActivatedDatafile != null)
+                if (ActivatedDatafile != null)
                 {
+#if WINDOWS_UWP
                     await FileService.WriteStringAsync(
                         fileName,
                         NewtonsoftJSONService.SerializeEncrypt(
                             ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
                             iv,
-                            fileModel),
+                            fileModel,
+                            fileModel.Version),
                         folder);
+#else
+                    var fileStream = await ActivatedDatafile.OpenStreamForWriteAsync();
+                    string content = NewtonsoftJSONService.SerializeEncrypt(
+                            NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
+                            iv,
+                            fileModel,
+                            fileModel.Version);
+                    await fileStream.WriteAsync(Encoding.UTF8.GetBytes(content));
+                    fileStream.Close();
+
+#endif
                 }
                 else
                 {
+#if WINDOWS_UWP
                     await FileService.WriteStringAsync(
                         fileName,
                         NewtonsoftJSONService.SerializeEncrypt(
                             SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName), 
                             iv, 
-                            fileModel),
+                            fileModel,
+                            fileModel.Version),
                         folder);
+#else
+
+#endif
                 }
 
 
@@ -834,7 +748,7 @@ namespace Project2FA.Services
                     TrackingManager.TrackExceptionUnhandled(nameof(GenerateTOTP), ex);
 #endif
                     Collection[i].TwoFACode = string.Empty;
-                    await SecretKeyError(Collection[i].Label).ConfigureAwait(false);
+                    await ErrorDialogs.SecretKeyError(Collection[i].Label).ConfigureAwait(false);
                 }
             }
         }
@@ -849,7 +763,7 @@ namespace Project2FA.Services
 
 
 
-        #region WebDAV
+#region WebDAV
         /// <summary>
         /// Upload the data file with custom WebDAV header
         /// </summary>
@@ -969,10 +883,10 @@ namespace Project2FA.Services
                 return (false, false);
             }
         }
-        #endregion
+#endregion
 
 
-        #region GetSet
+#region GetSet
         public TwoFACodeModel TempDeletedTFAModel
         {
             get => _tempDeletedTFAModel;
@@ -1010,7 +924,7 @@ namespace Project2FA.Services
             get => _openDatefile;
             set => SetProperty(ref _openDatefile, value);
         }
-        #endregion
+#endregion
 
         public void Dispose()
         {

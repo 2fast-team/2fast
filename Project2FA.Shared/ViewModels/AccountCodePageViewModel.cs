@@ -76,8 +76,6 @@ namespace Project2FA.ViewModels
 
             _dispatcherTOTPTimer = new DispatcherTimer();
             _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 0, 1); //every second
-            //_dispatcherTOTPTimer.Tick -= TOTPTimer;
-            //_dispatcherTOTPTimer.Tick += TOTPTimer;
 
             _dispatcherTimerDeletedModel = new DispatcherTimer();
             _dispatcherTimerDeletedModel.Interval = new TimeSpan(0, 0, 1); //every second
@@ -237,7 +235,7 @@ namespace Project2FA.ViewModels
         private async Task TOTPTimerTask()
         {
             //prevent the acccess for other Threads
-            await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
+            //await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
                 TwoFADataService.Collection[i].Seconds -= TwoFADataService.TOTPEventStopwatch.Elapsed.TotalSeconds; // elapsed time (seconds) from the last event call
@@ -247,7 +245,7 @@ namespace Project2FA.ViewModels
                 }
             }
             TwoFADataService.TOTPEventStopwatch.Restart(); // reset the added time from the stopwatch => time+ / event
-            TwoFADataService.CollectionAccessSemaphore.Release();
+            //TwoFADataService.CollectionAccessSemaphore.Release();
         }
 
         /// <summary>

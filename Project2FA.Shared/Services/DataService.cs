@@ -50,6 +50,7 @@ using Microsoft.Toolkit.Uwp.Helpers;
 using CommunityToolkit.WinUI.UI.Controls;
 using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.Connectivity;
+using CommunityToolkit.WinUI.Helpers;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
 using Microsoft.UI.Xaml;
@@ -558,9 +559,13 @@ namespace Project2FA.Services
                 await CollectionAccessSemaphore.WaitAsync();
 
 
-
+                // set new template version for data file
+                var prevíousVersion = new Version(SystemInformation.Instance.ApplicationVersion.ToFormattedString());
+                var compareVersion = new Version("1.3.0.0");
+                var result = compareVersion.CompareTo(prevíousVersion);
+                int version = result >= 0 ? 2 : 1;
                 // create the new datafile model
-                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = 2 };
+                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version };
                 
                 if (ActivatedDatafile != null)
                 {

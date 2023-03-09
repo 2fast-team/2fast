@@ -259,7 +259,7 @@ namespace Project2FA.ViewModels
             {
                 string datafileStr = string.Empty;
                 // create new thread for buggy Android, else NetworkOnMainThreadException 
-#if ANDROID
+#if __ANDROID__
                 await Task.Run(async () => {
 
                     datafileStr = await FileIO.ReadTextAsync(LocalStorageFile);

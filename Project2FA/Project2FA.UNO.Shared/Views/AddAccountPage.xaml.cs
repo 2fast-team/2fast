@@ -19,10 +19,12 @@ namespace Project2FA.UNO.Views
 
     public sealed partial class AddAccountPage : Page
     {
-        public AddAccountContentDialogViewModel ViewModel => DataContext as AddAccountContentDialogViewModel;
+        public AddAccountPageViewModel ViewModel => DataContext as AddAccountPageViewModel;
         public AddAccountPage()
         {
             this.InitializeComponent();
+            // Refresh x:Bind when the DataContext changes.
+            DataContextChanged += (s, e) => Bindings.Update();
         }
     }
 }

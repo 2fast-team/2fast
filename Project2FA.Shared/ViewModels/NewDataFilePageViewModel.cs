@@ -53,7 +53,7 @@ namespace Project2FA.ViewModels
             ISecretService secretService,
             INavigationService navigationService,
             ISerializationService serializationService) : 
-            base ()
+            base()
         {
             NaviationService = navigationService;
             SerializationService = serializationService;

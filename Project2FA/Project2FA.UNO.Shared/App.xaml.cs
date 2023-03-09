@@ -278,12 +278,7 @@ namespace Project2FA.UNO
             containerRegistry.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
             containerRegistry.RegisterSingleton<ISerializationService, SerializationService>();
             containerRegistry.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>();
-
-
             containerRegistry.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
-            
-
-            //containerRegistry.RegisterSingleton<INavigationService, NavigationService>();
 
             containerRegistry.RegisterSingleton<ShellPage>();
             //containerRegistry.Register<DatafileViewModelBase>();

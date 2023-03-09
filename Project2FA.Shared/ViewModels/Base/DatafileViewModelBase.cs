@@ -111,7 +111,7 @@ namespace Project2FA.ViewModels
 
 #if __IOS__
             Foundation.NSError error;
-            Foundation.NSUrl url = Foundation.NSUrl.FromString(LocalStorageFile.Path);
+            Foundation.NSUrl url = Foundation.NSUrl.FromFilename(LocalStorageFile.Path);
             Foundation.NSData bookmark = url.CreateBookmarkData(Foundation.NSUrlBookmarkCreationOptions.WithSecurityScope, null, null, out error);
             Foundation.NSUserDefaults.StandardUserDefaults["bookmark"] = bookmark;
             Foundation.NSUserDefaults.StandardUserDefaults.Synchronize();

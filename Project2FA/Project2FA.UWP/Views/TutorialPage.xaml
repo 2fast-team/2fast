@@ -14,15 +14,24 @@
         <StackPanel>
             <FlipView 
                 Margin="0,32,0,0"
-                
                 x:Name="FV_Tutorials">
                 <FlipViewItem>
                     <StackPanel>
-                        <TextBlock 
+                        <Image MaxHeight="80" Source="/Assets/FileLogo.png"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image MinHeight="150" Stretch="UniformToFill" Source="/Assets/Infoelements/AuthSystemstorageDE.png"></Image>
+                            <TextBlock 
+                            Grid.Column="1"
+                                Margin="24,0,0,0"
                             x:Uid="TutorialContentDialogFirstSteps"
                             Text="~TutorialContentDialogFirstSteps.Text"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
+                        </Grid>
                     </StackPanel>
                 </FlipViewItem>
                 <FlipViewItem>

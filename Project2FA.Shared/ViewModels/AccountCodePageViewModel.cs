@@ -2,7 +2,6 @@
 using System;
 using System.Windows.Input;
 using Project2FA.Strings;
-using Prism.Navigation;
 using System.Threading.Tasks;
 using Project2FA.Helpers;
 using CommunityToolkit.Mvvm.Input;
@@ -15,6 +14,7 @@ using UNOversal.Logging;
 using Project2FA.Services;
 using Prism.Ioc;
 using Windows.ApplicationModel.DataTransfer;
+using Project2FA.Core;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -280,7 +280,6 @@ namespace Project2FA.ViewModels
                 };
                 dataPackage.SetText(model.TwoFACode);
                 Clipboard.SetContent(dataPackage);
-                System.Console.WriteLine("Copy label: " + model.Label);
                 return true;
             }
             catch (System.Exception)
@@ -289,7 +288,7 @@ namespace Project2FA.ViewModels
                 dialog.Title = Strings.Resources.ErrorHandle;
                 dialog.Content = Strings.Resources.ErrorClipboardTask;
                 dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
-                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
                 dialog.PrimaryButtonCommand = new AsyncRelayCommand(async () =>
                 {
                     await CopyCodeToClipboardCommandTask(model);

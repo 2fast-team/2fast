@@ -1062,4 +1062,13 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   <data name="AccountCodePageTitle" xml:space="preserve">
     <value>Konten</value>
   </data>
+  <data name="AccoundCodePageImportEntry.Label" xml:space="preserve">
+    <value>Konten importieren</value>
+  </data>
+  <data name="AccoundCodePageImportCamera.Text" xml:space="preserve">
+    <value>Kamera-Import durchführen</value>
+  </data>
+  <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
+    <value>Datei/Bild zum Import verwenden</value>
+  </data>
 </root>

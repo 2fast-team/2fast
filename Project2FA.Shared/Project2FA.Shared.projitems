@@ -48,16 +48,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ImportAccountContentDialog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UpdateDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UseDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\DatafileViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileActivationPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImportAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewDataFilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ShellPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TutorialPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UseDataFilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WelcomePageViewModel.cs" />
   </ItemGroup>

@@ -190,6 +190,9 @@
     <Compile Include="Views\FileActivationPage.xaml.cs">
       <DependentUpon>FileActivationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContentDialogs\ImportAccountContentDialog.xaml.cs">
+      <DependentUpon>ImportAccountContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -459,6 +462,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FileActivationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentDialogs\ImportAccountContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

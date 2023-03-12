@@ -110,6 +110,7 @@ namespace Project2FA.UWP
             container.RegisterForNavigation<BlankPage, BlankPageViewModel>();
             container.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
             container.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
+            container.RegisterForNavigation<TutorialPage, TutorialPageViewModel>();
             //contentdialogs and view-models
             container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
             container.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();

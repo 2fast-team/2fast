@@ -1055,4 +1055,13 @@ In the following sections, the functionality of this application is explained in
   <data name="AccountCodePageTitle" xml:space="preserve">
     <value>Accounts</value>
   </data>
+  <data name="AccoundCodePageImportEntry.Label" xml:space="preserve">
+    <value>Import accounts</value>
+  </data>
+  <data name="AccoundCodePageImportCamera.Text" xml:space="preserve">
+    <value>Perform camera import</value>
+  </data>
+  <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
+    <value>Use file/image for import</value>
+  </data>
 </root>

@@ -65,7 +65,18 @@ namespace Project2FA.Services
 #endif
     public class DataService : ObservableRecipient, IDisposable
     {
-        public SemaphoreSlim CollectionAccessSemaphore { get; } = new SemaphoreSlim(1, 1);
+        private SemaphoreSlim _collectionAccessSemaphore;
+        public SemaphoreSlim CollectionAccessSemaphore 
+        { 
+            get
+            {
+                if (_collectionAccessSemaphore == null)
+                {
+                    _collectionAccessSemaphore = new SemaphoreSlim(1);
+                }
+                return _collectionAccessSemaphore;
+            }
+        }
         private bool _checkedTimeSynchronisation;
         private TimeSpan _ntpServerTimeDifference;
         private ISecretService SecretService { get; }
@@ -264,6 +275,7 @@ namespace Project2FA.Services
             try
             {
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
+                // not for UWP
 #if !WINDOWS_UWP
                 StorageFile file = null;
 #endif
@@ -941,7 +953,7 @@ namespace Project2FA.Services
         {
             if (disposing)
             {
-                CollectionAccessSemaphore?.Dispose();
+                _collectionAccessSemaphore?.Dispose();
             }
         }
     }

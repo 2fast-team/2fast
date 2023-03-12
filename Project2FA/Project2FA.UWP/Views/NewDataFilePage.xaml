@@ -306,7 +306,7 @@
                                 Command="{x:Bind ViewModel.WebDAVLoginCommand}"
                                 x:Uid="NewDatafileContentDialogChangePath"
                                 Content="~NewDatafileContentDialogChangePath.Content"/>
-                                    
+
                                     <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
@@ -325,25 +325,6 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-        <msct:Loading 
-            IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
-            Background="{ThemeResource TranslucentBackgroundHighBrush}">
-            <StackPanel>
-                <muxc:AnimatedVisualPlayer 
-                    MaxHeight="120"
-                    PlaybackRate="0.5"
-                    AutoPlay="True">
-                    <lottie:LottieVisualSource  
-                        UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
-                </muxc:AnimatedVisualPlayer>
-                <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
-                <Button 
-                    x:Uid="BTNTryAgain" 
-                    Margin="0,10,0,0" 
-                    Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
-                    HorizontalAlignment="Center"/>
-            </StackPanel>
-        </msct:Loading>
 
         <msct:Loading 
             IsLoading="{x:Bind ViewModel.WebDAVLoginError,Mode=OneWay}" 

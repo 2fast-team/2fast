@@ -52,7 +52,7 @@ namespace Project2FA.ViewModels
             Project2FA.ZXing.BarcodeWriter writer = new Project2FA.ZXing.BarcodeWriter();
             writer.Format = BarcodeFormat.QR_CODE;
             writer.Options = options;
-            QRImage = writer.Write(Uri.EscapeDataString(uriBuilder.ToString()));
+            QRImage = writer.Write(uriBuilder.ToString());
         }
 
         public void Initialize(IDialogParameters parameters)

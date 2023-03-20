@@ -17,6 +17,7 @@ using UNOversal.Navigation;
 using Project2FA.Utils;
 using UNOversal.Services.Dialogs;
 using Project2FA.ViewModels;
+using Windows.System;
 
 namespace Project2FA.UWP.Views
 {
@@ -281,9 +282,11 @@ namespace Project2FA.UWP.Views
 
         private async void FeedbackItem_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
+            Uri uri = new Uri("https://github.com/2fast-team/2fast/discussions");
+            await Launcher.LaunchUriAsync(uri);
             // https://docs.microsoft.com/en-us/windows/uwp/monetize/launch-feedback-hub-from-your-app
-            Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-            await launcher.LaunchAsync();
+            //Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+            //await launcher.LaunchAsync();
         }
 
         private string _settingsNavigationStr;

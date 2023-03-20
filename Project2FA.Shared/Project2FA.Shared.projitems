@@ -2291,6 +2291,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\schluessel.svg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\SmallTile.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\SmallTile.scale-125.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\SmallTile.scale-150.png" />

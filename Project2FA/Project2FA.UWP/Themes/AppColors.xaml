@@ -8,6 +8,7 @@
                   TintColor="{ThemeResource SystemChromeAltHighColor}"
                   TintOpacity="0.8" 
                   FallbackColor="{ThemeResource SystemAltHighColor}" />
+
     <!--ProgressRing-->
     <StaticResource x:Key="ProgressRingBackgroundThemeBrush" ResourceKey="ControlFillColorTertiaryBrush" />
 

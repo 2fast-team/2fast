@@ -6,83 +6,361 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:Project2FA.Repository.Models"
+    xmlns:viewmodels="using:Project2FA.ViewModels"
     xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.Resources>
+        <DataTemplate x:Name="ShellHeaderTemplate">
+            <Grid Background="{ThemeResource ShellAcrylicWindowBrush}" 
+                      Height="40">
+                <TextBlock 
+                    Text="Tutorial"
+                    Margin="15,0,0,0"
+                    Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
+                    TextWrapping="NoWrap" 
+                    VerticalAlignment="Top" />
+            </Grid>
+        </DataTemplate>
 
-    <Grid>
+        <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
+            <UserControl
+                    x:Name="Root" 
+                    MaxWidth="660"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+                <Grid 
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        Background="{ThemeResource TwoFABackgroundBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.RowSpan="3" >
+                        <Border 
+                                Width="2.5" 
+                                ui:Effects.Shadow="{StaticResource SignShadow}"
+                                Background="{StaticResource SystemAccentColor}" />
+                    </Grid>
+
+                    <muxc:PersonPicture 
+                            Height="48"
+                            Width="48"
+                            DisplayName="{x:Bind Model, 
+                            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                            Mode=OneWay}"
+                            Margin="15,10,20,0"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
+                        <!--<muxc:PersonPicture.ProfilePicture>
+                                <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
+                            </muxc:PersonPicture.ProfilePicture>-->
+                    </muxc:PersonPicture>
+
+                    <RelativePanel 
+                            Grid.Column="2" 
+                            Grid.RowSpan="2" 
+                            Grid.ColumnSpan="2">
+                        <TextBlock
+                                x:Name="AccountName"
+                                FontSize="22"
+                                Margin="0,10,10,0" 
+                                VerticalAlignment="Center">
+                                <Bold>
+                                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
+                                </Bold>
+                        </TextBlock>
+                        <TextBlock 
+                                x:Name="IssuerName"
+                                FontWeight="Thin"
+                                Text="{x:Bind Issuer,Mode=OneWay}" 
+                                FontSize="22"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"/>
+                    </RelativePanel>
+
+                    <StackPanel
+                            Orientation="Horizontal"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="0,0,0,4">
+
+                        <Button
+                                x:Name="BTN_ShowCode"
+                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                                Width="48"
+                                Height="48"
+                                Margin="0,0,4,0"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                HorizontalAlignment="Stretch" Click="BTN_ShowCode_Click" >
+                            <FontIcon 
+                                    Glyph="&#xE18B;"
+                                    FontSize="20"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                        </Button>
+                        <TextBlock
+                                Text="______"
+                                FontSize="28"
+                                CharacterSpacing="205"
+                                VerticalAlignment="Center" 
+                                Foreground="{ThemeResource SystemAccentColor}" />
+
+                        <Button
+                                x:Name="BTN_CopyCode"
+                                x:Uid="AccountCopyCodeButton"
+                                Width="48"
+                                Height="48"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0" 
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
+                                HorizontalAlignment="Stretch" Click="BTN_CopyCode_Click" >
+                            <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
+                        </Button>
+                        <Grid VerticalAlignment="Center">
+                            <controls:RadialProgressBar
+                                Value="{x:Bind Seconds,Mode=OneWay}" 
+                                Maximum="{x:Bind Period,Mode=OneWay}" 
+                                    
+                                Minimum="0"
+                                IsIndeterminate="False"
+                                Width="42"
+                                Height="42"
+                                x:Uid="AccountCodePageRemainingSeconds"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
+                                Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
+                            <TextBlock 
+                                x:Uid="AccountCodePageRemainingSeconds"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
+                                Opacity="0.6"
+                                Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
+                                FontSize="16"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"/>
+                        </Grid>
+                        <Button
+                                x:Name="BTN_SetFavourite"
+                                Width="48"
+                                Height="48"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0"
+                                ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
+                                HorizontalAlignment="Stretch" Click="BTN_SetFavourite_Click" >
+                            <FontIcon 
+                                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                    FontSize="20"
+                                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
+
+                    <Button
+                        x:Name="AccountCodePageItemMoreBTN"
+                        x:Uid="AccountCodePageItemMoreBTN"
+                        Grid.Column="4" 
+                        Margin="8,0,0,0" 
+                        VerticalAlignment="Top" 
+                        Style="{StaticResource TransparentButtonStyle}"
+                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip}" Click="AccountCodePageItemMoreBTN_Click">
+                        <FontIcon Glyph="&#xE712;"/>
+                        <!--<Button.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem 
+                                        x:Uid="AccountCodePageEditEntry">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE70F;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem 
+                                        x:Uid="AccountCodePageDeleteEntry"
+                                        IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE107;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem
+                                        x:Uid="AccountCodePageShowQRCode">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE72D;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </Button.Flyout>-->
+                    </Button>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="WindowStates">
+                            <VisualState x:Name="NarrowState">
+                                <VisualState.StateTriggers>
+                                    <AdaptiveTrigger MinWindowWidth="0" />
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Target="IssuerName.(RelativePanel.Below)" Value="AccountName"/>
+                                    <Setter Target="IssuerName.Margin" Value="0,10,10,0"/>
+                                    <!--<Setter Target="Root.MinWidth" Value="478"/>-->
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="MediumState">
+                                <VisualState.StateTriggers>
+                                    <AdaptiveTrigger MinWindowWidth="720" />
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <!--<Setter Target="Root.MinWidth" Value="660"/>-->
+                                    <Setter Target="IssuerName.(RelativePanel.RightOf)" Value="AccountName"/>
+                                    <Setter Target="IssuerName.Margin" Value="10,10,10,0"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    
+                </Grid>
+            </UserControl>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid x:Name="MainGrid">
         <StackPanel>
             <FlipView 
-                Margin="0,32,0,0"
+                Margin="8,32,8,0"
                 x:Name="FV_Tutorials">
+                <FlipView.Background>
+                    <ImageBrush
+                    ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                    Stretch="UniformToFill" />
+                </FlipView.Background>
                 <FlipViewItem>
-                    <StackPanel>
-                        <Image MaxHeight="80" Source="/Assets/FileLogo.png"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Image MinHeight="150" Stretch="UniformToFill" Source="/Assets/Infoelements/AuthSystemstorageDE.png"></Image>
+                    <Grid MaxWidth="760">
+                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                            <Border>
+                                <Border.Background>
+                                    <media:BackdropBlurBrush Amount="2" />
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <StackPanel >
+                            <Grid>
+                                <Ellipse 
+                                    ui:Effects.Shadow="{StaticResource PersonPictureShadow}"
+                                    Height="100" 
+                                    Width="100"
+                                    Fill="{ThemeResource SystemAccentColor}"/>
+                                <Image 
+                            Margin="0,12,0,12"
+                            Height="60" 
+                            Width="60"
+                                    Source="/Assets/FileLogo.png"
+                                    Stretch="Fill"
+                                    
+                                    VerticalAlignment="Center" HorizontalAlignment="Center">
+                                </Image>
+                            </Grid>
+
                             <TextBlock 
                             Grid.Column="1"
-                                Margin="24,0,0,0"
                             x:Uid="TutorialContentDialogFirstSteps"
                             Text="~TutorialContentDialogFirstSteps.Text"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
-                        </Grid>
-                    </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
                 </FlipViewItem>
                 <FlipViewItem>
-                    <StackPanel>
-                        <TextBlock 
+                    <Grid MaxWidth="760">
+                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                            <Border>
+                                <Border.Background>
+                                    <media:BackdropBlurBrush Amount="2" />
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <StackPanel>
+                            <TextBlock 
                             x:Uid="TutorialContentDialogCreateMethodHeader"
                             Text="~TutorialContentDialogCreateMethodHeader.Text"
                             FontSize="16"
                             FontWeight="Bold"
                             TextWrapping="WrapWholeWords"
                             Margin="0,0,0,12"/>
-                        <TextBlock 
+                            <TextBlock 
                             x:Uid="TutorialContentDialogCreateMethod"
                             Text="~TutorialContentDialogCreateMethod.Text"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
-                        <Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />
-                    </StackPanel>
+                            <ListView 
+                                    ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
+                                    ItemTemplate="{StaticResource TwoFACodeCustomTemplate}"
+                                    ItemsSource="{x:Bind ViewModel.Collection, Mode=OneWay}">
+
+                            </ListView>
+                            <!--<Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />-->
+                        </StackPanel>
+                    </Grid>
                 </FlipViewItem>
                 <FlipViewItem>
-                    <StackPanel>
-                        <TextBlock 
+                    <Grid MaxWidth="760">
+                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                            <Border>
+                                <Border.Background>
+                                    <media:BackdropBlurBrush Amount="2" />
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <StackPanel>
+                            <TextBlock 
                             x:Uid="TutorialContentDialogLoadMethodHeader"
                             Text="~TutorialContentDialogLoadMethodHeader.Text"
                             FontSize="16"
                             FontWeight="Bold"
                             TextWrapping="WrapWholeWords"
                             Margin="0,0,0,12"/>
-                        <TextBlock 
+                            <TextBlock 
                             x:Uid="TutorialContentDialogLoadMethod"
                             Text="~TutorialContentDialogLoadMethod.Text"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
-                        <Image Source="/Assets/Tutorials/2fast_load_datafile.gif" />
-                    </StackPanel>
+                            <!--<Image Source="/Assets/Tutorials/2fast_load_datafile.gif" />-->
+                        </StackPanel>
+                    </Grid>
+
                 </FlipViewItem>
                 <FlipViewItem>
-                    <StackPanel>
-                        <TextBlock 
+                    <Grid MaxWidth="760">
+                        <StackPanel>
+                            <TextBlock 
                             x:Uid="AddAccountCodeContentDialogQRCodeHelpHeader"
                             Text="~AddAccountCodeContentDialogQRCodeHelpHeader.Text"
                             FontSize="16"
                             FontWeight="Bold"
                             TextWrapping="WrapWholeWords"
                             Margin="0,0,0,12"/>
-                        <TextBlock 
+                            <TextBlock 
                             Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
-                        <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
-                    </StackPanel>
+                            <!--<Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />-->
+                        </StackPanel>
+                    </Grid>
+
                 </FlipViewItem>
             </FlipView>
 

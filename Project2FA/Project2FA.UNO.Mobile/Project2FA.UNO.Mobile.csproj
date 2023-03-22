@@ -50,14 +50,14 @@
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Core" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.100" />
-    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.4" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.4" />
-    <PackageReference Include="Uno.WinUI" Version="4.8.0-dev.792" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.0-dev.792" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.0-dev.792" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.0-dev.792" />
+    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.5" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.5" />
+    <PackageReference Include="Uno.WinUI" Version="4.8.15" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.15" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.15" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.15" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="4.8.0-dev.792" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="4.8.15" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>

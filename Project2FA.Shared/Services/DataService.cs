@@ -574,7 +574,7 @@ namespace Project2FA.Services
                 // set new template version for data file
                 var prevíousVersion = new Version(SystemInformation.Instance.ApplicationVersion.ToFormattedString());
                 var compareVersion = new Version("1.3.0.0");
-                var result = compareVersion.CompareTo(prevíousVersion);
+                var result = prevíousVersion.CompareTo(compareVersion);
                 int version = result >= 0 ? 2 : 1;
                 // create the new datafile model
                 DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version };

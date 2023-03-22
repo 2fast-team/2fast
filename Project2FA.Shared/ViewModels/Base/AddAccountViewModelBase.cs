@@ -703,33 +703,42 @@ namespace Project2FA.ViewModels
 
         private async void CameraHelper_FrameArrived(object sender, FrameEventArgs e)
         {
-            _currentVideoFrame = e.VideoFrame;
-
-            // analyse only every _vidioFrameDivider value
-            if (_videoFrameCounter % _vidioFrameDivider == 0 && SelectedPivotIndex == 1)
+            try
             {
-                var luminanceSource = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
-                if (luminanceSource != null)
+                _currentVideoFrame = e.VideoFrame;
+
+                // analyse only every _vidioFrameDivider value
+                if (_videoFrameCounter % _vidioFrameDivider == 0 && SelectedPivotIndex == 1)
                 {
-                    var barcodeReader = new Project2FA.ZXing.BarcodeReader
+                    var luminanceSource = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
+                    if (luminanceSource != null)
                     {
-                        AutoRotate = true,
-                        Options = { TryHarder = true }
-                    };
-                    var decodedStr = barcodeReader.Decode(luminanceSource);
-                    if (decodedStr != null)
-                    {
-                        if (decodedStr.Text.StartsWith("otpauth"))
+                        var barcodeReader = new Project2FA.ZXing.BarcodeReader
                         {
-                            await CleanUpCamera();
-                            _qrCodeStr = decodedStr.Text;
-                            await ReadAuthenticationFromString();
+                            AutoRotate = true,
+                            Options = { TryHarder = true }
+                        };
+                        var decodedStr = barcodeReader.Decode(luminanceSource);
+                        if (decodedStr != null)
+                        {
+                            if (decodedStr.Text.StartsWith("otpauth"))
+                            {
+                                await CleanUpCamera();
+                                _qrCodeStr = decodedStr.Text;
+                                await ReadAuthenticationFromString();
+                            }
                         }
                     }
                 }
             }
-            _videoFrameCounter++;
-
+            catch (Exception)
+            {
+                // ignore errors
+            }
+            finally
+            {
+                _videoFrameCounter++;
+            }
         }
 
 

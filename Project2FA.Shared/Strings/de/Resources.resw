@@ -492,7 +492,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="WelcomePageIntro.Text" xml:space="preserve">
     <value>Willkommen!
 
-Starten Sie direkt durch und bringen mehr Sicherheit durch einen zweiten Faktor in ihr Leben.</value>
+Starten Sie direkt durch und bringen Sie mehr Sicherheit durch einen zweiten Faktor in Ihr Leben.</value>
   </data>
   <data name="WelcomePageLoadDatafile.Content" xml:space="preserve">
     <value>Vorhandene Datendatei laden</value>
@@ -734,11 +734,8 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>• Windows Hello kann nun in den Einstellungen für die generelle Anmeldung deaktiviert werden
-• Aktualisierung von Drittanbieter Bibliotheken
-• Behebung eines Fehlers, dass bei dem Starten von .2fa Datendateien nicht alle Rechte zum Lesen zur Verfügung standen
-• Verschlüsselung des eingegebenen Passwortes bei dem Starten von .2fa Dateien
-• Zuverlässigkeit der WebDAV-Komponente wurde erhöht</value>
+    <value>- Fehlerbehebungen
+- Aktualisierung von Drittanbieter-Bibliotheken</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>

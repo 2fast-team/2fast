@@ -67,7 +67,7 @@ namespace Project2FA.Core.Services.JSON
         public string SerializeEncrypt(string key, byte[] initVectorArray, object value, int encryptionVersion)
         {
             byte[] byteArrayKey;
-            if (encryptionVersion == 1)
+            if (encryptionVersion == 1 || encryptionVersion == 0)
             {
                 byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
             }
@@ -102,7 +102,7 @@ namespace Project2FA.Core.Services.JSON
         public string SerializeEncrypt(byte[] keyArray, byte[] initVectorArray, object value, int encryptionVersion)
         {
             byte[] byteArrayKey;
-            if (encryptionVersion == 1)
+            if (encryptionVersion == 1 || encryptionVersion == 0)
             {
                 byteArrayKey = CryptoService.CreateByteArrayKeyV1(keyArray);
             }
@@ -206,7 +206,7 @@ namespace Project2FA.Core.Services.JSON
         public T DeserializeDecrypt<T>(string key, byte[] initVector, string value, int encryptionVersion)
         {
             byte[] byteArrayKey;
-            if (encryptionVersion == 1)
+            if (encryptionVersion == 1 || encryptionVersion == 0)
             {
                 byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
             }
@@ -236,7 +236,7 @@ namespace Project2FA.Core.Services.JSON
         public T DeserializeDecrypt<T>(byte[] keyArray, byte[] initVector, string value, int encryptionVersion)
         {
             byte[] byteArrayKey;
-            if (encryptionVersion == 1)
+            if (encryptionVersion == 1 || encryptionVersion == 0)
             {
                 byteArrayKey = CryptoService.CreateByteArrayKeyV1(keyArray);
             }

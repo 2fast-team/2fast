@@ -58,6 +58,7 @@ namespace Project2FA.ViewModels
         public ICommand SetFavouriteCommand { get; }
         public ICommand HideOrShowTOTPCodeCommand {get;}
         public ICommand CopyCodeToClipboardCommand { get; }
+        public ICommand NavigateToSettingsCommand { get; }
 
         private bool _datafileUpdated;
         private bool _datafileWebDAVUpToDate;
@@ -145,6 +146,7 @@ namespace Project2FA.ViewModels
             }
 
             CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
+            NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
 
 
             //register the messenger calls
@@ -176,6 +178,10 @@ namespace Project2FA.ViewModels
 
         }
 
+        private async Task NavigateToSettingsCommandTask()
+        {
+            await NavigationService.NavigateAsync(nameof(SettingPage));
+        }
 
         private async Task StartTOTPLogic()
         {

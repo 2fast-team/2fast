@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Project2FA.UNO"
-    xmlns:converters="clr-namespace:Project2FA.UNO.Converters"
+    xmlns:converters="using:Project2FA.Converters"
     xmlns:unoApp="using:UNOversal.DryIoc">
 	
     <Application.Resources>
@@ -19,11 +19,18 @@
                 <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Color x:Key="SystemAccentColor">#FF009BC1</Color>
-            <converters:SVGImageConverter x:Key="SVGImageConverter"/>
-            <converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
-            <converters:PersonalPictureInitialsVisibilityConverter x:Key="PersonalPictureInitialsVisibilityConverter"/>
+            <converters:BytesToHumanReadableConverter x:Key="BytesToHumanReadableConverter"/>
+            <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+            <converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
+            <converters:VisibleWhenFalseConverter x:Key="VisibleWhenFalseConverter"/>
+            <converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>
+            <converters:TOTPVisibilityTooltipConverter x:Key="TOTPVisibilityTooltipConverter"/>
             <converters:DoubleToInt32ToStringConverter x:Key="DoubleToInt32ToStringConverter"/>
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:PersonalPictureInitialsVisibilityConverter x:Key="PersonalPictureInitialsVisibilityConverter"/>
+            <converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
+            <converters:SVGImageConverter x:Key="SVGImageConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 

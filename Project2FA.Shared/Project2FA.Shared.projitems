@@ -9,6 +9,18 @@
     <Import_RootNamespace>Project2FA.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToCommandBarVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BytesToHumanReadableConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DoubleToInt32ToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\FavouriteToIconConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\FavouriteTooltipConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonalPictureInitialsVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonPictureSizeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\SVGImageConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TOTPVisibilityTooltipConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\VisibleWhenFalseConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ApplicationThemeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SVGColorHelper.cs" />
@@ -4565,5 +4577,8 @@
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Assets\Icons\" />
   </ItemGroup>
 </Project>

@@ -40,12 +40,12 @@
                         <Grid Grid.RowSpan="3" >
                             <Border 
                                 Width="2.5" 
-                                Background="{ThemeResource  SystemColorControlAccentBrush}" />
+                                Background="{ThemeResource  SystemAccentColor}" />
                         </Grid>
 
                         <PersonPicture 
-                            Height="68"
-                            Width="68"
+                            Height="76"
+                            Width="76"
                             DisplayName="{x:Bind Model, 
                             Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
                             Mode=OneWay}"
@@ -82,9 +82,9 @@
                         <StackPanel
                             Orientation="Horizontal"
                             Grid.Row="3"
-                            Grid.Column="2"
-                            Grid.ColumnSpan="2"
-                            Margin="0,0,0,4">
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="8,0,0,4">
 
                             <Button
                                 x:Name="BTN_ShowCode"
@@ -156,7 +156,23 @@
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center"/>
                             </Grid>
-
+                            <Button
+                                x:Name="BTN_SetFavourite"
+                                Width="48"
+                                Height="48"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.SetFavouriteCommand, ElementName=Page, Mode=OneTime}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0"
+                                ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
+                                HorizontalAlignment="Stretch" >
+                                <FontIcon 
+                                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                    FontSize="20"
+                                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
                         </StackPanel>
 
                         <Button
@@ -245,8 +261,8 @@
                         </Grid>
 
                         <PersonPicture 
-                            Height="68"
-                            Width="68"
+                            Height="76"
+                            Width="76"
                             Background="{ThemeResource SystemAccentColor}"
                             BorderBrush="{ThemeResource SystemAccentColor}"
                             Foreground="White"
@@ -286,9 +302,9 @@
                         <StackPanel
                             Orientation="Horizontal"
                             Grid.Row="3"
-                            Grid.Column="2"
-                            Grid.ColumnSpan="2"
-                            Margin="0,0,0,4">
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="8,0,0,4">
 
                             <Button
                                 x:Name="BTN_ShowCode"
@@ -312,7 +328,7 @@
                                 <TextBlock
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
                                 FontSize="24"
-
+MinWidth="50"
                                 VerticalAlignment="Center"
                                 CharacterSpacing="60"
                                 Foreground="{ThemeResource SystemAccentColor}" />
@@ -360,6 +376,23 @@
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center"/>
                             </Grid>
+
+                            <Button
+                                x:Name="BTN_SetFavourite"
+                                Width="48"
+                                Height="48"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.SetFavouriteCommand, ElementName=Page, Mode=OneTime}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0"
+                                HorizontalAlignment="Stretch" >
+                                <FontIcon 
+                                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                    FontSize="20"
+                                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
 
                         </StackPanel>
 
@@ -512,8 +545,16 @@
                 </Button.Flyout>
             </Button>
 
-            <Border Background="{ThemeResource TwoFABackgroundBrush}" Grid.Column="4" Height="48" CornerRadius="32,0,0,0" VerticalAlignment="Bottom">
-                <Button Width="76" HorizontalAlignment="Center" Style="{StaticResource TransparentButtonStyle}">
+            <Border 
+                Background="{ThemeResource TwoFABackgroundBrush}" 
+                Grid.Column="4" 
+                Height="48" CornerRadius="32,0,0,0" 
+                VerticalAlignment="Bottom">
+                <Button 
+                    Width="76" 
+                    HorizontalAlignment="Center"
+                    Command="{x:Bind ViewModel.NavigateToSettingsCommand}"
+                    Style="{StaticResource TransparentButtonStyle}">
                     <FontIcon 
                         FontSize="30"
                         Glyph="&#xE115;" />

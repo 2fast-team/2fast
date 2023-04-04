@@ -66,7 +66,7 @@ namespace Project2FA.Utils
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.PrimaryButtonText = Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             dialog.SecondaryButtonText = Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
             dialog.SecondaryButtonCommand = new RelayCommand(() =>
             {
@@ -90,7 +90,7 @@ namespace Project2FA.Utils
             {
                 Title = Resources.PasswordInvalidHeader,
                 PrimaryButtonText = Resources.ChangePassword,
-                PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style,
+                PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style,
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
                 PrimaryButtonCommand = new RelayCommand(async () =>
@@ -146,7 +146,7 @@ namespace Project2FA.Utils
             });
             dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
             dialog.PrimaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             dialog.SecondaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
             dialog.SecondaryButtonCommand = new RelayCommand(() =>
             {
@@ -179,7 +179,7 @@ namespace Project2FA.Utils
             });
             dialog.CloseButtonText = Resources.ButtonTextCancel;
             dialog.PrimaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             //dialog.SecondaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
             //dialog.SecondaryButtonCommand = new RelayCommand(() =>
             //{
@@ -359,7 +359,7 @@ namespace Project2FA.Utils
                 }
             });
             dialog.PrimaryButtonText = Resources.WriteDatafileErrorBTNRetry;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             dialog.SecondaryButtonText = Resources.WriteDatafileErrorBTNCancel;
             dialog.SecondaryButtonCommand = new RelayCommand(() =>
             {
@@ -384,7 +384,7 @@ namespace Project2FA.Utils
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.PrimaryButtonText = Resources.RestartApp;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             dialog.SecondaryButtonText = Resources.Confirm;
             dialog.SecondaryButtonCommand = new RelayCommand(() =>
             {
@@ -468,7 +468,7 @@ namespace Project2FA.Utils
 
             dialog.Content = stackPanel;
             dialog.PrimaryButtonText = Resources.CloseApp;
-            dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             dialog.PrimaryButtonCommand = new RelayCommand(() =>
             {
                 App.Current.Exit();

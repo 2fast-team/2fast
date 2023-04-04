@@ -96,6 +96,9 @@ namespace Project2FA.Services
         private const long unixEpochTicks = 621355968000000000L;
         private const long ticksToSeconds = 10000000L;
         int _reloadCollectionCounter = 0;
+#if __IOS__
+        private Foundation.NSUrl _openDatefileUrl = null;
+#endif
 
         //private StorageFileQueryResult _queryResult; // to reload the datafile if the file is modified
         //private bool _datafileWritten;
@@ -275,9 +278,13 @@ namespace Project2FA.Services
             try
             {
                 ObservableCollection<TwoFACodeModel> deserializeCollection = new ObservableCollection<TwoFACodeModel>();
-                // not for UWP
+
 #if !WINDOWS_UWP
+                // not for UWP
                 StorageFile file = null;
+#endif
+#if __IOS__
+                Foundation.NSUrl nsUrl = null;
 #endif
                 StorageFolder folder = null;
                 string datafilename, passwordHashName, path;
@@ -291,6 +298,12 @@ namespace Project2FA.Services
                     dbHash = null;
                     passwordHashName = Constants.ActivatedDatafileHashName;
                     datafilename = ActivatedDatafile.Name;
+#if __IOS__
+                    nsUrl = OpenDatefileUrl;
+#endif
+#if __IOS__ || __ANDROID__
+                    file = ActivatedDatafile;
+#endif
                 }
                 else
                 {
@@ -309,10 +322,7 @@ namespace Project2FA.Services
                     dbHash = await App.Repository.Password.GetAsync();
                     passwordHashName = dbHash.Hash;
                     datafilename = dbDatafile.Name;
-                }
 
-                try
-                {
 #if __ANDROID__
                     // create new thread for buggy Android, else NetworkOnMainThreadException 
                     await Task.Run(async () => {
@@ -320,33 +330,56 @@ namespace Project2FA.Services
                         file = StorageFile.GetFromSafUri(androidUri);
                     });
 #endif
+#if __IOS__
+                    Foundation.NSData bookmark = Foundation.NSUserDefaults.StandardUserDefaults.DataForKey(Constants.ContainerName);
+                    nsUrl = Foundation.NSUrl.FromBookmarkData(
+                        bookmark,
+                        Foundation.NSUrlBookmarkResolutionOptions.WithSecurityScope,
+                        null,
+                        out bool isStale,
+                        out Foundation.NSError error);
+                    file = await StorageFile.GetFileFromPathAsync(nsUrl.Path);
+#endif
                 }
-                catch (Exception exc)
-                {
-                    throw;
-                }
+
+
 
 
 #if __ANDROID__ || __IOS__
                 if (file != null)
-#else
+#endif
+#if WINDOWS_UWP
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
-                {
-                    // prevent write of the datafile to folder
-                    _initialization = true;
+                    {
+                        // prevent write of the datafile to folder
+                        _initialization = true;
                     await CollectionAccessSemaphore.WaitAsync();
                     try
                     {
                         string datafileStr = string.Empty;
 
-#if __ANDROID__ || __IOS__
+#if __ANDROID__
                         // create new thread for buggy Android, else NetworkOnMainThreadException 
                         await Task.Run(async () => {
                             datafileStr = await FileIO.ReadTextAsync(file);
                         });
                         
-#else
+#endif
+#if __IOS__
+                        if (Foundation.NSFileManager.DefaultManager.IsReadableFile(nsUrl.Path))
+                        {
+                            datafileStr = await FileIO.ReadTextAsync(file);
+                        }
+                        else
+                        {
+                            if (nsUrl.StartAccessingSecurityScopedResource())
+                            {
+                                datafileStr = await FileIO.ReadTextAsync(file);
+                            }
+                        }
+#endif
+#if WINDOWS_UWP
                         datafileStr = await FileService.ReadStringAsync(datafilename, folder);
 #endif
 
@@ -357,7 +390,7 @@ namespace Project2FA.Services
                             DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
                             byte[] iv = datafile.IV;
 
-                            if (SettingsService.Instance.AdvancedPasswordSecurity || ActivatedDatafile != null)
+                            if (ActivatedDatafile != null)
                             {
 #if WINDOWS_UWP
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
@@ -434,6 +467,16 @@ namespace Project2FA.Services
                         await ErrorDialogs.ShowPasswordError();
                         //CheckLocalDatafile();
                         
+                    }
+                    finally
+                    {
+#if __IOS__
+                        if (nsUrl != null)
+                        {
+                            // release the access of the file
+                            nsUrl.StopAccessingSecurityScopedResource();
+                        }
+#endif
                     }
 
                 }
@@ -555,7 +598,12 @@ namespace Project2FA.Services
         {
             string fileName = string.Empty;
             StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+#if !WINDOWS_UWP
             StorageFile file = null;
+#endif
+#if __IOS__
+            Foundation.NSUrl nsUrl = null;
+#endif
             DBPasswordHashModel dbHash = await App.Repository.Password.GetAsync();
             DBDatafileModel datafileDB = await App.Repository.Datafile.GetAsync();
             // load the current file to allow the reset of the file
@@ -581,14 +629,18 @@ namespace Project2FA.Services
                 
                 if (ActivatedDatafile != null)
                 {
+#if WINDOWS_UWP
                     folder = await ActivatedDatafile.GetParentAsync();
+#endif
                     fileName = ActivatedDatafile.Name;
                 }
                 else
                 {
+#if WINDOWS_UWP
                     folder = datafileDB.IsWebDAV ?
                     ApplicationData.Current.LocalFolder :
                     await StorageFolder.GetFolderFromPathAsync(datafileDB.Path);
+#endif
                     fileName = datafileDB.Name;
 #if __ANDROID__
                     // create new thread for buggy Android, else NetworkOnMainThreadException 
@@ -598,7 +650,14 @@ namespace Project2FA.Services
                     });
 #endif
 #if __IOS__
-                    
+                    Foundation.NSData bookmark = Foundation.NSUserDefaults.StandardUserDefaults.DataForKey(Constants.ContainerName);
+                    nsUrl = Foundation.NSUrl.FromBookmarkData(
+                        bookmark,
+                        Foundation.NSUrlBookmarkResolutionOptions.WithSecurityScope,
+                        null,
+                        out bool isStale,
+                        out Foundation.NSError error);
+                    file = await StorageFile.GetFileFromPathAsync(nsUrl.Path);
 #endif
                 }
 
@@ -620,14 +679,19 @@ namespace Project2FA.Services
                             fileModel.Version),
                         folder);
 #else
-                    var fileStream = await ActivatedDatafile.OpenStreamForWriteAsync();
                     string content = NewtonsoftJSONService.SerializeEncrypt(
                             NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
                             iv,
                             fileModel,
                             fileModel.Version);
-                    await fileStream.WriteAsync(Encoding.UTF8.GetBytes(content));
-                    fileStream.Close();
+#if __ANDROID__
+                    // create new thread for buggy Android, else NetworkOnMainThreadException 
+                    await Task.Run(async () => {
+                        await FileIO.WriteTextAsync(ActivatedDatafile, content);
+                    });
+#else
+                    await FileIO.WriteTextAsync(ActivatedDatafile, content);
+#endif
 
 #endif
                 }
@@ -643,8 +707,37 @@ namespace Project2FA.Services
                             fileModel.Version),
                         folder);
 #else
-
+#if __IOS__
+                    if (!Foundation.NSFileManager.DefaultManager.IsWritableFile(nsUrl.Path))
+                    {
+                        nsUrl.StartAccessingSecurityScopedResource();
+                    }
 #endif
+                    //var fileStream = await file.OpenStreamForWriteAsync();
+                    string content = NewtonsoftJSONService.SerializeEncrypt(
+                            SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName),
+                            iv,
+                            fileModel,
+                            fileModel.Version);
+#if __ANDROID__
+                    // create new thread for buggy Android, else NetworkOnMainThreadException 
+                    await Task.Run(async () => {
+                        await FileIO.WriteTextAsync(file, content);
+                    });
+#else
+                    await FileIO.WriteTextAsync(file, content);
+#endif
+
+                    //using (StreamWriter writer = new StreamWriter(await file.OpenStreamForWriteAsync()))
+                    //{
+                    //    await writer.WriteAsync(content);
+                    //}
+
+
+                    //await fileStream.WriteAsync(Encoding.UTF8.GetBytes(content));
+                    //fileStream.Close();
+#endif
+
                 }
 
 
@@ -673,7 +766,7 @@ namespace Project2FA.Services
                 CollectionAccessSemaphore.Release();
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(WriteLocalDatafile), exc);
-#endif
+
                 var restoreSuccess = await RestoreLastDatafile(datafile, fileName, folder);
                 if (restoreSuccess)
                 {
@@ -683,6 +776,7 @@ namespace Project2FA.Services
                 {
                     // TODO Dialog
                 }
+#endif
 
             }
         }
@@ -941,6 +1035,9 @@ namespace Project2FA.Services
             get => _openDatefile;
             set => SetProperty(ref _openDatefile, value);
         }
+#if __IOS__
+        public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }
+#endif
 #endregion
 
         public void Dispose()

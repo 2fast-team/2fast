@@ -1,13 +1,18 @@
-﻿using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media.Imaging;
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using Windows.Security.Cryptography;
-using Project2FA.Repository.Models;
+using System.Text;
 
-namespace Project2FA.UNO.Converters
+#if WINDOWS_UWP
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media.Imaging;
+#else
+using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Data;
+#endif
+
+namespace Project2FA.Converters
 {
     public class SVGImageConverter : IValueConverter
     {
@@ -18,6 +23,12 @@ namespace Project2FA.UNO.Converters
             {
                 try
                 {
+                    //var svgBuffer = CryptographicBuffer.ConvertStringToBinary(value.ToString(), BinaryStringEncoding.Utf8);
+
+                    //using (var stream = svgBuffer.AsStream())
+                    //{
+                    //    svg.SetSourceAsync(stream.AsRandomAccessStream()).AsTask().ConfigureAwait(false);
+                    //}
                     var utf8 = new UTF8Encoding();
                     var svgBuffer = utf8.GetBytes(value.ToString());
 

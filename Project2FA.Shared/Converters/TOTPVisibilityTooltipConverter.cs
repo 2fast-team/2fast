@@ -1,22 +1,23 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System;
+#if WINDOWS_UWP
+using Windows.UI.Xaml.Data;
+#else
 using Microsoft.UI.Xaml.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+#endif
 
-namespace Project2FA.UNO.Converters
+namespace Project2FA.Converters
 {
-    public class BooleanToVisibilityConverter : IValueConverter
+    public class TOTPVisibilityTooltipConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if ((bool)value)
+            if (!(bool)value)
             {
-                return Visibility.Visible;
+                return Strings.Resources.AccountCodePageTooltipHideTOTP;
             }
             else
             {
-                return Visibility.Collapsed;
+                return Strings.Resources.AccountCodePageTooltipShowTOTP;
             }
         }
 

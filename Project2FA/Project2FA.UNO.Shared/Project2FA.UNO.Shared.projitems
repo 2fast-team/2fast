@@ -18,11 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\DoubleToInt32ToStringConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonalPictureInitialsVisibilityConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonPictureSizeConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\SVGImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AddAccountPage.xaml.cs">
       <DependentUpon>AddAccountPage.xaml</DependentUpon>
     </Compile>

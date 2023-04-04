@@ -11,7 +11,7 @@
     <AssemblyName>Project2FA.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22621.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -23,7 +23,7 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x64|arm64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
     <PackageCertificateThumbprint>5603522399507011BC16B020D4E00718C66AB93F</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
@@ -145,18 +145,6 @@
     <Compile Include="Services\Web\Default\WindowsHttpClientAdapter.cs" />
     <Compile Include="Utils\CustomRichTextButtonActions.cs" />
     <Compile Include="Utils\CustomRichTextFormatter.cs" />
-    <Compile Include="Converters\BoolToCommandBarVisibilityConverter.cs" />
-    <Compile Include="Converters\BytesToHumanReadableConverter.cs" />
-    <Compile Include="Converters\DateTimeToStringConverter.cs" />
-    <Compile Include="Converters\PersonalPictureInitialsVisibilityConverter.cs" />
-    <Compile Include="Converters\DoubleToInt32ToStringConverter.cs" />
-    <Compile Include="Converters\FavouriteToIconConverter.cs" />
-    <Compile Include="Converters\PersonPictureSizeConverter.cs" />
-    <Compile Include="Converters\SVGImageConverter.cs" />
-    <Compile Include="Converters\TOTPVisibilityTooltipConverter.cs" />
-    <Compile Include="Converters\FavouriteTooltipConverter.cs" />
-    <Compile Include="Converters\NullToVisibilityConverter.cs" />
-    <Compile Include="Converters\VisibleWhenFalseConverter.cs" />
     <Compile Include="Extensions\TextBoxRegex.cs" />
     <Compile Include="Extensions\TextBoxRegex.Data.cs" />
     <Compile Include="Extensions\TextBoxRegex.Properties.cs" />

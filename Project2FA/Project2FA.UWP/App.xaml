@@ -2,7 +2,7 @@
     x:Class="Project2FA.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Converters="using:Project2FA.UWP.Converters"
+    xmlns:Converters="using:Project2FA.Converters"
     xmlns:unoApp="using:UNOversal.DryIoc">
 
     <Application.Resources>

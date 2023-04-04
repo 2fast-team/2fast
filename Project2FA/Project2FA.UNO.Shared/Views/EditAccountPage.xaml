@@ -91,11 +91,11 @@
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
-                            -->
-                        <!--<animations:Implicit.ShowAnimations>
+                            
+                        --><!--<animations:Implicit.ShowAnimations>
                                 <animations:OpacityAnimation Duration="0:0:1" From="0" To="1.0"/>
-                            </animations:Implicit.ShowAnimations>-->
-                        <!--
+                            </animations:Implicit.ShowAnimations>--><!--
+                        
                         </StackPanel>
                     </labs:SettingsCard.ActionContent>-->
                     </labs:SettingsCard>

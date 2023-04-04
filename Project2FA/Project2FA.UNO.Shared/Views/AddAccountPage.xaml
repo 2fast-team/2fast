@@ -11,11 +11,20 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <utu:NavigationBar             
+            Grid.Row="0"
+            
+            Background="{ThemeResource TwoFABackgroundBrush}"
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+			Content="#AddAccountPage">
+        </utu:NavigationBar>
         <Button 
             x:Name="BTN_QRCodeCameraScan"
+            Grid.Row="1"
             Margin="0,10,0,10" 
             HorizontalContentAlignment="Left"
             Style="{StaticResource AccentButtonStyle}"
@@ -39,7 +48,7 @@
         <MediaPlayerElement 
             x:Name="CameraPlayerElement" 
             Visibility="{x:Bind ViewModel.CameraSuccessfullyLoaded, Mode=OneWay}"
-            Grid.Row="1">
+            Grid.Row="2">
         </MediaPlayerElement>
     </Grid>
 </Page>

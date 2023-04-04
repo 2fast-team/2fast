@@ -1,17 +1,19 @@
-﻿using Microsoft.UI.Xaml.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+#if WINDOWS_UWP
+using Windows.UI.Xaml.Data;
+#else
+using Microsoft.UI.Xaml.Data;
+#endif
 
-namespace Project2FA.UNO.Converters
+namespace Project2FA.Converters
 {
     public class PersonPictureSizeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (int.TryParse(value.ToString(), out int size))
+            if (double.TryParse(value.ToString(), out double size))
             {
-                return (size / 3) * 2;
+                return (size/3)*2;
             }
             else
             {

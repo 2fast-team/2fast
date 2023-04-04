@@ -1,8 +1,12 @@
 ﻿using Project2FA.Repository.Models;
 using System;
+#if WINDOWS_UWP
 using Windows.UI.Xaml.Data;
+#else
+using Microsoft.UI.Xaml.Data;
+#endif
 
-namespace Project2FA.UWP.Converters
+namespace Project2FA.Converters
 {
     /// <summary>
     /// Called twice because of two PersonPicture controls (binding):/

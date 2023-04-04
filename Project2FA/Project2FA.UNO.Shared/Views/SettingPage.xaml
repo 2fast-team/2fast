@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:labs="clr-namespace:CommunityToolkit.Labs.WinUI;assembly=CommunityToolkit.Labs.WinUI.SettingsControls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,6 +19,86 @@
             Grid.Row="0"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             Background="{ThemeResource TwoFABackgroundBrush}"/>
+
+        <StackPanel Grid.Row="1">
+            <labs:SettingsCard x:Uid="SettingsBackButtonCard">
+                <ToggleSwitch 
+                    x:Name="SettingsBackButtonToggleSwtich"
+                    x:Uid="SettingsBackButtonToggleSwtich"
+                    IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHeaderBackButton, Mode=TwoWay}"
+                    OffContent="~SettingsBackButtonToggleSwtich.OffContent"
+                    OnContent="~SettingsBackButtonToggleSwtich.OnContent"  />
+            </labs:SettingsCard>
+
+            <labs:SettingsCard 
+                x:Uid="SettingsAppThemeMode"
+                Header="~SettingsAppThemeMode.Header">
+                <labs:SettingsCard.Description>
+                    <HyperlinkButton
+                        x:Uid="SettingsWindowsColor"
+                        Content="~SettingsWindowsColor.Content"
+                        NavigateUri="ms-settings:personalization-colors"/>
+                </labs:SettingsCard.Description>
+                <labs:SettingsCard.Content>
+                    <StackPanel>
+                        <ComboBox 
+                                SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
+                                MinWidth="{StaticResource CardActionControlMinWidth}">
+                            <ComboBoxItem x:Uid="SettingsThemeLight" />
+                            <ComboBoxItem x:Uid="SettingsThemeDark"/>
+                            <ComboBoxItem x:Uid="SettingsThemeSystem"/>
+                        </ComboBox>
+                    </StackPanel>
+                </labs:SettingsCard.Content>
+            </labs:SettingsCard>
+
+            <labs:SettingsCard 
+                x:Uid="SettingsAppCornorRadius"
+                Header="~SettingsAppCornorRadius.Header">
+                <labs:SettingsCard.Description>
+                    <TextBlock 
+                        x:Uid="SettingsAppCornorRadiusDesc"
+                        Text="~SettingsAppCornorRadiusDesc.Text" 
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch"/>
+                </labs:SettingsCard.Description>
+                <labs:SettingsCard.Content>
+                    <ToggleSwitch 
+                        x:Name="SettingsRoundCornerToggleSwtich"
+                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
+                </labs:SettingsCard.Content>
+            </labs:SettingsCard>
+            <labs:SettingsExpander
+                Margin="0,0,0,20"
+                IsExpanded="True">
+                <labs:SettingsExpander.Header>
+                    <labs:SettingsCard
+                    x:Uid="SettingsCustomDesign"
+                    Header="~SettingsCustomDesign.Header"/>
+                </labs:SettingsExpander.Header>
+
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard 
+                            x:Uid="SettingsAppPrideMonthDesign"
+                            Header="~SettingsAppPrideMonthDesign.Header"
+                            FontFamily="Segoe UI Emoji"
+                            Icon="🏳‍🌈">
+                        <labs:SettingsCard.Description>
+                            <TextBlock 
+                                x:Uid="SettingsAppPrideMonthDesignDesc"
+                                Text="~SettingsAppPrideMonthDesignDesc.Text" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch"/>
+                        </labs:SettingsCard.Description>
+                        <labs:SettingsCard.Content>
+                            <ToggleSwitch 
+                                x:Name="SettingsAppPrideMonthDesignToggleSwtich"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.PrideMonthDesign, Mode=TwoWay}"/>
+                        </labs:SettingsCard.Content>
+                    </labs:SettingsCard>
+                </labs:SettingsExpander.Items>
+            </labs:SettingsExpander>
+        </StackPanel>
 
     </Grid>
 </Page>

@@ -61,7 +61,7 @@ namespace Project2FA.UNO
             InitializeLogging();
 
 #if __IOS__ || __ANDROID__
-            Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+            //Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
 #endif
 
             this.InitializeComponent();
@@ -163,8 +163,7 @@ namespace Project2FA.UNO
         public override bool OpenUrl(UIKit.UIApplication app, Foundation.NSUrl url, Foundation.NSDictionary options)
         {
             string urlPath = url.Path;
-            Foundation.NSData data = null;
-            StorageFile openedFile;
+            //Foundation.NSData data = null;
             if (_activeDatafileUrl != null)
             {
                 //release the access
@@ -174,23 +173,31 @@ namespace Project2FA.UNO
 
             if (Foundation.NSFileManager.DefaultManager.IsReadableFile(urlPath))
             {
+                LoadStorageFile(url,urlPath);
                 //openedFile = new StorageFile(new );//await StorageFile.GetFileFromPathAsync(urlPath);
-                data = Foundation.NSData.FromFile(urlPath);
+                //data = Foundation.NSData.FromFile(urlPath);
             }
             else
             {
                 if (url.StartAccessingSecurityScopedResource())
                 {
-                    data = Foundation.NSData.FromFile(urlPath);
-                    url.StopAccessingSecurityScopedResource();
+                    //data = Foundation.NSData.FromFile(urlPath);
+                    LoadStorageFile(url,urlPath);
+                    
                 }
             }
 
             // TODO iOS cannot currently open files
-            Foundation.NSString str = Foundation.NSString.FromData(data, Foundation.NSStringEncoding.UTF8);
+            //Foundation.NSString str = Foundation.NSString.FromData(data, Foundation.NSStringEncoding.UTF8);
             //DataService.Instance.StorageFileUrl = url.Path.ToString();
-
+            DataService.Instance.OpenDatefileUrl = url;
             return base.OpenUrl(app, url, options);
+        }
+
+        private async Task LoadStorageFile(Foundation.NSUrl url, string path)
+        {
+            DataService.Instance.ActivatedDatafile = await StorageFile.GetFileFromPathAsync(path);
+            url.StopAccessingSecurityScopedResource();
         }
 
 #endif
@@ -287,6 +294,7 @@ namespace Project2FA.UNO
             containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
             containerRegistry.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
             containerRegistry.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
 #if __IOS__ || __ANDROID__
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();

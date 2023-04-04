@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:mstoolkitControls="clr-namespace:CommunityToolkit.WinUI.UI.Controls;assembly=CommunityToolkit.WinUI.UI.Controls.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -16,39 +17,83 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar 
             Grid.Row="0"
+            Content="#Login"
             Background="{ThemeResource TwoFABackgroundBrush}"/>
-        <StackPanel 
-            x:Name="MainStackPanel"
-            MaxWidth="400" 
-            MinHeight="500" 
->
-            <!--<mstoolkitControls:ImageEx 
-                        Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
-                        MaxHeight="150" 
-                        Margin="0,30,0,10"/>-->
-            <TextBlock Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" FontSize="24"/>
-            <PasswordBox
-                x:Uid="LoginPagePassword"
-                Header="~LoginPagePassword.Header" 
-                PlaceholderText="~LoginPagePassword.PlaceholderText" 
-                Password="{x:Bind ViewModel.Password,Mode=TwoWay}" 
-                Margin="0,5,0,10" 
-                KeyDown="LoginKeydownCheckEnterSubmit" 
-                InputScope="Password" />
+
+        <!--for debug-->
+        <Border 
+            x:Name="PageStaticBackgroundBorder" 
+            Grid.Row="1"
+            Visibility="Collapsed">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Red" Offset="0.000" />
+                    <GradientStop Color="Red" Offset="0.166" />
+                    <GradientStop Color="DarkOrange" Offset="0.167" />
+                    <GradientStop Color="DarkOrange" Offset="0.332" />
+                    <GradientStop Color="Goldenrod" Offset="0.333" />
+                    <GradientStop Color="Goldenrod" Offset="0.499" />
+                    <GradientStop Color="SeaGreen" Offset="0.500" />
+                    <GradientStop Color="SeaGreen" Offset="0.666" />
+                    <GradientStop Color="MediumBlue" Offset="0.667" />
+                    <GradientStop Color="MediumBlue" Offset="0.832" />
+                    <GradientStop Color="Indigo" Offset="0.833" />
+                    <GradientStop Color="Indigo" Offset="1.000" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border 
+            x:Name="PageImageBackgroundBorder"
+            Grid.Row="1">
+            <Image 
+                Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                Stretch="UniformToFill" />
+        </Border>
+
+        <Grid 
+            x:Name="MainGrid"
+            Grid.Row="1">
+            <Border 
+                Background="{ThemeResource TranslucentBackgroundMediumBrush}"
+                x:Name="DetailFirstShadowPanel" >
+                <!--<Border.Background>
+                    <media:PipelineBrush Source="{media:BackdropSource}">
+                        <media:BlurEffect Amount="16"/>
+                    </media:PipelineBrush>
+                </Border.Background>-->
+            </Border>
             <StackPanel 
-                x:Name="SP_LoginBTNs"
-                Orientation="Horizontal" 
-                HorizontalAlignment="Center">
-                <Button 
-                    x:Uid="LoginPageLoginButton"
-                    Content="~LoginPageLoginButton.Content" 
-                    Command="{x:Bind ViewModel.LoginCommand}" 
-                             
-                    MinWidth="100"
-                    Margin="0,10,10,0" 
-                    HorizontalAlignment="Center"/>
+            
+            x:Name="MainStackPanel"
+>
+                <mstoolkitControls:ImageEx 
+                        Source="ms-appx:///Assets/Images/FileLogo.png"
+                        MaxHeight="120" 
+                        Margin="0,30,0,10"/>
+                <PasswordBox 
+                        x:Uid="LoginPagePassword"    
+                        Header="~LoginPagePassword.Header" 
+                        PlaceholderText="~LoginPagePassword.PlaceholderText" 
+                        Password="{x:Bind ViewModel.Password,Mode=TwoWay}" 
+                        Margin="0,5,0,10" 
+                        
+                        InputScope="Password" />
+                <StackPanel 
+                        x:Name="SP_LoginBTNs"
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Center">
+                    <Button 
+                            x:Uid="LoginPageLoginButton"
+                            Content="~LoginPageLoginButton.Content" 
+                            Command="{x:Bind ViewModel.LoginCommand}" 
+                            Style="{StaticResource AccentButtonStyle}"
+                            MinWidth="100"
+                            Margin="0,10,10,0" 
+                            HorizontalAlignment="Center"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </Grid>
     </Grid>
 
 </Page>

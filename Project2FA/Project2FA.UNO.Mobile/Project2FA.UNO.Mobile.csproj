@@ -40,7 +40,7 @@
     <None Remove="Android\Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.12" />
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.17" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="DryIoc" Version="5.3.4" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
@@ -50,8 +50,9 @@
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Core" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.100" />
-    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.5" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.5" />
+    <PackageReference Include="Uno.Resizetizer" Version="1.0.2" />
+    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.5.8" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.5.8" />
     <PackageReference Include="Uno.WinUI" Version="4.8.15" />
     <PackageReference Include="Uno.WinUI.Lottie" Version="4.8.15" />
     <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.15" Condition="'$(Configuration)'=='Debug'" />

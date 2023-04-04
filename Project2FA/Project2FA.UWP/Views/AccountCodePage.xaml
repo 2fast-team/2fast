@@ -76,7 +76,7 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <!--<AppBarButton
+                                        <AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
                                             ToolTipService.ToolTip="#todo"
@@ -91,7 +91,7 @@
                                                         Icon="Camera"/>
                                                 </MenuFlyout>
                                             </AppBarButton.Flyout>
-                                        </AppBarButton>-->
+                                        </AppBarButton>
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>
@@ -141,14 +141,14 @@
                                         SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
                                         Margin="0,0,1,0" />
                                 </AppBarElementContainer>
-                                <!--<AppBarButton
+                                <AppBarButton
                                     x:Name="ABB_SearchFilter"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip}"
                                      x:Uid="AccountCodePageSearchFilter" >
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
                                     </AppBarButton.Icon>
-                                </AppBarButton>-->
+                                </AppBarButton>
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 

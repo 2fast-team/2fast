@@ -1,5 +1,6 @@
 ﻿using Windows.UI.ViewManagement;
 using Project2FA.Services;
+using Windows.UI;
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Windows.UI.Xaml.Controls;
@@ -24,12 +25,10 @@ namespace Project2FA.Helpers
         private static bool initialTransparencyValue;
         private static bool _changeTheme;
 
-
         public static void Initialize()
         {
             // Save reference as this might be null when the user is in another app
             CurrentApplicationWindow = Window.Current;
-
             // Registering to color changes, thus we notice when user changes theme system wide
             uiSettings = new UISettings();
 #if WINDOWS_UWP
@@ -48,21 +47,30 @@ namespace Project2FA.Helpers
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 CurrentApplicationWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
                 {
-                    UpdateSystemTheme();
+                    Color lightBackground = Color.FromArgb(255, 255, 255, 255);
+                    var systemColor = sender.GetColorValue(UIColorType.Background);
+                    if (lightBackground == systemColor)
+                    {
+                        UpdateSystemTheme(ApplicationTheme.Light);
+                    }
+                    else
+                    {
+                        UpdateSystemTheme(ApplicationTheme.Dark);
+                    }
                 });
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 
 
-        public static void UpdateSystemTheme()
+        public static void UpdateSystemTheme(ApplicationTheme theme)
         {
             // change only once
             if (!_changeTheme)
             {
 
                 if (SettingsService.Instance.AppTheme == Services.Enums.Theme.System &&
-                    initialTransparencyValue == uiSettings.AdvancedEffectsEnabled)
+                    SettingsService.Instance.OriginalAppTheme != theme)
                 {
                     // invert the current theme
                     if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
@@ -73,10 +81,6 @@ namespace Project2FA.Helpers
                     {
                         SettingsService.Instance.ResetSystemTheme(ApplicationTheme.Dark);
                     }
-                }
-                else
-                {
-                    SettingsService.Instance.OriginalAppTheme = Application.Current.RequestedTheme == ApplicationTheme.Dark ? ApplicationTheme.Light : ApplicationTheme.Dark;
                 }
                 _changeTheme = true;
             }

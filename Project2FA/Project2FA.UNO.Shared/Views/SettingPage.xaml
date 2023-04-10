@@ -68,7 +68,7 @@
                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
                 </labs:SettingsCard.Content>
             </labs:SettingsCard>
-            <labs:SettingsExpander
+            <!--<labs:SettingsExpander
                 Margin="0,0,0,20"
                 IsExpanded="True">
                 <labs:SettingsExpander.Header>
@@ -97,7 +97,7 @@
                         </labs:SettingsCard.Content>
                     </labs:SettingsCard>
                 </labs:SettingsExpander.Items>
-            </labs:SettingsExpander>
+            </labs:SettingsExpander>-->
         </StackPanel>
 
     </Grid>

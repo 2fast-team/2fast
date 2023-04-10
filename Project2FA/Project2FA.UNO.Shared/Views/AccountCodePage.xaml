@@ -127,12 +127,16 @@
                                 x:Uid="AccountCopyCodeButton"
                                 Width="48"
                                 Height="48"
-                                Click="BTN_CopyCode_Click"
                                 CommandParameter="{Binding}"
                                 Command="{Binding DataContext.CopyCodeToClipboardCommand, ElementName=Page, Mode=OneTime}"
                                 Margin="8,0,4,0" 
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
+                                <Button.Flyout>
+                                    <Flyout>
+                                        <TextBlock Text="{x:Bind strings:Resources.AccountCodePageCopyCodeTeachingTip}"/>
+                                    </Flyout>
+                                </Button.Flyout>
                             </Button>
 
                             <Grid VerticalAlignment="Center">
@@ -347,12 +351,16 @@ MinWidth="50"
                                 x:Uid="AccountCopyCodeButton"
                                 Width="48"
                                 Height="48"
-                                Click="BTN_CopyCode_Click"
                                 CommandParameter="{Binding}"
                                 Command="{Binding DataContext.CopyCodeToClipboardCommand, ElementName=Page, Mode=OneTime}"
                                 Margin="8,0,4,0" 
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
+                                <Button.Flyout>
+                                    <Flyout>
+                                        <TextBlock Text="{x:Bind strings:Resources.AccountCodePageCopyCodeTeachingTip}"/>
+                                    </Flyout>
+                                </Button.Flyout>
                             </Button>
 
                             <Grid VerticalAlignment="Center">
@@ -505,10 +513,31 @@ MinWidth="50"
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Border Background="{ThemeResource TwoFABackgroundBrush}" CornerRadius="0,32,0,0" Height="48" VerticalAlignment="Bottom">
-                <Button Width="76" HorizontalAlignment="Center" Style="{StaticResource TransparentButtonStyle}">
+                <Button 
+                    Width="76" HorizontalAlignment="Center" 
+                    Style="{StaticResource TransparentButtonStyle}"
+  >
                     <FontIcon 
                         FontSize="30"
                         Glyph="&#xE11A;" />
+                    <Button.Flyout>
+                        <Flyout>
+                            <CommandBar 
+                x:Name="CommandBarFlyout1">
+                                <AppBarElementContainer>
+                                    <AutoSuggestBox 
+                                    Width="250"
+                                    Height="40"
+                                    QueryIcon="Find"
+                                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                                    TextChanged="AutoSuggestBox_TextChanged"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,1,0" />
+                                </AppBarElementContainer>
+                                <AppBarButton Label="Delete" Icon="Delete" ToolTipService.ToolTip="Delete"  />
+                            </CommandBar>
+                        </Flyout>
+                    </Button.Flyout>
                 </Button>
             </Border>
 

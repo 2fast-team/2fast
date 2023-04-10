@@ -256,10 +256,9 @@
                                 </Border.Background>
                             </Border>
                         </Border>
-                        <StackPanel >
-                            <Grid>
+                        <StackPanel Margin="12,0,12,0">
+                            <Grid >
                                 <Ellipse 
-                                    ui:Effects.Shadow="{StaticResource PersonPictureShadow}"
                                     Height="100" 
                                     Width="100"
                                     Fill="{ThemeResource SystemAccentColor}"/>
@@ -293,7 +292,7 @@
                                 </Border.Background>
                             </Border>
                         </Border>
-                        <StackPanel>
+                        <StackPanel Margin="12,0,12,0">
                             <TextBlock 
                             x:Uid="TutorialContentDialogCreateMethodHeader"
                             Text="~TutorialContentDialogCreateMethodHeader.Text"
@@ -306,12 +305,18 @@
                             Text="~TutorialContentDialogCreateMethod.Text"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
-                            <ListView 
-                                    ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
-                                    ItemTemplate="{StaticResource TwoFACodeCustomTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.Collection, Mode=OneWay}">
-
-                            </ListView>
+                            <TextBlock 
+                            x:Uid="TutorialContentDialogLoadMethodHeader"
+                            Text="~TutorialContentDialogLoadMethodHeader.Text"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            TextWrapping="WrapWholeWords"
+                            Margin="0,20,0,12"/>
+                            <TextBlock 
+                            x:Uid="TutorialContentDialogLoadMethod"
+                            Text="~TutorialContentDialogLoadMethod.Text"
+                            FontSize="16"
+                            TextWrapping="WrapWholeWords"/>
                             <!--<Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />-->
                         </StackPanel>
                     </Grid>
@@ -325,27 +330,7 @@
                                 </Border.Background>
                             </Border>
                         </Border>
-                        <StackPanel>
-                            <TextBlock 
-                            x:Uid="TutorialContentDialogLoadMethodHeader"
-                            Text="~TutorialContentDialogLoadMethodHeader.Text"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            TextWrapping="WrapWholeWords"
-                            Margin="0,0,0,12"/>
-                            <TextBlock 
-                            x:Uid="TutorialContentDialogLoadMethod"
-                            Text="~TutorialContentDialogLoadMethod.Text"
-                            FontSize="16"
-                            TextWrapping="WrapWholeWords"/>
-                            <!--<Image Source="/Assets/Tutorials/2fast_load_datafile.gif" />-->
-                        </StackPanel>
-                    </Grid>
-
-                </FlipViewItem>
-                <FlipViewItem>
-                    <Grid MaxWidth="760">
-                        <StackPanel>
+                        <StackPanel Margin="12,0,12,0">
                             <TextBlock 
                             x:Uid="AddAccountCodeContentDialogQRCodeHelpHeader"
                             Text="~AddAccountCodeContentDialogQRCodeHelpHeader.Text"
@@ -362,14 +347,46 @@
                     </Grid>
 
                 </FlipViewItem>
+                <FlipViewItem>
+                    <Grid MaxWidth="760">
+                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                            <Border>
+                                <Border.Background>
+                                    <media:BackdropBlurBrush Amount="2" />
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <StackPanel Margin="12,0,12,0">
+                            <TextBlock 
+                            x:Uid="TutorialContentDialogLoadMethodHeader"
+                            Text="~TutorialContentDialogLoadMethodHeader.Text"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            TextWrapping="WrapWholeWords"
+                            Margin="0,0,0,12"/>
+                            <TextBlock 
+                            x:Uid="TutorialContentDialogLoadMethod"
+                            Text="~TutorialContentDialogLoadMethod.Text"
+                            FontSize="16"
+                            TextWrapping="WrapWholeWords"/>
+                            <ListView 
+                                    ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
+                                    ItemTemplate="{StaticResource TwoFACodeCustomTemplate}"
+                                    ItemsSource="{x:Bind ViewModel.Collection, Mode=OneWay}">
+
+                            </ListView>
+                        </StackPanel>
+                    </Grid>
+
+                </FlipViewItem>
             </FlipView>
 
         </StackPanel>
         <muxc:PipsPager 
             x:Name="FlipViewPipsPager"
-      HorizontalAlignment="Center"
-      VerticalContentAlignment="Bottom"
-      NumberOfPages="4"
-      SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
+            HorizontalAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            NumberOfPages="4"
+            SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
     </Grid>
 </Page>

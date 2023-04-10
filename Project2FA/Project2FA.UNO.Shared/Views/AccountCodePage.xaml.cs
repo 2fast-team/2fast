@@ -41,15 +41,15 @@ namespace Project2FA.UNO.Views
 
         private void CreateTeachingTip(FrameworkElement element)
         {
-            //TeachingTip teachingTip = new TeachingTip
-            //{
-            //    Target = element,
-            //    Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
+            TeachingTip teachingTip = new TeachingTip
+            {
+                Target = element,
+                Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
 
-            //    BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
-            //    IsOpen = true,
-            //};
-            //MainGrid.Children.Add(teachingTip);
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            MainGrid.Children.Add(teachingTip);
         }
 
         /// <summary>
@@ -65,6 +65,7 @@ namespace Project2FA.UNO.Views
                 //{
                 //    CreateTeachingTip(sender as FrameworkElement);
                 //}
+                CreateTeachingTip(sender as FrameworkElement);
             }
         }
 
@@ -73,6 +74,58 @@ namespace Project2FA.UNO.Views
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
             {
                 await ViewModel.EditAccountFromCollection(model);
+            }
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                if (string.IsNullOrEmpty(sender.Text) == false)
+                {
+                    try
+                    {
+                        List<string> _nameList = new List<string>();
+                        foreach (TwoFACodeModel item in ViewModel.TwoFADataService.Collection)
+                        {
+                            _nameList.Add(item.Label);
+                        }
+                        List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                        if (listSuggestion.Count == 0)
+                        {
+                            listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
+                        }
+                        sender.ItemsSource = listSuggestion;
+                        ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                    }
+                    catch (System.Exception exc)
+                    {
+                        ViewModel.TwoFADataService.ACVCollection.Filter = null;
+                        //TrackingManager.TrackException(nameof(AutoSuggestBox_TextChanged), exc);
+                    }
+
+                }
+                else
+                {
+                    sender.ItemsSource = null;
+                    if (ViewModel.TwoFADataService.ACVCollection.Filter != null)
+                    {
+                        ViewModel.TwoFADataService.ACVCollection.Filter = null;
+                    }
+                }
+            }
+        }
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            string selectedItem = args.SelectedItem.ToString();
+            if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
+            {
+                ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label == selectedItem;
+            }
+            else
+            {
+                sender.Text = string.Empty;
             }
         }
 
@@ -100,6 +153,11 @@ namespace Project2FA.UNO.Views
             {
                 await ViewModel.DeleteAccountFromCollection(model);   
             }
+        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            Bindings.Update();
+            base.OnNavigatedFrom(e);
         }
     }
 }

@@ -9,6 +9,13 @@
     <Import_RootNamespace>Project2FA.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\AdvancedCollectionView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\AdvancedCollectionView.Defer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\AdvancedCollectionView.Events.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\IAdvancedCollectionView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\SortDescription.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\SortDirection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\VectorChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToCommandBarVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BytesToHumanReadableConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />

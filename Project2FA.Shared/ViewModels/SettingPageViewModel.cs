@@ -82,14 +82,14 @@ namespace Project2FA.ViewModels
             }
         }
 
-        private async Task SendMail()
-        {
-            EmailMessage emailMessage = new EmailMessage();
-            emailMessage.To.Add(new EmailRecipient("app-2fast@outlook.com"));
-            emailMessage.Subject = "Support 2fast";
+        //private async Task SendMail()
+        //{
+        //    EmailMessage emailMessage = new EmailMessage();
+        //    emailMessage.To.Add(new EmailRecipient("app-2fast@outlook.com"));
+        //    emailMessage.Subject = "Support 2fast";
 
-            await EmailManager.ShowComposeNewEmailAsync(emailMessage);
-        }
+        //    await EmailManager.ShowComposeNewEmailAsync(emailMessage);
+        //}
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
         {
@@ -107,6 +107,10 @@ namespace Project2FA.ViewModels
     /// <summary>
     /// Main content part of the settings page
     /// </summary>
+
+#if !WINDOWS_UWP
+    [Bindable]
+#endif
     public class SettingsPartViewModel : ObservableObject
     {
         private SettingsService _settings;
@@ -512,6 +516,10 @@ namespace Project2FA.ViewModels
     /// <summary>
     /// Datafile tab from the settings page
     /// </summary>
+
+#if !WINDOWS_UWP
+    [Bindable]
+#endif
     public class DatafilePartViewModel : ObservableObject
     {
         private IDialogService _dialogService { get; }
@@ -587,6 +595,10 @@ namespace Project2FA.ViewModels
     /// <summary>
     /// About tab from the settings page
     /// </summary>
+
+#if !WINDOWS_UWP
+    [Bindable]
+#endif
     public class AboutPartViewModel : ObservableObject
     {
 #if WINDOWS_UWP

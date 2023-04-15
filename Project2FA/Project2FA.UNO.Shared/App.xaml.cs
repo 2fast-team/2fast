@@ -140,7 +140,6 @@ namespace Project2FA.UNO
             }
             if (args.Arguments is ProtocolActivatedEventArgs fileActivated)
             {
-                //var file = fileActivated.Uri
 #if __ANDROID__
                 Android.Net.Uri strLink = Android.Net.Uri.Parse(fileActivated.Uri.ToString());
                 DataService.Instance.ActivatedDatafile = StorageFile.GetFromSafUri(strLink);
@@ -269,9 +268,9 @@ namespace Project2FA.UNO
             global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
 #endif
-//#if __IOS__ || __ANDROID__
-//            global::Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
-//#endif
+#if __IOS__ || __ANDROID__
+            global::Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+#endif
         }
 
         public override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -288,7 +287,6 @@ namespace Project2FA.UNO
             containerRegistry.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
 
             containerRegistry.RegisterSingleton<ShellPage>();
-            //containerRegistry.Register<DatafileViewModelBase>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();

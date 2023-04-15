@@ -16,13 +16,13 @@
 
     <Page.Resources>
         <ResourceDictionary>
-            <helpers:AccountAvatarTemplateSelector 
+            <!--<helpers:AccountAvatarTemplateSelector 
                 x:Key="AccountAvatarTemplateSelector"
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
-                Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
+                Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>-->
 
             <DataTemplate x:Key="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
-                <Grid Background="{ThemeResource TwoFABackgroundBrush}">
+                <Grid Background="{ThemeResource TwoFABackgroundBrush}" Margin="0,0,0,8">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -239,7 +239,10 @@
             </DataTemplate>
 
             <DataTemplate x:Key="TwoFACodeCustomAccentTemplate" x:DataType="models:TwoFACodeModel">
-                <Grid Background="{ThemeResource TwoFABackgroundBrush}">
+                <!--<ListViewItem>
+                   
+                </ListViewItem>-->
+                <Grid Background="{ThemeResource TwoFABackgroundBrush}" Margin="0,0,0,8">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -479,7 +482,7 @@ MinWidth="50"
         x:Name="MainGrid"
         Grid.Row="1"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <ListView 
+            <!--<ListView 
             x:Name="LV_AccountCollection"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
                 ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
@@ -487,15 +490,28 @@ MinWidth="50"
             HorizontalContentAlignment="Stretch"
                 ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}"
             HorizontalAlignment="Stretch">
-                <!--<ListView.ItemContainerStyle>
+                --><!--<ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="2,16,2,0"/>
                     </Style>
-                </ListView.ItemContainerStyle>-->
-            </ListView>
-        </Grid>
+                </ListView.ItemContainerStyle>--><!--
+            </ListView>-->
+            <ItemsRepeaterScrollHost>
+                <ScrollViewer>
+                    <ItemsRepeater ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}">
+                        <ItemsRepeater.ItemTemplate>
+                            <helpers:AccountAvatarTemplateSelector 
+                            x:Key="AccountAvatarTemplateSelector"
+                            Normal="{StaticResource TwoFACodeCustomTemplate}" 
+                            Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </ScrollViewer>
 
+            </ItemsRepeaterScrollHost>
+        </Grid>
+        
         <Grid Grid.Row="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -548,7 +564,8 @@ MinWidth="50"
             <Border 
                 Background="{ThemeResource TwoFABackgroundBrush}" 
                 Grid.Column="4" 
-                Height="48" CornerRadius="32,0,0,0" 
+                Height="48" 
+                CornerRadius="32,0,0,0" 
                 VerticalAlignment="Bottom">
                 <Button 
                     Width="76" 

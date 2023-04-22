@@ -37,11 +37,11 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.RowSpan="3" >
-                            <Border 
-                                Width="2.5" 
-                                Background="{ThemeResource  SystemAccentColor}" />
-                        </Grid>
+						<Border
+						    Grid.RowSpan="3"
+                            Width="2.5"
+                            Margin="0,0,0,8"
+                            Background="{ThemeResource  SystemAccentColor}" />
 
                         <PersonPicture 
                             Height="76"
@@ -83,12 +83,12 @@
                             Orientation="Horizontal"
                             Grid.Row="3"
                             Grid.Column="1"
-                            Grid.ColumnSpan="3"
+                            Grid.ColumnSpan="4"
                             Margin="8,0,0,4">
 
                             <Button
                                 x:Name="BTN_ShowCode"
-
+                                Style="{StaticResource TransparentButtonStyle}"
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
@@ -108,7 +108,7 @@
                                 <TextBlock
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
                                 FontSize="24"
-
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                                 VerticalAlignment="Center"
                                 CharacterSpacing="60"
                                 Foreground="{ThemeResource SystemAccentColor}" />
@@ -116,7 +116,7 @@
                                 Text="______"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
                                 FontSize="24"
-                                CharacterSpacing="205"
+                                CharacterSpacing="200"
                                 VerticalAlignment="Center" 
                                 Foreground="{ThemeResource SystemAccentColor}" />
                             </Grid>
@@ -243,9 +243,6 @@
             </DataTemplate>
 
             <DataTemplate x:Key="TwoFACodeCustomAccentTemplate" x:DataType="models:TwoFACodeModel">
-                <!--<ListViewItem>
-                   
-                </ListViewItem>-->
                 <Grid Background="{ThemeResource TwoFABackgroundBrush}" Margin="0,0,0,8">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -261,11 +258,16 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.RowSpan="3" >
+                        <!--<Grid Grid.RowSpan="3" >
                             <Border 
                                 Width="2.5" 
                                 Background="{ThemeResource SystemAccentColor}" />
-                        </Grid>
+                        </Grid>-->
+                        <Border
+						    Grid.RowSpan="3"
+                            Width="2.5"
+                            Margin="0,0,0,8"
+                            Background="{ThemeResource  SystemAccentColor}" />
 
                         <PersonPicture 
                             Height="76"
@@ -310,12 +312,12 @@
                             Orientation="Horizontal"
                             Grid.Row="3"
                             Grid.Column="1"
-                            Grid.ColumnSpan="3"
+                            Grid.ColumnSpan="4"
                             Margin="8,0,0,4">
 
                             <Button
                                 x:Name="BTN_ShowCode"
-
+                                Style="{StaticResource TransparentButtonStyle}"
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
@@ -335,7 +337,8 @@
                                 <TextBlock
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
                                 FontSize="24"
-MinWidth="50"
+                                MinWidth="50"
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                                 VerticalAlignment="Center"
                                 CharacterSpacing="60"
                                 Foreground="{ThemeResource SystemAccentColor}" />
@@ -343,7 +346,7 @@ MinWidth="50"
                                 Text="______"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
                                 FontSize="24"
-                                CharacterSpacing="205"
+                                CharacterSpacing="200"
                                 VerticalAlignment="Center" 
                                 Foreground="{ThemeResource SystemAccentColor}" />
                             </Grid>
@@ -485,6 +488,13 @@ MinWidth="50"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             MainCommandMode="Action"
 			Content="{x:Bind strings:Resources.AccountCodePageTitle}">
+            <!--<utu:NavigationBar.PrimaryCommands>
+                <AppBarButton Label="Search" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE721;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </utu:NavigationBar.PrimaryCommands>-->
         </utu:NavigationBar>
         <Grid 
         x:Name="MainGrid"
@@ -519,8 +529,62 @@ MinWidth="50"
 
             </ItemsRepeaterScrollHost>
         </Grid>
+
+        <utu:TabBar 
+            SelectedIndex="0"
+            Grid.Row="2"
+            Style="{StaticResource BottomTabBarStyle}">
+            <utu:TabBar.Items>
+                <utu:TabBarItem Content="Home">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE80F;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem Content="Search">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xe721;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem Style="{StaticResource BottomFabTabBarItemStyle}" Content="+">
+                    <utu:TabBarItem.Flyout>
+                        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
+                            Placement="Top">
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddCamera"
+                                Text="AccountCodePageAddCamera.Text~"
+                                Click="BTN_AddAccountCamera_Click">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE70F;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddManual"
+                                Text="AccountCodePageAddManual.Text~"
+                                Click="BTN_AddAccountManual_Click">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE1C2;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </utu:TabBarItem.Flyout>
+                    <utu:TabBarItem.Icon>
+                        <SymbolIcon Symbol="Add" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem Content="Support">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE946;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem Content="About" Command="{x:Bind ViewModel.NavigateToSettingsCommand}">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE713;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+            </utu:TabBar.Items>
+        </utu:TabBar>
         
-        <Grid Grid.Row="2" >
+        <!--<Grid Grid.Row="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="auto"/>
@@ -606,63 +670,7 @@ MinWidth="50"
                         Glyph="&#xE115;" />
                 </Button>
             </Border>
-        </Grid>
-
-        <!--<Grid Grid.Row="2" Height="52" Background="{ThemeResource TwoFABackgroundBrush}">
-            <StackPanel 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Bottom">
-                <Button Width="76" Style="{StaticResource TransparentButtonStyle}">
-                    <FontIcon 
-                        FontSize="30"
-                        Glyph="&#xE109;" />
-                    <Button.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddCamera"
-                                Text="AccountCodePageAddCamera.Text~"
-                                Click="BTN_AddAccountCamera_Click">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE70F;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddManual"
-                                Text="AccountCodePageAddManual.Text~"
-                                Click="BTN_AddAccountManual_Click">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE1C2;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </Button.Flyout>
-                </Button>
-                <Button Width="76" Style="{StaticResource TransparentButtonStyle}">
-                    <FontIcon 
-                        FontSize="30"
-                        Glyph="&#xE11A;" />
-                </Button>
-                <Button Width="76" Style="{StaticResource TransparentButtonStyle}">
-                    <FontIcon 
-                        FontSize="30"
-                        Glyph="&#xE115;" />
-                </Button>
-            </StackPanel>
         </Grid>-->
 
-        <!--<CommandBar Grid.Row="2">
-            <CommandBar.PrimaryCommands>
-                <AppBarButton Label="#add" Icon="Add"/>
-                <AppBarButton Label="#search" Icon="Find">
-                    <AppBarButton.Flyout>
-                        <CommandBarFlyout>
-                            <AppBarButton Icon="Placeholder"/>
-                        </CommandBarFlyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-                <AppBarButton Label="#settings" Icon="Setting"/>
-            </CommandBar.PrimaryCommands>
-        </CommandBar>-->
     </Grid>
 </Page>

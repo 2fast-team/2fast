@@ -144,7 +144,7 @@ namespace Project2FA.UWP
                     Repository = new DBProject2FARepository(dbOptions);
                 }
 
-                // LoadIconNames(); //only for development
+                //LoadIconNames(); //only for development
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
@@ -192,7 +192,7 @@ namespace Project2FA.UWP
                     }
                     else
                     {
-                        await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(TutorialPage));
+                        await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
                         Window.Current.Content = ShellPageInstance;
                     }
                 }
@@ -235,26 +235,36 @@ namespace Project2FA.UWP
         /// <returns></returns>
         //private async Task LoadIconNames()
         //{
-        //    IFileService fileService = App.Current.Container.Resolve<IFileService>();
-        //    StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-        //    if (!await fileService.FileExistsAsync("IconNameCollection.json", localFolder))
+        //    try
         //    {
-        //        string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-        //        string path = root + @"\Assets\AccountIcons";
-        //        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-        //        var elements = await folder.GetFilesAsync();
-        //        List<IconNameModel> iconList = new List<IconNameModel>();
-        //        foreach (var item in elements)
+        //        IFileService fileService = App.Current.Container.Resolve<IFileService>();
+        //        StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+        //        if (!await fileService.FileExistsAsync("IconNameCollection.json", localFolder))
         //        {
-        //            iconList.Add(new IconNameModel() { Name = item.DisplayName });
+        //            string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+        //            string path = root + @"\Assets\AccountIcons";
+        //            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+        //            var elements = await folder.GetFilesAsync();
+        //            List<IconNameModel> iconList = new List<IconNameModel>();
+        //            foreach (var item in elements)
+        //            {
+        //                iconList.Add(new IconNameModel() { Name = item.DisplayName });
+        //            }
+        //            var iconCollectionModel = new IconNameCollectionModel()
+        //            {
+        //                AppVersion = SystemInformation.Instance.ApplicationVersion.ToString(),
+        //                Collection = iconList.ToObservableCollection()
+        //            };
+        //            await fileService.WriteFileAsync("IconNameCollection.json", iconCollectionModel, localFolder);
         //        }
-        //        var iconCollectionModel = new IconNameCollectionModel()
-        //        {
-        //            AppVersion = SystemInformation.Instance.ApplicationVersion.ToString(),
-        //            Collection = iconList.ToObservableCollection()
-        //        };
-        //        await fileService.WriteFileAsync("IconNameCollection.json", iconCollectionModel, localFolder);
+
         //    }
+        //    catch (Exception exc)
+        //    {
+
+        //        throw;
+        //    }
+
         //}
 
         #region AutoLogout

@@ -11,7 +11,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- Load Uno.Toolkit.UI resources -->
                 <ToolkitResources xmlns="using:Uno.Toolkit.UI" />
-                <MaterialToolkitResources xmlns="using:Uno.Toolkit.UI.Material" />
+                <!--<MaterialToolkitResources xmlns="using:Uno.Toolkit.UI.Material" />-->
                 <CupertinoToolkitResources xmlns="using:Uno.Toolkit.UI.Cupertino" />
 
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />

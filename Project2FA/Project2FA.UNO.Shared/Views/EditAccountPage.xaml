@@ -19,10 +19,13 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar             
             Grid.Row="0"
-            
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
 			Content="#Edit">
+            <utu:NavigationBar.MainCommand>
+                <AppBarButton 
+                    Foreground="{ThemeResource  SystemAccentColor}" />
+            </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>
         <Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto">

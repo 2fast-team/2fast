@@ -30,7 +30,7 @@
                                 <!-- Visual State when a Photo is available for display -->
                                 <VisualState x:Name="Photo">
                                     <VisualState.Setters>
-                                        <Setter Target="SVGImage.Visibility" Value="Visible" />
+                                        <!--<Setter Target="SVGImage.Visibility" Value="Visible" />-->
                                         <!--<Setter Target="PersonPictureEllipse.Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ActualImageBrush}"/>
 
                                         --><!-- ImageBrush is not stretching properly https://github.com/unoplatform/uno/issues/4951 --><!--
@@ -41,7 +41,7 @@
                                 <VisualState x:Name="Initials" />
                                 <VisualState x:Name="NoPhotoOrInitials">
                                     <VisualState.Setters>
-                                        <Setter Target="SVGImage.Visibility" Value="Collapsed" />
+                                        <!--<Setter Target="SVGImage.Visibility" Value="Collapsed" />-->
                                         <!--<Setter Target="InitialsTextBlock.FontFamily" Value="{ThemeResource SymbolThemeFontFamily}"/>-->
                                         <!-- Placeholder symbol for 'Contact' (https://docs.microsoft.com/en-us/windows/uwp/design/style/segoe-ui-symbol-font) -->
                                         <!--<Setter Target="InitialsTextBlock.Text" Value="&#xE77B;"/>-->

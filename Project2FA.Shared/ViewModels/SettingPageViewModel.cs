@@ -51,11 +51,14 @@ namespace Project2FA.ViewModels
         public SettingsPartViewModel SettingsPartViewModel { get; }
         public AboutPartViewModel AboutPartViewModel { get; }
         public DatafilePartViewModel DatafilePartViewModel { get; }
+        public INavigationService NavigationService { get; }
+
         public ICommand RateAppCommand { get; }
         public ICommand SendMailCommand { get; }
+        //public ICommand NavigateBackCommand { get; }
 
         private int _selectedItem;
-        public SettingPageViewModel(IDialogService dialogService, ISecretService secretService)
+        public SettingPageViewModel(IDialogService dialogService, ISecretService secretService, INavigationService navigationService)
         {
 #if WINDOWS_UWP
             IMarketplaceService marketplaceService = App.Current.Container.Resolve<IMarketplaceService>();
@@ -71,6 +74,8 @@ namespace Project2FA.ViewModels
             {
                 AboutPartViewModel.RateApp();
             });
+            NavigationService = navigationService;
+            //NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             //SendMailCommand = new AsyncRelayCommand(SendMail);
         }
 
@@ -102,6 +107,7 @@ namespace Project2FA.ViewModels
             get => _selectedItem;
             set => SetProperty(ref _selectedItem, value);
         }
+        
     }
 
     /// <summary>

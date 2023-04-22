@@ -162,7 +162,6 @@ namespace Project2FA.UNO
         public override bool OpenUrl(UIKit.UIApplication app, Foundation.NSUrl url, Foundation.NSDictionary options)
         {
             string urlPath = url.Path;
-            //Foundation.NSData data = null;
             if (_activeDatafileUrl != null)
             {
                 //release the access
@@ -186,9 +185,6 @@ namespace Project2FA.UNO
                 }
             }
 
-            // TODO iOS cannot currently open files
-            //Foundation.NSString str = Foundation.NSString.FromData(data, Foundation.NSStringEncoding.UTF8);
-            //DataService.Instance.StorageFileUrl = url.Path.ToString();
             DataService.Instance.OpenDatefileUrl = url;
             return base.OpenUrl(app, url, options);
         }
@@ -198,7 +194,6 @@ namespace Project2FA.UNO
             DataService.Instance.ActivatedDatafile = await StorageFile.GetFileFromPathAsync(path);
             url.StopAccessingSecurityScopedResource();
         }
-
 #endif
 
         /// <summary>

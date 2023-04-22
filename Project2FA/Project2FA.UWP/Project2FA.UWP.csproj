@@ -532,8 +532,8 @@
   </ItemGroup>
   <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.Services\UNOversalTemplate.Services.projitems" Label="Shared" />
   <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.IoC.DryIoC\UNOversalTemplate.IoC.DryIoC.projitems" Label="Shared" />
-  <Import Project="..\..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
   <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.Core\UNOversalTemplate.Core.projitems" Label="Shared" />
+  <Import Project="..\..\Project2FA.Shared\Project2FA.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

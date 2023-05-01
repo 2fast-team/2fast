@@ -59,6 +59,7 @@ namespace Project2FA.ViewModels
         public ICommand HideOrShowTOTPCodeCommand {get;}
         public ICommand CopyCodeToClipboardCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
+        private TwoFACodeModel _changedItem = null;
 
         private bool _datafileUpdated;
         private bool _datafileWebDAVUpToDate;
@@ -83,48 +84,10 @@ namespace Project2FA.ViewModels
             _dispatcherTimerDeletedModel.Tick -= TimerDeletedModel;
             _dispatcherTimerDeletedModel.Tick += TimerDeletedModel;
 
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            AddAccountCommand = new RelayCommand(async () =>
-            {
-                if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
-                {
-                    TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
-                }
-                AddAccountContentDialog dialog = new AddAccountContentDialog();
-                var result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
-                if (result == ContentDialogResult.None)
-                {
-#if WINDOWS_UWP
-                    await dialog.ViewModel.CleanUpCamera();
-#endif
-                }
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
+            AddAccountCommand = new AsyncRelayCommand(AddAccountCommandTask);
             RefreshCommand = new AsyncRelayCommand(ReloadDatafileAndUpdateCollection);
-
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            LogoutCommand = new RelayCommand(async () =>
-            {
-                if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
-                {
-                    TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
-                }
-                // clear the navigation stack
-                await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
-                if (TwoFADataService.ActivatedDatafile != null)
-                {
-                    FileActivationPage fileActivationPage = new FileActivationPage();
-                    WinUIWindow.Current.Content = fileActivationPage;
-                }
-                else
-                {
-                    LoginPage loginPage = new LoginPage(true);
-                    WinUIWindow.Current.Content = loginPage;
-                }
-
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+            LogoutCommand = new AsyncRelayCommand(LogoutCommandTask);
 
             UndoDeleteCommand = new RelayCommand(() =>
             {
@@ -140,14 +103,14 @@ namespace Project2FA.ViewModels
             HideOrShowTOTPCodeCommand = new RelayCommand<TwoFACodeModel>(HideOrShowTOTPCode);
             DeleteAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
+            CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
+
+            NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
+
             if (TwoFADataService.TempDeletedTFAModel != null)
             {
                 _dispatcherTimerDeletedModel.Start();
             }
-
-            CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
-            NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
-
 
             //register the messenger calls
             Messenger.Register<AccountCodePageViewModel, DatafileWriteStatusChangedMessage>(this, (r, m) => r.DatafileUpdated = m.Value);
@@ -176,6 +139,42 @@ namespace Project2FA.ViewModels
             });
 
 
+        }
+
+        private async Task AddAccountCommandTask()
+        {
+            if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
+            {
+                TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
+            }
+            AddAccountContentDialog dialog = new AddAccountContentDialog();
+            var result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+            if (result == ContentDialogResult.None)
+            {
+#if WINDOWS_UWP
+                await dialog.ViewModel.CleanUpCamera();
+#endif
+            }
+        }
+
+        private async Task LogoutCommandTask()
+        {
+            if (TwoFADataService.EmptyAccountCollectionTipIsOpen)
+            {
+                TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
+            }
+            // clear the navigation stack
+            await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+            if (TwoFADataService.ActivatedDatafile != null)
+            {
+                FileActivationPage fileActivationPage = new FileActivationPage();
+                WinUIWindow.Current.Content = fileActivationPage;
+            }
+            else
+            {
+                LoginPage loginPage = App.Current.Container.Resolve<LoginPage>();
+                WinUIWindow.Current.Content = loginPage;
+            }
         }
 
         private async Task NavigateToSettingsCommandTask()
@@ -263,12 +262,14 @@ namespace Project2FA.ViewModels
         {
             if (parameter is TwoFACodeModel model)
             {
+                ChangedItem = null;
                 model.IsFavourite = !model.IsFavourite;
                 await TwoFADataService.WriteLocalDatafile();
                 if (!string.IsNullOrWhiteSpace(model.AccountIconName))
                 {
                     await SVGColorHelper.GetSVGIconWithThemeColor(model, model.AccountIconName);
                 }
+                ChangedItem = model;
             }
         }
 
@@ -482,6 +483,15 @@ namespace Project2FA.ViewModels
         { 
             get => _datafileWebDAVUpdated; 
             set => SetProperty(ref _datafileWebDAVUpdated, value); 
+        }
+        public TwoFACodeModel ChangedItem
+        {
+            get => _changedItem;
+            set
+            {
+                _changedItem = value;
+                OnPropertyChanged(nameof(ChangedItem));
+            }
         }
     }
 }

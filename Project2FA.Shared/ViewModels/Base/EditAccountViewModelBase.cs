@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Helpers;
 using Project2FA.Repository.Models;
+using Project2FA.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +21,7 @@ namespace Project2FA.ViewModels
             _tempAccountSVGIcon, _tempNotes, _tempIconLabel;
         private IconNameCollectionModel _iconNameCollectionModel;
         private bool _isEditBoxVisible;
+        private bool _notesExpanded = true;
 
         public ICommand CancelButtonCommand { get; internal set; }
         public ICommand PrimaryButtonCommand { get; internal set; }
@@ -29,7 +31,9 @@ namespace Project2FA.ViewModels
         public ISerializationService SerializationService { get; internal set; }
         public EditAccountViewModelBase()
         {
-
+#if WINDOWS_UWP
+            NotesExpanded = SettingsService.Instance.IsProVersion ? false : true;
+#endif
         }
         public TwoFACodeModel Model
         {
@@ -106,6 +110,16 @@ namespace Project2FA.ViewModels
         {
             get => _isEditBoxVisible;
             set => SetProperty(ref _isEditBoxVisible, value);
+        }
+        public bool NotesExpanded 
+        { 
+            get => _notesExpanded;
+            set => SetProperty(ref _notesExpanded, value); 
+        }
+
+        public bool IsProVersion
+        {
+            get => SettingsService.Instance.IsProVersion;
         }
 
         public async Task LoadIconNameCollection()

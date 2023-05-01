@@ -192,7 +192,7 @@ namespace Project2FA.UWP
                     }
                     else
                     {
-                        await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
+                        await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(TutorialPage));
                         Window.Current.Content = ShellPageInstance;
                     }
                 }

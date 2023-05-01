@@ -1,12 +1,9 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using System.Windows.Input;
-using Prism.Navigation;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using UNOversal.Services.Dialogs;
 using UNOversal.Navigation;
-
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -33,7 +30,6 @@ namespace Project2FA.ViewModels
         INavigationService _navigationService { get; }
         public ICommand NewDatefileCommand { get; }
         public ICommand TutorialCommand { get; }
-        public ICommand OpenTutorialCommand { get; }
 
         public ICommand UseExistDatefileCommand { get; }
         private bool _isTutorialOpen;
@@ -48,33 +44,22 @@ namespace Project2FA.ViewModels
             App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             Title = Strings.Resources.WelcomePageTitle;
 
-            NewDatefileCommand = new AsyncRelayCommand(NewDatafile);
+            NewDatefileCommand = new AsyncRelayCommand(NewDatafileCommandTask);
 
-            UseExistDatefileCommand = new AsyncRelayCommand(UseExistDatafile);
+            UseExistDatefileCommand = new AsyncRelayCommand(UseExistDatafileCommandTask);
 
             TutorialCommand = new RelayCommand(() =>
             {
                 IsTutorialOpen = !IsTutorialOpen;
             });
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            OpenTutorialCommand = new RelayCommand(async() =>
-            {
-                var dialog = new TutorialContentDialog();
-                if (IsTutorialOpen)
-                {
-                    IsTutorialOpen = false;
-                }
-                await _dialogService.ShowDialogAsync(dialog,new DialogParameters());
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
-        private async Task NewDatafile()
+        private async Task NewDatafileCommandTask()
         {
             await _navigationService.NavigateAsync(nameof(NewDataFilePage));
         }
 
-        private async Task UseExistDatafile()
+        private async Task UseExistDatafileCommandTask()
         {
             await _navigationService.NavigateAsync(nameof(UseDataFilePage));
         }

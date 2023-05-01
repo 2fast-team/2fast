@@ -31,19 +31,21 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="AppTitleBar" Background="{ThemeResource TitleAcrylicWindowBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <StackPanel 
+                x:Name="AppTitle" 
+                Grid.Column="1" 
+                Orientation="Horizontal">
+                <Image 
+                    x:Name="AppLogo"
+                    Source="/Assets/Square44x44Logo.png" 
+                    Margin="0,0,10,0" 
+                    Height="26"/>
                 <TextBlock 
-                x:Name="AppTitle"
                 Text="{x:Bind ViewModel.Title,Mode=OneWay}"
                 VerticalAlignment="Center"
                 Style="{StaticResource CaptionTextBlockStyle}" />
                 <TextBlock 
-                Margin="20,0,0,0"
-                x:Name="WarnTitle"
+                Margin="10,0,0,0"
                 Visibility="{x:Bind ViewModel.IsScreenCaptureEnabled,Mode=OneWay}"
                 Text="{x:Bind strings:Resources.ShellPageWarnInfo,Mode=OneWay}"
                 VerticalAlignment="Center"

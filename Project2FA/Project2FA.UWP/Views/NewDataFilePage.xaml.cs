@@ -1,9 +1,11 @@
-﻿using Project2FA.ViewModels;
+﻿using Project2FA.UWP.Controls;
+using Project2FA.ViewModels;
 using System;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-
+using Windows.UI.Xaml.Media;
 
 namespace Project2FA.UWP.Views
 {
@@ -26,7 +28,17 @@ namespace Project2FA.UWP.Views
 
         private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
         {
-
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            {
+                Target = sender as FrameworkElement,
+                Title = Strings.Resources.NewDatafilePasswordInfoTitle,
+                Subtitle = Strings.Resources.NewDatafilePasswordInfo,
+                AutoCloseInterval = 8000,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            RootGrid.Children.Add(teachingTip);
         }
 
         private async void BTN_LocalPath_Click(object sender, RoutedEventArgs e)

@@ -1,23 +1,14 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
+using Project2FA.Utils;
 using Project2FA.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 
 
 namespace Project2FA.UWP.Views
@@ -33,8 +24,20 @@ namespace Project2FA.UWP.Views
 
         private void FileActivationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.IsVisibleChanged -= CoreTitleBar_IsVisibleChanged;
+            coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
             // Set XAML element as a draggable region.
             Window.Current.SetTitleBar(AppTitleBar);
+
+            // Register a handler for when the size of the overlaid caption control changes.
+            // For example, when the app moves to a screen with a different DPI.
+            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
+            if (WindowDisplayInfo.GetForCurrentView() == WindowDisplayMode.FullScreenTabletMode)
+            {
+                AppTitleBar.Visibility = Visibility.Collapsed;
+            }
+
             if (SettingsService.Instance.UseRoundCorner)
             {
                 App.Current.Resources["ControlCornerRadius"] = new CornerRadius(4, 4, 4, 4);
@@ -95,6 +98,28 @@ namespace Project2FA.UWP.Views
                 IsOpen = true
             };
             RootGrid.Children.Add(teachingTip);
+        }
+
+        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            UpdateTitleBarLayout(sender);
+        }
+
+        private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
+        {
+            // Update title bar control size as needed to account for system size changes.
+            AppTitleBar.Height = coreTitleBar.Height;
+            // Get the size of the caption controls area and back button 
+            // (returned in logical pixels), and move your content around as necessary.
+            const int smallLeftIndent = 12; // largeLeftIndent = 24;
+
+            AppTitle.TranslationTransition = new Vector3Transition();
+            AppTitle.Translation = new System.Numerics.Vector3(smallLeftIndent + (float)coreTitleBar.SystemOverlayLeftInset, 0, 0);
+        }
+
+        private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            AppTitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

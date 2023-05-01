@@ -33,6 +33,9 @@ using System.Text.RegularExpressions;
 using Windows.Media.Core;
 using CommunityToolkit.Mvvm.Input;
 using Windows.Devices.Enumeration;
+using Windows.UI.ViewManagement;
+using Windows.Foundation;
+using Windows.Graphics.Capture;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -264,11 +267,36 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task ScanClipboardQRCode()
         {
-            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?delayInSeconds=" + OpeningSeconds));
+            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
+                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
+                    Strings.Resources.ApplicationName,
+                    OpeningSeconds)));
             if (result)
             {
                 _launchScreenClip = true;
             }
+            else
+            {
+
+            }
+
+            //// The GraphicsCapturePicker follows the same pattern the
+            //// file pickers do.
+            //var picker = new GraphicsCapturePicker();
+            //GraphicsCaptureItem item = await picker.PickSingleItemAsync();
+
+            //// The item may be null if the user dismissed the
+            //// control without making a selection or hit Cancel.
+            //if (item != null)
+            //{
+            //    // Stop the previous capture if we had one.
+
+            //    // We'll define this method later in the document.
+            //    //StartCaptureInternal(item);
+            //}
+            //await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+            //var size = new Size(192, 150);
+            //ApplicationView.GetForCurrentView().TryResizeView(size);
         }
 
         private void OnTimedEvent(object sender, object e)

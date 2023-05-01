@@ -84,17 +84,25 @@ namespace Project2FA.Services
             set => _helper.TryWrite(nameof(AutoLogoutMinutes), value);
         }
 
-        public bool UseDarkOrWhiteTitleBar
-        {
-            get => _helper.SafeRead(nameof(UseDarkOrWhiteTitleBar), false);
-            set => _helper.TryWrite(nameof(UseDarkOrWhiteTitleBar), value);
-        }
-
+        /// <summary>
+        /// Indicates whether the app has been rated.
+        /// </summary>
         public bool AppRated
         {
             get => _helper.SafeRead(nameof(AppRated), false);
             set => _helper.TryWrite(nameof(AppRated), value);
         }
+
+#if WINDOWS_UWP
+        /// <summary>
+        /// Indicates whether the application is the pro version.
+        /// </summary>
+        public bool IsProVersion
+        {
+            get => _helper.SafeRead(nameof(IsProVersion), false);
+            set => _helper.TryWrite(nameof(IsProVersion), value);
+        }
+#endif
 
         public bool UseExtendedHash
         {

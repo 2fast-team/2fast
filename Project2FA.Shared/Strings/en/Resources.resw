@@ -927,7 +927,7 @@ For storage and backup, a data file is created or used to store the linked accou
 In the following sections, the functionality of this application is explained in this tutorial.</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
-    <value>To create a data file, the first step is to select a folder in which the file is to be saved. This is followed by the name and password for encrypting the file. It is recommended to save the password in a password manager to prevent loss.</value>
+    <value>To create a data file, the first step is to select a folder in which the file is to be saved. A storage location that is protected against data loss is recommended (e.g. cloud storage such as One-Drive, DropBox, etc.). This is followed by the name and password for encrypting the file. It is recommended to save the password in a password manager to prevent loss.</value>
   </data>
   <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
     <value>To load the datafile, the first step is to select the data file. This is followed by the password with which the data file has been encrypted.</value>
@@ -1060,5 +1060,26 @@ In the following sections, the functionality of this application is explained in
   </data>
   <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
     <value>Use file/image for import</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>[Beta] 2fast - two factor authenticator supporting TOTP</value>
+  </data>
+  <data name="TutorialPageBackButton.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="TutorialPageForwardButton.Text" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="TutorialPageSkipButton.Content" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
+    <value>finish tutorial</value>
+  </data>
+  <data name="NewDatafilePasswordInfo" xml:space="preserve">
+    <value>A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.</value>
+  </data>
+  <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
+    <value>Passwort für die Verschlüsselung</value>
   </data>
 </root>

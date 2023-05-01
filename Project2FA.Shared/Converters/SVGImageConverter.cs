@@ -3,13 +3,18 @@ using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Security.Cryptography;
 using System.Text;
+using UNOversal.Logging;
+using Prism.Ioc;
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
+using Project2FA.UWP;
 #else
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Data;
+using Project2FA.UNO;
 #endif
 
 namespace Project2FA.Converters
@@ -37,8 +42,9 @@ namespace Project2FA.Converters
                         svg.SetSourceAsync(stream.AsRandomAccessStream()).AsTask().ConfigureAwait(false);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exc)
                 {
+                    App.Current.Container.Resolve<ILoggerFacade>().Log(nameof(SVGImageConverter) + " " + exc.Message, Category.Exception, Priority.High);
                     return null;
                 }
             }

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using UNOversal.Services.Dialogs;
 using CommunityToolkit.Mvvm.Input;
+using Project2FA.Services;
 
 namespace Project2FA.UWP.Views
 {
@@ -28,7 +29,15 @@ namespace Project2FA.UWP.Views
         private void AccountCodePage_Loaded(object sender, RoutedEventArgs e)
         {
             App.ShellPageInstance.ShellViewInternal.Header = ViewModel;
-            App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
+            if (SettingsService.Instance.IsProVersion)
+            {
+                App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplatePro;
+            }
+            else
+            {
+                App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
+            }
+            
         }
 
         /// <summary>

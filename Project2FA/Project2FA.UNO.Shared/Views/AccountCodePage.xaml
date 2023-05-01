@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:models="using:Project2FA.Repository.Models"
-    xmlns:mstoolkitControls="clr-namespace:CommunityToolkit.WinUI.UI.Controls;assembly=CommunityToolkit.WinUI.UI.Controls.Core"
+    xmlns:mstoolkitControls="using:CommunityToolkit.WinUI.UI.Controls.Core"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:helpers="using:Project2FA.Helpers"
     x:Name="Page"
@@ -44,8 +44,8 @@
                             Background="{ThemeResource  SystemAccentColor}" />
 
                         <PersonPicture 
-                            Height="76"
-                            Width="76"
+                            Height="68"
+                            Width="68"
                             DisplayName="{x:Bind Model, 
                             Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
                             Mode=OneWay}"
@@ -270,8 +270,8 @@
                             Background="{ThemeResource  SystemAccentColor}" />
 
                         <PersonPicture 
-                            Height="76"
-                            Width="76"
+                            Height="68"
+                            Width="68"
                             Background="{ThemeResource SystemAccentColor}"
                             BorderBrush="{ThemeResource SystemAccentColor}"
                             Foreground="White"
@@ -545,7 +545,7 @@
                         <FontIcon Glyph="&#xe721;" />
                     </utu:TabBarItem.Icon>
                 </utu:TabBarItem>
-                <utu:TabBarItem Style="{StaticResource BottomFabTabBarItemStyle}" Content="+">
+                <utu:TabBarItem Style="{StaticResource BottomFabTabBarItemStyle}">
                     <utu:TabBarItem.Flyout>
                         <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
                             Placement="Top">

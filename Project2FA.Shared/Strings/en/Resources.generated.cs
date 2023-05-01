@@ -21,6 +21,45 @@ namespace Project2FA.Strings{
             _resourceLoader = ResourceLoader.GetForViewIndependentUse("Resources");
         }
 
+        #region NewDatafilePasswordInfoTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: NewDatafilePasswordInfo
+        /// </summary>
+        public static string NewDatafilePasswordInfoTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewDatafilePasswordInfoTitle");
+            }
+        }
+        #endregion
+
+        #region NewDatafilePasswordInfo
+        /// <summary>
+        ///   Looks up a localized string similar to: NewDatafilePasswordInfo
+        /// </summary>
+        public static string NewDatafilePasswordInfo
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewDatafilePasswordInfo");
+            }
+        }
+        #endregion
+
+        #region ApplicationName
+        /// <summary>
+        ///   Looks up a localized string similar to: 2fast
+        /// </summary>
+        public static string ApplicationName
+        {
+            get
+            {
+                return _resourceLoader.GetString("ApplicationName");
+            }
+        }
+        #endregion
+
         #region AccountCodePageCopied
         /// <summary>
         ///   Looks up a localized string similar to: Copied to clipboard

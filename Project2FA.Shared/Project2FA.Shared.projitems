@@ -29,10 +29,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TOTPVisibilityTooltipConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\VisibleWhenFalseConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ApplicationThemeExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SVGColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
@@ -2589,12 +2591,13 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\IconNameCollection.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\ProgressRingDeterminate.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\ProgressRingIntdeterminate.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Splashcreen\splash_screen.svg" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Assets\Icons\" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\schluessel.svg" />
   </ItemGroup>
 </Project>

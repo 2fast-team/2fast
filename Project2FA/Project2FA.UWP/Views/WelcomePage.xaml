@@ -41,40 +41,6 @@
                                 </CommandBar.Content>
                             </CommandBar>
                         </CommandBar.Content>
-                        <CommandBar.PrimaryCommands>
-                            <AppBarButton 
-                                x:Name="ABB_Tutorial"
-                                Command="{x:Bind TutorialCommand}"
-                                x:Uid="WelcomePageABBTutorial" >
-                                <AppBarButton.Icon>
-                                    <FontIcon Glyph="&#xE946;"/>
-                                </AppBarButton.Icon>
-                                <AppBarButton.Resources>
-                                    <appcontrols:AutoCloseTeachingTip 
-                                        x:Name="WelcomePageTutorialTip"
-                                        AutoCloseInterval="12000"
-                                        BorderBrush="{ThemeResource SystemAccentColor}"
-                                        Content="{x:Bind strings:Resources.WelcomePageTutorialDesc}"
-                                        x:Uid="WelcomePageTutorialTip"
-                                        BorderThickness="2"
-                                        IsOpen="{x:Bind IsTutorialOpen, Mode=TwoWay}"
-                                        Target="{Binding ElementName=ABB_Tutorial}"
-                                        ActionButtonCommand="{x:Bind OpenTutorialCommand}"
-	                                    ActionButtonContent="{x:Bind strings:Resources.WelcomePageTutorialTipOpen}"
-	                                    CloseButtonContent="{x:Bind strings:Resources.ButtonTextConfirm}">
-                                        <muxc:TeachingTip.HeroContent>
-                                            <muxc:AnimatedVisualPlayer 
-                                                MaxHeight="120"
-                                                x:Name="LottiePlayer"
-                                                AutoPlay="True">
-                                                <lottie:LottieVisualSource  
-                                                    UriSource="ms-appx:///Assets/AnimatedVisuals/21398-online-tutorial.json"/>
-                                            </muxc:AnimatedVisualPlayer>
-                                        </muxc:TeachingTip.HeroContent>
-                                    </appcontrols:AutoCloseTeachingTip>
-                                </AppBarButton.Resources>
-                            </AppBarButton>
-                        </CommandBar.PrimaryCommands>
                     </CommandBar>
                 </Grid>
             </UserControl>

@@ -9,7 +9,12 @@
 		<item name="android:windowNoTitle">true</item>
 
 		<!-- SplashScreen -->
-		<item name="android:windowBackground">@drawable/Splash</item>
+		<item name="android:windowBackground">@drawable/uno_splash_image</item>
+
+		<item name="android:windowSplashScreenBackground">@color/uno_splash_color</item>
+		<item name="android:windowSplashScreenAnimatedIcon">@drawable/uno_splash_image</item>
+		<!-- Image at the footer -->
+		<item name="android:windowSplashScreenBrandingImage">@drawable/uno_splash_image</item>
 
 		<!-- Color style for toggle switch -->
 		<!--<item name="colorControlActivated">@color/MaterialPrimaryColor</item>-->

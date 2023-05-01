@@ -238,25 +238,33 @@
     </Page.Resources>
 
     <Grid x:Name="MainGrid">
-        <StackPanel>
-            <FlipView 
-                Margin="8,32,8,0"
-                x:Name="FV_Tutorials">
-                <FlipView.Background>
-                    <ImageBrush
+        <Grid.Background>
+            <ImageBrush
                     ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
                     Stretch="UniformToFill" />
-                </FlipView.Background>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <FlipView 
+                UseTouchAnimationsForAllNavigation="True"
+                SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
+                Background="Transparent"
+                x:Name="FV_Tutorials">
                 <FlipViewItem>
                     <Grid MaxWidth="760">
-                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                        <Border 
+                            ui:Effects.Shadow="{StaticResource PageShadow}" 
+                            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                             <Border>
                                 <Border.Background>
                                     <media:BackdropBlurBrush Amount="2" />
                                 </Border.Background>
                             </Border>
                         </Border>
-                        <StackPanel Margin="12,0,12,0">
+                        <StackPanel Margin="12,12,12,0">
                             <Grid >
                                 <Ellipse 
                                     Height="100" 
@@ -285,14 +293,16 @@
                 </FlipViewItem>
                 <FlipViewItem>
                     <Grid MaxWidth="760">
-                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                        <Border 
+                            ui:Effects.Shadow="{StaticResource PageShadow}" 
+                            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                             <Border>
                                 <Border.Background>
                                     <media:BackdropBlurBrush Amount="2" />
                                 </Border.Background>
                             </Border>
                         </Border>
-                        <StackPanel Margin="12,0,12,0">
+                        <StackPanel Margin="12,12,12,0">
                             <TextBlock 
                             x:Uid="TutorialContentDialogCreateMethodHeader"
                             Text="~TutorialContentDialogCreateMethodHeader.Text"
@@ -323,14 +333,16 @@
                 </FlipViewItem>
                 <FlipViewItem>
                     <Grid MaxWidth="760">
-                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                        <Border 
+                            ui:Effects.Shadow="{StaticResource PageShadow}" 
+                            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                             <Border>
                                 <Border.Background>
                                     <media:BackdropBlurBrush Amount="2" />
                                 </Border.Background>
                             </Border>
                         </Border>
-                        <StackPanel Margin="12,0,12,0">
+                        <StackPanel Margin="12,12,12,0">
                             <TextBlock 
                             x:Uid="AddAccountCodeContentDialogQRCodeHelpHeader"
                             Text="~AddAccountCodeContentDialogQRCodeHelpHeader.Text"
@@ -342,21 +354,23 @@
                             Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
-                            <!--<Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />-->
+                            <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
                         </StackPanel>
                     </Grid>
 
                 </FlipViewItem>
                 <FlipViewItem>
                     <Grid MaxWidth="760">
-                        <Border Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                        <Border 
+                            ui:Effects.Shadow="{StaticResource PageShadow}" 
+                            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                             <Border>
                                 <Border.Background>
                                     <media:BackdropBlurBrush Amount="2" />
                                 </Border.Background>
                             </Border>
                         </Border>
-                        <StackPanel Margin="12,0,12,0">
+                        <StackPanel Margin="12,12,12,0">
                             <TextBlock 
                             x:Uid="TutorialContentDialogLoadMethodHeader"
                             Text="~TutorialContentDialogLoadMethodHeader.Text"
@@ -377,13 +391,76 @@
                             </ListView>
                         </StackPanel>
                     </Grid>
-
                 </FlipViewItem>
             </FlipView>
-
         </StackPanel>
+
+        <Grid Grid.Row="1" MaxWidth="760">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="2" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                <Border>
+                    <Border.Background>
+                        <media:BackdropBlurBrush Amount="2" />
+                    </Border.Background>
+                </Border>
+            </Border>
+            <Button 
+                Visibility="{x:Bind ViewModel.BackButtonVisible,Mode=OneWay}"
+                Command="{x:Bind ViewModel.BackButtonCommand}"
+                HorizontalAlignment="Left" >
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Left">
+                    <FontIcon Glyph="&#xE76B;" FontSize="20"/>
+                    <TextBlock 
+                        Text="~TutorialPageBackButton.Text" 
+                        Margin="8,0,0,0" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Center" 
+                        x:Uid="TutorialPageBackButton" />
+                </StackPanel>
+            </Button>
+            <StackPanel 
+                Orientation="Horizontal" 
+                Grid.Column="1"
+                HorizontalAlignment="Right">
+                <Button 
+                    Command="{x:Bind ViewModel.FinishButtonCommand}"
+                    Visibility="{x:Bind ViewModel.FinishButtonVisible,Mode=OneWay}"
+                    Style="{StaticResource AccentButtonStyle}"
+                    x:Uid="TutorialPageFinishpButton" 
+                    Content="~TutorialPageFinishpButton.Content" />
+                <Button 
+                    Command="{x:Bind ViewModel.SkipButtonCommand}"
+                    Visibility="{x:Bind ViewModel.SkipButtonVisible,Mode=OneWay}"
+                    x:Uid="TutorialPageSkipButton" 
+                    Content="~TutorialPageSkipButton.Content" />
+                <Button 
+                    Margin="8,0,0,0"
+                    Command="{x:Bind ViewModel.FordwardButtonCommand}"
+                    Visibility="{x:Bind ViewModel.ForwardButtonVisible,Mode=OneWay}"
+                    Style="{StaticResource AccentButtonStyle}">
+                    <StackPanel 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Left">
+                        <TextBlock 
+                        Text="~TutorialPageForwardButton.Text" 
+                        Margin="8,0,0,0" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Center" 
+                        x:Uid="TutorialPageForwardButton" />
+                        <FontIcon Glyph="&#xE76C;" FontSize="20"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+        </Grid>
         <muxc:PipsPager 
             x:Name="FlipViewPipsPager"
+            Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalContentAlignment="Bottom"
             NumberOfPages="4"

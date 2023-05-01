@@ -417,6 +417,7 @@ namespace Project2FA.ViewModels
                         App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8, 8, 8, 8);
                         App.Current.Resources["ComboBoxItemCornerRadius"] = new CornerRadius(3);
                         App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(1.5);
+                        App.Current.Resources["TokenItemCornerRadius"] = new CornerRadius(16);
                     }
                     else
                     {
@@ -424,6 +425,7 @@ namespace Project2FA.ViewModels
                         App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
                         App.Current.Resources["ComboBoxItemCornerRadius"] = new CornerRadius(0);
                         App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(0);
+                        App.Current.Resources["TokenItemCornerRadius"] = new CornerRadius(0);
                     }
                     _settings.UseRoundCorner = value;
                     OnPropertyChanged(nameof(UseRoundCorner));

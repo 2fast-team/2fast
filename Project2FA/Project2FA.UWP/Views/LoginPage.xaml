@@ -76,28 +76,27 @@
             x:Name="AppTitleBar" 
             Background="{ThemeResource TitleAcrylicWindowBrush}"
             Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
-                <ColumnDefinition/>
-                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <TextBlock 
+            <StackPanel 
                 x:Name="AppTitle" 
                 Grid.Column="1" 
-                Style="{StaticResource CaptionTextBlockStyle}"
-                Text="{x:Bind ViewModel.ApplicationTitle, Mode=OneWay}"
-                Margin="12,8"/>
+                Orientation="Horizontal">
+                <Image 
+                    x:Name="AppLogo"
+                    Source="/Assets/Square44x44Logo.png" 
+                    Margin="0,0,10,0" 
+                    Height="26"/>
                 <TextBlock 
-                Margin="20,0,0,0"
-                x:Name="WarnTitle"
+                Text="{x:Bind ViewModel.ApplicationTitle,Mode=OneWay}"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}" />
+                <TextBlock 
+                Margin="10,0,0,0"
                 Visibility="{x:Bind ViewModel.IsScreenCaptureEnabled,Mode=OneWay}"
                 Text="{x:Bind strings:Resources.ShellPageWarnInfo,Mode=OneWay}"
                 VerticalAlignment="Center"
                 Foreground="Red"
                 Style="{StaticResource CaptionTextBlockStyle}" />
             </StackPanel>
-
         </Grid>
 
         <Grid 

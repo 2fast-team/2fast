@@ -42,8 +42,6 @@ namespace Project2FA.UWP.Views
             if (control != null)
             {
                 var tooltip = (control as TeachingTip);
-                //tooltip = null;
-                //CreateTeachingTip(element, content);
                 if (tooltip.IsOpen)
                 {
                     tooltip.IsOpen = false;

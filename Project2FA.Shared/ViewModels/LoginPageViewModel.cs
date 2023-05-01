@@ -115,7 +115,7 @@ namespace Project2FA.ViewModels
         private async void WindowsHelloLogin()
         {
             UserConsentVerificationResult consentResult = await UserConsentVerifier.RequestVerificationAsync(Resources.WindowsHelloLoginMessage);
-            if (consentResult.Equals(UserConsentVerificationResult.Verified))
+            if (consentResult == UserConsentVerificationResult.Verified)
             {
                 var dbHash = await App.Repository.Password.GetAsync();
                 var secretService = App.Current.Container.Resolve<ISecretService>();

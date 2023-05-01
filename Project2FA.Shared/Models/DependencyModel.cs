@@ -1,8 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+#if !WINDOWS_UWP
+using Microsoft.UI.Xaml.Data;
+#endif
 
 namespace Project2FA.Repository.Models
 {
+#if !WINDOWS_UWP
+    [Bindable]
+#endif
     public class DependencyModel : ObservableObject
     {
         private string _name;

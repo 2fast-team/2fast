@@ -927,14 +927,14 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Möchten Sie das Tutorial zu der Anwendung öffnen?</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>Diese Anwendung ist ein Authentifikator für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „Time-based One-time Password Algorithmus“ (TOTP) nach Standardisierung RFC 6238 nutzt. Dienste die für die 2FA auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden.
+    <value>Diese Anwendung ist ein Authentifikator für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „Time-based One-time Password Algorithmus“/ zeitbasiertes Einmal-Passwort (TOTP) nach Standardisierung RFC 6238 nutzt. Dienste die für die 2FA auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden.
 
-Für die Speicherung und die Sicherung wird hierbei eine Datendatei erstellt bzw. genutzt, um die verknüpften Accounts in dieser Datei verschlüsselt zu speichern. Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. empfohlen, um eine Versionerung und eine Sicherstellung gegen Verlust zu erlangen.
+Für die Speicherung und der Sicherung wird hierbei eine Datendatei erstellt bzw. genutzt, um die verknüpften Konten in dieser Datei mit einem Passwort verschlüsselt zu speichern. Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. zu empfehlen, um eine Versionerung und eine Sicherstellung gegen Verlust zu erlangen.
 
 In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in diesem Tutorial erläutert.</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
-    <value>Für die Erstellung einer Datendatei muss als erster Schritt ein Ordner gewählt werden, in dem die Datei gespeichert werden soll. Im Anschluss folgen der Name und das Passwort für die Verschlüsselung der Datei. Es wird die Speicherung des Passwortes in einem Passwortmanager empfohlen, um einen Verlust zu verhindern.</value>
+    <value>Für die Erstellung einer Datendatei muss als erster Schritt ein Ordner gewählt werden, in dem die Datei gespeichert werden soll. Hierbei ist ein Speicherort zu empfehlen, der gegenüber einem Datenverlust abgesichert ist (z.B. Cloud-Speicher wie One-Drive, DropBox, etc.). Im Anschluss folgen der Name und das Passwort für die Verschlüsselung der Datei. Es wird die Speicherung des Passwortes in einem Passwortmanager empfohlen, um einen Verlust zu verhindern.</value>
   </data>
   <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
     <value>Für das Laden einer Datendatei muss als erster Schritt die Datendatei ausgewählt werden. Im Anschluss folgt das Passwort, mit dem die Datendatei verschlüsselt worden ist.</value>
@@ -1067,5 +1067,26 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   </data>
   <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
     <value>Datei/Bild zum Import verwenden</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
+  </data>
+  <data name="TutorialPageBackButton.Text" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="TutorialPageForwardButton.Text" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="TutorialPageSkipButton.Content" xml:space="preserve">
+    <value>Überspringen</value>
+  </data>
+  <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
+    <value>Abschließen</value>
+  </data>
+  <data name="NewDatafilePasswordInfo" xml:space="preserve">
+    <value>Für die Verschlüsselung der Datendatei muss ein Passwort vergeben werden. Es ist dingend zu empfehlen, dieses Passwort in einem Passwortmanager sicher zu speichern.</value>
+  </data>
+  <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
+    <value>Passwort für die Verschlüsselung</value>
   </data>
 </root>

@@ -12,6 +12,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:utils="using:Project2FA.UWP.Utils"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     MinWidth="500"
@@ -130,7 +131,7 @@
                 Margin="0,10,0,20"/>
 
                 <appcontrols:CardExpanderControl 
-                    IsExpanded="True"
+                    IsExpanded="{x:Bind ViewModel.NotesExpanded,Mode=OneWay}"
                     Margin="0,15,0,8">
                     <appcontrols:CardExpanderControl.Header>
                         <appcontrols:CardControl
@@ -160,6 +161,58 @@
                         </RichEditBox>
                     </StackPanel>
                 </appcontrols:CardExpanderControl>
+
+                <appcontrols:CardExpanderControl 
+                    IsExpanded="False"
+                    Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    Margin="0,15,0,8">
+                    <appcontrols:CardExpanderControl.Header>
+                        <appcontrols:CardControl
+                            Icon="&#xE71C;"
+                            x:Uid="EditAccountContentDialogAddGlobalCategories" 
+                            Header="~EditAccountContentDialogAddGlobalCategories.Header">
+                        </appcontrols:CardControl>
+                    </appcontrols:CardExpanderControl.Header>
+                    <StackPanel>
+                        <TextBox Header="#Title"/>
+                        <TextBox Header="#Icon" Margin="0,10,0,20"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="#add">
+
+                            </Button>
+                            <CheckBox x:Name="CB_CategoryAllowDeletion" Margin="15,0,0,0" Content="#allow deletion"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </appcontrols:CardExpanderControl>
+
+                <labs:TokenView 
+                    Margin="0,15,0,8"
+                     Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"
+                    SelectionMode="Multiple" >
+                    <labs:TokenItem Content="Apps">
+                        <labs:TokenItem.Icon>
+                            <FontIcon Glyph="&#xECAA;" />
+                        </labs:TokenItem.Icon>
+                    </labs:TokenItem>
+                    <labs:TokenItem Content="Work">
+                        <labs:TokenItem.Icon>
+                            <FontIcon Glyph="&#xE821;" />
+                        </labs:TokenItem.Icon>
+                    </labs:TokenItem>
+                    <labs:TokenItem Content="Web">
+                        <labs:TokenItem.Icon>
+                            <FontIcon Glyph="&#xE12B;" />
+                        </labs:TokenItem.Icon>
+                    </labs:TokenItem>
+                </labs:TokenView>
+
+
+
+
+
+
                 <!--Category for filter and sorting
                 <ListView/>-->
                 <!--<Grid>

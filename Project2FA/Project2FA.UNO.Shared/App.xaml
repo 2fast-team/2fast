@@ -9,6 +9,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+				<!-- Load Cupertino resources -->
+				<CupertinoColors xmlns="using:Uno.Cupertino"  />
+				<CupertinoFonts xmlns="using:Uno.Cupertino"  />
+				<CupertinoResources xmlns="using:Uno.Cupertino" />
                 <!-- Load Uno.Toolkit.UI resources -->
                 <ToolkitResources xmlns="using:Uno.Toolkit.UI" />
                 <!--<MaterialToolkitResources xmlns="using:Uno.Toolkit.UI.Material" />-->

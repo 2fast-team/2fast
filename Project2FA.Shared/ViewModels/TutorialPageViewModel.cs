@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
+using System.Threading.Tasks;
+using UNOversal.Navigation;
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -22,13 +26,69 @@ namespace Project2FA.ViewModels
 {
     public class TutorialPageViewModel : ObservableObject
     {
+        private int _selectedIndex = 0;
         private bool _isTooltipOpen;
+        public ICommand BackButtonCommand;
+        public ICommand FordwardButtonCommand;
+        public ICommand SkipButtonCommand;
+        public ICommand FinishButtonCommand;
+        public INavigationService NavigationService { get; private set; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
-        public TutorialPageViewModel()
+
+
+        public TutorialPageViewModel(INavigationService navigationService)
         {
             // disable the navigation to other pages
             App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
+            NavigationService = navigationService;
             Collection.Add(new TwoFACodeModel { Issuer = "2fast@test.com", Label = "2fast", Seconds= 30, SecretByteArray = new byte[8] });
+            BackButtonCommand = new RelayCommand(() => 
+            {
+                SelectedIndex--;
+            });
+            FordwardButtonCommand = new RelayCommand(() => 
+            {
+                SelectedIndex++;
+            });
+            SkipButtonCommand = new AsyncRelayCommand(SkipButtonCommandTask);
+            FinishButtonCommand = new AsyncRelayCommand(SkipButtonCommandTask);
+        }
+        
+        private async Task SkipButtonCommandTask()
+        {
+            await NavigationService.NavigateAsync(nameof(WelcomePage));
+        }
+        public int SelectedIndex 
+        { 
+            get => _selectedIndex;
+            set
+            {
+                if (SetProperty(ref _selectedIndex, value))
+                {
+                    OnPropertyChanged(nameof(BackButtonVisible));
+                    OnPropertyChanged(nameof(ForwardButtonVisible));
+                    OnPropertyChanged(nameof(SkipButtonVisible));
+                    OnPropertyChanged(nameof(FinishButtonVisible));
+                }
+            }
+        }
+        
+        public bool BackButtonVisible
+        {
+            get => SelectedIndex > 0;
+        }
+
+        public bool ForwardButtonVisible
+        {
+            get => SelectedIndex < 3;
+        }
+        public bool SkipButtonVisible
+        {
+            get => SelectedIndex < 3;
+        }
+        public bool FinishButtonVisible
+        {
+            get => SelectedIndex == 3;
         }
     }
 }

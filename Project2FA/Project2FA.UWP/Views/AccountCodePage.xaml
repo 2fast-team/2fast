@@ -24,7 +24,7 @@
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
 
-            <DataTemplate x:Name="ShellHeaderTemplate" x:DataType="viewmodels:AccountCodePageViewModel">
+            <DataTemplate x:Name="ShellHeaderTemplatePro" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
                     <Grid>
                         <CommandBar 
@@ -47,7 +47,7 @@
                                         VerticalAlignment="Top" />
                                     </CommandBar.Content>
                                     <CommandBar.PrimaryCommands>
-                                        <AppBarSeparator/>
+                                        <AppBarSeparator Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
                                         <AppBarButton 
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
@@ -61,7 +61,7 @@
                                                 AutoCloseInterval="10000"
                                                 BorderBrush="{ThemeResource SystemAccentColor}"
                                                 x:Uid="AccountCodePageEmptyCollectionTip"
-                                                    IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
+                                                IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
                                                 BorderThickness="2"
                                                 Target="{Binding ElementName=ABB_AddAccount, Mode=OneTime}">
                                                     <muxc:TeachingTip.HeroContent>
@@ -173,9 +173,10 @@
                                         <AdaptiveTrigger MinWindowWidth="0" />
                                     </VisualState.StateTriggers>
                                     <VisualState.Setters>
+                                        <Setter Target="ABB_ImportAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
-                                        <!--<Setter Target="ABB_SearchFilter.LabelPosition" Value="Collapsed"/>-->
+                                        <Setter Target="ABB_SearchFilter.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
                                     </VisualState.Setters>
@@ -191,6 +192,163 @@
                 </UserControl>
             </DataTemplate>
 
+            <DataTemplate x:Name="ShellHeaderTemplate" x:DataType="viewmodels:AccountCodePageViewModel">
+                <UserControl>
+                    <Grid>
+                        <CommandBar 
+                    x:Name="HeaderCommandBar"
+                    OverflowButtonVisibility="Auto"
+                    DefaultLabelPosition="Right"
+                    VerticalAlignment="Top"
+                    Background="{ThemeResource ShellAcrylicWindowBrush}">
+                            <CommandBar.Content>
+                                <CommandBar 
+                                OverflowButtonVisibility="Collapsed"
+                                Background="{ThemeResource ShellAcrylicWindowBrush}"
+                                DefaultLabelPosition="Right">
+                                    <CommandBar.Content>
+                                        <TextBlock 
+                                        Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
+                                        Text="{x:Bind strings:Resources.AccountCodePageTitle}"
+                                        Margin="15,0,0,11"
+                                        TextWrapping="NoWrap" 
+                                        VerticalAlignment="Top" />
+                                    </CommandBar.Content>
+                                    <CommandBar.PrimaryCommands>
+                                        <AppBarSeparator Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
+                                        <AppBarButton 
+                                        x:Name="ABB_AddAccount"
+                                        x:Uid="AccountCodePageAddEntry"
+                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip}"
+                                        Icon="Add" 
+                                        Command="{x:Bind AddAccountCommand}">
+                                            <AppBarButton.Resources>
+                                                <!--user information for adding totp accounts-->
+                                                <appcontrols:AutoCloseTeachingTip 
+                                                x:Name="EmptyAccountCollectionTip"
+                                                AutoCloseInterval="10000"
+                                                BorderBrush="{ThemeResource SystemAccentColor}"
+                                                x:Uid="AccountCodePageEmptyCollectionTip"
+                                                IsOpen="{x:Bind TwoFADataService.EmptyAccountCollectionTipIsOpen, Mode=TwoWay}"
+                                                BorderThickness="2"
+                                                Target="{Binding ElementName=ABB_AddAccount, Mode=OneTime}">
+                                                    <muxc:TeachingTip.HeroContent>
+                                                        <muxc:AnimatedVisualPlayer 
+                                                        MaxHeight="120"
+                                                        x:Name="LottiePlayer"
+                                                        AutoPlay="True">
+                                                            <lottie:LottieVisualSource  
+                                                                UriSource="ms-appx:///Assets/AnimatedVisuals/10223-search-empty.json"/>
+                                                        </muxc:AnimatedVisualPlayer>
+                                                    </muxc:TeachingTip.HeroContent>
+                                                </appcontrols:AutoCloseTeachingTip>
+                                            </AppBarButton.Resources>
+                                        </AppBarButton>
+                                        <!--<AppBarButton
+                                            x:Name="ABB_ImportAccount"
+                                            x:Uid="AccoundCodePageImportEntry"
+                                            ToolTipService.ToolTip="#todo"
+                                            Icon="Import">
+                                            <AppBarButton.Flyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem 
+                                                        x:Uid="AccoundCodePageImportDocument"
+                                                        Icon="Document"/>
+                                                    <MenuFlyoutItem
+                                                        x:Uid="AccoundCodePageImportCamera"
+                                                        Icon="Camera"/>
+                                                </MenuFlyout>
+                                            </AppBarButton.Flyout>
+                                        </AppBarButton>-->
+                                    </CommandBar.PrimaryCommands>
+                                </CommandBar>
+                            </CommandBar.Content>
+                            <CommandBar.PrimaryCommands>
+                                <AppBarElementContainer
+                                    Visibility="{x:Bind IsAccountDeleted, Mode=OneWay}">
+                                    <CommandBar 
+                                        OverflowButtonVisibility="Collapsed"
+                                        Background="{ThemeResource ShellAcrylicWindowBrush}"
+                                        DefaultLabelPosition="Right">
+                                        <CommandBar.Content>
+                                            <Grid>
+                                                <controls:RadialProgressBar
+                                Value="{x:Bind TwoFADataService.TempDeletedTFAModel.Seconds,Mode=OneWay}" 
+                                Maximum="{x:Bind TwoFADataService.TempDeletedTFAModel.Period, Mode=OneWay}" 
+                                Width="40"
+                                Height="40"
+                                IsIndeterminate="False"
+                                Foreground="{ThemeResource SystemAccentColor}"/>
+                                                <TextBlock 
+                                Opacity="0.6"
+                                Text="{x:Bind TwoFADataService.TempDeletedTFAModel.Seconds,Mode=OneWay}"
+                                FontSize="12"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"/>
+                                            </Grid>
+                                        </CommandBar.Content>
+                                        <CommandBar.PrimaryCommands>
+                                            <AppBarButton  
+                                            x:Name="ABB_UndoDelete"
+                                            x:Uid="AccountCodePageABBUndoDelete" 
+                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip}"
+                                            Command="{x:Bind UndoDeleteCommand}" 
+                                            Icon="Undo" />
+                                        </CommandBar.PrimaryCommands>
+                                    </CommandBar>
+                                </AppBarElementContainer>
+                                <AppBarElementContainer>
+                                    <AutoSuggestBox 
+                                        Width="200"
+                                        Height="40"
+                                        QueryIcon="Find"
+                                        VerticalAlignment="Center"
+                                        PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                                        TextChanged="AutoSuggestBox_TextChanged" 
+                                        VerticalContentAlignment="Center"
+                                        SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
+                                        Margin="0,0,1,0" />
+                                </AppBarElementContainer>
+                                <AppBarButton 
+                                x:Name="ABB_Logout"
+                                x:Uid="AccountCodePageABBLogout" 
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip}"
+                                Command="{x:Bind LogoutCommand}">
+                                    <AppBarButton.Icon>
+                                        <FontIcon Glyph="&#xE1F6;"/>
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
+                                <AppBarButton 
+                                x:Name="ABB_Refresh"
+                                x:Uid="AccountCodePageReloadDatafile"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip}"
+                                Icon="Sync"
+                                Command="{x:Bind RefreshCommand}"/>
+                            </CommandBar.PrimaryCommands>
+                        </CommandBar>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="WindowStates">
+                                <VisualState x:Name="NarrowState">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="0" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="MediumState">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="850" />
+                                    </VisualState.StateTriggers>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </UserControl>
+            </DataTemplate>
             <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
                 <UserControl
                     x:Name="Root" 
@@ -659,6 +817,7 @@
             IsItemClickEnabled="False"
             ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
             HorizontalContentAlignment="Stretch"
+            helpers:TemplateSelector.ChangedItem="{x:Bind ViewModel.ChangedItem, Mode=OneWay}"
             HorizontalAlignment="Stretch">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

@@ -264,7 +264,7 @@ namespace Project2FA.UNO
 #endif
 #endif
 #if __IOS__ || __ANDROID__
-            global::Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+            //global::Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
 #endif
         }
 

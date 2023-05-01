@@ -30,6 +30,7 @@ namespace Project2FA.UWP.Views
         public NavigationView ShellViewInternal { get; private set; }
         public Frame MainFrame { get; }
         public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
+        private CoreApplicationViewTitleBar coreTitleBar;
 
         public ShellPage()
         {
@@ -41,7 +42,7 @@ namespace Project2FA.UWP.Views
             // determine and set if the app is started in debug mode
             ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
 
-            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
             SetTitleBarAsDraggable();
@@ -122,6 +123,7 @@ namespace Project2FA.UWP.Views
                 App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
                 App.Current.Resources["ComboBoxItemCornerRadius"] = new CornerRadius(0);
                 App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(0);
+                App.Current.Resources["TokenItemCornerRadius"] = new CornerRadius(0);
                 switch (SettingsService.Instance.AppTheme)
                 {
                     case Theme.System:

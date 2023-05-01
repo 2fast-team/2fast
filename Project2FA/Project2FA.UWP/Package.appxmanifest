@@ -3,8 +3,9 @@
          xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-         IgnorableNamespaces="uap mp rescap">
-	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.2.5.0" />
+         xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
+         IgnorableNamespaces="uap mp rescap uap6">
+	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=J.P.Weber IT" Version="1.2.6.0" />
 	<mp:PhoneIdentity PhoneProductId="7288b17f-197f-4356-b520-fc13fab44621" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 	<Properties>
 		<DisplayName>2fast (Beta)</DisplayName>
@@ -19,7 +20,7 @@
 	</Resources>
 	<Applications>
 		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Project2FA.UWP.App">
-			<uap:VisualElements DisplayName="[Beta] 2fast - two factor authenticator supporting TOTP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="transparent" Description="Project2FA">
+			<uap:VisualElements DisplayName="ms-resource:ApplicationName" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="transparent" Description="Project2FA">
 				<uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="2fast">
 					<uap:ShowNameOnTiles>
 						<uap:ShowOn Tile="wide310x150Logo"/>
@@ -52,6 +53,7 @@
 		<uap:Capability Name="removableStorage"/>
 		<Capability Name="privateNetworkClientServer"/>
 		<Capability Name="internetClient"/>
+		<uap6:Capability Name="graphicsCapture"/>
 		<DeviceCapability Name="webcam"/>
 	</Capabilities>
 </Package>

@@ -520,6 +520,7 @@
                 x:Uid="SettingsPivotItemAbout" 
                 Header="~SPIAbout.Header" 
                 Margin="8,0,0,0">
+                
                 <UserControl>
                     <Grid Margin="0,10,0,0">
                         <RelativePanel>
@@ -553,6 +554,8 @@
                                     </TextBlock>
                                     <HyperlinkButton 
                             x:Uid="SettingsSourceCode"
+                                        FontSize="20"
+                                        Padding="0"
                             Content="~SettingsSourceCode.Content" 
                             NavigateUri="https://github.com/2fast-team/2fast"
                             ToolTipService.ToolTip="https://github.com/2fast-team/2fast"/>
@@ -605,7 +608,54 @@
                                 </StackPanel>
                             </ScrollViewer>
 
-                            <controls:HeaderedContentControl 
+                            <appcontrols:CardExpanderControl 
+                                IsExpanded="True"
+                                Header="~SettingsDependencies.Header"
+                                x:Name="LV_Dependencies" 
+                                x:Uid="SettingsDependencies">
+                                <appcontrols:CardExpanderControl.Content>
+                                    <SemanticZoom 
+                            CanChangeViews="False">
+                                        <SemanticZoom.ZoomedInView>
+                                            <GridView
+                                SelectionMode="None"
+                                IsSynchronizedWithCurrentItem="False"
+                                ItemTemplate="{StaticResource DependenciesListViewTemplate}"
+                                ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
+                                IsTabStop="False"
+                                IsItemClickEnabled="True">
+                                                <GridView.GroupStyle>
+                                                    <GroupStyle>
+                                                        <GroupStyle.HeaderTemplate>
+                                                            <DataTemplate >
+                                                                <TextBlock 
+                                                                Text="{Binding Key}" 
+                                                                FontSize="20"/>
+                                                            </DataTemplate>
+                                                        </GroupStyle.HeaderTemplate>
+                                                        <GroupStyle.Panel>
+                                                            <ItemsPanelTemplate>
+                                                                <controls:WrapPanel/>
+                                                            </ItemsPanelTemplate>
+                                                        </GroupStyle.Panel>
+                                                    </GroupStyle>
+                                                </GridView.GroupStyle>
+                                                <GridView.ItemContainerStyle>
+                                                    <Style TargetType="GridViewItem">
+                                                        <Setter Property="Margin" Value="0,0,8,16" />
+
+                                                        <Setter Property="animations:Implicit.Animations" 
+                                                            Value="{StaticResource ImplicitOffset}"/>
+                                                    </Style>
+                                                </GridView.ItemContainerStyle>
+                                            </GridView>
+                                        </SemanticZoom.ZoomedInView>
+                                    </SemanticZoom>
+                                </appcontrols:CardExpanderControl.Content>
+                                
+                            </appcontrols:CardExpanderControl>
+
+                            <!--<controls:HeaderedContentControl 
                                 x:Name="LV_Dependencies" 
                                 x:Uid="SettingsDependencies"
                                 Margin="0,10,0,0"
@@ -613,50 +663,14 @@
                                 <controls:HeaderedContentControl.HeaderTemplate>
                                     <DataTemplate>
                                         <Border 
-                                            BorderThickness="0,1,0,1" 
+                                            Background="{ThemeResource CardBackgroundBrush}"
                                             BorderBrush="{ThemeResource SystemControlDisabledChromeDisabledLowBrush}">
                                             <TextBlock Text="{Binding}" FontSize="20"/>
                                         </Border>
                                     </DataTemplate>
                                 </controls:HeaderedContentControl.HeaderTemplate>
-                                <SemanticZoom 
-                            CanChangeViews="False">
-                                    <SemanticZoom.ZoomedInView>
-                                        <GridView
-                                SelectionMode="None"
-                                IsSynchronizedWithCurrentItem="False"
-                                ItemTemplate="{StaticResource DependenciesListViewTemplate}"
-                                ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
-                                IsTabStop="False"
-                                IsItemClickEnabled="True">
-                                            <GridView.GroupStyle>
-                                                <GroupStyle>
-                                                    <GroupStyle.HeaderTemplate>
-                                                        <DataTemplate >
-                                                            <TextBlock 
-                                                                Text="{Binding Key}" 
-                                                                FontSize="20"/>
-                                                        </DataTemplate>
-                                                    </GroupStyle.HeaderTemplate>
-                                                    <GroupStyle.Panel>
-                                                        <ItemsPanelTemplate>
-                                                            <controls:WrapPanel/>
-                                                        </ItemsPanelTemplate>
-                                                    </GroupStyle.Panel>
-                                                </GroupStyle>
-                                            </GridView.GroupStyle>
-                                            <GridView.ItemContainerStyle>
-                                                <Style TargetType="GridViewItem">
-                                                    <Setter Property="Margin" Value="0,0,8,16" />
-                                                    
-                                                    <Setter Property="animations:Implicit.Animations" 
-                                                            Value="{StaticResource ImplicitOffset}"/>
-                                                </Style>
-                                            </GridView.ItemContainerStyle>
-                                        </GridView>
-                                    </SemanticZoom.ZoomedInView>
-                                </SemanticZoom>
-                            </controls:HeaderedContentControl>
+                                
+                            </controls:HeaderedContentControl>-->
                         </RelativePanel>
 
 

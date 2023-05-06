@@ -27,22 +27,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <!--<DataTemplate x:Key="EmailTokenTemplate">
-                <StackPanel Orientation="Horizontal">
-                    <Border 
-                        CornerRadius="9999" 
-                        Background="{Binding DisplayName, Converter={StaticResource NameToColorConverter}}"
-                Width="20" Height="20">
-                        <TextBlock Text="{Binding Initials}" Foreground="White"
-                     FontSize="10"
-                     FontWeight="Semibold"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"/>
-                    </Border>
-                    <TextBlock Text="{Binding DisplayName}" Padding="4,0,0,0"/>
-                </StackPanel>
-            </DataTemplate>-->
         </ResourceDictionary>
     </ContentDialog.Resources>
 
@@ -180,17 +164,28 @@
                             <Button Content="#add">
 
                             </Button>
-                            <CheckBox x:Name="CB_CategoryAllowDeletion" Margin="15,0,0,0" Content="#allow deletion"/>
+                           
                         </StackPanel>
                         
                     </StackPanel>
                 </appcontrols:CardExpanderControl>
 
+                <CheckBox 
+                    x:Name="CB_CategoryAllowDeletion" 
+                    Margin="15,0,0,0" 
+                    Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    Content="#allow deletion"/>
+
                 <labs:TokenView 
                     Margin="0,15,0,8"
-                     Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
                     CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"
                     SelectionMode="Multiple" >
+                    <!--<labs:TokenView.ItemContainerStyle>
+                        <Style TargetType="labs:TokenItem">
+                            <Setter Property="CornerRadius" Value="{ThemeResource TokenItemCornerRadius}" />
+                        </Style>
+                    </labs:TokenView.ItemContainerStyle>-->
                     <labs:TokenItem Content="Apps">
                         <labs:TokenItem.Icon>
                             <FontIcon Glyph="&#xECAA;" />

@@ -36,6 +36,9 @@ using Windows.Devices.Enumeration;
 using Windows.UI.ViewManagement;
 using Windows.Foundation;
 using Windows.Graphics.Capture;
+using Project2FA.Core;
+using UNOversal.Services.Dialogs;
+using Prism.Ioc;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -318,67 +321,67 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task ReadQRCodeFromClipboard()
         {
-            try
+            DataPackageView dataPackageView = Clipboard.GetContent();
+            if (dataPackageView.Contains(StandardDataFormats.Bitmap))
             {
-                DataPackageView dataPackageView = Clipboard.GetContent();
-                if (dataPackageView.Contains(StandardDataFormats.Bitmap))
+                IRandomAccessStreamReference imageReceived = null;
+                try
                 {
-                    IRandomAccessStreamReference imageReceived = null;
+                    imageReceived = await dataPackageView.GetBitmapAsync();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(ex.Message, Category.Exception, Priority.Medium);
+                }
+                finally
+                {
                     try
                     {
-                        imageReceived = await dataPackageView.GetBitmapAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Log(ex.Message, Category.Exception, Priority.Medium);
-                    }
-                    finally
-                    {
-                        try
+                        if (imageReceived != null)
                         {
-                            if (imageReceived != null)
-                            {
-                                using IRandomAccessStreamWithContentType imageStream = await imageReceived.OpenReadAsync();
-                                BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(imageStream);
-                                SoftwareBitmap softwareBitmap = await bitmapDecoder.GetSoftwareBitmapAsync();
+                            using IRandomAccessStreamWithContentType imageStream = await imageReceived.OpenReadAsync();
+                            BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(imageStream);
+                            SoftwareBitmap softwareBitmap = await bitmapDecoder.GetSoftwareBitmapAsync();
 
-                                string result = ReadQRCodeFromBitmap(softwareBitmap);
-                                _qrCodeStr = HttpUtility.UrlDecode(result);
-                                if (!string.IsNullOrEmpty(_qrCodeStr))
-                                {
-                                    //clear the clipboard, if the image is read as TOTP
-                                    Clipboard.Clear();
-                                    await ReadAuthenticationFromString();
-                                }
-                                else
-                                {
-                                    MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
-                                    await dialog.ShowAsync();
-                                }
+                            string result = ReadQRCodeFromBitmap(softwareBitmap);
+                            _qrCodeStr = HttpUtility.UrlDecode(result);
+                            if (!string.IsNullOrEmpty(_qrCodeStr))
+                            {
+                                //clear the clipboard, if the image is read as TOTP
+                                Clipboard.Clear();
+                                await ReadAuthenticationFromString();
                             }
                             else
                             {
-                                //TODO add error: empty Clipboard?
+                                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
+                                await dialog.ShowAsync();
                             }
                         }
-                        catch (Exception exc)
+                        else
                         {
-#if WINDOWS_UWP
-                            TrackingManager.TrackException(nameof(ReadQRCodeFromClipboard), exc);
-#endif
-                            // TODO error by processing the image
+                            //TODO add error: empty Clipboard?
+                            //ContentDialog dialog = new ContentDialog();
+                            //dialog.Title = Strings.Resources.ErrorHandle;
+                            //dialog.Content = Strings.Resources.ErrorClipboardTask;
+                            //dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
+                            //dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
+                            //dialog.PrimaryButtonCommand = new AsyncRelayCommand(async () =>
+                            //{
+                            //    await ReadQRCodeFromClipboard();
+                            //});
+                            //dialog.SecondaryButtonText = Strings.Resources.ButtonTextCancel;
+                            //await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
                         }
-
+                    }
+                    catch (Exception exc)
+                    {
+#if WINDOWS_UWP
+                        TrackingManager.TrackExceptionCatched(nameof(ReadQRCodeFromClipboard), exc);
+#endif
+                        // TODO error by processing the image
                     }
                 }
             }
-            catch (Exception exc)
-            {
-#if WINDOWS_UWP
-                TrackingManager.TrackException(nameof(ReadQRCodeFromClipboard), exc);
-#endif
-            }
-
         }
 #endif
 

@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -36,7 +37,14 @@ namespace Project2FA.UWP.Views
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
         }
 
-        private async Task CreateTeachingTip(FrameworkElement element, string content)
+        /// <summary>
+        /// Create the TeachingTip for the specific framework element
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="title"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        private async Task CreateTeachingTip(FrameworkElement element,string title, string content)
         {
             var control = MainGrid.FindDescendant(nameof(TeachingTip));
             if (control != null)
@@ -47,18 +55,21 @@ namespace Project2FA.UWP.Views
                     tooltip.IsOpen = false;
                     await Task.Delay(500);
                 }
-                tooltip.Content = content;
+                TextBlock txt = new TextBlock { Text = content, TextWrapping = TextWrapping.WrapWholeWords };
+                tooltip.Title = title;
+                tooltip.Content = txt;
                 tooltip.Target = element;
                 tooltip.IsOpen = true;
 
             }
             else
             {
+                TextBlock txt = new TextBlock { Text = content, TextWrapping = TextWrapping.WrapWholeWords };
                 TeachingTip teachingTip = new TeachingTip
                 {
                     Target = element,
                     Name = nameof(TeachingTip),
-                    Content = content,
+                    Content = txt,
                     IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource { Symbol = Symbol.Help },
                     BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
                     IsOpen = true,
@@ -67,20 +78,11 @@ namespace Project2FA.UWP.Views
             }
         }
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-        private void AccountCodePageItemMoreBTN_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender as FrameworkElement != null)
-            {
-                CreateTeachingTip(sender as FrameworkElement, string.Empty);
-            }
-        }
-
         private void BTN_SetFavourite_Click(object sender, RoutedEventArgs e)
         {
             if (sender as FrameworkElement != null)
             {
-                CreateTeachingTip(sender as FrameworkElement, string.Empty);
+                CreateTeachingTip(sender as FrameworkElement, Strings.Resources.TutorialPageItemFavouriteBTNTitle, Strings.Resources.TutorialPageItemFavouriteBTNTDesc).ConfigureAwait(false);
             }
         }
 
@@ -88,7 +90,7 @@ namespace Project2FA.UWP.Views
         {
             if (sender as FrameworkElement != null)
             {
-                CreateTeachingTip(sender as FrameworkElement, string.Empty);
+                CreateTeachingTip(sender as FrameworkElement, Strings.Resources.TutorialPageItemCopyCodeBTNTitle, Strings.Resources.TutorialPageItemCopyCodeBTNDesc).ConfigureAwait(false);
             }
         }
 
@@ -96,9 +98,32 @@ namespace Project2FA.UWP.Views
         {
             if (sender as FrameworkElement != null)
             {
-                CreateTeachingTip(sender as FrameworkElement, string.Empty);
+                CreateTeachingTip(sender as FrameworkElement, Strings.Resources.TutorialPageItemShowCodeBTNTitle, Strings.Resources.TutorialPageItemShowCodeBTNDesc).ConfigureAwait(false);
             }
         }
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
+        private void TutorialPageItemMoreBTN_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender as FrameworkElement != null)
+            {
+                CreateTeachingTip(sender as FrameworkElement, Strings.Resources.TutorialPageItemMoreBTNTitle, Strings.Resources.TutorialPageItemMoreBTNDesc).ConfigureAwait(false);
+            }
+        }
+
+        private void FV_Tutorials_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ViewModel != null && ViewModel.SelectedIndex == 3)
+            {
+                var control = MainGrid.FindDescendant(nameof(TeachingTip));
+                if (control != null)
+                {
+                    var tooltip = (control as TeachingTip);
+                    if (tooltip.IsOpen)
+                    {
+                        tooltip.IsOpen = false;
+                    }
+                }
+            }
+        }
     }
 }

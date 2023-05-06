@@ -19,7 +19,6 @@ namespace Project2FA.UWP.Views
             App.ShellPageInstance.SetTitleBarAsDraggable(); //TODO check workaround
             App.ShellPageInstance.ShellViewInternal.Header = ViewModel;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
-            ViewModel.IsTutorialOpen = true;
             if (System.Diagnostics.Debugger.IsAttached || SettingsService.Instance.PrideMonthDesign)
             {
                 PageStaticBackgroundBorder.Visibility = Visibility.Visible;

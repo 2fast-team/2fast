@@ -1082,4 +1082,34 @@ In the following sections, the functionality of this application is explained in
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
     <value>Passwort für die Verschlüsselung</value>
   </data>
+  <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
+    <value>The key is copied to the clipboard.</value>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
+    <value>Copy key</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
+    <value>By setting a favourite, the account is displayed in the accent colour of the application and is placed on top in the display order.</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
+    <value>Set favourite</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
+    <value>Additional options for the account are displayed here</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNTitle" xml:space="preserve">
+    <value>More options</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
+    <value>Optionally, keys can be hidden and displayed again</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
+    <value>Hide/display key</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
+    <value>There are various interaction options for created accounts, which are explained in more detail using an example account after they have been activated.</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
+    <value>Interaction options for accounts</value>
+  </data>
 </root>

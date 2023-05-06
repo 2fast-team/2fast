@@ -417,7 +417,7 @@ namespace Project2FA.ViewModels
                         App.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8, 8, 8, 8);
                         App.Current.Resources["ComboBoxItemCornerRadius"] = new CornerRadius(3);
                         App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(1.5);
-                        App.Current.Resources["TokenItemCornerRadius"] = new CornerRadius(16);
+                        App.Current.Resources["TokenItemCornerRadius"] = new CornerRadius(16,16,16,16);
                     }
                     else
                     {

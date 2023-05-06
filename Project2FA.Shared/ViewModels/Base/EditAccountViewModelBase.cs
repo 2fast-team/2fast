@@ -117,10 +117,12 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _notesExpanded, value); 
         }
 
+#if WINDOWS_UWP
         public bool IsProVersion
         {
             get => SettingsService.Instance.IsProVersion;
         }
+#endif
 
         public async Task LoadIconNameCollection()
         {
@@ -135,6 +137,9 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
+#if WINDOWS_UWP
+                Project2FA.UWP.TrackingManager.TrackException(nameof(LoadIconNameCollection), exc);
+#endif
                 //TOOD add exception dialog
             }
 

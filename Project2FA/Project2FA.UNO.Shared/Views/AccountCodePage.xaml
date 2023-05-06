@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:models="using:Project2FA.Repository.Models"
-    xmlns:mstoolkitControls="using:CommunityToolkit.WinUI.UI.Controls.Core"
+    xmlns:mstoolkitControls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:helpers="using:Project2FA.Helpers"
     x:Name="Page"

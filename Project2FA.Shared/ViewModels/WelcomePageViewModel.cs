@@ -1,9 +1,9 @@
-﻿using Prism.Mvvm;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using UNOversal.Services.Dialogs;
 using UNOversal.Navigation;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -24,7 +24,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class WelcomePageViewModel : BindableBase
+    public class WelcomePageViewModel : ObservableObject
     {
         IDialogService _dialogService { get; }
         INavigationService _navigationService { get; }
@@ -47,11 +47,6 @@ namespace Project2FA.ViewModels
             NewDatefileCommand = new AsyncRelayCommand(NewDatafileCommandTask);
 
             UseExistDatefileCommand = new AsyncRelayCommand(UseExistDatafileCommandTask);
-
-            TutorialCommand = new RelayCommand(() =>
-            {
-                IsTutorialOpen = !IsTutorialOpen;
-            });
         }
 
         private async Task NewDatafileCommandTask()
@@ -65,6 +60,5 @@ namespace Project2FA.ViewModels
         }
 
         public string Title { get => _title; set => SetProperty(ref _title, value); }
-        public bool IsTutorialOpen { get => _isTutorialOpen; set => SetProperty(ref _isTutorialOpen, value); }
     }
 }

@@ -42,7 +42,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.18" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-    <PackageReference Include="DryIoc" Version="5.3.4" />
+    <PackageReference Include="DryIoc" Version="5.4.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Svg.Skia" Version="0.6.0-preview7" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.100" />
@@ -51,16 +51,16 @@
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Core" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.100" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.100" />
-    <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.5.0-dev.1" />
-    <PackageReference Include="Uno.Resizetizer" Version="1.1.0-dev.31" />
+    <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.6.0-dev.2" />
+    <PackageReference Include="Uno.Resizetizer" Version="1.1.0-dev.40" />
     <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="2.6.0-dev.40" />
     <PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.6.0-dev.40" />
-    <PackageReference Include="Uno.WinUI" Version="4.9.0-dev.767" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.9.0-dev.767" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.9.0-dev.767" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.9.0-dev.767" />
+    <PackageReference Include="Uno.WinUI" Version="4.9.0-dev.890" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="4.9.0-dev.890" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.9.0-dev.890" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.9.0-dev.890" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="4.9.0-dev.767" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="4.9.0-dev.890" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>

@@ -1089,4 +1089,34 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
     <value>Passwort für die Verschlüsselung</value>
   </data>
+  <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
+    <value>Der Schlüssel wird in die Zwischenablage kopiert.</value>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
+    <value>Schlüssel kopieren</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
+    <value>Hier werden weitere Optionen für das Konto angezeigt</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNTitle" xml:space="preserve">
+    <value>Weitere Optionen</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
+    <value>Optional können Schlüssel versteckt und weider angezeigt werden</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
+    <value>Schlüssel verstecken/anzeigen</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
+    <value>Durch die Setzung eines Favoriten wird das Konto in der Akzentfarbe der Anwendung dargestellt und in der Reihenfolge der Anzeige nach oben gesetzt.</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
+    <value>Favorit setzen</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
+    <value>Für angelegte Konten gibt es verschiedenste Interaktionsmöglichkeiten, die anhand eines Beispielkontos nach deren Betätigung weitergehender erklärt werden.</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
+    <value>Interaktionsmöglichkeiten für Konten</value>
+  </data>
 </root>

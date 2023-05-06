@@ -181,7 +181,8 @@
                         Margin="8,0,0,0" 
                         VerticalAlignment="Top" 
                         Style="{StaticResource TransparentButtonStyle}"
-                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip}" Click="AccountCodePageItemMoreBTN_Click">
+                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip}" 
+                        Click="TutorialPageItemMoreBTN_Click">
                         <FontIcon Glyph="&#xE712;"/>
                         <!--<Button.Flyout>
                             <MenuFlyout Placement="Bottom">
@@ -252,7 +253,7 @@
                 UseTouchAnimationsForAllNavigation="True"
                 SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
                 Background="Transparent"
-                x:Name="FV_Tutorials">
+                x:Name="FV_Tutorials" SelectionChanged="FV_Tutorials_SelectionChanged">
                 <FlipViewItem>
                     <Grid MaxWidth="760">
                         <Border 
@@ -372,15 +373,15 @@
                         </Border>
                         <StackPanel Margin="12,12,12,0">
                             <TextBlock 
-                            x:Uid="TutorialContentDialogLoadMethodHeader"
-                            Text="~TutorialContentDialogLoadMethodHeader.Text"
+                            x:Uid="TutorialContentDialogInteractionAccountHeader"
+                            Text="~TutorialContentDialogInteractionAccountHeader.Text"
                             FontSize="16"
                             FontWeight="Bold"
                             TextWrapping="WrapWholeWords"
                             Margin="0,0,0,12"/>
                             <TextBlock 
-                            x:Uid="TutorialContentDialogLoadMethod"
-                            Text="~TutorialContentDialogLoadMethod.Text"
+                            x:Uid="TutorialContentDialogInteractionAccount"
+                            Text="~TutorialContentDialogInteractionAccount.Text"
                             FontSize="16"
                             TextWrapping="WrapWholeWords"/>
                             <ListView 

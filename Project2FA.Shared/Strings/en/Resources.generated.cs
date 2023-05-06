@@ -10,55 +10,18 @@ using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Data;
 #endif
 
-namespace Project2FA.Strings{
+namespace Project2FA.Strings
+{
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public static class Resources {
+    public static class Resources
+    {
         private static ResourceLoader _resourceLoader;
         static Resources()
         {
             _resourceLoader = ResourceLoader.GetForViewIndependentUse("Resources");
         }
-
-        #region NewDatafilePasswordInfoTitle
-        /// <summary>
-        ///   Looks up a localized string similar to: NewDatafilePasswordInfo
-        /// </summary>
-        public static string NewDatafilePasswordInfoTitle
-        {
-            get
-            {
-                return _resourceLoader.GetString("NewDatafilePasswordInfoTitle");
-            }
-        }
-        #endregion
-
-        #region NewDatafilePasswordInfo
-        /// <summary>
-        ///   Looks up a localized string similar to: NewDatafilePasswordInfo
-        /// </summary>
-        public static string NewDatafilePasswordInfo
-        {
-            get
-            {
-                return _resourceLoader.GetString("NewDatafilePasswordInfo");
-            }
-        }
-        #endregion
-
-        #region ApplicationName
-        /// <summary>
-        ///   Looks up a localized string similar to: 2fast
-        /// </summary>
-        public static string ApplicationName
-        {
-            get
-            {
-                return _resourceLoader.GetString("ApplicationName");
-            }
-        }
-        #endregion
 
         #region AccountCodePageCopied
         /// <summary>
@@ -972,7 +935,7 @@ namespace Project2FA.Strings{
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: • Windows Hello can now be disabled in the settings for general login • Update of third party libraries • Fixed a bug where not all rights were available to read when starting .2fa files • Encryption of the password entered when starting .2fa files • Increased reliability of the WebDAV component
+        ///   Looks up a localized string similar to: - Bug fixes - Updating third-party libraries
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -1645,13 +1608,156 @@ namespace Project2FA.Strings{
             }
         }
         #endregion
+
+        #region ApplicationName
+        /// <summary>
+        ///   Looks up a localized string similar to: [Beta] 2fast - two factor authenticator supporting TOTP
+        /// </summary>
+        public static string ApplicationName
+        {
+            get
+            {
+                return _resourceLoader.GetString("ApplicationName");
+            }
+        }
+        #endregion
+
+        #region NewDatafilePasswordInfo
+        /// <summary>
+        ///   Looks up a localized string similar to: A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.
+        /// </summary>
+        public static string NewDatafilePasswordInfo
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewDatafilePasswordInfo");
+            }
+        }
+        #endregion
+
+        #region NewDatafilePasswordInfoTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Passwort für die Verschlüsselung
+        /// </summary>
+        public static string NewDatafilePasswordInfoTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewDatafilePasswordInfoTitle");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemCopyCodeBTNDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: The key is copied to the clipboard.
+        /// </summary>
+        public static string TutorialPageItemCopyCodeBTNDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemCopyCodeBTNDesc");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemCopyCodeBTNTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Copy key
+        /// </summary>
+        public static string TutorialPageItemCopyCodeBTNTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemCopyCodeBTNTitle");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemFavouriteBTNTDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: By setting a favourite, the account is displayed in the accent colour of the application and is placed on top in the display order.
+        /// </summary>
+        public static string TutorialPageItemFavouriteBTNTDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemFavouriteBTNTDesc");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemFavouriteBTNTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Set favourite
+        /// </summary>
+        public static string TutorialPageItemFavouriteBTNTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemFavouriteBTNTitle");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemMoreBTNDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: Additional options for the account are displayed here
+        /// </summary>
+        public static string TutorialPageItemMoreBTNDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemMoreBTNDesc");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemMoreBTNTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: More options
+        /// </summary>
+        public static string TutorialPageItemMoreBTNTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemMoreBTNTitle");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemShowCodeBTNDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: Optionally, keys can be hidden and displayed again
+        /// </summary>
+        public static string TutorialPageItemShowCodeBTNDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemShowCodeBTNDesc");
+            }
+        }
+        #endregion
+
+        #region TutorialPageItemShowCodeBTNTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Hide/display key
+        /// </summary>
+        public static string TutorialPageItemShowCodeBTNTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPageItemShowCodeBTNTitle");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [MarkupExtensionReturnType(ReturnType = typeof(string))]
-    public class ResourcesExtension: MarkupExtension
+    public class ResourcesExtension : MarkupExtension
     {
         public enum KeyEnum
         {
@@ -1778,6 +1884,17 @@ namespace Project2FA.Strings{
             InfoBarDatafileUpdated,
             ShellPageWarnInfo,
             AccountCodePageTitle,
+            ApplicationName,
+            NewDatafilePasswordInfo,
+            NewDatafilePasswordInfoTitle,
+            TutorialPageItemCopyCodeBTNDesc,
+            TutorialPageItemCopyCodeBTNTitle,
+            TutorialPageItemFavouriteBTNTDesc,
+            TutorialPageItemFavouriteBTNTitle,
+            TutorialPageItemMoreBTNDesc,
+            TutorialPageItemMoreBTNTitle,
+            TutorialPageItemShowCodeBTNDesc,
+            TutorialPageItemShowCodeBTNTitle,
         }
 
         private static ResourceLoader _resourceLoader;
@@ -1785,13 +1902,13 @@ namespace Project2FA.Strings{
         {
             _resourceLoader = ResourceLoader.GetForViewIndependentUse("Resources");
         }
-        public KeyEnum Key { get; set;}
-        public IValueConverter Converter { get; set;}
-        public object ConverterParameter { get; set;}
+        public KeyEnum Key { get; set; }
+        public IValueConverter Converter { get; set; }
+        public object ConverterParameter { get; set; }
         protected override object ProvideValue()
         {
             string res;
-            if(Key == KeyEnum.__Undefined)
+            if (Key == KeyEnum.__Undefined)
             {
                 res = "";
             }

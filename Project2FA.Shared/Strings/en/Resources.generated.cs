@@ -1751,6 +1751,19 @@ namespace Project2FA.Strings
             }
         }
         #endregion
+
+        #region AddAccountContentDialogScreenclipNotFound
+        /// <summary>
+        ///   Looks up a localized string similar to: Snipping tool not found
+        /// </summary>
+        public static string AddAccountContentDialogScreenclipNotFound
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddAccountContentDialogScreenclipNotFound");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]

@@ -172,7 +172,7 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                LoginPage loginPage = App.Current.Container.Resolve<LoginPage>();
+                LoginPage loginPage = new LoginPage(true);
                 WinUIWindow.Current.Content = loginPage;
             }
         }

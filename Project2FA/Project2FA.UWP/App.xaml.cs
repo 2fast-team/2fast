@@ -316,7 +316,6 @@ namespace Project2FA.UWP
                 if (timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
                 {
                     _focusLostTimer.Stop();
-                    bool isLogout = true;
                     var dialogService = Current.Container.Resolve<IDialogService>();
                     if (await dialogService.IsDialogRunning())
                     {
@@ -330,7 +329,7 @@ namespace Project2FA.UWP
                     }
                     else
                     {
-                        var loginPage = new LoginPage(isLogout);
+                        var loginPage = new LoginPage(true);
                         Window.Current.Content = loginPage;
                     }
                 }

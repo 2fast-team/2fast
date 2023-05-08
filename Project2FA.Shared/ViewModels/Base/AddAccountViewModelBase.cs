@@ -271,7 +271,7 @@ namespace Project2FA.ViewModels
         public async Task ScanClipboardQRCode()
         {
             bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
-                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
+                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}",
                     Strings.Resources.ApplicationName,
                     OpeningSeconds)));
             if (result)
@@ -280,8 +280,13 @@ namespace Project2FA.ViewModels
             }
             else
             {
-
+                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogScreenclipNotFound, Strings.Resources.Error);
+                await dialog.ShowAsync();
             }
+    //        bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
+    //string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
+    //    Strings.Resources.ApplicationName,
+    //    OpeningSeconds)));
 
             //// The GraphicsCapturePicker follows the same pattern the
             //// file pickers do.

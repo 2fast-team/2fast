@@ -734,7 +734,9 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Fehlerbehebungen
+    <value>- Über 200 neue Unternehmen-Logos hinzugefügt
+- Überarbeitung des initialen Tutorials
+- Fehlerbehebungen
 - Aktualisierung von Drittanbieter-Bibliotheken</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1118,5 +1120,8 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   </data>
   <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
     <value>Interaktionsmöglichkeiten für Konten</value>
+  </data>
+  <data name="AddAccountContentDialogScreenclipNotFound" xml:space="preserve">
+    <value>Die benötigte Systemanwendung „Ausschneiden und Skizzieren“ konnte nicht gefunden werden: https://apps.microsoft.com/store/detail/snipping-tool/9MZ95KL8MR0L</value>
   </data>
 </root>

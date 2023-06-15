@@ -15,17 +15,21 @@ using UNOversal.Services.Serialization;
 using UNOversal.Navigation;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.Secrets;
+using Project2FA.Core;
+
 
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 #else
 using Microsoft.UI.Xaml.Data;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
 #endif
 
 namespace Project2FA.ViewModels
@@ -36,6 +40,8 @@ namespace Project2FA.ViewModels
     public class NewDataFilePageViewModel : DatafileViewModelBase
     {
         private IFileService FileService { get; }
+
+        private IDialogService DialogService { get; }
         private ISerializationService SerializationService { get; }
         private INavigationService NaviationService { get; }
         public ICommand SetAndCreateLocalDatafileCommand { get; }
@@ -57,6 +63,7 @@ namespace Project2FA.ViewModels
         {
             NaviationService = navigationService;
             SerializationService = serializationService;
+            DialogService = dialogService;
             FileService = fileService;
             WebDAVLoginRequiered = true;
             WebDAVDatafilePropertiesEnabled = false;
@@ -166,22 +173,41 @@ namespace Project2FA.ViewModels
                     SerializationService.Serialize(file),
                     await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
 
-                await CreateLocalFileDB(isWebDAV);
-                App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
-                await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+                var result = await CreateLocalFileDB(isWebDAV);
+                if (result != null)
+                {
+                    App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
+                    await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+                }
+                else
+                {
+                    // TODO error Dialog
+                }
+
             }
             catch (Exception exc)
             {
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(SetAndCreateLocalDatafile),exc);
 #endif
-                var result = await Utils.ErrorDialogs.WritingDatafileError(true);
-                if (result == ContentDialogResult.Primary)
+                if (exc.Message.Contains("E_ACCESSDENIED"))
                 {
-                    await SetAndCreateLocalDatafile(isWebDAV).ConfigureAwait(false);
+                    var dialog = new ContentDialog();
+                    dialog.Title = Strings.Resources.NewDatafileAccessErrorTitle;
+                    dialog.Content = Strings.Resources.NewDatafileAccessErrorDesc;
+                    dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
+                    dialog.PrimaryButtonText = Strings.Resources.Confirm;
+                    await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+                }
+                else
+                {
+                    var result = await Utils.ErrorDialogs.WritingDatafileError(true);
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        SetAndCreateLocalDatafile(isWebDAV);
+                    }
                 }
             }
-
         }
 
 

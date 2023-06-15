@@ -1,9 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Labs.WinUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Project2FA.Core.Utils;
 using Project2FA.Helpers;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +25,8 @@ namespace Project2FA.ViewModels
         private IconNameCollectionModel _iconNameCollectionModel;
         private bool _isEditBoxVisible;
         private bool _notesExpanded = true;
+        private ObservableCollection<CategoryModel> _tempAccountCategoryList;
+        private ObservableCollection<CategoryModel> _globalTempCategories = new ObservableCollection<CategoryModel>();
 
         public ICommand CancelButtonCommand { get; internal set; }
         public ICommand PrimaryButtonCommand { get; internal set; }
@@ -46,6 +51,10 @@ namespace Project2FA.ViewModels
                     TempLabel = Model.Label;
                     TempAccountIconName = Model.AccountIconName;
                     TempAccountSVGIcon = Model.AccountSVGIcon;
+                    if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
+                    {
+                        GlobalTempCategories.AddRange(DataService.Instance.GlobalCategories);
+                    }
                     if (!string.IsNullOrWhiteSpace(value.Notes))
                     {
                         TempNotes = Model.Notes;
@@ -117,12 +126,32 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _notesExpanded, value); 
         }
 
+        public ObservableCollection<CategoryModel> GlobalTempCategories
+        {
+            get => _globalTempCategories;
+            set => SetProperty(ref _globalTempCategories, value);
+        }
+
 #if WINDOWS_UWP
         public bool IsProVersion
         {
             get => SettingsService.Instance.IsProVersion;
         }
 #endif
+        public ObservableCollection<CategoryModel> TempAccountCategoryList 
+        { 
+            get
+            {
+                if(_tempAccountCategoryList == null)
+                {
+                    _tempAccountCategoryList = new ObservableCollection<CategoryModel>();
+                }
+                return _tempAccountCategoryList;
+            }
+            set => SetProperty(ref _tempAccountCategoryList, value);
+        }
+
+
 
         public async Task LoadIconNameCollection()
         {

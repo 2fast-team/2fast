@@ -1,6 +1,6 @@
 ﻿namespace Project2FA.Services.Enums
 {
-    public enum WindowsHelloPreferEnum
+    public enum BiometricPreferEnum
     {
         None = 0,
         Prefer = 1,

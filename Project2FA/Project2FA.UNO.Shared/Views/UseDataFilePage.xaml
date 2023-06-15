@@ -25,7 +25,7 @@
         </utu:NavigationBar>
         <Grid x:Name="RootGrid" Grid.Row="1">
             <ScrollViewer VerticalScrollMode="Auto">
-                <StackPanel Padding="0,0,22,0">
+                <StackPanel Padding="8,0,22,0">
                     <TextBlock 
                                 TextWrapping="Wrap"
                                 Text="~UseDatafileContentDialogLoadInfo.Text"

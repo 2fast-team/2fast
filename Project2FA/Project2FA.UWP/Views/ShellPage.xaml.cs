@@ -41,7 +41,7 @@ namespace Project2FA.UWP.Views
             string title = Windows.ApplicationModel.Package.Current.DisplayName;
             // determine and set if the app is started in debug mode
             ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
-
+            SettingsService.Instance.IsProVersion = true;
             coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 

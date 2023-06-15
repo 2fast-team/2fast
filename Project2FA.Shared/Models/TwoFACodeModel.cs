@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core;
 using Project2FA.Core.Services.Crypto;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -172,6 +174,21 @@ namespace Project2FA.Repository.Models
         public TwoFACodeModel Model
         {
             get => this;
+        }
+
+        private List<CategoryModel> _selectedCategories;
+        //[Encrypt]
+        public List<CategoryModel> SelectedCategories 
+        { 
+            get
+            {
+                if (_selectedCategories == null)
+                {
+                    _selectedCategories = new List<CategoryModel>();
+                }
+                return _selectedCategories;
+            }
+            set => _selectedCategories = value;
         }
 
         //[JsonIgnore]

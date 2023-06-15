@@ -18,9 +18,17 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar 
             Grid.Row="0"
+            MainCommandMode="Action"
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-            Content="#Login"/>
+            Content="#Login">
+            <utu:NavigationBar.MainCommand>
+                <AppBarButton 
+                    Content="#Back" 
+                    Visibility="Collapsed"
+                    Foreground="{ThemeResource  SystemAccentColor}" />
+            </utu:NavigationBar.MainCommand>
+        </utu:NavigationBar>
 
         <!--for debug-->
         <Border 

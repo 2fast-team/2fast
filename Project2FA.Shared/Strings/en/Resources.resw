@@ -421,7 +421,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>User-defined title bar (in light/dark)</value>
   </data>
   <data name="SettingsWindowsColor.Content" xml:space="preserve">
-    <value>Windows color settings</value>
+    <value>System color settings</value>
   </data>
   <data name="SettingsWindowsHelloPrefer.Header" xml:space="preserve">
     <value>Prefer Windows Hello for login</value>
@@ -1116,5 +1116,14 @@ In the following sections, the functionality of this application is explained in
   </data>
   <data name="AddAccountContentDialogScreenclipNotFound" xml:space="preserve">
     <value>The required system application "Snipping Tool" could not be found: https://apps.microsoft.com/store/detail/snipping-tool/9MZ95KL8MR0L</value>
+  </data>
+  <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
+    <value>Access to the folder is blocked for the application, try again or select another folder.</value>
+  </data>
+  <data name="NewDatafileAccessErrorTitle" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
+    <value>Create categories</value>
   </data>
 </root>

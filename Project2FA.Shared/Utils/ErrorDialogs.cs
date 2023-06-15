@@ -11,6 +11,7 @@ using Windows.Storage;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
 using UNOversal.Services.Secrets;
+using ColorCode.Compilation.Languages;
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -55,9 +56,15 @@ namespace Project2FA.Utils
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.AuthorizationFileSystemContentDialogTitle;
+#if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.AuthorizationFileSystemContentDialogDescription;
             dialog.Content = markdown;
+#else
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
+            dialog.Content = textBlock;
+#endif
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
@@ -98,7 +105,11 @@ namespace Project2FA.Utils
                     var dialog = new ChangeDatafilePasswordContentDialog();
                     var param = new DialogParameters();
                     param.Add("isInvalid", true);
-                    await dialogService.ShowDialogAsync(dialog, param);
+                    var result = await dialogService.ShowDialogAsync(dialog, param);
+                    if (result != ContentDialogResult.Primary)
+                    {
+                        ShowPasswordError();
+                    }
                 }),
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
@@ -134,17 +145,23 @@ namespace Project2FA.Utils
             {
                 Title = Strings.Resources.AuthorizationFileSystemContentDialogTitle
             };
+#if WINDOWS_UWP
             var markdown = new MarkdownTextBlock
             {
                 Text = Strings.Resources.AuthorizationFileSystemContentDialogDescription
             };
             dialog.Content = markdown;
+#else
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
+            dialog.Content = textBlock;
+#endif
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
                 App.Current.Exit();
             });
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+            dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
             dialog.PrimaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogPrimaryBTN;
             dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             dialog.SecondaryButtonText = Strings.Resources.AuthorizationFileSystemContentDialogSecondaryBTN;
@@ -162,12 +179,18 @@ namespace Project2FA.Utils
             {
                 Title = Strings.Resources.AuthorizationFileSystemContentDialogTitle
             };
+#if WINDOWS_UWP
             var markdown = new MarkdownTextBlock
             {
                 Text = Strings.Resources.AuthorizationFileSystemContentDialogDescription
             };
             dialog.Content = markdown;
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+#else
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
+            dialog.Content = textBlock;
+#endif
+            dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
@@ -246,7 +269,7 @@ namespace Project2FA.Utils
             buttonStackPanel.Children.Add(feedbackHub);
             stackpanel.Children.Add(buttonStackPanel);
 
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+            dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
             dialog.Content = stackpanel;
             dialog.PrimaryButtonText = Resources.RestartApp;
             dialog.SecondaryButtonText = Resources.CloseApp;
@@ -307,6 +330,7 @@ namespace Project2FA.Utils
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/2fast-team/2fast/issues"));
             };
+            // TODO change
             var feedbackHub = new Button
             {
                 Margin = new Thickness(4, 0, 0, 0),
@@ -326,7 +350,7 @@ namespace Project2FA.Utils
             buttonStackPanel.Children.Add(feedbackHub);
             stackpanel.Children.Add(buttonStackPanel);
 
-            dialog.Style = App.Current.Resources["MyContentDialogStyle"] as Style;
+            dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
             dialog.Content = stackpanel;
             dialog.PrimaryButtonText = Resources.Confirm;
             //dialog.SecondaryButtonText = Resources.CloseApp;
@@ -489,6 +513,12 @@ namespace Project2FA.Utils
                 }
             }
             await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        internal static Task WritingFatalRestoreError()
+        {
+            // TODO generate
+            throw new NotImplementedException();
         }
     }
 }

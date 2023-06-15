@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:media="clr-namespace:CommunityToolkit.WinUI.UI.Media;assembly=CommunityToolkit.WinUI.UI.Media"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -69,11 +70,18 @@
             </utu:NavigationBar.PrimaryCommands>-->
         </utu:NavigationBar>
         <Grid x:Name="MasterGrid" Grid.Row="1">
+            <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                <Border>
+                    <!--<Border.Background>
+                        <media:BackdropBlurBrush Amount="2" />
+                    </Border.Background>-->
+                </Border>
+            </Border>
             <!--<Grid.Background>
                 <AcrylicBrush 
                 AlwaysUseFallback="False" 
                 TintColor="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                TintOpacity="0.5" />
+                TintOpacity="0.1" />
             </Grid.Background>-->
             <ScrollViewer  Margin="0,40,0,0" VerticalScrollBarVisibility="Auto">
                 <RelativePanel Margin="12,0,12,0" HorizontalAlignment="Center">

@@ -99,50 +99,63 @@ namespace Project2FA.ViewModels
         /// <param name="isWebDAV"></param>
         public async Task<DBDatafileModel> CreateLocalFileDB(bool isWebDAV)
         {
-            string hash = CryptoService.CreateStringHash(Password);
-            await App.Repository.Password.DeleteAsync();
-            DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
-            string tempDataFileName;
-            if (!DateFileName.Contains(".2fa"))
+            DBDatafileModel model;
+            try
             {
-                DateFileName += ".2fa";
-            }
-            tempDataFileName = DateFileName;
+                string hash = CryptoService.CreateStringHash(Password);
+                
+                DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
+                string tempDataFileName;
+                if (!DateFileName.Contains(".2fa"))
+                {
+                    DateFileName += ".2fa";
+                }
+                tempDataFileName = DateFileName;
 
+                //save the file path for persistent access on iOS 
 #if __IOS__
-            Foundation.NSError error;
-            Foundation.NSUrl url = Foundation.NSUrl.FromFilename(LocalStorageFile.Path);
-            Foundation.NSData bookmark = url.CreateBookmarkData(Foundation.NSUrlBookmarkCreationOptions.WithSecurityScope, null, null, out error);
-            Foundation.NSUserDefaults.StandardUserDefaults[Constants.ContainerName] = bookmark;
-            Foundation.NSUserDefaults.StandardUserDefaults.Synchronize();
+                Foundation.NSError error;
+                Foundation.NSUrl url = Foundation.NSUrl.FromFilename(LocalStorageFile.Path);
+                Foundation.NSData bookmark = url.CreateBookmarkData(Foundation.NSUrlBookmarkCreationOptions.WithSecurityScope, null, null, out error);
+                Foundation.NSUserDefaults.StandardUserDefaults[Constants.ContainerName] = bookmark;
+                Foundation.NSUserDefaults.StandardUserDefaults.Synchronize();
 #endif
-
 
 #if WINDOWS_UWP
-            var model = new DBDatafileModel
-            {
-                DBPasswordHashModel = passwordModel,
-                IsWebDAV = isWebDAV,
-                Path = ChoosenOneWebDAVFile == null ? LocalStorageFolder.Path: ChoosenOneWebDAVFile.Path,
-                Name = tempDataFileName
-            };
+                model = new DBDatafileModel
+                {
+                    DBPasswordHashModel = passwordModel,
+                    IsWebDAV = isWebDAV,
+                    Path = ChoosenOneWebDAVFile == null ? LocalStorageFolder.Path : ChoosenOneWebDAVFile.Path,
+                    Name = tempDataFileName
+                };
 #else
-            var model = new DBDatafileModel
-            {
-                DBPasswordHashModel = passwordModel,
-                IsWebDAV = isWebDAV,
-                Path = ChoosenOneWebDAVFile == null ? LocalStorageFile.Path : ChoosenOneWebDAVFile.Path,
-                Name = tempDataFileName
-            };
+                model = new DBDatafileModel
+                {
+                    DBPasswordHashModel = passwordModel,
+                    IsWebDAV = isWebDAV,
+                    Path = ChoosenOneWebDAVFile == null ? LocalStorageFile.Path : ChoosenOneWebDAVFile.Path,
+                    Name = tempDataFileName
+                };
 #endif
 
-            await App.Repository.Datafile.UpsertAsync(model);
+                await App.Repository.Datafile.UpsertAsync(model);
 
 
-            // write the password with the hash(key) in the secret vault
-            SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
+                // write the password with the hash(key) in the secret vault
+                SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
+                return model;
+            }
+            catch (Exception exc)
+            {
+#if WINDOWS_UWP
+                await App.Repository.Password.DeleteAsync();
+                TrackingManager.TrackExceptionCatched(nameof(CreateLocalFileDB), exc);
+#endif
+                return null;
+            }
 
-            return model;
+
         }
 
         /// <summary>

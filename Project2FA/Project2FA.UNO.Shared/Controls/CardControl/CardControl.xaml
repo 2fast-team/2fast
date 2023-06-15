@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Project2FA.UWP.Controls">
+    xmlns:controls="using:Project2FA.Controls">
 
     <Style TargetType="controls:CardControl">
         <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
@@ -63,7 +63,7 @@
 
                                 <ContentPresenter
                                 x:Name="DescriptionPresenter"
-                                FontFamily="Seguoe UI"
+                                        FontFamily="Seguoe UI"
                                 Content="{TemplateBinding Description}"
                                 FontSize="{StaticResource SecondaryTextFontSize}"
                                 TextWrapping="WrapWholeWords"

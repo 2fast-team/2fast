@@ -55,7 +55,7 @@ namespace Project2FA.ViewModels
 
         public ICommand RateAppCommand { get; }
         public ICommand SendMailCommand { get; }
-        //public ICommand NavigateBackCommand { get; }
+        public ICommand NavigateBackCommand { get; }
 
         private int _selectedItem;
         public SettingPageViewModel(IDialogService dialogService, ISecretService secretService, INavigationService navigationService)
@@ -75,7 +75,7 @@ namespace Project2FA.ViewModels
                 AboutPartViewModel.RateApp();
             });
             NavigationService = navigationService;
-            //NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);
+            NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             //SendMailCommand = new AsyncRelayCommand(SendMail);
         }
 
@@ -85,6 +85,11 @@ namespace Project2FA.ViewModels
             {
                 SelectedItem = selectedItem;
             }
+        }
+
+        private async Task NavigateBackCommandTask()
+        {
+            await NavigationService.GoBackAsync();
         }
 
         //private async Task SendMail()
@@ -360,10 +365,10 @@ namespace Project2FA.ViewModels
             {
                 switch (_settings.PreferWindowsHello)
                 {
-                    case WindowsHelloPreferEnum.None:
-                    case WindowsHelloPreferEnum.No:
+                    case BiometricPreferEnum.None:
+                    case BiometricPreferEnum.No:
                         return false;
-                    case WindowsHelloPreferEnum.Prefer:
+                    case BiometricPreferEnum.Prefer:
                         return true;
                     default:
                         return false;
@@ -371,7 +376,7 @@ namespace Project2FA.ViewModels
             }
             set
             {
-                _settings.PreferWindowsHello = value ? WindowsHelloPreferEnum.Prefer : WindowsHelloPreferEnum.No;
+                _settings.PreferWindowsHello = value ? BiometricPreferEnum.Prefer : BiometricPreferEnum.No;
                 OnPropertyChanged(nameof(PreferWindowsHelloLogin));
             }
         }

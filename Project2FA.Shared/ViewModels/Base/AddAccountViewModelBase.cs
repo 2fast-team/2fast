@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Project2FA.Repository.Models;
 using System.Collections.ObjectModel;
 using Windows.Media.Capture.Frames;
@@ -17,11 +16,8 @@ using Windows.Storage.Streams;
 using System.IO;
 using Project2FA.Helpers;
 using Project2FA.Services;
-using Project2FA.Core.Utils;
 using Windows.UI.Core;
-using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics.Imaging;
-using System.Web;
 using Windows.UI.Popups;
 using Project2FA.Core.ProtoModels;
 using OtpNet;
@@ -32,13 +28,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Windows.Media.Core;
 using CommunityToolkit.Mvvm.Input;
-using Windows.Devices.Enumeration;
 using Windows.UI.ViewManagement;
-using Windows.Foundation;
-using Windows.Graphics.Capture;
-using Project2FA.Core;
-using UNOversal.Services.Dialogs;
-using Prism.Ioc;
+using Project2FA.Core.Utils;
+using System.Web;
+using System.Linq;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -47,6 +40,7 @@ using Windows.UI.Xaml.Controls;
 using WindowActivatedEventArgs = Windows.UI.Core.WindowActivatedEventArgs;
 using WinUIWindow = Windows.UI.Xaml.Window;
 using Microsoft.Toolkit.Uwp.Helpers;
+using Windows.ApplicationModel.DataTransfer;
 #else
 using Project2FA.UNO;
 using Microsoft.UI.Xaml;
@@ -256,6 +250,7 @@ namespace Project2FA.ViewModels
                 if (_qrCodeScan)
                 {
 #if WINDOWS_UWP
+                    ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
                     ReadQRCodeFromClipboard();
 #endif
                     _qrCodeScan = false;
@@ -270,12 +265,10 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task ScanClipboardQRCode()
         {
-            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
-                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}",
-                    Strings.Resources.ApplicationName,
-                    OpeningSeconds)));
+            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?source={0}&clippingMode=Window"));
             if (result)
             {
+                await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
                 _launchScreenClip = true;
             }
             else
@@ -603,6 +596,27 @@ namespace Project2FA.ViewModels
                 Model.AccountIconName = transformName;
                 AccountIconName = transformName;
                 await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
+            }
+            else
+            {
+                // fallback: check if one IconNameCollectionModel name fits into the label name
+                try
+                {
+                    var list = IconNameCollectionModel.Collection.Where(x => x.Name.Contains(transformName));
+                    if (list.Count() == 1)
+                    {
+                        Model.AccountIconName = list.FirstOrDefault().Name;
+                        AccountIconName = list.FirstOrDefault().Name;
+                        await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
+                    }
+                }
+                catch (Exception exc)
+                {
+#if WINDOWS_UWP
+                    TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
+#endif
+                }
+
             }
             //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()))
             //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;

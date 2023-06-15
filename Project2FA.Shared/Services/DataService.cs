@@ -90,6 +90,8 @@ namespace Project2FA.Services
         public Stopwatch TOTPEventStopwatch { get; }
         public Project2FA.Controls.AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
+
+        public ObservableCollection<CategoryModel> GlobalCategories { get; set; } = new ObservableCollection<CategoryModel>();
         private StorageFile _openDatefile;
         private bool _emptyAccountCollectionTipIsOpen;
         private TwoFACodeModel _tempDeletedTFAModel;
@@ -388,6 +390,11 @@ namespace Project2FA.Services
                         {
                             // read the iv for AES
                             DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                            GlobalCategories.Clear();
+                            if (datafile.GlobalCategories != null)
+                            {
+                                GlobalCategories.AddRange(datafile.GlobalCategories);
+                            }
                             byte[] iv = datafile.IV;
 
                             if (ActivatedDatafile != null)
@@ -461,9 +468,12 @@ namespace Project2FA.Services
                             
                         }
                     }
-                    catch (Exception)
+                    catch (Exception exc)
                     {
                         _errorOccurred = true;
+#if WINDOWS_UWP
+                        TrackingManager.TrackExceptionCatched(nameof(CheckLocalDatafile) + " PW", exc);
+#endif
                         await ErrorDialogs.ShowPasswordError();
                         //CheckLocalDatafile();
                         
@@ -625,7 +635,7 @@ namespace Project2FA.Services
                 var result = prevíousVersion.CompareTo(compareVersion);
                 int version = result >= 0 ? 2 : 1;
                 // create the new datafile model
-                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version };
+                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version, GlobalCategories = GlobalCategories };
                 
                 if (ActivatedDatafile != null)
                 {
@@ -766,18 +776,34 @@ namespace Project2FA.Services
                 CollectionAccessSemaphore.Release();
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(WriteLocalDatafile), exc);
+#endif
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                HandleWriteError(datafile,fileName,folder);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
-                var restoreSuccess = await RestoreLastDatafile(datafile, fileName, folder);
-                if (restoreSuccess)
+            }
+        }
+
+        private async Task HandleWriteError(DatafileModel datafile, string fileName, StorageFolder folder, int count = 0)
+        {
+            var restoreSuccess = await RestoreLastDatafile(datafile, fileName, folder);
+            if (restoreSuccess)
+            {
+                await Utils.ErrorDialogs.WritingDatafileError(false);
+            }
+            else
+            {
+                if (count < 3)
                 {
-                    await Utils.ErrorDialogs.WritingDatafileError(false);
+                    await Task.Delay(250);
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    HandleWriteError(datafile, fileName, folder, count + 1);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
                 else
                 {
-                    // TODO Dialog
+                    await Utils.ErrorDialogs.WritingFatalRestoreError();
                 }
-#endif
-
             }
         }
 

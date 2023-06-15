@@ -1,10 +1,12 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
+﻿using CommunityToolkit.Labs.WinUI;
+using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.UWP.Extensions;
 using Project2FA.ViewModels;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,6 +25,10 @@ namespace Project2FA.UWP.Views
 
         private void EditAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
         {
+            for (int i = 0; i < ViewModel.TempAccountCategoryList.Count; i++)
+            {
+                TV_Categories.SelectedItems.Add(ViewModel.TempAccountCategoryList[i]);
+            }
             switch (SettingsService.Instance.AppTheme)
             {
                 case Theme.System:
@@ -125,6 +131,14 @@ namespace Project2FA.UWP.Views
             else
             {
                 sender.Text = string.Empty;
+            }
+        }
+
+        private void TokenView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is CategoryModel model)
+            {
+                model.IsSelected = !model.IsSelected;
             }
         }
     }

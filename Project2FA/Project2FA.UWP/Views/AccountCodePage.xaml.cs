@@ -37,7 +37,7 @@ namespace Project2FA.UWP.Views
             {
                 App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
             }
-            
+            //LV_AccountCollection.TabIndex = 1;
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Project2FA.UWP.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                if (string.IsNullOrEmpty(sender.Text) == false)
+                if (string.IsNullOrWhiteSpace(sender.Text) == false)
                 {
                     try
                     {
@@ -136,18 +136,55 @@ namespace Project2FA.UWP.Views
                         {
                             _nameList.Add(item.Label);
                         }
+                        // search the labels
                         List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
                         if (listSuggestion.Count == 0)
                         {
                             listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
                         }
-                        sender.ItemsSource = listSuggestion;
-                        ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+
+                        // filter the selected categories
+                        if (ViewModel.TwoFADataService.GlobalCategories != null)
+                        {
+                            var selectedGlobalCategories = ViewModel.TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true);
+                            if (selectedGlobalCategories.Any())
+                            {
+                                ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc => 
+                                selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && ((TwoFACodeModel)model).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+
+
+                                var filteredCollection = ViewModel.TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
+                                    selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && model.Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase));
+                                listSuggestion = listSuggestion.Where(ls => filteredCollection.Where(fc => fc.Label == ls).Any()).ToList();
+                                sender.ItemsSource = listSuggestion;
+                                //selectedGlobalCategories.Where(c => ViewModel.TwoFADataService.Collection.Where(x => x.SelectedCategories.Where(y => y.Guid == c.Guid).Any()).Any());
+                                //ViewModel.TwoFADataService.ACVCollection.Filter = x => 
+                                ////((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase) ||
+                                //selectedCategories.Where(c => ((TwoFACodeModel)x).SelectedCategories.Where(y => y.Guid == c.Guid).Any());
+
+                                //works for categories
+                                //ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
+                                //selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
+                            }
+                            else
+                            {
+                                ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                                sender.ItemsSource = listSuggestion;
+                            }
+                        }
+                        // no categories set
+                        else
+                        {
+                            ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                            sender.ItemsSource = listSuggestion;
+                        }
+
+                        
                     }
                     catch (System.Exception exc)
                     {
                         ViewModel.TwoFADataService.ACVCollection.Filter = null;
-                        TrackingManager.TrackException(nameof(AutoSuggestBox_TextChanged),exc);
+                        TrackingManager.TrackExceptionCatched(nameof(AutoSuggestBox_TextChanged),exc);
                     }
                     
                 }
@@ -172,6 +209,26 @@ namespace Project2FA.UWP.Views
             else
             {
                 sender.Text = string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Copy the account code from selected item via Tab and Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void LV_AccountCollection_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                if (LV_AccountCollection.SelectedItem is TwoFACodeModel model)
+                {
+                    if (await Copy2FACodeToClipboard(model))
+                    {
+                        CreateTeachingTip(e.OriginalSource as FrameworkElement);
+                    }
+                }
             }
         }
     }

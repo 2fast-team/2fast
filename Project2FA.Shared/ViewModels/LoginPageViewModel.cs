@@ -1,14 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Prism.Ioc;
-using Project2FA.Core.Services;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.Secrets;
-using Windows.Security.Credentials;
-using Windows.Security.Credentials.UI;
 using Project2FA.Core;
 using Project2FA.Services;
 using Project2FA.Strings;
@@ -24,6 +19,8 @@ using Project2FA.UWP;
 using Project2FA.UWP.Views;
 using WinUIWindow = Windows.UI.Xaml.Window;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Windows.Security.Credentials;
+using Windows.Security.Credentials.UI;
 #else
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -54,7 +51,10 @@ namespace Project2FA.ViewModels
             LoginCommand = new RelayCommand(CheckLogin);
 #if WINDOWS_UWP
             WindowsHelloLoginCommand = new RelayCommand(WindowsHelloLogin);
+#else
+            BiometricoLoginCommand = new AsyncRelayCommand(BiometricoLoginCommandTask);
 #endif
+
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
             //register the messenger calls
@@ -71,7 +71,7 @@ namespace Project2FA.ViewModels
             {
                 WindowsHelloIsUsable = SettingsService.Instance.ActivateWindowsHello;
                 var settings = SettingsService.Instance;
-                if (settings.PreferWindowsHello == Services.Enums.WindowsHelloPreferEnum.None)
+                if (settings.PreferWindowsHello == Services.Enums.BiometricPreferEnum.None)
                 {
                     var dialog = new ContentDialog();
                     var markdown = new MarkdownTextBlock
@@ -87,24 +87,23 @@ namespace Project2FA.ViewModels
                         case ContentDialogResult.None:
                             break;
                         case ContentDialogResult.Primary:
-                            settings.PreferWindowsHello = Services.Enums.WindowsHelloPreferEnum.Prefer;
+                            settings.PreferWindowsHello = Services.Enums.BiometricPreferEnum.Prefer;
                             WindowsHelloLogin();
                             break;
                         case ContentDialogResult.Secondary:
-                            settings.PreferWindowsHello = Services.Enums.WindowsHelloPreferEnum.No;
+                            settings.PreferWindowsHello = Services.Enums.BiometricPreferEnum.No;
                             break;
                         default:
                             break;
                     }
                 }
-                else if (settings.PreferWindowsHello == Services.Enums.WindowsHelloPreferEnum.Prefer)
+                else if (settings.PreferWindowsHello == Services.Enums.BiometricPreferEnum.Prefer)
                 {
                     if (!IsLogout)
                     {
                         WindowsHelloLogin();
                     }
                 }
-
             }
         }
 
@@ -127,6 +126,11 @@ namespace Project2FA.ViewModels
             }
         }
 #endif
+
+        private async Task BiometricoLoginCommandTask()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Make a login with hitting 'Enter' key possible

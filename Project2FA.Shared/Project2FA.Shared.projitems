@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SVGColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
@@ -41,7 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SerializationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\Theme.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\WindowsHelloPreferEnum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\BiometricPreferEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVDirectoryService.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\EditAccountViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BlankPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\CategoryContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />

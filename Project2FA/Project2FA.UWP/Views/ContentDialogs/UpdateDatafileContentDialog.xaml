@@ -31,7 +31,6 @@
             <PivotItem 
                 x:Name="FolderPivotItem"
                 Header="#Datendatei"
-                MinHeight="400"
                 x:Uid="UseDatafileContentDialogDatafilePivotItem">
                 <Grid>
                     <ScrollViewer VerticalScrollMode="Auto">
@@ -49,9 +48,10 @@
                                 Header="#Dateiname"
                                 Margin="0,5,0,5"/>
                             <Button 
+                                x:Name="BTN_ChangeDatafile"
                                 x:Uid="UseDatafileContentDialogChangeDatafile" 
-                                Command="{x:Bind ViewModel.UseDatafileCommand}"
-                                Content="#Datendatei ändern"/>
+                                Content="~UseDatafileContentDialogChangeDatafile.Content" 
+                                Click="BTN_ChangeDatafile_Click"/>
                             <Border 
                                 Margin="0,12" 
                                 Background="{ThemeResource AppBarSeparatorForegroundThemeBrush}" 
@@ -59,7 +59,7 @@
                             <PasswordBox
                                 x:Name="PB_LocalPassword"
                                 x:Uid="Password"
-                                Header="#Password" 
+                                Header="~Password.Header" 
                                 InputScope="Password"
                                 Password="{x:Bind ViewModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <Border 

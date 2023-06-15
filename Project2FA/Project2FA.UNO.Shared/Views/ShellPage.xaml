@@ -5,6 +5,7 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,9 +19,14 @@
     </Page.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <NavigationView
             x:Name="ShellView"
             IsPaneToggleButtonVisible="False"
+            IsBackButtonVisible="Collapsed"
             CompactModeThresholdWidth="540"
             IsSettingsVisible="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
             IsPaneOpen="False">
@@ -58,6 +64,69 @@
                 </NavigationViewItem>
             </NavigationView.FooterMenuItems>
         </NavigationView>
+
+        <utu:TabBar 
+            SelectedIndex="0"
+            Grid.Row="2"
+            Visibility="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
+            Style="{StaticResource BottomTabBarStyle}">
+            <utu:TabBar.Items>
+                <utu:TabBarItem 
+                    Content="Home"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE80F;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem 
+                    Content="Search"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xe721;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem 
+                    Style="{StaticResource BottomFabTabBarItemStyle}"
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+                    <utu:TabBarItem.Flyout>
+                        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
+                            Placement="Top">
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddCamera"
+                                Text="AccountCodePageAddCamera.Text~"
+                                >
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE70F;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddManual"
+                                Text="AccountCodePageAddManual.Text~"
+                                >
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE1C2;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </utu:TabBarItem.Flyout>
+                    <utu:TabBarItem.Icon>
+                        <SymbolIcon Symbol="Add" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem Content="#About">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE946;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem 
+                    Content="#Settings" 
+                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE713;" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+            </utu:TabBar.Items>
+        </utu:TabBar>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
                 <VisualState x:Name="NarrowState">

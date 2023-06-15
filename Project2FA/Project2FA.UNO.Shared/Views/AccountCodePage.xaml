@@ -58,6 +58,7 @@
                         </PersonPicture>
 
                         <RelativePanel 
+                            MinHeight="80"
                             Grid.Column="2" 
                             Grid.RowSpan="2" 
                             Grid.ColumnSpan="2">
@@ -287,6 +288,7 @@
                         </PersonPicture>
 
                         <RelativePanel 
+                            MinHeight="80"
                             Grid.Column="2" 
                             Grid.RowSpan="2" 
                             Grid.ColumnSpan="2">
@@ -488,13 +490,12 @@
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             MainCommandMode="Action"
 			Content="{x:Bind strings:Resources.AccountCodePageTitle}">
-            <!--<utu:NavigationBar.PrimaryCommands>
-                <AppBarButton Label="Search" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE721;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </utu:NavigationBar.PrimaryCommands>-->
+            <utu:NavigationBar.MainCommand>
+                <AppBarButton 
+                    Content="#Back" 
+                    Visibility="Collapsed"
+                    Foreground="{ThemeResource  SystemAccentColor}" />
+            </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>
         <Grid 
         x:Name="MainGrid"
@@ -517,7 +518,9 @@
             </ListView>-->
             <ItemsRepeaterScrollHost>
                 <ScrollViewer>
-                    <ItemsRepeater ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}">
+                    <ItemsRepeater 
+                        ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
+                        helpers:TemplateSelector.ChangedItem="{x:Bind ViewModel.ChangedItem, Mode=OneWay}">
                         <ItemsRepeater.ItemTemplate>
                             <helpers:AccountAvatarTemplateSelector 
                             x:Key="AccountAvatarTemplateSelector"
@@ -530,59 +533,7 @@
             </ItemsRepeaterScrollHost>
         </Grid>
 
-        <utu:TabBar 
-            SelectedIndex="0"
-            Grid.Row="2"
-            Style="{StaticResource BottomTabBarStyle}">
-            <utu:TabBar.Items>
-                <utu:TabBarItem Content="Home">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xE80F;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-                <utu:TabBarItem Content="Search">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xe721;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-                <utu:TabBarItem Style="{StaticResource BottomFabTabBarItemStyle}">
-                    <utu:TabBarItem.Flyout>
-                        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
-                            Placement="Top">
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddCamera"
-                                Text="AccountCodePageAddCamera.Text~"
-                                Click="BTN_AddAccountCamera_Click">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE70F;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddManual"
-                                Text="AccountCodePageAddManual.Text~"
-                                Click="BTN_AddAccountManual_Click">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE1C2;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </utu:TabBarItem.Flyout>
-                    <utu:TabBarItem.Icon>
-                        <SymbolIcon Symbol="Add" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-                <utu:TabBarItem Content="Support">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xE946;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-                <utu:TabBarItem Content="About" Command="{x:Bind ViewModel.NavigateToSettingsCommand}">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xE713;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-            </utu:TabBar.Items>
-        </utu:TabBar>
+
         
         <!--<Grid Grid.Row="2" >
             <Grid.ColumnDefinitions>

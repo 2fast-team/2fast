@@ -1,7 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Navigation;
-using Prism.Ioc;
-using Project2FA.Core.Services.JSON;
+﻿using Project2FA.Core.Services.JSON;
 using Project2FA.Repository.Models;
 using System;
 using System.Threading.Tasks;
@@ -148,7 +145,12 @@ namespace Project2FA.ViewModels
         public async Task SetAndCheckLocalDatafile(bool isWebDAV = false)
         {
             IsLoading = true;
+
+#if WINDOWS_UWP
+            if (await TestPassword() && LocalStorageFolder != null)
+#else
             if (await TestPassword())
+#endif
             {
                 await CreateLocalFileDB(isWebDAV);
                 App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;

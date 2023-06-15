@@ -15,8 +15,7 @@ namespace Project2FA.Strings
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public static class Resources
-    {
+    public static class Resources {
         private static ResourceLoader _resourceLoader;
         static Resources()
         {
@@ -935,7 +934,7 @@ namespace Project2FA.Strings
 
         #region NewAppFeaturesContent
         /// <summary>
-        ///   Looks up a localized string similar to: - Bug fixes - Updating third-party libraries
+        ///   Looks up a localized string similar to: - Over 200 new company logos added - Revision of the initial tutorial - Bug fixes - Third party libraries updated
         /// </summary>
         public static string NewAppFeaturesContent
         {
@@ -1611,7 +1610,7 @@ namespace Project2FA.Strings
 
         #region ApplicationName
         /// <summary>
-        ///   Looks up a localized string similar to: [Beta] 2fast - two factor authenticator supporting TOTP
+        ///   Looks up a localized string similar to: [Beta] 2fast - two factor authenticator
         /// </summary>
         public static string ApplicationName
         {
@@ -1754,7 +1753,7 @@ namespace Project2FA.Strings
 
         #region AddAccountContentDialogScreenclipNotFound
         /// <summary>
-        ///   Looks up a localized string similar to: Snipping tool not found
+        ///   Looks up a localized string similar to: The required system application "Snipping Tool" could not be found: https://apps.microsoft.com/store/detail/snipping-tool/9MZ95KL8MR0L
         /// </summary>
         public static string AddAccountContentDialogScreenclipNotFound
         {
@@ -1764,13 +1763,39 @@ namespace Project2FA.Strings
             }
         }
         #endregion
+
+        #region NewDatafileAccessErrorDesc
+        /// <summary>
+        ///   Looks up a localized string similar to: Access to the folder is blocked for the application, try again or select another folder.
+        /// </summary>
+        public static string NewDatafileAccessErrorDesc
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewDatafileAccessErrorDesc");
+            }
+        }
+        #endregion
+
+        #region NewDatafileAccessErrorTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Access denied
+        /// </summary>
+        public static string NewDatafileAccessErrorTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("NewDatafileAccessErrorTitle");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [MarkupExtensionReturnType(ReturnType = typeof(string))]
-    public class ResourcesExtension : MarkupExtension
+    public class ResourcesExtension: MarkupExtension
     {
         public enum KeyEnum
         {
@@ -1908,6 +1933,9 @@ namespace Project2FA.Strings
             TutorialPageItemMoreBTNTitle,
             TutorialPageItemShowCodeBTNDesc,
             TutorialPageItemShowCodeBTNTitle,
+            AddAccountContentDialogScreenclipNotFound,
+            NewDatafileAccessErrorDesc,
+            NewDatafileAccessErrorTitle,
         }
 
         private static ResourceLoader _resourceLoader;
@@ -1915,13 +1943,13 @@ namespace Project2FA.Strings
         {
             _resourceLoader = ResourceLoader.GetForViewIndependentUse("Resources");
         }
-        public KeyEnum Key { get; set; }
-        public IValueConverter Converter { get; set; }
-        public object ConverterParameter { get; set; }
+        public KeyEnum Key { get; set;}
+        public IValueConverter Converter { get; set;}
+        public object ConverterParameter { get; set;}
         protected override object ProvideValue()
         {
             string res;
-            if (Key == KeyEnum.__Undefined)
+            if(Key == KeyEnum.__Undefined)
             {
                 res = "";
             }

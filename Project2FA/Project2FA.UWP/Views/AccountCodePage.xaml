@@ -8,6 +8,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="using:Project2FA.ViewModels"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
@@ -23,6 +24,13 @@
                 x:Key="AccountAvatarTemplateSelector"
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
+
+            <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>
+                    <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
+                </StackPanel>
+            </DataTemplate>
 
             <DataTemplate x:Name="ShellHeaderTemplatePro" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
@@ -148,6 +156,102 @@
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
                                     </AppBarButton.Icon>
+                                    <AppBarButton.Flyout>
+                                        <!--<MenuFlyout>
+                                            <MenuFlyoutItem Text="#manage categories"></MenuFlyoutItem>
+                                            <MenuFlyoutSeparator/>
+                                            
+                                        </MenuFlyout>-->
+                                        <!--<Flyout>
+                                            <StackPanel>
+                                                <Button Content="#manage categories" Margin="0"></Button>
+                                            </StackPanel>
+                                        </Flyout>-->
+                                        <muxc:CommandBarFlyout Placement="Bottom">
+                                            <muxc:CommandBarFlyout.SecondaryCommands>
+                                                <AppBarButton Icon="Setting" Label="#manage categories"/>
+                                                <AppBarElementContainer>
+                                                    <StackPanel Grid.Row="1" MaxWidth="250">
+                                                        <TextBlock 
+                                                            Text="#Select categories"
+                                                            Margin="0,0,0,4"/>
+                                                        <!--<controls:TokenizingTextBox
+                                                            ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
+                                                            PlaceholderText="Select Names"
+                                                            MaxHeight="104"
+                                                            HorizontalAlignment="Stretch"
+                                                            QueryIcon="{ui:SymbolIconSource Symbol=Find}"
+                                                            TextMemberPath="Text"
+                                                            TokenDelimiter=","
+                                                            IsItemClickEnabled="True"
+                                                            TokenItemTemplate="{StaticResource CategoryTemplate}">
+                                                            --><!--<controls:TokenizingTextBox.TokenItemTemplate>
+                                                                <DataTemplate x:DataType="models:CategoryModel">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>
+                                                                        <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </controls:TokenizingTextBox.TokenItemTemplate>--><!--
+                                                        </controls:TokenizingTextBox>-->
+
+
+                                                        <labs:TokenView 
+                                                            x:Name="TV_Categories"
+                                                            Margin="0,15,0,8"
+                                                            ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
+                                                            CanRemoveTokens="False"
+                                                            IsItemClickEnabled="True"
+                                                            SelectionMode="Multiple"  
+                                                            ItemTemplate="{StaticResource CategoryTemplate}"/>
+
+                                                        <Border 
+                                                            BorderThickness="1,0,1,1" 
+                                                            BorderBrush="{ThemeResource TextControlBorderBrush}">
+                                                            <ListView 
+                                                                MaxHeight="200"
+                                                                IsItemClickEnabled="True"
+                                                                ItemTemplate="{StaticResource CategoryTemplate}">
+                                                            </ListView>
+                                                        </Border>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Button 
+                                                                Content="#set filter" 
+                                                                HorizontalAlignment="Stretch"
+				                                                VerticalAlignment="Stretch"
+                                                                Style="{StaticResource AccentButtonStyle}">
+                                                                
+                                                            </Button>
+                                                            <Button Grid.Column="1">
+                                                                <SymbolIcon Symbol="RepeatAll" />
+                                                            </Button>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                    <!--<labs:TokenView 
+                                                    ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
+                                                    CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"
+                                                    IsItemClickEnabled="True"
+                                                    SelectionMode="Multiple">
+                                                        <labs:TokenView.ItemTemplate>
+                                                            <DataTemplate x:DataType="models:CategoryModel">
+                                                                <labs:TokenItem 
+                                                                    Content="{x:Bind Name,Mode=OneWay}" 
+                                                                    IsSelected="{x:Bind IsSelected,Mode=TwoWay}">
+                                                                    <labs:TokenItem.Icon>
+                                                                        <FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}"/>
+                                                                    </labs:TokenItem.Icon>
+                                                                </labs:TokenItem>
+                                                            </DataTemplate>
+                                                        </labs:TokenView.ItemTemplate>
+                                                    </labs:TokenView>-->
+                                                </AppBarElementContainer>
+                                            </muxc:CommandBarFlyout.SecondaryCommands>
+                                        </muxc:CommandBarFlyout>
+                                    </AppBarButton.Flyout>
                                 </AppBarButton>
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
@@ -349,6 +453,7 @@
                     </Grid>
                 </UserControl>
             </DataTemplate>
+            
             <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
                 <UserControl
                     x:Name="Root" 
@@ -357,7 +462,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch">
+                    VerticalContentAlignment="Stretch" >
                     <Grid 
                         HorizontalAlignment="Stretch"
                         CornerRadius="{ThemeResource ControlCornerRadius}"
@@ -818,7 +923,8 @@
             ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
             HorizontalContentAlignment="Stretch"
             helpers:TemplateSelector.ChangedItem="{x:Bind ViewModel.ChangedItem, Mode=OneWay}"
-            HorizontalAlignment="Stretch">
+            HorizontalAlignment="Stretch" 
+            KeyUp="LV_AccountCollection_KeyUp">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <controls:WrapPanel 

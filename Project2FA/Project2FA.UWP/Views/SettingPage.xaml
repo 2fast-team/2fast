@@ -193,9 +193,13 @@
                                 Background="{StaticResource SystemAccentColor}" />
                                             <appcontrols:CardControl 
                                     x:Uid="SettingsAppPrideMonthDesign"
-                                    Header="~SettingsAppPrideMonthDesign.Header"
-                                    FontFamily="Segoe UI Emoji"
-                                    Icon="🏳‍🌈">
+                                    Header="~SettingsAppPrideMonthDesign.Header">
+                                                <appcontrols:CardControl.Icon>
+                                                    <FontIcon 
+                                                        FontSize="16"
+                                                        FontFamily="Segoe UI Emoji" 
+                                                        Glyph="🏳‍🌈"/>
+                                                </appcontrols:CardControl.Icon>
                                                 <appcontrols:CardControl.Description>
                                                     <TextBlock 
                                             x:Uid="SettingsAppPrideMonthDesignDesc"

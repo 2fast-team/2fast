@@ -21,6 +21,7 @@ using UNOversal.Services.Dialogs;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using CommunityToolkit.Mvvm.Input;
+using UNOversal.Navigation;
 
 namespace Project2FA.UNO.Views
 {
@@ -35,9 +36,18 @@ namespace Project2FA.UNO.Views
             this.InitializeComponent();
             // Refresh x:Bind when the DataContext changes.
             DataContextChanged += (s, e) => Bindings.Update();
+            App.ShellPageInstance.MainFrame.Navigated -= MainFrame_Navigated;
+            App.ShellPageInstance.MainFrame.Navigated += MainFrame_Navigated;
         }
 
-
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (e.NavigationMode == Microsoft.UI.Xaml.Navigation.NavigationMode.Back)
+            {
+                App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
+                ViewModel.Initialize(new NavigationParameters());
+            }
+        }
 
         private void CreateTeachingTip(FrameworkElement element)
         {

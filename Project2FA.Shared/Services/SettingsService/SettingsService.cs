@@ -158,10 +158,16 @@ namespace Project2FA.Services
             set => _helper.TryWrite(nameof(ActivateWindowsHello), value);
         }
 
-        public WindowsHelloPreferEnum PreferWindowsHello
+        public BiometricPreferEnum PreferWindowsHello
         {
-            get => _helper.SafeReadEnum(nameof(PreferWindowsHello), WindowsHelloPreferEnum.None);
+            get => _helper.SafeReadEnum(nameof(PreferWindowsHello), BiometricPreferEnum.None);
             set => _helper.TryWrite(nameof(PreferWindowsHello), value);
+        }
+
+        public BiometricPreferEnum PreferBiometricLogin
+        {
+            get => _helper.SafeReadEnum(nameof(PreferBiometricLogin), BiometricPreferEnum.None);
+            set => _helper.TryWrite(nameof(PreferBiometricLogin), value);
         }
 
         public Theme AppTheme

@@ -30,7 +30,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid x:Name="AppTitleBar" Background="{ThemeResource TitleAcrylicWindowBrush}">
+        <Grid x:Name="AppTitleBar" Background="{ThemeResource TitleAcrylicWindowBrush}" MinHeight="32">
             <StackPanel 
                 x:Name="AppTitle" 
                 Grid.Column="1" 

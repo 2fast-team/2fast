@@ -27,6 +27,8 @@ namespace Project2FA.ViewModels
     {
         private INavigationService NavigationService { get; }
 
+        public ICommand NavigateBackCommand { get; }
+
 
         public EditAccountPageViewModel(ISerializationService serializationService, INavigationService navigationService)
         {
@@ -48,9 +50,10 @@ namespace Project2FA.ViewModels
                 }
                 Model.Notes = TempNotes;
                 await DataService.Instance.WriteLocalDatafile();
-                await NavigateBack();
+                await NavigateBackCommandTask();
             });
-            CancelButtonCommand = new AsyncRelayCommand(NavigateBack);
+            NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);
+            CancelButtonCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
                 TempAccountSVGIcon = null;
@@ -62,7 +65,7 @@ namespace Project2FA.ViewModels
             });
         }
 
-        private async Task NavigateBack()
+        private async Task NavigateBackCommandTask()
         {
             await NavigationService.GoBackAsync();
         }

@@ -50,5 +50,15 @@ namespace Project2FA.UWP.Views
                 args.Cancel = true;
             }
         }
+
+        private async void BTN_ChangeDatafile_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await ViewModel.SetLocalFile(true);
+            if (result)
+            {
+                PB_LocalPassword.Focus(FocusState.Programmatic);
+            }
+
+        }
     }
 }

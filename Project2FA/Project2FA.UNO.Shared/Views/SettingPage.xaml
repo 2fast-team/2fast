@@ -18,12 +18,14 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar 
             x:Name="PageNavigationbar"
+            MainCommandMode="Back"
             Grid.Row="0"
             Content="#Settings"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             Background="{ThemeResource TwoFABackgroundBrush}">
             <utu:NavigationBar.MainCommand>
                 <AppBarButton 
+                    Content="#Back" 
                     Foreground="{ThemeResource  SystemAccentColor}" />
             </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>

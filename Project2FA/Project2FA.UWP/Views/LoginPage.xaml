@@ -75,7 +75,8 @@
         <Grid 
             x:Name="AppTitleBar" 
             Background="{ThemeResource TitleAcrylicWindowBrush}"
-            Grid.ColumnSpan="3">
+            Grid.ColumnSpan="3"
+            MinHeight="32">
             <StackPanel 
                 x:Name="AppTitle" 
                 Grid.Column="1" 

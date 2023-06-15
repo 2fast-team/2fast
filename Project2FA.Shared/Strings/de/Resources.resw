@@ -418,13 +418,13 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Einen Modus wählen</value>
   </data>
   <data name="SettingsThemeSystem.Content" xml:space="preserve">
-    <value>Windows-Standard</value>
+    <value>System-Standard</value>
   </data>
   <data name="SettingsTitleBarToggleSwtich.Header" xml:space="preserve">
     <value>Benutzerdefinierte Titel-Leiste (in Hell/Dunkel)</value>
   </data>
   <data name="SettingsWindowsColor.Content" xml:space="preserve">
-    <value>Windows-Farbeinstellungen</value>
+    <value>System-Farbeinstellungen</value>
   </data>
   <data name="SettingsWindowsHelloPrefer.Header" xml:space="preserve">
     <value>Windows Hello zur Anmeldung präferieren</value>
@@ -1123,5 +1123,14 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   </data>
   <data name="AddAccountContentDialogScreenclipNotFound" xml:space="preserve">
     <value>Die benötigte Systemanwendung „Ausschneiden und Skizzieren“ konnte nicht gefunden werden: https://apps.microsoft.com/store/detail/snipping-tool/9MZ95KL8MR0L</value>
+  </data>
+  <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
+    <value>Der Zugriff auf den Ordner ist für die Anwendung gesperrt, probieren Sie es erneut, oder wählen Sie einen anderen Ordner.</value>
+  </data>
+  <data name="NewDatafileAccessErrorTitle" xml:space="preserve">
+    <value>Zugriff verweigert</value>
+  </data>
+  <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
+    <value>Kategorien anlegen</value>
   </data>
 </root>

@@ -9,6 +9,7 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:richText="using:Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText"
+    xmlns:models="using:Project2FA.Repository.Models"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:utils="using:Project2FA.UWP.Utils"
@@ -160,12 +161,13 @@
                     <StackPanel>
                         <TextBox Header="#Title"/>
                         <TextBox Header="#Icon" Margin="0,10,0,20"/>
-                        <StackPanel Orientation="Horizontal">
-                            <Button Content="#add">
+                        <Button Content="#add" HorizontalAlignment="Center"/>
+                        <!--<StackPanel Orientation="Horizontal">
+                            <Button Content="#add" HorizontalAlignment="Center">
 
                             </Button>
                            
-                        </StackPanel>
+                        </StackPanel>-->
                         
                     </StackPanel>
                 </appcontrols:CardExpanderControl>
@@ -177,35 +179,23 @@
                     Content="#allow deletion"/>
 
                 <labs:TokenView 
+                    x:Name="TV_Categories"
                     Margin="0,15,0,8"
                     Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
                     CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"
-                    SelectionMode="Multiple" >
-                    <!--<labs:TokenView.ItemContainerStyle>
-                        <Style TargetType="labs:TokenItem">
-                            <Setter Property="CornerRadius" Value="{ThemeResource TokenItemCornerRadius}" />
-                        </Style>
-                    </labs:TokenView.ItemContainerStyle>-->
-                    <labs:TokenItem Content="Apps">
-                        <labs:TokenItem.Icon>
-                            <FontIcon Glyph="&#xECAA;" />
-                        </labs:TokenItem.Icon>
-                    </labs:TokenItem>
-                    <labs:TokenItem Content="Work">
-                        <labs:TokenItem.Icon>
-                            <FontIcon Glyph="&#xE821;" />
-                        </labs:TokenItem.Icon>
-                    </labs:TokenItem>
-                    <labs:TokenItem Content="Web">
-                        <labs:TokenItem.Icon>
-                            <FontIcon Glyph="&#xE12B;" />
-                        </labs:TokenItem.Icon>
-                    </labs:TokenItem>
+                    IsItemClickEnabled="True"
+                    SelectionMode="Multiple" 
+                    ItemClick="TokenView_ItemClick" >
+                    <labs:TokenView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CategoryModel">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>
+                                <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </labs:TokenView.ItemTemplate>
                 </labs:TokenView>
-
-
-
-
 
 
                 <!--Category for filter and sorting

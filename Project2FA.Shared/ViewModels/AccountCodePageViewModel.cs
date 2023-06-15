@@ -15,6 +15,7 @@ using Project2FA.Services;
 using Prism.Ioc;
 using Windows.ApplicationModel.DataTransfer;
 using Project2FA.Core;
+using System.Collections.ObjectModel;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -59,6 +60,7 @@ namespace Project2FA.ViewModels
         public ICommand HideOrShowTOTPCodeCommand {get;}
         public ICommand CopyCodeToClipboardCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
+        public ICommand SetFilterCommand { get; }
         private TwoFACodeModel _changedItem = null;
 
         private bool _datafileUpdated;
@@ -67,7 +69,6 @@ namespace Project2FA.ViewModels
         private bool _datafileNoInternetConnection;
 
         private bool _codeVisibilityOptionEnabled;
-        private string _title;
 
 
         public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade, INavigationService navigationService)
@@ -104,6 +105,7 @@ namespace Project2FA.ViewModels
             DeleteAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
             CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
+            //SetFilterCommand = new AsyncRelayCommand(SetFilterCommandTask);
 
             NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
 
@@ -329,6 +331,7 @@ namespace Project2FA.ViewModels
 #if __IOS__ || __ANDROID__
             var param = new NavigationParameters();
             param.Add("model", model);
+            App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             await NavigationService.NavigateAsync(nameof(EditAccountPage), param);
 #else
             var dialog = new EditAccountContentDialog();

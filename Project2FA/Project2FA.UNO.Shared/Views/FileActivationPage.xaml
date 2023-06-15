@@ -17,8 +17,17 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar 
             Grid.Row="0"
-            Content="#Login"
-            Background="{ThemeResource TwoFABackgroundBrush}"/>
+            MainCommandMode="Action"
+            Background="{ThemeResource TwoFABackgroundBrush}"
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+            Content="#Login">
+            <utu:NavigationBar.MainCommand>
+                <AppBarButton 
+                    Content="#Back" 
+                    Visibility="Collapsed"
+                    Foreground="{ThemeResource  SystemAccentColor}" />
+            </utu:NavigationBar.MainCommand>
+        </utu:NavigationBar>
 
         <!--for debug-->
         <Border 
@@ -64,13 +73,15 @@
                 </Border.Background>-->
             </Border>
             <StackPanel 
-            
-            x:Name="MainStackPanel"
->
+            x:Name="MainStackPanel">
                 <mstoolkitControls:ImageEx 
                         Source="ms-appx:///Assets/Images/FileLogo.png"
                         MaxHeight="120" 
                         Margin="0,30,0,10"/>
+                <TextBlock
+                    Margin="0,5,0,0"
+                    Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" 
+                    FontSize="24"/>
                 <PasswordBox 
                         x:Uid="LoginPagePassword"    
                         Header="~LoginPagePassword.Header" 

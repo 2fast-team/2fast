@@ -41,7 +41,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
-    <PackageReference Include="protobuf-net" Version="3.2.16" />
+    <PackageReference Include="protobuf-net" Version="3.2.26" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="7.0.1" />
   </ItemGroup>
 

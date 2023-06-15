@@ -11,9 +11,13 @@
   <Import Project="Project2FA.UNO.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
+    <UpToDateCheckInput Remove="Controls\CardControl\CardControl.xaml" />
+    <UpToDateCheckInput Remove="Controls\CardExpanderControl\CardExpanderControl.xaml" />
+    <UpToDateCheckInput Remove="Controls\CardGroupControl\CardGroupControl.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\Button.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\PersonPicture.xaml" />
     <UpToDateCheckInput Remove="Styles\Styles.xaml" />
+    <UpToDateCheckInput Remove="Themes\Generic.xaml" />
     <UpToDateCheckInput Remove="Views\AccountCodePage.xaml" />
     <UpToDateCheckInput Remove="Views\AddAccountPage.xaml" />
     <UpToDateCheckInput Remove="Views\AppAboutPage - Copy.xaml" />
@@ -29,6 +33,10 @@
     <UpToDateCheckInput Remove="Views\WelcomePage.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_Compile Remove="Controls\CardControl\CardControl.cs" />
+    <_Globbed_Compile Remove="Controls\CardExpanderControl\CardExpanderControl.cs" />
+    <_Globbed_Compile Remove="Controls\CardGroupControl\CardGroupAutomationPeer.cs" />
+    <_Globbed_Compile Remove="Controls\CardGroupControl\CardGroupControl.cs" />
     <_Globbed_Compile Remove="Converters\BooleanToVisibilityConverter.cs" />
     <_Globbed_Compile Remove="Converters\DoubleToInt32ToStringConverter.cs" />
     <_Globbed_Compile Remove="Converters\PersonalPictureInitialsVisibilityConverter.cs" />
@@ -125,9 +133,13 @@
     <_Globbed_Content Remove="Assets\Wide310x150Logo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbled_Page Remove="Controls\CardControl\CardControl.xaml" />
+    <_Globbled_Page Remove="Controls\CardExpanderControl\CardExpanderControl.xaml" />
+    <_Globbled_Page Remove="Controls\CardGroupControl\CardGroupControl.xaml" />
     <_Globbled_Page Remove="Styles\Generic\Button.xaml" />
     <_Globbled_Page Remove="Styles\Generic\PersonPicture.xaml" />
     <_Globbled_Page Remove="Styles\Styles.xaml" />
+    <_Globbled_Page Remove="Themes\Generic.xaml" />
     <_Globbled_Page Remove="Views\AddAccountPage.xaml" />
     <_Globbled_Page Remove="Views\AppAboutPage - Copy.xaml" />
     <_Globbled_Page Remove="Views\BlankPage - Copy.xaml" />

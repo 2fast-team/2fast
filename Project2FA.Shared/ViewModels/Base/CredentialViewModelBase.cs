@@ -24,6 +24,7 @@ namespace Project2FA.ViewModels
         private string _password;
         public ICommand LoginCommand { get; internal set; }
         public ICommand WindowsHelloLoginCommand { get; internal set; }
+        public ICommand BiometricoLoginCommand { get; internal set; }
         public IDialogService DialogService { get; internal set; }
         private string _applicationTitle;
         private bool _isScreenCaptureEnabled;

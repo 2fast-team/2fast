@@ -41,13 +41,9 @@ Steps to reproduce the behavior:
 App Version(s):
 
 Windows 10/11 Build Number:
-
-- [ ] Fall Creators Update (16299)
-- [ ] April 2018 Update (17134)
-- [ ] October 2018 Update (17763)
-- [ ] May 2019 Update (18362)
-- [ ] May 2020 Update (19041)
+- [ ] Windows 10 May 2020 Update (19041)
 - [ ] Windows 11 21H2 Update (22000)
+- [ ] Windows 11 22H2 Update (22621)
 - [ ] Insider Build ({build_number})
 
 ## Additional context

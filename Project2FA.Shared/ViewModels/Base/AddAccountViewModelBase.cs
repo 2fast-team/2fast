@@ -927,7 +927,6 @@ namespace Project2FA.ViewModels
                         if (Regex.IsMatch(value, "^[A-Z2-7]*={0,6}$"))
                         {
                             Model.SecretByteArray = Base32Encoding.ToBytes(value);
-                            CheckInputs();
                         }
                         else
                         {
@@ -938,6 +937,7 @@ namespace Project2FA.ViewModels
 #pragma warning restore CA2011 // Avoid infinite recursion
                         }
                     }
+                    CheckInputs();
                 }
             }
         }

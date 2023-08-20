@@ -13,7 +13,6 @@ using Project2FA.Services;
 using System.Collections.ObjectModel;
 using Project2FA.Core.Utils;
 using System.Linq;
-using CommunityToolkit.Labs.WinUI;
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;

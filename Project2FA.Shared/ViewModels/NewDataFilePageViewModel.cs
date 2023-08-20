@@ -204,7 +204,7 @@ namespace Project2FA.ViewModels
                     var result = await Utils.ErrorDialogs.WritingDatafileError(true);
                     if (result == ContentDialogResult.Primary)
                     {
-                        SetAndCreateLocalDatafile(isWebDAV);
+                        await SetAndCreateLocalDatafile(isWebDAV);
                     }
                 }
             }

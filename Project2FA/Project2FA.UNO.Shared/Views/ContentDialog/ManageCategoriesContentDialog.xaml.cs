@@ -16,10 +16,11 @@ using Project2FA.ViewModels;
 
 namespace Project2FA.UNO.Views
 {
-    public sealed partial class NewDataFilePage : Page
+
+    public sealed partial class ManageCategoriesContentDialog : ContentDialog
     {
-        public NewDataFilePageViewModel ViewModel => DataContext as NewDataFilePageViewModel;
-        public NewDataFilePage()
+        //public TutorialContentDialogViewModel ViewModel => DataContext as TutorialContentDialogViewModel;
+        public ManageCategoriesContentDialog()
         {
             this.InitializeComponent();
             // Refresh x:Bind when the DataContext changes.

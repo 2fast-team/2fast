@@ -4,3 +4,7 @@
 [submodule "UNOversalTemplate"]
 	path = UNOversalTemplate
 	url = https://github.com/jp-weber/UNOversalTemplate.git
+[submodule "BiometryService"]
+	path = BiometryService
+	url = https://github.com/jp-weber/BiometryService.git
+

@@ -8,8 +8,10 @@
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:mstoolkitControls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:appcontrols="using:Project2FA.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:helpers="using:Project2FA.Helpers"
+    xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     x:Name="Page"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -141,7 +143,7 @@
                             </Button>
 
                             <Grid VerticalAlignment="Center">
-                                <mstoolkitControls:RadialProgressBar
+                                <appcontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     
@@ -204,13 +206,13 @@
                                             <FontIcon Glyph="&#xE107;"/>
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
-                                    <MenuFlyoutItem
+                                    <not_mobile:MenuFlyoutItem
                                         x:Uid="AccountCodePageShowQRCode"
                                         Click="BTN_ShareItem_Click">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE72D;"/>
                                         </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
+                                    </not_mobile:MenuFlyoutItem>
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>
@@ -372,7 +374,7 @@
                             </Button>
 
                             <Grid VerticalAlignment="Center">
-                                <mstoolkitControls:RadialProgressBar
+                                <ProgressRing
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     
@@ -486,9 +488,10 @@
 
         <utu:NavigationBar             
             Grid.Row="0"
-            Background="{ThemeResource TwoFABackgroundBrush}"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             MainCommandMode="Action"
+            DefaultLabelPosition="Collapsed"
 			Content="{x:Bind strings:Resources.AccountCodePageTitle}">
             <utu:NavigationBar.MainCommand>
                 <AppBarButton 
@@ -496,6 +499,9 @@
                     Visibility="Collapsed"
                     Foreground="{ThemeResource  SystemAccentColor}" />
             </utu:NavigationBar.MainCommand>
+            <utu:NavigationBar.PrimaryCommands>
+                <AppBarButton Content="#Add" Icon="Add"></AppBarButton>
+            </utu:NavigationBar.PrimaryCommands>
         </utu:NavigationBar>
         <Grid 
         x:Name="MainGrid"
@@ -519,8 +525,7 @@
             <ItemsRepeaterScrollHost>
                 <ScrollViewer>
                     <ItemsRepeater 
-                        ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
-                        helpers:TemplateSelector.ChangedItem="{x:Bind ViewModel.ChangedItem, Mode=OneWay}">
+                        ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}">
                         <ItemsRepeater.ItemTemplate>
                             <helpers:AccountAvatarTemplateSelector 
                             x:Key="AccountAvatarTemplateSelector"

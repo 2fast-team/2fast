@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 #if WINDOWS_UWP
+using Project2FA.UWP;
 using Windows.UI.Xaml.Data;
 #else
 using Microsoft.UI.Xaml.Data;
@@ -45,8 +46,18 @@ namespace Project2FA.Controls
             {
                 return;
             }
-
-            CurrentChanged?.Invoke(this, e);
+            try
+            {
+                CurrentChanged?.Invoke(this, e);
+            }
+            catch (Exception exc)
+            {
+                //TODO should be ignored?
+#if WINDOWS_UWP
+                TrackingManager.TrackExceptionCatched("ACV " + nameof(OnCurrentChanged), exc);
+#endif
+            }
+            
 
             // ReSharper disable once ExplicitCallerInfoArgument
             OnPropertyChanged(nameof(CurrentItem));

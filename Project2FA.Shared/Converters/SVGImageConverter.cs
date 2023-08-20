@@ -24,12 +24,13 @@ namespace Project2FA.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var svg = new SvgImageSource();
+
+            if (!string.IsNullOrWhiteSpace(value as string))
+            {
 #if __ANDROID__ || __IOS__
             svg.RasterizePixelHeight = 64;
             svg.RasterizePixelWidth = 64;
 #endif
-            if (value != null)
-            {
                 try
                 {
                     //var svgBuffer = CryptographicBuffer.ConvertStringToBinary(value.ToString(), BinaryStringEncoding.Utf8);
@@ -51,10 +52,6 @@ namespace Project2FA.Converters
                     App.Current.Container.Resolve<ILoggerFacade>().Log(nameof(SVGImageConverter) + " " + exc.Message, Category.Exception, Priority.High);
                     return null;
                 }
-            }
-            else
-            {
-                return null;
             }
             return svg;
         }

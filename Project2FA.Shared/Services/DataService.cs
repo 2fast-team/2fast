@@ -12,7 +12,6 @@ using System.Security.Cryptography;
 using Project2FA.Strings;
 using Windows.ApplicationModel.Core;
 using System.IO;
-using Microsoft.Toolkit.Uwp.UI;
 using Project2FA.Core;
 using Project2FA.Core.Services.NTP;
 using System.Threading.Tasks;
@@ -78,6 +77,7 @@ namespace Project2FA.Services
             }
         }
         private bool _checkedTimeSynchronisation;
+        private bool _isLoading;
         private TimeSpan _ntpServerTimeDifference;
         private ISecretService SecretService { get; }
         private IDialogService DialogService { get; }
@@ -85,6 +85,7 @@ namespace Project2FA.Services
         private IFileService FileService { get; }
         private INetworkTimeService NetworkTimeService { get; }
         private INetworkService NetworkService { get; }
+        private bool _isFirstActivatedDatafileStart = true;
         private bool _initialization, _errorOccurred;
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
@@ -135,34 +136,6 @@ namespace Project2FA.Services
         {
             await CheckLocalDatafile();
             TOTPEventStopwatch.Start();
-
-#if WINDOWS_UWP
-            if (SystemInformation.Instance.IsAppUpdated)
-            {
-                var prevíousVersion = new Version(SystemInformation.Instance.PreviousVersionInstalled.ToFormattedString());
-                var compareVersion = new Version("1.0.9.0");
-                var result = compareVersion.CompareTo(prevíousVersion);
-                // only when the old version is lower or equal to version 1.0.9
-                if (result >= 0)
-                {
-                    string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-                    string path = root + @"\Assets\AccountIcons";
-                    StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-                    // try and set the account icon name
-                    for (int i = 0; i < Collection.Count; i++)
-                    {
-                        string label = Collection[i].Label;
-                        label = label.ToLower().Replace("-", string.Empty).Replace(" ", string.Empty);
-                        if (await FileService.FileExistsAsync(string.Format("{0}.svg", label), folder))
-                        {
-                            Collection[i].AccountIconName = label;
-                            await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], label);
-                        }
-                    }
-                    await WriteLocalDatafile();
-                }
-            }
-#endif
         }
 
         /// <summary>
@@ -276,6 +249,12 @@ namespace Project2FA.Services
         /// </summary>
         private async Task CheckLocalDatafile()
         {
+            if (Collection.Count == 0)
+            {
+                // loading animation only for empty collection
+                IsLoading = true;
+            }
+
             DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
             try
             {
@@ -480,6 +459,7 @@ namespace Project2FA.Services
                     }
                     finally
                     {
+                        IsLoading = false;
 #if __IOS__
                         if (nsUrl != null)
                         {
@@ -671,11 +651,10 @@ namespace Project2FA.Services
 #endif
                 }
 
-#if WINDOWS_UWP
                 // backup the last version before write
                 string datafileStr = await FileService.ReadStringAsync(fileName, folder);
                 datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
-#endif
+
 
                 if (ActivatedDatafile != null)
                 {
@@ -1061,10 +1040,17 @@ namespace Project2FA.Services
             get => _openDatefile;
             set => SetProperty(ref _openDatefile, value);
         }
+
+        public bool IsLoading 
+        { 
+            get => _isLoading; 
+            set => SetProperty(ref _isLoading, value); 
+        }
+        public bool IsFirstActivatedDatafileStart { get => _isFirstActivatedDatafileStart; set => _isFirstActivatedDatafileStart = value; }
 #if __IOS__
         public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }
 #endif
-#endregion
+        #endregion
 
         public void Dispose()
         {

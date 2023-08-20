@@ -40,11 +40,16 @@ namespace Project2FA.ViewModels
             return DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
+#if WINDOWS_UWP
         public bool WindowsHelloIsUsable
+#else
+        public bool BiometricIsUsable
+#endif
         {
             get => _windowsHelloIsUsable;
             set => SetProperty(ref _windowsHelloIsUsable, value);
         }
+
         public string Password
         {
             get => _password;

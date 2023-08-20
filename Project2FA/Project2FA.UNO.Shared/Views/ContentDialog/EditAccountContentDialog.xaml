@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
-    xmlns:labs="clr-namespace:CommunityToolkit.Labs.WinUI;assembly=CommunityToolkit.Labs.WinUI.SettingsControls"
+
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -16,7 +16,7 @@
                 MinHeight="650"
                 Margin="0,0,16,0">
 
-                <labs:SettingsCard
+                <!--<labs:SettingsCard
                     Header="~AddAccountContentDialogAccountIcon.Header"
                     x:Uid="AddAccountContentDialogAccountIcon">
                     <labs:SettingsCard.Description>
@@ -45,7 +45,7 @@
                             </Button>
                         </Grid>
                     </labs:SettingsCard.Description>
-                    <!--<labs:SettingsCard.ActionContent>
+                    --><!--<labs:SettingsCard.ActionContent>
                         <StackPanel 
                                 Visibility="{x:Bind ViewModel.IsEditBoxVisible, Mode=OneWay}">
                             <AutoSuggestBox 
@@ -79,7 +79,7 @@
                                 <animations:OpacityAnimation Duration="0:0:1" From="0" To="1.0"/>
                             </animations:Implicit.ShowAnimations>--><!--
                         </StackPanel>
-                    </labs:SettingsCard.ActionContent>-->
+                    </labs:SettingsCard.ActionContent>--><!--
                 </labs:SettingsCard>
                 <TextBox 
                 Header="~AddAccountContentDialogLabel.Header" 
@@ -94,7 +94,7 @@
                 <labs:SettingsExpander 
                     IsExpanded="True"
                     Margin="0,15,0,8">
-                    <!--<labs:SettingsCard.Header>
+                    --><!--<labs:SettingsCard.Header>
                         <labs:SettingsCard
                             Icon="&#xE104;"
                             x:Uid="EditAccountContentDialogAccountNotes" 
@@ -120,8 +120,8 @@
                             IsColorFontEnabled="False"
                             TextChanged="REB_Notes_TextChanged">
                         </RichEditBox>
-                    </StackPanel>-->
-                </labs:SettingsExpander>
+                    </StackPanel>--><!--
+                </labs:SettingsExpander>-->
                 <!--Category for filter and sorting
                 <ListView/>-->
                 <!--<Grid>

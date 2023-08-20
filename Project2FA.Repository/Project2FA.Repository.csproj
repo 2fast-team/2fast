@@ -16,25 +16,32 @@
   </PropertyGroup>
 
 	<Choose>
+		<When Condition="'$(TargetFramework)'=='net7.0'">
+			<ItemGroup>
+				<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
+			</ItemGroup>
+		</When>
 		<When Condition="'$(TargetFramework)'=='uap10.0.17763'">
 			<ItemGroup>
 				<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
+				<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
 			</ItemGroup>
 		</When>
 		<When Condition="'$(TargetFramework)'=='uap10.0.22621'">
 			<ItemGroup>
 				<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
+				<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
 			</ItemGroup>
 		</When>
 	</Choose>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1">
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
+
     <PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
   </ItemGroup>
 

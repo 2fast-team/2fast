@@ -35,9 +35,17 @@ namespace Project2FA.UNO.Views
         {
             this.InitializeComponent();
             // Refresh x:Bind when the DataContext changes.
+            this.Loaded += AccountCodePage_Loaded;
             DataContextChanged += (s, e) => Bindings.Update();
             App.ShellPageInstance.MainFrame.Navigated -= MainFrame_Navigated;
             App.ShellPageInstance.MainFrame.Navigated += MainFrame_Navigated;
+        }
+
+        private void AccountCodePage_Loaded(object sender, RoutedEventArgs e)
+        {
+#if ANDROID || IOS || MACCATALYST
+            App.ShellPageInstance.ViewModel.SelectedIndex = 0;
+#endif
         }
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
@@ -164,10 +172,10 @@ namespace Project2FA.UNO.Views
                 await ViewModel.DeleteAccountFromCollection(model);   
             }
         }
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            Bindings.Update();
-            base.OnNavigatedFrom(e);
-        }
+        //protected override void OnNavigatedFrom(NavigationEventArgs e)
+        //{
+        //    Bindings.Update();
+        //    base.OnNavigatedFrom(e);
+        //}
     }
 }

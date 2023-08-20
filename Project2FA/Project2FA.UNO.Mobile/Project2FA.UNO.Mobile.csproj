@@ -42,32 +42,31 @@
     <None Remove="Android\Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.18" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="DryIoc" Version="5.4.1" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
-    <PackageReference Include="Svg.Skia" Version="0.6.0-rc1.1" />
-    <PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.100" />
-    <PackageReference Include="Uno.CommunityToolkit.WinUI.Connectivity" Version="7.1.100" />
-    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI" Version="7.1.100" />
-    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Core" Version="7.1.100" />
-    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.100" />
-    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.100" />
+    <PackageReference Include="Svg.Skia" Version="1.0.0" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.200-dev.13.gef3f523648" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.Connectivity" Version="7.1.200-dev.13.gef3f523648" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI" Version="7.1.200-dev.13.gef3f523648" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Core" Version="7.1.200-dev.13.gef3f523648" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.200-dev.13.gef3f523648" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Media" Version="7.1.200-dev.13.gef3f523648" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.6.0-dev.2" />
-    <PackageReference Include="Uno.Resizetizer" Version="1.1.0" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="3.1.0-dev.12" />
-    <PackageReference Include="Uno.WinUI" Version="4.10.0-dev.271" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="4.10.0-dev.271" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.10.0-dev.271" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.10.0-dev.289" />
+    <PackageReference Include="Uno.Resizetizer" Version="1.1.2" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="4.0.0-dev.74" />
+    <PackageReference Include="Uno.WinUI" Version="5.0.0-dev.2127" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.0.0-dev.2127" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="5.0.0-dev.2127" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.0-dev.2127" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="4.10.0-dev.271" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.0.0-dev.2127" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(TargetFramework)'=='net7.0-android'">
       <ItemGroup>
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.9.0.1" />
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.9.0.2" />
         <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
       </ItemGroup>
       <ItemGroup>
@@ -133,6 +132,7 @@
     <None Remove="iOS\AppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BiometryService\src\BiometryService\BiometryService.csproj" />
     <ProjectReference Include="..\..\Otp.NET\src\Otp.NET\Otp.NET.csproj" />
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
     <ProjectReference Include="..\..\Project2FA.Repository\Project2FA.Repository.csproj" />

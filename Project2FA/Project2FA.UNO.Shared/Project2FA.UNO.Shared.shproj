@@ -16,6 +16,7 @@
     <UpToDateCheckInput Remove="Controls\CardGroupControl\CardGroupControl.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\Button.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\PersonPicture.xaml" />
+    <UpToDateCheckInput Remove="Styles\Generic\TabBar.xaml" />
     <UpToDateCheckInput Remove="Styles\Styles.xaml" />
     <UpToDateCheckInput Remove="Themes\Generic.xaml" />
     <UpToDateCheckInput Remove="Views\AccountCodePage.xaml" />
@@ -27,6 +28,7 @@
     <UpToDateCheckInput Remove="Views\ContentDialog\AddAccountContentDialog.xaml" />
     <UpToDateCheckInput Remove="Views\FileActivationPage.xaml" />
     <UpToDateCheckInput Remove="Views\LoginPage.xaml" />
+    <UpToDateCheckInput Remove="Views\ManageCategoriesContentDialog.xaml" />
     <UpToDateCheckInput Remove="Views\NewDataFilePage.xaml" />
     <UpToDateCheckInput Remove="Views\ShellPage.xaml" />
     <UpToDateCheckInput Remove="Views\UseDataFilePage.xaml" />
@@ -74,8 +76,10 @@
     <_Globbed_Compile Remove="Views\EditAccountContentDialog.xaml.cs" />
     <_Globbed_Compile Remove="Views\FileActivationPage.xaml.cs" />
     <_Globbed_Compile Remove="Views\LoginPage.xaml.cs" />
+    <_Globbed_Compile Remove="Views\ManageCategoriesContentDialog.xaml.cs" />
     <_Globbed_Compile Remove="Views\NewDataFilePage.xaml.cs" />
     <_Globbed_Compile Remove="Views\ShellPage.xaml.cs" />
+    <_Globbed_Compile Remove="Views\TutorialContentDialog.xaml.cs" />
     <_Globbed_Compile Remove="Views\UseDataFilePage.xaml.cs" />
     <_Globbed_Compile Remove="Views\WelcomePage.xaml.cs" />
   </ItemGroup>
@@ -138,6 +142,7 @@
     <_Globbled_Page Remove="Controls\CardGroupControl\CardGroupControl.xaml" />
     <_Globbled_Page Remove="Styles\Generic\Button.xaml" />
     <_Globbled_Page Remove="Styles\Generic\PersonPicture.xaml" />
+    <_Globbled_Page Remove="Styles\Generic\TabBar.xaml" />
     <_Globbled_Page Remove="Styles\Styles.xaml" />
     <_Globbled_Page Remove="Themes\Generic.xaml" />
     <_Globbled_Page Remove="Views\AddAccountPage.xaml" />
@@ -148,6 +153,7 @@
     <_Globbled_Page Remove="Views\ContentDialog\AddAccountContentDialog.xaml" />
     <_Globbled_Page Remove="Views\FileActivationPage.xaml" />
     <_Globbled_Page Remove="Views\LoginPage.xaml" />
+    <_Globbled_Page Remove="Views\ManageCategoriesContentDialog.xaml" />
     <_Globbled_Page Remove="Views\NewDataFilePage.xaml" />
     <_Globbled_Page Remove="Views\ShellPage.xaml" />
     <_Globbled_Page Remove="Views\UseDataFilePage.xaml" />

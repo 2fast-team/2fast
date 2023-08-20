@@ -73,11 +73,13 @@
                 </Border.Background>-->
             </Border>
             <StackPanel 
-            x:Name="MainStackPanel">
-                <mstoolkitControls:ImageEx 
-                        Source="ms-appx:///Assets/Images/FileLogo.png"
-                        MaxHeight="120" 
-                        Margin="0,30,0,10"/>
+            x:Name="MainStackPanel"
+            MaxWidth="320" 
+            MinHeight="500" >
+                <Image 
+                    Source="ms-appx:///Assets/Images/FileLogo.png"
+                    MaxHeight="80" 
+                    Margin="0,30,0,10"/>
                 <TextBlock
                     Margin="0,5,0,0"
                     Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" 

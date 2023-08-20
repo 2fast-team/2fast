@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using Prism.Navigation;
 using Project2FA.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Uno.Toolkit.UI;
 using UNOversal.Navigation;
 using Windows.UI.Core;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
@@ -55,6 +55,33 @@ namespace Project2FA.UNO.Views
                 e.Handled = true;
                 await NavigationService.GoBackAsync();
             }
+        }
+
+        private async void OnSelectionChanged(TabBar sender, TabBarSelectionChangedEventArgs args)
+        {
+            if(ViewModel.NavigationIsAllowed)
+            {
+                switch (sender.SelectedIndex)
+                {
+                    case 0:
+                        await NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+                        break;
+                    case 1:
+                        await NavigationService.NavigateAsync(nameof(BlankPage));
+                        break;
+                    case 3:
+                        await NavigationService.NavigateAsync(nameof(SettingPage));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
+            //if (sender.SelectedIndex == 2)
+            //{
+            //    MobileTabBar.SelectedIndex = 0;
+            //}
         }
 
         private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
@@ -190,6 +217,11 @@ namespace Project2FA.UNO.Views
                 menuItem = ShellView.FooterMenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
             }
             return menuItem;
+        }
+
+        private void TabBar_SelectionChanged(Uno.Toolkit.UI.TabBar sender, Uno.Toolkit.UI.TabBarSelectionChangedEventArgs args)
+        {
+
         }
     }
 }

@@ -1126,4 +1126,22 @@ In the following sections, the functionality of this application is explained in
   <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
     <value>Create categories</value>
   </data>
+  <data name="ManageCategoriesContentDialogIcon.Header" xml:space="preserve">
+    <value>Choose icon</value>
+  </data>
+  <data name="ManageCategoriesContentDialogLabel.Header" xml:space="preserve">
+    <value>Name of the catgory</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.Title" xml:space="preserve">
+    <value>Filter &amp; manage categories</value>
+  </data>
+  <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
+    <value>Create category</value>
+  </data>
 </root>

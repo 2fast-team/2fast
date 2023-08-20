@@ -16,6 +16,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\SortDescription.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\SortDirection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\AdvancedCollectionView\VectorChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.Properties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToCommandBarVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BytesToHumanReadableConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileActivationPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImportAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ManageCategoriesContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewDataFilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ShellPageViewModel.cs" />
@@ -2601,5 +2605,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\schluessel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

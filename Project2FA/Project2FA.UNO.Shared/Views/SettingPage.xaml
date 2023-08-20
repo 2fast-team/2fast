@@ -5,9 +5,9 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:Uno.UI.Toolkit"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
-     xmlns:strings="using:Project2FA.Strings"
-    xmlns:labs="clr-namespace:CommunityToolkit.Labs.WinUI;assembly=CommunityToolkit.Labs.WinUI.SettingsControls"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -30,7 +30,7 @@
             </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>
 
-        <StackPanel Grid.Row="1">
+        <!--<StackPanel Grid.Row="1">
             <labs:SettingsCard x:Uid="SettingsBackButtonCard">
                 <ToggleSwitch 
                     x:Name="SettingsBackButtonToggleSwtich"
@@ -78,7 +78,7 @@
                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
                 </labs:SettingsCard.Content>
             </labs:SettingsCard>
-            <!--<labs:SettingsExpander
+            --><!--<labs:SettingsExpander
                 Margin="0,0,0,20"
                 IsExpanded="True">
                 <labs:SettingsExpander.Header>
@@ -107,7 +107,7 @@
                         </labs:SettingsCard.Content>
                     </labs:SettingsCard>--><!--
                 </labs:SettingsExpander.Items>
-            </labs:SettingsExpander>-->
+            </labs:SettingsExpander>--><!--
             <labs:SettingsCard
                     x:Uid="SettingsPreferHiddenTOTP"
                     Header="~SettingsPreferHiddenTOTP.Header" 
@@ -124,7 +124,7 @@
                 </labs:SettingsCard.Content>
             </labs:SettingsCard>
 
-        </StackPanel>
+        </StackPanel>-->
 
     </Grid>
 </Page>

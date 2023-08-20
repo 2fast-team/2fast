@@ -22,9 +22,12 @@ namespace Project2FA.UNO
         )]
     public class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
     {
+        public static MainActivity Instance { get; private set; }
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            Instance = this;
             // disable screenshot capture
             if (!System.Diagnostics.Debugger.IsAttached)
             {

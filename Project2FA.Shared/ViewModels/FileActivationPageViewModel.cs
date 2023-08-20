@@ -96,7 +96,6 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Check the input
         /// </summary>
-        /// <param name="password"></param>
         /// <returns>return true if password is valid;
         /// else decryption not working</returns>
         private async Task<bool> CheckNavigationRequest()

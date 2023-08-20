@@ -42,7 +42,13 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
+
+#if WINDOWS_UWP
     public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync, IInitialize
+#else
+    public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync
+#endif
+
     {
         private DispatcherTimer _dispatcherTOTPTimer;
         private DispatcherTimer _dispatcherTimerDeletedModel;
@@ -61,13 +67,14 @@ namespace Project2FA.ViewModels
         public ICommand CopyCodeToClipboardCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
         public ICommand SetFilterCommand { get; }
+        public ICommand ManageCategoriesCommand { get; }
         private TwoFACodeModel _changedItem = null;
 
         private bool _datafileUpdated;
         private bool _datafileWebDAVUpToDate;
         private bool _datafileWebDAVUpdated;
         private bool _datafileNoInternetConnection;
-
+        private bool _isFirstStart = true;
         private bool _codeVisibilityOptionEnabled;
 
 
@@ -105,6 +112,7 @@ namespace Project2FA.ViewModels
             DeleteAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
             CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
+            ManageCategoriesCommand = new AsyncRelayCommand(ManageCategoriesCommandTask);
             //SetFilterCommand = new AsyncRelayCommand(SetFilterCommandTask);
 
             NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
@@ -139,8 +147,19 @@ namespace Project2FA.ViewModels
                         break;
                 }
             });
+            //TODO only for Android and iOS 
+#if !WINDOWS_UWP
+        CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
+        StartTOTPLogic();
+#endif
 
 
+        }
+
+        private async Task ManageCategoriesCommandTask()
+        {
+            ManageCategoriesContentDialog dialog = new ManageCategoriesContentDialog();
+            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         private async Task AddAccountCommandTask()
@@ -186,9 +205,10 @@ namespace Project2FA.ViewModels
 
         private async Task StartTOTPLogic()
         {
-            if (DataService.Instance.ActivatedDatafile != null)
+            if (DataService.Instance.ActivatedDatafile != null) // && DataService.Instance.IsFirstActivatedDatafileStart
             {
                 await DataService.Instance.StartService();
+                DataService.Instance.IsFirstActivatedDatafileStart = false;
             }
             else
             {
@@ -202,6 +222,8 @@ namespace Project2FA.ViewModels
                     await DataService.Instance.StartService();
                 }
             }
+
+
 
             _dispatcherTOTPTimer.Tick -= TOTPTimer;
             _dispatcherTOTPTimer.Tick += TOTPTimer;
@@ -264,7 +286,8 @@ namespace Project2FA.ViewModels
         {
             if (parameter is TwoFACodeModel model)
             {
-                ChangedItem = null;
+                // TODO is this works?
+                //ChangedItem = null;
                 model.IsFavourite = !model.IsFavourite;
                 await TwoFADataService.WriteLocalDatafile();
                 if (!string.IsNullOrWhiteSpace(model.AccountIconName))
@@ -331,7 +354,7 @@ namespace Project2FA.ViewModels
 #if __IOS__ || __ANDROID__
             var param = new NavigationParameters();
             param.Add("model", model);
-            App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
+            //App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             await NavigationService.NavigateAsync(nameof(EditAccountPage), param);
 #else
             var dialog = new EditAccountContentDialog();

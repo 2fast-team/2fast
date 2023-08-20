@@ -280,8 +280,10 @@ namespace Project2FA.UNO
             containerRegistry.RegisterSingleton<ISerializationService, SerializationService>();
             containerRegistry.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>();
             containerRegistry.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
+            containerRegistry.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
 
             containerRegistry.RegisterSingleton<ShellPage>();
+            containerRegistry.RegisterForNavigation<BlankPage, BlankPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();

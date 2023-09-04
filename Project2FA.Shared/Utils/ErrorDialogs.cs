@@ -193,7 +193,7 @@ namespace Project2FA.Utils
             dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
+                var result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
                 App.Current.Exit();
             });
             dialog.CloseButtonCommand = new RelayCommand(() =>

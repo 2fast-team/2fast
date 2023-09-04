@@ -475,7 +475,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>Storage</value>
   </data>
   <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>Choose WebDAV (beta)</value>
+    <value>Choose WebDAV</value>
   </data>
   <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>
@@ -1143,5 +1143,37 @@ In the following sections, the functionality of this application is explained in
   </data>
   <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
     <value>Create category</value>
+  </data>
+  <data name="ShellPageSearchNavigation.Content" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ShellPageSettingsNavigation.Content" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="BiometricFacePreferMessage" xml:space="preserve">
+    <value>You have the option of logging in with facial recognition. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+  </data>
+  <data name="BiometricFingerPreferMessage" xml:space="preserve">
+    <value>You have the option of logging in with your fingerprint. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+  </data>
+  <data name="BiometricLoginSubtitle" xml:space="preserve">
+    <value>Log in to the app with a fingerprint or facial recognition.</value>
+  </data>
+  <data name="BiometricLoginTitle" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.Content" xml:space="preserve">
+    <value>Tutorial</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Open tutorial</value>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
+    <value>Die App speichert lokal in einer Datei die eingetragenen Konten, wodurch die Anwendung komplett offline betrieben werden kann, da zur Anlage und Generierung der zeitbasierten Einmal-Passwörter keine Kommunikation zwischen dem Dienst herrscht. 
+Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. zu empfehlen, um eine Versionierung und eine Sicherstellung gegen Verlust zu erlangen.
+In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung im Einzelnen erläutert.</value>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
+    <value>Funktionsweise der Anwendung</value>
   </data>
 </root>

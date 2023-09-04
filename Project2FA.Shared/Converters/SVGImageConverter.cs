@@ -28,8 +28,8 @@ namespace Project2FA.Converters
             if (!string.IsNullOrWhiteSpace(value as string))
             {
 #if __ANDROID__ || __IOS__
-            svg.RasterizePixelHeight = 64;
-            svg.RasterizePixelWidth = 64;
+            //svg.RasterizePixelHeight = 64;
+            //svg.RasterizePixelWidth = 64;
 #endif
                 try
                 {
@@ -50,7 +50,7 @@ namespace Project2FA.Converters
                 catch (Exception exc)
                 {
                     App.Current.Container.Resolve<ILoggerFacade>().Log(nameof(SVGImageConverter) + " " + exc.Message, Category.Exception, Priority.High);
-                    return null;
+                    return new SvgImageSource();
                 }
             }
             return svg;

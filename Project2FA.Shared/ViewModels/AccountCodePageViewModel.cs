@@ -185,7 +185,7 @@ namespace Project2FA.ViewModels
                 TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
             }
             // clear the navigation stack
-            await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+            await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
             if (TwoFADataService.ActivatedDatafile != null)
             {
                 FileActivationPage fileActivationPage = new FileActivationPage();
@@ -422,13 +422,10 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task ReloadDatafileAndUpdateCollection()
         {
+            // only reload, when the collection loading is not in progress
             if (TwoFADataService.CollectionAccessSemaphore.CurrentCount > 0)
             {
                 await TwoFADataService.ReloadDatafile();
-            }
-            else
-            {
-                // TODO add info for the user, that the task is currently run
             }
         }
 

@@ -1,12 +1,10 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Project2FA.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Uno.Toolkit.UI;
 using UNOversal.Navigation;
@@ -18,7 +16,7 @@ namespace Project2FA.UNO.Views
     public sealed partial class ShellPage : Page
     {
         private SystemNavigationManager _navManager;
-        public INavigationService NavigationService { get; private set; }
+        
         public NavigationView ShellViewInternal { get; private set; }
 
         public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
@@ -35,7 +33,7 @@ namespace Project2FA.UNO.Views
             _settingsNavigationStr = "SettingPage?PivotItem=0";
             ShellViewInternal = ShellView;
             ShellView.Content = MainFrame = new Frame();
-            NavigationService = NavigationFactory.Create(MainFrame);
+            ViewModel.NavigationService = NavigationFactory.Create(MainFrame);
 
             SetupGestures();
         }
@@ -44,44 +42,36 @@ namespace Project2FA.UNO.Views
         {
             _navManager.BackRequested += NavManager_BackRequested;
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            ShellView.BackRequested += async (s, e) => await NavigationService.GoBackAsync();
+            ShellView.BackRequested += async (s, e) => await ViewModel.NavigationService.GoBackAsync();
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
         private async void NavManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (NavigationService.CanGoBack())
+            if (ViewModel.NavigationService.CanGoBack())
             {
                 e.Handled = true;
-                await NavigationService.GoBackAsync();
-            }
-        }
-
-        private async void OnSelectionChanged(TabBar sender, TabBarSelectionChangedEventArgs args)
-        {
-            if(ViewModel.NavigationIsAllowed)
-            {
-                switch (sender.SelectedIndex)
+                await ViewModel.NavigationService.GoBackAsync();
+#if ANDROID || IOS
+                if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
                 {
-                    case 0:
-                        await NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
-                        break;
-                    case 1:
-                        await NavigationService.NavigateAsync(nameof(BlankPage));
-                        break;
-                    case 3:
-                        await NavigationService.NavigateAsync(nameof(SettingPage));
-                        break;
-                    default:
-                        break;
+                    switch (uIElement)
+                    {
+                        case AccountCodePage:
+                            ViewModel.SelectedIndex = 0;
+                            break;
+                        case SearchPage:
+                            ViewModel.SelectedIndex = 1;
+                            break;
+                        case SettingPage:
+                            ViewModel.SelectedIndex = 2;
+                            break;
+                        default:
+                            break;
+                    }
                 }
+#endif
             }
-
-
-            //if (sender.SelectedIndex == 2)
-            //{
-            //    MobileTabBar.SelectedIndex = 0;
-            //}
         }
 
         private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
@@ -98,7 +88,7 @@ namespace Project2FA.UNO.Views
             {
                 if (withNavigation)
                 {
-                    if ((await NavigationService.NavigateAsync(_settingsNavigationStr)).Success)
+                    if ((await ViewModel.NavigationService.NavigateAsync(_settingsNavigationStr)).Success)
                     {
                         PreviousItem = selectedItem;
                         ShellView.SelectedItem = selectedItem;
@@ -123,7 +113,7 @@ namespace Project2FA.UNO.Views
                         PreviousItem = item;
                         ShellView.SelectedItem = item;
                     }
-                    else if ((await NavigationService.NavigateAsync(path)).Success)
+                    else if ((await ViewModel.NavigationService.NavigateAsync(path)).Success)
                     {
                         PreviousItem = selectedItem;
                         ShellView.SelectedItem = selectedItem;
@@ -217,11 +207,6 @@ namespace Project2FA.UNO.Views
                 menuItem = ShellView.FooterMenuItems.OfType<NavigationViewItem>().SingleOrDefault(x => x.Equals(item) && x.Tag != null);
             }
             return menuItem;
-        }
-
-        private void TabBar_SelectionChanged(Uno.Toolkit.UI.TabBar sender, Uno.Toolkit.UI.TabBarSelectionChangedEventArgs args)
-        {
-
         }
     }
 }

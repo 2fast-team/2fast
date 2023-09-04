@@ -27,10 +27,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
+using WindowActivatedEventArgs = Microsoft.UI.Xaml.WindowActivatedEventArgs;
 using UNOversal;
 using Project2FA.Services;
 using Project2FA.Core.Services.NTP;
 using CommunityToolkit.WinUI.Helpers;
+using Windows.UI.Core;
 
 namespace Project2FA.UNO
 {
@@ -39,6 +41,8 @@ namespace Project2FA.UNO
     /// </summary>
     public sealed partial class App : UNOversalApplication
     {
+        private DateTime _focusLostTime;
+        private DispatcherTimer _focusLostTimer;
         /// <summary>
         /// Creates the access of the static instance of the ShellPage
         /// </summary>
@@ -78,7 +82,6 @@ namespace Project2FA.UNO
 //        }
 //#endif
 
-
         public override async Task OnStartAsync(IApplicationArgs args)
         {
             if (WinUIWindow.Current.Content == null)
@@ -92,8 +95,8 @@ namespace Project2FA.UNO
                 //    coreTitleBar.ExtendViewIntoTitleBar = true;
                 //}
 
-                //Window.Current.Activated -= Current_Activated;
-                //Window.Current.Activated += Current_Activated;
+                WinUIWindow.Current.Activated -= Current_Activated;
+                WinUIWindow.Current.Activated += Current_Activated;
                 // set DB
                 if (Repository is null)
                 {
@@ -133,7 +136,7 @@ namespace Project2FA.UNO
                     }
                     else
                     {
-                        await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
+                        await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
                         WinUIWindow.Current.Content = ShellPageInstance;
                     }
                 }
@@ -150,6 +153,75 @@ namespace Project2FA.UNO
             }
 
             WinUIWindow.Current.Activate();
+        }
+
+        private void Current_Activated(object sender, WindowActivatedEventArgs e)
+        {
+            if (e.WindowActivationState == CoreWindowActivationState.Deactivated)
+            {
+                if (WinUIWindow.Current.Content is ShellPage)
+                {
+                    if (_focusLostTimer == null)
+                    {
+                        _focusLostTimer = new DispatcherTimer();
+                        _focusLostTimer.Interval = new TimeSpan(0, 1, 0); //every minute
+                    }
+                    _focusLostTimer.Tick -= FocusLostTimer_Tick;
+                    _focusLostTimer.Tick += FocusLostTimer_Tick;
+                    _focusLostTimer.Start();
+                    _focusLostTime = DateTime.Now;
+                }
+            }
+            if (e.WindowActivationState == CoreWindowActivationState.CodeActivated)
+            {
+                if (_focusLostTimer == null)
+                {
+                    return;
+                }
+                if (_focusLostTimer.IsEnabled)
+                {
+                    _focusLostTimer.Stop();
+                }
+            }
+        }
+
+
+        private async void FocusLostTimer_Tick(object sender, object e)
+        {
+            if (await Repository.Password.GetAsync() is null)
+            {
+                _focusLostTimer.Stop();
+                return;
+            }
+            TimeSpan timeDiff = DateTime.Now - _focusLostTime;
+            if (SettingsService.Instance.UseAutoLogout)
+            {
+                if (true )//timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
+                {
+                    _focusLostTimer.Stop();
+                    var dialogService = Current.Container.Resolve<IDialogService>();
+                    if (await dialogService.IsDialogRunning())
+                    {
+                        dialogService.CloseDialogs();
+                    }
+                    await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                    if (DataService.Instance.ActivatedDatafile != null)
+                    {
+                        var fileActivationPage = new FileActivationPage();
+                        WinUIWindow.Current.Content = fileActivationPage;
+                    }
+                    else
+                    {
+#if ANDROID || IOS
+                        var loginPage = new LoginPage(true);
+#else
+                        var loginPage = new LoginPage(true);
+#endif
+
+                        WinUIWindow.Current.Content = loginPage;
+                    }
+                }
+            }
         }
 
         protected override UIElement CreateShell()
@@ -294,8 +366,10 @@ namespace Project2FA.UNO
 #if __IOS__ || __ANDROID__
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
+            containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
 #else
             containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
+            containerRegistry.RegisterForNavigation<AddAccountContentDialog, AddAccountContentDialogViewModel>();
 #endif
 
             //contentdialogs and view-models

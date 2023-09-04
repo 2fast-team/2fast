@@ -478,7 +478,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Speicherart</value>
   </data>
   <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>WebDAV nutzen (Beta)</value>
+    <value>WebDAV nutzen</value>
   </data>
   <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>
@@ -929,11 +929,9 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Möchten Sie das Tutorial zu der Anwendung öffnen?</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>Diese Anwendung ist ein Authentifikator für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „Time-based One-time Password Algorithmus“/ zeitbasiertes Einmal-Passwort (TOTP) nach Standardisierung RFC 6238 nutzt. Dienste die für die 2FA auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden.
+    <value>Die Anwendung **2fast** (Akronym für **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) ist ein [Authentifikator](https://de.wikipedia.org/wiki/Authentifizierung) für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „**T**ime-based **O**ne-**t**ime **P**assword Algorithmus“/ zeitbasiertes Einmal-Passwort (TOTP) nach Standardisierung [RFC 6238](https://tools.ietf.org/html/rfc6238) nutzt. Dienste die für die 2FA auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden.
 
-Für die Speicherung und der Sicherung wird hierbei eine Datendatei erstellt bzw. genutzt, um die verknüpften Konten in dieser Datei mit einem Passwort verschlüsselt zu speichern. Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. zu empfehlen, um eine Versionerung und eine Sicherstellung gegen Verlust zu erlangen.
-
-In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in diesem Tutorial erläutert.</value>
+Im Weiteren wird die Funktionsweise der Anwendung erläutert.</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
     <value>Für die Erstellung einer Datendatei muss als erster Schritt ein Ordner gewählt werden, in dem die Datei gespeichert werden soll. Hierbei ist ein Speicherort zu empfehlen, der gegenüber einem Datenverlust abgesichert ist (z.B. Cloud-Speicher wie One-Drive, DropBox, etc.). Im Anschluss folgen der Name und das Passwort für die Verschlüsselung der Datei. Es wird die Speicherung des Passwortes in einem Passwortmanager empfohlen, um einen Verlust zu verhindern.</value>
@@ -1150,5 +1148,37 @@ In den nachfolgenden Abschnitten wird die Funktionsweise dieser Anwendung in die
   </data>
   <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
     <value>Kategorie anlegen</value>
+  </data>
+  <data name="ShellPageSearchNavigation.Content" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="ShellPageSettingsNavigation.Content" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="BiometricFacePreferMessage" xml:space="preserve">
+    <value>Es besteht die Möglichkeit das Sie sich mit der Gesichtserkennung anmelden können. Möchten Sie in Zukunft diese Anmeldung präferieren? Sie können jederzeit diese Option in den Einstellungen wieder ändern.</value>
+  </data>
+  <data name="BiometricFingerPreferMessage" xml:space="preserve">
+    <value>Es besteht die Möglichkeit das Sie sich mit dem Fingerabdruck anmelden können. Möchten Sie in Zukunft diese Anmeldung präferieren? Sie können jederzeit diese Option in den Einstellungen wieder ändern.</value>
+  </data>
+  <data name="BiometricLoginSubtitle" xml:space="preserve">
+    <value>Melden Sie sich mit einem Fingerabdruck oder der Gesichtserkennung bei der Anwendung an.</value>
+  </data>
+  <data name="BiometricLoginTitle" xml:space="preserve">
+    <value>Anmeldung</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.Content" xml:space="preserve">
+    <value>Tutorial</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tutorial aufrufen</value>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
+    <value>Die App speichert lokal in einer Datei die eingetragenen Konten, wodurch die Anwendung komplett offline betrieben werden kann, da zur Anlage und Generierung der zeitbasierten Einmal-Passwörter keine Kommunikation zwischen dem Dienst herrscht. 
+Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. zu empfehlen, um eine Versionierung und eine Sicherstellung gegen Verlust zu erlangen.
+In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung im Einzelnen erläutert.</value>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
+    <value>Funktionsweise der Anwendung</value>
   </data>
 </root>

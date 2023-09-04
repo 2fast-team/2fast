@@ -250,7 +250,8 @@ namespace Project2FA.ViewModels
                 if (_qrCodeScan)
                 {
 #if WINDOWS_UWP
-                    ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
+                    // TODO for 1.3.0 version
+                    //ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
                     ReadQRCodeFromClipboard();
 #endif
                     _qrCodeScan = false;
@@ -265,10 +266,15 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task ScanClipboardQRCode()
         {
-            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?source={0}&clippingMode=Window"));
+            //bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?source={0}&clippingMode=Window"));
+            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
+                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
+                Strings.Resources.ApplicationName,
+                OpeningSeconds)));
             if (result)
             {
-                await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+                // TODO for 1.3.0 version
+                //await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
                 _launchScreenClip = true;
             }
             else
@@ -276,10 +282,10 @@ namespace Project2FA.ViewModels
                 MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogScreenclipNotFound, Strings.Resources.Error);
                 await dialog.ShowAsync();
             }
-    //        bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
-    //string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
-    //    Strings.Resources.ApplicationName,
-    //    OpeningSeconds)));
+//            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
+//string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
+//Strings.Resources.ApplicationName,
+//OpeningSeconds)));
 
             //// The GraphicsCapturePicker follows the same pattern the
             //// file pickers do.
@@ -589,19 +595,19 @@ namespace Project2FA.ViewModels
             var transformName = Model.Label.ToLower();
             transformName = transformName.Replace(" ", string.Empty);
             transformName = transformName.Replace("-", string.Empty);
-            ;
-            if (await FileService.FileExistsAsync(string.Format("{0}.svg", transformName), folder))
-            {
 
-                Model.AccountIconName = transformName;
-                AccountIconName = transformName;
-                await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
-            }
-            else
+            try
             {
-                // fallback: check if one IconNameCollectionModel name fits into the label name
-                try
+                if (await FileService.FileExistsAsync(string.Format("{0}.svg", transformName), folder))
                 {
+                    Model.AccountIconName = transformName;
+                    AccountIconName = transformName;
+                    await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
+                }
+                else
+                {
+                    // fallback: check if one IconNameCollectionModel name fits into the label name
+
                     var list = IconNameCollectionModel.Collection.Where(x => x.Name.Contains(transformName));
                     if (list.Count() == 1)
                     {
@@ -610,13 +616,12 @@ namespace Project2FA.ViewModels
                         await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
                     }
                 }
-                catch (Exception exc)
-                {
+            }
+            catch (Exception exc)
+            {
 #if WINDOWS_UWP
-                    TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
+                TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
 #endif
-                }
-
             }
             //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()))
             //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;

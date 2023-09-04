@@ -114,6 +114,27 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="WidthNarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <Setter Target="SP_LoginBTNs.Orientation" Value="Vertical"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="WidthMediumHigherState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="852" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

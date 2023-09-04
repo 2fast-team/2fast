@@ -143,7 +143,7 @@
                             </Button>
 
                             <Grid VerticalAlignment="Center">
-                                <appcontrols:RadialProgressBar
+                                <ProgressRing
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     
@@ -190,7 +190,9 @@
                             VerticalAlignment="Top" >
                             <FontIcon Glyph="&#xE712;"/>
                             <Button.Flyout>
-                                <MenuFlyout UseNativePopup="True">
+                                <MenuFlyout 
+                                    UseNativePopup="True" 
+                                    utu:MenuFlyoutExtensions.CancelTextIosOverride="{x:Bind strings:Resources.ButtonTextCancel}">
                                     <MenuFlyoutItem 
                                         x:Uid="AccountCodePageEditEntry"
                                         Click="BTN_EditItem_Click">
@@ -422,7 +424,9 @@
                             VerticalAlignment="Top" >
                             <FontIcon Glyph="&#xE712;"/>
                             <Button.Flyout>
-                                <MenuFlyout UseNativePopup="True">
+                                <MenuFlyout 
+                                    UseNativePopup="True" 
+                                    utu:MenuFlyoutExtensions.CancelTextIosOverride="{x:Bind strings:Resources.ButtonTextCancel}">
                                     <MenuFlyoutItem 
                                         x:Uid="AccountCodePageEditEntry"
                                         Click="BTN_EditItem_Click">
@@ -500,12 +504,38 @@
                     Foreground="{ThemeResource  SystemAccentColor}" />
             </utu:NavigationBar.MainCommand>
             <utu:NavigationBar.PrimaryCommands>
-                <AppBarButton Content="#Add" Icon="Add"></AppBarButton>
+                <AppBarButton >
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Add" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                    </AppBarButton.Icon>
+                    <!--<AppBarButton.Flyout>
+                        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
+    Placement="Top">
+                            <MenuFlyoutItem 
+        x:Uid="AccountCodePageAddCamera"
+        Text="AccountCodePageAddCamera.Text~"
+        >
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE70F;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem 
+        x:Uid="AccountCodePageAddManual"
+        Text="AccountCodePageAddManual.Text~"
+        >
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE1C2;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>-->
+                </AppBarButton>
             </utu:NavigationBar.PrimaryCommands>
         </utu:NavigationBar>
         <Grid 
         x:Name="MainGrid"
         Grid.Row="1"
+        Margin="2,0,0,0"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <!--<ListView 
             x:Name="LV_AccountCollection"
@@ -515,12 +545,14 @@
             HorizontalContentAlignment="Stretch"
                 ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}"
             HorizontalAlignment="Stretch">
-                --><!--<ListView.ItemContainerStyle>
+                -->
+            <!--<ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="2,16,2,0"/>
                     </Style>
-                </ListView.ItemContainerStyle>--><!--
+                </ListView.ItemContainerStyle>-->
+            <!--
             </ListView>-->
             <ItemsRepeaterScrollHost>
                 <ScrollViewer>
@@ -537,96 +569,5 @@
 
             </ItemsRepeaterScrollHost>
         </Grid>
-
-
-        
-        <!--<Grid Grid.Row="2" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Border Background="{ThemeResource TwoFABackgroundBrush}" CornerRadius="0,32,0,0" Height="48" VerticalAlignment="Bottom">
-                <Button 
-                    Width="76" HorizontalAlignment="Center" 
-                    Style="{StaticResource TransparentButtonStyle}"
-  >
-                    <FontIcon 
-                        FontSize="30"
-                        Glyph="&#xE11A;" />
-                    <Button.Flyout>
-                        <Flyout>
-                            <CommandBar 
-                x:Name="CommandBarFlyout1">
-                                <AppBarElementContainer>
-                                    <AutoSuggestBox 
-                                    Width="250"
-                                    Height="40"
-                                    QueryIcon="Find"
-                                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"
-                                    TextChanged="AutoSuggestBox_TextChanged"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,1,0" />
-                                </AppBarElementContainer>
-                                <AppBarButton Label="Delete" Icon="Delete" ToolTipService.ToolTip="Delete"  />
-                            </CommandBar>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
-            </Border>
-
-            <Button 
-                Grid.Column="2"
-                Height="62" 
-                Width="62" 
-                CornerRadius="36" 
-                Background="#FF009BC1"
-                Foreground="White"
-                HorizontalAlignment="Center" >
-                <FontIcon 
-                        FontSize="30"
-                        Glyph="&#xE109;" />
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddCamera"
-                                Text="AccountCodePageAddCamera.Text~"
-                                Click="BTN_AddAccountCamera_Click">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xE70F;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                        <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddManual"
-                                Text="AccountCodePageAddManual.Text~"
-                                Click="BTN_AddAccountManual_Click">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xE1C2;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                    </MenuFlyout>
-                </Button.Flyout>
-            </Button>
-
-            <Border 
-                Background="{ThemeResource TwoFABackgroundBrush}" 
-                Grid.Column="4" 
-                Height="48" 
-                CornerRadius="32,0,0,0" 
-                VerticalAlignment="Bottom">
-                <Button 
-                    Width="76" 
-                    HorizontalAlignment="Center"
-                    Command="{x:Bind ViewModel.NavigateToSettingsCommand}"
-                    Style="{StaticResource TransparentButtonStyle}">
-                    <FontIcon 
-                        FontSize="30"
-                        Glyph="&#xE115;" />
-                </Button>
-            </Border>
-        </Grid>-->
-
     </Grid>
 </Page>

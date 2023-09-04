@@ -13,13 +13,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using CommunityToolkit.WinUI.Helpers;
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Data;
-using Microsoft.Toolkit.Uwp.Helpers;
 #else
 using Microsoft.UI.Xaml.Data;
-using CommunityToolkit.WinUI.Helpers;
 #endif
 
 namespace Project2FA.Controls

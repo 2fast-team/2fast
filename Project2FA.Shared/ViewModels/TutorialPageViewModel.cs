@@ -1,13 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Repository.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using UNOversal.Navigation;
+using Windows.UI.Xaml.Controls.Primitives;
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -24,10 +23,11 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Project2FA.ViewModels
 {
-    public class TutorialPageViewModel : ObservableObject
+    public class TutorialPageViewModel : ObservableObject, IInitialize
     {
         private int _selectedIndex = 0;
         private bool _isTooltipOpen;
+        private bool _isManualOpened;
         public ICommand BackButtonCommand;
         public ICommand FordwardButtonCommand;
         public ICommand SkipButtonCommand;
@@ -38,8 +38,6 @@ namespace Project2FA.ViewModels
 
         public TutorialPageViewModel(INavigationService navigationService)
         {
-            // disable the navigation to other pages
-            App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             NavigationService = navigationService;
             Collection.Add(new TwoFACodeModel { Issuer = "2fast@test.com", Label = "2fast", Seconds= 30, SecretByteArray = new byte[8] });
             BackButtonCommand = new RelayCommand(() => 
@@ -56,8 +54,31 @@ namespace Project2FA.ViewModels
         
         private async Task SkipButtonCommandTask()
         {
-            await NavigationService.NavigateAsync(nameof(WelcomePage));
+            if (IsManualOpened)
+            {
+                await NavigationService.GoBackAsync();
+            }
+            else
+            {
+                await NavigationService.NavigateAsync(nameof(WelcomePage));
+            }
         }
+
+        public void Initialize(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue<bool>("ManualView", out bool isManualOpened))
+            {
+                IsManualOpened = isManualOpened;
+            }
+            else
+
+            {
+                // disable the navigation to other pages
+                App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
+            }
+           
+        }
+
         public int SelectedIndex 
         { 
             get => _selectedIndex;
@@ -80,15 +101,20 @@ namespace Project2FA.ViewModels
 
         public bool ForwardButtonVisible
         {
-            get => SelectedIndex < 3;
+            get => SelectedIndex < 4;
         }
         public bool SkipButtonVisible
         {
-            get => SelectedIndex < 3;
+            get => SelectedIndex < 4;
         }
         public bool FinishButtonVisible
         {
-            get => SelectedIndex == 3;
+            get => SelectedIndex == 4;
+        }
+        public bool IsManualOpened 
+        {
+            get => _isManualOpened; 
+            set => SetProperty(ref _isManualOpened, value);
         }
     }
 }

@@ -10,8 +10,7 @@ using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Data;
 #endif
 
-namespace Project2FA.Strings
-{
+namespace Project2FA.Strings{
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -1789,6 +1788,58 @@ namespace Project2FA.Strings
             }
         }
         #endregion
+
+        #region BiometricFacePreferMessage
+        /// <summary>
+        ///   Looks up a localized string similar to: You have the option of logging in with facial recognition. Would you like to prefer this login in the future? You can change this option in the settings at any time.
+        /// </summary>
+        public static string BiometricFacePreferMessage
+        {
+            get
+            {
+                return _resourceLoader.GetString("BiometricFacePreferMessage");
+            }
+        }
+        #endregion
+
+        #region BiometricFingerPreferMessage
+        /// <summary>
+        ///   Looks up a localized string similar to: You have the option of logging in with your fingerprint. Would you like to prefer this login in the future? You can change this option in the settings at any time.
+        /// </summary>
+        public static string BiometricFingerPreferMessage
+        {
+            get
+            {
+                return _resourceLoader.GetString("BiometricFingerPreferMessage");
+            }
+        }
+        #endregion
+
+        #region BiometricLoginSubtitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Log in to the app with a fingerprint or facial recognition.
+        /// </summary>
+        public static string BiometricLoginSubtitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("BiometricLoginSubtitle");
+            }
+        }
+        #endregion
+
+        #region BiometricLoginTitle
+        /// <summary>
+        ///   Looks up a localized string similar to: Login
+        /// </summary>
+        public static string BiometricLoginTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("BiometricLoginTitle");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -1936,6 +1987,10 @@ namespace Project2FA.Strings
             AddAccountContentDialogScreenclipNotFound,
             NewDatafileAccessErrorDesc,
             NewDatafileAccessErrorTitle,
+            BiometricFacePreferMessage,
+            BiometricFingerPreferMessage,
+            BiometricLoginSubtitle,
+            BiometricLoginTitle,
         }
 
         private static ResourceLoader _resourceLoader;
@@ -1960,4 +2015,4 @@ namespace Project2FA.Strings
             return Converter == null ? res : Converter.Convert(res, typeof(String), ConverterParameter, null);
         }
     }
-}
+} //Project2FA.UWP.Strings

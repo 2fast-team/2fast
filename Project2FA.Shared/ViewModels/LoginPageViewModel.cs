@@ -31,14 +31,13 @@ using WinUIWindow = Microsoft.UI.Xaml.Window;
 using CommunityToolkit.WinUI.UI.Controls;
 #endif
 
-#if __IOS__ || MACCATALYST
+#if IOS
 using UIKit;
 using LocalAuthentication;
 using BiometryService;
 #endif
 
-#if __ANDROID__
-using Project2FA.UNO;
+#if ANDROID
 using AndroidX.Biometric;
 using BiometryService;
 #endif
@@ -53,7 +52,7 @@ namespace Project2FA.ViewModels
 #endif
     public class LoginPageViewModel : CredentialViewModelBase
     {
-#if ANDROID || IOS || MACCATALYST
+#if ANDROID || IOS
         private IBiometryService BiometryService { get; }
         private readonly CancellationToken _cancellationToken = CancellationToken.None;
 #endif
@@ -67,7 +66,7 @@ namespace Project2FA.ViewModels
 #if WINDOWS_UWP
             WindowsHelloLoginCommand = new RelayCommand(WindowsHelloLoginCommandTask);
 #else
-#if __IOS__
+#if IOS
 			var laContext = new LAContext
 			{
 				LocalizedReason = "REASON THAT APP WANTS TO USE BIOMETRY :)",
@@ -82,27 +81,27 @@ namespace Project2FA.ViewModels
 #endif
 
             //Note that not all combinations of authenticator types are supported prior to Android 11 (API 30). Specifically, DEVICE_CREDENTIAL alone is unsupported prior to API 30, and BIOMETRIC_STRONG | DEVICE_CREDENTIAL is unsupported on API 28-29
-#if __ANDROID__
+#if ANDROID
             Func<BiometricPrompt.PromptInfo> promptBuilder;
             if (Android.OS.Build.VERSION.SdkInt <= Android.OS.BuildVersionCodes.Q)
             {
                 promptBuilder = () => new BiometricPrompt.PromptInfo.Builder()
-                    .SetTitle("Biometrics SignIn")
-                    .SetSubtitle("Biometrics Confirm")
+                    .SetTitle(Strings.Resources.BiometricLoginTitle)
+                    .SetSubtitle(Strings.Resources.BiometricLoginSubtitle)
                     //.SetAllowedAuthenticators(BiometricManager.Authenticators.BiometricWeak | BiometricManager.Authenticators.DeviceCredential) // Fallback on secure pin WARNING cannot Encrypt data with this settings
                     .SetAllowedAuthenticators(BiometricManager.Authenticators.BiometricStrong) // used for Encrypt decrypt feature for device bellow Android 11
-                    .SetNegativeButtonText("Cancel")
+                    .SetNegativeButtonText(Strings.Resources.ButtonTextCancel)
                     .Build();
             }
             else
             {
                 promptBuilder = () => new BiometricPrompt.PromptInfo.Builder()
-                    .SetTitle("Biometrics SignIn")
-                    .SetSubtitle("Biometrics Confirm")
+                    .SetTitle(Strings.Resources.BiometricLoginTitle)
+                    .SetSubtitle(Strings.Resources.BiometricLoginSubtitle)
                     // BiometricManager.Authenticators.DeviceCredential == Fallback on secure pin
                     .SetAllowedAuthenticators(BiometricManager.Authenticators.BiometricStrong)
                     // Do not set NegativeButtonText if BiometricManager.Authenticators.DeviceCredential is allowed with BiometricManager.Authenticators.BiometricStrong
-                    .SetNegativeButtonText("Cancel")
+                    .SetNegativeButtonText(Strings.Resources.ButtonTextCancel)
                     .Build();
             }
 
@@ -111,7 +110,10 @@ namespace Project2FA.ViewModels
                 promptBuilder
             );
 #endif
+#if ANDROID || IOS
             BiometricoLoginCommand = new AsyncRelayCommand(BiometricoLoginCommandTask);
+#endif
+
 #endif
 
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
@@ -224,6 +226,8 @@ namespace Project2FA.ViewModels
             {
                 // TODO change from Windows Hello!
                 var capabilities = await BiometryService.GetCapabilities(_cancellationToken);
+                bool isFingerprintReader = capabilities.BiometryType == BiometryType.Fingerprint ? true : false;
+
                 if (capabilities.IsSupported && capabilities.IsEnabled)
                 {
                     BiometricIsUsable = SettingsService.Instance.ActivateWindowsHello;
@@ -233,7 +237,7 @@ namespace Project2FA.ViewModels
                         var dialog = new ContentDialog();
                         var markdown = new TextBlock
                         {
-                            Text = Resources.WindowsHelloPreferMessage,
+                            Text = isFingerprintReader ? Resources.BiometricFingerPreferMessage : Resources.BiometricFacePreferMessage,
                             TextWrapping = Microsoft.UI.Xaml.TextWrapping.WrapWholeWords
                         };
                         dialog.Content = markdown;
@@ -317,8 +321,10 @@ namespace Project2FA.ViewModels
 #if WINDOWS_UWP
                 App.ShellPageInstance.SetTitleBarAsDraggable();
 #endif
-                await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+                // TODO for UNO
                 WinUIWindow.Current.Content = App.ShellPageInstance;
+                await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+                WinUIWindow.Current.Activate();
                 return true;
             }
             else

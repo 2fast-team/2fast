@@ -35,25 +35,46 @@ namespace Project2FA.UNO.Views
         {
             this.InitializeComponent();
             // Refresh x:Bind when the DataContext changes.
-            this.Loaded += AccountCodePage_Loaded;
             DataContextChanged += (s, e) => Bindings.Update();
+            // Evcnt for the native back behavior which currently skips the framework extension
+#if ANDROID || IOS
             App.ShellPageInstance.MainFrame.Navigated -= MainFrame_Navigated;
             App.ShellPageInstance.MainFrame.Navigated += MainFrame_Navigated;
-        }
-
-        private void AccountCodePage_Loaded(object sender, RoutedEventArgs e)
-        {
-#if ANDROID || IOS || MACCATALYST
-            App.ShellPageInstance.ViewModel.SelectedIndex = 0;
 #endif
         }
 
+        /// <summary>
+        /// Detects the native back behavior which currently skips the framework extension
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
             if (e.NavigationMode == Microsoft.UI.Xaml.Navigation.NavigationMode.Back)
             {
                 App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 ViewModel.Initialize(new NavigationParameters());
+
+                //set current index for TabBar on smartphones
+#if ANDROID || IOS
+                if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
+                {
+                    switch (uIElement)
+                    {
+                        case AccountCodePage:
+                            App.ShellPageInstance.ViewModel.SelectedIndex = 0;
+                            break;
+                        case SearchPage:
+                            App.ShellPageInstance.ViewModel.SelectedIndex = 1;
+                            break;
+                        case SettingPage:
+                            App.ShellPageInstance.ViewModel.SelectedIndex = 2;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+#endif
             }
         }
 
@@ -172,10 +193,5 @@ namespace Project2FA.UNO.Views
                 await ViewModel.DeleteAccountFromCollection(model);   
             }
         }
-        //protected override void OnNavigatedFrom(NavigationEventArgs e)
-        //{
-        //    Bindings.Update();
-        //    base.OnNavigatedFrom(e);
-        //}
     }
 }

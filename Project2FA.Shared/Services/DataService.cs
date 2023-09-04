@@ -35,21 +35,19 @@ using UNOversal.Services.File;
 using UNOversal.Services.Network;
 using Project2FA.Utils;
 using Project2FA.Core.Services.Crypto;
+using CommunityToolkit.WinUI.Controls;
+using CommunityToolkit.WinUI.Helpers;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Microsoft.Toolkit.Uwp.Connectivity;
-using Microsoft.Toolkit.Uwp.UI.Controls;
 using Project2FA.UWP.Utils;
-using Microsoft.Toolkit.Uwp.Helpers;
+using Windows.Security.Authorization.AppCapabilityAccess;
 #else
-using CommunityToolkit.WinUI.UI.Controls;
-using CommunityToolkit.WinUI.UI;
-using CommunityToolkit.WinUI.Connectivity;
-using CommunityToolkit.WinUI.Helpers;
+
+
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
 using Microsoft.UI.Xaml;
@@ -270,10 +268,26 @@ namespace Project2FA.Services
                 StorageFolder folder = null;
                 string datafilename, passwordHashName, path;
                 DBPasswordHashModel dbHash;
+
                 if (ActivatedDatafile != null)
                 {
 #if WINDOWS_UWP
-                    folder = await ActivatedDatafile.GetParentAsync();
+                    // check if the app has file system access to load the file
+                    var checkFileSystemAccess = AppCapability.Create("broadFileSystemAccess").CheckAccess();
+                    switch (checkFileSystemAccess)
+                    {
+                        case AppCapabilityAccessStatus.DeniedBySystem:
+                        case AppCapabilityAccessStatus.NotDeclaredByApp:
+                        case AppCapabilityAccessStatus.DeniedByUser:
+                        case AppCapabilityAccessStatus.UserPromptRequired:
+                            await ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
+                            break;
+                        case AppCapabilityAccessStatus.Allowed:
+                            break;
+                        default:
+                            await ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
+                            break;
+                    }
 #endif
                     path = ActivatedDatafile.Path;
                     dbHash = null;
@@ -332,10 +346,10 @@ namespace Project2FA.Services
 #if WINDOWS_UWP
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
-                    {
-                        // prevent write of the datafile to folder
-                        _initialization = true;
+                {
                     await CollectionAccessSemaphore.WaitAsync();
+                    // prevent write of the datafile to folder
+                    _initialization = true;
                     try
                     {
                         string datafileStr = string.Empty;
@@ -520,11 +534,13 @@ namespace Project2FA.Services
             }
             finally
             {
+                // writing status for the data file is activated again
+                _initialization = false;
                 CollectionAccessSemaphore.Release();
             }
 
             //check if a newer version is available or the current file must be uploaded
-            if (dbDatafile.IsWebDAV && ActivatedDatafile == null)
+            if (dbDatafile != null && dbDatafile.IsWebDAV && ActivatedDatafile == null)
             {
                 if (await NetworkService.GetIsInternetAvailableAsync())
                 {
@@ -544,10 +560,7 @@ namespace Project2FA.Services
                 {
                     Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.NoInternet));
                 }
-
             }
-            // writing status for the data file is activated again
-            _initialization = false;
         }
 
         //private async void Query_DatafileChanged(IStorageQueryResultBase sender, object args)
@@ -610,7 +623,12 @@ namespace Project2FA.Services
 
 
                 // set new template version for data file
+#if WINDOWS_UWP
+                var prevíousVersion = new Version(Microsoft.Toolkit.Uwp.Helpers.SystemInformation.Instance.ApplicationVersion.ToFormattedString());
+#else
                 var prevíousVersion = new Version(SystemInformation.Instance.ApplicationVersion.ToFormattedString());
+#endif
+
                 var compareVersion = new Version("1.3.0.0");
                 var result = prevíousVersion.CompareTo(compareVersion);
                 int version = result >= 0 ? 2 : 1;
@@ -730,7 +748,7 @@ namespace Project2FA.Services
                 }
 
 
-                if (datafileDB.IsWebDAV && ActivatedDatafile == null)
+                if (datafileDB != null && datafileDB.IsWebDAV && ActivatedDatafile == null)
                 {
                     // TODO check result
                     (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder, datafileDB);
@@ -1050,7 +1068,7 @@ namespace Project2FA.Services
 #if __IOS__
         public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }
 #endif
-        #endregion
+#endregion
 
         public void Dispose()
         {

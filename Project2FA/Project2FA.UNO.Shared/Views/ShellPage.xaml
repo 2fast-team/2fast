@@ -187,27 +187,29 @@
             Grid.Row="2"
             Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay}"
             ItemContainerStyle="{StaticResource CupertinoBottomTabBarItemStyle}"
-            SelectionChanged="OnSelectionChanged"
+            SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
             SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
             Style="{StaticResource CupertinoBottomTabBarStyle}">
             <utu:TabBar.Items>
                 <utu:TabBarItem 
-                    Content="Start"
-                    Tag="Start"
+                    x:Uid="ShellPageAccountsNavigation"
+                    Tag="/AccountCodePage"
+                    Command="{x:Bind ViewModel.AccountCodePageCommand}"
                     IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
                     <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xE80F;" />
+                        <FontIcon Glyph="&#xE192;" />
                     </utu:TabBarItem.Icon>
                 </utu:TabBarItem>
                 <utu:TabBarItem 
-                    Content="Search"
-                    Tag="Search"
+                    x:Uid="ShellPageSearchNavigation"
+                    Tag="SearchPage"
+                    Command="{x:Bind ViewModel.SearchPageCommand}"
                     IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
                     <utu:TabBarItem.Icon>
                         <FontIcon Glyph="&#xe721;" />
                     </utu:TabBarItem.Icon>
                 </utu:TabBarItem>
-                <utu:TabBarItem 
+                <!--<utu:TabBarItem 
                     Content="Add"
                     Tag="Add"
                     IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
@@ -235,15 +237,17 @@
                     <utu:TabBarItem.Icon>
                         <SymbolIcon Symbol="Add" />
                     </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
+                </utu:TabBarItem>-->
+                
                 <!--<utu:TabBarItem Content="#About">
                     <utu:TabBarItem.Icon>
                         <FontIcon Glyph="&#xE946;" />
                     </utu:TabBarItem.Icon>
                 </utu:TabBarItem>-->
                 <utu:TabBarItem 
-                    Content="#Settings" 
-                    Tag="Settings"
+                    x:Uid="ShellPageSettingsNavigation"
+                    Tag="SettingPage"
+                    Command="{x:Bind ViewModel.SettingsPageCommand}"
                     IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
                     <utu:TabBarItem.Icon>
                         <FontIcon Glyph="&#xE713;" />

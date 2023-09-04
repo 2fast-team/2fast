@@ -9,15 +9,15 @@ using System.Numerics;
 using System.Xml.Linq;
 using System;
 using Windows.UI;
-
+using CommunityToolkit.WinUI;
+using CommunityToolkit.WinUI.Animations;
+using CommunityToolkit.WinUI.Animations.Expressions;
 
 #if WINDOWS_UWP
 using Windows.UI.Composition;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Shapes;
-using Microsoft.Toolkit.Uwp.UI;
-using Microsoft.Toolkit.Uwp.UI.Animations;
-using Microsoft.Toolkit.Uwp.UI.Animations.Expressions;
+
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 #else
@@ -25,9 +25,6 @@ using Microsoft.UI;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Shapes;
-using CommunityToolkit.WinUI.UI;
-using CommunityToolkit.WinUI.UI.Animations;
-using CommunityToolkit.WinUI.UI.Animations.Expressions;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 #endif

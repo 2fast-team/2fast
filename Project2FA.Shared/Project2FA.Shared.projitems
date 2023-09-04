@@ -50,10 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVDirectoryService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WindowService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ErrorDialogs.cs" />
@@ -68,6 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\AddAccountViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\CredentialViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\EditAccountViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BlankPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\CategoryContentDialogViewModel.cs" />

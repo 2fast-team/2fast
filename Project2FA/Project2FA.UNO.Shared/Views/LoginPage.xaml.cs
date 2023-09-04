@@ -37,7 +37,9 @@ namespace Project2FA.UNO.Views
                 PageStaticBackgroundBorder.Visibility = Visibility.Visible;
                 PageImageBackgroundBorder.Visibility = Visibility.Collapsed;
             }
+#if ANDROID || IOS
             ViewModel.CheckCapabilityBiometricLogin();
+#endif
         }
     }
 }

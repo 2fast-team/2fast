@@ -24,6 +24,7 @@ using Project2FA.UWP.Views;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
+using Windows.Security.Authorization.AppCapabilityAccess;
 #else
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
@@ -129,11 +130,25 @@ namespace Project2FA.ViewModels
             try
             {
 #if WINDOWS_UWP
-                //TODO current workaround: check permission to the file system (broadFileSystemAccess)
-                string path = @"C:\Windows\explorer.exe";
-                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
+                // check if the app has file system access to load the file
+                var checkFileSystemAccess = AppCapability.Create("broadFileSystemAccess").CheckAccess();
+                switch (checkFileSystemAccess)
+                {
+                    case AppCapabilityAccessStatus.DeniedBySystem:
+                    case AppCapabilityAccessStatus.NotDeclaredByApp:
+                    case AppCapabilityAccessStatus.DeniedByUser:
+                    case AppCapabilityAccessStatus.UserPromptRequired:
+                        await ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
+                        break;
+                    default:
+                    case AppCapabilityAccessStatus.Allowed:
+                        return await SetLocalFile();
+                }
+                return await UseExistDatafile();
+#else
+return await SetLocalFile();
 #endif
-                return await SetLocalFile();
+
             }
             catch (UnauthorizedAccessException)
             {

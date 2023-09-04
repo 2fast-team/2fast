@@ -125,7 +125,7 @@ namespace Project2FA.ViewModels
                     NewtonsoftJSONService.Serialize(encryptedBytes));
 #endif
                 App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
-                await App.ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+                await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
                 Window.Current.Content = App.ShellPageInstance;
                 return true;
             }

@@ -109,7 +109,8 @@ namespace Project2FA.UNO
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
-                    SystemInformation.Instance.TrackAppUse(e);
+                    // TODO Uno release
+                    //SystemInformation.Instance.TrackAppUse(e);
                     // set custom splash screen page
                     //Window.Current.Content = new SplashPage(e.SplashScreen);
                 }

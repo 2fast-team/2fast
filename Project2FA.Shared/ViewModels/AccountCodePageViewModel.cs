@@ -27,7 +27,6 @@ using Windows.UI.Xaml.Data;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using WinUIWindow = Windows.UI.Xaml.Window;
 #else
-using CommunityToolkit.WinUI.UI.Controls;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
 using Microsoft.UI.Xaml;
@@ -397,10 +396,18 @@ namespace Project2FA.ViewModels
         {
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.DeleteAccountContentDialogTitle;
+#if WINDOWS_UWP
             var markdown = new MarkdownTextBlock
             {
                 Text = Resources.DeleteAccountContentDialogDescription
             };
+#else
+            var markdown = new TextBlock
+            {
+                Text = Resources.DeleteAccountContentDialogDescription,
+                TextWrapping = TextWrapping.Wrap
+            };
+#endif
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.Confirm;
             dialog.SecondaryButtonText = Resources.ButtonTextCancel;

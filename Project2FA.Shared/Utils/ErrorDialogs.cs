@@ -11,7 +11,6 @@ using Windows.Storage;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
 using UNOversal.Services.Secrets;
-using ColorCode.Compilation.Languages;
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -24,7 +23,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
-using CommunityToolkit.WinUI.UI.Controls;
 #endif
 
 namespace Project2FA.Utils
@@ -218,6 +216,7 @@ namespace Project2FA.Utils
             {
                 Title = Resources.ErrorHandle
             };
+#if WINDOWS_UWP
             var errorTextBlock = new MarkdownTextBlock()
             {
                 Margin = new Thickness(0, 8, 0, 8)
@@ -225,6 +224,16 @@ namespace Project2FA.Utils
             errorTextBlock.Text = "#" + exc.Message  + "\n"
                 + exc.StackTrace + "\n"
                 + exc.InnerException;
+#else
+            var errorTextBlock = new TextBlock()
+            {
+                Margin = new Thickness(0, 8, 0, 8),
+                TextWrapping = TextWrapping.Wrap
+            };
+            errorTextBlock.Text = exc.Message
+                + exc.StackTrace
+                + exc.InnerException;
+#endif
             var stackpanel = new StackPanel();
             var clipboardButton = new Button();
             clipboardButton.Margin = new Thickness(0, 10, 0, 0);
@@ -259,8 +268,9 @@ namespace Project2FA.Utils
             feedbackHub.Click += async (s, e) =>
             {
                 // https://docs.microsoft.com/en-us/windows/uwp/monetize/launch-feedback-hub-from-your-app
-                var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-                await launcher.LaunchAsync();
+                //var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+                //await launcher.LaunchAsync();
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/2fast-team/2fast/discussions"));
             };
 #endif
             var buttonStackPanel = new StackPanel();
@@ -295,11 +305,20 @@ namespace Project2FA.Utils
             {
                 Title = Resources.ErrorHandle
             };
+#if WINDOWS_UWP
             var errorMarkdownTextBlock = new MarkdownTextBlock()
             {
                 Margin = new Thickness(0, 4, 0, 0)
             };
             errorMarkdownTextBlock.Text = errorDetail;
+#else
+            var errorMarkdownTextBlock = new TextBlock()
+            {
+                Margin = new Thickness(0, 4, 0, 0),
+                TextWrapping = TextWrapping.Wrap
+            };
+            errorMarkdownTextBlock.Text = errorDetail;
+#endif
             //errorMarkdownTextBlock.IsReadOnly = true;
             var stackpanel = new StackPanel();
             var clipboardButton = new Button();
@@ -372,7 +391,12 @@ namespace Project2FA.Utils
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.Error;
+#if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
+#else
+            TextBlock markdown = new TextBlock();
+            markdown.TextWrapping = TextWrapping.Wrap;
+#endif
             markdown.Text = string.Format(Resources.WriteDatafileErrorDesc);
             dialog.Content = markdown;
             dialog.PrimaryButtonCommand = new RelayCommand(() =>
@@ -397,7 +421,12 @@ namespace Project2FA.Utils
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.Error;
+#if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
+#else
+            TextBlock markdown = new TextBlock();
+            markdown.TextWrapping = TextWrapping.Wrap;
+#endif
             markdown.Text = string.Format(Resources.ErrorGenerateTOTPCode, label);
             dialog.Content = markdown;
 
@@ -442,7 +471,12 @@ namespace Project2FA.Utils
             dialog.Closed += Dialog_Closed;
             dialog.Title = Resources.ErrorHandle;
             StackPanel stackPanel = new StackPanel();
+#if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
+#else
+            TextBlock markdown = new TextBlock();
+            markdown.TextWrapping = TextWrapping.Wrap;
+#endif
             markdown.Text = Resources.ExceptionDatafileNotFound;
             stackPanel.Children.Add(markdown);
 

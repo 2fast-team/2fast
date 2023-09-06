@@ -28,7 +28,6 @@ using Microsoft.UI.Xaml.Data;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
-using CommunityToolkit.WinUI.UI.Controls;
 #endif
 
 #if IOS

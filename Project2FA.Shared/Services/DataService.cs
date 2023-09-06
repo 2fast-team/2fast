@@ -37,6 +37,7 @@ using Project2FA.Utils;
 using Project2FA.Core.Services.Crypto;
 using CommunityToolkit.WinUI.Controls;
 using CommunityToolkit.WinUI.Helpers;
+using CommunityToolkit.WinUI;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -87,7 +88,7 @@ namespace Project2FA.Services
         private bool _initialization, _errorOccurred;
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
-        public Project2FA.Controls.AdvancedCollectionView ACVCollection { get; }
+        public AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
 
         public ObservableCollection<CategoryModel> GlobalCategories { get; set; } = new ObservableCollection<CategoryModel>();
@@ -122,10 +123,10 @@ namespace Project2FA.Services
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             NetworkTimeService = App.Current.Container.Resolve<INetworkTimeService>();
             NetworkService = App.Current.Container.Resolve<INetworkService>();
-            ACVCollection = new Project2FA.Controls.AdvancedCollectionView(Collection, true);
+            ACVCollection = new AdvancedCollectionView(Collection, true);
             TOTPEventStopwatch = new Stopwatch();
             //ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
-            ACVCollection.SortDescriptions.Add(new Project2FA.Controls.SortDescription("IsFavouriteText", Project2FA.Controls.SortDirection.Ascending));
+            ACVCollection.SortDescriptions.Add(new SortDescription("IsFavouriteText", SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
             CheckTime().ConfigureAwait(false);
         }
@@ -626,7 +627,8 @@ namespace Project2FA.Services
 #if WINDOWS_UWP
                 var prevíousVersion = new Version(Microsoft.Toolkit.Uwp.Helpers.SystemInformation.Instance.ApplicationVersion.ToFormattedString());
 #else
-                var prevíousVersion = new Version(SystemInformation.Instance.ApplicationVersion.ToFormattedString());
+                // TODO Uno release
+                var prevíousVersion = new Version("1.3.0.0");
 #endif
 
                 var compareVersion = new Version("1.3.0.0");

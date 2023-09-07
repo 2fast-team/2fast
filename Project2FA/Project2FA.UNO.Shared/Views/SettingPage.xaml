@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Uno.UI.Toolkit"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:strings="using:Project2FA.Strings"
+    xmlns:toolkitcontrols="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -30,26 +32,27 @@
             </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>
 
-        <!--<StackPanel Grid.Row="1">
-            <labs:SettingsCard x:Uid="SettingsBackButtonCard">
+        <StackPanel Grid.Row="1">
+
+            <!--<toolkitcontrols:SettingsCard x:Uid="SettingsBackButtonCard">
                 <ToggleSwitch 
                     x:Name="SettingsBackButtonToggleSwtich"
                     x:Uid="SettingsBackButtonToggleSwtich"
                     IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHeaderBackButton, Mode=TwoWay}"
                     OffContent="~SettingsBackButtonToggleSwtich.OffContent"
                     OnContent="~SettingsBackButtonToggleSwtich.OnContent"  />
-            </labs:SettingsCard>
+            </toolkitcontrols:SettingsCard>-->
 
-            <labs:SettingsCard 
+            <!--<toolkitcontrols:SettingsCard 
                 x:Uid="SettingsAppThemeMode"
                 Header="~SettingsAppThemeMode.Header">
-                <labs:SettingsCard.Description>
+                <toolkitcontrols:SettingsCard.Description>
                     <HyperlinkButton
                         x:Uid="SettingsWindowsColor"
                         Content="~SettingsWindowsColor.Content"
                         NavigateUri="ms-settings:personalization-colors"/>
-                </labs:SettingsCard.Description>
-                <labs:SettingsCard.Content>
+                </toolkitcontrols:SettingsCard.Description>
+                <toolkitcontrols:SettingsCard.Content>
                     <StackPanel>
                         <ComboBox 
                                 SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
@@ -59,72 +62,70 @@
                             <ComboBoxItem x:Uid="SettingsThemeSystem"/>
                         </ComboBox>
                     </StackPanel>
-                </labs:SettingsCard.Content>
-            </labs:SettingsCard>
+                </toolkitcontrols:SettingsCard.Content>
+            </toolkitcontrols:SettingsCard>-->
 
-            <labs:SettingsCard 
+            <!--<toolkitcontrols:SettingsCard 
                 x:Uid="SettingsAppCornorRadius"
                 Header="~SettingsAppCornorRadius.Header">
-                <labs:SettingsCard.Description>
+                <toolkitcontrols:SettingsCard.Description>
                     <TextBlock 
                         x:Uid="SettingsAppCornorRadiusDesc"
                         Text="~SettingsAppCornorRadiusDesc.Text" 
                         VerticalAlignment="Stretch" 
                         HorizontalAlignment="Stretch"/>
-                </labs:SettingsCard.Description>
-                <labs:SettingsCard.Content>
+                </toolkitcontrols:SettingsCard.Description>
+                <toolkitcontrols:SettingsCard.Content>
                     <ToggleSwitch 
                         x:Name="SettingsRoundCornerToggleSwtich"
                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
-                </labs:SettingsCard.Content>
-            </labs:SettingsCard>
-            --><!--<labs:SettingsExpander
+                </toolkitcontrols:SettingsCard.Content>
+            </toolkitcontrols:SettingsCard>-->
+            
+        <!--<toolkitcontrols:SettingsExpander
                 Margin="0,0,0,20"
                 IsExpanded="True">
-                <labs:SettingsExpander.Header>
-                    <labs:SettingsCard
+                <toolkitcontrols:SettingsExpander.Header>
+                    <toolkitcontrols:SettingsCard
                     x:Uid="SettingsCustomDesign"
                     Header="~SettingsCustomDesign.Header"/>
-                </labs:SettingsExpander.Header>
+                </toolkitcontrols:SettingsExpander.Header>
 
-                <labs:SettingsExpander.Items>
-                    --><!--<labs:SettingsCard 
+                <toolkitcontrols:SettingsExpander.Items>
+                    <toolkitcontrols:SettingsCard 
                             x:Uid="SettingsAppPrideMonthDesign"
-                            Header="~SettingsAppPrideMonthDesign.Header"
-                            FontFamily="Segoe UI Emoji"
-                            Icon="🏳‍🌈">
-                        <labs:SettingsCard.Description>
+                            Header="~SettingsAppPrideMonthDesign.Header">
+                        <toolkitcontrols:SettingsCard.Description>
                             <TextBlock 
                                 x:Uid="SettingsAppPrideMonthDesignDesc"
                                 Text="~SettingsAppPrideMonthDesignDesc.Text" 
                                 VerticalAlignment="Stretch" 
                                 HorizontalAlignment="Stretch"/>
-                        </labs:SettingsCard.Description>
-                        <labs:SettingsCard.Content>
+                        </toolkitcontrols:SettingsCard.Description>
+                        <toolkitcontrols:SettingsCard.Content>
                             <ToggleSwitch 
                                 x:Name="SettingsAppPrideMonthDesignToggleSwtich"
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.PrideMonthDesign, Mode=TwoWay}"/>
-                        </labs:SettingsCard.Content>
-                    </labs:SettingsCard>--><!--
-                </labs:SettingsExpander.Items>
-            </labs:SettingsExpander>--><!--
-            <labs:SettingsCard
+                        </toolkitcontrols:SettingsCard.Content>
+                    </toolkitcontrols:SettingsCard>
+                </toolkitcontrols:SettingsExpander.Items>
+            </toolkitcontrols:SettingsExpander>
+            <toolkitcontrols:SettingsCard
                     x:Uid="SettingsPreferHiddenTOTP"
-                    Header="~SettingsPreferHiddenTOTP.Header" 
-                    Icon="&#xE18B;">
-                <labs:SettingsCard.Description>
+                    Header="~SettingsPreferHiddenTOTP.Header" >
+                <toolkitcontrols:SettingsCard.Description>
                     <TextBlock 
                         x:Uid="SettingsPreferHiddenTOTPDesc"
                         Text="~SettingsPreferHiddenTOTPDesc.Text"/>
-                </labs:SettingsCard.Description>
-                <labs:SettingsCard.Content>
+                </toolkitcontrols:SettingsCard.Description>
+                <toolkitcontrols:SettingsCard.Content>
                     <ToggleSwitch 
                         x:Name="SettingsPreferHiddenTOTP"
                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
-                </labs:SettingsCard.Content>
-            </labs:SettingsCard>
+                </toolkitcontrols:SettingsCard.Content>
+            </toolkitcontrols:SettingsCard>-->
 
-        </StackPanel>-->
+        </StackPanel>
 
     </Grid>
 </Page>

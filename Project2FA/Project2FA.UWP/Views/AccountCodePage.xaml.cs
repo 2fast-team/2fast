@@ -149,10 +149,11 @@ namespace Project2FA.UWP.Views
                             var selectedGlobalCategories = ViewModel.TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true);
                             if (selectedGlobalCategories.Any())
                             {
+                                // filter where the models have the selected categories and the input label
                                 ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc => 
                                 selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && ((TwoFACodeModel)model).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
 
-
+                                // set suggetion where the models have the selected categories and the input label
                                 var filteredCollection = ViewModel.TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
                                     selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && model.Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase));
                                 listSuggestion = listSuggestion.Where(ls => filteredCollection.Where(fc => fc.Label == ls).Any()).ToList();

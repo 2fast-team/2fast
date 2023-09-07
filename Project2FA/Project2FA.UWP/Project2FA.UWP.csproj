@@ -23,7 +23,7 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <PackageCertificateThumbprint>EE7C273F92500269D23ABD081383DBE749638BD0</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
@@ -139,6 +139,8 @@
     <Compile Include="Services\Marketplace\Abstractions\IMarketplaceService.cs" />
     <Compile Include="Services\Marketplace\Default\MarketplaceHelper.cs" />
     <Compile Include="Services\Marketplace\Default\MarketplaceService.cs" />
+    <Compile Include="Services\Subscription\ISubscriptionService.cs" />
+    <Compile Include="Services\Subscription\SubscriptionService.cs" />
     <Compile Include="Services\Web\Abstractions\IWebApiAdapter.cs" />
     <Compile Include="Services\Web\Abstractions\IWebApiService.cs" />
     <Compile Include="Services\Web\Default\WebApiService.cs" />
@@ -165,6 +167,9 @@
     </Compile>
     <Compile Include="Views\ContentDialogs\ChangeDatafilePasswordContentDialog.xaml.cs">
       <DependentUpon>ChangeDatafilePasswordContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentDialogs\ManageCategoriesContentDialog.xaml.cs">
+      <DependentUpon>ManageCategoriesContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContentDialogs\UpdateDatafileContentDialog.xaml.cs">
       <DependentUpon>UpdateDatafileContentDialog.xaml</DependentUpon>
@@ -201,9 +206,6 @@
     </Compile>
     <Compile Include="Views\ContentDialogs\UseDatafileContentDialog.xaml.cs">
       <DependentUpon>UseDatafileContentDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ContentDialogs\TutorialContentDialog.xaml.cs">
-      <DependentUpon>TutorialContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TutorialPage.xaml.cs">
       <DependentUpon>TutorialPage.xaml</DependentUpon>
@@ -293,29 +295,41 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Common">
-      <Version>8.2.0</Version>
-    </PackageReference>
     <PackageReference Include="CommunityToolkit.Labs.Uwp.TokenView">
-      <Version>0.0.6</Version>
+      <Version>0.1.230809</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Animations">
+      <Version>8.0.230828-rc</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Collections">
+      <Version>8.0.230828-rc</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
+      <Version>8.0.230828-rc</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
+      <Version>8.0.230828-rc</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Extensions">
+      <Version>8.0.230828-rc</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Lottie">
+      <Version>8.0.0-rc</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Media">
+      <Version>8.0.230828-rc</Version>
     </PackageReference>
     <PackageReference Include="DryIoc.dll">
       <Version>5.4.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
-      <Version>7.0.1</Version>
+      <Version>7.0.4</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
     <PackageReference Include="Microsoft.Services.Store.Engagement">
-      <Version>10.1901.28001</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.Connectivity">
-      <Version>7.1.3</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
-      <Version>7.1.3</Version>
+      <Version>10.2307.3001</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>7.1.3</Version>
@@ -323,17 +337,14 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.Markdown">
       <Version>7.1.3</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie">
-      <Version>7.1.1</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Media">
       <Version>7.1.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.8.4</Version>
+      <Version>2.8.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
-      <Version>1.0.1774.30</Version>
+      <Version>1.0.1938.49</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
@@ -446,6 +457,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ContentDialogs\ManageCategoriesContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ContentDialogs\UpdateDatafileContentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -491,10 +506,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentDialogs\UseDatafileContentDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ContentDialogs\TutorialContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

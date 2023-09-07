@@ -5,14 +5,15 @@
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="using:Project2FA.ViewModels"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:strings="using:Project2FA.Strings"
-    xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
-    xmlns:wctmedia="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
+    xmlns:wctmedia="using:CommunityToolkit.WinUI.Media"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:Project2FA.Helpers"
     x:Name="Page"
@@ -25,12 +26,6 @@
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
 
-            <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>
-                    <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
-                </StackPanel>
-            </DataTemplate>
 
             <DataTemplate x:Name="ShellHeaderTemplatePro" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
@@ -90,7 +85,7 @@
                                             ToolTipService.ToolTip="#todo"
                                             Icon="Import">
                                             <AppBarButton.Flyout>
-                                                <MenuFlyout>
+                                                <MenuFlyout Placement="Bottom">
                                                     <MenuFlyoutItem 
                                                         x:Uid="AccoundCodePageImportDocument"
                                                         Icon="Document"/>
@@ -151,13 +146,14 @@
                                 </AppBarElementContainer>
                                 <AppBarButton
                                     x:Name="ABB_SearchFilter"
+                                    Command="{x:Bind ManageCategoriesCommand}"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip}"
                                      x:Uid="AccountCodePageSearchFilter" >
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
                                     </AppBarButton.Icon>
-                                    <AppBarButton.Flyout>
-                                        <!--<MenuFlyout>
+                                    <!--<AppBarButton.Flyout>
+                                        --><!--<MenuFlyout>
                                             <MenuFlyoutItem Text="#manage categories"></MenuFlyoutItem>
                                             <MenuFlyoutSeparator/>
                                             
@@ -166,16 +162,19 @@
                                             <StackPanel>
                                                 <Button Content="#manage categories" Margin="0"></Button>
                                             </StackPanel>
-                                        </Flyout>-->
+                                        </Flyout>--><!--
                                         <muxc:CommandBarFlyout Placement="Bottom">
                                             <muxc:CommandBarFlyout.SecondaryCommands>
-                                                <AppBarButton Icon="Setting" Label="#manage categories"/>
+                                                <AppBarButton 
+                                                    Icon="Setting" 
+                                                    Label="#manage categories"
+                                                    Command="{x:Bind ManageCategoriesCommand}"/>
                                                 <AppBarElementContainer>
                                                     <StackPanel Grid.Row="1" MaxWidth="250">
                                                         <TextBlock 
                                                             Text="#Select categories"
                                                             Margin="0,0,0,4"/>
-                                                        <!--<controls:TokenizingTextBox
+                                                        --><!--<controls:TokenizingTextBox
                                                             ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
                                                             PlaceholderText="Select Names"
                                                             MaxHeight="104"
@@ -193,7 +192,7 @@
                                                                     </StackPanel>
                                                                 </DataTemplate>
                                                             </controls:TokenizingTextBox.TokenItemTemplate>--><!--
-                                                        </controls:TokenizingTextBox>-->
+                                                        </controls:TokenizingTextBox>--><!--
 
 
                                                         <labs:TokenView 
@@ -214,7 +213,7 @@
                                                                 ItemTemplate="{StaticResource CategoryTemplate}">
                                                             </ListView>
                                                         </Border>
-                                                        <Grid>
+                                                        <Grid HorizontalAlignment="Stretch">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*"/>
                                                                 <ColumnDefinition Width="auto"/>
@@ -226,12 +225,15 @@
                                                                 Style="{StaticResource AccentButtonStyle}">
                                                                 
                                                             </Button>
-                                                            <Button Grid.Column="1">
+                                                            <Button 
+                                                                Grid.Column="1" 
+                                                                HorizontalAlignment="Stretch"
+				                                                VerticalAlignment="Stretch">
                                                                 <SymbolIcon Symbol="RepeatAll" />
                                                             </Button>
                                                         </Grid>
                                                     </StackPanel>
-                                                    <!--<labs:TokenView 
+                                                    --><!--<labs:TokenView 
                                                     ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
                                                     CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"
                                                     IsItemClickEnabled="True"
@@ -247,11 +249,11 @@
                                                                 </labs:TokenItem>
                                                             </DataTemplate>
                                                         </labs:TokenView.ItemTemplate>
-                                                    </labs:TokenView>-->
+                                                    </labs:TokenView>--><!--
                                                 </AppBarElementContainer>
                                             </muxc:CommandBarFlyout.SecondaryCommands>
                                         </muxc:CommandBarFlyout>
-                                    </AppBarButton.Flyout>
+                                    </AppBarButton.Flyout>-->
                                 </AppBarButton>
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
@@ -909,6 +911,110 @@
                     </Grid>
                 </UserControl>
             </DataTemplate>
+
+            <DataTemplate x:Name="ShimmerTemplate">
+                <UserControl
+                    x:Name="Root" 
+                    MaxWidth="660"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" >
+                    <Grid 
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="{ThemeResource ControlCornerRadius}"
+                        >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.RowSpan="3" >
+
+                        </Grid>
+
+                        <unocontrols:Shimmer 
+                        Height="48"
+                        Width="48"
+                        CornerRadius="96"
+                        Margin="15,10,20,0"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2">
+                        </unocontrols:Shimmer>
+
+
+                        <RelativePanel 
+                            Grid.Column="2" 
+                            Grid.RowSpan="2" 
+                            Grid.ColumnSpan="2">
+
+                            <unocontrols:Shimmer 
+                            x:Name="AccountName" 
+                            Width="200"
+                            Margin="0,10,10,0" />
+
+                            <unocontrols:Shimmer 
+                            x:Name="IssuerName" 
+                            Width="200"
+                            Margin="0,10,10,0" />
+                        </RelativePanel>
+
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="0,0,0,4">
+
+                            <unocontrols:Shimmer Width="120"  />
+
+                            <unocontrols:Shimmer 
+                            Width="48"
+                            Height="48" 
+                            Margin="8,0,4,0"/>
+
+                            <unocontrols:Shimmer 
+                            Width="48"
+                            Height="48" 
+                            Margin="8,0,4,0"/>
+
+                        </StackPanel>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="WindowStates">
+                                <VisualState x:Name="NarrowState">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="0" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="IssuerName.(RelativePanel.Below)" Value="AccountName"/>
+                                        <Setter Target="IssuerName.Margin" Value="0,10,10,0"/>
+                                        <Setter Target="Root.MinWidth" Value="478"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="MediumState">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="720" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="Root.MinWidth" Value="660"/>
+                                        <Setter Target="IssuerName.(RelativePanel.RightOf)" Value="AccountName"/>
+                                        <Setter Target="IssuerName.Margin" Value="10,10,10,0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </UserControl>
+            </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
     
@@ -932,6 +1038,27 @@
                         HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+        </ListView>
+        <ListView 
+                Visibility="{x:Bind ViewModel.TwoFADataService.IsLoading, Mode=OneWay}"
+                ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
+                ItemTemplate="{StaticResource ShimmerTemplate}">
+            <!--<ListView.ItemContainerStyle>
+
+                    <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Padding" Value="2,16,20,0"/>
+                </ListView.ItemContainerStyle>-->
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <controls:WrapPanel 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <Grid></Grid>
+            <Grid></Grid>
+            <Grid></Grid>
         </ListView>
         <!--<appcontrols:AutoCloseInfoBar
             IsOpen="{x:Bind ViewModel.DatafileWebDAVUpdated,Mode=TwoWay}"

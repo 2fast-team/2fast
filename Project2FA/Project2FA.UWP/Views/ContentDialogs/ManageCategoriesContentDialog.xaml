@@ -1,0 +1,65 @@
+﻿<ContentDialog
+    x:Class="Project2FA.UWP.Views.ManageCategoriesContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Project2FA.Repository.Models"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d"
+    Title="~ManageCategoriesContentDialogHeader.Title"
+    x:Uid="ManageCategoriesContentDialogHeader"
+    PrimaryButtonText="~ManageCategoriesContentDialogHeader.PrimaryButtonText"
+    SecondaryButtonText="~ManageCategoriesContentDialogHeader.SecondaryButtonText">
+
+    <ContentDialog.Resources>
+        <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
+            <StackPanel Orientation="Horizontal">
+                <FontIcon  Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>
+                <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </ContentDialog.Resources>
+
+    <Grid>
+        <StackPanel>
+            <labs:TokenView 
+                x:Name="TV_Categories"
+                Margin="0,0,15,8"
+                ItemsSource="{x:Bind ViewModel.TempGlobalCategories,Mode=OneWay}"
+                CanRemoveTokens="False"
+                IsItemClickEnabled="True"
+                SelectionMode="Multiple"  
+                ItemTemplate="{StaticResource CategoryTemplate}"/>
+            <TextBox 
+                Header="~ManageCategoriesContentDialogLabel.Header" 
+                x:Uid="AddAccountContentDialogLabel"  
+                Text="{x:Bind ViewModel.Label,Mode=TwoWay}"/>
+            <ComboBox 
+                VerticalAlignment="Stretch"
+                Margin="0,10,0,20" 
+                x:Uid="ManageCategoriesContentDialogIcon" 
+                Header="~ManageCategoriesContentDialogIcon.Header">
+                
+            </ComboBox>
+            <!--<AutoSuggestBox 
+                Header="~ManageCategoriesContentDialogIcon.Header"
+                x:Uid="ManageCategoriesContentDialogIcon" 
+                PlaceholderText="#name of icon"
+                Margin="0,10,0,20" 
+                QueryIcon="Find"
+                SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
+                TextChanged="AutoSuggestBox_TextChanged"/>-->
+
+            <Button 
+                Command="{x:Bind ViewModel.CreateCategoryCommand}"
+                x:Uid="ManageCategoriesContentDialogIconCreateBTN"
+                Margin="0,10,0,20" 
+                Content="~ManageCategoriesContentDialogIconCreateBTN.Content">
+                
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</ContentDialog>

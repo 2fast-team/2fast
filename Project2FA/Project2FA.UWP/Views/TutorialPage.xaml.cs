@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -112,7 +113,7 @@ namespace Project2FA.UWP.Views
 
         private void FV_Tutorials_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ViewModel != null && ViewModel.SelectedIndex == 3)
+            if (ViewModel != null && ViewModel.SelectedIndex == 4)
             {
                 var control = MainGrid.FindDescendant(nameof(TeachingTip));
                 if (control != null)
@@ -124,6 +125,15 @@ namespace Project2FA.UWP.Views
                     }
                 }
             }
+        }
+
+        private async void MarkdownTextBlock_LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
+        {
+            if (Uri.TryCreate(e.Link, UriKind.Absolute, out Uri link))
+            {
+                await Launcher.LaunchUriAsync(link);
+            }
+
         }
     }
 }

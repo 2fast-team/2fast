@@ -80,14 +80,14 @@
             </muxc:NavigationView.MenuItems>
 
             <muxc:NavigationView.FooterMenuItems>
-                <!--<muxc:NavigationViewItem 
+                <muxc:NavigationViewItem 
                     x:Uid="ShellPageTutorialNavigation"
                     IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"
-                    Tag="TutorialPage">
+                    Tag="TutorialPage?ManualView=true">  
                     <muxc:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE754;"/>
+                        <FontIcon Glyph="&#xE939;"/>
                     </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>-->
+                </muxc:NavigationViewItem>
                 <muxc:NavigationViewItem
                         Content="Feedback"
                         IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}"

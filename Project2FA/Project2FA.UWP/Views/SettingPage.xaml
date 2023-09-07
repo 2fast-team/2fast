@@ -9,9 +9,9 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:models="using:Project2FA.Repository.Models"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:animations="using:CommunityToolkit.WinUI.Animations"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
-    xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+    xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     mc:Ignorable="d">
 
@@ -123,6 +123,7 @@
                                     Header="~SettingsOptionsDesignTitle.Header">
                                 <appcontrols:CardControl 
                                     x:Uid="SettingsBackButtonCard"
+                                    Icon="&#xE112;"
                                     Header="~SettingsBackButtonCard.Header">
                                     <appcontrols:CardControl.ActionContent>
                                         <ToggleSwitch 
@@ -137,6 +138,7 @@
 
                                 <appcontrols:CardControl 
                                     x:Uid="SettingsAppThemeMode"
+                                    Icon="&#xE2B1;"
                                     Header="~SettingsAppThemeMode.Header">
                                     <appcontrols:CardControl.Description>
                                         <HyperlinkButton
@@ -157,22 +159,7 @@
                                     </appcontrols:CardControl.ActionContent>
                                 </appcontrols:CardControl>
 
-                                <appcontrols:CardControl 
-                                    x:Uid="SettingsAppCornorRadius"
-                                    Header="~SettingsAppCornorRadius.Header">
-                                    <appcontrols:CardControl.Description>
-                                        <TextBlock 
-                                            x:Uid="SettingsAppCornorRadiusDesc"
-                                            Text="~SettingsAppCornorRadiusDesc.Text" 
-                                            VerticalAlignment="Stretch" 
-                                            HorizontalAlignment="Stretch"/>
-                                    </appcontrols:CardControl.Description>
-                                    <appcontrols:CardControl.ActionContent>
-                                        <ToggleSwitch 
-                                x:Name="SettingsRoundCornerToggleSwtich"
-                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
-                                    </appcontrols:CardControl.ActionContent>
-                                </appcontrols:CardControl>
+
 
                                 <appcontrols:CardExpanderControl 
                                         Background="{ThemeResource CardBackgroundBrush}"
@@ -211,6 +198,27 @@
                                                     <ToggleSwitch 
                                 x:Name="SettingsAppPrideMonthDesignToggleSwtich"
                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.PrideMonthDesign, Mode=TwoWay}"/>
+                                                </appcontrols:CardControl.ActionContent>
+                                            </appcontrols:CardControl>
+                                            <Border 
+                                Height="1.5" 
+                                ui:Effects.Shadow="{StaticResource SignShadow}"
+                                Background="{StaticResource SystemAccentColor}" />
+                                            <appcontrols:CardControl 
+                                    x:Uid="SettingsAppCornorRadius"
+                                               Icon="&#xE2AE;"
+                                    Header="~SettingsAppCornorRadius.Header">
+                                                <appcontrols:CardControl.Description>
+                                                    <TextBlock 
+                                            x:Uid="SettingsAppCornorRadiusDesc"
+                                            Text="~SettingsAppCornorRadiusDesc.Text" 
+                                            VerticalAlignment="Stretch" 
+                                            HorizontalAlignment="Stretch"/>
+                                                </appcontrols:CardControl.Description>
+                                                <appcontrols:CardControl.ActionContent>
+                                                    <ToggleSwitch 
+                                x:Name="SettingsRoundCornerToggleSwtich"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
                                                 </appcontrols:CardControl.ActionContent>
                                             </appcontrols:CardControl>
                                         </StackPanel>
@@ -350,6 +358,7 @@
                                 ui:Effects.Shadow="{StaticResource SignShadow}"
                                 Background="{StaticResource SystemAccentColor}" />
                                                 <appcontrols:CardControl 
+                                                    Icon="&#xE916;"
                                         x:Uid="SettingsOptionsAutoLogout"
                                         Header="~SettingsOptionsAutoLogout.Header">
                                                     <appcontrols:CardControl.Description>
@@ -699,6 +708,7 @@
                         <AdaptiveTrigger MinWindowWidth="960" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="TB_QRCode_Description.MaxWidth" Value="auto"/>
                         <Setter Target="LV_Dependencies.Margin" Value="20,0,0,0"/>
                         <Setter Target="LV_Dependencies.(RelativePanel.RightOf)" Value="SV_AboutTheApp"/>
                     </VisualState.Setters>

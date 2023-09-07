@@ -8,7 +8,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:viewmodels="using:Project2FA.ViewModels"
     xmlns:strings="using:Project2FA.Strings"
@@ -137,7 +137,7 @@
                             <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                         </Button>
                         <Grid VerticalAlignment="Center">
-                            <controls:RadialProgressBar
+                            <toolkit:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     
@@ -272,25 +272,114 @@
                                     Width="100"
                                     Fill="{ThemeResource SystemAccentColor}"/>
                                 <Image 
-                            Margin="0,12,0,12"
-                            Height="60" 
-                            Width="60"
+                                    Margin="0,12,0,12"
+                                    Height="60" 
+                                    Width="60"
                                     Source="/Assets/FileLogo.png"
                                     Stretch="Fill"
-                                    
-                                    VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Center">
                                 </Image>
                             </Grid>
 
-                            <TextBlock 
-                            Grid.Column="1"
-                            x:Uid="TutorialContentDialogFirstSteps"
-                            Text="~TutorialContentDialogFirstSteps.Text"
-                            FontSize="16"
-                            TextWrapping="WrapWholeWords"/>
+                            <toolkit:MarkdownTextBlock 
+                                Grid.Column="1"
+                                x:Uid="TutorialContentDialogFirstSteps"
+                                Text="~TutorialContentDialogFirstSteps.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords" 
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Margin="0,12,12,12">
+                                    <Ellipse 
+                                        Height="100" 
+                                        Width="100"
+                                        Fill="#99FFFFFF"/>
+                                    <Image 
+                                        Margin="0,12,0,12"
+                                        Height="60" 
+                                        Width="60"
+                                        Source="/Assets/AccountIcons/Microsoft.svg"
+                                        Stretch="Fill"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center">
+                                    </Image>
+                                </Grid>
+                                <Grid Margin="0,12,12,12">
+                                    <Ellipse 
+                                        Height="100" 
+                                        Width="100"
+                                        Fill="#99FFFFFF"/>
+                                    <Image 
+                                        Margin="0,12,0,12"
+                                        Height="60" 
+                                        Width="60"
+                                        Source="/Assets/AccountIcons/Google.svg"
+                                        Stretch="Fill"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center">
+                                    </Image>
+                                </Grid>
+                                <Grid Margin="0,12,12,12">
+                                    <Ellipse 
+                                        Height="100" 
+                                        Width="100"
+                                        Fill="#99FFFFFF"/>
+                                    <Image 
+                                        Margin="0,12,0,12"
+                                        Height="60" 
+                                        Width="60"
+                                        Source="/Assets/AccountIcons/PayPal.svg"
+                                        Stretch="Fill"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center">
+                                    </Image>
+                                </Grid>
+                            </StackPanel>
+
                         </StackPanel>
                     </Grid>
+                </FlipViewItem>
+                <FlipViewItem>
+                    <Grid MaxWidth="760">
+                        <Border 
+                            ui:Effects.Shadow="{StaticResource PageShadow}" 
+                            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                            <Border>
+                                <Border.Background>
+                                    <media:BackdropBlurBrush Amount="2" />
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <StackPanel Margin="12,12,12,0">
+                            <toolkit:MarkdownTextBlock 
+                                x:Uid="TutorialContentDialogHowTheAppWorksHeader"
+                                Text="~TutorialContentDialogHowTheAppWorksHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords"/>
+                            <toolkit:MarkdownTextBlock 
+                                x:Uid="TutorialContentDialogHowTheAppWorks"
+                                Text="~TutorialContentDialogHowTheAppWorks.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords" 
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                            <!--TutorialContentDialogHowTheAppWorks.Text-->
+                            <!--<toolkit:MarkdownTextBlock 
+                                x:Uid="TutorialContentDialogFirstSteps"
+                                Text="~TutorialContentDialogFirstSteps.Text"
+                                FontSize="16"
+                                TextWrapping="WrapWholeWords" 
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
 
+                        </StackPanel>
+                    </Grid>
                 </FlipViewItem>
                 <FlipViewItem>
                     <Grid MaxWidth="760">
@@ -307,26 +396,34 @@
                             <TextBlock 
                             x:Uid="TutorialContentDialogCreateMethodHeader"
                             Text="~TutorialContentDialogCreateMethodHeader.Text"
-                            FontSize="16"
+                            FontSize="20"
+                            FontStretch="ExtraCondensed"
+                            FontFamily="Calibri"
                             FontWeight="Bold"
                             TextWrapping="WrapWholeWords"
                             Margin="0,0,0,12"/>
                             <TextBlock 
                             x:Uid="TutorialContentDialogCreateMethod"
                             Text="~TutorialContentDialogCreateMethod.Text"
-                            FontSize="16"
+                            FontSize="20"
+                            FontStretch="ExtraCondensed"
+                            FontFamily="Calibri"
                             TextWrapping="WrapWholeWords"/>
                             <TextBlock 
                             x:Uid="TutorialContentDialogLoadMethodHeader"
                             Text="~TutorialContentDialogLoadMethodHeader.Text"
-                            FontSize="16"
+                            FontSize="20"
+                            FontStretch="ExtraCondensed"
+                            FontFamily="Calibri"
                             FontWeight="Bold"
                             TextWrapping="WrapWholeWords"
                             Margin="0,20,0,12"/>
                             <TextBlock 
                             x:Uid="TutorialContentDialogLoadMethod"
                             Text="~TutorialContentDialogLoadMethod.Text"
-                            FontSize="16"
+                            FontSize="20"
+                            FontStretch="ExtraCondensed"
+                            FontFamily="Calibri"
                             TextWrapping="WrapWholeWords"/>
                             <!--<Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />-->
                         </StackPanel>
@@ -345,16 +442,25 @@
                         </Border>
                         <StackPanel Margin="12,12,12,0">
                             <TextBlock 
-                            x:Uid="AddAccountCodeContentDialogQRCodeHelpHeader"
-                            Text="~AddAccountCodeContentDialogQRCodeHelpHeader.Text"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            TextWrapping="WrapWholeWords"
-                            Margin="0,0,0,12"/>
-                            <TextBlock 
+                                x:Uid="AddAccountCodeContentDialogQRCodeHelpHeader"
+                                Text="~AddAccountCodeContentDialogQRCodeHelpHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                FontWeight="Bold"
+                                TextWrapping="WrapWholeWords"
+                                Margin="0,0,0,12"/>
+                            <toolkit:MarkdownTextBlock 
+                                Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords"
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                            <!--<TextBlock 
                             Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
                             FontSize="16"
-                            TextWrapping="WrapWholeWords"/>
+                            TextWrapping="WrapWholeWords"/>-->
                             <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
                         </StackPanel>
                     </Grid>
@@ -373,17 +479,27 @@
                         </Border>
                         <StackPanel Margin="12,12,12,0">
                             <TextBlock 
-                            x:Uid="TutorialContentDialogInteractionAccountHeader"
-                            Text="~TutorialContentDialogInteractionAccountHeader.Text"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            TextWrapping="WrapWholeWords"
-                            Margin="0,0,0,12"/>
-                            <TextBlock 
+                                x:Uid="TutorialContentDialogInteractionAccountHeader"
+                                Text="~TutorialContentDialogInteractionAccountHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                FontWeight="Bold"
+                                TextWrapping="WrapWholeWords"
+                                Margin="0,0,0,12"/>
+                            <toolkit:MarkdownTextBlock 
+                                x:Uid="TutorialContentDialogInteractionAccount"
+                                Text="~TutorialContentDialogInteractionAccount.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords"
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                            <!--<TextBlock 
                             x:Uid="TutorialContentDialogInteractionAccount"
                             Text="~TutorialContentDialogInteractionAccount.Text"
                             FontSize="16"
-                            TextWrapping="WrapWholeWords"/>
+                            TextWrapping="WrapWholeWords"/>-->
                             <ListView 
                                     ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
                                     ItemTemplate="{StaticResource TwoFACodeCustomTemplate}"
@@ -464,7 +580,7 @@
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalContentAlignment="Bottom"
-            NumberOfPages="4"
+            NumberOfPages="5"
             SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
     </Grid>
 </Page>

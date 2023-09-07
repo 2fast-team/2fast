@@ -120,7 +120,7 @@ namespace Project2FA.UWP
             container.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();
             container.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
             container.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
-            //container.RegisterDialog<TutorialContentDialog, TutorialContentDialogViewModel>();
+            container.RegisterDialog<ManageCategoriesContentDialog, ManageCategoriesContentDialogViewModel>();
         }
 
         public override async Task OnStartAsync(IApplicationArgs args)
@@ -144,7 +144,7 @@ namespace Project2FA.UWP
                     Repository = new DBProject2FARepository(dbOptions);
                 }
 
-                //LoadIconNames(); //only for development
+                //LoadIconNames(); // for development only
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
@@ -179,7 +179,7 @@ namespace Project2FA.UWP
                     {
                         dialogService.CloseDialogs();
                     }
-                    await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                    await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
                     FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
                     Window.Current.Content = fileActivationPage;
                 }
@@ -192,7 +192,7 @@ namespace Project2FA.UWP
                     }
                     else
                     {
-                        await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(TutorialPage));
+                        await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(TutorialPage));
                         Window.Current.Content = ShellPageInstance;
                     }
                 }
@@ -215,8 +215,7 @@ namespace Project2FA.UWP
                     {
                         if (cmdlist[i].Key == "isScreenCaptureEnabled")
                         {
-                            bool value;
-                            if(bool.TryParse(cmdlist[i].Value, out value))
+                            if(bool.TryParse(cmdlist[i].Value, out bool value))
                             {
                                 ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
                             }
@@ -321,7 +320,7 @@ namespace Project2FA.UWP
                     {
                         dialogService.CloseDialogs();
                     }
-                    await ShellPageInstance.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                    await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
                     if (DataService.Instance.ActivatedDatafile != null)
                     {
                         var fileActivationPage = new FileActivationPage();

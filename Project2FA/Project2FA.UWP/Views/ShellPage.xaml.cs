@@ -25,8 +25,6 @@ namespace Project2FA.UWP.Views
     public sealed partial class ShellPage : Page
     {
         private SystemNavigationManager _navManager;
-
-        public INavigationService NavigationService { get; private set; }
         public NavigationView ShellViewInternal { get; private set; }
         public Frame MainFrame { get; }
         public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
@@ -41,7 +39,8 @@ namespace Project2FA.UWP.Views
             string title = Windows.ApplicationModel.Package.Current.DisplayName;
             // determine and set if the app is started in debug mode
             ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
-            SettingsService.Instance.IsProVersion = true;
+            //TODO WIP pro features
+            SettingsService.Instance.IsProVersion = false;
             coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
@@ -58,23 +57,23 @@ namespace Project2FA.UWP.Views
             ShellViewInternal = ShellView;
             ShellView.Content = MainFrame = new Frame();
             GestureService.SetupWindowListeners(Window.Current.CoreWindow);
-            NavigationService = NavigationFactory.Create(MainFrame).AttachGestures(Window.Current, Gesture.Back, Gesture.Forward);
+            ViewModel.NavigationService = NavigationFactory.Create(MainFrame).AttachGestures(Window.Current, Gesture.Back, Gesture.Forward);
 
             SetupGestures();
             SetupBackButton();
 
-            NavigationService.CanGoBackChanged += (s, args) =>
+            ViewModel.NavigationService.CanGoBackChanged += (s, args) =>
             {
                 //Backbutton setting
                 if (SettingsService.Instance.UseHeaderBackButton)
                 {
-                    _navManager.AppViewBackButtonVisibility = NavigationService.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+                    _navManager.AppViewBackButtonVisibility = ViewModel.NavigationService.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
                 }
                 else
                 {
-                    if (ShellView.IsBackEnabled != NavigationService.CanGoBack())
+                    if (ShellView.IsBackEnabled != ViewModel.NavigationService.CanGoBack())
                     {
-                        ShellView.IsBackEnabled = NavigationService.CanGoBack();
+                        ShellView.IsBackEnabled = ViewModel.NavigationService.CanGoBack();
                         if (ShellView.IsBackButtonVisible == NavigationViewBackButtonVisible.Collapsed)
                         {
                             ShellView.IsBackButtonVisible = NavigationViewBackButtonVisible.Auto;
@@ -117,6 +116,7 @@ namespace Project2FA.UWP.Views
 
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
+            // set the corner radius for the controls
             if (!SettingsService.Instance.UseRoundCorner)
             {
                 App.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
@@ -151,13 +151,16 @@ namespace Project2FA.UWP.Views
                 }
             }
 
+            // open error dialog for last session
             if (!string.IsNullOrEmpty(SettingsService.Instance.UnhandledExceptionStr))
             {
                 await CheckUnhandledExceptionLastSession();
             }
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             //Rate information for the user
-            if (SystemInformation.Instance.LaunchCount == 5 || SystemInformation.Instance.LaunchCount == 15)
+            if (SystemInformation.Instance.LaunchCount == 5 || 
+                SystemInformation.Instance.LaunchCount == 15 || 
+                SystemInformation.Instance.LaunchCount == 45)
             {
                 if (!SettingsService.Instance.AppRated && (MainFrame.Content as FrameworkElement).GetType() != typeof(WelcomePage))
                 {
@@ -253,13 +256,13 @@ namespace Project2FA.UWP.Views
             if (settings.UseHeaderBackButton)
             {
                 ShellView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
-                _navManager.AppViewBackButtonVisibility = NavigationService.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+                _navManager.AppViewBackButtonVisibility = ViewModel.NavigationService.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             }
             else
             {
                 _navManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
                 ShellView.IsBackButtonVisible = NavigationViewBackButtonVisible.Auto;
-                ShellView.IsBackEnabled = NavigationService.CanGoBack();
+                ShellView.IsBackEnabled = ViewModel.NavigationService.CanGoBack();
             }
         }
 
@@ -267,7 +270,7 @@ namespace Project2FA.UWP.Views
         {
             _navManager.BackRequested += NavManager_BackRequested;
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            ShellView.BackRequested += async (s, e) => await NavigationService.GoBackAsync();
+            ShellView.BackRequested += async (s, e) => await ViewModel.NavigationService.GoBackAsync();
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
         }
 
@@ -278,10 +281,10 @@ namespace Project2FA.UWP.Views
 
         private async void NavManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (NavigationService.CanGoBack())
+            if (ViewModel.NavigationService.CanGoBack())
             {
                 e.Handled = true;
-                await NavigationService.GoBackAsync();
+                await ViewModel.NavigationService.GoBackAsync();
             }
         }
 
@@ -312,7 +315,7 @@ namespace Project2FA.UWP.Views
             {
                 if (withNavigation)
                 {
-                    if ((await NavigationService.NavigateAsync(_settingsNavigationStr)).Success)
+                    if ((await ViewModel.NavigationService.NavigateAsync(_settingsNavigationStr)).Success)
                     {
                         PreviousItem = selectedItem;
                         ShellView.SelectedItem = selectedItem;
@@ -337,7 +340,7 @@ namespace Project2FA.UWP.Views
                         PreviousItem = item;
                         ShellView.SelectedItem = item;
                     }
-                    else if ((await NavigationService.NavigateAsync(path)).Success)
+                    else if ((await ViewModel.NavigationService.NavigateAsync(path)).Success)
                     {
                         PreviousItem = selectedItem;
                         ShellView.SelectedItem = selectedItem;

@@ -1176,4 +1176,10 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung im Ei
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
     <value>Funktionsweise der Anwendung</value>
   </data>
+  <data name="SettingsManageSubscriptions.Content" xml:space="preserve">
+    <value>Manage subscriptions</value>
+  </data>
+  <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
+    <value>In the following steps, the functionality of the application will be explained.</value>
+  </data>
 </root>

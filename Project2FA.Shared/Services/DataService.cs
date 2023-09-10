@@ -38,6 +38,7 @@ using Project2FA.Core.Services.Crypto;
 using CommunityToolkit.WinUI.Controls;
 using CommunityToolkit.WinUI.Helpers;
 using CommunityToolkit.WinUI;
+using CommunityToolkit.WinUI.Collections;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -282,7 +283,7 @@ namespace Project2FA.Services
                         case AppCapabilityAccessStatus.DeniedByUser:
                         case AppCapabilityAccessStatus.UserPromptRequired:
                             await ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
-                            break;
+                            return;
                         case AppCapabilityAccessStatus.Allowed:
                             break;
                         default:

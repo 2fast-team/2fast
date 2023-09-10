@@ -929,9 +929,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Möchten Sie das Tutorial zu der Anwendung öffnen?</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>Die Anwendung **2fast** (Akronym für **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) ist ein [Authentifikator](https://de.wikipedia.org/wiki/Authentifizierung) für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „**T**ime-based **O**ne-**t**ime **P**assword Algorithmus“/ zeitbasiertes Einmal-Passwort (TOTP) nach Standardisierung [RFC 6238](https://tools.ietf.org/html/rfc6238) nutzt. Dienste die für die 2FA auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden.
-
-Im Weiteren wird die Funktionsweise der Anwendung erläutert.</value>
+    <value>Die Anwendung **2fast** (Akronym für **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) ist ein [Authentifikator](https://de.wikipedia.org/wiki/Authentifizierung) für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „**T**ime-based **O**ne-**t**ime **P**assword Algorithmus“/ zeitbasiertes Einmal-Passwort (TOTP) nach Standardisierung [RFC 6238](https://tools.ietf.org/html/rfc6238) nutzt. Dienste die für den zweiten Faktor auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden. Beispielhaft untestützen Microsoft, Google und PayPal die Zwei-Faktor-Authentifizierung mittels TOTP:</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
     <value>Für die Erstellung einer Datendatei muss als erster Schritt ein Ordner gewählt werden, in dem die Datei gespeichert werden soll. Hierbei ist ein Speicherort zu empfehlen, der gegenüber einem Datenverlust abgesichert ist (z.B. Cloud-Speicher wie One-Drive, DropBox, etc.). Im Anschluss folgen der Name und das Passwort für die Verschlüsselung der Datei. Es wird die Speicherung des Passwortes in einem Passwortmanager empfohlen, um einen Verlust zu verhindern.</value>
@@ -1180,5 +1178,11 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung im Ei
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
     <value>Funktionsweise der Anwendung</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Content" xml:space="preserve">
+    <value>Abonnement verwalten</value>
+  </data>
+  <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
+    <value>Im Weiteren wird die Funktionsweise der Anwendung erläutert.</value>
   </data>
 </root>

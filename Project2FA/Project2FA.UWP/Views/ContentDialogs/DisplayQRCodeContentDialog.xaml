@@ -13,6 +13,9 @@
 
     <StackPanel>
         <TextBlock Text="{x:Bind ViewModel.Header,Mode=OneWay}" Margin="0,12,0,12"/>
-        <Image MaxWidth="250" Source="{x:Bind ViewModel.QRImage,Mode=OneWay}"></Image>
+        <Image MaxWidth="250" Source="{x:Bind ViewModel.QRImage,Mode=OneWay}"/>
+        <TextBlock 
+            x:Uid="DisplayQRCodeContentDialogDesc"
+            Text="~DisplayQRCodeContentDialogDesc.Text"/>
     </StackPanel>
 </ContentDialog>

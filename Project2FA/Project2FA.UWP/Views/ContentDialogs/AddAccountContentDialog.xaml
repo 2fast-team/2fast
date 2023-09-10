@@ -10,7 +10,6 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mediaSourceType="using:Windows.Media.Capture.Frames"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
-    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:utils="using:Project2FA.UWP.Utils"
     xmlns:models="using:Project2FA.Repository.Models"
     Style="{StaticResource MyContentDialogStyle}"

@@ -587,6 +587,29 @@
                                     FontFamily="Segoe UI" />
                                         </StackPanel>
                                     </Button>
+                                    <Button 
+                                    Margin="0,10" 
+                                    Style="{StaticResource ButtonRevealStyle}"
+                                    Command="{x:Bind ViewModel.SupportAppCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Shop"/>
+                                            <TextBlock 
+                                        Text="~SettingsSupportApp.Text" 
+                                        Margin="8,0,0,0" 
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Center" 
+                                        x:Uid="SettingsSupportApp" 
+                                        FontFamily="Segoe UI" />
+                                        </StackPanel>
+                                    </Button>
+                                    <HyperlinkButton 
+                                x:Uid="SettingsManageSubscriptions"
+                                FontSize="20"
+                                Margin="0,10" 
+                                Padding="0"
+                                Content="~SettingsManageSubscriptions.Content" 
+                                NavigateUri="https://account.microsoft.com/services"
+                                ToolTipService.ToolTip="https://account.microsoft.com/services"/>
                                     <!--<Button 
                                         Margin="0,10" 
                                         Style="{StaticResource ButtonRevealStyle}"

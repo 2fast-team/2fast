@@ -13,13 +13,21 @@
 	<a style="text-decoration:none" href="https://github.com/2fast-team/2fast/releases">
     		<img src="https://img.shields.io/badge/Sideload-Download-purple.svg?style=flat-round" alt="Sideload link" />
 	</a>
-	<a style="text-decoration:none" href="https://community.chocolatey.org/packages/2fast">
-    		<img src="https://img.shields.io/chocolatey/dt/2fast?color=blue&label=Chocolatey" alt="Chocolatey link" />
-	</a>
 	<a href="https://github.com/2fast-team/2fast/blob/master/LICENSE" target="_blank" alt="License">
 		<img src="https://img.shields.io/github/license/2fast-team/2fast" />
 	</a>
 </p>
+<p align="center">
+	<a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
+</p>
+
+<p align="center">
+other installation methode (not maintained by me)
+<a style="text-decoration:none" href="https://community.chocolatey.org/packages/2fast">
+    		<img src="https://img.shields.io/chocolatey/dt/2fast?color=blue&label=Chocolatey" alt="Chocolatey link" />
+	</a>
+</p>
+
 
 ## About 2fast
 
@@ -39,14 +47,14 @@
 - Open Source
 - Works on multiple platforms
 	- Currently released for Windows 10+ (UWP) 
-	- under development (with UNO platform):
+	- under development (with Uno platform):
 		- Android
 		- iOS
 		- Linux
 		- macOS
 - Uses the widely accepted TOTP algorithm ([RFC 6238](https://tools.ietf.org/html/rfc6238))
 	- Works with accounts from Google, Microsoft, Facebook, PayPal, etc.
-- Build with [UNOversalTemplate](https://github.com/jp-weber/UNOversalTemplate)
+- Build with [UNOversalTemplate](https://github.com/jp-weber/UNOversalTemplate) as template
 
 ### Screenshots
 
@@ -57,13 +65,18 @@
 
 ## Installation
 
-For Windows operating systems:
+For Windows operating systems, install safely via Microsoft Store:
 <p align="center">
 	<a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
 </p>
 
+If you prefer to install via command line, ```winget``` is recommend:
+```powershell
+winget install 9P9D81GLH89Q
+```
 
-You can also install the app using [Chocolatey](https://community.chocolatey.org/packages/2fast):
+
+You can also install the app using [Chocolatey](https://community.chocolatey.org/packages/2fast) (not maintained by me):
 ```powershell
 choco install 2fast
 ```
@@ -89,14 +102,14 @@ The following steps will help if you want to contribute or work on the applicati
 ### Installation
 
 1. Clone this repository with all its submodules (HTTPS example)
-```sh
+```shell
 git clone --recurse-submodules https://github.com/2fast-team/2fast.git
 ```
 2. Open the `.sln` file with Visual Studio
 	- The dependencies are automatically loaded by Visual Studio
 3. Start working and debugging!
 	- Remember to select the correct start project and -platform before hitting the play button
-	  - e.g. `x64` and `UWP` for the Universal Windows Application
+  (e.g. `x64` and `UWP` for the Universal Windows Application)
 
 
 ## Contributing

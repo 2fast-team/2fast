@@ -56,6 +56,7 @@ namespace Project2FA.ViewModels
         public ICommand RateAppCommand { get; }
         public ICommand SendMailCommand { get; }
         public ICommand NavigateBackCommand { get; }
+        public ICommand SupportAppCommand { get; }
 
         private int _selectedItem;
         public SettingPageViewModel(IDialogService dialogService, ISecretService secretService, INavigationService navigationService)
@@ -73,6 +74,11 @@ namespace Project2FA.ViewModels
             RateAppCommand = new RelayCommand(() =>
             {
                 AboutPartViewModel.RateApp();
+            });
+
+            SupportAppCommand = new RelayCommand(() =>
+            {
+                //AboutPartViewModel.SupportApp();
             });
             NavigationService = navigationService;
             NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);

@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>EE7C273F92500269D23ABD081383DBE749638BD0</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>32C88AE77FED66601484168B29341F41A354EFDE</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -299,25 +299,25 @@
       <Version>0.1.230809</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Animations">
-      <Version>8.0.230828-rc</Version>
+      <Version>8.0.230907</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Collections">
-      <Version>8.0.230828-rc</Version>
+      <Version>8.0.230907</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
-      <Version>8.0.230828-rc</Version>
+      <Version>8.0.230907</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
-      <Version>8.0.230828-rc</Version>
+      <Version>8.0.230907</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Extensions">
-      <Version>8.0.230828-rc</Version>
+      <Version>8.0.230907</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Lottie">
       <Version>8.0.0-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Media">
-      <Version>8.0.230828-rc</Version>
+      <Version>8.0.230907</Version>
     </PackageReference>
     <PackageReference Include="DryIoc.dll">
       <Version>5.4.1</Version>

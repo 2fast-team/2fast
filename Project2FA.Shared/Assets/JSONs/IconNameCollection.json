@@ -65,6 +65,9 @@
             "Name": "activision"
         },
         {
+            "Name": "acura"
+        },
+        {
             "Name": "adafruit"
         },
         {
@@ -134,6 +137,9 @@
             "Name": "adp"
         },
         {
+            "Name": "adroll"
+        },
+        {
             "Name": "adyen"
         },
         {
@@ -150,6 +156,9 @@
         },
         {
             "Name": "aew"
+        },
+        {
+            "Name": "affine"
         },
         {
             "Name": "affinity"
@@ -188,6 +197,9 @@
             "Name": "airbnb"
         },
         {
+            "Name": "airbrakedotio"
+        },
+        {
             "Name": "airbus"
         },
         {
@@ -204,6 +216,9 @@
         },
         {
             "Name": "airfrance"
+        },
+        {
+            "Name": "airindia"
         },
         {
             "Name": "airplayaudio"
@@ -225,6 +240,9 @@
         },
         {
             "Name": "albertheijn"
+        },
+        {
+            "Name": "alby"
         },
         {
             "Name": "alchemy"
@@ -254,6 +272,9 @@
             "Name": "alibabadotcom"
         },
         {
+            "Name": "alienware"
+        },
+        {
             "Name": "aliexpress"
         },
         {
@@ -281,6 +302,9 @@
             "Name": "alpinelinux"
         },
         {
+            "Name": "alteryx"
+        },
+        {
             "Name": "altiumdesigner"
         },
         {
@@ -302,6 +326,9 @@
             "Name": "amazoncloudwatch"
         },
         {
+            "Name": "amazondocumentdb"
+        },
+        {
             "Name": "amazondynamodb"
         },
         {
@@ -320,7 +347,13 @@
             "Name": "amazongames"
         },
         {
+            "Name": "amazoniam"
+        },
+        {
             "Name": "amazonlumberyard"
+        },
+        {
+            "Name": "amazonluna"
         },
         {
             "Name": "amazonpay"
@@ -332,6 +365,12 @@
             "Name": "amazonrds"
         },
         {
+            "Name": "amazonredshift"
+        },
+        {
+            "Name": "amazonroute53"
+        },
+        {
             "Name": "amazons3"
         },
         {
@@ -339,6 +378,9 @@
         },
         {
             "Name": "amd"
+        },
+        {
+            "Name": "ameba"
         },
         {
             "Name": "americanairlines"
@@ -476,6 +518,9 @@
             "Name": "apacheopenoffice"
         },
         {
+            "Name": "apacheparquet"
+        },
+        {
             "Name": "apachepulsar"
         },
         {
@@ -488,10 +533,16 @@
             "Name": "apachespark"
         },
         {
+            "Name": "apachestorm"
+        },
+        {
             "Name": "apachetomcat"
         },
         {
             "Name": "aparat"
+        },
+        {
+            "Name": "apifox"
         },
         {
             "Name": "apollographql"
@@ -527,6 +578,9 @@
             "Name": "appsignal"
         },
         {
+            "Name": "appsmith"
+        },
+        {
             "Name": "appstore"
         },
         {
@@ -543,6 +597,9 @@
         },
         {
             "Name": "arangodb"
+        },
+        {
+            "Name": "arcgis"
         },
         {
             "Name": "archicad"
@@ -566,6 +623,9 @@
             "Name": "argos"
         },
         {
+            "Name": "ariakit"
+        },
+        {
             "Name": "arkecosystem"
         },
         {
@@ -573,6 +633,12 @@
         },
         {
             "Name": "arm"
+        },
+        {
+            "Name": "armkeil"
+        },
+        {
+            "Name": "arstechnica"
         },
         {
             "Name": "artifacthub"
@@ -659,6 +725,9 @@
             "Name": "auth0"
         },
         {
+            "Name": "authelia"
+        },
+        {
             "Name": "authy"
         },
         {
@@ -695,6 +764,9 @@
             "Name": "awslambda"
         },
         {
+            "Name": "awsorganizations"
+        },
+        {
             "Name": "axios"
         },
         {
@@ -714,6 +786,9 @@
         },
         {
             "Name": "babel"
+        },
+        {
+            "Name": "babylondotjs"
         },
         {
             "Name": "backblaze"
@@ -803,6 +878,12 @@
             "Name": "bentley"
         },
         {
+            "Name": "bento"
+        },
+        {
+            "Name": "bentoml"
+        },
+        {
             "Name": "betfair"
         },
         {
@@ -831,6 +912,9 @@
         },
         {
             "Name": "biolink"
+        },
+        {
+            "Name": "bisecthosting"
         },
         {
             "Name": "bit"
@@ -905,6 +989,9 @@
             "Name": "boeing"
         },
         {
+            "Name": "bombardier"
+        },
+        {
             "Name": "bookalope"
         },
         {
@@ -938,6 +1025,9 @@
             "Name": "bose"
         },
         {
+            "Name": "botblecms"
+        },
+        {
             "Name": "boulanger"
         },
         {
@@ -959,10 +1049,19 @@
             "Name": "breaker"
         },
         {
+            "Name": "brevo"
+        },
+        {
             "Name": "britishairways"
         },
         {
             "Name": "broadcom"
+        },
+        {
+            "Name": "bsd"
+        },
+        {
+            "Name": "bspwm"
         },
         {
             "Name": "bt"
@@ -1034,6 +1133,12 @@
             "Name": "cachet"
         },
         {
+            "Name": "caddy"
+        },
+        {
+            "Name": "cadillac"
+        },
+        {
             "Name": "cafepress"
         },
         {
@@ -1059,6 +1164,12 @@
         },
         {
             "Name": "capacitor"
+        },
+        {
+            "Name": "cardano"
+        },
+        {
+            "Name": "carrd"
         },
         {
             "Name": "carrefour"
@@ -1115,6 +1226,9 @@
             "Name": "chakraui"
         },
         {
+            "Name": "channel4"
+        },
+        {
             "Name": "chartdotjs"
         },
         {
@@ -1127,10 +1241,16 @@
             "Name": "chatbot"
         },
         {
+            "Name": "chatwoot"
+        },
+        {
             "Name": "checkio"
         },
         {
             "Name": "checkmarx"
+        },
+        {
+            "Name": "checkmk"
         },
         {
             "Name": "chef"
@@ -1142,6 +1262,9 @@
             "Name": "chevrolet"
         },
         {
+            "Name": "chianetwork"
+        },
+        {
             "Name": "chinaeasternairlines"
         },
         {
@@ -1149,6 +1272,9 @@
         },
         {
             "Name": "chocolatey"
+        },
+        {
+            "Name": "chromatic"
         },
         {
             "Name": "chromecast"
@@ -1196,7 +1322,13 @@
             "Name": "ckeditor4"
         },
         {
+            "Name": "clarifai"
+        },
+        {
             "Name": "claris"
+        },
+        {
+            "Name": "clarivate"
         },
         {
             "Name": "clickhouse"
@@ -1257,6 +1389,9 @@
         },
         {
             "Name": "cnn"
+        },
+        {
+            "Name": "cocacola"
         },
         {
             "Name": "cockpit"
@@ -1334,6 +1469,12 @@
             "Name": "codeship"
         },
         {
+            "Name": "codesignal"
+        },
+        {
+            "Name": "codestream"
+        },
+        {
             "Name": "codewars"
         },
         {
@@ -1373,7 +1514,13 @@
             "Name": "commonworkflowlanguage"
         },
         {
+            "Name": "compilerexplorer"
+        },
+        {
             "Name": "composer"
+        },
+        {
+            "Name": "comptia"
         },
         {
             "Name": "comsol"
@@ -1404,6 +1551,9 @@
         },
         {
             "Name": "containerd"
+        },
+        {
+            "Name": "contao"
         },
         {
             "Name": "contentful"
@@ -1454,13 +1604,22 @@
             "Name": "cplusplus"
         },
         {
+            "Name": "cplusplusbuilder"
+        },
+        {
             "Name": "craftcms"
+        },
+        {
+            "Name": "craftsman"
         },
         {
             "Name": "cratedb"
         },
         {
             "Name": "crayon"
+        },
+        {
+            "Name": "creality"
         },
         {
             "Name": "createreactapp"
@@ -1524,6 +1683,9 @@
         },
         {
             "Name": "curseforge"
+        },
+        {
+            "Name": "cyberdefenders"
         },
         {
             "Name": "cycling74"
@@ -1628,6 +1790,9 @@
             "Name": "debian"
         },
         {
+            "Name": "decapcms"
+        },
+        {
             "Name": "dedge"
         },
         {
@@ -1659,6 +1824,9 @@
         },
         {
             "Name": "deno"
+        },
+        {
+            "Name": "denon"
         },
         {
             "Name": "dependabot"
@@ -1739,6 +1907,9 @@
             "Name": "disroot"
         },
         {
+            "Name": "distrokid"
+        },
+        {
             "Name": "django"
         },
         {
@@ -1757,10 +1928,19 @@
             "Name": "docsdotrs"
         },
         {
+            "Name": "docsify"
+        },
+        {
+            "Name": "docusaurus"
+        },
+        {
             "Name": "docusign"
         },
         {
             "Name": "dogecoin"
+        },
+        {
+            "Name": "doi"
         },
         {
             "Name": "dolby"
@@ -1811,6 +1991,9 @@
             "Name": "dsautomobiles"
         },
         {
+            "Name": "dts"
+        },
+        {
             "Name": "dtube"
         },
         {
@@ -1859,10 +2042,19 @@
             "Name": "eagle"
         },
         {
+            "Name": "easyeda"
+        },
+        {
             "Name": "easyjet"
         },
         {
             "Name": "ebay"
+        },
+        {
+            "Name": "ebox"
+        },
+        {
+            "Name": "eclipseadoptium"
         },
         {
             "Name": "eclipseche"
@@ -1911,6 +2103,9 @@
         },
         {
             "Name": "elasticstack"
+        },
+        {
+            "Name": "elavon"
         },
         {
             "Name": "electron"
@@ -1997,6 +2192,9 @@
             "Name": "equinixmetal"
         },
         {
+            "Name": "ericsson"
+        },
+        {
             "Name": "erlang"
         },
         {
@@ -2016,6 +2214,9 @@
         },
         {
             "Name": "espressif"
+        },
+        {
+            "Name": "esri"
         },
         {
             "Name": "etcd"
@@ -2090,6 +2291,9 @@
             "Name": "facepunch"
         },
         {
+            "Name": "falco"
+        },
+        {
             "Name": "falcon"
         },
         {
@@ -2106,6 +2310,9 @@
         },
         {
             "Name": "fantom"
+        },
+        {
+            "Name": "fareharbor"
         },
         {
             "Name": "farfetch"
@@ -2153,7 +2360,13 @@
             "Name": "ferrarinv"
         },
         {
+            "Name": "ferretdb"
+        },
+        {
             "Name": "ffmpeg"
+        },
+        {
+            "Name": "fi"
         },
         {
             "Name": "fiat"
@@ -2187,6 +2400,12 @@
         },
         {
             "Name": "firebase"
+        },
+        {
+            "Name": "firefish"
+        },
+        {
+            "Name": "fireflyiii"
         },
         {
             "Name": "firefox"
@@ -2234,6 +2453,9 @@
             "Name": "flickr"
         },
         {
+            "Name": "flightaware"
+        },
+        {
             "Name": "flipboard"
         },
         {
@@ -2252,7 +2474,13 @@
             "Name": "fluentd"
         },
         {
+            "Name": "fluke"
+        },
+        {
             "Name": "flutter"
+        },
+        {
+            "Name": "flux"
         },
         {
             "Name": "fluxus"
@@ -2289,6 +2517,9 @@
         },
         {
             "Name": "forestry"
+        },
+        {
+            "Name": "forgejo"
         },
         {
             "Name": "formstack"
@@ -2348,10 +2579,19 @@
             "Name": "freenas"
         },
         {
+            "Name": "freepik"
+        },
+        {
             "Name": "frontendmentor"
         },
         {
+            "Name": "frontify"
+        },
+        {
             "Name": "fsecure"
+        },
+        {
+            "Name": "fsharp"
         },
         {
             "Name": "fugacloud"
@@ -2384,10 +2624,16 @@
             "Name": "gameandwatch"
         },
         {
+            "Name": "gamebanana"
+        },
+        {
             "Name": "gamedeveloper"
         },
         {
             "Name": "gamejolt"
+        },
+        {
+            "Name": "gamemaker"
         },
         {
             "Name": "garmin"
@@ -2397,6 +2643,9 @@
         },
         {
             "Name": "gatsby"
+        },
+        {
+            "Name": "gdal"
         },
         {
             "Name": "geant"
@@ -2558,7 +2807,16 @@
             "Name": "googleanalytics"
         },
         {
+            "Name": "googleappsscript"
+        },
+        {
             "Name": "googleassistant"
+        },
+        {
+            "Name": "googlebard"
+        },
+        {
+            "Name": "googlebigquery"
         },
         {
             "Name": "googlecalendar"
@@ -2579,7 +2837,19 @@
             "Name": "googlecloud"
         },
         {
+            "Name": "googlecloudcomposer"
+        },
+        {
             "Name": "googlecolab"
+        },
+        {
+            "Name": "googlecontaineroptimizedos"
+        },
+        {
+            "Name": "googledatastudio"
+        },
+        {
+            "Name": "googledocs"
         },
         {
             "Name": "googledomains"
@@ -2591,10 +2861,16 @@
             "Name": "googleearth"
         },
         {
+            "Name": "googleearthengine"
+        },
+        {
             "Name": "googlefit"
         },
         {
             "Name": "googlefonts"
+        },
+        {
+            "Name": "googleforms"
         },
         {
             "Name": "googlehangouts"
@@ -2654,6 +2930,9 @@
             "Name": "googlesheets"
         },
         {
+            "Name": "googleslides"
+        },
+        {
             "Name": "googlestreetview"
         },
         {
@@ -2670,6 +2949,9 @@
         },
         {
             "Name": "gradle"
+        },
+        {
+            "Name": "gradleplaypublisher"
         },
         {
             "Name": "grafana"
@@ -2720,6 +3002,9 @@
             "Name": "gsk"
         },
         {
+            "Name": "gstreamer"
+        },
+        {
             "Name": "gtk"
         },
         {
@@ -2745,6 +3030,9 @@
         },
         {
             "Name": "gutenberg"
+        },
+        {
+            "Name": "h3"
         },
         {
             "Name": "habr"
@@ -2774,7 +3062,13 @@
             "Name": "hackthebox"
         },
         {
+            "Name": "hal"
+        },
+        {
             "Name": "handlebarsdotjs"
+        },
+        {
+            "Name": "handm"
         },
         {
             "Name": "handshake"
@@ -2790,6 +3084,9 @@
         },
         {
             "Name": "harmonyos"
+        },
+        {
+            "Name": "hashicorp"
         },
         {
             "Name": "hashnode"
@@ -2822,6 +3119,12 @@
             "Name": "headspace"
         },
         {
+            "Name": "hearth"
+        },
+        {
+            "Name": "hearthisdotat"
+        },
+        {
             "Name": "hedera"
         },
         {
@@ -2847,6 +3150,9 @@
         },
         {
             "Name": "hetzner"
+        },
+        {
+            "Name": "hexlet"
         },
         {
             "Name": "hexo"
@@ -2897,6 +3203,9 @@
             "Name": "honey"
         },
         {
+            "Name": "honor"
+        },
+        {
             "Name": "hootsuite"
         },
         {
@@ -2909,6 +3218,9 @@
             "Name": "hotjar"
         },
         {
+            "Name": "hotwire"
+        },
+        {
             "Name": "houdini"
         },
         {
@@ -2918,10 +3230,16 @@
             "Name": "hp"
         },
         {
+            "Name": "hsbc"
+        },
+        {
             "Name": "html5"
         },
         {
             "Name": "htmlacademy"
+        },
+        {
+            "Name": "htop"
         },
         {
             "Name": "httpie"
@@ -3026,6 +3344,9 @@
             "Name": "ifttt"
         },
         {
+            "Name": "igdb"
+        },
+        {
             "Name": "iheartradio"
         },
         {
@@ -3047,16 +3368,31 @@
             "Name": "immer"
         },
         {
+            "Name": "immich"
+        },
+        {
             "Name": "imou"
         },
         {
+            "Name": "improvmx"
+        },
+        {
             "Name": "indeed"
+        },
+        {
+            "Name": "indigo"
+        },
+        {
+            "Name": "inertia"
         },
         {
             "Name": "infiniti"
         },
         {
             "Name": "influxdb"
+        },
+        {
+            "Name": "infoq"
         },
         {
             "Name": "informatica"
@@ -3113,6 +3449,9 @@
             "Name": "interactjs"
         },
         {
+            "Name": "interbase"
+        },
+        {
             "Name": "intercom"
         },
         {
@@ -3126,6 +3465,9 @@
         },
         {
             "Name": "intigriti"
+        },
+        {
+            "Name": "intuit"
         },
         {
             "Name": "invision"
@@ -3150,6 +3492,15 @@
         },
         {
             "Name": "ipfs"
+        },
+        {
+            "Name": "iris"
+        },
+        {
+            "Name": "isc2"
+        },
+        {
+            "Name": "iscsquared"
         },
         {
             "Name": "issuu"
@@ -3221,6 +3572,9 @@
             "Name": "jet"
         },
         {
+            "Name": "jetblue"
+        },
+        {
             "Name": "jetbrains"
         },
         {
@@ -3231,6 +3585,9 @@
         },
         {
             "Name": "jfrogbintray"
+        },
+        {
+            "Name": "jfrogpipelines"
         },
         {
             "Name": "jinja"
@@ -3257,6 +3614,9 @@
             "Name": "jordan"
         },
         {
+            "Name": "jovian"
+        },
+        {
             "Name": "jpeg"
         },
         {
@@ -3279,6 +3639,12 @@
         },
         {
             "Name": "jss"
+        },
+        {
+            "Name": "juce"
+        },
+        {
+            "Name": "juejin"
         },
         {
             "Name": "juke"
@@ -3326,6 +3692,9 @@
             "Name": "kalilinux"
         },
         {
+            "Name": "kamailio"
+        },
+        {
             "Name": "kaniko"
         },
         {
@@ -3354,6 +3723,9 @@
         },
         {
             "Name": "kdenlive"
+        },
+        {
+            "Name": "kedro"
         },
         {
             "Name": "keepachangelog"
@@ -3407,7 +3779,13 @@
             "Name": "kinopoisk"
         },
         {
+            "Name": "kinsta"
+        },
+        {
             "Name": "kirby"
+        },
+        {
+            "Name": "kit"
         },
         {
             "Name": "kitsu"
@@ -3435,6 +3813,9 @@
         },
         {
             "Name": "koc"
+        },
+        {
+            "Name": "kodak"
         },
         {
             "Name": "kodi"
@@ -3542,6 +3923,9 @@
             "Name": "leaflet"
         },
         {
+            "Name": "leagueoflegends"
+        },
+        {
             "Name": "leanpub"
         },
         {
@@ -3551,6 +3935,9 @@
             "Name": "legacygames"
         },
         {
+            "Name": "leica"
+        },
+        {
             "Name": "lemmy"
         },
         {
@@ -3558,6 +3945,9 @@
         },
         {
             "Name": "lens"
+        },
+        {
+            "Name": "leptos"
         },
         {
             "Name": "lerna"
@@ -3584,6 +3974,9 @@
             "Name": "lgtm"
         },
         {
+            "Name": "liberadotchat"
+        },
+        {
             "Name": "liberapay"
         },
         {
@@ -3608,7 +4001,13 @@
             "Name": "lifx"
         },
         {
+            "Name": "lightburn"
+        },
+        {
             "Name": "lighthouse"
+        },
+        {
+            "Name": "lightning"
         },
         {
             "Name": "line"
@@ -3677,6 +4076,9 @@
             "Name": "lmms"
         },
         {
+            "Name": "local"
+        },
+        {
             "Name": "lodash"
         },
         {
@@ -3684,6 +4086,9 @@
         },
         {
             "Name": "logmein"
+        },
+        {
+            "Name": "logseq"
         },
         {
             "Name": "logstash"
@@ -3705,6 +4110,9 @@
         },
         {
             "Name": "lotpolishairlines"
+        },
+        {
+            "Name": "ltspice"
         },
         {
             "Name": "lua"
@@ -3755,6 +4163,9 @@
             "Name": "mailchimp"
         },
         {
+            "Name": "maildotcom"
+        },
+        {
             "Name": "maildotru"
         },
         {
@@ -3765,6 +4176,9 @@
         },
         {
             "Name": "makerbot"
+        },
+        {
+            "Name": "mambaui"
         },
         {
             "Name": "mamp"
@@ -3780,6 +4194,9 @@
         },
         {
             "Name": "mapbox"
+        },
+        {
+            "Name": "maplibre"
         },
         {
             "Name": "mariadb"
@@ -3800,6 +4217,9 @@
             "Name": "marriott"
         },
         {
+            "Name": "marvelapp"
+        },
+        {
             "Name": "maserati"
         },
         {
@@ -3818,6 +4238,9 @@
             "Name": "materialdesignicons"
         },
         {
+            "Name": "matillion"
+        },
+        {
             "Name": "matomo"
         },
         {
@@ -3831,6 +4254,9 @@
         },
         {
             "Name": "matternet"
+        },
+        {
+            "Name": "mautic"
         },
         {
             "Name": "max"
@@ -3873,6 +4299,9 @@
         },
         {
             "Name": "mediatemple"
+        },
+        {
+            "Name": "medibangpaint"
         },
         {
             "Name": "medium"
@@ -3929,10 +4358,16 @@
             "Name": "mewe"
         },
         {
+            "Name": "mg"
+        },
+        {
             "Name": "microbit"
         },
         {
             "Name": "microdotblog"
+        },
+        {
+            "Name": "microeditor"
         },
         {
             "Name": "microgenetics"
@@ -3998,10 +4433,19 @@
             "Name": "microsoftword"
         },
         {
+            "Name": "microstation"
+        },
+        {
             "Name": "microstrategy"
         },
         {
             "Name": "midi"
+        },
+        {
+            "Name": "mikrotik"
+        },
+        {
+            "Name": "milvus"
         },
         {
             "Name": "minds"
@@ -4016,10 +4460,19 @@
             "Name": "mini"
         },
         {
+            "Name": "minio"
+        },
+        {
             "Name": "minutemailer"
         },
         {
+            "Name": "miraheze"
+        },
+        {
             "Name": "miro"
+        },
+        {
+            "Name": "misskey"
         },
         {
             "Name": "mitsubishi"
@@ -4073,10 +4526,22 @@
             "Name": "mongodb"
         },
         {
+            "Name": "mongoose"
+        },
+        {
+            "Name": "mongoosedotws"
+        },
+        {
             "Name": "monica"
         },
         {
             "Name": "monkeytie"
+        },
+        {
+            "Name": "monkeytype"
+        },
+        {
+            "Name": "monogame"
         },
         {
             "Name": "monogames"
@@ -4124,6 +4589,9 @@
             "Name": "mtr"
         },
         {
+            "Name": "mubi"
+        },
+        {
             "Name": "mui"
         },
         {
@@ -4131,6 +4599,9 @@
         },
         {
             "Name": "muller"
+        },
+        {
+            "Name": "multisim"
         },
         {
             "Name": "mumble"
@@ -4178,6 +4649,9 @@
             "Name": "nativescript"
         },
         {
+            "Name": "natsdotio"
+        },
+        {
             "Name": "naver"
         },
         {
@@ -4187,7 +4661,13 @@
             "Name": "nbb"
         },
         {
+            "Name": "nbc"
+        },
+        {
             "Name": "ndr"
+        },
+        {
+            "Name": "near"
         },
         {
             "Name": "nec"
@@ -4226,6 +4706,9 @@
             "Name": "newbalance"
         },
         {
+            "Name": "newegg"
+        },
+        {
             "Name": "newjapanprowrestling"
         },
         {
@@ -4247,19 +4730,31 @@
             "Name": "nextdotjs"
         },
         {
+            "Name": "nextra"
+        },
+        {
             "Name": "nfc"
         },
         {
             "Name": "nginx"
         },
         {
+            "Name": "nginxproxymanager"
+        },
+        {
             "Name": "ngrok"
+        },
+        {
+            "Name": "ngrx"
         },
         {
             "Name": "niconico"
         },
         {
             "Name": "nike"
+        },
+        {
+            "Name": "nikon"
         },
         {
             "Name": "nim"
@@ -4367,6 +4862,9 @@
             "Name": "nx"
         },
         {
+            "Name": "nxp"
+        },
+        {
             "Name": "nzxt"
         },
         {
@@ -4386,6 +4884,9 @@
         },
         {
             "Name": "octave"
+        },
+        {
+            "Name": "octobercms"
         },
         {
             "Name": "octoprint"
@@ -4484,10 +4985,16 @@
             "Name": "openproject"
         },
         {
+            "Name": "openscad"
+        },
+        {
             "Name": "opensea"
         },
         {
             "Name": "opensearch"
+        },
+        {
+            "Name": "opensourcehardware"
         },
         {
             "Name": "opensourceinitiative"
@@ -4508,6 +5015,9 @@
             "Name": "opentelemetry"
         },
         {
+            "Name": "opentf"
+        },
+        {
             "Name": "openverse"
         },
         {
@@ -4524,6 +5034,9 @@
         },
         {
             "Name": "opera"
+        },
+        {
+            "Name": "operagx"
         },
         {
             "Name": "opnsense"
@@ -4580,6 +5093,9 @@
             "Name": "owasp"
         },
         {
+            "Name": "owncloud"
+        },
+        {
             "Name": "oxygen"
         },
         {
@@ -4616,7 +5132,13 @@
             "Name": "palantir"
         },
         {
+            "Name": "paloaltonetworks"
+        },
+        {
             "Name": "paloaltosoftware"
+        },
+        {
+            "Name": "panasonic"
         },
         {
             "Name": "pandas"
@@ -4646,6 +5168,12 @@
             "Name": "patreon"
         },
         {
+            "Name": "paychex"
+        },
+        {
+            "Name": "payloadcms"
+        },
+        {
             "Name": "payoneer"
         },
         {
@@ -4659,6 +5187,12 @@
         },
         {
             "Name": "peakdesign"
+        },
+        {
+            "Name": "pearson"
+        },
+        {
+            "Name": "peerlist"
         },
         {
             "Name": "peertube"
@@ -4715,6 +5249,9 @@
             "Name": "philipshue"
         },
         {
+            "Name": "phoenixframework"
+        },
+        {
             "Name": "phonepe"
         },
         {
@@ -4734,6 +5271,9 @@
         },
         {
             "Name": "phpstorm"
+        },
+        {
+            "Name": "piaggiogroup"
         },
         {
             "Name": "picardsurgeles"
@@ -4871,6 +5411,9 @@
             "Name": "podcastaddict"
         },
         {
+            "Name": "podcastindex"
+        },
+        {
             "Name": "podman"
         },
         {
@@ -4916,6 +5459,9 @@
             "Name": "postgresql"
         },
         {
+            "Name": "posthog"
+        },
+        {
             "Name": "postman"
         },
         {
@@ -4955,6 +5501,9 @@
             "Name": "precommit"
         },
         {
+            "Name": "prefect"
+        },
+        {
             "Name": "premierleague"
         },
         {
@@ -4967,6 +5516,9 @@
             "Name": "prettier"
         },
         {
+            "Name": "pretzel"
+        },
+        {
             "Name": "prevention"
         },
         {
@@ -4977,6 +5529,9 @@
         },
         {
             "Name": "primevideo"
+        },
+        {
+            "Name": "printables"
         },
         {
             "Name": "prisma"
@@ -5018,7 +5573,16 @@
             "Name": "protodotio"
         },
         {
+            "Name": "proton"
+        },
+        {
+            "Name": "protoncalendar"
+        },
+        {
             "Name": "protondb"
+        },
+        {
+            "Name": "protondrive"
         },
         {
             "Name": "protonmail"
@@ -5034,6 +5598,9 @@
         },
         {
             "Name": "proxmox"
+        },
+        {
+            "Name": "pterodactyl"
         },
         {
             "Name": "pubg"
@@ -5078,6 +5645,9 @@
             "Name": "pycharm"
         },
         {
+            "Name": "pydantic"
+        },
+        {
             "Name": "pyg"
         },
         {
@@ -5097,6 +5667,9 @@
         },
         {
             "Name": "python"
+        },
+        {
+            "Name": "pythonanywhere"
         },
         {
             "Name": "pytorch"
@@ -5130,6 +5703,9 @@
         },
         {
             "Name": "qiwi"
+        },
+        {
+            "Name": "qlik"
         },
         {
             "Name": "qmk"
@@ -5180,6 +5756,9 @@
             "Name": "quora"
         },
         {
+            "Name": "qwant"
+        },
+        {
             "Name": "qwiklabs"
         },
         {
@@ -5202,6 +5781,12 @@
         },
         {
             "Name": "radiopublic"
+        },
+        {
+            "Name": "radixui"
+        },
+        {
+            "Name": "radstudio"
         },
         {
             "Name": "railway"
@@ -5261,6 +5846,9 @@
             "Name": "reacttable"
         },
         {
+            "Name": "readdotcv"
+        },
+        {
             "Name": "readme"
         },
         {
@@ -5274,6 +5862,9 @@
         },
         {
             "Name": "reasonstudios"
+        },
+        {
+            "Name": "recoil"
         },
         {
             "Name": "red"
@@ -5318,6 +5909,9 @@
             "Name": "relianceindustrieslimited"
         },
         {
+            "Name": "remark"
+        },
+        {
             "Name": "remix"
         },
         {
@@ -5357,10 +5951,16 @@
             "Name": "resurrectionremixos"
         },
         {
+            "Name": "retool"
+        },
+        {
             "Name": "retroarch"
         },
         {
             "Name": "retropie"
+        },
+        {
+            "Name": "revanced"
         },
         {
             "Name": "revealdotjs"
@@ -5402,13 +6002,25 @@
             "Name": "ripple"
         },
         {
+            "Name": "riscv"
+        },
+        {
             "Name": "riseup"
+        },
+        {
+            "Name": "roadmapdotsh"
         },
         {
             "Name": "roamresearch"
         },
         {
+            "Name": "robinhood"
+        },
+        {
             "Name": "roblox"
+        },
+        {
+            "Name": "robloxstudio"
         },
         {
             "Name": "robotframework"
@@ -5433,6 +6045,9 @@
         },
         {
             "Name": "rome"
+        },
+        {
+            "Name": "rootme"
         },
         {
             "Name": "roots"
@@ -5492,6 +6107,15 @@
             "Name": "rubysinatra"
         },
         {
+            "Name": "ruff"
+        },
+        {
+            "Name": "rumble"
+        },
+        {
+            "Name": "rundeck"
+        },
+        {
             "Name": "runkeeper"
         },
         {
@@ -5516,6 +6140,9 @@
             "Name": "safari"
         },
         {
+            "Name": "sage"
+        },
+        {
             "Name": "sahibinden"
         },
         {
@@ -5538,6 +6165,12 @@
         },
         {
             "Name": "sanfranciscomunicipalrailway"
+        },
+        {
+            "Name": "sanic"
+        },
+        {
+            "Name": "sanity"
         },
         {
             "Name": "saopaulometro"
@@ -5582,6 +6215,9 @@
             "Name": "scpfoundation"
         },
         {
+            "Name": "scrapbox"
+        },
+        {
             "Name": "scratch"
         },
         {
@@ -5603,7 +6239,13 @@
             "Name": "scrutinizerci"
         },
         {
+            "Name": "scylladb"
+        },
+        {
             "Name": "seagate"
+        },
+        {
+            "Name": "searxng"
         },
         {
             "Name": "seat"
@@ -5637,6 +6279,9 @@
         },
         {
             "Name": "semaphoreci"
+        },
+        {
+            "Name": "semrush"
         },
         {
             "Name": "semver"
@@ -5684,6 +6329,9 @@
             "Name": "shanghaimetro"
         },
         {
+            "Name": "sharex"
+        },
+        {
             "Name": "sharp"
         },
         {
@@ -5714,6 +6362,9 @@
             "Name": "shopware"
         },
         {
+            "Name": "shortcut"
+        },
+        {
             "Name": "shotcut"
         },
         {
@@ -5727,6 +6378,9 @@
         },
         {
             "Name": "siemens"
+        },
+        {
+            "Name": "sifive"
         },
         {
             "Name": "signal"
@@ -5750,7 +6404,13 @@
             "Name": "sinaweibo"
         },
         {
+            "Name": "singaporeairlines"
+        },
+        {
             "Name": "singlestore"
+        },
+        {
+            "Name": "sitecore"
         },
         {
             "Name": "sitepoint"
@@ -5784,6 +6444,9 @@
         },
         {
             "Name": "skypeforbusiness"
+        },
+        {
+            "Name": "skyrock"
         },
         {
             "Name": "slack"
@@ -5879,6 +6542,9 @@
             "Name": "sonarsource"
         },
         {
+            "Name": "sonatype"
+        },
+        {
             "Name": "songkick"
         },
         {
@@ -5907,6 +6573,9 @@
         },
         {
             "Name": "sourcegraph"
+        },
+        {
+            "Name": "sourcehut"
         },
         {
             "Name": "sourcetree"
@@ -5948,6 +6617,12 @@
             "Name": "speedtest"
         },
         {
+            "Name": "speedypage"
+        },
+        {
+            "Name": "spigotmc"
+        },
+        {
             "Name": "spinnaker"
         },
         {
@@ -5955,6 +6630,9 @@
         },
         {
             "Name": "splunk"
+        },
+        {
+            "Name": "spoj"
         },
         {
             "Name": "spond"
@@ -6002,6 +6680,9 @@
             "Name": "ssrn"
         },
         {
+            "Name": "sst"
+        },
+        {
             "Name": "stackbit"
         },
         {
@@ -6033,6 +6714,9 @@
         },
         {
             "Name": "standardjs"
+        },
+        {
+            "Name": "standardresume"
         },
         {
             "Name": "starbucks"
@@ -6125,7 +6809,13 @@
             "Name": "strongswan"
         },
         {
+            "Name": "stryker"
+        },
+        {
             "Name": "stubhub"
+        },
+        {
+            "Name": "studio3t"
         },
         {
             "Name": "styledcomponents"
@@ -6149,6 +6839,9 @@
             "Name": "substack"
         },
         {
+            "Name": "subtitleedit"
+        },
+        {
             "Name": "subversion"
         },
         {
@@ -6159,6 +6852,9 @@
         },
         {
             "Name": "supabase"
+        },
+        {
+            "Name": "supercrease"
         },
         {
             "Name": "supermicro"
@@ -6183,6 +6879,9 @@
         },
         {
             "Name": "svg"
+        },
+        {
+            "Name": "svgdotjs"
         },
         {
             "Name": "svgo"
@@ -6287,6 +6986,9 @@
             "Name": "taxbuzz"
         },
         {
+            "Name": "tcs"
+        },
+        {
             "Name": "teamcity"
         },
         {
@@ -6329,6 +7031,9 @@
             "Name": "teratail"
         },
         {
+            "Name": "termius"
+        },
+        {
             "Name": "terraform"
         },
         {
@@ -6347,6 +7052,9 @@
             "Name": "testinglibrary"
         },
         {
+            "Name": "testrail"
+        },
+        {
             "Name": "tether"
         },
         {
@@ -6354,6 +7062,9 @@
         },
         {
             "Name": "tga"
+        },
+        {
+            "Name": "thangs"
         },
         {
             "Name": "thealgorithms"
@@ -6398,6 +7109,9 @@
             "Name": "threadless"
         },
         {
+            "Name": "threads"
+        },
+        {
             "Name": "threedotjs"
         },
         {
@@ -6410,6 +7124,9 @@
             "Name": "thunderbird"
         },
         {
+            "Name": "thurgauerkantonalbank"
+        },
+        {
             "Name": "thymeleaf"
         },
         {
@@ -6417,6 +7134,9 @@
         },
         {
             "Name": "tidal"
+        },
+        {
+            "Name": "tiddlywiki"
         },
         {
             "Name": "tide"
@@ -6435,6 +7155,9 @@
         },
         {
             "Name": "timescale"
+        },
+        {
+            "Name": "tina"
         },
         {
             "Name": "tinder"
@@ -6459,6 +7182,9 @@
         },
         {
             "Name": "toggl"
+        },
+        {
+            "Name": "toggltrack"
         },
         {
             "Name": "tokyometro"
@@ -6500,6 +7226,9 @@
             "Name": "traefikproxy"
         },
         {
+            "Name": "trailforks"
+        },
+        {
             "Name": "trainerroad"
         },
         {
@@ -6527,6 +7256,9 @@
             "Name": "treyarch"
         },
         {
+            "Name": "trilium"
+        },
+        {
             "Name": "triller"
         },
         {
@@ -6537,6 +7269,9 @@
         },
         {
             "Name": "tripdotcom"
+        },
+        {
+            "Name": "trivy"
         },
         {
             "Name": "trove"
@@ -6576,6 +7311,9 @@
         },
         {
             "Name": "tunein"
+        },
+        {
+            "Name": "turbo"
         },
         {
             "Name": "turborepo"
@@ -6632,6 +7370,9 @@
             "Name": "ubuntu"
         },
         {
+            "Name": "ubuntumate"
+        },
+        {
             "Name": "udacity"
         },
         {
@@ -6647,7 +7388,13 @@
             "Name": "ulule"
         },
         {
+            "Name": "umami"
+        },
+        {
             "Name": "umbraco"
+        },
+        {
+            "Name": "uml"
         },
         {
             "Name": "unacademy"
@@ -6675,6 +7422,9 @@
         },
         {
             "Name": "unlicense"
+        },
+        {
+            "Name": "uno"
         },
         {
             "Name": "unocss"
@@ -6752,6 +7502,9 @@
             "Name": "vault"
         },
         {
+            "Name": "vaultwarden"
+        },
+        {
             "Name": "vauxhall"
         },
         {
@@ -6768,6 +7521,9 @@
         },
         {
             "Name": "veepee"
+        },
+        {
+            "Name": "vega"
         },
         {
             "Name": "velog"
@@ -6788,6 +7544,9 @@
             "Name": "verizon"
         },
         {
+            "Name": "vespa"
+        },
+        {
             "Name": "vexxhost"
         },
         {
@@ -6795,6 +7554,9 @@
         },
         {
             "Name": "viadeo"
+        },
+        {
+            "Name": "viaplay"
         },
         {
             "Name": "viber"
@@ -6824,6 +7586,9 @@
             "Name": "visa"
         },
         {
+            "Name": "visualbasic"
+        },
+        {
             "Name": "visualstudio"
         },
         {
@@ -6842,6 +7607,9 @@
             "Name": "vivaldi"
         },
         {
+            "Name": "vivawallet"
+        },
+        {
             "Name": "vivino"
         },
         {
@@ -6857,6 +7625,9 @@
             "Name": "vodafone"
         },
         {
+            "Name": "voipdotms"
+        },
+        {
             "Name": "volkswagen"
         },
         {
@@ -6864,6 +7635,9 @@
         },
         {
             "Name": "vonage"
+        },
+        {
+            "Name": "vorondesign"
         },
         {
             "Name": "vowpalwabbit"
@@ -6893,6 +7667,9 @@
             "Name": "vultr"
         },
         {
+            "Name": "vyond"
+        },
+        {
             "Name": "w3c"
         },
         {
@@ -6914,6 +7691,9 @@
             "Name": "wallabag"
         },
         {
+            "Name": "walletconnect"
+        },
+        {
             "Name": "walmart"
         },
         {
@@ -6927,6 +7707,9 @@
         },
         {
             "Name": "warp"
+        },
+        {
+            "Name": "wasabi"
         },
         {
             "Name": "wasmcloud"
@@ -6995,6 +7778,9 @@
             "Name": "webtoon"
         },
         {
+            "Name": "webtrees"
+        },
+        {
             "Name": "wechat"
         },
         {
@@ -7005,6 +7791,9 @@
         },
         {
             "Name": "welcometothejungle"
+        },
+        {
+            "Name": "wellfound"
         },
         {
             "Name": "wemo"
@@ -7034,6 +7823,9 @@
             "Name": "wikidata"
         },
         {
+            "Name": "wikidotgg"
+        },
+        {
             "Name": "wikidotjs"
         },
         {
@@ -7056,6 +7848,9 @@
         },
         {
             "Name": "windows"
+        },
+        {
+            "Name": "windows10"
         },
         {
             "Name": "windows11"
@@ -7142,6 +7937,9 @@
             "Name": "wwise"
         },
         {
+            "Name": "x"
+        },
+        {
             "Name": "xamarin"
         },
         {
@@ -7220,6 +8018,9 @@
             "Name": "yelp"
         },
         {
+            "Name": "yeti"
+        },
+        {
             "Name": "yoast"
         },
         {
@@ -7292,6 +8093,9 @@
             "Name": "zenodo"
         },
         {
+            "Name": "zensar"
+        },
+        {
             "Name": "zerodha"
         },
         {
@@ -7313,6 +8117,9 @@
             "Name": "zigbee"
         },
         {
+            "Name": "zilch"
+        },
+        {
             "Name": "zillow"
         },
         {
@@ -7320,6 +8127,9 @@
         },
         {
             "Name": "zingat"
+        },
+        {
+            "Name": "zod"
         },
         {
             "Name": "zoho"

@@ -144,7 +144,7 @@ namespace Project2FA.UWP
                     Repository = new DBProject2FARepository(dbOptions);
                 }
 
-                //LoadIconNames(); // for development only
+                //await LoadIconNames(); // for development only
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
@@ -244,15 +244,15 @@ namespace Project2FA.UWP
         //            string path = root + @"\Assets\AccountIcons";
         //            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
         //            var elements = await folder.GetFilesAsync();
-        //            List<IconNameModel> iconList = new List<IconNameModel>();
+        //            System.Collections.Generic.List<Repository.Models.IconNameModel> iconList = new System.Collections.Generic.List<Repository.Models.IconNameModel>();
         //            foreach (var item in elements)
         //            {
-        //                iconList.Add(new IconNameModel() { Name = item.DisplayName });
+        //                iconList.Add(new Repository.Models.IconNameModel() { Name = item.DisplayName });
         //            }
-        //            var iconCollectionModel = new IconNameCollectionModel()
+        //            var iconCollectionModel = new Repository.Models.IconNameCollectionModel()
         //            {
         //                AppVersion = SystemInformation.Instance.ApplicationVersion.ToString(),
-        //                Collection = iconList.ToObservableCollection()
+        //                Collection = new System.Collections.ObjectModel.ObservableCollection<Repository.Models.IconNameModel>(iconList)
         //            };
         //            await fileService.WriteFileAsync("IconNameCollection.json", iconCollectionModel, localFolder);
         //        }

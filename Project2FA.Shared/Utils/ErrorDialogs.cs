@@ -61,6 +61,7 @@ namespace Project2FA.Utils
 #else
             TextBlock textBlock = new TextBlock();
             textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
+            textBlock.TextWrapping = TextWrapping.WrapWholeWords;
             dialog.Content = textBlock;
 #endif
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -152,6 +153,7 @@ namespace Project2FA.Utils
 #else
             TextBlock textBlock = new TextBlock();
             textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
+            textBlock.TextWrapping = TextWrapping.WrapWholeWords;
             dialog.Content = textBlock;
 #endif
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
@@ -186,6 +188,7 @@ namespace Project2FA.Utils
 #else
             TextBlock textBlock = new TextBlock();
             textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
+            textBlock.TextWrapping = TextWrapping.WrapWholeWords;
             dialog.Content = textBlock;
 #endif
             dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
@@ -228,7 +231,7 @@ namespace Project2FA.Utils
             var errorTextBlock = new TextBlock()
             {
                 Margin = new Thickness(0, 8, 0, 8),
-                TextWrapping = TextWrapping.Wrap
+                TextWrapping = TextWrapping.WrapWholeWords
             };
             errorTextBlock.Text = exc.Message
                 + exc.StackTrace

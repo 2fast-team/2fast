@@ -5,7 +5,7 @@
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
          IgnorableNamespaces="uap mp rescap uap6">
-	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=1377weber" Version="1.2.7.0" />
+	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=J.P.Weber IT" Version="1.2.7.0" />
 	<mp:PhoneIdentity PhoneProductId="ebe850c9-6e4f-4d91-a52e-8040b0ae33df" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 	<Properties>
 		<DisplayName>2fast (Beta)</DisplayName>

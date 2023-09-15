@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
+    xmlns:toolkitcontrols="using:CommunityToolkit.WinUI.Controls"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
@@ -90,24 +91,33 @@
                                                         x:Uid="NewDatafileContentDialogLocalPath" />
                                                 </StackPanel>
                                             </Button>
-                                            <Button 
-                                                x:Name="BTN_WebDAV"
-                                                Margin="0,10,0,10"
-                                                HorizontalContentAlignment="Left"
-                                                Style="{StaticResource AccentButtonStyle}"
-                                                Click="BTN_WebDAV_Click"
-                                                MinWidth="255">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <FontIcon Glyph="&#xE753;"
-                                                        FontSize="30"/>
-                                                    <TextBlock 
-                                                        Margin="8,0,0,0" 
-                                                        HorizontalAlignment="Stretch" 
-                                                        VerticalAlignment="Center" 
-                                                        Text="~NewDatafileContentDialogWebDAV.Text"
-                                                        x:Uid="NewDatafileContentDialogWebDAV" />   
-                                                </StackPanel>
-                                            </Button>
+                                            <toolkitcontrols:SettingsExpander>
+                                                <toolkitcontrols:SettingsExpander.Items>
+                                                    <toolkitcontrols:SettingsCard>
+                                                        <toolkitcontrols:SettingsCard.Content>
+                                                            <Button 
+                                                                x:Name="BTN_WebDAV"
+                                                                Margin="0,10,0,10"
+                                                                HorizontalContentAlignment="Left"
+                                                                Style="{StaticResource AccentButtonStyle}"
+                                                                Click="BTN_WebDAV_Click"
+                                                                MinWidth="255">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <FontIcon Glyph="&#xE753;"
+                                                                        FontSize="30"/>
+                                                                    <TextBlock 
+                                                                        Margin="8,0,0,0" 
+                                                                        HorizontalAlignment="Stretch" 
+                                                                        VerticalAlignment="Center" 
+                                                                        Text="~NewDatafileContentDialogWebDAV.Text"
+                                                                        x:Uid="NewDatafileContentDialogWebDAV" />
+                                                                </StackPanel>
+                                                            </Button>
+                                                        </toolkitcontrols:SettingsCard.Content>
+                                                    </toolkitcontrols:SettingsCard>
+                                                </toolkitcontrols:SettingsExpander.Items>
+                                            </toolkitcontrols:SettingsExpander>
+                                            
                                         </StackPanel>
                                     </ScrollViewer>
                                 </PivotItem>

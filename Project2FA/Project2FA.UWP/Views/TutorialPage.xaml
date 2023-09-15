@@ -17,8 +17,9 @@
     
     <Page.Resources>
         <DataTemplate x:Name="ShellHeaderTemplate">
-            <Grid Background="{ThemeResource ShellAcrylicWindowBrush}" 
-                      Height="40">
+            <Grid 
+                Background="{ThemeResource ShellAcrylicWindowBrush}" 
+                Height="40">
                 <TextBlock 
                     Text="Tutorial"
                     Margin="15,0,0,0"
@@ -30,16 +31,16 @@
 
         <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
             <UserControl
-                    x:Name="Root" 
-                    MaxWidth="660"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch">
+                x:Name="Root" 
+                MaxWidth="660"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch">
                 <Grid 
-                        HorizontalAlignment="Stretch"
-                        CornerRadius="{ThemeResource ControlCornerRadius}"
-                        Background="{ThemeResource TwoFABackgroundBrush}">
+                    HorizontalAlignment="Stretch"
+                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                    Background="{ThemeResource TwoFABackgroundBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
@@ -55,85 +56,85 @@
 
                     <Grid Grid.RowSpan="3" >
                         <Border 
-                                Width="2.5" 
-                                ui:Effects.Shadow="{StaticResource SignShadow}"
-                                Background="{StaticResource SystemAccentColor}" />
+                            Width="2.5" 
+                            ui:Effects.Shadow="{StaticResource SignShadow}"
+                            Background="{StaticResource SystemAccentColor}" />
                     </Grid>
 
                     <muxc:PersonPicture 
-                            Height="48"
-                            Width="48"
-                            DisplayName="{x:Bind Model, 
-                            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
-                            Mode=OneWay}"
-                            Margin="15,10,20,0"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
-                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
+                        Height="48"
+                        Width="48"
+                        DisplayName="{x:Bind Model, 
+                        Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                        Mode=OneWay}"
+                        Margin="15,10,20,0"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
                         <!--<muxc:PersonPicture.ProfilePicture>
                                 <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
                             </muxc:PersonPicture.ProfilePicture>-->
                     </muxc:PersonPicture>
 
                     <RelativePanel 
-                            Grid.Column="2" 
-                            Grid.RowSpan="2" 
-                            Grid.ColumnSpan="2">
+                        Grid.Column="2" 
+                        Grid.RowSpan="2" 
+                        Grid.ColumnSpan="2">
                         <TextBlock
-                                x:Name="AccountName"
-                                FontSize="22"
-                                Margin="0,10,10,0" 
-                                VerticalAlignment="Center">
-                                <Bold>
-                                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
-                                </Bold>
+                            x:Name="AccountName"
+                            FontSize="22"
+                            Margin="0,10,10,0" 
+                            VerticalAlignment="Center">
+                            <Bold>
+                                <Run Text="{x:Bind Label,Mode=OneWay}"/>
+                            </Bold>
                         </TextBlock>
                         <TextBlock 
-                                x:Name="IssuerName"
-                                FontWeight="Thin"
-                                Text="{x:Bind Issuer,Mode=OneWay}" 
-                                FontSize="22"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"/>
+                            x:Name="IssuerName"
+                            FontWeight="Thin"
+                            Text="{x:Bind Issuer,Mode=OneWay}" 
+                            FontSize="22"
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Center"/>
                     </RelativePanel>
 
                     <StackPanel
-                            Orientation="Horizontal"
-                            Grid.Row="3"
-                            Grid.Column="2"
-                            Margin="0,0,0,4">
+                        Orientation="Horizontal"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Margin="0,0,0,4">
 
                         <Button
-                                x:Name="BTN_ShowCode"
-                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
-                                Width="48"
-                                Height="48"
-                                Margin="0,0,4,0"
-                                Style="{StaticResource TransparentButtonStyle}"
-                                HorizontalAlignment="Stretch" Click="BTN_ShowCode_Click" >
+                            x:Name="BTN_ShowCode"
+                            ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                            Width="48"
+                            Height="48"
+                            Margin="0,0,4,0"
+                            Style="{StaticResource TransparentButtonStyle}"
+                            HorizontalAlignment="Stretch" Click="BTN_ShowCode_Click" >
                             <FontIcon 
-                                    Glyph="&#xE18B;"
-                                    FontSize="20"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"/>
+                                Glyph="&#xE18B;"
+                                FontSize="20"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
                         </Button>
                         <TextBlock
-                                Text="______"
-                                FontSize="28"
-                                CharacterSpacing="205"
-                                VerticalAlignment="Center" 
-                                Foreground="{ThemeResource SystemAccentColor}" />
+                            Text="______"
+                            FontSize="28"
+                            CharacterSpacing="205"
+                            VerticalAlignment="Center" 
+                            Foreground="{ThemeResource SystemAccentColor}" />
 
                         <Button
-                                x:Name="BTN_CopyCode"
-                                x:Uid="AccountCopyCodeButton"
-                                Width="48"
-                                Height="48"
-                                Style="{StaticResource TransparentButtonStyle}"
-                                Margin="8,0,4,0" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
-                                HorizontalAlignment="Stretch" Click="BTN_CopyCode_Click" >
+                            x:Name="BTN_CopyCode"
+                            x:Uid="AccountCopyCodeButton"
+                            Width="48"
+                            Height="48"
+                            Style="{StaticResource TransparentButtonStyle}"
+                            Margin="8,0,4,0" 
+                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
+                            HorizontalAlignment="Stretch" Click="BTN_CopyCode_Click" >
                             <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                         </Button>
                         <Grid VerticalAlignment="Center">
@@ -158,19 +159,19 @@
                                 HorizontalAlignment="Center"/>
                         </Grid>
                         <Button
-                                x:Name="BTN_SetFavourite"
-                                Width="48"
-                                Height="48"
-                                Style="{StaticResource TransparentButtonStyle}"
-                                Margin="8,0,4,0"
-                                ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
-                                HorizontalAlignment="Stretch" Click="BTN_SetFavourite_Click" >
+                            x:Name="BTN_SetFavourite"
+                            Width="48"
+                            Height="48"
+                            Style="{StaticResource TransparentButtonStyle}"
+                            Margin="8,0,4,0"
+                            ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
+                            HorizontalAlignment="Stretch" Click="BTN_SetFavourite_Click" >
                             <FontIcon 
-                                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
-                                    FontSize="20"
-                                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"/>
+                                Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                FontSize="20"
+                                Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
                         </Button>
                     </StackPanel>
 
@@ -241,8 +242,8 @@
     <Grid x:Name="MainGrid">
         <Grid.Background>
             <ImageBrush
-                    ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
-                    Stretch="UniformToFill" />
+                ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                Stretch="UniformToFill" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition/>

@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using CommunityToolkit.Mvvm.Input;
 using UNOversal.Navigation;
+using Microsoft.UI.Xaml.Media.Animation;
 
 namespace Project2FA.UNO.Views
 {
@@ -54,7 +55,7 @@ namespace Project2FA.UNO.Views
             {
                 App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 ViewModel.Initialize(new NavigationParameters());
-
+                
                 //set current index for TabBar on smartphones
 #if ANDROID || IOS
                 if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
@@ -63,10 +64,22 @@ namespace Project2FA.UNO.Views
                     {
                         case AccountCodePage:
                             App.ShellPageInstance.ViewModel.SelectedIndex = 0;
+                            var fadeOutStoryboard = new Storyboard();
+                            var fadeAnimation = new DoubleAnimation { From = 1.0, To = 0.0, Duration = new Duration(TimeSpan.FromSeconds(1.0)) };
+                            Storyboard.SetTarget(fadeAnimation, MobileAutoSuggestBox);
+                            Storyboard.SetTargetProperty(fadeAnimation, "Opacity");
+                            fadeOutStoryboard.Children.Add(fadeAnimation);
+                            fadeOutStoryboard.Begin();
                             break;
-                        case SearchPage:
-                            App.ShellPageInstance.ViewModel.SelectedIndex = 1;
-                            break;
+                        //case SearchPage:
+                        //    App.ShellPageInstance.ViewModel.SelectedIndex = 1;
+                        //    var fadeInStoryboard = new Storyboard();
+                        //    var fadeInAnimation = new DoubleAnimation { From = 0.0, To = 1.0, Duration = new Duration(TimeSpan.FromSeconds(1.0)) };
+                        //    Storyboard.SetTarget(fadeInAnimation, MobileAutoSuggestBox);
+                        //    Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
+                        //    fadeInStoryboard.Children.Add(fadeInAnimation);
+                        //    fadeInStoryboard.Begin();
+                        //    break;
                         case SettingPage:
                             App.ShellPageInstance.ViewModel.SelectedIndex = 2;
                             break;

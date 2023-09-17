@@ -367,7 +367,6 @@ namespace Project2FA.UNO
 #if __IOS__ || __ANDROID__
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
-            containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
 #else
             containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountContentDialog, AddAccountContentDialogViewModel>();

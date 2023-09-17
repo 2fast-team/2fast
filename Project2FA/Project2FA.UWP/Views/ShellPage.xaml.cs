@@ -36,9 +36,8 @@ namespace Project2FA.UWP.Views
             _navManager = SystemNavigationManager.GetForCurrentView();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
 
-            string title = Windows.ApplicationModel.Package.Current.DisplayName;
             // determine and set if the app is started in debug mode
-            ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
+            ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + Strings.Resources.ApplicationName : Strings.Resources.ApplicationName;
             //TODO WIP pro features
             SettingsService.Instance.IsProVersion = false;
             coreTitleBar = CoreApplication.GetCurrentView().TitleBar;

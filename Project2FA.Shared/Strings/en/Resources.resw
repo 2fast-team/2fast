@@ -730,10 +730,12 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Over 200 new company logos added
+    <value>- Added over 250 new company logos
 - Revision of the initial tutorial
+- Tutorial call possible again at any time
 - Bug fixes
-- Third party libraries updated</value>
+- Updating of third-party libraries
+- Support for copying a time-based one-time password from an account, using the Enter key</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features &amp; changes</value>
@@ -922,11 +924,7 @@ Please synchronize the time in the settings.</value>
     <value>Would you like to open the tutorial for the application?</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>This application is an authenticator for two-factor authentication (2FA) that uses the standard "Time-based One-time Password Algorithm" (TOTP) according to standardisation RFC 6238. Services that rely on the TOTP standard for 2FA can be used with this application.
-
-For storage and backup, a data file is created or used to store the linked accounts in this file in encrypted form. For storage, a cloud storage such as Nextcloud, ownCloud, Onedrive, etc. is recommended in order to achieve versioning and security against loss.
-
-In the following sections, the functionality of this application is explained in this tutorial.</value>
+    <value>The **2fast** application (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is an [authenticator](https://en.wikipedia.org/wiki/Authenticator) for two-factor authentication (2FA) that uses the standard "**T**ime-based **O**ne-**t**ime **P**assword algorithm"/ time-based one-time password (TOTP) according to standardization [RFC 6238](https://tools.ietf.org/html/rfc6238). Services that rely on the TOTP standard for the second factor can be used with this application. For example, Microsoft, Google and PayPal support two-factor authentication using TOTP:</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
     <value>To create a data file, the first step is to select a folder in which the file is to be saved. A storage location that is protected against data loss is recommended (e.g. cloud storage such as One-Drive, DropBox, etc.). This is followed by the name and password for encrypting the file. It is recommended to save the password in a password manager to prevent loss.</value>
@@ -1169,12 +1167,18 @@ In the following sections, the functionality of this application is explained in
     <value>Open tutorial</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
-    <value>Die App speichert lokal in einer Datei die eingetragenen Konten, wodurch die Anwendung komplett offline betrieben werden kann, da zur Anlage und Generierung der zeitbasierten Einmal-Passwörter keine Kommunikation zwischen dem Dienst herrscht. 
-Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. zu empfehlen, um eine Versionierung und eine Sicherstellung gegen Verlust zu erlangen.
-In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung im Einzelnen erläutert.</value>
+    <value>The functionality for the [Authentication](https://en.wikipedia.org/wiki/Authentication) of the second factor is done by means of the time-based one-time password. For this purpose, a secret setup key is agreed between the logon server of the service and the user, which is stored locally in the application. This ensures that if the setup key is agreed, the application can always be operated offline.
+
+
+
+The storage of the setup keys for the various services in this application, unlike in other authenticators, is stored in a file, which is password protected at creation to encrypt the file. For storing the file, a cloud storage such as Nextcloud, ownCloud, Onedrive, etc. is recommended in this case, in order to obtain versioning and security against loss.
+
+
+
+The functionality of this application is explained in more detail in the following sections.</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
-    <value>Funktionsweise der Anwendung</value>
+    <value>Functionality of the application</value>
   </data>
   <data name="SettingsManageSubscriptions.Content" xml:space="preserve">
     <value>Manage subscriptions</value>

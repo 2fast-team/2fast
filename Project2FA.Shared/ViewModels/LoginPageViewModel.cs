@@ -249,7 +249,9 @@ namespace Project2FA.ViewModels
                                 break;
                             case ContentDialogResult.Primary:
                                 settings.PreferBiometricLogin = Services.Enums.BiometricPreferEnum.Prefer;
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                                 BiometricoLoginCommandTask();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                                 break;
                             case ContentDialogResult.Secondary:
                                 settings.PreferBiometricLogin = Services.Enums.BiometricPreferEnum.No;
@@ -262,7 +264,9 @@ namespace Project2FA.ViewModels
                     {
                         if (!IsLogout)
                         {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                             BiometricoLoginCommandTask();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         }
                     }
                 }

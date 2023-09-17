@@ -60,8 +60,8 @@ namespace Project2FA.UNO.Views
                         case AccountCodePage:
                             ViewModel.SelectedIndex = 0;
                             break;
-                        case SearchPage:
-                            ViewModel.SelectedIndex = 1;
+                        //case SearchPage:
+                        //    ViewModel.SelectedIndex = 1;
                             break;
                         case SettingPage:
                             ViewModel.SelectedIndex = 2;
@@ -69,6 +69,18 @@ namespace Project2FA.UNO.Views
                         default:
                             break;
                     }
+                }
+#endif
+            }
+            else
+            {
+#if ANDROID || IOS
+                // if the search is seleted, a back command go to
+                // the AccountCodePage index
+                if (ViewModel.SelectedIndex == 1)
+                {
+                    e.Handled = true;
+                    ViewModel.SelectedIndex = 0;
                 }
 #endif
             }

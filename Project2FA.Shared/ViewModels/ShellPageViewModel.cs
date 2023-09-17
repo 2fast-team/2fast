@@ -32,6 +32,7 @@ namespace Project2FA.ViewModels
         private string _title;
         private bool _isScreenCaptureEnabled;
         private int _selectedIndex = 0;
+        private bool _isMobileSearchActive = false;
         public ICommand AccountCodePageCommand { get; }
         public ICommand SearchPageCommand { get; }
         public ICommand SettingsPageCommand { get; }
@@ -62,13 +63,13 @@ namespace Project2FA.ViewModels
 
         private async Task SearchPageCommandTask()
         {
-            if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
-            {
-                if (uIElement is not SearchPage)
-                {
-                    await NavigationService.NavigateAsync(nameof(SearchPage));
-                }
-            }
+            //if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
+            //{
+            //    if (uIElement is not SearchPage)
+            //    {
+            //        await NavigationService.NavigateAsync(nameof(SearchPage));
+            //    }
+            //}
         }
 
         private async Task AccountCodePageCommandTask()
@@ -138,6 +139,14 @@ namespace Project2FA.ViewModels
             set
             {
                 SetProperty(ref _selectedIndex, value);
+                if (value == 1)
+                {
+                    IsMobileSearchActive = true;
+                }
+                else
+                {
+                    IsMobileSearchActive = false;
+                }
             }
         }
 
@@ -145,6 +154,11 @@ namespace Project2FA.ViewModels
         { 
             get => _selectedItem;
             set => SetProperty(ref _selectedItem, value);
+        }
+        public bool IsMobileSearchActive 
+        { 
+            get => _isMobileSearchActive; 
+            set => SetProperty(ref _isMobileSearchActive, value);
         }
 #endif
     }

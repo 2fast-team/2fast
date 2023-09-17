@@ -479,6 +479,12 @@ namespace Project2FA.ViewModels
             //set the view setting from SettingsPage
             CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
 
+            // reset the search filter for accounts
+            if (TwoFADataService.ACVCollection.Filter != null)
+            {
+                TwoFADataService.ACVCollection.Filter = null;
+            }
+
             //Start the app logic
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             StartTOTPLogic();
@@ -523,5 +529,11 @@ namespace Project2FA.ViewModels
                 OnPropertyChanged(nameof(ChangedItem));
             }
         }
+#if !WINDOWS_UWP
+        public ShellPageViewModel ShellViewModel
+        {
+            get => App.ShellPageInstance.ViewModel;
+        }
+#endif
     }
 }

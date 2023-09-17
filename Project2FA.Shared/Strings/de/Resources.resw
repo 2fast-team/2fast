@@ -734,10 +734,12 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Über 200 neue Unternehmen-Logos hinzugefügt
+    <value>- Über 250 neue Unternehmen-Logos hinzugefügt
 - Überarbeitung des initialen Tutorials
+- Tutorialaufruf jederzeit wieder möglich
 - Fehlerbehebungen
-- Aktualisierung von Drittanbieter-Bibliotheken</value>
+- Aktualisierung von Drittanbieter-Bibliotheken
+- Unterstützung des kopierens eines zeitbasierten Einmalpasstwortes von einem Konto, mithilfe der Enter-Taste</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -929,7 +931,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Möchten Sie das Tutorial zu der Anwendung öffnen?</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>Die Anwendung **2fast** (Akronym für **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) ist ein [Authentifikator](https://de.wikipedia.org/wiki/Authentifizierung) für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „**T**ime-based **O**ne-**t**ime **P**assword Algorithmus“/ zeitbasiertes Einmal-Passwort (TOTP) nach Standardisierung [RFC 6238](https://tools.ietf.org/html/rfc6238) nutzt. Dienste die für den zweiten Faktor auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden. Beispielhaft untestützen Microsoft, Google und PayPal die Zwei-Faktor-Authentifizierung mittels TOTP:</value>
+    <value>Die Anwendung **2fast** (Akronym für **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) ist ein [Authentifikator](https://de.wikipedia.org/wiki/Authentifizierung) für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „**T**ime-based **O**ne-**t**ime **P**assword Algorithmus“/ zeitbasiertes Einmalpasswort (TOTP) nach Standardisierung [RFC 6238](https://tools.ietf.org/html/rfc6238) nutzt. Dienste die für den zweiten Faktor auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden. Beispielhaft untestützen Microsoft, Google und PayPal die Zwei-Faktor-Authentifizierung mittels TOTP:</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
     <value>Für die Erstellung einer Datendatei muss als erster Schritt ein Ordner gewählt werden, in dem die Datei gespeichert werden soll. Hierbei ist ein Speicherort zu empfehlen, der gegenüber einem Datenverlust abgesichert ist (z.B. Cloud-Speicher wie One-Drive, DropBox, etc.). Im Anschluss folgen der Name und das Passwort für die Verschlüsselung der Datei. Es wird die Speicherung des Passwortes in einem Passwortmanager empfohlen, um einen Verlust zu verhindern.</value>
@@ -1172,12 +1174,18 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Tutorial aufrufen</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
-    <value>Die App speichert lokal in einer Datei die eingetragenen Konten, wodurch die Anwendung komplett offline betrieben werden kann, da zur Anlage und Generierung der zeitbasierten Einmal-Passwörter keine Kommunikation zwischen dem Dienst herrscht. 
-Zur Speicherung ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. zu empfehlen, um eine Versionierung und eine Sicherstellung gegen Verlust zu erlangen.
-In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung im Einzelnen erläutert.</value>
+    <value>Die Funktionsweise für die [Authentizierung](https://de.wikipedia.org/wiki/Authentifizierung) des zweiten Faktors erfolgt mittels des zeitbasierten Einmalpasswortes. Hierfür wird zwischen dem Anmeldeserver des Dienstes und dem Anwender ein geheimer Einrichtungsschlüssel vereinbart, der lokal in der Anwendung gespeichert wird. Dies sorgt dafür, das wenn der Einrichtungsschlüssel vereinbart wurde, die Anwendung immer offline betrieben werden kann.
+
+
+
+Die Speicherung der Einrichtungsschlüssel für die verschiedenen Dienste wird in dieser Anwendung, anders als in anderen Authentifikatoren in einer Datei gespeichert, welche  mit einem Passwort bei der Erstellung versehen wird, um die Datei zu verschlüsseln. Zur Speicherung der Datei ist hierbei ein Cloud-Speicher wie Nextcloud, ownCloud, Onedrive, etc. zu empfehlen, um eine Versionierung und eine Sicherstellung gegen Verlust zu erlangen.
+
+
+
+In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detailierter erläutert.</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
-    <value>Funktionsweise der Anwendung</value>
+    <value>**Funktionsweise der Anwendung**</value>
   </data>
   <data name="SettingsManageSubscriptions.Content" xml:space="preserve">
     <value>Abonnement verwalten</value>

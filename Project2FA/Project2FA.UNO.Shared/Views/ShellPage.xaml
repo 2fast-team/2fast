@@ -186,6 +186,7 @@
             x:Name="MobileTabBar"
             Grid.Row="2"
             Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay}"
+            Margin="0,0,0,30"
             ItemContainerStyle="{StaticResource CupertinoBottomTabBarItemStyle}"
             SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
             SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"

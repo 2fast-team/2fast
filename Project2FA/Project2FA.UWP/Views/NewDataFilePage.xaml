@@ -91,33 +91,28 @@
                                                         x:Uid="NewDatafileContentDialogLocalPath" />
                                                 </StackPanel>
                                             </Button>
-                                            <toolkitcontrols:SettingsExpander>
-                                                <toolkitcontrols:SettingsExpander.Items>
-                                                    <toolkitcontrols:SettingsCard>
-                                                        <toolkitcontrols:SettingsCard.Content>
-                                                            <Button 
-                                                                x:Name="BTN_WebDAV"
-                                                                Margin="0,10,0,10"
-                                                                HorizontalContentAlignment="Left"
-                                                                Style="{StaticResource AccentButtonStyle}"
-                                                                Click="BTN_WebDAV_Click"
-                                                                MinWidth="255">
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <FontIcon Glyph="&#xE753;"
-                                                                        FontSize="30"/>
-                                                                    <TextBlock 
-                                                                        Margin="8,0,0,0" 
-                                                                        HorizontalAlignment="Stretch" 
-                                                                        VerticalAlignment="Center" 
-                                                                        Text="~NewDatafileContentDialogWebDAV.Text"
-                                                                        x:Uid="NewDatafileContentDialogWebDAV" />
-                                                                </StackPanel>
-                                                            </Button>
-                                                        </toolkitcontrols:SettingsCard.Content>
-                                                    </toolkitcontrols:SettingsCard>
-                                                </toolkitcontrols:SettingsExpander.Items>
-                                            </toolkitcontrols:SettingsExpander>
-                                            
+                                            <Button
+                                                x:Name="BTN_WebDAV"
+                                                HorizontalContentAlignment="Left"
+                                                Style="{StaticResource AccentButtonStyle}"
+                                                Margin="0,10,0,10"
+                                                MinWidth="255"
+                                                Click="BTN_WebDAV_Click">
+                                                <StackPanel 
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Left">
+                                                    <FontIcon 
+                                                    Glyph="&#xE753;" 
+                                                    FontSize="30"/>
+                                                    <TextBlock 
+                                                    Margin="8,0,0,0" 
+                                                    HorizontalAlignment="Stretch" 
+                                                    VerticalAlignment="Center" 
+                                                    x:Uid="NewDatafileContentDialogWebDAV"
+                                                    Text="~NewDatafileContentDialogWebDAV.Text"/>
+                                                </StackPanel>
+                                            </Button>
+
                                         </StackPanel>
                                     </ScrollViewer>
                                 </PivotItem>
@@ -129,7 +124,7 @@
                                     <Grid MaxWidth="800" HorizontalAlignment="Left">
                                         <ScrollViewer VerticalScrollMode="Auto">
                                             <StackPanel>
-                                                <TextBlock 
+                                                <TextBlock
                                 TextWrapping="Wrap" 
                                 x:Uid="NewDatafileContentDialogCreateInfo" />
                                                 <TextBox 
@@ -141,7 +136,6 @@
                                 Header="~NewDatafileContentDialogLocalFolder.Header"
                                 Margin="0,10,0,10">
                                                 </TextBox>
-
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition/>
@@ -267,12 +261,32 @@
                                 Text="{x:Bind ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,0,0,20"/>
 
-                                                        <PasswordBox 
-                                x:Name="PB_WebDAVPassword"
-                                x:Uid="Password" 
-                                Header="~Password.Header" 
-                                Password="{x:Bind ViewModel.WebDAVPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Margin="0,0,0,32" />
+                                                        <Grid Margin="0,0,0,32">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition  Width="auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <PasswordBox
+                                                            x:Name="PB_WebDAVPassword"
+                                                            x:Uid="Password"
+                                                            Header="~Password.Header" 
+                                                            InputScope="Password"
+                                                            Password="{x:Bind ViewModel.WebDAVPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                            KeyDown="PB_LocalPassword_KeyDown"/>
+                                                            <HyperlinkButton
+                                                            Grid.Column="1"
+                                                            Height="36"
+                                                            Width="48"
+                                                            Padding="4,4,4,4"
+                                                            ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+                                                            Click="HLBTN_WDPasswordInfo"
+                                                            VerticalAlignment="Bottom">
+                                                                <FontIcon
+                                                                FontSize="20"
+                                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                                                Glyph="&#xE946;"/>
+                                                            </HyperlinkButton>
+                                                        </Grid>
 
                                                         <Button
                                 x:Name="UseDatafileContentDialogWDLogin"

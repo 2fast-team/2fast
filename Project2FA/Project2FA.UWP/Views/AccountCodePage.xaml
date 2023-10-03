@@ -580,7 +580,7 @@
                                 <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
                             <Grid VerticalAlignment="Center">
-                                <controls:RadialProgressBar
+                                <unocontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     
@@ -808,7 +808,7 @@
                                 <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
                             <Grid VerticalAlignment="Center">
-                                <controls:RadialProgressBar
+                                <unocontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     

@@ -32,17 +32,7 @@ namespace Project2FA.UWP.Views
         /// <param name="args"></param>
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            string hash;
-            var secretService = App.Current.Container.Resolve<ISecretService>();
-            var jsonService = App.Current.Container.Resolve<ISerializationService>();
-            if (DataService.Instance.ActivatedDatafile != null)
-            {
-                hash = CryptoService.CreateStringHash(ProtectData.Unprotect(jsonService.Deserialize<byte[]>(secretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName))));
-            }
-            else
-            {
-                hash = (await App.Repository.Password.GetAsync()).Hash;
-            }
+            string hash = await ViewModel.GetCurrentPasswordHash();
             // first check if the given current password matches with the datafile
             if (hash == CryptoService.CreateStringHash(ViewModel.CurrentPassword))
             {

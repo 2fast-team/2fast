@@ -305,7 +305,7 @@ Important: You have to type in the password everytime you start the app!</value>
     <value>Storage</value>
   </data>
   <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>Choose WebDAV (beta)</value>
+    <value>Choose WebDAV</value>
   </data>
   <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>
@@ -1185,5 +1185,8 @@ The functionality of this application is explained in more detail in the followi
   </data>
   <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
     <value>In the following steps, the functionality of the application will be explained.</value>
+  </data>
+  <data name="BTNBack.Content" xml:space="preserve">
+    <value>Back</value>
   </data>
 </root>

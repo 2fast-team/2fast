@@ -1,9 +1,5 @@
-﻿using Prism.Mvvm;
-using System.Threading.Tasks;
-using Prism.Ioc;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using Prism.Commands;
-using Project2FA.Core.Services;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
 using System;
@@ -16,14 +12,14 @@ using UNOversal.Services.Secrets;
 using UNOversal.Services.File;
 using Project2FA.Services;
 using Project2FA.Core.Utils;
-using Windows.Security.Cryptography;
-using Windows.Storage.Streams;
-using System.Text;
 using Project2FA.Core.Services.Crypto;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
+using Windows.Security.Cryptography;
+using Windows.Storage.Streams;
 #else
+using System.Text;
 using Project2FA.UNO;
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -53,11 +49,14 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Constructor
         /// </summary>
-        public ChangeDatafilePasswordContentDialogViewModel()
+        public ChangeDatafilePasswordContentDialogViewModel(
+            ISecretService secretService, 
+            IFileService fileService, 
+            INewtonsoftJSONService newtonsoftJSONService)
         {
-            SecretService = App.Current.Container.Resolve<ISecretService>();
-            FileService = App.Current.Container.Resolve<IFileService>();
-            NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
+            SecretService = secretService;
+            FileService = fileService;
+            NewtonsoftJSONService = newtonsoftJSONService;
             ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
@@ -144,13 +143,30 @@ namespace Project2FA.ViewModels
                                     await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
                 StorageFile file = await folder.GetFileAsync(dbDatafile.Name);
                 return await TestPassword(file, folder);
-
-
             }
         }
 
+        public async Task<string> GetCurrentPasswordHash()
+        {
+            string hash;
+            if (DataService.Instance.ActivatedDatafile != null)
+            {
+#if WINDOWS_UWP
+                hash = CryptoService.CreateStringHash(ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName))));
+#else
+                // TODO encrypted password via ProtectData is not supported
+                hash = CryptoService.CreateStringHash(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName)));
+#endif
+            }
+            else
+            {
+                hash = (await App.Repository.Password.GetAsync()).Hash;
+            }
+            return hash;
+        }
+
         /// <summary>
-        /// 
+        /// Test the new password, if the current password is invalid, or test the current password, if a new password will be set
         /// </summary>
         /// <param name="storageFile"></param>
         /// <param name="storageFolder"></param>
@@ -173,6 +189,7 @@ namespace Project2FA.ViewModels
                 }
                 else
                 {
+                    // check the current password, if the file can be decrypted
                     DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(CurrentPassword, iv, datafileStr, datafile.Version);
                 }
 
@@ -236,7 +253,7 @@ namespace Project2FA.ViewModels
             if (InvalidPassword)
             {
                 if (NewPassword == NewPasswordRepeat &&
-                    (!string.IsNullOrEmpty(NewPassword) && !string.IsNullOrEmpty(NewPasswordRepeat)))
+                    (!string.IsNullOrWhiteSpace(NewPassword) && !string.IsNullOrWhiteSpace(NewPasswordRepeat)))
                 {
                     IsPrimaryBTNEnable = true;
                 }
@@ -247,10 +264,10 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                if (!string.IsNullOrEmpty(CurrentPassword))
+                if (!string.IsNullOrWhiteSpace(CurrentPassword))
                 {
                     if (NewPassword == NewPasswordRepeat &&
-                        (!string.IsNullOrEmpty(NewPassword) && !string.IsNullOrEmpty(NewPasswordRepeat)))
+                        (!string.IsNullOrWhiteSpace(NewPassword) && !string.IsNullOrWhiteSpace(NewPasswordRepeat)))
                     {
                         IsPrimaryBTNEnable = true;
                     }

@@ -32,6 +32,7 @@ using Windows.UI.ViewManagement;
 using Project2FA.Core.Utils;
 using System.Web;
 using System.Linq;
+using CommunityToolkit.WinUI.Helpers;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -39,7 +40,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using WindowActivatedEventArgs = Windows.UI.Core.WindowActivatedEventArgs;
 using WinUIWindow = Windows.UI.Xaml.Window;
-using Microsoft.Toolkit.Uwp.Helpers;
 using Windows.ApplicationModel.DataTransfer;
 #else
 using Project2FA.UNO;
@@ -48,7 +48,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using WindowActivatedEventArgs = Microsoft.UI.Xaml.WindowActivatedEventArgs;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
-using CommunityToolkit.WinUI.Helpers;
 #endif
 
 namespace Project2FA.ViewModels
@@ -266,9 +265,10 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task ScanClipboardQRCode()
         {
-            //bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-screenclip:edit?source={0}&clippingMode=Window"));
+            // TODO option for clippingMode via settings page for 1.3.0 version
+            // clippingMode Values supported include: Rectangle, Freeform, Window
             bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
-                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
+                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Rectangle",
                 Strings.Resources.ApplicationName,
                 OpeningSeconds)));
             if (result)
@@ -282,11 +282,8 @@ namespace Project2FA.ViewModels
                 MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogScreenclipNotFound, Strings.Resources.Error);
                 await dialog.ShowAsync();
             }
-//            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
-//string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Window",
-//Strings.Resources.ApplicationName,
-//OpeningSeconds)));
 
+            // TODO implement alternative way to scan QR Code for 1.3.0 version
             //// The GraphicsCapturePicker follows the same pattern the
             //// file pickers do.
             //var picker = new GraphicsCapturePicker();
@@ -352,7 +349,16 @@ namespace Project2FA.ViewModels
                             if (!string.IsNullOrEmpty(_qrCodeStr))
                             {
                                 //clear the clipboard, if the image is read as TOTP
-                                Clipboard.Clear();
+                                try
+                                {
+                                    Clipboard.Clear();
+                                }
+                                catch (Exception exc)
+                                {
+#if WINDOWS_UWP
+                                    TrackingManager.TrackExceptionCatched("Clipboard.Clear: ", exc);
+#endif
+                                }
                                 await ReadAuthenticationFromString();
                             }
                             else

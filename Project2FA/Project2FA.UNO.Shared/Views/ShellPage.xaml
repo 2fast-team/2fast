@@ -184,9 +184,10 @@
 
         <utu:TabBar 
             x:Name="MobileTabBar"
-            Grid.Row="2"
+            Grid.Row="1"
+            IsEnabled="{x:Bind ViewModel.NavigationIsAllowed, Mode=OneWay}"
             Visibility="{x:Bind ViewModel.IsMobile,Mode=OneWay}"
-            Margin="0,0,0,30"
+            Margin="{x:Bind ViewModel.GetTabBarMargin, Mode=OneWay}"
             ItemContainerStyle="{StaticResource CupertinoBottomTabBarItemStyle}"
             SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
             SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"

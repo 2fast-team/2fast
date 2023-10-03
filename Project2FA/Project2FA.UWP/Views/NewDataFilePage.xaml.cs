@@ -79,5 +79,19 @@ namespace Project2FA.UWP.Views
         {
 
         }
+
+        private void HLBTN_WDPasswordInfo(object sender, RoutedEventArgs e)
+        {
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            {
+                Target = sender as FrameworkElement,
+                Subtitle = Strings.Resources.WebDAVAppPasswordInfo,
+                AutoCloseInterval = 8000,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            RootGrid.Children.Add(teachingTip);
+        }
     }
 }

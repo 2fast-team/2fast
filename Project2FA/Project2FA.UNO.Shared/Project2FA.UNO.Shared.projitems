@@ -18,10 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\CardControl\CardControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\CardExpanderControl\CardExpanderControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\CardGroupControl\CardGroupAutomationPeer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\CardGroupControl\CardGroupControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AddAccountPage.xaml.cs">
       <DependentUpon>AddAccountPage.xaml</DependentUpon>
     </Compile>
@@ -87,18 +83,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\CardControl\CardControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\CardExpanderControl\CardExpanderControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\CardGroupControl\CardGroupControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Generic\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -162,7 +162,7 @@ return await SetLocalFile();
             IsLoading = true;
 
 #if WINDOWS_UWP
-            if (await TestPassword() && LocalStorageFolder != null)
+            if (await TestPassword() && (LocalStorageFolder != null || isWebDAV))
 #else
             if (await TestPassword())
 #endif

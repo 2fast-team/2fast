@@ -3,9 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <!--custom controls-->
-        <ResourceDictionary Source="ms-appx:///Controls/CardControl/CardControl.xaml" />
-
-        <ResourceDictionary Source="ms-appx:///Controls/CardGroupControl/CardGroupControl.xaml" />
         <ResourceDictionary Source="/Controls/Shimmer/Shimmer.xaml" />
         <ResourceDictionary Source="/Controls/RadialProgressBar/RadialProgressBar.xaml" />
     </ResourceDictionary.MergedDictionaries>

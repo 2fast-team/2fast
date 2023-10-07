@@ -1189,4 +1189,7 @@ The functionality of this application is explained in more detail in the followi
   <data name="BTNBack.Content" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
+    <value>Choose folder path</value>
+  </data>
 </root>

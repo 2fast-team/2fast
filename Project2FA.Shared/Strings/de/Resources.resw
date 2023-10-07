@@ -1196,4 +1196,7 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="BTNBack.Content" xml:space="preserve">
     <value>Zurück</value>
   </data>
+  <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
+    <value>Ordnerpfad wählen</value>
+  </data>
 </root>

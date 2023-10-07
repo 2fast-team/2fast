@@ -1,12 +1,9 @@
-﻿using CommunityToolkit.Labs.WinUI;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
-using Project2FA.Repository.Models;
+﻿using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.UWP.Extensions;
 using Project2FA.ViewModels;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

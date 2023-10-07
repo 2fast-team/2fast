@@ -266,7 +266,7 @@ namespace Project2FA.ViewModels
         public async Task ScanClipboardQRCode()
         {
             // TODO option for clippingMode via settings page for 1.3.0 version
-            // clippingMode Values supported include: Rectangle, Freeform, Window
+            // clippingMode Values supported include: Rectangle, Freeform, Window, Fullscreen, Recording
             bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
                 string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Rectangle",
                 Strings.Resources.ApplicationName,

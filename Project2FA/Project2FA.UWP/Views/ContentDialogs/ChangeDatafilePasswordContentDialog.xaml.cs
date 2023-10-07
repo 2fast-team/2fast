@@ -1,11 +1,6 @@
-﻿using Project2FA.Services;
-using Prism.Ioc;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Project2FA.Core;
 using Project2FA.ViewModels;
-using UNOversal.Services.Secrets;
-using UNOversal.Services.Serialization;
 using Project2FA.Core.Services.Crypto;
 
 namespace Project2FA.UWP.Views

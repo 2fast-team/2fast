@@ -275,7 +275,7 @@ namespace Project2FA.Services
                 {
 #if WINDOWS_UWP
                     // check if the app has file system access to load the file
-                    var checkFileSystemAccess = AppCapability.Create("broadFileSystemAccess").CheckAccess();
+                    var checkFileSystemAccess = AppCapability.Create(Constants.BroadFileSystemAccessName).CheckAccess();
                     switch (checkFileSystemAccess)
                     {
                         case AppCapabilityAccessStatus.DeniedBySystem:
@@ -295,6 +295,9 @@ namespace Project2FA.Services
                     dbHash = null;
                     passwordHashName = Constants.ActivatedDatafileHashName;
                     datafilename = ActivatedDatafile.Name;
+#if WINDOWS_UWP
+                    folder = await ActivatedDatafile.GetParentAsync();
+#endif
 #if __IOS__
                     nsUrl = OpenDatefileUrl;
 #endif
@@ -492,7 +495,7 @@ namespace Project2FA.Services
                     if (dbDatafile.IsWebDAV)
                     {
                         // TODO show not found error
-                        //var webDAVTask = await CheckIfWebDAVDatafileIsEqual(dbDatafile);
+                        await ErrorDialogs.ShowFileOrFolderNotFoundError(dbDatafile);
                         //await CheckLocalDatafile();
                     }
                     else
@@ -615,14 +618,12 @@ namespace Project2FA.Services
             DatafileModel datafile = new DatafileModel();
             try
             {
+                await CollectionAccessSemaphore.WaitAsync();
 
                 byte[] iv = Aes.Create().IV;
                 string passwordHashName = ActivatedDatafile != null ?
                     Constants.ActivatedDatafileHashName :
                     dbHash.Hash;
-
-                await CollectionAccessSemaphore.WaitAsync();
-
 
                 // set new template version for data file
 #if WINDOWS_UWP

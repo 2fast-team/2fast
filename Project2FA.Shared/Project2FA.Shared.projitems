@@ -9,6 +9,14 @@
     <Import_RootNamespace>Project2FA.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.Members.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.Members.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.Placeholder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.Source.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExFailedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExOpenedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.Properties.cs" />
@@ -72,6 +80,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileActivationPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImportAccountPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\InAppPaymentContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ManageCategoriesContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewDataFilePageViewModel.cs" />
@@ -2867,6 +2876,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\schluessel.svg" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

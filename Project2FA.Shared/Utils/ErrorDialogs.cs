@@ -11,6 +11,7 @@ using Windows.Storage;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
 using UNOversal.Services.Secrets;
+using Windows.Security.Authorization.AppCapabilityAccess;
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -49,6 +50,7 @@ namespace Project2FA.Utils
             dialog.SecondaryButtonText = Resources.Confirm;
             return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
+
         public static async Task ShowUnauthorizedAccessError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
@@ -135,8 +137,6 @@ namespace Project2FA.Utils
                 ShowPasswordError();
             }
         }
-
-        
 
         public static Task UnauthorizedAccessDialog()
         {
@@ -353,23 +353,23 @@ namespace Project2FA.Utils
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/2fast-team/2fast/issues"));
             };
             // TODO change
-            var feedbackHub = new Button
-            {
-                Margin = new Thickness(4, 0, 0, 0),
-                Content = "Feedback-Hub"
-            };
-            feedbackHub.Click += async (s, e) =>
-            {
-#if WINDOWS_UWP
-                // https://docs.microsoft.com/en-us/windows/uwp/monetize/launch-feedback-hub-from-your-app
-                var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-                await launcher.LaunchAsync();
-#endif
-            };
+//            var feedbackHub = new Button
+//            {
+//                Margin = new Thickness(4, 0, 0, 0),
+//                Content = "Feedback-Hub"
+//            };
+//            feedbackHub.Click += async (s, e) =>
+//            {
+//#if WINDOWS_UWP
+//                // https://docs.microsoft.com/en-us/windows/uwp/monetize/launch-feedback-hub-from-your-app
+//                var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+//                await launcher.LaunchAsync();
+//#endif
+//            };
             var buttonStackPanel = new StackPanel();
             buttonStackPanel.Orientation = Orientation.Horizontal;
             buttonStackPanel.Children.Add(githubButton);
-            buttonStackPanel.Children.Add(feedbackHub);
+            //buttonStackPanel.Children.Add(feedbackHub);
             stackpanel.Children.Add(buttonStackPanel);
 
             dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
@@ -452,104 +452,107 @@ namespace Project2FA.Utils
         /// <summary>
         /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
         /// </summary>
-        public async static Task ShowFileOrFolderNotFoundError()
+        public async static Task ShowFileOrFolderNotFoundError(DBDatafileModel datafileModel = null)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-            try
+            // check if the app has file system access to load the file
+            var checkFileSystemAccess = AppCapability.Create(Constants.BroadFileSystemAccessName).CheckAccess();
+            if (checkFileSystemAccess == AppCapabilityAccessStatus.Allowed)
             {
-                //TODO current workaround: check permission to the file system (broadFileSystemAccess)
-                string path = @"C:\Windows\explorer.exe";
-                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                await ErrorDialogs.UnauthorizedAccessDialog();
-            }
-            // disable shell navigation
-            App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
-            //Logger.Log("no datafile found", Category.Exception, Priority.High);
-            bool selectedOption = false;
+                if (datafileModel != null && datafileModel.IsWebDAV)
+                {
+                    // TODO WebDav case
+                }
+                // disable shell navigation
+                App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
+                //Logger.Log("no datafile found", Category.Exception, Priority.High);
+                bool selectedOption = false;
 
-            ContentDialog dialog = new ContentDialog();
-            dialog.Closed += Dialog_Closed;
-            dialog.Title = Resources.ErrorHandle;
-            StackPanel stackPanel = new StackPanel();
+                ContentDialog dialog = new ContentDialog();
+                dialog.Closed += Dialog_Closed;
+                dialog.Title = Resources.ErrorHandle;
+                StackPanel stackPanel = new StackPanel();
 #if WINDOWS_UWP
-            MarkdownTextBlock markdown = new MarkdownTextBlock();
+                MarkdownTextBlock markdown = new MarkdownTextBlock();
 #else
-            TextBlock markdown = new TextBlock();
-            markdown.TextWrapping = TextWrapping.Wrap;
+                TextBlock markdown = new TextBlock();
+                markdown.TextWrapping = TextWrapping.Wrap;
 #endif
-            markdown.Text = Resources.ExceptionDatafileNotFound;
-            stackPanel.Children.Add(markdown);
+                markdown.Text = Resources.ExceptionDatafileNotFound;
+                stackPanel.Children.Add(markdown);
 
-            Button changePathBTN = new Button();
-            changePathBTN.Margin = new Thickness(0, 10, 0, 0);
-            changePathBTN.Content = Resources.ChangeDatafilePath;
-
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            changePathBTN.Command = new RelayCommand(async () =>
-            {
-                selectedOption = true;
-                dialog.Hide();
-                ContentDialogResult result = await dialogService.ShowDialogAsync(new UpdateDatafileContentDialog(), new DialogParameters());
-                if (result == ContentDialogResult.Primary)
-                {
-                    DataService.Instance.ErrorResolved();
-                    // allow shell navigation
-                    App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
-                    await DataService.Instance.ReloadDatafile();
-                }
-                if (result == ContentDialogResult.None)
-                {
-                    await ShowFileOrFolderNotFoundError();
-                }
-            });
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            stackPanel.Children.Add(changePathBTN);
-
-            Button factoryResetBTN = new Button();
-            factoryResetBTN.Margin = new Thickness(0, 10, 0, 10);
-            factoryResetBTN.Content = Resources.FactoryReset;
+                Button changePathBTN = new Button();
+                changePathBTN.Margin = new Thickness(0, 10, 0, 0);
+                changePathBTN.Content = Resources.ChangeDatafilePath;
 
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-            factoryResetBTN.Command = new RelayCommand(async () =>
-            {
-                ISecretService _secretService = App.Current.Container.Resolve<ISecretService>();
-                DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
-                //delete password in the secret vault
-                _secretService.Helper.RemoveSecret(Constants.ContainerName, passwordHash.Hash);
-                // reset data and restart app
-                await ApplicationData.Current.ClearAsync();
-                await CoreApplication.RequestRestartAsync("Factory reset");
-            });
+                changePathBTN.Command = new RelayCommand(async () =>
+                {
+                    selectedOption = true;
+                    dialog.Hide();
+                    ContentDialogResult result = await dialogService.ShowDialogAsync(new UpdateDatafileContentDialog(), new DialogParameters());
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        DataService.Instance.ErrorResolved();
+                        // allow shell navigation
+                        App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
+                        await DataService.Instance.ReloadDatafile();
+                    }
+                    if (result == ContentDialogResult.None)
+                    {
+                        await ShowFileOrFolderNotFoundError();
+                    }
+                });
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+                stackPanel.Children.Add(changePathBTN);
+
+                Button factoryResetBTN = new Button();
+                factoryResetBTN.Margin = new Thickness(0, 10, 0, 10);
+                factoryResetBTN.Content = Resources.FactoryReset;
+
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+                factoryResetBTN.Command = new RelayCommand(async () =>
+                {
+                    ISecretService _secretService = App.Current.Container.Resolve<ISecretService>();
+                    DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
+                    //delete password in the secret vault
+                    _secretService.Helper.RemoveSecret(Constants.ContainerName, passwordHash.Hash);
+                    // reset data and restart app
+                    await ApplicationData.Current.ClearAsync();
+                    await CoreApplication.RequestRestartAsync("Factory reset");
+                });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
-            stackPanel.Children.Add(factoryResetBTN);
+                stackPanel.Children.Add(factoryResetBTN);
 
-            dialog.Content = stackPanel;
-            dialog.PrimaryButtonText = Resources.CloseApp;
-            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
-            dialog.PrimaryButtonCommand = new RelayCommand(() =>
-            {
-                App.Current.Exit();
-            });
-
-            async void Dialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
-            {
-                if (!(Window.Current.Content is ShellPage))
+                dialog.Content = stackPanel;
+                dialog.PrimaryButtonText = Resources.CloseApp;
+                dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
+                dialog.PrimaryButtonCommand = new RelayCommand(() =>
                 {
                     App.Current.Exit();
-                }
-                else
+                });
+
+                async void Dialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
                 {
-                    if (!selectedOption)
+                    if (!(Window.Current.Content is ShellPage))
                     {
-                        await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+                        App.Current.Exit();
+                    }
+                    else
+                    {
+                        if (!selectedOption)
+                        {
+                            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+                        }
                     }
                 }
+                await dialogService.ShowDialogAsync(dialog, new DialogParameters());
             }
-            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            else
+            {
+                await UnauthorizedAccessUseLocalFileDialog();
+            }
         }
 
         internal static Task WritingFatalRestoreError()

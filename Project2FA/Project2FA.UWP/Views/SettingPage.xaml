@@ -4,8 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:wctc="using:CommunityToolkit.WinUI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:models="using:Project2FA.Repository.Models"
@@ -671,7 +672,7 @@
                                                         </GroupStyle.HeaderTemplate>
                                                         <GroupStyle.Panel>
                                                             <ItemsPanelTemplate>
-                                                                <controls:WrapPanel/>
+                                                                <wctc:WrapPanel/>
                                                             </ItemsPanelTemplate>
                                                         </GroupStyle.Panel>
                                                     </GroupStyle>
@@ -731,7 +732,7 @@
                         <AdaptiveTrigger MinWindowWidth="960" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TB_QRCode_Description.MaxWidth" Value="auto"/>
+                        <!--<Setter Target="TB_QRCode_Description.MaxWidth" Value="auto"/>-->
                         <Setter Target="LV_Dependencies.Margin" Value="20,0,0,0"/>
                         <Setter Target="LV_Dependencies.(RelativePanel.RightOf)" Value="SV_AboutTheApp"/>
                     </VisualState.Setters>

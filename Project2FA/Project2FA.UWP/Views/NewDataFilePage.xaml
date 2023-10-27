@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:extensions="using:Project2FA.UWP.Extensions"
-    xmlns:toolkitcontrols="using:CommunityToolkit.WinUI.Controls"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
@@ -389,7 +388,6 @@
                                     </Grid>
                                 </PivotItem>
                             </Pivot>
-
                         </RelativePanel>
                     </ScrollViewer>
                 </Grid>

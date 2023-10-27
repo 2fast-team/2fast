@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64|arm64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>1F71EC50F3ECBB45724B21A55C7EF0FA86999DE3</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>EE7C273F92500269D23ABD081383DBE749638BD0</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -186,6 +186,9 @@
     <Compile Include="Views\ContentDialogs\ImportAccountContentDialog.xaml.cs">
       <DependentUpon>ImportAccountContentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContentDialogs\InAppPaymentContentDialog.xaml.cs">
+      <DependentUpon>InAppPaymentContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -320,7 +323,7 @@
       <Version>8.0.230907</Version>
     </PackageReference>
     <PackageReference Include="DryIoc.dll">
-      <Version>5.4.1</Version>
+      <Version>5.4.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
       <Version>7.0.4</Version>
@@ -344,7 +347,7 @@
       <Version>2.8.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
-      <Version>1.0.2045.28</Version>
+      <Version>1.0.2088.41</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
@@ -478,6 +481,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentDialogs\ImportAccountContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentDialogs\InAppPaymentContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

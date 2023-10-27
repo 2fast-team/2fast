@@ -263,7 +263,7 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Launch the MS screenclip app
         /// </summary>
-        public async Task ScanClipboardQRCode()
+        private async Task ScanClipboardQRCode()
         {
             // TODO option for clippingMode via settings page for 1.3.0 version
             // clippingMode Values supported include: Rectangle, Freeform, Window, Fullscreen, Recording
@@ -320,7 +320,7 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Read the image (QR-code) from the clipboard
         /// </summary>
-        public async Task ReadQRCodeFromClipboard()
+        private async Task ReadQRCodeFromClipboard()
         {
             DataPackageView dataPackageView = Clipboard.GetContent();
             if (dataPackageView.Contains(StandardDataFormats.Bitmap))
@@ -893,11 +893,6 @@ namespace Project2FA.ViewModels
             }
         }
 
-        //public bool IsFocusSupported
-        //    => _mediaCapture != null
-        //    && _mediaCapture.VideoDeviceController != null
-        //    && _mediaCapture.VideoDeviceController.FocusControl != null
-        //    && _mediaCapture.VideoDeviceController.FocusControl.Supported;
         public TwoFACodeModel Model
         {
             get => _model;

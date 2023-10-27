@@ -190,7 +190,8 @@ return await SetLocalFile();
             };
 #if __IOS__
             //filePicker.FileTypeFilter.Add("com.jpwtechnology.2fa");
-            filePicker.FileTypeFilter.Add("*");
+            Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToUTTypeMapping.Add(".2fa", "com.jpwtechnology.2fa");
+            //filePicker.FileTypeFilter.Add("*");
 #else
             filePicker.FileTypeFilter.Add(".2fa");
 #endif

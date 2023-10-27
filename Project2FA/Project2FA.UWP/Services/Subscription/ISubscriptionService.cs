@@ -10,5 +10,6 @@ namespace Project2FA.UWP.Services
     public interface ISubscriptionService
     {
         Task SetupSubscriptionInfoAsync();
+        void Initialize(string id);
     }
 }

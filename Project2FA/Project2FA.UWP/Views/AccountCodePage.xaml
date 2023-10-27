@@ -3,13 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:models="using:Project2FA.Repository.Models"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:wctc="using:CommunityToolkit.WinUI.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="using:Project2FA.ViewModels"
-    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
@@ -107,7 +106,7 @@
                                         DefaultLabelPosition="Right">
                                         <CommandBar.Content>
                                             <Grid>
-                                                <controls:RadialProgressBar
+                                                <unocontrols:RadialProgressBar
                                 Value="{x:Bind TwoFADataService.TempDeletedTFAModel.Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind TwoFADataService.TempDeletedTFAModel.Period, Mode=OneWay}" 
                                 Width="40"
@@ -378,7 +377,7 @@
                                         DefaultLabelPosition="Right">
                                         <CommandBar.Content>
                                             <Grid>
-                                                <controls:RadialProgressBar
+                                                <unocontrols:RadialProgressBar
                                 Value="{x:Bind TwoFADataService.TempDeletedTFAModel.Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind TwoFADataService.TempDeletedTFAModel.Period, Mode=OneWay}" 
                                 Width="40"
@@ -1034,7 +1033,7 @@
             KeyUp="LV_AccountCollection_KeyUp">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <controls:WrapPanel 
+                    <wctc:WrapPanel 
                         Orientation="Horizontal" 
                         HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
@@ -1052,7 +1051,7 @@
                 </ListView.ItemContainerStyle>-->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <controls:WrapPanel 
+                    <wctc:WrapPanel 
                         Orientation="Horizontal" 
                         HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>

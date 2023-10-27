@@ -390,7 +390,7 @@
                             </Button>
 
                             <Grid VerticalAlignment="Center">
-                                <ProgressRing
+                                <appcontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     

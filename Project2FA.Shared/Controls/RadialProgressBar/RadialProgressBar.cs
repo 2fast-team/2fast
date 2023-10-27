@@ -5,6 +5,7 @@
 
 using System;
 using Windows.Foundation;
+
 #if WINDOWS_UWP
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
@@ -15,7 +16,6 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
-
 #endif
 
 namespace Project2FA.Controls
@@ -81,8 +81,6 @@ namespace Project2FA.Controls
         /// </summary>
         protected override void OnApplyTemplate()
         {
-            base.OnApplyTemplate();
-
             outlineFigure = GetTemplateChild(OutlineFigurePartName) as PathFigure;
             outlineArc = GetTemplateChild(OutlineArcPartName) as ArcSegment;
             barFigure = GetTemplateChild(BarFigurePartName) as PathFigure;
@@ -91,6 +89,8 @@ namespace Project2FA.Controls
             allTemplatePartsDefined = outlineFigure != null && outlineArc != null && barFigure != null && barArc != null;
 
             RenderAll();
+
+            base.OnApplyTemplate();
         }
 
         /// <summary>

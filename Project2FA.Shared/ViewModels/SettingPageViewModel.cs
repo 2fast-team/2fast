@@ -23,6 +23,7 @@ using CommunityToolkit.Mvvm.Collections;
 
 
 #if WINDOWS_UWP
+using Project2FA.UWP.Services;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -76,10 +77,20 @@ namespace Project2FA.ViewModels
                 AboutPartViewModel.RateApp();
             });
 
-            SupportAppCommand = new RelayCommand(() =>
+#if WINDOWS_UWP
+            SupportAppCommand = new AsyncRelayCommand(async() =>
             {
-                //AboutPartViewModel.SupportApp();
+                IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+                var result = await dialogService.ShowDialogAsync(new InAppPaymentContentDialog(), new DialogParameters());
+                if (result == ContentDialogResult.Primary)
+                {
+                    var service = App.Current.Container.Resolve<ISubscriptionService>();
+                    service.Initialize(Constants.SupportSubscriptionId);
+                    await service.SetupSubscriptionInfoAsync();
+                }
+
             });
+#endif
             NavigationService = navigationService;
             NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             //SendMailCommand = new AsyncRelayCommand(SendMail);
@@ -207,11 +218,11 @@ namespace Project2FA.ViewModels
                     await CoreApplication.RequestRestartAsync("Factory reset");
 #endif
 #if __IOS__
-
+                    App.Current.Exit();
 #endif
 
 #if ANDROID
-
+                    App.Current.Exit();
 #endif
                     break;
                 case ContentDialogResult.Primary:

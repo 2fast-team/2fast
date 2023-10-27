@@ -439,7 +439,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Feedback</value>
   </data>
   <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
-    <value>Feedback geben</value>
+    <value>Feedback geben (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
     <value>Andere Datendatei auswählen</value>
@@ -1198,5 +1198,11 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   </data>
   <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
     <value>Ordnerpfad wählen</value>
+  </data>
+  <data name="SettingsSupportApp.Text" xml:space="preserve">
+    <value>Entwicklung unterstützen</value>
+  </data>
+  <data name="MonthSupportSubscription.Text" xml:space="preserve">
+    <value>Mit dem Abonnement unterstützen Sie die Weiterentwicklung der Anwendung. *Pro+* Funktionen die in Zukunft hinzugefügt werden, sind mit diesem Abonnement nutzbar.</value>
   </data>
 </root>

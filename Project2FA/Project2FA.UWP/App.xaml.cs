@@ -10,6 +10,7 @@ using Project2FA.Services;
 using Project2FA.Services.Marketplace;
 using Project2FA.Services.Parser;
 using Project2FA.Services.Web;
+using Project2FA.UWP.Services;
 using Project2FA.UWP.Views;
 using Project2FA.ViewModels;
 using System;
@@ -101,6 +102,7 @@ namespace Project2FA.UWP
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
+            container.RegisterSingleton<ISubscriptionService, SubscriptionService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();
@@ -121,6 +123,7 @@ namespace Project2FA.UWP
             container.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
             container.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
             container.RegisterDialog<ManageCategoriesContentDialog, ManageCategoriesContentDialogViewModel>();
+            container.RegisterDialog<InAppPaymentContentDialog, InAppPaymentContentDialogViewModel>();
         }
 
         public override async Task OnStartAsync(IApplicationArgs args)

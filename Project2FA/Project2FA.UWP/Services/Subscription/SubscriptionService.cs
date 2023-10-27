@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Services.Store;
 
@@ -13,7 +10,12 @@ namespace Project2FA.UWP.Services
         StoreProduct subscriptionStoreProduct;
 
         // Assign this variable to the Store ID of your subscription add-on.
-        private string subscriptionStoreId = "";
+        private string _subscriptionStoreId = "";
+
+        public void Initialize(string id)
+        {
+            _subscriptionStoreId = id;
+        }
 
         // This is the entry point method for the example.
         public async Task SetupSubscriptionInfoAsync()
@@ -70,7 +72,7 @@ namespace Project2FA.UWP.Services
             foreach (var addOnLicense in appLicense.AddOnLicenses)
             {
                 StoreLicense license = addOnLicense.Value;
-                if (license.SkuStoreId.StartsWith(subscriptionStoreId))
+                if (license.SkuStoreId.StartsWith(_subscriptionStoreId))
                 {
                     if (license.IsActive)
                     {
@@ -104,7 +106,7 @@ namespace Project2FA.UWP.Services
             foreach (var item in result.Products)
             {
                 StoreProduct product = item.Value;
-                if (product.StoreId == subscriptionStoreId)
+                if (product.StoreId == _subscriptionStoreId)
                 {
                     return product;
                 }

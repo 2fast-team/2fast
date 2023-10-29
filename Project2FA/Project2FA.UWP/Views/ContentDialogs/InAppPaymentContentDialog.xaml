@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:markdown="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:Project2FA.Models"
     mc:Ignorable="d"
     Title="~InAppPaymentContentDialog.Title"
     x:Uid="InAppPaymentContentDialog"
@@ -15,27 +16,30 @@
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
-    <Grid MinHeight="400">
-        <GridView SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}">
+    <Grid >
+        <GridView 
+            ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+            SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}">
             <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="10,0,10,0">
+                <DataTemplate x:DataType="models:InAppPaymentSubscriptionModel">
+                    <Grid 
+                        Margin="12,8,12,8" 
+                        MinWidth="250"
+                        MinHeight="400">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Image 
-                Source="/Assets/FileLogo.png"
+                Source="{x:Bind Url, Mode=OneWay}"
                 Height="100"></Image>
                         <markdown:MarkdownTextBlock 
-                            Grid.Row="1"
-                            x:Uid="MonthSupportSubscription" 
-                            Text="~MonthSupportSubscription.Text">
+                            Grid.Row="1" 
+                            Text="{x:Bind Description,Mode=OneWay}">
                         </markdown:MarkdownTextBlock>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            <Grid/>
         </GridView>
 
     </Grid>

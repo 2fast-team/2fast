@@ -1205,4 +1205,16 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="MonthSupportSubscription.Text" xml:space="preserve">
     <value>Mit dem Abonnement unterstützen Sie die Weiterentwicklung der Anwendung. *Pro+* Funktionen die in Zukunft hinzugefügt werden, sind mit diesem Abonnement nutzbar.</value>
   </data>
+  <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>abonnieren</value>
+  </data>
+  <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>abbrechen</value>
+  </data>
+  <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
+    <value>Importieren Sie das Konto für ein anderes Gerät, indem Sie mit dem gewünschten Gerät eine App zur zwei Faktor Authentifizierung öffnen und ein Konto mit der Kamera hinzufügen.</value>
+  </data>
 </root>

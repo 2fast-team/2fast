@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UNOversal.Services.Dialogs;
+using Project2FA.Models;
+using System.Collections.ObjectModel;
 
 namespace Project2FA.ViewModels
 {
@@ -12,6 +14,7 @@ namespace Project2FA.ViewModels
     {
         private bool _primaryButtonCanClick;
         private int _selectedIndex = -1;
+        public ObservableCollection<InAppPaymentSubscriptionModel> Items { get; } = new ObservableCollection<InAppPaymentSubscriptionModel>();
 
         public bool PrimaryButtonCanClick 
         {
@@ -40,7 +43,7 @@ namespace Project2FA.ViewModels
 
         public void Initialize(IDialogParameters parameters)
         {
-            
+            Items.Add(new InAppPaymentSubscriptionModel { Description = "Test", Url = "ms-appx:///Assets/FileLogo.png" });
         }
     }
 }

@@ -1198,4 +1198,16 @@ The functionality of this application is explained in more detail in the followi
   <data name="MonthSupportSubscription.Text" xml:space="preserve">
     <value>With the subscription you support the further development of the application. *Pro+* features that will be added in the future are usable with this subscription.</value>
   </data>
+  <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>subscribe</value>
+  </data>
+  <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>cancel</value>
+  </data>
+  <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
+    <value>Subscription</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
+    <value>Import the account for another device by opening a two-factor authentication app with the desired device and adding an account with the camera.</value>
+  </data>
 </root>

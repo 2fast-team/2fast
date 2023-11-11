@@ -15,28 +15,18 @@
 	  <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
   </PropertyGroup>
 
-	<Choose>
-		<When Condition="'$(TargetFramework)'=='net7.0'">
-			<ItemGroup>
-				<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
-			</ItemGroup>
-		</When>
-		<When Condition="'$(TargetFramework)'=='uap10.0.17763'">
-			<ItemGroup>
-				<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
-				<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
-			</ItemGroup>
-		</When>
-		<When Condition="'$(TargetFramework)'=='uap10.0.22621'">
-			<ItemGroup>
-				<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
-				<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
-			</ItemGroup>
-		</When>
-	</Choose>
+	<ItemGroup Condition="'$(TargetFramework)'=='net7.0'">
+		<!--<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />-->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.17763' or '$(TargetFramework)'=='uap10.0.22621'">
+		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
+	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

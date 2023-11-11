@@ -404,7 +404,7 @@ namespace Project2FA.ViewModels
 
         private void CheckWebDAVInputs()
         {
-            if (!string.IsNullOrEmpty(_username) && !string.IsNullOrEmpty(_webDAVPassword) && !string.IsNullOrEmpty(ServerAddress))
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(WebDAVPassword) && !string.IsNullOrEmpty(ServerAddress))
             {
                 WebDAVCredentialsEntered = true;
             }
@@ -421,19 +421,37 @@ namespace Project2FA.ViewModels
         public string ServerAddress
         {
             get => _serverAddress;
-            set => SetProperty(ref _serverAddress, value);
+            set 
+            { 
+                if(SetProperty(ref _serverAddress, value))
+                {
+                    CheckWebDAVInputs();
+                }
+            }
         }
 
         public string Username
         {
             get => _username;
-            set => SetProperty(ref _username, value);
+            set
+            {
+                if(SetProperty(ref _username, value))
+                {
+                    CheckWebDAVInputs();
+                }
+            }
         }
 
         public string WebDAVPassword
         {
             get => _webDAVPassword;
-            set => SetProperty(ref _webDAVPassword, value);
+            set
+            {
+                if(SetProperty(ref _webDAVPassword, value))
+                {
+                    CheckWebDAVInputs();
+                }
+            }
         }
 
         public int SelectedIndex

@@ -2,7 +2,6 @@
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons.Common;
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText;
 using Windows.System;
 using Windows.UI.Text;
 using Windows.UI.Xaml.Controls;

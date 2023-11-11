@@ -20,9 +20,11 @@ using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.Utils;
 using CommunityToolkit.Mvvm.Collections;
+using Windows.System;
 
 
 #if WINDOWS_UWP
+using Project2FA.UWP.Services;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -57,6 +59,8 @@ namespace Project2FA.ViewModels
         public ICommand SendMailCommand { get; }
         public ICommand NavigateBackCommand { get; }
         public ICommand SupportAppCommand { get; }
+        public ICommand SeeSourceCodeCommand { get; }
+        public ICommand ManageSubscriptionsCommand { get; }
 
         private int _selectedItem;
         public SettingPageViewModel(IDialogService dialogService, ISecretService secretService, INavigationService navigationService)
@@ -76,10 +80,33 @@ namespace Project2FA.ViewModels
                 AboutPartViewModel.RateApp();
             });
 
-            SupportAppCommand = new RelayCommand(() =>
+            SeeSourceCodeCommand = new AsyncRelayCommand(async() => 
             {
-                //AboutPartViewModel.SupportApp();
+                Uri uri = new Uri("https://github.com/2fast-team/2fast");
+                await Launcher.LaunchUriAsync(uri);
             });
+
+#if WINDOWS_UWP
+            SupportAppCommand = new AsyncRelayCommand(async() =>
+            {
+                IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+                var result = await dialogService.ShowDialogAsync(new InAppPaymentContentDialog(), new DialogParameters());
+                if (result == ContentDialogResult.Primary)
+                {
+                    var service = App.Current.Container.Resolve<ISubscriptionService>();
+                    service.Initialize(Constants.SupportSubscriptionId);
+                    await service.SetupSubscriptionInfoAsync();
+                    await service.PromptUserToPurchaseAsync();
+                }
+
+            });
+
+            ManageSubscriptionsCommand = new AsyncRelayCommand(async() => 
+            {
+                Uri uri = new Uri("https://account.microsoft.com/services");
+                await Launcher.LaunchUriAsync(uri);
+            });
+#endif
             NavigationService = navigationService;
             NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             //SendMailCommand = new AsyncRelayCommand(SendMail);
@@ -90,6 +117,14 @@ namespace Project2FA.ViewModels
             if (parameters.TryGetValue<int>("PivotItem", out int selectedItem))
             {
                 SelectedItem = selectedItem;
+            }
+
+            if (parameters.TryGetValue<bool>("OpenSubscriptions", out bool openSubscriptions))
+            {
+                if (openSubscriptions)
+                {
+                    SupportAppCommand.Execute(null);
+                }
             }
         }
 
@@ -207,11 +242,11 @@ namespace Project2FA.ViewModels
                     await CoreApplication.RequestRestartAsync("Factory reset");
 #endif
 #if __IOS__
-
+                    App.Current.Exit();
 #endif
 
 #if ANDROID
-
+                    App.Current.Exit();
 #endif
                     break;
                 case ContentDialogResult.Primary:

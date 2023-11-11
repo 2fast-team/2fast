@@ -1840,6 +1840,26 @@ namespace Project2FA.Strings{
             }
         }
         #endregion
+
+        #region SettingsCardExternalAction
+        public static string SettingsCardExternalAction
+        {
+            get
+            {
+                return _resourceLoader.GetString("SettingsCardExternalAction");
+            }
+        }
+        #endregion
+
+        #region InAppSubscriptionMonthSupport
+        public static string InAppSubscriptionMonthSupport
+        {
+            get
+            {
+                return _resourceLoader.GetString("InAppSubscriptionMonthSupport");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]

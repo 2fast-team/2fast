@@ -1,26 +1,11 @@
-﻿using Prism.Ioc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Project2FA.ViewModels;
-using Prism;
 using Windows.UI;
 using Project2FA.Repository.Models;
-using UNOversal.Services.Dialogs;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.DataTransfer;
-using CommunityToolkit.Mvvm.Input;
 using UNOversal.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
 
@@ -41,7 +26,36 @@ namespace Project2FA.UNO.Views
 #if ANDROID || IOS
             App.ShellPageInstance.MainFrame.Navigated -= MainFrame_Navigated;
             App.ShellPageInstance.MainFrame.Navigated += MainFrame_Navigated;
+            PropertyChangedCallback callback = new PropertyChangedCallback(SelectedTabBarIndexChanged);
+            //register an event for the changed selected index property of the TabBar
+            MobileAutoSuggestBox.RegisterDisposablePropertyChangedCallback(VisibilityProperty, SelectedTabBarIndexChanged);
 #endif
+        }
+
+        private void SelectedTabBarIndexChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        {
+            var visibilty = (Visibility)args.NewValue;
+            switch (visibilty)
+            {
+                case Visibility.Collapsed:
+                    var fadeOutStoryboard = new Storyboard();
+                    var fadeAnimation = new DoubleAnimation { From = 1.0, To = 0.0, Duration = new Duration(TimeSpan.FromSeconds(1.0)) };
+                    Storyboard.SetTarget(fadeAnimation, MobileAutoSuggestBox);
+                    Storyboard.SetTargetProperty(fadeAnimation, "Opacity");
+                    fadeOutStoryboard.Children.Add(fadeAnimation);
+                    fadeOutStoryboard.Begin();
+                    break;
+                case Visibility.Visible:
+                    var fadeInStoryboard = new Storyboard();
+                    var fadeInAnimation = new DoubleAnimation { From = 0.0, To = 1.0, Duration = new Duration(TimeSpan.FromSeconds(1.0)) };
+                    Storyboard.SetTarget(fadeInAnimation, MobileAutoSuggestBox);
+                    Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
+                    fadeInStoryboard.Children.Add(fadeInAnimation);
+                    fadeInStoryboard.Begin();
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -64,22 +78,7 @@ namespace Project2FA.UNO.Views
                     {
                         case AccountCodePage:
                             App.ShellPageInstance.ViewModel.SelectedIndex = 0;
-                            var fadeOutStoryboard = new Storyboard();
-                            var fadeAnimation = new DoubleAnimation { From = 1.0, To = 0.0, Duration = new Duration(TimeSpan.FromSeconds(1.0)) };
-                            Storyboard.SetTarget(fadeAnimation, MobileAutoSuggestBox);
-                            Storyboard.SetTargetProperty(fadeAnimation, "Opacity");
-                            fadeOutStoryboard.Children.Add(fadeAnimation);
-                            fadeOutStoryboard.Begin();
                             break;
-                        //case SearchPage:
-                        //    App.ShellPageInstance.ViewModel.SelectedIndex = 1;
-                        //    var fadeInStoryboard = new Storyboard();
-                        //    var fadeInAnimation = new DoubleAnimation { From = 0.0, To = 1.0, Duration = new Duration(TimeSpan.FromSeconds(1.0)) };
-                        //    Storyboard.SetTarget(fadeInAnimation, MobileAutoSuggestBox);
-                        //    Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
-                        //    fadeInStoryboard.Children.Add(fadeInAnimation);
-                        //    fadeInStoryboard.Begin();
-                        //    break;
                         case SettingPage:
                             App.ShellPageInstance.ViewModel.SelectedIndex = 2;
                             break;
@@ -133,38 +132,7 @@ namespace Project2FA.UNO.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                if (string.IsNullOrEmpty(sender.Text) == false)
-                {
-                    try
-                    {
-                        List<string> _nameList = new List<string>();
-                        foreach (TwoFACodeModel item in ViewModel.TwoFADataService.Collection)
-                        {
-                            _nameList.Add(item.Label);
-                        }
-                        List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
-                        if (listSuggestion.Count == 0)
-                        {
-                            listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
-                        }
-                        sender.ItemsSource = listSuggestion;
-                        ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
-                    }
-                    catch (System.Exception exc)
-                    {
-                        ViewModel.TwoFADataService.ACVCollection.Filter = null;
-                        //TrackingManager.TrackException(nameof(AutoSuggestBox_TextChanged), exc);
-                    }
-
-                }
-                else
-                {
-                    sender.ItemsSource = null;
-                    if (ViewModel.TwoFADataService.ACVCollection.Filter != null)
-                    {
-                        ViewModel.TwoFADataService.ACVCollection.Filter = null;
-                    }
-                }
+                ViewModel.SetSuggestionList(sender, args);
             }
         }
 

@@ -127,76 +127,7 @@ namespace Project2FA.UWP.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                if (string.IsNullOrWhiteSpace(sender.Text) == false)
-                {
-                    try
-                    {
-                        List<string> _nameList = new List<string>();
-                        foreach (TwoFACodeModel item in ViewModel.TwoFADataService.Collection)
-                        {
-                            _nameList.Add(item.Label);
-                        }
-                        // search the labels
-                        List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
-                        if (listSuggestion.Count == 0)
-                        {
-                            listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
-                        }
-
-                        // filter the selected categories
-                        if (ViewModel.TwoFADataService.GlobalCategories != null)
-                        {
-                            var selectedGlobalCategories = ViewModel.TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true);
-                            if (selectedGlobalCategories.Any())
-                            {
-                                // filter where the models have the selected categories and the input label
-                                ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc => 
-                                selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && ((TwoFACodeModel)model).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
-
-                                // set suggetion where the models have the selected categories and the input label
-                                var filteredCollection = ViewModel.TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
-                                    selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && model.Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase));
-                                listSuggestion = listSuggestion.Where(ls => filteredCollection.Where(fc => fc.Label == ls).Any()).ToList();
-                                sender.ItemsSource = listSuggestion;
-                                //selectedGlobalCategories.Where(c => ViewModel.TwoFADataService.Collection.Where(x => x.SelectedCategories.Where(y => y.Guid == c.Guid).Any()).Any());
-                                //ViewModel.TwoFADataService.ACVCollection.Filter = x => 
-                                ////((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase) ||
-                                //selectedCategories.Where(c => ((TwoFACodeModel)x).SelectedCategories.Where(y => y.Guid == c.Guid).Any());
-
-                                //works for categories
-                                //ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
-                                //selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
-                            }
-                            else
-                            {
-                                ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
-                                sender.ItemsSource = listSuggestion;
-                            }
-                        }
-                        // no categories set
-                        else
-                        {
-                            ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
-                            sender.ItemsSource = listSuggestion;
-                        }
-
-                        
-                    }
-                    catch (System.Exception exc)
-                    {
-                        ViewModel.TwoFADataService.ACVCollection.Filter = null;
-                        TrackingManager.TrackExceptionCatched(nameof(AutoSuggestBox_TextChanged),exc);
-                    }
-                    
-                }
-                else
-                {
-                    sender.ItemsSource = null;
-                    if (ViewModel.TwoFADataService.ACVCollection.Filter != null)
-                    {
-                        ViewModel.TwoFADataService.ACVCollection.Filter = null;
-                    }
-                }
+                ViewModel.SetSuggestionList(sender, args);
             }
         }
 

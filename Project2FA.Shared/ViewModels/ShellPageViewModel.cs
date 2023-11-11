@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.Input;
 using UNOversal.Navigation;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
+using Project2FA.Services;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -139,6 +140,16 @@ namespace Project2FA.ViewModels
             set
             {
                 SetProperty(ref _selectedIndex, value);
+                //only for mobile devices, check if account filters are set
+#if ANDROID || IOS
+                if (value == 0)
+                {
+                    if (DataService.Instance.ACVCollection.Filter != null)
+                    {
+                        DataService.Instance.ACVCollection.Filter = null;
+                    }
+                }
+#endif
                 if (value == 1)
                 {
                     IsMobileSearchActive = true;
@@ -159,6 +170,18 @@ namespace Project2FA.ViewModels
         { 
             get => _isMobileSearchActive; 
             set => SetProperty(ref _isMobileSearchActive, value);
+        }
+
+        public Thickness GetTabBarMargin
+        {
+            get
+            {
+#if IOS
+                return new Thickness(0, 0, 0, 30);
+#else
+                return new Thickness(0, 0, 0, 4);
+#endif
+            }
         }
 #endif
     }

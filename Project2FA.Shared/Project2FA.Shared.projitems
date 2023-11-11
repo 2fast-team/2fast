@@ -9,6 +9,14 @@
     <Import_RootNamespace>Project2FA.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.Members.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.Members.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.Placeholder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.Source.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExFailedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExOpenedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.Properties.cs" />
@@ -32,6 +40,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentSubscriptionModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
@@ -72,6 +81,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileActivationPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImportAccountPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\InAppPaymentContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ManageCategoriesContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewDataFilePageViewModel.cs" />
@@ -2803,6 +2813,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\zyte.svg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background\mhellmeier_blue-hills.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\give-love.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-125.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-150.png" />
@@ -2867,6 +2878,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\schluessel.svg" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

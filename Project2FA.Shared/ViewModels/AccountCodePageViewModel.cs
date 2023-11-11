@@ -16,6 +16,9 @@ using Prism.Ioc;
 using Windows.ApplicationModel.DataTransfer;
 using Project2FA.Core;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -42,7 +45,7 @@ namespace Project2FA.ViewModels
     [Bindable]
 #endif
 
-#if WINDOWS_UWP
+#if WINDOWS_UWP || !__MOBILE__
     public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync, IInitialize
 #else
     public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync
@@ -146,7 +149,7 @@ namespace Project2FA.ViewModels
                         break;
                 }
             });
-            //TODO only for Android and iOS 
+            //TODO only for Android and iOS
 #if !WINDOWS_UWP
         CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
         StartTOTPLogic();
@@ -491,6 +494,82 @@ namespace Project2FA.ViewModels
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
+
+        public void SetSuggestionList(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (string.IsNullOrWhiteSpace(sender.Text) == false)
+            {
+                try
+                {
+                    List<string> _nameList = new List<string>();
+                    foreach (TwoFACodeModel item in TwoFADataService.Collection)
+                    {
+                        _nameList.Add(item.Label);
+                    }
+                    // search the labels
+                    List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                    if (listSuggestion.Count == 0)
+                    {
+                        listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
+                    }
+
+                    // filter the selected categories
+                    if (TwoFADataService.GlobalCategories != null)
+                    {
+                        var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true);
+                        if (selectedGlobalCategories.Any())
+                        {
+                            // filter where the models have the selected categories and the input label
+                            TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
+                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && ((TwoFACodeModel)model).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+
+                            // set suggetion where the models have the selected categories and the input label
+                            var filteredCollection = TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
+                                selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && model.Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase));
+                            listSuggestion = listSuggestion.Where(ls => filteredCollection.Where(fc => fc.Label == ls).Any()).ToList();
+                            sender.ItemsSource = listSuggestion;
+                            //selectedGlobalCategories.Where(c => ViewModel.TwoFADataService.Collection.Where(x => x.SelectedCategories.Where(y => y.Guid == c.Guid).Any()).Any());
+                            //ViewModel.TwoFADataService.ACVCollection.Filter = x => 
+                            ////((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase) ||
+                            //selectedCategories.Where(c => ((TwoFACodeModel)x).SelectedCategories.Where(y => y.Guid == c.Guid).Any());
+
+                            //works for categories
+                            //ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
+                            //selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
+                        }
+                        else
+                        {
+                            TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                            sender.ItemsSource = listSuggestion;
+                        }
+                    }
+                    // no categories set
+                    else
+                    {
+                        TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                        sender.ItemsSource = listSuggestion;
+                    }
+
+
+                }
+                catch (System.Exception exc)
+                {
+                    TwoFADataService.ACVCollection.Filter = null;
+#if WINDOWS_UWP
+                    TrackingManager.TrackExceptionCatched(nameof(SetSuggestionList), exc);
+#endif
+                }
+
+            }
+            else
+            {
+                sender.ItemsSource = null;
+                if (TwoFADataService.ACVCollection.Filter != null)
+                {
+                    TwoFADataService.ACVCollection.Filter = null;
+                }
+            }
+        }
         public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
         public bool IsAccountNotDeleted => TwoFADataService.TempDeletedTFAModel == null;

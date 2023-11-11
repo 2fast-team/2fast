@@ -9,6 +9,8 @@ namespace Project2FA.UWP.Services
 {
     public interface ISubscriptionService
     {
-        Task SetupSubscriptionInfoAsync();
+        Task<(bool IsActive, StoreLicense info)> SetupSubscriptionInfoAsync();
+        Task PromptUserToPurchaseAsync();
+        void Initialize(string id);
     }
 }

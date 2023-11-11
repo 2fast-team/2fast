@@ -4,8 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:models="using:Project2FA.Repository.Models"
@@ -538,109 +539,63 @@
                     <Grid Margin="0,10,0,0">
                         <RelativePanel>
                             <ScrollViewer x:Name="SV_AboutTheApp" >
-                                <StackPanel>
-                                    <TextBlock 
-                            Margin="0,0,0,12" 
-                            TextWrapping="WrapWholeWords"
-                            FontSize="20" 
-                            Text="{x:Bind ViewModel.AboutPartViewModel.DisplayName, Mode=OneWay}"/>
-                                    <Border
-                            MaxHeight="140" 
-                            MaxWidth="140" 
-                            HorizontalAlignment="Left"
-                            BorderThickness="1"
-                            IsHitTestVisible="False" 
-                            Background="{ThemeResource SystemAccentColor}">
-                                        <controls:ImageEx
-                                Margin="8" 
-                                Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"  
-                                Stretch="UniformToFill"/>
-                                    </Border>
-                                    <TextBlock 
-                            Text="Jan Philipp Weber &amp; Malte Hellmeier" 
-                            FontSize="20"
-                            TextWrapping="WrapWholeWords"
-                            Margin="0,10,0,0"/>
-                                    <TextBlock FontSize="20">
-                            <Run>Version: </Run>
-                            <Run Text="{x:Bind ViewModel.AboutPartViewModel.Version, Mode=OneTime}" />
-                                    </TextBlock>
-                                    <HyperlinkButton 
-                            x:Uid="SettingsSourceCode"
-                                        FontSize="20"
-                                        Padding="0"
-                            Content="~SettingsSourceCode.Content" 
-                            NavigateUri="https://github.com/2fast-team/2fast"
-                            ToolTipService.ToolTip="https://github.com/2fast-team/2fast"/>
-                                    <Button 
-                                        Margin="0,10" 
-                                        Style="{StaticResource ButtonRevealStyle}"
-                                        Command="{x:Bind ViewModel.RateAppCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Like"/>
-                                            <TextBlock 
-                                    Text="~SettingsRateApp.Text" 
-                                    Margin="8,0,0,0" 
-                                    HorizontalAlignment="Stretch" 
-                                    VerticalAlignment="Center" 
-                                    x:Uid="SettingsRateApp" 
-                                    FontFamily="Segoe UI" />
+                                <StackPanel Margin="0,0,0,12">
+                                    <Grid Background="{ThemeResource CardBackgroundBrush}" CornerRadius="{ThemeResource OverlayCornerRadius}">
+                                        <StackPanel Spacing="4" Margin="12,12">
+                                            <ctwc:SettingsCard 
+                                                Background="{ThemeResource SystemAccentColor}"
+                                                Foreground="White"
+                                                Header="Jan Philipp Weber &amp; Malte Hellmeier"
+                                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/Square44x44Logo.targetsize-256.png}">
+                                                <ctwc:SettingsCard.Description>
+                                                    <TextBlock 
+                                                        FontSize="20" 
+                                                        Foreground="White">
+                                                        <Run Text="{x:Bind ViewModel.AboutPartViewModel.DisplayName, Mode=OneWay}"/>
+                                                        <LineBreak/>
+                                                        <Run>Version: </Run>
+                                                        <Run Text="{x:Bind ViewModel.AboutPartViewModel.Version, Mode=OneTime}" />
+                                                    </TextBlock>
+                                                </ctwc:SettingsCard.Description>
+                                            </ctwc:SettingsCard>
+
+                                            <ctwc:SettingsCard 
+                                                x:Uid="SettingsSourceCode"
+                                               ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
+                                                ToolTipService.ToolTip="https://github.com/2fast-team/2fast"
+                                               ActionIconToolTip="{x:Bind strings:Resources.SettingsCardExternalAction}"
+                                               Header="~SettingsSourceCode.Header"
+                                               HeaderIcon="{ui:FontIcon Glyph=&#xE943;}"
+                                                Command="{x:Bind ViewModel.SeeSourceCodeCommand}"
+                                               IsClickEnabled="True" />
+
+                                            <ctwc:SettingsCard 
+                                                x:Uid="SettingsRateApp"
+                                                Command="{x:Bind ViewModel.RateAppCommand}"
+                                                Header="~SettingsRateApp.Header"
+                                                HeaderIcon="{ui:FontIcon Glyph=&#xE19F;}"
+                                                IsClickEnabled="True" />
+
+                                            <ctwc:SettingsCard 
+                                                x:Uid="SettingsInAppPayment"
+                                                Command="{x:Bind ViewModel.SupportAppCommand}"
+                                                Description="~SettingsInAppPayment.Description"
+                                                Header="~SettingsInAppPayment.Header"
+                                                HeaderIcon="{ui:FontIcon Glyph=&#xE14D;}"
+                                                IsClickEnabled="True" />
+
+                                            <ctwc:SettingsCard 
+                                                x:Uid="SettingsManageSubscriptions"
+                                               ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
+                                                ToolTipService.ToolTip="https://account.microsoft.com/services"
+                                               ActionIconToolTip="{x:Bind strings:Resources.SettingsCardExternalAction}"
+                                               Description="~SettingsManageSubscriptions.Description"
+                                               Header="~SettingsManageSubscriptions.Header"
+                                               HeaderIcon="{ui:FontIcon Glyph=&#xED0E;}"
+                                                Command="{x:Bind ViewModel.ManageSubscriptionsCommand}"
+                                               IsClickEnabled="True" />
                                         </StackPanel>
-                                    </Button>
-                                    <Button 
-                                    Margin="0,10" 
-                                    Style="{StaticResource ButtonRevealStyle}"
-                                    Command="{x:Bind ViewModel.SupportAppCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Shop"/>
-                                            <TextBlock 
-                                        Text="~SettingsSupportApp.Text" 
-                                        Margin="8,0,0,0" 
-                                        HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Center" 
-                                        x:Uid="SettingsSupportApp" 
-                                        FontFamily="Segoe UI" />
-                                        </StackPanel>
-                                    </Button>
-                                    <HyperlinkButton 
-                                x:Uid="SettingsManageSubscriptions"
-                                FontSize="20"
-                                Margin="0,10" 
-                                Padding="0"
-                                Content="~SettingsManageSubscriptions.Content" 
-                                NavigateUri="https://account.microsoft.com/services"
-                                ToolTipService.ToolTip="https://account.microsoft.com/services"/>
-                                    <!--<Button 
-                                        Margin="0,10" 
-                                        Style="{StaticResource ButtonRevealStyle}"
-                                        Command="{x:Bind ViewModel.SendMailCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Account"/>
-                                            <TextBlock 
-                                    Text="~SettingsMailSupportApp.Text" 
-                                    Margin="8,0,0,0" 
-                                    HorizontalAlignment="Stretch" 
-                                    VerticalAlignment="Center" 
-                                    x:Uid="SettingsMailSupportApp" 
-                                    FontFamily="Segoe UI" />
-                                        </StackPanel>
-                                    </Button>-->
-                                    <!--<TextBlock 
-                                        x:Uid="SettingsPageAboDesc"
-                                        Margin="0,15,0,0" 
-                                        Text="~SettingsPageAboDesc.Text"/>
-                                    <Button Margin="0,0,0,20">
-                                        <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Tag"/>
-                                            <TextBlock 
-                                    Text="~SettingsPageAboButton.Text" 
-                                    Margin="8,0,0,0" 
-                                    HorizontalAlignment="Stretch" 
-                                    VerticalAlignment="Center" 
-                                    x:Uid="SettingsPageAboButton" 
-                                    FontFamily="Segoe UI" />
-                                        </StackPanel>
-                                    </Button>-->
+                                    </Grid>
                                 </StackPanel>
                             </ScrollViewer>
 
@@ -671,7 +626,7 @@
                                                         </GroupStyle.HeaderTemplate>
                                                         <GroupStyle.Panel>
                                                             <ItemsPanelTemplate>
-                                                                <controls:WrapPanel/>
+                                                                <ctwc:WrapPanel/>
                                                             </ItemsPanelTemplate>
                                                         </GroupStyle.Panel>
                                                     </GroupStyle>
@@ -731,7 +686,7 @@
                         <AdaptiveTrigger MinWindowWidth="960" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TB_QRCode_Description.MaxWidth" Value="auto"/>
+                        <!--<Setter Target="TB_QRCode_Description.MaxWidth" Value="auto"/>-->
                         <Setter Target="LV_Dependencies.Margin" Value="20,0,0,0"/>
                         <Setter Target="LV_Dependencies.(RelativePanel.RightOf)" Value="SV_AboutTheApp"/>
                     </VisualState.Setters>

@@ -162,7 +162,7 @@ return await SetLocalFile();
             IsLoading = true;
 
 #if WINDOWS_UWP
-            if (await TestPassword() && LocalStorageFolder != null)
+            if (await TestPassword() && (LocalStorageFolder != null || isWebDAV))
 #else
             if (await TestPassword())
 #endif
@@ -190,7 +190,9 @@ return await SetLocalFile();
             };
 #if __IOS__
             //filePicker.FileTypeFilter.Add("com.jpwtechnology.2fa");
-            filePicker.FileTypeFilter.Add("*");
+            Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToUTTypeMapping.Add(".2fa", "com.jpwtechnology.2fa");
+            //filePicker.FileTypeFilter.Add("*");
+            filePicker.FileTypeFilter.Add(".2fa");
 #else
             filePicker.FileTypeFilter.Add(".2fa");
 #endif

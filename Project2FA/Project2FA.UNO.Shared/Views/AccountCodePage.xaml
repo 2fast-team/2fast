@@ -5,7 +5,7 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:mstoolkitControls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations"
@@ -19,6 +19,12 @@
 
     <Page.Resources>
         <ResourceDictionary>
+            <utu:ShadowCollection x:Name="PersonPictureShadow">
+                <utu:Shadow 
+                    BlurRadius="24"
+					Opacity="0.8"
+				   Color="{ThemeResource SystemAccentColor}" />
+            </utu:ShadowCollection>
             <!--<helpers:AccountAvatarTemplateSelector 
                 x:Key="AccountAvatarTemplateSelector"
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
@@ -85,10 +91,10 @@
 
                         <StackPanel
                             Orientation="Horizontal"
-                            Grid.Row="3"
+                            Grid.Row="2"
                             Grid.Column="1"
                             Grid.ColumnSpan="4"
-                            Margin="8,0,0,4">
+                            Margin="8,10,0,4">
 
                             <Button
                                 x:Name="BTN_ShowCode"
@@ -144,7 +150,7 @@
                             </Button>
 
                             <Grid VerticalAlignment="Center">
-                                <ProgressRing
+                                <appcontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     
@@ -228,7 +234,7 @@
                                 </VisualState.StateTriggers>
                                 <VisualState.Setters>
                                     <Setter Target="IssuerName.(RelativePanel.Below)" Value="AccountName"/>
-                                    <Setter Target="IssuerName.Margin" Value="0,10,10,0"/>
+                                    <Setter Target="IssuerName.Margin" Value="0,10,0,0"/>
                                     <!--<Setter Target="Root.MinWidth" Value="478"/>-->
                                 </VisualState.Setters>
                             </VisualState>
@@ -239,7 +245,7 @@
                                 <VisualState.Setters>
                                     <Setter Target="Root.MinWidth" Value="660"/>
                                     <Setter Target="IssuerName.(RelativePanel.RightOf)" Value="AccountName"/>
-                                    <Setter Target="IssuerName.Margin" Value="10,10,10,0"/>
+                                    <Setter Target="IssuerName.Margin" Value="10,10,0,0"/>
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -275,7 +281,12 @@
                             Margin="0,0,0,8"
                             Background="{ThemeResource  SystemAccentColor}" />
 
-                        <PersonPicture 
+                        <utu:ShadowContainer 
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="2" 
+                            Shadows="{StaticResource PersonPictureShadow}">
+                            <PersonPicture 
                             Height="68"
                             Width="68"
                             Background="{ThemeResource SystemAccentColor}"
@@ -288,9 +299,10 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                            Style="{StaticResource PersonPictureWithAccentShadow}"
                             Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
-                        </PersonPicture>
+                            </PersonPicture>
+                        </utu:ShadowContainer>
+
 
                         <RelativePanel 
                             MinHeight="80"
@@ -317,10 +329,10 @@
 
                         <StackPanel
                             Orientation="Horizontal"
-                            Grid.Row="3"
+                            Grid.Row="2"
                             Grid.Column="1"
                             Grid.ColumnSpan="4"
-                            Margin="8,0,0,4">
+                            Margin="8,10,0,4">
 
                             <Button
                                 x:Name="BTN_ShowCode"
@@ -377,7 +389,7 @@
                             </Button>
 
                             <Grid VerticalAlignment="Center">
-                                <ProgressRing
+                                <appcontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
                                 Maximum="{x:Bind Period,Mode=OneWay}" 
                                     
@@ -462,7 +474,7 @@
                                 </VisualState.StateTriggers>
                                 <VisualState.Setters>
                                     <Setter Target="IssuerName.(RelativePanel.Below)" Value="AccountName"/>
-                                    <Setter Target="IssuerName.Margin" Value="0,10,10,0"/>
+                                    <Setter Target="IssuerName.Margin" Value="0,10,0,0"/>
                                     <!--<Setter Target="Root.MinWidth" Value="478"/>-->
                                 </VisualState.Setters>
                             </VisualState>
@@ -473,7 +485,7 @@
                                 <VisualState.Setters>
                                     <Setter Target="Root.MinWidth" Value="660"/>
                                     <Setter Target="IssuerName.(RelativePanel.RightOf)" Value="AccountName"/>
-                                    <Setter Target="IssuerName.Margin" Value="10,10,10,0"/>
+                                    <Setter Target="IssuerName.Margin" Value="10,10,0,0"/>
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -546,7 +558,7 @@
             TextChanged="AutoSuggestBox_TextChanged" 
             VerticalContentAlignment="Center"
             SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-            Margin="4,0,4,16" />
+            Margin="4,0,4,4" />
             <!--<Storyboard x:Name="FadeOutStoryboard">
                 <DoubleAnimation
                 Storyboard.TargetName="MobileAutoSuggestBox"

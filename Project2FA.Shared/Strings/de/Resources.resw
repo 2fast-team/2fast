@@ -305,7 +305,7 @@ Wichtig: Das Passwort wird bei jedem Start zur Entschlüsselung und Nutzung der 
     <value>Speicherart</value>
   </data>
   <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>WebDAV nutzen (Beta)</value>
+    <value>WebDAV nutzen</value>
   </data>
   <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>
@@ -402,7 +402,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="SettingsPivotItemOption.Header" xml:space="preserve">
     <value>Optionen</value>
   </data>
-  <data name="SettingsRateApp.Text" xml:space="preserve">
+  <data name="SettingsRateApp.Header" xml:space="preserve">
     <value>App im Store bewerten</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
@@ -439,7 +439,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
     <value>Feedback</value>
   </data>
   <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
-    <value>Feedback geben</value>
+    <value>Feedback geben (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
     <value>Andere Datendatei auswählen</value>
@@ -618,7 +618,7 @@ Anleitung zum setzen der Berechtigung:
   <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
     <value>Werkseinstellungen</value>
   </data>
-  <data name="SettingsSourceCode.Content" xml:space="preserve">
+  <data name="SettingsSourceCode.Header" xml:space="preserve">
     <value>Quellcode der App anzeigen</value>
   </data>
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
@@ -739,7 +739,8 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
 - Tutorialaufruf jederzeit wieder möglich
 - Fehlerbehebungen
 - Aktualisierung von Drittanbieter-Bibliotheken
-- Unterstützung des kopierens eines zeitbasierten Einmalpasstwortes von einem Konto, mithilfe der Enter-Taste</value>
+- Unterstützung des kopierens eines zeitbasierten Einmalpasstwortes von einem Konto, mithilfe der Enter-Taste
+- Möglichkeit zum abonnieren eines [monatlichen Abonnements](SettingPage?PivotItem=2&amp;OpenSubscriptions=true) für die Unterstützung der Weiterentwicklung der App</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -931,7 +932,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Möchten Sie das Tutorial zu der Anwendung öffnen?</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>Die Anwendung **2fast** (Akronym für **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) ist ein [Authentifikator](https://de.wikipedia.org/wiki/Authentifizierung) für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „**T**ime-based **O**ne-**t**ime **P**assword Algorithmus“/ zeitbasiertes Einmalpasswort (TOTP) nach Standardisierung [RFC 6238](https://tools.ietf.org/html/rfc6238) nutzt. Dienste die für den zweiten Faktor auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden. Beispielhaft untestützen Microsoft, Google und PayPal die Zwei-Faktor-Authentifizierung mittels TOTP:</value>
+    <value>Die Anwendung **2fast** (Akronym für **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) ist ein Authentifikator für die Zwei-Faktor-Authentifizierung (2FA), die den Standard „**T**ime-based **O**ne-**t**ime **P**assword Algorithmus“/ zeitbasiertes Einmalpasswort (TOTP) nach Standardisierung [RFC 6238](https://tools.ietf.org/html/rfc6238) nutzt. Dienste die für den zweiten Faktor auf den TOTP Standard setzen, können mit dieser Anwendung verwendet werden. Beispielhaft untestützen Microsoft, Google und PayPal die Zwei-Faktor-Authentifizierung mittels TOTP:</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
     <value>Für die Erstellung einer Datendatei muss als erster Schritt ein Ordner gewählt werden, in dem die Datei gespeichert werden soll. Hierbei ist ein Speicherort zu empfehlen, der gegenüber einem Datenverlust abgesichert ist (z.B. Cloud-Speicher wie One-Drive, DropBox, etc.). Im Anschluss folgen der Name und das Passwort für die Verschlüsselung der Datei. Es wird die Speicherung des Passwortes in einem Passwortmanager empfohlen, um einen Verlust zu verhindern.</value>
@@ -1069,7 +1070,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
+    <value>2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>
@@ -1187,10 +1188,48 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
     <value>**Funktionsweise der Anwendung**</value>
   </data>
-  <data name="SettingsManageSubscriptions.Content" xml:space="preserve">
+  <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
     <value>Abonnement verwalten</value>
   </data>
   <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
     <value>Im Weiteren wird die Funktionsweise der Anwendung erläutert.</value>
+  </data>
+  <data name="BTNBack.Content" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
+    <value>Ordnerpfad wählen</value>
+  </data>
+  <data name="SettingsInAppPayment.Header" xml:space="preserve">
+    <value>Abonnements und Käufe</value>
+  </data>
+  <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
+    <value>Mit dem Abonnement unterstützen Sie die weitere Entwicklung der Anwendung. ***Pro+*** Funktionen, die in der Zukunft hinzugefügt werden, sind mit diesem Abonnement zugänglich und nutzbar.
+***
+### 2,49€ monatlich</value>
+  </data>
+  <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>abonnieren</value>
+  </data>
+  <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>abbrechen</value>
+  </data>
+  <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
+    <value>Importieren Sie das Konto für ein anderes Gerät, indem Sie mit dem gewünschten Gerät eine App zur zwei Faktor Authentifizierung öffnen und ein Konto mit der Kamera hinzufügen.</value>
+  </data>
+  <data name="SettingsCardExternalAction" xml:space="preserve">
+    <value>extern aufrufen (Browser)</value>
+  </data>
+  <data name="SettingsInAppPayment.Description" xml:space="preserve">
+    <value>Abonnements und Käufe für erweiterte Funktionen tätigen</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
+    <value>Abonnements in Ihrem Microsoft Konto verwalten</value>
+  </data>
+  <data name="InAppPaymentContentDialogMonthItemSelect.Content" xml:space="preserve">
+    <value>Abonnement auswählen</value>
   </data>
 </root>

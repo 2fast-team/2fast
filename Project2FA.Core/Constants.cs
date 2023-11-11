@@ -9,7 +9,7 @@
         public const string BiometricIntegritySourceKey = "biometricIntegritySource";
         public const string BroadFileSystemAccessName = "broadFileSystemAccess";
         public const string OneYearSubscriptionId = "9MWQKWBQFQLG";
-        public const string SupportSubscriptionId = "";
+        public const string SupportSubscriptionId = "9N0PKJ5MF92B";
         public const string LifeTimeId = "";
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS_UWP
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UNOversal;
@@ -7,7 +8,7 @@ using Windows.UI.Xaml;
 
 namespace Project2FA.Services
 {
-    #if WINDOWS_UWP
+    
     public static class WindowService
     {
         public static Dictionary<Guid, Action<WindowCreatedEventArgs>> WindowCreatedCallBacks { get; } = new Dictionary<Guid, Action<WindowCreatedEventArgs>>();
@@ -69,5 +70,5 @@ namespace Project2FA.Services
             _instances.Add(args.Window);
         }
     }
-#endif
 }
+#endif

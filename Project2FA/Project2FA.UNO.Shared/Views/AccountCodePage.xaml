@@ -299,7 +299,6 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                            Style="{StaticResource PersonPictureWithAccentShadow}"
                             Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
                             </PersonPicture>
                         </utu:ShadowContainer>

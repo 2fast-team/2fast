@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:markdown="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:models="using:Project2FA.Models"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Title="~InAppPaymentContentDialog.Title"
     x:Uid="InAppPaymentContentDialog"
@@ -16,31 +17,62 @@
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
-    <Grid >
-        <GridView 
+    <Grid>
+        <!--<GridView 
+            HorizontalAlignment="Center"
             ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
             SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:InAppPaymentSubscriptionModel">
-                    <Grid 
+                    <UserControl IsEnabled="{x:Bind IsEnabled,Mode=OneWay}">
+                        <Grid 
                         Margin="12,8,12,8" 
-                        MinWidth="250"
+                        MinWidth="350"
                         MinHeight="400">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Image 
                 Source="{x:Bind Url, Mode=OneWay}"
                 Height="100"></Image>
-                        <markdown:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock 
                             Grid.Row="1" 
                             Text="{x:Bind Description,Mode=OneWay}">
-                        </markdown:MarkdownTextBlock>
-                    </Grid>
+                            </markdown:MarkdownTextBlock>
+                        </Grid>
+                    </UserControl>
+
                 </DataTemplate>
             </GridView.ItemTemplate>
-        </GridView>
+        </GridView>-->
+        
 
+        <ToggleButton 
+            IsEnabled="{x:Bind ViewModel.MonthItemIsEnabled,Mode=OneWay}" 
+            IsChecked="{x:Bind ViewModel.MonthItemIsChecked,Mode=TwoWay}">
+            <Grid 
+                Margin="12,8,12,8" 
+                MinWidth="350"
+                MinHeight="400">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image 
+                Source="ms-appx:///Assets/Images/give-love.png"
+                Height="100"></Image>
+                <StackPanel Grid.Row="1" >
+                    <markdown:MarkdownTextBlock
+                        Text="{x:Bind strings:Resources.InAppSubscriptionMonthSupport,Mode=OneWay}">
+                    </markdown:MarkdownTextBlock>
+                    <CheckBox 
+                        x:Uid="InAppPaymentContentDialogMonthItemSelect"
+                        HorizontalAlignment="Center"
+                        Content="~InAppPaymentContentDialogMonthItemSelect.Content"
+                        IsChecked="{x:Bind ViewModel.MonthItemIsChecked,Mode=TwoWay}"/>
+                </StackPanel>
+            </Grid>
+        </ToggleButton>
     </Grid>
 </ContentDialog>

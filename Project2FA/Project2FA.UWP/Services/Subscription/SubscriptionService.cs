@@ -17,8 +17,7 @@ namespace Project2FA.UWP.Services
             _subscriptionStoreId = id;
         }
 
-        // This is the entry point method for the example.
-        public async Task SetupSubscriptionInfoAsync()
+        public async Task<(bool IsActive, StoreLicense info)> SetupSubscriptionInfoAsync()
         {
             if (context == null)
             {
@@ -27,41 +26,9 @@ namespace Project2FA.UWP.Services
                 // may need additional code to configure the StoreContext object.
                 // For more info, see https://aka.ms/storecontext-for-desktop.
             }
-
-            (bool isActive, StoreLicense info) = await CheckIfUserHasSubscriptionAsync();
-            bool userOwnsSubscription = isActive;
-            if (userOwnsSubscription && info != null)
-            {
-                // Unlock all the subscription add-on features here.
-                return;
-            }
-
-            // Get the StoreProduct that represents the subscription add-on.
             subscriptionStoreProduct = await GetSubscriptionProductAsync();
-            if (subscriptionStoreProduct == null)
-            {
-                return;
-            }
+            return await CheckIfUserHasSubscriptionAsync();
 
-            // Check if the first SKU is a trial and notify the customer that a trial is available.
-            // If a trial is available, the Skus array will always have 2 purchasable SKUs and the
-            // first one is the trial. Otherwise, this array will only have one SKU.
-            StoreSku sku = subscriptionStoreProduct.Skus[0];
-            if (sku.SubscriptionInfo.HasTrialPeriod)
-            {
-                // You can display the subscription trial info to the customer here. You can use 
-                // sku.SubscriptionInfo.TrialPeriod and sku.SubscriptionInfo.TrialPeriodUnit 
-                // to get the trial details.
-            }
-            else
-            {
-                // You can display the subscription purchase info to the customer here. You can use 
-                // sku.SubscriptionInfo.BillingPeriod and sku.SubscriptionInfo.BillingPeriodUnit
-                // to provide the renewal details.
-            }
-
-            // Prompt the customer to purchase the subscription.
-            await PromptUserToPurchaseAsync();
         }
 
         private async Task<(bool IsActive, StoreLicense info)> CheckIfUserHasSubscriptionAsync()
@@ -116,7 +83,7 @@ namespace Project2FA.UWP.Services
             return null;
         }
 
-        private async Task PromptUserToPurchaseAsync()
+        public async Task PromptUserToPurchaseAsync()
         {
             // Request a purchase of the subscription product. If a trial is available it will be offered 
             // to the customer. Otherwise, the non-trial SKU will be offered.

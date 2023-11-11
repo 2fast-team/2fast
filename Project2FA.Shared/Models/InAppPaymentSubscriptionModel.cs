@@ -23,6 +23,15 @@ namespace Project2FA.Models
             get => _description; 
             set => SetProperty(ref _description, value);
         }
+
+        private bool _isEnabled;
+        public bool IsEnabled 
+        { 
+            get => _isEnabled; 
+            set => SetProperty(ref _isEnabled, value);
+        }
+
+
     }
 }
 #endif

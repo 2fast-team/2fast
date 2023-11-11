@@ -33,6 +33,7 @@ using Project2FA.Services;
 using Project2FA.Core.Services.NTP;
 using CommunityToolkit.WinUI.Helpers;
 using Windows.UI.Core;
+using Uno.UI;
 
 namespace Project2FA.UNO
 {
@@ -152,6 +153,9 @@ namespace Project2FA.UNO
                 FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
                 WinUIWindow.Current.Content = fileActivationPage;
             }
+#if DEBUG
+            WinUIWindow.Current.EnableHotReload();
+#endif
 
             WinUIWindow.Current.Activate();
         }

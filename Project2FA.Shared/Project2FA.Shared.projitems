@@ -2813,6 +2813,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\zyte.svg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background\mhellmeier_blue-hills.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\give-love.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-125.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-150.png" />

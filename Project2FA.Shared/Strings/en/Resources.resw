@@ -399,7 +399,7 @@ The datafile will **not** be removed in the reset progress.</value>
   <data name="SettingsPivotItemOption.Header" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="SettingsRateApp.Text" xml:space="preserve">
+  <data name="SettingsRateApp.Header" xml:space="preserve">
     <value>rate app in store</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
@@ -611,7 +611,7 @@ Instructions for setting the authorisation:
   <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
     <value>Factory reset</value>
   </data>
-  <data name="SettingsSourceCode.Content" xml:space="preserve">
+  <data name="SettingsSourceCode.Header" xml:space="preserve">
     <value>Show source code of the app</value>
   </data>
   <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
@@ -735,7 +735,8 @@ Please synchronize the time in the settings.</value>
 - Tutorial call possible again at any time
 - Bug fixes
 - Updating of third-party libraries
-- Support for copying a time-based one-time password from an account, using the Enter key</value>
+- Support for copying a time-based one-time password from an account, using the Enter key
+- Possibility to subscribe to a [monthly subscription](SettingPage?PivotItem=2&amp;OpenSubscriptions=true) to support the further development of the app</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features &amp; changes</value>
@@ -1062,7 +1063,7 @@ Please synchronize the time in the settings.</value>
     <value>Use file/image for import</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - two factor authenticator</value>
+    <value>2fast - two factor authenticator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Back</value>
@@ -1180,7 +1181,7 @@ The functionality of this application is explained in more detail in the followi
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
     <value>Functionality of the application</value>
   </data>
-  <data name="SettingsManageSubscriptions.Content" xml:space="preserve">
+  <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
     <value>Manage subscriptions</value>
   </data>
   <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
@@ -1192,11 +1193,13 @@ The functionality of this application is explained in more detail in the followi
   <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
     <value>Choose folder path</value>
   </data>
-  <data name="SettingsSupportApp.Text" xml:space="preserve">
-    <value>Support development</value>
+  <data name="SettingsInAppPayment.Header" xml:space="preserve">
+    <value>Subscriptions and one-time purchases</value>
   </data>
-  <data name="MonthSupportSubscription.Text" xml:space="preserve">
-    <value>With the subscription you support the further development of the application. *Pro+* features that will be added in the future are usable with this subscription.</value>
+  <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
+    <value>With the subscription you support the further development of the application. ***Pro+*** features that will be added in the future are usable with this subscription and accessible.
+***
+### 2,49€ monthly</value>
   </data>
   <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
     <value>subscribe</value>
@@ -1209,5 +1212,17 @@ The functionality of this application is explained in more detail in the followi
   </data>
   <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
     <value>Import the account for another device by opening a two-factor authentication app with the desired device and adding an account with the camera.</value>
+  </data>
+  <data name="SettingsCardExternalAction" xml:space="preserve">
+    <value>call externally (browser)</value>
+  </data>
+  <data name="SettingsInAppPayment.Description" xml:space="preserve">
+    <value>Make subscriptions and purchases for advanced features</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
+    <value>Manage subscriptions in your Microsoft account</value>
+  </data>
+  <data name="InAppPaymentContentDialogMonthItemSelect.Content" xml:space="preserve">
+    <value>Select subscription</value>
   </data>
 </root>

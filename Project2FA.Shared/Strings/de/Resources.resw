@@ -402,7 +402,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="SettingsPivotItemOption.Header" xml:space="preserve">
     <value>Optionen</value>
   </data>
-  <data name="SettingsRateApp.Text" xml:space="preserve">
+  <data name="SettingsRateApp.Header" xml:space="preserve">
     <value>App im Store bewerten</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
@@ -618,7 +618,7 @@ Anleitung zum setzen der Berechtigung:
   <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
     <value>Werkseinstellungen</value>
   </data>
-  <data name="SettingsSourceCode.Content" xml:space="preserve">
+  <data name="SettingsSourceCode.Header" xml:space="preserve">
     <value>Quellcode der App anzeigen</value>
   </data>
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
@@ -739,7 +739,8 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
 - Tutorialaufruf jederzeit wieder möglich
 - Fehlerbehebungen
 - Aktualisierung von Drittanbieter-Bibliotheken
-- Unterstützung des kopierens eines zeitbasierten Einmalpasstwortes von einem Konto, mithilfe der Enter-Taste</value>
+- Unterstützung des kopierens eines zeitbasierten Einmalpasstwortes von einem Konto, mithilfe der Enter-Taste
+- Möglichkeit zum abonnieren eines [monatlichen Abonnements](SettingPage?PivotItem=2&amp;OpenSubscriptions=true) für die Unterstützung der Weiterentwicklung der App</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -1069,7 +1070,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
+    <value>2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>
@@ -1187,7 +1188,7 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
     <value>**Funktionsweise der Anwendung**</value>
   </data>
-  <data name="SettingsManageSubscriptions.Content" xml:space="preserve">
+  <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
     <value>Abonnement verwalten</value>
   </data>
   <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
@@ -1199,11 +1200,13 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
     <value>Ordnerpfad wählen</value>
   </data>
-  <data name="SettingsSupportApp.Text" xml:space="preserve">
-    <value>Entwicklung unterstützen</value>
+  <data name="SettingsInAppPayment.Header" xml:space="preserve">
+    <value>Abonnements und Käufe</value>
   </data>
-  <data name="MonthSupportSubscription.Text" xml:space="preserve">
-    <value>Mit dem Abonnement unterstützen Sie die Weiterentwicklung der Anwendung. *Pro+* Funktionen die in Zukunft hinzugefügt werden, sind mit diesem Abonnement nutzbar.</value>
+  <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
+    <value>Mit dem Abonnement unterstützen Sie die weitere Entwicklung der Anwendung. ***Pro+*** Funktionen, die in der Zukunft hinzugefügt werden, sind mit diesem Abonnement zugänglich und nutzbar.
+***
+### 2,49€ monatlich</value>
   </data>
   <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
     <value>abonnieren</value>
@@ -1216,5 +1219,17 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   </data>
   <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
     <value>Importieren Sie das Konto für ein anderes Gerät, indem Sie mit dem gewünschten Gerät eine App zur zwei Faktor Authentifizierung öffnen und ein Konto mit der Kamera hinzufügen.</value>
+  </data>
+  <data name="SettingsCardExternalAction" xml:space="preserve">
+    <value>extern aufrufen (Browser)</value>
+  </data>
+  <data name="SettingsInAppPayment.Description" xml:space="preserve">
+    <value>Abonnements und Käufe für erweiterte Funktionen tätigen</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
+    <value>Abonnements in Ihrem Microsoft Konto verwalten</value>
+  </data>
+  <data name="InAppPaymentContentDialogMonthItemSelect.Content" xml:space="preserve">
+    <value>Abonnement auswählen</value>
   </data>
 </root>

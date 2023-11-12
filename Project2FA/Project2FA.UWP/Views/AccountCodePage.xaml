@@ -1030,6 +1030,7 @@
             HorizontalContentAlignment="Stretch"
             helpers:TemplateSelector.ChangedItem="{x:Bind ViewModel.ChangedItem, Mode=OneWay}"
             HorizontalAlignment="Stretch" 
+            Margin="0,0,0,12"
             KeyUp="LV_AccountCollection_KeyUp">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

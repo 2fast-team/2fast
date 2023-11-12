@@ -5,7 +5,7 @@
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
          IgnorableNamespaces="uap mp rescap uap6">
-	<Identity Name="38343JanPhilippWeber.2fastTwoFactorAuthenticatorSu" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="0.0.1.0" />
+	<Identity Name="38343JanPhilippWeber.2fastTwoFactorAuthenticatorSu" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.2.7.0" />
 	<mp:PhoneIdentity PhoneProductId="4cf662a7-5e43-4e47-bd7c-7bad7eed6ba0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 	<Properties>
 		<DisplayName>2fast – Two Factor Authenticator Supporting TOTP</DisplayName>

@@ -10,6 +10,7 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/ScrollBar_themeresources.xaml" />-->
         <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/PersonPicture.xaml" />
+        <ResourceDictionary Source="ms-appx:///Controls/RadialProgressBar/RadialProgressBar.xaml" />
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBoxItemStyle.xaml" />-->
 
 

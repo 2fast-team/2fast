@@ -1063,7 +1063,7 @@ Please synchronize the time in the settings.</value>
     <value>Use file/image for import</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - two factor authenticator</value>
+    <value>[Beta] 2fast - two factor authenticator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Back</value>

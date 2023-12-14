@@ -24,11 +24,11 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class ShellPage : Page
     {
-        private SystemNavigationManager _navManager;
+        private readonly SystemNavigationManager _navManager;
         public NavigationView ShellViewInternal { get; private set; }
         public Frame MainFrame { get; }
         public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
-        private CoreApplicationViewTitleBar coreTitleBar;
+        private readonly CoreApplicationViewTitleBar _coreTitleBar;
 
         public ShellPage()
         {
@@ -39,15 +39,15 @@ namespace Project2FA.UWP.Views
             // determine and set if the app is started in debug mode
             ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + Strings.Resources.ApplicationName : Strings.Resources.ApplicationName;
             //TODO WIP pro features
-            SettingsService.Instance.IsProVersion = false;
-            coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
+            SettingsService.Instance.IsProVersion = true;
+            _coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            _coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
             SetTitleBarAsDraggable();
 
             // Register a handler for when the size of the overlaid caption control changes.
             // For example, when the app moves to a screen with a different DPI.
-            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
+            _coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
             if (WindowDisplayInfo.GetForCurrentView() == WindowDisplayMode.FullScreenTabletMode)
             {
                 AppTitleBar.Visibility = Visibility.Collapsed;

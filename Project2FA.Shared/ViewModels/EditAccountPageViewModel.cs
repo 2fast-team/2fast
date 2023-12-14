@@ -39,15 +39,15 @@ namespace Project2FA.ViewModels
                 Model.Issuer = TempIssuer;
                 Model.Label = TempLabel;
                 Model.AccountIconName = TempAccountIconName;
-                (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName);
-                if (success)
-                {
-                    Model.AccountSVGIcon = iconStr;
-                }
-                else
-                {
-                    Model.AccountSVGIcon = null;
-                }
+                //(bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName);
+                //if (success)
+                //{
+                //    Model.AccountSVGIcon = iconStr;
+                //}
+                //else
+                //{
+                //    Model.AccountSVGIcon = null;
+                //}
                 Model.Notes = TempNotes;
                 await DataService.Instance.WriteLocalDatafile();
                 await NavigateBackCommandTask();
@@ -76,20 +76,20 @@ namespace Project2FA.ViewModels
             {
                 Model = model;
                 TempAccountIconName = Model.AccountIconName;
-                if (!string.IsNullOrWhiteSpace(TempAccountIconName))
-                {
-                    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
-                    if (success)
-                    {
-                        TempAccountSVGIcon = iconStr;
-                    }
+                //if (!string.IsNullOrWhiteSpace(TempAccountIconName))
+                //{
+                //    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
+                //    if (success)
+                //    {
+                //        TempAccountSVGIcon = iconStr;
+                //    }
 
-                }
-                else
-                {
-                    TempIconLabel = TempLabel;
-                }
-                await LoadIconNameCollection();
+                //}
+                //else
+                //{
+                //    TempIconLabel = TempLabel;
+                //}
+                //await LoadIconNameCollection();
             }
         }
     }

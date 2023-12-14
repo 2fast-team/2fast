@@ -158,8 +158,26 @@ namespace Project2FA.Controls
         private Size ComputeEllipseSize()
         {
             var safeThickness = Math.Max(Thickness, 0.0);
+
+#if !WINDOWS_UWP
+            double controlHeight, controlWidth;
+            if (Width < Height)
+            {
+                controlWidth = Width;
+                controlHeight = Width;
+            }
+            else
+            {
+                controlWidth = Height;
+                controlHeight = Height;
+            }
+            var width = Math.Max((controlWidth - safeThickness) / 2.0, 0.0);
+            var height = Math.Max((controlHeight - safeThickness) / 2.0, 0.0);
+#else
             var width = Math.Max((ActualWidth - safeThickness) / 2.0, 0.0);
             var height = Math.Max((ActualHeight - safeThickness) / 2.0, 0.0);
+#endif
+
             return new Size(width, height);
         }
 

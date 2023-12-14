@@ -56,15 +56,15 @@ namespace Project2FA.ViewModels
             Model.Issuer = TempIssuer;
             Model.Label = TempLabel;
             Model.AccountIconName = TempAccountIconName;
-            (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName);
-            if (success)
-            {
-                Model.AccountSVGIcon = iconStr;
-            }
-            else
-            {
-                Model.AccountSVGIcon = null;
-            }
+            //(bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName);
+            //if (success)
+            //{
+            //    Model.AccountSVGIcon = iconStr;
+            //}
+            //else
+            //{
+            //    Model.AccountSVGIcon = null;
+            //}
             Model.Notes = TempNotes;
             Model.SelectedCategories = GlobalTempCategories.Where(x => x.IsSelected == true).ToList();
             for (int i = 0; i < TempAccountCategoryList.Count; i++)
@@ -81,18 +81,18 @@ namespace Project2FA.ViewModels
             {
                 Model = model;
                 TempAccountIconName = Model.AccountIconName;
-                if (!string.IsNullOrWhiteSpace(TempAccountIconName))
-                {
-                    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
-                    if (success)
-                    {
-                        TempAccountSVGIcon = iconStr;
-                    }
-                }
-                else
-                {
-                    TempIconLabel = TempLabel;
-                }
+                //if (!string.IsNullOrWhiteSpace(TempAccountIconName))
+                //{
+                //    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
+                //    if (success)
+                //    {
+                //        TempAccountSVGIcon = iconStr;
+                //    }
+                //}
+                //else
+                //{
+                //    TempIconLabel = TempLabel;
+                //}
 
                 //Model.SelectedCategories.Add(GlobalTempCategories.FirstOrDefault()); // debug
                 // add all categories
@@ -109,7 +109,7 @@ namespace Project2FA.ViewModels
                     selectedList.ElementAt(i).IsSelected = true;
                     TempAccountCategoryList.Add(selectedList.ElementAt(i));
                 }
-                await LoadIconNameCollection();
+                //await LoadIconNameCollection();
             }
         }
     }

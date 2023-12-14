@@ -46,33 +46,65 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>-->
-        
-
-        <ToggleButton 
+        <FlipView>
+            <FlipViewItem>
+                <ToggleButton 
             IsEnabled="{x:Bind ViewModel.MonthItemIsEnabled,Mode=OneWay}" 
             IsChecked="{x:Bind ViewModel.MonthItemIsChecked,Mode=TwoWay}">
-            <Grid 
+                    <Grid 
                 Margin="12,8,12,8" 
                 MinWidth="350"
                 MinHeight="400">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Image 
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image 
                 Source="ms-appx:///Assets/Images/give-love.png"
                 Height="100"></Image>
-                <StackPanel Grid.Row="1" >
-                    <markdown:MarkdownTextBlock
+                        <StackPanel Grid.Row="1" >
+                            <markdown:MarkdownTextBlock
                         Text="{x:Bind strings:Resources.InAppSubscriptionMonthSupport,Mode=OneWay}">
-                    </markdown:MarkdownTextBlock>
-                    <CheckBox 
+                            </markdown:MarkdownTextBlock>
+                            <CheckBox 
                         x:Uid="InAppPaymentContentDialogMonthItemSelect"
                         HorizontalAlignment="Center"
                         Content="~InAppPaymentContentDialogMonthItemSelect.Content"
                         IsChecked="{x:Bind ViewModel.MonthItemIsChecked,Mode=TwoWay}"/>
-                </StackPanel>
-            </Grid>
-        </ToggleButton>
+                        </StackPanel>
+                    </Grid>
+                </ToggleButton>
+            </FlipViewItem>
+            <FlipViewItem>
+                <ToggleButton 
+            IsEnabled="{x:Bind ViewModel.MonthItemIsEnabled,Mode=OneWay}" 
+            IsChecked="{x:Bind ViewModel.MonthItemIsChecked,Mode=TwoWay}">
+                    <Grid 
+                Margin="12,8,12,8" 
+                MinWidth="350"
+                MinHeight="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image 
+                Source="ms-appx:///Assets/Images/give-love.png"
+                Height="100"></Image>
+                        <StackPanel Grid.Row="1" >
+                            <markdown:MarkdownTextBlock
+                        Text="{x:Bind strings:Resources.InAppSubscriptionMonthSupport,Mode=OneWay}">
+                            </markdown:MarkdownTextBlock>
+                            <CheckBox 
+                        x:Uid="InAppPaymentContentDialogMonthItemSelect"
+                        HorizontalAlignment="Center"
+                        Content="~InAppPaymentContentDialogMonthItemSelect.Content"
+                        IsChecked="{x:Bind ViewModel.MonthItemIsChecked,Mode=TwoWay}"/>
+                        </StackPanel>
+                    </Grid>
+                </ToggleButton>
+            </FlipViewItem>
+        </FlipView>
+
+
     </Grid>
 </ContentDialog>

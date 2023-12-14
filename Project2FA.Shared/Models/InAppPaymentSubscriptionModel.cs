@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project2FA.Models
+namespace Project2FA.Repository.Models
 {
     public class InAppPaymentSubscriptionModel : ObservableObject
     {

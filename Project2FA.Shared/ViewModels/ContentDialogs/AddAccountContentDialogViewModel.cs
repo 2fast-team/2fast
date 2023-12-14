@@ -45,7 +45,6 @@ namespace Project2FA.ViewModels
         public async Task InitializeAsync(IDialogParameters parameters)
         {
             OTPList.Clear();
-            await LoadIconNameCollection();
         }
 
     }

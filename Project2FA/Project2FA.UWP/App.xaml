@@ -16,6 +16,7 @@
             <Converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
             <Converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
             <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <Converters:ShowCodeToIconConverter x:Key="ShowCodeToIconConverter"/>
             <Converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
             <Converters:VisibleWhenFalseConverter x:Key="VisibleWhenFalseConverter"/>
             <Converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>
@@ -24,6 +25,7 @@
             <Converters:PersonalPictureInitialsVisibilityConverter x:Key="PersonalPictureInitialsVisibilityConverter"/>
             <Converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
             <Converters:SVGImageConverter x:Key="SVGImageConverter"/>
+            <Converters:FontIconNameToGlyphConverter x:Key="FontIconNameToGlyphConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </unoApp:UNOversalApplication>

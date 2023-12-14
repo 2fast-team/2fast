@@ -1,34 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst;</TargetFrameworks>
+    <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst;</TargetFrameworks>
     <SingleProject>true</SingleProject>
     <OutputType>Exe</OutputType>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net7.0-ios'">iossimulator-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net7.0-macos'">osx-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-ios'">iossimulator-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-macos'">osx-x64</RuntimeIdentifier>
 	  <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
 	  <!-- <MtouchExtraArgs Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
 	  <!-- Required for C# Hot Reload -->
 	  <UseInterpreter Condition="'$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
     <IsUnoHead>true</IsUnoHead>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-ios'">14.2</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-android'">27.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net7.0-macos'">10.14</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">27.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net8.0-macos'">10.14</SupportedOSPlatformVersion>
     <PackageIcon>splash.png</PackageIcon>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
     <CodesignKey>Apple Development: Created via API (CB3KSUCNGR)</CodesignKey>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+    <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' and '$(Configuration)' == 'Release'">
+	    <!-- PublishAot=true indicates NativeAOT, while omitting this property would use Mono's AOT -->
+	    <PublishAot>true</PublishAot>
+    </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
     <AndroidUseAapt2>True</AndroidUseAapt2>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <EnableLLVM>True</EnableLLVM>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
     <AndroidPackageFormat>apk</AndroidPackageFormat>
+	<AndroidStripILAfterAOT>true</AndroidStripILAfterAOT>
+	<AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
     <EnableLLVM>True</EnableLLVM>
   </PropertyGroup>
   <ItemGroup>
@@ -48,33 +54,40 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.0.230907" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.0.230907" />
     <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.0.230907" />
-    <PackageReference Include="DryIoc" Version="5.4.2" />
+    <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
-    <PackageReference Include="Svg.Skia" Version="1.0.0.3" />
+    <PackageReference Include="Svg.Skia" Version="1.0.0.7" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
-    <PackageReference Include="Uno.Resizetizer" Version="1.2.0" />
-    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="5.0.17" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="5.0.17" />
-    <PackageReference Include="Uno.WinUI" Version="5.0.41" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.0.41" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.0.41" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.41" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.0.41" />
+    <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="3.0.11" />
+    <PackageReference Include="Uno.Resizetizer" Version="1.2.1" />
+    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="5.0.19" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="5.0.19" />
+    <PackageReference Include="Uno.WinUI" Version="5.0.64" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.0.64" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.0.64" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.64" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.0.64" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>
-    <When Condition="'$(TargetFramework)'=='net7.0-android'">
+    <When Condition="'$(TargetFramework)'=='net8.0-android'">
       <ItemGroup>
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.10.0.1" />
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.10.0.2" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.UI" Version="2.7.5.1" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.Fragment" Version="2.7.5.1" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.Runtime" Version="2.7.5.1" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.7.5.1" />
+		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.3.0.2" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.3.0.2" />
         <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
       </ItemGroup>
       <ItemGroup>
         <AndroidEnvironment Include="Android/environment.conf" />
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)'=='net7.0-ios'">
-      <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+    <When Condition="'$(TargetFramework)'=='net8.0-ios'">
+      <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
 		  <!--to be able to use EF core dynamic stuff-->
         <MtouchExtraArgs>--interpreter</MtouchExtraArgs>
 		<NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
@@ -86,7 +99,7 @@
       </PropertyGroup>
     </When>
 
-    <When Condition="'$(TargetFramework)'=='net7.0-maccatalyst'">
+    <When Condition="'$(TargetFramework)'=='net8.0-maccatalyst'">
       <PropertyGroup>
         <!-- Configure the GC -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
@@ -101,7 +114,7 @@
         <!--<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />-->
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)'=='net7.0-macos'">
+    <When Condition="'$(TargetFramework)'=='net8.0-macos'">
       <PropertyGroup>
       </PropertyGroup>
     </When>
@@ -131,6 +144,7 @@
     <ProjectReference Include="..\..\Otp.NET\src\Otp.NET\Otp.NET.csproj" />
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
     <ProjectReference Include="..\..\Project2FA.Repository\Project2FA.Repository.csproj" />
+    <ProjectReference Include="..\..\Project2FA.UNO.MauiControls\Project2FA.UNO.MauiControls.csproj" />
     <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
   </ItemGroup>
 </Project>

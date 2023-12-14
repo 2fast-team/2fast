@@ -96,19 +96,30 @@ namespace Project2FA.UWP.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                if (string.IsNullOrEmpty(sender.Text) == false && sender.Text.Length >= 2)
+                if (string.IsNullOrEmpty(sender.Text) == false && sender.Text.Length >= 2 && sender.Text != Strings.Resources.AccountCodePageSearchNotFound)
                 {
-                    List<string> _nameList = new List<string>();
-                    foreach (IconNameModel item in ViewModel.IconNameCollectionModel.Collection)
+                    List<string> listSuggestion = new List<string>();
+                    var tempList = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                    for (int i = 0; i < tempList.Count; i++)
                     {
-                        _nameList.Add(item.Name);
+                        listSuggestion.Add(tempList[i].Name);
                     }
-                    List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
-                    if (listSuggestion.Count == 0)
+                    try
                     {
-                        listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
+                        if (listSuggestion.Count == 0)
+                        {
+                            sender.ItemsSource = Strings.Resources.AccountCodePageSearchNotFound;
+                        }
+                        else
+                        {
+                            sender.ItemsSource = listSuggestion;
+                        }
                     }
-                    sender.ItemsSource = listSuggestion;
+                    catch (System.Exception)
+                    {
+                        sender.ItemsSource = null;
+                    }
+
                 }
                 else
                 {
@@ -119,15 +130,17 @@ namespace Project2FA.UWP.Views
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            string selectedItem = args.SelectedItem.ToString();
-            if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
+            //args.reas
+            if (args.SelectedItem is string selectedItem)
             {
-                ViewModel.TempAccountIconName = selectedItem;
-                ViewModel.LoadIconSVG();
-            }
-            else
-            {
-                sender.Text = string.Empty;
+                if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
+                {
+                    ViewModel.TempAccountIconName = selectedItem;
+                }
+                else
+                {
+                    sender.Text = string.Empty;
+                }
             }
         }
 

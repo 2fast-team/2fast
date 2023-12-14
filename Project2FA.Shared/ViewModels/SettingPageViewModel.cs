@@ -270,9 +270,9 @@ namespace Project2FA.ViewModels
                 }
 
                 _settings.AppTheme = value;
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                DataService.Instance.ReloadAccountIconSVGs();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+//#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+//                DataService.Instance.ReloadAccountIconSVGs();
+//#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 

@@ -6,60 +6,113 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Project2FA.Repository.Models"
+    xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     Title="~ManageCategoriesContentDialogHeader.Title"
     x:Uid="ManageCategoriesContentDialogHeader"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.DataChanged,Mode=OneWay}"
     PrimaryButtonText="~ManageCategoriesContentDialogHeader.PrimaryButtonText"
     SecondaryButtonText="~ManageCategoriesContentDialogHeader.SecondaryButtonText">
 
     <ContentDialog.Resources>
-        <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon  Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>
-                <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
-            </StackPanel>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
+                <StackPanel Orientation="Horizontal">
+                    <!--<FontIcon  Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>-->
+                    <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Name="SymbolListTemplate" x:DataType="models:SymbolModel">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="{x:Bind Symbol,Mode=OneWay}" Margin="0,0,10,0"/>
+                    <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+  
     </ContentDialog.Resources>
 
-    <Grid>
-        <StackPanel>
-            <labs:TokenView 
-                x:Name="TV_Categories"
-                Margin="0,0,15,8"
-                ItemsSource="{x:Bind ViewModel.TempGlobalCategories,Mode=OneWay}"
-                CanRemoveTokens="False"
-                IsItemClickEnabled="True"
-                SelectionMode="Multiple"  
-                ItemTemplate="{StaticResource CategoryTemplate}"/>
-            <TextBox 
-                Header="~ManageCategoriesContentDialogLabel.Header" 
-                x:Uid="AddAccountContentDialogLabel"  
-                Text="{x:Bind ViewModel.Label,Mode=TwoWay}"/>
-            <ComboBox 
-                VerticalAlignment="Stretch"
-                Margin="0,10,0,20" 
-                x:Uid="ManageCategoriesContentDialogIcon" 
-                Header="~ManageCategoriesContentDialogIcon.Header">
-                
-            </ComboBox>
-            <!--<AutoSuggestBox 
-                Header="~ManageCategoriesContentDialogIcon.Header"
-                x:Uid="ManageCategoriesContentDialogIcon" 
-                PlaceholderText="#name of icon"
-                Margin="0,10,0,20" 
-                QueryIcon="Find"
-                SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-                TextChanged="AutoSuggestBox_TextChanged"/>-->
+    <Grid 
+        MinWidth="350" 
+        MinHeight="450">
+        <ScrollViewer>
+            <StackPanel>
+                <appcontrols:CardExpanderControl 
+                        IsExpanded="False"
+                        Margin="0,15,0,8">
+                    <appcontrols:CardExpanderControl.Header>
+                        <appcontrols:CardControl
+                            Icon="&#xE713;"
+                            x:Uid="ManageCategoriesAddGlobalCategories" 
+                            Header="~ManageCategoriesAddGlobalCategories.Header">
+                        </appcontrols:CardControl>
+                    </appcontrols:CardExpanderControl.Header>
+                    <StackPanel>
+                        <TextBox 
+                            Header="~ManageCategoriesContentDialogLabel.Header" 
+                            x:Uid="ManageCategoriesContentDialogLabel"  
+                            Text="{x:Bind ViewModel.Label,Mode=TwoWay}"/>
+                        <ComboBox 
+                            VerticalAlignment="Stretch"
+                            Margin="0,10,0,20" 
+                            HorizontalAlignment="Stretch"
+                            x:Uid="ManageCategoriesContentDialogIcon" 
+                            ItemTemplate="{StaticResource SymbolListTemplate}"
+                            SelectedItem="{x:Bind ViewModel.SelectedIconItem, Mode=TwoWay}"
+                            ItemsSource="{x:Bind ViewModel.IconSourceCollection, Mode=OneWay}"
+                            Header="~ManageCategoriesContentDialogIcon.Header">
+                        </ComboBox>
+                        <Button 
+                            Command="{x:Bind ViewModel.CreateCategoryCommand}"
+                            x:Uid="ManageCategoriesContentDialogIconCreateBTN"
+                            Margin="0,10,0,20"
+                            IsEnabled="{x:Bind ViewModel.CanCreate,Mode=OneWay}"
+                            Content="~ManageCategoriesContentDialogIconCreateBTN.Content">
+                        </Button>
+                    </StackPanel>
+                </appcontrols:CardExpanderControl>
 
-            <Button 
-                Command="{x:Bind ViewModel.CreateCategoryCommand}"
-                x:Uid="ManageCategoriesContentDialogIconCreateBTN"
-                Margin="0,10,0,20" 
-                Content="~ManageCategoriesContentDialogIconCreateBTN.Content">
-                
-            </Button>
+                <appcontrols:CardExpanderControl 
+                        IsExpanded="True"
+                        Margin="0,15,0,8">
+                    <appcontrols:CardExpanderControl.Header>
+                        <appcontrols:CardControl
+                            Icon="&#xE71C;"
+                            x:Uid="ManageCategoriesFilterCategories" 
+                            Header="~ManageCategoriesFilterCategories.Header">
+                        </appcontrols:CardControl>
+                    </appcontrols:CardExpanderControl.Header>
+                    <labs:TokenView 
+                        x:Name="TV_Categories"
+                        Margin="0,0,15,8"
+                        ItemsSource="{x:Bind ViewModel.TempGlobalCategories,Mode=OneWay}"
+                        CanRemoveTokens="False"
+                        IsItemClickEnabled="True"
+                        SelectionMode="Multiple"  
+                        ItemTemplate="{StaticResource CategoryTemplate}"/>
+                </appcontrols:CardExpanderControl>
 
-        </StackPanel>
+                
+                <!--<AutoSuggestBox 
+            Header="~ManageCategoriesContentDialogIcon.Header"
+            x:Uid="ManageCategoriesContentDialogIcon" 
+            PlaceholderText="#name of icon"
+            Margin="0,10,0,20" 
+            QueryIcon="Find"
+            SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
+            TextChanged="AutoSuggestBox_TextChanged"/>-->
+
+
+
+            </StackPanel>
+        </ScrollViewer>
+      
     </Grid>
 </ContentDialog>

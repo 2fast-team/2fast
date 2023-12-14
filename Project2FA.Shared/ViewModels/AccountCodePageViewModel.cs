@@ -18,7 +18,7 @@ using Project2FA.Core;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Toolkit.Uwp.Helpers;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -28,6 +28,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Data;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Microsoft.Toolkit.Uwp.Helpers;
 using WinUIWindow = Windows.UI.Xaml.Window;
 #else
 using Project2FA.UNO;
@@ -160,8 +161,8 @@ namespace Project2FA.ViewModels
 
         private async Task ManageCategoriesCommandTask()
         {
-            ManageCategoriesContentDialog dialog = new ManageCategoriesContentDialog();
-            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+            //ManageCategoriesContentDialog dialog = new ManageCategoriesContentDialog();
+            //await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         private async Task AddAccountCommandTask()
@@ -292,10 +293,10 @@ namespace Project2FA.ViewModels
                 //ChangedItem = null;
                 model.IsFavourite = !model.IsFavourite;
                 await TwoFADataService.WriteLocalDatafile();
-                if (!string.IsNullOrWhiteSpace(model.AccountIconName))
-                {
-                    await SVGColorHelper.GetSVGIconWithThemeColor(model, model.AccountIconName);
-                }
+                //if (!string.IsNullOrWhiteSpace(model.AccountIconName))
+                //{
+                //    await SVGColorHelper.GetSVGIconWithThemeColor(model, model.AccountIconName);
+                //}
                 ChangedItem = model;
             }
         }
@@ -570,6 +571,7 @@ namespace Project2FA.ViewModels
                 }
             }
         }
+        #region Getter_Setter
         public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
         public bool IsAccountNotDeleted => TwoFADataService.TempDeletedTFAModel == null;
@@ -614,5 +616,6 @@ namespace Project2FA.ViewModels
             get => App.ShellPageInstance.ViewModel;
         }
 #endif
+        #endregion
     }
 }

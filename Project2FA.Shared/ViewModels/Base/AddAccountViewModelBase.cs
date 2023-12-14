@@ -142,29 +142,29 @@ namespace Project2FA.ViewModels
 #endif
         }
 
-        internal async Task LoadIconNameCollection()
-        {
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/IconNameCollection.json"));
-            IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
-            using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
-            IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(await r.ReadToEndAsync());
-            //StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            //string name = "IconNameCollection.json";
-            //if (await FileService.FileExistsAsync(name, localFolder))
-            //{
-            //    var result = await FileService.ReadStringAsync(name, localFolder);
-            //    IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(result);
-            //}
-            //else
-            //{
-            //    //TODO should not happen
-            //}
-        }
+        //internal async Task LoadIconNameCollection()
+        //{
+        //    StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/IconNameCollection.json"));
+        //    IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
+        //    using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
+        //    IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(await r.ReadToEndAsync());
+        //    //StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+        //    //string name = "IconNameCollection.json";
+        //    //if (await FileService.FileExistsAsync(name, localFolder))
+        //    //{
+        //    //    var result = await FileService.ReadStringAsync(name, localFolder);
+        //    //    IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(result);
+        //    //}
+        //    //else
+        //    //{
+        //    //    //TODO should not happen
+        //    //}
+        //}
 
-        public async Task LoadIconSVG()
-        {
-            await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
-        }
+        //public async Task LoadIconSVG()
+        //{
+        //    await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
+        //}
 
         private async Task ScanQRCodeCommandTask()
         {
@@ -594,9 +594,9 @@ namespace Project2FA.ViewModels
 
         private async Task CheckLabelForIcon()
         {
-            string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-            string path = root + @"\Assets\AccountIcons";
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+            //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+            //string path = root + @"\Assets\AccountIcons";
+            //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
 
             var transformName = Model.Label.ToLower();
             transformName = transformName.Replace(" ", string.Empty);
@@ -604,24 +604,40 @@ namespace Project2FA.ViewModels
 
             try
             {
-                if (await FileService.FileExistsAsync(string.Format("{0}.svg", transformName), folder))
+                if (DataService.Instance.FontIconCollection.Where(x => x.Name == transformName).Any())
                 {
                     Model.AccountIconName = transformName;
                     AccountIconName = transformName;
-                    await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
                 }
                 else
                 {
                     // fallback: check if one IconNameCollectionModel name fits into the label name
 
-                    var list = IconNameCollectionModel.Collection.Where(x => x.Name.Contains(transformName));
+                    var list = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(transformName));
                     if (list.Count() == 1)
                     {
                         Model.AccountIconName = list.FirstOrDefault().Name;
                         AccountIconName = list.FirstOrDefault().Name;
-                        await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
                     }
                 }
+                //if (await FileService.FileExistsAsync(string.Format("{0}.svg", transformName), folder))
+                //{
+                //    Model.AccountIconName = transformName;
+                //    AccountIconName = transformName;
+                //    await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
+                //}
+                //else
+                //{
+                //    // fallback: check if one IconNameCollectionModel name fits into the label name
+
+                //    var list = IconNameCollectionModel.Collection.Where(x => x.Name.Contains(transformName));
+                //    if (list.Count() == 1)
+                //    {
+                //        Model.AccountIconName = list.FirstOrDefault().Name;
+                //        AccountIconName = list.FirstOrDefault().Name;
+                //        await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
+                //    }
+                //}
             }
             catch (Exception exc)
             {

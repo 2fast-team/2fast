@@ -4,7 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <!--custom controls-->
         <ResourceDictionary Source="/Controls/Shimmer/Shimmer.xaml" />
-        <ResourceDictionary Source="/Controls/RadialProgressBar/RadialProgressBar.xaml" />
+        
     </ResourceDictionary.MergedDictionaries>
     
     

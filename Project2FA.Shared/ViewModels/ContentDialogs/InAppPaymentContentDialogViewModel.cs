@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UNOversal.Services.Dialogs;
-using Project2FA.Models;
 using System.Collections.ObjectModel;
 using Windows.Services.Store;
 using System.Threading.Tasks;
@@ -14,6 +13,7 @@ using Project2FA.Strings;
 using Project2FA.UWP;
 using Project2FA.UWP.Services;
 using Project2FA.Core;
+using Project2FA.Repository.Models;
 
 namespace Project2FA.ViewModels
 {

@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Project2FA.UNO"
-    xmlns:converters="using:Project2FA.Converters"
+    xmlns:Converters="using:Project2FA.Converters"
     xmlns:unoApp="using:UNOversal.DryIoc">
 	
     <Application.Resources>
@@ -23,18 +23,19 @@
                 <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Color x:Key="SystemAccentColor">#FF009BC1</Color>
-            <converters:BytesToHumanReadableConverter x:Key="BytesToHumanReadableConverter"/>
-            <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
-            <converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
-            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
-            <converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
-            <converters:VisibleWhenFalseConverter x:Key="VisibleWhenFalseConverter"/>
-            <converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>
-            <converters:TOTPVisibilityTooltipConverter x:Key="TOTPVisibilityTooltipConverter"/>
-            <converters:DoubleToInt32ToStringConverter x:Key="DoubleToInt32ToStringConverter"/>
-            <converters:PersonalPictureInitialsVisibilityConverter x:Key="PersonalPictureInitialsVisibilityConverter"/>
-            <converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
-            <converters:SVGImageConverter x:Key="SVGImageConverter"/>
+            <Converters:BytesToHumanReadableConverter x:Key="BytesToHumanReadableConverter"/>
+            <Converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+            <Converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
+            <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <Converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
+            <Converters:VisibleWhenFalseConverter x:Key="VisibleWhenFalseConverter"/>
+            <Converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>
+            <Converters:TOTPVisibilityTooltipConverter x:Key="TOTPVisibilityTooltipConverter"/>
+            <Converters:DoubleToInt32ToStringConverter x:Key="DoubleToInt32ToStringConverter"/>
+            <Converters:PersonalPictureInitialsVisibilityConverter x:Key="PersonalPictureInitialsVisibilityConverter"/>
+            <Converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
+            <Converters:SVGImageConverter x:Key="SVGImageConverter"/>
+            <Converters:FontIconNameToGlyphConverter x:Key="FontIconNameToGlyphConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 

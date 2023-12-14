@@ -34,6 +34,8 @@ using Project2FA.Core.Services.NTP;
 using CommunityToolkit.WinUI.Helpers;
 using Windows.UI.Core;
 using Uno.UI;
+using Uno.Extensions.Maui;
+using Project2FA.UNO.MauiControls;
 
 namespace Project2FA.UNO
 {
@@ -42,6 +44,7 @@ namespace Project2FA.UNO
     /// </summary>
     public sealed partial class App : UNOversalApplication
     {
+        private bool _logoutNavigation = false;
         private DateTime _focusLostTime;
         private DispatcherTimer _focusLostTimer;
         /// <summary>
@@ -85,6 +88,15 @@ namespace Project2FA.UNO
 
         public override async Task OnStartAsync(IApplicationArgs args)
         {
+
+#if DEBUG
+            WinUIWindow.Current.EnableHotReload();
+#endif
+
+#if MAUI_EMBEDDING
+            this.UseMauiEmbedding<MauiControls.App>(WinUIWindow.Current,
+                maui => maui.UseMauiControls());
+#endif
             if (WinUIWindow.Current.Content == null)
             {
                 //ThemeHelper.Initialize();
@@ -153,9 +165,7 @@ namespace Project2FA.UNO
                 FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
                 WinUIWindow.Current.Content = fileActivationPage;
             }
-#if DEBUG
-            WinUIWindow.Current.EnableHotReload();
-#endif
+
 
             WinUIWindow.Current.Activate();
         }
@@ -187,6 +197,21 @@ namespace Project2FA.UNO
                 {
                     _focusLostTimer.Stop();
                 }
+                if (_logoutNavigation)
+                {
+                    _logoutNavigation = false;
+                    ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                    if (DataService.Instance.ActivatedDatafile != null)
+                    {
+                        var fileActivationPage = new FileActivationPage();
+                        WinUIWindow.Current.Content = fileActivationPage;
+                    }
+                    else
+                    {
+                        var loginPage = new LoginPage(true);
+                        WinUIWindow.Current.Content = loginPage;
+                    }
+                }
             }
         }
 
@@ -209,21 +234,28 @@ namespace Project2FA.UNO
                     {
                         dialogService.CloseDialogs();
                     }
-                    await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
-                    if (DataService.Instance.ActivatedDatafile != null)
+                    if (ShellPageInstance.MainFrame.DispatcherQueue.HasThreadAccess)
                     {
-                        var fileActivationPage = new FileActivationPage();
-                        WinUIWindow.Current.Content = fileActivationPage;
+                        await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                        if (DataService.Instance.ActivatedDatafile != null)
+                        {
+                            var fileActivationPage = new FileActivationPage();
+                            WinUIWindow.Current.Content = fileActivationPage;
+                        }
+                        else
+                        {
+                            //#if ANDROID || IOS
+                            //                        var loginPage = new LoginPage(true);
+                            //#else
+                            //                        var loginPage = new LoginPage(true);
+                            //#endif
+                            var loginPage = new LoginPage(true);
+                            WinUIWindow.Current.Content = loginPage;
+                        }
                     }
                     else
                     {
-#if ANDROID || IOS
-                        var loginPage = new LoginPage(true);
-#else
-                        var loginPage = new LoginPage(true);
-#endif
-
-                        WinUIWindow.Current.Content = loginPage;
+                        _logoutNavigation = true;
                     }
                 }
             }

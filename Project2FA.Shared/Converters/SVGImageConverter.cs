@@ -27,10 +27,6 @@ namespace Project2FA.Converters
 
             if (!string.IsNullOrWhiteSpace(value as string))
             {
-#if __ANDROID__ || __IOS__
-            //svg.RasterizePixelHeight = 64;
-            //svg.RasterizePixelWidth = 64;
-#endif
                 try
                 {
                     //var svgBuffer = CryptographicBuffer.ConvertStringToBinary(value.ToString(), BinaryStringEncoding.Utf8);

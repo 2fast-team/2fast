@@ -21,12 +21,11 @@ namespace Project2FA.ViewModels
         private TwoFACodeModel _twoFACodeModel;
         private string _tempIssuer, _tempLabel, _tempAccountIconName,
             _tempAccountSVGIcon, _tempNotes, _tempIconLabel;
-        private IconNameCollectionModel _iconNameCollectionModel;
+        private FontIdentifikationCollectionModel _iconNameCollectionModel;
         private bool _isEditBoxVisible;
         private bool _notesExpanded = true;
         private ObservableCollection<CategoryModel> _tempAccountCategoryList;
         private ObservableCollection<CategoryModel> _globalTempCategories = new ObservableCollection<CategoryModel>();
-
         public ICommand CancelButtonCommand { get; internal set; }
         public ICommand PrimaryButtonCommand { get; internal set; }
         public ICommand DeleteAccountIconCommand { get; internal set; }
@@ -66,7 +65,7 @@ namespace Project2FA.ViewModels
             }
         }
 
-        public IconNameCollectionModel IconNameCollectionModel
+        public FontIdentifikationCollectionModel IconNameCollectionModel
         {
             get => _iconNameCollectionModel;
             private set => _iconNameCollectionModel = value;
@@ -86,6 +85,8 @@ namespace Project2FA.ViewModels
             get => _tempNotes;
             set => SetProperty(ref _tempNotes, value);
         }
+
+        
         public string TempAccountIconName
         {
             get => _tempAccountIconName;
@@ -93,14 +94,14 @@ namespace Project2FA.ViewModels
             {
                 if (SetProperty(ref _tempAccountIconName, value))
                 {
-                    if (value != null)
-                    {
-                        TempIconLabel = string.Empty;
-                    }
-                    else
-                    {
-                        TempIconLabel = TempLabel;
-                    }
+                    //if (value != null)
+                    //{
+                    //    TempIconLabel = string.Empty;
+                    //}
+                    //else
+                    //{
+                    //    TempIconLabel = TempLabel;
+                    //}
                 }
             }
         }
@@ -151,35 +152,34 @@ namespace Project2FA.ViewModels
         }
 
 
+        //        public async Task LoadIconNameCollection()
+        //        {
+        //            try
+        //            {
+        //                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/simpleicons.json"));
+        //                IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
+        //                using (StreamReader r = new StreamReader(randomStream.AsStreamForRead()))
+        //                {
+        //                    IconNameCollectionModel = SerializationService.Deserialize<FontIdentifikationCollectionModel>(await r.ReadToEndAsync());
+        //                }
+        //            }
+        //            catch (Exception exc)
+        //            {
+        //#if WINDOWS_UWP
+        //                Project2FA.UWP.TrackingManager.TrackException(nameof(LoadIconNameCollection), exc);
+        //#endif
+        //                //TOOD add exception dialog
+        //            }
 
-        public async Task LoadIconNameCollection()
-        {
-            try
-            {
-                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/IconNameCollection.json"));
-                IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
-                using (StreamReader r = new StreamReader(randomStream.AsStreamForRead()))
-                {
-                    IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(await r.ReadToEndAsync());
-                }
-            }
-            catch (Exception exc)
-            {
-#if WINDOWS_UWP
-                Project2FA.UWP.TrackingManager.TrackException(nameof(LoadIconNameCollection), exc);
-#endif
-                //TOOD add exception dialog
-            }
+        //        }
 
-        }
-
-        public async Task LoadIconSVG()
-        {
-            (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
-            if (success)
-            {
-                TempAccountSVGIcon = iconStr;
-            }
-        }
+        //public async Task LoadIconSVG()
+        //{
+        //    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
+        //    if (success)
+        //    {
+        //        TempAccountSVGIcon = iconStr;
+        //    }
+        //}
     }
 }

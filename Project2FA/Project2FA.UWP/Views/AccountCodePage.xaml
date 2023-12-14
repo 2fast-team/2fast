@@ -7,6 +7,7 @@
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:views="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="using:Project2FA.ViewModels"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
@@ -28,6 +29,11 @@
 
             <DataTemplate x:Name="ShellHeaderTemplatePro" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
+                    <UserControl.Resources>
+                        <Style TargetType="FontIcon">
+                            <Setter Property="FontFamily" Value="{StaticResource SegoeFluentIcons}"/>
+                        </Style>
+                    </UserControl.Resources>
                     <Grid>
                         <CommandBar 
                     x:Name="HeaderCommandBar"
@@ -54,8 +60,10 @@
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
                                         ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip}"
-                                        Icon="Add" 
                                         Command="{x:Bind AddAccountCommand}">
+                                            <AppBarButton.Icon>
+                                                <FontIcon Glyph="&#xE710;"/>
+                                            </AppBarButton.Icon>
                                             <AppBarButton.Resources>
                                                 <!--user information for adding totp accounts-->
                                                 <appcontrols:AutoCloseTeachingTip 
@@ -81,8 +89,10 @@
                                         <AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
-                                            ToolTipService.ToolTip="#todo"
-                                            Icon="Import">
+                                            ToolTipService.ToolTip="#todo">
+                                            <AppBarButton.Icon>
+                                                <FontIcon Glyph="&#xE8B5;"/>
+                                            </AppBarButton.Icon>
                                             <AppBarButton.Flyout>
                                                 <MenuFlyout Placement="Bottom">
                                                     <MenuFlyoutItem 
@@ -126,8 +136,11 @@
                                             x:Name="ABB_UndoDelete"
                                             x:Uid="AccountCodePageABBUndoDelete" 
                                             ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip}"
-                                            Command="{x:Bind UndoDeleteCommand}" 
-                                            Icon="Undo" />
+                                            Command="{x:Bind UndoDeleteCommand}"  >
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xE7A7;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
                                         </CommandBar.PrimaryCommands>
                                     </CommandBar>
                                 </AppBarElementContainer>
@@ -135,22 +148,30 @@
                                     <AutoSuggestBox 
                                         Width="200"
                                         Height="40"
-                                        QueryIcon="Find"
                                         VerticalAlignment="Center"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                         TextChanged="AutoSuggestBox_TextChanged" 
                                         VerticalContentAlignment="Center"
                                         SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-                                        Margin="0,0,1,0" />
+                                        Margin="0,0,1,0" >
+                                        <AutoSuggestBox.QueryIcon>
+                                            <FontIcon Glyph="&#xE721;" FontSize="18"/>
+                                        </AutoSuggestBox.QueryIcon>
+                                    </AutoSuggestBox>
                                 </AppBarElementContainer>
                                 <AppBarButton
                                     x:Name="ABB_SearchFilter"
                                     Command="{x:Bind ManageCategoriesCommand}"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip}"
-                                     x:Uid="AccountCodePageSearchFilter" >
+                                     x:Uid="AccountCodePageSearchFilter" Click="ABB_SearchFilter_Click" >
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
                                     </AppBarButton.Icon>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <Flyout>
+                                            <views:CategoryFilterFlyout/>
+                                        </Flyout>
+                                    </FlyoutBase.AttachedFlyout>
                                     <!--<AppBarButton.Flyout>
                                         --><!--<MenuFlyout>
                                             <MenuFlyoutItem Text="#manage categories"></MenuFlyoutItem>
@@ -267,8 +288,11 @@
                                 x:Name="ABB_Refresh"
                                 x:Uid="AccountCodePageReloadDatafile"
                                 ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip}"
-                                Icon="Sync"
-                                Command="{x:Bind RefreshCommand}"/>
+                                Command="{x:Bind RefreshCommand}">
+                                    <AppBarButton.Icon>
+                                        <FontIcon Glyph="&#xE895;"/>
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
                             </CommandBar.PrimaryCommands>
                         </CommandBar>
                         <VisualStateManager.VisualStateGroups>
@@ -324,9 +348,11 @@
                                         <AppBarButton 
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
-                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip}"
-                                        Icon="Add" 
+                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip}" 
                                         Command="{x:Bind AddAccountCommand}">
+                                            <AppBarButton.Icon>
+                                                <FontIcon Glyph="&#xE710;"/>
+                                            </AppBarButton.Icon>
                                             <AppBarButton.Resources>
                                                 <!--user information for adding totp accounts-->
                                                 <appcontrols:AutoCloseTeachingTip 
@@ -397,8 +423,11 @@
                                             x:Name="ABB_UndoDelete"
                                             x:Uid="AccountCodePageABBUndoDelete" 
                                             ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip}"
-                                            Command="{x:Bind UndoDeleteCommand}" 
-                                            Icon="Undo" />
+                                            Command="{x:Bind UndoDeleteCommand}">
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xE7A7;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
                                         </CommandBar.PrimaryCommands>
                                     </CommandBar>
                                 </AppBarElementContainer>
@@ -406,13 +435,16 @@
                                     <AutoSuggestBox 
                                         Width="200"
                                         Height="40"
-                                        QueryIcon="Find"
                                         VerticalAlignment="Center"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                         TextChanged="AutoSuggestBox_TextChanged" 
                                         VerticalContentAlignment="Center"
                                         SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-                                        Margin="0,0,1,0" />
+                                        Margin="0,0,1,0" >
+                                        <AutoSuggestBox.QueryIcon>
+                                            <FontIcon Glyph="&#xE721;" FontSize="18"/>
+                                        </AutoSuggestBox.QueryIcon>
+                                    </AutoSuggestBox>
                                 </AppBarElementContainer>
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
@@ -427,8 +459,11 @@
                                 x:Name="ABB_Refresh"
                                 x:Uid="AccountCodePageReloadDatafile"
                                 ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip}"
-                                Icon="Sync"
-                                Command="{x:Bind RefreshCommand}"/>
+                                Command="{x:Bind RefreshCommand}">
+                                    <AppBarButton.Icon>
+                                        <FontIcon Glyph="&#xE895;"/>
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
                             </CommandBar.PrimaryCommands>
                         </CommandBar>
                         <VisualStateManager.VisualStateGroups>
@@ -498,7 +533,7 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
+                            Tag="{x:Bind AccountIconName, Mode=OneWay}">
                             <!--<muxc:PersonPicture.ProfilePicture>
                                 <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
                             </muxc:PersonPicture.ProfilePicture>-->
@@ -544,7 +579,7 @@
                                 Style="{StaticResource TransparentButtonStyle}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
-                                    Glyph="&#xE18B;"
+                                    Glyph="{x:Bind HideTOTPCode, Converter={StaticResource ShowCodeToIconConverter},Mode=OneWay}"
                                     FontSize="20"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
@@ -728,7 +763,7 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Style="{StaticResource PersonPictureWithAccentShadow}"
-                            Tag="{x:Bind AccountSVGIcon, Mode=OneWay}"
+                            Tag="{x:Bind AccountIconName, Mode=OneWay}"
                             Grid.RowSpan="2">
                         </muxc:PersonPicture>
 
@@ -762,7 +797,7 @@
 
                             <Button
                                 x:Name="BTN_ShowCode"
-                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                                ToolTipService.ToolTip="{Binding HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
@@ -772,7 +807,7 @@
                                 Style="{StaticResource TransparentButtonStyle}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
-                                    Glyph="&#xE18B;"
+                                    Glyph="{x:Bind HideTOTPCode, Converter={StaticResource ShowCodeToIconConverter},Mode=OneWay}"
                                     FontSize="20"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>

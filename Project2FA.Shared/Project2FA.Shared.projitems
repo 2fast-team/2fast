@@ -26,9 +26,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DoubleToInt32ToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FavouriteToIconConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FavouriteTooltipConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\FontIconNameToGlyphConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NullToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonalPictureInitialsVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonPictureSizeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ShowCodeToIconConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\SVGImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TOTPVisibilityTooltipConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\VisibleWhenFalseConverter.cs" />
@@ -40,7 +42,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationCollectionModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentSubscriptionModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
@@ -2812,6 +2817,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\zwave.svg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\AccountIcons\zyte.svg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background\mhellmeier_blue-hills.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Segoe Fluent Icons.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\SimpleIcons.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\give-love.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-100.png" />
@@ -2865,7 +2872,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Wide310x150Logo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Wide310x150Logo.scale-400.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\Dependencies.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\IconNameCollection.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\ProgressRingDeterminate.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\ProgressRingIntdeterminate.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Splashcreen\splash_screen.svg" />
@@ -2890,5 +2896,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\simpleicons.json" />
   </ItemGroup>
 </Project>

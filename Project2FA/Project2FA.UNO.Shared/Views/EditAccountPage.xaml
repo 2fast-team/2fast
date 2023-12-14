@@ -48,6 +48,7 @@
                                 <PersonPicture
                             Height="110"
                             Width="110"
+                                    FontSize="52"
                                     HorizontalAlignment="Left"
                             DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
                                     Style="{StaticResource DefaultPersonPictureStyle}"

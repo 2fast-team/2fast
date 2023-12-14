@@ -39,6 +39,9 @@ using CommunityToolkit.WinUI.Controls;
 using CommunityToolkit.WinUI.Helpers;
 using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.Collections;
+using UNOversal.Services.Serialization;
+
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -85,12 +88,14 @@ namespace Project2FA.Services
         private IFileService FileService { get; }
         private INetworkTimeService NetworkTimeService { get; }
         private INetworkService NetworkService { get; }
+        private ISerializationService SerializationService { get; }
         private bool _isFirstActivatedDatafileStart = true;
         private bool _initialization, _errorOccurred;
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
         public AdvancedCollectionView ACVCollection { get; }
         public ObservableCollection<TwoFACodeModel> Collection { get; } = new ObservableCollection<TwoFACodeModel>();
+        public ObservableCollection<FontIdentifikationModel> FontIconCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
 
         public ObservableCollection<CategoryModel> GlobalCategories { get; set; } = new ObservableCollection<CategoryModel>();
         private StorageFile _openDatefile;
@@ -122,6 +127,7 @@ namespace Project2FA.Services
             Logger = App.Current.Container.Resolve<ILoggerFacade>();
             DialogService = App.Current.Container.Resolve<IDialogService>();
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
+            SerializationService = App.Current.Container.Resolve<ISerializationService>();
             NetworkTimeService = App.Current.Container.Resolve<INetworkTimeService>();
             NetworkService = App.Current.Container.Resolve<INetworkService>();
             ACVCollection = new AdvancedCollectionView(Collection, true);
@@ -134,8 +140,30 @@ namespace Project2FA.Services
 
         public async Task StartService()
         {
+            await LoadFontIconList();
             await CheckLocalDatafile();
             TOTPEventStopwatch.Start();
+        }
+
+        private async Task LoadFontIconList()
+        {
+            try
+            {
+                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/simpleicons.json"));
+                IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
+                using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
+                var fontIdentifikationCollectionModel = SerializationService.Deserialize<FontIdentifikationCollectionModel>(await r.ReadToEndAsync());
+                FontIconCollection.AddRange(fontIdentifikationCollectionModel.Collection, true);
+            }
+            catch (Exception exc)
+            {
+
+                throw;
+            }
+
+            //SerializationService.Serialize()
+            //FontIconCollection
+
         }
 
         /// <summary>
@@ -201,7 +229,7 @@ namespace Project2FA.Services
                             int i = (sender as ObservableCollection<TwoFACodeModel>).Count - 1;
                             Collection[i].HideTOTPCode = useHiddenTOTP;
                             // set the svg source
-                            await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
+                            //await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
                             await InitializeItem(i);
                         }
                     }
@@ -891,13 +919,13 @@ namespace Project2FA.Services
             }
         }
 
-        public async Task ReloadAccountIconSVGs()
-        {
-            for (int i = 0; i < Collection.Count; i++)
-            {
-                await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
-            }
-        }
+        //public async Task ReloadAccountIconSVGs()
+        //{
+        //    for (int i = 0; i < Collection.Count; i++)
+        //    {
+        //        await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
+        //    }
+        //}
 
 
 

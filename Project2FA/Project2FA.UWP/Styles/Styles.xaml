@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations" 
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
@@ -20,14 +21,17 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/PersonPicture.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBoxItemStyle.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/TokenView.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/SettingsCard.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/SettingsExpander.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
+
+    <FontFamily x:Key="SegoeFluentIcons">ms-appx:///Assets/Fonts/Segoe Fluent Icons.ttf#Segoe Fluent Icons</FontFamily>
 
     <!--<CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>-->
     <CornerRadius x:Key="TokenItemCornerRadius">16</CornerRadius>
-    
 
     <Thickness x:Key="MenuBarItemBorderThickness">2,2,2,2</Thickness>
     <Thickness x:Key="GridViewItemMultiselectBorderThickness">2,2,2,2</Thickness>
@@ -67,6 +71,10 @@
 
     <Style TargetType="RichEditBox">
         <Setter Property="Background" Value="{ThemeResource TextControlBackground}"/>
+    </Style>
+
+    <Style TargetType="FontIcon">
+        <Setter Property="FontFamily" Value="{StaticResource SegoeFluentIcons}"/>
     </Style>
 
     <!-- Caret/Chevron Icons -->
@@ -161,10 +169,14 @@
         <Setter Property="PrimaryButtonStyle" Value="{ThemeResource ButtonRevealStyle}" />
     </Style>
 
-    <Style TargetType="muxc:Expander">
-        <!--<Setter Property="Background" Value="{ThemeResource TwoFABackgroundBrush}" />-->
+    <!--<Style TargetType="muxc:Expander">
+        --><!--<Setter Property="Background" Value="{ThemeResource TwoFABackgroundBrush}" />--><!--
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    </Style>
+    </Style>-->
+
+    <!--<Style TargetType="ctwc:SettingsCard" BasedOn="{StaticResource DefaultSettingsCardStyle}">
+        <Setter Property="MinHeight" Value="48" />
+    </Style>-->
 
 </ResourceDictionary>

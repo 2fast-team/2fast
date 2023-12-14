@@ -41,6 +41,7 @@
         <Setter Property="Background" Value="{ThemeResource PersonPictureEllipseFillThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource PersonPictureEllipseFillStrokeBrush}"/>
         <Setter Property="BorderThickness" Value="{ThemeResource PersonPictureEllipseStrokeThickness}"/>
+        <Setter Property="FontSize" Value="30"/>
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="100" />
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
@@ -126,10 +127,19 @@
                             FlowDirection="LeftToRight">
                         </Rectangle>-->
 
-                        <toolkitcontrols:ImageEx 
+                        <!--<toolkitcontrols:ImageEx 
                             Width="{Binding Width, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource PersonPictureSizeConverter}}" 
                             Height="{Binding Height, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource PersonPictureSizeConverter}}"  
-                            Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag, Converter={StaticResource SVGImageConverter}}"/>
+                            Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag, Converter={StaticResource SVGImageConverter}}"/>-->
+
+                        <FontIcon
+                            IsTextScaleFactorEnabled="False"
+                            Width="{Binding Width, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource PersonPictureSizeConverter}}" 
+                            Height="{Binding Height, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource PersonPictureSizeConverter}}" 
+                            FontFamily="ms-appx:///Assets/Fonts/SimpleIcons.ttf#Simple Icons"
+                            FontSize="{TemplateBinding FontSize}"
+                            Glyph="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag, Converter={StaticResource FontIconNameToGlyphConverter}}"
+                            />
 
                         <Grid
                             x:Name="BadgeGrid"

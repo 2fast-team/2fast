@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.17763;uap10.0.22621; net7.0</TargetFrameworks>
+    <TargetFrameworks>uap10.0.17763;uap10.0.22621; net8.0</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Title>Project2FA Repository</Title>
     <Platforms>x86;x64;ARM;ARM64;AnyCPU</Platforms>
@@ -15,9 +15,9 @@
 	  <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
   </PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net7.0'">
-		<!--<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />-->
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
+	<ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
+		<!--<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />-->
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.17763' or '$(TargetFramework)'=='uap10.0.22621'">
@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.4">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

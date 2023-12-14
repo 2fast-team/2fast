@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Media;
 using UNOversal.Services.Dialogs;
 using CommunityToolkit.Mvvm.Input;
 using Project2FA.Services;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Project2FA.UWP.Views
 {
@@ -161,6 +162,15 @@ namespace Project2FA.UWP.Views
                         CreateTeachingTip(e.OriginalSource as FrameworkElement);
                     }
                 }
+            }
+        }
+
+        private void ABB_SearchFilter_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is AppBarButton abtn)
+            {
+                //FlyoutBase.ShowAttachedFlyout(abtn);
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.17763;uap10.0.22621;net7.0</TargetFrameworks>
+    <TargetFrameworks>uap10.0.17763;uap10.0.22621;net8.0</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Title>WebDAVClientPortable</Title>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -9,18 +9,9 @@
   
 </PropertyGroup>
 
-	<Choose>
-		<When Condition="'$(TargetFramework)'=='uap10.0.17763'">
-			<ItemGroup>
-				<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
-			</ItemGroup>
-		</When>
-		<When Condition="'$(TargetFramework)'=='uap10.0.22621'">
-			<ItemGroup>
-				<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
-			</ItemGroup>
-		</When>
-	</Choose>
+	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.17763' or '$(TargetFramework)'=='uap10.0.22621'">
+		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
+	</ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />

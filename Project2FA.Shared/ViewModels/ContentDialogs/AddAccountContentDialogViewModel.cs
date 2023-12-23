@@ -17,22 +17,21 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
+
     /// <summary>
     /// View model for adding an account countent dialog
     /// </summary>
-    public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitializeAsync
+    public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
 
         /// <summary>
         /// Constructor
         /// </summary>
         public AddAccountContentDialogViewModel(
-            IFileService fileService,
             ISerializationService serializationService,
             ILoggerFacade loggerFacade,
             IProject2FAParser project2FAParser): base()
         {
-            FileService = fileService;
             SerializationService = serializationService;
             Logger = loggerFacade;
             Project2FAParser = project2FAParser;
@@ -42,10 +41,9 @@ namespace Project2FA.ViewModels
 
         }
 
-        public async Task InitializeAsync(IDialogParameters parameters)
+        public void Initialize(IDialogParameters parameters)
         {
             OTPList.Clear();
         }
-
     }
 }

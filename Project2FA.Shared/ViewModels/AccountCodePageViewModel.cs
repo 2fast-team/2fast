@@ -71,6 +71,7 @@ namespace Project2FA.ViewModels
         public ICommand NavigateToSettingsCommand { get; }
         public ICommand SetFilterCommand { get; }
         public ICommand ManageCategoriesCommand { get; }
+        public ICommand CameraCommand { get; }
         private TwoFACodeModel _changedItem = null;
 
         private bool _datafileUpdated;
@@ -116,6 +117,10 @@ namespace Project2FA.ViewModels
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
             CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
             ManageCategoriesCommand = new AsyncRelayCommand(ManageCategoriesCommandTask);
+#if !WINDOWS_UWP
+            // custom commands for Uno platform project
+            CameraCommand = new AsyncRelayCommand(CameraCommandTask);
+#endif
             //SetFilterCommand = new AsyncRelayCommand(SetFilterCommandTask);
 
             NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
@@ -158,6 +163,13 @@ namespace Project2FA.ViewModels
 
 
         }
+
+#if !WINDOWS_UWP
+        private async Task CameraCommandTask()
+        {
+            await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
+        }
+#endif
 
         private async Task ManageCategoriesCommandTask()
         {
@@ -616,6 +628,6 @@ namespace Project2FA.ViewModels
             get => App.ShellPageInstance.ViewModel;
         }
 #endif
-        #endregion
+#endregion
     }
 }

@@ -36,6 +36,7 @@ using Windows.UI.Core;
 using Uno.UI;
 using Uno.Extensions.Maui;
 using Project2FA.UNO.MauiControls;
+using Project2FA.Services.Parser;
 
 namespace Project2FA.UNO
 {
@@ -77,20 +78,11 @@ namespace Project2FA.UNO
 
         }
 
-//#if __IOS__ && DEBUG
-//        // Hot Restart support for debug only
-//        public override bool FinishedLaunching(UIKit.UIApplication uiApplication, Foundation.NSDictionary launchOptions)
-//        {
-//            Microsoft.UI.Xaml.Application.Start(_ => new App());
-//            return base.FinishedLaunching(uiApplication, launchOptions);
-//        }
-//#endif
-
         public override async Task OnStartAsync(IApplicationArgs args)
         {
 
 #if DEBUG
-            WinUIWindow.Current.EnableHotReload();
+            //WinUIWindow.Current.EnableHotReload();
 #endif
 
 #if MAUI_EMBEDDING
@@ -390,6 +382,7 @@ namespace Project2FA.UNO
             containerRegistry.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>();
             containerRegistry.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
             containerRegistry.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
+            containerRegistry.RegisterSingleton<IProject2FAParser, Project2FAParser>();
 
             containerRegistry.RegisterSingleton<ShellPage>();
             containerRegistry.RegisterForNavigation<BlankPage, BlankPageViewModel>();
@@ -399,10 +392,13 @@ namespace Project2FA.UNO
             containerRegistry.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
             containerRegistry.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
             containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
+            
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
+            //AddAccountCameraPageViewModel
 #if __IOS__ || __ANDROID__
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddAccountCameraPage, AddAccountCameraPageViewModel>();
 #else
             containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountContentDialog, AddAccountContentDialogViewModel>();

@@ -20,6 +20,7 @@
     <UpToDateCheckInput Remove="Styles\Styles.xaml" />
     <UpToDateCheckInput Remove="Themes\Generic.xaml" />
     <UpToDateCheckInput Remove="Views\AccountCodePage.xaml" />
+    <UpToDateCheckInput Remove="Views\AddAccountCameraPage.xaml" />
     <UpToDateCheckInput Remove="Views\AddAccountPage.xaml" />
     <UpToDateCheckInput Remove="Views\AppAboutPage - Copy.xaml" />
     <UpToDateCheckInput Remove="Views\BlankPage - Copy.xaml" />
@@ -63,6 +64,7 @@
     <_Globbed_Compile Remove="ViewModels\UseDataFilePageViewModel.cs" />
     <_Globbed_Compile Remove="ViewModels\WelcomePageViewModel.cs" />
     <_Globbed_Compile Remove="Views\AccountCodePage.xaml.cs" />
+    <_Globbed_Compile Remove="Views\AddAccountCameraPage.xaml.cs" />
     <_Globbed_Compile Remove="Views\AddAccountContentDialog.xaml.cs" />
     <_Globbed_Compile Remove="Views\AddAccountPage.xaml.cs" />
     <_Globbed_Compile Remove="Views\AppAboutPage - Copy.xaml.cs" />
@@ -145,6 +147,7 @@
     <_Globbled_Page Remove="Styles\Generic\TabBar.xaml" />
     <_Globbled_Page Remove="Styles\Styles.xaml" />
     <_Globbled_Page Remove="Themes\Generic.xaml" />
+    <_Globbled_Page Remove="Views\AddAccountCameraPage.xaml" />
     <_Globbled_Page Remove="Views\AddAccountPage.xaml" />
     <_Globbled_Page Remove="Views\AppAboutPage - Copy.xaml" />
     <_Globbled_Page Remove="Views\BlankPage - Copy.xaml" />

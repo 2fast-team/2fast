@@ -130,14 +130,8 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Scan QR codes</string>
+	<string>Scanning QR codes to create accounts for multi-factor authentication</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID/Touch ID instead of a password to access your account</string>
-
-	<!--
-	Adjust this to your application's encryption usage.
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
-	-->
   </dict>
 </plist>

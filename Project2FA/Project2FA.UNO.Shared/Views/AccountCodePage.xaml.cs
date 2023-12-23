@@ -29,6 +29,7 @@ namespace Project2FA.UNO.Views
             PropertyChangedCallback callback = new PropertyChangedCallback(SelectedTabBarIndexChanged);
             //register an event for the changed selected index property of the TabBar
             MobileAutoSuggestBox.RegisterDisposablePropertyChangedCallback(VisibilityProperty, SelectedTabBarIndexChanged);
+            App.ShellPageInstance.ViewModel.TabBarIsVisible = true;
 #endif
         }
 
@@ -65,9 +66,9 @@ namespace Project2FA.UNO.Views
         /// <param name="e"></param>
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
+            App.ShellPageInstance.ViewModel.TabBarIsVisible = true;
             if (e.NavigationMode == Microsoft.UI.Xaml.Navigation.NavigationMode.Back)
             {
-                App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 ViewModel.Initialize(new NavigationParameters());
                 
                 //set current index for TabBar on smartphones

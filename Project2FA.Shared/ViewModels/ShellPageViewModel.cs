@@ -119,20 +119,28 @@ namespace Project2FA.ViewModels
         }
 
 #if !WINDOWS_UWP
+
+        private bool _tabBarIsVisible;
         /// <summary>
-        /// 
+        /// The TabBar should be only visible at mobile devices
         /// </summary>
         public bool IsMobile 
         {
             get
             {
 #if ANDROID || IOS
-                return true && NavigationIsAllowed;
+                return true;
 #else
                 return false;
 #endif
             }
         }
+        public bool TabBarIsVisible
+        {
+            get => IsMobile & _tabBarIsVisible;
+            set=> SetProperty(ref _tabBarIsVisible, value);
+        }
+
 
         public int SelectedIndex 
         { 

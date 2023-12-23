@@ -1860,6 +1860,16 @@ namespace Project2FA.Strings{
             }
         }
         #endregion
+
+        #region AddAccountContentDialogTitle
+        public static string AddAccountContentDialogTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddAccountContentDialogTitle");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2011,6 +2021,7 @@ namespace Project2FA.Strings{
             BiometricFingerPreferMessage,
             BiometricLoginSubtitle,
             BiometricLoginTitle,
+            AddAccountContentDialogTitle
         }
 
         private static ResourceLoader _resourceLoader;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2FA.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class CategoryFilterFlyout : Page
     {
+        public CategoryFilterFlyoutViewModel ViewModel { get; } = new CategoryFilterFlyoutViewModel();
         public CategoryFilterFlyout()
         {
             this.InitializeComponent();

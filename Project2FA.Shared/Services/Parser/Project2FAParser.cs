@@ -28,6 +28,7 @@ namespace Project2FA.Services.Parser
                     //check if the QR-Code contains a totp auth request
                     if (match.Groups[1].Value == "totp")
                     {
+                        qrParams.Add(new KeyValuePair<string, string>("auth", match.Groups[1].Value));
                         string label = string.Empty;
                         string issuer = match.Groups[2].Value;
                         string collectionVar;

@@ -26,7 +26,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class EditAccountContentDialogViewModel : EditAccountViewModelBase, IDialogInitializeAsync
+    public class EditAccountContentDialogViewModel : EditAccountViewModelBase, IDialogInitialize
     {
         
         public EditAccountContentDialogViewModel(ISerializationService serializationService)
@@ -56,15 +56,7 @@ namespace Project2FA.ViewModels
             Model.Issuer = TempIssuer;
             Model.Label = TempLabel;
             Model.AccountIconName = TempAccountIconName;
-            //(bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName);
-            //if (success)
-            //{
-            //    Model.AccountSVGIcon = iconStr;
-            //}
-            //else
-            //{
-            //    Model.AccountSVGIcon = null;
-            //}
+
             Model.Notes = TempNotes;
             Model.SelectedCategories = GlobalTempCategories.Where(x => x.IsSelected == true).ToList();
             for (int i = 0; i < TempAccountCategoryList.Count; i++)
@@ -75,41 +67,21 @@ namespace Project2FA.ViewModels
             await DataService.Instance.WriteLocalDatafile();
         }
 
-        public async Task InitializeAsync(IDialogParameters parameters)
+        public void Initialize(IDialogParameters parameters)
         {
             if (parameters.TryGetValue<TwoFACodeModel>("model", out var model))
             {
                 Model = model;
                 TempAccountIconName = Model.AccountIconName;
-                //if (!string.IsNullOrWhiteSpace(TempAccountIconName))
-                //{
-                //    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
-                //    if (success)
-                //    {
-                //        TempAccountSVGIcon = iconStr;
-                //    }
-                //}
-                //else
-                //{
-                //    TempIconLabel = TempLabel;
-                //}
-
-                //Model.SelectedCategories.Add(GlobalTempCategories.FirstOrDefault()); // debug
-                // add all categories
-                //foreach (var category in GlobalTempCategories)
-                //{
-                //    TempAccountCategoryList.Add(new TokenItem { Content = category.Name, Icon = new FontIcon { Glyph = category.Glyph }, Tag = category.Guid });
-                //}
 
                 TempAccountCategoryList.Clear();
                 //filter which are selected
-                var selectedList = GlobalTempCategories.Where(x=> Model.SelectedCategories.Where(y => y.Guid == x.Guid).Any());
+                var selectedList = GlobalTempCategories.Where(x => Model.SelectedCategories.Where(y => y.Guid == x.Guid).Any());
                 for (int i = 0; i < selectedList.Count(); i++)
                 {
                     selectedList.ElementAt(i).IsSelected = true;
                     TempAccountCategoryList.Add(selectedList.ElementAt(i));
                 }
-                //await LoadIconNameCollection();
             }
         }
     }

@@ -139,6 +139,7 @@
     <Compile Include="Services\Marketplace\Abstractions\IMarketplaceService.cs" />
     <Compile Include="Services\Marketplace\Default\MarketplaceHelper.cs" />
     <Compile Include="Services\Marketplace\Default\MarketplaceService.cs" />
+    <Compile Include="Services\MDMSettings\EnterpriseAppManagementService.cs" />
     <Compile Include="Services\Subscription\ISubscriptionService.cs" />
     <Compile Include="Services\Subscription\SubscriptionService.cs" />
     <Compile Include="Services\Web\Abstractions\IWebApiAdapter.cs" />
@@ -282,6 +283,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\AnimatedVisuals\10223-search-empty.json" />
     <Content Include="Assets\AnimatedVisuals\21398-online-tutorial.json" />
+    <Content Include="Assets\Fonts\Segoe Fluent Icons.ttf" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

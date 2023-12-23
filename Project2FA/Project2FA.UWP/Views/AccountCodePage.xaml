@@ -533,11 +533,7 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                            Tag="{x:Bind AccountIconName, Mode=OneWay}">
-                            <!--<muxc:PersonPicture.ProfilePicture>
-                                <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
-                            </muxc:PersonPicture.ProfilePicture>-->
-                        </muxc:PersonPicture>
+                            Tag="{x:Bind AccountIconName, Mode=OneWay}"/>
 
                         <RelativePanel 
                             Grid.Column="2" 
@@ -580,7 +576,8 @@
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
                                     Glyph="{x:Bind HideTOTPCode, Converter={StaticResource ShowCodeToIconConverter},Mode=OneWay}"
-                                    FontSize="20"
+                                    FontSize="24"
+                                    Style="{StaticResource FullFluentFontIconStyle}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
                             </Button>
@@ -611,7 +608,7 @@
                                 Margin="8,0,4,0" 
                                 ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
                                 HorizontalAlignment="Stretch" >
-                                <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
+                                <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
                             <Grid VerticalAlignment="Center">
                                 <unocontrols:RadialProgressBar
@@ -808,7 +805,8 @@
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
                                     Glyph="{x:Bind HideTOTPCode, Converter={StaticResource ShowCodeToIconConverter},Mode=OneWay}"
-                                    FontSize="20"
+                                    FontSize="24"
+                                    Style="{StaticResource FullFluentFontIconStyle}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
                             </Button>
@@ -839,7 +837,7 @@
                                 Margin="8,0,4,0" 
                                 ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
                                 HorizontalAlignment="Stretch" >
-                                <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
+                                <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
                             <Grid VerticalAlignment="Center">
                                 <unocontrols:RadialProgressBar

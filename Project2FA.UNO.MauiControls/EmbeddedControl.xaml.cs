@@ -15,9 +15,7 @@ public partial class EmbeddedControl : ContentView
     {
         foreach (var barcode in e.Results)
         {
-            Console.WriteLine($"Barcodes: {barcode.Format} -> {barcode.Value}");
             ViewModel.Parameter = barcode.Value;
         }
-            
     }
 }

@@ -34,15 +34,12 @@ namespace Project2FA.ViewModels
         public ICommand UseExistDatefileCommand { get; }
         private bool _isTutorialOpen;
 
-        private string _title;
-
         public WelcomePageViewModel(IDialogService dialogService, INavigationService navigationService)
         {
             _dialogService = dialogService;
             _navigationService = navigationService;
             // disable the navigation to other pages
             App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
-            Title = Strings.Resources.WelcomePageTitle;
 
             NewDatefileCommand = new AsyncRelayCommand(NewDatafileCommandTask);
 
@@ -58,7 +55,5 @@ namespace Project2FA.ViewModels
         {
             await _navigationService.NavigateAsync(nameof(UseDataFilePage));
         }
-
-        public string Title { get => _title; set => SetProperty(ref _title, value); }
     }
 }

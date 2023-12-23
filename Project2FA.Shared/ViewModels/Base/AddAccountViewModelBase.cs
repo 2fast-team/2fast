@@ -91,7 +91,6 @@ namespace Project2FA.ViewModels
         public ILoggerFacade Logger { get; internal set; }
         public ISerializationService SerializationService { get; internal set; }
         public IProject2FAParser Project2FAParser { get; internal set; }
-        public IFileService FileService { get; internal set; }
         private IconNameCollectionModel _iconNameCollectionModel;
         private string _tempIconLabel;
         private VideoFrame _currentVideoFrame;
@@ -399,7 +398,7 @@ namespace Project2FA.ViewModels
         {
             SecretKey = string.Empty;
             Issuer = string.Empty;
-            //migrate code import
+            //migrate code import (Google)
             if (_qrCodeStr.StartsWith("otpauth-migration://"))
             {
                 if (await ParseMigrationQRCode())
@@ -592,12 +591,8 @@ namespace Project2FA.ViewModels
             return true;
         }
 
-        private async Task CheckLabelForIcon()
+        public Task CheckLabelForIcon()
         {
-            //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-            //string path = root + @"\Assets\AccountIcons";
-            //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-
             var transformName = Model.Label.ToLower();
             transformName = transformName.Replace(" ", string.Empty);
             transformName = transformName.Replace("-", string.Empty);
@@ -620,24 +615,6 @@ namespace Project2FA.ViewModels
                         AccountIconName = list.FirstOrDefault().Name;
                     }
                 }
-                //if (await FileService.FileExistsAsync(string.Format("{0}.svg", transformName), folder))
-                //{
-                //    Model.AccountIconName = transformName;
-                //    AccountIconName = transformName;
-                //    await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
-                //}
-                //else
-                //{
-                //    // fallback: check if one IconNameCollectionModel name fits into the label name
-
-                //    var list = IconNameCollectionModel.Collection.Where(x => x.Name.Contains(transformName));
-                //    if (list.Count() == 1)
-                //    {
-                //        Model.AccountIconName = list.FirstOrDefault().Name;
-                //        AccountIconName = list.FirstOrDefault().Name;
-                //        await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
-                //    }
-                //}
             }
             catch (Exception exc)
             {
@@ -645,16 +622,7 @@ namespace Project2FA.ViewModels
                 TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
 #endif
             }
-            //var file = await StorageFile.GetFileFromPathAsync(string.Format("ms-appx:///Assets/AccountIcons/{0}.svg", Model.Label.ToLower()))
-            //string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-            //string path = root + @"\Assets\AccountIcons";
-            //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-            //var element = (await folder.GetFilesAsync()).Where(x => x.DisplayName.Contains("microsoft")).FirstOrDefault();
-            //if (element != null)
-            //{
-            //    Model.AccountIconName = element.DisplayName;
-            //    //Model.AccountSVGIcon = SV
-            //}
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -943,7 +911,7 @@ namespace Project2FA.ViewModels
             {
                 if (SetProperty(ref _secretKey, value))
                 {
-                    if (!string.IsNullOrEmpty(value))
+                    if (!string.IsNullOrWhiteSpace(value))
                     {
                         // see https://tools.ietf.org/html/rfc4648 for Base32 specification
                         if (Regex.IsMatch(value, "^[A-Z2-7]*={0,6}$"))

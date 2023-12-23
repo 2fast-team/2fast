@@ -11,12 +11,12 @@ namespace Project2FA.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (bool)value ? "\uE890" : "\uF140";
+            return (bool)value ? "\uE5F0" : "\uE5F4";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return (bool)value ? "\uE890" : "\uF140";
+            return (bool)value ? "\uE5F0" : "\uE5F4";
         }
     }
 }

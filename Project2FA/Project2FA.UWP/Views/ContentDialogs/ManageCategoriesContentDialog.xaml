@@ -45,20 +45,20 @@
         <ScrollViewer>
             <StackPanel>
                 <appcontrols:CardExpanderControl 
-                        IsExpanded="False"
+                        IsExpanded="True"
                         Margin="0,15,0,8">
                     <appcontrols:CardExpanderControl.Header>
                         <appcontrols:CardControl
                             Icon="&#xE713;"
-                            x:Uid="ManageCategoriesAddGlobalCategories" 
+                            x:Uid="ManageCategoriesAddGlobalCategories"
                             Header="~ManageCategoriesAddGlobalCategories.Header">
                         </appcontrols:CardControl>
                     </appcontrols:CardExpanderControl.Header>
                     <StackPanel>
                         <TextBox 
-                            Header="~ManageCategoriesContentDialogLabel.Header" 
-                            x:Uid="ManageCategoriesContentDialogLabel"  
-                            Text="{x:Bind ViewModel.Label,Mode=TwoWay}"/>
+                            Header="~ManageCategoriesContentDialogLabel.Header"
+                            x:Uid="ManageCategoriesContentDialogLabel"
+                            Text="{x:Bind ViewModel.Label,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <ComboBox 
                             VerticalAlignment="Stretch"
                             Margin="0,10,0,20" 
@@ -79,7 +79,7 @@
                     </StackPanel>
                 </appcontrols:CardExpanderControl>
 
-                <appcontrols:CardExpanderControl 
+                <!--<appcontrols:CardExpanderControl 
                         IsExpanded="True"
                         Margin="0,15,0,8">
                     <appcontrols:CardExpanderControl.Header>
@@ -97,7 +97,7 @@
                         IsItemClickEnabled="True"
                         SelectionMode="Multiple"  
                         ItemTemplate="{StaticResource CategoryTemplate}"/>
-                </appcontrols:CardExpanderControl>
+                </appcontrols:CardExpanderControl>-->
 
                 
                 <!--<AutoSuggestBox 

@@ -354,26 +354,20 @@
                                     </StackPanel>
                                 </appcontrols:CardControl.ActionContent>
                             </appcontrols:CardControl>-->
-                            
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox 
-                                    Header="~AddAccountContentDialogLabel.Header" 
-                                    PlaceholderText="~AddAccountContentDialogLabel.PlaceholderText" 
-                                    x:Uid="AddAccountContentDialogLabel"
-                                    Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
-                                    UpdateSourceTrigger=PropertyChanged}" 
-                                    Margin="0,0,0,8">
-                                    <!--<Interactivity:Interaction.Behaviors>
-                                        <behaviors:HighlightFormFieldOnErrors 
-                                            PropertyName="Label"
-                                            PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
-                                    </Interactivity:Interaction.Behaviors>-->
-                                </TextBox>
-                            </Grid>
+
+                            <TextBox 
+                                Header="~AddAccountContentDialogLabel.Header" 
+                                PlaceholderText="~AddAccountContentDialogLabel.PlaceholderText" 
+                                x:Uid="AddAccountContentDialogLabel"
+                                Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}" 
+                                Margin="0,0,0,8">
+                            <!--<Interactivity:Interaction.Behaviors>
+                                    <behaviors:HighlightFormFieldOnErrors 
+                                        PropertyName="Label"
+                                        PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
+                                </Interactivity:Interaction.Behaviors>-->
+                            </TextBox>
 
                             <TextBox 
                                 Header="~AddAccountContentDialogAccountName.Header" 
@@ -585,7 +579,7 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
-            <PivotItem 
+            <PivotItem
                 Header="#import backup" 
                 x:Uid="AddAccountContentDialogImportBackup"
                 x:Name="PI_ImportAccountBackup">
@@ -596,7 +590,8 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                         IsItemClickEnabled="True"
                         ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
                         HorizontalContentAlignment="Stretch"
-                        HorizontalAlignment="Stretch" ItemClick="ListView_ItemClick"/>
+                        HorizontalAlignment="Stretch" 
+                        ItemClick="ListView_ItemClick"/>
                 </Grid>
                 
             </PivotItem>

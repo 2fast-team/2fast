@@ -199,6 +199,8 @@ namespace Project2FA.ViewModels
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             CheckWindowsHelloIsSupported();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#else
+            App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
 #endif
         }
 
@@ -565,7 +567,24 @@ namespace Project2FA.ViewModels
                 OnPropertyChanged(nameof(UseAutoLogout));
             }
         }
+#if WINDOWS_UWP
+        public bool IsProVersion 
+        {
+            get => _settings.IsProVersion;
+        }
+
+        public bool UseProFeatures
+        {
+            get => _settings.UseProFeatures;
+            set
+            {
+                _settings.UseProFeatures = value;
+                OnPropertyChanged(nameof(UseProFeatures));
+            }
+        }
+#endif
     }
+
 
     /// <summary>
     /// Datafile tab from the settings page

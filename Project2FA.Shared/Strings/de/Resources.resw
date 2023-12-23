@@ -1145,7 +1145,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Abbrechen</value>
   </data>
   <data name="ManageCategoriesContentDialogHeader.Title" xml:space="preserve">
-    <value>Filtern &amp; Kategorien verwalten</value>
+    <value>Kategorien verwalten</value>
   </data>
   <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
     <value>Kategorie anlegen</value>
@@ -1231,5 +1231,14 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   </data>
   <data name="InAppPaymentContentDialogMonthItemSelect.Content" xml:space="preserve">
     <value>Abonnement auswählen</value>
+  </data>
+  <data name="AddAccountContentDialogTitle" xml:space="preserve">
+    <value>Neues Konto anlegen</value>
+  </data>
+  <data name="CategoryFilterFlyoutNoCategories.Text" xml:space="preserve">
+    <value>Es sind derzeit keine Kategorien vorhanden, erstellen Sie neue Kategorien über die Einstellungen in diesem Dialog.</value>
+  </data>
+  <data name="ManageCategoriesAddGlobalCategories.Header" xml:space="preserve">
+    <value>Kategorie anlegen</value>
   </data>
 </root>

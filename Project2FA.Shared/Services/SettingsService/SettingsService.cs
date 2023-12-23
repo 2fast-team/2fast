@@ -102,6 +102,12 @@ namespace Project2FA.Services
             get => _helper.SafeRead(nameof(IsProVersion), false);
             set => _helper.TryWrite(nameof(IsProVersion), value);
         }
+
+        public bool UseProFeatures
+        {
+            get => _helper.SafeRead(nameof(UseProFeatures), false);
+            set => _helper.TryWrite(nameof(UseProFeatures), value);
+        }
 #endif
 
         public bool UseExtendedHash

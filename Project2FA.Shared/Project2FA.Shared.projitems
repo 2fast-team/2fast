@@ -68,11 +68,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\SoftwareBitmapLuminanceSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\WriteableBitmapRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountCodePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountCameraPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\AddAccountViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\CredentialViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\EditAccountViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BlankPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CategoryFilterFlyoutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\CategoryContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
@@ -98,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background\mhellmeier_blue-hills.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Segoe Fluent Icons.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\SimpleIcons.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\give-love.png" />

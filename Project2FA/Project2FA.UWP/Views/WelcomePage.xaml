@@ -34,7 +34,7 @@
                                 <CommandBar.Content>
                                     <TextBlock 
                                         Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
-                                        Text="{x:Bind Title,Mode=OneWay}"
+                                        Text="{x:Bind strings:Resources.WelcomePageTitle}"
                                         Margin="15,0,0,11"
                                         TextWrapping="NoWrap" 
                                         VerticalAlignment="Top" />
@@ -160,78 +160,6 @@
                 </Grid>
             </Grid>
         </Border>
-
-        <!--<mstoolkitControls:DropShadowPanel 
-            x:Name="DropShadow"
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch"
-            Color="{ThemeResource SystemChromeMediumColor}"
-            CornerRadius="{ThemeResource OverlayCornerRadius}"
-            BlurRadius="40"
-            Grid.Column="1"
-            ShadowOpacity="0.4">
-            <Grid x:Name="RootGrid" >
-                <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
-                    <Border>
-                        <Border.Background>
-                            <media:BackdropBlurBrush Amount="2" />
-                        </Border.Background>
-                    </Border>
-                </Border>
-
-                <Grid x:Name="MasterGrid" >
-                    <ScrollViewer  Margin="0,40,0,0" VerticalScrollBarVisibility="Auto">
-                        <RelativePanel Margin="12,0,12,0" HorizontalAlignment="Center">
-                            <TextBlock 
-                                x:Name="TB_FirstSteps"
-                                RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                Text="~WelcomePageFirstSteps.Text" 
-                                x:Uid="WelcomePageFirstSteps" 
-                                TextWrapping="Wrap" 
-                                HorizontalAlignment="Center" 
-                                FontWeight="Bold" 
-                                FontSize="25" 
-                                FontFamily="Segoe UI" 
-                                Margin="0,0,0,40" 
-                                TextAlignment="Center" />
-                            <TextBlock 
-                                x:Name="TB_IntroText"
-                                Text="~WelcomePageIntro.Text" 
-                                RelativePanel.Below="TB_FirstSteps"
-                                RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                x:Uid="WelcomePageIntro" 
-                                TextWrapping="Wrap" 
-                                HorizontalAlignment="Center" 
-                                FontSize="16" 
-                                Margin="0,0,0,40" 
-                                TextAlignment="Center" />
-                            <StackPanel x:Name="SP_FirstStartOptions" 
-                                        RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                        RelativePanel.Below="TB_IntroText">
-                                <Button 
-                                x:Name="BTN_NewDataFile"
-                                Content="~WelcomePageCreateDatafile.Content" 
-                                x:Uid="WelcomePageCreateDatafile" 
-                                Command="{x:Bind ViewModel.NewDatefileCommand}" 
-                                Style="{StaticResource AccentButtonStyle}" 
-                                Margin="0,0,20,10" />
-                                <Button 
-                                RelativePanel.RightOf="BTN_NewDataFile"
-                                    Margin="0,0,20,10" 
-                                Content="~WelcomePageLoadDatafile.Content" 
-                                x:Uid="WelcomePageLoadDatafile"
-                                Command="{x:Bind ViewModel.UseExistDatefileCommand}" />
-                            </StackPanel>
-                            
-                        </RelativePanel>
-                    </ScrollViewer>
-                </Grid>
-            </Grid>
-        </mstoolkitControls:DropShadowPanel>-->
-        
-        
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

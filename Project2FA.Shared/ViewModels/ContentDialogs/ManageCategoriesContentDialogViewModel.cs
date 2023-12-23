@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
+using Project2FA.Core.Utils;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using System;
@@ -41,10 +42,12 @@ namespace Project2FA.ViewModels
         public void Initialize(IDialogParameters parameters)
         {
             CreateCategoryCommand = new AsyncRelayCommand(CreateCategoryCommandTask);
+            ObservableCollection<SymbolModel> tempCollection = new ObservableCollection<SymbolModel>();
             foreach (Symbol symbol in (Symbol[])Enum.GetValues(typeof(Symbol)))
             {
-                IconSourceCollection.Add(new SymbolModel { Symbol = symbol, Name = symbol.ToString() });
+                tempCollection.Add(new SymbolModel { Symbol = symbol, Name = symbol.ToString() });
             }
+            IconSourceCollection.AddRange(tempCollection.OrderBy(x => x.Name));
             TempGlobalCategories = new ObservableCollection<CategoryModel>(DataService.Instance.GlobalCategories);
         }
 

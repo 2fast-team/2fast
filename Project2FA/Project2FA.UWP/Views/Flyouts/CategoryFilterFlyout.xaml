@@ -5,6 +5,7 @@
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d">
 
     <Grid Margin="0 12">
@@ -14,36 +15,53 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid>
-            <CommandBar HorizontalAlignment="Stretch">
-                <CommandBar.PrimaryCommands>
-                    <AppBarButton>
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SegoeFluentIcons}" Glyph="&#xE14E;" />
-                        </AppBarButton.Icon>
-                    </AppBarButton>
-                    <AppBarButton>
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SegoeFluentIcons}" Glyph="&#xE1C5;" />
-                        </AppBarButton.Icon>
-                    </AppBarButton>
-                    <AppBarButton>
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SegoeFluentIcons}" Glyph="&#xE149;" />
-                        </AppBarButton.Icon>
-                    </AppBarButton>
-                </CommandBar.PrimaryCommands>
+        <CommandBar HorizontalAlignment="Stretch">
+            <CommandBar.PrimaryCommands>
+                <!--<AppBarButton>
+            <AppBarButton.Icon>
+                <FontIcon  Glyph="&#xE14E;" />
+            </AppBarButton.Icon>
+        </AppBarButton>-->
+                <AppBarButton Label="~CategoryFilterFlyoutABBTN_Reset" IsEnabled="False">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE149;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton 
+            Label="~CategoryFilterFlyoutABBTN_Settings"
+            Command="{x:Bind ViewModel.ManageCategoriesCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE713;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
 
-            </CommandBar>
-        </Grid>
+        </CommandBar>
+
+        <TextBlock 
+            x:Uid="CategoryFilterFlyoutNoCategories"
+            Text="~CategoryFilterFlyoutNoCategories"
+            TextWrapping="WrapWholeWords"
+            MaxWidth="350"
+            Grid.Row="1"/>
 
         <!--Category list-->
 
-        <Button
-            IsEnabled="False"
-            Style="{StaticResource AccentButtonStyle}"
-            Grid.Row="2"
-            Content="~Confirm"/>
+        <StackPanel
+            HorizontalAlignment="Stretch"
+            Orientation="Horizontal"
+            Margin="0,25,0,0"
+            Grid.Row="2">
+            <Button
+                IsEnabled="False"
+                Style="{StaticResource AccentButtonStyle}"
+                Content="{x:Bind strings:Resources.ButtonTextConfirm}"/>
+            <Button
+                Margin="15,0,0,0"
+                IsEnabled="False"
+                Content="{x:Bind strings:Resources.ButtonTextCancel}"/>
+        </StackPanel>
+
 
     </Grid>
 </Page>

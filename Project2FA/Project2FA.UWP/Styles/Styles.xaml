@@ -27,6 +27,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <FontFamily x:Key="SegoeFluentIcons">ms-appx:///Assets/Fonts/Segoe Fluent Icons.ttf#Segoe Fluent Icons</FontFamily>
+    <FontFamily x:Key="SegoeFullFluentIcons">ms-appx:///Assets/Fonts/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular</FontFamily>
 
     <!--<CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
@@ -73,7 +74,15 @@
         <Setter Property="Background" Value="{ThemeResource TextControlBackground}"/>
     </Style>
 
-    <Style TargetType="FontIcon">
+    <Style TargetType="FontIcon" BasedOn="{StaticResource DefaultFontIconStyle}">
+        
+    </Style>
+
+    <Style x:Key="FullFluentFontIconStyle" TargetType="FontIcon">
+        <Setter Property="FontFamily" Value="{StaticResource SegoeFullFluentIcons}"/>
+    </Style>
+
+    <Style x:Key="DefaultFontIconStyle" TargetType="FontIcon">
         <Setter Property="FontFamily" Value="{StaticResource SegoeFluentIcons}"/>
     </Style>
 

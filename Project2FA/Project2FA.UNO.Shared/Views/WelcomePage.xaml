@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
-    xmlns:media="clr-namespace:CommunityToolkit.WinUI.UI.Media;assembly=CommunityToolkit.WinUI.UI.Media"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -16,11 +16,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
-        </Grid.ColumnDefinitions>-->
+        <utu:NavigationBar 
+            Grid.Row="0"
+            MainCommandMode="Action"
+            Background="{ThemeResource TwoFABackgroundBrush}"
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
+            <utu:NavigationBar.Content>
+                <TextBlock 
+                    Text="{x:Bind strings:Resources.WelcomePageTitle}"
+                    Style="{StaticResource ShellHeaderTitleTextBlockStyle}" />
+            </utu:NavigationBar.Content>
+        </utu:NavigationBar>
 
         <!--for debug-->
         <Border 
@@ -45,31 +51,22 @@
             </Border.Background>
         </Border>
 
-        <utu:NavigationBar 
-            Grid.Row="0"
-            MainCommandMode="Action"
-            Background="{ThemeResource TwoFABackgroundBrush}"
-            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-			Content="#WelcomePage">
-            <!--<utu:NavigationBar.PrimaryCommands>
-                <AppBarButton Label="Alerts" Style="{StaticResource AppBarButtonStyle}">
-                    <AppBarButton.Icon>
-                        <BitmapIcon ShowAsMonochrome="False" UriSource="ms-appx:///Assets/Bell.png" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton Label="Share" Style="{StaticResource AppBarButtonStyle}">
-                    <AppBarButton.Icon>
-                        <BitmapIcon ShowAsMonochrome="False" UriSource="ms-appx:///Assets/Share.png" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton Label="Search" Style="{StaticResource AppBarButtonStyle}">
-                    <AppBarButton.Icon>
-                        <BitmapIcon ShowAsMonochrome="False" UriSource="ms-appx:///Assets/Search.png" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </utu:NavigationBar.PrimaryCommands>-->
-        </utu:NavigationBar>
+        <Border 
+            x:Name="PageImageBackgroundBorder"
+            Grid.Row="1">
+            <Image 
+                Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                Stretch="UniformToFill" />
+        </Border>
+
+
         <Grid x:Name="MasterGrid" Grid.Row="1">
+            <!--<Grid.Background>
+                <AcrylicBrush 
+                AlwaysUseFallback="False" 
+                TintColor="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                TintOpacity="0.8" />
+            </Grid.Background>-->
             <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                 <Border>
                     <!--<Border.Background>
@@ -77,12 +74,7 @@
                     </Border.Background>-->
                 </Border>
             </Border>
-            <!--<Grid.Background>
-                <AcrylicBrush 
-                AlwaysUseFallback="False" 
-                TintColor="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                TintOpacity="0.1" />
-            </Grid.Background>-->
+
             <ScrollViewer  Margin="0,40,0,0" VerticalScrollBarVisibility="Auto">
                 <RelativePanel Margin="12,0,12,0" HorizontalAlignment="Center">
                     
@@ -117,6 +109,7 @@
                             x:Name="BTN_NewDataFile"
                             Content="~WelcomePageCreateDatafile.Content" 
                             x:Uid="WelcomePageCreateDatafile" 
+                            Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.NewDatefileCommand}" 
                             Margin="0,0,20,10" />
                         <Button 

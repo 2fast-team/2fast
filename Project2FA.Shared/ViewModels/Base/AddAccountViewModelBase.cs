@@ -126,7 +126,6 @@ namespace Project2FA.ViewModels
 
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
-                Model.AccountSVGIcon = null;
                 Model.AccountIconName = null;
                 AccountIconName = null;
             });

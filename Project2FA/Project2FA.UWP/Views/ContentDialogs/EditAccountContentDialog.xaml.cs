@@ -96,46 +96,17 @@ namespace Project2FA.UWP.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                if (string.IsNullOrEmpty(sender.Text) == false && sender.Text.Length >= 2 && sender.Text != Strings.Resources.AccountCodePageSearchNotFound)
-                {
-                    List<string> listSuggestion = new List<string>();
-                    var tempList = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
-                    for (int i = 0; i < tempList.Count; i++)
-                    {
-                        listSuggestion.Add(tempList[i].Name);
-                    }
-                    try
-                    {
-                        if (listSuggestion.Count == 0)
-                        {
-                            sender.ItemsSource = Strings.Resources.AccountCodePageSearchNotFound;
-                        }
-                        else
-                        {
-                            sender.ItemsSource = listSuggestion;
-                        }
-                    }
-                    catch (System.Exception)
-                    {
-                        sender.ItemsSource = null;
-                    }
-
-                }
-                else
-                {
-                    sender.ItemsSource = null;
-                }
+                ViewModel.SearchAccountFonts(sender.Text);
             }
         }
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            //args.reas
-            if (args.SelectedItem is string selectedItem)
+            if (args.SelectedItem is FontIdentifikationModel selectedItem)
             {
-                if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
+                if (selectedItem.Name != Strings.Resources.AccountCodePageSearchNotFound)
                 {
-                    ViewModel.TempAccountIconName = selectedItem;
+                    ViewModel.TempAccountIconName = selectedItem.Name;
                 }
                 else
                 {
@@ -150,6 +121,11 @@ namespace Project2FA.UWP.Views
             {
                 model.IsSelected = !model.IsSelected;
             }
+        }
+
+        private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SearchAccountFonts(ViewModel.TempAccountIconName);
         }
     }
 }

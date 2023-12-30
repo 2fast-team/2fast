@@ -56,7 +56,6 @@ namespace Project2FA.ViewModels
             CancelButtonCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
-                TempAccountSVGIcon = null;
                 TempAccountIconName = null;
             });
             EditAccountIconCommand = new RelayCommand(() =>

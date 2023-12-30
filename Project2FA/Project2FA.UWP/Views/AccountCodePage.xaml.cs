@@ -38,7 +38,6 @@ namespace Project2FA.UWP.Views
             {
                 App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
             }
-            //LV_AccountCollection.TabIndex = 1;
         }
 
         /// <summary>
@@ -72,7 +71,6 @@ namespace Project2FA.UWP.Views
                 await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
                 return false;
             }
-
         }
 
         private void CreateTeachingTip(FrameworkElement element)
@@ -128,20 +126,29 @@ namespace Project2FA.UWP.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                ViewModel.SetSuggestionList(sender, args);
+                ViewModel.SetSuggestionList(sender.Text);
             }
         }
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            string selectedItem = args.SelectedItem.ToString();
-            if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
+            if (args.SelectedItem is TwoFACodeModel item)
             {
-                ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label == selectedItem;
+                if (item.Label != Strings.Resources.AccountCodePageSearchNotFound)
+                {
+                    ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x) == item;
+                    ViewModel.SearchedAccountLabel = item.Label;
+                }
+                else
+                {
+                    ViewModel.SearchedAccountLabel = string.Empty;
+                    ViewModel.TwoFADataService.ACVCollection.Filter = null;
+                }
             }
             else
             {
-                sender.Text = string.Empty;
+                ViewModel.SearchedAccountLabel = string.Empty;
+                ViewModel.TwoFADataService.ACVCollection.Filter = null;
             }
         }
 
@@ -152,7 +159,6 @@ namespace Project2FA.UWP.Views
         /// <param name="e"></param>
         private async void LV_AccountCollection_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
                 if (LV_AccountCollection.SelectedItem is TwoFACodeModel model)
@@ -167,11 +173,22 @@ namespace Project2FA.UWP.Views
 
         private void ABB_SearchFilter_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is AppBarButton abtn)
-            {
-                //FlyoutBase.ShowAttachedFlyout(abtn);
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-            }
+            //if (sender is AppBarButton abbtn)
+            //{
+            //    CategoryFilterFlyout categoryFilterFlyout = new CategoryFilterFlyout();
+            //    if (abbtn.Flyout is null)
+            //    {
+            //        abbtn.Flyout = new Flyout();
+            //    }
+                
+            //    FlyoutBase.SetAttachedFlyout(categoryFilterFlyout, abbtn.Flyout);
+            //    FlyoutBase.ShowAttachedFlyout(abbtn);
+            //}
+        }
+
+        private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel);
         }
     }
 }

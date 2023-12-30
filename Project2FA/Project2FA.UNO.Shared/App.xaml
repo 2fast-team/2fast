@@ -36,6 +36,7 @@
             <Converters:PersonPictureSizeConverter x:Key="PersonPictureSizeConverter"/>
             <Converters:SVGImageConverter x:Key="SVGImageConverter"/>
             <Converters:FontIconNameToGlyphConverter x:Key="FontIconNameToGlyphConverter"/>
+            <Converters:FontIconUnicodeIndexToGlyphConverter x:Key="FontIconUnicodeIndexToGlyphConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 

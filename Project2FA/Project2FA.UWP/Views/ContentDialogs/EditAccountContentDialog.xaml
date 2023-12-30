@@ -18,6 +18,7 @@
     MinWidth="500"
     Title="~EditAccountContentDialog.Title"
     x:Uid="EditAccountContentDialog"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
     PrimaryButtonStyle="{StaticResource ButtonRevealStyle}"
     PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
     SecondaryButtonCommand="{x:Bind ViewModel.CancelButtonCommand}">
@@ -62,7 +63,9 @@
                                 <FontIcon
                             FontSize="18"
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                            Glyph="&#xE104;" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                            Glyph="&#xE104;" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Bottom"/>
                             </Button>
                         </Grid>
                     </appcontrols:CardControl.Description>
@@ -79,12 +82,39 @@
                                 PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                 TextChanged="AutoSuggestBox_TextChanged" 
                                 VerticalContentAlignment="Center"
+                                UpdateTextOnSelect="False"
+                                TextMemberPath="Name"
+                                GotFocus="AutoSuggestBox_GotFocus"
+                                ItemsSource="{x:Bind ViewModel.FontIdentifikationCollection, Mode=OneWay}"
                                 SuggestionChosen="AutoSuggestBox_SuggestionChosen" >
-                                <!--<AutoSuggestBox.ItemTemplate>
+                                <AutoSuggestBox.RenderTransform>
+                                    <CompositeTransform />
+                                </AutoSuggestBox.RenderTransform>
+                                <AutoSuggestBox.ItemTemplate>
                                     <DataTemplate x:DataType="models:FontIdentifikationModel">
-                                        <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
+                                        <Grid
+                                            HorizontalAlignment="Stretch"
+                                            Background="Transparent"
+                                            ToolTipService.ToolTip="{x:Bind Name}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <FontIcon
+                                                FontSize="16"
+                                                Margin="4,0,0,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                FontFamily="{StaticResource SimpleIcons}"
+                                                Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"
+                                                Text="{x:Bind Name, Mode=OneWay}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </Grid>
                                     </DataTemplate>
-                                </AutoSuggestBox.ItemTemplate>-->
+                                </AutoSuggestBox.ItemTemplate>
                             </AutoSuggestBox>
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                 <Button 
@@ -113,21 +143,21 @@
                 </appcontrols:CardControl>
                 <TextBox 
                 Header="~AddAccountContentDialogLabel.Header" 
-                x:Uid="AddAccountContentDialogLabel"  
-                Text="{x:Bind ViewModel.TempLabel,Mode=TwoWay}"/>
-                <TextBox 
+                x:Uid="AddAccountContentDialogLabel"
+                Text="{x:Bind ViewModel.TempLabel,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox
                 Header="~AddAccountContentDialogAccountName.Header"
-                x:Uid="AddAccountContentDialogAccountName" 
-                Text="{x:Bind ViewModel.TempIssuer,Mode=TwoWay}" 
+                x:Uid="AddAccountContentDialogAccountName"
+                Text="{x:Bind ViewModel.TempIssuer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                 Margin="0,10,0,20"/>
 
-                <appcontrols:CardExpanderControl 
+                <appcontrols:CardExpanderControl
                     IsExpanded="{x:Bind ViewModel.NotesExpanded,Mode=OneWay}"
                     Margin="0,15,0,8">
                     <appcontrols:CardExpanderControl.Header>
                         <appcontrols:CardControl
                             Icon="&#xE104;"
-                            x:Uid="EditAccountContentDialogAccountNotes" 
+                            x:Uid="EditAccountContentDialogAccountNotes"
                             Header="~EditAccountContentDialogAccountNotes.Header">
                         </appcontrols:CardControl>
                     </appcontrols:CardExpanderControl.Header>

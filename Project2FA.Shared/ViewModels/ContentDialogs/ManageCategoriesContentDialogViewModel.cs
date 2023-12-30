@@ -24,6 +24,7 @@ namespace Project2FA.ViewModels
     public class ManageCategoriesContentDialogViewModel : ObservableObject, IDialogInitialize
     {
         public ICommand CreateCategoryCommand;
+        public ICommand PrimaryCommand;
         private bool _dataChanged;
         private SymbolModel _selectedIconItem;
         private bool _canCreate;
@@ -49,6 +50,36 @@ namespace Project2FA.ViewModels
             }
             IconSourceCollection.AddRange(tempCollection.OrderBy(x => x.Name));
             TempGlobalCategories = new ObservableCollection<CategoryModel>(DataService.Instance.GlobalCategories);
+            PrimaryCommand = new AsyncRelayCommand(PrimaryCommandTask);
+        }
+
+        private Task PrimaryCommandTask()
+        {
+            for (int i = 0; i < TempGlobalCategories.Count; i++)
+            {
+                // check for changed names
+                var found = DataService.Instance.GlobalCategories.Where(x => x.Guid == TempGlobalCategories[i].Guid).FirstOrDefault();
+                if (found != null)
+                {
+                    if (found.Name != TempGlobalCategories[i].Name)
+                    {
+                        found.Name = TempGlobalCategories[i].Name;
+                    }
+                }
+                if (DataService.Instance.GlobalCategories.Count == 0)
+                {
+                    DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
+                }
+                else
+                {
+                    if (DataService.Instance.GlobalCategories.Where(x => x.Guid != TempGlobalCategories[i].Guid).Any())
+                    {
+                        DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
+                    }
+                }
+            }
+            return Task.CompletedTask;
+            
         }
 
         private Task CreateCategoryCommandTask()
@@ -57,7 +88,13 @@ namespace Project2FA.ViewModels
             if (TempGlobalCategories.Where(x => x.Name == Label).FirstOrDefault() == null)
             {
                 DataChanged = true;
-                //TempGlobalCategories.Add(new CategoryModel { Guid = Guid.NewGuid(), IsSelected = false, Glyph = "\uEA8D", Name = Label });
+                TempGlobalCategories.Add(new CategoryModel 
+                { 
+                    Guid = Guid.NewGuid(),
+                    IsSelected = false,
+                    UnicodeString = "\uE821",
+                    UnicodeIndex = 59425,
+                    Name = Label });
             }
             else
             {

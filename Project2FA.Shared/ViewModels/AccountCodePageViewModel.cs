@@ -18,6 +18,8 @@ using Project2FA.Core;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using Project2FA.Core.Utils;
+
 
 
 #if WINDOWS_UWP
@@ -53,6 +55,7 @@ namespace Project2FA.ViewModels
 #endif
 
     {
+        public ObservableCollection<TwoFACodeModel> SearchAccountCollection { get; } = new ObservableCollection<TwoFACodeModel>();
         private DispatcherTimer _dispatcherTOTPTimer;
         private DispatcherTimer _dispatcherTimerDeletedModel;
         private IDialogService DialogService { get; }
@@ -73,7 +76,7 @@ namespace Project2FA.ViewModels
         public ICommand ManageCategoriesCommand { get; }
         public ICommand CameraCommand { get; }
         private TwoFACodeModel _changedItem = null;
-
+        private string _searchedAccountLabel;
         private bool _datafileUpdated;
         private bool _datafileWebDAVUpToDate;
         private bool _datafileWebDAVUpdated;
@@ -508,39 +511,43 @@ namespace Project2FA.ViewModels
         }
 
 
-        public void SetSuggestionList(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        public void SetSuggestionList(string searchText)
         {
-            if (string.IsNullOrWhiteSpace(sender.Text) == false)
+            if (string.IsNullOrWhiteSpace(searchText) == false)
             {
                 try
                 {
-                    List<string> _nameList = new List<string>();
-                    foreach (TwoFACodeModel item in TwoFADataService.Collection)
-                    {
-                        _nameList.Add(item.Label);
-                    }
                     // search the labels
-                    List<string> listSuggestion = _nameList.Where(x => x.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                    var listSuggestion = TwoFADataService.Collection.Where(x => x.Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase)).ToList();
                     if (listSuggestion.Count == 0)
                     {
-                        listSuggestion.Add(Strings.Resources.AccountCodePageSearchNotFound);
+                        listSuggestion.Add(new TwoFACodeModel { Label = Strings.Resources.AccountCodePageSearchNotFound });
                     }
+                    //else
+                    //{
+                    //    SearchAccountCollection.AddRange(listSuggestion, false);
+                    //}
 
                     // filter the selected categories
                     if (TwoFADataService.GlobalCategories != null)
                     {
                         var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true);
+                        // categories are selected
                         if (selectedGlobalCategories.Any())
                         {
                             // filter where the models have the selected categories and the input label
                             TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
-                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && ((TwoFACodeModel)model).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
+                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && ((TwoFACodeModel)model).Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase);
 
                             // set suggetion where the models have the selected categories and the input label
                             var filteredCollection = TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
-                                selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && model.Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase));
-                            listSuggestion = listSuggestion.Where(ls => filteredCollection.Where(fc => fc.Label == ls).Any()).ToList();
-                            sender.ItemsSource = listSuggestion;
+                                selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && model.Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase));
+                            listSuggestion = listSuggestion.Where(ls => filteredCollection.Where(fc => fc.Label == ls.Label).Any()).ToList();
+
+                            // add filtered collection to suggestion list
+                            SearchAccountCollection.AddRange(listSuggestion, true);
+
+
                             //selectedGlobalCategories.Where(c => ViewModel.TwoFADataService.Collection.Where(x => x.SelectedCategories.Where(y => y.Guid == c.Guid).Any()).Any());
                             //ViewModel.TwoFADataService.ACVCollection.Filter = x => 
                             ////((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase) ||
@@ -550,17 +557,20 @@ namespace Project2FA.ViewModels
                             //ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
                             //selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
                         }
+                        // no categories selected
                         else
                         {
-                            TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
-                            sender.ItemsSource = listSuggestion;
+                            TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase);
+                            // add filtered collection to suggestion list
+                            SearchAccountCollection.AddRange(listSuggestion, true);
                         }
                     }
                     // no categories set
                     else
                     {
-                        TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase);
-                        sender.ItemsSource = listSuggestion;
+                        TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase);
+                        // add filtered collection to suggestion list
+                        SearchAccountCollection.AddRange(listSuggestion, true);
                     }
 
 
@@ -576,7 +586,8 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                sender.ItemsSource = null;
+                //sender.ItemsSource = null;
+                SearchAccountCollection.Clear();
                 if (TwoFADataService.ACVCollection.Filter != null)
                 {
                     TwoFADataService.ACVCollection.Filter = null;
@@ -622,12 +633,18 @@ namespace Project2FA.ViewModels
                 OnPropertyChanged(nameof(ChangedItem));
             }
         }
+
+        public string SearchedAccountLabel 
+        { 
+            get => _searchedAccountLabel; 
+            set => SetProperty(ref _searchedAccountLabel, value);
+        }
 #if !WINDOWS_UWP
         public ShellPageViewModel ShellViewModel
         {
             get => App.ShellPageInstance.ViewModel;
         }
 #endif
-#endregion
+        #endregion
     }
 }

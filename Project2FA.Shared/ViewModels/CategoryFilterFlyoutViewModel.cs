@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Ioc;
 using UNOversal.Services.Dialogs;
+using Project2FA.Services;
+
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -24,6 +26,7 @@ namespace Project2FA.ViewModels
         public CategoryFilterFlyoutViewModel()
         {
             ManageCategoriesCommand = new AsyncRelayCommand(ManageCategoriesCommandTask);
+            OnPropertyChanged(nameof(NoCategoriesExists));
         }
 
         private async Task ManageCategoriesCommandTask()
@@ -31,6 +34,11 @@ namespace Project2FA.ViewModels
             var dialogService = App.Current.Container.Resolve<IDialogService>();
             ManageCategoriesContentDialog dialog = new ManageCategoriesContentDialog();
             await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        public bool NoCategoriesExists 
+        { 
+            get => DataService.Instance.GlobalCategories.Count == 0; 
         }
     }
 }

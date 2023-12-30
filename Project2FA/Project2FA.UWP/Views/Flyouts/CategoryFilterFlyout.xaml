@@ -43,6 +43,7 @@
             Text="~CategoryFilterFlyoutNoCategories"
             TextWrapping="WrapWholeWords"
             MaxWidth="350"
+            Visibility="{x:Bind ViewModel.NoCategoriesExists,Mode=OneWay}"
             Grid.Row="1"/>
 
         <!--Category list-->

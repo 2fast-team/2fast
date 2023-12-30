@@ -17,6 +17,8 @@
 
     </ResourceDictionary.MergedDictionaries>
 
+    <FontFamily x:Key="SimpleIcons">ms-appx:///Assets/Fonts/SimpleIcons.ttf#Simple Icons</FontFamily>
+
     <!--<Style TargetType="utu:NavigationBar" BasedOn="{StaticResource NativeDefaultNavigationBar}" />-->
 
     <Style x:Key="ShellHeaderTitleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">

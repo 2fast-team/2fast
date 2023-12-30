@@ -8,12 +8,14 @@
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     Title="~ManageCategoriesContentDialogHeader.Title"
     x:Uid="ManageCategoriesContentDialogHeader"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.DataChanged,Mode=OneWay}"
     PrimaryButtonText="~ManageCategoriesContentDialogHeader.PrimaryButtonText"
+    PrimaryButtonCommand="{x:Bind ViewModel.PrimaryCommand}"
     SecondaryButtonText="~ManageCategoriesContentDialogHeader.SecondaryButtonText">
 
     <ContentDialog.Resources>
@@ -24,8 +26,12 @@
 
             <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
                 <StackPanel Orientation="Horizontal">
-                    <!--<FontIcon  Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>-->
-                    <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
+                    <FontIcon  
+                        Glyph="{x:Bind UnicodeIndex,Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}" 
+                        Margin="0,0,10,0"/>
+                    <TextBlock 
+                        Text="{x:Bind Name,Mode=OneWay}" 
+                        Margin="0,0,10,0"/>
                 </StackPanel>
             </DataTemplate>
 
@@ -61,9 +67,9 @@
                             Text="{x:Bind ViewModel.Label,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <ComboBox 
                             VerticalAlignment="Stretch"
-                            Margin="0,10,0,20" 
+                            Margin="0,10,0,20"
                             HorizontalAlignment="Stretch"
-                            x:Uid="ManageCategoriesContentDialogIcon" 
+                            x:Uid="ManageCategoriesContentDialogIcon"
                             ItemTemplate="{StaticResource SymbolListTemplate}"
                             SelectedItem="{x:Bind ViewModel.SelectedIconItem, Mode=TwoWay}"
                             ItemsSource="{x:Bind ViewModel.IconSourceCollection, Mode=OneWay}"
@@ -73,11 +79,56 @@
                             Command="{x:Bind ViewModel.CreateCategoryCommand}"
                             x:Uid="ManageCategoriesContentDialogIconCreateBTN"
                             Margin="0,10,0,20"
+                            Style="{StaticResource AccentButtonStyle}"
                             IsEnabled="{x:Bind ViewModel.CanCreate,Mode=OneWay}"
                             Content="~ManageCategoriesContentDialogIconCreateBTN.Content">
                         </Button>
                     </StackPanel>
                 </appcontrols:CardExpanderControl>
+
+                <ListView 
+                    ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
+                    ItemsSource="{x:Bind ViewModel.TempGlobalCategories}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CategoryModel">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon
+                                    FontSize="32"
+                                    Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+                                <Button
+                                    Margin="4,0,0,0"
+                                    Grid.Column="1"
+                                    CornerRadius="99"
+                                    Width="40"
+                                    Height="40">
+                                    <FontIcon FontSize="12" Glyph="&#xE70F;"/>
+                                    <Button.ContextFlyout>
+                                        <muxc:CommandBarFlyout>
+                                            <muxc:CommandBarFlyout.PrimaryCommands>
+                                                <AppBarElementContainer>
+                                                    <AutoSuggestBox></AutoSuggestBox>
+                                                </AppBarElementContainer>
+                                            </muxc:CommandBarFlyout.PrimaryCommands>
+                                        </muxc:CommandBarFlyout>
+                                    </Button.ContextFlyout>
+                                </Button>
+                                <TextBox
+                                    TextChanged="TextBox_TextChanged"
+                                    Text="{x:Bind Name,Mode=TwoWay}"
+                                    MinWidth="250"
+                                    Grid.Column="2"
+                                    Margin="12,0,0,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!--<labs:TokenView ItemsSource="{x:Bind ViewModel.TempGlobalCategories}"/>-->
 
                 <!--<appcontrols:CardExpanderControl 
                         IsExpanded="True"

@@ -266,18 +266,51 @@
                                     <StackPanel 
                                         HorizontalAlignment="Center"
                                         Visibility="{x:Bind ViewModel.IsEditBoxVisible, Mode=OneWay}">
+
                                         <AutoSuggestBox 
                                             Header="~AddAccountContentDialogSuggestionBox.Header" 
                                             x:Uid="AddAccountContentDialogSuggestionBox"
-                                            MinWidth="360"
+                                            Width="200"
                                             QueryIcon="Find"
-                                            HorizontalAlignment="Stretch"
-                                            HorizontalContentAlignment="Stretch"
+                                            Text="{x:Bind ViewModel.AccountIconName,Mode=OneWay}"
                                             VerticalAlignment="Center"
                                             PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                             TextChanged="AutoSuggestBox_TextChanged" 
                                             VerticalContentAlignment="Center"
-                                            SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
+                                            UpdateTextOnSelect="False"
+                                            TextMemberPath="Name"
+                                            GotFocus="AutoSuggestBox_GotFocus"
+                                            ItemsSource="{x:Bind ViewModel.FontIdentifikationCollection, Mode=OneWay}"
+                                            SuggestionChosen="AutoSuggestBox_SuggestionChosen" >
+                                            <AutoSuggestBox.RenderTransform>
+                                                <CompositeTransform />
+                                            </AutoSuggestBox.RenderTransform>
+                                            <AutoSuggestBox.ItemTemplate>
+                                                <DataTemplate x:DataType="models:FontIdentifikationModel">
+                                                    <Grid
+                                                        HorizontalAlignment="Stretch"
+                                                        Background="Transparent"
+                                                        ToolTipService.ToolTip="{x:Bind Name}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="30" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <FontIcon
+                                                            FontSize="16"
+                                                            Margin="4,0,0,0"
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Center"
+                                                            FontFamily="{StaticResource SimpleIcons}"
+                                                            Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+                                                        <TextBlock
+                                                            Grid.Column="1"
+                                                            VerticalAlignment="Center"
+                                                            Text="{x:Bind Name, Mode=OneWay}"
+                                                            TextTrimming="CharacterEllipsis" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </AutoSuggestBox.ItemTemplate>
+                                        </AutoSuggestBox>
                                         <animations:Implicit.ShowAnimations>
                                             <animations:OpacityAnimation Duration="0:0:1" From="0" To="1.0"/>
                                         </animations:Implicit.ShowAnimations>

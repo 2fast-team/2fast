@@ -133,20 +133,29 @@ namespace Project2FA.UNO.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                ViewModel.SetSuggestionList(sender, args);
+                ViewModel.SetSuggestionList(sender.Text);
             }
         }
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            string selectedItem = args.SelectedItem.ToString();
-            if (selectedItem != Strings.Resources.AccountCodePageSearchNotFound)
+            if (args.SelectedItem is TwoFACodeModel item)
             {
-                ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label == selectedItem;
+                if (item.Label != Strings.Resources.AccountCodePageSearchNotFound)
+                {
+                    ViewModel.TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x) == item;
+                    ViewModel.SearchedAccountLabel = item.Label;
+                }
+                else
+                {
+                    ViewModel.SearchedAccountLabel = string.Empty;
+                    ViewModel.TwoFADataService.ACVCollection.Filter = null;
+                }
             }
             else
             {
-                sender.Text = string.Empty;
+                ViewModel.SearchedAccountLabel = string.Empty;
+                ViewModel.TwoFADataService.ACVCollection.Filter = null;
             }
         }
 
@@ -174,6 +183,11 @@ namespace Project2FA.UNO.Views
             {
                 await ViewModel.DeleteAccountFromCollection(model);   
             }
+        }
+
+        private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel);
         }
     }
 }

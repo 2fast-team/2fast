@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FavouriteToIconConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FavouriteTooltipConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FontIconNameToGlyphConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\FontIconUnicodeIndexToGlyphConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NullToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonalPictureInitialsVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PersonPictureSizeConverter.cs" />
@@ -37,7 +38,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ApplicationThemeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SVGColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />

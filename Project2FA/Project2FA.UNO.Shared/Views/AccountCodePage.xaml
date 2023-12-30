@@ -604,18 +604,48 @@
         </utu:NavigationBar>
 
         <Grid Grid.Row="1">
-            
+
             <AutoSuggestBox 
             x:Name="MobileAutoSuggestBox"
             Height="48"
             QueryIcon="Find"
+            Text="{x:Bind ViewModel.SearchedAccountLabel,Mode=TwoWay}"
             Visibility="{x:Bind ViewModel.ShellViewModel.IsMobileSearchActive, Mode=OneWay}"
             VerticalAlignment="Center"
             PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
             TextChanged="AutoSuggestBox_TextChanged" 
             VerticalContentAlignment="Center"
             SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-            Margin="4,0,4,4" />
+            UpdateTextOnSelect="False"
+            TextMemberPath="Name"
+            GotFocus="AutoSuggestBox_GotFocus"
+            Margin="4,0,4,4" >
+                <AutoSuggestBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:TwoFACodeModel">
+                        <Grid
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            ToolTipService.ToolTip="{x:Bind Label}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon
+                                FontSize="16"
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource SimpleIcons}"
+                                Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind Label, Mode=OneWay}"
+                                TextTrimming="CharacterEllipsis" />
+                        </Grid>
+                    </DataTemplate>
+                </AutoSuggestBox.ItemTemplate>
+            </AutoSuggestBox>
             <!--<Storyboard x:Name="FadeOutStoryboard">
                 <DoubleAnimation
                 Storyboard.TargetName="MobileAutoSuggestBox"

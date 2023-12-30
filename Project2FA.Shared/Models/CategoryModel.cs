@@ -15,19 +15,20 @@ namespace Project2FA.Repository.Models
 #endif
     public class CategoryModel : ObservableObject
     {
-        //private string _glyph;
+        private string _unicodeString;
 
-        //public string Glyph 
-        //{ 
-        //    get => _glyph; 
-        //    set => SetProperty(ref _glyph, value);
-        //}
-        private Symbol _symbol;
+        public string UnicodeString 
+        { 
+            get => _unicodeString; 
+            set => SetProperty(ref _unicodeString, value);
+        }
 
-        public Symbol Symbol
-        {
-            get => _symbol;
-            set => SetProperty(ref _symbol, value);
+        private int _unicodeIndex;
+
+        public int UnicodeIndex 
+        { 
+            get => _unicodeIndex; 
+            set => SetProperty(ref _unicodeIndex, value);
         }
 
         private string _name;

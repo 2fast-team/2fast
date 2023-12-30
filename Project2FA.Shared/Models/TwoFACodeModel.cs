@@ -135,15 +135,6 @@ namespace Project2FA.Repository.Models
             }
         }
 
-        private string _accountSVGIcon;
-
-        [JsonIgnore]
-        public string AccountSVGIcon
-        {
-            get => _accountSVGIcon;
-            set => SetProperty(ref _accountSVGIcon, value);
-        }
-
         private string _notes;
         [Encrypt]
         public string Notes

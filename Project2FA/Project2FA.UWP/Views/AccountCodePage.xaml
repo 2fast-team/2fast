@@ -149,11 +149,41 @@
                                         Width="200"
                                         Height="40"
                                         VerticalAlignment="Center"
+                                        Text="{x:Bind SearchedAccountLabel,Mode=TwoWay}"
+                                        ItemsSource="{x:Bind SearchAccountCollection,Mode=OneWay}"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                         TextChanged="AutoSuggestBox_TextChanged" 
                                         VerticalContentAlignment="Center"
-                                        SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
+                                        SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                                        UpdateTextOnSelect="False"
+                                        TextMemberPath="Name"
+                                        GotFocus="AutoSuggestBox_GotFocus"
                                         Margin="0,0,1,0" >
+                                        <AutoSuggestBox.ItemTemplate>
+                                            <DataTemplate x:DataType="models:TwoFACodeModel">
+                                                <Grid
+                                                    HorizontalAlignment="Stretch"
+                                                    Background="Transparent"
+                                                    ToolTipService.ToolTip="{x:Bind Label}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="30" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <FontIcon
+                                                        FontSize="16"
+                                                        Margin="4,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        FontFamily="{StaticResource SimpleIcons}"
+                                                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        VerticalAlignment="Center"
+                                                        Text="{x:Bind Label, Mode=OneWay}"
+                                                        TextTrimming="CharacterEllipsis" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </AutoSuggestBox.ItemTemplate>
                                         <AutoSuggestBox.QueryIcon>
                                             <FontIcon Glyph="&#xE721;" FontSize="18"/>
                                         </AutoSuggestBox.QueryIcon>
@@ -167,11 +197,11 @@
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
                                     </AppBarButton.Icon>
-                                    <FlyoutBase.AttachedFlyout>
+                                    <!--<FlyoutBase.AttachedFlyout>
                                         <Flyout>
                                             <views:CategoryFilterFlyout/>
                                         </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
+                                    </FlyoutBase.AttachedFlyout>-->
                                     <!--<AppBarButton.Flyout>
                                         --><!--<MenuFlyout>
                                             <MenuFlyoutItem Text="#manage categories"></MenuFlyoutItem>

@@ -11,21 +11,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.Serialization;
-using Windows.Storage;
-using Windows.Storage.Streams;
 
 namespace Project2FA.ViewModels
 {
     public class EditAccountViewModelBase : ObservableObject
     {
         private TwoFACodeModel _twoFACodeModel;
-        private string _tempIssuer, _tempLabel, _tempAccountIconName,
-            _tempAccountSVGIcon, _tempNotes, _tempIconLabel;
+        private string _tempIssuer, _tempLabel, _tempAccountIconName, _tempNotes, _tempIconLabel;
         private FontIdentifikationCollectionModel _iconNameCollectionModel;
         private bool _isEditBoxVisible;
         private bool _notesExpanded = true;
-        private ObservableCollection<CategoryModel> _tempAccountCategoryList;
-        private ObservableCollection<CategoryModel> _globalTempCategories = new ObservableCollection<CategoryModel>();
+        private bool _isPrimaryBTNEnabled;
+
+        public ObservableCollection<CategoryModel> TempAccountCategoryList { get; } = new ObservableCollection<CategoryModel>();
+        public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         public ICommand CancelButtonCommand { get; internal set; }
         public ICommand PrimaryButtonCommand { get; internal set; }
         public ICommand DeleteAccountIconCommand { get; internal set; }
@@ -35,7 +34,7 @@ namespace Project2FA.ViewModels
         public EditAccountViewModelBase()
         {
 #if WINDOWS_UWP
-            NotesExpanded = SettingsService.Instance.IsProVersion ? false : true;
+            NotesExpanded = !IsProVersion;
 #endif
         }
         public TwoFACodeModel Model
@@ -48,7 +47,6 @@ namespace Project2FA.ViewModels
                     TempIssuer = Model.Issuer;
                     TempLabel = Model.Label;
                     TempAccountIconName = Model.AccountIconName;
-                    TempAccountSVGIcon = Model.AccountSVGIcon;
                     if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
                     {
                         GlobalTempCategories.AddRange(DataService.Instance.GlobalCategories);
@@ -65,6 +63,14 @@ namespace Project2FA.ViewModels
             }
         }
 
+        /// <summary>
+        /// Checks if the inputs are correct and enables / disables the submit button
+        /// </summary>
+        private void CheckInputs()
+        {
+            IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(TempLabel) && !string.IsNullOrEmpty(TempIssuer);
+        }
+
         public FontIdentifikationCollectionModel IconNameCollectionModel
         {
             get => _iconNameCollectionModel;
@@ -73,12 +79,24 @@ namespace Project2FA.ViewModels
         public string TempIssuer
         {
             get => _tempIssuer;
-            set => SetProperty(ref _tempIssuer, value);
+            set
+            {
+                if(SetProperty(ref _tempIssuer, value))
+                {
+                    CheckInputs();
+                }
+            }
         }
         public string TempLabel
         {
             get => _tempLabel;
-            set => SetProperty(ref _tempLabel, value);
+            set
+            {
+                if (SetProperty(ref _tempLabel, value))
+                {
+                    CheckInputs();
+                }
+            }
         }
         public string TempNotes
         {
@@ -92,24 +110,15 @@ namespace Project2FA.ViewModels
             get => _tempAccountIconName;
             set
             {
-                if (SetProperty(ref _tempAccountIconName, value))
-                {
-                    //if (value != null)
-                    //{
-                    //    TempIconLabel = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    TempIconLabel = TempLabel;
-                    //}
-                }
+                SetProperty(ref _tempAccountIconName, value);
             }
         }
-        public string TempAccountSVGIcon
+        public bool IsPrimaryBTNEnable
         {
-            get => _tempAccountSVGIcon;
-            set => SetProperty(ref _tempAccountSVGIcon, value);
+            get => _isPrimaryBTNEnabled;
+            set => SetProperty(ref _isPrimaryBTNEnabled, value);
         }
+
         public string TempIconLabel
         {
             get => _tempIconLabel;
@@ -126,31 +135,12 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _notesExpanded, value); 
         }
 
-        public ObservableCollection<CategoryModel> GlobalTempCategories
-        {
-            get => _globalTempCategories;
-            set => SetProperty(ref _globalTempCategories, value);
-        }
-
 #if WINDOWS_UWP
         public bool IsProVersion
         {
             get => SettingsService.Instance.IsProVersion;
         }
 #endif
-        public ObservableCollection<CategoryModel> TempAccountCategoryList 
-        { 
-            get
-            {
-                if(_tempAccountCategoryList == null)
-                {
-                    _tempAccountCategoryList = new ObservableCollection<CategoryModel>();
-                }
-                return _tempAccountCategoryList;
-            }
-            set => SetProperty(ref _tempAccountCategoryList, value);
-        }
-
 
         //        public async Task LoadIconNameCollection()
         //        {

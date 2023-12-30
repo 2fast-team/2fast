@@ -28,7 +28,7 @@ namespace Project2FA.ViewModels
 #endif
     public class EditAccountContentDialogViewModel : EditAccountViewModelBase, IDialogInitialize
     {
-        
+        public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
         public EditAccountContentDialogViewModel(ISerializationService serializationService)
         {
             SerializationService = serializationService;
@@ -42,7 +42,6 @@ namespace Project2FA.ViewModels
             });
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
-                TempAccountSVGIcon = null;
                 TempAccountIconName = null;
             });
             EditAccountIconCommand = new RelayCommand(() =>
@@ -82,6 +81,35 @@ namespace Project2FA.ViewModels
                     selectedList.ElementAt(i).IsSelected = true;
                     TempAccountCategoryList.Add(selectedList.ElementAt(i));
                 }
+            }
+        }
+
+        public Task<bool> SearchAccountFonts(string senderText)
+        {
+            if (string.IsNullOrEmpty(senderText) == false && senderText.Length >= 2 && senderText != Strings.Resources.AccountCodePageSearchNotFound)
+            {
+                var tempList = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(senderText, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                FontIdentifikationCollection.AddRange(tempList, true);
+                try
+                {
+                    if (FontIdentifikationCollection.Count == 0)
+                    {
+                        FontIdentifikationCollection.Add(new FontIdentifikationModel { Name = Strings.Resources.AccountCodePageSearchNotFound });
+                        return Task.FromResult(true);
+                    }
+                    return Task.FromResult(true);
+                }
+                catch (System.Exception)
+                {
+                    FontIdentifikationCollection.Clear();
+                    return Task.FromResult(false);
+                }
+
+            }
+            else
+            {
+                FontIdentifikationCollection.Clear();
+                return Task.FromResult(false);
             }
         }
     }

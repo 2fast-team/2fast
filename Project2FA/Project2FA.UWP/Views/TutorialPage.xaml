@@ -72,7 +72,7 @@
                         Grid.Column="1"
                         Grid.Row="0"
                         Grid.RowSpan="2"
-                        Tag="{x:Bind AccountSVGIcon, Mode=OneWay}">
+                        Tag="{x:Bind AccountIconName, Mode=OneWay}">
                         <!--<muxc:PersonPicture.ProfilePicture>
                                 <SvgImageSource UriSource="{x:Bind AccountIcon, Mode=OneWay}" RasterizePixelHeight="32"></SvgImageSource>
                             </muxc:PersonPicture.ProfilePicture>-->
@@ -302,45 +302,33 @@
                                         Height="100" 
                                         Width="100"
                                         Fill="#99FFFFFF"/>
-                                    <Image 
+                                    <FontIcon 
                                         Margin="0,12,0,12"
-                                        Height="60" 
-                                        Width="60"
-                                        Source="/Assets/AccountIcons/Microsoft.svg"
-                                        Stretch="Fill"
-                                        VerticalAlignment="Center" 
-                                        HorizontalAlignment="Center">
-                                    </Image>
+                                        FontFamily="{StaticResource SimpleIcons}" 
+                                        FontSize="60" 
+                                        Glyph="&#xEFCC;"/>
                                 </Grid>
                                 <Grid Margin="0,12,12,12">
                                     <Ellipse 
                                         Height="100" 
                                         Width="100"
                                         Fill="#99FFFFFF"/>
-                                    <Image 
+                                    <FontIcon 
                                         Margin="0,12,0,12"
-                                        Height="60" 
-                                        Width="60"
-                                        Source="/Assets/AccountIcons/Google.svg"
-                                        Stretch="Fill"
-                                        VerticalAlignment="Center" 
-                                        HorizontalAlignment="Center">
-                                    </Image>
+                                        FontFamily="{StaticResource SimpleIcons}" 
+                                        FontSize="60" 
+                                        Glyph="&#xEDB3;"/>
                                 </Grid>
                                 <Grid Margin="0,12,12,12">
                                     <Ellipse 
                                         Height="100" 
                                         Width="100"
                                         Fill="#99FFFFFF"/>
-                                    <Image 
+                                    <FontIcon 
                                         Margin="0,12,0,12"
-                                        Height="60" 
-                                        Width="60"
-                                        Source="/Assets/AccountIcons/PayPal.svg"
-                                        Stretch="Fill"
-                                        VerticalAlignment="Center" 
-                                        HorizontalAlignment="Center">
-                                    </Image>
+                                        FontFamily="{StaticResource SimpleIcons}" 
+                                        FontSize="60" 
+                                        Glyph="&#xF0DD;"/>
                                 </Grid>
                             </StackPanel>
 

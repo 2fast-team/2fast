@@ -1241,4 +1241,7 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="ManageCategoriesAddGlobalCategories.Header" xml:space="preserve">
     <value>Kategorie anlegen</value>
   </data>
+  <data name="LoginPageTitle.Text" xml:space="preserve">
+    <value>Anmeldung</value>
+  </data>
 </root>

@@ -9,6 +9,8 @@ using System.Text;
 
 namespace Project2FA.Core.Services.JSON
 {
+    // TODO change to https://github.com/jp-weber/System.Text.Json.Serialization.Encryption
+    // or based on https://github.com/Burwin/JsonCryption.Utf8Json
     public class NewtonsoftJSONService : INewtonsoftJSONService, IDisposable
     {
         EncryptionFactory _encryptionFactory;

@@ -6,8 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
-    xmlns:media="clr-namespace:CommunityToolkit.WinUI.UI.Media;assembly=CommunityToolkit.WinUI.UI.Media"
-    xmlns:mstoolkitControls="clr-namespace:CommunityToolkit.WinUI.UI.Controls;assembly=CommunityToolkit.WinUI.UI.Controls.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -20,8 +18,10 @@
             Grid.Row="0"
             MainCommandMode="Action"
             Background="{ThemeResource TwoFABackgroundBrush}"
-            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-            Content="#Login">
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
+            <utu:NavigationBar.Content>
+                <TextBlock x:Uid="LoginPageTitle"></TextBlock>
+            </utu:NavigationBar.Content>
             <utu:NavigationBar.MainCommand>
                 <AppBarButton 
                     Content="#Back" 

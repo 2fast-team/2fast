@@ -320,7 +320,7 @@ Important: You have to type in the password everytime you start the app!</value>
     <value>Foldername</value>
   </data>
   <data name="NewLocalDatafileInfo.Text" xml:space="preserve">
-    <value>To use this app you have to create a data file one time. All accounts will be stored entrypted in this file.
+    <value>To use this app you have to create a data file one time. All accounts will be stored encrypted in this file.
 If you plan to use this application on several devices it makes sense to store this file on an external storage (e. g. cloud).</value>
   </data>
   <data name="NewPasswordContentDialog.Header" xml:space="preserve">

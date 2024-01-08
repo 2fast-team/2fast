@@ -31,7 +31,7 @@ other installation methode (not maintained by me)
 
 ## About 2fast
 
-**2fast** (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is the first free, open source, two factor authenticator for Windows and other platforms with the ability to store the sensitive data encrypted at a place of your choice instead of a 3rd party cloud location.
+**2fast** (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is a free, open source, two factor authenticator for Windows and other platforms with the ability to store the sensitive data encrypted at a place of your choice instead of a 3rd party cloud location.
 
 ### Features
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
 using Microsoft.UI.Xaml.Controls;
+using Project2FA.Extensions;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
@@ -12,6 +13,7 @@ using System.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -252,6 +254,14 @@ namespace Project2FA.UWP.Views
         private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
         {
             ViewModel.SearchAccountFonts(ViewModel.AccountIconName);
+        }
+
+        private void BTN_SearchIcon_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                FlyoutBase.ShowAttachedFlyout(btn);
+            }
         }
     }
 }

@@ -1209,13 +1209,13 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
 ### 2,49€ monatlich</value>
   </data>
   <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>abonnieren</value>
+    <value>abonnieren / kaufen</value>
   </data>
   <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
     <value>abbrechen</value>
   </data>
   <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
-    <value>Abonnement</value>
+    <value>Abonnements &amp; Käufe</value>
   </data>
   <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
     <value>Importieren Sie das Konto für ein anderes Gerät, indem Sie mit dem gewünschten Gerät eine App zur zwei Faktor Authentifizierung öffnen und ein Konto mit der Kamera hinzufügen.</value>
@@ -1229,7 +1229,7 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
     <value>Abonnements in Ihrem Microsoft Konto verwalten</value>
   </data>
-  <data name="InAppPaymentContentDialogMonthItemSelect.Content" xml:space="preserve">
+  <data name="InAppPaymentContentDialogSubscriptionItemSelect" xml:space="preserve">
     <value>Abonnement auswählen</value>
   </data>
   <data name="AddAccountContentDialogTitle" xml:space="preserve">
@@ -1243,5 +1243,23 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   </data>
   <data name="LoginPageTitle.Text" xml:space="preserve">
     <value>Anmeldung</value>
+  </data>
+  <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
+    <value>Kategorien &amp; Filter setzen</value>
+  </data>
+  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+    <value>Kategorien &amp; Filter setzen</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
+    <value>Filter zurücksetzen</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Settings.Label" xml:space="preserve">
+    <value>Kategorien verwalten</value>
+  </data>
+  <data name="EditAccountContentDialogAccountCategories.Header" xml:space="preserve">
+    <value>Kategorien setzen</value>
+  </data>
+  <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
+    <value>Zum Kauf auswählen</value>
   </data>
 </root>

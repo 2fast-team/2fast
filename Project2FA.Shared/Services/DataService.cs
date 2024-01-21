@@ -9,8 +9,6 @@ using OtpNet;
 using Project2FA.Core.Utils;
 using System.Threading;
 using System.Security.Cryptography;
-using Project2FA.Strings;
-using Windows.ApplicationModel.Core;
 using System.IO;
 using Project2FA.Core;
 using Project2FA.Core.Services.NTP;
@@ -20,13 +18,10 @@ using Project2FA.Services.WebDAV;
 using Windows.Storage.Streams;
 using WebDAVClient.Types;
 using System.Collections.Generic;
-using Project2FA.Helpers;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core.Messenger;
 using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.Input;
-using System.Text;
 using Project2FA.Repository.Models.Enums;
 using UNOversal.Services.Secrets;
 using UNOversal.Services.Dialogs;
@@ -35,9 +30,7 @@ using UNOversal.Services.File;
 using UNOversal.Services.Network;
 using Project2FA.Utils;
 using Project2FA.Core.Services.Crypto;
-using CommunityToolkit.WinUI.Controls;
 using CommunityToolkit.WinUI.Helpers;
-using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.Collections;
 using UNOversal.Services.Serialization;
 
@@ -89,7 +82,6 @@ namespace Project2FA.Services
         private INetworkTimeService NetworkTimeService { get; }
         private INetworkService NetworkService { get; }
         private ISerializationService SerializationService { get; }
-        private bool _isFirstActivatedDatafileStart = true;
         private bool _initialization, _errorOccurred;
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
@@ -104,6 +96,8 @@ namespace Project2FA.Services
         private const long unixEpochTicks = 621355968000000000L;
         private const long ticksToSeconds = 10000000L;
         int _reloadCollectionCounter = 0;
+        private bool _isFilterEnabled;
+        private bool _isFilterChecked;
 #if __IOS__
         private Foundation.NSUrl _openDatefileUrl = null;
 #endif
@@ -157,13 +151,10 @@ namespace Project2FA.Services
             }
             catch (Exception exc)
             {
-
-                throw;
+#if WINDOWS_UWP
+                TrackingManager.TrackExceptionCatched(nameof(LoadFontIconList), exc);
+#endif
             }
-
-            //SerializationService.Serialize()
-            //FontIconCollection
-
         }
 
         /// <summary>
@@ -228,8 +219,6 @@ namespace Project2FA.Services
                             // initialize the newest (last) item
                             int i = (sender as ObservableCollection<TwoFACodeModel>).Count - 1;
                             Collection[i].HideTOTPCode = useHiddenTOTP;
-                            // set the svg source
-                            //await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
                             await InitializeItem(i);
                         }
                     }
@@ -316,7 +305,7 @@ namespace Project2FA.Services
                             break;
                         default:
                             await ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
-                            break;
+                            return;
                     }
 #endif
                     path = ActivatedDatafile.Path;
@@ -416,16 +405,12 @@ namespace Project2FA.Services
                         {
                             // read the iv for AES
                             DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
-                            GlobalCategories.Clear();
-                            if (datafile.GlobalCategories != null)
-                            {
-                                GlobalCategories.AddRange(datafile.GlobalCategories);
-                            }
                             byte[] iv = datafile.IV;
 
                             if (ActivatedDatafile != null)
                             {
 #if WINDOWS_UWP
+                                // only Windows can use the ProtectData class to encrypt the password for the activated file
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                     ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
                                     iv,
@@ -448,8 +433,8 @@ namespace Project2FA.Services
                                     datafile.Version);
                             }
 
-
                             deserializeCollection = datafile.Collection;
+                            GlobalCategories.AddRange(datafile.GlobalCategories, true);
                         }
                         if (deserializeCollection != null)
                         {
@@ -664,8 +649,14 @@ namespace Project2FA.Services
                 var compareVersion = new Version("1.3.0.0");
                 var result = prevíousVersion.CompareTo(compareVersion);
                 int version = result >= 0 ? 2 : 1;
+
+                ObservableCollection<CategoryModel> tempCategories = new ObservableCollection<CategoryModel>(GlobalCategories);
+                for (int i = 0; i < tempCategories.Count; i++)
+                {
+                    tempCategories[i].IsSelected = false;
+                }
                 // create the new datafile model
-                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version, GlobalCategories = GlobalCategories };
+                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version, GlobalCategories = tempCategories };
                 
                 if (ActivatedDatafile != null)
                 {
@@ -919,16 +910,6 @@ namespace Project2FA.Services
             }
         }
 
-        //public async Task ReloadAccountIconSVGs()
-        //{
-        //    for (int i = 0; i < Collection.Count; i++)
-        //    {
-        //        await SVGColorHelper.GetSVGIconWithThemeColor(Collection[i], Collection[i].AccountIconName);
-        //    }
-        //}
-
-
-
 #region WebDAV
         /// <summary>
         /// Upload the data file with custom WebDAV header
@@ -936,7 +917,7 @@ namespace Project2FA.Services
         /// <param name="folder"></param>
         /// <param name="datafileDB"></param>
         /// <returns></returns>
-        public async Task<(bool successful, bool statusResult)> UploadDatafileWithWebDAV(StorageFolder folder, DBDatafileModel datafileDB, bool initial=false)
+        private async Task<(bool successful, bool statusResult)> UploadDatafileWithWebDAV(StorageFolder folder, DBDatafileModel datafileDB, bool initial=false)
         {
             WebDAVClient.Client client = WebDAVClientService.Instance.GetClient();
             if (await FileService.FileExistsAsync(datafileDB.Name, folder))
@@ -1096,7 +1077,25 @@ namespace Project2FA.Services
             get => _isLoading; 
             set => SetProperty(ref _isLoading, value); 
         }
-        public bool IsFirstActivatedDatafileStart { get => _isFirstActivatedDatafileStart; set => _isFirstActivatedDatafileStart = value; }
+
+        public bool IsFilterEnabled
+        {
+            get => _isFilterEnabled;
+            set => SetProperty(ref _isFilterEnabled, value);
+        }
+
+        public bool IsFilterChecked
+        {
+            get => _isFilterChecked;
+            set 
+            {
+                if(SetProperty(ref _isFilterChecked, value))
+                {
+                    Messenger.Send(new FilteringChangedMessage(true));
+                }
+            }
+        }
+
 #if __IOS__
         public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }
 #endif

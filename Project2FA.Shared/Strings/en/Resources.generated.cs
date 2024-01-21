@@ -1870,6 +1870,37 @@ namespace Project2FA.Strings{
             }
         }
         #endregion
+
+        #region AccountCodePageManageFilterToolTip
+        public static string AccountCodePageManageFilterToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageManageFilterToolTip");
+            }
+        }
+        #endregion
+
+        #region InAppPaymentContentDialogPurchaseItemSelect
+        public static string InAppPaymentContentDialogPurchaseItemSelect
+        {
+            get
+            {
+                return _resourceLoader.GetString("InAppPaymentContentDialogPurchaseItemSelect");
+            }
+        }
+        #endregion
+
+        #region InAppPaymentContentDialogSubscriptionItemSelect
+        public static string InAppPaymentContentDialogSubscriptionItemSelect
+        {
+            get
+            {
+                return _resourceLoader.GetString("InAppPaymentContentDialogSubscriptionItemSelect");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2021,7 +2052,8 @@ namespace Project2FA.Strings{
             BiometricFingerPreferMessage,
             BiometricLoginSubtitle,
             BiometricLoginTitle,
-            AddAccountContentDialogTitle
+            AddAccountContentDialogTitle,
+            AccountCodePageManageFilterToolTip
         }
 
         private static ResourceLoader _resourceLoader;

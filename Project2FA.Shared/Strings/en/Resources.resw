@@ -1202,13 +1202,13 @@ The functionality of this application is explained in more detail in the followi
 ### 2,49€ monthly</value>
   </data>
   <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>subscribe</value>
+    <value>subscribe / buy</value>
   </data>
   <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
     <value>cancel</value>
   </data>
   <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
-    <value>Subscription</value>
+    <value>Subscriptions &amp; purchases</value>
   </data>
   <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
     <value>Import the account for another device by opening a two-factor authentication app with the desired device and adding an account with the camera.</value>
@@ -1222,7 +1222,7 @@ The functionality of this application is explained in more detail in the followi
   <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
     <value>Manage subscriptions in your Microsoft account</value>
   </data>
-  <data name="InAppPaymentContentDialogMonthItemSelect.Content" xml:space="preserve">
+  <data name="InAppPaymentContentDialogSubscriptionItemSelect" xml:space="preserve">
     <value>Select subscription</value>
   </data>
   <data name="AddAccountContentDialogTitle" xml:space="preserve">
@@ -1236,5 +1236,23 @@ The functionality of this application is explained in more detail in the followi
   </data>
   <data name="LoginPageTitle.Text" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
+    <value>Manage categories &amp; set filters</value>
+  </data>
+  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+    <value>Manage categories &amp; set filters</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
+    <value>Reset filter</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Settings.Label" xml:space="preserve">
+    <value>Manage categories</value>
+  </data>
+  <data name="EditAccountContentDialogAccountCategories.Header" xml:space="preserve">
+    <value>Set categories</value>
+  </data>
+  <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
+    <value>select for purchase</value>
   </data>
 </root>

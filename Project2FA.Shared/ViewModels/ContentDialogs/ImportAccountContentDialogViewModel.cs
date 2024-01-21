@@ -12,9 +12,9 @@ using Org.BouncyCastle.Security;
 
 namespace Project2FA.ViewModels
 {
-    public class ImportAccountContentDialog : AddAccountViewModelBase
+    public class ImportAccountContentDialogViewModel : AddAccountViewModelBase
     {
-        public ImportAccountContentDialog()
+        public ImportAccountContentDialogViewModel()
         {
             //BCrypt.Net.BCrypt.
         }

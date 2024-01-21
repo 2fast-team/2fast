@@ -297,7 +297,31 @@
                             <StackPanel 
                                 Orientation="Horizontal" 
                                 HorizontalAlignment="Center">
-                                <Grid Margin="0,12,12,12">
+                                <muxc:PersonPicture
+                                    Height="110"
+                                    Width="110"
+                                    FontSize="66"
+                                    Margin="0,10,20,0"
+                                    Style="{StaticResource UnicodeIndexPersonPictureStyle}"
+                                    Tag="&#xEFCC;">
+                                </muxc:PersonPicture>
+                                <muxc:PersonPicture
+                                    Height="110"
+                                    Width="110"
+                                    FontSize="66"
+                                    Margin="0,10,20,0"
+                                    Style="{StaticResource UnicodeIndexPersonPictureStyle}"
+                                    Tag="&#xEDB3;">
+                                </muxc:PersonPicture>
+                                <muxc:PersonPicture
+                                    Height="110"
+                                    Width="110"
+                                    FontSize="66"
+                                    Margin="0,10,20,0"
+                                    Style="{StaticResource UnicodeIndexPersonPictureStyle}"
+                                    Tag="&#xF0DD;">
+                                </muxc:PersonPicture>
+                                <!--<Grid Margin="0,12,12,12">
                                     <Ellipse 
                                         Height="100" 
                                         Width="100"
@@ -329,7 +353,7 @@
                                         FontFamily="{StaticResource SimpleIcons}" 
                                         FontSize="60" 
                                         Glyph="&#xF0DD;"/>
-                                </Grid>
+                                </Grid>-->
                             </StackPanel>
 
                             <TextBlock 

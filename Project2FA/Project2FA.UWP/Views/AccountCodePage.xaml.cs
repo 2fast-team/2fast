@@ -2,8 +2,6 @@
 using Project2FA.Repository.Models;
 using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI;
@@ -173,17 +171,16 @@ namespace Project2FA.UWP.Views
 
         private void ABB_SearchFilter_Click(object sender, RoutedEventArgs e)
         {
-            //if (sender is AppBarButton abbtn)
-            //{
-            //    CategoryFilterFlyout categoryFilterFlyout = new CategoryFilterFlyout();
-            //    if (abbtn.Flyout is null)
-            //    {
-            //        abbtn.Flyout = new Flyout();
-            //    }
-                
-            //    FlyoutBase.SetAttachedFlyout(categoryFilterFlyout, abbtn.Flyout);
-            //    FlyoutBase.ShowAttachedFlyout(abbtn);
-            //}
+            ViewModel.FilterIsActive = false;
+            if (sender is AppBarButton abbtn)
+            {
+                //abbtn.Flyout ??= new Flyout();
+                //abbtn.Flyout.
+                //CategoryFilterFlyout categoryFlyout = new CategoryFilterFlyout();
+                //FlyoutBase.SetAttachedFlyout(abbtn, (Flyout)Page.Resources["CategoryFilterFlyout"]);
+                FlyoutBase.ShowAttachedFlyout(abbtn);
+                ViewModel.SendCategoryFilterUpdatate();
+            }
         }
 
         private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)

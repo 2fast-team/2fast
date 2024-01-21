@@ -63,7 +63,6 @@ namespace Project2FA.UNO.Views
                             //  SelectedIndex =1 is not a real page
                             //case SearchPage:
                             //    ViewModel.SelectedIndex = 1;
-                            break;
                         case SettingPage:
                             ViewModel.SelectedIndex = 2;
                             break;

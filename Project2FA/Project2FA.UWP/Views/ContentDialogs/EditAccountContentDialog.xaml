@@ -46,12 +46,12 @@
                             MinWidth="120" 
                             MinHeight="100">
                             <muxc:PersonPicture
-                            Height="110"
-                            Width="110"
+                                Height="110"
+                                Width="110"
                                 FontSize="66"
-                            DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
-                            Margin="0,10,20,0"
-                            Tag="{x:Bind ViewModel.TempAccountIconName, Mode=OneWay}">
+                                DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
+                                Margin="0,10,20,0"
+                                Tag="{x:Bind ViewModel.TempAccountIconName, Mode=OneWay}">
                             </muxc:PersonPicture>
                             <Button 
                                 CornerRadius="32"
@@ -183,25 +183,40 @@
                     </StackPanel>
                 </appcontrols:CardExpanderControl>
 
-                <labs:TokenView 
+                <appcontrols:CardExpanderControl
+                    Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    IsExpanded="True"
+                    Margin="0,15,0,8">
+                    <appcontrols:CardExpanderControl.Header>
+                        <appcontrols:CardControl
+                            Icon="&#xE912;"
+                            x:Uid="EditAccountContentDialogAccountCategories"
+                            Header="~EditAccountContentDialogAccountCategories.Header">
+                        </appcontrols:CardControl>
+                    </appcontrols:CardExpanderControl.Header>
+                    <labs:TokenView 
                     x:Name="TV_Categories"
                     Margin="0,15,0,8"
-                    Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    
                     ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
-                    CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"
+                    
                     IsItemClickEnabled="True"
                     SelectionMode="Multiple" 
-                    ItemClick="TokenView_ItemClick" >
-                    <labs:TokenView.ItemTemplate>
-                        <DataTemplate x:DataType="models:CategoryModel">
-                            <StackPanel Orientation="Horizontal">
-                                <!--<FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>-->
-                                <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </labs:TokenView.ItemTemplate>
-                </labs:TokenView>
+                    ItemClick="TokenView_ItemClick">
+                        <labs:TokenView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CategoryModel">
+                                <StackPanel Orientation="Horizontal">
+                                    <!--<FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>-->
+                                    <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </labs:TokenView.ItemTemplate>
+                    </labs:TokenView>
+                </appcontrols:CardExpanderControl>
 
+
+
+                <!--CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"-->
 
                 <!--Category for filter and sorting
                 <ListView/>-->

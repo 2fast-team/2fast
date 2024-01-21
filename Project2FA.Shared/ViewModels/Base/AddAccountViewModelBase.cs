@@ -91,7 +91,6 @@ namespace Project2FA.ViewModels
         public ILoggerFacade Logger { get; internal set; }
         public ISerializationService SerializationService { get; internal set; }
         public IProject2FAParser Project2FAParser { get; internal set; }
-        private IconNameCollectionModel _iconNameCollectionModel;
         private string _tempIconLabel;
         private VideoFrame _currentVideoFrame;
         private long _videoFrameCounter;
@@ -128,6 +127,7 @@ namespace Project2FA.ViewModels
             {
                 Model.AccountIconName = null;
                 AccountIconName = null;
+                OnPropertyChanged(nameof(Model));
             });
 
             SecondayButtonCommand = new AsyncRelayCommand(SecondayButtonCommandTask);
@@ -635,7 +635,7 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                IsPrimaryBTNEnable = !string.IsNullOrEmpty(SecretKey) && !string.IsNullOrEmpty(Label) && !string.IsNullOrEmpty(Issuer);
+                IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(SecretKey) && !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrWhiteSpace(Issuer);
             }
         }
 
@@ -988,11 +988,6 @@ namespace Project2FA.ViewModels
         {
             get => _isCameraActive;
             set => SetProperty(ref _isCameraActive, value);
-        }
-        public IconNameCollectionModel IconNameCollectionModel
-        {
-            get => _iconNameCollectionModel;
-            private set => _iconNameCollectionModel = value;
         }
 
         public bool IsEditBoxVisible

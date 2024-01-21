@@ -243,8 +243,8 @@
                                         <VisualState.Setters>
                                             <Setter Target="PART_RootGrid.Background" Value="{ThemeResource TokenItemBackgroundPointerOverSelected}" />
                                             <Setter Target="PART_RootGrid.BorderBrush" Value="{ThemeResource TokenItemBorderBrushPointerOverSelected}" />
-                                            <Setter Target="PART_ContentPresenter.Foreground" Value="{ThemeResource TokenItemForegroundPointerOverSelected}" />
-                                            <Setter Target="PART_IconPresenter.Foreground" Value="{ThemeResource TokenItemForegroundPointerOverSelected}" />
+                                            <Setter Target="PART_ContentPresenter.Foreground" Value="White" />
+                                            <Setter Target="PART_IconPresenter.Foreground" Value="White" />
                                             <Setter Target="PART_RemoveButton.Style" Value="{ThemeResource SubtleAccentButtonStyle}" />
                                             <Setter Target="PART_RootGrid.BackgroundSizing" Value="OuterBorderEdge" />
                                         </VisualState.Setters>
@@ -253,6 +253,8 @@
                                         <VisualState.Setters>
                                             <Setter Target="PART_RootGrid.Background" Value="{ThemeResource TokenItemBackgroundPressedSelected}" />
                                             <Setter Target="PART_RootGrid.BorderBrush" Value="{ThemeResource TokenItemBorderBrushPressedSelected}" />
+                                            <Setter Target="PART_ContentPresenter.Foreground" Value="White" />
+                                            <Setter Target="PART_IconPresenter.Foreground" Value="White" />
                                             <!--<Setter Target="PART_ContentPresenter.Foreground" Value="{ThemeResource TokenItemForegroundPressedSelected}" />
                                             <Setter Target="PART_IconPresenter.Foreground" Value="{ThemeResource TokenItemForegroundPointerOverSelected}" />-->
                                             <Setter Target="PART_RemoveButton.Style" Value="{ThemeResource SubtleAccentButtonStyle}" />

@@ -1,0 +1,23 @@
+{
+    "Name": "CategoryIcons",
+  "Collection": [
+    {
+      "Name": "Bank",
+      "UnicodeString": "&#xE224;",
+      "UnicodeIndex": 57890
+    },
+    {
+      "Name": "Cloud",
+      "UnicodeString": "&#xE397;",
+      "UnicodeIndex": 58263
+    },
+    {
+      "Name": "Currency",
+      "UnicodeString": "&#xE44B;",
+      "UnicodeIndex": 58443
+    }
+
+
+
+  ]
+}

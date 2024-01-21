@@ -16,8 +16,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Messenger\**" />
     <Compile Remove="Services\WebDAV\**" />
+    <EmbeddedResource Remove="Messenger\**" />
     <EmbeddedResource Remove="Services\WebDAV\**" />
+    <None Remove="Messenger\**" />
     <None Remove="Services\WebDAV\**" />
   </ItemGroup>
 

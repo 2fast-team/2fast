@@ -37,7 +37,7 @@
                 Orientation="Horizontal">
                 <Image 
                     x:Name="AppLogo"
-                    Source="/Assets/Square44x44Logo.png" 
+                    Source="/Assets/Icons/schluessel.svg" 
                     Margin="0,0,10,0" 
                     Height="26"/>
                 <TextBlock 

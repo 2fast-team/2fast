@@ -1,13 +1,15 @@
 ﻿#if WINDOWS_UWP
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using Project2FA.Core.Messenger;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Project2FA.Repository.Models
 {
-    public class InAppPaymentSubscriptionModel : ObservableObject
+    public class InAppPaymentItemModel : ObservableRecipient
     {
         private string _url;
 
@@ -24,6 +26,14 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _description, value);
         }
 
+        private string _uidCheckBox;
+
+        public string UidCheckBox 
+        { 
+            get => _uidCheckBox;
+            set => SetProperty(ref _uidCheckBox, value);
+        }
+
         private bool _isEnabled;
         public bool IsEnabled 
         { 
@@ -31,6 +41,19 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _isEnabled, value);
         }
 
+        private bool _isChecked;
+        public bool IsChecked
+        { 
+            get => _isChecked; 
+            set
+            {
+                if (SetProperty(ref _isChecked, value))
+                {
+                    Messenger.Send(new InAppItemChangedMessage(this));
+                }
+                
+            }
+        }
 
     }
 }

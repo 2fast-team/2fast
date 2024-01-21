@@ -44,6 +44,7 @@
                             <Style TargetType="muxc:SplitButton" BasedOn="{StaticResource SplitButtonCommandBarStyle}"/>
                             <Style TargetType="muxc:ToggleSplitButton" BasedOn="{StaticResource SplitButtonCommandBarStyle}"/>
                             <Style TargetType="AppBarButton" BasedOn="{StaticResource AppBarButtonDefaultStyle}"/>
+                            <!--<Style TargetType="AppBarToggleButton" BasedOn="{StaticResource AppBarToggleButtonRevealStyle}"/>-->
                         </Grid.Resources>
 
                         <VisualStateManager.VisualStateGroups>
@@ -1138,7 +1139,14 @@
                                 VerticalAlignment="Center"
                                 Visibility="Collapsed"
                                 AutomationProperties.AccessibilityView="Raw" />
-                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1,0" />
+                            <Border 
+                                x:Name="Border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="{TemplateBinding CornerRadius}" 
+                                Grid.RowSpan="2" 
+                                Grid.ColumnSpan="2" 
+                                Margin="1,0" />
 
                         </Grid>
 

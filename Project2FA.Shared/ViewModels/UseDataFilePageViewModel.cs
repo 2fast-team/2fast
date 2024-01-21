@@ -188,15 +188,19 @@ return await SetLocalFile();
             {
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
+            filePicker.FileTypeFilter.Add(".2fa");
 #if __IOS__
-            //filePicker.FileTypeFilter.Add("com.jpwtechnology.2fa");
+            // mapping the filter type to definied UTType
             Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToUTTypeMapping.Add(".2fa", "com.jpwtechnology.2fa");
-            //filePicker.FileTypeFilter.Add("*");
-            filePicker.FileTypeFilter.Add(".2fa");
-#else
-            filePicker.FileTypeFilter.Add(".2fa");
 #endif
 
+#if ANDROID
+            // set the persistent access to the file
+            var intent = new Android.Content.Intent(Android.Content.Intent.ActionOpenDocument);
+            intent.AddFlags(Android.Content.ActivityFlags.GrantPersistableUriPermission);
+            // TODO feature uno build
+            //FilePickerHelper.RegisterOnBeforeStartActivity(filePicker, intent);
+#endif
 
             IsLoading = true;
             LocalStorageFile = await filePicker.PickSingleFileAsync();

@@ -1,9 +1,9 @@
-﻿using Project2FA.Repository.Models;
+﻿using Project2FA.Extensions;
+using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
-using Project2FA.UWP.Extensions;
 using Project2FA.ViewModels;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,9 +22,12 @@ namespace Project2FA.UWP.Views
 
         private void EditAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < ViewModel.TempAccountCategoryList.Count; i++)
+            ViewModel.Model.SelectedCategories ??= new ObservableCollection<CategoryModel>();
+            // match the guid and add the items from GlobalTempCategories collection to the SelectedItems source.
+            var selectedItems = ViewModel.GlobalTempCategories.Where(x => ViewModel.Model.SelectedCategories.Where(selected => selected.Guid == x.Guid).Any());
+            for (int i = 0; i < selectedItems.Count(); i++)
             {
-                TV_Categories.SelectedItems.Add(ViewModel.TempAccountCategoryList[i]);
+                TV_Categories.SelectedItems.Add(selectedItems.ElementAt(i));
             }
             switch (SettingsService.Instance.AppTheme)
             {
@@ -64,6 +67,8 @@ namespace Project2FA.UWP.Views
             }
             if (!string.IsNullOrWhiteSpace(ViewModel.TempNotes))
             {
+                // TODO replace RTF control with markdown:
+                // https://stackoverflow.com/questions/46119392/how-do-i-convert-an-rtf-string-to-a-markdown-string-and-back-c-net-core-or
                 // TODO bug workaround https://github.com/microsoft/microsoft-ui-xaml/issues/1941
                 var options = Windows.UI.Text.TextSetOptions.FormatRtf | Windows.UI.Text.TextSetOptions.ApplyRtfDocumentDefaults;
                 REB_Notes.Document.SetText(options, ViewModel.TempNotes);
@@ -80,11 +85,6 @@ namespace Project2FA.UWP.Views
             {
                 ViewModel.TempNotes = ViewModel.TempNotes.Replace(@"\red0\green0\blue0", @"\red255\green255\blue255");
             }
-        }
-
-        private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void REB_Notes_TextChanged(object sender, RoutedEventArgs e)
@@ -110,11 +110,16 @@ namespace Project2FA.UWP.Views
                 }
                 else
                 {
-                    sender.Text = string.Empty;
+                    ViewModel.TempAccountIconName = string.Empty;
                 }
             }
         }
 
+        /// <summary>
+        /// Is triggered when the element is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TokenView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is CategoryModel model)
@@ -123,6 +128,11 @@ namespace Project2FA.UWP.Views
             }
         }
 
+        /// <summary>
+        /// Automatic search when the control has the focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
         {
             ViewModel.SearchAccountFonts(ViewModel.TempAccountIconName);

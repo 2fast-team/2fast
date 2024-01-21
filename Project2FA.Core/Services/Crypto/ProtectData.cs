@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS_UWP
+using System;
 using System.Security.Cryptography;
 
 namespace Project2FA.Core.Services.Crypto
@@ -29,3 +30,4 @@ namespace Project2FA.Core.Services.Crypto
         }
     }
 }
+#endif

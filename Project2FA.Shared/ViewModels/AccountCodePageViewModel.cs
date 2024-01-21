@@ -73,7 +73,6 @@ namespace Project2FA.ViewModels
         public ICommand CopyCodeToClipboardCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
         public ICommand SetFilterCommand { get; }
-        public ICommand ManageCategoriesCommand { get; }
         public ICommand CameraCommand { get; }
         private TwoFACodeModel _changedItem = null;
         private string _searchedAccountLabel;
@@ -83,6 +82,7 @@ namespace Project2FA.ViewModels
         private bool _datafileNoInternetConnection;
         private bool _isFirstStart = true;
         private bool _codeVisibilityOptionEnabled;
+        private bool _filterIsActive;
 
 
         public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade, INavigationService navigationService)
@@ -119,7 +119,6 @@ namespace Project2FA.ViewModels
             DeleteAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
             CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
-            ManageCategoriesCommand = new AsyncRelayCommand(ManageCategoriesCommandTask);
 #if !WINDOWS_UWP
             // custom commands for Uno platform project
             CameraCommand = new AsyncRelayCommand(CameraCommandTask);
@@ -158,6 +157,10 @@ namespace Project2FA.ViewModels
                         break;
                 }
             });
+            Messenger.Register<AccountCodePageViewModel, FilteringChangedMessage>(this, (r, m) =>
+            {
+                SetSuggestionList(string.Empty);
+            });
             //TODO only for Android and iOS
 #if !WINDOWS_UWP
         CodeVisibilityOptionEnabled = SettingsService.Instance.UseHiddenTOTP;
@@ -173,12 +176,6 @@ namespace Project2FA.ViewModels
             await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
         }
 #endif
-
-        private async Task ManageCategoriesCommandTask()
-        {
-            //ManageCategoriesContentDialog dialog = new ManageCategoriesContentDialog();
-            //await DialogService.ShowDialogAsync(dialog, new DialogParameters());
-        }
 
         private async Task AddAccountCommandTask()
         {
@@ -226,7 +223,7 @@ namespace Project2FA.ViewModels
             if (DataService.Instance.ActivatedDatafile != null) // && DataService.Instance.IsFirstActivatedDatafileStart
             {
                 await DataService.Instance.StartService();
-                DataService.Instance.IsFirstActivatedDatafileStart = false;
+                //DataService.Instance.IsFirstActivatedDatafileStart = false;
             }
             else
             {
@@ -282,7 +279,6 @@ namespace Project2FA.ViewModels
         private async Task TOTPTimerTask()
         {
             //prevent the acccess for other Threads
-            //await TwoFADataService.CollectionAccessSemaphore.WaitAsync();
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
                 TwoFADataService.Collection[i].Seconds -= TwoFADataService.TOTPEventStopwatch.Elapsed.TotalSeconds; // elapsed time (seconds) from the last event call
@@ -292,7 +288,6 @@ namespace Project2FA.ViewModels
                 }
             }
             TwoFADataService.TOTPEventStopwatch.Restart(); // reset the added time from the stopwatch => time+ / event
-            //TwoFADataService.CollectionAccessSemaphore.Release();
         }
 
         /// <summary>
@@ -304,14 +299,13 @@ namespace Project2FA.ViewModels
         {
             if (parameter is TwoFACodeModel model)
             {
-                // TODO is this works?
-                //ChangedItem = null;
                 model.IsFavourite = !model.IsFavourite;
                 await TwoFADataService.WriteLocalDatafile();
-                //if (!string.IsNullOrWhiteSpace(model.AccountIconName))
-                //{
-                //    await SVGColorHelper.GetSVGIconWithThemeColor(model, model.AccountIconName);
-                //}
+                if (ChangedItem == model)
+                {
+                    // change the changed item to null to trigger an update, when the item is set again
+                    ChangedItem = null;
+                }
                 ChangedItem = model;
             }
         }
@@ -529,7 +523,7 @@ namespace Project2FA.ViewModels
                     //}
 
                     // filter the selected categories
-                    if (TwoFADataService.GlobalCategories != null)
+                    if (TwoFADataService.GlobalCategories != null && TwoFADataService.IsFilterChecked)
                     {
                         var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true);
                         // categories are selected
@@ -582,18 +576,42 @@ namespace Project2FA.ViewModels
                     TrackingManager.TrackExceptionCatched(nameof(SetSuggestionList), exc);
 #endif
                 }
-
             }
             else
             {
                 //sender.ItemsSource = null;
-                SearchAccountCollection.Clear();
-                if (TwoFADataService.ACVCollection.Filter != null)
+                if (TwoFADataService.GlobalCategories != null && TwoFADataService.IsFilterChecked)
                 {
-                    TwoFADataService.ACVCollection.Filter = null;
+                    var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true).ToList();
+                    //var filteredCollection = TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
+                    //    selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any());
+
+                    TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).SelectedCategories.Where(sc =>
+                        selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
+                    // categories are selected
+                    //if (selectedGlobalCategories.Any())
+                    //{
+                    //    SearchAccountCollection.AddRange(filteredCollection, true);
+                    //}
                 }
+                else
+                {
+                    SearchAccountCollection.Clear();
+                    if (TwoFADataService.ACVCollection.Filter != null)
+                    {
+                        TwoFADataService.ACVCollection.Filter = null;
+                    }
+
+                }
+
             }
         }
+#if WINDOWS_UWP
+        public void SendCategoryFilterUpdatate()
+        {
+            Messenger.Send(new CategoriesChangedMessage(true));
+        }
+#endif
         #region Getter_Setter
         public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
@@ -638,6 +656,11 @@ namespace Project2FA.ViewModels
         { 
             get => _searchedAccountLabel; 
             set => SetProperty(ref _searchedAccountLabel, value);
+        }
+        public bool FilterIsActive 
+        { 
+            get => _filterIsActive; 
+            set => SetProperty(ref _filterIsActive, value);
         }
 #if !WINDOWS_UWP
         public ShellPageViewModel ShellViewModel

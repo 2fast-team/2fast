@@ -16,7 +16,7 @@ namespace Project2FA.UNO.Droid
 
     [global::Android.App.ApplicationAttribute(
         Label = "@string/ApplicationName",
-        Icon = "@mipmap/appicon",
+        Icon = "@mipmap/schluessel",
         LargeHeap = true,
         HardwareAccelerated = true,
         Theme = "@style/AppTheme"

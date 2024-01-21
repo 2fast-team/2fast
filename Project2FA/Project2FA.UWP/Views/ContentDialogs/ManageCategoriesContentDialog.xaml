@@ -88,7 +88,7 @@
 
                 <ListView 
                     ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
-                    ItemsSource="{x:Bind ViewModel.TempGlobalCategories}">
+                    ItemsSource="{x:Bind ViewModel.TempGlobalCategories, Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:CategoryModel">
                             <Grid>
@@ -98,6 +98,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <FontIcon
+                                    FontFamily="{StaticResource SegoeFluentIconsFilled}"
                                     FontSize="32"
                                     Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
                                 <Button
@@ -127,41 +128,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-                <!--<labs:TokenView ItemsSource="{x:Bind ViewModel.TempGlobalCategories}"/>-->
-
-                <!--<appcontrols:CardExpanderControl 
-                        IsExpanded="True"
-                        Margin="0,15,0,8">
-                    <appcontrols:CardExpanderControl.Header>
-                        <appcontrols:CardControl
-                            Icon="&#xE71C;"
-                            x:Uid="ManageCategoriesFilterCategories" 
-                            Header="~ManageCategoriesFilterCategories.Header">
-                        </appcontrols:CardControl>
-                    </appcontrols:CardExpanderControl.Header>
-                    <labs:TokenView 
-                        x:Name="TV_Categories"
-                        Margin="0,0,15,8"
-                        ItemsSource="{x:Bind ViewModel.TempGlobalCategories,Mode=OneWay}"
-                        CanRemoveTokens="False"
-                        IsItemClickEnabled="True"
-                        SelectionMode="Multiple"  
-                        ItemTemplate="{StaticResource CategoryTemplate}"/>
-                </appcontrols:CardExpanderControl>-->
-
-                
-                <!--<AutoSuggestBox 
-            Header="~ManageCategoriesContentDialogIcon.Header"
-            x:Uid="ManageCategoriesContentDialogIcon" 
-            PlaceholderText="#name of icon"
-            Margin="0,10,0,20" 
-            QueryIcon="Find"
-            SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-            TextChanged="AutoSuggestBox_TextChanged"/>-->
-
-
-
             </StackPanel>
         </ScrollViewer>
       

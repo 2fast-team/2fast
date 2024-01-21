@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json.Encryption;
 using System;
 
 #if WINDOWS_UWP
@@ -13,25 +14,26 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class CategoryModel : ObservableObject
+    public class CategoryModel : ObservableObject, ICloneable
     {
         private string _unicodeString;
-
+        [Encrypt]
         public string UnicodeString 
         { 
             get => _unicodeString; 
             set => SetProperty(ref _unicodeString, value);
         }
 
-        private int _unicodeIndex;
+        private string _unicodeIndex;
 
-        public int UnicodeIndex 
+        public string UnicodeIndex 
         { 
             get => _unicodeIndex; 
             set => SetProperty(ref _unicodeIndex, value);
         }
 
         private string _name;
+        [Encrypt]
         public string Name 
         { 
             get => _name; 
@@ -52,5 +54,9 @@ namespace Project2FA.Repository.Models
             set => _guid = value; 
         }
 
+        public object Clone()
+        {
+            return new CategoryModel { UnicodeString = UnicodeString, UnicodeIndex = UnicodeIndex, Guid = Guid, Name = Name, IsSelected = IsSelected };
+        }
     }
 }

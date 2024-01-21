@@ -26,6 +26,30 @@
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
 
+            <DataTemplate x:Key="SuggestBoxDataTemplate" x:DataType="models:TwoFACodeModel">
+                <Grid
+                    HorizontalAlignment="Stretch"
+                    Background="Transparent"
+                    ToolTipService.ToolTip="{x:Bind Label}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon
+                        FontSize="16"
+                        Margin="4,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource SimpleIcons}"
+                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Text="{x:Bind Label, Mode=OneWay}"
+                        TextTrimming="CharacterEllipsis" />
+                </Grid>
+            </DataTemplate>
+
 
             <DataTemplate x:Name="ShellHeaderTemplatePro" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
@@ -59,7 +83,7 @@
                                         <AppBarButton 
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
-                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip}"
+                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip, FallbackValue=''}"
                                         Command="{x:Bind AddAccountCommand}">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE710;"/>
@@ -135,7 +159,7 @@
                                             <AppBarButton  
                                             x:Name="ABB_UndoDelete"
                                             x:Uid="AccountCodePageABBUndoDelete" 
-                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip}"
+                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip, FallbackValue=''}"
                                             Command="{x:Bind UndoDeleteCommand}"  >
                                                 <AppBarButton.Icon>
                                                     <FontIcon Glyph="&#xE7A7;"/>
@@ -152,163 +176,55 @@
                                         Text="{x:Bind SearchedAccountLabel,Mode=TwoWay}"
                                         ItemsSource="{x:Bind SearchAccountCollection,Mode=OneWay}"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                                        ItemTemplate="{StaticResource SuggestBoxDataTemplate}"
                                         TextChanged="AutoSuggestBox_TextChanged" 
                                         VerticalContentAlignment="Center"
                                         SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                                         UpdateTextOnSelect="False"
                                         TextMemberPath="Name"
                                         GotFocus="AutoSuggestBox_GotFocus"
+                                        AllowFocusOnInteraction="True"
                                         Margin="0,0,1,0" >
-                                        <AutoSuggestBox.ItemTemplate>
-                                            <DataTemplate x:DataType="models:TwoFACodeModel">
-                                                <Grid
-                                                    HorizontalAlignment="Stretch"
-                                                    Background="Transparent"
-                                                    ToolTipService.ToolTip="{x:Bind Label}">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="30" />
-                                                        <ColumnDefinition Width="*" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <FontIcon
-                                                        FontSize="16"
-                                                        Margin="4,0,0,0"
-                                                        HorizontalAlignment="Left"
-                                                        VerticalAlignment="Center"
-                                                        FontFamily="{StaticResource SimpleIcons}"
-                                                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
-                                                    <TextBlock
-                                                        Grid.Column="1"
-                                                        VerticalAlignment="Center"
-                                                        Text="{x:Bind Label, Mode=OneWay}"
-                                                        TextTrimming="CharacterEllipsis" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </AutoSuggestBox.ItemTemplate>
                                         <AutoSuggestBox.QueryIcon>
                                             <FontIcon Glyph="&#xE721;" FontSize="18"/>
                                         </AutoSuggestBox.QueryIcon>
                                     </AutoSuggestBox>
                                 </AppBarElementContainer>
-                                <AppBarButton
-                                    x:Name="ABB_SearchFilter"
-                                    Command="{x:Bind ManageCategoriesCommand}"
-                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip}"
-                                     x:Uid="AccountCodePageSearchFilter" Click="ABB_SearchFilter_Click" >
-                                    <AppBarButton.Icon>
-                                        <FontIcon Glyph="&#xE16E;"/>
-                                    </AppBarButton.Icon>
-                                    <!--<FlyoutBase.AttachedFlyout>
+                                <AppBarButton 
+                                    x:Uid="AccountCodePageManageFilter"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageManageFilterToolTip, FallbackValue=''}"
+                                    Click="ABB_SearchFilter_Click" >
+                                    <AppBarButton.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon Glyph="&#xE16E;"/>
+                                            <FontIcon Glyph="&#xE70D;"/>
+                                        </StackPanel>
+                                    </AppBarButton.Content>
+                                    <!--<AppBarButton.Icon>
+                                        <FontIcon FontSize="30" Glyph="&#xE70D;"/>
+                                    </AppBarButton.Icon>-->
+                                    <FlyoutBase.AttachedFlyout>
                                         <Flyout>
                                             <views:CategoryFilterFlyout/>
                                         </Flyout>
-                                    </FlyoutBase.AttachedFlyout>-->
-                                    <!--<AppBarButton.Flyout>
-                                        --><!--<MenuFlyout>
-                                            <MenuFlyoutItem Text="#manage categories"></MenuFlyoutItem>
-                                            <MenuFlyoutSeparator/>
-                                            
-                                        </MenuFlyout>-->
-                                        <!--<Flyout>
-                                            <StackPanel>
-                                                <Button Content="#manage categories" Margin="0"></Button>
-                                            </StackPanel>
-                                        </Flyout>--><!--
-                                        <muxc:CommandBarFlyout Placement="Bottom">
-                                            <muxc:CommandBarFlyout.SecondaryCommands>
-                                                <AppBarButton 
-                                                    Icon="Setting" 
-                                                    Label="#manage categories"
-                                                    Command="{x:Bind ManageCategoriesCommand}"/>
-                                                <AppBarElementContainer>
-                                                    <StackPanel Grid.Row="1" MaxWidth="250">
-                                                        <TextBlock 
-                                                            Text="#Select categories"
-                                                            Margin="0,0,0,4"/>
-                                                        --><!--<controls:TokenizingTextBox
-                                                            ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
-                                                            PlaceholderText="Select Names"
-                                                            MaxHeight="104"
-                                                            HorizontalAlignment="Stretch"
-                                                            QueryIcon="{ui:SymbolIconSource Symbol=Find}"
-                                                            TextMemberPath="Text"
-                                                            TokenDelimiter=","
-                                                            IsItemClickEnabled="True"
-                                                            TokenItemTemplate="{StaticResource CategoryTemplate}">
-                                                            --><!--<controls:TokenizingTextBox.TokenItemTemplate>
-                                                                <DataTemplate x:DataType="models:CategoryModel">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>
-                                                                        <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
-                                                                    </StackPanel>
-                                                                </DataTemplate>
-                                                            </controls:TokenizingTextBox.TokenItemTemplate>--><!--
-                                                        </controls:TokenizingTextBox>--><!--
-
-
-                                                        <labs:TokenView 
-                                                            x:Name="TV_Categories"
-                                                            Margin="0,15,0,8"
-                                                            ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
-                                                            CanRemoveTokens="False"
-                                                            IsItemClickEnabled="True"
-                                                            SelectionMode="Multiple"  
-                                                            ItemTemplate="{StaticResource CategoryTemplate}"/>
-
-                                                        <Border 
-                                                            BorderThickness="1,0,1,1" 
-                                                            BorderBrush="{ThemeResource TextControlBorderBrush}">
-                                                            <ListView 
-                                                                MaxHeight="200"
-                                                                IsItemClickEnabled="True"
-                                                                ItemTemplate="{StaticResource CategoryTemplate}">
-                                                            </ListView>
-                                                        </Border>
-                                                        <Grid HorizontalAlignment="Stretch">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="auto"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <Button 
-                                                                Content="#set filter" 
-                                                                HorizontalAlignment="Stretch"
-				                                                VerticalAlignment="Stretch"
-                                                                Style="{StaticResource AccentButtonStyle}">
-                                                                
-                                                            </Button>
-                                                            <Button 
-                                                                Grid.Column="1" 
-                                                                HorizontalAlignment="Stretch"
-				                                                VerticalAlignment="Stretch">
-                                                                <SymbolIcon Symbol="RepeatAll" />
-                                                            </Button>
-                                                        </Grid>
-                                                    </StackPanel>
-                                                    --><!--<labs:TokenView 
-                                                    ItemsSource="{x:Bind TwoFADataService.GlobalCategories,Mode=OneWay}"
-                                                    CanRemoveTokens="{Binding IsChecked, ElementName=CB_CategoryAllowDeletion}"
-                                                    IsItemClickEnabled="True"
-                                                    SelectionMode="Multiple">
-                                                        <labs:TokenView.ItemTemplate>
-                                                            <DataTemplate x:DataType="models:CategoryModel">
-                                                                <labs:TokenItem 
-                                                                    Content="{x:Bind Name,Mode=OneWay}" 
-                                                                    IsSelected="{x:Bind IsSelected,Mode=TwoWay}">
-                                                                    <labs:TokenItem.Icon>
-                                                                        <FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}"/>
-                                                                    </labs:TokenItem.Icon>
-                                                                </labs:TokenItem>
-                                                            </DataTemplate>
-                                                        </labs:TokenView.ItemTemplate>
-                                                    </labs:TokenView>--><!--
-                                                </AppBarElementContainer>
-                                            </muxc:CommandBarFlyout.SecondaryCommands>
-                                        </muxc:CommandBarFlyout>
-                                    </AppBarButton.Flyout>-->
+                                    </FlyoutBase.AttachedFlyout>
                                 </AppBarButton>
+                                <AppBarToggleButton
+                                    x:Name="ABB_SearchFilter"
+                                    IsEnabled="{x:Bind TwoFADataService.IsFilterEnabled,Mode=OneWay}"
+                                    IsChecked="{x:Bind TwoFADataService.IsFilterChecked,Mode=TwoWay}"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip, FallbackValue=''}"
+                                    x:Uid="AccountCodePageSearchFilter" 
+                                    >
+                                    <AppBarToggleButton.Icon>
+                                        <FontIcon Glyph="&#xE16E;"/>
+                                    </AppBarToggleButton.Icon>
+
+                                </AppBarToggleButton>
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
                                 Command="{x:Bind LogoutCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE1F6;"/>
@@ -317,7 +233,7 @@
                                 <AppBarButton 
                                 x:Name="ABB_Refresh"
                                 x:Uid="AccountCodePageReloadDatafile"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
                                 Command="{x:Bind RefreshCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE895;"/>
@@ -336,6 +252,7 @@
                                         <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_SearchFilter.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="AccountCodePageManageFilter.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
                                     </VisualState.Setters>
@@ -378,7 +295,7 @@
                                         <AppBarButton 
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
-                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip}" 
+                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip, FallbackValue=''}" 
                                         Command="{x:Bind AddAccountCommand}">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE710;"/>
@@ -452,7 +369,7 @@
                                             <AppBarButton  
                                             x:Name="ABB_UndoDelete"
                                             x:Uid="AccountCodePageABBUndoDelete" 
-                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip}"
+                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip, FallbackValue=''}"
                                             Command="{x:Bind UndoDeleteCommand}">
                                                 <AppBarButton.Icon>
                                                     <FontIcon Glyph="&#xE7A7;"/>
@@ -466,10 +383,17 @@
                                         Width="200"
                                         Height="40"
                                         VerticalAlignment="Center"
+                                        Text="{x:Bind SearchedAccountLabel,Mode=TwoWay}"
+                                        ItemsSource="{x:Bind SearchAccountCollection,Mode=OneWay}"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                                        ItemTemplate="{StaticResource SuggestBoxDataTemplate}"
                                         TextChanged="AutoSuggestBox_TextChanged" 
                                         VerticalContentAlignment="Center"
-                                        SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
+                                        SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                                        UpdateTextOnSelect="False"
+                                        TextMemberPath="Name"
+                                        GotFocus="AutoSuggestBox_GotFocus"
+                                        AllowFocusOnInteraction="True"
                                         Margin="0,0,1,0" >
                                         <AutoSuggestBox.QueryIcon>
                                             <FontIcon Glyph="&#xE721;" FontSize="18"/>
@@ -479,7 +403,7 @@
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
                                 Command="{x:Bind LogoutCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE1F6;"/>
@@ -488,7 +412,7 @@
                                 <AppBarButton 
                                 x:Name="ABB_Refresh"
                                 x:Uid="AccountCodePageReloadDatafile"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
                                 Command="{x:Bind RefreshCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE895;"/>
@@ -636,7 +560,7 @@
                                 Click="BTN_CopyCode_Click"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip, FallbackValue=''}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
@@ -650,11 +574,11 @@
                                 Width="42"
                                 Height="42"
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Opacity="0.6"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
@@ -686,7 +610,7 @@
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" 
                             Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip}">
+                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip, FallbackValue=''}">
                             <FontIcon Glyph="&#xE712;"/>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">
@@ -865,7 +789,7 @@
                                 Click="BTN_CopyCode_Click"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip, FallbackValue=''}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
@@ -879,12 +803,12 @@
                                 Width="42"
                                 Height="42"
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
                                 Opacity="0.6"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
                                 VerticalAlignment="Center" 
@@ -915,7 +839,7 @@
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" 
                             Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip}">
+                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip, FallbackValue=''}">
                             <FontIcon Glyph="&#xE712;"/>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">
@@ -1018,16 +942,19 @@
                         <RelativePanel 
                             Grid.Column="2" 
                             Grid.RowSpan="2" 
-                            Grid.ColumnSpan="2">
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,8">
 
                             <unocontrols:Shimmer 
                             x:Name="AccountName" 
                             Width="200"
+                            Height="18"
                             Margin="0,10,10,0" />
 
                             <unocontrols:Shimmer 
                             x:Name="IssuerName" 
                             Width="200"
+                            Height="18"
                             Margin="0,10,10,0" />
                         </RelativePanel>
 
@@ -1041,12 +968,12 @@
 
                             <unocontrols:Shimmer 
                             Width="48"
-                            Height="48" 
+                            Height="32" 
                             Margin="8,0,4,0"/>
 
                             <unocontrols:Shimmer 
                             Width="48"
-                            Height="48" 
+                            Height="32" 
                             Margin="8,0,4,0"/>
 
                         </StackPanel>
@@ -1078,6 +1005,10 @@
                     </Grid>
                 </UserControl>
             </DataTemplate>
+
+            <!--<Flyout x:Key="CategoryFilterFlyout">
+                <views:CategoryFilterFlyout/>
+            </Flyout>-->
         </ResourceDictionary>
     </Page.Resources>
     

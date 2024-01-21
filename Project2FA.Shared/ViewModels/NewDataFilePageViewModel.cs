@@ -14,10 +14,7 @@ using UNOversal.Services.File;
 using UNOversal.Services.Serialization;
 using UNOversal.Navigation;
 using UNOversal.Services.Dialogs;
-using UNOversal.Services.Secrets;
 using Project2FA.Core;
-
-
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -56,7 +53,6 @@ namespace Project2FA.ViewModels
         public NewDataFilePageViewModel(
             IFileService fileService, 
             IDialogService dialogService,
-            ISecretService secretService,
             INavigationService navigationService,
             ISerializationService serializationService) : 
             base()
@@ -223,6 +219,14 @@ namespace Project2FA.ViewModels
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
             folderPicker.FileTypeFilter.Add("*");
+
+#if ANDROID
+			var intent = new Android.Content.Intent(Android.Content.Intent.ActionOpenDocument);
+			intent.AddFlags(Android.Content.ActivityFlags.GrantPersistableUriPermission);
+            // TODO future uno build
+			//FilePickerHelper.RegisterOnBeforeStartActivity(folderPicker, intent);
+#endif
+
             IsLoading = true;
             var folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)

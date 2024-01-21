@@ -14,6 +14,7 @@ using Project2FA.UWP;
 using Project2FA.UWP.Services;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 
 namespace Project2FA.ViewModels
 {
@@ -21,7 +22,11 @@ namespace Project2FA.ViewModels
     {
         private bool _primaryButtonCanClick;
         private int _selectedIndex = -1;
-        public ObservableCollection<InAppPaymentSubscriptionModel> Items { get; } = new ObservableCollection<InAppPaymentSubscriptionModel>();
+        private bool _isLoading = false;
+        private ISubscriptionService SubscriptionService { get; }
+
+        private InAppPaymentItemModel _selectedItem;
+        public ObservableCollection<InAppPaymentItemModel> Items { get; } = new ObservableCollection<InAppPaymentItemModel>();
 
         public bool PrimaryButtonCanClick 
         {
@@ -67,7 +72,30 @@ namespace Project2FA.ViewModels
             }
         }
 
+        public bool IsLoading { get => _isLoading; set => SetProperty(ref _isLoading, value); }
+        public InAppPaymentItemModel SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                if(SetProperty(ref _selectedItem, value))
+                {
+                    if (value != null && value.IsEnabled && value.IsChecked)
+                    {
+                        PrimaryButtonCanClick = true;
+                    }
+                    else
+                    {
+                        PrimaryButtonCanClick = false;
+                    }
+                }
+            }
+        }
 
+        public InAppPaymentContentDialogViewModel(ISubscriptionService subscriptionService)
+        {
+            SubscriptionService = subscriptionService;
+        }
 
         public void Initialize(IDialogParameters parameters)
         {
@@ -76,19 +104,41 @@ namespace Project2FA.ViewModels
 
         private async Task CheckSubscriptionsAndPurchases()
         {
-            //var monthlySupportModel = new InAppPaymentSubscriptionModel
-            //{
-            //    Description = Resources.InAppSubscriptionMonthSupport,
-            //    Url = "ms-appx:///Assets/Images/give-love.png",
-            //    IsEnabled = false
-            //};
-            //Items.Add(monthlySupportModel);
-            var subService = App.Current.Container.Resolve<ISubscriptionService>();
-            subService.Initialize(Constants.SupportSubscriptionId);
-            (bool IsActive, StoreLicense info) = await subService.SetupSubscriptionInfoAsync();
-            bool inAppSubscriptionMonthCanSubscribe = !IsActive && info == null;
-            MonthItemIsChecked = IsActive;
-            MonthItemIsEnabled = inAppSubscriptionMonthCanSubscribe;
+            IsLoading = true;
+            var monthlySupportModel = new InAppPaymentItemModel
+            {
+                Description = Resources.InAppSubscriptionMonthSupport,
+                Url = "ms-appx:///Assets/Images/give-love.png",
+                UidCheckBox = Resources.InAppPaymentContentDialogSubscriptionItemSelect,
+                IsEnabled = false,
+                IsChecked = false,
+            };
+            Items.Add(monthlySupportModel);
+
+            var yearsupportModel = new InAppPaymentItemModel
+
+            {
+                Description = Resources.InAppSubscriptionMonthSupport,
+                Url = "ms-appx:///Assets/Images/give-love.png",
+                UidCheckBox = Resources.InAppPaymentContentDialogSubscriptionItemSelect,
+                IsEnabled = false,
+                IsChecked = false,
+            };
+            Items.Add(yearsupportModel);
+
+            SelectedItem = monthlySupportModel;
+
+            SubscriptionService.Initialize(Constants.SupportSubscriptionId);
+            (bool IsActiveMonthSubscription, StoreLicense info) = await SubscriptionService.SetupSubscriptionInfoAsync();
+            bool inAppSubscriptionMonthCanSubscribe = !IsActiveMonthSubscription && info == null;
+            monthlySupportModel.IsChecked = IsActiveMonthSubscription;
+            monthlySupportModel.IsEnabled = inAppSubscriptionMonthCanSubscribe;
+
+
+            //MonthItemIsChecked = IsActive;
+            //MonthItemIsEnabled = inAppSubscriptionMonthCanSubscribe;
+
+            IsLoading = false;
             //Items.Add(new InAppPaymentSubscriptionModel { Description = "OneYearSub", Url = "ms-appx:///Assets/FileLogo.png" });
 
             //Items.Add(new InAppPaymentSubscriptionModel { Description = "BuyLifetime", Url = "ms-appx:///Assets/FileLogo.png" });

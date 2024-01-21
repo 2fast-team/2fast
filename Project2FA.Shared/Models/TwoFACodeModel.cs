@@ -167,20 +167,8 @@ namespace Project2FA.Repository.Models
             get => this;
         }
 
-        private List<CategoryModel> _selectedCategories;
-        //[Encrypt]
-        public List<CategoryModel> SelectedCategories 
-        { 
-            get
-            {
-                if (_selectedCategories == null)
-                {
-                    _selectedCategories = new List<CategoryModel>();
-                }
-                return _selectedCategories;
-            }
-            set => _selectedCategories = value;
-        }
+
+        public ObservableCollection<CategoryModel> SelectedCategories { get; set; }
 
         //[JsonIgnore]
         //public List<(string name, string message)> Errors

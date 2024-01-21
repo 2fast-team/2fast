@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml.Controls;
+using Project2FA.Core.Messenger;
 using Project2FA.Core.Utils;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
@@ -21,7 +23,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Project2FA.ViewModels
 {
-    public class ManageCategoriesContentDialogViewModel : ObservableObject, IDialogInitialize
+    public class ManageCategoriesContentDialogViewModel : ObservableRecipient, IDialogInitialize
     {
         public ICommand CreateCategoryCommand;
         public ICommand PrimaryCommand;
@@ -31,11 +33,6 @@ namespace Project2FA.ViewModels
 
         public ObservableCollection<SymbolModel> IconSourceCollection { get; private set; } = new ObservableCollection<SymbolModel>();
         public ObservableCollection<CategoryModel> TempGlobalCategories { get; private set; } = new ObservableCollection<CategoryModel>();
-        //public ObservableCollection<CategoryModel> GlobalCategories
-        //{
-        //    get => DataService.Instance.GlobalCategories;
-        //    set => DataService.Instance.GlobalCategories = value;
-        //}
         private string _label;
 
 
@@ -49,35 +46,43 @@ namespace Project2FA.ViewModels
                 tempCollection.Add(new SymbolModel { Symbol = symbol, Name = symbol.ToString() });
             }
             IconSourceCollection.AddRange(tempCollection.OrderBy(x => x.Name));
-            TempGlobalCategories = new ObservableCollection<CategoryModel>(DataService.Instance.GlobalCategories);
+            TempGlobalCategories ??= new ObservableCollection<CategoryModel>();
+            for (int i = 0; i < DataService.Instance.GlobalCategories.Count; i++)
+            {
+                // clone the item without a reference
+                TempGlobalCategories.Add((CategoryModel)DataService.Instance.GlobalCategories[i].Clone());
+            }
             PrimaryCommand = new AsyncRelayCommand(PrimaryCommandTask);
         }
 
         private Task PrimaryCommandTask()
         {
-            for (int i = 0; i < TempGlobalCategories.Count; i++)
-            {
-                // check for changed names
-                var found = DataService.Instance.GlobalCategories.Where(x => x.Guid == TempGlobalCategories[i].Guid).FirstOrDefault();
-                if (found != null)
-                {
-                    if (found.Name != TempGlobalCategories[i].Name)
-                    {
-                        found.Name = TempGlobalCategories[i].Name;
-                    }
-                }
-                if (DataService.Instance.GlobalCategories.Count == 0)
-                {
-                    DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
-                }
-                else
-                {
-                    if (DataService.Instance.GlobalCategories.Where(x => x.Guid != TempGlobalCategories[i].Guid).Any())
-                    {
-                        DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
-                    }
-                }
-            }
+            DataService.Instance.GlobalCategories.AddRange(TempGlobalCategories, true);
+            //for (int i = 0; i < TempGlobalCategories.Count; i++)
+            //{
+            //    // check for changed names
+            //    var foundSameItems = DataService.Instance.GlobalCategories.Where(x => x.Guid == TempGlobalCategories[i].Guid).FirstOrDefault();
+            //    if (foundSameItems != null)
+            //    {
+            //        if (foundSameItems.Name != TempGlobalCategories[i].Name)
+            //        {
+            //            foundSameItems.Name = TempGlobalCategories[i].Name;
+            //        }
+            //    }
+            //    if (DataService.Instance.GlobalCategories.Count == 0)
+            //    {
+            //        DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
+            //    }
+            //    else
+            //    {
+            //        if (DataService.Instance.GlobalCategories.Where(x => x.Guid != TempGlobalCategories[i].Guid).Any())
+            //        {
+            //            DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
+            //        }
+            //    }
+            //}
+            DataService.Instance.WriteLocalDatafile();
+            Messenger.Send(new CategoriesChangedMessage(true));
             return Task.CompletedTask;
             
         }
@@ -93,7 +98,7 @@ namespace Project2FA.ViewModels
                     Guid = Guid.NewGuid(),
                     IsSelected = false,
                     UnicodeString = "\uE821",
-                    UnicodeIndex = 59425,
+                    UnicodeIndex = "59425",
                     Name = Label });
             }
             else

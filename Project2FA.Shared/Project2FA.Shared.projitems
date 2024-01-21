@@ -39,12 +39,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messenger\CategoriesChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messenger\DatafileWriteStatusChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messenger\FilteringChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messenger\InAppItemChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messenger\IsScreenCaptureEnabledChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messenger\PasswordStatusChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messenger\WebDAVStatusChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationCollectionModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentSubscriptionModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentItemModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
@@ -74,13 +81,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\CredentialViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\EditAccountViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BlankPageViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CategoryFilterFlyoutViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Fylouts\CategoryFilterFlyoutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\AddAccountContentDialogViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\CategoryContentDialogViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ImportAccountContentDialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ImportAccountContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UpdateDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UseDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
@@ -100,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background\mhellmeier_blue-hills.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Filled.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\SimpleIcons.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
@@ -154,6 +161,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Wide310x150Logo.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Wide310x150Logo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Wide310x150Logo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\CategoryIcons.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\Dependencies.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\ProgressRingDeterminate.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\ProgressRingIntdeterminate.json" />
@@ -182,5 +190,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\simpleicons.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Fylouts\" />
   </ItemGroup>
 </Project>

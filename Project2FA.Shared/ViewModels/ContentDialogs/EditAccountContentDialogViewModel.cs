@@ -15,6 +15,7 @@ using Project2FA.Core.Utils;
 using System.Linq;
 
 #if WINDOWS_UWP
+using Project2FA.UWP;
 using Windows.UI.Xaml.Controls;
 #else
 using Microsoft.UI.Xaml.Controls;
@@ -57,12 +58,8 @@ namespace Project2FA.ViewModels
             Model.AccountIconName = TempAccountIconName;
 
             Model.Notes = TempNotes;
-            Model.SelectedCategories = GlobalTempCategories.Where(x => x.IsSelected == true).ToList();
-            for (int i = 0; i < TempAccountCategoryList.Count; i++)
-            {
-                TempAccountCategoryList[i].IsSelected = false;
-            }
-            DataService.Instance.GlobalCategories = TempAccountCategoryList;
+            Model.SelectedCategories ??= new ObservableCollection<CategoryModel>();
+            Model.SelectedCategories.AddRange(GlobalTempCategories.Where(x => x.IsSelected == true), true);
             await DataService.Instance.WriteLocalDatafile();
         }
 
@@ -72,18 +69,14 @@ namespace Project2FA.ViewModels
             {
                 Model = model;
                 TempAccountIconName = Model.AccountIconName;
-
-                TempAccountCategoryList.Clear();
-                //filter which are selected
-                var selectedList = GlobalTempCategories.Where(x => Model.SelectedCategories.Where(y => y.Guid == x.Guid).Any());
-                for (int i = 0; i < selectedList.Count(); i++)
-                {
-                    selectedList.ElementAt(i).IsSelected = true;
-                    TempAccountCategoryList.Add(selectedList.ElementAt(i));
-                }
             }
         }
 
+        /// <summary>
+        /// Search the account list by the search term
+        /// </summary>
+        /// <param name="senderText">Input search text</param>
+        /// <returns></returns>
         public Task<bool> SearchAccountFonts(string senderText)
         {
             if (string.IsNullOrEmpty(senderText) == false && senderText.Length >= 2 && senderText != Strings.Resources.AccountCodePageSearchNotFound)
@@ -99,8 +92,11 @@ namespace Project2FA.ViewModels
                     }
                     return Task.FromResult(true);
                 }
-                catch (System.Exception)
+                catch (Exception exc)
                 {
+#if WINDOWS_UWP
+                    TrackingManager.TrackExceptionCatched(nameof(SearchAccountFonts), exc);
+#endif
                     FontIdentifikationCollection.Clear();
                     return Task.FromResult(false);
                 }

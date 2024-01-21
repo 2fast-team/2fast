@@ -217,7 +217,7 @@
                 x:Name="PI_AccountInput"
                 x:Uid="AddAccountContentDialogInputs">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid MinHeight="700">
+                    <Grid >
                         <StackPanel Margin="0,10,16,0">
                             <ctwc:SettingsCard 
                                 Margin="0"
@@ -228,97 +228,101 @@
                                         Margin="0,10,0,0" 
                                         MinWidth="120" 
                                         MinHeight="100">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
                                         <muxc:PersonPicture
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="2"
                                             Height="110"
                                             Width="110"
-                                            DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
-                                            Margin="0,10,20,0"
+                                            DisplayName="{x:Bind ViewModel.Model, 
+                                                Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                                                Mode=OneWay}"
                                             FontSize="60"
                                             Tag="{x:Bind ViewModel.Model.AccountIconName, Mode=OneWay}">
                                         </muxc:PersonPicture>
-                                        <StackPanel 
-                                            Orientation="Horizontal"
-                                            VerticalAlignment="Bottom" 
-                                            HorizontalAlignment="Right">
-                                            <Button 
-                                                CornerRadius="32"
-                                                Width="44"
-                                                Height="44"
-                                                Margin="0,0,8,0"
-                                                Command="{x:Bind ViewModel.DeleteAccountIconCommand}">
-                                                <SymbolIcon Symbol="Delete"/>
-                                            </Button>
-                                            <Button 
-                                                CornerRadius="32"
-                                                Width="44"
-                                                Height="44"
-                                                Command="{x:Bind ViewModel.EditAccountIconCommand}">
-                                                <FontIcon
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                                    Glyph="&#xE104;" />
-                                            </Button>
-                                        </StackPanel>
-                                        
+                                        <Button 
+                                            CornerRadius="32"
+                                            Grid.Column="1"
+                                            Width="44"
+                                            Height="44"
+                                            Command="{x:Bind ViewModel.DeleteAccountIconCommand}" 
+                                            VerticalAlignment="Bottom">
+                                            <SymbolIcon Symbol="Delete"/>
+                                        </Button>
+                                        <Button 
+                                            x:Name="BTN_SearchIcon"
+                                            CornerRadius="32"
+                                            Grid.Column="2"
+                                            Width="44"
+                                            Height="44"
+                                            VerticalAlignment="Bottom"
+                                            HorizontalAlignment="Right" 
+                                            Click="BTN_SearchIcon_Click">
+                                            <FlyoutBase.AttachedFlyout>
+                                                <muxc:CommandBarFlyout Placement="Bottom">
+                                                    <muxc:CommandBarFlyout.PrimaryCommands>
+                                                        <AppBarElementContainer>
+                                                            <AutoSuggestBox 
+                                                                Width="200"
+                                                                QueryIcon="Find"
+                                                                Text="{x:Bind ViewModel.AccountIconName,Mode=OneWay}"
+                                                                VerticalAlignment="Center"
+                                                                PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                                                                TextChanged="AutoSuggestBox_TextChanged" 
+                                                                VerticalContentAlignment="Center"
+                                                                UpdateTextOnSelect="False"
+                                                                TextMemberPath="Name"
+                                                                GotFocus="AutoSuggestBox_GotFocus"
+                                                                ItemsSource="{x:Bind ViewModel.FontIdentifikationCollection, Mode=OneWay}"
+                                                                SuggestionChosen="AutoSuggestBox_SuggestionChosen" >
+                                                                <AutoSuggestBox.RenderTransform>
+                                                                    <CompositeTransform />
+                                                                </AutoSuggestBox.RenderTransform>
+                                                                <AutoSuggestBox.ItemTemplate>
+                                                                    <DataTemplate x:DataType="models:FontIdentifikationModel">
+                                                                        <Grid
+                                                                            HorizontalAlignment="Stretch"
+                                                                            Background="Transparent"
+                                                                            ToolTipService.ToolTip="{x:Bind Name}">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="30" />
+                                                                                <ColumnDefinition Width="*" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <FontIcon
+                                                                                FontSize="16"
+                                                                                Margin="4,0,0,0"
+                                                                                HorizontalAlignment="Left"
+                                                                                VerticalAlignment="Center"
+                                                                                FontFamily="{StaticResource SimpleIcons}"
+                                                                                Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+                                                                            <TextBlock
+                                                                                Grid.Column="1"
+                                                                                VerticalAlignment="Center"
+                                                                                Text="{x:Bind Name, Mode=OneWay}"
+                                                                                TextTrimming="CharacterEllipsis" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </AutoSuggestBox.ItemTemplate>
+                                                            </AutoSuggestBox>
+                                                        </AppBarElementContainer>
+                                                    </muxc:CommandBarFlyout.PrimaryCommands>
+                                                </muxc:CommandBarFlyout>
+                                            </FlyoutBase.AttachedFlyout>
+                                            <FontIcon
+                                                FontSize="18"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                                Glyph="&#xE104;" />
+                                        </Button>
                                     </Grid>
                                 </ctwc:SettingsCard.Description>
-                                <ctwc:SettingsCard.Content>
-                                    <StackPanel 
-                                        HorizontalAlignment="Center"
-                                        Visibility="{x:Bind ViewModel.IsEditBoxVisible, Mode=OneWay}">
+                                <!--<ctwc:SettingsCard.Content>
 
-                                        <AutoSuggestBox 
-                                            Header="~AddAccountContentDialogSuggestionBox.Header" 
-                                            x:Uid="AddAccountContentDialogSuggestionBox"
-                                            Width="200"
-                                            QueryIcon="Find"
-                                            Text="{x:Bind ViewModel.AccountIconName,Mode=OneWay}"
-                                            VerticalAlignment="Center"
-                                            PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
-                                            TextChanged="AutoSuggestBox_TextChanged" 
-                                            VerticalContentAlignment="Center"
-                                            UpdateTextOnSelect="False"
-                                            TextMemberPath="Name"
-                                            GotFocus="AutoSuggestBox_GotFocus"
-                                            ItemsSource="{x:Bind ViewModel.FontIdentifikationCollection, Mode=OneWay}"
-                                            SuggestionChosen="AutoSuggestBox_SuggestionChosen" >
-                                            <AutoSuggestBox.RenderTransform>
-                                                <CompositeTransform />
-                                            </AutoSuggestBox.RenderTransform>
-                                            <AutoSuggestBox.ItemTemplate>
-                                                <DataTemplate x:DataType="models:FontIdentifikationModel">
-                                                    <Grid
-                                                        HorizontalAlignment="Stretch"
-                                                        Background="Transparent"
-                                                        ToolTipService.ToolTip="{x:Bind Name}">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="30" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <FontIcon
-                                                            FontSize="16"
-                                                            Margin="4,0,0,0"
-                                                            HorizontalAlignment="Left"
-                                                            VerticalAlignment="Center"
-                                                            FontFamily="{StaticResource SimpleIcons}"
-                                                            Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
-                                                        <TextBlock
-                                                            Grid.Column="1"
-                                                            VerticalAlignment="Center"
-                                                            Text="{x:Bind Name, Mode=OneWay}"
-                                                            TextTrimming="CharacterEllipsis" />
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </AutoSuggestBox.ItemTemplate>
-                                        </AutoSuggestBox>
-                                        <animations:Implicit.ShowAnimations>
-                                            <animations:OpacityAnimation Duration="0:0:1" From="0" To="1.0"/>
-                                        </animations:Implicit.ShowAnimations>
-                                        <!--<animations:Implicit.HideAnimations>
-    <animations:OpacityAnimation Duration="0:0:1" From="1" To="0.0"/>
-</animations:Implicit.HideAnimations>-->
-                                    </StackPanel>
-                                </ctwc:SettingsCard.Content>
+                                </ctwc:SettingsCard.Content>-->
                             </ctwc:SettingsCard>
                             <!--<appcontrols:CardControl
                                 x:Uid="AddAccountContentDialogAccountIcon"
@@ -613,7 +617,7 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                 </ScrollViewer>
             </PivotItem>
             <PivotItem
-                Header="#import backup" 
+                Header="#import google backup" 
                 x:Uid="AddAccountContentDialogImportBackup"
                 x:Name="PI_ImportAccountBackup">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
@@ -684,9 +688,9 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                             Grid.Row="1">
                         </MediaPlayerElement>
 
-                        <Canvas Grid.Row="1">
+                        <!--<Canvas Grid.Row="1">
                             <Canvas Name="QRCodeCanvas" RenderTransformOrigin="0.5,0.5"/>
-                        </Canvas>
+                        </Canvas>-->
                     </Grid>
                 </RelativePanel>
 

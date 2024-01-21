@@ -22,8 +22,6 @@ namespace Project2FA.ViewModels
         private bool _isEditBoxVisible;
         private bool _notesExpanded = true;
         private bool _isPrimaryBTNEnabled;
-
-        public ObservableCollection<CategoryModel> TempAccountCategoryList { get; } = new ObservableCollection<CategoryModel>();
         public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         public ICommand CancelButtonCommand { get; internal set; }
         public ICommand PrimaryButtonCommand { get; internal set; }
@@ -34,6 +32,7 @@ namespace Project2FA.ViewModels
         public EditAccountViewModelBase()
         {
 #if WINDOWS_UWP
+            // note expander is collapsed if a pro version is active
             NotesExpanded = !IsProVersion;
 #endif
         }
@@ -49,7 +48,11 @@ namespace Project2FA.ViewModels
                     TempAccountIconName = Model.AccountIconName;
                     if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
                     {
-                        GlobalTempCategories.AddRange(DataService.Instance.GlobalCategories);
+                        GlobalTempCategories.Clear();
+                        for (int i = 0; i < DataService.Instance.GlobalCategories.Count; i++)
+                        {
+                            GlobalTempCategories.Add((CategoryModel)DataService.Instance.GlobalCategories[i].Clone());
+                        }
                     }
                     if (!string.IsNullOrWhiteSpace(value.Notes))
                     {
@@ -141,35 +144,5 @@ namespace Project2FA.ViewModels
             get => SettingsService.Instance.IsProVersion;
         }
 #endif
-
-        //        public async Task LoadIconNameCollection()
-        //        {
-        //            try
-        //            {
-        //                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/simpleicons.json"));
-        //                IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
-        //                using (StreamReader r = new StreamReader(randomStream.AsStreamForRead()))
-        //                {
-        //                    IconNameCollectionModel = SerializationService.Deserialize<FontIdentifikationCollectionModel>(await r.ReadToEndAsync());
-        //                }
-        //            }
-        //            catch (Exception exc)
-        //            {
-        //#if WINDOWS_UWP
-        //                Project2FA.UWP.TrackingManager.TrackException(nameof(LoadIconNameCollection), exc);
-        //#endif
-        //                //TOOD add exception dialog
-        //            }
-
-        //        }
-
-        //public async Task LoadIconSVG()
-        //{
-        //    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
-        //    if (success)
-        //    {
-        //        TempAccountSVGIcon = iconStr;
-        //    }
-        //}
     }
 }

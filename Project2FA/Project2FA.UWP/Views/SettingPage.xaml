@@ -577,7 +577,7 @@
 
                                             <ctwc:SettingsCard 
                                                 x:Uid="SettingsInAppPayment"
-                                                Command="{x:Bind ViewModel.SupportAppCommand}"
+                                                Command="{x:Bind ViewModel.InAppPaymentCommand}"
                                                 Description="~SettingsInAppPayment.Description"
                                                 Header="~SettingsInAppPayment.Header"
                                                 HeaderIcon="{ui:FontIcon Glyph=&#xE14D;}"

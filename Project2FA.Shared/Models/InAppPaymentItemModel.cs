@@ -11,6 +11,12 @@ namespace Project2FA.Repository.Models
 {
     public class InAppPaymentItemModel : ObservableRecipient
     {
+        private string _storeId;
+        public string StoreId 
+        {
+            get => _storeId; 
+            set => _storeId = value; 
+        }
         private string _url;
 
         public string Url 

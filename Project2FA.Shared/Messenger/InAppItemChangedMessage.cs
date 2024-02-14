@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Messaging.Messages;
+﻿#if WINDOWS_UWP
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using Project2FA.Repository.Models;
 
 namespace Project2FA.Core.Messenger
@@ -11,3 +12,4 @@ namespace Project2FA.Core.Messenger
         }
     }
 }
+#endif

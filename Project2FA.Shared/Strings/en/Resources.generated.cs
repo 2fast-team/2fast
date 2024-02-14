@@ -1901,6 +1901,65 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region AccountCodePageProFeatureToolTip
+        public static string AccountCodePageProFeatureToolTip
+        {
+            get
+            {
+                return _resourceLoader.GetString("AccountCodePageProFeatureToolTip");
+            }
+        }
+        #endregion
+
+        #region InAppSubscriptionYear
+        public static string InAppSubscriptionYear
+        {
+            get
+            {
+                return _resourceLoader.GetString("InAppSubscriptionYear");
+            }
+        }
+        #endregion
+
+        #region InAppBuyOnce
+        public static string InAppBuyOnce
+        {
+            get
+            {
+                return _resourceLoader.GetString("InAppBuyOnce");
+            }
+        }
+        #endregion
+
+        #region InAppPaymentContentDialogBuyItemSelect
+        public static string InAppPaymentContentDialogBuyItemSelect
+        {
+            get
+            {
+                return _resourceLoader.GetString("InAppPaymentContentDialogBuyItemSelect");
+            }
+        }
+        #endregion
+
+        #region ProFeatureContentInfo
+        public static string ProFeatureContentInfo
+        {
+            get
+            {
+                return _resourceLoader.GetString("ProFeatureContentInfo");
+            }
+        }
+        #endregion
+
+        #region ProFeatureTitleInfo
+        public static string ProFeatureTitleInfo
+        {
+            get
+            {
+                return _resourceLoader.GetString("ProFeatureTitleInfo");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2053,7 +2112,13 @@ namespace Project2FA.Strings{
             BiometricLoginSubtitle,
             BiometricLoginTitle,
             AddAccountContentDialogTitle,
-            AccountCodePageManageFilterToolTip
+            AccountCodePageManageFilterToolTip,
+            AccountCodePageProFeatureToolTip,
+            InAppSubscriptionYear,
+            InAppBuyOnce,
+            InAppPaymentContentDialogBuyItemSelect,
+            ProFeatureContentInfo,
+            ProFeatureTitleInfo
         }
 
         private static ResourceLoader _resourceLoader;

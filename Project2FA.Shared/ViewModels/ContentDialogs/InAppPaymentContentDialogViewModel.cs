@@ -1,29 +1,25 @@
 ﻿#if WINDOWS_UWP
 
 using CommunityToolkit.Mvvm.ComponentModel;
-using Prism.Ioc;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UNOversal.Services.Dialogs;
 using System.Collections.ObjectModel;
 using Windows.Services.Store;
 using System.Threading.Tasks;
 using Project2FA.Strings;
-using Project2FA.UWP;
 using Project2FA.UWP.Services;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
-using Microsoft.Toolkit.Uwp.UI.Controls;
+using Project2FA.Core.Messenger;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Project2FA.ViewModels
 {
-    public class InAppPaymentContentDialogViewModel : ObservableObject, IDialogInitialize
+    public class InAppPaymentContentDialogViewModel : ObservableObject, IDialogInitialize, IRecipient<InAppItemChangedMessage>
     {
         private bool _primaryButtonCanClick;
         private int _selectedIndex = -1;
         private bool _isLoading = false;
-        private ISubscriptionService SubscriptionService { get; }
+        private IPurchaseAddOnService PurchaseService { get; }
 
         private InAppPaymentItemModel _selectedItem;
         public ObservableCollection<InAppPaymentItemModel> Items { get; } = new ObservableCollection<InAppPaymentItemModel>();
@@ -36,65 +32,38 @@ namespace Project2FA.ViewModels
         public int SelectedIndex 
         { 
             get => _selectedIndex; 
-            set
-            {
-                if (SetProperty(ref _selectedIndex, value))
-                {
-                    if (value != -1)
-                    {
-                        PrimaryButtonCanClick = true;
-                    }
-                    else
-                    {
-                        PrimaryButtonCanClick = false;
-                    }
-                }
-            }
-        }
-
-        private bool _monthItemIsEnabled = false;
-        public bool MonthItemIsEnabled 
-        { 
-            get => _monthItemIsEnabled; 
-            set => SetProperty(ref _monthItemIsEnabled, value); 
-        }
-
-        private bool _monthItemIsChecked = false;
-        public bool MonthItemIsChecked
-        {
-            get => _monthItemIsChecked;
-            set
-            {
-                if(SetProperty(ref _monthItemIsChecked, value))
-                {
-                    PrimaryButtonCanClick = value;
-                }
-            }
+            set => SetProperty(ref _selectedIndex, value);
         }
 
         public bool IsLoading { get => _isLoading; set => SetProperty(ref _isLoading, value); }
         public InAppPaymentItemModel SelectedItem
         {
             get => _selectedItem;
-            set
-            {
-                if(SetProperty(ref _selectedItem, value))
-                {
-                    if (value != null && value.IsEnabled && value.IsChecked)
-                    {
-                        PrimaryButtonCanClick = true;
-                    }
-                    else
-                    {
-                        PrimaryButtonCanClick = false;
-                    }
-                }
-            }
+            set => SetProperty(ref _selectedItem, value);
         }
 
-        public InAppPaymentContentDialogViewModel(ISubscriptionService subscriptionService)
+        public InAppPaymentContentDialogViewModel(IPurchaseAddOnService subscriptionService)
         {
-            SubscriptionService = subscriptionService;
+            PurchaseService = subscriptionService;
+            WeakReferenceMessenger.Default.Register<InAppItemChangedMessage>(this);
+        }
+
+        // receive the status change from model
+        public void Receive(InAppItemChangedMessage message)
+        {
+            // ensure that only one item is checked
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (Items[i] != SelectedItem)
+                {
+                    Items[i].IsChecked = false;
+                }
+                else
+                {
+                    // if the selected item is the item of the list, check if the condition is complete
+                    PrimaryButtonCanClick = Items[i].IsChecked && Items[i].IsEnabled;
+                }
+            }
         }
 
         public void Initialize(IDialogParameters parameters)
@@ -112,69 +81,90 @@ namespace Project2FA.ViewModels
                 UidCheckBox = Resources.InAppPaymentContentDialogSubscriptionItemSelect,
                 IsEnabled = false,
                 IsChecked = false,
+                StoreId = Constants.SupportSubscriptionId
             };
             Items.Add(monthlySupportModel);
 
-            var yearsupportModel = new InAppPaymentItemModel
-
+            var yearSubscriptionModel = new InAppPaymentItemModel
             {
-                Description = Resources.InAppSubscriptionMonthSupport,
+                Description = Resources.InAppSubscriptionYear,
                 Url = "ms-appx:///Assets/Images/give-love.png",
                 UidCheckBox = Resources.InAppPaymentContentDialogSubscriptionItemSelect,
                 IsEnabled = false,
                 IsChecked = false,
+                StoreId = Constants.OneYearSubscriptionId
             };
-            Items.Add(yearsupportModel);
+            Items.Add(yearSubscriptionModel);
 
+            var lifeTimeModel = new InAppPaymentItemModel
+            {
+                Description = Resources.InAppBuyOnce,
+                Url = "ms-appx:///Assets/Images/give-love.png",
+                UidCheckBox = Resources.InAppPaymentContentDialogBuyItemSelect,
+                IsEnabled = false,
+                IsChecked = false,
+                StoreId = Constants.LifeTimeId
+            };
+            Items.Add(lifeTimeModel);
+
+            //default item
             SelectedItem = monthlySupportModel;
 
-            SubscriptionService.Initialize(Constants.SupportSubscriptionId);
-            (bool IsActiveMonthSubscription, StoreLicense info) = await SubscriptionService.SetupSubscriptionInfoAsync();
-            bool inAppSubscriptionMonthCanSubscribe = !IsActiveMonthSubscription && info == null;
-            monthlySupportModel.IsChecked = IsActiveMonthSubscription;
+            PurchaseService.Initialize(Constants.SupportSubscriptionId);
+            (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await PurchaseService.SetupPurchaseAddOnInfoAsync();
+            bool inAppSubscriptionMonthCanSubscribe = !IsActiveMonthSubscription && infoMonth == null;
             monthlySupportModel.IsEnabled = inAppSubscriptionMonthCanSubscribe;
+            monthlySupportModel.IsChecked = IsActiveMonthSubscription;
+            
+
+            PurchaseService.Initialize(Constants.OneYearSubscriptionId);
+            (bool IsActiveYearSubscription, StoreLicense infoYear) = await PurchaseService.SetupPurchaseAddOnInfoAsync();
+            bool inAppSubscriptionYearCanSubscribe = !IsActiveMonthSubscription && infoYear == null;
+            if (IsActiveYearSubscription)
+            {
+                SelectedItem = yearSubscriptionModel;
+            }
+            yearSubscriptionModel.IsEnabled = inAppSubscriptionYearCanSubscribe;
+            yearSubscriptionModel.IsChecked = IsActiveYearSubscription;
+            
+
+            PurchaseService.Initialize(Constants.LifeTimeId);
+            (bool IsActiveLifeTimeBuy, StoreLicense infoLifeTime) = await PurchaseService.SetupPurchaseAddOnInfoAsync();
+            bool inAppPurchaseCanSubscribe = !IsActiveLifeTimeBuy && infoLifeTime == null;
+            if (IsActiveLifeTimeBuy)
+            {
+                SelectedItem = lifeTimeModel;
+            }
+            lifeTimeModel.IsEnabled = inAppPurchaseCanSubscribe;
+            lifeTimeModel.IsChecked = IsActiveLifeTimeBuy;
+            
+
+            if (monthlySupportModel.IsChecked)
+            {
+                SelectedItem = monthlySupportModel;
+                yearSubscriptionModel.IsEnabled = false;
+                lifeTimeModel.IsEnabled = false;
+            }
+
+            if (yearSubscriptionModel.IsChecked)
+            {
+                SelectedItem = yearSubscriptionModel;
+                monthlySupportModel.IsEnabled = false;
+                lifeTimeModel.IsEnabled = false;
+            }
+
+            if (lifeTimeModel.IsChecked)
+            {
+                SelectedItem = lifeTimeModel;
+                yearSubscriptionModel.IsEnabled = false;
+                monthlySupportModel.IsEnabled = false;
+            }
 
 
             //MonthItemIsChecked = IsActive;
             //MonthItemIsEnabled = inAppSubscriptionMonthCanSubscribe;
 
             IsLoading = false;
-            //Items.Add(new InAppPaymentSubscriptionModel { Description = "OneYearSub", Url = "ms-appx:///Assets/FileLogo.png" });
-
-            //Items.Add(new InAppPaymentSubscriptionModel { Description = "BuyLifetime", Url = "ms-appx:///Assets/FileLogo.png" });
-            //bool userOwnsSubscription = isActive;
-            //if (userOwnsSubscription && info != null)
-            //{
-            //    // Unlock all the subscription add-on features here.
-            //    return;
-            //}
-
-            //// Get the StoreProduct that represents the subscription add-on.
-            //subscriptionStoreProduct = await GetSubscriptionProductAsync();
-            //if (subscriptionStoreProduct == null)
-            //{
-            //    return;
-            //}
-
-            //// Check if the first SKU is a trial and notify the customer that a trial is available.
-            //// If a trial is available, the Skus array will always have 2 purchasable SKUs and the
-            //// first one is the trial. Otherwise, this array will only have one SKU.
-            //StoreSku sku = subscriptionStoreProduct.Skus[0];
-            //if (sku.SubscriptionInfo.HasTrialPeriod)
-            //{
-            //    // You can display the subscription trial info to the customer here. You can use 
-            //    // sku.SubscriptionInfo.TrialPeriod and sku.SubscriptionInfo.TrialPeriodUnit 
-            //    // to get the trial details.
-            //}
-            //else
-            //{
-            //    // You can display the subscription purchase info to the customer here. You can use 
-            //    // sku.SubscriptionInfo.BillingPeriod and sku.SubscriptionInfo.BillingPeriodUnit
-            //    // to provide the renewal details.
-            //}
-
-            //// Prompt the customer to purchase the subscription.
-            //await PromptUserToPurchaseAsync();
         }
     }
 }

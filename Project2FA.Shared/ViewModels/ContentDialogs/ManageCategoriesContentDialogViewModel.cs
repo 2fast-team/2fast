@@ -9,11 +9,16 @@ using Project2FA.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.Dialogs;
+using Windows.Storage.Streams;
+using Windows.Storage;
+using UNOversal.Services.Serialization;
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -23,29 +28,36 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Project2FA.ViewModels
 {
-    public class ManageCategoriesContentDialogViewModel : ObservableRecipient, IDialogInitialize
+    public class ManageCategoriesContentDialogViewModel : ObservableRecipient, IDialogInitializeAsync
     {
         public ICommand CreateCategoryCommand;
         public ICommand PrimaryCommand;
         private bool _dataChanged;
-        private SymbolModel _selectedIconItem;
+        private FontIdentifikationModel _selectedIconItem;
         private bool _canCreate;
+        private ISerializationService SerializationService { get; }
 
-        public ObservableCollection<SymbolModel> IconSourceCollection { get; private set; } = new ObservableCollection<SymbolModel>();
+        public ObservableCollection<FontIdentifikationModel> IconSourceCollection { get; private set; } = new ObservableCollection<FontIdentifikationModel>();
         public ObservableCollection<CategoryModel> TempGlobalCategories { get; private set; } = new ObservableCollection<CategoryModel>();
         private string _label;
 
+        public ManageCategoriesContentDialogViewModel(ISerializationService serializationService)
+        {
+            SerializationService = serializationService;
+        }
 
-
-        public void Initialize(IDialogParameters parameters)
+        public async Task InitializeAsync(IDialogParameters parameters)
         {
             CreateCategoryCommand = new AsyncRelayCommand(CreateCategoryCommandTask);
-            ObservableCollection<SymbolModel> tempCollection = new ObservableCollection<SymbolModel>();
-            foreach (Symbol symbol in (Symbol[])Enum.GetValues(typeof(Symbol)))
-            {
-                tempCollection.Add(new SymbolModel { Symbol = symbol, Name = symbol.ToString() });
-            }
-            IconSourceCollection.AddRange(tempCollection.OrderBy(x => x.Name));
+            //ObservableCollection<SymbolModel> tempCollection = new ObservableCollection<SymbolModel>();
+            //foreach (Symbol symbol in (Symbol[])Enum.GetValues(typeof(Symbol)))
+            //{
+            //    tempCollection.Add(new SymbolModel { Symbol = symbol, Name = symbol.ToString() });
+            //}
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/CategoryIcons.json"));
+            IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
+            using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
+            IconSourceCollection.AddRange(SerializationService.Deserialize<ObservableCollection<FontIdentifikationModel>>(await r.ReadToEndAsync()));
             TempGlobalCategories ??= new ObservableCollection<CategoryModel>();
             for (int i = 0; i < DataService.Instance.GlobalCategories.Count; i++)
             {
@@ -54,6 +66,7 @@ namespace Project2FA.ViewModels
             }
             PrimaryCommand = new AsyncRelayCommand(PrimaryCommandTask);
         }
+
 
         private Task PrimaryCommandTask()
         {
@@ -97,8 +110,8 @@ namespace Project2FA.ViewModels
                 { 
                     Guid = Guid.NewGuid(),
                     IsSelected = false,
-                    UnicodeString = "\uE821",
-                    UnicodeIndex = "59425",
+                    UnicodeString = SelectedIconItem.UnicodeString,
+                    UnicodeIndex = SelectedIconItem.UnicodeIndex.ToString(),
                     Name = Label });
             }
             else
@@ -120,6 +133,8 @@ namespace Project2FA.ViewModels
             }
         }
 
+
+
         public string Label
         {
             get => _label;
@@ -138,7 +153,7 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _dataChanged, value);
         }
 
-        public SymbolModel SelectedIconItem 
+        public FontIdentifikationModel SelectedIconItem 
         {
             get => _selectedIconItem;
             set

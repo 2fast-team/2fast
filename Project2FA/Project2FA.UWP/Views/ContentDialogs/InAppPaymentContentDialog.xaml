@@ -15,9 +15,7 @@
     x:Uid="InAppPaymentContentDialog"
     PrimaryButtonText="~InAppPaymentContentDialog.PrimaryButtonText"
     SecondaryButtonText="~InAppPaymentContentDialog.SecondaryButtonText"
-    IsPrimaryButtonEnabled="{x:Bind ViewModel.PrimaryButtonCanClick, Mode=OneWay}"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.PrimaryButtonCanClick, Mode=OneWay}">
 
     <ContentDialog.Resources>
 
@@ -26,7 +24,7 @@
             <Setter Property="Foreground" Value="{ThemeResource ToggleButtonForeground}" />
             <Setter Property="BorderBrush" Value="{ThemeResource ToggleButtonRevealBorderBrush}" />
             <Setter Property="BorderThickness" Value="{ThemeResource ToggleButtonRevealBorderThemeThickness}" />
-            <Setter Property="Padding" Value="{ThemeResource ButtonPadding}" />
+            <Setter Property="Padding" Value="0" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
@@ -97,7 +95,7 @@
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver" />
                                             <!--<Setter Target="RootGrid.Background" Value="{ThemeResource ToggleButtonRevealBackgroundCheckedPointerOver}" />-->
-                                            <Setter Target="ContentPresenter.BorderThickness" Value="4,4,4,4" />
+                                            <!--<Setter Target="ContentPresenter.BorderThickness" Value="4,4,4,4" />-->
                                             <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ToggleButtonRevealBackgroundChecked}" />
                                             <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
                                         </VisualState.Setters>
@@ -195,9 +193,9 @@
             <ToggleButton 
             Style="{StaticResource InAppPurchaseToggleButtonStyle}"
             IsEnabled="{x:Bind IsEnabled, Mode=OneWay}" 
-            IsChecked="{x:Bind IsChecked,Mode=TwoWay}">
+            IsChecked="{x:Bind IsChecked,Mode=TwoWay}" Click="ToggleButton_Click">
                 <Grid 
-                    Margin="12,8,12,8" 
+                    Margin="12,0,12,0" 
                     MaxWidth="300"
                     MinHeight="400">
                     <Grid.RowDefinitions>

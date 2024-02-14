@@ -349,12 +349,14 @@ namespace Project2FA.Services
 #endif
 #if __IOS__
                     Foundation.NSData bookmark = Foundation.NSUserDefaults.StandardUserDefaults.DataForKey(Constants.ContainerName);
+#pragma warning disable CA1416 // Validate platform compatibility
                     nsUrl = Foundation.NSUrl.FromBookmarkData(
                         bookmark,
                         Foundation.NSUrlBookmarkResolutionOptions.WithSecurityScope,
                         null,
                         out bool isStale,
                         out Foundation.NSError error);
+#pragma warning restore CA1416 // Validate platform compatibility
                     file = await StorageFile.GetFileFromPathAsync(nsUrl.Path);
 #endif
                 }
@@ -682,12 +684,14 @@ namespace Project2FA.Services
 #endif
 #if __IOS__
                     Foundation.NSData bookmark = Foundation.NSUserDefaults.StandardUserDefaults.DataForKey(Constants.ContainerName);
+#pragma warning disable CA1416 // Validate platform compatibility
                     nsUrl = Foundation.NSUrl.FromBookmarkData(
                         bookmark,
                         Foundation.NSUrlBookmarkResolutionOptions.WithSecurityScope,
                         null,
                         out bool isStale,
                         out Foundation.NSError error);
+#pragma warning restore CA1416 // Validate platform compatibility
                     file = await StorageFile.GetFileFromPathAsync(nsUrl.Path);
 #endif
                 }

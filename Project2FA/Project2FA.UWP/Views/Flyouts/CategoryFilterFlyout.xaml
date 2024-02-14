@@ -69,8 +69,13 @@
             <labs:TokenView.ItemTemplate>
                 <DataTemplate x:DataType="models:CategoryModel">
                     <StackPanel Orientation="Horizontal">
-                        <!--<FontIcon Glyph="{x:Bind Glyph,Mode=OneWay}" Margin="0,0,10,0"/>-->
-                        <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
+                        <FontIcon
+                        FontSize="16"
+                        FontFamily="{StaticResource SegoeFluentIconsFilled}"
+                        Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+                        <TextBlock 
+                            Text="{x:Bind Name,Mode=OneWay}"
+                            Margin="4,0,0,0"/>
                     </StackPanel>
                 </DataTemplate>
             </labs:TokenView.ItemTemplate>

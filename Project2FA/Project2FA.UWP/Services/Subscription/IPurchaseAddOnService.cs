@@ -7,9 +7,9 @@ using Windows.Services.Store;
 
 namespace Project2FA.UWP.Services
 {
-    public interface ISubscriptionService
+    public interface IPurchaseAddOnService
     {
-        Task<(bool IsActive, StoreLicense info)> SetupSubscriptionInfoAsync();
+        Task<(bool IsActive, StoreLicense info)> SetupPurchaseAddOnInfoAsync();
         Task PromptUserToPurchaseAsync();
         void Initialize(string id);
     }

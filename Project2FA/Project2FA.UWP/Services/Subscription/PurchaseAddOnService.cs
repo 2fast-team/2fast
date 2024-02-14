@@ -4,20 +4,20 @@ using Windows.Services.Store;
 
 namespace Project2FA.UWP.Services
 {
-    public class SubscriptionService : ISubscriptionService
+    public class PurchaseAddOnService : IPurchaseAddOnService
     {
         private StoreContext context = null;
-        StoreProduct subscriptionStoreProduct;
+        StoreProduct purchaseAddOnProduct;
 
-        // Assign this variable to the Store ID of your subscription add-on.
-        private string _subscriptionStoreId = "";
+        // Assign this variable to the Store ID of your add-on.
+        private string _addonStoreId = "";
 
         public void Initialize(string id)
         {
-            _subscriptionStoreId = id;
+            _addonStoreId = id;
         }
 
-        public async Task<(bool IsActive, StoreLicense info)> SetupSubscriptionInfoAsync()
+        public async Task<(bool IsActive, StoreLicense info)> SetupPurchaseAddOnInfoAsync()
         {
             if (context == null)
             {
@@ -26,12 +26,12 @@ namespace Project2FA.UWP.Services
                 // may need additional code to configure the StoreContext object.
                 // For more info, see https://aka.ms/storecontext-for-desktop.
             }
-            subscriptionStoreProduct = await GetSubscriptionProductAsync();
-            return await CheckIfUserHasSubscriptionAsync();
+            purchaseAddOnProduct = await GetSubscriptionProductAsync();
+            return await CheckIfUserHasAddOnAsync();
 
         }
 
-        private async Task<(bool IsActive, StoreLicense info)> CheckIfUserHasSubscriptionAsync()
+        private async Task<(bool IsActive, StoreLicense info)> CheckIfUserHasAddOnAsync()
         {
             StoreAppLicense appLicense = await context.GetAppLicenseAsync();
 
@@ -39,7 +39,7 @@ namespace Project2FA.UWP.Services
             foreach (var addOnLicense in appLicense.AddOnLicenses)
             {
                 StoreLicense license = addOnLicense.Value;
-                if (license.SkuStoreId.StartsWith(_subscriptionStoreId))
+                if (license.SkuStoreId.StartsWith(_addonStoreId))
                 {
                     if (license.IsActive)
                     {
@@ -49,7 +49,7 @@ namespace Project2FA.UWP.Services
                 }
             }
 
-            // The customer does not have a (active) license to the subscription.
+            // The customer does not have a (active) license to the add-on.
             return (false, null);
         }
 
@@ -73,7 +73,7 @@ namespace Project2FA.UWP.Services
             foreach (var item in result.Products)
             {
                 StoreProduct product = item.Value;
-                if (product.StoreId == _subscriptionStoreId)
+                if (product.StoreId == _addonStoreId)
                 {
                     return product;
                 }
@@ -87,7 +87,7 @@ namespace Project2FA.UWP.Services
         {
             // Request a purchase of the subscription product. If a trial is available it will be offered 
             // to the customer. Otherwise, the non-trial SKU will be offered.
-            StorePurchaseResult result = await subscriptionStoreProduct.RequestPurchaseAsync();
+            StorePurchaseResult result = await purchaseAddOnProduct.RequestPurchaseAsync();
 
             // Capture the error message for the operation, if any.
             string extendedError = string.Empty;

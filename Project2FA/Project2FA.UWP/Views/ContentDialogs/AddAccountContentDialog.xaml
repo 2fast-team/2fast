@@ -155,7 +155,7 @@
                                     Padding="4,4,4,4"
                                     Click="HLBTN_QRCodeInfo"
                                     Style="{StaticResource TransparentButtonStyle}"
-                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
                                     VerticalAlignment="Center">
                                     <FontIcon
                                     FontSize="20"
@@ -288,7 +288,7 @@
                                                                         <Grid
                                                                             HorizontalAlignment="Stretch"
                                                                             Background="Transparent"
-                                                                            ToolTipService.ToolTip="{x:Bind Name}">
+                                                                            ToolTipService.ToolTip="{x:Bind Name, FallbackValue=''}">
                                                                             <Grid.ColumnDefinitions>
                                                                                 <ColumnDefinition Width="30" />
                                                                                 <ColumnDefinition Width="*" />
@@ -572,7 +572,7 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                                                 Padding="4,4,4,4"
                                                 Style="{StaticResource TransparentButtonStyle}"
                                                 x:Name="BTN_Expertsettings_Help"
-                                                ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
+                                                ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp,FallbackValue=''}"
                                                 VerticalAlignment="Bottom" Click="BTN_Expertsettings_Help_Click">
                                                 <FontIcon
                                                     FontSize="20"

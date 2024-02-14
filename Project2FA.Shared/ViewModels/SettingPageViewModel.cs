@@ -58,7 +58,7 @@ namespace Project2FA.ViewModels
         public ICommand RateAppCommand { get; }
         public ICommand SendMailCommand { get; }
         public ICommand NavigateBackCommand { get; }
-        public ICommand SupportAppCommand { get; }
+        public ICommand InAppPaymentCommand { get; }
         public ICommand SeeSourceCodeCommand { get; }
         public ICommand ManageSubscriptionsCommand { get; }
 
@@ -87,18 +87,19 @@ namespace Project2FA.ViewModels
             });
 
 #if WINDOWS_UWP
-            SupportAppCommand = new AsyncRelayCommand(async() =>
+            InAppPaymentCommand = new AsyncRelayCommand(async() =>
             {
                 IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
-                var result = await dialogService.ShowDialogAsync(new InAppPaymentContentDialog(), new DialogParameters());
+                var inAppPaymentDialog = new InAppPaymentContentDialog();
+                var result = await dialogService.ShowDialogAsync(inAppPaymentDialog, new DialogParameters());
                 if (result == ContentDialogResult.Primary)
                 {
-                    var service = App.Current.Container.Resolve<ISubscriptionService>();
-                    service.Initialize(Constants.SupportSubscriptionId);
-                    await service.SetupSubscriptionInfoAsync();
+                    var service = App.Current.Container.Resolve<IPurchaseAddOnService>();
+                    var selectedPurchaseItem = inAppPaymentDialog.ViewModel.Items.Where(x => x.IsChecked == true).FirstOrDefault();
+                    service.Initialize(selectedPurchaseItem.StoreId);
+                    await service.SetupPurchaseAddOnInfoAsync();
                     await service.PromptUserToPurchaseAsync();
                 }
-
             });
 
             ManageSubscriptionsCommand = new AsyncRelayCommand(async() => 
@@ -119,11 +120,11 @@ namespace Project2FA.ViewModels
                 SelectedItem = selectedItem;
             }
 
-            if (parameters.TryGetValue<bool>("OpenSubscriptions", out bool openSubscriptions))
+            if (parameters.TryGetValue<bool>("OpenInAppPayments", out bool openInAppPayments))
             {
-                if (openSubscriptions)
+                if (openInAppPayments)
                 {
-                    SupportAppCommand.Execute(null);
+                    InAppPaymentCommand.Execute(null);
                 }
             }
         }

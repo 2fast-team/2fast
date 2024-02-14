@@ -74,6 +74,9 @@ namespace Project2FA.ViewModels
         public ICommand NavigateToSettingsCommand { get; }
         public ICommand SetFilterCommand { get; }
         public ICommand CameraCommand { get; }
+
+        public ICommand ShowProFeatureCommand { get; }
+
         private TwoFACodeModel _changedItem = null;
         private string _searchedAccountLabel;
         private bool _datafileUpdated;
@@ -83,6 +86,7 @@ namespace Project2FA.ViewModels
         private bool _isFirstStart = true;
         private bool _codeVisibilityOptionEnabled;
         private bool _filterIsActive;
+        private bool _proFeatureRequest;
 
 
         public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade, INavigationService navigationService)
@@ -126,6 +130,7 @@ namespace Project2FA.ViewModels
             //SetFilterCommand = new AsyncRelayCommand(SetFilterCommandTask);
 
             NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
+            ShowProFeatureCommand = new AsyncRelayCommand(ShowProFeatureCommandTask);
 
             if (TwoFADataService.TempDeletedTFAModel != null)
             {
@@ -200,7 +205,7 @@ namespace Project2FA.ViewModels
                 TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
             }
             // clear the navigation stack
-            await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+            await NavigationService.NavigateAsync("/" + nameof(BlankPage));
             if (TwoFADataService.ActivatedDatafile != null)
             {
                 FileActivationPage fileActivationPage = new FileActivationPage();
@@ -216,6 +221,25 @@ namespace Project2FA.ViewModels
         private async Task NavigateToSettingsCommandTask()
         {
             await NavigationService.NavigateAsync(nameof(SettingPage));
+        }
+
+        private async Task ShowProFeatureCommandTask()
+        {
+            string clickedLink = string.Empty; // save the clicked link
+            var dialog = new ContentDialog();
+            dialog.Title = Strings.Resources.ProFeatureTitleInfo;
+            dialog.Content = Strings.Resources.ProFeatureContentInfo;
+            dialog.PrimaryButtonText = Strings.Resources.ButtonTextConfirm;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
+            dialog.SecondaryButtonText = Strings.Resources.ButtonTextCancel;
+            dialog.PrimaryButtonCommand = new AsyncRelayCommand(async() =>
+            {
+                DialogService.CloseDialogs();
+                _proFeatureRequest = true;
+                await NavigationService.NavigateAsync("SettingPage?PivotItem=2&OpenInAppPayments=true");
+                
+            });
+            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         private async Task StartTOTPLogic()
@@ -451,7 +475,7 @@ namespace Project2FA.ViewModels
 
         public async Task<bool> CanNavigateAsync(INavigationParameters parameters)
         {
-            if (!await DialogService.IsDialogRunning())
+            if (!await DialogService.IsDialogRunning() || _proFeatureRequest)
             {
                 //detach the events
                 if (_dispatcherTOTPTimer.IsEnabled)
@@ -465,7 +489,15 @@ namespace Project2FA.ViewModels
                 }
                 TwoFADataService.TOTPEventStopwatch.Reset();
             }
-            return !await DialogService.IsDialogRunning();
+            if (!_proFeatureRequest)
+            {
+                return !await DialogService.IsDialogRunning();
+            }
+            else
+            {
+                _proFeatureRequest = false;
+                return true;
+            }
         }
 
         public DataService TwoFADataService => DataService.Instance;

@@ -30,7 +30,7 @@
                 <Grid
                     HorizontalAlignment="Stretch"
                     Background="Transparent"
-                    ToolTipService.ToolTip="{x:Bind Label}">
+                    ToolTipService.ToolTip="{x:Bind Label, FallbackValue=''}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30" />
                         <ColumnDefinition Width="*" />
@@ -110,7 +110,7 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <AppBarButton
+                                        <!--<AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
                                             ToolTipService.ToolTip="#todo">
@@ -127,7 +127,7 @@
                                                         Icon="Camera"/>
                                                 </MenuFlyout>
                                             </AppBarButton.Flyout>
-                                        </AppBarButton>
+                                        </AppBarButton>-->
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>
@@ -204,7 +204,7 @@
                                         <FontIcon FontSize="30" Glyph="&#xE70D;"/>
                                     </AppBarButton.Icon>-->
                                     <FlyoutBase.AttachedFlyout>
-                                        <Flyout>
+                                        <Flyout LightDismissOverlayMode="Off">
                                             <views:CategoryFilterFlyout/>
                                         </Flyout>
                                     </FlyoutBase.AttachedFlyout>
@@ -214,12 +214,10 @@
                                     IsEnabled="{x:Bind TwoFADataService.IsFilterEnabled,Mode=OneWay}"
                                     IsChecked="{x:Bind TwoFADataService.IsFilterChecked,Mode=TwoWay}"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip, FallbackValue=''}"
-                                    x:Uid="AccountCodePageSearchFilter" 
-                                    >
+                                    x:Uid="AccountCodePageSearchFilter">
                                     <AppBarToggleButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
                                     </AppBarToggleButton.Icon>
-
                                 </AppBarToggleButton>
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
@@ -400,6 +398,36 @@
                                         </AutoSuggestBox.QueryIcon>
                                     </AutoSuggestBox>
                                 </AppBarElementContainer>
+                                <AppBarButton 
+                                    Command="{x:Bind ShowProFeatureCommand}"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}"
+                                    x:Uid="AccountCodePageManageFilterInfo">
+                                    <AppBarButton.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon Glyph="&#xE16E;"/>
+                                            <FontIcon Glyph="&#xE946;"/>
+                                        </StackPanel>
+                                    </AppBarButton.Content>
+                                </AppBarButton>
+                                <!--<AppBarButton
+                                    Margin="0"
+                                    Padding="4,4,4,4"
+                                    Width="48"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}"
+                                    VerticalAlignment="Center" 
+                                    Click="HLBTN_ProFeature">
+                                    <FontIcon
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE946;"  />
+                                </AppBarButton>-->
+                                <!--<AppBarToggleButton
+                                    IsEnabled="False"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}"
+                                    x:Uid="AccountCodePageSearchFilter" >
+                                    <AppBarToggleButton.Icon>
+                                        <FontIcon Glyph="&#xE16E;"/>
+                                    </AppBarToggleButton.Icon>
+                                </AppBarToggleButton>-->
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 

@@ -39,7 +39,7 @@ namespace Project2FA.UWP.Views
             // determine and set if the app is started in debug mode
             ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + Strings.Resources.ApplicationName : Strings.Resources.ApplicationName;
             //TODO WIP pro features
-            SettingsService.Instance.IsProVersion = true;
+            SettingsService.Instance.IsProVersion = false;
             _coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             _coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 

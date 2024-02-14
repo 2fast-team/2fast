@@ -28,6 +28,7 @@
                 <StackPanel Orientation="Horizontal">
                     <FontIcon  
                         Glyph="{x:Bind UnicodeIndex,Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}" 
+                        FontFamily="{StaticResource SegoeFluentIconsFilled}"
                         Margin="0,0,10,0"/>
                     <TextBlock 
                         Text="{x:Bind Name,Mode=OneWay}" 
@@ -35,11 +36,22 @@
                 </StackPanel>
             </DataTemplate>
 
-            <DataTemplate x:Name="SymbolListTemplate" x:DataType="models:SymbolModel">
-                <StackPanel Orientation="Horizontal">
-                    <SymbolIcon Symbol="{x:Bind Symbol,Mode=OneWay}" Margin="0,0,10,0"/>
-                    <TextBlock Text="{x:Bind Name,Mode=OneWay}" Margin="0,0,10,0"/>
-                </StackPanel>
+            <DataTemplate x:Name="SymbolListTemplate" x:DataType="models:FontIdentifikationModel">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon
+                        Margin="4,0,0,0"
+                        FontSize="16"
+                        FontFamily="{StaticResource SegoeFluentIconsFilled}"
+                        Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+                    <TextBlock 
+                        Grid.Column="1"
+                        Text="{x:Bind Name,Mode=OneWay}" 
+                        Margin="0,0,10,0"/>
+                </Grid>
             </DataTemplate>
         </ResourceDictionary>
   

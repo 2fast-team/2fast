@@ -102,7 +102,7 @@ namespace Project2FA.UWP
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
-            container.RegisterSingleton<ISubscriptionService, SubscriptionService>();
+            container.RegisterSingleton<IPurchaseAddOnService, PurchaseAddOnService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();

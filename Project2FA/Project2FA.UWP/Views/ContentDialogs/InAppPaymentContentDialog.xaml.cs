@@ -1,6 +1,9 @@
-﻿using Project2FA.ViewModels;
+﻿using Project2FA.Repository.Models;
+using Project2FA.ViewModels;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 
 namespace Project2FA.UWP.Views
@@ -11,16 +14,21 @@ namespace Project2FA.UWP.Views
         public InAppPaymentContentDialog()
         {
             this.InitializeComponent();
-            //this.Loaded += InAppPaymentContentDialog_Loaded;
 
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
+            if (e.OriginalSource is ToggleButton tbtn && tbtn.DataContext is InAppPaymentItemModel model)
+            {
+                for (int i = 0; i < ViewModel.Items.Count; i++)
+                {
+                    if (ViewModel.Items[i] != model)
+                    {
+                        ViewModel.Items[i].IsChecked = false;
+                    }
+                }
+            }
         }
     }
 }

@@ -187,5 +187,10 @@ namespace Project2FA.UWP.Views
         {
             ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel);
         }
+
+        private void HLBTN_ProFeature(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

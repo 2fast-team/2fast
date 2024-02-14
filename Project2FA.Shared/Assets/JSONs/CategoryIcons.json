@@ -1,23 +1,17 @@
-{
-    "Name": "CategoryIcons",
-  "Collection": [
+  [
     {
       "Name": "Bank",
-      "UnicodeString": "&#xE224;",
-      "UnicodeIndex": 57890
+      "UnicodeString": "U\u002BE220",
+      "UnicodeIndex": 57888
     },
     {
       "Name": "Cloud",
-      "UnicodeString": "&#xE397;",
+      "UnicodeString": "U\u002BE397",
       "UnicodeIndex": 58263
     },
     {
       "Name": "Currency",
-      "UnicodeString": "&#xE44B;",
-      "UnicodeIndex": 58443
+      "UnicodeString": "U\u002BE449",
+      "UnicodeIndex": 58441
     }
-
-
-
   ]
-}

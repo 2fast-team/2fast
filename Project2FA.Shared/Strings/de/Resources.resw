@@ -1262,4 +1262,35 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Zum Kauf auswählen</value>
   </data>
+  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+    <value>Funktion nur durch Kauf oder Abonnement verfügbar.</value>
+  </data>
+  <data name="InAppBuyOnce" xml:space="preserve">
+    <value>Mit dem Kauf werden Pro+ Funktionen dauerhaft zugänglich und nutzbar, Sie unterstützen damit die weitere Entwicklung der Anwendung.
+Derzeit verfügbar:
+
+- Kategorien &amp; Filter
+***
+### 34,99 einmalig</value>
+  </data>
+  <data name="InAppSubscriptionYear" xml:space="preserve">
+    <value>Mit dem Abonnement werden ***Pro+*** Funktionen zugänglich und nutzbar und Sie unterstützen die weitere Entwicklung der Anwendung.
+Derzeit verfügbar:
+
+- Kategorien &amp; Filter
+***
+### 6,49€ jährlich</value>
+  </data>
+  <data name="InAppPaymentContentDialogBuyItemSelect" xml:space="preserve">
+    <value>Zum Kauf auswählen</value>
+  </data>
+  <data name="AccountCodePageManageFilterInfo.Label" xml:space="preserve">
+    <value>Kategorien &amp; Filter</value>
+  </data>
+  <data name="ProFeatureContentInfo" xml:space="preserve">
+    <value>Die Funktionalität ist nur durch ein Abonnement oder Kauf verfügbar. Möchten Sie sich die Varianten ansehen?</value>
+  </data>
+  <data name="ProFeatureTitleInfo" xml:space="preserve">
+    <value>Kostenpflichtige Funktion</value>
+  </data>
 </root>

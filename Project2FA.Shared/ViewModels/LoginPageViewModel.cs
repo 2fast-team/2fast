@@ -11,6 +11,14 @@ using CommunityToolkit.Mvvm.Messaging;
 using Project2FA.Core.Messenger;
 using Project2FA.Core.Services.Crypto;
 using System.Threading;
+using Project2FA.Utils;
+using Windows.UI.Xaml;
+using Windows.ApplicationModel.Core;
+
+using Windows.ApplicationModel.DataTransfer;
+
+
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -173,17 +181,37 @@ namespace Project2FA.ViewModels
         /// </summary>
         private async void WindowsHelloLoginCommandTask()
         {
-            UserConsentVerificationResult consentResult = await UserConsentVerifier.RequestVerificationAsync(Resources.WindowsHelloLoginMessage);
-            if (consentResult == UserConsentVerificationResult.Verified)
+            try
             {
-                var dbHash = await App.Repository.Password.GetAsync();
-                var secretService = App.Current.Container.Resolve<ISecretService>();
-                //TODO check if this is a problem
-                if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash)))
+                UserConsentVerificationResult consentResult = await UserConsentVerifier.RequestVerificationAsync(Resources.WindowsHelloLoginMessage);
+                if (consentResult == UserConsentVerificationResult.Verified)
                 {
-                    await ShowLoginError();
+                    var dbHash = await App.Repository.Password.GetAsync();
+                    var secretService = App.Current.Container.Resolve<ISecretService>();
+
+                    if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash)))
+                    {
+                        await ShowLoginError();
+                    }
                 }
             }
+            catch (Exception exc)
+            {
+                TrackingManager.TrackExceptionCatched(nameof(WindowsHelloLoginCommandTask), exc);
+                var dialog = new ContentDialog
+                {
+                    Title = Resources.ErrorHandle
+                };
+                var textBlock = new TextBlock();
+                textBlock.Text = Resources.LoginPageWindowsHelloError;
+                dialog.Content = textBlock;
+                dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
+                dialog.PrimaryButtonText = Resources.Confirm;
+                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+
+                await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
+            }
+
         }
 #endif
 
@@ -280,11 +308,11 @@ namespace Project2FA.ViewModels
 #endif
 
 
-        /// <summary>
-        /// Make a login with hitting 'Enter' key possible
-        /// </summary>
-        /// <param name="e"></param>
-        public void LoginWithEnterKeyDown(KeyRoutedEventArgs e)
+                /// <summary>
+                /// Make a login with hitting 'Enter' key possible
+                /// </summary>
+                /// <param name="e"></param>
+                public void LoginWithEnterKeyDown(KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {

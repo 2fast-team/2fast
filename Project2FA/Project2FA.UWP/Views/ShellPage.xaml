@@ -37,9 +37,9 @@
                 Orientation="Horizontal">
                 <Image 
                     x:Name="AppLogo"
-                    Source="/Assets/Icons/schluessel.svg" 
+                    Source="/Assets/FileLogo.png" 
                     Margin="0,0,10,0" 
-                    Height="26"/>
+                    Height="22"/>
                 <TextBlock 
                 Text="{x:Bind ViewModel.Title,Mode=OneWay}"
                 VerticalAlignment="Center"

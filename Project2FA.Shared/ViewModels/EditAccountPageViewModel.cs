@@ -36,9 +36,9 @@ namespace Project2FA.ViewModels
             NavigationService = navigationService;
             PrimaryButtonCommand = new RelayCommand(async () =>
             {
-                Model.Issuer = TempIssuer;
-                Model.Label = TempLabel;
-                Model.AccountIconName = TempAccountIconName;
+                //Model.Issuer = TempIssuer;
+                //Model.Label = TempLabel;
+                //Model.AccountIconName = TempAccountIconName;
                 //(bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName);
                 //if (success)
                 //{
@@ -48,7 +48,7 @@ namespace Project2FA.ViewModels
                 //{
                 //    Model.AccountSVGIcon = null;
                 //}
-                Model.Notes = TempNotes;
+                //Model.Notes = Notes;
                 await DataService.Instance.WriteLocalDatafile();
                 await NavigateBackCommandTask();
             });
@@ -56,7 +56,7 @@ namespace Project2FA.ViewModels
             CancelButtonCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
-                TempAccountIconName = null;
+                AccountIconName = string.Empty;
             });
             EditAccountIconCommand = new RelayCommand(() =>
             {
@@ -74,7 +74,7 @@ namespace Project2FA.ViewModels
             if (parameters.TryGetValue<TwoFACodeModel>("model", out var model))
             {
                 Model = model;
-                TempAccountIconName = Model.AccountIconName;
+                //TempAccountIconName = Model.AccountIconName;
                 //if (!string.IsNullOrWhiteSpace(TempAccountIconName))
                 //{
                 //    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);

@@ -11,6 +11,8 @@ using Project2FA.Core;
 using Project2FA.Repository.Models;
 using Project2FA.Core.Messenger;
 using CommunityToolkit.Mvvm.Messaging;
+using Project2FA.Services;
+using System;
 
 namespace Project2FA.ViewModels
 {
@@ -144,6 +146,8 @@ namespace Project2FA.ViewModels
                 SelectedItem = monthlySupportModel;
                 yearSubscriptionModel.IsEnabled = false;
                 lifeTimeModel.IsEnabled = false;
+
+                CheckProVersion(infoMonth);
             }
 
             if (yearSubscriptionModel.IsChecked)
@@ -151,6 +155,8 @@ namespace Project2FA.ViewModels
                 SelectedItem = yearSubscriptionModel;
                 monthlySupportModel.IsEnabled = false;
                 lifeTimeModel.IsEnabled = false;
+
+                CheckProVersion(infoYear);
             }
 
             if (lifeTimeModel.IsChecked)
@@ -158,13 +164,21 @@ namespace Project2FA.ViewModels
                 SelectedItem = lifeTimeModel;
                 yearSubscriptionModel.IsEnabled = false;
                 monthlySupportModel.IsEnabled = false;
+
+                CheckProVersion(infoLifeTime);
             }
-
-
-            //MonthItemIsChecked = IsActive;
-            //MonthItemIsEnabled = inAppSubscriptionMonthCanSubscribe;
-
             IsLoading = false;
+        }
+
+        private void CheckProVersion(StoreLicense storeLicense)
+        {
+            if (SettingsService.Instance.IsProVersion == false)
+            {
+                SettingsService.Instance.IsProVersion = true;
+                SettingsService.Instance.PurchasedStoreId = storeLicense.SkuStoreId.Split("/")[0];
+                SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                SettingsService.Instance.NextCheckedInPurchaseAddon = storeLicense.ExpirationDate;
+            }
         }
     }
 }

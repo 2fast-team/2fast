@@ -245,10 +245,28 @@ namespace Project2FA.Services
             }
         }
 
+        public string PurchasedStoreId
+        {
+            get => _helper.SafeRead(nameof(PurchasedStoreId), string.Empty);
+            set => _helper.TryWrite(nameof(PurchasedStoreId), value);
+        }
+
         public DateTime LastCheckedSystemTime
         {
             get => _helper.SafeRead(nameof(LastCheckedSystemTime), new DateTime());
             set =>_helper.TryWrite(nameof(LastCheckedSystemTime), value);
+        }
+
+        public DateTimeOffset LastCheckedInPurchaseAddon
+        {
+            get => _helper.SafeRead(nameof(LastCheckedInPurchaseAddon), new DateTimeOffset());
+            set => _helper.TryWrite(nameof(LastCheckedInPurchaseAddon), value);
+        }
+
+        public DateTimeOffset NextCheckedInPurchaseAddon
+        {
+            get => _helper.SafeRead(nameof(NextCheckedInPurchaseAddon), new DateTimeOffset());
+            set => _helper.TryWrite(nameof(NextCheckedInPurchaseAddon), value);
         }
     }
 }

@@ -19,6 +19,10 @@ using UNOversal.Services.Dialogs;
 using Project2FA.ViewModels;
 using Windows.System;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Windows.Services.Store;
+using Project2FA.UWP.Services;
+using Project2FA.Core;
+using UNOversal.Services.Network;
 
 namespace Project2FA.UWP.Views
 {
@@ -38,8 +42,6 @@ namespace Project2FA.UWP.Views
 
             // determine and set if the app is started in debug mode
             ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + Strings.Resources.ApplicationName : Strings.Resources.ApplicationName;
-            //TODO WIP pro features
-            SettingsService.Instance.IsProVersion = false;
             _coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             _coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
@@ -179,6 +181,26 @@ namespace Project2FA.UWP.Views
                 //    }
                 //}
 
+                if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.2.7.0")))
+                {
+                    //check after update, if the user already have a subscription
+                    var purchaseService = App.Current.Container.Resolve<IPurchaseAddOnService>();
+                    var networkService = App.Current.Container.Resolve<INetworkService>();
+                    if (await networkService.GetIsInternetAvailableAsync())
+                    {
+                        purchaseService.Initialize(Constants.SupportSubscriptionId);
+                        (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await purchaseService.SetupPurchaseAddOnInfoAsync();
+
+                        if (IsActiveMonthSubscription)
+                        {
+                            // set new expiration date and last check time
+                            SettingsService.Instance.IsProVersion = true;
+                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoMonth.ExpirationDate;
+                        }
+                    }
+                }
+
                 ContentDialog dialog = new ContentDialog();
                 string clickedLink = string.Empty; // save the clicked link
                 dialog.Title = Strings.Resources.NewAppFeaturesTitle;
@@ -211,6 +233,11 @@ namespace Project2FA.UWP.Views
                     // set the round corner for Windows 11+
                     SettingsService.Instance.UseRoundCorner = true;
                 }
+                CheckInAppSubscriptionStatus(true);
+            }
+            else
+            {
+                CheckInAppSubscriptionStatus(false);
             }
 
 
@@ -218,7 +245,96 @@ namespace Project2FA.UWP.Views
 
         }
 
+        private async Task CheckInAppSubscriptionStatus(bool isFirstStart)
+        {
+            var purchaseService = App.Current.Container.Resolve<IPurchaseAddOnService>();
+            var networkService = App.Current.Container.Resolve<INetworkService>();
+            if (await networkService.GetIsInternetAvailableAsync())
+            {
+                if (SettingsService.Instance.IsProVersion)
+                {
+                    if (SettingsService.Instance.PurchasedStoreId == Constants.OneYearSubscriptionId ||
+                        SettingsService.Instance.PurchasedStoreId == Constants.SupportSubscriptionId)
+                    {
+                        if (SettingsService.Instance.NextCheckedInPurchaseAddon != new DateTimeOffset() && SettingsService.Instance.NextCheckedInPurchaseAddon < DateTimeOffset.Now)
+                        {
+                            if (SettingsService.Instance.PurchasedStoreId == Constants.SupportSubscriptionId)
+                            {
+                                purchaseService.Initialize(Constants.SupportSubscriptionId);
+                                (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await purchaseService.SetupPurchaseAddOnInfoAsync();
 
+                                if (IsActiveMonthSubscription)
+                                {
+                                    // set new expiration date and last check time
+                                    SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                                    SettingsService.Instance.NextCheckedInPurchaseAddon = infoMonth.ExpirationDate;
+                                }
+                                else
+                                {
+                                    SettingsService.Instance.IsProVersion = false;
+                                }
+                            }
+
+                            if (SettingsService.Instance.PurchasedStoreId == Constants.OneYearSubscriptionId)
+                            {
+                                purchaseService.Initialize(Constants.OneYearSubscriptionId);
+                                (bool IsActiveYearSubscription, StoreLicense infoYear) = await purchaseService.SetupPurchaseAddOnInfoAsync();
+                                if (IsActiveYearSubscription)
+                                {
+                                    // set new expiration date and last check time
+                                    SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                                    SettingsService.Instance.NextCheckedInPurchaseAddon = infoYear.ExpirationDate;
+                                }
+                                else
+                                {
+                                    SettingsService.Instance.IsProVersion = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // only check all addons, if this is the first start
+                    if (isFirstStart)
+                    {
+                        purchaseService.Initialize(Constants.SupportSubscriptionId);
+                        (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await purchaseService.SetupPurchaseAddOnInfoAsync();
+
+                        if (IsActiveMonthSubscription)
+                        {
+                            // set new expiration date and last check time
+                            SettingsService.Instance.IsProVersion = true;
+                            SettingsService.Instance.PurchasedStoreId = Constants.SupportSubscriptionId;
+                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoMonth.ExpirationDate;
+                        }
+
+                        purchaseService.Initialize(Constants.OneYearSubscriptionId);
+                        (bool IsActiveYearSubscription, StoreLicense infoYear) = await purchaseService.SetupPurchaseAddOnInfoAsync();
+                        if (IsActiveYearSubscription)
+                        {
+                            // set new expiration date and last check time
+                            SettingsService.Instance.IsProVersion = true;
+                            SettingsService.Instance.PurchasedStoreId = Constants.OneYearSubscriptionId;
+                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoYear.ExpirationDate;
+                        }
+
+                        purchaseService.Initialize(Constants.LifeTimeId);
+                        (bool IsActiveLifeTimeBuy, StoreLicense infoLifeTime) = await purchaseService.SetupPurchaseAddOnInfoAsync();
+                        if (IsActiveLifeTimeBuy)
+                        {
+                            // set new expiration date and last check time
+                            SettingsService.Instance.IsProVersion = true;
+                            SettingsService.Instance.PurchasedStoreId = Constants.LifeTimeId;
+                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoLifeTime.ExpirationDate;
+                        }
+                    }
+                }
+            }
+        }
 
         public void SetTitleBarAsDraggable()
         {

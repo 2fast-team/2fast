@@ -43,7 +43,7 @@ namespace Project2FA.ViewModels
             });
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
-                TempAccountIconName = null;
+                AccountIconName = null;
             });
             EditAccountIconCommand = new RelayCommand(() =>
             {
@@ -53,11 +53,11 @@ namespace Project2FA.ViewModels
 
         private async Task SaveAndCloseDialog()
         {
-            Model.Issuer = TempIssuer;
-            Model.Label = TempLabel;
-            Model.AccountIconName = TempAccountIconName;
+            Model.Issuer = Issuer;
+            Model.Label = Label;
+            Model.AccountIconName = AccountIconName;
 
-            Model.Notes = TempNotes;
+            Model.Notes = Notes;
             Model.SelectedCategories ??= new ObservableCollection<CategoryModel>();
             Model.SelectedCategories.AddRange(GlobalTempCategories.Where(x => x.IsSelected == true), true);
             await DataService.Instance.WriteLocalDatafile();
@@ -68,7 +68,8 @@ namespace Project2FA.ViewModels
             if (parameters.TryGetValue<TwoFACodeModel>("model", out var model))
             {
                 Model = model;
-                TempAccountIconName = Model.AccountIconName;
+                TempModel = (TwoFACodeModel)Model.Clone();
+                AccountIconName = Model.AccountIconName;
             }
         }
 

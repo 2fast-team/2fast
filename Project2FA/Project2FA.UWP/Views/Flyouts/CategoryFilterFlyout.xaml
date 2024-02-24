@@ -29,7 +29,8 @@
         </AppBarButton>-->
                 <AppBarButton 
                     x:Uid="CategoryFilterFlyoutABBTN_Reset"
-                    Label="~CategoryFilterFlyoutABBTN_Reset" 
+                    Label="~CategoryFilterFlyoutABBTN_Reset"
+                    Command="{x:Bind ViewModel.ResetFilterCommand}"
                     IsEnabled="False">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE149;" />

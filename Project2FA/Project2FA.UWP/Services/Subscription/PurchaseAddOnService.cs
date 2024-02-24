@@ -83,7 +83,7 @@ namespace Project2FA.UWP.Services
             return null;
         }
 
-        public async Task PromptUserToPurchaseAsync()
+        public async Task<bool> PromptUserToPurchaseAsync()
         {
             // Request a purchase of the subscription product. If a trial is available it will be offered 
             // to the customer. Otherwise, the non-trial SKU will be offered.
@@ -99,26 +99,28 @@ namespace Project2FA.UWP.Services
             switch (result.Status)
             {
                 case StorePurchaseStatus.Succeeded:
+                    return true;
                     // Show a UI to acknowledge that the customer has purchased your subscription 
                     // and unlock the features of the subscription. 
-                    break;
+
 
                 case StorePurchaseStatus.NotPurchased:
                     System.Diagnostics.Debug.WriteLine("The purchase did not complete. " +
                         "The customer may have cancelled the purchase. ExtendedError: " + extendedError);
-                    break;
+                    return false;
 
                 case StorePurchaseStatus.ServerError:
                 case StorePurchaseStatus.NetworkError:
                     System.Diagnostics.Debug.WriteLine("The purchase was unsuccessful due to a server or network error. " +
                         "ExtendedError: " + extendedError);
-                    break;
+                    return false;
 
                 case StorePurchaseStatus.AlreadyPurchased:
                     System.Diagnostics.Debug.WriteLine("The customer already owns this subscription." +
                             "ExtendedError: " + extendedError);
-                    break;
+                    return false;
             }
+            return false;
         }
     }
 }

@@ -177,6 +177,7 @@
                                         ItemsSource="{x:Bind SearchAccountCollection,Mode=OneWay}"
                                         PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                         ItemTemplate="{StaticResource SuggestBoxDataTemplate}"
+                                        ItemContainerStyle="{StaticResource AutoSuggestBoxItemContainerStyle}"
                                         TextChanged="AutoSuggestBox_TextChanged" 
                                         VerticalContentAlignment="Center"
                                         SuggestionChosen="AutoSuggestBox_SuggestionChosen"
@@ -188,9 +189,17 @@
                                         <AutoSuggestBox.QueryIcon>
                                             <FontIcon Glyph="&#xE721;" FontSize="18"/>
                                         </AutoSuggestBox.QueryIcon>
+
+
+                                        <!--<AutoSuggestBox.Style>
+                                            <Style TargetType="AutoSuggestBox">
+                                                <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextControlSelectionHighlightColor}" />
+                                            </Style>
+                                        </AutoSuggestBox.Style>-->
                                     </AutoSuggestBox>
                                 </AppBarElementContainer>
                                 <AppBarButton 
+                                    x:Name="ABB_ManageFilter"
                                     x:Uid="AccountCodePageManageFilter"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageManageFilterToolTip, FallbackValue=''}"
                                     Click="ABB_SearchFilter_Click" >
@@ -250,7 +259,7 @@
                                         <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_SearchFilter.LabelPosition" Value="Collapsed"/>
-                                        <Setter Target="AccountCodePageManageFilter.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="ABB_ManageFilter.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
                                     </VisualState.Setters>
@@ -399,6 +408,7 @@
                                     </AutoSuggestBox>
                                 </AppBarElementContainer>
                                 <AppBarButton 
+                                    x:Name="ABB_ManageFilterInfo"
                                     Command="{x:Bind ShowProFeatureCommand}"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}"
                                     x:Uid="AccountCodePageManageFilterInfo">
@@ -457,6 +467,7 @@
                                     <VisualState.Setters>
                                         <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="ABB_ManageFilterInfo.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
                                     </VisualState.Setters>

@@ -10,7 +10,7 @@ namespace Project2FA.UWP.Services
     public interface IPurchaseAddOnService
     {
         Task<(bool IsActive, StoreLicense info)> SetupPurchaseAddOnInfoAsync();
-        Task PromptUserToPurchaseAsync();
+        Task<bool> PromptUserToPurchaseAsync();
         void Initialize(string id);
     }
 }

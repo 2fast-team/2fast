@@ -7,6 +7,8 @@ using Project2FA.Core;
 using Project2FA.Core.Services.Crypto;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System;
+using Windows.UI.WebUI;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -17,7 +19,7 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class TwoFACodeModel : ObservableObject
+    public class TwoFACodeModel : ObservableObject, ICloneable
     {
         private string _label;
         [Encrypt]
@@ -195,6 +197,11 @@ namespace Project2FA.Repository.Models
         public TwoFACodeModel()
         {
             //ErrorsChanged += Model_ErrorsChanged;
+        }
+
+        public object Clone()
+        {
+            return new TwoFACodeModel {  Label = Label, Issuer = Issuer, SelectedCategories = SelectedCategories, Notes = Notes, AccountIconName = AccountIconName };
         }
     }
 }

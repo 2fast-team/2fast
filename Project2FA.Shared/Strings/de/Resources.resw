@@ -1293,4 +1293,13 @@ Derzeit verfügbar:
   <data name="ProFeatureTitleInfo" xml:space="preserve">
     <value>Kostenpflichtige Funktion</value>
   </data>
+  <data name="TutorialContentDialogForgettenPassword.Text" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="TutorialPagePasswordInfo" xml:space="preserve">
+    <value>Falls Sie das Password vergessen haben und zuvor die Anwendung deinstalliert oder zurückgesetzt hatten, können Sie auf dem selben Computer in der [Anmeldeinformationsverwaltung](https://support.microsoft.com/de-de/windows/zugreifen-auf-anmeldeinformationsverwaltung-1b5c916a-6a16-889f-8581-fc16e8165ac0) von Windows  das Passwort einsehen. Der Eintrag ist hier als „Project2FA“ unter Webanmeldeinformationen gesetzt.</value>
+  </data>
+  <data name="LoginPageWindowsHelloError" xml:space="preserve">
+    <value>Es liegt ein Problem mit Windows Hello vor. Um die Funktionalität in der Anwendung zu verwenden, lösen Sie das Problem in den Windows Einstellungen.</value>
+  </data>
 </root>

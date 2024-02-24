@@ -1,5 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.UI;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using Microsoft.UI.Xaml.Controls;
+using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -122,6 +124,24 @@ namespace Project2FA.UWP.Views
                 await Launcher.LaunchUriAsync(link);
             }
 
+        }
+
+        private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
+        {
+            var markdownText = new MarkdownTextBlock();
+            markdownText.Margin = new Thickness(8,8,8,8);
+            markdownText.Text = Strings.Resources.TutorialPagePasswordInfo;
+            markdownText.LinkClicked += MarkdownTextBlock_LinkClicked;
+            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            {
+                Target = sender as FrameworkElement,
+                HeroContent = markdownText,
+                AutoCloseInterval = 8000,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true,
+            };
+            MainGrid.Children.Add(teachingTip);
         }
     }
 }

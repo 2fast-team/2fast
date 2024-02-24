@@ -152,6 +152,39 @@
         </Setter>
     </Style>
 
+    <Style x:Name="AutoSuggestBoxItemContainerStyle"  TargetType="ListViewItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter 
+                        CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                        ContentMargin="{TemplateBinding Padding}" 
+                        CheckMode="Inline" 
+                        ContentTransitions="{TemplateBinding ContentTransitions}" 
+                        CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                        DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" 
+                        DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
+                        DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
+                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
+                        FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" 
+                        FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                        PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                        PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                        PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                        PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                        ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
+                        SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+                        SelectionCheckMarkVisualEnabled="True" 
+                        SelectedForeground="White"
+                        SelectedPointerOverBackground="{ThemeResource SystemAccentColorDark1}" 
+                        SelectedBackground="{ThemeResource SystemAccentColor}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="toolkit:MarkdownTextBlock">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontSize" Value="16"/>

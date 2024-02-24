@@ -321,39 +321,6 @@
                                     Style="{StaticResource UnicodeIndexPersonPictureStyle}"
                                     Tag="&#xF0DD;">
                                 </muxc:PersonPicture>
-                                <!--<Grid Margin="0,12,12,12">
-                                    <Ellipse 
-                                        Height="100" 
-                                        Width="100"
-                                        Fill="#99FFFFFF"/>
-                                    <FontIcon 
-                                        Margin="0,12,0,12"
-                                        FontFamily="{StaticResource SimpleIcons}" 
-                                        FontSize="60" 
-                                        Glyph="&#xEFCC;"/>
-                                </Grid>
-                                <Grid Margin="0,12,12,12">
-                                    <Ellipse 
-                                        Height="100" 
-                                        Width="100"
-                                        Fill="#99FFFFFF"/>
-                                    <FontIcon 
-                                        Margin="0,12,0,12"
-                                        FontFamily="{StaticResource SimpleIcons}" 
-                                        FontSize="60" 
-                                        Glyph="&#xEDB3;"/>
-                                </Grid>
-                                <Grid Margin="0,12,12,12">
-                                    <Ellipse 
-                                        Height="100" 
-                                        Width="100"
-                                        Fill="#99FFFFFF"/>
-                                    <FontIcon 
-                                        Margin="0,12,0,12"
-                                        FontFamily="{StaticResource SimpleIcons}" 
-                                        FontSize="60" 
-                                        Glyph="&#xF0DD;"/>
-                                </Grid>-->
                             </StackPanel>
 
                             <TextBlock 
@@ -363,6 +330,29 @@
                                 TextWrapping="WrapWholeWords"
                                 FontSize="20"
                                 FontFamily="Calibri"/>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                                <TextBlock 
+                                    Margin="0,12,0,0"
+                                    Text="~TutorialContentDialogForgettenPassword.Text"
+                                    x:Uid="TutorialContentDialogForgettenPassword"
+                                    TextWrapping="WrapWholeWords"
+                                    FontSize="20"
+                                    FontFamily="Calibri"/>
+                                <Button
+                                    Height="48"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    Click="HLBTN_PasswordInfo"
+                                    Style="{StaticResource TransparentButtonStyle}"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
+                                    VerticalAlignment="Center">
+                                    <FontIcon
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"  />
+                                </Button>
+                            </StackPanel>
 
                         </StackPanel>
                     </Grid>

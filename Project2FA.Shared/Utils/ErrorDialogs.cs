@@ -256,7 +256,7 @@ namespace Project2FA.Utils
 
             var githubButton = new Button
             {
-                Content = "Github"
+                Content = "Github issues"
             };
             githubButton.Click += async (s, e) =>
             {
@@ -265,7 +265,7 @@ namespace Project2FA.Utils
             var feedbackHub = new Button
             {
                 Margin = new Thickness(4, 0, 0, 0),
-                Content = "Feedback-Hub"
+                Content = "Github dicussions"
             };
 #if WINDOWS_UWP
             feedbackHub.Click += async (s, e) =>
@@ -352,20 +352,6 @@ namespace Project2FA.Utils
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/2fast-team/2fast/issues"));
             };
-            // TODO change
-//            var feedbackHub = new Button
-//            {
-//                Margin = new Thickness(4, 0, 0, 0),
-//                Content = "Feedback-Hub"
-//            };
-//            feedbackHub.Click += async (s, e) =>
-//            {
-//#if WINDOWS_UWP
-//                // https://docs.microsoft.com/en-us/windows/uwp/monetize/launch-feedback-hub-from-your-app
-//                var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-//                await launcher.LaunchAsync();
-//#endif
-//            };
             var buttonStackPanel = new StackPanel();
             buttonStackPanel.Orientation = Orientation.Horizontal;
             buttonStackPanel.Children.Add(githubButton);

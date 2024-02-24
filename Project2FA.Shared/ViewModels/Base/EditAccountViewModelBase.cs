@@ -16,7 +16,7 @@ namespace Project2FA.ViewModels
 {
     public class EditAccountViewModelBase : ObservableObject
     {
-        private TwoFACodeModel _twoFACodeModel;
+        private TwoFACodeModel _twoFACodeModel, _tempModel;
         private string _tempIssuer, _tempLabel, _tempAccountIconName, _tempNotes, _tempIconLabel;
         private FontIdentifikationCollectionModel _iconNameCollectionModel;
         private bool _isEditBoxVisible;
@@ -43,9 +43,10 @@ namespace Project2FA.ViewModels
             {
                 if (SetProperty(ref _twoFACodeModel, value))
                 {
-                    TempIssuer = Model.Issuer;
-                    TempLabel = Model.Label;
-                    TempAccountIconName = Model.AccountIconName;
+                    //TempAccountIconName = Model.AccountIconName;
+                    //TempIssuer = Model.Issuer;
+                    //TempLabel = Model.Label;
+                    
                     if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
                     {
                         GlobalTempCategories.Clear();
@@ -54,16 +55,33 @@ namespace Project2FA.ViewModels
                             GlobalTempCategories.Add((CategoryModel)DataService.Instance.GlobalCategories[i].Clone());
                         }
                     }
-                    if (!string.IsNullOrWhiteSpace(value.Notes))
-                    {
-                        TempNotes = Model.Notes;
-                    }
-                    else
-                    {
-                        TempNotes = string.Empty;
-                    }
+                    //if (!string.IsNullOrWhiteSpace(value.Notes))
+                    //{
+                    //    Notes = Model.Notes;
+                    //}
+                    //else
+                    //{
+                    //    Notes = string.Empty;
+                    //}
                 }
             }
+        }
+
+        public TwoFACodeModel TempModel
+        {
+            get => _tempModel;
+            set
+            {
+                if(SetProperty(ref _tempModel, value))
+                {
+                    //OnPropertyChanged(nameof(Issuer));
+                    //OnPropertyChanged(nameof(Label));
+                    //OnPropertyChanged(nameof(Notes));
+                    //OnPropertyChanged(nameof(Issuer));
+                    //OnPropertyChanged(nameof(Issuer));
+                }
+            }
+
         }
 
         /// <summary>
@@ -71,7 +89,7 @@ namespace Project2FA.ViewModels
         /// </summary>
         private void CheckInputs()
         {
-            IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(TempLabel) && !string.IsNullOrEmpty(TempIssuer);
+            IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrEmpty(Issuer);
         }
 
         public FontIdentifikationCollectionModel IconNameCollectionModel
@@ -79,41 +97,56 @@ namespace Project2FA.ViewModels
             get => _iconNameCollectionModel;
             private set => _iconNameCollectionModel = value;
         }
-        public string TempIssuer
+        public string Issuer
         {
-            get => _tempIssuer;
+            get => TempModel.Issuer;
             set
             {
-                if(SetProperty(ref _tempIssuer, value))
-                {
-                    CheckInputs();
-                }
+                TempModel.Issuer = value;
+                OnPropertyChanged(nameof(Issuer));
+                CheckInputs();
             }
         }
-        public string TempLabel
+        public string Label
         {
-            get => _tempLabel;
+            get => TempModel.Label;
             set
             {
-                if (SetProperty(ref _tempLabel, value))
-                {
-                    CheckInputs();
-                }
+                TempModel.Label = value;
+                OnPropertyChanged(nameof(Label));
+                CheckInputs();
             }
         }
-        public string TempNotes
+        public string Notes
         {
-            get => _tempNotes;
-            set => SetProperty(ref _tempNotes, value);
+            get => TempModel.Notes;
+            set
+            {
+                TempModel.Notes = value;
+                OnPropertyChanged(nameof(Notes));
+            }
         }
 
         
-        public string TempAccountIconName
+        public string AccountIconName
         {
-            get => _tempAccountIconName;
+            get => TempModel.AccountIconName;
             set
             {
-                SetProperty(ref _tempAccountIconName, value);
+                TempModel.AccountIconName = value;
+                OnPropertyChanged(nameof(AccountIconName));
+                //if (SetProperty(ref _tempAccountIconName, value))
+                //{
+                //    if (string.IsNullOrWhiteSpace(value))
+                //    {
+                //        TempIconLabel = TempLabel;
+                //    }
+                //    else
+                //    {
+                //        TempIconLabel = string.Empty;
+                //    }
+
+                //}
             }
         }
         public bool IsPrimaryBTNEnable
@@ -127,6 +160,7 @@ namespace Project2FA.ViewModels
             get => _tempIconLabel;
             set => SetProperty(ref _tempIconLabel, value);
         }
+
         public bool IsEditBoxVisible
         {
             get => _isEditBoxVisible;

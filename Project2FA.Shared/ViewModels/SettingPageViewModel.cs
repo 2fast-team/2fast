@@ -21,6 +21,8 @@ using Project2FA.Services.Enums;
 using Project2FA.Utils;
 using CommunityToolkit.Mvvm.Collections;
 using Windows.System;
+using Windows.Services.Store;
+
 
 
 #if WINDOWS_UWP
@@ -97,8 +99,16 @@ namespace Project2FA.ViewModels
                     var service = App.Current.Container.Resolve<IPurchaseAddOnService>();
                     var selectedPurchaseItem = inAppPaymentDialog.ViewModel.Items.Where(x => x.IsChecked == true).FirstOrDefault();
                     service.Initialize(selectedPurchaseItem.StoreId);
-                    await service.SetupPurchaseAddOnInfoAsync();
-                    await service.PromptUserToPurchaseAsync();
+                    //
+                    var purchaseInfo = await service.PromptUserToPurchaseAsync();
+                    (bool isActive, StoreLicense storeLicense) = await service.SetupPurchaseAddOnInfoAsync();
+                    if (purchaseInfo && isActive)
+                    {
+                        SettingsService.Instance.IsProVersion = true;
+                        SettingsService.Instance.PurchasedStoreId = storeLicense.SkuStoreId;
+                        SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                        SettingsService.Instance.NextCheckedInPurchaseAddon = storeLicense.ExpirationDate;
+                    }
                 }
             });
 
@@ -712,9 +722,9 @@ namespace Project2FA.ViewModels
         public CollectionViewSource DependencyCollectionViewSource { get; } = new CollectionViewSource();
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 
-        public string DisplayName => Windows.ApplicationModel.Package.Current.DisplayName;
+        public string DisplayName => Strings.Resources.ApplicationName;
 
-        public string Publisher => Windows.ApplicationModel.Package.Current.PublisherDisplayName;
+        //public string Publisher => Windows.ApplicationModel.Package.Current.PublisherDisplayName;
 
         public string Version
         {
@@ -737,6 +747,7 @@ namespace Project2FA.ViewModels
 #if WINDOWS_UWP
             return _marketplaceService.LaunchAppReviewInStoreAsync();
 #else
+// TODO Android and IOS
             return Task.CompletedTask;
 #endif
         }

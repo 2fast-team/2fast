@@ -1286,4 +1286,13 @@ Currently available:
   <data name="ProFeatureTitleInfo" xml:space="preserve">
     <value>Paid function</value>
   </data>
+  <data name="TutorialContentDialogForgettenPassword.Text" xml:space="preserve">
+    <value>Forgotten password?</value>
+  </data>
+  <data name="TutorialPagePasswordInfo" xml:space="preserve">
+    <value>If you have forgotten the password and previously uninstalled or reset the application, you can view the password on the same computer in the [Credential Manager](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) of Windows. The entry is set here as "Project2FA" under web login information.</value>
+  </data>
+  <data name="LoginPageWindowsHelloError" xml:space="preserve">
+    <value>There is a problem with Windows Hello. To use the functionality in the application, solve the problem in the Windows settings.</value>
+  </data>
 </root>

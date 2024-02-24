@@ -1960,6 +1960,26 @@ namespace Project2FA.Strings{
             }
         }
         #endregion
+
+        #region TutorialPagePasswordInfo
+        public static string TutorialPagePasswordInfo
+        {
+            get
+            {
+                return _resourceLoader.GetString("TutorialPagePasswordInfo");
+            }
+        }
+        #endregion
+
+        #region LoginPageWindowsHelloError
+        public static string LoginPageWindowsHelloError
+        {
+            get
+            {
+                return _resourceLoader.GetString("LoginPageWindowsHelloError");
+            }
+        }
+        #endregion
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2118,7 +2138,9 @@ namespace Project2FA.Strings{
             InAppBuyOnce,
             InAppPaymentContentDialogBuyItemSelect,
             ProFeatureContentInfo,
-            ProFeatureTitleInfo
+            ProFeatureTitleInfo,
+            TutorialPagePasswordInfo,
+            LoginPageWindowsHelloError
         }
 
         private static ResourceLoader _resourceLoader;

@@ -65,13 +65,15 @@ namespace Project2FA.UWP.Views
                 default:
                     break;
             }
-            if (!string.IsNullOrWhiteSpace(ViewModel.TempNotes))
+
+
+            if (!string.IsNullOrWhiteSpace(ViewModel.Notes))
             {
                 // TODO replace RTF control with markdown:
                 // https://stackoverflow.com/questions/46119392/how-do-i-convert-an-rtf-string-to-a-markdown-string-and-back-c-net-core-or
                 // TODO bug workaround https://github.com/microsoft/microsoft-ui-xaml/issues/1941
                 var options = Windows.UI.Text.TextSetOptions.FormatRtf | Windows.UI.Text.TextSetOptions.ApplyRtfDocumentDefaults;
-                REB_Notes.Document.SetText(options, ViewModel.TempNotes);
+                REB_Notes.Document.SetText(options, ViewModel.Notes);
             }
         }
 
@@ -79,17 +81,17 @@ namespace Project2FA.UWP.Views
         {
             if (isLightTheme)
             {
-                ViewModel.TempNotes = ViewModel.TempNotes.Replace(@"\red255\green255\blue255", @"\red0\green0\blue0");
+                ViewModel.Notes = ViewModel.Notes.Replace(@"\red255\green255\blue255", @"\red0\green0\blue0");
             }
             else
             {
-                ViewModel.TempNotes = ViewModel.TempNotes.Replace(@"\red0\green0\blue0", @"\red255\green255\blue255");
+                ViewModel.Notes = ViewModel.Notes.Replace(@"\red0\green0\blue0", @"\red255\green255\blue255");
             }
         }
 
         private void REB_Notes_TextChanged(object sender, RoutedEventArgs e)
         {
-            ViewModel.TempNotes = Toolbar.Formatter?.Text;
+            ViewModel.Notes = Toolbar.Formatter?.Text;
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -106,11 +108,11 @@ namespace Project2FA.UWP.Views
             {
                 if (selectedItem.Name != Strings.Resources.AccountCodePageSearchNotFound)
                 {
-                    ViewModel.TempAccountIconName = selectedItem.Name;
+                    ViewModel.AccountIconName = selectedItem.Name;
                 }
                 else
                 {
-                    ViewModel.TempAccountIconName = string.Empty;
+                    ViewModel.AccountIconName = string.Empty;
                 }
             }
         }
@@ -135,7 +137,7 @@ namespace Project2FA.UWP.Views
         /// <param name="e"></param>
         private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            ViewModel.SearchAccountFonts(ViewModel.TempAccountIconName);
+            ViewModel.SearchAccountFonts(ViewModel.AccountIconName);
         }
     }
 }

@@ -271,6 +271,7 @@
                                                                 Width="200"
                                                                 QueryIcon="Find"
                                                                 Text="{x:Bind ViewModel.AccountIconName,Mode=OneWay}"
+                                                                ItemContainerStyle="{StaticResource AutoSuggestBoxItemContainerStyle}"
                                                                 VerticalAlignment="Center"
                                                                 PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
                                                                 TextChanged="AutoSuggestBox_TextChanged" 

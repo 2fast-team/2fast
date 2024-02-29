@@ -109,5 +109,21 @@ namespace Project2FA.ViewModels
                 return Task.FromResult(false);
             }
         }
+
+        public bool NoCategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count == 0;
+            }
+        }
+
+        public bool CategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count > 0;
+            }
+        }
     }
 }

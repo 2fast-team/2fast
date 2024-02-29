@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:sys="using:System"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:strings="using:Project2FA.Strings"
     x:Name="MainPage"
@@ -22,16 +23,12 @@
             HorizontalAlignment="Stretch" 
             DefaultLabelPosition="Right">
             <CommandBar.PrimaryCommands>
-                <!--<AppBarButton>
-            <AppBarButton.Icon>
-                <FontIcon  Glyph="&#xE14E;" />
-            </AppBarButton.Icon>
-        </AppBarButton>-->
                 <AppBarButton 
+                    x:Name="ABTN_ResetFilter"
                     x:Uid="CategoryFilterFlyoutABBTN_Reset"
                     Label="~CategoryFilterFlyoutABBTN_Reset"
                     Command="{x:Bind ViewModel.ResetFilterCommand}"
-                    IsEnabled="False">
+                    IsEnabled="{x:Bind ViewModel.CanResetFilter, Mode=OneWay}" Click="ABTN_ResetFilter_Click">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE149;" />
                     </AppBarButton.Icon>
@@ -52,35 +49,50 @@
 
         <TextBlock 
             x:Uid="CategoryFilterFlyoutNoCategories"
-            Text="~CategoryFilterFlyoutNoCategories"
+            Text="~CategoryFilterFlyoutNoCategories.Text"
             TextWrapping="WrapWholeWords"
+            Margin="0,4,0,0"
             MaxWidth="350"
             Visibility="{x:Bind ViewModel.NoCategoriesExists,Mode=OneWay}"
             Grid.Row="1"/>
 
-        <!--Category list-->
-        <labs:TokenView 
+
+        <StackPanel Grid.Row="1">
+            <TextBlock 
+            x:Uid="CategoryFilterFlyoutCategoriesInfo"
+            Text="~CategoryFilterFlyoutCategoriesInfo.Text"
+            TextWrapping="WrapWholeWords"
+            Margin="0,4,0,12"
+            MaxWidth="350"
+            Visibility="{x:Bind ViewModel.CategoriesExists,Mode=OneWay}"/>
+
+            <!--Category list-->
+            <labs:TokenView 
             x:Name="TV_Categories"
             Margin="0,15,0,8"
-            Grid.Row="1"
             ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
             IsItemClickEnabled="True"
             SelectionMode="Multiple" 
             ItemClick="TokenView_ItemClick" Loaded="TV_Categories_Loaded">
-            <labs:TokenView.ItemTemplate>
-                <DataTemplate x:DataType="models:CategoryModel">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon
+                <labs:TokenView.ItemTemplate>
+                    <DataTemplate x:DataType="models:CategoryModel">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon
                         FontSize="16"
                         FontFamily="{StaticResource SegoeFluentIconsFilled}"
                         Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
-                        <TextBlock 
+                            <TextBlock 
                             Text="{x:Bind Name,Mode=OneWay}"
                             Margin="4,0,0,0"/>
-                    </StackPanel>
-                </DataTemplate>
-            </labs:TokenView.ItemTemplate>
-        </labs:TokenView>
+                        </StackPanel>
+                    </DataTemplate>
+                </labs:TokenView.ItemTemplate>
+            </labs:TokenView>
+        </StackPanel>
+
+
+
+
 
         <StackPanel
             HorizontalAlignment="Stretch"

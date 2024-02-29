@@ -12,7 +12,6 @@ using Project2FA.Core.Messenger;
 using Project2FA.Core.Services.Crypto;
 using System.Threading;
 using Project2FA.Utils;
-using Windows.UI.Xaml;
 using Windows.ApplicationModel.Core;
 
 using Windows.ApplicationModel.DataTransfer;
@@ -29,10 +28,12 @@ using WinUIWindow = Windows.UI.Xaml.Window;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
+using Windows.UI.Xaml;
 #else
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
 using WinUIWindow = Microsoft.UI.Xaml.Window;

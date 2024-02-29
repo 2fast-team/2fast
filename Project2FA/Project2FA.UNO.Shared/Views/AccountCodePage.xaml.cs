@@ -29,7 +29,7 @@ namespace Project2FA.UNO.Views
             PropertyChangedCallback callback = new PropertyChangedCallback(SelectedTabBarIndexChanged);
             //register an event for the changed selected index property of the TabBar
             MobileAutoSuggestBox.RegisterDisposablePropertyChangedCallback(VisibilityProperty, SelectedTabBarIndexChanged);
-            App.ShellPageInstance.ViewModel.TabBarIsVisible = true;
+            //App.ShellPageInstance.ViewModel.TabBarIsVisible = true;
 #endif
         }
 

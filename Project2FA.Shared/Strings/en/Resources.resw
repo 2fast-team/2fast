@@ -1295,4 +1295,10 @@ Currently available:
   <data name="LoginPageWindowsHelloError" xml:space="preserve">
     <value>There is a problem with Windows Hello. To use the functionality in the application, solve the problem in the Windows settings.</value>
   </data>
+  <data name="EditAccountContentDialogAccountCategoryInfo.Text" xml:space="preserve">
+    <value>By clicking on the existing categories, categories can be assigned to the accounts, allowing searches to be carried out later. The categories are managed and created using the "Set categories &amp; filters" button in the top menu bar.</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
+    <value>There are currently no categories available, create new categories using the button in the top menu bar "Set categories &amp; filters".</value>
+  </data>
 </root>

@@ -1,6 +1,4 @@
-﻿using Project2FA.Core.Messenger;
-using Project2FA.Repository.Models;
-using Project2FA.Services;
+﻿using Project2FA.Repository.Models;
 using Project2FA.ViewModels;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -31,6 +29,10 @@ namespace Project2FA.UWP.Views
         private void TV_Categories_Loaded(object sender, RoutedEventArgs e)
         {
             var selectedItems = ViewModel.GlobalTempCategories.Where(x => x.IsSelected == true);
+            if (selectedItems.Count() > 0)
+            {
+                ViewModel.CanResetFilter = true;
+            }
             for (int i = 0; i < selectedItems.Count(); i++)
             {
                 TV_Categories.SelectedItems.Add(selectedItems.ElementAt(i));
@@ -73,5 +75,15 @@ namespace Project2FA.UWP.Views
         }
 
 
+        private void ABTN_ResetFilter_Click(object sender, RoutedEventArgs e)
+        {
+            TV_Categories.SelectedItems.Clear();
+            ViewModel.CanResetFilter = false;
+            for (int i = 0; i < ViewModel.GlobalTempCategories.Count; i++)
+            {
+                ViewModel.GlobalTempCategories[i].IsSelected = false;
+            }
+            ViewModel.SaveCategorySetting();
+        }
     }
 }

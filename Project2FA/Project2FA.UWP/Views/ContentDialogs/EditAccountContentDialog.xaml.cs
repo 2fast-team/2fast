@@ -139,5 +139,17 @@ namespace Project2FA.UWP.Views
         {
             ViewModel.SearchAccountFonts(ViewModel.AccountIconName);
         }
+
+        private void HLBTN_CategoryInfo(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel.CategoriesExists)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 }

@@ -89,7 +89,7 @@ namespace Project2FA.ViewModels
         /// </summary>
         private void CheckInputs()
         {
-            IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrEmpty(Issuer);
+            IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrWhiteSpace(Issuer);
         }
 
         public FontIdentifikationCollectionModel IconNameCollectionModel
@@ -119,11 +119,19 @@ namespace Project2FA.ViewModels
         }
         public string Notes
         {
-            get => TempModel.Notes;
+            get
+            {
+                if (TempModel.Notes is null)
+                {
+                    return string.Empty;
+                }
+                return TempModel.Notes;
+            }
             set
             {
                 TempModel.Notes = value;
                 OnPropertyChanged(nameof(Notes));
+                CheckInputs();
             }
         }
 
@@ -135,6 +143,7 @@ namespace Project2FA.ViewModels
             {
                 TempModel.AccountIconName = value;
                 OnPropertyChanged(nameof(AccountIconName));
+                CheckInputs();
                 //if (SetProperty(ref _tempAccountIconName, value))
                 //{
                 //    if (string.IsNullOrWhiteSpace(value))
@@ -158,7 +167,13 @@ namespace Project2FA.ViewModels
         public string TempIconLabel
         {
             get => _tempIconLabel;
-            set => SetProperty(ref _tempIconLabel, value);
+            set
+            {
+                if(SetProperty(ref _tempIconLabel, value))
+                {
+                    CheckInputs();
+                }
+            }
         }
 
         public bool IsEditBoxVisible

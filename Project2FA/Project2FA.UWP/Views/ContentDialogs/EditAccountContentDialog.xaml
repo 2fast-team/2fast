@@ -197,27 +197,56 @@
                             Header="~EditAccountContentDialogAccountCategories.Header">
                         </appcontrols:CardControl>
                     </appcontrols:CardExpanderControl.Header>
-                    <labs:TokenView 
-                    x:Name="TV_Categories"
-                    Margin="0,15,0,8"
-                    
-                    ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
-                    
-                    IsItemClickEnabled="True"
-                    SelectionMode="Multiple" 
-                    ItemClick="TokenView_ItemClick">
-                        <labs:TokenView.ItemTemplate>
-                            <DataTemplate x:DataType="models:CategoryModel">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon 
-                                       FontFamily="{StaticResource SegoeFluentIconsFilled}"
-                                       Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"
-                                       Margin="0,0,10,0"/>
-                                    <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </labs:TokenView.ItemTemplate>
-                    </labs:TokenView>
+                    <Grid>
+                        <TextBlock 
+                            Visibility="{x:Bind ViewModel.NoCategoriesExists,Mode=OneWay}"
+                            x:Uid="EditAccountContentDialogAccountNoCategoryInfo"
+                            Margin="8,8,8,0" 
+                            TextWrapping="WrapWholeWords"
+                            Text="~EditAccountContentDialogAccountNoCategoryInfo.Text"/>
+                        <StackPanel >
+                            <Button
+                                Height="48"
+                                Width="48"
+                                Padding="4,4,4,4"
+                                Click="HLBTN_CategoryInfo"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
+                                VerticalAlignment="Center">
+                                <FontIcon
+                                    FontSize="20"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    Glyph="&#xE946;"/>
+                            </Button>
+                            <TextBlock 
+                            x:Uid="EditAccountContentDialogAccountCategoryInfo"
+                            Margin="8,8,8,0" 
+                                TextWrapping="WrapWholeWords"
+                            Text="~EditAccountContentDialogAccountCategoryInfo.Text"/>
+                            <labs:TokenView 
+                                x:Name="TV_Categories"
+                                Margin="0,15,0,8"
+                                Visibility="{x:Bind ViewModel.CategoriesExists,Mode=OneWay}"
+                                ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
+                                IsItemClickEnabled="True"
+                                SelectionMode="Multiple" 
+                                ItemClick="TokenView_ItemClick">
+                                <labs:TokenView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:CategoryModel">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon 
+                   FontFamily="{StaticResource SegoeFluentIconsFilled}"
+                   Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"
+                   Margin="0,0,10,0"/>
+                                            <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </labs:TokenView.ItemTemplate>
+                            </labs:TokenView>
+                        </StackPanel>
+
+                    </Grid>
+
                 </appcontrols:CardExpanderControl>
 
 

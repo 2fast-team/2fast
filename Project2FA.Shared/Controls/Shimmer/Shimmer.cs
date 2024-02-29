@@ -171,10 +171,10 @@ namespace Project2FA.Controls
             {
                 case ElementTheme.Default:
                 case ElementTheme.Dark:
-                    _gradientStop1!.Color = Color.FromArgb((byte)(255 * 3.26 / 100), 255, 255, 255);
-                    _gradientStop2!.Color = Color.FromArgb((byte)(255 * 6.05 / 100), 255, 255, 255);
-                    _gradientStop3!.Color = Color.FromArgb((byte)(255 * 6.05 / 100), 255, 255, 255);
-                    _gradientStop4!.Color = Color.FromArgb((byte)(255 * 3.26 / 100), 255, 255, 255);
+                    _gradientStop1!.Color = Color.FromArgb((byte)(255 * 6.05 / 100), 255, 255, 255);
+                    _gradientStop2!.Color = Color.FromArgb((byte)(255 * 3.26 / 100), 255, 255, 255);
+                    _gradientStop3!.Color = Color.FromArgb((byte)(255 * 3.26 / 100), 255, 255, 255);
+                    _gradientStop4!.Color = Color.FromArgb((byte)(255 * 6.05 / 100), 255, 255, 255);
                     break;
                 case ElementTheme.Light:
                     _gradientStop1!.Color = Color.FromArgb((byte)(255 * 5.37 / 100), 0, 0, 0);

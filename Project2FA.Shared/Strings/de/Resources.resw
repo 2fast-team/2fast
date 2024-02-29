@@ -543,12 +543,11 @@ Starten Sie direkt durch und bringen Sie mehr Sicherheit durch einen zweiten Fak
     <value>Passwort eingeben</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
-    <value>Die Anwendung besitzt derzeit **nicht** die erforderlichen Zugriffsrechte, um auf die vorhandene Datendatei zuzugreifen.
-
-
-Für das setzen der Rechte muss die Anwendung jedoch geschlossen werden. 
-Bitte erteilen Sie die erforderlichen Rechte in den Einstellungen und starten Sie die Anwendung erneut, um die existierende Datendatei zu laden. 
-
+    <value>Die Anwendung besitzt derzeit **nicht** die erforderlichen Zugriffsrechte, um auf die vorhandene Datendatei zuzugreifen.  
+Für das setzen der Rechte muss die Anwendung jedoch geschlossen werden.  
+  
+Bitte erteilen Sie die erforderlichen Rechte in den Einstellungen und starten Sie die Anwendung erneut, um die existierende Datendatei zu laden.  
+  
 Anleitung zum setzen der Berechtigung:
 ![Anleitung zum setzen der Berechtigung](ms-appx:///Assets/Infoelements/AuthSystemstorageDE.png)</value>
   </data>
@@ -1301,5 +1300,11 @@ Derzeit verfügbar:
   </data>
   <data name="LoginPageWindowsHelloError" xml:space="preserve">
     <value>Es liegt ein Problem mit Windows Hello vor. Um die Funktionalität in der Anwendung zu verwenden, lösen Sie das Problem in den Windows Einstellungen.</value>
+  </data>
+  <data name="EditAccountContentDialogAccountCategoryInfo.Text" xml:space="preserve">
+    <value>Durch das anklicken der vorhandenen Kategorien, können den Konten Kategorien zugewiesen werden, wodurch im späteren Suchen ausgeführt werden können. Die Kategorien werden über den Button in der oberen Menüleiste „Kategorien &amp; Filter setzen“ verwaltet und erstellt.</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
+    <value>Es sind derzeit keine Kategorien vorhanden, erstellen Sie neue Kategorien über den Button in der oberen Menüleiste „Kategorien &amp; Filter setzen“.</value>
   </data>
 </root>

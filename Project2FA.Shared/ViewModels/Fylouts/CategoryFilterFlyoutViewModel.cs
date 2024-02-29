@@ -35,7 +35,8 @@ namespace Project2FA.ViewModels
     {
         public ICommand ManageCategoriesCommand { get; }
         public ICommand ResetFilterCommand { get; }
-        private bool _canSaveFilter;
+        private bool _canSaveFilter, _canResetFilter;
+        private bool _categoriesExists;
         public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         public CategoryFilterFlyoutViewModel()
         {
@@ -58,7 +59,7 @@ namespace Project2FA.ViewModels
         {
             var dialogService = App.Current.Container.Resolve<IDialogService>();
             ManageCategoriesContentDialog dialog = new ManageCategoriesContentDialog();
-            await (dialogService.ShowDialogAsync(dialog, new DialogParameters())).ConfigureAwait(true);
+            await dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         public void SaveCategorySetting()
@@ -98,10 +99,23 @@ namespace Project2FA.ViewModels
             }
         }
 
+        public bool CategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count > 0;
+            }
+        }
+
         public bool CanSaveFilter 
         { 
             get => _canSaveFilter; 
             set => SetProperty(ref _canSaveFilter, value);
+        }
+        public bool CanResetFilter
+        { 
+            get => _canResetFilter; 
+            set => SetProperty(ref _canResetFilter, value); 
         }
     }
 }

@@ -1307,4 +1307,19 @@ Derzeit verfügbar:
   <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
     <value>Es sind derzeit keine Kategorien vorhanden, erstellen Sie neue Kategorien über den Button in der oberen Menüleiste „Kategorien &amp; Filter setzen“.</value>
   </data>
+  <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
+    <value>Fehlerprotokollierung</value>
+  </data>
+  <data name="SettingsLoggingFull.Content" xml:space="preserve">
+    <value>Vollständig</value>
+  </data>
+  <data name="SettingsLoggingNone.Content" xml:space="preserve">
+    <value>Keine Protokollierung</value>
+  </data>
+  <data name="SettingsLoggingSimple.Content" xml:space="preserve">
+    <value>Nur Fehler</value>
+  </data>
+  <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
+    <value>Fehlerprotokoll anzeigen</value>
+  </data>
 </root>

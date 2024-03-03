@@ -245,6 +245,12 @@ namespace Project2FA.Services
             }
         }
 
+        public LoggingPreferEnum LoggingSetting
+        {
+            get => _helper.SafeReadEnum(nameof(LoggingSetting), LoggingPreferEnum.Simple);
+            set => _helper.TryWrite(nameof(LoggingSetting), value);
+        }
+
         public string PurchasedStoreId
         {
             get => _helper.SafeRead(nameof(PurchasedStoreId), string.Empty);

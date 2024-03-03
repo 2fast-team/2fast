@@ -58,6 +58,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SerializationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\LoggingPreferEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\Theme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\BiometricPreferEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\SettingsService.cs" />

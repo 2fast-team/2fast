@@ -436,7 +436,11 @@ namespace Project2FA.Services
                             }
 
                             deserializeCollection = datafile.Collection;
-                            GlobalCategories.AddRange(datafile.GlobalCategories, true);
+                            if (datafile.GlobalCategories != null)
+                            {
+                                GlobalCategories.AddRange(datafile.GlobalCategories, true);
+                            }
+          
                         }
                         if (deserializeCollection != null)
                         {

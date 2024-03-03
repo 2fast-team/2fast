@@ -513,6 +513,30 @@ namespace Project2FA.ViewModels
             }
         }
 
+        public int LoggingIndex
+        {
+            get => _settings.LoggingSetting switch
+            {
+                LoggingPreferEnum.Simple => 1,
+                LoggingPreferEnum.None => 0,
+                LoggingPreferEnum.Full => 2,
+                _ => 1,
+            };
+
+            set
+            {
+                switch (value)
+                {
+                    case 0:
+                        _settings.LoggingSetting = LoggingPreferEnum.None; break;
+                    case 1:
+                        _settings.LoggingSetting = LoggingPreferEnum.Simple; break;
+                    case 2:
+                        _settings.LoggingSetting = LoggingPreferEnum.Full; break;
+                }
+            }
+        }
+
         public int SetQRCodeScanSeconds
         {
             get => _settings.QRCodeScanSeconds;

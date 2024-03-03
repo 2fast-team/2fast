@@ -1301,4 +1301,19 @@ Currently available:
   <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
     <value>There are currently no categories available, create new categories using the button in the top menu bar "Set categories &amp; filters".</value>
   </data>
+  <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
+    <value>Error logging</value>
+  </data>
+  <data name="SettingsLoggingFull.Content" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="SettingsLoggingNone.Content" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SettingsLoggingSimple.Content" xml:space="preserve">
+    <value>Only exception</value>
+  </data>
+  <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
+    <value>Show error log</value>
+  </data>
 </root>

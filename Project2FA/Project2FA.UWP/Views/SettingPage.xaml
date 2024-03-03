@@ -305,6 +305,29 @@
                                     </appcontrols:CardControl.ActionContent>
                                 </appcontrols:CardControl>
 
+                                <appcontrols:CardControl 
+                        x:Uid="SettingsAppLoggingMode"
+                        Icon="&#xEADF;"
+                        Header="~SettingsAppLoggingMode.Header">
+                                    <appcontrols:CardControl.Description>
+                                        <HyperlinkButton
+                                x:Uid="SettingsOpenLogBTN"
+                                Content="~SettingsOpenLogBTN.Content"
+                                NavigateUri="ms-settings:personalization-colors"/>
+                                    </appcontrols:CardControl.Description>
+                                    <appcontrols:CardControl.ActionContent>
+                                        <StackPanel>
+                                            <ComboBox 
+SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.LoggingIndex, Mode=TwoWay}" 
+MinWidth="{StaticResource CardActionControlMinWidth}">
+                                                <ComboBoxItem x:Uid="SettingsLoggingNone" />
+                                                <ComboBoxItem x:Uid="SettingsLoggingSimple"/>
+                                                <ComboBoxItem x:Uid="SettingsLoggingFull"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </appcontrols:CardControl.ActionContent>
+                                </appcontrols:CardControl>
+
 
                                 <appcontrols:CardControl 
                                     x:Uid="SettingsOptionsQRScan"
@@ -469,7 +492,9 @@
                                     </appcontrols:CardExpanderControl.Content>
                                 </appcontrols:CardExpanderControl>
 
-                                <appcontrols:CardExpanderControl
+                                
+
+                                <!--<appcontrols:CardExpanderControl
                                     Margin="0,0,0,20"
                                     Visibility="{x:Bind ViewModel.SettingsPartViewModel.IsProVersion}">
                                     <appcontrols:CardExpanderControl.Header>
@@ -483,7 +508,7 @@
                                             </appcontrols:CardControl.ActionContent>
                                         </appcontrols:CardControl>
                                     </appcontrols:CardExpanderControl.Header>
-                                </appcontrols:CardExpanderControl>
+                                </appcontrols:CardExpanderControl>-->
                             </appcontrols:CardGroupControl>
                         </StackPanel>
                     </ScrollViewer>

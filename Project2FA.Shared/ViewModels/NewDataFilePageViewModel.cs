@@ -15,6 +15,8 @@ using UNOversal.Services.Serialization;
 using UNOversal.Navigation;
 using UNOversal.Services.Dialogs;
 using Project2FA.Core;
+using Project2FA.Services.Logging;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -43,6 +45,7 @@ namespace Project2FA.ViewModels
         private INavigationService NaviationService { get; }
         public ICommand SetAndCreateLocalDatafileCommand { get; }
         public ICommand SetAndCreateWebDAVDatafileCommand { get; }
+        private ILoggingService LoggingService { get; }
         private bool _selectWebDAV;
 
         private string _errorText;
@@ -54,13 +57,15 @@ namespace Project2FA.ViewModels
             IFileService fileService, 
             IDialogService dialogService,
             INavigationService navigationService,
-            ISerializationService serializationService) : 
+            ISerializationService serializationService,
+            ILoggingService loggingService) : 
             base()
         {
             NaviationService = navigationService;
             SerializationService = serializationService;
             DialogService = dialogService;
             FileService = fileService;
+            LoggingService = loggingService;
             WebDAVLoginRequiered = true;
             WebDAVDatafilePropertiesEnabled = false;
 
@@ -183,16 +188,17 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
+                await LoggingService.LogException(exc);
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(SetAndCreateLocalDatafile),exc);
 #endif
                 if (exc.Message.Contains("E_ACCESSDENIED"))
                 {
                     var dialog = new ContentDialog();
-                    dialog.Title = Strings.Resources.NewDatafileAccessErrorTitle;
-                    dialog.Content = Strings.Resources.NewDatafileAccessErrorDesc;
+                    dialog.Title = Resources.NewDatafileAccessErrorTitle;
+                    dialog.Content = Resources.NewDatafileAccessErrorDesc;
                     dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
-                    dialog.PrimaryButtonText = Strings.Resources.Confirm;
+                    dialog.PrimaryButtonText = Resources.Confirm;
                     await DialogService.ShowDialogAsync(dialog, new DialogParameters());
                 }
                 else

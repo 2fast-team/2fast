@@ -18,6 +18,8 @@ using Project2FA.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using Project2FA.Core.Messenger;
 using Project2FA.Core.Services.Crypto;
+using Project2FA.Services.Logging;
+
 
 #if WINDOWS_UWP
 using Windows.Security.Cryptography;
@@ -48,6 +50,7 @@ namespace Project2FA.ViewModels
         private IDialogService DialogService { get; }
         private ISecretService SecretService { get; }
         private IFileService FileService { get; }
+        private ILoggingService LoggingService { get; }
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
         private string _applicationTitle;
         private bool _isScreenCaptureEnabled;
@@ -58,6 +61,7 @@ namespace Project2FA.ViewModels
             DialogService = App.Current.Container.Resolve<IDialogService>();
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             FileService = App.Current.Container.Resolve<IFileService>();
+            LoggingService = App.Current.Container.Resolve<ILoggingService>();
             LoginCommand = new RelayCommand(CheckLogin);
             App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
@@ -174,6 +178,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
+                await LoggingService.LogException(exc);
                 //Error = exc.Message;
                 //ShowError = true;
                 //Password = string.Empty;

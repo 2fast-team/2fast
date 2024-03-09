@@ -1322,4 +1322,10 @@ Derzeit verfügbar:
   <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
     <value>Fehlerprotokoll anzeigen</value>
   </data>
+  <data name="SettingsPageNoLogDialogContent" xml:space="preserve">
+    <value>Derzeit wurde kein Fehlerbericht erstellt.</value>
+  </data>
+  <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
+    <value>Kein Fehlerbericht vorhanden</value>
+  </data>
 </root>

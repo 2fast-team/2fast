@@ -19,6 +19,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using Project2FA.Core.Utils;
+using Project2FA.Services.Logging;
+
 
 
 
@@ -74,6 +76,7 @@ namespace Project2FA.ViewModels
         public ICommand NavigateToSettingsCommand { get; }
         public ICommand SetFilterCommand { get; }
         public ICommand CameraCommand { get; }
+        private ILoggingService LoggingService { get; }
 
         public ICommand ShowProFeatureCommand { get; }
 
@@ -89,11 +92,12 @@ namespace Project2FA.ViewModels
         private bool _proFeatureRequest;
 
 
-        public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade, INavigationService navigationService)
+        public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade, INavigationService navigationService, ILoggingService loggingService)
         {
             DialogService = dialogService;
             Logger = loggerFacade;
             NavigationService = navigationService;
+            LoggingService = loggingService;
 
             _dispatcherTOTPTimer = new DispatcherTimer();
             _dispatcherTOTPTimer.Interval = new TimeSpan(0, 0, 0, 1); //every second
@@ -350,8 +354,9 @@ namespace Project2FA.ViewModels
                 Clipboard.SetContent(dataPackage);
                 return true;
             }
-            catch (System.Exception)
+            catch (Exception exc)
             {
+                await LoggingService.LogException(exc);
                 ContentDialog dialog = new ContentDialog();
                 dialog.Title = Strings.Resources.ErrorHandle;
                 dialog.Content = Strings.Resources.ErrorClipboardTask;
@@ -603,6 +608,7 @@ namespace Project2FA.ViewModels
                 }
                 catch (System.Exception exc)
                 {
+                    LoggingService.LogException(exc);
                     TwoFADataService.ACVCollection.Filter = null;
 #if WINDOWS_UWP
                     TrackingManager.TrackExceptionCatched(nameof(SetSuggestionList), exc);

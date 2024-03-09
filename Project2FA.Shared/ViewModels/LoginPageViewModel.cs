@@ -15,6 +15,8 @@ using Project2FA.Utils;
 using Windows.ApplicationModel.Core;
 
 using Windows.ApplicationModel.DataTransfer;
+using Project2FA.Services.Logging;
+
 
 
 
@@ -60,6 +62,7 @@ namespace Project2FA.ViewModels
 #endif
     public class LoginPageViewModel : CredentialViewModelBase
     {
+        private ILoggingService LoggingService { get; }
 #if ANDROID || IOS
         private IBiometryService BiometryService { get; }
         private readonly CancellationToken _cancellationToken = CancellationToken.None;
@@ -70,6 +73,7 @@ namespace Project2FA.ViewModels
         public LoginPageViewModel()
         {
             DialogService = App.Current.Container.Resolve<IDialogService>();
+            LoggingService = App.Current.Container.Resolve<LoggingService>();
             LoginCommand = new RelayCommand(CheckLogin);
 #if WINDOWS_UWP
             WindowsHelloLoginCommand = new RelayCommand(WindowsHelloLoginCommandTask);
@@ -198,6 +202,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
+                await LoggingService.LogException(exc);
                 TrackingManager.TrackExceptionCatched(nameof(WindowsHelloLoginCommandTask), exc);
                 var dialog = new ContentDialog
                 {

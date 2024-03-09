@@ -1980,6 +1980,27 @@ namespace Project2FA.Strings{
             }
         }
         #endregion
+
+        #region SettingsPageNoLogDialogTitle
+        public static string SettingsPageNoLogDialogTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("SettingsPageNoLogDialogTitle");
+            }
+        }
+        #endregion
+
+        #region SettingsPageNoLogDialogContent
+        public static string SettingsPageNoLogDialogContent
+        {
+            get
+            {
+                return _resourceLoader.GetString("SettingsPageNoLogDialogContent");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]

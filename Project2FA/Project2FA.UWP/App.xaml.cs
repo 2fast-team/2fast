@@ -7,6 +7,7 @@ using Project2FA.Core.Services.NTP;
 using Project2FA.Helpers;
 using Project2FA.Repository.Database;
 using Project2FA.Services;
+using Project2FA.Services.Logging;
 using Project2FA.Services.Marketplace;
 using Project2FA.Services.Parser;
 using Project2FA.Services.Web;
@@ -67,6 +68,7 @@ namespace Project2FA.UWP
             TrackingManager.TrackExceptionUnhandled("UnobservedTaskException", e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
+            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception);
             // let the app crash...
         }
 
@@ -75,6 +77,7 @@ namespace Project2FA.UWP
             TrackingManager.TrackExceptionUnhandled(nameof(App_UnhandledException), e.Exception);
             SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
+            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception);
             // let the app crash...
         }
 
@@ -103,6 +106,7 @@ namespace Project2FA.UWP
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
             container.RegisterSingleton<IPurchaseAddOnService, PurchaseAddOnService>();
+            container.RegisterSingleton<ILoggingService, LoggingService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();

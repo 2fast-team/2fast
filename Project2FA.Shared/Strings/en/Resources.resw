@@ -1316,4 +1316,10 @@ Currently available:
   <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
     <value>Show error log</value>
   </data>
+  <data name="SettingsPageNoLogDialogContent" xml:space="preserve">
+    <value>No error report has been created at this time.</value>
+  </data>
+  <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
+    <value>No error report available</value>
+  </data>
 </root>

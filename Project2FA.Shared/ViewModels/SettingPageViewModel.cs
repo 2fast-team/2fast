@@ -22,6 +22,10 @@ using Project2FA.Utils;
 using CommunityToolkit.Mvvm.Collections;
 using Windows.System;
 using Windows.Services.Store;
+using Project2FA.Services.Logging;
+using UNOversal.Services.File;
+
+
 
 
 
@@ -65,7 +69,9 @@ namespace Project2FA.ViewModels
         public ICommand ManageSubscriptionsCommand { get; }
 
         private int _selectedItem;
-        public SettingPageViewModel(IDialogService dialogService, ISecretService secretService, INavigationService navigationService)
+        public SettingPageViewModel(IDialogService dialogService, 
+            ISecretService secretService,
+            INavigationService navigationService)
         {
 #if WINDOWS_UWP
             IMarketplaceService marketplaceService = App.Current.Container.Resolve<IMarketplaceService>();
@@ -177,7 +183,7 @@ namespace Project2FA.ViewModels
     public class SettingsPartViewModel : ObservableObject
     {
         private SettingsService _settings;
-        private IDialogService _dialogService { get; }
+        private IDialogService DialogService { get; }
         private bool _isWindowsHelloSupported;
         private bool _manualNTPServerConfiurationChecked;
         private bool _progressIsIndeterminate;
@@ -187,6 +193,7 @@ namespace Project2FA.ViewModels
 
         public ICommand MakeFactoryResetCommand { get; }
         public ICommand SaveNTPServerAddressCommand { get; }
+        public ICommand OpenLogCommand { get; }
 
         /// <summary>
         /// View Model constructor
@@ -197,14 +204,14 @@ namespace Project2FA.ViewModels
         {
             if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 _settings = SettingsService.Instance;
-            _dialogService = dialogService;
-
+            DialogService = dialogService;
             MakeFactoryResetCommand = new RelayCommand(MakeFactoryReset);
             SaveNTPServerAddressCommand = new RelayCommand(() =>
             {
                 SettingsService.Instance.NTPServerString = _ntpServerStr;
                 NtpServerEditValid = false;
             });
+            OpenLogCommand = new AsyncRelayCommand(OpenLogCommandTask);
 
 #if WINDOWS_UWP
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -234,7 +241,7 @@ namespace Project2FA.ViewModels
             dialog.PrimaryButtonText = Resources.No;
             dialog.SecondaryButtonText = Resources.Yes;
             dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            ContentDialogResult result = await _dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            ContentDialogResult result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
 
             switch (result)
             {
@@ -268,6 +275,31 @@ namespace Project2FA.ViewModels
                     break;
                 default:
                     break;
+            }
+        }
+
+        private async Task OpenLogCommandTask()
+        {
+            // TODO if nessesary
+            //// Set the recommended app
+            //var options = new Windows.System.LauncherOptions();
+            //options.PreferredApplicationPackageFamilyName = "Contoso.URIApp_8wknc82po1e";
+            //options.PreferredApplicationDisplayName = "Contoso URI Ap";
+            try
+            {
+                var file = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.LogName);
+                // Launch the URI and pass in the recommended app
+                // in case the user has no apps installed to handle the URI
+                var success = await Launcher.LaunchFileAsync(file);
+            }
+            catch (Exception)
+            {
+                var dialog = new ContentDialog();
+                dialog.Title = Resources.SettingsPageNoLogDialogTitle;
+                dialog.Content = Resources.SettingsPageNoLogDialogContent;
+                dialog.PrimaryButtonText = Resources.Confirm;
+                await DialogService.ShowDialogAsync(dialog, new DialogParameters());
+
             }
         }
 

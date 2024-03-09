@@ -12,5 +12,6 @@
         public const string SupportSubscriptionId = "9N0PKJ5MF92B";
         public const string LifeTimeId = "9PCLBSQW4DLN";
         public const string EnterpriseAppManagementContainer = "Managed.App.Settings";
+        public const string LogName = "AppLog.log";
     }
 }

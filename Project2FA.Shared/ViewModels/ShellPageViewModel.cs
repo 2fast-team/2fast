@@ -32,13 +32,13 @@ namespace Project2FA.ViewModels
         private bool _navigationIsAllowed = true;
         private string _title;
         private bool _isScreenCaptureEnabled;
-        private int _selectedIndex = 0;
-        private bool _isMobileSearchActive = false;
         public ICommand AccountCodePageCommand { get; }
         public ICommand SearchPageCommand { get; }
         public ICommand SettingsPageCommand { get; }
-#if !WINDOWS_UWP
+#if ANDROID || IOS
         private TabBarItem _selectedItem;
+        private int _selectedIndex = 0;
+        private bool _isMobileSearchActive = false;
 #endif
 
         public ShellPageViewModel()
@@ -141,7 +141,7 @@ namespace Project2FA.ViewModels
             set=> SetProperty(ref _tabBarIsVisible, value);
         }
 
-
+#if ANDROID || IOS
         public int SelectedIndex 
         { 
             get => _selectedIndex;
@@ -149,7 +149,7 @@ namespace Project2FA.ViewModels
             {
                 SetProperty(ref _selectedIndex, value);
                 //only for mobile devices, check if account filters are set
-#if ANDROID || IOS
+
                 if (value == 0)
                 {
                     if (DataService.Instance.ACVCollection.Filter != null)
@@ -157,7 +157,7 @@ namespace Project2FA.ViewModels
                         DataService.Instance.ACVCollection.Filter = null;
                     }
                 }
-#endif
+
                 if (value == 1)
                 {
                     IsMobileSearchActive = true;
@@ -179,6 +179,7 @@ namespace Project2FA.ViewModels
             get => _isMobileSearchActive; 
             set => SetProperty(ref _isMobileSearchActive, value);
         }
+#endif
 
         public Thickness GetTabBarMargin
         {

@@ -313,7 +313,7 @@
                                         <HyperlinkButton
                                 x:Uid="SettingsOpenLogBTN"
                                 Content="~SettingsOpenLogBTN.Content"
-                                NavigateUri="ms-settings:personalization-colors"/>
+                                Command="{x:Bind ViewModel.SettingsPartViewModel.OpenLogCommand}"/>
                                     </appcontrols:CardControl.Description>
                                     <appcontrols:CardControl.ActionContent>
                                         <StackPanel>

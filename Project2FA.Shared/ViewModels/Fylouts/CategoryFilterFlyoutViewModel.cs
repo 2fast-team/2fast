@@ -34,17 +34,12 @@ namespace Project2FA.ViewModels
     public class CategoryFilterFlyoutViewModel : ObservableRecipient
     {
         public ICommand ManageCategoriesCommand { get; }
-        public ICommand ResetFilterCommand { get; }
         private bool _canSaveFilter, _canResetFilter;
         private bool _categoriesExists;
         public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         public CategoryFilterFlyoutViewModel()
         {
             ManageCategoriesCommand = new AsyncRelayCommand(ManageCategoriesCommandTask);
-            ResetFilterCommand = new RelayCommand(() =>
-            {
-
-            });
             OnPropertyChanged(nameof(NoCategoriesExists));
 
             Messenger.Register<CategoryFilterFlyoutViewModel, CategoriesChangedMessage>(this, (r, m) =>

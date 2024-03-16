@@ -27,8 +27,8 @@
                     x:Name="ABTN_ResetFilter"
                     x:Uid="CategoryFilterFlyoutABBTN_Reset"
                     Label="~CategoryFilterFlyoutABBTN_Reset"
-                    Command="{x:Bind ViewModel.ResetFilterCommand}"
-                    IsEnabled="{x:Bind ViewModel.CanResetFilter, Mode=OneWay}" Click="ABTN_ResetFilter_Click">
+                    IsEnabled="{x:Bind ViewModel.CanResetFilter, Mode=OneWay}" 
+                    Click="ABTN_ResetFilter_Click">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE149;" />
                     </AppBarButton.Icon>

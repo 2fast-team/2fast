@@ -663,10 +663,10 @@ namespace Project2FA.Services
                 var result = prevíousVersion.CompareTo(compareVersion);
                 int version = result >= 0 ? 2 : 1;
 
-                ObservableCollection<CategoryModel> tempCategories = new ObservableCollection<CategoryModel>(GlobalCategories);
-                for (int i = 0; i < tempCategories.Count; i++)
+                ObservableCollection<CategoryModel> tempCategories = new ObservableCollection<CategoryModel>();
+                for (int i = 0; i < GlobalCategories.Count; i++)
                 {
-                    tempCategories[i].IsSelected = false;
+                    tempCategories.Add((CategoryModel)GlobalCategories[i].Clone());
                 }
                 // create the new datafile model
                 DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version, GlobalCategories = tempCategories };

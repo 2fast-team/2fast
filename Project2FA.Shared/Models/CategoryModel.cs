@@ -54,9 +54,10 @@ namespace Project2FA.Repository.Models
             set => _guid = value; 
         }
 
+        // Clone the object except IsSelected
         public object Clone()
         {
-            return new CategoryModel { UnicodeString = UnicodeString, UnicodeIndex = UnicodeIndex, Guid = Guid, Name = Name, IsSelected = IsSelected };
+            return new CategoryModel { UnicodeString = UnicodeString, UnicodeIndex = UnicodeIndex, Guid = Guid, Name = Name };
         }
     }
 }

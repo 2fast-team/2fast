@@ -33,6 +33,7 @@ namespace Project2FA.UWP.Views
             for (int i = 0; i < selectedItems.Count(); i++)
             {
                 TV_Categories.SelectedItems.Add(selectedItems.ElementAt(i));
+                selectedItems.ElementAt(i).IsSelected = true;
             }
             switch (SettingsService.Instance.AppTheme)
             {

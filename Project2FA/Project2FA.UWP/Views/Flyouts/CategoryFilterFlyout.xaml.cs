@@ -79,6 +79,7 @@ namespace Project2FA.UWP.Views
         {
             TV_Categories.SelectedItems.Clear();
             ViewModel.CanResetFilter = false;
+            ViewModel.CanSaveFilter = false;
             for (int i = 0; i < ViewModel.GlobalTempCategories.Count; i++)
             {
                 ViewModel.GlobalTempCategories[i].IsSelected = false;

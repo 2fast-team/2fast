@@ -90,7 +90,7 @@ namespace Project2FA.ViewModels
             var yearSubscriptionModel = new InAppPaymentItemModel
             {
                 Description = Resources.InAppSubscriptionYear,
-                Url = "ms-appx:///Assets/Images/give-love.png",
+                Url = "ms-appx:///Assets/Images/price-tag.png",
                 UidCheckBox = Resources.InAppPaymentContentDialogSubscriptionItemSelect,
                 IsEnabled = false,
                 IsChecked = false,
@@ -101,7 +101,7 @@ namespace Project2FA.ViewModels
             var lifeTimeModel = new InAppPaymentItemModel
             {
                 Description = Resources.InAppBuyOnce,
-                Url = "ms-appx:///Assets/Images/give-love.png",
+                Url = "ms-appx:///Assets/Images/gift.png",
                 UidCheckBox = Resources.InAppPaymentContentDialogBuyItemSelect,
                 IsEnabled = false,
                 IsChecked = false,

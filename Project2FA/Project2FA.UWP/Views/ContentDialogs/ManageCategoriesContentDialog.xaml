@@ -9,6 +9,8 @@
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:strings="using:Project2FA.Strings"
+    x:Name="Page"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     Title="~ManageCategoriesContentDialogHeader.Title"
@@ -108,6 +110,7 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
                                 <FontIcon
                                     FontFamily="{StaticResource SegoeFluentIconsFilled}"
@@ -120,15 +123,29 @@
                                     Width="40"
                                     Height="40">
                                     <FontIcon FontSize="12" Glyph="&#xE70F;"/>
-                                    <Button.ContextFlyout>
-                                        <muxc:CommandBarFlyout>
+                                    <Button.Flyout>
+                                        <muxc:CommandBarFlyout Placement="Right">
                                             <muxc:CommandBarFlyout.PrimaryCommands>
                                                 <AppBarElementContainer>
-                                                    <AutoSuggestBox></AutoSuggestBox>
+                                                    <ComboBox 
+                                                        x:Name="CB_CategoryModel"
+                                                        MinWidth="220"
+                                                        VerticalAlignment="Stretch"
+                                                        HorizontalAlignment="Stretch"
+                                                        MinHeight="48"
+                                                        
+                                                        ItemTemplate="{StaticResource SymbolListTemplate}"
+                                                        ItemsSource="{Binding DataContext.IconSourceCollection, ElementName=Page, Mode=OneWay}" 
+                                                        SelectionChanged="CB_CategoryModel_SelectionChanged" 
+                                                        Loaded="CB_CategoryModel_Loaded">
+                                                    </ComboBox>
                                                 </AppBarElementContainer>
+                                                <AppBarButton 
+                                                    
+                                                    Icon="Accept" Click="AppBarButton_Click"/>
                                             </muxc:CommandBarFlyout.PrimaryCommands>
                                         </muxc:CommandBarFlyout>
-                                    </Button.ContextFlyout>
+                                    </Button.Flyout>
                                 </Button>
                                 <TextBox
                                     TextChanged="TextBox_TextChanged"
@@ -136,6 +153,16 @@
                                     MinWidth="250"
                                     Grid.Column="2"
                                     Margin="12,0,0,0"/>
+                                <Button 
+                                    Margin="4,0,0,0"
+                                    Grid.Column="3"
+                                    CornerRadius="99"
+                                    Width="40"
+                                    Height="40"
+                                    CommandParameter="{Binding}"
+                                    Command="{Binding DataContext.DeleteCategoryCommand, ElementName=Page, Mode=OneWay}">
+                                    <FontIcon FontSize="12" Glyph="&#xE74D;"/>
+                                </Button>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

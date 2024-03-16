@@ -31,7 +31,7 @@
         </ResourceDictionary>
     </ContentDialog.Resources>
 
-    <Grid>
+    <Grid x:Name="RootGrid">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel 
                 MinHeight="650" 
@@ -192,9 +192,26 @@
                     Margin="0,15,0,8">
                     <appcontrols:CardExpanderControl.Header>
                         <appcontrols:CardControl
-                            Icon="&#xE912;"
-                            x:Uid="EditAccountContentDialogAccountCategories"
-                            Header="~EditAccountContentDialogAccountCategories.Header">
+                                        Icon="&#xE912;"
+                                        x:Uid="EditAccountContentDialogAccountCategories" 
+                                        Header="~EditAccountContentDialogAccountCategories.Header">
+                            <appcontrols:CardControl.ActionContent>
+                                <Button
+                                    Grid.Column="1"
+                                    Height="36"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    Style="{StaticResource TransparentButtonStyle}"
+                                    x:Name="BTN_Cateory_Help"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp,FallbackValue=''}"
+                                    VerticalAlignment="Bottom" 
+                                    Click="HLBTN_CategoryInfo" >
+                                    <FontIcon
+                                        FontSize="20"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE946;"/>
+                                </Button>
+                            </appcontrols:CardControl.ActionContent>
                         </appcontrols:CardControl>
                     </appcontrols:CardExpanderControl.Header>
                     <Grid>
@@ -205,24 +222,6 @@
                             TextWrapping="WrapWholeWords"
                             Text="~EditAccountContentDialogAccountNoCategoryInfo.Text"/>
                         <StackPanel >
-                            <Button
-                                Height="48"
-                                Width="48"
-                                Padding="4,4,4,4"
-                                Click="HLBTN_CategoryInfo"
-                                Style="{StaticResource TransparentButtonStyle}"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
-                                VerticalAlignment="Center">
-                                <FontIcon
-                                    FontSize="20"
-                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                    Glyph="&#xE946;"/>
-                            </Button>
-                            <TextBlock 
-                            x:Uid="EditAccountContentDialogAccountCategoryInfo"
-                            Margin="8,8,8,0" 
-                                TextWrapping="WrapWholeWords"
-                            Text="~EditAccountContentDialogAccountCategoryInfo.Text"/>
                             <labs:TokenView 
                                 x:Name="TV_Categories"
                                 Margin="0,15,0,8"

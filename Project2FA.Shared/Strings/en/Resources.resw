@@ -730,13 +730,12 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Added over 250 new company logos
-- Revision of the initial tutorial
-- Tutorial call possible again at any time
+    <value>- New company logos have been added
 - Bug fixes
-- Updating of third-party libraries
-- Support for copying a time-based one-time password from an account, using the Enter key
-- Possibility to subscribe to a [monthly subscription](SettingPage?PivotItem=2&amp;OpenSubscriptions=true) to support the further development of the app</value>
+- Update of third-party libraries
+- Error logs are now documented and can be viewed or disabled in the settings
+- Implementation of categories and filters ([Pro function](SettingPage?PivotItem=2&amp;OpenInAppPayments=true))
+- Additional options for subscribing to/buying [in-app purchases](SettingPage?PivotItem=2&amp;OpenInAppPayments=true) to support the further development of the app</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features &amp; changes</value>
@@ -1296,9 +1295,9 @@ Currently available:
     <value>There is a problem with Windows Hello. To use the functionality in the application, solve the problem in the Windows settings.</value>
   </data>
   <data name="EditAccountContentDialogAccountCategoryInfo.Text" xml:space="preserve">
-    <value>By clicking on the existing categories, categories can be assigned to the accounts, allowing searches to be carried out later. The categories are managed and created using the "Set categories &amp; filters" button in the top menu bar.</value>
+    <value>By clicking on the existing categories, you can assign one or more categories to the account, allowing you to carry out filtered searches later on. The categories are managed and created on the main page using the "Set categories &amp; filters" button in the top menu bar.</value>
   </data>
-  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
+  <data name="EditAccountContentDialogAccountNoCategoryInfoText" xml:space="preserve">
     <value>There are currently no categories available, create new categories using the button in the top menu bar "Set categories &amp; filters".</value>
   </data>
   <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
@@ -1321,5 +1320,8 @@ Currently available:
   </data>
   <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
     <value>No error report available</value>
+  </data>
+  <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
+    <value>The search is carried out with the set categories via an OR search.</value>
   </data>
 </root>

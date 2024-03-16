@@ -195,6 +195,8 @@ namespace WebDAVClient
                         passwordCredential.UserName + ":" +
                         passwordCredential.Password
                     ));
+            _client.BaseAddress = new Uri(_url);
+            //_client.DefaultRequestHeaders.Add("OCS-APIRequest", "true");
             _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", encoded);
 
             _dav = new WebDavSession(_url, _httpClientHandler, HttpVersion)

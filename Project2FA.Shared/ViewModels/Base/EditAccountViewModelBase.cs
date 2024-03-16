@@ -144,18 +144,6 @@ namespace Project2FA.ViewModels
                 TempModel.AccountIconName = value;
                 OnPropertyChanged(nameof(AccountIconName));
                 CheckInputs();
-                //if (SetProperty(ref _tempAccountIconName, value))
-                //{
-                //    if (string.IsNullOrWhiteSpace(value))
-                //    {
-                //        TempIconLabel = TempLabel;
-                //    }
-                //    else
-                //    {
-                //        TempIconLabel = string.Empty;
-                //    }
-
-                //}
             }
         }
         public bool IsPrimaryBTNEnable

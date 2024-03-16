@@ -733,13 +733,12 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Über 250 neue Unternehmen-Logos hinzugefügt
-- Überarbeitung des initialen Tutorials
-- Tutorialaufruf jederzeit wieder möglich
+    <value>- Neue Unternehmens-Logos wurden hinzugefügt
 - Fehlerbehebungen
 - Aktualisierung von Drittanbieter-Bibliotheken
-- Unterstützung des kopierens eines zeitbasierten Einmalpasstwortes von einem Konto, mithilfe der Enter-Taste
-- Möglichkeit zum abonnieren eines [monatlichen Abonnements](SettingPage?PivotItem=2&amp;OpenSubscriptions=true) für die Unterstützung der Weiterentwicklung der App</value>
+- Fehlerprotokolle werden nun dokumentiert und können in den Einstellungen angesehen oder deaktiviert werden
+- Implementierung von Kategorien und Filter ([Pro-Funktion](SettingPage?PivotItem=2&amp;OpenInAppPayments=true))
+- Weitere Möglichkeiten zum abonnieren/kaufen der [In-App Käufe](SettingPage?PivotItem=2&amp;OpenInAppPayments=true) für die Unterstützung der Weiterentwicklung der App</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -1301,8 +1300,8 @@ Derzeit verfügbar:
   <data name="LoginPageWindowsHelloError" xml:space="preserve">
     <value>Es liegt ein Problem mit Windows Hello vor. Um die Funktionalität in der Anwendung zu verwenden, lösen Sie das Problem in den Windows Einstellungen.</value>
   </data>
-  <data name="EditAccountContentDialogAccountCategoryInfo.Text" xml:space="preserve">
-    <value>Durch das anklicken der vorhandenen Kategorien, können den Konten Kategorien zugewiesen werden, wodurch im späteren Suchen ausgeführt werden können. Die Kategorien werden über den Button in der oberen Menüleiste „Kategorien &amp; Filter setzen“ verwaltet und erstellt.</value>
+  <data name="EditAccountContentDialogAccountCategoryInfoText" xml:space="preserve">
+    <value>Durch das anklicken der vorhandenen Kategorien, können Sie dem Konto eine oder mehrere Kategorien zuweisen, wodurch im späteren gefilterte Suchen ausgeführt werden können. Die Kategorien werden auf der Hauptseite über den Button in der oberen Menüleiste „Kategorien &amp; Filter setzen“ verwaltet und erstellt.</value>
   </data>
   <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
     <value>Es sind derzeit keine Kategorien vorhanden, erstellen Sie neue Kategorien über den Button in der oberen Menüleiste „Kategorien &amp; Filter setzen“.</value>
@@ -1327,5 +1326,8 @@ Derzeit verfügbar:
   </data>
   <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
     <value>Kein Fehlerbericht vorhanden</value>
+  </data>
+  <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
+    <value>Die Suche wird mit den gesetzten Kategorien mit einer Oder-Suche durchgeführt.</value>
   </data>
 </root>

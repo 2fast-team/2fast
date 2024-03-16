@@ -35,7 +35,7 @@ namespace Project2FA.ViewModels
         public ICommand AccountCodePageCommand { get; }
         public ICommand SearchPageCommand { get; }
         public ICommand SettingsPageCommand { get; }
-#if ANDROID || IOS
+#if !WINDOWS_UWP
         private TabBarItem _selectedItem;
         private int _selectedIndex = 0;
         private bool _isMobileSearchActive = false;
@@ -141,7 +141,7 @@ namespace Project2FA.ViewModels
             set=> SetProperty(ref _tabBarIsVisible, value);
         }
 
-#if ANDROID || IOS
+
         public int SelectedIndex 
         { 
             get => _selectedIndex;
@@ -179,7 +179,7 @@ namespace Project2FA.ViewModels
             get => _isMobileSearchActive; 
             set => SetProperty(ref _isMobileSearchActive, value);
         }
-#endif
+
 
         public Thickness GetTabBarMargin
         {

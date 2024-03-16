@@ -2001,6 +2001,16 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region EditAccountContentDialogAccountCategoryInfoText
+        public static string EditAccountContentDialogAccountCategoryInfoText
+        {
+            get
+            {
+                return _resourceLoader.GetString("EditAccountContentDialogAccountCategoryInfoText");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2161,7 +2171,8 @@ namespace Project2FA.Strings{
             ProFeatureContentInfo,
             ProFeatureTitleInfo,
             TutorialPagePasswordInfo,
-            LoginPageWindowsHelloError
+            LoginPageWindowsHelloError,
+            EditAccountContentDialogAccountCategoryInfoText
         }
 
         private static ResourceLoader _resourceLoader;

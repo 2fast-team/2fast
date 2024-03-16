@@ -1,17 +1,62 @@
-  [
-    {
-      "Name": "Bank",
-      "UnicodeString": "U\u002BE220",
-      "UnicodeIndex": 57888
-    },
-    {
-      "Name": "Cloud",
-      "UnicodeString": "U\u002BE397",
-      "UnicodeIndex": 58263
-    },
-    {
-      "Name": "Currency",
-      "UnicodeString": "U\u002BE449",
-      "UnicodeIndex": 58441
-    }
-  ]
+[
+  {
+    "Name": "Bank",
+    "UnicodeString": "U\u002BE220",
+    "UnicodeIndex": 57888
+  },
+  {
+    "Name": "Cloud",
+    "UnicodeString": "U\u002BE397",
+    "UnicodeIndex": 58263
+  },
+  {
+    "Name": "Currency",
+    "UnicodeString": "U\u002BE449",
+    "UnicodeIndex": 58441
+  },
+  {
+    "Name": "Privat",
+    "UnicodeString": "U\u002BF6E1",
+    "UnicodeIndex": 63201
+  },
+  {
+    "Name": "Team",
+    "UnicodeString": "U\u002BF5C4",
+    "UnicodeIndex": 62916
+  },
+  {
+    "Name": "Mail",
+    "UnicodeString": "U\u002BF546",
+    "UnicodeIndex": 62790
+  },
+  {
+    "Name": "Service",
+    "UnicodeString": "U\u002BF46A",
+    "UnicodeIndex": 62570
+  },
+  {
+    "Name": "Coffee",
+    "UnicodeString": "U\u002BF3C4",
+    "UnicodeIndex": 62404
+  },
+  {
+    "Name": "Breaker",
+    "UnicodeString": "U\u002BEEC0",
+    "UnicodeIndex": 61120
+  },
+  {
+    "Name": "Games",
+    "UnicodeString": "U\u002BE321",
+    "UnicodeIndex": 58145
+  },
+  {
+    "Name": "Website",
+    "UnicodeString": "U\u002BE6BE",
+    "UnicodeIndex": 59070
+  },
+  {
+    "Name": "Education",
+    "UnicodeString": "U\u002BE6F3",
+    "UnicodeIndex": 59123
+  }
+]

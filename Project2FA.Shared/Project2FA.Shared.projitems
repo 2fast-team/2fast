@@ -113,12 +113,14 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\SimpleIcons.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gift.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\give-love.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-125.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\price-tag.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\SmallTile.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\SmallTile.scale-125.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\SmallTile.scale-150.png" />

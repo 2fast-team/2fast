@@ -30,8 +30,9 @@ namespace Project2FA.ViewModels
 {
     public class ManageCategoriesContentDialogViewModel : ObservableRecipient, IDialogInitializeAsync
     {
-        public ICommand CreateCategoryCommand;
-        public ICommand PrimaryCommand;
+        public ICommand CreateCategoryCommand { get; }
+        public ICommand PrimaryCommand { get; }
+        public ICommand DeleteCategoryCommand { get; }
         private bool _dataChanged;
         private FontIdentifikationModel _selectedIconItem;
         private bool _canCreate;
@@ -44,11 +45,16 @@ namespace Project2FA.ViewModels
         public ManageCategoriesContentDialogViewModel(ISerializationService serializationService)
         {
             SerializationService = serializationService;
+            CreateCategoryCommand = new AsyncRelayCommand(CreateCategoryCommandTask);
+            PrimaryCommand = new AsyncRelayCommand(PrimaryCommandTask);
+            DeleteCategoryCommand = new AsyncRelayCommand<CategoryModel>(DeleteCategoryCommandTask);
         }
+
+
 
         public async Task InitializeAsync(IDialogParameters parameters)
         {
-            CreateCategoryCommand = new AsyncRelayCommand(CreateCategoryCommandTask);
+            
             //ObservableCollection<SymbolModel> tempCollection = new ObservableCollection<SymbolModel>();
             //foreach (Symbol symbol in (Symbol[])Enum.GetValues(typeof(Symbol)))
             //{
@@ -64,36 +70,13 @@ namespace Project2FA.ViewModels
                 // clone the item without a reference
                 TempGlobalCategories.Add((CategoryModel)DataService.Instance.GlobalCategories[i].Clone());
             }
-            PrimaryCommand = new AsyncRelayCommand(PrimaryCommandTask);
+
         }
 
 
         private Task PrimaryCommandTask()
         {
             DataService.Instance.GlobalCategories.AddRange(TempGlobalCategories, true);
-            //for (int i = 0; i < TempGlobalCategories.Count; i++)
-            //{
-            //    // check for changed names
-            //    var foundSameItems = DataService.Instance.GlobalCategories.Where(x => x.Guid == TempGlobalCategories[i].Guid).FirstOrDefault();
-            //    if (foundSameItems != null)
-            //    {
-            //        if (foundSameItems.Name != TempGlobalCategories[i].Name)
-            //        {
-            //            foundSameItems.Name = TempGlobalCategories[i].Name;
-            //        }
-            //    }
-            //    if (DataService.Instance.GlobalCategories.Count == 0)
-            //    {
-            //        DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
-            //    }
-            //    else
-            //    {
-            //        if (DataService.Instance.GlobalCategories.Where(x => x.Guid != TempGlobalCategories[i].Guid).Any())
-            //        {
-            //            DataService.Instance.GlobalCategories.Add(TempGlobalCategories[i]);
-            //        }
-            //    }
-            //}
             DataService.Instance.WriteLocalDatafile();
             Messenger.Send(new CategoriesChangedMessage(true));
             return Task.CompletedTask;
@@ -119,6 +102,12 @@ namespace Project2FA.ViewModels
                 // show error
             }
             
+            return Task.CompletedTask;
+        }
+
+        private Task DeleteCategoryCommandTask(CategoryModel model)
+        {
+            TempGlobalCategories.Remove(model);
             return Task.CompletedTask;
         }
         private void ValidateInput()

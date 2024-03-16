@@ -121,23 +121,39 @@
     "StringURL": "https://lottiefiles.com/3932-error-cross"
   },
   {
-    "Name": "Logo: Schlüssel",
+    "Name": "Icon: Gift free icon ",
     "Authors": "freepik @ flaticon",
     "LicenseName": "Flaticon license",
     "CategoryUid": "Asset",
     "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
-    "StringURL": "https://www.flaticon.com/de/kostenloses-icon/schlussel_2786386?related_item_id=2786386"
+    "StringURL": "https://www.flaticon.com/free-icon/gift_15193288"
   },
   {
-    "Name": "give-love",
+    "Name": "Icon: Key free icon",
     "Authors": "freepik @ flaticon",
     "LicenseName": "Flaticon license",
     "CategoryUid": "Asset",
     "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
-    "StringURL": "https://www.flaticon.com/free-icon/give-love_4478162?term=help&page=6&position=17&origin=search&related_id=4478162"
+    "StringURL": "https://www.flaticon.com/free-icon/key_2786386"
   },
   {
-    "Name": "Online Tutorial",
+    "Name": "Icon: give-love",
+    "Authors": "freepik @ flaticon",
+    "LicenseName": "Flaticon license",
+    "CategoryUid": "Asset",
+    "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
+    "StringURL": "https://www.flaticon.com/free-icon/give-love_4478162"
+  },
+  {
+    "Name": "Icon: Price Tag free icon",
+    "Authors": "freepik @ flaticon",
+    "LicenseName": "Flaticon license",
+    "CategoryUid": "Asset",
+    "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
+    "StringURL": "https://www.flaticon.com/free-icon/price-tag_15193292"
+  },
+  {
+    "Name": "Icon: Online Tutorial",
     "Authors": "Xero Hub @ flaticon",
     "CategoryUid": "Asset",
     "StringLicenseURL": "",

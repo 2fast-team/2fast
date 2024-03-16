@@ -43,7 +43,7 @@ namespace Project2FA.ViewModels
             });
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
-                AccountIconName = null;
+                AccountIconName = string.Empty;
             });
             EditAccountIconCommand = new RelayCommand(() =>
             {

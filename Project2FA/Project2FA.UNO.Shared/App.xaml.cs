@@ -37,6 +37,7 @@ using Uno.UI;
 using Uno.Extensions.Maui;
 using Project2FA.UNO.MauiControls;
 using Project2FA.Services.Parser;
+using Project2FA.Services.Logging;
 
 namespace Project2FA.UNO
 {
@@ -383,6 +384,7 @@ namespace Project2FA.UNO
             containerRegistry.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
             containerRegistry.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
             containerRegistry.RegisterSingleton<IProject2FAParser, Project2FAParser>();
+            containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
 
             containerRegistry.RegisterSingleton<ShellPage>();
             containerRegistry.RegisterForNavigation<BlankPage, BlankPageViewModel>();

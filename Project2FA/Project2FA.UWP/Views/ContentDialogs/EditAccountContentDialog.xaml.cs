@@ -1,12 +1,17 @@
-﻿using Project2FA.Extensions;
+﻿using Microsoft.UI.Xaml.Controls;
+using Project2FA.Extensions;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.ViewModels;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
 
 namespace Project2FA.UWP.Views
 {
@@ -142,14 +147,16 @@ namespace Project2FA.UWP.Views
 
         private void HLBTN_CategoryInfo(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.CategoriesExists)
+            TeachingTip teachingTip = new TeachingTip
             {
-
-            }
-            else
-            {
-
-            }
+                Target = sender as FrameworkElement,
+                MaxWidth = 400,
+                Subtitle = Strings.Resources.EditAccountContentDialogAccountCategoryInfoText,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true
+            };
+            RootGrid.Children.Add(teachingTip);
         }
     }
 }

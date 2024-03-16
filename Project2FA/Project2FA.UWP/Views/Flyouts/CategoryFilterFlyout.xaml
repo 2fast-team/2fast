@@ -70,6 +70,7 @@
             <labs:TokenView 
             x:Name="TV_Categories"
             Margin="0,15,0,8"
+            MaxWidth="420"
             ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
             IsItemClickEnabled="True"
             SelectionMode="Multiple" 
@@ -89,10 +90,6 @@
                 </labs:TokenView.ItemTemplate>
             </labs:TokenView>
         </StackPanel>
-
-
-
-
 
         <StackPanel
             HorizontalAlignment="Stretch"

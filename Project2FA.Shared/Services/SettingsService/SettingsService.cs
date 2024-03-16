@@ -100,7 +100,7 @@ namespace Project2FA.Services
         public bool IsProVersion
         {
             get => _helper.SafeRead(nameof(IsProVersion), false);
-            set => _helper.TryWrite(nameof(IsProVersion), value);
+            internal set => _helper.TryWrite(nameof(IsProVersion), value);
         }
 
         public bool UseProFeatures

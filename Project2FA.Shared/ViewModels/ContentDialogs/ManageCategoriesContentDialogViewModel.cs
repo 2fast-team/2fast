@@ -18,6 +18,9 @@ using UNOversal.Services.Dialogs;
 using Windows.Storage.Streams;
 using Windows.Storage;
 using UNOversal.Services.Serialization;
+using CommunityToolkit.WinUI.Collections;
+
+
 
 
 #if WINDOWS_UWP
@@ -37,9 +40,11 @@ namespace Project2FA.ViewModels
         private FontIdentifikationModel _selectedIconItem;
         private bool _canCreate;
         private ISerializationService SerializationService { get; }
+        public AdvancedCollectionView ACVCollection { get; private set; }
 
         public ObservableCollection<FontIdentifikationModel> IconSourceCollection { get; private set; } = new ObservableCollection<FontIdentifikationModel>();
         public ObservableCollection<CategoryModel> TempGlobalCategories { get; private set; } = new ObservableCollection<CategoryModel>();
+        private FontIdentifikationModel _selectedComboBoxItem;
         private string _label;
 
         public ManageCategoriesContentDialogViewModel(ISerializationService serializationService)
@@ -64,6 +69,8 @@ namespace Project2FA.ViewModels
             IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
             using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
             IconSourceCollection.AddRange(SerializationService.Deserialize<ObservableCollection<FontIdentifikationModel>>(await r.ReadToEndAsync()));
+            ACVCollection = new AdvancedCollectionView(IconSourceCollection, true);
+            ACVCollection.SortDescriptions.Add(new SortDescription("Name", SortDirection.Ascending));
             TempGlobalCategories ??= new ObservableCollection<CategoryModel>();
             for (int i = 0; i < DataService.Instance.GlobalCategories.Count; i++)
             {
@@ -159,5 +166,9 @@ namespace Project2FA.ViewModels
             get => _canCreate; 
             set => SetProperty(ref _canCreate, value);
         }
+        public FontIdentifikationModel SelectedComboBoxItem 
+        { 
+            get => _selectedComboBoxItem;
+            set => SetProperty(ref _selectedComboBoxItem, value); }
     }
 }

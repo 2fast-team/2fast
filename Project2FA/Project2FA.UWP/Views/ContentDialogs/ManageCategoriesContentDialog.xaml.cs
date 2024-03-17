@@ -9,12 +9,15 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
+using CommandBarFlyout = Microsoft.UI.Xaml.Controls.CommandBarFlyout;
 
 namespace Project2FA.UWP.Views
 {
     public sealed partial class ManageCategoriesContentDialog : ContentDialog
     {
         public ManageCategoriesContentDialogViewModel ViewModel => DataContext as ManageCategoriesContentDialogViewModel;
+
+        private CommandBarFlyout _openedCommandBarFlyout;
         public ManageCategoriesContentDialog()
         {
             this.InitializeComponent();
@@ -53,51 +56,46 @@ namespace Project2FA.UWP.Views
             ViewModel.DataChanged = true;
         }
 
-        private void CB_CategoryModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if ((FrameworkElement)sender is ComboBox cb)
-            {
-                if (cb.DataContext is CategoryModel model)
-                {
-                    var newValue = (FontIdentifikationModel)cb.SelectedItem;
-                    model.UnicodeIndex = newValue.UnicodeIndex.ToString();
-                    model.UnicodeString = newValue.UnicodeString;
-                }
-            }
-
-        }
-
         private void CB_CategoryModel_Loaded(object sender, RoutedEventArgs e)
         {
             if ((FrameworkElement)sender is ComboBox cb)
             {
                 if (cb.DataContext is CategoryModel model)
                 {
-                    cb.SelectedItem = ViewModel.IconSourceCollection.Where(x => x.UnicodeIndex == Convert.ToUInt32(model.UnicodeIndex)).FirstOrDefault();
-                }
-            }
-        }
-
-        private void FindAndCloseFlyout(object sender)
-        {
-            var parent = Page ?? sender as DependencyObject;
-            while (parent != null)
-            {
-                if (parent is FlyoutPresenter)
-                {
-                    ((parent as FlyoutPresenter).Parent as Popup).IsOpen = false;
-                    break;
-                }
-                else
-                {
-                    parent = VisualTreeHelper.GetParent(parent);
+                    ViewModel.SelectedComboBoxItem = ViewModel.IconSourceCollection.Where(x => x.UnicodeIndex == Convert.ToUInt32(model.UnicodeIndex)).FirstOrDefault();
+                    //cb.SelectedItem = ViewModel.IconSourceCollection.Where(x => x.UnicodeIndex == Convert.ToUInt32(model.UnicodeIndex)).FirstOrDefault();
                 }
             }
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            FindAndCloseFlyout(sender);
+            //FindAndCloseFlyout(sender);
+            _openedCommandBarFlyout?.Hide();
+            if (ViewModel.SelectedComboBoxItem != null)
+            {
+                if (sender is AppBarButton abtn && abtn.DataContext is CategoryModel model)
+                {
+                    model.UnicodeIndex = ViewModel.SelectedComboBoxItem.UnicodeIndex.ToString();
+                    model.UnicodeString = ViewModel.SelectedComboBoxItem.UnicodeString;
+                }
+            }
+        }
+
+        private void BTN_ShowIcons_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                FlyoutBase.ShowAttachedFlyout(btn);
+            }
+        }
+
+        private void CommandBarFlyout_Opening(object sender, object e)
+        {
+            if (sender is Microsoft.UI.Xaml.Controls.CommandBarFlyout cmdf)
+            {
+                _openedCommandBarFlyout = cmdf;
+            }
         }
     }
 }

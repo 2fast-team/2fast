@@ -101,6 +101,7 @@
                 </appcontrols:CardExpanderControl>
 
                 <ListView 
+                    x:Name="LV_Categories"
                     ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
                     ItemsSource="{x:Bind ViewModel.TempGlobalCategories, Mode=OneWay}">
                     <ListView.ItemTemplate>
@@ -117,13 +118,40 @@
                                     FontSize="32"
                                     Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
                                 <Button
+                                    x:Name="BTN_ShowIcons"
                                     Margin="4,0,0,0"
                                     Grid.Column="1"
                                     CornerRadius="99"
                                     Width="40"
-                                    Height="40">
+                                    Height="40" 
+                                    Click="BTN_ShowIcons_Click">
                                     <FontIcon FontSize="12" Glyph="&#xE70F;"/>
-                                    <Button.Flyout>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <muxc:CommandBarFlyout 
+                                            Placement="Right" 
+                                            Opening="CommandBarFlyout_Opening">
+                                            <muxc:CommandBarFlyout.PrimaryCommands>
+                                                <AppBarElementContainer>
+                                                    <ComboBox 
+                                                        x:Name="CB_CategoryModel"
+                                                        BorderBrush="{ThemeResource SystemAccentColor}"
+                                                        MinWidth="220"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Stretch"
+                                                        MinHeight="34"
+                                                        SelectedValuePath="UnicodeIndex"
+                                                        SelectedItem="{Binding DataContext.SelectedComboBoxItem, ElementName=Page,Mode=TwoWay}"
+                                                        ItemTemplate="{StaticResource SymbolListTemplate}"
+                                                        ItemsSource="{Binding DataContext.ACVCollection, ElementName=Page, Mode=OneWay}" 
+                                                        Loaded="CB_CategoryModel_Loaded"/>
+                                                </AppBarElementContainer>
+                                                <AppBarButton 
+                                                    Icon="Accept" 
+                                                    Click="AppBarButton_Click"/>
+                                            </muxc:CommandBarFlyout.PrimaryCommands>
+                                        </muxc:CommandBarFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+                                    <!--<Button.Flyout>
                                         <muxc:CommandBarFlyout Placement="Right">
                                             <muxc:CommandBarFlyout.PrimaryCommands>
                                                 <AppBarElementContainer>
@@ -141,11 +169,11 @@
                                                     </ComboBox>
                                                 </AppBarElementContainer>
                                                 <AppBarButton 
-                                                    
-                                                    Icon="Accept" Click="AppBarButton_Click"/>
+                                                    Icon="Accept" 
+                                                    Click="AppBarButton_Click"/>
                                             </muxc:CommandBarFlyout.PrimaryCommands>
                                         </muxc:CommandBarFlyout>
-                                    </Button.Flyout>
+                                    </Button.Flyout>-->
                                 </Button>
                                 <TextBox
                                     TextChanged="TextBox_TextChanged"

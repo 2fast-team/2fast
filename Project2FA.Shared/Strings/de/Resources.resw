@@ -788,9 +788,6 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
     <value>Mit der Betätigung und der Bestätigung wird die App zurückgesetzt</value>
   </data>
-  <data name="String" xml:space="preserve">
-    <value>Farbgebung der App</value>
-  </data>
   <data name="SettingsAppThemeMode.Header" xml:space="preserve">
     <value>App-Farbschema</value>
   </data>
@@ -1068,7 +1065,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
+    <value>2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>

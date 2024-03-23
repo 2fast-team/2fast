@@ -75,7 +75,7 @@ namespace Project2FA.UWP
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
             TrackingManager.TrackExceptionUnhandled(nameof(App_UnhandledException), e.Exception);
-            SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
+            SettingsService.Instance.UnhandledExceptionStr += e.Message + "\n" + e.Exception.StackTrace + "\n"
             + e.Exception.InnerException;
             App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception);
             // let the app crash...

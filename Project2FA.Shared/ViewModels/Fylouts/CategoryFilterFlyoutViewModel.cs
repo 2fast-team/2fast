@@ -35,18 +35,23 @@ namespace Project2FA.ViewModels
     {
         public ICommand ManageCategoriesCommand { get; }
         private bool _canSaveFilter, _canResetFilter;
-        private bool _categoriesExists;
         public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         public CategoryFilterFlyoutViewModel()
         {
             ManageCategoriesCommand = new AsyncRelayCommand(ManageCategoriesCommandTask);
-            OnPropertyChanged(nameof(NoCategoriesExists));
+            //OnPropertyChanged(nameof(NoCategoriesExists));
 
             Messenger.Register<CategoryFilterFlyoutViewModel, CategoriesChangedMessage>(this, (r, m) =>
             {
                 OnPropertyChanged(nameof(NoCategoriesExists));
                 CanSaveFilter = false;
                 GlobalTempCategories.AddRange(DataService.Instance.GlobalCategories.Select(x => (CategoryModel)x.Clone()).ToList(), true);
+                var selectedItems = GlobalCategories.Where(x => x.IsSelected == true);
+                var tempItems = GlobalTempCategories.Where(x => selectedItems.Where(s => s.Guid == x.Guid).Any());
+                for (int i = 0; i < tempItems.Count(); i++)
+                {
+                    tempItems.ElementAt(i).IsSelected = true;
+                }
             });
         }
 
@@ -84,6 +89,10 @@ namespace Project2FA.ViewModels
                 DataService.Instance.IsFilterChecked = false;
                 Messenger.Send(new FilteringChangedMessage(false));
             }
+        }
+        public ObservableCollection<CategoryModel> GlobalCategories
+        {
+            get => DataService.Instance.GlobalCategories;
         }
 
         public bool NoCategoriesExists 

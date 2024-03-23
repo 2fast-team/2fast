@@ -582,7 +582,7 @@ Anleitung zum setzen der Berechtigung:
     <value>Ein Fehler ist aufgetreten</value>
   </data>
   <data name="ErrorHandleDescription" xml:space="preserve">
-    <value>Ein unbehandelter Fehler ist aufgetreten, bitte senden Sie die Fehlerdetails welche in den Feld zu sehen sind über den Feedback-Hub, oder nutzen Sie die Fehlermeldung über Github.</value>
+    <value>Ein unbehandelter Fehler ist aufgetreten, bitte senden Sie die Fehlerdetails welche in den Feld zu sehen sind über die Fehlermeldung in Github.</value>
   </data>
   <data name="PasswordInvalidHeader" xml:space="preserve">
     <value>Passwort ungültig</value>
@@ -724,7 +724,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Speichern</value>
   </data>
   <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
-    <value>Ein unbehandelter Fehler ist bei der letzten Nutzung der App aufgetreten, bitte senden Sie die Fehlerdetails welche in den Feld zu sehen sind über den Feedback-Hub, oder nutzen Sie die Fehlermeldung über Github.</value>
+    <value>Ein unbehandelter Fehler ist bei der letzten Nutzung der App aufgetreten, bitte senden Sie die Fehlerdetails welche in den Feld zu sehen sind über die Fehlermeldung in Github.</value>
   </data>
   <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
     <value>NTP Server manuell setzen</value>

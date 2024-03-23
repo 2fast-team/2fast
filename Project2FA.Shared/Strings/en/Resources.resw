@@ -577,7 +577,7 @@ Instructions for setting the authorisation:
     <value>Error handle</value>
   </data>
   <data name="ErrorHandleDescription" xml:space="preserve">
-    <value>An unhandled error has occurred, please send the error details which can be seen in the field via the feedback hub, or add a new issue via Github.</value>
+    <value>An unhandled error has occurred, please send the error details which can be seen in the field via a new issue in Github.</value>
   </data>
   <data name="PasswordInvalidHeader" xml:space="preserve">
     <value>Password invalid</value>
@@ -721,7 +721,7 @@ Please synchronize the time in the settings.</value>
     <value>Save</value>
   </data>
   <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
-    <value>An unhandled error occurred the last time the app was used, please submit the error details which can be seen in the box via the feedback hub, or use the error message via Github.</value>
+    <value>An unhandled error occurred the last time the app was used, please send the error details which can be seen in the field via a new issue in Github.</value>
   </data>
   <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
     <value>set NTP server manually</value>

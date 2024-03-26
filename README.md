@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-other installation methode (not maintained by me)
+other installation method (not maintained by me)
 <a style="text-decoration:none" href="https://community.chocolatey.org/packages/2fast">
     		<img src="https://img.shields.io/chocolatey/dt/2fast?color=blue&label=Chocolatey" alt="Chocolatey link" />
 	</a>
@@ -31,15 +31,15 @@ other installation methode (not maintained by me)
 
 ## About 2fast
 
-**2fast** (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is a free, open source, two factor authenticator for Windows and other platforms with the ability to store the sensitive data encrypted at a place of your choice instead of a 3rd party cloud location.
+**2fast** (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is a free, open source, two factor authenticator for Windows and other platforms. 2fast has the ability to store the encrypted data at a place of your choice instead of a 3rd party cloud location.
 
 ### Features
 
-- Every data is stored in one single encrypted file
+- All data is stored in a single encrypted file
 	- Encrypted with AES using a password-based key by PBKDF2
-	- Possibility to send the data file to your colleges and friends to securely share logins
-	- Easy backup & restore in one single file
-- Everything works local
+	- Possibility to send the data file to your colleagues and friends to securely share logins
+	- Easily backup & restore using a single file
+- Everything works locally
 	- No extra account, registration or login needed
 	- No Internet connection needed except for WebDAV use
 - Synchronisation via a WebDAV server (e.g. ownCloud or Nextcloud) as storage location [currently in Beta]
@@ -114,7 +114,7 @@ git clone --recurse-submodules https://github.com/2fast-team/2fast.git
 
 ## Contributing
 
-Feel free to fork the project, work in your personal branch and create a pull request or you simple interact in the [issue section](https://github.com/2fast-team/2fast/issues).
+Feel free to fork the project, work in your personal branch and create a pull request. Or you can simply interact in the [issue section](https://github.com/2fast-team/2fast/issues).
 
 **This is an open source project! Every contribution is greatly appreciated!**
 

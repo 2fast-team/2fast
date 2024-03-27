@@ -146,7 +146,7 @@ namespace Project2FA.ViewModels
                 }
                 return await UseExistDatafile();
 #else
-return await SetLocalFile();
+                return await SetLocalFile();
 #endif
 
             }
@@ -196,10 +196,10 @@ return await SetLocalFile();
 
 #if ANDROID
             // set the persistent access to the file
-            var intent = new Android.Content.Intent(Android.Content.Intent.ActionOpenDocument);
-            intent.AddFlags(Android.Content.ActivityFlags.GrantPersistableUriPermission);
-            // TODO feature uno build
-            //FilePickerHelper.RegisterOnBeforeStartActivity(filePicker, intent);
+            FilePickerHelper.RegisterOnBeforeStartActivity(filePicker, (intent) =>
+            {
+                intent.AddFlags(Android.Content.ActivityFlags.GrantPersistableUriPermission);
+            });
 #endif
 
             IsLoading = true;
@@ -208,8 +208,9 @@ return await SetLocalFile();
             {
                 IsLoading = false;
 
-                //set folder to the access list
+
 #if WINDOWS_UWP
+                // set folder to the access list
                 LocalStorageFolder = await LocalStorageFile.GetParentAsync();
                 StorageApplicationPermissions.FutureAccessList.Add(LocalStorageFile, "metadata");
 #endif

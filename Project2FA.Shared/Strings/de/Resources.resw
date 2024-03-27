@@ -1065,7 +1065,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - Zwei-Faktor-Authentifikator</value>
+    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>
@@ -1266,7 +1266,7 @@ Derzeit verfügbar:
 
 - Kategorien &amp; Filter
 ***
-### 34,99 einmalig</value>
+### 34,99€ einmalig</value>
   </data>
   <data name="InAppSubscriptionYear" xml:space="preserve">
     <value>Mit dem Abonnement werden ***Pro+*** Funktionen zugänglich und nutzbar und Sie unterstützen die weitere Entwicklung der Anwendung.

@@ -199,4 +199,7 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Fylouts\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\android_schluessel.svg" />
+  </ItemGroup>
 </Project>

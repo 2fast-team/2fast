@@ -43,10 +43,6 @@ namespace Project2FA.ViewModels
             {
                 if (SetProperty(ref _twoFACodeModel, value))
                 {
-                    //TempAccountIconName = Model.AccountIconName;
-                    //TempIssuer = Model.Issuer;
-                    //TempLabel = Model.Label;
-                    
                     if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
                     {
                         GlobalTempCategories.Clear();
@@ -55,14 +51,6 @@ namespace Project2FA.ViewModels
                             GlobalTempCategories.Add((CategoryModel)DataService.Instance.GlobalCategories[i].Clone());
                         }
                     }
-                    //if (!string.IsNullOrWhiteSpace(value.Notes))
-                    //{
-                    //    Notes = Model.Notes;
-                    //}
-                    //else
-                    //{
-                    //    Notes = string.Empty;
-                    //}
                 }
             }
         }

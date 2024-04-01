@@ -18,6 +18,10 @@ using UNOversal.Services.Secrets;
 using Project2FA.Utils;
 using Project2FA.Services.WebDAV;
 
+
+
+
+
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -198,7 +202,10 @@ namespace Project2FA.ViewModels
             // set the persistent access to the file
             FilePickerHelper.RegisterOnBeforeStartActivity(filePicker, (intent) =>
             {
+                intent.AddFlags(Android.Content.ActivityFlags.GrantReadUriPermission);
+                intent.AddFlags(Android.Content.ActivityFlags.GrantWriteUriPermission);
                 intent.AddFlags(Android.Content.ActivityFlags.GrantPersistableUriPermission);
+                intent.AddFlags(Android.Content.ActivityFlags.GrantPrefixUriPermission);
             });
 #endif
 
@@ -215,6 +222,12 @@ namespace Project2FA.ViewModels
                 StorageApplicationPermissions.FutureAccessList.Add(LocalStorageFile, "metadata");
 #endif
 
+#if __ANDROID__
+                // save the file path for persistable URI permission
+                Uno.UI.ContextHelper.Current.ContentResolver.TakePersistableUriPermission(
+                    Android.Net.Uri.Parse(LocalStorageFile.Path),
+                    Android.Content.ActivityFlags.GrantReadUriPermission);
+#endif
                 DateFileName = LocalStorageFile.Name;
                 return true;
             }

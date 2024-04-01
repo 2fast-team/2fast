@@ -46,14 +46,15 @@
                             MinWidth="120" 
                             MinHeight="100">
                                 <PersonPicture
-                            Height="110"
-                            Width="110"
+                                    Height="110"
+                                    Width="110"
                                     FontSize="52"
                                     HorizontalAlignment="Left"
-                            DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
-                                    Style="{StaticResource DefaultPersonPictureStyle}"
-                            Margin="0,10,20,0"
-                            Tag="{x:Bind ViewModel.AccountIconName, Mode=OneWay}">
+                                    DisplayName="{x:Bind ViewModel.TempModel, 
+                                    Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                                    Mode=OneWay}"
+                                    Margin="0,10,20,0"
+                                    Tag="{x:Bind ViewModel.AccountIconName, Mode=OneWay}">
                                 </PersonPicture>
                                 <Button 
                                 CornerRadius="32"

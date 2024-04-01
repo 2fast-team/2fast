@@ -36,20 +36,6 @@
         </utu:NavigationBar>
 
         <StackPanel Grid.Row="1">
-            <!--<controls:SettingsCard 
-                x:Name="settingsCard"
-                Description="This is a default card, with the Header, HeaderIcon, Description and Content set."
-                Header="This is the Header">
-                <ComboBox>
-                    <ComboBoxItem>Option 1</ComboBoxItem>
-                    <ComboBoxItem>Option 2</ComboBoxItem>
-                    <ComboBoxItem>Option 3</ComboBoxItem>
-                </ComboBox>
-            </controls:SettingsCard>-->
-            <!--<controls:SettingsCard Description="You can use a FontIcon, SymbolIcon or BitmapIcon to set the cards HeaderIcon."
-                       Header="Icon options">
-                <ToggleSwitch />
-            </controls:SettingsCard>-->
 
             <!--<toolkitcontrols:SettingsCard x:Uid="SettingsBackButtonCard">
                 <ToggleSwitch 
@@ -72,8 +58,8 @@
                 <controls:SettingsCard.Content>
                     <StackPanel>
                         <ComboBox 
-                                SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
-                                MinWidth="{StaticResource CardActionControlMinWidth}">
+                            SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
+                            MinWidth="{StaticResource CardActionControlMinWidth}">
                             <ComboBoxItem x:Uid="SettingsThemeLight" />
                             <ComboBoxItem x:Uid="SettingsThemeDark"/>
                             <ComboBoxItem x:Uid="SettingsThemeSystem"/>
@@ -98,8 +84,8 @@
                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
                 </controls:SettingsCard.Content>
             </controls:SettingsCard>
-            
-        <!--<controls:SettingsExpander
+
+            <!--<controls:SettingsExpander
                 Margin="0,0,0,20"
                 IsExpanded="True">
                 <controls:SettingsExpander.Header>
@@ -143,7 +129,50 @@
                 </controls:SettingsCard.Content>
             </controls:SettingsCard>
 
-        </StackPanel>
+            <controls:SettingsCard
+                x:Uid="SettingsOptionsFactoryReset"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE74D;}"
+                Header="~SettingsOptionsFactoryReset.Header">
+                <controls:SettingsCard.Description>
+                    <TextBlock 
+                        x:Uid="SettingsOptionsFactoryResetDesc"
+                        Text="~SettingsOptionsFactoryResetDesc.Text"/>
+                </controls:SettingsCard.Description>
+                <controls:SettingsCard.Content>
+                    <Button
+                        
+                        Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
+                        <TextBlock 
+                            Text="~FactoryReset" 
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center"
+                            x:Uid="SettingsOptionsFactoryResetButton"/>
+                    </Button>
+                </controls:SettingsCard.Content>
+            </controls:SettingsCard>
 
+            <controls:SettingsCard 
+                x:Uid="SettingsAppLoggingMode"
+                HeaderIcon="{ui:FontIcon Glyph=&#xEADF;}"
+                Header="~SettingsAppLoggingMode.Header">
+                <controls:SettingsCard.Description>
+                    <HyperlinkButton
+                                x:Uid="SettingsOpenLogBTN"
+                                Content="~SettingsOpenLogBTN.Content"
+                                Command="{x:Bind ViewModel.SettingsPartViewModel.OpenLogCommand}"/>
+                </controls:SettingsCard.Description>
+                <controls:SettingsCard.Content>
+                    <StackPanel>
+                        <ComboBox 
+SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.LoggingIndex, Mode=TwoWay}" 
+MinWidth="{StaticResource CardActionControlMinWidth}">
+                            <ComboBoxItem x:Uid="SettingsLoggingNone" />
+                            <ComboBoxItem x:Uid="SettingsLoggingSimple"/>
+                            <ComboBoxItem x:Uid="SettingsLoggingFull"/>
+                        </ComboBox>
+                    </StackPanel>
+                </controls:SettingsCard.Content>
+            </controls:SettingsCard>
+        </StackPanel>
     </Grid>
 </Page>

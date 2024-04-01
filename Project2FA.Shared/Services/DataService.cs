@@ -34,6 +34,8 @@ using CommunityToolkit.WinUI.Helpers;
 using CommunityToolkit.WinUI.Collections;
 using UNOversal.Services.Serialization;
 using Project2FA.Services.Logging;
+using System.Web;
+
 
 
 
@@ -348,8 +350,11 @@ namespace Project2FA.Services
 
 #if __ANDROID__
                     // create new thread for buggy Android, else NetworkOnMainThreadException 
-                    await Task.Run(async () => {
+                    await Task.Run(async () =>
+                    {
+                        
                         Android.Net.Uri androidUri = Android.Net.Uri.Parse(path);
+
                         file = StorageFile.GetFromSafUri(androidUri);
                     });
 #endif

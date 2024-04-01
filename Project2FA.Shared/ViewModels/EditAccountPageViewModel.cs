@@ -16,6 +16,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
+using Project2FA.UNO;
 #endif
 
 namespace Project2FA.ViewModels
@@ -23,7 +24,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class EditAccountPageViewModel : EditAccountViewModelBase, IInitializeAsync
+    public class EditAccountPageViewModel : EditAccountViewModelBase, IInitialize
     {
         private INavigationService NavigationService { get; }
 
@@ -62,6 +63,10 @@ namespace Project2FA.ViewModels
             {
                 IsEditBoxVisible = !IsEditBoxVisible;
             });
+
+#if __ANDROID__ || __IOS__
+            App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
+#endif
         }
 
         private async Task NavigateBackCommandTask()
@@ -69,26 +74,13 @@ namespace Project2FA.ViewModels
             await NavigationService.GoBackAsync();
         }
 
-        public async Task InitializeAsync(INavigationParameters parameters)
+        public void Initialize(INavigationParameters parameters)
         {
             if (parameters.TryGetValue<TwoFACodeModel>("model", out var model))
             {
                 Model = model;
-                //TempAccountIconName = Model.AccountIconName;
-                //if (!string.IsNullOrWhiteSpace(TempAccountIconName))
-                //{
-                //    (bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName, Model.IsFavourite);
-                //    if (success)
-                //    {
-                //        TempAccountSVGIcon = iconStr;
-                //    }
-
-                //}
-                //else
-                //{
-                //    TempIconLabel = TempLabel;
-                //}
-                //await LoadIconNameCollection();
+                TempModel = (TwoFACodeModel)Model.Clone();
+                AccountIconName = Model.AccountIconName;
             }
         }
     }

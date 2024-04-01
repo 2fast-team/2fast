@@ -310,25 +310,25 @@
       <Version>0.1.240305-build.1659</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Animations">
-      <Version>8.1.240320-build.986</Version>
+      <Version>8.1.240328-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Collections">
-      <Version>8.1.240320-build.986</Version>
+      <Version>8.1.240328-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
-      <Version>8.1.240320-build.986</Version>
+      <Version>8.1.240328-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
-      <Version>8.1.240320-build.986</Version>
+      <Version>8.1.240328-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Extensions">
-      <Version>8.1.240320-build.986</Version>
+      <Version>8.1.240328-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Lottie">
       <Version>8.0.280224</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Media">
-      <Version>8.1.240320-build.986</Version>
+      <Version>8.1.240328-rc</Version>
     </PackageReference>
     <PackageReference Include="DryIoc.dll">
       <Version>5.4.3</Version>

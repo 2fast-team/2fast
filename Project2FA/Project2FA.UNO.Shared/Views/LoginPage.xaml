@@ -20,7 +20,10 @@
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
             <utu:NavigationBar.Content>
-                <TextBlock x:Uid="LoginPageTitle"></TextBlock>
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    x:Uid="LoginPageTitle"
+                    Style="{StaticResource ShellHeaderTitleTextBlockStyle}"/>
             </utu:NavigationBar.Content>
             <utu:NavigationBar.MainCommand>
                 <AppBarButton 

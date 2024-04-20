@@ -70,11 +70,6 @@ namespace Project2FA.UWP.Views
             ViewModel.MediaPlayerElementControl = CameraPlayerElement;
         }
 
-        public void BTN_QRCodeScan_Click(object sender, RoutedEventArgs e)
-        {
-            QRCodeScanTip.IsOpen = true;
-        }
-
         private void TBTagChangedCallback(DependencyObject sender, DependencyProperty dp)
         {
             if (dp == TextBlock.TagProperty)
@@ -150,7 +145,14 @@ namespace Project2FA.UWP.Views
                             MainPivot.Items.Remove(PI_AccountInput);
                         }
                     }
-                    ViewModel.SelectedPivotIndex = 1;
+                    if (tag == "Overview")
+                    {
+                        ViewModel.SelectedPivotIndex = 0;
+                    }
+                    else
+                    {
+                        ViewModel.SelectedPivotIndex = 1;
+                    }
                 }
             }
         }

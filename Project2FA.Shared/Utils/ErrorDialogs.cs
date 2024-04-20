@@ -24,6 +24,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
+using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
 
 namespace Project2FA.Utils
@@ -41,6 +42,9 @@ namespace Project2FA.Utils
             dialog.Title = Resources.AccountCodePageWrongTimeTitle;
             dialog.Content = Resources.AccountCodePageWrongTimeContent;
             dialog.PrimaryButtonText = Resources.AccountCodePageWrongTimeBTN;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
@@ -56,6 +60,9 @@ namespace Project2FA.Utils
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.AuthorizationFileSystemContentDialogTitle;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.AuthorizationFileSystemContentDialogDescription;
@@ -120,6 +127,9 @@ namespace Project2FA.Utils
                     App.Current.Exit();
                 })
             };
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 
 #if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
@@ -144,6 +154,9 @@ namespace Project2FA.Utils
             {
                 Title = Strings.Resources.AuthorizationFileSystemContentDialogTitle
             };
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             var markdown = new MarkdownTextBlock
             {
@@ -179,6 +192,9 @@ namespace Project2FA.Utils
             {
                 Title = Strings.Resources.AuthorizationFileSystemContentDialogTitle
             };
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             var markdown = new MarkdownTextBlock
             {
@@ -219,12 +235,16 @@ namespace Project2FA.Utils
             {
                 Title = Resources.ErrorHandle
             };
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             var errorTextBlock = new MarkdownTextBlock()
             {
                 Margin = new Thickness(0, 8, 0, 8)
             };
             errorTextBlock.Text = "#" + exc.Message  + "\n"
+                + exc.Source + "\n"
                 + exc.StackTrace + "\n"
                 + exc.InnerException;
 #else
@@ -308,6 +328,9 @@ namespace Project2FA.Utils
             {
                 Title = Resources.ErrorHandle
             };
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             var errorMarkdownTextBlock = new MarkdownTextBlock()
             {
@@ -380,6 +403,9 @@ namespace Project2FA.Utils
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.Error;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
 #else
@@ -410,6 +436,9 @@ namespace Project2FA.Utils
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.Error;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
 #else
@@ -458,6 +487,9 @@ namespace Project2FA.Utils
                 dialog.Closed += Dialog_Closed;
                 dialog.Title = Resources.ErrorHandle;
                 StackPanel stackPanel = new StackPanel();
+#if !WINDOWS_UWP
+                dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
                 MarkdownTextBlock markdown = new MarkdownTextBlock();
 #else

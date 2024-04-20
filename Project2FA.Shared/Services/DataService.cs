@@ -778,14 +778,6 @@ namespace Project2FA.Services
                     await FileIO.WriteTextAsync(file, content);
 #endif
 
-                    //using (StreamWriter writer = new StreamWriter(await file.OpenStreamForWriteAsync()))
-                    //{
-                    //    await writer.WriteAsync(content);
-                    //}
-
-
-                    //await fileStream.WriteAsync(Encoding.UTF8.GetBytes(content));
-                    //fileStream.Close();
 #endif
 
                 }

@@ -64,13 +64,13 @@ namespace Project2FA.ViewModels
 
         private async Task SearchPageCommandTask()
         {
-            //if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
-            //{
-            //    if (uIElement is not SearchPage)
-            //    {
-            //        await NavigationService.NavigateAsync(nameof(SearchPage));
-            //    }
-            //}
+            if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
+            {
+                if (uIElement is SettingPage)
+                {
+                    await NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+                }
+            }
         }
 
         private async Task AccountCodePageCommandTask()

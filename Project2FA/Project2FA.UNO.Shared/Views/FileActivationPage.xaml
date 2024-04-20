@@ -19,8 +19,13 @@
             Grid.Row="0"
             MainCommandMode="Action"
             Background="{ThemeResource TwoFABackgroundBrush}"
-            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-            Content="#Login">
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
+            <utu:NavigationBar.Content>
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    x:Uid="LoginPageTitle"
+                    Style="{StaticResource ShellHeaderTitleTextBlockStyle}"/>
+            </utu:NavigationBar.Content>
             <utu:NavigationBar.MainCommand>
                 <AppBarButton 
                     Content="#Back" 

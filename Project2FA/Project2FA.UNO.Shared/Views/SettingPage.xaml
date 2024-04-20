@@ -26,7 +26,10 @@
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             Background="{ThemeResource TwoFABackgroundBrush}">
             <utu:NavigationBar.Content>
-                <TextBlock x:Uid="SettingsPageName"></TextBlock>
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    x:Uid="SettingsPageName"
+                    Style="{StaticResource ShellHeaderTitleTextBlockStyle}"/>
             </utu:NavigationBar.Content>
             <utu:NavigationBar.MainCommand>
                 <AppBarButton 
@@ -35,9 +38,10 @@
             </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>
 
-        <StackPanel Grid.Row="1">
+        <ScrollViewer Grid.Row="1">
+            <StackPanel >
 
-            <!--<toolkitcontrols:SettingsCard x:Uid="SettingsBackButtonCard">
+                <!--<toolkitcontrols:SettingsCard x:Uid="SettingsBackButtonCard">
                 <ToggleSwitch 
                     x:Name="SettingsBackButtonToggleSwtich"
                     x:Uid="SettingsBackButtonToggleSwtich"
@@ -46,46 +50,46 @@
                     OnContent="~SettingsBackButtonToggleSwtich.OnContent"  />
             </toolkitcontrols:SettingsCard>-->
 
-            <controls:SettingsCard 
+                <controls:SettingsCard 
                 x:Uid="SettingsAppThemeMode"
                 Header="~SettingsAppThemeMode.Header">
-                <controls:SettingsCard.Description>
-                    <HyperlinkButton
+                    <controls:SettingsCard.Description>
+                        <HyperlinkButton
                         x:Uid="SettingsWindowsColor"
                         Content="~SettingsWindowsColor.Content"
                         NavigateUri="ms-settings:personalization-colors"/>
-                </controls:SettingsCard.Description>
-                <controls:SettingsCard.Content>
-                    <StackPanel>
-                        <ComboBox 
+                    </controls:SettingsCard.Description>
+                    <controls:SettingsCard.Content>
+                        <StackPanel>
+                            <ComboBox 
                             SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
                             MinWidth="{StaticResource CardActionControlMinWidth}">
-                            <ComboBoxItem x:Uid="SettingsThemeLight" />
-                            <ComboBoxItem x:Uid="SettingsThemeDark"/>
-                            <ComboBoxItem x:Uid="SettingsThemeSystem"/>
-                        </ComboBox>
-                    </StackPanel>
-                </controls:SettingsCard.Content>
-            </controls:SettingsCard>
+                                <ComboBoxItem x:Uid="SettingsThemeLight" />
+                                <ComboBoxItem x:Uid="SettingsThemeDark"/>
+                                <ComboBoxItem x:Uid="SettingsThemeSystem"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </controls:SettingsCard.Content>
+                </controls:SettingsCard>
 
-            <controls:SettingsCard 
+                <controls:SettingsCard 
                 x:Uid="SettingsAppCornorRadius"
                 Header="~SettingsAppCornorRadius.Header">
-                <controls:SettingsCard.Description>
-                    <TextBlock 
+                    <controls:SettingsCard.Description>
+                        <TextBlock 
                         x:Uid="SettingsAppCornorRadiusDesc"
                         Text="~SettingsAppCornorRadiusDesc.Text" 
                         VerticalAlignment="Stretch" 
                         HorizontalAlignment="Stretch"/>
-                </controls:SettingsCard.Description>
-                <controls:SettingsCard.Content>
-                    <ToggleSwitch 
+                    </controls:SettingsCard.Description>
+                    <controls:SettingsCard.Content>
+                        <ToggleSwitch 
                         x:Name="SettingsRoundCornerToggleSwtich"
                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
-                </controls:SettingsCard.Content>
-            </controls:SettingsCard>
+                    </controls:SettingsCard.Content>
+                </controls:SettingsCard>
 
-            <!--<controls:SettingsExpander
+                <!--<controls:SettingsExpander
                 Margin="0,0,0,20"
                 IsExpanded="True">
                 <controls:SettingsExpander.Header>
@@ -114,65 +118,68 @@
                 </controls:SettingsExpander.Items>
             </controls:SettingsExpander>-->
 
-            <controls:SettingsCard
+                <controls:SettingsCard
                     x:Uid="SettingsPreferHiddenTOTP"
                     Header="~SettingsPreferHiddenTOTP.Header" >
-                <controls:SettingsCard.Description>
-                    <TextBlock 
+                    <controls:SettingsCard.Description>
+                        <TextBlock 
                         x:Uid="SettingsPreferHiddenTOTPDesc"
                         Text="~SettingsPreferHiddenTOTPDesc.Text"/>
-                </controls:SettingsCard.Description>
-                <controls:SettingsCard.Content>
-                    <ToggleSwitch 
+                    </controls:SettingsCard.Description>
+                    <controls:SettingsCard.Content>
+                        <ToggleSwitch 
                         x:Name="SettingsPreferHiddenTOTP"
                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
-                </controls:SettingsCard.Content>
-            </controls:SettingsCard>
+                    </controls:SettingsCard.Content>
+                </controls:SettingsCard>
 
-            <controls:SettingsCard
+                <controls:SettingsCard
                 x:Uid="SettingsOptionsFactoryReset"
                 HeaderIcon="{ui:FontIcon Glyph=&#xE74D;}"
                 Header="~SettingsOptionsFactoryReset.Header">
-                <controls:SettingsCard.Description>
-                    <TextBlock 
+                    <controls:SettingsCard.Description>
+                        <TextBlock 
                         x:Uid="SettingsOptionsFactoryResetDesc"
                         Text="~SettingsOptionsFactoryResetDesc.Text"/>
-                </controls:SettingsCard.Description>
-                <controls:SettingsCard.Content>
-                    <Button
+                    </controls:SettingsCard.Description>
+                    <controls:SettingsCard.Content>
+                        <Button
                         
                         Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
-                        <TextBlock 
+                            <TextBlock 
                             Text="~FactoryReset" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
                             x:Uid="SettingsOptionsFactoryResetButton"/>
-                    </Button>
-                </controls:SettingsCard.Content>
-            </controls:SettingsCard>
+                        </Button>
+                    </controls:SettingsCard.Content>
+                </controls:SettingsCard>
 
-            <controls:SettingsCard 
+                <controls:SettingsCard 
                 x:Uid="SettingsAppLoggingMode"
                 HeaderIcon="{ui:FontIcon Glyph=&#xEADF;}"
                 Header="~SettingsAppLoggingMode.Header">
-                <controls:SettingsCard.Description>
-                    <HyperlinkButton
+                    <controls:SettingsCard.Description>
+                        <HyperlinkButton
                                 x:Uid="SettingsOpenLogBTN"
                                 Content="~SettingsOpenLogBTN.Content"
                                 Command="{x:Bind ViewModel.SettingsPartViewModel.OpenLogCommand}"/>
-                </controls:SettingsCard.Description>
-                <controls:SettingsCard.Content>
-                    <StackPanel>
-                        <ComboBox 
+                    </controls:SettingsCard.Description>
+                    <controls:SettingsCard.Content>
+                        <StackPanel>
+                            <ComboBox 
 SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.LoggingIndex, Mode=TwoWay}" 
 MinWidth="{StaticResource CardActionControlMinWidth}">
-                            <ComboBoxItem x:Uid="SettingsLoggingNone" />
-                            <ComboBoxItem x:Uid="SettingsLoggingSimple"/>
-                            <ComboBoxItem x:Uid="SettingsLoggingFull"/>
-                        </ComboBox>
-                    </StackPanel>
-                </controls:SettingsCard.Content>
-            </controls:SettingsCard>
-        </StackPanel>
+                                <ComboBoxItem x:Uid="SettingsLoggingNone" />
+                                <ComboBoxItem x:Uid="SettingsLoggingSimple"/>
+                                <ComboBoxItem x:Uid="SettingsLoggingFull"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </controls:SettingsCard.Content>
+                </controls:SettingsCard>
+            </StackPanel>
+        </ScrollViewer>
+
+
     </Grid>
 </Page>

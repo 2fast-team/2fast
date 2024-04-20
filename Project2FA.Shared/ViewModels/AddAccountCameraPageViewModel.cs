@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using UNOversal.Services.Dialogs;
 using System.Web;
+using Windows.UI.Core;
+using Windows.Storage;
+using System;
 
 namespace Project2FA.ViewModels
 {
@@ -35,7 +38,12 @@ namespace Project2FA.ViewModels
                 {
                     var parameter = new NavigationParameters();
                     parameter.Add("AccountValuePair", valuePair);
-                    await NavigationService.NavigateAsync(nameof(AddAccountPage), parameter);
+
+                    await App.ShellPageInstance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,async () =>
+                    {
+                        await NavigationService.NavigateAsync(nameof(AddAccountPage), parameter);
+                    });
+
                 }
                 else
                 {

@@ -44,6 +44,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Project2FA.UNO.Views;
 using Project2FA.UNO;
+using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
 
 namespace Project2FA.ViewModels
@@ -218,7 +219,7 @@ namespace Project2FA.ViewModels
             CheckWindowsHelloIsSupported();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 #else
-            App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
+            //App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
 #endif
         }
 
@@ -229,6 +230,9 @@ namespace Project2FA.ViewModels
         {
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.SettingsFactoryResetDialogTitle;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.SettingsFactoryResetMessage;
@@ -295,9 +299,13 @@ namespace Project2FA.ViewModels
             catch (Exception)
             {
                 var dialog = new ContentDialog();
+#if !WINDOWS_UWP
+                dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
                 dialog.Title = Resources.SettingsPageNoLogDialogTitle;
                 dialog.Content = Resources.SettingsPageNoLogDialogContent;
                 dialog.PrimaryButtonText = Resources.Confirm;
+
                 await DialogService.ShowDialogAsync(dialog, new DialogParameters());
 
             }

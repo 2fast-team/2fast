@@ -20,7 +20,7 @@ namespace Project2FA.UNO.Views
 {
     public sealed partial class LoginPage : Page
     {
-        readonly LoginPageViewModel ViewModel = new LoginPageViewModel();
+        public LoginPageViewModel ViewModel = new LoginPageViewModel();
         public LoginPage(bool isLogout = false)
         {
             this.InitializeComponent();
@@ -30,15 +30,15 @@ namespace Project2FA.UNO.Views
             this.Loaded += LoginPage_Loaded;
         }
 
-        private void LoginPage_Loaded(object sender, RoutedEventArgs e)
+        private async void LoginPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (System.Diagnostics.Debugger.IsAttached || SettingsService.Instance.PrideMonthDesign)
             {
                 PageStaticBackgroundBorder.Visibility = Visibility.Visible;
                 PageImageBackgroundBorder.Visibility = Visibility.Collapsed;
             }
-#if ANDROID || IOS
-            ViewModel.CheckCapabilityBiometricLogin();
+#if __ANDROID__ || IOS
+            await ViewModel.CheckCapabilityBiometricLogin(MainGrid.XamlRoot);
 #endif
         }
     }

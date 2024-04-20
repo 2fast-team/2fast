@@ -34,6 +34,9 @@ using System.Web;
 using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
 
+
+
+
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Windows.UI.Xaml;
@@ -41,6 +44,11 @@ using Windows.UI.Xaml.Controls;
 using WindowActivatedEventArgs = Windows.UI.Core.WindowActivatedEventArgs;
 using WinUIWindow = Windows.UI.Xaml.Window;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Graphics.Capture;
+using Windows.Foundation;
+using Windows.Graphics.DirectX;
+using Microsoft.Graphics.Canvas;
+using Windows.UI.Xaml.Media.Imaging;
 #else
 using Project2FA.UNO;
 using Microsoft.UI.Xaml;
@@ -54,13 +62,6 @@ namespace Project2FA.ViewModels
 {
     public class AddAccountViewModelBase : ObservableObject, IDisposable
     {
-        // future function: 
-        // create screen capture without third party app
-        // https://learn.microsoft.com/en-us/windows/uwp/audio-video-camera/screen-capture
-
-        // create PiP mode
-        // https://stackoverflow.com/questions/64644610/how-to-set-minimum-window-size-in-compact-overlay-mode-of-uwp-app
-
         public ObservableCollection<TwoFACodeModel> OTPList { get; internal set; } = new ObservableCollection<TwoFACodeModel>();
         public ObservableCollection<MediaFrameSourceGroup> CameraSourceGroup { get; internal set; } = new ObservableCollection<MediaFrameSourceGroup>();
         private Windows.Media.Playback.MediaPlayer _mediaPlayer;
@@ -68,7 +69,7 @@ namespace Project2FA.ViewModels
         private CameraHelper _cameraHelper;
 
         private string _qrCodeStr;
-        private bool _qrCodeScan, _launchScreenClip, _isButtonEnable;
+        private bool _isButtonEnable;
         private bool _manualInput;
         private bool _isCameraActive;
         private TwoFACodeModel _model;
@@ -95,6 +96,12 @@ namespace Project2FA.ViewModels
         private VideoFrame _currentVideoFrame;
         private long _videoFrameCounter;
         private const int _vidioFrameDivider = 20; // every X frame for analyzing
+#if WINDOWS_UWP
+        private Direct3D11CaptureFramePool _framePool;
+        private CanvasDevice _canvasDevice;
+        private GraphicsCaptureSession _session;
+        private GraphicsCaptureItem _item;
+#endif
 
         public AddAccountViewModelBase()
         {
@@ -111,7 +118,9 @@ namespace Project2FA.ViewModels
                 SelectedPivotIndex = 1;
                 ManualInput = true;
             });
+#if WINDOWS_UWP
             ScanQRCodeCommand = new AsyncRelayCommand(ScanQRCodeCommandTask);
+#endif
             PrimaryButtonCommand = new AsyncRelayCommand(PrimaryButtonCommandTask);
 
 
@@ -135,8 +144,8 @@ namespace Project2FA.ViewModels
             ReloadCameraCommand = new AsyncRelayCommand(InitializeCameraAsync);
 
 #if WINDOWS_UWP
-            WinUIWindow.Current.Activated -= Current_Activated;
-            WinUIWindow.Current.Activated += Current_Activated;
+            //WinUIWindow.Current.Activated -= Current_Activated;
+            //WinUIWindow.Current.Activated += Current_Activated;
 #endif
         }
 
@@ -164,6 +173,7 @@ namespace Project2FA.ViewModels
         //    await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
         //}
 
+#if WINDOWS_UWP
         private async Task ScanQRCodeCommandTask()
         {
 
@@ -174,8 +184,9 @@ namespace Project2FA.ViewModels
             _dispatcherTimer.Tick += OnTimedEvent;
             Seconds = OpeningSeconds;
             _dispatcherTimer.Start();
-            await ScanClipboardQRCode();
+            await ScanScreenQRCode();
         }
+#endif
 
 
         private async Task CameraScanCommandTask()
@@ -220,86 +231,134 @@ namespace Project2FA.ViewModels
             await CleanUpCamera();
         }
 
-        /// <summary>
-        /// Detects if the app loses focus and gets it again
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Current_Activated(object sender, WindowActivatedEventArgs e)
-        {
-            if (e.WindowActivationState == CoreWindowActivationState.Deactivated)
-            {
-                Logger.Log("Focus lost/Deactivated", Category.Info, Priority.Low);
-                // if the screenclip app is started, the focus of the application is lost
-                if (_launchScreenClip)
-                {
-                    // now set the scan to true
-                    _qrCodeScan = true;
-                    Logger.Log("QR-code scan is now active", Category.Info, Priority.Low);
-                    // user has switch the application to scan the QR-code
-                    _launchScreenClip = false;
-                }
-            }
-            else
-            {
-                Logger.Log("Focus/Activated", Category.Info, Priority.Low);
-                // if the app is focused again, check if a QR-Code is in the clipboard
-                if (_qrCodeScan)
-                {
 #if WINDOWS_UWP
-                    // TODO for 1.3.0 version
-                    //ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
-                    ReadQRCodeFromClipboard();
-#endif
-                    _qrCodeScan = false;
-                }
-            }
-        }
-
-
-
         /// <summary>
         /// Launch the MS screenclip app
         /// </summary>
-        private async Task ScanClipboardQRCode()
+        private async Task ScanScreenQRCode()
         {
-            // TODO option for clippingMode via settings page for 1.3.0 version
-            // clippingMode Values supported include: Rectangle, Freeform, Window, Fullscreen, Recording
-            bool result = await Windows.System.Launcher.LaunchUriAsync(new Uri(
-                string.Format("ms-screenclip:edit?source={0}&delayInSeconds={1}&clippingMode=Rectangle",
-                Strings.Resources.ApplicationName,
-                OpeningSeconds)));
-            if (result)
+            // set Window for compact overlay
+            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+            var size = new Size(192, 150);
+            ApplicationView.GetForCurrentView().TryResizeView(size);
+            _canvasDevice = new CanvasDevice();
+
+            // create picker for graphic capture
+            var picker = new GraphicsCapturePicker();
+            GraphicsCaptureItem item = await picker.PickSingleItemAsync();
+
+            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
+            // The item may be null if the user dismissed the
+            // control without making a selection or hit Cancel.
+            if (item != null)
             {
-                // TODO for 1.3.0 version
-                //await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
-                _launchScreenClip = true;
+                //_item = item;
+                // Stop the previous capture if we had one.
+                StopWindowScreenCapture();
+                // We'll define this method later in the document.
+                //StartCaptureInternal(item);
+
+                _framePool = Direct3D11CaptureFramePool.Create(
+                    _canvasDevice, // D3D device
+                    DirectXPixelFormat.B8G8R8A8UIntNormalized, // Pixel format
+                    2, // Number of frames
+                    item.Size); // Size of the buffers
+
+                _session = _framePool.CreateCaptureSession(item);
+
+                _framePool.FrameArrived -= FramePool_WindowFrameArrived;
+                _framePool.FrameArrived += FramePool_WindowFrameArrived;
+
+
+                _session.StartCapture();
+
             }
             else
             {
-                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogScreenclipNotFound, Strings.Resources.Error);
-                await dialog.ShowAsync();
+                // TODO hint for tutorial?
             }
 
-            // TODO implement alternative way to scan QR Code for 1.3.0 version
-            //// The GraphicsCapturePicker follows the same pattern the
-            //// file pickers do.
-            //var picker = new GraphicsCapturePicker();
-            //GraphicsCaptureItem item = await picker.PickSingleItemAsync();
-
-            //// The item may be null if the user dismissed the
-            //// control without making a selection or hit Cancel.
-            //if (item != null)
-            //{
-            //    // Stop the previous capture if we had one.
-
-            //    // We'll define this method later in the document.
-            //    //StartCaptureInternal(item);
-            //}
-            //await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
-            //var size = new Size(192, 150);
-            //ApplicationView.GetForCurrentView().TryResizeView(size);
         }
+
+        private async void FramePool_WindowFrameArrived(Direct3D11CaptureFramePool sender, object args)
+        {
+            // only one frame is nessasary
+            _framePool.FrameArrived -= FramePool_WindowFrameArrived;
+            // The FrameArrived event fires for every frame on the thread that
+            // created the Direct3D11CaptureFramePool. This means we don't have to
+            // do a null-check here, as we know we're the only one  
+            // dequeueing frames in our application.  
+
+            // NOTE: Disposing the frame retires it and returns  
+            // the buffer to the pool.
+            using var frame = _framePool.TryGetNextFrame();
+
+            // Convert our D3D11 surface into a Win2D object.
+            CanvasBitmap canvasBitmap = CanvasBitmap.CreateFromDirect3D11Surface(
+                _canvasDevice,
+                frame.Surface);
+
+            var renderer = new CanvasRenderTarget(_canvasDevice,
+                                                  canvasBitmap.SizeInPixels.Width,
+                                                  canvasBitmap.SizeInPixels.Height, canvasBitmap.Dpi);
+            using (var ds = renderer.CreateDrawingSession())
+            {
+                ds.DrawImage(canvasBitmap, 0, 0);
+            }
+
+            InMemoryRandomAccessStream randomAccessStream = new InMemoryRandomAccessStream();
+            await renderer.SaveAsync(randomAccessStream, CanvasBitmapFileFormat.Png);
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(randomAccessStream);
+            var softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+
+            if (softwareBitmap.BitmapPixelFormat != BitmapPixelFormat.Bgra8 ||
+                softwareBitmap.BitmapAlphaMode == BitmapAlphaMode.Straight)
+            {
+                softwareBitmap = SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+            }
+
+            StopWindowScreenCapture();
+
+            var luminanceSource = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(softwareBitmap);
+            if (luminanceSource != null)
+            {
+                var barcodeReader = new Project2FA.ZXing.BarcodeReader
+                {
+                    AutoRotate = true,
+                    Options = { TryHarder = true }
+                };
+                var decodedStr = barcodeReader.Decode(luminanceSource);
+                if (decodedStr != null)
+                {
+                    if (decodedStr.Text.StartsWith("otpauth"))
+                    {
+
+                        _qrCodeStr = decodedStr.Text;
+                        await ReadAuthenticationFromString();
+                    }
+                }
+                else
+                {
+                    await QRReadError();
+                }
+            }
+            else
+            {
+                await QRReadError();
+            }
+        }
+
+        public void StopWindowScreenCapture()
+        {
+            _session?.Dispose();
+            _framePool?.Dispose();
+            _item = null;
+            _session = null;
+            _framePool = null;
+        }
+#endif
+
+
 
         private void OnTimedEvent(object sender, object e)
         {
@@ -353,9 +412,7 @@ namespace Project2FA.ViewModels
                                 }
                                 catch (Exception exc)
                                 {
-#if WINDOWS_UWP
                                     TrackingManager.TrackExceptionCatched("Clipboard.Clear: ", exc);
-#endif
                                 }
                                 await ReadAuthenticationFromString();
                             }
@@ -383,9 +440,9 @@ namespace Project2FA.ViewModels
                     }
                     catch (Exception exc)
                     {
-#if WINDOWS_UWP
+
                         TrackingManager.TrackExceptionCatched(nameof(ReadQRCodeFromClipboard), exc);
-#endif
+
                         // TODO error by processing the image
                     }
                 }
@@ -397,6 +454,7 @@ namespace Project2FA.ViewModels
         {
             SecretKey = string.Empty;
             Issuer = string.Empty;
+
             //migrate code import (Google)
             if (_qrCodeStr.StartsWith("otpauth-migration://"))
             {
@@ -418,6 +476,7 @@ namespace Project2FA.ViewModels
             {
                 //move to the input dialog
                 PivotViewSelectionName = "NormalInputAccount";
+                SelectedPivotIndex = 1;
 
                 if (await ParseQRCode() && !string.IsNullOrEmpty(SecretKey)
                    && !string.IsNullOrEmpty(Issuer))
@@ -888,6 +947,10 @@ namespace Project2FA.ViewModels
             {
                 if (SetProperty(ref _selectedPivotIndex, value))
                 {
+                    if (value == 0)
+                    {
+                        PivotViewSelectionName = "Overview";
+                    }
                     //OnPropertyChanged(nameof(PivotViewSelectionName));
                     //if(value== 0)
                     //{

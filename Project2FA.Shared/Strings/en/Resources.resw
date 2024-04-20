@@ -124,10 +124,10 @@
     <value>Copied to clipboard</value>
   </data>
   <data name="AccountCodePageDeleteEntry.Text" xml:space="preserve">
-    <value>delete</value>
+    <value>Delete</value>
   </data>
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
-    <value>edit</value>
+    <value>Edit</value>
   </data>
   <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
     <value>Show options</value>
@@ -148,7 +148,7 @@
     <value>Confirm deletion</value>
   </data>
   <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
-    <value>copy code</value>
+    <value>Copy code</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
     <value>Cancel</value>
@@ -238,10 +238,10 @@
     <value>Current password</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>delete</value>
+    <value>Delete</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>edit</value>
+    <value>Edit</value>
   </data>
   <data name="EditAccountContentDialog.PrimaryButtonText" xml:space="preserve">
     <value>Confirm</value>
@@ -265,7 +265,7 @@
     <value>Password</value>
   </data>
   <data name="LoginPagePassword.PlaceholderText" xml:space="preserve">
-    <value>input password</value>
+    <value>Input password</value>
   </data>
   <data name="LoginPagePasswordMismatch" xml:space="preserve">
     <value>The password doesn't match the password of the data file.</value>
@@ -311,10 +311,10 @@ Important: You have to type in the password everytime you start the app!</value>
     <value>WebDAV</value>
   </data>
   <data name="NewDatafileLocalFolder.Header" xml:space="preserve">
-    <value>filename</value>
+    <value>Filename</value>
   </data>
   <data name="NewDatafileLocalFolder.PlaceholderText" xml:space="preserve">
-    <value>enter filename</value>
+    <value>Enter filename</value>
   </data>
   <data name="NewDatefileContentDialogFolderName.Header" xml:space="preserve">
     <value>Foldername</value>
@@ -336,7 +336,7 @@ If you plan to use this application on several devices it makes sense to store t
     <value>Password</value>
   </data>
   <data name="Password.PlaceholderText" xml:space="preserve">
-    <value>input password</value>
+    <value>Input password</value>
   </data>
   <data name="PasswordRepeat.Header" xml:space="preserve">
     <value>Repeat password</value>
@@ -373,10 +373,10 @@ If you plan to use this application on several devices it makes sense to store t
 The datafile will **not** be removed in the reset progress.</value>
   </data>
   <data name="SettingsGiveFeedback.Text" xml:space="preserve">
-    <value>give feedback</value>
+    <value>Give feedback</value>
   </data>
   <data name="SettingsGiveFeedbackText" xml:space="preserve">
-    <value>give feedback</value>
+    <value>Give feedback</value>
   </data>
   <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
     <value>Design</value>
@@ -400,7 +400,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>Options</value>
   </data>
   <data name="SettingsRateApp.Header" xml:space="preserve">
-    <value>rate app in store</value>
+    <value>Rate app in store</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
     <value>Are you sure you want to permanently delete the data file? You will loose all your added accounts.</value>
@@ -436,7 +436,7 @@ The datafile will **not** be removed in the reset progress.</value>
     <value>Feedback</value>
   </data>
   <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
-    <value>give feedback (Github)</value>
+    <value>Give feedback (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
     <value>Choose another datafile</value>
@@ -519,10 +519,10 @@ Start with another security factor in your daily life.</value>
     <value>Yes</value>
   </data>
   <data name="RateAppContentDialogLaterButton" xml:space="preserve">
-    <value>recall later</value>
+    <value>Recall later</value>
   </data>
   <data name="RateAppContentDialogNoButton" xml:space="preserve">
-    <value>no, thanks</value>
+    <value>No, thanks</value>
   </data>
   <data name="RateAppContentDialogQuestion" xml:space="preserve">
     <value>You have been using this app for some time now, please visit the store to rate it and write a review. You can also use the Windows Feedback App at any time to send us your feedback directly.</value>
@@ -537,7 +537,7 @@ Start with another security factor in your daily life.</value>
     <value>Current password</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText" xml:space="preserve">
-    <value>input password</value>
+    <value>Input password</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
     <value>The application does not currently have the necessary access rights to access the data file. To set the rights, however, the application must be closed. 
@@ -556,7 +556,7 @@ Instructions for setting the authorisation:
     <value>Authorization error</value>
   </data>
   <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
-    <value>lock app</value>
+    <value>Lock app</value>
   </data>
   <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
     <value>Key copied to clipboard</value>
@@ -596,7 +596,7 @@ Instructions for setting the authorisation:
 **Do you want to edit the path?**</value>
   </data>
   <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
-    <value>lock app</value>
+    <value>Lock app</value>
   </data>
   <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
     <value>Add account</value>
@@ -636,10 +636,10 @@ Instructions for setting the authorisation:
     <value>change password</value>
   </data>
   <data name="ErrorHandleSendError" xml:space="preserve">
-    <value>send error</value>
+    <value>Send error</value>
   </data>
   <data name="FactoryReset" xml:space="preserve">
-    <value>factory reset</value>
+    <value>Factory reset</value>
   </data>
   <data name="ChangeDatafilePath" xml:space="preserve">
     <value>Change file path</value>
@@ -697,7 +697,7 @@ Please synchronize the time in the settings.</value>
     <value>Licence:</value>
   </data>
   <data name="RestartApp" xml:space="preserve">
-    <value>restart app</value>
+    <value>Restart app</value>
   </data>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Copy report to clipboard</value>
@@ -724,7 +724,7 @@ Please synchronize the time in the settings.</value>
     <value>An unhandled error occurred the last time the app was used, please send the error details which can be seen in the field via a new issue in Github.</value>
   </data>
   <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
-    <value>set NTP server manually</value>
+    <value>Set NTP server manually</value>
   </data>
   <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
@@ -753,25 +753,25 @@ Please synchronize the time in the settings.</value>
     <value>Load existing datafile</value>
   </data>
   <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
-    <value>first steps</value>
+    <value>First steps</value>
   </data>
   <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
-    <value>load data file</value>
+    <value>Load data file</value>
   </data>
   <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
-    <value>login</value>
+    <value>Login</value>
   </data>
   <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
-    <value>server address</value>
+    <value>Server address</value>
   </data>
   <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
-    <value>username</value>
+    <value>Username</value>
   </data>
   <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
-    <value>data file</value>
+    <value>Data file</value>
   </data>
   <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
-    <value>service login</value>
+    <value>Service login</value>
   </data>
   <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
     <value>Round corners</value>
@@ -795,13 +795,13 @@ Please synchronize the time in the settings.</value>
     <value>To load the data file, you must enter the password that was configured when the file was created.</value>
   </data>
   <data name="ToolTipShowHelp" xml:space="preserve">
-    <value>show help</value>
+    <value>Show help</value>
   </data>
   <data name="SettingsAutoLogoutDesc" xml:space="preserve">
     <value>Automatic logout after inactivity</value>
   </data>
   <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
-    <value>minutes inactivity</value>
+    <value>Minutes inactivity</value>
   </data>
   <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
     <value>Automatic lock</value>
@@ -828,10 +828,10 @@ Please synchronize the time in the settings.</value>
     <value>Set as favourite</value>
   </data>
   <data name="AccountCodePageTooltipHideTOTP" xml:space="preserve">
-    <value>hide key</value>
+    <value>Hide key</value>
   </data>
   <data name="AccountCodePageTooltipShowTOTP" xml:space="preserve">
-    <value>show key</value>
+    <value>Show key</value>
   </data>
   <data name="SettingsPreferHiddenTOTP.Header" xml:space="preserve">
     <value>Hide keys</value>
@@ -867,7 +867,7 @@ Please synchronize the time in the settings.</value>
     <value>Notes</value>
   </data>
   <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
-    <value>search account picture</value>
+    <value>Search account picture</value>
   </data>
   <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
     <value>Only change these settings if you are sure that the service requires them.</value>
@@ -1201,10 +1201,10 @@ The functionality of this application is explained in more detail in the followi
 ### 2,49€ monthly</value>
   </data>
   <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>subscribe / buy</value>
+    <value>Subscribe / buy</value>
   </data>
   <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
-    <value>cancel</value>
+    <value>Cancel</value>
   </data>
   <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
     <value>Subscriptions &amp; purchases</value>
@@ -1213,7 +1213,7 @@ The functionality of this application is explained in more detail in the followi
     <value>Import the account for another device by opening a two-factor authentication app with the desired device and adding an account with the camera.</value>
   </data>
   <data name="SettingsCardExternalAction" xml:space="preserve">
-    <value>call externally (browser)</value>
+    <value>Call externally (browser)</value>
   </data>
   <data name="SettingsInAppPayment.Description" xml:space="preserve">
     <value>Make subscriptions and purchases for advanced features</value>
@@ -1252,7 +1252,7 @@ The functionality of this application is explained in more detail in the followi
     <value>Set categories</value>
   </data>
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
-    <value>select for purchase</value>
+    <value>Select for purchase</value>
   </data>
   <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
     <value>Function only available by purchase or subscription.</value>

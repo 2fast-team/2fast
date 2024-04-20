@@ -50,6 +50,7 @@ using BiometryService;
 #if ANDROID
 using AndroidX.Biometric;
 using BiometryService;
+using Microsoft.Maui.ApplicationModel;
 #endif
 
 namespace Project2FA.ViewModels
@@ -253,7 +254,7 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Checks and starts biometric login, if possible and desired
         /// </summary>
-        public async Task CheckCapabilityBiometricLogin()
+        public async Task CheckCapabilityBiometricLogin(XamlRoot root)
         {
             try
             {
@@ -273,6 +274,7 @@ namespace Project2FA.ViewModels
                             Text = isFingerprintReader ? Resources.BiometricFingerPreferMessage : Resources.BiometricFacePreferMessage,
                             TextWrapping = Microsoft.UI.Xaml.TextWrapping.WrapWholeWords
                         };
+                        dialog.XamlRoot = root;
                         dialog.Content = markdown;
                         dialog.PrimaryButtonText = Resources.Yes;
                         dialog.SecondaryButtonText = Resources.No;

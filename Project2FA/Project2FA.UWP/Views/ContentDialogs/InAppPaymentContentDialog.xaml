@@ -193,7 +193,8 @@
             <ToggleButton 
             Style="{StaticResource InAppPurchaseToggleButtonStyle}"
             IsEnabled="{x:Bind IsEnabled, Mode=OneWay}" 
-            IsChecked="{x:Bind IsChecked,Mode=TwoWay}" Click="ToggleButton_Click">
+            IsChecked="{x:Bind IsChecked,Mode=TwoWay}" 
+            Click="ToggleButton_Click">
                 <Grid 
                     Margin="12,0,12,0" 
                     MaxWidth="300"

@@ -358,6 +358,9 @@ namespace Project2FA.ViewModels
             {
                 await LoggingService.LogException(exc);
                 ContentDialog dialog = new ContentDialog();
+#if !WINDOWS_UWP
+                dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
                 dialog.Title = Strings.Resources.ErrorHandle;
                 dialog.Content = Strings.Resources.ErrorClipboardTask;
                 dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
@@ -438,6 +441,9 @@ namespace Project2FA.ViewModels
         {
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.DeleteAccountContentDialogTitle;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 #if WINDOWS_UWP
             var markdown = new MarkdownTextBlock
             {
@@ -521,6 +527,9 @@ namespace Project2FA.ViewModels
             var param = new DialogParameters();
             param.Add("Model", model);
             var dialog = new DisplayQRCodeContentDialog();
+#if !WINDOWS_UWP
+            dialog.XamlRoot = App.ShellPageInstance.XamlRoot;
+#endif
             await DialogService.ShowDialogAsync(dialog, param);
         }
 

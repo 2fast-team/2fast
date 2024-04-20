@@ -140,6 +140,7 @@ namespace Project2FA.UNO
                     {
                         LoginPage loginPage = Container.Resolve<LoginPage>();
                         WinUIWindow.Current.Content = loginPage;
+
                     }
                     else
                     {

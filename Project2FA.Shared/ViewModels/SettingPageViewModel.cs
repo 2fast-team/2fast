@@ -199,7 +199,6 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// View Model constructor
         /// </summary>
-        /// <param name="resourceService"></param>
         /// <param name="dialogService"></param>
         public SettingsPartViewModel(IDialogService dialogService)
         {

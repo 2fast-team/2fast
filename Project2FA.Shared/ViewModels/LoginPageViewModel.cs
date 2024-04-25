@@ -359,11 +359,16 @@ namespace Project2FA.ViewModels
             {
 #if WINDOWS_UWP
                 App.ShellPageInstance.SetTitleBarAsDraggable();
-#endif
-                // TODO for UNO
                 WinUIWindow.Current.Content = App.ShellPageInstance;
                 await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
                 WinUIWindow.Current.Activate();
+#else
+                // TODO for UNO
+                App.MainWindow.Content = App.ShellPageInstance;
+                await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+                WinUIWindow.Current.Activate();
+#endif
+
                 return true;
             }
             else

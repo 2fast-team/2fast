@@ -946,7 +946,7 @@ namespace Project2FA.Strings{
 
         #region NewAppFeaturesTitle
         /// <summary>
-        ///   Looks up a localized string similar to: New features & changes
+        /// Looks up a localized string similar to: New features and changes
         /// </summary>
         public static string NewAppFeaturesTitle
         {

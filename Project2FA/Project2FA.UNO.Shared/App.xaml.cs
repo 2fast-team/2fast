@@ -52,12 +52,17 @@ namespace Project2FA.UNO
         /// <summary>
         /// Creates the access of the static instance of the ShellPage
         /// </summary>
-        public static ShellPage ShellPageInstance { get; private set; }
+        internal static ShellPage ShellPageInstance { get; private set; }
 
         /// <summary>
         /// Pipeline for interacting with database.
         /// </summary>
         public static IProject2FARepository Repository { get; private set; }
+
+        /// <summary>
+        /// Gets the main window of the app.
+        /// </summary>
+        internal static WinUIWindow? MainWindow { get; private set; }
 
 #if __IOS__
         Foundation.NSUrl _activeDatafileUrl;
@@ -81,16 +86,16 @@ namespace Project2FA.UNO
 
         public override async Task OnStartAsync(IApplicationArgs args)
         {
-
+            MainWindow = WinUIWindow.Current;
 #if DEBUG
-            //WinUIWindow.Current.EnableHotReload();
+            WinUIWindow.Current.EnableHotReload();
 #endif
 
 #if MAUI_EMBEDDING
-            this.UseMauiEmbedding<MauiControls.App>(WinUIWindow.Current,
+            this.UseMauiEmbedding<MauiControls.App>(MainWindow,
                 maui => maui.UseMauiControls());
 #endif
-            if (WinUIWindow.Current.Content == null)
+            if (MainWindow.Content == null)
             {
                 //ThemeHelper.Initialize();
                 // Hide default title bar
@@ -139,13 +144,13 @@ namespace Project2FA.UNO
                     if (await Repository.Password.GetAsync() is not null)
                     {
                         LoginPage loginPage = Container.Resolve<LoginPage>();
-                        WinUIWindow.Current.Content = loginPage;
+                        MainWindow.Content = loginPage;
 
                     }
                     else
                     {
                         await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
-                        WinUIWindow.Current.Content = ShellPageInstance;
+                        MainWindow.Content = ShellPageInstance;
                     }
                 }
             }
@@ -157,18 +162,23 @@ namespace Project2FA.UNO
 #endif
 
                 FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
-                WinUIWindow.Current.Content = fileActivationPage;
+                MainWindow.Content = fileActivationPage;
             }
 
 
             WinUIWindow.Current.Activate();
         }
 
+        /// <summary>
+        /// Detects if the focus is lost for the app and start the timer for auto logout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Current_Activated(object sender, WindowActivatedEventArgs e)
         {
             if (e.WindowActivationState == CoreWindowActivationState.Deactivated)
             {
-                if (WinUIWindow.Current.Content is ShellPage)
+                if (MainWindow.Content is ShellPage)
                 {
                     if (_focusLostTimer == null)
                     {
@@ -190,21 +200,6 @@ namespace Project2FA.UNO
                 if (_focusLostTimer.IsEnabled)
                 {
                     _focusLostTimer.Stop();
-                }
-                if (_logoutNavigation)
-                {
-                    _logoutNavigation = false;
-                    ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
-                    if (DataService.Instance.ActivatedDatafile != null)
-                    {
-                        var fileActivationPage = new FileActivationPage();
-                        WinUIWindow.Current.Content = fileActivationPage;
-                    }
-                    else
-                    {
-                        var loginPage = new LoginPage(true);
-                        WinUIWindow.Current.Content = loginPage;
-                    }
                 }
             }
         }
@@ -230,21 +225,16 @@ namespace Project2FA.UNO
                     }
                     if (ShellPageInstance.MainFrame.DispatcherQueue.HasThreadAccess)
                     {
-                        await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
+                        //await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
                         if (DataService.Instance.ActivatedDatafile != null)
                         {
                             var fileActivationPage = new FileActivationPage();
-                            WinUIWindow.Current.Content = fileActivationPage;
+                            MainWindow.Content = fileActivationPage;
                         }
                         else
                         {
-                            //#if ANDROID || IOS
-                            //                        var loginPage = new LoginPage(true);
-                            //#else
-                            //                        var loginPage = new LoginPage(true);
-                            //#endif
                             var loginPage = new LoginPage(true);
-                            WinUIWindow.Current.Content = loginPage;
+                            MainWindow.Content = loginPage;
                         }
                     }
                     else

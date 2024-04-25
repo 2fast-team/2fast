@@ -13,7 +13,7 @@
     <IsUnoHead>true</IsUnoHead>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">14.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">27.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">29.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net8.0-macos'">10.14</SupportedOSPlatformVersion>
     <PackageIcon>splash.png</PackageIcon>
     <PublishTrimmed>False</PublishTrimmed>
@@ -58,25 +58,25 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240405-build.1014" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240405-build.1014" />
     <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240405-build.1014" />
-	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.20" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Svg.Skia" Version="1.0.0.18" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.8.0-dev.1" />
     <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="4.2.0-dev.36" />
-    <PackageReference Include="Uno.Resizetizer" Version="1.4.5">
+    <PackageReference Include="Uno.Resizetizer" Version="1.4.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.1.0-dev.10" />
     <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.1.0-dev.10" />
-    <PackageReference Include="Uno.WinUI" Version="5.3.0-dev.523" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.3.0-dev.523" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.3.0-dev.523" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.3.0-dev.523" />
+    <PackageReference Include="Uno.WinUI" Version="5.3.0-dev.657" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.3.0-dev.657" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.3.0-dev.657" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.3.0-dev.657" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.3.0-dev.523" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.3.0-dev.657" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>

@@ -388,7 +388,7 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Starts the dialog to edit an existing account
         /// </summary>
-        /// <param name="parameter"></param>
+        /// <param name="model"></param>
 #if WINDOWS_UWP
         private async Task EditAccountFromCollection(TwoFACodeModel model)
 #else
@@ -431,7 +431,7 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Deletes an account from the collection
         /// </summary>
-        /// <param name="parameter"></param>
+        /// <param name="model"></param>
 #if WINDOWS_UWP
         private async Task DeleteAccountFromCollection(TwoFACodeModel model)
 #else

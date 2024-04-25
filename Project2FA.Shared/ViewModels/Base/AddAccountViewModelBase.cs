@@ -701,7 +701,7 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Read QR code from writeble bitmap  
         /// </summary>
-        /// <param name="encodedStr"></param>
+        /// <param name="bitmap"></param>
         /// <returns>decoded result</returns>
         private string ReadQRCodeFromBitmap(SoftwareBitmap bitmap)
         {

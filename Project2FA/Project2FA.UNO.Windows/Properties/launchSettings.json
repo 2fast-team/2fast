@@ -1,7 +1,0 @@
-{
-  "profiles": {
-    "Project2FA.UNO.Windows": {
-      "commandName": "MsixPackage"
-    }
-  }
-}

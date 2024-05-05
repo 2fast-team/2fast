@@ -1324,4 +1324,7 @@ Currently available:
   <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
     <value>The search is carried out with the set categories via an OR search.</value>
   </data>
+  <data name="EditAccountPageTitle" xml:space="preserve">
+    <value>Edit account</value>
+  </data>
 </root>

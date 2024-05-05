@@ -69,7 +69,7 @@ namespace Project2FA.UNO.Views
                 ViewModel.Initialize(new NavigationParameters());
                 
                 //set current index for TabBar on smartphones
-#if ANDROID || IOS
+#if __ANDROID__ || __IOS__
                 if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)
                 {
                     switch (uIElement)

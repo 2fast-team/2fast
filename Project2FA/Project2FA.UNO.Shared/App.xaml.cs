@@ -62,7 +62,7 @@ namespace Project2FA.UNO
         /// <summary>
         /// Gets the main window of the app.
         /// </summary>
-        internal static WinUIWindow? MainWindow { get; private set; }
+        protected WinUIWindow? MainWindow { get; private set; }
 
 #if __IOS__
         Foundation.NSUrl _activeDatafileUrl;
@@ -97,6 +97,7 @@ namespace Project2FA.UNO
 #endif
             if (MainWindow.Content == null)
             {
+                MainWindow.Content = ShellPageInstance;
                 //ThemeHelper.Initialize();
                 // Hide default title bar
                 // not implemented
@@ -143,14 +144,11 @@ namespace Project2FA.UNO
                 {
                     if (await Repository.Password.GetAsync() is not null)
                     {
-                        LoginPage loginPage = Container.Resolve<LoginPage>();
-                        MainWindow.Content = loginPage;
-
+                        await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(LoginPage));
                     }
                     else
                     {
                         await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
-                        MainWindow.Content = ShellPageInstance;
                     }
                 }
             }
@@ -160,11 +158,8 @@ namespace Project2FA.UNO
                 Android.Net.Uri strLink = Android.Net.Uri.Parse(fileActivated.Uri.ToString());
                 DataService.Instance.ActivatedDatafile = StorageFile.GetFromSafUri(strLink);
 #endif
-
-                FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
-                MainWindow.Content = fileActivationPage;
+                await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(FileActivationPage));
             }
-
 
             WinUIWindow.Current.Activate();
         }
@@ -215,7 +210,7 @@ namespace Project2FA.UNO
             TimeSpan timeDiff = DateTime.Now - _focusLostTime;
             if (SettingsService.Instance.UseAutoLogout)
             {
-                if (true )//timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
+                if (timeDiff.TotalMinutes >= SettingsService.Instance.AutoLogoutMinutes)
                 {
                     _focusLostTimer.Stop();
                     var dialogService = Current.Container.Resolve<IDialogService>();
@@ -228,13 +223,11 @@ namespace Project2FA.UNO
                         //await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(BlankPage));
                         if (DataService.Instance.ActivatedDatafile != null)
                         {
-                            var fileActivationPage = new FileActivationPage();
-                            MainWindow.Content = fileActivationPage;
+                            await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(FileActivationPage));
                         }
                         else
                         {
-                            var loginPage = new LoginPage(true);
-                            MainWindow.Content = loginPage;
+                            await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(LoginPage));
                         }
                     }
                     else
@@ -380,12 +373,13 @@ namespace Project2FA.UNO
             containerRegistry.RegisterSingleton<ShellPage>();
             containerRegistry.RegisterForNavigation<BlankPage, BlankPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<FileActivationPage, FileActivationPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
             containerRegistry.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
             containerRegistry.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
             containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
-            
+
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
             //AddAccountCameraPageViewModel
 #if __IOS__ || __ANDROID__

@@ -15,16 +15,17 @@ using System.Web;
 using Windows.UI.Core;
 using Windows.Storage;
 using System;
+using Project2FA.UNO.MauiControls.Messenger;
 
 namespace Project2FA.ViewModels
 {
     [Bindable]
-    public class AddAccountCameraPageViewModel : ObservableRecipient, IInitialize, IConfirmNavigationAsync
+    public class AddAccountCameraPageViewModel : ObservableRecipient, IInitialize, IConfirmNavigation
     {
         private INavigationService NavigationService { get; }
         private IProject2FAParser Project2FAParser { get; }
         private IDialogService DialogService { get; }
-        private bool _finishAccount = false;
+        private bool _foundAccount = false;
         public AddAccountCameraPageViewModel(INavigationService navigationService, IProject2FAParser project2FAParser, IDialogService dialogService)
         {
             NavigationService = navigationService;
@@ -38,10 +39,10 @@ namespace Project2FA.ViewModels
                 {
                     var parameter = new NavigationParameters();
                     parameter.Add("AccountValuePair", valuePair);
-
+                    _foundAccount = true;
                     await App.ShellPageInstance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,async () =>
                     {
-                        await NavigationService.NavigateAsync(nameof(AddAccountPage), parameter);
+                        await NavigationService.NavigateAsync("/" + nameof(AddAccountPage), parameter);
                     });
 
                 }
@@ -56,23 +57,15 @@ namespace Project2FA.ViewModels
         {
             // TabBar should not be visible
             App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
-
-
-
         }
 
-        public Task<bool> CanNavigateAsync(INavigationParameters parameters)
+        public bool CanNavigate(INavigationParameters parameters)
         {
-            if (!_finishAccount)
+            if (!_foundAccount)
             {
-                // TODO Dialog 
-                return Task.FromResult(true);
+                Messenger.Send(new ControlDisposeMessage(true));
             }
-            else
-            {
-                //Messenger.Unregister<QRCodeScannedMessage>(this);
-                return Task.FromResult(true);
-            }
+            return true;
         }
     }
 }

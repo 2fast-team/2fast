@@ -328,36 +328,6 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                                     </appcontrols:CardControl.ActionContent>
                                 </appcontrols:CardControl>
 
-
-                                <appcontrols:CardControl 
-                                    x:Uid="SettingsOptionsQRScan"
-                                    Header="~SettingsOptionsQRScan.Header" 
-                                    Icon="&#xED14;">
-                                    <appcontrols:CardControl.Description>
-                                        <TextBlock Text="{x:Bind strings:Resources.SettingsQRScanningHeader}"/>
-                                    </appcontrols:CardControl.Description>
-                                    <appcontrols:CardControl.ActionContent>
-                                        <StackPanel 
-                                            Orientation="Horizontal" 
-                                            Margin="0,6,0,15">
-                                            <TextBlock 
-                                                x:Name="TB_QRCode_Description"
-                                                Text="{x:Bind strings:Resources.SettingsQRScanningSecondsRange}" 
-                                                TextWrapping="WrapWholeWords" 
-                                                Margin="0,0,10,0"
-                                                VerticalAlignment="Center"/>
-                                            <muxc:NumberBox 
-                                                Value="{x:Bind ViewModel.SettingsPartViewModel.SetQRCodeScanSeconds,Mode=TwoWay}"
-                                                Maximum="10"
-                                                Minimum="3"
-                                                SpinButtonPlacementMode="Inline"
-                                                MinWidth="120"
-                                                HorizontalAlignment="Left">
-                                            </muxc:NumberBox>
-                                        </StackPanel>
-                                    </appcontrols:CardControl.ActionContent>
-                                </appcontrols:CardControl>
-
                                 <appcontrols:CardExpanderControl
                                     Background="{ThemeResource CardBackgroundBrush}"
                                     IsExpanded="True">

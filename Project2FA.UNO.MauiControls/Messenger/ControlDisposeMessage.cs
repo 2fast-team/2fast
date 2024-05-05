@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 
 namespace Project2FA.UNO.MauiControls;
-public class QRCodeScannedMessage : ValueChangedMessage<string>
+public class ControlDisposeMessage : ValueChangedMessage<bool>
 {
-    public QRCodeScannedMessage(string value) : base(value)
+    public ControlDisposeMessage(bool value) : base(value)
     {
     }
 }

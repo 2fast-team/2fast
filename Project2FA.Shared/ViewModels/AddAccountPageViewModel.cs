@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using Project2FA.Repository.Models;
 using OtpNet;
 using System.Threading.Tasks;
-
-
-
+using System.Windows.Input;
+using Prism.Commands;
+using CommunityToolkit.Mvvm.Input;
 
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 using Project2FA.UNO;
+using Project2FA.UNO.Views;
 #endif
 
 namespace Project2FA.ViewModels
@@ -23,19 +24,28 @@ namespace Project2FA.ViewModels
 #endif
     public class AddAccountPageViewModel : AddAccountViewModelBase, IInitializeAsync
     {
+        public ICommand CancelButtonCommand { get; }
         public AddAccountPageViewModel(
             ISerializationService serializationService,
             ILoggerFacade loggerFacade,
-            IProject2FAParser project2FAParser) : base()
+            IProject2FAParser project2FAParser,
+            INavigationService navigationService) : base()
         {
             SerializationService = serializationService;
             Logger = loggerFacade;
             Project2FAParser = project2FAParser;
 
+#if __ANDROID__ || __IOS__
+            CancelButtonCommand = new AsyncRelayCommand(async() =>
+            {
+                await navigationService.NavigateAsync("/" + nameof(AccountCodePage));
+            });
+#endif
+
             //ErrorsChanged += Validation_ErrorsChanged;
 
 #if ANDROID || IOS
-        App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
+            App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
 #endif
         }
 

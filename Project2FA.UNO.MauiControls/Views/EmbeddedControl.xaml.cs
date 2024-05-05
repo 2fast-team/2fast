@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using Project2FA.UNO.MauiControls.ViewModel;
 using System;
 using ZXing.Net.Maui;
 
@@ -16,6 +17,7 @@ public partial class EmbeddedControl : ContentView
             AutoRotate = true,
             Multiple = true
         };
+        ViewModel.CameraReader = cameraBarcodeReaderView;
     }
 
     private void BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)

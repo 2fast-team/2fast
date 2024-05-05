@@ -11,7 +11,10 @@
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:toolkitcontrols="using:CommunityToolkit.WinUI.Controls"
-    mc:Ignorable="d"
+    xmlns:android="http://uno.ui/android"
+    xmlns:ios="http://uno.ui/ios"
+    xmlns:not_ios="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    mc:Ignorable="d android ios"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -39,7 +42,7 @@
         </utu:NavigationBar>
 
         <ScrollViewer Grid.Row="1">
-            <StackPanel >
+            <StackPanel Spacing="12">
 
                 <!--<toolkitcontrols:SettingsCard x:Uid="SettingsBackButtonCard">
                 <ToggleSwitch 
@@ -83,9 +86,15 @@
                         HorizontalAlignment="Stretch"/>
                     </controls:SettingsCard.Description>
                     <controls:SettingsCard.Content>
-                        <ToggleSwitch 
-                        x:Name="SettingsRoundCornerToggleSwtich"
-                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
+                        <Grid>
+                            <not_ios:ToggleSwitch 
+                            x:Name="SettingsRoundCornerToggleSwtich"
+                            IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
+                            <ios:ToggleSwitch 
+                            x:Name="SettingsRoundCornerToggleSwtich"
+                            Style="{StaticResource NativeDefaultToggleSwitch}"
+                            IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
+                        </Grid>
                     </controls:SettingsCard.Content>
                 </controls:SettingsCard>
 
@@ -127,9 +136,15 @@
                         Text="~SettingsPreferHiddenTOTPDesc.Text"/>
                     </controls:SettingsCard.Description>
                     <controls:SettingsCard.Content>
-                        <ToggleSwitch 
-                        x:Name="SettingsPreferHiddenTOTP"
-                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
+                        <Grid>
+                            <not_ios:ToggleSwitch 
+                                x:Name="SettingsPreferHiddenTOTP"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
+                            <ios:ToggleSwitch 
+                                x:Name="SettingsPreferHiddenTOTP"
+                                Style="{StaticResource NativeDefaultToggleSwitch}"
+                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
+                        </Grid>
                     </controls:SettingsCard.Content>
                 </controls:SettingsCard>
 

@@ -30,6 +30,30 @@
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>-->
 
+            <DataTemplate x:Key="SuggestBoxDataTemplate" x:DataType="models:TwoFACodeModel">
+                <Grid
+                    HorizontalAlignment="Stretch"
+                    Background="Transparent"
+                    ToolTipService.ToolTip="{x:Bind Label, FallbackValue=''}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon
+                        FontSize="16"
+                        Margin="4,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource SimpleIcons}"
+                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Text="{x:Bind Label, Mode=OneWay}"
+                        TextTrimming="CharacterEllipsis" />
+                </Grid>
+            </DataTemplate>
+
             <DataTemplate x:Key="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
                 <Grid Background="{ThemeResource TwoFABackgroundBrush}" Margin="0,0,0,8">
                     <Grid>
@@ -324,10 +348,12 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                            Style="{StaticResource DefaultPersonPictureStyle}"
+                                Style="{StaticResource DefaultPersonPictureStyle}"
                             Tag="{x:Bind AccountIconName, Mode=OneWay}">
                             </PersonPicture>
                         </utu:ShadowContainer>
+
+                        <!--Style="{StaticResource DefaultPersonPictureStyle}"-->
 
                         <!--<StackPanel
                             MinHeight="80"
@@ -503,13 +529,13 @@
                                             <FontIcon Glyph="&#xE107;"/>
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
-                                    <MenuFlyoutItem
+                                    <not_mobile:MenuFlyoutItem
                                         x:Uid="AccountCodePageShowQRCode"
                                         Click="BTN_ShareItem_Click">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE72D;"/>
                                         </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
+                                    </not_mobile:MenuFlyoutItem>
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>
@@ -556,7 +582,13 @@
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             MainCommandMode="Action"
+            
             DefaultLabelPosition="Collapsed">
+            <utu:NavigationBar.Resources>
+                <Style TargetType="MenuFlyoutPresenter">
+                    <Setter Target="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+                </Style>
+            </utu:NavigationBar.Resources>
             <utu:NavigationBar.Content>
                 <TextBlock 
                     VerticalAlignment="Center"
@@ -571,13 +603,14 @@
                     Foreground="{ThemeResource  SystemAccentColor}" />
             </utu:NavigationBar.MainCommand>
             <utu:NavigationBar.PrimaryCommands>
-                <AppBarButton Label="Add" Style="{StaticResource AppBarButtonStyle}">
+                <AppBarButton>
                     <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE710;"/>
+                        <FontIcon FontSize="28" Glyph="&#xE710;"/>
                     </AppBarButton.Icon>
                     <AppBarButton.Flyout>
                         <MenuFlyout 
-                            MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
+                            UseNativePopup="True" 
+                            toolkit:MenuFlyoutExtensions.CancelTextIosOverride="{x:Bind strings:Resources.ButtonTextCancel}"
                             Placement="Top">
                             <MenuFlyoutItem 
                                 x:Uid="AccountCodePageAddCamera"
@@ -597,12 +630,31 @@
                         </MenuFlyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
+                <AppBarButton 
+    x:Name="ABB_Logout"
+    Foreground="{ThemeResource ButtonForeground}"
+    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
+    Command="{x:Bind ViewModel.LogoutCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE1F6;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton 
+    x:Name="ABB_Refresh"
+    Foreground="{ThemeResource ButtonForeground}"
+    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
+    Command="{x:Bind ViewModel.RefreshCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE895;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
 
             </utu:NavigationBar.PrimaryCommands>
-            <utu:NavigationBar.SecondaryCommands>
+            <!--<utu:NavigationBar.SecondaryCommands>
                 <AppBarButton 
                     x:Name="ABB_Logout"
                     x:Uid="AccountCodePageABBLogout" 
+                    Foreground="{ThemeResource ButtonForeground}"
                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
                     Command="{x:Bind ViewModel.LogoutCommand}">
                     <AppBarButton.Icon>
@@ -611,6 +663,7 @@
                 </AppBarButton>
                 <AppBarButton 
                     x:Name="ABB_Refresh"
+                    Foreground="{ThemeResource ButtonForeground}"
                     x:Uid="AccountCodePageReloadDatafile"
                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
                     Command="{x:Bind ViewModel.RefreshCommand}">
@@ -618,7 +671,7 @@
                         <FontIcon Glyph="&#xE895;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-            </utu:NavigationBar.SecondaryCommands>
+            </utu:NavigationBar.SecondaryCommands>-->
         </utu:NavigationBar>
 
         <Grid Grid.Row="1">
@@ -627,6 +680,7 @@
             x:Name="MobileAutoSuggestBox"
             Height="48"
             QueryIcon="Find"
+            ItemTemplate="{StaticResource SuggestBoxDataTemplate}"
             Text="{x:Bind ViewModel.SearchedAccountLabel,Mode=TwoWay}"
             Visibility="{x:Bind ViewModel.ShellViewModel.IsMobileSearchActive, Mode=OneWay}"
             VerticalAlignment="Center"
@@ -638,7 +692,7 @@
             TextMemberPath="Name"
             GotFocus="AutoSuggestBox_GotFocus"
             Margin="4,0,4,4" >
-                <AutoSuggestBox.ItemTemplate>
+                <!--<AutoSuggestBox.ItemTemplate>
                     <DataTemplate x:DataType="models:TwoFACodeModel">
                         <Grid
                             HorizontalAlignment="Stretch"
@@ -662,7 +716,7 @@
                                 TextTrimming="CharacterEllipsis" />
                         </Grid>
                     </DataTemplate>
-                </AutoSuggestBox.ItemTemplate>
+                </AutoSuggestBox.ItemTemplate>-->
             </AutoSuggestBox>
             <!--<Storyboard x:Name="FadeOutStoryboard">
                 <DoubleAnimation

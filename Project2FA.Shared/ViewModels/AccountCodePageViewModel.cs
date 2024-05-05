@@ -208,6 +208,8 @@ namespace Project2FA.ViewModels
             {
                 TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
             }
+
+#if WINDOWS_UWP
             // clear the navigation stack
             await NavigationService.NavigateAsync("/" + nameof(BlankPage));
             if (TwoFADataService.ActivatedDatafile != null)
@@ -220,6 +222,19 @@ namespace Project2FA.ViewModels
                 LoginPage loginPage = new LoginPage(true);
                 WinUIWindow.Current.Content = loginPage;
             }
+#else
+            if (TwoFADataService.ActivatedDatafile != null)
+            {
+                FileActivationPage fileActivationPage = new FileActivationPage();
+                await NavigationService.NavigateAsync("/" + nameof(FileActivationPage));
+            }
+            else
+            {
+                var navigationParameters = new NavigationParameters();
+                navigationParameters.Add("isLogout", true);
+                await NavigationService.NavigateAsync("/" + nameof(LoginPage), navigationParameters);
+            }
+#endif
         }
 
         private async Task NavigateToSettingsCommandTask()
@@ -659,7 +674,7 @@ namespace Project2FA.ViewModels
             Messenger.Send(new CategoriesChangedMessage(true));
         }
 #endif
-        #region Getter_Setter
+#region Getter_Setter
         public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
         public bool IsAccountNotDeleted => TwoFADataService.TempDeletedTFAModel == null;
@@ -715,6 +730,6 @@ namespace Project2FA.ViewModels
             get => App.ShellPageInstance.ViewModel;
         }
 #endif
-        #endregion
+#endregion
     }
 }

@@ -16,6 +16,7 @@
     <UpToDateCheckInput Remove="Controls\CardGroupControl\CardGroupControl.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\Button.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\PersonPicture.xaml" />
+    <UpToDateCheckInput Remove="Styles\Generic\SettingsCard.xaml" />
     <UpToDateCheckInput Remove="Styles\Generic\TabBar.xaml" />
     <UpToDateCheckInput Remove="Styles\Styles.xaml" />
     <UpToDateCheckInput Remove="Themes\Generic.xaml" />
@@ -144,6 +145,7 @@
     <_Globbled_Page Remove="Controls\CardGroupControl\CardGroupControl.xaml" />
     <_Globbled_Page Remove="Styles\Generic\Button.xaml" />
     <_Globbled_Page Remove="Styles\Generic\PersonPicture.xaml" />
+    <_Globbled_Page Remove="Styles\Generic\SettingsCard.xaml" />
     <_Globbled_Page Remove="Styles\Generic\TabBar.xaml" />
     <_Globbled_Page Remove="Styles\Styles.xaml" />
     <_Globbled_Page Remove="Themes\Generic.xaml" />

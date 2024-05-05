@@ -17,7 +17,6 @@ namespace Project2FA.ViewModels
     public class EditAccountViewModelBase : ObservableObject
     {
         private TwoFACodeModel _twoFACodeModel, _tempModel;
-        private string _tempIssuer, _tempLabel, _tempAccountIconName, _tempNotes, _tempIconLabel;
         private FontIdentifikationCollectionModel _iconNameCollectionModel;
         private bool _isEditBoxVisible;
         private bool _notesExpanded = true;
@@ -63,9 +62,9 @@ namespace Project2FA.ViewModels
                 if(SetProperty(ref _tempModel, value))
                 {
                     //OnPropertyChanged(nameof(Issuer));
-                    //OnPropertyChanged(nameof(Label));
-                    //OnPropertyChanged(nameof(Notes));
-                    //OnPropertyChanged(nameof(Issuer));
+                    OnPropertyChanged(nameof(Label));
+                    OnPropertyChanged(nameof(Notes));
+                    OnPropertyChanged(nameof(Issuer));
                     //OnPropertyChanged(nameof(Issuer));
                 }
             }
@@ -138,18 +137,6 @@ namespace Project2FA.ViewModels
         {
             get => _isPrimaryBTNEnabled;
             set => SetProperty(ref _isPrimaryBTNEnabled, value);
-        }
-
-        public string TempIconLabel
-        {
-            get => _tempIconLabel;
-            set
-            {
-                if(SetProperty(ref _tempIconLabel, value))
-                {
-                    CheckInputs();
-                }
-            }
         }
 
         public bool IsEditBoxVisible

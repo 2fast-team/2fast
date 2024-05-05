@@ -14,6 +14,10 @@ using UNOversal.Navigation;
 using UNOversal.Services.Serialization;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 using Project2FA.UNO;
@@ -37,19 +41,13 @@ namespace Project2FA.ViewModels
             NavigationService = navigationService;
             PrimaryButtonCommand = new RelayCommand(async () =>
             {
-                //Model.Issuer = TempIssuer;
-                //Model.Label = TempLabel;
-                //Model.AccountIconName = TempAccountIconName;
-                //(bool success, string iconStr) = await SVGColorHelper.GetSVGIconWithThemeColor(Model.IsFavourite, TempAccountIconName);
-                //if (success)
-                //{
-                //    Model.AccountSVGIcon = iconStr;
-                //}
-                //else
-                //{
-                //    Model.AccountSVGIcon = null;
-                //}
+                Model.Issuer = Issuer;
+                Model.Label = Label;
+                Model.AccountIconName = AccountIconName;
+
                 //Model.Notes = Notes;
+                //Model.SelectedCategories ??= new ObservableCollection<CategoryModel>();
+                //Model.SelectedCategories.AddRange(GlobalTempCategories.Where(x => x.IsSelected == true), true);
                 await DataService.Instance.WriteLocalDatafile();
                 await NavigateBackCommandTask();
             });

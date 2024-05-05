@@ -1327,4 +1327,7 @@ Derzeit verfügbar:
   <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
     <value>Die Suche wird mit den gesetzten Kategorien mit einer Oder-Suche durchgeführt.</value>
   </data>
+  <data name="EditAccountPageTitle" xml:space="preserve">
+    <value>Konto bearbeiten</value>
+  </data>
 </root>

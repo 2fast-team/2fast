@@ -16,6 +16,8 @@ using Windows.ApplicationModel.Core;
 
 using Windows.ApplicationModel.DataTransfer;
 using Project2FA.Services.Logging;
+using UNOversal.Navigation;
+
 
 
 
@@ -51,6 +53,7 @@ using BiometryService;
 using AndroidX.Biometric;
 using BiometryService;
 using Microsoft.Maui.ApplicationModel;
+using AndroidX.Lifecycle;
 #endif
 
 namespace Project2FA.ViewModels
@@ -61,7 +64,12 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
+
+#if WINDOWS_UWP
     public class LoginPageViewModel : CredentialViewModelBase
+#else
+    public class LoginPageViewModel : CredentialViewModelBase, IInitialize
+#endif
     {
         private ILoggingService LoggingService { get; }
 #if ANDROID || IOS
@@ -124,6 +132,7 @@ namespace Project2FA.ViewModels
             );
 #endif
 #if ANDROID || IOS
+            App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
             BiometricoLoginCommand = new AsyncRelayCommand(BiometricoLoginCommandTask);
 #endif
 
@@ -254,7 +263,7 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Checks and starts biometric login, if possible and desired
         /// </summary>
-        public async Task CheckCapabilityBiometricLogin(XamlRoot root)
+        public async Task CheckCapabilityBiometricLogin()
         {
             try
             {
@@ -274,7 +283,7 @@ namespace Project2FA.ViewModels
                             Text = isFingerprintReader ? Resources.BiometricFingerPreferMessage : Resources.BiometricFacePreferMessage,
                             TextWrapping = Microsoft.UI.Xaml.TextWrapping.WrapWholeWords
                         };
-                        dialog.XamlRoot = root;
+                        dialog.XamlRoot = App.ShellPageInstance.XamlRoot;
                         dialog.Content = markdown;
                         dialog.PrimaryButtonText = Resources.Yes;
                         dialog.SecondaryButtonText = Resources.No;
@@ -315,12 +324,11 @@ namespace Project2FA.ViewModels
         }
 #endif
 
-
-                /// <summary>
-                /// Make a login with hitting 'Enter' key possible
-                /// </summary>
-                /// <param name="e"></param>
-                public void LoginWithEnterKeyDown(KeyRoutedEventArgs e)
+        /// <summary>
+        /// Make a login with hitting 'Enter' key possible
+        /// </summary>
+        /// <param name="e"></param>
+        public void LoginWithEnterKeyDown(KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
@@ -357,17 +365,15 @@ namespace Project2FA.ViewModels
             string pwdhash = CryptoService.CreateStringHash(password);
             if (dbHash.Hash == pwdhash)
             {
+                //var navigationParameters = new NavigationParameters();
+                //navigationParameters.Add("pwd", password);
 #if WINDOWS_UWP
                 App.ShellPageInstance.SetTitleBarAsDraggable();
                 WinUIWindow.Current.Content = App.ShellPageInstance;
-                await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
-                WinUIWindow.Current.Activate();
-#else
-                // TODO for UNO
-                App.MainWindow.Content = App.ShellPageInstance;
-                await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
-                WinUIWindow.Current.Activate();
 #endif
+
+                await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+                WinUIWindow.Current.Activate();
 
                 return true;
             }
@@ -375,6 +381,16 @@ namespace Project2FA.ViewModels
             {
                 return false;
             }
+        }
+
+        public void Initialize(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue<bool>("isLogout", out var isLogout))
+            {
+                IsLogout = isLogout;
+            }
+            //CheckCapabilityBiometricLogin();
+
         }
     }
 }

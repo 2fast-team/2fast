@@ -3,6 +3,7 @@ using Prism.Ioc;
 using UNOversal.Services.Settings;
 using Project2FA.Services.Enums;
 using Project2FA.Extensions;
+using Project2FA.Core;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -70,17 +71,27 @@ namespace Project2FA.Services
             }
         }
 
-
-
-        public int QRCodeScanSeconds
-        {
-            get => _helper.SafeRead(nameof(QRCodeScanSeconds), 5);
-            set => _helper.TryWrite(nameof(QRCodeScanSeconds), value);
-        }
-
         public int AutoLogoutMinutes
         {
-            get => _helper.SafeRead(nameof(AutoLogoutMinutes), 10);
+            get
+            {
+                if (IsProVersion)
+                {
+                    var(successful, result) = _helper.Read<int>(nameof(AutoLogoutMinutes), Constants.EnterpriseAppManagementContainer);
+                    if (successful)
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        return _helper.SafeRead(nameof(AutoLogoutMinutes), 10);
+                    }
+                }
+                else
+                {
+                    return _helper.SafeRead(nameof(AutoLogoutMinutes), 10);
+                }
+            }
             set => _helper.TryWrite(nameof(AutoLogoutMinutes), value);
         }
 
@@ -118,13 +129,51 @@ namespace Project2FA.Services
 
         public bool UseAutoLogout
         {
-            get => _helper.SafeRead(nameof(UseAutoLogout), true);
+            get
+            {
+                if (IsProVersion)
+                {
+                    var (successful, result) = _helper.Read<bool>(nameof(UseAutoLogout), Constants.EnterpriseAppManagementContainer);
+                    if (successful)
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        return _helper.SafeRead(nameof(UseAutoLogout), true);
+                    }
+                }
+                else
+                {
+                    return _helper.SafeRead(nameof(UseAutoLogout), true);
+                }
+            }
+                
             set => _helper.TryWrite(nameof(UseAutoLogout), value);
         }
 
         public bool UseNTPServerCorrection
         {
-            get => _helper.SafeRead(nameof(UseNTPServerCorrection), false);
+            get
+            {
+                if (IsProVersion)
+                {
+                    var (successful, result) = _helper.Read<bool>(nameof(UseNTPServerCorrection), Constants.EnterpriseAppManagementContainer);
+                    if (successful)
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        return _helper.SafeRead(nameof(UseNTPServerCorrection), false);
+                    }
+                }
+                else
+                {
+                    return _helper.SafeRead(nameof(UseNTPServerCorrection), false);
+                }
+            }
+                
             set => _helper.TryWrite(nameof(UseNTPServerCorrection), value);
         }
 
@@ -134,9 +183,35 @@ namespace Project2FA.Services
             set => _helper.TryWrite(nameof(AdvancedPasswordSecurity), value);
         }
 
+        public bool UseHiddenTOTPIsMDMManaged
+        {
+            get => _helper.SafeRead(nameof(UseHiddenTOTPIsMDMManaged), false);
+            set => _helper.TryWrite(nameof(UseHiddenTOTPIsMDMManaged), value);
+        }
+
         public bool UseHiddenTOTP
         {
-            get => _helper.SafeRead(nameof(UseHiddenTOTP), false);
+            get
+            {
+                if (IsProVersion)
+                {
+                    var (successful, result) = _helper.Read<bool>(nameof(UseHiddenTOTP), Constants.EnterpriseAppManagementContainer);
+                    if (successful)
+                    {
+                        UseHiddenTOTPIsMDMManaged = true;
+                        return result;
+                    }
+                    else
+                    {
+                        return _helper.SafeRead(nameof(UseHiddenTOTP), false);
+                    }
+                }
+                else
+                {
+                    UseHiddenTOTPIsMDMManaged = false;
+                    return _helper.SafeRead(nameof(UseHiddenTOTP), false);
+                }
+            } 
             set => _helper.TryWrite(nameof(UseHiddenTOTP), value);
         }
 
@@ -160,7 +235,25 @@ namespace Project2FA.Services
 
         public bool ActivateWindowsHello
         {
-            get => _helper.SafeRead(nameof(ActivateWindowsHello), true);
+            get
+            {
+                if (IsProVersion)
+                {
+                    var (successful, result) = _helper.Read<bool>(nameof(ActivateWindowsHello), Constants.EnterpriseAppManagementContainer);
+                    if (successful)
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        return _helper.SafeRead(nameof(ActivateWindowsHello), true);
+                    }
+                }
+                else
+                {
+                    return _helper.SafeRead(nameof(ActivateWindowsHello), true);
+                }
+            }
             set => _helper.TryWrite(nameof(ActivateWindowsHello), value);
         }
 

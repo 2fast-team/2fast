@@ -33,6 +33,10 @@ using Project2FA.Core.Utils;
 using System.Web;
 using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
+using Project2FA.Services.Logging;
+using Prism.Ioc;
+
+
 
 
 
@@ -92,6 +96,7 @@ namespace Project2FA.ViewModels
         public ILoggerFacade Logger { get; internal set; }
         public ISerializationService SerializationService { get; internal set; }
         public IProject2FAParser Project2FAParser { get; internal set; }
+        public ILoggingService LoggingService { get; internal set; }
         private string _tempIconLabel;
         private VideoFrame _currentVideoFrame;
         private long _videoFrameCounter;
@@ -143,35 +148,8 @@ namespace Project2FA.ViewModels
 
             ReloadCameraCommand = new AsyncRelayCommand(InitializeCameraAsync);
 
-#if WINDOWS_UWP
-            //WinUIWindow.Current.Activated -= Current_Activated;
-            //WinUIWindow.Current.Activated += Current_Activated;
-#endif
+            LoggingService = App.Current.Container.Resolve<ILoggingService>();
         }
-
-        //internal async Task LoadIconNameCollection()
-        //{
-        //    StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/IconNameCollection.json"));
-        //    IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
-        //    using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
-        //    IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(await r.ReadToEndAsync());
-        //    //StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-        //    //string name = "IconNameCollection.json";
-        //    //if (await FileService.FileExistsAsync(name, localFolder))
-        //    //{
-        //    //    var result = await FileService.ReadStringAsync(name, localFolder);
-        //    //    IconNameCollectionModel = SerializationService.Deserialize<IconNameCollectionModel>(result);
-        //    //}
-        //    //else
-        //    //{
-        //    //    //TODO should not happen
-        //    //}
-        //}
-
-        //public async Task LoadIconSVG()
-        //{
-        //    await SVGColorHelper.GetSVGIconWithThemeColor(Model, Model.AccountIconName);
-        //}
 
 #if WINDOWS_UWP
         private async Task ScanQRCodeCommandTask()
@@ -233,7 +211,7 @@ namespace Project2FA.ViewModels
 
 #if WINDOWS_UWP
         /// <summary>
-        /// Launch the MS screenclip app
+        /// Launch the screen capture app
         /// </summary>
         private async Task ScanScreenQRCode()
         {
@@ -275,66 +253,79 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                // TODO hint for tutorial?
+                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogNoCaptureContentError, Strings.Resources.Error);
+                await dialog.ShowAsync();
             }
 
         }
 
+        /// <summary>
+        /// Read the frame from the pool with ZXing
+        /// </summary>
+        /// <param name="sender">Direct3D11CaptureFramePool</param>
+        /// <param name="args"></param>
         private async void FramePool_WindowFrameArrived(Direct3D11CaptureFramePool sender, object args)
         {
-            // only one frame is nessasary
-            _framePool.FrameArrived -= FramePool_WindowFrameArrived;
-            // The FrameArrived event fires for every frame on the thread that
-            // created the Direct3D11CaptureFramePool. This means we don't have to
-            // do a null-check here, as we know we're the only one  
-            // dequeueing frames in our application.  
-
-            // NOTE: Disposing the frame retires it and returns  
-            // the buffer to the pool.
-            using var frame = _framePool.TryGetNextFrame();
-
-            // Convert our D3D11 surface into a Win2D object.
-            CanvasBitmap canvasBitmap = CanvasBitmap.CreateFromDirect3D11Surface(
-                _canvasDevice,
-                frame.Surface);
-
-            var renderer = new CanvasRenderTarget(_canvasDevice,
-                                                  canvasBitmap.SizeInPixels.Width,
-                                                  canvasBitmap.SizeInPixels.Height, canvasBitmap.Dpi);
-            using (var ds = renderer.CreateDrawingSession())
+            try
             {
-                ds.DrawImage(canvasBitmap, 0, 0);
-            }
+                // only one frame is nessasary
+                _framePool.FrameArrived -= FramePool_WindowFrameArrived;
+                // The FrameArrived event fires for every frame on the thread that
+                // created the Direct3D11CaptureFramePool. This means we don't have to
+                // do a null-check here, as we know we're the only one  
+                // dequeueing frames in our application.  
 
-            InMemoryRandomAccessStream randomAccessStream = new InMemoryRandomAccessStream();
-            await renderer.SaveAsync(randomAccessStream, CanvasBitmapFileFormat.Png);
-            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(randomAccessStream);
-            var softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+                // NOTE: Disposing the frame retires it and returns  
+                // the buffer to the pool.
+                using var frame = _framePool.TryGetNextFrame();
 
-            if (softwareBitmap.BitmapPixelFormat != BitmapPixelFormat.Bgra8 ||
-                softwareBitmap.BitmapAlphaMode == BitmapAlphaMode.Straight)
-            {
-                softwareBitmap = SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
-            }
+                // Convert our D3D11 surface into a Win2D object.
+                CanvasBitmap canvasBitmap = CanvasBitmap.CreateFromDirect3D11Surface(
+                    _canvasDevice,
+                    frame.Surface);
 
-            StopWindowScreenCapture();
-
-            var luminanceSource = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(softwareBitmap);
-            if (luminanceSource != null)
-            {
-                var barcodeReader = new Project2FA.ZXing.BarcodeReader
+                var renderer = new CanvasRenderTarget(_canvasDevice,
+                                                      canvasBitmap.SizeInPixels.Width,
+                                                      canvasBitmap.SizeInPixels.Height, canvasBitmap.Dpi);
+                using (var ds = renderer.CreateDrawingSession())
                 {
-                    AutoRotate = true,
-                    Options = { TryHarder = true }
-                };
-                var decodedStr = barcodeReader.Decode(luminanceSource);
-                if (decodedStr != null)
+                    ds.DrawImage(canvasBitmap, 0, 0);
+                }
+
+                InMemoryRandomAccessStream randomAccessStream = new InMemoryRandomAccessStream();
+                await renderer.SaveAsync(randomAccessStream, CanvasBitmapFileFormat.Png);
+                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(randomAccessStream);
+                var softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+
+                if (softwareBitmap.BitmapPixelFormat != BitmapPixelFormat.Bgra8 ||
+                    softwareBitmap.BitmapAlphaMode == BitmapAlphaMode.Straight)
                 {
-                    if (decodedStr.Text.StartsWith("otpauth"))
+                    softwareBitmap = SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+                }
+
+                StopWindowScreenCapture();
+
+                var luminanceSource = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(softwareBitmap);
+                if (luminanceSource != null)
+                {
+                    var barcodeReader = new Project2FA.ZXing.BarcodeReader
                     {
+                        AutoRotate = true,
+                        Options = { TryHarder = true }
+                    };
+                    var decodedStr = barcodeReader.Decode(luminanceSource);
+                    if (decodedStr != null)
+                    {
+                        if (decodedStr.Text.StartsWith("otpauth") || decodedStr.Text.StartsWith("otpauth-migration"))
+                        {
 
-                        _qrCodeStr = decodedStr.Text;
-                        await ReadAuthenticationFromString();
+                            _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
+                            await ReadAuthenticationFromString();
+                        }
+                    }
+                    else
+                    {
+                        await QRReadError();
                     }
                 }
                 else
@@ -342,8 +333,9 @@ namespace Project2FA.ViewModels
                     await QRReadError();
                 }
             }
-            else
+            catch (Exception exc)
             {
+                await LoggingService.LogException(exc);
                 await QRReadError();
             }
         }

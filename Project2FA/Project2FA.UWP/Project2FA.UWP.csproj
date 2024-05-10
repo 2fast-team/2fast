@@ -140,7 +140,6 @@
     <Compile Include="Services\Marketplace\Abstractions\IMarketplaceService.cs" />
     <Compile Include="Services\Marketplace\Default\MarketplaceHelper.cs" />
     <Compile Include="Services\Marketplace\Default\MarketplaceService.cs" />
-    <Compile Include="Services\MDMSettings\EnterpriseAppManagementService.cs" />
     <Compile Include="Services\Subscription\IPurchaseAddOnService.cs" />
     <Compile Include="Services\Subscription\PurchaseAddOnService.cs" />
     <Compile Include="Services\Web\Abstractions\IWebApiAdapter.cs" />

@@ -2011,14 +2011,22 @@ namespace Project2FA.Strings{
         }
         #endregion
 
-        //EditAccountPageTitle
-
         #region EditAccountPageTitle
         public static string EditAccountPageTitle
         {
             get
             {
                 return _resourceLoader.GetString("EditAccountPageTitle");
+            }
+        }
+        #endregion
+
+        #region AddAccountContentDialogNoCaptureContentError
+        public static string AddAccountContentDialogNoCaptureContentError
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddAccountContentDialogNoCaptureContentError");
             }
         }
         #endregion
@@ -2185,7 +2193,8 @@ namespace Project2FA.Strings{
             TutorialPagePasswordInfo,
             LoginPageWindowsHelloError,
             EditAccountContentDialogAccountCategoryInfoText,
-            EditAccountPageTitle
+            EditAccountPageTitle,
+            AddAccountContentDialogNoCaptureContentError
         }
 
         private static ResourceLoader _resourceLoader;

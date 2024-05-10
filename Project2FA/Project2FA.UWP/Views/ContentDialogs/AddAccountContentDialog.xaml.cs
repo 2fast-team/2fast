@@ -166,13 +166,13 @@ namespace Project2FA.UWP.Views
                 Subtitle = Strings.Resources.AddAccountCodeContentDialogQRCodeHelp,
                 IsLightDismissEnabled = true,
                 BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
-                IsOpen = true,
-                HeroContent = new Image
-                {
-                    Source = new BitmapImage(new Uri("ms-appx:///Assets/Tutorials/2fast_qrcode_scan.gif", UriKind.Absolute)),
-                    MaxWidth = 400,
-                    MaxHeight = 300
-                }
+                IsOpen = true
+                //HeroContent = new Image
+                //{
+                //    Source = new BitmapImage(new Uri("ms-appx:///Assets/Tutorials/2fast_qrcode_scan.gif", UriKind.Absolute)),
+                //    MaxWidth = 400,
+                //    MaxHeight = 300
+                //}
             };
             RootGrid.Children.Add(teachingTip);
         }

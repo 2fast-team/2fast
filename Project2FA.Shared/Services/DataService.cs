@@ -863,8 +863,6 @@ namespace Project2FA.Services
             {
                 CollectionAccessSemaphore.Release();
             }
-            
-
         }
 
         /// <summary>

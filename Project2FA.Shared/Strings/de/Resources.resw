@@ -813,7 +813,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Schließen</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
-    <value>Bei der Wahl des QR-Code Scans öffnet sich nach wenigen Sekunden nach Klick auf dem Button ein Lesetool, mit dem der QR-Code bei dem Dienst selektiert werden muss. Ziehen Sie hierbei ziehen ein Rechteck um den QR-Code, indem Sie die linke Maustaste gedrückt halten.</value>
+    <value>Bei der Wahl des QR-Code Scans öffnet ein neues Fenster, bei dem das Programm ausgewählt werden muss, das den einzulesenden QR-Code enthält, beispielsweise der Browser.</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
     <value>QR-Code anzeigen</value>
@@ -1329,5 +1329,8 @@ Derzeit verfügbar:
   </data>
   <data name="EditAccountPageTitle" xml:space="preserve">
     <value>Konto bearbeiten</value>
+  </data>
+  <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
+    <value>Es wurde kein Fenster zum einlesen eines QR-Codes ausgewählt.</value>
   </data>
 </root>

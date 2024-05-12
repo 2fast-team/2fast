@@ -576,19 +576,6 @@ namespace Project2FA.ViewModels
             }
         }
 
-        public int SetQRCodeScanSeconds
-        {
-            get => _settings.QRCodeScanSeconds;
-            set
-            {
-                if (_settings.QRCodeScanSeconds != value)
-                {
-                    _settings.QRCodeScanSeconds = value;
-                    OnPropertyChanged(nameof(SetQRCodeScanSeconds));
-                }
-            }
-        }
-
         public int SetAutoLogoutMinutes
         {
             get => _settings.AutoLogoutMinutes;
@@ -639,6 +626,7 @@ namespace Project2FA.ViewModels
             {
                 _settings.UseAutoLogout = value;
                 OnPropertyChanged(nameof(UseAutoLogout));
+                //OnPropertyChanged(nameof(AutoLogoutMinutesIsMDMManaged));
             }
         }
 #if WINDOWS_UWP
@@ -657,6 +645,38 @@ namespace Project2FA.ViewModels
             }
         }
 #endif
+
+        #region MDMConfigs
+        public bool AutoLogoutMinutesIsMDMManaged
+        {
+            get => !_settings.AutoLogoutMinutesIsMDMManaged;
+        }
+
+        public bool UseAutoLogoutIsMDMManaged
+        {
+            get => !_settings.UseAutoLogoutIsMDMManaged;
+        }
+
+        public bool ActivateWindowsHelloIsMDMManaged
+        {
+            get => !_settings.ActivateWindowsHelloIsMDMManaged;
+        }
+
+        public bool UseNTPServerCorrectionIsMDMManaged
+        {
+            get => !_settings.UseNTPServerCorrectionIsMDMManaged;
+        }
+
+        public bool NTPServerStringIsMDMManaged
+        {
+            get => !_settings.NTPServerStringIsMDMManaged;
+        }
+
+        public bool UseHiddenTOTPIsMDMManaged
+        {
+            get => !_settings.UseHiddenTOTPIsMDMManaged;
+        }
+        #endregion
     }
 
 

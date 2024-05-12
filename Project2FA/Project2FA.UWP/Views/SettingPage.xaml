@@ -114,7 +114,7 @@
                         VerticalScrollMode="Auto" 
                         Margin="0,10,0,0">
 
-                        <StackPanel 
+                        <StackPanel
                             x:Name="Main_StackPanel"
                             MaxWidth="1040"
                             HorizontalAlignment="Left" 
@@ -269,7 +269,8 @@
 
                                 <appcontrols:CardControl 
                                     x:Uid="SettingsPreferHiddenTOTP"
-                                    Header="~SettingsPreferHiddenTOTP.Header" 
+                                    Header="~SettingsPreferHiddenTOTP.Header"
+                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTPIsMDMManaged, Mode=OneWay}"
                                     Icon="&#xE18B;">
                                     <appcontrols:CardControl.Description>
                                         <TextBlock 
@@ -329,6 +330,7 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                                 </appcontrols:CardControl>
 
                                 <appcontrols:CardExpanderControl
+                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseAutoLogoutIsMDMManaged, Mode=OneWay}"
                                     Background="{ThemeResource CardBackgroundBrush}"
                                     IsExpanded="True">
                                     <appcontrols:CardExpanderControl.Header>
@@ -351,6 +353,7 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                                             <appcontrols:CardControl 
                                                 Icon="&#xE916;"
                                                 x:Uid="SettingsOptionsAutoLogout"
+                                                IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.AutoLogoutMinutesIsMDMManaged, Mode=OneWay}"
                                                 Header="~SettingsOptionsAutoLogout.Header">
                                                 <appcontrols:CardControl.Description>
                                                     <TextBlock Text="{x:Bind strings:Resources.SettingsAutoLogoutDesc}"/>
@@ -380,7 +383,8 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                                     </appcontrols:CardExpanderControl.Content>
                                 </appcontrols:CardExpanderControl>
 
-                                <appcontrols:CardExpanderControl 
+                                <appcontrols:CardExpanderControl
+                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrectionIsMDMManaged, Mode=OneWay}"
                                     Background="{ThemeResource CardBackgroundBrush}"
                                     IsExpanded="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}">
                                     <appcontrols:CardExpanderControl.Header>

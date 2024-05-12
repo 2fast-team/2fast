@@ -71,6 +71,12 @@ namespace Project2FA.Services
             }
         }
 
+        public bool AutoLogoutMinutesIsMDMManaged
+        {
+            get => _helper.SafeRead(nameof(AutoLogoutMinutesIsMDMManaged), false);
+            set => _helper.TryWrite(nameof(AutoLogoutMinutesIsMDMManaged), value);
+        }
+
         public int AutoLogoutMinutes
         {
             get
@@ -80,6 +86,7 @@ namespace Project2FA.Services
                     var(successful, result) = _helper.Read<int>(nameof(AutoLogoutMinutes), Constants.EnterpriseAppManagementContainer);
                     if (successful)
                     {
+                        AutoLogoutMinutesIsMDMManaged = true;
                         return result;
                     }
                     else
@@ -89,6 +96,7 @@ namespace Project2FA.Services
                 }
                 else
                 {
+                    AutoLogoutMinutesIsMDMManaged = false;
                     return _helper.SafeRead(nameof(AutoLogoutMinutes), 10);
                 }
             }
@@ -127,6 +135,12 @@ namespace Project2FA.Services
             set => _helper.TryWrite(nameof(UseExtendedHash), value);
         }
 
+        public bool UseAutoLogoutIsMDMManaged
+        {
+            get => _helper.SafeRead(nameof(UseAutoLogoutIsMDMManaged), false);
+            set => _helper.TryWrite(nameof(UseAutoLogoutIsMDMManaged), value);
+        }
+
         public bool UseAutoLogout
         {
             get
@@ -136,6 +150,7 @@ namespace Project2FA.Services
                     var (successful, result) = _helper.Read<bool>(nameof(UseAutoLogout), Constants.EnterpriseAppManagementContainer);
                     if (successful)
                     {
+                        UseAutoLogoutIsMDMManaged = true;
                         return result;
                     }
                     else
@@ -145,11 +160,18 @@ namespace Project2FA.Services
                 }
                 else
                 {
+                    UseAutoLogoutIsMDMManaged = false;
                     return _helper.SafeRead(nameof(UseAutoLogout), true);
                 }
             }
                 
             set => _helper.TryWrite(nameof(UseAutoLogout), value);
+        }
+
+        public bool UseNTPServerCorrectionIsMDMManaged
+        {
+            get => _helper.SafeRead(nameof(UseNTPServerCorrectionIsMDMManaged), false);
+            set => _helper.TryWrite(nameof(UseNTPServerCorrectionIsMDMManaged), value);
         }
 
         public bool UseNTPServerCorrection
@@ -161,6 +183,7 @@ namespace Project2FA.Services
                     var (successful, result) = _helper.Read<bool>(nameof(UseNTPServerCorrection), Constants.EnterpriseAppManagementContainer);
                     if (successful)
                     {
+                        UseNTPServerCorrectionIsMDMManaged = true;
                         return result;
                     }
                     else
@@ -170,6 +193,7 @@ namespace Project2FA.Services
                 }
                 else
                 {
+                    UseNTPServerCorrectionIsMDMManaged = false;
                     return _helper.SafeRead(nameof(UseNTPServerCorrection), false);
                 }
             }
@@ -221,16 +245,48 @@ namespace Project2FA.Services
             set => _helper.TryWrite(nameof(PrideMonthDesign), value);
         }
 
+        public bool NTPServerStringIsMDMManaged
+        {
+            get => _helper.SafeRead(nameof(NTPServerStringIsMDMManaged), false);
+            set => _helper.TryWrite(nameof(NTPServerStringIsMDMManaged), value);
+        }
+
         public string NTPServerString
         {
-            get => _helper.SafeRead(nameof(UseExtendedHash), "time.windows.com");
-            set => _helper.TryWrite(nameof(UseExtendedHash), value);
+            get
+            {
+                if (IsProVersion)
+                {
+                    var (successful, result) = _helper.Read<string>(nameof(NTPServerString), Constants.EnterpriseAppManagementContainer);
+                    if (successful)
+                    {
+                        NTPServerStringIsMDMManaged = true;
+                        return result;
+                    }
+                    else
+                    {
+                        return _helper.SafeRead(nameof(NTPServerString), "time.windows.com");
+                    }
+                }
+                else
+                {
+                    NTPServerStringIsMDMManaged = false;
+                    return _helper.SafeRead(nameof(NTPServerString), "time.windows.com");
+                }
+            }
+            set => _helper.TryWrite(nameof(NTPServerString), value);
         }
 
         public string UnhandledExceptionStr
         {
             get => _helper.SafeRead(nameof(UnhandledExceptionStr), string.Empty);
             set => _helper.TryWrite(nameof(UnhandledExceptionStr), value);
+        }
+
+        public bool ActivateWindowsHelloIsMDMManaged
+        {
+            get => _helper.SafeRead(nameof(ActivateWindowsHelloIsMDMManaged), false);
+            set => _helper.TryWrite(nameof(ActivateWindowsHelloIsMDMManaged), value);
         }
 
         public bool ActivateWindowsHello
@@ -242,6 +298,7 @@ namespace Project2FA.Services
                     var (successful, result) = _helper.Read<bool>(nameof(ActivateWindowsHello), Constants.EnterpriseAppManagementContainer);
                     if (successful)
                     {
+                        ActivateWindowsHelloIsMDMManaged = true;
                         return result;
                     }
                     else
@@ -251,6 +308,7 @@ namespace Project2FA.Services
                 }
                 else
                 {
+                    ActivateWindowsHelloIsMDMManaged = false;
                     return _helper.SafeRead(nameof(ActivateWindowsHello), true);
                 }
             }

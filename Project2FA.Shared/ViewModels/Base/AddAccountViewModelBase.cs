@@ -157,10 +157,8 @@ namespace Project2FA.ViewModels
 
             await CleanUpCamera();
             OTPList.Clear();
-            OpeningSeconds = SettingsService.Instance.QRCodeScanSeconds;
             _dispatcherTimer.Tick -= OnTimedEvent;
             _dispatcherTimer.Tick += OnTimedEvent;
-            Seconds = OpeningSeconds;
             _dispatcherTimer.Start();
             await ScanScreenQRCode();
         }

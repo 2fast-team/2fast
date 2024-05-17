@@ -201,26 +201,29 @@ namespace Project2FA.UWP.Views
                     }
                 }
 
-                ContentDialog dialog = new ContentDialog();
-                string clickedLink = string.Empty; // save the clicked link
-                dialog.Title = Strings.Resources.NewAppFeaturesTitle;
-                var markdown = new MarkdownTextBlock();
-                markdown.Text = Strings.Resources.NewAppFeaturesContent;
-                markdown.LinkClicked += Markdown_LinkClicked;
-                dialog.Content = markdown;
-                dialog.PrimaryButtonText = Strings.Resources.Confirm;
-                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                await dialogService.ShowDialogAsync(dialog, new DialogParameters());
-                if (!string.IsNullOrWhiteSpace(clickedLink))
+                if (Strings.Resources.Language == "EN")
                 {
-                    await ViewModel.NavigationService.NavigateAsync(clickedLink);
-                }
+                    ContentDialog dialog = new ContentDialog();
+                    string clickedLink = string.Empty; // save the clicked link
+                    dialog.Title = Strings.Resources.NewAppFeaturesTitle;
+                    var markdown = new MarkdownTextBlock();
+                    markdown.Text = Strings.Resources.NewAppFeaturesContent;
+                    markdown.LinkClicked += Markdown_LinkClicked;
+                    dialog.Content = markdown;
+                    dialog.PrimaryButtonText = Strings.Resources.Confirm;
+                    dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                    await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+                    if (!string.IsNullOrWhiteSpace(clickedLink))
+                    {
+                        await ViewModel.NavigationService.NavigateAsync(clickedLink);
+                    }
 
-                // if a link is clicked, the dialog will be close
-                void Markdown_LinkClicked(object sender, LinkClickedEventArgs e)
-                {
-                    clickedLink = e.Link;
-                    dialogService.CloseDialogs();
+                    // if a link is clicked, the dialog will be close
+                    void Markdown_LinkClicked(object sender, LinkClickedEventArgs e)
+                    {
+                        clickedLink = e.Link;
+                        dialogService.CloseDialogs();
+                    }
                 }
             }
 

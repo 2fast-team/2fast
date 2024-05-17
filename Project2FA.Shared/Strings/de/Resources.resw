@@ -1266,7 +1266,7 @@ Derzeit verfügbar:
 
 - Kategorien &amp; Filter
 ***
-### 34,99 einmalig</value>
+### 34,99€ einmalig</value>
   </data>
   <data name="InAppSubscriptionYear" xml:space="preserve">
     <value>Mit dem Abonnement werden ***Pro+*** Funktionen zugänglich und nutzbar und Sie unterstützen die weitere Entwicklung der Anwendung.
@@ -1326,5 +1326,14 @@ Derzeit verfügbar:
   </data>
   <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
     <value>Die Suche wird mit den gesetzten Kategorien mit einer Oder-Suche durchgeführt.</value>
+  </data>
+  <data name="EditAccountPageTitle" xml:space="preserve">
+    <value>Konto bearbeiten</value>
+  </data>
+  <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
+    <value>Es wurde kein Fenster zum einlesen eines QR-Codes ausgewählt.</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>DE</value>
   </data>
 </root>

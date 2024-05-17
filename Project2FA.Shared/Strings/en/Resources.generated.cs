@@ -946,7 +946,7 @@ namespace Project2FA.Strings{
 
         #region NewAppFeaturesTitle
         /// <summary>
-        ///   Looks up a localized string similar to: New features & changes
+        /// Looks up a localized string similar to: New features and changes
         /// </summary>
         public static string NewAppFeaturesTitle
         {
@@ -2011,6 +2011,36 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region EditAccountPageTitle
+        public static string EditAccountPageTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("EditAccountPageTitle");
+            }
+        }
+        #endregion
+
+        #region AddAccountContentDialogNoCaptureContentError
+        public static string AddAccountContentDialogNoCaptureContentError
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddAccountContentDialogNoCaptureContentError");
+            }
+        }
+        #endregion
+
+        #region Language
+        public static string Language
+        {
+            get
+            {
+                return _resourceLoader.GetString("Language");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2172,7 +2202,10 @@ namespace Project2FA.Strings{
             ProFeatureTitleInfo,
             TutorialPagePasswordInfo,
             LoginPageWindowsHelloError,
-            EditAccountContentDialogAccountCategoryInfoText
+            EditAccountContentDialogAccountCategoryInfoText,
+            EditAccountPageTitle,
+            AddAccountContentDialogNoCaptureContentError,
+            Language
         }
 
         private static ResourceLoader _resourceLoader;

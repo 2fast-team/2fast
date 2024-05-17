@@ -74,7 +74,13 @@ namespace Project2FA.Services
         public bool AutoLogoutMinutesIsMDMManaged
         {
             get => _helper.SafeRead(nameof(AutoLogoutMinutesIsMDMManaged), false);
-            set => _helper.TryWrite(nameof(AutoLogoutMinutesIsMDMManaged), value);
+            set
+            {
+                if (_helper.SafeRead(nameof(AutoLogoutMinutesIsMDMManaged), false) != value)
+                {
+                    _helper.TryWrite(nameof(AutoLogoutMinutesIsMDMManaged), value);
+                }
+            }
         }
 
         public int AutoLogoutMinutes
@@ -112,15 +118,21 @@ namespace Project2FA.Services
             set => _helper.TryWrite(nameof(AppRated), value);
         }
 
-#if WINDOWS_UWP
         /// <summary>
         /// Indicates whether the application is the pro version.
         /// </summary>
         public bool IsProVersion
         {
+#if WINDOWS_UWP
             get => _helper.SafeRead(nameof(IsProVersion), false);
             internal set => _helper.TryWrite(nameof(IsProVersion), value);
+#else
+            get => false;
+#endif
         }
+
+#if WINDOWS_UWP
+
 
         public bool UseProFeatures
         {

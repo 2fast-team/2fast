@@ -318,18 +318,15 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <!--<Grid Grid.RowSpan="3" >
-                            <Border 
-                                Width="2.5" 
-                                Background="{ThemeResource SystemAccentColor}" />
-                        </Grid>-->
+
                         <Border
 						    Grid.RowSpan="3"
                             Width="2.5"
                             Margin="0,0,0,8"
                             Background="{ThemeResource  SystemAccentColor}" />
 
-                        <utu:ShadowContainer 
+                        <!--issue https://github.com/unoplatform/uno.toolkit.ui/issues/1122-->
+                        <!--<utu:ShadowContainer 
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2" 
@@ -348,12 +345,33 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                                Style="{StaticResource DefaultPersonPictureStyle}"
+                            Style="{StaticResource DefaultPersonPictureStyle}"
                             Tag="{x:Bind AccountIconName, Mode=OneWay}">
                             </PersonPicture>
-                        </utu:ShadowContainer>
+                        </utu:ShadowContainer>-->
 
-                        <!--Style="{StaticResource DefaultPersonPictureStyle}"-->
+                        <PersonPicture 
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="2" 
+                            Height="68"
+                            Width="68"
+                            Background="{ThemeResource SystemAccentColor}"
+                            BorderBrush="{ThemeResource SystemAccentColor}"
+                            Foreground="White"
+                            FontSize="40"
+                            DisplayName="{x:Bind Model, 
+                            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                            Mode=OneWay}"
+                            Margin="8,10,20,0"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Style="{StaticResource DefaultPersonPictureStyle}"
+                            Tag="{x:Bind AccountIconName, Mode=OneWay}">
+                        </PersonPicture>
+
+
 
                         <!--<StackPanel
                             MinHeight="80"

@@ -2031,6 +2031,16 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region LoginPageIOSBiometricReason
+        public static string LoginPageIOSBiometricReason
+        {
+            get
+            {
+                return _resourceLoader.GetString("LoginPageIOSBiometricReason");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2194,7 +2204,8 @@ namespace Project2FA.Strings{
             LoginPageWindowsHelloError,
             EditAccountContentDialogAccountCategoryInfoText,
             EditAccountPageTitle,
-            AddAccountContentDialogNoCaptureContentError
+            AddAccountContentDialogNoCaptureContentError,
+            LoginPageIOSBiometricReason
         }
 
         private static ResourceLoader _resourceLoader;

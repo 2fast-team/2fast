@@ -71,6 +71,12 @@ namespace Project2FA.Services
             }
         }
 
+        public bool ShowAvailableProFeatures
+        {
+            get => _helper.SafeRead(nameof(ShowAvailableProFeatures), true);
+            set => _helper.TryWrite(nameof(ShowAvailableProFeatures), value);
+        }
+
         public bool AutoLogoutMinutesIsMDMManaged
         {
             get => _helper.SafeRead(nameof(AutoLogoutMinutesIsMDMManaged), false);

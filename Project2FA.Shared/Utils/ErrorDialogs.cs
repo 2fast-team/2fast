@@ -573,6 +573,18 @@ namespace Project2FA.Utils
             }
         }
 
+        public async static Task ShowLogNotFound()
+        {
+            var dialog = new ContentDialog
+            {
+                Title = Strings.Resources.SettingsPageNoLogDialogTitle,
+                Content = Strings.Resources.SettingsPageNoLogDialogContent,
+                PrimaryButtonText = Strings.Resources.Confirm
+            };
+
+            await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
+        }
+
         internal static Task WritingFatalRestoreError()
         {
             // TODO generate

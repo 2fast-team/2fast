@@ -140,6 +140,7 @@ namespace Project2FA.Services.Parser
                         //get only the parameter string
                         cmdStr = cmdStr.Remove(0, match.Groups[0].Length + 1); //remove //twofastauth://CATEGORY/set?
                         string isScreenCaptureEnabled;
+                        string startLogFileCmd;
                         string collectionVar;
 
                         if (!string.IsNullOrEmpty(cmdStr))
@@ -147,11 +148,18 @@ namespace Project2FA.Services.Parser
                             //create collection of the parameter values
                             System.Collections.Specialized.NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(cmdStr);
 
-                            collectionVar = nameValueCollection["IsScreenCaptureEnabled"];
+                            collectionVar = nameValueCollection[nameof(isScreenCaptureEnabled)];
                             if (!string.IsNullOrEmpty(collectionVar))
                             {
                                 isScreenCaptureEnabled = collectionVar;
                                 cmdParams.Add(new KeyValuePair<string, string>(nameof(isScreenCaptureEnabled), isScreenCaptureEnabled));
+                            }
+
+                            collectionVar = nameValueCollection[nameof(startLogFileCmd)];
+                            if (!string.IsNullOrEmpty(collectionVar))
+                            {
+                                startLogFileCmd = collectionVar;
+                                cmdParams.Add(new KeyValuePair<string, string>(nameof(startLogFileCmd), startLogFileCmd));
                             }
                         }
                     }

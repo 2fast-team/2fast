@@ -73,11 +73,15 @@ namespace Project2FA.Core.Services.JSON
             {
                 byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
             }
-            else
+            else if (encryptionVersion == 2)
             {
                 byteArrayKey = CryptoService.CreateByteArrayKeyV2(key);
             }
-             
+            else
+            {
+                byteArrayKey = CryptoService.CreateByteArrayKeyV2(key, 80000);
+            }
+
             var serializer = new JsonSerializer
             {
                 ContractResolver = _encryptionFactory.GetContractResolver()

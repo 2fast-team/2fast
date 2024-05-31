@@ -38,6 +38,7 @@ using Uno.Extensions.Maui;
 using Project2FA.UNO.MauiControls;
 using Project2FA.Services.Parser;
 using Project2FA.Services.Logging;
+using UNOversal.Navigation;
 
 namespace Project2FA.UNO
 {
@@ -356,6 +357,7 @@ namespace Project2FA.UNO
 
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            //containerRegistry.RegisterSingleton<INavigationService, NavigationService>();
             containerRegistry.RegisterSingleton<IDialogService, DialogService>();
             containerRegistry.RegisterSingleton<IFileService, FileService>();
             containerRegistry.RegisterSingleton<INetworkService, NetworkService>();

@@ -74,7 +74,7 @@ namespace Project2FA.UNO.Views
             }
             else
             {
-#if ANDROID || IOS
+#if __ANDROID__ || __IOS__
                 // if the search is seleted, a back command go to
                 // the AccountCodePage index 0
                 if (ViewModel.SelectedIndex == 1)

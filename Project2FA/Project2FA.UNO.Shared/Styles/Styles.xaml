@@ -17,6 +17,7 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/PersonPicture.xaml" />
         <ResourceDictionary Source="ms-appx:///Controls/RadialProgressBar/RadialProgressBar.xaml" />
+        <ResourceDictionary Source="ms-appx:///Controls/Shimmer/Shimmer.xaml" />
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBoxItemStyle.xaml" />-->
 
 

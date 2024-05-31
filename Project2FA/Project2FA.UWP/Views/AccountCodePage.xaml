@@ -110,9 +110,10 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <!--<AppBarButton
+                                        <AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
+                                            IsEnabled="False"
                                             ToolTipService.ToolTip="#todo">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE8B5;"/>
@@ -127,7 +128,7 @@
                                                         Icon="Camera"/>
                                                 </MenuFlyout>
                                             </AppBarButton.Flyout>
-                                        </AppBarButton>-->
+                                        </AppBarButton>
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>
@@ -329,22 +330,19 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <!--<AppBarButton
+                                        <AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
-                                            ToolTipService.ToolTip="#todo"
-                                            Icon="Import">
-                                            <AppBarButton.Flyout>
-                                                <MenuFlyout>
-                                                    <MenuFlyoutItem 
-                                                        x:Uid="AccoundCodePageImportDocument"
-                                                        Icon="Document"/>
-                                                    <MenuFlyoutItem
-                                                        x:Uid="AccoundCodePageImportCamera"
-                                                        Icon="Camera"/>
-                                                </MenuFlyout>
-                                            </AppBarButton.Flyout>
-                                        </AppBarButton>-->
+                                            Visibility="{x:Bind ShowAvailableProFeatures}"
+                                            Command="{x:Bind ShowProFeatureCommand}"
+                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}">
+                                            <AppBarButton.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <SymbolIcon Symbol="Import" Margin="0,0, 4,0"/>
+                                                    <FontIcon Glyph="&#xE946;"/>
+                                                </StackPanel>
+                                            </AppBarButton.Content>
+                                        </AppBarButton>
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>
@@ -409,6 +407,7 @@
                                 </AppBarElementContainer>
                                 <AppBarButton 
                                     x:Name="ABB_ManageFilterInfo"
+                                    Visibility="{x:Bind ShowAvailableProFeatures}"
                                     Command="{x:Bind ShowProFeatureCommand}"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}"
                                     x:Uid="AccountCodePageManageFilterInfo">
@@ -1074,9 +1073,9 @@
             </ItemsControl.ItemsPanel>
         </ListView>
         <ListView 
-                Visibility="{x:Bind ViewModel.TwoFADataService.IsLoading, Mode=OneWay}"
-                ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
-                ItemTemplate="{StaticResource ShimmerTemplate}">
+            Visibility="{x:Bind ViewModel.TwoFADataService.IsLoading, Mode=OneWay}"
+            ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
+            ItemTemplate="{StaticResource ShimmerTemplate}">
             <!--<ListView.ItemContainerStyle>
 
                     <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>

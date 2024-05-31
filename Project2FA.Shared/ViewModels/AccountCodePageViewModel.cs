@@ -21,9 +21,6 @@ using System.Linq;
 using Project2FA.Core.Utils;
 using Project2FA.Services.Logging;
 
-
-
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -280,8 +277,6 @@ namespace Project2FA.ViewModels
                     await DataService.Instance.StartService();
                 }
             }
-
-
 
             _dispatcherTOTPTimer.Tick -= TOTPTimer;
             _dispatcherTOTPTimer.Tick += TOTPTimer;
@@ -559,6 +554,10 @@ namespace Project2FA.ViewModels
                 TwoFADataService.ACVCollection.Filter = null;
             }
 
+#if __ANDROID__ || __IOS__
+            Messenger.Send(new Project2FA.UNO.MauiControls.ControlDisposeMessage(true));
+#endif
+
             //Start the app logic
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             StartTOTPLogic();
@@ -674,7 +673,14 @@ namespace Project2FA.ViewModels
             Messenger.Send(new CategoriesChangedMessage(true));
         }
 #endif
-#region Getter_Setter
+        #region Getter_Setter
+
+#if WINDOWS_UWP
+        public bool ShowAvailableProFeatures
+        {
+            get => SettingsService.Instance.ShowAvailableProFeatures;
+        }
+#endif
         public bool IsAccountDeleted => TwoFADataService.TempDeletedTFAModel != null;
 
         public bool IsAccountNotDeleted => TwoFADataService.TempDeletedTFAModel == null;

@@ -8,15 +8,11 @@ using System.Windows.Input;
 using UNOversal.Logging;
 using UNOversal.Services.Serialization;
 using Project2FA.Services.Parser;
-using UNOversal.Services.File;
 using Windows.Media;
 using System.Threading.Tasks;
-using Windows.Storage;
 using Windows.Storage.Streams;
 using System.IO;
-using Project2FA.Helpers;
 using Project2FA.Services;
-using Windows.UI.Core;
 using Windows.Graphics.Imaging;
 using Windows.UI.Popups;
 using Project2FA.Core.ProtoModels;
@@ -35,8 +31,7 @@ using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
 using Project2FA.Services.Logging;
 using Prism.Ioc;
-
-
+using UNOversal.Navigation;
 
 
 
@@ -60,6 +55,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using WindowActivatedEventArgs = Microsoft.UI.Xaml.WindowActivatedEventArgs;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
+using Project2FA.UNO.Views;
 #endif
 
 namespace Project2FA.ViewModels
@@ -200,6 +196,9 @@ namespace Project2FA.ViewModels
             {
                 DataService.Instance.Collection.Add(Model);
             }
+#if __ANDROID__ || _IOS__
+            await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
+#endif
         }
 
         private async Task SecondayButtonCommandTask()
@@ -231,8 +230,6 @@ namespace Project2FA.ViewModels
                 //_item = item;
                 // Stop the previous capture if we had one.
                 StopWindowScreenCapture();
-                // We'll define this method later in the document.
-                //StartCaptureInternal(item);
 
                 _framePool = Direct3D11CaptureFramePool.Create(
                     _canvasDevice, // D3D device
@@ -573,8 +570,6 @@ namespace Project2FA.ViewModels
             {
                 return Task.FromResult(false);
             }
-
-
         }
 
         /// <summary>
@@ -1092,6 +1087,7 @@ namespace Project2FA.ViewModels
             get => _cameraSuccessfullyLoaded;
             set => SetProperty(ref _cameraSuccessfullyLoaded, value);
         }
+#endregion
 
         public void Dispose()
         {
@@ -1103,11 +1099,14 @@ namespace Project2FA.ViewModels
         {
             if (disposing)
             {
-
+#if WINDOWS_UWP
                 _mediaPlayer?.Dispose();
                 _cameraHelper?.Dispose();
+                _framePool?.Dispose();
+                _canvasDevice?.Dispose();
+                _session?.Dispose();
+#endif
             }
         }
-#endregion
     }
 }

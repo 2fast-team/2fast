@@ -30,8 +30,10 @@ using UNOversal.Services.Settings;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Project2FA.UWP
 {
@@ -174,6 +176,19 @@ namespace Project2FA.UWP
                                 ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
                             }
                         }
+                        if (cmdlist[i].Key == "startLogFileCmd")
+                        {
+                            try
+                            {
+                                var file = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.LogName);
+                                // Launch the URI and pass in the recommended app
+                                var success = await Launcher.LaunchFileAsync(file);
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+                        }
                     }
                 }
 
@@ -213,23 +228,31 @@ namespace Project2FA.UWP
                     FileActivationPage fileActivationPage = Container.Resolve<FileActivationPage>();
                     Window.Current.Content = fileActivationPage;
                 }
-                if (args.Arguments is ProtocolActivatedEventArgs protoActivated)
+
+                // else invalid request
+            }
+
+            if (args.Arguments is ProtocolActivatedEventArgs protoLaunchActivated)
+            {
+                string content = protoLaunchActivated.Uri.ToString();
+                var parser = App.Current.Container.Resolve<IProject2FAParser>();
+                var cmdlist = parser.ParseCmdStr(content);
+                for (int i = 0; i < cmdlist.Count; i++)
                 {
-                    string content = protoActivated.Uri.ToString();
-                    var parser = App.Current.Container.Resolve<IProject2FAParser>();
-                    var cmdlist = parser.ParseCmdStr(content);
-                    for (int i = 0; i < cmdlist.Count; i++)
+                    if (cmdlist[i].Key == "startLogFileCmd")
                     {
-                        if (cmdlist[i].Key == "isScreenCaptureEnabled")
+                        try
                         {
-                            if(bool.TryParse(cmdlist[i].Value, out bool value))
-                            {
-                                ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
-                            }
+                            var file = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.LogName);
+                            // Launch the URI and pass in the recommended app
+                            var success = await Launcher.LaunchFileAsync(file);
+                        }
+                        catch (Exception)
+                        {
+
                         }
                     }
                 }
-                // else invalid request
             }
 
             Window.Current.Activate();

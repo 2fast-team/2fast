@@ -5,7 +5,6 @@
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:markdown="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:mtc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
@@ -16,6 +15,7 @@
     PrimaryButtonText="~InAppPaymentContentDialog.PrimaryButtonText"
     SecondaryButtonText="~InAppPaymentContentDialog.SecondaryButtonText"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.PrimaryButtonCanClick, Mode=OneWay}">
+    
 
     <ContentDialog.Resources>
 
@@ -207,10 +207,10 @@
                         Source="{x:Bind Url,Mode=OneWay}"
                         Height="100"></Image>
                     <StackPanel Grid.Row="1" >
-                        <markdown:MarkdownTextBlock
+                        <mtc:MarkdownTextBlock
                             Foreground="{ThemeResource AppBarItemForegroundThemeBrush}"
                             Text="{x:Bind Description,Mode=OneWay}">
-                        </markdown:MarkdownTextBlock>
+                        </mtc:MarkdownTextBlock>
                         <CheckBox 
                             HorizontalAlignment="Center"
                             Content="{x:Bind UidCheckBox, Mode=OneWay}"

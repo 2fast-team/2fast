@@ -1,4 +1,6 @@
-﻿using Project2FA.Core;
+﻿
+using Project2FA.Core;
+using Project2FA.Core.Services.JSON;
 using Project2FA.Services.Enums;
 using System;
 using System.Threading.Tasks;
@@ -75,11 +77,11 @@ namespace Project2FA.Services.Logging
         /// <returns></returns>
         private async Task WriteExceptionLog(Exception exc, StorageFile file)
         {
+#if WINDOWS_UWP
+            await FileIO.AppendTextAsync(file, _timeStemp +  "uptime " + Microsoft.Toolkit.Uwp.Helpers.SystemInformation.Instance.AppUptime + "\n");
+#endif
             await FileIO.AppendTextAsync(file, _timeStemp + exc.Source + " - " + exc.Message + "\n");
-            if (exc.InnerException != null)
-            {
-                await FileIO.AppendTextAsync(file, "InnerException - " + exc.InnerException.ToString() + "\n");
-            }
+            await FileIO.AppendTextAsync(file, "Log - " + exc.ToString() + "\n");
         }
     }
 }

@@ -810,10 +810,7 @@ namespace Project2FA.Services
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(WriteLocalDatafile), exc);
 #endif
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                HandleWriteError(datafile,fileName,folder);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-
+                await HandleWriteError(datafile,fileName,folder);
             }
         }
 

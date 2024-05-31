@@ -6,8 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
-    xmlns:mobile="http://uno.ui/mobile" 
-    mc:Ignorable="d"
+    xmlns:ios="http://uno.ui/ios"
+    xmlns:android="http://uno.ui/android"
+    xmlns:wasm="http://uno.ui/wasm"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    mc:Ignorable="d ios android wasm win"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
@@ -182,81 +185,85 @@
             </NavigationView.FooterMenuItems>
         </NavigationView>
 
-        <utu:TabBar 
-            x:Name="MobileTabBar"
+        <Grid 
             Grid.Row="1"
-            IsEnabled="{x:Bind ViewModel.NavigationIsAllowed, Mode=OneWay}"
-            Visibility="{x:Bind ViewModel.TabBarIsVisible,Mode=OneWay}"
-            Margin="{x:Bind ViewModel.GetTabBarMargin, Mode=OneWay}"
-            ItemContainerStyle="{StaticResource CupertinoBottomTabBarItemStyle}"
-            SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
-            SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
-            Style="{StaticResource CupertinoBottomTabBarStyle}">
-            <utu:TabBar.Items>
-                <utu:TabBarItem 
-                    x:Uid="ShellPageAccountsNavigation"
-                    Tag="/AccountCodePage"
-                    Command="{x:Bind ViewModel.AccountCodePageCommand}"
-                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xE192;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-                <utu:TabBarItem 
-                    x:Uid="ShellPageSearchNavigation"
-                    Tag="SearchPage"
-                    Command="{x:Bind ViewModel.SearchPageCommand}"
-                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xe721;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-                <!--<utu:TabBarItem 
-                    Content="Add"
-                    Tag="Add"
-                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
-                    <utu:TabBarItem.Flyout>
-                        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
-                            Placement="Top">
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddCamera"
-                                Text="AccountCodePageAddCamera.Text~"
-                                >
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE70F;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddManual"
-                                Text="AccountCodePageAddManual.Text~"
-                                >
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE1C2;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </utu:TabBarItem.Flyout>
-                    <utu:TabBarItem.Icon>
-                        <SymbolIcon Symbol="Add" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>-->
-                
-                <!--<utu:TabBarItem Content="#About">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xE946;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>-->
-                <utu:TabBarItem 
-                    x:Uid="ShellPageSettingsNavigation"
-                    Tag="SettingPage"
-                    Command="{x:Bind ViewModel.SettingsPageCommand}"
-                    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
-                    <utu:TabBarItem.Icon>
-                        <FontIcon Glyph="&#xE713;" />
-                    </utu:TabBarItem.Icon>
-                </utu:TabBarItem>
-            </utu:TabBar.Items>
-        </utu:TabBar>
+            Visibility="{x:Bind ViewModel.IsMobile, Mode=OneWay}">
+            <utu:TabBar 
+    x:Name="MobileTabBar"
+    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed, Mode=OneWay}"
+    Visibility="{x:Bind ViewModel.TabBarIsVisible,Mode=OneWay}"
+    Margin="{x:Bind ViewModel.GetTabBarMargin, Mode=OneWay}"
+    ItemContainerStyle="{StaticResource CupertinoBottomTabBarItemStyle}"
+    SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
+    SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
+    Style="{StaticResource CupertinoBottomTabBarStyle}">
+                <utu:TabBar.Items>
+                    <utu:TabBarItem 
+            x:Uid="ShellPageAccountsNavigation"
+            Tag="/AccountCodePage"
+            Command="{x:Bind ViewModel.AccountCodePageCommand}"
+            IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+                        <utu:TabBarItem.Icon>
+                            <FontIcon Glyph="&#xE192;" />
+                        </utu:TabBarItem.Icon>
+                    </utu:TabBarItem>
+                    <utu:TabBarItem 
+            x:Uid="ShellPageSearchNavigation"
+            Tag="SearchPage"
+            Command="{x:Bind ViewModel.SearchPageCommand}"
+            IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+                        <utu:TabBarItem.Icon>
+                            <FontIcon Glyph="&#xe721;" />
+                        </utu:TabBarItem.Icon>
+                    </utu:TabBarItem>
+                    <!--<utu:TabBarItem 
+            Content="Add"
+            Tag="Add"
+            IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+            <utu:TabBarItem.Flyout>
+                <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}"
+                    Placement="Top">
+                    <MenuFlyoutItem 
+                        x:Uid="AccountCodePageAddCamera"
+                        Text="AccountCodePageAddCamera.Text~"
+                        >
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xE70F;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem 
+                        x:Uid="AccountCodePageAddManual"
+                        Text="AccountCodePageAddManual.Text~"
+                        >
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xE1C2;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </utu:TabBarItem.Flyout>
+            <utu:TabBarItem.Icon>
+                <SymbolIcon Symbol="Add" />
+            </utu:TabBarItem.Icon>
+        </utu:TabBarItem>-->
+
+                    <!--<utu:TabBarItem Content="#About">
+            <utu:TabBarItem.Icon>
+                <FontIcon Glyph="&#xE946;" />
+            </utu:TabBarItem.Icon>
+        </utu:TabBarItem>-->
+                    <utu:TabBarItem 
+            x:Uid="ShellPageSettingsNavigation"
+            Tag="SettingPage"
+            Command="{x:Bind ViewModel.SettingsPageCommand}"
+            IsEnabled="{x:Bind ViewModel.NavigationIsAllowed,Mode=OneWay}">
+                        <utu:TabBarItem.Icon>
+                            <FontIcon Glyph="&#xE713;" />
+                        </utu:TabBarItem.Icon>
+                    </utu:TabBarItem>
+                </utu:TabBar.Items>
+            </utu:TabBar>
+        </Grid>
+        
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
                 <VisualState x:Name="NarrowState">

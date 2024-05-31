@@ -106,19 +106,26 @@
                 Header="~SPIOption.Header"
                 Margin="8,0,0,0">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=" auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
+                            Text="~SettingsMDMInfo.Text"
+                            x:Uid="SettingsMDMInfo"
+                            FontSize="16"
+                            Visibility="{x:Bind ViewModel.SettingsPartViewModel.IsMDMActive, Mode=OneWay}"
+                            Foreground="{ThemeResource ApplicationWarnHighlightForegroundBrush}"/>
                     <ScrollViewer
+                        Grid.Row="1"
                         VerticalScrollMode="Auto" 
                         Margin="0,10,0,0">
-
                         <StackPanel
                             x:Name="Main_StackPanel"
                             MaxWidth="1040"
                             HorizontalAlignment="Left" 
                             Margin="0,0,16,0">
+
                             <appcontrols:CardGroupControl 
                                     x:Uid="SettingsOptionsDesignTitle"
                                     Header="~SettingsOptionsDesignTitle.Header">
@@ -157,6 +164,24 @@
                                                 <ComboBoxItem x:Uid="SettingsThemeSystem"/>
                                             </ComboBox>
                                         </StackPanel>
+                                    </appcontrols:CardControl.ActionContent>
+                                </appcontrols:CardControl>
+
+                                <appcontrols:CardControl 
+                                    x:Uid="SettingsAppShowAvailableProFeatures"
+                                    Icon="&#xE82F;"
+                                    Visibility="{x:Bind ViewModel.SettingsPartViewModel.IsNoProVersion, Mode=OneWay}"
+                                    Header="~SettingsAppShowAvailableProFeatures.Header">
+                                    <appcontrols:CardControl.Description>
+                                        <TextBlock 
+                                            x:Uid="SettingsAppShowAvailableProFeaturessDesc"
+                                            Text="~SettingsAppShowAvailableProFeaturessDesc.Text" 
+                                            VerticalAlignment="Stretch" 
+                                            HorizontalAlignment="Stretch"/>
+                                    </appcontrols:CardControl.Description>
+                                    <appcontrols:CardControl.ActionContent>
+                                        <ToggleSwitch 
+                                            IsOn="{x:Bind ViewModel.SettingsPartViewModel.ShowAvailableProFeatures, Mode=TwoWay}"/>
                                     </appcontrols:CardControl.ActionContent>
                                 </appcontrols:CardControl>
 
@@ -223,17 +248,18 @@
                                                 </appcontrols:CardControl.ActionContent>
                                             </appcontrols:CardControl>
                                         </StackPanel>
-                                        
                                     </appcontrols:CardExpanderControl.Content>
                                 </appcontrols:CardExpanderControl>
 
-                                
                             </appcontrols:CardGroupControl>
 
                             <appcontrols:CardGroupControl 
                                 x:Uid="SettingsOptionsFunctionsTitle"
-                                Header="~SettingsOptionsFunctionsTitle.Header">
-                                <appcontrols:CardExpanderControl>
+                                Header="~SettingsOptionsFunctionsTitle.Header"
+                                Margin="0,0,0,12">
+                                <appcontrols:CardExpanderControl
+                                    Tag="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHelloIsMDMManaged, Mode=OneWay}"
+                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHelloIsMDMManaged, Mode=OneWay}">
                                     <appcontrols:CardExpanderControl.Header>
                                         <appcontrols:CardControl
                                             Icon="&#xF0FB;"
@@ -407,7 +433,6 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                                             <appcontrols:CardControl>
                                                 <appcontrols:CardControl.Description>
                                                     <StackPanel
-                                                        Margin="56,12,40,12"
                                                         HorizontalAlignment="Left">
                                                         <TextBlock 
                                                             x:Uid="SettingsNTPServerDescribtion"
@@ -466,7 +491,7 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                                     </appcontrols:CardExpanderControl.Content>
                                 </appcontrols:CardExpanderControl>
 
-                                
+
 
                                 <!--<appcontrols:CardExpanderControl
                                     Margin="0,0,0,20"
@@ -486,6 +511,7 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                             </appcontrols:CardGroupControl>
                         </StackPanel>
                     </ScrollViewer>
+
                 </Grid>
             </PivotItem>
             <PivotItem 

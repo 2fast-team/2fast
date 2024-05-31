@@ -1330,4 +1330,16 @@ Currently available:
   <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
     <value>No window for scanning a QR code has been selected.</value>
   </data>
+  <data name="LoginPageIOSBiometricReason" xml:space="preserve">
+    <value>With the use of biometrics, login is implemented without a password.</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeatures.Header" xml:space="preserve">
+    <value>Display of Pro functions</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeaturessDesc.Text" xml:space="preserve">
+    <value>This setting can be used to switch the visibility of placeholders for Pro functions on or off.</value>
+  </data>
+  <data name="SettingsMDMInfo.Text" xml:space="preserve">
+    <value>*Some settings are managed by your organisation.</value>
+  </data>
 </root>

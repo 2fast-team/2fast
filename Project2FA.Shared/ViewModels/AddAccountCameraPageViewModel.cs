@@ -61,10 +61,11 @@ namespace Project2FA.ViewModels
 
         public bool CanNavigate(INavigationParameters parameters)
         {
-            if (!_foundAccount)
-            {
-                Messenger.Send(new ControlDisposeMessage(true));
-            }
+            //if (!_foundAccount)
+            //{
+            //    Messenger.Send(new ControlDisposeMessage(true));
+            //}
+            Messenger.Send(new ControlDisposeMessage(true));
             return true;
         }
     }

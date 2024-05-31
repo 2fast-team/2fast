@@ -185,10 +185,11 @@ namespace Project2FA.ViewModels
         {
             get
             {
-#if IOS
-                return new Thickness(0, 0, 0, 30);
-#else
                 return new Thickness(0, 0, 0, 4);
+#if IOS
+                //return new Thickness(0, 0, 0, 30);
+#else
+                //return new Thickness(0, 0, 0, 4);
 #endif
             }
         }

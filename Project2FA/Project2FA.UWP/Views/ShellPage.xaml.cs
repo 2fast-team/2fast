@@ -55,6 +55,7 @@ namespace Project2FA.UWP.Views
                 AppTitleBar.Visibility = Visibility.Collapsed;
             }
 
+
             ShellViewInternal = ShellView;
             ShellView.Content = MainFrame = new Frame();
             GestureService.SetupWindowListeners(Window.Current.CoreWindow);

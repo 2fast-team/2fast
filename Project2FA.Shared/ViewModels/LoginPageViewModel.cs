@@ -13,15 +13,9 @@ using Project2FA.Core.Services.Crypto;
 using System.Threading;
 using Project2FA.Utils;
 using Windows.ApplicationModel.Core;
-
 using Windows.ApplicationModel.DataTransfer;
 using Project2FA.Services.Logging;
 using UNOversal.Navigation;
-
-
-
-
-
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -29,10 +23,10 @@ using Windows.UI.Xaml.Input;
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
 using WinUIWindow = Windows.UI.Xaml.Window;
-using Microsoft.Toolkit.Uwp.UI.Controls;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.UI.Xaml;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 #else
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -90,9 +84,9 @@ namespace Project2FA.ViewModels
 #if IOS
 			var laContext = new LAContext
 			{
-				LocalizedReason = "REASON THAT APP WANTS TO USE BIOMETRY :)",
+				LocalizedReason = Resources.LoginPageIOSBiometricReason,
 				LocalizedFallbackTitle = "FALLBACK",
-				LocalizedCancelTitle = "CANCEL"
+				LocalizedCancelTitle = Resources.ButtonTextCancel
 			};
 
             BiometryService = new BiometryService.BiometryService(
@@ -180,7 +174,7 @@ namespace Project2FA.ViewModels
                             break;
                     }
                 }
-                else if (settings.PreferWindowsHello == Services.Enums.BiometricPreferEnum.Prefer)
+                else if (WindowsHelloIsUsable && settings.PreferWindowsHello == Services.Enums.BiometricPreferEnum.Prefer)
                 {
                     if (!IsLogout)
                     {
@@ -223,11 +217,10 @@ namespace Project2FA.ViewModels
                 dialog.Content = textBlock;
                 dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
                 dialog.PrimaryButtonText = Resources.Confirm;
-                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
 
                 await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
             }
-
         }
 #endif
 
@@ -255,7 +248,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-
+                LoggingService.LogException(exc);
             }
            
 
@@ -287,6 +280,7 @@ namespace Project2FA.ViewModels
                         dialog.Content = markdown;
                         dialog.PrimaryButtonText = Resources.Yes;
                         dialog.SecondaryButtonText = Resources.No;
+                        await Task.Delay(1500);
                         var result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
                         switch (result)
                         {
@@ -318,7 +312,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-
+                LoggingService.LogException(exc);
             }
             
         }
@@ -389,7 +383,9 @@ namespace Project2FA.ViewModels
             {
                 IsLogout = isLogout;
             }
-            //CheckCapabilityBiometricLogin();
+#if ANDROID || IOS
+            CheckCapabilityBiometricLogin();
+#endif
 
         }
     }

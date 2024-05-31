@@ -1331,6 +1331,18 @@ Derzeit verfügbar:
     <value>Konto bearbeiten</value>
   </data>
   <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
-    <value>Es wurde kein Fenster zum einlesen eines QR-Codes ausgewählt.</value>
+    <value>Es wurde kein Fenster zum Einlesen eines QR-Codes ausgewählt.</value>
+  </data>
+  <data name="LoginPageIOSBiometricReason" xml:space="preserve">
+    <value>Mit der Nutzung der Biometrie wird die Anmeldung ohne Passwort umgesetzt.</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeatures.Header" xml:space="preserve">
+    <value>Anzeige von Pro-Funktionen</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeaturessDesc.Text" xml:space="preserve">
+    <value>Mit der Einstellung kann die Sichtbarkeit der Platzhalter von Pro-Funktionen aus- oder eingeschaltet werden.</value>
+  </data>
+  <data name="SettingsMDMInfo.Text" xml:space="preserve">
+    <value>*Einige Einstellungen werden von Ihrer Organisation verwaltet.</value>
   </data>
 </root>

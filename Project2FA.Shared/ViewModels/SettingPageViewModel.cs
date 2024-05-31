@@ -26,9 +26,6 @@ using Project2FA.Services.Logging;
 using UNOversal.Services.File;
 
 
-
-
-
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
 using Windows.UI.Xaml.Controls;
@@ -220,6 +217,21 @@ namespace Project2FA.ViewModels
 #else
             //App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
 #endif
+
+#if WINDOWS_UWP
+            // DEBUG MDM settings
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    if(!ApplicationData.Current.LocalSettings.Containers.ContainsKey(Constants.EnterpriseAppManagementContainer))
+            //    {
+            //        Windows.Storage.ApplicationDataContainer container =
+            //        ApplicationData.Current.LocalSettings.CreateContainer(Constants.EnterpriseAppManagementContainer, Windows.Storage.ApplicationDataCreateDisposition.Always);
+            //    }
+            //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values[nameof(UseHiddenTOTP)] = "true";
+            //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values[nameof(UseAutoLogout)] = "true";
+            //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values["AutoLogoutMinutes"] = "5";
+            //}
+#endif
         }
 
         /// <summary>
@@ -306,7 +318,6 @@ namespace Project2FA.ViewModels
                 dialog.PrimaryButtonText = Resources.Confirm;
 
                 await DialogService.ShowDialogAsync(dialog, new DialogParameters());
-
             }
         }
 
@@ -531,6 +542,16 @@ namespace Project2FA.ViewModels
             }
         }
 
+        public bool ShowAvailableProFeatures
+        {
+            get => _settings.ShowAvailableProFeatures;
+            set
+            {
+                _settings.ShowAvailableProFeatures = value;
+                OnPropertyChanged(nameof(ShowAvailableProFeatures));
+            }
+        }
+
         public int ThemeIndex
         {
             get => _settings.AppTheme switch
@@ -635,6 +656,11 @@ namespace Project2FA.ViewModels
             get => _settings.IsProVersion;
         }
 
+        public bool IsNoProVersion
+        {
+            get => !_settings.IsProVersion;
+        }
+
         public bool UseProFeatures
         {
             get => _settings.UseProFeatures;
@@ -647,6 +673,15 @@ namespace Project2FA.ViewModels
 #endif
 
         #region MDMConfigs
+        public bool IsMDMActive
+        {
+            get => _settings.AutoLogoutMinutesIsMDMManaged ||
+                _settings.UseAutoLogoutIsMDMManaged ||
+                _settings.ActivateWindowsHelloIsMDMManaged ||
+                _settings.UseNTPServerCorrectionIsMDMManaged ||
+                _settings.NTPServerStringIsMDMManaged ||
+                _settings.UseHiddenTOTPIsMDMManaged;
+        }
         public bool AutoLogoutMinutesIsMDMManaged
         {
             get => !_settings.AutoLogoutMinutesIsMDMManaged;

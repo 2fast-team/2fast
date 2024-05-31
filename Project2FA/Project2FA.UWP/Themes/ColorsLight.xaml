@@ -14,6 +14,8 @@
     <SolidColorBrush x:Name="TranslucentBackgroundLowBrush" Opacity="0.55" Color="White"/>
     <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="White"/>
 
+    <SolidColorBrush x:Name="ApplicationWarnHighlightForegroundBrush" Color="#C50500"/>
+
     <!-- Resources for AccentButtonStyle -->
     <!--<StaticResource x:Key="AccentButtonBackground" ResourceKey="SystemControlForegroundAccentBrush" />
     <StaticResource x:Key="AccentButtonBackgroundPointerOver" ResourceKey="SystemControlForegroundAccentBrush" />

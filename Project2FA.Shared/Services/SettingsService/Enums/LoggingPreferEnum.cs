@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Project2FA.Services.Enums
+﻿namespace Project2FA.Services.Enums
 {
     public enum LoggingPreferEnum
     {

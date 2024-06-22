@@ -60,8 +60,10 @@ other installation method (not maintained by me)
 
 <img src="https://i.postimg.cc/FzXQpK43/2fast-screenshot-1.png" alt="2fast Screenshot Login Screen" width="470" />  <img src="https://i.postimg.cc/zv7PhDXJ/2fast-screenshot-2.png" alt="2fast Screenshot Account Screen" width="464" />
 
-### Nominations
+## Nominations
 <a href='https://aka.ms/StoreAppAwardsWinners'><img width="720" alt="finalist_lock_up_light_on_dark_Utilities" src="https://user-images.githubusercontent.com/10946850/180846349-d0f8358d-5684-4616-92a0-5bc547087e42.png" width="250"></a>
+## Wiki
+See https://github.com/2fast-team/2fast/wiki
 
 ## Installation
 

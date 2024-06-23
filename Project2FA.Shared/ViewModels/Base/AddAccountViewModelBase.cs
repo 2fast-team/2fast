@@ -29,9 +29,10 @@ using Project2FA.Core.Utils;
 using System.Web;
 using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
-using Project2FA.Services.Logging;
 using Prism.Ioc;
 using UNOversal.Navigation;
+using UNOversal.Services.Logging;
+
 
 
 
@@ -330,7 +331,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 await QRReadError();
             }
         }

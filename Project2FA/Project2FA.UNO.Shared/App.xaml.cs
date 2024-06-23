@@ -37,8 +37,8 @@ using Uno.UI;
 using Uno.Extensions.Maui;
 using Project2FA.UNO.MauiControls;
 using Project2FA.Services.Parser;
-using Project2FA.Services.Logging;
 using UNOversal.Navigation;
+using UNOversal.Services.Logging;
 
 namespace Project2FA.UNO
 {

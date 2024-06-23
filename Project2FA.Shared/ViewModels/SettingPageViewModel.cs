@@ -1,16 +1,13 @@
 ﻿using System;
 using Windows.Storage;
 using System.Windows.Input;
-using Windows.ApplicationModel.Core;
 using Project2FA.Strings;
 using Prism.Ioc;
 using Project2FA.Repository.Models;
 using System.Linq;
-using Windows.Security.Credentials;
 using Project2FA.Core.Services.NTP;
 using System.Threading.Tasks;
 using Project2FA.Core;
-using Windows.ApplicationModel.Email;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using UNOversal.Navigation;
@@ -21,10 +18,7 @@ using Project2FA.Services.Enums;
 using Project2FA.Utils;
 using CommunityToolkit.Mvvm.Collections;
 using Windows.System;
-using Windows.Services.Store;
-using Project2FA.Services.Logging;
-using UNOversal.Services.File;
-
+using UNOversal.Services.Logging;
 
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
@@ -35,6 +29,9 @@ using Project2FA.UWP;
 using Project2FA.UWP.Views;
 using Project2FA.Services.Marketplace;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Windows.Services.Store;
+using Windows.Security.Credentials;
+using Windows.ApplicationModel.Core;
 #else
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
@@ -222,7 +219,7 @@ namespace Project2FA.ViewModels
             // DEBUG MDM settings
             //if (System.Diagnostics.Debugger.IsAttached)
             //{
-            //    if(!ApplicationData.Current.LocalSettings.Containers.ContainsKey(Constants.EnterpriseAppManagementContainer))
+            //    if (!ApplicationData.Current.LocalSettings.Containers.ContainsKey(Constants.EnterpriseAppManagementContainer))
             //    {
             //        Windows.Storage.ApplicationDataContainer container =
             //        ApplicationData.Current.LocalSettings.CreateContainer(Constants.EnterpriseAppManagementContainer, Windows.Storage.ApplicationDataCreateDisposition.Always);
@@ -230,6 +227,7 @@ namespace Project2FA.ViewModels
             //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values[nameof(UseHiddenTOTP)] = "true";
             //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values[nameof(UseAutoLogout)] = "true";
             //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values["AutoLogoutMinutes"] = "5";
+            //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values["LoginScreenWallpaper"] = string.Empty;
             //}
 #endif
         }

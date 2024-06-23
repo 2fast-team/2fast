@@ -524,6 +524,39 @@
                         </StackPanel>
                     </Grid>
                 </FlipViewItem>
+                <FlipViewItem>
+                    <Grid MaxWidth="760">
+                        <Border 
+                            ui:Effects.Shadow="{StaticResource PageShadow}" 
+                            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                            <Border>
+                                <Border.Background>
+                                    <media:BackdropBlurBrush Amount="2" />
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <StackPanel Margin="12,12,12,0">
+                            <TextBlock 
+                                x:Uid="TutorialContentDialogInteractionAccountHeader"
+                                Text="~TutorialContentDialogInteractionAccountHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                FontWeight="Bold"
+                                TextWrapping="WrapWholeWords"
+                                Margin="0,0,0,12"/>
+                            <toolkit:MarkdownTextBlock 
+                                x:Uid="TutorialContentDialogInteractionAccount"
+                                Text="~TutorialContentDialogInteractionAccount.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords"
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+
+                        </StackPanel>
+                    </Grid>
+                </FlipViewItem>
             </FlipView>
         </StackPanel>
 
@@ -595,7 +628,7 @@
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalContentAlignment="Bottom"
-            NumberOfPages="5"
+            NumberOfPages="6"
             SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
     </Grid>
 </Page>

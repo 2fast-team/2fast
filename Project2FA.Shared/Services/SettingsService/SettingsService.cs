@@ -2,8 +2,11 @@
 using Prism.Ioc;
 using UNOversal.Services.Settings;
 using Project2FA.Services.Enums;
-using Project2FA.Extensions;
 using Project2FA.Core;
+using UNOversal.Services.Logging;
+using UNOversal.Extensions;
+
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -412,6 +415,24 @@ namespace Project2FA.Services
                 default:
                     break;
             }
+        }
+
+        public string LoginScreenWallpaper
+        {
+            get
+            {
+                if (IsProVersion)
+                {
+                    return _helper.ReadString(nameof(LoginScreenWallpaper), Constants.EnterpriseAppManagementContainer);
+                    //var (successful, result) = 
+                    //if (successful)
+                    //{
+                    //    return result;
+                    //}
+                }
+                return string.Empty;
+            }
+            set => _helper.TryWrite(nameof(LoginScreenWallpaper), value);
         }
 
         public LoggingPreferEnum LoggingSetting

@@ -19,7 +19,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using Project2FA.Core.Utils;
-using Project2FA.Services.Logging;
+using UNOversal.Services.Logging;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -366,7 +367,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 ContentDialog dialog = new ContentDialog();
 #if !WINDOWS_UWP
                 dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
@@ -631,7 +632,7 @@ namespace Project2FA.ViewModels
                 }
                 catch (System.Exception exc)
                 {
-                    LoggingService.LogException(exc);
+                    LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                     TwoFADataService.ACVCollection.Filter = null;
 #if WINDOWS_UWP
                     TrackingManager.TrackExceptionCatched(nameof(SetSuggestionList), exc);

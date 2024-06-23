@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.Dialogs;
+using Project2FA.Services;
+
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -38,6 +40,51 @@ namespace Project2FA.ViewModels
             dialog.Content = Resources.LoginPagePasswordMismatch;
             dialog.PrimaryButtonText = Resources.Confirm;
             return DialogService.ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        public bool IsMDMLoginScreenWallpaperAvailable
+        {
+            get
+            {
+                if (SettingsService.Instance.IsProVersion)
+                {
+                    if (!string.IsNullOrWhiteSpace(SettingsService.Instance.LoginScreenWallpaper))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        public bool IsMDMLoginScreenWallpaperNotAvailable
+        {
+            get
+            {
+                if (SettingsService.Instance.IsProVersion)
+                {
+                    if (string.IsNullOrWhiteSpace(SettingsService.Instance.LoginScreenWallpaper))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        public string MDMLoginScreenWallpaperStr
+        {
+            get
+            {
+                if (SettingsService.Instance.IsProVersion)
+                {
+                    if (!string.IsNullOrWhiteSpace(SettingsService.Instance.LoginScreenWallpaper))
+                    {
+                        return SettingsService.Instance.LoginScreenWallpaper;
+                    }
+                }
+                return string.Empty;
+            }
         }
 
 #if WINDOWS_UWP

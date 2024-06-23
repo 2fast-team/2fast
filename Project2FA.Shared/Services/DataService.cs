@@ -33,8 +33,9 @@ using Project2FA.Core.Services.Crypto;
 using CommunityToolkit.WinUI.Helpers;
 using CommunityToolkit.WinUI.Collections;
 using UNOversal.Services.Serialization;
-using Project2FA.Services.Logging;
 using System.Web;
+using UNOversal.Services.Logging;
+
 
 
 
@@ -157,7 +158,7 @@ namespace Project2FA.Services
             }
             catch (Exception exc)
             {
-                LoggingService.LogException(exc);
+                LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(LoadFontIconList), exc);
 #endif
@@ -189,7 +190,7 @@ namespace Project2FA.Services
                     }
                     catch (Exception exc)
                     {
-                        LoggingService.LogException(exc);
+                        LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                         Logger.Log("NTP exception: " + exc.Message, Category.Exception, Priority.Low);
                         //TrackingManager.TrackException(exc);
                     }
@@ -498,7 +499,7 @@ namespace Project2FA.Services
                     }
                     catch (Exception exc)
                     {
-                        await LoggingService.LogException(exc);
+                        await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                         _errorOccurred = true;
 #if WINDOWS_UWP
                         TrackingManager.TrackExceptionCatched(nameof(CheckLocalDatafile) + " PW", exc);
@@ -539,7 +540,7 @@ namespace Project2FA.Services
             catch (Exception exc)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 _errorOccurred = true;
                 if (exc is UnauthorizedAccessException)
                 {
@@ -806,7 +807,7 @@ namespace Project2FA.Services
             catch (Exception exc)
             {
                 CollectionAccessSemaphore.Release();
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(WriteLocalDatafile), exc);
 #endif
@@ -850,7 +851,7 @@ namespace Project2FA.Services
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(RestoreLastDatafile), exc);
 #endif
@@ -894,13 +895,13 @@ namespace Project2FA.Services
                 else
                 {
                     Collection[i].TwoFACode = "Error";
-                    await LoggingService.Log("ArgumentNullException " + Collection[i].Label);
+                    await LoggingService.Log("ArgumentNullException " + Collection[i].Label, SettingsService.Instance.LoggingSetting);
                     throw new ArgumentNullException(Collection[i].Label);
                 }
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 Logger.Log(exc.Message, Category.Exception, Priority.High);
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(GenerateTOTP), exc);

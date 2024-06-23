@@ -18,7 +18,8 @@ using Project2FA.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using Project2FA.Core.Messenger;
 using Project2FA.Core.Services.Crypto;
-using Project2FA.Services.Logging;
+using UNOversal.Services.Logging;
+
 
 
 #if WINDOWS_UWP
@@ -43,11 +44,9 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class FileActivationPageViewModel : ObservableRecipient
+    public class FileActivationPageViewModel : CredentialViewModelBase
     {
         private string _password;
-        public ICommand LoginCommand { get; }
-        private IDialogService DialogService { get; }
         private ISecretService SecretService { get; }
         private IFileService FileService { get; }
         private ILoggingService LoggingService { get; }
@@ -178,7 +177,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 //Error = exc.Message;
                 //ShowError = true;
                 //Password = string.Empty;
@@ -202,24 +201,6 @@ namespace Project2FA.ViewModels
         public string DatafileName
         {
             get => DataService.Instance.ActivatedDatafile.Name;
-        }
-
-        public string Password
-        {
-            get => _password;
-            set => SetProperty(ref _password, value);
-        }
-
-        public string ApplicationTitle
-        {
-            get => _applicationTitle;
-            set => SetProperty(ref _applicationTitle, value);
-        }
-
-        internal bool IsScreenCaptureEnabled
-        {
-            get => _isScreenCaptureEnabled;
-            set => SetProperty(ref _isScreenCaptureEnabled, value);
         }
     }
 }

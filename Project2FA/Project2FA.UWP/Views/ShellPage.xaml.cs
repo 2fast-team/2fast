@@ -23,6 +23,7 @@ using Windows.Services.Store;
 using Project2FA.UWP.Services;
 using Project2FA.Core;
 using UNOversal.Services.Network;
+using UNOversal.Services.Gesture;
 
 namespace Project2FA.UWP.Views
 {

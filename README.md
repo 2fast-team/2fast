@@ -42,7 +42,7 @@ other installation method (not maintained by me)
 - Everything works locally
 	- No extra account, registration or login needed
 	- No Internet connection needed except for WebDAV use
-- Synchronisation via a WebDAV server (e.g. ownCloud or Nextcloud) as storage location [currently in Beta]
+- Synchronisation via a WebDAV server (e.g. ownCloud or Nextcloud) as storage location
 - Free for desktop OS / fee required for mobile OS
 - Open Source
 - Works on multiple platforms
@@ -96,8 +96,8 @@ The following steps will help if you want to contribute or work on the applicati
 	- Don't forget to select the *Mobile development with .NET* package in the installation process 
 	- .NET Multi-Platform App UI development
 - Windows 10, version >= `1809`, October update 2018 (for the universal Windows application)
-	- The latest Windows 10 SDK is required
-- Android, version >= 7.0 (for the Android application)
+	- The latest Windows 11 SDK is required
+- Android, version >= 10.0 (for the Android application)
 	- Remember to trust 3rd party Apps by enabling this in the Android developer settings if you want to build from source
 
 

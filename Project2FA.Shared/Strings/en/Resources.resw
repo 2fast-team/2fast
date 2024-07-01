@@ -1080,7 +1080,7 @@ Please synchronize the time in the settings.</value>
     <value>A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.</value>
   </data>
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
-    <value>Passwort für die Verschlüsselung</value>
+    <value>Password for encryption</value>
   </data>
   <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
     <value>The key is copied to the clipboard.</value>

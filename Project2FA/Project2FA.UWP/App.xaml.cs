@@ -180,28 +180,35 @@ namespace Project2FA.UWP
                             }
                             break;
                         }
-                        if (cmdlist[i].Key == "startLogFileCmd")
-                        {
-                            try
-                            {
-                                var file = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.LogName);
-                                // Launch the URI and pass in the recommended app
-                                var success = await Launcher.LaunchFileAsync(file);
-                            }
-                            catch (Exception)
-                            {
-                                await ErrorDialogs.ShowLogNotFound();
-                            }
-                            break;
-                        }
-                        if (SettingsService.Instance.IsProVersion)
-                        {
-                            if (cmdlist[i].Key == "addAccount")
-                            {
-                                parser.ParseQRCodeStr(cmdlist[i].Value);
-                            }
-                            break;
-                        }
+                        //if (cmdlist[i].Key == "startLogFileCmd")
+                        //{
+                        //    try
+                        //    {
+                        //        var file = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.LogName);
+                        //        // Launch the URI and pass in the recommended app
+                        //        var success = await Launcher.LaunchFileAsync(file);
+                        //    }
+                        //    catch (Exception)
+                        //    {
+                        //        await ErrorDialogs.ShowLogNotFound();
+                        //    }
+                        //    break;
+                        //}
+                        //if (SettingsService.Instance.IsProVersion)
+                        //{
+                        //    if (cmdlist[i].Key == "addAccount")
+                        //    {
+                        //        var accountParams = parser.ParseQRCodeStr(cmdlist[i].Value);
+                        //        if (accountParams.Count > 0 && accountParams[0].Value == "totp")
+                        //        {
+                        //            var dialog = new AddAccountContentDialog();
+                        //            var dialogParams = new DialogParameters();
+                        //            dialogParams.Add("account", accountParams);
+                        //            await this.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, dialogParams);
+                        //        }
+                        //    }
+                        //    break;
+                        //}
                     }
                 }
 
@@ -262,14 +269,21 @@ namespace Project2FA.UWP
                         }
                         catch (Exception)
                         {
-
+                            await ErrorDialogs.ShowLogNotFound();
                         }
                     }
                     if (SettingsService.Instance.IsProVersion)
                     {
                         if (cmdlist[i].Key == "addAccount")
                         {
-                            parser.ParseQRCodeStr(cmdlist[i].Value);
+                            var accountParams = parser.ParseQRCodeStr(cmdlist[i].Value);
+                            if (accountParams.Count > 0 && accountParams[0].Value == "totp")
+                            {
+                                var dialog = new AddAccountContentDialog();
+                                var dialogParams = new DialogParameters();
+                                dialogParams.Add("account", accountParams);
+                                await this.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, dialogParams);
+                            }
                         }
                         break;
                     }

@@ -6,8 +6,6 @@ using Project2FA.Core;
 using UNOversal.Services.Logging;
 using UNOversal.Extensions;
 
-
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Windows.UI.Xaml;
@@ -424,11 +422,6 @@ namespace Project2FA.Services
                 if (IsProVersion)
                 {
                     return _helper.ReadString(nameof(LoginScreenWallpaper), Constants.EnterpriseAppManagementContainer);
-                    //var (successful, result) = 
-                    //if (successful)
-                    //{
-                    //    return result;
-                    //}
                 }
                 return string.Empty;
             }

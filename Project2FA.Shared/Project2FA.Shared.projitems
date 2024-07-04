@@ -108,7 +108,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Filled.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\SimpleIcons.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\appoverview.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\firstSteps_DE.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\firstSteps_EN.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gift.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\give-love.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-100.png" />

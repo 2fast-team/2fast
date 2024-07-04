@@ -18,9 +18,6 @@ using Project2FA.Core;
 using UNOversal.Services.Logging;
 using Project2FA.Services;
 
-
-
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;

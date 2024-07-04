@@ -810,7 +810,7 @@ Please synchronize the time in the settings.</value>
     <value>Close</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
-    <value>When selecting the QR code scan, a new window opens in which the programme containing the QR code to be scanned must be selected, for example the browser.</value>
+    <value>When the QR code scan is selected, a new window opens in which the programme containing the QR code to be scanned must be selected. This is the browser, for example.</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
     <value>Display QR code</value>
@@ -1080,7 +1080,7 @@ Please synchronize the time in the settings.</value>
     <value>A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.</value>
   </data>
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
-    <value>Passwort für die Verschlüsselung</value>
+    <value>Password for encryption</value>
   </data>
   <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
     <value>The key is copied to the clipboard.</value>
@@ -1111,9 +1111,6 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
     <value>Interaction options for accounts</value>
-  </data>
-  <data name="AddAccountContentDialogScreenclipNotFound" xml:space="preserve">
-    <value>The required system application "Snipping Tool" could not be found: https://apps.microsoft.com/store/detail/snipping-tool/9MZ95KL8MR0L</value>
   </data>
   <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
     <value>Access to the folder is blocked for the application, try again or select another folder.</value>
@@ -1262,6 +1259,7 @@ The functionality of this application is explained in more detail in the followi
 Currently available:
 
 - Categories &amp; filter
+- Mobile Device Management (MDM)
 ***
 ### 34,99€ one-time</value>
   </data>
@@ -1270,6 +1268,7 @@ Currently available:
 Currently available:
 
 - Categories &amp; filter
+- Mobile Device Management (MDM)
 ***
 ### 6,49€ annually</value>
   </data>
@@ -1341,5 +1340,14 @@ Currently available:
   </data>
   <data name="SettingsMDMInfo.Text" xml:space="preserve">
     <value>*Some settings are managed by your organisation.</value>
+  </data>
+  <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
+    <value>blablalba</value>
+  </data>
+  <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
+    <value>Pro-Funktions</value>
+  </data>
+  <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
+    <value>![First steps](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
 </root>

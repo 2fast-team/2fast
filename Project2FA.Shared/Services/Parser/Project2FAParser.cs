@@ -165,7 +165,7 @@ namespace Project2FA.Services.Parser
                             collectionVar = nameValueCollection[nameof(addAccount)];
                             if (!string.IsNullOrEmpty(collectionVar))
                             {
-                                addAccount = collectionVar;
+                                addAccount = cmdStr.Replace("addAccount=", string.Empty);
                                 cmdParams.Add(new KeyValuePair<string, string>(nameof(addAccount), addAccount));
                             }
                         }

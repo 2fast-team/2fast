@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Project2FA.Services;
+using System;
 using System.Threading.Tasks;
+using UNOversal.Services.Logging;
 using Windows.Services.Store;
 
 namespace Project2FA.UWP.Services
 {
     public class PurchaseAddOnService : IPurchaseAddOnService
     {
+        private ILoggingService LoggingService { get; }
         private StoreContext context = null;
         StoreProduct purchaseAddOnProduct;
 
@@ -15,6 +18,11 @@ namespace Project2FA.UWP.Services
         public void Initialize(string id)
         {
             _addonStoreId = id;
+        }
+
+        public PurchaseAddOnService(ILoggingService loggingService)
+        {
+            LoggingService = loggingService;
         }
 
         public async Task<(bool IsActive, StoreLicense info)> SetupPurchaseAddOnInfoAsync()
@@ -87,38 +95,48 @@ namespace Project2FA.UWP.Services
         {
             // Request a purchase of the subscription product. If a trial is available it will be offered 
             // to the customer. Otherwise, the non-trial SKU will be offered.
-            StorePurchaseResult result = await purchaseAddOnProduct.RequestPurchaseAsync();
-
-            // Capture the error message for the operation, if any.
-            string extendedError = string.Empty;
-            if (result.ExtendedError != null)
+            try
             {
-                extendedError = result.ExtendedError.Message;
-            }
+                StorePurchaseResult result = await purchaseAddOnProduct.RequestPurchaseAsync();
 
-            switch (result.Status)
-            {
-                case StorePurchaseStatus.Succeeded:
-                    return true;
+                // Capture the error message for the operation, if any.
+                string extendedError = string.Empty;
+                if (result.ExtendedError != null)
+                {
+                    extendedError = result.ExtendedError.Message;
+                }
+
+                switch (result.Status)
+                {
+                    case StorePurchaseStatus.Succeeded:
+                        return true;
                     // Show a UI to acknowledge that the customer has purchased your subscription 
                     // and unlock the features of the subscription. 
 
 
-                case StorePurchaseStatus.NotPurchased:
-                    System.Diagnostics.Debug.WriteLine("The purchase did not complete. " +
-                        "The customer may have cancelled the purchase. ExtendedError: " + extendedError);
-                    return false;
+                    case StorePurchaseStatus.NotPurchased:
+                        System.Diagnostics.Debug.WriteLine("The purchase did not complete. " +
+                            "The customer may have cancelled the purchase. ExtendedError: " + extendedError);
+                        return false;
 
-                case StorePurchaseStatus.ServerError:
-                case StorePurchaseStatus.NetworkError:
-                    System.Diagnostics.Debug.WriteLine("The purchase was unsuccessful due to a server or network error. " +
-                        "ExtendedError: " + extendedError);
-                    return false;
-
-                case StorePurchaseStatus.AlreadyPurchased:
-                    System.Diagnostics.Debug.WriteLine("The customer already owns this subscription." +
+                    case StorePurchaseStatus.ServerError:
+                    case StorePurchaseStatus.NetworkError:
+                        System.Diagnostics.Debug.WriteLine("The purchase was unsuccessful due to a server or network error. " +
                             "ExtendedError: " + extendedError);
-                    return false;
+                        return false;
+
+                    case StorePurchaseStatus.AlreadyPurchased:
+                        System.Diagnostics.Debug.WriteLine("The customer already owns this subscription." +
+                                "ExtendedError: " + extendedError);
+                        return false;
+                }
+            }
+            catch (Exception exc)
+            {
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+#if WINDOWS_UWP
+                TrackingManager.TrackExceptionCatched(nameof(PromptUserToPurchaseAsync), exc);
+#endif
             }
             return false;
         }

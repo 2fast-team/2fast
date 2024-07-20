@@ -213,16 +213,30 @@ namespace Project2FA.UWP.Views
                 dialog.PrimaryButtonText = Strings.Resources.Confirm;
                 dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
                 await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+                // check for in app navigation parameters
                 if (!string.IsNullOrWhiteSpace(clickedLink))
                 {
-                    await ViewModel.NavigationService.NavigateAsync(clickedLink);
+                    if (!clickedLink.StartsWith("http"))
+                    {
+                        await ViewModel.NavigationService.NavigateAsync(clickedLink);
+                    }
                 }
 
-                // if a link is clicked, the dialog will be close
-                void Markdown_LinkClicked(object sender, LinkClickedEventArgs e)
+                // if a link is clicked, the dialog will be close for in app navigation parameters
+                async void Markdown_LinkClicked(object sender, LinkClickedEventArgs e)
                 {
                     clickedLink = e.Link;
-                    dialogService.CloseDialogs();
+                    if(clickedLink.StartsWith("http"))
+                    {
+                        if (Uri.TryCreate(e.Link, UriKind.Absolute, out Uri link))
+                        {
+                            await Launcher.LaunchUriAsync(link);
+                        }
+                    }
+                    else
+                    {
+                        dialogService.CloseDialogs();
+                    }
                 }
             }
 

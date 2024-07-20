@@ -52,7 +52,8 @@ namespace Project2FA.ViewModels
         {
             if (parameters.TryGetValue<List<KeyValuePair<string, string>>>("account", out var account))
             {
-
+                ParseQRCode(account);
+                PivotViewSelectionName = "NormalInputAccount";
             }
             OTPList.Clear();
         }
@@ -77,7 +78,6 @@ namespace Project2FA.ViewModels
                     FontIdentifikationCollection.Clear();
                     return Task.FromResult(false);
                 }
-
             }
             else
             {

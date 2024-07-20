@@ -17,6 +17,7 @@ using Project2FA.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using Template10.Services.Compression;
 using UNOversal;
 using UNOversal.DryIoc;
@@ -256,7 +257,7 @@ namespace Project2FA.UWP
             {
                 string content = protoLaunchActivated.Uri.ToString();
                 var parser = App.Current.Container.Resolve<IProject2FAParser>();
-                var cmdlist = parser.ParseCmdStr(content);
+                var cmdlist = parser.ParseCmdStr(HttpUtility.UrlDecode(content));
                 for (int i = 0; i < cmdlist.Count; i++)
                 {
                     if (cmdlist[i].Key == "startLogFileCmd")
@@ -272,20 +273,23 @@ namespace Project2FA.UWP
                             await ErrorDialogs.ShowLogNotFound();
                         }
                     }
-                    if (SettingsService.Instance.IsProVersion)
+                    if (Window.Current.Content is ShellPage shellpage && shellpage.MainFrame.Content is AccountCodePage)
                     {
-                        if (cmdlist[i].Key == "addAccount")
+                        if (SettingsService.Instance.IsProVersion)
                         {
-                            var accountParams = parser.ParseQRCodeStr(cmdlist[i].Value);
-                            if (accountParams.Count > 0 && accountParams[0].Value == "totp")
+                            if (cmdlist[i].Key == "addAccount")
                             {
-                                var dialog = new AddAccountContentDialog();
-                                var dialogParams = new DialogParameters();
-                                dialogParams.Add("account", accountParams);
-                                await this.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, dialogParams);
+                                var accountParams = parser.ParseQRCodeStr(cmdlist[i].Value);
+                                if (accountParams.Count > 0 && accountParams[0].Value == "totp")
+                                {
+                                    var dialog = new AddAccountContentDialog();
+                                    var dialogParams = new DialogParameters();
+                                    dialogParams.Add("account", accountParams);
+                                    await this.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, dialogParams);
+                                }
                             }
+                            break;
                         }
-                        break;
                     }
                 }
             }

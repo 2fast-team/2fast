@@ -15,8 +15,8 @@ using UNOversal.Services.Serialization;
 using UNOversal.Navigation;
 using UNOversal.Services.Dialogs;
 using Project2FA.Core;
-using Project2FA.Services.Logging;
-
+using UNOversal.Services.Logging;
+using Project2FA.Services;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -150,6 +150,14 @@ namespace Project2FA.ViewModels
 
         private async Task WebDAVLoginCommandTask()
         {
+            // TODO WebDAV authentication via WebView2
+//#if WINDOWS_UWP
+//            var dialog = new WebDAVAuthContentDialog();
+//            var dialogparams = new DialogParameters();
+//            dialogparams.Add("url", "https://SERVER/index.php/login/flow");
+//            await DialogService.ShowDialogAsync(dialog, dialogparams);
+
+//#endif
             await WebDAVLogin(true);
         }
 
@@ -188,7 +196,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(SetAndCreateLocalDatafile),exc);
 #endif

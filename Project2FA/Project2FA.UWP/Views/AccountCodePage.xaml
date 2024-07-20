@@ -110,7 +110,7 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <AppBarButton
+                                        <!--<AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
                                             IsEnabled="False"
@@ -128,7 +128,7 @@
                                                         Icon="Camera"/>
                                                 </MenuFlyout>
                                             </AppBarButton.Flyout>
-                                        </AppBarButton>
+                                        </AppBarButton>-->
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>
@@ -256,7 +256,7 @@
                                         <AdaptiveTrigger MinWindowWidth="0" />
                                     </VisualState.StateTriggers>
                                     <VisualState.Setters>
-                                        <Setter Target="ABB_ImportAccount.LabelPosition" Value="Collapsed"/>
+                                        <!--<Setter Target="ABB_ImportAccount.LabelPosition" Value="Collapsed"/>-->
                                         <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_SearchFilter.LabelPosition" Value="Collapsed"/>
@@ -267,7 +267,7 @@
                                 </VisualState>
                                 <VisualState x:Name="MediumState">
                                     <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="850" />
+                                        <AdaptiveTrigger MinWindowWidth="1120" />
                                     </VisualState.StateTriggers>
                                 </VisualState>
                             </VisualStateGroup>
@@ -330,7 +330,7 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <AppBarButton
+                                        <!--<AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
                                             Visibility="{x:Bind ShowAvailableProFeatures}"
@@ -342,7 +342,7 @@
                                                     <FontIcon Glyph="&#xE946;"/>
                                                 </StackPanel>
                                             </AppBarButton.Content>
-                                        </AppBarButton>
+                                        </AppBarButton>-->
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>
@@ -473,7 +473,7 @@
                                 </VisualState>
                                 <VisualState x:Name="MediumState">
                                     <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="850" />
+                                        <AdaptiveTrigger MinWindowWidth="1120" />
                                     </VisualState.StateTriggers>
                                 </VisualState>
                             </VisualStateGroup>

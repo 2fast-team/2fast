@@ -7,22 +7,25 @@ using Project2FA.Core.Services.NTP;
 using Project2FA.Helpers;
 using Project2FA.Repository.Database;
 using Project2FA.Services;
-using Project2FA.Services.Logging;
 using Project2FA.Services.Marketplace;
 using Project2FA.Services.Parser;
 using Project2FA.Services.Web;
+using Project2FA.Utils;
 using Project2FA.UWP.Services;
 using Project2FA.UWP.Views;
 using Project2FA.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using Template10.Services.Compression;
 using UNOversal;
 using UNOversal.DryIoc;
 using UNOversal.Ioc;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.File;
+using UNOversal.Services.Gesture;
+using UNOversal.Services.Logging;
 using UNOversal.Services.Network;
 using UNOversal.Services.Secrets;
 using UNOversal.Services.Serialization;
@@ -68,18 +71,18 @@ namespace Project2FA.UWP
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             TrackingManager.TrackExceptionUnhandled("UnobservedTaskException", e.Exception);
-            SettingsService.Instance.UnhandledExceptionStr += e.Exception.Message + "\n" + e.Exception.StackTrace + "\n"
+            SettingsService.Instance.UnhandledExceptionStr += e.Exception + "\n"
             + e.Exception.InnerException;
-            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception);
+            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception, SettingsService.Instance.LoggingSetting);
             // let the app crash...
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
             TrackingManager.TrackExceptionUnhandled(nameof(App_UnhandledException), e.Exception);
-            SettingsService.Instance.UnhandledExceptionStr += e.Message + "\n" + e.Exception.StackTrace + "\n"
+            SettingsService.Instance.UnhandledExceptionStr += e.Exception + "\n"
             + e.Exception.InnerException;
-            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception);
+            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception, SettingsService.Instance.LoggingSetting);
             // let the app crash...
         }
 
@@ -130,6 +133,7 @@ namespace Project2FA.UWP
             container.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
             container.RegisterDialog<ManageCategoriesContentDialog, ManageCategoriesContentDialogViewModel>();
             container.RegisterDialog<InAppPaymentContentDialog, InAppPaymentContentDialogViewModel>();
+            container.RegisterDialog<WebDAVAuthContentDialog, WebDAVAuthContentDialogViewModel>();
         }
 
         public override async Task OnStartAsync(IApplicationArgs args)
@@ -175,20 +179,37 @@ namespace Project2FA.UWP
                             {
                                 ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
                             }
+                            break;
                         }
-                        if (cmdlist[i].Key == "startLogFileCmd")
-                        {
-                            try
-                            {
-                                var file = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.LogName);
-                                // Launch the URI and pass in the recommended app
-                                var success = await Launcher.LaunchFileAsync(file);
-                            }
-                            catch (Exception)
-                            {
-
-                            }
-                        }
+                        //if (cmdlist[i].Key == "startLogFileCmd")
+                        //{
+                        //    try
+                        //    {
+                        //        var file = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.LogName);
+                        //        // Launch the URI and pass in the recommended app
+                        //        var success = await Launcher.LaunchFileAsync(file);
+                        //    }
+                        //    catch (Exception)
+                        //    {
+                        //        await ErrorDialogs.ShowLogNotFound();
+                        //    }
+                        //    break;
+                        //}
+                        //if (SettingsService.Instance.IsProVersion)
+                        //{
+                        //    if (cmdlist[i].Key == "addAccount")
+                        //    {
+                        //        var accountParams = parser.ParseQRCodeStr(cmdlist[i].Value);
+                        //        if (accountParams.Count > 0 && accountParams[0].Value == "totp")
+                        //        {
+                        //            var dialog = new AddAccountContentDialog();
+                        //            var dialogParams = new DialogParameters();
+                        //            dialogParams.Add("account", accountParams);
+                        //            await this.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, dialogParams);
+                        //        }
+                        //    }
+                        //    break;
+                        //}
                     }
                 }
 
@@ -236,7 +257,7 @@ namespace Project2FA.UWP
             {
                 string content = protoLaunchActivated.Uri.ToString();
                 var parser = App.Current.Container.Resolve<IProject2FAParser>();
-                var cmdlist = parser.ParseCmdStr(content);
+                var cmdlist = parser.ParseCmdStr(HttpUtility.UrlDecode(content));
                 for (int i = 0; i < cmdlist.Count; i++)
                 {
                     if (cmdlist[i].Key == "startLogFileCmd")
@@ -249,7 +270,25 @@ namespace Project2FA.UWP
                         }
                         catch (Exception)
                         {
-
+                            await ErrorDialogs.ShowLogNotFound();
+                        }
+                    }
+                    if (Window.Current.Content is ShellPage shellpage && shellpage.MainFrame.Content is AccountCodePage)
+                    {
+                        if (SettingsService.Instance.IsProVersion)
+                        {
+                            if (cmdlist[i].Key == "addAccount")
+                            {
+                                var accountParams = parser.ParseQRCodeStr(cmdlist[i].Value);
+                                if (accountParams.Count > 0 && accountParams[0].Value == "totp")
+                                {
+                                    var dialog = new AddAccountContentDialog();
+                                    var dialogParams = new DialogParameters();
+                                    dialogParams.Add("account", accountParams);
+                                    await this.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, dialogParams);
+                                }
+                            }
+                            break;
                         }
                     }
                 }
@@ -257,44 +296,6 @@ namespace Project2FA.UWP
 
             Window.Current.Activate();
         }
-
-        /// <summary>
-        /// Indexing the list of svg names in one json file, for development only
-        /// </summary>
-        /// <returns></returns>
-        //private async Task LoadIconNames()
-        //{
-        //    try
-        //    {
-        //        IFileService fileService = App.Current.Container.Resolve<IFileService>();
-        //        StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-        //        if (!await fileService.FileExistsAsync("IconNameCollection.json", localFolder))
-        //        {
-        //            string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-        //            string path = root + @"\Assets\AccountIcons";
-        //            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
-        //            var elements = await folder.GetFilesAsync();
-        //            System.Collections.Generic.List<Repository.Models.IconNameModel> iconList = new System.Collections.Generic.List<Repository.Models.IconNameModel>();
-        //            foreach (var item in elements)
-        //            {
-        //                iconList.Add(new Repository.Models.IconNameModel() { Name = item.DisplayName });
-        //            }
-        //            var iconCollectionModel = new Repository.Models.IconNameCollectionModel()
-        //            {
-        //                AppVersion = SystemInformation.Instance.ApplicationVersion.ToString(),
-        //                Collection = new System.Collections.ObjectModel.ObservableCollection<Repository.Models.IconNameModel>(iconList)
-        //            };
-        //            await fileService.WriteFileAsync("IconNameCollection.json", iconCollectionModel, localFolder);
-        //        }
-
-        //    }
-        //    catch (Exception exc)
-        //    {
-
-        //        throw;
-        //    }
-
-        //}
 
         #region AutoLogout
         /// <summary>

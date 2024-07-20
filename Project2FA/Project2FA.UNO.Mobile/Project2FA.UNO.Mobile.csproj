@@ -52,44 +52,44 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.1.240517-build.1048" />
-    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240517-build.1048" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240517-build.1048" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240517-build.1048" />
-    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240517-build.1048" />
-    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240517-build.1048" />
-	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
+    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.1.240606-rc" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240606-rc" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240606-rc" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240606-rc" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240606-rc" />
+    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240606-rc" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
-    <PackageReference Include="Svg.Skia" Version="1.0.0.18" />
+    <PackageReference Include="Svg.Skia" Version="1.0.0.19" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
-    <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="4.1.23" />
+    <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="4.1.28" />
     <PackageReference Include="Uno.Resizetizer" Version="1.4.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.0.24" />
     <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.0.24" />
-    <PackageReference Include="Uno.WinUI" Version="5.2.139" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.2.139" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.2.139" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.2.139" />
+    <PackageReference Include="Uno.WinUI" Version="5.2.175" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.2.175" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.2.175" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.2.175" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.2.139" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.2.175" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(TargetFramework)'=='net8.0-android'">
       <ItemGroup>
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.10.0.4" />
-		<PackageReference Include="Xamarin.AndroidX.Navigation.UI" Version="2.7.7.2" />
-		<PackageReference Include="Xamarin.AndroidX.Navigation.Fragment" Version="2.7.7.2" />
-		<PackageReference Include="Xamarin.AndroidX.Navigation.Runtime" Version="2.7.7.2" />
-		<PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.7.7.2" />
-		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.3" />
-		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.2" />
-        <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.1" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.UI" Version="2.7.7.5" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.Fragment" Version="2.7.7.5" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.Runtime" Version="2.7.7.5" />
+		<PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.7.7.5" />
+		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.6" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5" />
+        <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.37" />
       </ItemGroup>
       <ItemGroup>
         <AndroidEnvironment Include="Android/environment.conf" />

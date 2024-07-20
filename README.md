@@ -42,7 +42,7 @@ other installation method (not maintained by me)
 - Everything works locally
 	- No extra account, registration or login needed
 	- No Internet connection needed except for WebDAV use
-- Synchronisation via a WebDAV server (e.g. ownCloud or Nextcloud) as storage location [currently in Beta]
+- Synchronisation via a WebDAV server (e.g. ownCloud or Nextcloud) as storage location
 - Free for desktop OS / fee required for mobile OS
 - Open Source
 - Works on multiple platforms
@@ -60,8 +60,10 @@ other installation method (not maintained by me)
 
 <img src="https://i.postimg.cc/FzXQpK43/2fast-screenshot-1.png" alt="2fast Screenshot Login Screen" width="470" />  <img src="https://i.postimg.cc/zv7PhDXJ/2fast-screenshot-2.png" alt="2fast Screenshot Account Screen" width="464" />
 
-### Nominations
+## Nominations
 <a href='https://aka.ms/StoreAppAwardsWinners'><img width="720" alt="finalist_lock_up_light_on_dark_Utilities" src="https://user-images.githubusercontent.com/10946850/180846349-d0f8358d-5684-4616-92a0-5bc547087e42.png" width="250"></a>
+## Wiki
+See https://github.com/2fast-team/2fast/wiki
 
 ## Installation
 
@@ -94,8 +96,8 @@ The following steps will help if you want to contribute or work on the applicati
 	- Don't forget to select the *Mobile development with .NET* package in the installation process 
 	- .NET Multi-Platform App UI development
 - Windows 10, version >= `1809`, October update 2018 (for the universal Windows application)
-	- The latest Windows 10 SDK is required
-- Android, version >= 7.0 (for the Android application)
+	- The latest Windows 11 SDK is required
+- Android, version >= 10.0 (for the Android application)
 	- Remember to trust 3rd party Apps by enabling this in the Android developer settings if you want to build from source
 
 

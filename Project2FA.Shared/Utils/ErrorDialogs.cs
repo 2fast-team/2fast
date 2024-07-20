@@ -581,6 +581,9 @@ namespace Project2FA.Utils
                 Content = Strings.Resources.SettingsPageNoLogDialogContent,
                 PrimaryButtonText = Strings.Resources.Confirm
             };
+#if !WINDOWS_UWP
+                dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
 
             await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
         }

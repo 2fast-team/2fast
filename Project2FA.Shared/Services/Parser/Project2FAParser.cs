@@ -141,6 +141,7 @@ namespace Project2FA.Services.Parser
                         cmdStr = cmdStr.Remove(0, match.Groups[0].Length + 1); //remove //twofastauth://CATEGORY/set?
                         string isScreenCaptureEnabled;
                         string startLogFileCmd;
+                        string addAccount;
                         string collectionVar;
 
                         if (!string.IsNullOrEmpty(cmdStr))
@@ -160,6 +161,12 @@ namespace Project2FA.Services.Parser
                             {
                                 startLogFileCmd = collectionVar;
                                 cmdParams.Add(new KeyValuePair<string, string>(nameof(startLogFileCmd), startLogFileCmd));
+                            }
+                            collectionVar = nameValueCollection[nameof(addAccount)];
+                            if (!string.IsNullOrEmpty(collectionVar))
+                            {
+                                addAccount = cmdStr.Replace("addAccount=", string.Empty);
+                                cmdParams.Add(new KeyValuePair<string, string>(nameof(addAccount), addAccount));
                             }
                         }
                     }

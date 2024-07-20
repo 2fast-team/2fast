@@ -26,6 +26,7 @@ namespace Project2FA.ViewModels
     public class TutorialPageViewModel : ObservableObject, IInitialize
     {
         private int _selectedIndex = 0;
+        private int _maxIndex = 5;
         private bool _isTooltipOpen;
         private bool _isManualOpened;
         public ICommand BackButtonCommand;
@@ -101,15 +102,15 @@ namespace Project2FA.ViewModels
 
         public bool ForwardButtonVisible
         {
-            get => SelectedIndex < 4;
+            get => SelectedIndex < _maxIndex;
         }
         public bool SkipButtonVisible
         {
-            get => SelectedIndex < 4;
+            get => SelectedIndex < _maxIndex;
         }
         public bool FinishButtonVisible
         {
-            get => SelectedIndex == 4;
+            get => SelectedIndex == _maxIndex;
         }
         public bool IsManualOpened 
         {

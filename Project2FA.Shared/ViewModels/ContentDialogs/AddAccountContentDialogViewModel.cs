@@ -9,11 +9,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using Project2FA.Repository.Models;
 using Project2FA.Core.Utils;
-
-
-
-
-
+using System.Collections.Generic;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -54,6 +50,11 @@ namespace Project2FA.ViewModels
 
         public void Initialize(IDialogParameters parameters)
         {
+            if (parameters.TryGetValue<List<KeyValuePair<string, string>>>("account", out var account))
+            {
+                ParseQRCode(account);
+                PivotViewSelectionName = "NormalInputAccount";
+            }
             OTPList.Clear();
         }
 
@@ -77,7 +78,6 @@ namespace Project2FA.ViewModels
                     FontIdentifikationCollection.Clear();
                     return Task.FromResult(false);
                 }
-
             }
             else
             {

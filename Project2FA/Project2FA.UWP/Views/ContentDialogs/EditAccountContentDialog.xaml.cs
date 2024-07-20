@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using Project2FA.Extensions;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
@@ -12,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+using UNOversal.Extensions;
 
 namespace Project2FA.UWP.Views
 {

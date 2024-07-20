@@ -219,6 +219,9 @@
     <Compile Include="Views\UseDataFilePage.xaml.cs">
       <DependentUpon>UseDataFilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContentDialogs\WebDAVAuthContentDialog.xaml.cs">
+      <DependentUpon>WebDAVAuthContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
@@ -307,28 +310,28 @@
       <Version>2.4.0</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Labs.Uwp.TokenView">
-      <Version>0.1.240517-build.1678</Version>
+      <Version>0.1.240628-build.1693</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Animations">
-      <Version>8.1.240517-build.1048</Version>
+      <Version>8.1.240606-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Collections">
-      <Version>8.1.240517-build.1048</Version>
+      <Version>8.1.240606-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
-      <Version>8.1.240517-build.1048</Version>
+      <Version>8.1.240606-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
-      <Version>8.1.240517-build.1048</Version>
+      <Version>8.1.240606-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Extensions">
-      <Version>8.1.240517-build.1048</Version>
+      <Version>8.1.240606-rc</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Lottie">
       <Version>8.0.280225</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Media">
-      <Version>8.1.240517-build.1048</Version>
+      <Version>8.1.240606-rc</Version>
     </PackageReference>
     <PackageReference Include="DryIoc.dll">
       <Version>5.4.3</Version>
@@ -350,6 +353,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.8.6</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.2592.51</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
@@ -542,6 +548,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UseDataFilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentDialogs\WebDAVAuthContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

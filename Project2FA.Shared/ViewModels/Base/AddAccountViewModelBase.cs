@@ -29,9 +29,10 @@ using Project2FA.Core.Utils;
 using System.Web;
 using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
-using Project2FA.Services.Logging;
 using Prism.Ioc;
 using UNOversal.Navigation;
+using UNOversal.Services.Logging;
+
 
 
 
@@ -330,7 +331,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 await QRReadError();
             }
         }
@@ -576,9 +577,9 @@ namespace Project2FA.ViewModels
         /// Parses the QR code by splitting the different parts
         /// </summary>
         /// <returns>true if TOTP</returns>
-        private async Task<bool> ParseQRCode()
+        public async Task<bool> ParseQRCode(List<KeyValuePair<string, string>> accountValuePair = null)
         {
-            List<KeyValuePair<string, string>> valuePair = Project2FAParser.ParseQRCodeStr(_qrCodeStr);
+            List<KeyValuePair<string, string>> valuePair = accountValuePair == null ? Project2FAParser.ParseQRCodeStr(_qrCodeStr) : accountValuePair;
 
             if (valuePair.Count == 0)
             {

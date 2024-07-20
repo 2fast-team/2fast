@@ -241,15 +241,23 @@
     </Page.Resources>
 
     <Grid x:Name="MainGrid">
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush
                 ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
                 Stretch="UniformToFill" />
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        
+        <muxc:ParallaxView 
+                VerticalShift="50">
+            <toolkit:ImageEx 
+                    Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
+                    Stretch="UniformToFill" />
+        </muxc:ParallaxView>
+
         <StackPanel>
             <FlipView 
                 UseTouchAnimationsForAllNavigation="True"
@@ -385,6 +393,9 @@
                                 FontFamily="Calibri"
                                 TextWrapping="WrapWholeWords" 
                                 LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                            <Image 
+                                Margin="0,12,0,0"
+                                Source="/Assets/Images/appoverview.png"/>
                             <!--TutorialContentDialogHowTheAppWorks.Text-->
                             <!--<toolkit:MarkdownTextBlock 
                                 x:Uid="TutorialContentDialogFirstSteps"
@@ -408,38 +419,47 @@
                             </Border>
                         </Border>
                         <StackPanel Margin="12,12,12,0">
+                            <toolkit:MarkdownTextBlock 
+                                Margin="0,12,0,0"
+                                x:Uid="TutorialContentDialogCreateOrLoad"
+                                Text="~TutorialContentDialogCreateOrLoad.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords" 
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
                             <TextBlock 
-                            x:Uid="TutorialContentDialogCreateMethodHeader"
-                            Text="~TutorialContentDialogCreateMethodHeader.Text"
-                            FontSize="20"
-                            FontStretch="ExtraCondensed"
-                            FontFamily="Calibri"
-                            FontWeight="Bold"
-                            TextWrapping="WrapWholeWords"
-                            Margin="0,0,0,12"/>
+                                x:Uid="TutorialContentDialogCreateMethodHeader"
+                                Text="~TutorialContentDialogCreateMethodHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                FontWeight="Bold"
+                                TextWrapping="WrapWholeWords"
+                                Margin="0,0,0,12"/>
                             <TextBlock 
-                            x:Uid="TutorialContentDialogCreateMethod"
-                            Text="~TutorialContentDialogCreateMethod.Text"
-                            FontSize="20"
-                            FontStretch="ExtraCondensed"
-                            FontFamily="Calibri"
-                            TextWrapping="WrapWholeWords"/>
+                                x:Uid="TutorialContentDialogCreateMethod"
+                                Text="~TutorialContentDialogCreateMethod.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords"/>
                             <TextBlock 
-                            x:Uid="TutorialContentDialogLoadMethodHeader"
-                            Text="~TutorialContentDialogLoadMethodHeader.Text"
-                            FontSize="20"
-                            FontStretch="ExtraCondensed"
-                            FontFamily="Calibri"
-                            FontWeight="Bold"
-                            TextWrapping="WrapWholeWords"
-                            Margin="0,20,0,12"/>
+                                x:Uid="TutorialContentDialogLoadMethodHeader"
+                                Text="~TutorialContentDialogLoadMethodHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                FontWeight="Bold"
+                                TextWrapping="WrapWholeWords"
+                                Margin="0,20,0,12"/>
                             <TextBlock 
-                            x:Uid="TutorialContentDialogLoadMethod"
-                            Text="~TutorialContentDialogLoadMethod.Text"
-                            FontSize="20"
-                            FontStretch="ExtraCondensed"
-                            FontFamily="Calibri"
-                            TextWrapping="WrapWholeWords"/>
+                                x:Uid="TutorialContentDialogLoadMethod"
+                                Text="~TutorialContentDialogLoadMethod.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords"/>
                             <!--<Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />-->
                         </StackPanel>
                     </Grid>
@@ -524,6 +544,39 @@
                         </StackPanel>
                     </Grid>
                 </FlipViewItem>
+                <FlipViewItem>
+                    <Grid MaxWidth="760">
+                        <Border 
+                            ui:Effects.Shadow="{StaticResource PageShadow}" 
+                            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                            <Border>
+                                <Border.Background>
+                                    <media:BackdropBlurBrush Amount="2" />
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <StackPanel Margin="12,12,12,0">
+                            <TextBlock 
+                                x:Uid="TutorialContentDialogProFeatureHeader"
+                                Text="~TutorialContentDialogProFeatureHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                FontWeight="Bold"
+                                TextWrapping="WrapWholeWords"
+                                Margin="0,0,0,12"/>
+                            <toolkit:MarkdownTextBlock 
+                                x:Uid="TutorialContentDialogProFeature"
+                                Text="~TutorialContentDialogProFeature.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                TextWrapping="WrapWholeWords"
+                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+
+                        </StackPanel>
+                    </Grid>
+                </FlipViewItem>
             </FlipView>
         </StackPanel>
 
@@ -532,7 +585,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Grid.ColumnSpan="2" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+            <Border
+                Grid.ColumnSpan="2" 
+                Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                 <Border>
                     <Border.Background>
                         <media:BackdropBlurBrush Amount="2" />
@@ -595,7 +650,7 @@
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalContentAlignment="Bottom"
-            NumberOfPages="5"
+            NumberOfPages="6"
             SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
     </Grid>
 </Page>

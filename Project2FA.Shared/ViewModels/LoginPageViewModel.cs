@@ -14,8 +14,9 @@ using System.Threading;
 using Project2FA.Utils;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
-using Project2FA.Services.Logging;
 using UNOversal.Navigation;
+using UNOversal.Services.Logging;
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -206,7 +207,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                await LoggingService.LogException(exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 TrackingManager.TrackExceptionCatched(nameof(WindowsHelloLoginCommandTask), exc);
                 var dialog = new ContentDialog
                 {
@@ -248,7 +249,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                LoggingService.LogException(exc);
+                LoggingService.LogException(exc,SettingsService.Instance.LoggingSetting);
             }
            
 
@@ -312,7 +313,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                LoggingService.LogException(exc);
+                LoggingService.LogException(exc,SettingsService.Instance.LoggingSetting);
             }
             
         }

@@ -730,12 +730,14 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- New company logos have been added
-- Bug fixes
+    <value>- Bug fixes
 - Update of third-party libraries
-- Error logs are now documented and can be viewed or disabled in the settings
-- Implementation of categories and filters ([Pro function](SettingPage?PivotItem=2&amp;OpenInAppPayments=true))
-- Additional options for subscribing to/buying [in-app purchases](SettingPage?PivotItem=2&amp;OpenInAppPayments=true) to support the further development of the app</value>
+- Standard encryption has been strengthened
+- Dependence of the "Cut and Sketch" programme has been removed, QR codes are now read by system functions 
+- Error logs can now be opened externally by command: [Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
+- Tutorial has been improved and the Pro functions have been added
+- Settings can be controlled centrally via MDM: [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) (Pro function)
+- New accounts can now be added externally via command [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd) (Pro function)</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>New features &amp; changes</value>
@@ -810,7 +812,7 @@ Please synchronize the time in the settings.</value>
     <value>Close</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
-    <value>When selecting the QR code scan, a new window opens in which the programme containing the QR code to be scanned must be selected, for example the browser.</value>
+    <value>When the QR code scan is selected, a new window opens in which the programme containing the QR code to be scanned must be selected. This is the browser, for example.</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
     <value>Display QR code</value>
@@ -1062,7 +1064,7 @@ Please synchronize the time in the settings.</value>
     <value>Use file/image for import</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - two factor authenticator</value>
+    <value>2fast - two factor authenticator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Back</value>
@@ -1074,13 +1076,13 @@ Please synchronize the time in the settings.</value>
     <value>Skip</value>
   </data>
   <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
-    <value>finish tutorial</value>
+    <value>Finish tutorial</value>
   </data>
   <data name="NewDatafilePasswordInfo" xml:space="preserve">
     <value>A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.</value>
   </data>
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
-    <value>Passwort für die Verschlüsselung</value>
+    <value>Password for encryption</value>
   </data>
   <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
     <value>The key is copied to the clipboard.</value>
@@ -1111,9 +1113,6 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
     <value>Interaction options for accounts</value>
-  </data>
-  <data name="AddAccountContentDialogScreenclipNotFound" xml:space="preserve">
-    <value>The required system application "Snipping Tool" could not be found: https://apps.microsoft.com/store/detail/snipping-tool/9MZ95KL8MR0L</value>
   </data>
   <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
     <value>Access to the folder is blocked for the application, try again or select another folder.</value>
@@ -1178,7 +1177,7 @@ The storage of the setup keys for the various services in this application, unli
 The functionality of this application is explained in more detail in the following sections.</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
-    <value>Functionality of the application</value>
+    <value>**Functionality of the application**</value>
   </data>
   <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
     <value>Manage subscriptions</value>
@@ -1262,6 +1261,7 @@ The functionality of this application is explained in more detail in the followi
 Currently available:
 
 - Categories &amp; filter
+- Mobile Device Management (MDM)
 ***
 ### 34,99€ one-time</value>
   </data>
@@ -1270,6 +1270,7 @@ Currently available:
 Currently available:
 
 - Categories &amp; filter
+- Mobile Device Management (MDM)
 ***
 ### 6,49€ annually</value>
   </data>
@@ -1341,5 +1342,20 @@ Currently available:
   </data>
   <data name="SettingsMDMInfo.Text" xml:space="preserve">
     <value>*Some settings are managed by your organisation.</value>
+  </data>
+  <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
+    <value># Categories and filters
+User-defined categories can be created with an icon and assignments can be created for accounts. In the filter selection, filtering for accounts is possible based on the configuration. Filtering of accounts by category can also be further narrowed down using the standard search.
+
+![Categories and filters](ms-appx:///Assets/Images/categories_EN.png)
+
+# Enterprise App Management | Mobile Device Management (MDM)
+The application supports an MDM configuration for centralised management of the application in the company; for example, the automatic blocking of the application or the login screen can be configured centrally. The overview of the available configurations can be viewed in the [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+  </data>
+  <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
+    <value>Pro-Funktions</value>
+  </data>
+  <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
+    <value>![First steps](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
 </root>

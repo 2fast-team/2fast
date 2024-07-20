@@ -35,7 +35,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\SVGImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TOTPVisibilityTooltipConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\VisibleWhenFalseConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ApplicationThemeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
@@ -55,18 +54,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Logging\ILoggingService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Logging\LoggingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SerializationService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\LoggingPreferEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\Theme.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\BiometricPreferEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVDirectoryService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\WindowService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeWriter.cs" />
@@ -105,6 +100,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ShellPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TutorialPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UseDataFilePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\WebDAVAuthContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WelcomePageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +108,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Filled.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\FluentSystemIcons-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\SimpleIcons.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\appoverview.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\categories_DE.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\categories_EN.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\FileLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\firstSteps_DE.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\firstSteps_EN.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gift.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\give-love.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\LargeTile.scale-100.png" />

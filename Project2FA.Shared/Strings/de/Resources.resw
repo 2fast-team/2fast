@@ -733,12 +733,14 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Neue Unternehmens-Logos wurden hinzugefügt
-- Fehlerbehebungen
-- Aktualisierung von Drittanbieter-Bibliotheken
-- Fehlerprotokolle werden nun dokumentiert und können in den Einstellungen angesehen oder deaktiviert werden
-- Implementierung von Kategorien und Filter ([Pro-Funktion](SettingPage?PivotItem=2&amp;OpenInAppPayments=true))
-- Weitere Möglichkeiten zum abonnieren/kaufen der [In-App Käufe](SettingPage?PivotItem=2&amp;OpenInAppPayments=true) für die Unterstützung der Weiterentwicklung der App</value>
+    <value>- Fehlerbehebungen
+- Aktualisierung der Bibliotheken von Drittanbietern
+- Standardmäßge Verschlüsselung wurde verstärkt
+- Abhängigkeit des Programms "Ausschneiden und Skizzieren" wurde entfernt, das Lesen von QR-Codes erfolgt nun durch Systemfunktionen 
+- Fehlerprotokolle können nun extern per Befehl geöffnet werden: [Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
+- Tutorial wurde verbessert und um die Pro-Funktionen ergänzt
+- Einstellungen können zentral via MDM gesteuert werden: [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) (Pro-Funktion)
+- Neue Konten können nun extern per Befehl hinzugefügt werden [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd) (Pro-Funktion)</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -813,7 +815,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Schließen</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
-    <value>Bei der Wahl des QR-Code Scans öffnet ein neues Fenster, bei dem das Programm ausgewählt werden muss, das den einzulesenden QR-Code enthält, beispielsweise der Browser.</value>
+    <value>Bei der Wahl des QR-Code Scans öffnet sich ein neues Fenster, bei dem das Programm ausgewählt werden muss, das den einzulesenden QR-Code enthält. Dies ist beispielsweise der Browser.</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
     <value>QR-Code anzeigen</value>
@@ -1065,7 +1067,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
+    <value>2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>
@@ -1098,7 +1100,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Weitere Optionen</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
-    <value>Optional können Schlüssel versteckt und weider angezeigt werden</value>
+    <value>Optional können Schlüssel versteckt und eingeblendet werden</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
     <value>Schlüssel verstecken/anzeigen</value>
@@ -1114,9 +1116,6 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
     <value>Interaktionsmöglichkeiten für Konten</value>
-  </data>
-  <data name="AddAccountContentDialogScreenclipNotFound" xml:space="preserve">
-    <value>Die benötigte Systemanwendung „Ausschneiden und Skizzieren“ konnte nicht gefunden werden: https://apps.microsoft.com/store/detail/snipping-tool/9MZ95KL8MR0L</value>
   </data>
   <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
     <value>Der Zugriff auf den Ordner ist für die Anwendung gesperrt, probieren Sie es erneut, oder wählen Sie einen anderen Ordner.</value>
@@ -1170,7 +1169,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Tutorial aufrufen</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
-    <value>Die Funktionsweise für die [Authentizierung](https://de.wikipedia.org/wiki/Authentifizierung) des zweiten Faktors erfolgt mittels des zeitbasierten Einmalpasswortes. Hierfür wird zwischen dem Anmeldeserver des Dienstes und dem Anwender ein geheimer Einrichtungsschlüssel vereinbart, der lokal in der Anwendung gespeichert wird. Dies sorgt dafür, das wenn der Einrichtungsschlüssel vereinbart wurde, die Anwendung immer offline betrieben werden kann.
+    <value>Die Funktionsweise für die [Authentifizierung](https://de.wikipedia.org/wiki/Authentifizierung) des zweiten Faktors erfolgt mittels des zeitbasierten Einmalpasswortes. Hierfür wird zwischen dem Anmeldeserver des Dienstes und dem Anwender ein geheimer Einrichtungsschlüssel vereinbart, der lokal in der Anwendung gespeichert wird. Dies sorgt dafür, das wenn der Einrichtungsschlüssel vereinbart wurde, die Anwendung immer offline betrieben werden kann.
 
 
 
@@ -1265,6 +1264,7 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
 Derzeit verfügbar:
 
 - Kategorien &amp; Filter
+- Mobile Device Management (MDM)
 ***
 ### 34,99€ einmalig</value>
   </data>
@@ -1273,6 +1273,7 @@ Derzeit verfügbar:
 Derzeit verfügbar:
 
 - Kategorien &amp; Filter
+- Mobile Device Management (MDM)
 ***
 ### 6,49€ jährlich</value>
   </data>
@@ -1344,5 +1345,20 @@ Derzeit verfügbar:
   </data>
   <data name="SettingsMDMInfo.Text" xml:space="preserve">
     <value>*Einige Einstellungen werden von Ihrer Organisation verwaltet.</value>
+  </data>
+  <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
+    <value># Kategorien und Filter
+Es können benutzerdefinierte Kategorien mit einem Icon angelegt werden und Zuordnungen für Konten erstellt werden. In der Auswahl der Filter sind auf Basis der Konfiguration Filterungen für Konten möglich. Betätigte Filterungen der Konten durch die Kategorien, können desweitern durch die standardmäßige Suche weiter eingegrenzt werden.
+
+![Kategorien und Filter](ms-appx:///Assets/Images/categories_DE.png)
+
+# Enterprise App Management | Mobile Device Management (MDM)
+Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwendung eine MDM-Konfiguration, so kann Beispielsweise die automatische Sperrung der Anwendung, oder das Anmeldebild zentral konfiguriert werden. Die Übersicht der verfügbaren Konfigurationen kann im [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) eingesehen werden.</value>
+  </data>
+  <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
+    <value>Pro-Funktionen</value>
+  </data>
+  <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
+    <value>![Erste Schritte](ms-appx:///Assets/Images/firstSteps_DE.png)</value>
   </data>
 </root>

@@ -67,8 +67,12 @@ namespace Project2FA.ViewModels
                     {
                         return true;
                     }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                return false;
+                return true;
             }
         }
 

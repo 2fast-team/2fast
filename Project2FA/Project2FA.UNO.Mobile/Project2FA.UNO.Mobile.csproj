@@ -58,25 +58,25 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240606-rc" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240606-rc" />
     <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240606-rc" />
-	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
-    <PackageReference Include="Svg.Skia" Version="1.0.0.19" />
+    <PackageReference Include="Svg.Skia" Version="2.0.0" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
-    <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="4.1.28" />
-    <PackageReference Include="Uno.Resizetizer" Version="1.4.10">
+    <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="4.2.2" />
+    <PackageReference Include="Uno.Resizetizer" Version="1.5.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.0.24" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.0.24" />
-    <PackageReference Include="Uno.WinUI" Version="5.2.175" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.2.175" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.2.175" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.2.175" />
+    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.1.8" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.1.8" />
+    <PackageReference Include="Uno.WinUI" Version="5.3.90" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.3.90" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.3.90" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.3.90" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.2.175" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.3.90" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>

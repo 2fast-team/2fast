@@ -243,7 +243,6 @@
                                 </labs:TokenView.ItemTemplate>
                             </labs:TokenView>
                         </StackPanel>
-
                     </Grid>
 
                 </appcontrols:CardExpanderControl>

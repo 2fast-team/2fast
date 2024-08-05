@@ -127,7 +127,6 @@
             <!--CornerRadius="{ThemeResource OverlayCornerRadius}"-->
             <StackPanel 
                     x:Name="MainStackPanel"
-                    MaxWidth="320" 
                     MinHeight="500" 
 >
                 <mstoolkitControls:ImageEx 
@@ -135,12 +134,13 @@
                         MaxHeight="150" 
                         Margin="0,30,0,10"/>
                 <PasswordBox 
-                        x:Uid="LoginPagePassword"    
-                        Header="~LoginPagePassword.Header" 
-                        PlaceholderText="~LoginPagePassword.PlaceholderText" 
-                        Password="{x:Bind ViewModel.Password,Mode=TwoWay}" 
-                        Margin="0,5,0,10" 
-                        KeyDown="LoginKeydownCheckEnterSubmit" 
+                        x:Uid="LoginPagePassword"
+                        MaxWidth="360"
+                        Header="~LoginPagePassword.Header"
+                        PlaceholderText="~LoginPagePassword.PlaceholderText"
+                        Password="{x:Bind ViewModel.Password,Mode=TwoWay}"
+                        Margin="0,5,0,10"
+                        KeyDown="LoginKeydownCheckEnterSubmit"
                         InputScope="Password" />
                 <StackPanel 
                         x:Name="SP_LoginBTNs"

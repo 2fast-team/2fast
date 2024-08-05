@@ -30,6 +30,7 @@ namespace Project2FA.ViewModels
     public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
         public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
+        public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
 
         /// <summary>
         /// Constructor
@@ -56,6 +57,14 @@ namespace Project2FA.ViewModels
                 PivotViewSelectionName = "NormalInputAccount";
             }
             OTPList.Clear();
+            if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
+            {
+                GlobalTempCategories.Clear();
+                for (int i = 0; i < DataService.Instance.GlobalCategories.Count; i++)
+                {
+                    GlobalTempCategories.Add((CategoryModel)DataService.Instance.GlobalCategories[i].Clone());
+                }
+            }
         }
 
         public Task<bool> SearchAccountFonts(string senderText)
@@ -85,5 +94,27 @@ namespace Project2FA.ViewModels
                 return Task.FromResult(false);
             }
         }
+
+        public bool NoCategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count == 0;
+            }
+        }
+
+        public bool CategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count > 0;
+            }
+        }
+#if WINDOWS_UWP
+        public bool IsProVersion
+        {
+            get => SettingsService.Instance.IsProVersion;
+        }
+#endif
     }
 }

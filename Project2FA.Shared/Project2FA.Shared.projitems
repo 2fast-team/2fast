@@ -176,6 +176,8 @@
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\es\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\fr\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\schluessel.svg" />

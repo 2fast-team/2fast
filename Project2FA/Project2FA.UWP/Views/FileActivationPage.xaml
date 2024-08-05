@@ -127,7 +127,6 @@
             </Border>
             <StackPanel 
                     x:Name="MainStackPanel"
-                    MaxWidth="400" 
                     MinHeight="500" 
 >
                 <mstoolkitControls:ImageEx 
@@ -137,6 +136,7 @@
                 <TextBlock Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" FontSize="24"/>
                 <PasswordBox
                         x:Uid="LoginPagePassword"
+                        MaxWidth="360"
                         Header="~LoginPagePassword.Header" 
                         PlaceholderText="~LoginPagePassword.PlaceholderText" 
                         Password="{x:Bind ViewModel.Password,Mode=TwoWay}" 

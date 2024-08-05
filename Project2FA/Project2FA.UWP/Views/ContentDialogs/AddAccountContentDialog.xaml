@@ -15,6 +15,7 @@
     xmlns:utils="using:Project2FA.UWP.Utils"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     x:Uid="AddAccountContentDialog"
@@ -500,6 +501,67 @@
                                         PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
                                 </Interactivity:Interaction.Behaviors>-->
                             </TextBox>
+
+                            <appcontrols:CardExpanderControl
+                    Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                    IsExpanded="True"
+                    Margin="0,15,0,8">
+                                <appcontrols:CardExpanderControl.Header>
+                                    <appcontrols:CardControl
+                                        Icon="&#xE912;"
+                                        x:Uid="EditAccountContentDialogAccountCategories" 
+                                        Header="~EditAccountContentDialogAccountCategories.Header">
+                                        <appcontrols:CardControl.ActionContent>
+                                            <Button
+                                    Grid.Column="1"
+                                    Height="36"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    Style="{StaticResource TransparentButtonStyle}"
+                                    x:Name="BTN_Cateory_Help"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp,FallbackValue=''}"
+                                    VerticalAlignment="Bottom" 
+                                    Click="HLBTN_CategoryInfo" >
+                                                <FontIcon
+                                        FontSize="20"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE946;"/>
+                                            </Button>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
+                                </appcontrols:CardExpanderControl.Header>
+                                <Grid>
+                                    <TextBlock 
+                            Visibility="{x:Bind ViewModel.NoCategoriesExists,Mode=OneWay}"
+                            x:Uid="EditAccountContentDialogAccountNoCategoryInfo"
+                            Margin="8,8,8,0" 
+                            TextWrapping="WrapWholeWords"
+                            Text="~EditAccountContentDialogAccountNoCategoryInfo.Text"/>
+                                    <StackPanel >
+                                        <labs:TokenView 
+                                x:Name="TV_Categories"
+                                Margin="0,15,0,8"
+                                Visibility="{x:Bind ViewModel.CategoriesExists,Mode=OneWay}"
+                                ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
+                                IsItemClickEnabled="True"
+                                SelectionMode="Multiple" 
+                                ItemClick="TokenView_ItemClick">
+                                            <labs:TokenView.ItemTemplate>
+                                                <DataTemplate x:DataType="models:CategoryModel">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <FontIcon 
+                   FontFamily="{StaticResource SegoeFluentIconsFilled}"
+                   Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"
+                   Margin="0,0,10,0"/>
+                                                        <TextBlock Text="{x:Bind Name,Mode=OneWay}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </labs:TokenView.ItemTemplate>
+                                        </labs:TokenView>
+                                    </StackPanel>
+                                </Grid>
+
+                            </appcontrols:CardExpanderControl>
 
                             <!--<ctwc:SettingsExpander
                                 HeaderIcon="{ui:FontIcon Glyph=&#xEF58;}"

@@ -16,6 +16,8 @@
     xmlns:wctmedia="using:CommunityToolkit.WinUI.Media"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:Project2FA.Helpers"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     x:Name="Page"
     mc:Ignorable="d">
 
@@ -1049,7 +1051,13 @@
             </Flyout>-->
         </ResourceDictionary>
     </Page.Resources>
-    
+
+    <!--<interactivity:Interaction.Behaviors>
+        <behaviors:FocusBehavior>
+            <behaviors:FocusTarget Control="{x:Bind LV_AccountCollection}" />
+        </behaviors:FocusBehavior>
+    </interactivity:Interaction.Behaviors>-->
+
     <Grid 
         x:Name="MainGrid"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

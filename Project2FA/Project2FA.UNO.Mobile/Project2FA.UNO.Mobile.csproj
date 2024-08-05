@@ -52,14 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.1.240606-rc" />
-    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240606-rc" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240606-rc" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240606-rc" />
-    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240606-rc" />
-    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240606-rc" />
-	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
+    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.1.240709-build.1082" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240709-build.1082" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240709-build.1082" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240709-build.1082" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240709-build.1082" />
+    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240709-build.1082" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Svg.Skia" Version="2.0.0" />
@@ -71,12 +71,12 @@
     </PackageReference>
     <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.1.8" />
     <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.1.8" />
-    <PackageReference Include="Uno.WinUI" Version="5.3.90" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.3.90" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.3.90" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.3.90" />
+    <PackageReference Include="Uno.WinUI" Version="5.3.114" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.3.114" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.3.114" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.3.114" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.3.90" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.3.114" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>
@@ -149,10 +149,4 @@
     <ProjectReference Include="..\..\Project2FA.UNO.MauiControls\Project2FA.UNO.MauiControls.csproj" />
     <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
   </ItemGroup>
-
-	<!--<Target Name="UpdateRuntimePackVersion" BeforeTargets="ProcessFrameworkReferences">
-		<ItemGroup>
-			<KnownRuntimePack Condition="%(RuntimePackLabels) == 'Mono'" LatestRuntimeFrameworkVersion="8.0.0" />
-		</ItemGroup>
-	</Target>-->
 </Project>

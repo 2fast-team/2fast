@@ -19,6 +19,8 @@ using Project2FA.Utils;
 using CommunityToolkit.Mvvm.Collections;
 using Windows.System;
 using UNOversal.Services.Logging;
+using Windows.Globalization;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
@@ -229,6 +231,19 @@ namespace Project2FA.ViewModels
             //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values["AutoLogoutMinutes"] = "5";
             //    ApplicationData.Current.LocalSettings.Containers[Constants.EnterpriseAppManagementContainer].Values["LoginScreenWallpaper"] = string.Empty;
             //}
+
+            // DEBUG languages
+            //var resourceContext = Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView();
+            //for (int i = 0; i < resourceContext.Languages.Count; i++)
+            //{
+            //    if (resourceContext.Languages[i].ToLower().StartsWith("fr"))
+            //    {
+            //        ApplicationLanguages.PrimaryLanguageOverride = "fr";
+            //        Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().Reset();
+            //        Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();
+            //    }
+            //}
+            //resourceContext.Languages
 #endif
         }
 

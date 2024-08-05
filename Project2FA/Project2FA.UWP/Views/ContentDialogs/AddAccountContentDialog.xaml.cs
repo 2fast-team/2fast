@@ -259,5 +259,15 @@ namespace Project2FA.UWP.Views
                 FlyoutBase.ShowAttachedFlyout(btn);
             }
         }
+
+        private void HLBTN_CategoryInfo(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TokenView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }

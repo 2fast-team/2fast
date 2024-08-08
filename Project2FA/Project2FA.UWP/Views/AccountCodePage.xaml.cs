@@ -17,6 +17,8 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class AccountCodePage : Page
     {
+        private bool _menuKeyPressed = false;
+        private string _tempNumber = string.Empty;
         AccountCodePageViewModel ViewModel => DataContext as AccountCodePageViewModel;
 
         public AccountCodePage()
@@ -36,6 +38,8 @@ namespace Project2FA.UWP.Views
             {
                 App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
             }
+            //App.ShellPageInstance.ShellViewInternal.Focus(FocusState.Unfocused);
+
         }
 
         /// <summary>
@@ -167,6 +171,75 @@ namespace Project2FA.UWP.Views
                     }
                 }
             }
+            if (e.KeyStatus.IsMenuKeyDown)
+            {
+                if ((int)e.Key >= 96 && (int)e.Key <= 105)
+                {
+                    switch (e.Key)
+                    {
+                        case Windows.System.VirtualKey.NumberPad0:
+                        case Windows.System.VirtualKey.Number0:
+                            _tempNumber += "0";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad1:
+                        case Windows.System.VirtualKey.Number1:
+                            _tempNumber += "1";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad2:
+                        case Windows.System.VirtualKey.Number2:
+                            _tempNumber += "2";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad3:
+                        case Windows.System.VirtualKey.Number3:
+                            _tempNumber += "3";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad4:
+                        case Windows.System.VirtualKey.Number4:
+                            _tempNumber += "4";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad5:
+                        case Windows.System.VirtualKey.Number5:
+                            _tempNumber += "5";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad6:
+                        case Windows.System.VirtualKey.Number6:
+                            _tempNumber += "6";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad7:
+                        case Windows.System.VirtualKey.Number7:
+                            _tempNumber += "7";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad8:
+                        case Windows.System.VirtualKey.Number8:
+                            _tempNumber += "8";
+                            break;
+                        case Windows.System.VirtualKey.NumberPad9:
+                        case Windows.System.VirtualKey.Number9:
+                            _tempNumber += "9";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(_tempNumber))
+                {
+                    if (int.TryParse(_tempNumber, out int result))
+                    {
+                        if (result != 0 && result <= ViewModel.TwoFADataService.Collection.Count)
+                        {
+                            ViewModel.SelectedIndex = result - 1;
+                        }
+                        _tempNumber = string.Empty;
+                    }
+                    else
+                    {
+                        _tempNumber = string.Empty;
+                    }
+                }
+            }
         }
 
         private void ABB_SearchFilter_Click(object sender, RoutedEventArgs e)
@@ -191,6 +264,12 @@ namespace Project2FA.UWP.Views
         private void HLBTN_ProFeature(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void MainGrid_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            //LV_AccountCollection.Focus(FocusState.Keyboard);
+            //LV_AccountCollection.Focus(FocusState.Programmatic);
         }
     }
 }

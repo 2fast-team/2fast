@@ -54,8 +54,9 @@
             </toolkitcontrols:SettingsCard>-->
 
                 <controls:SettingsCard 
-                x:Uid="SettingsAppThemeMode"
-                Header="~SettingsAppThemeMode.Header">
+                    x:Uid="SettingsAppThemeMode"
+                    Header="~SettingsAppThemeMode.Header"
+                    ios:Style="{StaticResource SettingsCardiOSStyle}">
                     <controls:SettingsCard.Description>
                         <HyperlinkButton
                         x:Uid="SettingsWindowsColor"
@@ -76,8 +77,9 @@
                 </controls:SettingsCard>
 
                 <controls:SettingsCard 
-                x:Uid="SettingsAppCornorRadius"
-                Header="~SettingsAppCornorRadius.Header">
+                    x:Uid="SettingsAppCornorRadius"
+                    Header="~SettingsAppCornorRadius.Header"
+                    ios:Style="{StaticResource SettingsCardiOSStyle}">
                     <controls:SettingsCard.Description>
                         <TextBlock 
                         x:Uid="SettingsAppCornorRadiusDesc"
@@ -129,7 +131,8 @@
 
                 <controls:SettingsCard
                     x:Uid="SettingsPreferHiddenTOTP"
-                    Header="~SettingsPreferHiddenTOTP.Header" >
+                    Header="~SettingsPreferHiddenTOTP.Header"
+                    ios:Style="{StaticResource SettingsCardiOSStyle}">
                     <controls:SettingsCard.Description>
                         <TextBlock 
                         x:Uid="SettingsPreferHiddenTOTPDesc"
@@ -149,9 +152,10 @@
                 </controls:SettingsCard>
 
                 <controls:SettingsCard
-                x:Uid="SettingsOptionsFactoryReset"
-                HeaderIcon="{ui:FontIcon Glyph=&#xE74D;}"
-                Header="~SettingsOptionsFactoryReset.Header">
+                    x:Uid="SettingsOptionsFactoryReset"
+                    HeaderIcon="{ui:FontIcon Glyph=&#xE74D;}"
+                    Header="~SettingsOptionsFactoryReset.Header"
+                    ios:Style="{StaticResource SettingsCardiOSStyle}">
                     <controls:SettingsCard.Description>
                         <TextBlock 
                         x:Uid="SettingsOptionsFactoryResetDesc"
@@ -171,9 +175,10 @@
                 </controls:SettingsCard>
 
                 <controls:SettingsCard 
-                x:Uid="SettingsAppLoggingMode"
-                HeaderIcon="{ui:FontIcon Glyph=&#xEADF;}"
-                Header="~SettingsAppLoggingMode.Header">
+                    x:Uid="SettingsAppLoggingMode"
+                    HeaderIcon="{ui:FontIcon Glyph=&#xEADF;}"
+                    Header="~SettingsAppLoggingMode.Header"
+                    ios:Style="{StaticResource SettingsCardiOSStyle}">
                     <controls:SettingsCard.Description>
                         <HyperlinkButton
                                 x:Uid="SettingsOpenLogBTN"

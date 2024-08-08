@@ -118,1244 +118,1247 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountCodePageAddEntry.Label" xml:space="preserve">
-    <value>Add account</value>
+    <value>添加账户</value>
   </data>
   <data name="AccountCodePageCopied" xml:space="preserve">
-    <value>Copied to clipboard</value>
+    <value>复制到剪贴板</value>
   </data>
   <data name="AccountCodePageDeleteEntry.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value>删除</value>
   </data>
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
-    <value>Edit</value>
+    <value>编辑</value>
   </data>
   <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
-    <value>Show options</value>
+    <value>显示选项</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
-    <value>Reload datafile</value>
+    <value>重新加载数据文件</value>
   </data>
   <data name="AccountCodePageViewModelDeleteAccept" xml:space="preserve">
-    <value>Yes</value>
+    <value>是</value>
   </data>
   <data name="AccountCodePageViewModelDeleteCancel" xml:space="preserve">
-    <value>No</value>
+    <value>没有</value>
   </data>
   <data name="DeleteDatafileContentDialogDeleteDescription" xml:space="preserve">
-    <value>Are you sure that you want to delete this account irrevocably?</value>
+    <value>您确定要不可撤销地删除此帐户吗？</value>
   </data>
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
-    <value>Confirm deletion</value>
+    <value>确认删除</value>
   </data>
   <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
-    <value>Copy code</value>
+    <value>复制代码</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="AddAccountContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Create account</value>
+    <value>创建账户</value>
   </data>
   <data name="AddAccountContentDialog.Title" xml:space="preserve">
-    <value>Create a new account</value>
+    <value>创建新账户</value>
   </data>
   <data name="AddAccountContentDialogAccountName.Header" xml:space="preserve">
-    <value>Account name</value>
+    <value>账户名称</value>
   </data>
   <data name="AddAccountContentDialogAccountName.PlaceholderText" xml:space="preserve">
-    <value>Mostly mail address</value>
+    <value>主要是邮件地址</value>
   </data>
   <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
-    <value>To create a new account for the two-factor-authentification you need a QR-code or a key (cryptical text) from the external service.
+    <value>要为双因素身份验证创建新账户，您需要一个 QR 码或来自外部服务的密钥（加密文本）。
 
-# How should the key be imported?
+# 如何导入密钥？
 </value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
-    <value>Inputs</value>
+    <value>输入</value>
   </data>
   <data name="AddAccountContentDialogInputType.Header" xml:space="preserve">
-    <value>Input type</value>
+    <value>输入类型</value>
   </data>
   <data name="AddAccountContentDialogLabel.Header" xml:space="preserve">
-    <value>Label</value>
+    <value>标签</value>
   </data>
   <data name="AddAccountContentDialogLabel.PlaceholderText" xml:space="preserve">
-    <value>Name to be displayed</value>
+    <value>要显示的名称</value>
   </data>
   <data name="AddAccountContentDialogManualInput.Text" xml:space="preserve">
-    <value>Manual input</value>
+    <value>手动输入</value>
   </data>
   <data name="AddAccountContentDialogManualInputCheckbox.Content" xml:space="preserve">
-    <value>Manual input</value>
+    <value>手动输入</value>
   </data>
   <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
-    <value>Can't get information from QR code. Please try again or add the secret key manually.</value>
+    <value>无法从 QR 码中获取信息。请重试或手动添加秘钥。</value>
   </data>
   <data name="AddAccountContentDialogReadQRCode.Text" xml:space="preserve">
-    <value>Scan key-QR-code</value>
+    <value>扫描关键 QR 代码</value>
   </data>
   <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo" xml:space="preserve">
-    <value>A scan tool will open soon</value>
+    <value>扫描工具即将打开</value>
   </data>
   <data name="AddAccountContentDialogReadQRCodeTip.Title" xml:space="preserve">
-    <value>Switch to the QR-code</value>
+    <value>切换到 QR 码</value>
   </data>
   <data name="AddAccountContentDialogSecretKey.Header" xml:space="preserve">
-    <value>Secret key</value>
+    <value>密匙</value>
   </data>
   <data name="AddAccountContentDialogSecretKey.PlaceholderText" xml:space="preserve">
-    <value>Please add secret key string here</value>
+    <value>请在此处添加秘钥字符串</value>
   </data>
   <data name="BTNConfirm.Content" xml:space="preserve">
-    <value>Confirm</value>
+    <value>确认</value>
   </data>
   <data name="BTNTryAgain.Content" xml:space="preserve">
-    <value>Try again</value>
+    <value>再试一次</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header" xml:space="preserve">
-    <value>Local Datafile</value>
+    <value>本地数据文件</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogIntroText.Text" xml:space="preserve">
-    <value>In this dialog you can change the password of the current used data file.</value>
+    <value>在此对话框中可以更改当前使用的数据文件的密码。</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Change password</value>
+    <value>更改密码</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.Title" xml:space="preserve">
-    <value>Change datafile password</value>
+    <value>更改数据文件密码</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogPasswordError.Text" xml:space="preserve">
-    <value>The entered password is not correct.</value>
+    <value>输入的密码不正确。</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>确认</value>
   </data>
   <data name="CurrentPassword.Header" xml:space="preserve">
-    <value>Current password</value>
+    <value>当前密码</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>删除</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>编辑</value>
   </data>
   <data name="EditAccountContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Confirm</value>
+    <value>确认</value>
   </data>
   <data name="EditAccountContentDialog.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="EditAccountContentDialog.Title" xml:space="preserve">
-    <value>Edit account</value>
+    <value>编辑账户</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>错误</value>
   </data>
   <data name="LoginPageLoginButton.Content" xml:space="preserve">
-    <value>Login</value>
+    <value>登录</value>
   </data>
   <data name="LoginPageLoginWindowsHelloButton.Content" xml:space="preserve">
-    <value>Login with Windows Hello</value>
+    <value>使用 Windows Hello 登录</value>
+    <comment>[ReswT:manually]</comment>
   </data>
   <data name="LoginPagePassword.Header" xml:space="preserve">
-    <value>Password</value>
+    <value>密码</value>
   </data>
   <data name="LoginPagePassword.PlaceholderText" xml:space="preserve">
-    <value>Input password</value>
+    <value>输入密码</value>
   </data>
   <data name="LoginPagePasswordMismatch" xml:space="preserve">
-    <value>The password doesn't match the password of the data file.</value>
+    <value>密码与数据文件的密码不匹配。</value>
   </data>
   <data name="NewDatafileContentDialogChangePath.Content" xml:space="preserve">
-    <value>Change path</value>
+    <value>改变路径</value>
   </data>
   <data name="NewDatafileContentDialogCreateInfo.Text" xml:space="preserve">
-    <value>To create a datafile you have to choose a name and a password.
-Important: You have to type in the password everytime you start the app!</value>
+    <value>要创建数据文件，您必须选择名称和密码。
+重要提示：每次启动应用程序时都必须输入密码！</value>
   </data>
   <data name="NewDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
-    <value>Datafile</value>
+    <value>数据文件</value>
   </data>
   <data name="NewDatafileContentDialogLocalFolder.Header" xml:space="preserve">
-    <value>Filename</value>
+    <value>文件名</value>
   </data>
   <data name="NewDatafileContentDialogLocalFolder.PlaceholderText" xml:space="preserve">
-    <value>for example data file</value>
+    <value>例如数据文件</value>
   </data>
   <data name="NewDatafileContentDialogLocalPath.Text" xml:space="preserve">
-    <value>Choose local path</value>
+    <value>选择本地路径</value>
   </data>
   <data name="NewDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="NewDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Create data file</value>
+    <value>创建数据文件</value>
   </data>
   <data name="NewDatafileContentDialogMain.Title" xml:space="preserve">
-    <value>Create data file</value>
+    <value>创建数据文件</value>
   </data>
   <data name="NewDatafileContentDialogPath.Header" xml:space="preserve">
-    <value>Path</value>
+    <value>路径</value>
   </data>
   <data name="NewDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
-    <value>Storage</value>
+    <value>存储</value>
   </data>
   <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>Choose WebDAV</value>
+    <value>选择 WebDAV</value>
   </data>
   <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>
   </data>
   <data name="NewDatafileLocalFolder.Header" xml:space="preserve">
-    <value>Filename</value>
+    <value>文件名</value>
   </data>
   <data name="NewDatafileLocalFolder.PlaceholderText" xml:space="preserve">
-    <value>Enter filename</value>
+    <value>输入文件名</value>
   </data>
   <data name="NewDatefileContentDialogFolderName.Header" xml:space="preserve">
-    <value>Foldername</value>
+    <value>文件夹名称</value>
   </data>
   <data name="NewLocalDatafileInfo.Text" xml:space="preserve">
-    <value>To use this app you have to create a data file one time. All accounts will be stored encrypted in this file.
-If you plan to use this application on several devices it makes sense to store this file on an external storage (e. g. cloud).</value>
+    <value>要使用此应用程序，您必须创建一个数据文件。所有账户都将加密存储在该文件中。
+如果您计划在多台设备上使用此应用程序，最好将此文件存储在外部存储器（如云）中。</value>
   </data>
   <data name="NewPasswordContentDialog.Header" xml:space="preserve">
-    <value>New password</value>
+    <value>新密码</value>
   </data>
   <data name="NewPasswordRepeatContentDialog.Header" xml:space="preserve">
-    <value>Repeat new password</value>
+    <value>重复新密码</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>没有</value>
   </data>
   <data name="Password.Header" xml:space="preserve">
-    <value>Password</value>
+    <value>密码</value>
   </data>
   <data name="Password.PlaceholderText" xml:space="preserve">
-    <value>Input password</value>
+    <value>输入密码</value>
   </data>
   <data name="PasswordRepeat.Header" xml:space="preserve">
-    <value>Repeat password</value>
+    <value>重复密码</value>
   </data>
   <data name="PasswordRepeat.PlaceholderText" xml:space="preserve">
-    <value>input password</value>
+    <value>输入密码</value>
   </data>
   <data name="SettingsActionRequiredRestart" xml:space="preserve">
-    <value>This change will take effect after restart of the app.</value>
+    <value>此更改将在重新启动应用程序后生效。</value>
   </data>
   <data name="SettingsBackButtonCard.Header" xml:space="preserve">
-    <value>Placement of back button</value>
+    <value>后退按钮的位置</value>
   </data>
   <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
-    <value>In the navigation menu</value>
+    <value>在导航菜单中</value>
   </data>
   <data name="SettingsBackButtonToggleSwtich.OnContent" xml:space="preserve">
-    <value>In the title bar</value>
+    <value>在标题栏中</value>
   </data>
   <data name="SettingsChangePassword.Text" xml:space="preserve">
-    <value>Change Password</value>
+    <value>更改密码</value>
   </data>
   <data name="SettingsDatafileFilePath.Text" xml:space="preserve">
-    <value>Data file path:</value>
+    <value>数据文件路径：</value>
   </data>
   <data name="SettingsDatafileName.Text" xml:space="preserve">
-    <value>Data file name:</value>
+    <value>数据文件名：</value>
   </data>
   <data name="SettingsDatafileTitle.Text" xml:space="preserve">
-    <value>Information about the current used datafile</value>
+    <value>关于当前使用的数据文件的信息</value>
   </data>
   <data name="SettingsFactoryResetMessage" xml:space="preserve">
-    <value>Are you sure you want to reset the app to factory settings? **This process cannot be undone!**
-The datafile will **not** be removed in the reset progress.</value>
+    <value>您确定要将应用程序重置为出厂设置吗？**此过程无法撤销！**
+重置过程中不会删除数据文件。</value>
   </data>
   <data name="SettingsGiveFeedback.Text" xml:space="preserve">
-    <value>Give feedback</value>
+    <value>提供反馈</value>
   </data>
   <data name="SettingsGiveFeedbackText" xml:space="preserve">
-    <value>Give feedback</value>
+    <value>提供反馈</value>
   </data>
   <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
-    <value>Design</value>
+    <value>设计</value>
   </data>
   <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
-    <value>Reset app to factory defaults</value>
+    <value>将应用程序重置为出厂默认设置</value>
   </data>
   <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
-    <value>Functions</value>
+    <value>功能</value>
   </data>
   <data name="SettingsPageName.Text" xml:space="preserve">
-    <value>Settings</value>
+    <value>设置</value>
   </data>
   <data name="SettingsPivotItemAbout.Header" xml:space="preserve">
-    <value>About the app</value>
+    <value>关于应用程序</value>
   </data>
   <data name="SettingsPivotItemDependencies.Header" xml:space="preserve">
-    <value>Dependencies</value>
+    <value>依赖关系</value>
   </data>
   <data name="SettingsPivotItemOption.Header" xml:space="preserve">
-    <value>Options</value>
+    <value>选项</value>
   </data>
   <data name="SettingsRateApp.Header" xml:space="preserve">
-    <value>Rate app in store</value>
+    <value>为商店中的应用程序评分</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
-    <value>Are you sure you want to permanently delete the data file? You will loose all your added accounts.</value>
+    <value>您确定要永久删除数据文件吗？您将失去所有已添加的账户。</value>
   </data>
   <data name="SettingsThemeDark.Content" xml:space="preserve">
-    <value>Dark</value>
+    <value>黑暗</value>
   </data>
   <data name="SettingsThemeLight.Content" xml:space="preserve">
-    <value>Light</value>
+    <value>灯光</value>
   </data>
   <data name="SettingsThemeSelectMode.Text" xml:space="preserve">
-    <value>Select a mode</value>
+    <value>选择模式</value>
   </data>
   <data name="SettingsThemeSystem.Content" xml:space="preserve">
-    <value>Use the system settings</value>
+    <value>使用系统设置</value>
   </data>
   <data name="SettingsTitleBarToggleSwtich.Header" xml:space="preserve">
-    <value>User-defined title bar (in light/dark)</value>
+    <value>用户自定义标题栏（浅色/深色）</value>
   </data>
   <data name="SettingsWindowsColor.Content" xml:space="preserve">
-    <value>System color settings</value>
+    <value>系统颜色设置</value>
   </data>
   <data name="SettingsWindowsHelloPrefer.Header" xml:space="preserve">
-    <value>Prefer Windows Hello for login</value>
+    <value>首选 Windows Hello 登录</value>
   </data>
   <data name="ShellPageAccountsNavigation.Content" xml:space="preserve">
-    <value>Accounts</value>
+    <value>账户</value>
   </data>
   <data name="ShellPageDatafileNavigation.Content" xml:space="preserve">
-    <value>Datafile</value>
+    <value>数据文件</value>
   </data>
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
-    <value>Feedback</value>
+    <value>反馈意见</value>
   </data>
   <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
-    <value>Give feedback (Github)</value>
+    <value>提供反馈（Github）</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
-    <value>Choose another datafile</value>
+    <value>选择另一个数据文件</value>
   </data>
   <data name="UseDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
-    <value>Datafile</value>
+    <value>数据文件</value>
   </data>
   <data name="UseDatafileContentDialogFilename.Header" xml:space="preserve">
-    <value>Filename</value>
+    <value>文件名</value>
   </data>
   <data name="UseDatafileContentDialogFolderPath.Header" xml:space="preserve">
-    <value>Folder path</value>
+    <value>文件夹路径</value>
   </data>
   <data name="UseDatafileContentDialogInfo.Text" xml:space="preserve">
-    <value>If you used the app before, please select if you want to load the existing datafile from your local storage or via WebDAV.</value>
+    <value>如果您以前使用过该应用程序，请选择是从本地存储还是通过 WebDAV 加载现有数据文件。</value>
   </data>
   <data name="UseDatafileContentDialogLoadInfo.Text" xml:space="preserve">
-    <value>Please select the existing data file and enter the password.</value>
+    <value>请选择现有数据文件并输入密码。</value>
   </data>
   <data name="UseDatafileContentDialogLocalPath.Text" xml:space="preserve">
-    <value>Choose local path</value>
+    <value>选择本地路径</value>
   </data>
   <data name="UseDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="UseDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Load data file</value>
+    <value>加载数据文件</value>
   </data>
   <data name="UseDatafileContentDialogMain.Title" xml:space="preserve">
-    <value>Load data file</value>
+    <value>加载数据文件</value>
   </data>
   <data name="UseDatafileContentDialogPasswordError.Text" xml:space="preserve">
-    <value>The data file cannot be decrypted with the password.</value>
+    <value>使用密码无法解密数据文件。</value>
   </data>
   <data name="UseDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
-    <value>Storage</value>
+    <value>存储</value>
   </data>
   <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>Choose WebDAV</value>
+    <value>选择 WebDAV</value>
   </data>
   <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
     <value>WebDAV</value>
   </data>
   <data name="WelcomePageCreateDatafile.Content" xml:space="preserve">
-    <value>Create new data file (first start)</value>
+    <value>创建新数据文件（首次启动）</value>
   </data>
   <data name="WelcomePageFirstSteps.Text" xml:space="preserve">
-    <value>First steps towards safety ...</value>
+    <value>实现安全的第一步...</value>
   </data>
   <data name="WelcomePageIntro.Text" xml:space="preserve">
-    <value>Welcome!
+    <value>欢迎光临
 
-Start with another security factor in your daily life.</value>
+从日常生活中的另一个安全因素开始。</value>
   </data>
   <data name="WelcomePageLoadDatafile.Content" xml:space="preserve">
-    <value>Load existing data file</value>
+    <value>加载现有数据文件</value>
   </data>
   <data name="WindowsHelloLoginMessage" xml:space="preserve">
-    <value>Please verify now with your configured Windows Hello login.</value>
+    <value>请立即使用已配置的 Windows Hello 登录进行验证。</value>
   </data>
   <data name="WindowsHelloPreferMessage" xml:space="preserve">
-    <value>It is possible to log in with Windows Hello. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+    <value>可以使用 Windows Hello 登录。您是否希望以后也使用这种登录方式？您可以随时在设置中更改此选项。</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>是</value>
   </data>
   <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
-    <value>Seconds to refresh</value>
+    <value>刷新秒数</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="ButtonTextConfirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>确认</value>
   </data>
   <data name="ButtonTextNo" xml:space="preserve">
-    <value>No</value>
+    <value>没有</value>
   </data>
   <data name="ButtonTextYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>是</value>
   </data>
   <data name="RateAppContentDialogLaterButton" xml:space="preserve">
-    <value>Recall later</value>
+    <value>稍后回顾</value>
   </data>
   <data name="RateAppContentDialogNoButton" xml:space="preserve">
-    <value>No, thanks</value>
+    <value>不，谢谢</value>
   </data>
   <data name="RateAppContentDialogQuestion" xml:space="preserve">
-    <value>You have been using this app for some time now, please visit the store to rate it and write a review. You can also use the Windows Feedback App at any time to send us your feedback directly.</value>
+    <value>您已经使用此应用程序一段时间了，请访问商店对其进行评分并写下评论。您也可以随时使用 Windows 反馈应用程序直接向我们发送反馈。</value>
   </data>
   <data name="RateAppContentDialogYesButton" xml:space="preserve">
-    <value>Rate now</value>
+    <value>立即评分</value>
   </data>
   <data name="RateAppContentDialogTitle" xml:space="preserve">
-    <value>Do you like this app?</value>
+    <value>您喜欢这款应用程序吗？</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header" xml:space="preserve">
-    <value>Current password</value>
+    <value>当前密码</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText" xml:space="preserve">
-    <value>Input password</value>
+    <value>输入密码</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
-    <value>The application does not currently have the necessary access rights to access the data file. To set the rights, however, the application must be closed. 
-Please grant the required rights in the settings and restart the application.
+    <value>应用程序目前不具备访问数据文件所需的访问权限。要设置权限，必须关闭应用程序。
+请在设置中授予所需的权限，然后重新启动应用程序。
 
-Instructions for setting the authorisation:
-![Instructions for setting the authorisation](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)</value>
+设置授权的说明：
+设置授权的说明](ms-appx://Assets/Infoelements/AuthSystemstorageEN.png)</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogPrimaryBTN" xml:space="preserve">
-    <value>Set authorization</value>
+    <value>设置授权</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogSecondaryBTN" xml:space="preserve">
-    <value>Cancel (close application)</value>
+    <value>取消（关闭应用程序）</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogTitle" xml:space="preserve">
-    <value>Authorization error</value>
+    <value>授权错误</value>
   </data>
   <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
-    <value>Lock app</value>
+    <value>锁定应用程序</value>
   </data>
   <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
-    <value>Key copied to clipboard</value>
+    <value>复制到剪贴板的键</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>Change password</value>
+    <value>更改密码</value>
   </data>
   <data name="CloseApp" xml:space="preserve">
-    <value>Close app</value>
+    <value>关闭应用程序</value>
   </data>
   <data name="DeleteAccountContentDialogDescription" xml:space="preserve">
-    <value>Are you sure you want to delete the account? After the deletion you have **30 seconds** to undo the deletion.</value>
+    <value>您确定要删除账户吗？删除后，您有 **30 秒**时间撤销删除。</value>
   </data>
   <data name="DeleteAccountContentDialogTitle" xml:space="preserve">
-    <value>Delete account</value>
+    <value>删除帐户</value>
   </data>
   <data name="ErrorHandle" xml:space="preserve">
-    <value>Error handle</value>
+    <value>错误处理</value>
   </data>
   <data name="ErrorHandleDescription" xml:space="preserve">
-    <value>An unhandled error has occurred, please send the error details which can be seen in the field via a new issue in Github.</value>
+    <value>发生了一个未处理的错误，请通过 Github 上的新问题发送错误详细信息（可在字段中看到）。</value>
   </data>
   <data name="PasswordInvalidHeader" xml:space="preserve">
-    <value>Password invalid</value>
+    <value>密码无效</value>
   </data>
   <data name="SettingsQRScanningHeader" xml:space="preserve">
-    <value>Time delay to start reading the QR Code</value>
+    <value>开始读取 QR 码的时间延迟</value>
   </data>
   <data name="SettingsQRScanningSecondsRange" xml:space="preserve">
-    <value>Specified in seconds (3-10s allowed)</value>
+    <value>以秒为单位指定（允许 3-10 秒）</value>
   </data>
   <data name="ShellPageAboutAppNavigation.Content" xml:space="preserve">
-    <value>About the app</value>
+    <value>关于应用程序</value>
   </data>
   <data name="ExceptionDatafileNotFound" xml:space="preserve">
-    <value>The path to the current data file could not be found. Possibly the data file was moved by you. 
-**Do you want to edit the path?**</value>
+    <value>无法找到当前数据文件的路径。可能是您移动了数据文件。
+**您要编辑路径吗？</value>
   </data>
   <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
-    <value>Lock app</value>
+    <value>锁定应用程序</value>
   </data>
   <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
-    <value>Add account</value>
+    <value>添加账户</value>
   </data>
   <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
-    <value>Reload datafile</value>
+    <value>重新加载数据文件</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
-    <value>The password saved in this app is invalid for the data file. You may have changed the password in another machine for the data file. 
-**Do you want to change the password now?</value>
+    <value>此应用程序中保存的数据文件密码无效。您可能已在另一台机器上更改了数据文件的密码。
+**您现在要更改密码吗？**</value>
+    <comment>[ReswT:manually]</comment>
   </data>
   <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
-    <value>Factory reset</value>
+    <value>出厂重置</value>
   </data>
   <data name="SettingsSourceCode.Header" xml:space="preserve">
-    <value>Show source code of the app</value>
+    <value>显示应用程序的源代码</value>
   </data>
   <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
-    <value>Data file</value>
+    <value>数据文件</value>
   </data>
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
-    <value>Undo delete</value>
+    <value>撤销删除</value>
   </data>
   <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
-    <value>Undo delete</value>
+    <value>撤销删除</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
-    <value>Name of the data file</value>
+    <value>数据文件名</value>
   </data>
   <data name="SettingsDatafilePath.Header" xml:space="preserve">
-    <value>Path of the data file</value>
+    <value>数据文件的路径</value>
   </data>
   <data name="NewDatafileContentDialogDatafileExistsError" xml:space="preserve">
-    <value>A data file with this name already exists in the folder. Please change the folder or the name of the file.</value>
+    <value>文件夹中已存在该名称的数据文件。请更改文件夹或文件名。</value>
   </data>
   <data name="SettingsDatafileBTNChangePassword.Content" xml:space="preserve">
-    <value>change password</value>
+    <value>更改密码</value>
   </data>
   <data name="ErrorHandleSendError" xml:space="preserve">
-    <value>Send error</value>
+    <value>发送错误</value>
   </data>
   <data name="FactoryReset" xml:space="preserve">
-    <value>Factory reset</value>
+    <value>出厂重置</value>
   </data>
   <data name="ChangeDatafilePath" xml:space="preserve">
-    <value>Change file path</value>
+    <value>更改文件路径</value>
   </data>
   <data name="AccountCodePageEmptyCollectionTip.Subtitle" xml:space="preserve">
-    <value>Add new accounts</value>
+    <value>添加新账户</value>
   </data>
   <data name="AccountCodePageEmptyCollectionTip.Title" xml:space="preserve">
-    <value>Empty list</value>
+    <value>空列表</value>
   </data>
   <data name="AccountCodePageWrongTimeBTN" xml:space="preserve">
-    <value>Open time settings</value>
+    <value>开放时间设置</value>
   </data>
   <data name="AccountCodePageWrongTimeContent" xml:space="preserve">
-    <value>The current time display of the device is incorrect, so the codes for the accounts cannot be generated correctly.
-Please synchronize the time in the settings.</value>
+    <value>设备当前时间显示不正确，因此无法正确生成账户代码。
+请在设置中同步时间。</value>
   </data>
   <data name="AccountCodePageWrongTimeTitle" xml:space="preserve">
-    <value>Incorrect time display</value>
+    <value>时间显示不正确</value>
   </data>
   <data name="PasswordAdvancedHashOption.Header" xml:space="preserve">
-    <value>Advanced options</value>
+    <value>高级选项</value>
   </data>
   <data name="PasswordAdvancedHashOptionText.Content" xml:space="preserve">
-    <value>With this setting, Argon2id is used instead of SHA-512 for the hash generation of the password query.</value>
+    <value>使用此设置后，密码查询的散列生成将使用 Argon2id 而不是 SHA-512。</value>
   </data>
   <data name="SettingsDatafileChangePasswordInfoTitle" xml:space="preserve">
-    <value>Password has been changed successfully</value>
+    <value>密码已成功更改</value>
   </data>
   <data name="ShellPagePaneTitle" xml:space="preserve">
-    <value>Navigation menu</value>
+    <value>导航菜单</value>
   </data>
   <data name="SettingsAuthorLogo.Content" xml:space="preserve">
-    <value>Author of the logo: Freepik</value>
+    <value>徽标的作者：Freepik</value>
   </data>
   <data name="AccountCodePageAutoSuggestBoxPlaceholder" xml:space="preserve">
-    <value>Search</value>
+    <value>搜索</value>
   </data>
   <data name="AccountCodePageSearchNotFound" xml:space="preserve">
-    <value>No results found</value>
+    <value>未找到结果</value>
   </data>
   <data name="SettingsDependencyGroupAssets" xml:space="preserve">
-    <value>Assets</value>
+    <value>资产</value>
   </data>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
-    <value>Packages</value>
+    <value>套餐</value>
   </data>
   <data name="SettingsDependencies.Header" xml:space="preserve">
-    <value>Dependencies of the app</value>
+    <value>应用程序的依赖关系</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">
-    <value>Author:</value>
+    <value>作者：</value>
   </data>
   <data name="SettingsDependencyLicence.Text" xml:space="preserve">
-    <value>Licence:</value>
+    <value>许可证</value>
   </data>
   <data name="RestartApp" xml:space="preserve">
-    <value>Restart app</value>
+    <value>重新启动应用程序</value>
   </data>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
-    <value>Copy report to clipboard</value>
+    <value>将报告复制到剪贴板</value>
   </data>
   <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>The address of the NTP server is valid and can be saved by pressing it.</value>
+    <value>NTP 服务器地址是有效的，可以通过按键保存。</value>
   </data>
   <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Saving?</value>
+    <value>储蓄？</value>
   </data>
   <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>The save of the NTP server address is not possible because the server was not found.</value>
+    <value>由于未找到服务器，无法保存 NTP 服务器地址。</value>
   </data>
   <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Error</value>
+    <value>错误</value>
   </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
-    <value>Use time server to check the system time</value>
+    <value>使用时间服务器检查系统时间</value>
   </data>
   <data name="SettingsSaveNTPServer.Label" xml:space="preserve">
-    <value>Save</value>
+    <value>节省</value>
   </data>
   <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
-    <value>An unhandled error occurred the last time the app was used, please send the error details which can be seen in the field via a new issue in Github.</value>
+    <value>上次使用应用程序时发生了未处理的错误，请通过 Github 上的新问题发送错误详细信息，该信息可在字段中看到。</value>
   </data>
   <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
-    <value>Set NTP server manually</value>
+    <value>手动设置 NTP 服务器</value>
   </data>
   <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
-    <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
+    <value>可以使用 NTP 服务器来检查系统时间是否正确。如果时间偏差较大，则创建的账户代码将不再正确。如果偏差超过 30 秒，系统将发出通知，并按照 NTP 服务器的时间创建代码。</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Bug fixes
-- Update of third-party libraries
-- Standard encryption has been strengthened
-- Dependence of the "Cut and Sketch" programme has been removed, QR codes are now read by system functions 
-- Error logs can now be opened externally by command: [Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
-- Tutorial has been improved and the Pro functions have been added
-- Settings can be controlled centrally via MDM: [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) (Pro function)
-- New accounts can now be added externally via command [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd) (Pro function)</value>
+    <value>- 错误修复
+- 更新第三方程序库
+- 加强了标准加密
+- 取消了对 "剪切与素描 "程序的依赖，二维码现在可通过系统功能读取
+- 现在可通过命令从外部打开错误日志：[Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
+- 改进了教程并添加了专业功能
+- 可通过 MDM 集中控制设置：[Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) （专业功能）
+- 现在可通过命令 [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd)（专业功能）从外部添加新账户</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
-    <value>New features &amp; changes</value>
+    <value>新功能和新变化</value>
   </data>
   <data name="WelcomePageTitle" xml:space="preserve">
-    <value>Welcome</value>
+    <value>欢迎</value>
   </data>
   <data name="UseDataFilePageName.Text" xml:space="preserve">
-    <value>Load existing data file</value>
+    <value>加载现有数据文件</value>
   </data>
   <data name="CreateDatafile" xml:space="preserve">
-    <value>Create datafile</value>
+    <value>创建数据文件</value>
   </data>
   <data name="LoadDatafile" xml:space="preserve">
-    <value>Load existing datafile</value>
+    <value>加载现有数据文件</value>
   </data>
   <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
-    <value>First steps</value>
+    <value>第一步</value>
   </data>
   <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
-    <value>Load data file</value>
+    <value>加载数据文件</value>
   </data>
   <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
-    <value>Login</value>
+    <value>登录</value>
   </data>
   <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
-    <value>Server address</value>
+    <value>服务器地址</value>
   </data>
   <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
-    <value>Username</value>
+    <value>用户名</value>
   </data>
   <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
-    <value>Data file</value>
+    <value>数据文件</value>
   </data>
   <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
-    <value>Service login</value>
+    <value>服务登录</value>
   </data>
   <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
-    <value>Round corners</value>
+    <value>圆角</value>
   </data>
   <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
-    <value>If the option is enabled, the corners of the controls will be rounded off</value>
+    <value>如果启用该选项，控件的边角将被磨圆</value>
   </data>
   <data name="SettingsAppThemeMode.Header" xml:space="preserve">
-    <value>App color scheme</value>
+    <value>应用程序配色方案</value>
   </data>
   <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
-    <value>Factory reset</value>
+    <value>出厂重置</value>
   </data>
   <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
-    <value>Pressing and confirming resets the app</value>
+    <value>按下并确认重置应用程序</value>
   </data>
   <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
-    <value>QR-Code scan</value>
+    <value>QR 码扫描</value>
   </data>
   <data name="UseDatafilePasswordInfo" xml:space="preserve">
-    <value>To load the data file, you must enter the password that was configured when the file was created.</value>
+    <value>要加载数据文件，必须输入创建文件时配置的密码。</value>
   </data>
   <data name="ToolTipShowHelp" xml:space="preserve">
-    <value>Show help</value>
+    <value>显示帮助</value>
   </data>
   <data name="SettingsAutoLogoutDesc" xml:space="preserve">
-    <value>Automatic logout after inactivity</value>
+    <value>不活动后自动注销</value>
   </data>
   <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
-    <value>Minutes inactivity</value>
+    <value>不活动分钟数</value>
   </data>
   <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
-    <value>Automatic lock</value>
+    <value>自动锁</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>关闭</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
-    <value>When the QR code scan is selected, a new window opens in which the programme containing the QR code to be scanned must be selected. This is the browser, for example.</value>
+    <value>选择 QR 代码扫描后，会打开一个新窗口，必须在其中选择包含要扫描的 QR 代码的程序。例如浏览器。</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
-    <value>Display QR code</value>
+    <value>显示 QR 码</value>
   </data>
   <data name="DisplayQRCodeContentDialogTitle" xml:space="preserve">
-    <value>QR code display</value>
+    <value>二维码显示</value>
   </data>
   <data name="AddAccountCodeContentDialogInputSecretKeyHelp" xml:space="preserve">
-    <value>The input is based on Base32 and therefore only allows the letters A-Z and the numbers from 2-7.</value>
+    <value>输入以 Base32 为基础，因此只能输入字母 A-Z 和数字 2-7。</value>
   </data>
   <data name="AccountCodePageTooltipDeleteFavourite" xml:space="preserve">
-    <value>Undo favourite</value>
+    <value>撤销收藏夹</value>
   </data>
   <data name="AccountCodePageTooltipSetFavourite" xml:space="preserve">
-    <value>Set as favourite</value>
+    <value>设为收藏夹</value>
   </data>
   <data name="AccountCodePageTooltipHideTOTP" xml:space="preserve">
-    <value>Hide key</value>
+    <value>隐藏键</value>
   </data>
   <data name="AccountCodePageTooltipShowTOTP" xml:space="preserve">
-    <value>Show key</value>
+    <value>显示密钥</value>
   </data>
   <data name="SettingsPreferHiddenTOTP.Header" xml:space="preserve">
-    <value>Hide keys</value>
+    <value>隐藏按键</value>
   </data>
   <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
-    <value>The generated keys are hidden and can optionally be faded in.</value>
+    <value>生成的密钥是隐藏的，可以选择淡入。</value>
   </data>
   <data name="AddAccountContentDialogExpertExpander.Header" xml:space="preserve">
-    <value>Expert settings</value>
+    <value>专家设置</value>
   </data>
   <data name="AddAccountContentDialogHashAlgo.Header" xml:space="preserve">
-    <value>Hash algorithm</value>
+    <value>哈希算法</value>
   </data>
   <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
-    <value>Number of digits</value>
+    <value>位数</value>
   </data>
   <data name="ButtonTextRetry" xml:space="preserve">
-    <value>Try again</value>
+    <value>再试一次</value>
   </data>
   <data name="ErrorClipboardTask" xml:space="preserve">
-    <value>The clipboard has been occupied by another program, please try again.</value>
+    <value>剪贴板已被其他程序占用，请重试。</value>
   </data>
   <data name="AddAccountContentDialogDeleteAccountIcon.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value>删除</value>
   </data>
   <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
-    <value>Account icon</value>
+    <value>账户图标</value>
   </data>
   <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
-    <value>Add notes</value>
+    <value>添加注释</value>
   </data>
   <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
-    <value>Notes</value>
+    <value>说明</value>
   </data>
   <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
-    <value>Search account picture</value>
+    <value>搜索账户图片</value>
   </data>
   <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
-    <value>Only change these settings if you are sure that the service requires them.</value>
+    <value>只有在确定服务需要时，才能更改这些设置。</value>
   </data>
   <data name="NewDataFilePageTitle.Text" xml:space="preserve">
-    <value>New data file</value>
+    <value>新数据文件</value>
   </data>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
-    <value>Filter</value>
+    <value>过滤器</value>
   </data>
   <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
-    <value>Filter</value>
+    <value>过滤器</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
-    <value>Choose file</value>
+    <value>选择文件</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFolder" xml:space="preserve">
-    <value>Choose folder</value>
+    <value>选择文件夹</value>
   </data>
   <data name="SettingsPageAboDesc.Text" xml:space="preserve">
-    <value>Support the development of the app with recurring payments.</value>
+    <value>支持开发定期付款的应用程序。</value>
   </data>
   <data name="WebDAVEmptyFolderMessage.Text" xml:space="preserve">
-    <value>This folder does not contain any files that can be selected.</value>
+    <value>该文件夹不包含任何可选择的文件。</value>
   </data>
   <data name="NewDatafileCreateDatafile.Content" xml:space="preserve">
-    <value>Create data file</value>
+    <value>创建数据文件</value>
   </data>
   <data name="NewDatafilehangeDatafile.Content" xml:space="preserve">
-    <value>Change folder</value>
+    <value>更改文件夹</value>
   </data>
   <data name="SettingsAppPrideMonthDesign.Header" xml:space="preserve">
-    <value>Rainbow colours for login windows</value>
+    <value>登录窗口的彩虹色</value>
   </data>
   <data name="SettingsAppPrideMonthDesignDesc.Text" xml:space="preserve">
-    <value>Setting rainbow colours for the login window</value>
+    <value>为登录窗口设置彩虹色</value>
   </data>
   <data name="SettingsMailSupportApp.Text" xml:space="preserve">
-    <value>E-mail support</value>
+    <value>电子邮件支持</value>
   </data>
   <data name="SettingsCustomDesign.Header" xml:space="preserve">
-    <value>Special design settings</value>
+    <value>特殊设计设置</value>
   </data>
   <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
-    <value>Import backup</value>
+    <value>导入备份</value>
   </data>
   <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
-    <value>Create data file</value>
+    <value>创建数据文件</value>
   </data>
   <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
-    <value>Open tutorial</value>
+    <value>开放式教程</value>
   </data>
   <data name="WelcomePageTutorialDesc" xml:space="preserve">
-    <value>Would you like to open the tutorial for the application?</value>
+    <value>您想打开应用程序的教程吗？</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>The **2fast** application (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is an [authenticator](https://en.wikipedia.org/wiki/Authenticator) for two-factor authentication (2FA) that uses the standard "**T**ime-based **O**ne-**t**ime **P**assword algorithm"/ time-based one-time password (TOTP) according to standardization [RFC 6238](https://tools.ietf.org/html/rfc6238). Services that rely on the TOTP standard for the second factor can be used with this application. For example, Microsoft, Google and PayPal support two-factor authentication using TOTP:</value>
+    <value>**2fast**应用程序（**t**two **f**actor **a**uthenticator **s**upporting**T**OTP的缩写）是一个用于双因素身份验证（2FA）的[验证器](https://en.wikipedia.org/wiki/Authenticator)，根据标准化[RFC 6238](https://tools.ietf.org/html/rfc6238)使用标准的 "**T**time-based **O**ne-**t**ime **P**assword algorithm"/基于时间的一次性口令（TOTP）。依赖 TOTP 标准作为第二要素的服务可与本应用程序一起使用。例如，微软、谷歌和 PayPal 都支持使用 TOTP 的双因素身份验证：</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
-    <value>To create a data file, the first step is to select a folder in which the file is to be saved. A storage location that is protected against data loss is recommended (e.g. cloud storage such as One-Drive, DropBox, etc.). This is followed by the name and password for encrypting the file. It is recommended to save the password in a password manager to prevent loss.</value>
+    <value>要创建数据文件，第一步是选择要保存文件的文件夹。建议选择可防止数据丢失的存储位置（如 One-Drive、DropBox 等云存储）。然后是加密文件的名称和密码。建议将密码保存在密码管理器中，以防丢失。</value>
   </data>
   <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
-    <value>To load the datafile, the first step is to select the data file. This is followed by the password with which the data file has been encrypted.</value>
+    <value>要加载数据文件，第一步是选择数据文件。然后输入数据文件的加密密码。</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
-    <value>Account creation</value>
+    <value>创建账户</value>
   </data>
   <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
-    <value>Creation of a datafile</value>
+    <value>创建数据文件</value>
   </data>
   <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
-    <value>Loading a data file</value>
+    <value>加载数据文件</value>
   </data>
   <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
-    <value>Automatic logout</value>
+    <value>自动登出</value>
   </data>
   <data name="FunctionNotAvailable" xml:space="preserve">
-    <value>Function not available</value>
+    <value>功能不可用</value>
   </data>
   <data name="WindowsHelloNotAvailable" xml:space="preserve">
-    <value>Windows Hello cannot be executed because no password is stored for the datafile in the protected memory.</value>
+    <value>由于受保护内存中的数据文件未存储密码，因此无法执行 Windows Hello。</value>
   </data>
   <data name="ErrorGenerateTOTPCode" xml:space="preserve">
-    <value>The secret key for the account {0} is empty or unreadable. Please restart the app. If the problem persists, clean up the account {0} and add it again.</value>
+    <value>账户 {0} 的密匙为空或无法读取。请重启应用程序。如果问题仍然存在，请清理账户 {0} 并重新添加。</value>
   </data>
   <data name="TextFormatterBoldToolTip" xml:space="preserve">
-    <value>Bold</value>
+    <value>粗体</value>
   </data>
   <data name="TextFormatterItalicToolTip" xml:space="preserve">
-    <value>Italics</value>
+    <value>斜体</value>
   </data>
   <data name="TextFormatterStrikeToolTip" xml:space="preserve">
-    <value>Strikethrough</value>
+    <value>删除线</value>
   </data>
   <data name="TextFormatterUnderlineToolTip" xml:space="preserve">
-    <value>Underline</value>
+    <value>下划线</value>
   </data>
   <data name="TextFormatterListToolTip" xml:space="preserve">
-    <value>List</value>
+    <value>列表</value>
   </data>
   <data name="TextFormatterOrderedToolTip" xml:space="preserve">
-    <value>Ordered list</value>
+    <value>有序列表</value>
   </data>
   <data name="WriteDatafileErrorBTNCancel" xml:space="preserve">
-    <value>Discard changes</value>
+    <value>放弃更改</value>
   </data>
   <data name="WriteDatafileErrorBTNRetry" xml:space="preserve">
-    <value>Save again</value>
+    <value>再次保存</value>
   </data>
   <data name="WriteDatafileErrorDesc" xml:space="preserve">
-    <value>The changes could not be saved. Do you want to save them again?</value>
+    <value>无法保存更改。您想重新保存吗？</value>
   </data>
   <data name="SettingsCBNotStorePassword.Content" xml:space="preserve">
-    <value>Don't save the password in credential manager (Windows Hello is not available)</value>
+    <value>不要在凭证管理器中保存密码（Windows Hello 不可用）</value>
   </data>
   <data name="DatafileViewModelWebDAVServerNotFound" xml:space="preserve">
-    <value>Address not found</value>
+    <value>未找到地址</value>
   </data>
   <data name="DatafileViewModelWebDAVServerNotFoundDesc" xml:space="preserve">
-    <value>The address to the WebDAV service could not be found.</value>
+    <value>无法找到 WebDAV 服务的地址。</value>
   </data>
   <data name="WebDAVAppPasswordInfo" xml:space="preserve">
-    <value>An app password is required to log in to the WebDAV service, this can be created in the settings of the WebDAV service.</value>
+    <value>登录 WebDAV 服务需要应用程序密码，该密码可在 WebDAV 服务的设置中创建。</value>
   </data>
   <data name="DatafileViewModelWebDAVCredentialsError" xml:space="preserve">
-    <value>Login error</value>
+    <value>登录错误</value>
   </data>
   <data name="DatafileViewModelWebDAVCredentialsErrorDesc" xml:space="preserve">
-    <value>Your username or password is invalid.</value>
+    <value>您的用户名或密码无效。</value>
   </data>
   <data name="DatafileViewModelWebDAVMaintenanceError" xml:space="preserve">
-    <value>Server in maintenance mode</value>
+    <value>服务器处于维护模式</value>
   </data>
   <data name="DatafileViewModelWebDAVMaintenanceErrorDesc" xml:space="preserve">
-    <value>Login is currently not possible because the WebDAV service is currently in maintenance mode.</value>
+    <value>由于 WebDAV 服务目前处于维护模式，因此目前无法登录。</value>
   </data>
   <data name="DatafileViewModelWebDAVNotInstalledError" xml:space="preserve">
-    <value>Server not installed</value>
+    <value>未安装服务器</value>
   </data>
   <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
-    <value>The WebDAV service is currently not properly installed.</value>
+    <value>WebDAV 服务目前未正确安装。</value>
   </data>
   <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
-    <value>Offer Windows Hello as a login option</value>
+    <value>提供 Windows Hello 作为登录选项</value>
   </data>
   <data name="InfoBarDatafileNoInternet" xml:space="preserve">
-    <value>Currently no internet connectivity is available for synchronisation. Please connect and confirm "Reload datafile".</value>
+    <value>目前无法连接互联网进行同步。请连接并确认 "重新加载数据文件"。</value>
   </data>
   <data name="InfoBarDatafileTitleNoInternet" xml:space="preserve">
-    <value>No internet connection</value>
+    <value>无网络连接</value>
   </data>
   <data name="InfoBarDatafileTitleUpdated" xml:space="preserve">
-    <value>Datafile updated</value>
+    <value>更新数据文件</value>
   </data>
   <data name="InfoBarDatafileUpdated" xml:space="preserve">
-    <value>The data file has been successfully updated.</value>
+    <value>数据文件已成功更新。</value>
   </data>
   <data name="AddAccountContentDialogCameraScan.Header" xml:space="preserve">
-    <value>Camera</value>
+    <value>照相机</value>
   </data>
   <data name="AddAccountContentDialogCameraScanBTN.Text" xml:space="preserve">
-    <value>Camera</value>
+    <value>照相机</value>
   </data>
   <data name="AddAccountContentDialogBTNCamRetry.Content" xml:space="preserve">
-    <value>Reload</value>
+    <value>重新加载</value>
   </data>
   <data name="AddAccountContentDialogNoCamFound.Text" xml:space="preserve">
-    <value>No camera is available.</value>
+    <value>没有摄像头。</value>
   </data>
   <data name="AddAccountContentDialogNoCamPermission.Text" xml:space="preserve">
-    <value>No consent has been given for the camera to be displayed.</value>
+    <value>未经同意展示摄像头。</value>
   </data>
   <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
-    <value>Open settings</value>
+    <value>打开设置</value>
   </data>
   <data name="ShellPageWarnInfo" xml:space="preserve">
-    <value>Screen recording protection not active</value>
+    <value>屏幕录制保护未激活</value>
   </data>
   <data name="NewDatafileFolderPath.Header" xml:space="preserve">
-    <value>WebDAV folder path</value>
+    <value>WebDAV 文件夹路径</value>
   </data>
   <data name="AccountCodePageTitle" xml:space="preserve">
-    <value>Accounts</value>
+    <value>账户</value>
   </data>
   <data name="AccoundCodePageImportEntry.Label" xml:space="preserve">
-    <value>Import accounts</value>
+    <value>导入账户</value>
   </data>
   <data name="AccoundCodePageImportCamera.Text" xml:space="preserve">
-    <value>Perform camera import</value>
+    <value>执行相机导入</value>
   </data>
   <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
-    <value>Use file/image for import</value>
+    <value>使用文件/图像导入</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - two factor authenticator</value>
+    <value>2fast - 双因素验证器</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
-    <value>Back</value>
+    <value>返回</value>
   </data>
   <data name="TutorialPageForwardButton.Text" xml:space="preserve">
-    <value>Forward</value>
+    <value>转发</value>
   </data>
   <data name="TutorialPageSkipButton.Content" xml:space="preserve">
-    <value>Skip</value>
+    <value>跳过</value>
   </data>
   <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
-    <value>Finish tutorial</value>
+    <value>完成教程</value>
   </data>
   <data name="NewDatafilePasswordInfo" xml:space="preserve">
-    <value>A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.</value>
+    <value>必须为数据文件加密指定一个密码。强烈建议将该密码安全地保存在密码管理器中。</value>
   </data>
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
-    <value>Password for encryption</value>
+    <value>加密密码</value>
   </data>
   <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
-    <value>The key is copied to the clipboard.</value>
+    <value>密钥被复制到剪贴板。</value>
   </data>
   <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
-    <value>Copy key</value>
+    <value>复制键</value>
   </data>
   <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
-    <value>By setting a favourite, the account is displayed in the accent colour of the application and is placed on top in the display order.</value>
+    <value>设置收藏夹后，账户将以应用程序的主色调显示，并在显示顺序中排在最前面。</value>
   </data>
   <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
-    <value>Set favourite</value>
+    <value>设置最爱</value>
   </data>
   <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
-    <value>Additional options for the account are displayed here</value>
+    <value>此处显示账户的其他选项</value>
   </data>
   <data name="TutorialPageItemMoreBTNTitle" xml:space="preserve">
-    <value>More options</value>
+    <value>更多选择</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
-    <value>Optionally, keys can be hidden and displayed again</value>
+    <value>可选择隐藏和重新显示按键</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
-    <value>Hide/display key</value>
+    <value>隐藏/显示按键</value>
   </data>
   <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
-    <value>There are various interaction options for created accounts, which are explained in more detail using an example account after they have been activated.</value>
+    <value>创建的账户有多种交互选项，我们将在账户激活后以一个账户为例进行详细说明。</value>
   </data>
   <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
-    <value>Interaction options for accounts</value>
+    <value>账户互动选项</value>
   </data>
   <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
-    <value>Access to the folder is blocked for the application, try again or select another folder.</value>
+    <value>应用程序访问文件夹受阻，请重试或选择其他文件夹。</value>
   </data>
   <data name="NewDatafileAccessErrorTitle" xml:space="preserve">
-    <value>Access denied</value>
+    <value>拒绝访问</value>
   </data>
   <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
-    <value>Create categories</value>
+    <value>创建类别</value>
   </data>
   <data name="ManageCategoriesContentDialogIcon.Header" xml:space="preserve">
-    <value>Choose icon</value>
+    <value>选择图标</value>
   </data>
   <data name="ManageCategoriesContentDialogLabel.Header" xml:space="preserve">
-    <value>Name of the catgory</value>
+    <value>类别名称</value>
   </data>
   <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText" xml:space="preserve">
-    <value>Save</value>
+    <value>节省</value>
   </data>
   <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="ManageCategoriesContentDialogHeader.Title" xml:space="preserve">
-    <value>Manage categories</value>
+    <value>管理类别</value>
   </data>
   <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
-    <value>Create category</value>
+    <value>创建类别</value>
   </data>
   <data name="ShellPageSearchNavigation.Content" xml:space="preserve">
-    <value>Search</value>
+    <value>搜索</value>
   </data>
   <data name="ShellPageSettingsNavigation.Content" xml:space="preserve">
-    <value>Settings</value>
+    <value>设置</value>
   </data>
   <data name="BiometricFacePreferMessage" xml:space="preserve">
-    <value>You have the option of logging in with facial recognition. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+    <value>您可以选择面部识别登录。您是否希望以后使用面部识别登录？您可以随时在设置中更改此选项。</value>
   </data>
   <data name="BiometricFingerPreferMessage" xml:space="preserve">
-    <value>You have the option of logging in with your fingerprint. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+    <value>您可以选择使用指纹登录。您是否希望以后使用指纹登录？您可以随时在设置中更改此选项。</value>
   </data>
   <data name="BiometricLoginSubtitle" xml:space="preserve">
-    <value>Log in to the app with a fingerprint or facial recognition.</value>
+    <value>使用指纹或面部识别登录应用程序。</value>
   </data>
   <data name="BiometricLoginTitle" xml:space="preserve">
-    <value>Login</value>
+    <value>登录</value>
   </data>
   <data name="ShellPageTutorialNavigation.Content" xml:space="preserve">
-    <value>Tutorial</value>
+    <value>教程</value>
   </data>
   <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Open tutorial</value>
+    <value>开放式教程</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
-    <value>The functionality for the [Authentication](https://en.wikipedia.org/wiki/Authentication) of the second factor is done by means of the time-based one-time password. For this purpose, a secret setup key is agreed between the logon server of the service and the user, which is stored locally in the application. This ensures that if the setup key is agreed, the application can always be operated offline.
+    <value>第二个因素的[身份验证](https://zh.wikipedia.org/wiki/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81) 功能是通过基于时间的一次性口令实现的。为此，服务的登录服务器和用户之间会商定一个秘密设置密钥，该密钥存储在应用程序的本地。这样可以确保在设置密钥达成一致的情况下，应用程序始终可以离线操作。
 
 
 
-The storage of the setup keys for the various services in this application, unlike in other authenticators, is stored in a file, which is password protected at creation to encrypt the file. For storing the file, a cloud storage such as Nextcloud, ownCloud, Onedrive, etc. is recommended in this case, in order to obtain versioning and security against loss.
+与其他身份验证器不同，本应用程序中各种服务的设置密钥存储在一个文件中，文件在创建时受密码保护，以便对文件进行加密。在这种情况下，建议使用 Nextcloud、ownCloud、Onedrive 等云存储设备来存储文件，以获得版本控制并防止丢失。
 
 
 
-The functionality of this application is explained in more detail in the following sections.</value>
+本应用程序的功能将在以下章节中详细介绍。</value>
+    <comment>[ReswT:manually]</comment>
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
-    <value>**Functionality of the application**</value>
+    <value>**应用程序的功能**</value>
   </data>
   <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
-    <value>Manage subscriptions</value>
+    <value>管理订阅</value>
   </data>
   <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
-    <value>In the following steps, the functionality of the application will be explained.</value>
+    <value>下面将对应用程序的功能进行说明。</value>
   </data>
   <data name="BTNBack.Content" xml:space="preserve">
-    <value>Back</value>
+    <value>返回</value>
   </data>
   <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
-    <value>Choose folder path</value>
+    <value>选择文件夹路径</value>
   </data>
   <data name="SettingsInAppPayment.Header" xml:space="preserve">
-    <value>Subscriptions and one-time purchases</value>
+    <value>订阅和一次性购买</value>
   </data>
   <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
-    <value>With the subscription you support the further development of the application. ***Pro+*** features that will be added in the future are usable with this subscription and accessible.
+    <value>订阅后，您将支持应用程序的进一步开发。未来将添加的****Pro+****功能可通过订阅使用。
 ***
-### 2,49€ monthly</value>
+### 每月 2,49 欧元</value>
   </data>
   <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Subscribe / buy</value>
+    <value>订阅/购买</value>
   </data>
   <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
-    <value>Subscriptions &amp; purchases</value>
+    <value>订阅和购买</value>
   </data>
   <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
-    <value>Import the account for another device by opening a two-factor authentication app with the desired device and adding an account with the camera.</value>
+    <value>使用所需的设备打开双因素身份验证应用程序，然后用摄像头添加一个账户，为另一个设备导入账户。</value>
   </data>
   <data name="SettingsCardExternalAction" xml:space="preserve">
-    <value>Call externally (browser)</value>
+    <value>外部调用（浏览器）</value>
   </data>
   <data name="SettingsInAppPayment.Description" xml:space="preserve">
-    <value>Make subscriptions and purchases for advanced features</value>
+    <value>订阅和购买高级功能</value>
   </data>
   <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
-    <value>Manage subscriptions in your Microsoft account</value>
+    <value>在 Microsoft 帐户中管理订阅</value>
   </data>
   <data name="InAppPaymentContentDialogSubscriptionItemSelect" xml:space="preserve">
-    <value>Select subscription</value>
+    <value>选择订阅</value>
   </data>
   <data name="AddAccountContentDialogTitle" xml:space="preserve">
-    <value>Create a new account</value>
+    <value>创建新账户</value>
   </data>
   <data name="CategoryFilterFlyoutNoCategories.Text" xml:space="preserve">
-    <value>There are currently no categories available, create new categories via the settings in this dialog.</value>
+    <value>目前没有可用的类别，请通过此对话框中的设置创建新类别。</value>
   </data>
   <data name="ManageCategoriesAddGlobalCategories.Header" xml:space="preserve">
-    <value>Add category</value>
+    <value>添加类别</value>
   </data>
   <data name="LoginPageTitle.Text" xml:space="preserve">
-    <value>Login</value>
+    <value>登录</value>
   </data>
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
-    <value>Manage categories &amp; set filters</value>
+    <value>管理类别和设置筛选器</value>
   </data>
   <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
-    <value>Manage categories &amp; set filters</value>
+    <value>管理类别和设置筛选器</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
-    <value>Reset filter</value>
+    <value>重置过滤器</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Settings.Label" xml:space="preserve">
-    <value>Manage categories</value>
+    <value>管理类别</value>
   </data>
   <data name="EditAccountContentDialogAccountCategories.Header" xml:space="preserve">
-    <value>Set categories</value>
+    <value>设置类别</value>
   </data>
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
-    <value>Select for purchase</value>
+    <value>选择购买</value>
   </data>
   <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
-    <value>Function only available by purchase or subscription.</value>
+    <value>仅通过购买或订阅才可使用该功能。</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">
-    <value>With the purchase, Pro+ functions become permanently accessible and usable, thus supporting the further development of the application.
-Currently available:
+    <value>购买后，Pro+ 功能可永久访问和使用，从而支持应用程序的进一步开发。
+目前可用：
 
-- Categories &amp; filter
-- Mobile Device Management (MDM)
+- 类别和过滤器
+- 移动设备管理 (MDM)
 ***
-### 34,99€ one-time</value>
+### 一次性 34,99 欧元</value>
   </data>
   <data name="InAppSubscriptionYear" xml:space="preserve">
-    <value>With the subscription, ***Pro+*** functions become accessible and usable and you support the further development of the application.
-Currently available:
+    <value>订阅后，****Pro+**** 功能将变得更容易访问和使用，您也将为应用程序的进一步开发提供支持。
+目前可用：
 
-- Categories &amp; filter
-- Mobile Device Management (MDM)
+- 类别和过滤器
+- 移动设备管理 (MDM)
 ***
-### 6,49€ annually</value>
+### 每年 6,49 欧元</value>
   </data>
   <data name="InAppPaymentContentDialogBuyItemSelect" xml:space="preserve">
-    <value>Select for buy</value>
+    <value>选择购买</value>
   </data>
   <data name="AccountCodePageManageFilterInfo.Label" xml:space="preserve">
-    <value>Categories &amp; filter</value>
+    <value>类别和过滤器</value>
   </data>
   <data name="ProFeatureContentInfo" xml:space="preserve">
-    <value>The functionality is only available by subscription or purchase. Would you like to take a look at the variants?</value>
+    <value>只有订阅或购买后才能使用这些功能。您想看看这些变体吗？</value>
   </data>
   <data name="ProFeatureTitleInfo" xml:space="preserve">
-    <value>Paid function</value>
+    <value>付费功能</value>
   </data>
   <data name="TutorialContentDialogForgettenPassword.Text" xml:space="preserve">
-    <value>Forgotten password?</value>
+    <value>忘记密码？</value>
   </data>
   <data name="TutorialPagePasswordInfo" xml:space="preserve">
-    <value>If you have forgotten the password and previously uninstalled or reset the application, you can view the password on the same computer in the [Credential Manager](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) of Windows. The entry is set here as "Project2FA" under web login information.</value>
+    <value>如果忘记密码并卸载或重置了应用程序，可在 Windows 的[凭证管理器](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) 中查看同一台计算机上的密码。这里的条目设置为 Web 登录信息下的 "Project2FA"。</value>
   </data>
   <data name="LoginPageWindowsHelloError" xml:space="preserve">
-    <value>There is a problem with Windows Hello. To use the functionality in the application, solve the problem in the Windows settings.</value>
+    <value>Windows Hello 存在问题。要使用应用程序中的功能，请在 Windows 设置中解决问题。</value>
   </data>
   <data name="EditAccountContentDialogAccountCategoryInfoText" xml:space="preserve">
-    <value>By clicking on the existing categories, you can assign one or more categories to the account, allowing you to carry out filtered searches later on. The categories are managed and created on the main page using the "Set categories &amp; filters" button in the top menu bar.</value>
+    <value>通过点击现有类别，您可以为账户指定一个或多个类别，以便日后进行过滤搜索。使用顶部菜单栏中的 "设置类别和筛选器 "按钮可在主页上管理和创建类别。</value>
   </data>
   <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
-    <value>There are currently no categories available, create new categories using the button in the top menu bar "Set categories &amp; filters".</value>
+    <value>目前没有可用的类别，请使用顶部菜单栏中的 "设置类别和筛选器 "按钮创建新类别。</value>
   </data>
   <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
-    <value>Error logging</value>
+    <value>错误记录</value>
   </data>
   <data name="SettingsLoggingFull.Content" xml:space="preserve">
-    <value>Complete</value>
+    <value>完整</value>
   </data>
   <data name="SettingsLoggingNone.Content" xml:space="preserve">
-    <value>No</value>
+    <value>没有</value>
   </data>
   <data name="SettingsLoggingSimple.Content" xml:space="preserve">
-    <value>Only exception</value>
+    <value>唯一例外</value>
   </data>
   <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
-    <value>Show error log</value>
+    <value>显示错误日志</value>
   </data>
   <data name="SettingsPageNoLogDialogContent" xml:space="preserve">
-    <value>No error report has been created at this time.</value>
+    <value>目前尚未创建错误报告。</value>
   </data>
   <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
-    <value>No error report available</value>
+    <value>无错误报告</value>
   </data>
   <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
-    <value>The search is carried out with the set categories via an OR search.</value>
+    <value>搜索是通过 OR 搜索对设定的类别进行搜索。</value>
   </data>
   <data name="EditAccountPageTitle" xml:space="preserve">
-    <value>Edit account</value>
+    <value>编辑账户</value>
   </data>
   <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
-    <value>No window for scanning a QR code has been selected.</value>
+    <value>未选择扫描 QR 代码的窗口。</value>
   </data>
   <data name="LoginPageIOSBiometricReason" xml:space="preserve">
-    <value>With the use of biometrics, login is implemented without a password.</value>
+    <value>使用生物识别技术，登录时无需密码。</value>
   </data>
   <data name="SettingsAppShowAvailableProFeatures.Header" xml:space="preserve">
-    <value>Display of Pro functions</value>
+    <value>显示专业功能</value>
   </data>
   <data name="SettingsAppShowAvailableProFeaturessDesc.Text" xml:space="preserve">
-    <value>This setting can be used to switch the visibility of placeholders for Pro functions on or off.</value>
+    <value>此设置可用于打开或关闭专业功能占位符的可见性。</value>
   </data>
   <data name="SettingsMDMInfo.Text" xml:space="preserve">
-    <value>*Some settings are managed by your organisation.</value>
+    <value>*某些设置由您的组织管理。</value>
   </data>
   <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
-    <value># Categories and filters
-User-defined categories can be created with an icon and assignments can be created for accounts. In the filter selection, filtering for accounts is possible based on the configuration. Filtering of accounts by category can also be further narrowed down using the standard search.
+    <value># 类别和筛选器
+可以用图标创建用户自定义类别，也可以为账户创建分配。在筛选器选择中，可根据配置筛选账户。还可以使用标准搜索进一步缩小按类别过滤账户的范围。
 
-![Categories and filters](ms-appx:///Assets/Images/categories_EN.png)
+类别和筛选器](ms-appx://Assets/Images/categories_EN.png)
 
-# Enterprise App Management | Mobile Device Management (MDM)
-The application supports an MDM configuration for centralised management of the application in the company; for example, the automatic blocking of the application or the login screen can be configured centrally. The overview of the available configurations can be viewed in the [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+# 企业应用管理 | 移动设备管理 (MDM)
+应用程序支持 MDM 配置，以便在公司内对应用程序进行集中管理；例如，可以对应用程序或登录屏幕的自动阻止进行集中配置。可用配置概览可在 [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM))中查看。</value>
   </data>
   <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
     <value>Pro-Funktions</value>
   </data>
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
-    <value>![First steps](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+    <value>第一步](ms-appx://Assets/Images/firstSteps_EN.png)</value>
   </data>
 </root>

@@ -79,6 +79,7 @@ namespace Project2FA.ViewModels
         public ICommand ShowProFeatureCommand { get; }
 
         private TwoFACodeModel _changedItem = null;
+        private int _selectedIndex;
         private string _searchedAccountLabel;
         private bool _datafileUpdated;
         private bool _datafileWebDAVUpToDate;
@@ -731,12 +732,17 @@ namespace Project2FA.ViewModels
             get => _filterIsActive; 
             set => SetProperty(ref _filterIsActive, value);
         }
+        public int SelectedIndex
+        { 
+            get => _selectedIndex; 
+            set => SetProperty(ref _selectedIndex, value);
+        }
 #if !WINDOWS_UWP
         public ShellPageViewModel ShellViewModel
         {
             get => App.ShellPageInstance.ViewModel;
         }
 #endif
-#endregion
+        #endregion
     }
 }

@@ -118,1244 +118,1248 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountCodePageAddEntry.Label" xml:space="preserve">
-    <value>Add account</value>
+    <value>アカウント追加</value>
   </data>
   <data name="AccountCodePageCopied" xml:space="preserve">
-    <value>Copied to clipboard</value>
+    <value>クリップボードにコピー</value>
   </data>
   <data name="AccountCodePageDeleteEntry.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value>削除</value>
   </data>
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
-    <value>Edit</value>
+    <value>編集</value>
   </data>
   <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
-    <value>Show options</value>
+    <value>オプションを表示する</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
-    <value>Reload datafile</value>
+    <value>データファイルの再読み込み</value>
   </data>
   <data name="AccountCodePageViewModelDeleteAccept" xml:space="preserve">
-    <value>Yes</value>
+    <value>はい</value>
   </data>
   <data name="AccountCodePageViewModelDeleteCancel" xml:space="preserve">
-    <value>No</value>
+    <value>いいえ</value>
   </data>
   <data name="DeleteDatafileContentDialogDeleteDescription" xml:space="preserve">
-    <value>Are you sure that you want to delete this account irrevocably?</value>
+    <value>本当にこのアカウントを削除しますか？</value>
   </data>
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
-    <value>Confirm deletion</value>
+    <value>削除の確認</value>
   </data>
   <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
-    <value>Copy code</value>
+    <value>コピーコード</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="AddAccountContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Create account</value>
+    <value>アカウント作成</value>
   </data>
   <data name="AddAccountContentDialog.Title" xml:space="preserve">
-    <value>Create a new account</value>
+    <value>新しいアカウントを作成する</value>
   </data>
   <data name="AddAccountContentDialogAccountName.Header" xml:space="preserve">
-    <value>Account name</value>
+    <value>アカウント名</value>
   </data>
   <data name="AddAccountContentDialogAccountName.PlaceholderText" xml:space="preserve">
-    <value>Mostly mail address</value>
+    <value>主にメールアドレス</value>
   </data>
   <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
-    <value>To create a new account for the two-factor-authentification you need a QR-code or a key (cryptical text) from the external service.
+    <value>二要素認証用の新しいアカウントを作成するには、外部サービスのQRコードまたはキー（暗号文）が必要です。
 
-# How should the key be imported?
+# どのように鍵をインポートするのですか?
 </value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
-    <value>Inputs</value>
+    <value>インプット</value>
   </data>
   <data name="AddAccountContentDialogInputType.Header" xml:space="preserve">
-    <value>Input type</value>
+    <value>入力タイプ</value>
   </data>
   <data name="AddAccountContentDialogLabel.Header" xml:space="preserve">
-    <value>Label</value>
+    <value>ラベル</value>
   </data>
   <data name="AddAccountContentDialogLabel.PlaceholderText" xml:space="preserve">
-    <value>Name to be displayed</value>
+    <value>表示される名前</value>
   </data>
   <data name="AddAccountContentDialogManualInput.Text" xml:space="preserve">
-    <value>Manual input</value>
+    <value>手動入力</value>
   </data>
   <data name="AddAccountContentDialogManualInputCheckbox.Content" xml:space="preserve">
-    <value>Manual input</value>
+    <value>手動入力</value>
   </data>
   <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
-    <value>Can't get information from QR code. Please try again or add the secret key manually.</value>
+    <value>QRコードから情報を取得できません。再試行するか、シークレットキーを手動で追加してください。</value>
   </data>
   <data name="AddAccountContentDialogReadQRCode.Text" xml:space="preserve">
-    <value>Scan key-QR-code</value>
+    <value>キーQRコードをスキャン</value>
   </data>
   <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo" xml:space="preserve">
-    <value>A scan tool will open soon</value>
+    <value>スキャンツールはすぐに開きます</value>
   </data>
   <data name="AddAccountContentDialogReadQRCodeTip.Title" xml:space="preserve">
-    <value>Switch to the QR-code</value>
+    <value>QRコードに切り替える</value>
   </data>
   <data name="AddAccountContentDialogSecretKey.Header" xml:space="preserve">
-    <value>Secret key</value>
+    <value>シークレット・キー</value>
   </data>
   <data name="AddAccountContentDialogSecretKey.PlaceholderText" xml:space="preserve">
-    <value>Please add secret key string here</value>
+    <value>ここに秘密鍵の文字列を追加してください。</value>
   </data>
   <data name="BTNConfirm.Content" xml:space="preserve">
-    <value>Confirm</value>
+    <value>確認</value>
   </data>
   <data name="BTNTryAgain.Content" xml:space="preserve">
-    <value>Try again</value>
+    <value>再試行</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header" xml:space="preserve">
-    <value>Local Datafile</value>
+    <value>ローカルデータファイル</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogIntroText.Text" xml:space="preserve">
-    <value>In this dialog you can change the password of the current used data file.</value>
+    <value>このダイアログでは、現在使用しているデータファイルのパスワードを変更することができます。</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Change password</value>
+    <value>パスワードの変更</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.Title" xml:space="preserve">
-    <value>Change datafile password</value>
+    <value>データファイルのパスワードを変更する</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogPasswordError.Text" xml:space="preserve">
-    <value>The entered password is not correct.</value>
+    <value>入力されたパスワードが正しくありません。</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>確認</value>
   </data>
   <data name="CurrentPassword.Header" xml:space="preserve">
-    <value>Current password</value>
+    <value>現在のパスワード</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>削除</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>編集</value>
   </data>
   <data name="EditAccountContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Confirm</value>
+    <value>確認</value>
   </data>
   <data name="EditAccountContentDialog.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="EditAccountContentDialog.Title" xml:space="preserve">
-    <value>Edit account</value>
+    <value>アカウント編集</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>エラー</value>
   </data>
   <data name="LoginPageLoginButton.Content" xml:space="preserve">
-    <value>Login</value>
+    <value>ログイン</value>
   </data>
   <data name="LoginPageLoginWindowsHelloButton.Content" xml:space="preserve">
-    <value>Login with Windows Hello</value>
+    <value>Windows Helloでログイン</value>
+    <comment>[ReswT:manually]</comment>
   </data>
   <data name="LoginPagePassword.Header" xml:space="preserve">
-    <value>Password</value>
+    <value>パスワード</value>
   </data>
   <data name="LoginPagePassword.PlaceholderText" xml:space="preserve">
-    <value>Input password</value>
+    <value>パスワード入力</value>
   </data>
   <data name="LoginPagePasswordMismatch" xml:space="preserve">
-    <value>The password doesn't match the password of the data file.</value>
+    <value>パスワードがデータファイルのパスワードと一致しない。</value>
   </data>
   <data name="NewDatafileContentDialogChangePath.Content" xml:space="preserve">
-    <value>Change path</value>
+    <value>パス変更</value>
   </data>
   <data name="NewDatafileContentDialogCreateInfo.Text" xml:space="preserve">
-    <value>To create a datafile you have to choose a name and a password.
-Important: You have to type in the password everytime you start the app!</value>
+    <value>データファイルを作成するには、名前とパスワードを選択する必要があります。
+重要：パスワードはアプリを起動するたびに入力する必要があります！</value>
   </data>
   <data name="NewDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
-    <value>Datafile</value>
+    <value>データファイル</value>
   </data>
   <data name="NewDatafileContentDialogLocalFolder.Header" xml:space="preserve">
-    <value>Filename</value>
+    <value>ファイル名</value>
   </data>
   <data name="NewDatafileContentDialogLocalFolder.PlaceholderText" xml:space="preserve">
-    <value>for example data file</value>
+    <value>例えばデータファイル</value>
   </data>
   <data name="NewDatafileContentDialogLocalPath.Text" xml:space="preserve">
-    <value>Choose local path</value>
+    <value>ローカルパスを選択</value>
   </data>
   <data name="NewDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="NewDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Create data file</value>
+    <value>データファイルの作成</value>
   </data>
   <data name="NewDatafileContentDialogMain.Title" xml:space="preserve">
-    <value>Create data file</value>
+    <value>データファイルの作成</value>
   </data>
   <data name="NewDatafileContentDialogPath.Header" xml:space="preserve">
-    <value>Path</value>
+    <value>パス</value>
   </data>
   <data name="NewDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
-    <value>Storage</value>
+    <value>ストレージ</value>
   </data>
   <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>Choose WebDAV</value>
+    <value>WebDAVを選択</value>
   </data>
   <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
-    <value>WebDAV</value>
+    <value>ウェブダブリュー</value>
   </data>
   <data name="NewDatafileLocalFolder.Header" xml:space="preserve">
-    <value>Filename</value>
+    <value>ファイル名</value>
   </data>
   <data name="NewDatafileLocalFolder.PlaceholderText" xml:space="preserve">
-    <value>Enter filename</value>
+    <value>ファイル名を入力</value>
   </data>
   <data name="NewDatefileContentDialogFolderName.Header" xml:space="preserve">
-    <value>Foldername</value>
+    <value>フォルダ名</value>
   </data>
   <data name="NewLocalDatafileInfo.Text" xml:space="preserve">
-    <value>To use this app you have to create a data file one time. All accounts will be stored encrypted in this file.
-If you plan to use this application on several devices it makes sense to store this file on an external storage (e. g. cloud).</value>
+    <value>このアプリを使用するには、データファイルを1回作成する必要があります。すべてのアカウントはこのファイルに暗号化されて保存されます。
+このアプリケーションを複数のデバイスで使用する場合は、このファイルを外部ストレージ（クラウドなど）に保存するのが理にかなっています。</value>
   </data>
   <data name="NewPasswordContentDialog.Header" xml:space="preserve">
-    <value>New password</value>
+    <value>新しいパスワード</value>
   </data>
   <data name="NewPasswordRepeatContentDialog.Header" xml:space="preserve">
-    <value>Repeat new password</value>
+    <value>新しいパスワードを繰り返す</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>いいえ</value>
   </data>
   <data name="Password.Header" xml:space="preserve">
-    <value>Password</value>
+    <value>パスワード</value>
   </data>
   <data name="Password.PlaceholderText" xml:space="preserve">
-    <value>Input password</value>
+    <value>パスワード入力</value>
   </data>
   <data name="PasswordRepeat.Header" xml:space="preserve">
-    <value>Repeat password</value>
+    <value>リピートパスワード</value>
   </data>
   <data name="PasswordRepeat.PlaceholderText" xml:space="preserve">
-    <value>input password</value>
+    <value>パスワード入力</value>
   </data>
   <data name="SettingsActionRequiredRestart" xml:space="preserve">
-    <value>This change will take effect after restart of the app.</value>
+    <value>この変更はアプリの再起動後に有効になります。</value>
   </data>
   <data name="SettingsBackButtonCard.Header" xml:space="preserve">
-    <value>Placement of back button</value>
+    <value>戻るボタンの配置</value>
   </data>
   <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
-    <value>In the navigation menu</value>
+    <value>ナビゲーション・メニュー</value>
   </data>
   <data name="SettingsBackButtonToggleSwtich.OnContent" xml:space="preserve">
-    <value>In the title bar</value>
+    <value>タイトルバー</value>
   </data>
   <data name="SettingsChangePassword.Text" xml:space="preserve">
-    <value>Change Password</value>
+    <value>パスワードの変更</value>
   </data>
   <data name="SettingsDatafileFilePath.Text" xml:space="preserve">
-    <value>Data file path:</value>
+    <value>データファイルのパス：</value>
   </data>
   <data name="SettingsDatafileName.Text" xml:space="preserve">
-    <value>Data file name:</value>
+    <value>データファイル名：</value>
   </data>
   <data name="SettingsDatafileTitle.Text" xml:space="preserve">
-    <value>Information about the current used datafile</value>
+    <value>現在使用されているデータファイルに関する情報</value>
   </data>
   <data name="SettingsFactoryResetMessage" xml:space="preserve">
-    <value>Are you sure you want to reset the app to factory settings? **This process cannot be undone!**
-The datafile will **not** be removed in the reset progress.</value>
+    <value>アプリを工場出荷時の設定にリセットしてよろしいですか？**このプロセスは元に戻せません。**
+データファイルはリセットの過程で削除されません。</value>
+    <comment>[ReswT:manually]</comment>
   </data>
   <data name="SettingsGiveFeedback.Text" xml:space="preserve">
-    <value>Give feedback</value>
+    <value>フィードバック</value>
   </data>
   <data name="SettingsGiveFeedbackText" xml:space="preserve">
-    <value>Give feedback</value>
+    <value>フィードバック</value>
   </data>
   <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
-    <value>Design</value>
+    <value>デザイン</value>
   </data>
   <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
-    <value>Reset app to factory defaults</value>
+    <value>アプリを工場出荷時のデフォルトにリセットする</value>
   </data>
   <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
-    <value>Functions</value>
+    <value>機能</value>
   </data>
   <data name="SettingsPageName.Text" xml:space="preserve">
-    <value>Settings</value>
+    <value>設定</value>
   </data>
   <data name="SettingsPivotItemAbout.Header" xml:space="preserve">
-    <value>About the app</value>
+    <value>アプリについて</value>
   </data>
   <data name="SettingsPivotItemDependencies.Header" xml:space="preserve">
-    <value>Dependencies</value>
+    <value>依存関係</value>
   </data>
   <data name="SettingsPivotItemOption.Header" xml:space="preserve">
-    <value>Options</value>
+    <value>オプション</value>
   </data>
   <data name="SettingsRateApp.Header" xml:space="preserve">
-    <value>Rate app in store</value>
+    <value>ストアでアプリを評価する</value>
   </data>
   <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
-    <value>Are you sure you want to permanently delete the data file? You will loose all your added accounts.</value>
+    <value>データファイルを完全に削除してもよろしいですか？追加したアカウントはすべて失われます。</value>
   </data>
   <data name="SettingsThemeDark.Content" xml:space="preserve">
-    <value>Dark</value>
+    <value>暗い</value>
   </data>
   <data name="SettingsThemeLight.Content" xml:space="preserve">
-    <value>Light</value>
+    <value>ライト</value>
   </data>
   <data name="SettingsThemeSelectMode.Text" xml:space="preserve">
-    <value>Select a mode</value>
+    <value>モード選択</value>
   </data>
   <data name="SettingsThemeSystem.Content" xml:space="preserve">
-    <value>Use the system settings</value>
+    <value>システム設定を使用する</value>
   </data>
   <data name="SettingsTitleBarToggleSwtich.Header" xml:space="preserve">
-    <value>User-defined title bar (in light/dark)</value>
+    <value>ユーザー定義のタイトルバー（明/暗時）</value>
   </data>
   <data name="SettingsWindowsColor.Content" xml:space="preserve">
-    <value>System color settings</value>
+    <value>システムカラー設定</value>
   </data>
   <data name="SettingsWindowsHelloPrefer.Header" xml:space="preserve">
-    <value>Prefer Windows Hello for login</value>
+    <value>ログインにWindows Helloを優先</value>
   </data>
   <data name="ShellPageAccountsNavigation.Content" xml:space="preserve">
-    <value>Accounts</value>
+    <value>アカウント</value>
   </data>
   <data name="ShellPageDatafileNavigation.Content" xml:space="preserve">
-    <value>Datafile</value>
+    <value>データファイル</value>
   </data>
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
-    <value>Feedback</value>
+    <value>フィードバック</value>
   </data>
   <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
-    <value>Give feedback (Github)</value>
+    <value>フィードバック（Github）</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
-    <value>Choose another datafile</value>
+    <value>別のデータファイルを選択する</value>
   </data>
   <data name="UseDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
-    <value>Datafile</value>
+    <value>データファイル</value>
   </data>
   <data name="UseDatafileContentDialogFilename.Header" xml:space="preserve">
-    <value>Filename</value>
+    <value>ファイル名</value>
   </data>
   <data name="UseDatafileContentDialogFolderPath.Header" xml:space="preserve">
-    <value>Folder path</value>
+    <value>フォルダパス</value>
   </data>
   <data name="UseDatafileContentDialogInfo.Text" xml:space="preserve">
-    <value>If you used the app before, please select if you want to load the existing datafile from your local storage or via WebDAV.</value>
+    <value>以前にアプリを使用したことがある場合は、既存のデータファイルをローカルストレージから読み込むか、WebDAV経由で読み込むかを選択してください。</value>
   </data>
   <data name="UseDatafileContentDialogLoadInfo.Text" xml:space="preserve">
-    <value>Please select the existing data file and enter the password.</value>
+    <value>既存のデータファイルを選択し、パスワードを入力してください。</value>
   </data>
   <data name="UseDatafileContentDialogLocalPath.Text" xml:space="preserve">
-    <value>Choose local path</value>
+    <value>ローカルパスを選択</value>
   </data>
   <data name="UseDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="UseDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
-    <value>Load data file</value>
+    <value>データファイルの読み込み</value>
   </data>
   <data name="UseDatafileContentDialogMain.Title" xml:space="preserve">
-    <value>Load data file</value>
+    <value>データファイルの読み込み</value>
   </data>
   <data name="UseDatafileContentDialogPasswordError.Text" xml:space="preserve">
-    <value>The data file cannot be decrypted with the password.</value>
+    <value>データファイルはパスワードでは復号化できない。</value>
   </data>
   <data name="UseDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
-    <value>Storage</value>
+    <value>ストレージ</value>
   </data>
   <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
-    <value>Choose WebDAV</value>
+    <value>WebDAVを選択</value>
   </data>
   <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
-    <value>WebDAV</value>
+    <value>ウェブダブリュー</value>
   </data>
   <data name="WelcomePageCreateDatafile.Content" xml:space="preserve">
-    <value>Create new data file (first start)</value>
+    <value>新規データファイルの作成（最初の開始）</value>
   </data>
   <data name="WelcomePageFirstSteps.Text" xml:space="preserve">
-    <value>First steps towards safety ...</value>
+    <value>安全への第一歩 ...</value>
   </data>
   <data name="WelcomePageIntro.Text" xml:space="preserve">
-    <value>Welcome!
+    <value>ようこそ！
 
-Start with another security factor in your daily life.</value>
+日常生活におけるもう一つのセキュリティ要素から始めましょう。</value>
   </data>
   <data name="WelcomePageLoadDatafile.Content" xml:space="preserve">
-    <value>Load existing data file</value>
+    <value>既存のデータファイルを読み込む</value>
   </data>
   <data name="WindowsHelloLoginMessage" xml:space="preserve">
-    <value>Please verify now with your configured Windows Hello login.</value>
+    <value>設定したWindows Helloログインで今すぐ確認してください。</value>
   </data>
   <data name="WindowsHelloPreferMessage" xml:space="preserve">
-    <value>It is possible to log in with Windows Hello. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+    <value>Windows Helloでのログインが可能です。今後もこのログインをご希望ですか？このオプションはいつでも設定で変更できます。</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>はい</value>
   </data>
   <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
-    <value>Seconds to refresh</value>
+    <value>リフレッシュまでの秒数</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="ButtonTextConfirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>確認</value>
   </data>
   <data name="ButtonTextNo" xml:space="preserve">
-    <value>No</value>
+    <value>いいえ</value>
   </data>
   <data name="ButtonTextYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>はい</value>
   </data>
   <data name="RateAppContentDialogLaterButton" xml:space="preserve">
-    <value>Recall later</value>
+    <value>後日リコール</value>
   </data>
   <data name="RateAppContentDialogNoButton" xml:space="preserve">
-    <value>No, thanks</value>
+    <value>いいえ、結構です</value>
   </data>
   <data name="RateAppContentDialogQuestion" xml:space="preserve">
-    <value>You have been using this app for some time now, please visit the store to rate it and write a review. You can also use the Windows Feedback App at any time to send us your feedback directly.</value>
+    <value>このアプリをお使いになっている方は、ストアにアクセスして評価し、レビューを書いてください。また、Windowsフィードバックアプリを使って、いつでも直接フィードバックをお送りいただけます。</value>
   </data>
   <data name="RateAppContentDialogYesButton" xml:space="preserve">
-    <value>Rate now</value>
+    <value>レート</value>
   </data>
   <data name="RateAppContentDialogTitle" xml:space="preserve">
-    <value>Do you like this app?</value>
+    <value>このアプリは気に入りましたか？</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header" xml:space="preserve">
-    <value>Current password</value>
+    <value>現在のパスワード</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText" xml:space="preserve">
-    <value>Input password</value>
+    <value>パスワード入力</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
-    <value>The application does not currently have the necessary access rights to access the data file. To set the rights, however, the application must be closed. 
-Please grant the required rights in the settings and restart the application.
+    <value>このアプリケーションには現在、データファイルにアクセスするために必要なアクセス権がありません。アクセス権を設定するには、アプリケーションを終了する必要があります。
+設定で必要な権限を付与し、アプリケーションを再起動してください。
 
-Instructions for setting the authorisation:
-![Instructions for setting the authorisation](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)</value>
+権限の設定方法
+![権限設定の説明](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogPrimaryBTN" xml:space="preserve">
-    <value>Set authorization</value>
+    <value>認可を設定する</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogSecondaryBTN" xml:space="preserve">
-    <value>Cancel (close application)</value>
+    <value>キャンセル（アプリケーションを閉じる）</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogTitle" xml:space="preserve">
-    <value>Authorization error</value>
+    <value>認証エラー</value>
   </data>
   <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
-    <value>Lock app</value>
+    <value>ロックアプリ</value>
   </data>
   <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
-    <value>Key copied to clipboard</value>
+    <value>クリップボードにコピーされたキー</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>Change password</value>
+    <value>パスワードの変更</value>
   </data>
   <data name="CloseApp" xml:space="preserve">
-    <value>Close app</value>
+    <value>アプリを閉じる</value>
   </data>
   <data name="DeleteAccountContentDialogDescription" xml:space="preserve">
-    <value>Are you sure you want to delete the account? After the deletion you have **30 seconds** to undo the deletion.</value>
+    <value>本当にアカウントを削除しますか？削除後、**30秒**以内に削除を取り消すことができます。</value>
   </data>
   <data name="DeleteAccountContentDialogTitle" xml:space="preserve">
-    <value>Delete account</value>
+    <value>アカウント削除</value>
   </data>
   <data name="ErrorHandle" xml:space="preserve">
-    <value>Error handle</value>
+    <value>エラーハンドル</value>
   </data>
   <data name="ErrorHandleDescription" xml:space="preserve">
-    <value>An unhandled error has occurred, please send the error details which can be seen in the field via a new issue in Github.</value>
+    <value>未処理のエラーが発生しました。フィールドに表示されるエラーの詳細をGithubの新しい課題から送信してください。</value>
   </data>
   <data name="PasswordInvalidHeader" xml:space="preserve">
-    <value>Password invalid</value>
+    <value>パスワード無効</value>
   </data>
   <data name="SettingsQRScanningHeader" xml:space="preserve">
-    <value>Time delay to start reading the QR Code</value>
+    <value>QRコードの読み取り開始までの遅延時間</value>
   </data>
   <data name="SettingsQRScanningSecondsRange" xml:space="preserve">
-    <value>Specified in seconds (3-10s allowed)</value>
+    <value>秒単位で指定（3～10秒可）</value>
   </data>
   <data name="ShellPageAboutAppNavigation.Content" xml:space="preserve">
-    <value>About the app</value>
+    <value>アプリについて</value>
   </data>
   <data name="ExceptionDatafileNotFound" xml:space="preserve">
-    <value>The path to the current data file could not be found. Possibly the data file was moved by you. 
-**Do you want to edit the path?**</value>
+    <value>現在のデータファイルへのパスが見つかりません。データファイルが移動された可能性があります。
+**パスを編集しますか？</value>
   </data>
   <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
-    <value>Lock app</value>
+    <value>ロックアプリ</value>
   </data>
   <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
-    <value>Add account</value>
+    <value>アカウント追加</value>
   </data>
   <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
-    <value>Reload datafile</value>
+    <value>データファイルの再読み込み</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
-    <value>The password saved in this app is invalid for the data file. You may have changed the password in another machine for the data file. 
-**Do you want to change the password now?</value>
+    <value>このアプリに保存されたパスワードは、データファイルに対して無効です。他のマシンでデータファイルのパスワードを変更した可能性があります。
+**パスワードを変更しますか？**</value>
+    <comment>[ReswT:manually]</comment>
   </data>
   <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
-    <value>Factory reset</value>
+    <value>ファクトリーリセット</value>
   </data>
   <data name="SettingsSourceCode.Header" xml:space="preserve">
-    <value>Show source code of the app</value>
+    <value>アプリのソースコードを表示する</value>
   </data>
   <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
-    <value>Data file</value>
+    <value>データファイル</value>
   </data>
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
-    <value>Undo delete</value>
+    <value>削除の取り消し</value>
   </data>
   <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
-    <value>Undo delete</value>
+    <value>削除の取り消し</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
-    <value>Name of the data file</value>
+    <value>データファイル名</value>
   </data>
   <data name="SettingsDatafilePath.Header" xml:space="preserve">
-    <value>Path of the data file</value>
+    <value>データファイルのパス</value>
   </data>
   <data name="NewDatafileContentDialogDatafileExistsError" xml:space="preserve">
-    <value>A data file with this name already exists in the folder. Please change the folder or the name of the file.</value>
+    <value>フォルダ内にこの名前のデータファイルが既に存在します。フォルダかファイル名を変更してください。</value>
   </data>
   <data name="SettingsDatafileBTNChangePassword.Content" xml:space="preserve">
-    <value>change password</value>
+    <value>パスワードを変更する</value>
   </data>
   <data name="ErrorHandleSendError" xml:space="preserve">
-    <value>Send error</value>
+    <value>送信エラー</value>
   </data>
   <data name="FactoryReset" xml:space="preserve">
-    <value>Factory reset</value>
+    <value>ファクトリーリセット</value>
   </data>
   <data name="ChangeDatafilePath" xml:space="preserve">
-    <value>Change file path</value>
+    <value>ファイルパスの変更</value>
   </data>
   <data name="AccountCodePageEmptyCollectionTip.Subtitle" xml:space="preserve">
-    <value>Add new accounts</value>
+    <value>新しいアカウントを追加する</value>
   </data>
   <data name="AccountCodePageEmptyCollectionTip.Title" xml:space="preserve">
-    <value>Empty list</value>
+    <value>空リスト</value>
   </data>
   <data name="AccountCodePageWrongTimeBTN" xml:space="preserve">
-    <value>Open time settings</value>
+    <value>オープン時間の設定</value>
   </data>
   <data name="AccountCodePageWrongTimeContent" xml:space="preserve">
-    <value>The current time display of the device is incorrect, so the codes for the accounts cannot be generated correctly.
-Please synchronize the time in the settings.</value>
+    <value>デバイスの現在時刻表示が正しくないため、アカウント用のコードを正しく生成できません。
+設定で時刻の同期を行ってください。</value>
   </data>
   <data name="AccountCodePageWrongTimeTitle" xml:space="preserve">
-    <value>Incorrect time display</value>
+    <value>誤った時刻表示</value>
   </data>
   <data name="PasswordAdvancedHashOption.Header" xml:space="preserve">
-    <value>Advanced options</value>
+    <value>高度なオプション</value>
   </data>
   <data name="PasswordAdvancedHashOptionText.Content" xml:space="preserve">
-    <value>With this setting, Argon2id is used instead of SHA-512 for the hash generation of the password query.</value>
+    <value>この設定では、パスワードクエリのハッシュ生成にSHA-512の代わりにArgon2idが使用されます。</value>
   </data>
   <data name="SettingsDatafileChangePasswordInfoTitle" xml:space="preserve">
-    <value>Password has been changed successfully</value>
+    <value>パスワードは正常に変更されました</value>
   </data>
   <data name="ShellPagePaneTitle" xml:space="preserve">
-    <value>Navigation menu</value>
+    <value>ナビゲーションメニュー</value>
   </data>
   <data name="SettingsAuthorLogo.Content" xml:space="preserve">
-    <value>Author of the logo: Freepik</value>
+    <value>ロゴの作者Freepik</value>
   </data>
   <data name="AccountCodePageAutoSuggestBoxPlaceholder" xml:space="preserve">
-    <value>Search</value>
+    <value>検索</value>
   </data>
   <data name="AccountCodePageSearchNotFound" xml:space="preserve">
-    <value>No results found</value>
+    <value>結果は見つかりませんでした</value>
   </data>
   <data name="SettingsDependencyGroupAssets" xml:space="preserve">
-    <value>Assets</value>
+    <value>資産</value>
   </data>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
-    <value>Packages</value>
+    <value>パッケージ</value>
   </data>
   <data name="SettingsDependencies.Header" xml:space="preserve">
-    <value>Dependencies of the app</value>
+    <value>アプリの依存関係</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">
-    <value>Author:</value>
+    <value>著者</value>
   </data>
   <data name="SettingsDependencyLicence.Text" xml:space="preserve">
-    <value>Licence:</value>
+    <value>ライセンス</value>
   </data>
   <data name="RestartApp" xml:space="preserve">
-    <value>Restart app</value>
+    <value>アプリを再起動する</value>
   </data>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
-    <value>Copy report to clipboard</value>
+    <value>レポートをクリップボードにコピーする</value>
   </data>
   <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>The address of the NTP server is valid and can be saved by pressing it.</value>
+    <value>NTPサーバーのアドレスは有効であり、これを押すことで保存できる。</value>
   </data>
   <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Saving?</value>
+    <value>節約？</value>
   </data>
   <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>The save of the NTP server address is not possible because the server was not found.</value>
+    <value>サーバーが見つからなかったため、NTPサーバーアドレスの保存ができません。</value>
   </data>
   <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Error</value>
+    <value>エラー</value>
   </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
-    <value>Use time server to check the system time</value>
+    <value>タイムサーバーを使用してシステム時間をチェックする</value>
   </data>
   <data name="SettingsSaveNTPServer.Label" xml:space="preserve">
-    <value>Save</value>
+    <value>セーブ</value>
   </data>
   <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
-    <value>An unhandled error occurred the last time the app was used, please send the error details which can be seen in the field via a new issue in Github.</value>
+    <value>最後にアプリが使用されたときに、処理されないエラーが発生しました。</value>
   </data>
   <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
-    <value>Set NTP server manually</value>
+    <value>NTPサーバーを手動で設定する</value>
   </data>
   <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
-    <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
+    <value>NTPサーバーを使用して、システムの正しい時刻をチェックすることができる。時刻にそれ以上のずれがある場合、アカウントのコード作成はもはや正しくない。30秒以上のずれがある場合、通知が表示され、NTPサーバーの時刻でコードの作成が行われる。</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Bug fixes
-- Update of third-party libraries
-- Standard encryption has been strengthened
-- Dependence of the "Cut and Sketch" programme has been removed, QR codes are now read by system functions 
-- Error logs can now be opened externally by command: [Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
-- Tutorial has been improved and the Pro functions have been added
-- Settings can be controlled centrally via MDM: [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) (Pro function)
-- New accounts can now be added externally via command [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd) (Pro function)</value>
+    <value>- バグ修正
+- サードパーティ製ライブラリの更新
+- 標準暗号化の強化
+- カット・アンド・スケッチ "プログラムへの依存が解消され、QRコードがシステム機能によって読み取られるようになりました。
+- エラーログをコマンドで外部から開けるようになりました：[Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
+- チュートリアルが改善され、Pro機能が追加されました。
+- MDM経由で設定を一元管理できるようになりました: [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) (プロ機能)
+- 新しいアカウントをコマンド経由で外部から追加できるようになりました [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd) (プロ機能)</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
-    <value>New features &amp; changes</value>
+    <value>新機能と変更点</value>
   </data>
   <data name="WelcomePageTitle" xml:space="preserve">
-    <value>Welcome</value>
+    <value>ようこそ</value>
   </data>
   <data name="UseDataFilePageName.Text" xml:space="preserve">
-    <value>Load existing data file</value>
+    <value>既存のデータファイルを読み込む</value>
   </data>
   <data name="CreateDatafile" xml:space="preserve">
-    <value>Create datafile</value>
+    <value>データファイルの作成</value>
   </data>
   <data name="LoadDatafile" xml:space="preserve">
-    <value>Load existing datafile</value>
+    <value>既存のデータファイルを読み込む</value>
   </data>
   <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
-    <value>First steps</value>
+    <value>はじめの一歩</value>
   </data>
   <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
-    <value>Load data file</value>
+    <value>データファイルの読み込み</value>
   </data>
   <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
-    <value>Login</value>
+    <value>ログイン</value>
   </data>
   <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
-    <value>Server address</value>
+    <value>サーバーアドレス</value>
   </data>
   <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
-    <value>Username</value>
+    <value>ユーザー名</value>
   </data>
   <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
-    <value>Data file</value>
+    <value>データファイル</value>
   </data>
   <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
-    <value>Service login</value>
+    <value>サービスログイン</value>
   </data>
   <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
-    <value>Round corners</value>
+    <value>ラウンドコーナー</value>
   </data>
   <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
-    <value>If the option is enabled, the corners of the controls will be rounded off</value>
+    <value>このオプションを有効にすると、コントロールの角が丸くなります。</value>
   </data>
   <data name="SettingsAppThemeMode.Header" xml:space="preserve">
-    <value>App color scheme</value>
+    <value>アプリの配色</value>
   </data>
   <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
-    <value>Factory reset</value>
+    <value>ファクトリーリセット</value>
   </data>
   <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
-    <value>Pressing and confirming resets the app</value>
+    <value>を押して確認すると、アプリがリセットされる</value>
   </data>
   <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
-    <value>QR-Code scan</value>
+    <value>QRコードスキャン</value>
   </data>
   <data name="UseDatafilePasswordInfo" xml:space="preserve">
-    <value>To load the data file, you must enter the password that was configured when the file was created.</value>
+    <value>データファイルをロードするには、ファイル作成時に設定されたパスワードを入力する必要があります。</value>
   </data>
   <data name="ToolTipShowHelp" xml:space="preserve">
-    <value>Show help</value>
+    <value>ヘルプを表示</value>
   </data>
   <data name="SettingsAutoLogoutDesc" xml:space="preserve">
-    <value>Automatic logout after inactivity</value>
+    <value>非アクティブ時の自動ログアウト</value>
   </data>
   <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
-    <value>Minutes inactivity</value>
+    <value>活動休止時間（分</value>
   </data>
   <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
-    <value>Automatic lock</value>
+    <value>オートロック</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>閉じる</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
-    <value>When the QR code scan is selected, a new window opens in which the programme containing the QR code to be scanned must be selected. This is the browser, for example.</value>
+    <value>QRコードスキャンを選択すると、新しいウィンドウが開き、スキャンするQRコードを含むプログラムを選択する必要があります。これは例えばブラウザです。</value>
   </data>
   <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
-    <value>Display QR code</value>
+    <value>QRコードを表示する</value>
   </data>
   <data name="DisplayQRCodeContentDialogTitle" xml:space="preserve">
-    <value>QR code display</value>
+    <value>QRコード表示</value>
   </data>
   <data name="AddAccountCodeContentDialogInputSecretKeyHelp" xml:space="preserve">
-    <value>The input is based on Base32 and therefore only allows the letters A-Z and the numbers from 2-7.</value>
+    <value>入力はBase32に基づいているため、A～Zのアルファベットと2～7の数字しか入力できない。</value>
   </data>
   <data name="AccountCodePageTooltipDeleteFavourite" xml:space="preserve">
-    <value>Undo favourite</value>
+    <value>お気に入りを取り消す</value>
   </data>
   <data name="AccountCodePageTooltipSetFavourite" xml:space="preserve">
-    <value>Set as favourite</value>
+    <value>お気に入りに設定</value>
   </data>
   <data name="AccountCodePageTooltipHideTOTP" xml:space="preserve">
-    <value>Hide key</value>
+    <value>キーを隠す</value>
   </data>
   <data name="AccountCodePageTooltipShowTOTP" xml:space="preserve">
-    <value>Show key</value>
+    <value>キーを表示</value>
   </data>
   <data name="SettingsPreferHiddenTOTP.Header" xml:space="preserve">
-    <value>Hide keys</value>
+    <value>キーを隠す</value>
   </data>
   <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
-    <value>The generated keys are hidden and can optionally be faded in.</value>
+    <value>生成されたキーは隠され、オプションでフェードインさせることもできる。</value>
   </data>
   <data name="AddAccountContentDialogExpertExpander.Header" xml:space="preserve">
-    <value>Expert settings</value>
+    <value>エキスパート設定</value>
   </data>
   <data name="AddAccountContentDialogHashAlgo.Header" xml:space="preserve">
-    <value>Hash algorithm</value>
+    <value>ハッシュアルゴリズム</value>
   </data>
   <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
-    <value>Number of digits</value>
+    <value>桁数</value>
   </data>
   <data name="ButtonTextRetry" xml:space="preserve">
-    <value>Try again</value>
+    <value>再試行</value>
   </data>
   <data name="ErrorClipboardTask" xml:space="preserve">
-    <value>The clipboard has been occupied by another program, please try again.</value>
+    <value>クリップボードが他のプログラムで使用されています。</value>
   </data>
   <data name="AddAccountContentDialogDeleteAccountIcon.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value>削除</value>
   </data>
   <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
-    <value>Account icon</value>
+    <value>アカウントアイコン</value>
   </data>
   <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
-    <value>Add notes</value>
+    <value>メモを追加する</value>
   </data>
   <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
-    <value>Notes</value>
+    <value>備考</value>
   </data>
   <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
-    <value>Search account picture</value>
+    <value>アカウント画像検索</value>
   </data>
   <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
-    <value>Only change these settings if you are sure that the service requires them.</value>
+    <value>これらの設定を変更するのは、そのサービスがその設定を必要とすることを確認してからにしてください。</value>
   </data>
   <data name="NewDataFilePageTitle.Text" xml:space="preserve">
-    <value>New data file</value>
+    <value>新しいデータファイル</value>
   </data>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
-    <value>Filter</value>
+    <value>フィルター</value>
   </data>
   <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
-    <value>Filter</value>
+    <value>フィルター</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
-    <value>Choose file</value>
+    <value>ファイルを選択</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFolder" xml:space="preserve">
-    <value>Choose folder</value>
+    <value>フォルダを選択</value>
   </data>
   <data name="SettingsPageAboDesc.Text" xml:space="preserve">
-    <value>Support the development of the app with recurring payments.</value>
+    <value>定期的な支払いでアプリの開発をサポートする。</value>
   </data>
   <data name="WebDAVEmptyFolderMessage.Text" xml:space="preserve">
-    <value>This folder does not contain any files that can be selected.</value>
+    <value>このフォルダには選択できるファイルはありません。</value>
   </data>
   <data name="NewDatafileCreateDatafile.Content" xml:space="preserve">
-    <value>Create data file</value>
+    <value>データファイルの作成</value>
   </data>
   <data name="NewDatafilehangeDatafile.Content" xml:space="preserve">
-    <value>Change folder</value>
+    <value>フォルダを変更する</value>
   </data>
   <data name="SettingsAppPrideMonthDesign.Header" xml:space="preserve">
-    <value>Rainbow colours for login windows</value>
+    <value>ログインウィンドウにレインボーカラー</value>
   </data>
   <data name="SettingsAppPrideMonthDesignDesc.Text" xml:space="preserve">
-    <value>Setting rainbow colours for the login window</value>
+    <value>ログイン・ウィンドウに虹色を設定する</value>
   </data>
   <data name="SettingsMailSupportApp.Text" xml:space="preserve">
-    <value>E-mail support</value>
+    <value>メールサポート</value>
   </data>
   <data name="SettingsCustomDesign.Header" xml:space="preserve">
-    <value>Special design settings</value>
+    <value>特別なデザイン設定</value>
   </data>
   <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
-    <value>Import backup</value>
+    <value>インポートバックアップ</value>
   </data>
   <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
-    <value>Create data file</value>
+    <value>データファイルの作成</value>
   </data>
   <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
-    <value>Open tutorial</value>
+    <value>オープンチュートリアル</value>
   </data>
   <data name="WelcomePageTutorialDesc" xml:space="preserve">
-    <value>Would you like to open the tutorial for the application?</value>
+    <value>アプリケーションのチュートリアルを開きますか？</value>
   </data>
   <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
-    <value>The **2fast** application (acronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) is an [authenticator](https://en.wikipedia.org/wiki/Authenticator) for two-factor authentication (2FA) that uses the standard "**T**ime-based **O**ne-**t**ime **P**assword algorithm"/ time-based one-time password (TOTP) according to standardization [RFC 6238](https://tools.ietf.org/html/rfc6238). Services that rely on the TOTP standard for the second factor can be used with this application. For example, Microsoft, Google and PayPal support two-factor authentication using TOTP:</value>
+    <value>2fast**アプリケーション(**t**2 **f**actor **a**uthenticator **s**upporting **T**OTPの頭字語)は、標準化[RFC 6238](https://tools.ietf.org/html/rfc6238)に従った標準的な「**T**time-based **One-**t**time **P**passwordアルゴリズム」/時間ベースのワンタイムパスワード(TOTP)を使用する二要素認証(2FA)のための[認証機能](https://en.wikipedia.org/wiki/Authenticator)です。TOTP 標準を第 2 要素に使用するサービスは、このアプリケーションで使用することができます。例えば、Microsoft、Google、PayPal は、TOTP を使用した二要素認証をサポートしています：</value>
   </data>
   <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
-    <value>To create a data file, the first step is to select a folder in which the file is to be saved. A storage location that is protected against data loss is recommended (e.g. cloud storage such as One-Drive, DropBox, etc.). This is followed by the name and password for encrypting the file. It is recommended to save the password in a password manager to prevent loss.</value>
+    <value>データファイルを作成するには、まずファイルを保存するフォルダを選択します。データ損失から保護される保存場所を推奨する（One-Drive、DropBoxなどのクラウドストレージなど）。続いて、ファイルを暗号化するための名前とパスワードを入力します。パスワードは紛失防止のため、パスワード・マネージャーに保存することをお勧めします。</value>
   </data>
   <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
-    <value>To load the datafile, the first step is to select the data file. This is followed by the password with which the data file has been encrypted.</value>
+    <value>データファイルをロードするには、まずデータファイルを選択する。続いて、データファイルを暗号化したパスワードを入力する。</value>
   </data>
   <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
-    <value>Account creation</value>
+    <value>アカウント作成</value>
   </data>
   <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
-    <value>Creation of a datafile</value>
+    <value>データファイルの作成</value>
   </data>
   <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
-    <value>Loading a data file</value>
+    <value>データファイルの読み込み</value>
   </data>
   <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
-    <value>Automatic logout</value>
+    <value>自動ログアウト</value>
   </data>
   <data name="FunctionNotAvailable" xml:space="preserve">
-    <value>Function not available</value>
+    <value>使用できない機能</value>
   </data>
   <data name="WindowsHelloNotAvailable" xml:space="preserve">
-    <value>Windows Hello cannot be executed because no password is stored for the datafile in the protected memory.</value>
+    <value>保護メモリ内のデータファイルにパスワードが保存されていないため、Windows Helloを実行できない。</value>
   </data>
   <data name="ErrorGenerateTOTPCode" xml:space="preserve">
-    <value>The secret key for the account {0} is empty or unreadable. Please restart the app. If the problem persists, clean up the account {0} and add it again.</value>
+    <value>アカウント{0}の秘密鍵が空か読めません。アプリを再起動してください。問題が解決しない場合は、アカウント{0}をクリーンアップし、再度追加してください。</value>
   </data>
   <data name="TextFormatterBoldToolTip" xml:space="preserve">
-    <value>Bold</value>
+    <value>太字</value>
   </data>
   <data name="TextFormatterItalicToolTip" xml:space="preserve">
-    <value>Italics</value>
+    <value>イタリック体</value>
   </data>
   <data name="TextFormatterStrikeToolTip" xml:space="preserve">
-    <value>Strikethrough</value>
+    <value>取り消し線</value>
   </data>
   <data name="TextFormatterUnderlineToolTip" xml:space="preserve">
-    <value>Underline</value>
+    <value>アンダーライン</value>
   </data>
   <data name="TextFormatterListToolTip" xml:space="preserve">
-    <value>List</value>
+    <value>リスト</value>
   </data>
   <data name="TextFormatterOrderedToolTip" xml:space="preserve">
-    <value>Ordered list</value>
+    <value>オーダーリスト</value>
   </data>
   <data name="WriteDatafileErrorBTNCancel" xml:space="preserve">
-    <value>Discard changes</value>
+    <value>変更の破棄</value>
   </data>
   <data name="WriteDatafileErrorBTNRetry" xml:space="preserve">
-    <value>Save again</value>
+    <value>もう一度保存する</value>
   </data>
   <data name="WriteDatafileErrorDesc" xml:space="preserve">
-    <value>The changes could not be saved. Do you want to save them again?</value>
+    <value>変更を保存できませんでした。もう一度保存しますか？</value>
   </data>
   <data name="SettingsCBNotStorePassword.Content" xml:space="preserve">
-    <value>Don't save the password in credential manager (Windows Hello is not available)</value>
+    <value>クレデンシャル・マネージャーにパスワードを保存しない（Windows Helloは利用できない）</value>
   </data>
   <data name="DatafileViewModelWebDAVServerNotFound" xml:space="preserve">
-    <value>Address not found</value>
+    <value>アドレスが見つかりません</value>
   </data>
   <data name="DatafileViewModelWebDAVServerNotFoundDesc" xml:space="preserve">
-    <value>The address to the WebDAV service could not be found.</value>
+    <value>WebDAVサービスのアドレスが見つかりません。</value>
   </data>
   <data name="WebDAVAppPasswordInfo" xml:space="preserve">
-    <value>An app password is required to log in to the WebDAV service, this can be created in the settings of the WebDAV service.</value>
+    <value>アプリのパスワードはWebDAVサービスの設定で作成できます。</value>
   </data>
   <data name="DatafileViewModelWebDAVCredentialsError" xml:space="preserve">
-    <value>Login error</value>
+    <value>ログインエラー</value>
   </data>
   <data name="DatafileViewModelWebDAVCredentialsErrorDesc" xml:space="preserve">
-    <value>Your username or password is invalid.</value>
+    <value>ユーザー名またはパスワードが無効です。</value>
   </data>
   <data name="DatafileViewModelWebDAVMaintenanceError" xml:space="preserve">
-    <value>Server in maintenance mode</value>
+    <value>サーバーがメンテナンスモード</value>
   </data>
   <data name="DatafileViewModelWebDAVMaintenanceErrorDesc" xml:space="preserve">
-    <value>Login is currently not possible because the WebDAV service is currently in maintenance mode.</value>
+    <value>WebDAVサービスは現在メンテナンス中のため、ログインはできません。</value>
   </data>
   <data name="DatafileViewModelWebDAVNotInstalledError" xml:space="preserve">
-    <value>Server not installed</value>
+    <value>サーバーがインストールされていない</value>
   </data>
   <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
-    <value>The WebDAV service is currently not properly installed.</value>
+    <value>WebDAVサービスが現在正しくインストールされていません。</value>
   </data>
   <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
-    <value>Offer Windows Hello as a login option</value>
+    <value>ログインオプションとしてWindows Helloを提供</value>
   </data>
   <data name="InfoBarDatafileNoInternet" xml:space="preserve">
-    <value>Currently no internet connectivity is available for synchronisation. Please connect and confirm "Reload datafile".</value>
+    <value>現在、同期のためのインターネット接続ができません。接続し、「データファイルの再読み込み」を確認してください。</value>
   </data>
   <data name="InfoBarDatafileTitleNoInternet" xml:space="preserve">
-    <value>No internet connection</value>
+    <value>インターネット接続なし</value>
   </data>
   <data name="InfoBarDatafileTitleUpdated" xml:space="preserve">
-    <value>Datafile updated</value>
+    <value>データファイル更新</value>
   </data>
   <data name="InfoBarDatafileUpdated" xml:space="preserve">
-    <value>The data file has been successfully updated.</value>
+    <value>データファイルは正常に更新されました。</value>
   </data>
   <data name="AddAccountContentDialogCameraScan.Header" xml:space="preserve">
-    <value>Camera</value>
+    <value>カメラ</value>
   </data>
   <data name="AddAccountContentDialogCameraScanBTN.Text" xml:space="preserve">
-    <value>Camera</value>
+    <value>カメラ</value>
   </data>
   <data name="AddAccountContentDialogBTNCamRetry.Content" xml:space="preserve">
-    <value>Reload</value>
+    <value>リロード</value>
   </data>
   <data name="AddAccountContentDialogNoCamFound.Text" xml:space="preserve">
-    <value>No camera is available.</value>
+    <value>カメラはない。</value>
   </data>
   <data name="AddAccountContentDialogNoCamPermission.Text" xml:space="preserve">
-    <value>No consent has been given for the camera to be displayed.</value>
+    <value>カメラが映し出されることに同意は得ていない。</value>
   </data>
   <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
-    <value>Open settings</value>
+    <value>オープン設定</value>
   </data>
   <data name="ShellPageWarnInfo" xml:space="preserve">
-    <value>Screen recording protection not active</value>
+    <value>画面録画保護が有効でない</value>
   </data>
   <data name="NewDatafileFolderPath.Header" xml:space="preserve">
-    <value>WebDAV folder path</value>
+    <value>WebDAVフォルダパス</value>
   </data>
   <data name="AccountCodePageTitle" xml:space="preserve">
-    <value>Accounts</value>
+    <value>アカウント</value>
   </data>
   <data name="AccoundCodePageImportEntry.Label" xml:space="preserve">
-    <value>Import accounts</value>
+    <value>アカウントのインポート</value>
   </data>
   <data name="AccoundCodePageImportCamera.Text" xml:space="preserve">
-    <value>Perform camera import</value>
+    <value>カメラのインポートの実行</value>
   </data>
   <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
-    <value>Use file/image for import</value>
+    <value>インポートにファイル/画像を使用する</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - two factor authenticator</value>
+    <value>2fast - 二要素認証</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
-    <value>Back</value>
+    <value>バック</value>
   </data>
   <data name="TutorialPageForwardButton.Text" xml:space="preserve">
-    <value>Forward</value>
+    <value>フォワード</value>
   </data>
   <data name="TutorialPageSkipButton.Content" xml:space="preserve">
-    <value>Skip</value>
+    <value>スキップ</value>
   </data>
   <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
-    <value>Finish tutorial</value>
+    <value>チュートリアルの終了</value>
   </data>
   <data name="NewDatafilePasswordInfo" xml:space="preserve">
-    <value>A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.</value>
+    <value>データファイルの暗号化にはパスワードが必要です。このパスワードは、パスワード・マネージャーで安全に保管することを強くお勧めします。</value>
   </data>
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
-    <value>Password for encryption</value>
+    <value>暗号化用パスワード</value>
   </data>
   <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
-    <value>The key is copied to the clipboard.</value>
+    <value>キーはクリップボードにコピーされる。</value>
   </data>
   <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
-    <value>Copy key</value>
+    <value>コピーキー</value>
   </data>
   <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
-    <value>By setting a favourite, the account is displayed in the accent colour of the application and is placed on top in the display order.</value>
+    <value>お気に入りを設定することで、そのアカウントはアプリケーションのアクセントカラーで表示され、表示順も一番上になります。</value>
   </data>
   <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
-    <value>Set favourite</value>
+    <value>お気に入りのセット</value>
   </data>
   <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
-    <value>Additional options for the account are displayed here</value>
+    <value>アカウントの追加オプションはここに表示されます。</value>
   </data>
   <data name="TutorialPageItemMoreBTNTitle" xml:space="preserve">
-    <value>More options</value>
+    <value>その他のオプション</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
-    <value>Optionally, keys can be hidden and displayed again</value>
+    <value>オプションで、キーを非表示にしたり、再度表示したりすることができる。</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
-    <value>Hide/display key</value>
+    <value>キーを隠す/表示する</value>
   </data>
   <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
-    <value>There are various interaction options for created accounts, which are explained in more detail using an example account after they have been activated.</value>
+    <value>作成されたアカウントには様々なインタラクションオプションがあり、アクティベートされた後のアカウント例を用いて詳しく説明する。</value>
   </data>
   <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
-    <value>Interaction options for accounts</value>
+    <value>口座の交流オプション</value>
   </data>
   <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
-    <value>Access to the folder is blocked for the application, try again or select another folder.</value>
+    <value>アプリケーションのためにフォルダへのアクセスがブロックされています。再試行するか、別のフォルダを選択してください。</value>
   </data>
   <data name="NewDatafileAccessErrorTitle" xml:space="preserve">
-    <value>Access denied</value>
+    <value>アクセス拒否</value>
   </data>
   <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
-    <value>Create categories</value>
+    <value>カテゴリーの作成</value>
   </data>
   <data name="ManageCategoriesContentDialogIcon.Header" xml:space="preserve">
-    <value>Choose icon</value>
+    <value>アイコンを選ぶ</value>
   </data>
   <data name="ManageCategoriesContentDialogLabel.Header" xml:space="preserve">
-    <value>Name of the catgory</value>
+    <value>カテゴリー名</value>
   </data>
   <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText" xml:space="preserve">
-    <value>Save</value>
+    <value>セーブ</value>
   </data>
   <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="ManageCategoriesContentDialogHeader.Title" xml:space="preserve">
-    <value>Manage categories</value>
+    <value>カテゴリーの管理</value>
   </data>
   <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
-    <value>Create category</value>
+    <value>カテゴリー作成</value>
   </data>
   <data name="ShellPageSearchNavigation.Content" xml:space="preserve">
-    <value>Search</value>
+    <value>検索</value>
   </data>
   <data name="ShellPageSettingsNavigation.Content" xml:space="preserve">
-    <value>Settings</value>
+    <value>設定</value>
   </data>
   <data name="BiometricFacePreferMessage" xml:space="preserve">
-    <value>You have the option of logging in with facial recognition. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+    <value>顔認証でログインするオプションがあります。今後もこのログインをご希望ですか？このオプションはいつでも設定で変更できます。</value>
   </data>
   <data name="BiometricFingerPreferMessage" xml:space="preserve">
-    <value>You have the option of logging in with your fingerprint. Would you like to prefer this login in the future? You can change this option in the settings at any time.</value>
+    <value>指紋でログインするオプションがあります。今後もこのログインをご希望ですか？このオプションはいつでも設定で変更できます。</value>
   </data>
   <data name="BiometricLoginSubtitle" xml:space="preserve">
-    <value>Log in to the app with a fingerprint or facial recognition.</value>
+    <value>指紋認証または顔認証でアプリにログイン。</value>
   </data>
   <data name="BiometricLoginTitle" xml:space="preserve">
-    <value>Login</value>
+    <value>ログイン</value>
   </data>
   <data name="ShellPageTutorialNavigation.Content" xml:space="preserve">
-    <value>Tutorial</value>
+    <value>チュートリアル</value>
   </data>
   <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Open tutorial</value>
+    <value>オープンチュートリアル</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
-    <value>The functionality for the [Authentication](https://en.wikipedia.org/wiki/Authentication) of the second factor is done by means of the time-based one-time password. For this purpose, a secret setup key is agreed between the logon server of the service and the user, which is stored locally in the application. This ensures that if the setup key is agreed, the application can always be operated offline.
+    <value>第2因子の「認証」(https://ja.wikipedia.org/wiki/%E8%AA%8D%E8%A8%BC)の機能は、時間ベースのワンタイムパスワードによって行われる。この目的のために、サービスのログオンサーバとユーザの間で秘密のセットアップキーが合意され、このキーはアプリ ケーションのローカルに保存されます。これにより、セットアップ・キーが合意されれば、アプリケーションは常にオフラインで操作することができます。
 
 
 
-The storage of the setup keys for the various services in this application, unlike in other authenticators, is stored in a file, which is password protected at creation to encrypt the file. For storing the file, a cloud storage such as Nextcloud, ownCloud, Onedrive, etc. is recommended in this case, in order to obtain versioning and security against loss.
+このアプリケーションの様々なサービスのセットアップ・キーの保存は、他の認証機関と異なり、ファイルに保存される。ファイルの保存には、バージョン管理や紛失時のセキュリティの観点から、Nextcloud、ownCloud、Onedriveなどのクラウドストレージを推奨します。
 
 
 
-The functionality of this application is explained in more detail in the following sections.</value>
+このアプリケーションの機能については、次のセクションで詳しく説明します。</value>
+    <comment>[ReswT:manually]</comment>
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
-    <value>**Functionality of the application**</value>
+    <value>**アプリケーションの機能</value>
   </data>
   <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
-    <value>Manage subscriptions</value>
+    <value>サブスクリプションの管理</value>
   </data>
   <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
-    <value>In the following steps, the functionality of the application will be explained.</value>
+    <value>次のステップでは、アプリケーションの機能を説明する。</value>
   </data>
   <data name="BTNBack.Content" xml:space="preserve">
-    <value>Back</value>
+    <value>バック</value>
   </data>
   <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
-    <value>Choose folder path</value>
+    <value>フォルダパスの選択</value>
   </data>
   <data name="SettingsInAppPayment.Header" xml:space="preserve">
-    <value>Subscriptions and one-time purchases</value>
+    <value>サブスクリプションと1回限りの購入</value>
   </data>
   <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
-    <value>With the subscription you support the further development of the application. ***Pro+*** features that will be added in the future are usable with this subscription and accessible.
+    <value>サブスクリプションにより、アプリケーションのさらなる開発をサポートします。将来追加される***Pro+***機能は、このサブスクリプションで使用でき、アクセス可能です。
 ***
-### 2,49€ monthly</value>
+### 月額2,49ユーロ</value>
   </data>
   <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Subscribe / buy</value>
+    <value>購読/購入</value>
   </data>
   <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
-    <value>Subscriptions &amp; purchases</value>
+    <value>購読と購入</value>
   </data>
   <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
-    <value>Import the account for another device by opening a two-factor authentication app with the desired device and adding an account with the camera.</value>
+    <value>別のデバイスのアカウントをインポートするには、目的のデバイスで二要素認証アプリを開き、カメラでアカウントを追加します。</value>
   </data>
   <data name="SettingsCardExternalAction" xml:space="preserve">
-    <value>Call externally (browser)</value>
+    <value>外部（ブラウザ）からの呼び出し</value>
   </data>
   <data name="SettingsInAppPayment.Description" xml:space="preserve">
-    <value>Make subscriptions and purchases for advanced features</value>
+    <value>高度な機能のためのサブスクリプションと購入を行う</value>
   </data>
   <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
-    <value>Manage subscriptions in your Microsoft account</value>
+    <value>Microsoftアカウントでサブスクリプションを管理する</value>
   </data>
   <data name="InAppPaymentContentDialogSubscriptionItemSelect" xml:space="preserve">
-    <value>Select subscription</value>
+    <value>サブスクリプションを選択</value>
   </data>
   <data name="AddAccountContentDialogTitle" xml:space="preserve">
-    <value>Create a new account</value>
+    <value>新しいアカウントを作成する</value>
   </data>
   <data name="CategoryFilterFlyoutNoCategories.Text" xml:space="preserve">
-    <value>There are currently no categories available, create new categories via the settings in this dialog.</value>
+    <value>現在利用可能なカテゴリはありません。このダイアログの設定で新しいカテゴリを作成してください。</value>
   </data>
   <data name="ManageCategoriesAddGlobalCategories.Header" xml:space="preserve">
-    <value>Add category</value>
+    <value>カテゴリーを追加する</value>
   </data>
   <data name="LoginPageTitle.Text" xml:space="preserve">
-    <value>Login</value>
+    <value>ログイン</value>
   </data>
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
-    <value>Manage categories &amp; set filters</value>
+    <value>カテゴリーの管理とフィルターの設定</value>
   </data>
   <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
-    <value>Manage categories &amp; set filters</value>
+    <value>カテゴリーの管理とフィルターの設定</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
-    <value>Reset filter</value>
+    <value>リセットフィルター</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Settings.Label" xml:space="preserve">
-    <value>Manage categories</value>
+    <value>カテゴリーの管理</value>
   </data>
   <data name="EditAccountContentDialogAccountCategories.Header" xml:space="preserve">
-    <value>Set categories</value>
+    <value>カテゴリーを設定する</value>
   </data>
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
-    <value>Select for purchase</value>
+    <value>購入を選択</value>
   </data>
   <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
-    <value>Function only available by purchase or subscription.</value>
+    <value>購入またはサブスクリプションによってのみ利用可能な機能。</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">
-    <value>With the purchase, Pro+ functions become permanently accessible and usable, thus supporting the further development of the application.
-Currently available:
+    <value>ご購入いただくことで、Pro+の機能が永続的に利用可能になり、アプリケーションのさらなる発展をサポートします。
+現在ご利用いただけます：
 
-- Categories &amp; filter
-- Mobile Device Management (MDM)
+- カテゴリーとフィルター
+- モバイルデバイス管理 (MDM)
 ***
-### 34,99€ one-time</value>
+### 34,99ユーロ</value>
   </data>
   <data name="InAppSubscriptionYear" xml:space="preserve">
-    <value>With the subscription, ***Pro+*** functions become accessible and usable and you support the further development of the application.
-Currently available:
+    <value>サブスクリプションにより、***Pro+***機能が利用可能になり、アプリケーションのさらなる開発をサポートします。
+現在ご利用いただけます：
 
-- Categories &amp; filter
-- Mobile Device Management (MDM)
+- カテゴリーとフィルター
+- モバイルデバイス管理 (MDM)
 ***
-### 6,49€ annually</value>
+### 年間6,49ユーロ</value>
   </data>
   <data name="InAppPaymentContentDialogBuyItemSelect" xml:space="preserve">
-    <value>Select for buy</value>
+    <value>購入を選択</value>
   </data>
   <data name="AccountCodePageManageFilterInfo.Label" xml:space="preserve">
-    <value>Categories &amp; filter</value>
+    <value>カテゴリー＆フィルター</value>
   </data>
   <data name="ProFeatureContentInfo" xml:space="preserve">
-    <value>The functionality is only available by subscription or purchase. Would you like to take a look at the variants?</value>
+    <value>この機能は、サブスクリプションまたは購入によってのみ利用可能です。バリアントをご覧になりたいですか？</value>
   </data>
   <data name="ProFeatureTitleInfo" xml:space="preserve">
-    <value>Paid function</value>
+    <value>有料機能</value>
   </data>
   <data name="TutorialContentDialogForgettenPassword.Text" xml:space="preserve">
-    <value>Forgotten password?</value>
+    <value>パスワードをお忘れですか？</value>
   </data>
   <data name="TutorialPagePasswordInfo" xml:space="preserve">
-    <value>If you have forgotten the password and previously uninstalled or reset the application, you can view the password on the same computer in the [Credential Manager](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) of Windows. The entry is set here as "Project2FA" under web login information.</value>
+    <value>パスワードを忘れてしまい、アプリケーションをアンインストールまたはリセットした場合、同じコンピュータのWindowsの[Credential Manager](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0)でパスワードを確認することができます。ここでは、Webログイン情報の下に「Project2FA」という項目が設定されています。</value>
   </data>
   <data name="LoginPageWindowsHelloError" xml:space="preserve">
-    <value>There is a problem with Windows Hello. To use the functionality in the application, solve the problem in the Windows settings.</value>
+    <value>Windows Helloに問題があります。アプリケーションの機能を使用するには、Windowsの設定で問題を解決してください。</value>
   </data>
   <data name="EditAccountContentDialogAccountCategoryInfoText" xml:space="preserve">
-    <value>By clicking on the existing categories, you can assign one or more categories to the account, allowing you to carry out filtered searches later on. The categories are managed and created on the main page using the "Set categories &amp; filters" button in the top menu bar.</value>
+    <value>既存のカテゴリーをクリックすると、1つまたは複数のカテゴリーをアカウントに割り当てることができ、後でフィルターをかけた検索を実行することができます。カテゴリーは、メインページの上部メニューバーの「カテゴリーとフィルターの設定」ボタンで管理・作成できます。</value>
   </data>
   <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
-    <value>There are currently no categories available, create new categories using the button in the top menu bar "Set categories &amp; filters".</value>
+    <value>現在、利用可能なカテゴリはありません。上部メニューバーの「カテゴリとフィルタの設定」ボタンを使用して新しいカテゴリを作成してください。</value>
   </data>
   <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
-    <value>Error logging</value>
+    <value>エラーログ</value>
   </data>
   <data name="SettingsLoggingFull.Content" xml:space="preserve">
-    <value>Complete</value>
+    <value>完全</value>
   </data>
   <data name="SettingsLoggingNone.Content" xml:space="preserve">
-    <value>No</value>
+    <value>いいえ</value>
   </data>
   <data name="SettingsLoggingSimple.Content" xml:space="preserve">
-    <value>Only exception</value>
+    <value>唯一の例外</value>
   </data>
   <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
-    <value>Show error log</value>
+    <value>エラーログの表示</value>
   </data>
   <data name="SettingsPageNoLogDialogContent" xml:space="preserve">
-    <value>No error report has been created at this time.</value>
+    <value>現時点でエラーレポートは作成されていない。</value>
   </data>
   <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
-    <value>No error report available</value>
+    <value>エラーレポートなし</value>
   </data>
   <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
-    <value>The search is carried out with the set categories via an OR search.</value>
+    <value>検索は、設定されたカテゴリーをOR検索で行う。</value>
   </data>
   <data name="EditAccountPageTitle" xml:space="preserve">
-    <value>Edit account</value>
+    <value>アカウント編集</value>
   </data>
   <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
-    <value>No window for scanning a QR code has been selected.</value>
+    <value>QRコード読み取り用のウィンドウが選択されていません。</value>
   </data>
   <data name="LoginPageIOSBiometricReason" xml:space="preserve">
-    <value>With the use of biometrics, login is implemented without a password.</value>
+    <value>生体認証を使えば、パスワードなしでログインできる。</value>
   </data>
   <data name="SettingsAppShowAvailableProFeatures.Header" xml:space="preserve">
-    <value>Display of Pro functions</value>
+    <value>プロ機能の表示</value>
   </data>
   <data name="SettingsAppShowAvailableProFeaturessDesc.Text" xml:space="preserve">
-    <value>This setting can be used to switch the visibility of placeholders for Pro functions on or off.</value>
+    <value>この設定を使用して、Pro機能のプレースホルダーの表示のオン/オフを切り替えることができます。</value>
   </data>
   <data name="SettingsMDMInfo.Text" xml:space="preserve">
-    <value>*Some settings are managed by your organisation.</value>
+    <value>*一部の設定は組織で管理されます。</value>
   </data>
   <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
-    <value># Categories and filters
-User-defined categories can be created with an icon and assignments can be created for accounts. In the filter selection, filtering for accounts is possible based on the configuration. Filtering of accounts by category can also be further narrowed down using the standard search.
+    <value># カテゴリーとフィルター
+ユーザー定義のカテゴリーをアイコンで作成し、アカウントに割り当てることができます。フィルター選択では、設定に基づいてアカウントのフィルタリングが可能です。カテゴリによるアカウントのフィルタリングは、標準の検索を使用してさらに絞り込むこともできます。
 
-![Categories and filters](ms-appx:///Assets/Images/categories_EN.png)
+カテゴリとフィルタ](ms-appx:///Assets/Images/categories_EN.png)
 
-# Enterprise App Management | Mobile Device Management (MDM)
-The application supports an MDM configuration for centralised management of the application in the company; for example, the automatic blocking of the application or the login screen can be configured centrally. The overview of the available configurations can be viewed in the [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+# エンタープライズアプリ管理｜モバイルデバイス管理(MDM)
+例えば、アプリケーションの自動ブロックやログイン画面を一元的に設定できます。利用可能な設定の概要は、[Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM))で確認できます。</value>
   </data>
   <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
-    <value>Pro-Funktions</value>
+    <value>プロファンクションズ</value>
   </data>
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
-    <value>![First steps](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+    <value>ファーストステップ](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
 </root>

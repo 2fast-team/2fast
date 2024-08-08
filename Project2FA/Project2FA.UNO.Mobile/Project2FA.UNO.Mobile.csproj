@@ -18,6 +18,7 @@
     <PackageIcon>splash.png</PackageIcon>
     <PublishTrimmed>False</PublishTrimmed>
     <PublishAot>False</PublishAot>
+    <Platforms>AnyCPU;ARM64</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
     <CodesignKey>Apple Development: Created via API (CB3KSUCNGR)</CodesignKey>
@@ -34,10 +35,24 @@
     <EnableLLVM>True</EnableLLVM>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|ARM64'">
+    <AndroidUseAapt2>True</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <EnableLLVM>True</EnableLLVM>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
     <AndroidPackageFormat>apk</AndroidPackageFormat>
 	<AndroidStripILAfterAOT>false</AndroidStripILAfterAOT>
 	<AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <EnableLLVM>True</EnableLLVM>
+    <RunAOTCompilation>False</RunAOTCompilation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|ARM64'">
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidStripILAfterAOT>false</AndroidStripILAfterAOT>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <EnableLLVM>True</EnableLLVM>
     <RunAOTCompilation>False</RunAOTCompilation>
   </PropertyGroup>
@@ -87,8 +102,8 @@
 		<PackageReference Include="Xamarin.AndroidX.Navigation.Fragment" Version="2.7.7.5" />
 		<PackageReference Include="Xamarin.AndroidX.Navigation.Runtime" Version="2.7.7.5" />
 		<PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.7.7.5" />
-		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.6" />
-		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5" />
+		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.2" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.2" />
         <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.37" />
       </ItemGroup>
       <ItemGroup>

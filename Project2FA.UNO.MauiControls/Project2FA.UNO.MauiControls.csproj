@@ -4,6 +4,7 @@
     <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst;</TargetFrameworks>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
+    <Platforms>AnyCPU;ARM64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

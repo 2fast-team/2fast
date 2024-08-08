@@ -1064,6 +1064,7 @@
         <ListView 
             x:Name="LV_AccountCollection"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
+            SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
             ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}" 
             IsItemClickEnabled="False"
             ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"

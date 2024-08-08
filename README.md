@@ -18,7 +18,9 @@
 	</a>
 </p>
 <p align="center">
-	<a href='//www.microsoft.com/store/apps/9p9d81glh89q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
+<a href="https://apps.microsoft.com/detail/9p9d81glh89q?mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
 </p>
 
 <p align="center">

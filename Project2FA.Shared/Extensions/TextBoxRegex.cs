@@ -4,11 +4,19 @@
 
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using Microsoft.Toolkit;
+using CommunityToolkit.Common;
+
+#if WINDOWS_UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+#else
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
+#endif
 
-namespace Project2FA.UWP.Extensions
+namespace Project2FA.Extensions
 {
     /// <inheritdoc cref="TextBoxExtensions"/>
     public static partial class TextBoxExtensions
@@ -63,7 +71,7 @@ namespace Project2FA.UWP.Extensions
             ValidateTextBox(textBox, textBox.Text);
         }
 
-        private static void TextBox_GettingFocus(UIElement sender, Windows.UI.Xaml.Input.GettingFocusEventArgs args)
+        private static void TextBox_GettingFocus(UIElement sender, GettingFocusEventArgs args)
         {
             var textBox = (TextBox)sender;
             textBox.SelectionStart = textBox.Text.Length;

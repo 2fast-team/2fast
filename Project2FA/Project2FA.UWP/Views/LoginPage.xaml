@@ -5,9 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mstoolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:media="using:CommunityToolkit.WinUI.Media"
     xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

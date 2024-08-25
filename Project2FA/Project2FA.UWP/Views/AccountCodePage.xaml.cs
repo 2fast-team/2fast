@@ -260,16 +260,5 @@ namespace Project2FA.UWP.Views
         {
             ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel);
         }
-
-        private void HLBTN_ProFeature(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MainGrid_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
-        {
-            //LV_AccountCollection.Focus(FocusState.Keyboard);
-            //LV_AccountCollection.Focus(FocusState.Programmatic);
-        }
     }
 }

@@ -7,8 +7,8 @@
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:media="using:CommunityToolkit.WinUI.Media"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:viewmodels="using:Project2FA.ViewModels"
     xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d">

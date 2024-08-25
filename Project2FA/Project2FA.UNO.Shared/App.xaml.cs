@@ -39,6 +39,9 @@ using Project2FA.UNO.MauiControls;
 using Project2FA.Services.Parser;
 using UNOversal.Navigation;
 using UNOversal.Services.Logging;
+using Microsoft.Maui.Platform;
+using Uno.Extensions;
+using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.UNO
 {
@@ -77,6 +80,7 @@ namespace Project2FA.UNO
             InitializeLogging();
 
 #if __IOS__ || __ANDROID__
+            SetStyles();
             //Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
 #endif
 
@@ -163,6 +167,55 @@ namespace Project2FA.UNO
             }
 
             WinUIWindow.Current.Activate();
+        }
+
+        private void SetStyles()
+        {
+#if ANDROID
+            //var style = new Style(typeof(NativePivotPresenter))
+            //{
+            //    Setters =
+            //    {
+            //        new Setter<NativePivotPresenter>("Template", pb => pb
+            //            .Template = new ControlTemplate(() =>
+            //                new Grid
+            //                {
+            //                    RowDefinitions =
+            //                    {
+            //                        new RowDefinition(){ Height = GridLength.Auto},
+            //                        new RowDefinition(){ Height = new GridLength(1, GridUnitType.Star)},
+            //                    },
+
+            //                    Children =
+            //                    {
+            //                        // Header
+            //                        new Border
+            //                        {
+            //                            Child = new Uno.UI.Controls.SlidingTabLayout(ContextHelper.Current)
+            //                            {
+            //                                LayoutParameters = new Android.Views.ViewGroup.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, Android.Views.ViewGroup.LayoutParams.WrapContent),
+            //                            },
+            //                            BorderThickness = new Thickness(0,0,0,1),
+            //                        }
+            //                        .Apply(b => b.SetBinding("Background", new Binding { Path = "Background", RelativeSource = RelativeSource.TemplatedParent }))
+            //                        .Apply(b => b.SetBinding("BorderBrush", new Binding { Path = "BorderBrush", RelativeSource = RelativeSource.TemplatedParent })),
+
+            //                        // Content
+            //                        new ExtendedViewPager(ContextHelper.Current)
+            //                        {
+            //                            OffscreenPageLimit = 1,
+            //                            PageMargin = (int)Android.Util.TypedValue.ApplyDimension(Android.Util.ComplexUnitType.Dip, 4, ContextHelper.Current.Resources.DisplayMetrics),
+            //                            SwipeEnabled = true,
+            //                        }
+            //                        .Apply(v => Grid.SetRow(v, 1))
+            //                    }
+            //            })
+            //        )
+            //    }
+            //};
+
+            //Style.RegisterDefaultStyleForType(typeof(NativePivotPresenter), style, true);
+#endif
         }
 
         /// <summary>

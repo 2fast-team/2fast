@@ -6,7 +6,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d android ios">
+    xmlns:not_win="http://uno.ui/not_win"
+    mc:Ignorable="d android ios not_win">
     <ResourceDictionary.MergedDictionaries>
         <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/ToggleSwitch.xaml" />
@@ -32,6 +33,52 @@
         <Setter Property="FontSize" Value="24" />
         <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
     </Style>
+
+    <!-- Default native Pivot styles (for both Android and iOS) -->
+    <not_win:Style x:Key="NativeDefaultPivot"
+                TargetType="Pivot">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Pivot">
+                    <NativePivotPresenter x:Name="NativePresenter" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </not_win:Style>
+
+    <ios:Style TargetType="NativePivotPresenter">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Pivot">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="PART_Content"
+                            Grid.Row="0" />
+                        <UITabBar Grid.Row="1" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </ios:Style>
+
+    <android:Style TargetType="NativePivotPresenter">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Pivot">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Border Background="red">
+                        <!--<SlidingTabLayout></SlidingTabLayout>-->
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </android:Style>
 
     <!--<Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

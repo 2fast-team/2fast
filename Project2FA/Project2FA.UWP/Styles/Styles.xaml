@@ -8,7 +8,7 @@
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     xmlns:Windows10version1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 8)"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media">
+    xmlns:media="using:CommunityToolkit.WinUI.Media">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Styles/Generic/Button.xaml" />
@@ -21,8 +21,8 @@
         <ResourceDictionary Source="ms-appx:///Styles/Generic/PersonPicture.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/ComboBoxItemStyle.xaml" />
         <ResourceDictionary Source="ms-appx:///Styles/Generic/TokenView.xaml" />
-        <ResourceDictionary Source="ms-appx:///Styles/Generic/SettingsCard.xaml" />
-        <ResourceDictionary Source="ms-appx:///Styles/Generic/SettingsExpander.xaml" />
+        <!--<ResourceDictionary Source="ms-appx:///Styles/Generic/SettingsCard.xaml" />
+        <ResourceDictionary Source="ms-appx:///Styles/Generic/SettingsExpander.xaml" />-->
         <ResourceDictionary Source="ms-appx:///Styles/Generic/AppBarToggleButton.xaml" />
 
     </ResourceDictionary.MergedDictionaries>

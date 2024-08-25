@@ -126,4 +126,7 @@
     <StaticResource x:Key="CardBackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor" />
     <StaticResource x:Key="CardBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
     <StaticResource x:Key="CardPrimaryForegroundBrush" ResourceKey="TextFillColorPrimaryBrush" />
+
+    <StaticResource x:Key="SettingsCardBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+    <StaticResource x:Key="SettingsCardBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
 </ResourceDictionary>

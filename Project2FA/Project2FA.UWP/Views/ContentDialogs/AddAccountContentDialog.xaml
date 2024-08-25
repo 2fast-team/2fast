@@ -11,7 +11,7 @@
     xmlns:mediaSourceType="using:Windows.Media.Capture.Frames"
     xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
-    xmlns:extensions="using:Project2FA.UWP.Extensions"
+    xmlns:extensions="using:Project2FA.Extensions"
     xmlns:utils="using:Project2FA.UWP.Utils"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
@@ -479,29 +479,6 @@
                                 </StackPanel>
                             </appcontrols:CardExpanderControl>
 
-                            <CheckBox 
-                                x:Name="CB_ManualInput"
-                                x:Uid="AddAccountContentDialogManualInputCheckbox" 
-                                IsChecked="{x:Bind ViewModel.ManualInput,Mode=TwoWay}" 
-                                Content="~AddAccountContentDialogManualInputCheckbox.Content" Margin="0,12,0,0"/>
-                            <TextBox 
-                                x:Name="TB_AddAccountContentDialogSecretKey"
-                                x:Uid="AddAccountContentDialogSecretKey"
-                                extensions:TextBoxExtensions.ValidationMode="Dynamic"
-                                extensions:TextBoxExtensions.Regex="^[A-Za-z2-7-\s]*={0,6}$"
-                                extensions:TextBoxExtensions.ValidationType="Custom"
-                                Header="~AddAccountContentDialogSecretKey.Header" 
-                                PlaceholderText="~AddAccountContentDialogSecretKey.PlaceholderText" 
-                                IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
-                                Margin="0,12,0,0"
-                                Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
-                                <!--<Interactivity:Interaction.Behaviors>
-                                    <behaviors:HighlightFormFieldOnErrors 
-                                        PropertyName="SecretKey"
-                                        PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
-                                </Interactivity:Interaction.Behaviors>-->
-                            </TextBox>
-
                             <appcontrols:CardExpanderControl
                     Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
                     IsExpanded="True"
@@ -562,6 +539,31 @@
                                 </Grid>
 
                             </appcontrols:CardExpanderControl>
+
+                            <CheckBox 
+                                x:Name="CB_ManualInput"
+                                x:Uid="AddAccountContentDialogManualInputCheckbox" 
+                                IsChecked="{x:Bind ViewModel.ManualInput,Mode=TwoWay}" 
+                                Content="~AddAccountContentDialogManualInputCheckbox.Content" Margin="0,12,0,0"/>
+                            <TextBox 
+                                x:Name="TB_AddAccountContentDialogSecretKey"
+                                x:Uid="AddAccountContentDialogSecretKey"
+                                extensions:TextBoxExtensions.ValidationMode="Dynamic"
+                                extensions:TextBoxExtensions.Regex="^[A-Za-z2-7-\s]*={0,6}$"
+                                extensions:TextBoxExtensions.ValidationType="Custom"
+                                Header="~AddAccountContentDialogSecretKey.Header" 
+                                PlaceholderText="~AddAccountContentDialogSecretKey.PlaceholderText" 
+                                IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
+                                Margin="0,12,0,0"
+                                Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+                                <!--<Interactivity:Interaction.Behaviors>
+                                    <behaviors:HighlightFormFieldOnErrors 
+                                        PropertyName="SecretKey"
+                                        PropertyErrors="{x:Bind ViewModel.Errors, Mode=OneWay}"/>
+                                </Interactivity:Interaction.Behaviors>-->
+                            </TextBox>
+
+
 
                             <!--<ctwc:SettingsExpander
                                 HeaderIcon="{ui:FontIcon Glyph=&#xEF58;}"

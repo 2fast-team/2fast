@@ -70,16 +70,6 @@ namespace Project2FA.UWP.Views
             ViewModel.ChooseWebDAV();
         }
 
-        private void UseDatafileContentDialogWDLogin_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void PB_LocalPassword_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-
-        }
-
         private void HLBTN_WDPasswordInfo(object sender, RoutedEventArgs e)
         {
             AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip

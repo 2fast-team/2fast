@@ -262,12 +262,29 @@ namespace Project2FA.UWP.Views
 
         private void HLBTN_CategoryInfo(object sender, RoutedEventArgs e)
         {
-
+            TeachingTip teachingTip = new TeachingTip
+            {
+                Target = sender as FrameworkElement,
+                MaxWidth = 400,
+                Subtitle = Strings.Resources.EditAccountContentDialogAccountCategoryInfoText,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true
+            };
+            RootGrid.Children.Add(teachingTip);
         }
 
+        /// <summary>
+        /// Is triggered when the element is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TokenView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            if (e.ClickedItem is CategoryModel model)
+            {
+                model.IsSelected = !model.IsSelected;
+            }
         }
     }
 }

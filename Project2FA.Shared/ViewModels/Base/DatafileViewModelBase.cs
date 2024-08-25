@@ -32,7 +32,7 @@ namespace Project2FA.ViewModels
     {
         private string _serverAddress;
         private string _username;
-        private int _selectedIndex;
+        private int _selectedIndex = 0;
         private string _dateFileName;
         private bool _datafileBTNActive;
         private bool _isLoading;

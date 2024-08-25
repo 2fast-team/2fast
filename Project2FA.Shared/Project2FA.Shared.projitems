@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExFailedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExOpenedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\SettingsGroup\SettingsGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\SettingsGroup\SettingsGroupAutomationPeer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.Properties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToCommandBarVisibilityConverter.cs" />
@@ -35,6 +37,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\SVGImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TOTPVisibilityTooltipConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\VisibleWhenFalseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Data.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Properties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
@@ -191,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\SettingsGroup\SettingsGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

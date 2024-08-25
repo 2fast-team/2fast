@@ -192,9 +192,9 @@
                     Margin="0,15,0,8">
                     <appcontrols:CardExpanderControl.Header>
                         <appcontrols:CardControl
-                                        Icon="&#xE912;"
-                                        x:Uid="EditAccountContentDialogAccountCategories" 
-                                        Header="~EditAccountContentDialogAccountCategories.Header">
+                            Icon="&#xE912;"
+                            x:Uid="EditAccountContentDialogAccountCategories" 
+                            Header="~EditAccountContentDialogAccountCategories.Header">
                             <appcontrols:CardControl.ActionContent>
                                 <Button
                                     Grid.Column="1"

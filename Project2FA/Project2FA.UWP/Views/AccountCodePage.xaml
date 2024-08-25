@@ -10,7 +10,7 @@
     xmlns:views="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="using:Project2FA.ViewModels"
-    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:wctmedia="using:CommunityToolkit.WinUI.Media"

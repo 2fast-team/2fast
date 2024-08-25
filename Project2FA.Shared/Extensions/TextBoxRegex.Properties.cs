@@ -2,10 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+#if WINDOWS_UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+#else
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#endif
 
-namespace Project2FA.UWP.Extensions
+namespace Project2FA.Extensions
 {
     /// <summary>
     /// Provides attached dependency properties for the <see cref="TextBox"/> type.

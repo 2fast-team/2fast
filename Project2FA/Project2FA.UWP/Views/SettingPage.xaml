@@ -12,8 +12,10 @@
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:unoVersalControls="using:Project2FA.Controls"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
-    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    x:Name="Page"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -98,7 +100,7 @@
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="3,0,0,0">
         <Pivot x:Name="Main_Pivot" SelectedIndex="{x:Bind ViewModel.SelectedItem,Mode=TwoWay}" >
             <PivotItem
@@ -124,267 +126,243 @@
                             x:Name="Main_StackPanel"
                             MaxWidth="1040"
                             HorizontalAlignment="Left" 
-                            Margin="0,0,16,0">
+                            Margin="0,0,16,12">
+                            <Grid 
+                                Background="{ThemeResource CardBackgroundBrush}" 
+                                CornerRadius="{ThemeResource OverlayCornerRadius}"
+                                Margin="0,0,0,12">
+                                <unoVersalControls:SettingsGroup
+                                    Margin="12,0, 12, 12"
+                                    Header="~SettingsOptionsDesignTitle.Header"
+                                    x:Uid="SettingsOptionsDesignTitle">
+                                    <ctwc:SettingsCard 
+                                x:Uid="SettingsBackButtonCard"
+                                HeaderIcon="{ui:FontIcon Glyph=&#xE112;}"
+                                Header="~SettingsBackButtonCard.Header">
+                                        <ctwc:SettingsCard.Content>
+                                            <ToggleSwitch 
+                                        x:Uid="SettingsBackButtonToggleSwtich"
+                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHeaderBackButton, Mode=TwoWay}"
+                                        OffContent="~SettingsBackButtonToggleSwtich.OffContent"
+                                        OnContent="~SettingsBackButtonToggleSwtich.OnContent"  />
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>
 
-                            <appcontrols:CardGroupControl 
-                                    x:Uid="SettingsOptionsDesignTitle"
-                                    Header="~SettingsOptionsDesignTitle.Header">
-                                <appcontrols:CardControl 
-                                    x:Uid="SettingsBackButtonCard"
-                                    Icon="&#xE112;"
-                                    Header="~SettingsBackButtonCard.Header">
-                                    <appcontrols:CardControl.ActionContent>
-                                        <ToggleSwitch 
-                                x:Name="SettingsBackButtonToggleSwtich"
-                                x:Uid="SettingsBackButtonToggleSwtich"
-                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHeaderBackButton, Mode=TwoWay}"
-                                OffContent="~SettingsBackButtonToggleSwtich.OffContent"
-                                OnContent="~SettingsBackButtonToggleSwtich.OnContent"  />
-                                    </appcontrols:CardControl.ActionContent>
+                                    <ctwc:SettingsCard
+                                        x:Uid="SettingsAppThemeMode"
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xE2B1;}"                
+                                        Header="~SettingsAppThemeMode.Header">
+                                        <ctwc:SettingsCard.Description>
+                                            <HyperlinkButton
+                                                 x:Uid="SettingsWindowsColor"
+                                                 Content="~SettingsWindowsColor.Content"
+                                                 NavigateUri="ms-settings:personalization-colors"
+                                                 Style="{StaticResource TextButtonStyle}"/>
+                                        </ctwc:SettingsCard.Description>
+                                        <ctwc:SettingsCard.Content>
+                                            <StackPanel>
+                                                <ComboBox 
+             SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
+             MinWidth="{StaticResource CardActionControlMinWidth}">
+                                                    <ComboBoxItem x:Uid="SettingsThemeLight" />
+                                                    <ComboBoxItem x:Uid="SettingsThemeDark"/>
+                                                    <ComboBoxItem x:Uid="SettingsThemeSystem"/>
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>
 
-                                </appcontrols:CardControl>
+                                    <!--<ctwc:SettingsCard 
+                                        Header="~SettingsAppFontSize.Header">
+                                        <ctwc:SettingsCard.Content>
+                                            <muxc:NumberBox
+                                                SpinButtonPlacementMode="Inline"
+                                                Minimum="-5"
+                                                Maximum="5"/>
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>-->
 
-                                <appcontrols:CardControl 
-                                    x:Uid="SettingsAppThemeMode"
-                                    Icon="&#xE2B1;"
-                                    Header="~SettingsAppThemeMode.Header">
-                                    <appcontrols:CardControl.Description>
-                                        <HyperlinkButton
-                                            x:Uid="SettingsWindowsColor"
-                                            Content="~SettingsWindowsColor.Content"
-                                            NavigateUri="ms-settings:personalization-colors"/>
-                                    </appcontrols:CardControl.Description>
-                                    <appcontrols:CardControl.ActionContent>
-                                        <StackPanel>
-                                            <ComboBox 
-                                            SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.ThemeIndex, Mode=TwoWay}" 
-                                            MinWidth="{StaticResource CardActionControlMinWidth}">
-                                                <ComboBoxItem x:Uid="SettingsThemeLight" />
-                                                <ComboBoxItem x:Uid="SettingsThemeDark"/>
-                                                <ComboBoxItem x:Uid="SettingsThemeSystem"/>
-                                            </ComboBox>
-                                        </StackPanel>
-                                    </appcontrols:CardControl.ActionContent>
-                                </appcontrols:CardControl>
-
-                                <appcontrols:CardControl 
-                                    x:Uid="SettingsAppShowAvailableProFeatures"
-                                    Icon="&#xE82F;"
-                                    Visibility="{x:Bind ViewModel.SettingsPartViewModel.IsNoProVersion, Mode=OneWay}"
-                                    Header="~SettingsAppShowAvailableProFeatures.Header">
-                                    <appcontrols:CardControl.Description>
-                                        <TextBlock 
+                                    <ctwc:SettingsCard 
+                                        x:Uid="SettingsAppShowAvailableProFeatures"
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xE82F;}"
+                                        Visibility="{x:Bind ViewModel.SettingsPartViewModel.IsNoProVersion, Mode=OneWay}"
+                                        Header="~SettingsAppShowAvailableProFeatures.Header">
+                                        <ctwc:SettingsCard.Description>
+                                            <TextBlock 
                                             x:Uid="SettingsAppShowAvailableProFeaturessDesc"
                                             Text="~SettingsAppShowAvailableProFeaturessDesc.Text" 
                                             VerticalAlignment="Stretch" 
                                             HorizontalAlignment="Stretch"/>
-                                    </appcontrols:CardControl.Description>
-                                    <appcontrols:CardControl.ActionContent>
-                                        <ToggleSwitch 
+                                        </ctwc:SettingsCard.Description>
+                                        <ctwc:SettingsCard.Content>
+                                            <ToggleSwitch 
                                             IsOn="{x:Bind ViewModel.SettingsPartViewModel.ShowAvailableProFeatures, Mode=TwoWay}"/>
-                                    </appcontrols:CardControl.ActionContent>
-                                </appcontrols:CardControl>
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>
 
-
-
-                                <appcontrols:CardExpanderControl 
-                                        Background="{ThemeResource CardBackgroundBrush}"
-                                        Margin="0,0,0,20"
-                                    IsExpanded="True">
-                                    <appcontrols:CardExpanderControl.Header>
-                                        <appcontrols:CardControl
-                                                Icon="&#xE771;"
-                                                x:Uid="SettingsCustomDesign"
-                                                Header="~SettingsCustomDesign.Header">
-                                        </appcontrols:CardControl>
-                                    </appcontrols:CardExpanderControl.Header>
-                                    <appcontrols:CardExpanderControl.Content>
-                                        <StackPanel>
-                                            <Border 
-                                Height="1.5" 
-                                ui:Effects.Shadow="{StaticResource SignShadow}"
-                                Background="{StaticResource SystemAccentColor}" />
-                                            <appcontrols:CardControl 
-                                    x:Uid="SettingsAppPrideMonthDesign"
-                                    Header="~SettingsAppPrideMonthDesign.Header">
-                                                <appcontrols:CardControl.Icon>
+                                    <ctwc:SettingsExpander
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xE771;}"
+                                        x:Uid="SettingsCustomDesign"
+                                        Header="~SettingsCustomDesign.Header"
+                                        IsExpanded="True">
+                                        <ctwc:SettingsExpander.Items>
+                                            <ctwc:SettingsCard
+                                                x:Uid="SettingsAppPrideMonthDesign"
+                                                Header="~SettingsAppPrideMonthDesign.Header">
+                                                <ctwc:SettingsCard.HeaderIcon>
                                                     <FontIcon 
                                                         FontSize="16"
                                                         FontFamily="Segoe UI Emoji" 
                                                         Glyph="🏳‍🌈"/>
-                                                </appcontrols:CardControl.Icon>
-                                                <appcontrols:CardControl.Description>
+                                                </ctwc:SettingsCard.HeaderIcon>
+                                                <ctwc:SettingsCard.Description>
                                                     <TextBlock 
-                                            x:Uid="SettingsAppPrideMonthDesignDesc"
-                                            Text="~SettingsAppPrideMonthDesignDesc.Text" 
-                                            VerticalAlignment="Stretch" 
-                                            HorizontalAlignment="Stretch"/>
-                                                </appcontrols:CardControl.Description>
-                                                <appcontrols:CardControl.ActionContent>
-                                                    <ToggleSwitch 
-                                x:Name="SettingsAppPrideMonthDesignToggleSwtich"
-                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.PrideMonthDesign, Mode=TwoWay}"/>
-                                                </appcontrols:CardControl.ActionContent>
-                                            </appcontrols:CardControl>
-                                            <Border 
-                                Height="1.5" 
-                                ui:Effects.Shadow="{StaticResource SignShadow}"
-                                Background="{StaticResource SystemAccentColor}" />
-                                            <appcontrols:CardControl 
-                                    x:Uid="SettingsAppCornorRadius"
-                                               Icon="&#xE2AE;"
-                                    Header="~SettingsAppCornorRadius.Header">
-                                                <appcontrols:CardControl.Description>
+                                                        x:Uid="SettingsAppPrideMonthDesignDesc"
+                                                        Text="~SettingsAppPrideMonthDesignDesc.Text" 
+                                                        VerticalAlignment="Stretch" 
+                                                        HorizontalAlignment="Stretch"/>
+                                                </ctwc:SettingsCard.Description>
+                                                <ctwc:SettingsCard.Content>
+                                                    <ToggleSwitch
+                                                        IsOn="{x:Bind ViewModel.SettingsPartViewModel.PrideMonthDesign, Mode=TwoWay}"/>
+                                                </ctwc:SettingsCard.Content>
+                                            </ctwc:SettingsCard>
+                                            <ctwc:SettingsCard 
+                                                x:Uid="SettingsAppCornorRadius"
+                                                HeaderIcon="{ui:FontIcon Glyph=&#xE2AE;}"
+                                                Header="~SettingsAppCornorRadius.Header">
+                                                <ctwc:SettingsCard.Description>
                                                     <TextBlock 
-                                            x:Uid="SettingsAppCornorRadiusDesc"
-                                            Text="~SettingsAppCornorRadiusDesc.Text" 
-                                            VerticalAlignment="Stretch" 
-                                            HorizontalAlignment="Stretch"/>
-                                                </appcontrols:CardControl.Description>
-                                                <appcontrols:CardControl.ActionContent>
-                                                    <ToggleSwitch 
-                                x:Name="SettingsRoundCornerToggleSwtich"
-                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
-                                                </appcontrols:CardControl.ActionContent>
-                                            </appcontrols:CardControl>
-                                        </StackPanel>
-                                    </appcontrols:CardExpanderControl.Content>
-                                </appcontrols:CardExpanderControl>
+                                                         x:Uid="SettingsAppCornorRadiusDesc"
+                                                         Text="~SettingsAppCornorRadiusDesc.Text" 
+                                                         VerticalAlignment="Stretch" 
+                                                         HorizontalAlignment="Stretch"/>
+                                                </ctwc:SettingsCard.Description>
+                                                <ctwc:SettingsCard.Content>
+                                                    <Grid>
+                                                        <ToggleSwitch
+                                                            IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
+                                                    </Grid>
+                                                </ctwc:SettingsCard.Content>
+                                            </ctwc:SettingsCard>
+                                        </ctwc:SettingsExpander.Items>
+                                    </ctwc:SettingsExpander>
+                                </unoVersalControls:SettingsGroup>
+                            </Grid>
 
-                            </appcontrols:CardGroupControl>
-
-                            <appcontrols:CardGroupControl 
-                                x:Uid="SettingsOptionsFunctionsTitle"
-                                Header="~SettingsOptionsFunctionsTitle.Header"
+                            <Grid 
+                                Background="{ThemeResource CardBackgroundBrush}" 
+                                CornerRadius="{ThemeResource OverlayCornerRadius}"
                                 Margin="0,0,0,12">
-                                <appcontrols:CardExpanderControl
-                                    Tag="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHelloIsMDMManaged, Mode=OneWay}"
-                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHelloIsMDMManaged, Mode=OneWay}">
-                                    <appcontrols:CardExpanderControl.Header>
-                                        <appcontrols:CardControl
-                                            Icon="&#xF0FB;"
-                                            x:Uid="SettingsUseWindowsHello" 
-                                            Header="~SettingsUseWindowsHello.Header">
-                                            <appcontrols:CardControl.ActionContent>
-                                                <ToggleSwitch
-                                                    IsOn="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHello,Mode=TwoWay}" 
-                                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported,Mode=TwoWay}" />
-                                            </appcontrols:CardControl.ActionContent>
-                                        </appcontrols:CardControl>
-                                    </appcontrols:CardExpanderControl.Header>
-                                    <appcontrols:CardExpanderControl.Content>
-                                        <StackPanel>
-                                            <Border 
-                                                Height="1.5" 
-                                                ui:Effects.Shadow="{StaticResource SignShadow}"
-                                                Background="{StaticResource SystemAccentColor}" />
-                                            <appcontrols:CardControl 
+                                <unoVersalControls:SettingsGroup
+                                    Margin="12,0, 12, 12"
+                                    Header="~SettingsOptionsFunctionsTitle.Header"
+                                    x:Uid="SettingsOptionsFunctionsTitle">
+                                    <ctwc:SettingsExpander
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xF0FB;}"
+                                        x:Uid="SettingsUseWindowsHello" 
+                                        Header="~SettingsUseWindowsHello.Header"
+                                        IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHelloIsMDMManaged,Mode=OneWay}">
+                                        <ctwc:SettingsExpander.Content>
+                                            <ToggleSwitch
+                                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHello,Mode=TwoWay}" 
+                                                IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsWindowsHelloSupported,Mode=TwoWay}" />
+                                        </ctwc:SettingsExpander.Content>
+                                        <ctwc:SettingsExpander.Items>
+                                            <ctwc:SettingsCard 
                                                 x:Uid="SettingsWindowsHelloPrefer"
                                                 Header="~SettingsWindowsHelloPrefer.Header"
-                                                Icon="&#xF552;">
-                                                <appcontrols:CardControl.ActionContent>
-                                                    <ToggleSwitch 
-                                                        x:Name="SettingsWindowsHelloPrefer"
+                                                HeaderIcon="{ui:FontIcon Glyph=&#xF552;}">
+                                                <ctwc:SettingsCard.Content>
+                                                    <ToggleSwitch
                                                         IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.ActivateWindowsHello, Mode=OneWay}" 
                                                         IsOn="{x:Bind ViewModel.SettingsPartViewModel.PreferWindowsHelloLogin, Mode=TwoWay}"/>
-                                                </appcontrols:CardControl.ActionContent>
-                                            </appcontrols:CardControl>
-                                        </StackPanel>
-                                    </appcontrols:CardExpanderControl.Content>
-                                </appcontrols:CardExpanderControl>
-
-                                <appcontrols:CardControl 
-                                    x:Uid="SettingsPreferHiddenTOTP"
-                                    Header="~SettingsPreferHiddenTOTP.Header"
-                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTPIsMDMManaged, Mode=OneWay}"
-                                    Icon="&#xE18B;">
-                                    <appcontrols:CardControl.Description>
-                                        <TextBlock 
-                                            x:Uid="SettingsPreferHiddenTOTPDesc"
-                                            Text="~SettingsPreferHiddenTOTPDesc.Text"/>
-                                    </appcontrols:CardControl.Description>
-                                    <appcontrols:CardControl.ActionContent>
-                                        <ToggleSwitch 
-                                            x:Name="SettingsPreferHiddenTOTP"
-                                            IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
-                                    </appcontrols:CardControl.ActionContent>
-                                </appcontrols:CardControl>
-
-                                <appcontrols:CardControl 
-                                    x:Uid="SettingsOptionsFactoryReset"
-                                    Icon="&#xE74D;"
-                                    Header="~SettingsOptionsFactoryReset.Header">
-                                    <appcontrols:CardControl.Description>
-                                        <TextBlock 
-                                            x:Uid="SettingsOptionsFactoryResetDesc"
-                                            Text="~SettingsOptionsFactoryResetDesc.Text"/>
-                                    </appcontrols:CardControl.Description>
-                                    <appcontrols:CardControl.ActionContent>
-                                        <Button
-                                            Style="{StaticResource ButtonRevealStyle}"
-                                            Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
+                                                </ctwc:SettingsCard.Content>
+                                            </ctwc:SettingsCard>
+                                        </ctwc:SettingsExpander.Items>
+                                    </ctwc:SettingsExpander>
+                                    <ctwc:SettingsCard
+                                        x:Uid="SettingsPreferHiddenTOTP"
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xE18B;}"
+                                        Header="~SettingsPreferHiddenTOTP.Header"
+                                        IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTPIsMDMManaged, Mode=OneWay}">
+                                        <ctwc:SettingsCard.Description>
                                             <TextBlock 
-                                                Text="~FactoryReset" 
-                                                HorizontalAlignment="Stretch" 
-                                                VerticalAlignment="Center"
-                                                x:Uid="SettingsOptionsFactoryResetButton"/>
-                                        </Button>
-                                    </appcontrols:CardControl.ActionContent>
-                                </appcontrols:CardControl>
+                                                x:Uid="SettingsPreferHiddenTOTPDesc"
+                                                Text="~SettingsPreferHiddenTOTPDesc.Text"/>
+                                        </ctwc:SettingsCard.Description>
+                                        <ctwc:SettingsCard.Content>
+                                            <Grid>
+                                                <ToggleSwitch 
+                                                    IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseHiddenTOTP, Mode=TwoWay}"/>
+                                            </Grid>
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>
 
-                                <appcontrols:CardControl 
-                        x:Uid="SettingsAppLoggingMode"
-                        Icon="&#xEADF;"
-                        Header="~SettingsAppLoggingMode.Header">
-                                    <appcontrols:CardControl.Description>
-                                        <HyperlinkButton
-                                x:Uid="SettingsOpenLogBTN"
-                                Content="~SettingsOpenLogBTN.Content"
-                                Command="{x:Bind ViewModel.SettingsPartViewModel.OpenLogCommand}"/>
-                                    </appcontrols:CardControl.Description>
-                                    <appcontrols:CardControl.ActionContent>
-                                        <StackPanel>
-                                            <ComboBox 
-SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.LoggingIndex, Mode=TwoWay}" 
-MinWidth="{StaticResource CardActionControlMinWidth}">
-                                                <ComboBoxItem x:Uid="SettingsLoggingNone" />
-                                                <ComboBoxItem x:Uid="SettingsLoggingSimple"/>
-                                                <ComboBoxItem x:Uid="SettingsLoggingFull"/>
-                                            </ComboBox>
-                                        </StackPanel>
-                                    </appcontrols:CardControl.ActionContent>
-                                </appcontrols:CardControl>
+                                    <ctwc:SettingsCard
+                                        x:Uid="SettingsOptionsFactoryReset"
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xE74D;}"
+                                        Header="~SettingsOptionsFactoryReset.Header">
+                                        <ctwc:SettingsCard.Description>
+                                            <TextBlock 
+                                                x:Uid="SettingsOptionsFactoryResetDesc"
+                                                Text="~SettingsOptionsFactoryResetDesc.Text"/>
+                                        </ctwc:SettingsCard.Description>
+                                        <ctwc:SettingsCard.Content>
+                                            <Button
+                                                Command="{x:Bind ViewModel.SettingsPartViewModel.MakeFactoryResetCommand}" >
+                                                <TextBlock 
+                                                    Text="~FactoryReset" 
+                                                    HorizontalAlignment="Stretch" 
+                                                    VerticalAlignment="Center"
+                                                    x:Uid="SettingsOptionsFactoryResetButton"/>
+                                            </Button>
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>
 
-                                <appcontrols:CardExpanderControl
-                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseAutoLogoutIsMDMManaged, Mode=OneWay}"
-                                    Background="{ThemeResource CardBackgroundBrush}"
-                                    IsExpanded="True">
-                                    <appcontrols:CardExpanderControl.Header>
-                                        <appcontrols:CardControl
-                                            Icon="&#xE1F6;"
-                                            x:Uid="SettingsUseAutoLogout" 
-                                            Header="~SettingsUseAutoLogout.Header">
-                                            <appcontrols:CardControl.ActionContent>
-                                                <ToggleSwitch
-                                                    IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseAutoLogout,Mode=TwoWay}"/>
-                                            </appcontrols:CardControl.ActionContent>
-                                        </appcontrols:CardControl>
-                                    </appcontrols:CardExpanderControl.Header>
-                                    <appcontrols:CardExpanderControl.Content>
-                                        <StackPanel>
-                                            <Border 
-                                                Height="1.5" 
-                                                ui:Effects.Shadow="{StaticResource SignShadow}"
-                                                Background="{StaticResource SystemAccentColor}" />
-                                            <appcontrols:CardControl 
-                                                Icon="&#xE916;"
+                                    <ctwc:SettingsCard 
+                                        x:Uid="SettingsAppLoggingMode"
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xEADF;}"
+                                        Header="~SettingsAppLoggingMode.Header">
+                                        <ctwc:SettingsCard.Description>
+                                            <HyperlinkButton
+                                                x:Uid="SettingsOpenLogBTN"
+                                                Content="~SettingsOpenLogBTN.Content"
+                                                Command="{x:Bind ViewModel.SettingsPartViewModel.OpenLogCommand}"
+                                                Style="{StaticResource TextButtonStyle}"/>
+                                        </ctwc:SettingsCard.Description>
+                                        <ctwc:SettingsCard.Content>
+                                            <StackPanel>
+                                                <ComboBox 
+                                                    SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.LoggingIndex, Mode=TwoWay}" 
+                                                    MinWidth="{StaticResource CardActionControlMinWidth}">
+                                                    <ComboBoxItem x:Uid="SettingsLoggingNone" />
+                                                    <ComboBoxItem x:Uid="SettingsLoggingSimple"/>
+                                                    <ComboBoxItem x:Uid="SettingsLoggingFull"/>
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>
+                                    <ctwc:SettingsExpander
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xE1F6;}"
+                                        x:Uid="SettingsUseAutoLogout" 
+                                        Header="~SettingsUseAutoLogout.Header"
+                                        IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseAutoLogoutIsMDMManaged,Mode=OneWay}"
+                                        IsExpanded="True">
+                                        <ctwc:SettingsExpander.Content>
+                                            <ToggleSwitch
+                                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseAutoLogout,Mode=TwoWay}"/>
+                                        </ctwc:SettingsExpander.Content>
+                                        <ctwc:SettingsExpander.Items>
+                                            <ctwc:SettingsCard 
+                                                HeaderIcon="{ui:FontIcon Glyph=&#xE916;}"
                                                 x:Uid="SettingsOptionsAutoLogout"
                                                 IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.AutoLogoutMinutesIsMDMManaged, Mode=OneWay}"
                                                 Header="~SettingsOptionsAutoLogout.Header">
-                                                <appcontrols:CardControl.Description>
+                                                <ctwc:SettingsCard.Description>
                                                     <TextBlock Text="{x:Bind strings:Resources.SettingsAutoLogoutDesc}"/>
-                                                </appcontrols:CardControl.Description>
-                                                <appcontrols:CardControl.ActionContent>
+                                                </ctwc:SettingsCard.Description>
+                                                <ctwc:SettingsCard.Content>
                                                     <StackPanel 
                                                         Orientation="Horizontal" 
                                                         Margin="0,6,0,15">
@@ -402,113 +380,87 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                                                             HorizontalAlignment="Left">
                                                         </muxc:NumberBox>
                                                     </StackPanel>
-                                                </appcontrols:CardControl.ActionContent>
-                                            </appcontrols:CardControl>
-                                        </StackPanel>
+                                                </ctwc:SettingsCard.Content>
+                                            </ctwc:SettingsCard>
+                                        </ctwc:SettingsExpander.Items>
+                                    </ctwc:SettingsExpander>
 
-                                    </appcontrols:CardExpanderControl.Content>
-                                </appcontrols:CardExpanderControl>
+                                    <ctwc:SettingsExpander
+                                        IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrectionIsMDMManaged, Mode=OneWay}"
+                                        Background="{ThemeResource CardBackgroundBrush}"
+                                        IsExpanded="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}"
+                                        HeaderIcon="{ui:FontIcon Glyph=&#xEE93;}"
+                                        x:Uid="SettingsUseNTPTimeCorrection" 
+                                        Header="~SettingsUseNTPTimeCorrection.Header">
+                                        <ctwc:SettingsExpander.Content>
+                                            <ToggleSwitch
+                                                IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=TwoWay}"/>
+                                        </ctwc:SettingsExpander.Content>
 
-                                <appcontrols:CardExpanderControl
-                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrectionIsMDMManaged, Mode=OneWay}"
-                                    Background="{ThemeResource CardBackgroundBrush}"
-                                    IsExpanded="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}">
-                                    <appcontrols:CardExpanderControl.Header>
-                                        <appcontrols:CardControl
-                                            Icon="&#xEE93;"
-                                            x:Uid="SettingsUseNTPTimeCorrection" 
-                                            Header="~SettingsUseNTPTimeCorrection.Header">
-                                            <appcontrols:CardControl.ActionContent>
-                                                <ToggleSwitch
-                                                    IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=TwoWay}"/>
-                                            </appcontrols:CardControl.ActionContent>
-                                        </appcontrols:CardControl>
-                                    </appcontrols:CardExpanderControl.Header>
-                                    <appcontrols:CardExpanderControl.Content>
-                                        <StackPanel>
-                                            <Border 
-                                                Height="1.5" 
-                                                ui:Effects.Shadow="{StaticResource SignShadow}"
-                                                Background="{StaticResource SystemAccentColor}" />
-                                            <appcontrols:CardControl>
-                                                <appcontrols:CardControl.Description>
-                                                    <StackPanel
-                                                        HorizontalAlignment="Left">
-                                                        <TextBlock 
-                                                            x:Uid="SettingsNTPServerDescribtion"
-                                                            TextWrapping="WrapWholeWords"
-                                                            Text="~SettingsNTPServerDescribtion.Text"/>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBox 
-                                                                Margin="0,8,0,0"
-                                                                x:Name="TB_SettingsNTPServer"
-                                                                Width="280"
-                                                                FontSize="16"
-                                                                Text="{x:Bind ViewModel.SettingsPartViewModel.NTPServerStr, Mode=TwoWay}"/>
-                                                            <CommandBar DefaultLabelPosition="Right">
-                                                                <CommandBar.PrimaryCommands>
-                                                                    <AppBarButton 
-                                                                        x:Name="ABB_SettingsSaveNTPServer"
-                                                                        Command="{x:Bind ViewModel.SettingsPartViewModel.SaveNTPServerAddressCommand}"
-                                                                        Icon="Save" 
-                                                                        x:Uid="SettingsSaveNTPServer"
-                                                                        Label="#save" 
-                                                                        IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid,Mode=OneWay}">
-                                                                        <AppBarButton.Resources>
-                                                                            <!--Binding: NtpServerEditValid OneWay, because it should not change the code behind value-->
-                                                                            <appcontrols:AutoCloseTeachingTip 
-                                                                                x:Name="SaveIsPossibleTip"
-                                                                                AutoCloseInterval="4000"
-                                                                                BorderBrush="{ThemeResource SystemAccentColor}"
-                                                                                x:Uid="SettingsPageSaveIsPossibleTip"
-                                                                                BorderThickness="2" 
-                                                                                IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid, Mode=OneWay}"
-                                                                                Target="{Binding ElementName=ABB_SettingsSaveNTPServer, Mode=OneTime}">
-                                                                            </appcontrols:AutoCloseTeachingTip>
-                                                                            <appcontrols:AutoCloseTeachingTip
-                                                                                x:Name="SaveNotPossibleTip"
-                                                                                AutoCloseInterval="4000"
-                                                                                BorderBrush="{ThemeResource SystemAccentColor}"
-                                                                                x:Uid="SettingsPageSaveNotPossibleTip"
-                                                                                BorderThickness="2"
-                                                                                IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditException, Mode=TwoWay}"
-                                                                                Target="{Binding ElementName=TB_SettingsNTPServer, Mode=OneTime}">
-                                                                            </appcontrols:AutoCloseTeachingTip>
-                                                                        </AppBarButton.Resources>
-                                                                    </AppBarButton>
-                                                                </CommandBar.PrimaryCommands>
-                                                            </CommandBar>
-                                                        </StackPanel>
-                                                        <muxc:ProgressBar 
-                                                            HorizontalAlignment="Left"
-                                                            Width="280"
-                                                            Visibility="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"
-                                                            IsIndeterminate="{x:Bind ViewModel.SettingsPartViewModel.ProgressIsIndeterminate,Mode=OneWay}"/>
+                                        <ctwc:SettingsExpander.Items>
+                                            <ctwc:SettingsCard>
+                                                <ctwc:SettingsCard.Description>
+                                                    <TextBlock 
+                                                        x:Uid="SettingsNTPServerDescribtion"
+                                                        TextWrapping="WrapWholeWords"
+                                                        Text="~SettingsNTPServerDescribtion.Text"/>
+
+                                                </ctwc:SettingsCard.Description>
+                                                <ctwc:SettingsCard.Content>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBox 
+                                        Margin="0,8,0,0"
+                                        Width="280"
+                                        FontSize="16"
+                                        Text="{x:Bind ViewModel.SettingsPartViewModel.NTPServerStr, Mode=TwoWay}"/>
+                                                        <Button 
+                                                            Command="{x:Bind ViewModel.SettingsPartViewModel.SaveNTPServerAddressCommand}"
+                                                            IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid,Mode=OneWay}">
+                                                            <Button.Content>
+                                                                <TextBlock Text="{x:Bind strings:Resources.ButtonTextConfirm}"/>
+                                                            </Button.Content>
+                                                        </Button>
+
+                                                        <!--<CommandBar DefaultLabelPosition="Right">
+                                                            <CommandBar.PrimaryCommands>
+                                                                <AppBarButton 
+                                                    Command="{x:Bind ViewModel.SettingsPartViewModel.SaveNTPServerAddressCommand}"
+                                                    Icon="Save" 
+                                                    x:Uid="SettingsSaveNTPServer"
+                                                    Label="#save" 
+                                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid,Mode=OneWay}">
+                                                                    <AppBarButton.Resources>
+                                                                        --><!--Binding: NtpServerEditValid OneWay, because it should not change the code behind value--><!--
+                                                                        <appcontrols:AutoCloseTeachingTip 
+                                                            x:Name="SaveIsPossibleTip"
+                                                            AutoCloseInterval="4000"
+                                                            BorderBrush="{ThemeResource SystemAccentColor}"
+                                                            x:Uid="SettingsPageSaveIsPossibleTip"
+                                                            BorderThickness="2" 
+                                                            IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditValid, Mode=OneWay}"
+                                                            Target="{Binding ElementName=ABB_SettingsSaveNTPServer, Mode=OneTime}">
+                                                                        </appcontrols:AutoCloseTeachingTip>
+                                                                        <appcontrols:AutoCloseTeachingTip
+                                                            x:Name="SaveNotPossibleTip"
+                                                            AutoCloseInterval="4000"
+                                                            BorderBrush="{ThemeResource SystemAccentColor}"
+                                                            x:Uid="SettingsPageSaveNotPossibleTip"
+                                                            BorderThickness="2"
+                                                            IsOpen="{x:Bind ViewModel.SettingsPartViewModel.NtpServerEditException, Mode=TwoWay}"
+                                                            Target="{Binding ElementName=TB_SettingsNTPServer, Mode=OneTime}">
+                                                                        </appcontrols:AutoCloseTeachingTip>
+                                                                    </AppBarButton.Resources>
+                                                                </AppBarButton>
+                                                            </CommandBar.PrimaryCommands>
+                                                        </CommandBar>-->
                                                     </StackPanel>
-                                                </appcontrols:CardControl.Description>
-                                            </appcontrols:CardControl>
-                                        </StackPanel>
-                                    </appcontrols:CardExpanderControl.Content>
-                                </appcontrols:CardExpanderControl>
+                                                </ctwc:SettingsCard.Content>
+                                            </ctwc:SettingsCard>
+                                        </ctwc:SettingsExpander.Items>
+                                    </ctwc:SettingsExpander>
+                                </unoVersalControls:SettingsGroup>
+                            </Grid>
 
-
-
-                                <!--<appcontrols:CardExpanderControl
-                                    Margin="0,0,0,20"
-                                    Visibility="{x:Bind ViewModel.SettingsPartViewModel.IsProVersion}">
-                                    <appcontrols:CardExpanderControl.Header>
-                                        <appcontrols:CardControl
-                                            Icon="&#xE9F5;"
-                                            x:Uid="SettingsUseProFeatures" 
-                                            Header="~SettingsUseProFeatures.Header">
-                                            <appcontrols:CardControl.ActionContent>
-                                                <ToggleSwitch
-                                                    IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseProFeatures,Mode=TwoWay}"/>
-                                            </appcontrols:CardControl.ActionContent>
-                                        </appcontrols:CardControl>
-                                    </appcontrols:CardExpanderControl.Header>
-                                </appcontrols:CardExpanderControl>-->
-                            </appcontrols:CardGroupControl>
                         </StackPanel>
                     </ScrollViewer>
 
@@ -563,66 +515,114 @@ MinWidth="{StaticResource CardActionControlMinWidth}">
                     <Grid Margin="0,10,0,0">
                         <RelativePanel>
                             <ScrollViewer x:Name="SV_AboutTheApp" >
-                                <StackPanel Margin="0,0,0,12">
-                                    <Grid Background="{ThemeResource CardBackgroundBrush}" CornerRadius="{ThemeResource OverlayCornerRadius}">
-                                        <StackPanel Spacing="4" Margin="12,12">
-                                            <ctwc:SettingsCard 
-                                                Background="{ThemeResource SystemAccentColor}"
-                                                Foreground="White"
-                                                Header="Jan Philipp Weber &amp; Malte Hellmeier"
-                                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/Square44x44Logo.targetsize-256.png}">
-                                                <ctwc:SettingsCard.Description>
-                                                    <TextBlock 
-                                                        FontSize="20" 
-                                                        Foreground="White">
-                                                        <Run Text="{x:Bind ViewModel.AboutPartViewModel.DisplayName, Mode=OneWay}"/>
-                                                        <LineBreak/>
-                                                        <Run>Version: </Run>
-                                                        <Run Text="{x:Bind ViewModel.AboutPartViewModel.Version, Mode=OneTime}" />
-                                                    </TextBlock>
-                                                </ctwc:SettingsCard.Description>
-                                            </ctwc:SettingsCard>
+                                <Grid Background="{ThemeResource CardBackgroundBrush}" CornerRadius="{ThemeResource OverlayCornerRadius}" Margin="0,0,0,12">
+                                    <StackPanel Spacing="4" Margin="12,12">
+                                        <ctwc:SettingsCard 
+            Background="{ThemeResource SystemAccentColor}"
+            Foreground="White"
+            Header="Jan Philipp Weber &amp; Malte Hellmeier"
+            HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/Square44x44Logo.targetsize-256.png}">
+                                            <ctwc:SettingsCard.Description>
+                                                <TextBlock 
+                    FontSize="20" 
+                    Foreground="White">
+                    <Run Text="{x:Bind ViewModel.AboutPartViewModel.DisplayName, Mode=OneWay}"/>
+                    <LineBreak/>
+                    <Run>Version: </Run>
+                    <Run Text="{x:Bind ViewModel.AboutPartViewModel.Version, Mode=OneTime}" />
+                                                </TextBlock>
+                                            </ctwc:SettingsCard.Description>
+                                        </ctwc:SettingsCard>
 
-                                            <ctwc:SettingsCard 
-                                                x:Uid="SettingsSourceCode"
-                                               ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
-                                                ToolTipService.ToolTip="https://github.com/2fast-team/2fast"
-                                               ActionIconToolTip="{x:Bind strings:Resources.SettingsCardExternalAction}"
-                                               Header="~SettingsSourceCode.Header"
-                                               HeaderIcon="{ui:FontIcon Glyph=&#xE943;}"
-                                                Command="{x:Bind ViewModel.SeeSourceCodeCommand}"
-                                               IsClickEnabled="True" />
+                                        <ctwc:SettingsCard 
+            x:Uid="SettingsSourceCode"
+           ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
+            ToolTipService.ToolTip="https://github.com/2fast-team/2fast"
+           ActionIconToolTip="{x:Bind strings:Resources.SettingsCardExternalAction}"
+           Header="~SettingsSourceCode.Header"
+           HeaderIcon="{ui:FontIcon Glyph=&#xE943;}"
+            Command="{x:Bind ViewModel.SeeSourceCodeCommand}"
+           IsClickEnabled="True" />
 
-                                            <ctwc:SettingsCard 
-                                                x:Uid="SettingsRateApp"
-                                                Command="{x:Bind ViewModel.RateAppCommand}"
-                                                Header="~SettingsRateApp.Header"
-                                                HeaderIcon="{ui:FontIcon Glyph=&#xE19F;}"
-                                                IsClickEnabled="True" />
+                                        <ctwc:SettingsCard 
+            x:Uid="SettingsRateApp"
+            Command="{x:Bind ViewModel.RateAppCommand}"
+            Header="~SettingsRateApp.Header"
+            HeaderIcon="{ui:FontIcon Glyph=&#xE19F;}"
+            IsClickEnabled="True" />
 
-                                            <ctwc:SettingsCard 
-                                                x:Uid="SettingsInAppPayment"
-                                                Command="{x:Bind ViewModel.InAppPaymentCommand}"
-                                                Description="~SettingsInAppPayment.Description"
-                                                Header="~SettingsInAppPayment.Header"
-                                                HeaderIcon="{ui:FontIcon Glyph=&#xE14D;}"
-                                                IsClickEnabled="True" />
+                                        <ctwc:SettingsCard 
+            x:Uid="SettingsInAppPayment"
+            Command="{x:Bind ViewModel.InAppPaymentCommand}"
+            Description="~SettingsInAppPayment.Description"
+            Header="~SettingsInAppPayment.Header"
+            HeaderIcon="{ui:FontIcon Glyph=&#xE14D;}"
+            IsClickEnabled="True" />
 
-                                            <ctwc:SettingsCard 
-                                                x:Uid="SettingsManageSubscriptions"
-                                               ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
-                                                ToolTipService.ToolTip="https://account.microsoft.com/services"
-                                               ActionIconToolTip="{x:Bind strings:Resources.SettingsCardExternalAction}"
-                                               Description="~SettingsManageSubscriptions.Description"
-                                               Header="~SettingsManageSubscriptions.Header"
-                                               HeaderIcon="{ui:FontIcon Glyph=&#xED0E;}"
-                                                Command="{x:Bind ViewModel.ManageSubscriptionsCommand}"
-                                               IsClickEnabled="True" />
-                                        </StackPanel>
-                                    </Grid>
-                                </StackPanel>
+                                        <ctwc:SettingsCard 
+            x:Uid="SettingsManageSubscriptions"
+           ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
+            ToolTipService.ToolTip="https://account.microsoft.com/services"
+           ActionIconToolTip="{x:Bind strings:Resources.SettingsCardExternalAction}"
+           Description="~SettingsManageSubscriptions.Description"
+           Header="~SettingsManageSubscriptions.Header"
+           HeaderIcon="{ui:FontIcon Glyph=&#xED0E;}"
+            Command="{x:Bind ViewModel.ManageSubscriptionsCommand}"
+           IsClickEnabled="True" />
+                                    </StackPanel>
+                                </Grid>
                             </ScrollViewer>
 
+                            <!--<unoVersalControls:SettingsGroup 
+                                x:Name="LV_Dependencies" >
+                                <ctwc:SettingsExpander 
+                                    IsExpanded="True"
+                                     Header="~SettingsDependencies.Header"
+                                     
+                                     x:Uid="SettingsDependencies">
+                                    <ctwc:SettingsExpander.Content>
+                                        <SemanticZoom
+                                            MaxWidth="480"
+                                            CanChangeViews="False">
+                                            <SemanticZoom.ZoomedInView>
+                                                <GridView
+                                                    SelectionMode="None"
+                                                    IsSynchronizedWithCurrentItem="False"
+                                                    ItemTemplate="{StaticResource DependenciesListViewTemplate}"
+                                                    ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
+                                                    IsTabStop="False"
+                                                    IsItemClickEnabled="True">
+                                                    <GridView.GroupStyle>
+                                                        <GroupStyle>
+                                                            <GroupStyle.HeaderTemplate>
+                                                                <DataTemplate >
+                                                                    <TextBlock 
+                                                                        Text="{Binding Key}" 
+                                                                        FontSize="20"/>
+                                                                </DataTemplate>
+                                                            </GroupStyle.HeaderTemplate>
+                                                            <GroupStyle.Panel>
+                                                                <ItemsPanelTemplate>
+                                                                    <ctwc:WrapPanel/>
+                                                                </ItemsPanelTemplate>
+                                                            </GroupStyle.Panel>
+                                                        </GroupStyle>
+                                                    </GridView.GroupStyle>
+                                                    <GridView.ItemContainerStyle>
+                                                        <Style TargetType="GridViewItem">
+                                                            <Setter Property="Margin" Value="0,0,8,16" />
+
+                                                            <Setter Property="animations:Implicit.Animations" 
+                                                                    Value="{StaticResource ImplicitOffset}"/>
+                                                        </Style>
+                                                    </GridView.ItemContainerStyle>
+                                                </GridView>
+                                            </SemanticZoom.ZoomedInView>
+                                        </SemanticZoom>
+                                    </ctwc:SettingsExpander.Content>
+                                </ctwc:SettingsExpander>
+                            </unoVersalControls:SettingsGroup>-->
+                            
                             <appcontrols:CardExpanderControl 
                                 IsExpanded="True"
                                 Header="~SettingsDependencies.Header"

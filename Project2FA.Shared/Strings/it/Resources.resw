@@ -117,1058 +117,1392 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountCodePageAddEntry.Label" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.Label">
     <value>Aggiungi account</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageCopied" xml:space="preserve">
+  <data name="AccountCodePageCopied">
     <value>Copiato negli appunti</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageDeleteEntry.Text" xml:space="preserve">
+  <data name="AccountCodePageDeleteEntry.Text">
     <value>Cancellare</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
+  <data name="AccountCodePageEditEntry.Text">
     <value>Modifica</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTNToolTip">
     <value>Mostra le opzioni</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.Label">
     <value>Ricarica il file di dati</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageViewModelDeleteAccept" xml:space="preserve">
+  <data name="AccountCodePageViewModelDeleteAccept">
     <value>Sì</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageViewModelDeleteCancel" xml:space="preserve">
+  <data name="AccountCodePageViewModelDeleteCancel">
     <value>No</value>
+    <comment></comment>
   </data>
-  <data name="DeleteDatafileContentDialogDeleteDescription" xml:space="preserve">
+  <data name="DeleteDatafileContentDialogDeleteDescription">
     <value>Siete sicuri di voler cancellare questo account in modo irrevocabile?</value>
+    <comment></comment>
   </data>
-  <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
+  <data name="DeleteDatafileContentDialogTitle">
     <value>Confermare l'eliminazione</value>
+    <comment></comment>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButtonToolTip">
     <value>Copiare il codice</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
+  <data name="AddAccountContentDialog.SecondaryButtonText">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialog.PrimaryButtonText" xml:space="preserve">
+  <data name="AddAccountContentDialog.PrimaryButtonText">
     <value>Creare un account</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialog.Title" xml:space="preserve">
+  <data name="AddAccountContentDialog.Title">
     <value>Creare un nuovo account</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogAccountName.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogAccountName.Header">
     <value>Nome del conto</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogAccountName.PlaceholderText" xml:space="preserve">
+  <data name="AddAccountContentDialogAccountName.PlaceholderText">
     <value>Indirizzo di posta elettronica</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
+  <data name="AddAccountContentDialogInfo.Text">
     <value>Per creare un nuovo account per l'autenticazione a due fattori è necessario un codice QR o una chiave (testo crittografico) dal servizio esterno.
 
 # Come deve essere importata la chiave?
 </value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogInputs.Header">
     <value>Ingressi</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogInputType.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogInputType.Header">
     <value>Tipo di ingresso</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogLabel.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogLabel.Header">
     <value>Etichetta</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogLabel.PlaceholderText" xml:space="preserve">
+  <data name="AddAccountContentDialogLabel.PlaceholderText">
     <value>Nome da visualizzare</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogManualInput.Text" xml:space="preserve">
+  <data name="AddAccountContentDialogManualInput.Text">
     <value>Ingresso manuale</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogManualInputCheckbox.Content" xml:space="preserve">
+  <data name="AddAccountContentDialogManualInputCheckbox.Content">
     <value>Ingresso manuale</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
+  <data name="AddAccountContentDialogQRCodeContentError">
     <value>Impossibile ottenere informazioni dal codice QR. Riprovare o aggiungere manualmente la chiave segreta.</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogReadQRCode.Text" xml:space="preserve">
+  <data name="AddAccountContentDialogReadQRCode.Text">
     <value>Scansione del codice-QR</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo" xml:space="preserve">
+  <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo">
     <value>Uno strumento di scansione si aprirà presto</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogReadQRCodeTip.Title" xml:space="preserve">
+  <data name="AddAccountContentDialogReadQRCodeTip.Title">
     <value>Passare al codice QR</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogSecretKey.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogSecretKey.Header">
     <value>Chiave segreta</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogSecretKey.PlaceholderText" xml:space="preserve">
+  <data name="AddAccountContentDialogSecretKey.PlaceholderText">
     <value>Aggiungere qui la stringa della chiave segreta</value>
+    <comment></comment>
   </data>
-  <data name="BTNConfirm.Content" xml:space="preserve">
+  <data name="BTNConfirm.Content">
     <value>Confermare</value>
+    <comment></comment>
   </data>
-  <data name="BTNTryAgain.Content" xml:space="preserve">
+  <data name="BTNTryAgain.Content">
     <value>Riprova</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header">
     <value>Profilo dati locale</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogIntroText.Text" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogIntroText.Text">
     <value>In questa finestra di dialogo è possibile modificare la password del file di dati correntemente utilizzato.</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText">
     <value>Modifica della password</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogMain.Title" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogMain.Title">
     <value>Modifica della password del file dati</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogPasswordError.Text" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogPasswordError.Text">
     <value>La password inserita non è corretta.</value>
+    <comment></comment>
   </data>
-  <data name="Confirm" xml:space="preserve">
+  <data name="Confirm">
     <value>Confermare</value>
+    <comment></comment>
   </data>
-  <data name="CurrentPassword.Header" xml:space="preserve">
+  <data name="CurrentPassword.Header">
     <value>Password attuale</value>
+    <comment></comment>
   </data>
-  <data name="Delete" xml:space="preserve">
+  <data name="Delete">
     <value>Cancellare</value>
+    <comment></comment>
   </data>
-  <data name="Edit" xml:space="preserve">
+  <data name="Edit">
     <value>Modifica</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialog.PrimaryButtonText" xml:space="preserve">
+  <data name="EditAccountContentDialog.PrimaryButtonText">
     <value>Confermare</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialog.SecondaryButtonText" xml:space="preserve">
+  <data name="EditAccountContentDialog.SecondaryButtonText">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialog.Title" xml:space="preserve">
+  <data name="EditAccountContentDialog.Title">
     <value>Modifica account</value>
+    <comment></comment>
   </data>
-  <data name="Error" xml:space="preserve">
+  <data name="Error">
     <value>Errore</value>
+    <comment></comment>
   </data>
-  <data name="LoginPageLoginButton.Content" xml:space="preserve">
+  <data name="LoginPageLoginButton.Content">
     <value>Accesso</value>
+    <comment></comment>
   </data>
-  <data name="LoginPageLoginWindowsHelloButton.Content" xml:space="preserve">
+  <data name="LoginPageLoginWindowsHelloButton.Content">
     <value>Accesso con Windows Hello</value>
     <comment>[ReswT:manually]</comment>
   </data>
-  <data name="LoginPagePassword.Header" xml:space="preserve">
+  <data name="LoginPagePassword.Header">
     <value>Password</value>
+    <comment></comment>
   </data>
-  <data name="LoginPagePassword.PlaceholderText" xml:space="preserve">
+  <data name="LoginPagePassword.PlaceholderText">
     <value>Password di ingresso</value>
+    <comment></comment>
   </data>
-  <data name="LoginPagePasswordMismatch" xml:space="preserve">
+  <data name="LoginPagePasswordMismatch">
     <value>La password non corrisponde a quella del file di dati.</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogChangePath.Content" xml:space="preserve">
+  <data name="NewDatafileContentDialogChangePath.Content">
     <value>Cambia percorso</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogCreateInfo.Text" xml:space="preserve">
+  <data name="NewDatafileContentDialogCreateInfo.Text">
     <value>Per creare un file di dati è necessario scegliere un nome e una password.
 Importante: la password deve essere digitata ogni volta che si avvia l'applicazione!</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
+  <data name="NewDatafileContentDialogDatafilePivotItem.Header">
     <value>Profilo dati</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogLocalFolder.Header" xml:space="preserve">
+  <data name="NewDatafileContentDialogLocalFolder.Header">
     <value>Nome del file</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogLocalFolder.PlaceholderText" xml:space="preserve">
+  <data name="NewDatafileContentDialogLocalFolder.PlaceholderText">
     <value>per esempio il file di dati</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogLocalPath.Text" xml:space="preserve">
+  <data name="NewDatafileContentDialogLocalPath.Text">
     <value>Scegliere il percorso locale</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
+  <data name="NewDatafileContentDialogMain.CloseButtonText">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
+  <data name="NewDatafileContentDialogMain.PrimaryButtonText">
     <value>Creare un file di dati</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogMain.Title" xml:space="preserve">
+  <data name="NewDatafileContentDialogMain.Title">
     <value>Creare un file di dati</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogPath.Header" xml:space="preserve">
+  <data name="NewDatafileContentDialogPath.Header">
     <value>Percorso</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
+  <data name="NewDatafileContentDialogPivotItemKind.Header">
     <value>Immagazzinamento</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
+  <data name="NewDatafileContentDialogWebDAV.Text">
     <value>Scegliere WebDAV</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
+  <data name="NewDatafileContentDialogWebDAVPivotItem.Header">
     <value>WebDAV</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileLocalFolder.Header" xml:space="preserve">
+  <data name="NewDatafileLocalFolder.Header">
     <value>Nome del file</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileLocalFolder.PlaceholderText" xml:space="preserve">
+  <data name="NewDatafileLocalFolder.PlaceholderText">
     <value>Inserire il nome del file</value>
+    <comment></comment>
   </data>
-  <data name="NewDatefileContentDialogFolderName.Header" xml:space="preserve">
+  <data name="NewDatefileContentDialogFolderName.Header">
     <value>Foldername</value>
+    <comment></comment>
   </data>
-  <data name="NewLocalDatafileInfo.Text" xml:space="preserve">
+  <data name="NewLocalDatafileInfo.Text">
     <value>Per utilizzare questa applicazione è necessario creare un file di dati una volta. Tutti gli account saranno memorizzati in modo crittografato in questo file.
 Se si prevede di utilizzare questa applicazione su diversi dispositivi, è consigliabile memorizzare questo file su un supporto di memoria esterno (ad es. cloud).</value>
+    <comment></comment>
   </data>
-  <data name="NewPasswordContentDialog.Header" xml:space="preserve">
+  <data name="NewPasswordContentDialog.Header">
     <value>Nuova password</value>
+    <comment></comment>
   </data>
-  <data name="NewPasswordRepeatContentDialog.Header" xml:space="preserve">
+  <data name="NewPasswordRepeatContentDialog.Header">
     <value>Ripetere la nuova password</value>
+    <comment></comment>
   </data>
-  <data name="No" xml:space="preserve">
+  <data name="No">
     <value>No</value>
+    <comment></comment>
   </data>
-  <data name="Password.Header" xml:space="preserve">
+  <data name="Password.Header">
     <value>Password</value>
+    <comment></comment>
   </data>
-  <data name="Password.PlaceholderText" xml:space="preserve">
+  <data name="Password.PlaceholderText">
     <value>Password di ingresso</value>
+    <comment></comment>
   </data>
-  <data name="PasswordRepeat.Header" xml:space="preserve">
+  <data name="PasswordRepeat.Header">
     <value>Ripetere la password</value>
+    <comment></comment>
   </data>
-  <data name="PasswordRepeat.PlaceholderText" xml:space="preserve">
+  <data name="PasswordRepeat.PlaceholderText">
     <value>inserire la password</value>
+    <comment></comment>
   </data>
-  <data name="SettingsActionRequiredRestart" xml:space="preserve">
+  <data name="SettingsActionRequiredRestart">
     <value>Questa modifica avrà effetto dopo il riavvio dell'applicazione.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsBackButtonCard.Header" xml:space="preserve">
+  <data name="SettingsBackButtonCard.Header">
     <value>Posizionamento del pulsante Indietro</value>
+    <comment></comment>
   </data>
-  <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
+  <data name="SettingsBackButtonToggleSwtich.OffContent">
     <value>Nel menu di navigazione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsBackButtonToggleSwtich.OnContent" xml:space="preserve">
+  <data name="SettingsBackButtonToggleSwtich.OnContent">
     <value>Nella barra del titolo</value>
+    <comment></comment>
   </data>
-  <data name="SettingsChangePassword.Text" xml:space="preserve">
+  <data name="SettingsChangePassword.Text">
     <value>Modifica della password</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDatafileFilePath.Text" xml:space="preserve">
+  <data name="SettingsDatafileFilePath.Text">
     <value>Percorso del file di dati:</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDatafileName.Text" xml:space="preserve">
+  <data name="SettingsDatafileName.Text">
     <value>Nome del file di dati:</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDatafileTitle.Text" xml:space="preserve">
+  <data name="SettingsDatafileTitle.Text">
     <value>Informazioni sul file di dati correntemente utilizzato</value>
+    <comment></comment>
   </data>
-  <data name="SettingsFactoryResetMessage" xml:space="preserve">
+  <data name="SettingsFactoryResetMessage">
     <value>Sei sicuro di voler ripristinare le impostazioni di fabbrica dell'app? **Questo processo non può essere annullato!**
 Il file di dati non verrà rimosso durante il ripristino.</value>
     <comment>[ReswT:manually]</comment>
   </data>
-  <data name="SettingsGiveFeedback.Text" xml:space="preserve">
+  <data name="SettingsGiveFeedback.Text">
     <value>Dare un feedback</value>
+    <comment></comment>
   </data>
-  <data name="SettingsGiveFeedbackText" xml:space="preserve">
+  <data name="SettingsGiveFeedbackText">
     <value>Dare un feedback</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
+  <data name="SettingsOptionsDesignTitle.Header">
     <value>Design</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
+  <data name="SettingsOptionsFactoryResetButton.Text">
     <value>Ripristino dell'app ai valori di fabbrica</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
+  <data name="SettingsOptionsFunctionsTitle.Header">
     <value>Funzioni</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageName.Text" xml:space="preserve">
+  <data name="SettingsPageName.Text">
     <value>Impostazioni</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPivotItemAbout.Header" xml:space="preserve">
+  <data name="SettingsPivotItemAbout.Header">
     <value>Informazioni sull'applicazione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPivotItemDependencies.Header" xml:space="preserve">
+  <data name="SettingsPivotItemDependencies.Header">
     <value>Dipendenze</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPivotItemOption.Header" xml:space="preserve">
+  <data name="SettingsPivotItemOption.Header">
     <value>Opzioni</value>
+    <comment></comment>
   </data>
-  <data name="SettingsRateApp.Header" xml:space="preserve">
+  <data name="SettingsRateApp.Header">
     <value>Vota l'app nel negozio</value>
+    <comment></comment>
   </data>
-  <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
+  <data name="SettingsRemoveDatafileMessage">
     <value>Siete sicuri di voler eliminare definitivamente il file di dati? Perderete tutti gli account aggiunti.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsThemeDark.Content" xml:space="preserve">
+  <data name="SettingsThemeDark.Content">
     <value>Scuro</value>
+    <comment></comment>
   </data>
-  <data name="SettingsThemeLight.Content" xml:space="preserve">
+  <data name="SettingsThemeLight.Content">
     <value>Luce</value>
+    <comment></comment>
   </data>
-  <data name="SettingsThemeSelectMode.Text" xml:space="preserve">
+  <data name="SettingsThemeSelectMode.Text">
     <value>Selezionare una modalità</value>
+    <comment></comment>
   </data>
-  <data name="SettingsThemeSystem.Content" xml:space="preserve">
+  <data name="SettingsThemeSystem.Content">
     <value>Utilizzare le impostazioni di sistema</value>
+    <comment></comment>
   </data>
-  <data name="SettingsTitleBarToggleSwtich.Header" xml:space="preserve">
+  <data name="SettingsTitleBarToggleSwtich.Header">
     <value>Barra del titolo definita dall'utente (in chiaro/scuro)</value>
+    <comment></comment>
   </data>
-  <data name="SettingsWindowsColor.Content" xml:space="preserve">
+  <data name="SettingsWindowsColor.Content">
     <value>Impostazioni del colore del sistema</value>
+    <comment></comment>
   </data>
-  <data name="SettingsWindowsHelloPrefer.Header" xml:space="preserve">
+  <data name="SettingsWindowsHelloPrefer.Header">
     <value>Preferite Windows Hello per il login</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageAccountsNavigation.Content" xml:space="preserve">
+  <data name="ShellPageAccountsNavigation.Content">
     <value>Conti</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageDatafileNavigation.Content" xml:space="preserve">
+  <data name="ShellPageDatafileNavigation.Content">
     <value>Profilo dati</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.Content">
     <value>Feedback</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigationToolTip">
     <value>Dare un feedback (Github)</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
+  <data name="UseDatafileContentDialogChangeDatafile.Content">
     <value>Scegliere un altro file di dati</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
+  <data name="UseDatafileContentDialogDatafilePivotItem.Header">
     <value>Profilo dati</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogFilename.Header" xml:space="preserve">
+  <data name="UseDatafileContentDialogFilename.Header">
     <value>Nome del file</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogFolderPath.Header" xml:space="preserve">
+  <data name="UseDatafileContentDialogFolderPath.Header">
     <value>Percorso della cartella</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogInfo.Text" xml:space="preserve">
+  <data name="UseDatafileContentDialogInfo.Text">
     <value>Se si è già utilizzata l'applicazione, selezionare se si desidera caricare il file di dati esistente dall'archivio locale o tramite WebDAV.</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogLoadInfo.Text" xml:space="preserve">
+  <data name="UseDatafileContentDialogLoadInfo.Text">
     <value>Selezionare il file di dati esistente e inserire la password.</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogLocalPath.Text" xml:space="preserve">
+  <data name="UseDatafileContentDialogLocalPath.Text">
     <value>Scegliere il percorso locale</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
+  <data name="UseDatafileContentDialogMain.CloseButtonText">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
+  <data name="UseDatafileContentDialogMain.PrimaryButtonText">
     <value>Caricare il file di dati</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogMain.Title" xml:space="preserve">
+  <data name="UseDatafileContentDialogMain.Title">
     <value>Caricare il file di dati</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogPasswordError.Text" xml:space="preserve">
+  <data name="UseDatafileContentDialogPasswordError.Text">
     <value>Il file di dati non può essere decifrato con la password.</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
+  <data name="UseDatafileContentDialogPivotItemKind.Header">
     <value>Immagazzinamento</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
+  <data name="UseDatafileContentDialogWebDAV.Text">
     <value>Scegliere WebDAV</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
+  <data name="UseDatafileContentDialogWebDAVPivotItem.Header">
     <value>WebDAV</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageCreateDatafile.Content" xml:space="preserve">
+  <data name="WelcomePageCreateDatafile.Content">
     <value>Creare un nuovo file di dati (primo avvio)</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageFirstSteps.Text" xml:space="preserve">
+  <data name="WelcomePageFirstSteps.Text">
     <value>Primi passi verso la sicurezza ...</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageIntro.Text" xml:space="preserve">
+  <data name="WelcomePageIntro.Text">
     <value>Benvenuti!
 
 Iniziate con un altro fattore di sicurezza nella vostra vita quotidiana.</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageLoadDatafile.Content" xml:space="preserve">
+  <data name="WelcomePageLoadDatafile.Content">
     <value>Carica il file di dati esistente</value>
+    <comment></comment>
   </data>
-  <data name="WindowsHelloLoginMessage" xml:space="preserve">
+  <data name="WindowsHelloLoginMessage">
     <value>Verificare ora con il login Windows Hello configurato.</value>
+    <comment></comment>
   </data>
-  <data name="WindowsHelloPreferMessage" xml:space="preserve">
+  <data name="WindowsHelloPreferMessage">
     <value>È possibile effettuare il login con Windows Hello. Volete preferire questo tipo di accesso in futuro? È possibile modificare questa opzione nelle impostazioni in qualsiasi momento.</value>
+    <comment></comment>
   </data>
-  <data name="Yes" xml:space="preserve">
+  <data name="Yes">
     <value>Sì</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSecondsToolTip">
     <value>Secondi per l'aggiornamento</value>
+    <comment></comment>
   </data>
-  <data name="ButtonTextCancel" xml:space="preserve">
+  <data name="ButtonTextCancel">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="ButtonTextConfirm" xml:space="preserve">
+  <data name="ButtonTextConfirm">
     <value>Confermare</value>
+    <comment></comment>
   </data>
-  <data name="ButtonTextNo" xml:space="preserve">
+  <data name="ButtonTextNo">
     <value>No</value>
+    <comment></comment>
   </data>
-  <data name="ButtonTextYes" xml:space="preserve">
+  <data name="ButtonTextYes">
     <value>Sì</value>
+    <comment></comment>
   </data>
-  <data name="RateAppContentDialogLaterButton" xml:space="preserve">
+  <data name="RateAppContentDialogLaterButton">
     <value>Richiamo successivo</value>
+    <comment></comment>
   </data>
-  <data name="RateAppContentDialogNoButton" xml:space="preserve">
+  <data name="RateAppContentDialogNoButton">
     <value>No, grazie</value>
+    <comment></comment>
   </data>
-  <data name="RateAppContentDialogQuestion" xml:space="preserve">
+  <data name="RateAppContentDialogQuestion">
     <value>Se state usando questa applicazione da un po' di tempo, visitate il negozio per valutarla e scrivere una recensione. Potete anche utilizzare l'app Windows Feedback in qualsiasi momento per inviarci direttamente il vostro feedback.</value>
+    <comment></comment>
   </data>
-  <data name="RateAppContentDialogYesButton" xml:space="preserve">
+  <data name="RateAppContentDialogYesButton">
     <value>Vota ora</value>
+    <comment></comment>
   </data>
-  <data name="RateAppContentDialogTitle" xml:space="preserve">
+  <data name="RateAppContentDialogTitle">
     <value>Vi piace questa applicazione?</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header">
     <value>Password attuale</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText">
     <value>Password di ingresso</value>
+    <comment></comment>
   </data>
-  <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
+  <data name="AuthorizationFileSystemContentDialogDescription">
     <value>L'applicazione non dispone attualmente dei diritti di accesso necessari per accedere al file di dati. Per impostare i diritti, tuttavia, l'applicazione deve essere chiusa.
 È necessario concedere i diritti necessari nelle impostazioni e riavviare l'applicazione.
 
 Istruzioni per l'impostazione dell'autorizzazione:
 ![Istruzioni per l'impostazione dell'autorizzazione](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)</value>
+    <comment></comment>
   </data>
-  <data name="AuthorizationFileSystemContentDialogPrimaryBTN" xml:space="preserve">
+  <data name="AuthorizationFileSystemContentDialogPrimaryBTN">
     <value>Impostare l'autorizzazione</value>
+    <comment></comment>
   </data>
-  <data name="AuthorizationFileSystemContentDialogSecondaryBTN" xml:space="preserve">
+  <data name="AuthorizationFileSystemContentDialogSecondaryBTN">
     <value>Annulla (chiudere l'applicazione)</value>
+    <comment></comment>
   </data>
-  <data name="AuthorizationFileSystemContentDialogTitle" xml:space="preserve">
+  <data name="AuthorizationFileSystemContentDialogTitle">
     <value>Errore di autorizzazione</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.Label">
     <value>App di blocco</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
+  <data name="AccountCodePageCopyCodeTeachingTip">
     <value>Tasto copiato negli appunti</value>
+    <comment></comment>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
+  <data name="ChangePassword">
     <value>Modifica della password</value>
+    <comment></comment>
   </data>
-  <data name="CloseApp" xml:space="preserve">
+  <data name="CloseApp">
     <value>Chiudere l'applicazione</value>
+    <comment></comment>
   </data>
-  <data name="DeleteAccountContentDialogDescription" xml:space="preserve">
+  <data name="DeleteAccountContentDialogDescription">
     <value>Siete sicuri di voler eliminare l'account? Dopo l'eliminazione si hanno **30 secondi** per annullare l'eliminazione.</value>
+    <comment></comment>
   </data>
-  <data name="DeleteAccountContentDialogTitle" xml:space="preserve">
+  <data name="DeleteAccountContentDialogTitle">
     <value>Cancellare l'account</value>
+    <comment></comment>
   </data>
-  <data name="ErrorHandle" xml:space="preserve">
+  <data name="ErrorHandle">
     <value>Maniglia di errore</value>
+    <comment></comment>
   </data>
-  <data name="ErrorHandleDescription" xml:space="preserve">
+  <data name="ErrorHandleDescription">
     <value>Si è verificato un errore non gestito, si prega di inviare i dettagli dell'errore che possono essere visualizzati nel campo tramite un nuovo problema in Github.</value>
+    <comment></comment>
   </data>
-  <data name="PasswordInvalidHeader" xml:space="preserve">
+  <data name="PasswordInvalidHeader">
     <value>Password non valida</value>
+    <comment></comment>
   </data>
-  <data name="SettingsQRScanningHeader" xml:space="preserve">
+  <data name="SettingsQRScanningHeader">
     <value>Tempo di ritardo per l'avvio della lettura del codice QR</value>
+    <comment></comment>
   </data>
-  <data name="SettingsQRScanningSecondsRange" xml:space="preserve">
+  <data name="SettingsQRScanningSecondsRange">
     <value>Specificato in secondi (ammessi 3-10s)</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageAboutAppNavigation.Content" xml:space="preserve">
+  <data name="ShellPageAboutAppNavigation.Content">
     <value>Informazioni sull'applicazione</value>
+    <comment></comment>
   </data>
-  <data name="ExceptionDatafileNotFound" xml:space="preserve">
+  <data name="ExceptionDatafileNotFound">
     <value>Non è stato possibile trovare il percorso del file di dati corrente. È possibile che il file di dati sia stato spostato dall'utente.
 **Si desidera modificare il percorso?</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogoutToolTip">
     <value>App di blocco</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntryToolTip">
     <value>Aggiungi account</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafileToolTip">
     <value>Ricarica il file di dati</value>
+    <comment></comment>
   </data>
-  <data name="PasswordInvalidMessage" xml:space="preserve">
+  <data name="PasswordInvalidMessage">
     <value>La password salvata in questa applicazione non è valida per il file di dati. È possibile che la password sia stata modificata in un'altra macchina per il file di dati.
 **Vuoi cambiare la password ora?**</value>
     <comment>[ReswT:manually]</comment>
   </data>
-  <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
+  <data name="SettingsFactoryResetDialogTitle">
     <value>Reset di fabbrica</value>
+    <comment></comment>
   </data>
-  <data name="SettingsSourceCode.Header" xml:space="preserve">
+  <data name="SettingsSourceCode.Header">
     <value>Mostra il codice sorgente dell'applicazione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
+  <data name="SettingsPivotItemDatafile.Header">
     <value>File dati</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.Label">
     <value>Annullamento dell'eliminazione</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDeleteToolTip">
     <value>Annullamento dell'eliminazione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDatafileName.Header" xml:space="preserve">
+  <data name="SettingsDatafileName.Header">
     <value>Nome del file di dati</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDatafilePath.Header" xml:space="preserve">
+  <data name="SettingsDatafilePath.Header">
     <value>Percorso del file di dati</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileContentDialogDatafileExistsError" xml:space="preserve">
+  <data name="NewDatafileContentDialogDatafileExistsError">
     <value>Nella cartella esiste già un file di dati con questo nome. Cambiare la cartella o il nome del file.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDatafileBTNChangePassword.Content" xml:space="preserve">
+  <data name="SettingsDatafileBTNChangePassword.Content">
     <value>cambiare la password</value>
+    <comment></comment>
   </data>
-  <data name="ErrorHandleSendError" xml:space="preserve">
+  <data name="ErrorHandleSendError">
     <value>Invia errore</value>
+    <comment></comment>
   </data>
-  <data name="FactoryReset" xml:space="preserve">
+  <data name="FactoryReset">
     <value>Reset di fabbrica</value>
+    <comment></comment>
   </data>
-  <data name="ChangeDatafilePath" xml:space="preserve">
+  <data name="ChangeDatafilePath">
     <value>Modifica del percorso del file</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageEmptyCollectionTip.Subtitle" xml:space="preserve">
+  <data name="AccountCodePageEmptyCollectionTip.Subtitle">
     <value>Aggiungere nuovi account</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageEmptyCollectionTip.Title" xml:space="preserve">
+  <data name="AccountCodePageEmptyCollectionTip.Title">
     <value>Elenco vuoto</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageWrongTimeBTN" xml:space="preserve">
+  <data name="AccountCodePageWrongTimeBTN">
     <value>Impostazioni dell'orario di apertura</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageWrongTimeContent" xml:space="preserve">
+  <data name="AccountCodePageWrongTimeContent">
     <value>La visualizzazione dell'ora corrente del dispositivo non è corretta, pertanto i codici per i conti non possono essere generati correttamente.
 Sincronizzare l'ora nelle impostazioni.</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageWrongTimeTitle" xml:space="preserve">
+  <data name="AccountCodePageWrongTimeTitle">
     <value>Visualizzazione errata dell'ora</value>
+    <comment></comment>
   </data>
-  <data name="PasswordAdvancedHashOption.Header" xml:space="preserve">
+  <data name="PasswordAdvancedHashOption.Header">
     <value>Opzioni avanzate</value>
+    <comment></comment>
   </data>
-  <data name="PasswordAdvancedHashOptionText.Content" xml:space="preserve">
+  <data name="PasswordAdvancedHashOptionText.Content">
     <value>Con questa impostazione, viene utilizzato Argon2id invece di SHA-512 per la generazione dell'hash della richiesta di password.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDatafileChangePasswordInfoTitle" xml:space="preserve">
+  <data name="SettingsDatafileChangePasswordInfoTitle">
     <value>La password è stata modificata con successo</value>
+    <comment></comment>
   </data>
-  <data name="ShellPagePaneTitle" xml:space="preserve">
+  <data name="ShellPagePaneTitle">
     <value>Menu di navigazione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAuthorLogo.Content" xml:space="preserve">
+  <data name="SettingsAuthorLogo.Content">
     <value>Autore del logo: Freepik</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageAutoSuggestBoxPlaceholder" xml:space="preserve">
+  <data name="AccountCodePageAutoSuggestBoxPlaceholder">
     <value>Ricerca</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageSearchNotFound" xml:space="preserve">
+  <data name="AccountCodePageSearchNotFound">
     <value>Nessun risultato trovato</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDependencyGroupAssets" xml:space="preserve">
+  <data name="SettingsDependencyGroupAssets">
     <value>Attività</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDependencyGroupPackages" xml:space="preserve">
+  <data name="SettingsDependencyGroupPackages">
     <value>Pacchetti</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies.Header">
     <value>Dipendenze dell'applicazione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDependencyAuthor.Text" xml:space="preserve">
+  <data name="SettingsDependencyAuthor.Text">
     <value>Autore:</value>
+    <comment></comment>
   </data>
-  <data name="SettingsDependencyLicence.Text" xml:space="preserve">
+  <data name="SettingsDependencyLicence.Text">
     <value>Licenza:</value>
+    <comment></comment>
   </data>
-  <data name="RestartApp" xml:space="preserve">
+  <data name="RestartApp">
     <value>Riavviare l'applicazione</value>
+    <comment></comment>
   </data>
-  <data name="ErrorCopyToClipboard" xml:space="preserve">
+  <data name="ErrorCopyToClipboard">
     <value>Copiare il rapporto negli appunti</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
+  <data name="SettingsPageSaveIsPossibleTip.Subtitle">
     <value>L'indirizzo del server NTP è valido e può essere salvato premendolo.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
+  <data name="SettingsPageSaveIsPossibleTip.Title">
     <value>Risparmiare?</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
+  <data name="SettingsPageSaveNotPossibleTip.Subtitle">
     <value>Il salvataggio dell'indirizzo del server NTP non è possibile perché il server non è stato trovato.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
+  <data name="SettingsPageSaveNotPossibleTip.Title">
     <value>Errore</value>
+    <comment></comment>
   </data>
-  <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
+  <data name="SettingsUseNTPTimeCorrection.Header">
     <value>Utilizzare il time server per controllare l'ora del sistema</value>
+    <comment></comment>
   </data>
-  <data name="SettingsSaveNTPServer.Label" xml:space="preserve">
+  <data name="SettingsSaveNTPServer.Label">
     <value>Risparmiare</value>
+    <comment></comment>
   </data>
-  <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
+  <data name="ErrorHandleDescriptionLastSession">
     <value>Si è verificato un errore non gestito l'ultima volta che è stata utilizzata l'app; si prega di inviare i dettagli dell'errore che possono essere visualizzati nel campo tramite un nuovo problema in Github.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
+  <data name="SettingsNTPServerCheckBoxText.Content">
     <value>Impostare manualmente il server NTP</value>
+    <comment></comment>
   </data>
-  <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
+  <data name="SettingsNTPServerDescribtion.Text">
     <value>È possibile utilizzare un server NTP per verificare l'ora corretta del sistema. Se la deviazione dell'ora è maggiore, la creazione dei codici per i conti non sarà più corretta. Se lo scostamento è superiore a trenta secondi, appare una notifica e la creazione dei codici viene effettuata con l'ora del server NTP.</value>
+    <comment></comment>
   </data>
-  <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Correzioni di bug
-- Aggiornamento delle librerie di terze parti
-- La crittografia standard è stata rafforzata
-- La dipendenza dal programma "Cut and Sketch" è stata rimossa, i codici QR sono ora letti dalle funzioni di sistema
-- I registri degli errori possono ora essere aperti esternamente con un comando: [Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
-- Il tutorial è stato migliorato e sono state aggiunte le funzioni Pro.
-- Le impostazioni possono essere controllate centralmente tramite MDM: [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) (funzione Pro)
-- I nuovi account possono ora essere aggiunti esternamente tramite comando [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd) (funzione Pro)</value>
+  <data name="NewAppFeaturesContent">
+    <value>- Aggiornamento delle librerie di terze parti
+- Sono state aggiunte altre lingue: spagnolo, francese, italiano, giapponese e cinese.
+- Le categorie possono ora essere impostate direttamente nei nuovi account (funzione Pro)</value>
+    <comment>[ReswT:always]</comment>
   </data>
-  <data name="NewAppFeaturesTitle" xml:space="preserve">
+  <data name="NewAppFeaturesTitle">
     <value>Nuove funzionalità e modifiche</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageTitle" xml:space="preserve">
+  <data name="WelcomePageTitle">
     <value>Benvenuti</value>
+    <comment></comment>
   </data>
-  <data name="UseDataFilePageName.Text" xml:space="preserve">
+  <data name="UseDataFilePageName.Text">
     <value>Carica il file di dati esistente</value>
+    <comment></comment>
   </data>
-  <data name="CreateDatafile" xml:space="preserve">
+  <data name="CreateDatafile">
     <value>Creare un file di dati</value>
+    <comment></comment>
   </data>
-  <data name="LoadDatafile" xml:space="preserve">
+  <data name="LoadDatafile">
     <value>Carica il file di dati esistente</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
+  <data name="WelcomePageABBTutorial.Label">
     <value>Primi passi</value>
+    <comment></comment>
   </data>
-  <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
+  <data name="UseDataFilePageLoadDatafile.Content">
     <value>Caricare il file di dati</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
+  <data name="UseDatafileContentDialogWDLogin.Content">
     <value>Accesso</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
+  <data name="UseDatafileContentDialogWDServerAddress.Header">
     <value>Indirizzo del server</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
+  <data name="UseDatafileContentDialogWDUsername.Header">
     <value>Nome utente</value>
+    <comment></comment>
   </data>
-  <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
+  <data name="UseDataFilePageDatafileExpander.Header">
     <value>File dati</value>
+    <comment></comment>
   </data>
-  <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
+  <data name="UseDataFilePageLoginExpander.Header">
     <value>Accesso al servizio</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
+  <data name="SettingsAppCornorRadius.Header">
     <value>Angoli arrotondati</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
+  <data name="SettingsAppCornorRadiusDesc.Text">
     <value>Se l'opzione è attivata, gli angoli dei controlli saranno arrotondati.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
+  <data name="SettingsAppThemeMode.Header">
     <value>Schema di colori dell'app</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
+  <data name="SettingsOptionsFactoryReset.Header">
     <value>Reset di fabbrica</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
+  <data name="SettingsOptionsFactoryResetDesc.Text">
     <value>Premendo e confermando si ripristina l'applicazione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
+  <data name="SettingsOptionsQRScan.Header">
     <value>Scansione del codice QR</value>
+    <comment></comment>
   </data>
-  <data name="UseDatafilePasswordInfo" xml:space="preserve">
+  <data name="UseDatafilePasswordInfo">
     <value>Per caricare il file di dati, è necessario inserire la password configurata al momento della creazione del file.</value>
+    <comment></comment>
   </data>
-  <data name="ToolTipShowHelp" xml:space="preserve">
+  <data name="ToolTipShowHelp">
     <value>Mostra aiuto</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAutoLogoutDesc" xml:space="preserve">
+  <data name="SettingsAutoLogoutDesc">
     <value>Logout automatico dopo l'inattività</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
+  <data name="SettingsAutoLogoutMinutes">
     <value>Minuti di inattività</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
+  <data name="SettingsOptionsAutoLogout.Header">
     <value>Blocco automatico</value>
+    <comment></comment>
   </data>
-  <data name="Close" xml:space="preserve">
+  <data name="Close">
     <value>Chiudere</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
+  <data name="AddAccountCodeContentDialogQRCodeHelp">
     <value>Quando si seleziona la scansione del codice QR, si apre una nuova finestra in cui è necessario selezionare il programma che contiene il codice QR da scansionare. Questo è il browser, ad esempio.</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
+  <data name="AccountCodePageShowQRCode.Text">
     <value>Visualizzazione del codice QR</value>
+    <comment></comment>
   </data>
-  <data name="DisplayQRCodeContentDialogTitle" xml:space="preserve">
+  <data name="DisplayQRCodeContentDialogTitle">
     <value>Visualizzazione del codice QR</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountCodeContentDialogInputSecretKeyHelp" xml:space="preserve">
+  <data name="AddAccountCodeContentDialogInputSecretKeyHelp">
     <value>L'input è basato su Base32 e quindi consente solo le lettere A-Z e i numeri da 2-7.</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageTooltipDeleteFavourite" xml:space="preserve">
+  <data name="AccountCodePageTooltipDeleteFavourite">
     <value>Annullamento dei preferiti</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageTooltipSetFavourite" xml:space="preserve">
+  <data name="AccountCodePageTooltipSetFavourite">
     <value>Imposta come preferito</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageTooltipHideTOTP" xml:space="preserve">
+  <data name="AccountCodePageTooltipHideTOTP">
     <value>Tasto di blocco</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageTooltipShowTOTP" xml:space="preserve">
+  <data name="AccountCodePageTooltipShowTOTP">
     <value>Mostra chiave</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPreferHiddenTOTP.Header" xml:space="preserve">
+  <data name="SettingsPreferHiddenTOTP.Header">
     <value>Nascondere i tasti</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
+  <data name="SettingsPreferHiddenTOTPDesc.Text">
     <value>Le chiavi generate sono nascoste e possono essere facoltativamente sfumate.</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogExpertExpander.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogExpertExpander.Header">
     <value>Impostazioni degli esperti</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogHashAlgo.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogHashAlgo.Header">
     <value>Algoritmo di hash</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogTotpSize.Header">
     <value>Numero di cifre</value>
+    <comment></comment>
   </data>
-  <data name="ButtonTextRetry" xml:space="preserve">
+  <data name="ButtonTextRetry">
     <value>Riprova</value>
+    <comment></comment>
   </data>
-  <data name="ErrorClipboardTask" xml:space="preserve">
+  <data name="ErrorClipboardTask">
     <value>Gli appunti sono stati occupati da un altro programma, riprovare.</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogDeleteAccountIcon.Text" xml:space="preserve">
+  <data name="AddAccountContentDialogDeleteAccountIcon.Text">
     <value>Cancellare</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogAccountIcon.Header">
     <value>Icona del conto</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogAccountNotes.Header">
     <value>Aggiungi note</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
+  <data name="EditAccountContentDialogAccountNotes.Header">
     <value>Note</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogSuggestionBox.Header">
     <value>Ricerca immagine dell'account</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
+  <data name="AddAccountCodeContentDialogExpertSettingsHelp">
     <value>Modificate queste impostazioni solo se siete sicuri che il servizio le richieda.</value>
+    <comment></comment>
   </data>
-  <data name="NewDataFilePageTitle.Text" xml:space="preserve">
+  <data name="NewDataFilePageTitle.Text">
     <value>Nuovo file di dati</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.Label">
     <value>Filtro</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilterToolTip">
     <value>Filtro</value>
+    <comment></comment>
   </data>
-  <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
+  <data name="WebViewDatafileContentDialogChooseFile">
     <value>Scegliere il file</value>
+    <comment></comment>
   </data>
-  <data name="WebViewDatafileContentDialogChooseFolder" xml:space="preserve">
+  <data name="WebViewDatafileContentDialogChooseFolder">
     <value>Scegliere la cartella</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageAboDesc.Text" xml:space="preserve">
+  <data name="SettingsPageAboDesc.Text">
     <value>Sostenere lo sviluppo dell'app con pagamenti ricorrenti.</value>
+    <comment></comment>
   </data>
-  <data name="WebDAVEmptyFolderMessage.Text" xml:space="preserve">
+  <data name="WebDAVEmptyFolderMessage.Text">
     <value>Questa cartella non contiene file che possono essere selezionati.</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileCreateDatafile.Content" xml:space="preserve">
+  <data name="NewDatafileCreateDatafile.Content">
     <value>Creare un file di dati</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafilehangeDatafile.Content" xml:space="preserve">
+  <data name="NewDatafilehangeDatafile.Content">
     <value>Cambia cartella</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppPrideMonthDesign.Header" xml:space="preserve">
+  <data name="SettingsAppPrideMonthDesign.Header">
     <value>Colori arcobaleno per le finestre di accesso</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppPrideMonthDesignDesc.Text" xml:space="preserve">
+  <data name="SettingsAppPrideMonthDesignDesc.Text">
     <value>Impostazione dei colori arcobaleno per la finestra di login</value>
+    <comment></comment>
   </data>
-  <data name="SettingsMailSupportApp.Text" xml:space="preserve">
+  <data name="SettingsMailSupportApp.Text">
     <value>Assistenza via e-mail</value>
+    <comment></comment>
   </data>
-  <data name="SettingsCustomDesign.Header" xml:space="preserve">
+  <data name="SettingsCustomDesign.Header">
     <value>Impostazioni speciali del design</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogImportBackup.Header">
     <value>Importazione del backup</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
+  <data name="NewDatafilePageCreateFileBTN.Content">
     <value>Creare un file di dati</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
+  <data name="WelcomePageTutorialTipOpen">
     <value>Tutorial aperto</value>
+    <comment></comment>
   </data>
-  <data name="WelcomePageTutorialDesc" xml:space="preserve">
+  <data name="WelcomePageTutorialDesc">
     <value>Volete aprire il tutorial dell'applicazione?</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
+  <data name="TutorialContentDialogFirstSteps.Text">
     <value>L'applicazione **2fast** (acronimo di **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) è un [autenticatore](https://en.wikipedia.org/wiki/Authenticator) per l'autenticazione a due fattori (2FA) che utilizza lo standard "**T**ime-based **O**ne-**t**ime **P**assword algorithm"/ time-based one-time password (TOTP) secondo la standardizzazione [RFC 6238](https://tools.ietf.org/html/rfc6238). I servizi che si basano sullo standard TOTP per il secondo fattore possono essere utilizzati con questa applicazione. Ad esempio, Microsoft, Google e PayPal supportano l'autenticazione a due fattori utilizzando TOTP:</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
+  <data name="TutorialContentDialogCreateMethod.Text">
     <value>Per creare un file di dati, il primo passo è selezionare una cartella in cui salvare il file. Si consiglia di scegliere un luogo di archiviazione protetto contro la perdita di dati (ad esempio, un cloud storage come One-Drive, DropBox, ecc.) Seguono il nome e la password per la crittografia del file. Si consiglia di salvare la password in un gestore di password per evitarne la perdita.</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
+  <data name="TutorialContentDialogLoadMethod.Text">
     <value>Per caricare il file di dati, il primo passo è selezionare il file di dati. A questo punto è necessario inserire la password con cui è stato criptato il file di dati.</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
+  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text">
     <value>Creazione di un account</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
+  <data name="TutorialContentDialogCreateMethodHeader.Text">
     <value>Creazione di un file di dati</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
+  <data name="TutorialContentDialogLoadMethodHeader.Text">
     <value>Caricamento di un file di dati</value>
+    <comment></comment>
   </data>
-  <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
+  <data name="SettingsUseAutoLogout.Header">
     <value>Disconnessione automatica</value>
+    <comment></comment>
   </data>
-  <data name="FunctionNotAvailable" xml:space="preserve">
+  <data name="FunctionNotAvailable">
     <value>Funzione non disponibile</value>
+    <comment></comment>
   </data>
-  <data name="WindowsHelloNotAvailable" xml:space="preserve">
+  <data name="WindowsHelloNotAvailable">
     <value>Windows Hello non può essere eseguito perché non è stata memorizzata alcuna password per il file di dati nella memoria protetta.</value>
+    <comment></comment>
   </data>
-  <data name="ErrorGenerateTOTPCode" xml:space="preserve">
+  <data name="ErrorGenerateTOTPCode">
     <value>La chiave segreta dell'account {0} è vuota o illeggibile. Riavviare l'applicazione. Se il problema persiste, ripulire l'account {0} e aggiungerlo nuovamente.</value>
+    <comment></comment>
   </data>
-  <data name="TextFormatterBoldToolTip" xml:space="preserve">
+  <data name="TextFormatterBoldToolTip">
     <value>In grassetto</value>
+    <comment></comment>
   </data>
-  <data name="TextFormatterItalicToolTip" xml:space="preserve">
+  <data name="TextFormatterItalicToolTip">
     <value>Corsivo</value>
+    <comment></comment>
   </data>
-  <data name="TextFormatterStrikeToolTip" xml:space="preserve">
+  <data name="TextFormatterStrikeToolTip">
     <value>Barrato</value>
+    <comment></comment>
   </data>
-  <data name="TextFormatterUnderlineToolTip" xml:space="preserve">
+  <data name="TextFormatterUnderlineToolTip">
     <value>Sottolineatura</value>
+    <comment></comment>
   </data>
-  <data name="TextFormatterListToolTip" xml:space="preserve">
+  <data name="TextFormatterListToolTip">
     <value>Elenco</value>
+    <comment></comment>
   </data>
-  <data name="TextFormatterOrderedToolTip" xml:space="preserve">
+  <data name="TextFormatterOrderedToolTip">
     <value>Elenco ordinato</value>
+    <comment></comment>
   </data>
-  <data name="WriteDatafileErrorBTNCancel" xml:space="preserve">
+  <data name="WriteDatafileErrorBTNCancel">
     <value>Scartare le modifiche</value>
+    <comment></comment>
   </data>
-  <data name="WriteDatafileErrorBTNRetry" xml:space="preserve">
+  <data name="WriteDatafileErrorBTNRetry">
     <value>Salva di nuovo</value>
+    <comment></comment>
   </data>
-  <data name="WriteDatafileErrorDesc" xml:space="preserve">
+  <data name="WriteDatafileErrorDesc">
     <value>Non è stato possibile salvare le modifiche. Volete salvarle di nuovo?</value>
+    <comment></comment>
   </data>
-  <data name="SettingsCBNotStorePassword.Content" xml:space="preserve">
+  <data name="SettingsCBNotStorePassword.Content">
     <value>Non salvare la password nel gestore delle credenziali (Windows Hello non è disponibile)</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVServerNotFound" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVServerNotFound">
     <value>Indirizzo non trovato</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVServerNotFoundDesc" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVServerNotFoundDesc">
     <value>L'indirizzo del servizio WebDAV non è stato trovato.</value>
+    <comment></comment>
   </data>
-  <data name="WebDAVAppPasswordInfo" xml:space="preserve">
+  <data name="WebDAVAppPasswordInfo">
     <value>Per accedere al servizio WebDAV è necessaria una password dell'applicazione, che può essere creata nelle impostazioni del servizio WebDAV.</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVCredentialsError" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVCredentialsError">
     <value>Errore di accesso</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVCredentialsErrorDesc" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVCredentialsErrorDesc">
     <value>Il nome utente o la password non sono validi.</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVMaintenanceError" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVMaintenanceError">
     <value>Server in modalità di manutenzione</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc">
     <value>L'accesso non è attualmente possibile perché il servizio WebDAV è in modalità di manutenzione.</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVNotInstalledError" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVNotInstalledError">
     <value>Server non installato</value>
+    <comment></comment>
   </data>
-  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
+  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc">
     <value>Il servizio WebDAV non è stato installato correttamente.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
+  <data name="SettingsUseWindowsHello.Header">
     <value>Offrire Windows Hello come opzione di login</value>
+    <comment></comment>
   </data>
-  <data name="InfoBarDatafileNoInternet" xml:space="preserve">
+  <data name="InfoBarDatafileNoInternet">
     <value>Attualmente non è disponibile la connessione a Internet per la sincronizzazione. Collegarsi e confermare "Ricarica file dati".</value>
+    <comment></comment>
   </data>
-  <data name="InfoBarDatafileTitleNoInternet" xml:space="preserve">
+  <data name="InfoBarDatafileTitleNoInternet">
     <value>Nessuna connessione a Internet</value>
+    <comment></comment>
   </data>
-  <data name="InfoBarDatafileTitleUpdated" xml:space="preserve">
+  <data name="InfoBarDatafileTitleUpdated">
     <value>Aggiornamento del file di dati</value>
+    <comment></comment>
   </data>
-  <data name="InfoBarDatafileUpdated" xml:space="preserve">
+  <data name="InfoBarDatafileUpdated">
     <value>Il file di dati è stato aggiornato con successo.</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogCameraScan.Header" xml:space="preserve">
+  <data name="AddAccountContentDialogCameraScan.Header">
     <value>Macchina fotografica</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogCameraScanBTN.Text" xml:space="preserve">
+  <data name="AddAccountContentDialogCameraScanBTN.Text">
     <value>Macchina fotografica</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogBTNCamRetry.Content" xml:space="preserve">
+  <data name="AddAccountContentDialogBTNCamRetry.Content">
     <value>Ricarica</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogNoCamFound.Text" xml:space="preserve">
+  <data name="AddAccountContentDialogNoCamFound.Text">
     <value>Non è disponibile alcuna telecamera.</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogNoCamPermission.Text" xml:space="preserve">
+  <data name="AddAccountContentDialogNoCamPermission.Text">
     <value>Non è stato dato il consenso alla visualizzazione della telecamera.</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
+  <data name="AddAccountContentDialogPrivacyWebcam.Content">
     <value>Impostazioni aperte</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageWarnInfo" xml:space="preserve">
+  <data name="ShellPageWarnInfo">
     <value>Protezione della registrazione dello schermo non attiva</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileFolderPath.Header" xml:space="preserve">
+  <data name="NewDatafileFolderPath.Header">
     <value>Percorso della cartella WebDAV</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageTitle" xml:space="preserve">
+  <data name="AccountCodePageTitle">
     <value>Conti</value>
+    <comment></comment>
   </data>
-  <data name="AccoundCodePageImportEntry.Label" xml:space="preserve">
+  <data name="AccoundCodePageImportEntry.Label">
     <value>Importazione dei conti</value>
+    <comment></comment>
   </data>
-  <data name="AccoundCodePageImportCamera.Text" xml:space="preserve">
+  <data name="AccoundCodePageImportCamera.Text">
     <value>Eseguire l'importazione della telecamera</value>
+    <comment></comment>
   </data>
-  <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
+  <data name="AccoundCodePageImportDocument.Text">
     <value>Utilizzare file/immagine per l'importazione</value>
+    <comment></comment>
   </data>
-  <data name="ApplicationName" xml:space="preserve">
+  <data name="ApplicationName">
     <value>2fast - Autenticatore a due fattori</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageBackButton.Text" xml:space="preserve">
+  <data name="TutorialPageBackButton.Text">
     <value>Indietro</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageForwardButton.Text" xml:space="preserve">
+  <data name="TutorialPageForwardButton.Text">
     <value>In avanti</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageSkipButton.Content" xml:space="preserve">
+  <data name="TutorialPageSkipButton.Content">
     <value>Salto</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
+  <data name="TutorialPageFinishpButton.Content">
     <value>Tutorial di finitura</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafilePasswordInfo" xml:space="preserve">
+  <data name="NewDatafilePasswordInfo">
     <value>È necessario assegnare una password per la crittografia del file di dati. Si raccomanda vivamente di memorizzare questa password in modo sicuro in un gestore di password.</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
+  <data name="NewDatafilePasswordInfoTitle">
     <value>Password per la crittografia</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
+  <data name="TutorialPageItemCopyCodeBTNDesc">
     <value>La chiave viene copiata negli appunti.</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
+  <data name="TutorialPageItemCopyCodeBTNTitle">
     <value>Tasto copia</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
+  <data name="TutorialPageItemFavouriteBTNTDesc">
     <value>Impostando un preferito, l'account viene visualizzato nel colore di accento dell'applicazione e posizionato in cima all'ordine di visualizzazione.</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
+  <data name="TutorialPageItemFavouriteBTNTitle">
     <value>Set preferito</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
+  <data name="TutorialPageItemMoreBTNDesc">
     <value>Qui vengono visualizzate ulteriori opzioni per il conto</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemMoreBTNTitle" xml:space="preserve">
+  <data name="TutorialPageItemMoreBTNTitle">
     <value>Altre opzioni</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
+  <data name="TutorialPageItemShowCodeBTNDesc">
     <value>Facoltativamente, i tasti possono essere nascosti e visualizzati di nuovo</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
+  <data name="TutorialPageItemShowCodeBTNTitle">
     <value>Tasto nascondi/visualizza</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
+  <data name="TutorialContentDialogInteractionAccount.Text">
     <value>Esistono diverse opzioni di interazione per gli account creati, che vengono spiegate in dettaglio con un esempio di account dopo la loro attivazione.</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
+  <data name="TutorialContentDialogInteractionAccountHeader.Text">
     <value>Opzioni di interazione per i conti</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
+  <data name="NewDatafileAccessErrorDesc">
     <value>L'accesso alla cartella è bloccato per l'applicazione, riprovare o selezionare un'altra cartella.</value>
+    <comment></comment>
   </data>
-  <data name="NewDatafileAccessErrorTitle" xml:space="preserve">
+  <data name="NewDatafileAccessErrorTitle">
     <value>Accesso negato</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
+  <data name="EditAccountContentDialogAddGlobalCategories.Header">
     <value>Creare categorie</value>
+    <comment></comment>
   </data>
-  <data name="ManageCategoriesContentDialogIcon.Header" xml:space="preserve">
+  <data name="ManageCategoriesContentDialogIcon.Header">
     <value>Scegliere l'icona</value>
+    <comment></comment>
   </data>
-  <data name="ManageCategoriesContentDialogLabel.Header" xml:space="preserve">
+  <data name="ManageCategoriesContentDialogLabel.Header">
     <value>Nome della categoria</value>
+    <comment></comment>
   </data>
-  <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText" xml:space="preserve">
+  <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText">
     <value>Risparmiare</value>
+    <comment></comment>
   </data>
-  <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText" xml:space="preserve">
+  <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="ManageCategoriesContentDialogHeader.Title" xml:space="preserve">
+  <data name="ManageCategoriesContentDialogHeader.Title">
     <value>Gestione delle categorie</value>
+    <comment></comment>
   </data>
-  <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
+  <data name="ManageCategoriesContentDialogIconCreateBTN.Content">
     <value>Creare una categoria</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageSearchNavigation.Content" xml:space="preserve">
+  <data name="ShellPageSearchNavigation.Content">
     <value>Ricerca</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageSettingsNavigation.Content" xml:space="preserve">
+  <data name="ShellPageSettingsNavigation.Content">
     <value>Impostazioni</value>
+    <comment></comment>
   </data>
-  <data name="BiometricFacePreferMessage" xml:space="preserve">
+  <data name="BiometricFacePreferMessage">
     <value>È possibile effettuare il login con il riconoscimento facciale. Volete preferire questo tipo di accesso in futuro? È possibile modificare questa opzione nelle impostazioni in qualsiasi momento.</value>
+    <comment></comment>
   </data>
-  <data name="BiometricFingerPreferMessage" xml:space="preserve">
+  <data name="BiometricFingerPreferMessage">
     <value>È possibile effettuare il login con la propria impronta digitale. Desiderate preferire questo tipo di accesso in futuro? È possibile modificare questa opzione nelle impostazioni in qualsiasi momento.</value>
+    <comment></comment>
   </data>
-  <data name="BiometricLoginSubtitle" xml:space="preserve">
+  <data name="BiometricLoginSubtitle">
     <value>Accedere all'app con l'impronta digitale o il riconoscimento facciale.</value>
+    <comment></comment>
   </data>
-  <data name="BiometricLoginTitle" xml:space="preserve">
+  <data name="BiometricLoginTitle">
     <value>Accesso</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageTutorialNavigation.Content" xml:space="preserve">
+  <data name="ShellPageTutorialNavigation.Content">
     <value>Tutorial</value>
+    <comment></comment>
   </data>
-  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip" xml:space="preserve">
+  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip">
     <value>Tutorial aperto</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
+  <data name="TutorialContentDialogHowTheAppWorks.Text">
     <value>La funzionalità di [Autenticazione](https://it.wikipedia.org/wiki/Autenticazione) del secondo fattore è realizzata mediante una password monouso basata sul tempo. A questo scopo, viene concordata una chiave di impostazione segreta tra il server di accesso al servizio e l'utente, che viene memorizzata localmente nell'applicazione. In questo modo si garantisce che, se la chiave di configurazione viene concordata, l'applicazione può sempre essere utilizzata offline.
 
 
@@ -1180,87 +1514,113 @@ La memorizzazione delle chiavi di configurazione per i vari servizi in questa ap
 Le funzionalità di questa applicazione sono spiegate in dettaglio nelle sezioni seguenti.</value>
     <comment>[ReswT:manually]</comment>
   </data>
-  <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
+  <data name="TutorialContentDialogHowTheAppWorksHeader.Text">
     <value>**Funzionalità dell'applicazione**</value>
+    <comment></comment>
   </data>
-  <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
+  <data name="SettingsManageSubscriptions.Header">
     <value>Gestire gli abbonamenti</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
+  <data name="TutorialContentDialogFirstStepAppending.Text">
     <value>Nei passi successivi verranno illustrate le funzionalità dell'applicazione.</value>
+    <comment></comment>
   </data>
-  <data name="BTNBack.Content" xml:space="preserve">
+  <data name="BTNBack.Content">
     <value>Indietro</value>
+    <comment></comment>
   </data>
-  <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
+  <data name="NewDataFilePageChangePath.Content">
     <value>Scegliere il percorso della cartella</value>
+    <comment></comment>
   </data>
-  <data name="SettingsInAppPayment.Header" xml:space="preserve">
+  <data name="SettingsInAppPayment.Header">
     <value>Abbonamenti e acquisti una tantum</value>
+    <comment></comment>
   </data>
-  <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
+  <data name="InAppSubscriptionMonthSupport">
     <value>Con l'abbonamento si sostiene l'ulteriore sviluppo dell'applicazione. Le funzionalità ***Pro+*** che verranno aggiunte in futuro sono utilizzabili con questo abbonamento e accessibili.
 ***
 ### 2,49€ al mese</value>
+    <comment></comment>
   </data>
-  <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
+  <data name="InAppPaymentContentDialog.PrimaryButtonText">
     <value>Abbonamento / acquisto</value>
+    <comment></comment>
   </data>
-  <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
+  <data name="InAppPaymentContentDialog.SecondaryButtonText">
     <value>Annullamento</value>
+    <comment></comment>
   </data>
-  <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
+  <data name="InAppPaymentContentDialog.Title">
     <value>Abbonamenti e acquisti</value>
+    <comment></comment>
   </data>
-  <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
+  <data name="DisplayQRCodeContentDialogDesc.Text">
     <value>Importare l'account per un altro dispositivo aprendo un'app di autenticazione a due fattori con il dispositivo desiderato e aggiungendo un account con la fotocamera.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsCardExternalAction" xml:space="preserve">
+  <data name="SettingsCardExternalAction">
     <value>Chiamata esterna (browser)</value>
+    <comment></comment>
   </data>
-  <data name="SettingsInAppPayment.Description" xml:space="preserve">
+  <data name="SettingsInAppPayment.Description">
     <value>Effettuare abbonamenti e acquisti per funzioni avanzate</value>
+    <comment></comment>
   </data>
-  <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
+  <data name="SettingsManageSubscriptions.Description">
     <value>Gestite gli abbonamenti nel vostro account Microsoft</value>
+    <comment></comment>
   </data>
-  <data name="InAppPaymentContentDialogSubscriptionItemSelect" xml:space="preserve">
+  <data name="InAppPaymentContentDialogSubscriptionItemSelect">
     <value>Selezionare l'abbonamento</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogTitle" xml:space="preserve">
+  <data name="AddAccountContentDialogTitle">
     <value>Creare un nuovo account</value>
+    <comment></comment>
   </data>
-  <data name="CategoryFilterFlyoutNoCategories.Text" xml:space="preserve">
+  <data name="CategoryFilterFlyoutNoCategories.Text">
     <value>Attualmente non ci sono categorie disponibili; creare nuove categorie tramite le impostazioni di questa finestra di dialogo.</value>
+    <comment></comment>
   </data>
-  <data name="ManageCategoriesAddGlobalCategories.Header" xml:space="preserve">
+  <data name="ManageCategoriesAddGlobalCategories.Header">
     <value>Aggiungi categoria</value>
+    <comment></comment>
   </data>
-  <data name="LoginPageTitle.Text" xml:space="preserve">
+  <data name="LoginPageTitle.Text">
     <value>Accesso</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.Label">
     <value>Gestire le categorie e impostare i filtri</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilterToolTip">
     <value>Gestire le categorie e impostare i filtri</value>
+    <comment></comment>
   </data>
-  <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
+  <data name="CategoryFilterFlyoutABBTN_Reset.Label">
     <value>Azzeramento del filtro</value>
+    <comment></comment>
   </data>
-  <data name="CategoryFilterFlyoutABBTN_Settings.Label" xml:space="preserve">
+  <data name="CategoryFilterFlyoutABBTN_Settings.Label">
     <value>Gestione delle categorie</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialogAccountCategories.Header" xml:space="preserve">
+  <data name="EditAccountContentDialogAccountCategories.Header">
     <value>Impostare le categorie</value>
+    <comment></comment>
   </data>
-  <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
+  <data name="InAppPaymentContentDialogPurchaseItemSelect">
     <value>Selezionare per l'acquisto</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeatureToolTip">
     <value>Funzione disponibile solo tramite acquisto o abbonamento.</value>
+    <comment></comment>
   </data>
-  <data name="InAppBuyOnce" xml:space="preserve">
+  <data name="InAppBuyOnce">
     <value>Con l'acquisto, le funzioni di Pro+ diventano permanentemente accessibili e utilizzabili, sostenendo così l'ulteriore sviluppo dell'applicazione.
 Attualmente disponibile:
 
@@ -1268,8 +1628,9 @@ Attualmente disponibile:
 - Gestione dei dispositivi mobili (MDM)
 ***
 ### 34,99€ una tantum</value>
+    <comment></comment>
   </data>
-  <data name="InAppSubscriptionYear" xml:space="preserve">
+  <data name="InAppSubscriptionYear">
     <value>Con l'abbonamento, le funzioni di ***Pro+*** diventano accessibili e utilizzabili e si sostiene l'ulteriore sviluppo dell'applicazione.
 Attualmente disponibile:
 
@@ -1277,77 +1638,101 @@ Attualmente disponibile:
 - Gestione dei dispositivi mobili (MDM)
 ***
 ### 6,49€ all'anno</value>
+    <comment></comment>
   </data>
-  <data name="InAppPaymentContentDialogBuyItemSelect" xml:space="preserve">
+  <data name="InAppPaymentContentDialogBuyItemSelect">
     <value>Selezionare per l'acquisto</value>
+    <comment></comment>
   </data>
-  <data name="AccountCodePageManageFilterInfo.Label" xml:space="preserve">
+  <data name="AccountCodePageManageFilterInfo.Label">
     <value>Categorie e filtri</value>
+    <comment></comment>
   </data>
-  <data name="ProFeatureContentInfo" xml:space="preserve">
+  <data name="ProFeatureContentInfo">
     <value>La funzionalità è disponibile solo tramite abbonamento o acquisto. Volete dare un'occhiata alle varianti?</value>
+    <comment></comment>
   </data>
-  <data name="ProFeatureTitleInfo" xml:space="preserve">
+  <data name="ProFeatureTitleInfo">
     <value>Funzione a pagamento</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogForgettenPassword.Text" xml:space="preserve">
+  <data name="TutorialContentDialogForgettenPassword.Text">
     <value>Dimenticato la password?</value>
+    <comment></comment>
   </data>
-  <data name="TutorialPagePasswordInfo" xml:space="preserve">
+  <data name="TutorialPagePasswordInfo">
     <value>Se si è dimenticata la password e si è precedentemente disinstallata o reimpostata l'applicazione, è possibile visualizzare la password sullo stesso computer nel [Credential Manager](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) di Windows. La voce è impostata come "Project2FA" tra le informazioni di accesso al web.</value>
+    <comment></comment>
   </data>
-  <data name="LoginPageWindowsHelloError" xml:space="preserve">
+  <data name="LoginPageWindowsHelloError">
     <value>Si è verificato un problema con Windows Hello. Per utilizzare la funzionalità dell'applicazione, risolvere il problema nelle impostazioni di Windows.</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialogAccountCategoryInfoText" xml:space="preserve">
+  <data name="EditAccountContentDialogAccountCategoryInfoText">
     <value>Facendo clic sulle categorie esistenti, è possibile assegnare una o più categorie all'account, consentendo in seguito di effettuare ricerche filtrate. Le categorie vengono gestite e create nella pagina principale tramite il pulsante "Imposta categorie e filtri" nella barra dei menu in alto.</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
+  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text">
     <value>Al momento non ci sono categorie disponibili; createne di nuove utilizzando il pulsante nella barra dei menu in alto "Imposta categorie e filtri".</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
+  <data name="SettingsAppLoggingMode.Header">
     <value>Registrazione degli errori</value>
+    <comment></comment>
   </data>
-  <data name="SettingsLoggingFull.Content" xml:space="preserve">
+  <data name="SettingsLoggingFull.Content">
     <value>Completo</value>
+    <comment></comment>
   </data>
-  <data name="SettingsLoggingNone.Content" xml:space="preserve">
+  <data name="SettingsLoggingNone.Content">
     <value>No</value>
+    <comment></comment>
   </data>
-  <data name="SettingsLoggingSimple.Content" xml:space="preserve">
+  <data name="SettingsLoggingSimple.Content">
     <value>Unica eccezione</value>
+    <comment></comment>
   </data>
-  <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
+  <data name="SettingsOpenLogBTN.Content">
     <value>Mostra il registro degli errori</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageNoLogDialogContent" xml:space="preserve">
+  <data name="SettingsPageNoLogDialogContent">
     <value>Al momento non è stato creato alcun rapporto di errore.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
+  <data name="SettingsPageNoLogDialogTitle">
     <value>Nessun rapporto di errore disponibile</value>
+    <comment></comment>
   </data>
-  <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
+  <data name="CategoryFilterFlyoutCategoriesInfo.Text">
     <value>La ricerca viene effettuata con le categorie impostate tramite una ricerca OR.</value>
+    <comment></comment>
   </data>
-  <data name="EditAccountPageTitle" xml:space="preserve">
+  <data name="EditAccountPageTitle">
     <value>Modifica account</value>
+    <comment></comment>
   </data>
-  <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
+  <data name="AddAccountContentDialogNoCaptureContentError">
     <value>Non è stata selezionata alcuna finestra per la scansione di un codice QR.</value>
+    <comment></comment>
   </data>
-  <data name="LoginPageIOSBiometricReason" xml:space="preserve">
+  <data name="LoginPageIOSBiometricReason">
     <value>Con l'uso della biometria, il login viene effettuato senza password.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppShowAvailableProFeatures.Header" xml:space="preserve">
+  <data name="SettingsAppShowAvailableProFeatures.Header">
     <value>Visualizzazione delle funzioni Pro</value>
+    <comment></comment>
   </data>
-  <data name="SettingsAppShowAvailableProFeaturessDesc.Text" xml:space="preserve">
+  <data name="SettingsAppShowAvailableProFeaturessDesc.Text">
     <value>Questa impostazione consente di attivare o disattivare la visibilità dei segnaposto per le funzioni Pro.</value>
+    <comment></comment>
   </data>
-  <data name="SettingsMDMInfo.Text" xml:space="preserve">
+  <data name="SettingsMDMInfo.Text">
     <value>*Alcune impostazioni sono gestite dalla vostra organizzazione.</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
+  <data name="TutorialContentDialogProFeature.Text">
     <value># Categorie e filtri
 Le categorie definite dall'utente possono essere create con un'icona e le assegnazioni possono essere create per gli account. Nella selezione dei filtri, è possibile filtrare gli account in base alla configurazione. Il filtro degli account per categoria può essere ulteriormente ristretto utilizzando la ricerca standard.
 
@@ -1355,11 +1740,14 @@ Le categorie definite dall'utente possono essere create con un'icona e le assegn
 
 # Gestione delle app aziendali | Gestione dei dispositivi mobili (MDM)
 L'applicazione supporta una configurazione MDM per la gestione centralizzata dell'applicazione in azienda; ad esempio, è possibile configurare a livello centrale il blocco automatico dell'applicazione o la schermata di accesso. La panoramica delle configurazioni disponibili può essere visualizzata nel [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
+  <data name="TutorialContentDialogProFeatureHeader.Text">
     <value>Pro-Funktions</value>
+    <comment></comment>
   </data>
-  <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
+  <data name="TutorialContentDialogCreateOrLoad.Text">
     <value>![Primi passi](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+    <comment></comment>
   </data>
 </root>

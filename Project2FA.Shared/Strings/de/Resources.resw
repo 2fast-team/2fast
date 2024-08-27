@@ -733,14 +733,9 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Für die Überprüfung der korrekten Uhrzeit des Systems kann ein NTP Server verwendet werden. Bei einer größeren Abweichung der Uhrzeit würde die Erstellung der Codes für die Accounts nicht mehr korrekt sein. Falls eine Abweichung größer als dreißig Sekunden besteht, würde eine Benachrichtigung erscheinen und die Erstellung der Codes mit der Uhrzeit des NTP Servers erfolgen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Fehlerbehebungen
-- Aktualisierung der Bibliotheken von Drittanbietern
-- Standardmäßge Verschlüsselung wurde verstärkt
-- Abhängigkeit des Programms "Ausschneiden und Skizzieren" wurde entfernt, das Lesen von QR-Codes erfolgt nun durch Systemfunktionen 
-- Fehlerprotokolle können nun extern per Befehl geöffnet werden: [Wiki](https://github.com/2fast-team/2fast/wiki/Open-(error)-log-via-cmd)
-- Tutorial wurde verbessert und um die Pro-Funktionen ergänzt
-- Einstellungen können zentral via MDM gesteuert werden: [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)) (Pro-Funktion)
-- Neue Konten können nun extern per Befehl hinzugefügt werden [Wiki](https://github.com/2fast-team/2fast/wiki/Add-account-via-cmd) (Pro-Funktion)</value>
+    <value>- Aktualisierung der Bibliotheken von Drittanbietern
+- Weitere Sprachen wurden hinzugefügt: Spanisch, Französisch, Italienisch, Japanisch, Chinesisch
+- Kategorien können nun in neuen Konten direkt gesetzt werden (Pro-Funktion)</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -1067,7 +1062,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
+    <value>2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>

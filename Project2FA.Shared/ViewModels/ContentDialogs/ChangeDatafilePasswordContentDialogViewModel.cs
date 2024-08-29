@@ -13,13 +13,14 @@ using UNOversal.Services.File;
 using Project2FA.Services;
 using Project2FA.Core.Utils;
 using Project2FA.Core.Services.Crypto;
+using System.Text;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Windows.Security.Cryptography;
 using Windows.Storage.Streams;
 #else
-using System.Text;
 using Project2FA.UNO;
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -83,12 +84,8 @@ namespace Project2FA.ViewModels
             {
                 SecretService.Helper.RemoveSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName);
                 byte[] encryptedBytes;
-#if WINDOWS_UWP
-                IBuffer buffer = CryptographicBuffer.ConvertStringToBinary(NewPassword, BinaryStringEncoding.Utf8);
-                CryptographicBuffer.CopyToByteArray(buffer, out encryptedBytes);
-#else
+
                 encryptedBytes = Encoding.UTF8.GetBytes(NewPassword);
-#endif
 #if WINDOWS_UWP
                 SecretService.Helper.WriteSecret(
                     Constants.ContainerName,

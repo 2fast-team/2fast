@@ -1062,7 +1062,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - Zwei-Faktor-Authentifikator</value>
+    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>

@@ -106,14 +106,8 @@ namespace Project2FA.ViewModels
             if (await TestPassword(DataService.Instance.ActivatedDatafile))
             {
                 byte[] encryptedBytes;
-#if WINDOWS_UWP
-                IBuffer buffer = CryptographicBuffer.ConvertStringToBinary(Password, BinaryStringEncoding.Utf8);
-                CryptographicBuffer.CopyToByteArray(buffer, out encryptedBytes);
-#else
+
                 encryptedBytes = Encoding.UTF8.GetBytes(Password);
-#endif
-
-
 
 #if WINDOWS_UWP
                 SecretService.Helper.WriteSecret(
@@ -165,7 +159,7 @@ namespace Project2FA.ViewModels
                     {
                         byte[] iv = datafile.IV;
                         DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                            (Password, iv, datafileStr, datafile.Version);
+                            (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
                         return true;
                     }
                 }

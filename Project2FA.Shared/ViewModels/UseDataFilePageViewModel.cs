@@ -17,6 +17,8 @@ using UNOversal.Services.Dialogs;
 using UNOversal.Services.Secrets;
 using Project2FA.Utils;
 using Project2FA.Services.WebDAV;
+using System.Text;
+
 
 
 #if WINDOWS_UWP
@@ -311,7 +313,7 @@ namespace Project2FA.ViewModels
                 try
                 {
                     DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                        (Password, iv, datafileStr, datafile.Version);
+                        (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
                     return true;
                 }
                 catch (Exception)

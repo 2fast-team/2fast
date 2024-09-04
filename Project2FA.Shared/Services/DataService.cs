@@ -35,6 +35,8 @@ using CommunityToolkit.WinUI.Collections;
 using UNOversal.Services.Serialization;
 using System.Web;
 using UNOversal.Services.Logging;
+using System.Text;
+
 
 
 
@@ -441,7 +443,7 @@ namespace Project2FA.Services
                             else
                             {
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName),
+                                    Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
                                     iv,
                                     datafileStr,
                                     datafile.Version);
@@ -752,7 +754,7 @@ namespace Project2FA.Services
                     await FileService.WriteStringAsync(
                         fileName,
                         NewtonsoftJSONService.SerializeEncrypt(
-                            SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName), 
+                            Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)), 
                             iv, 
                             fileModel,
                             fileModel.Version),
@@ -766,7 +768,7 @@ namespace Project2FA.Services
 #endif
                     //var fileStream = await file.OpenStreamForWriteAsync();
                     string content = NewtonsoftJSONService.SerializeEncrypt(
-                            SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName),
+                            Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
                             iv,
                             fileModel,
                             fileModel.Version);

@@ -66,7 +66,7 @@
     <None Remove="Android\Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.0" />
     <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.1.240821" />
     <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.1.240821" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240821" />

@@ -1062,7 +1062,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - Zwei-Faktor-Authentifikator</value>
+    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>
@@ -1355,5 +1355,8 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   </data>
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>![Erste Schritte](ms-appx:///Assets/Images/firstSteps_DE.png)</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+    <value>Das eingegebene, neue Passwort ist nicht korrekt.</value>
   </data>
 </root>

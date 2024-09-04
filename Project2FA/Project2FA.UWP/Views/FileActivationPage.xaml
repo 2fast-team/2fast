@@ -5,8 +5,8 @@
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:mstoolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:appControls="using:Project2FA.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:CommunityToolkit.WinUI.Media"
     xmlns:strings="using:Project2FA.Strings"
@@ -68,14 +68,14 @@
                 <muxc:ParallaxView 
                 VerticalShift="50"
                 Visibility="{x:Bind ViewModel.IsMDMLoginScreenWallpaperNotAvailable, Mode=OneWay}">
-                    <mstoolkitControls:ImageEx 
+                    <appControls:ImageEx 
                     Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
                     Stretch="UniformToFill" />
                 </muxc:ParallaxView>
                 <muxc:ParallaxView 
                 VerticalShift="50"
                     Visibility="{x:Bind ViewModel.IsMDMLoginScreenWallpaperAvailable, Mode=OneWay}">
-                    <mstoolkitControls:ImageEx 
+                    <appControls:ImageEx 
                     Source="{x:Bind ViewModel.MDMLoginScreenWallpaperStr, Mode=OneWay}"
                     Stretch="UniformToFill" 
                     IsCacheEnabled="True" />
@@ -129,11 +129,14 @@
                     x:Name="MainStackPanel"
                     MinHeight="500" 
 >
-                <mstoolkitControls:ImageEx 
+                <appControls:ImageEx 
                         Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png"
                         MaxHeight="150" 
                         Margin="0,30,0,10"/>
-                <TextBlock Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" FontSize="24"/>
+                <TextBlock 
+                    Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" 
+                    HorizontalAlignment="Center"
+                    FontSize="24"/>
                 <PasswordBox
                         x:Uid="LoginPagePassword"
                         MaxWidth="360"

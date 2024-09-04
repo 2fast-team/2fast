@@ -114,7 +114,8 @@ namespace Project2FA.Utils
                     var param = new DialogParameters();
                     param.Add("isInvalid", true);
                     var result = await dialogService.ShowDialogAsync(dialog, param);
-                    if (result != ContentDialogResult.Primary)
+                    
+                    if (!dialog.ViewModel.PasswordChanged)
                     {
                         ShowPasswordError();
                     }

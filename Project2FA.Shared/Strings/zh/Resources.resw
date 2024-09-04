@@ -1357,4 +1357,7 @@
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>第一步](ms-appx://Assets/Images/firstSteps_EN.png)</value>
   </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+    <value>输入的新密码不正确。</value>
+  </data>
 </root>

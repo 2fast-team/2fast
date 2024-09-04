@@ -1356,4 +1356,7 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>![Erste Schritte](ms-appx:///Assets/Images/firstSteps_DE.png)</value>
   </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+    <value>Das eingegebene, neue Passwort ist nicht korrekt.</value>
+  </data>
 </root>

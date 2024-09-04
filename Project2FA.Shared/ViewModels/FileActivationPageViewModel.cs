@@ -159,7 +159,7 @@ namespace Project2FA.ViewModels
                     {
                         byte[] iv = datafile.IV;
                         DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                            (Password, iv, datafileStr, datafile.Version);
+                            (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
                         return true;
                     }
                 }

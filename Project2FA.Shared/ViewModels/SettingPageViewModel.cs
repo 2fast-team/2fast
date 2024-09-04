@@ -278,6 +278,8 @@ namespace Project2FA.ViewModels
                     var secretHelper = App.Current.Container.Resolve<ISecretService>();
                     //delete password in the secret vault
                     secretHelper.Helper.RemoveSecret(passwordHash.Hash);
+                    // delete password hash in DB
+                    await App.Repository.Password.DeleteAsync();
                     //remove WebDAV login
                     secretHelper.Helper.RemoveSecret("WDServerAddress");
                     secretHelper.Helper.RemoveSecret("WDUsername");

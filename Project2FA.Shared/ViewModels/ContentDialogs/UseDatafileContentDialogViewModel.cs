@@ -8,6 +8,7 @@ using Project2FA.Core.Services.JSON;
 using CommunityToolkit.Mvvm.Input;
 using UNOversal.Services.Secrets;
 using UNOversal.Services.File;
+using System.Text;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -152,7 +153,7 @@ namespace Project2FA.ViewModels
                 try
                 {
                     var deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                        (Password, iv, datafileStr, datafile.Version);
+                        (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
                     return true;
                 }
                 catch (Exception)

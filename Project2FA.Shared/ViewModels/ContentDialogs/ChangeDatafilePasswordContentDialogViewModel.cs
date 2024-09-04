@@ -14,7 +14,7 @@ using Project2FA.Services;
 using Project2FA.Core.Utils;
 using Project2FA.Core.Services.Crypto;
 using System.Text;
-
+using UNOversal.Services.Logging;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -45,6 +45,7 @@ namespace Project2FA.ViewModels
         private IFileService FileService { get; }
 
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
+        private ILoggingService LoggingService { get; }
         public ICommand ConfirmErrorCommand { get; }
 
         /// <summary>
@@ -53,11 +54,13 @@ namespace Project2FA.ViewModels
         public ChangeDatafilePasswordContentDialogViewModel(
             ISecretService secretService, 
             IFileService fileService, 
-            INewtonsoftJSONService newtonsoftJSONService)
+            INewtonsoftJSONService newtonsoftJSONService,
+            ILoggingService loggingService)
         {
             SecretService = secretService;
             FileService = fileService;
             NewtonsoftJSONService = newtonsoftJSONService;
+            LoggingService = loggingService;
             ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
@@ -103,6 +106,8 @@ namespace Project2FA.ViewModels
                 passwordHashDB = await App.Repository.Password.GetAsync();
                 //delete password in the secret vault
                 SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordHashDB.Hash);
+                // delete the hash in DB
+                await App.Repository.Password.DeleteAsync();
                 //set new hash
                 passwordHashDB.Hash = CryptoService.CreateStringHash(NewPassword);
                 // update db with new pw hash
@@ -110,6 +115,8 @@ namespace Project2FA.ViewModels
                 hash = model.Hash;
                 // save new pw in the secret vault
                 SecretService.Helper.WriteSecret(Constants.ContainerName, hash, NewPassword);
+                // reload collection
+                await DataService.Instance.ReloadDatafile();
             }
 
             //datafile must not changed when password was invalid (written already by other app)
@@ -180,20 +187,19 @@ namespace Project2FA.ViewModels
                 // if the current password is invalid, try to load the datafile with the new password
                 if (InvalidPassword)
                 {
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(NewPassword, iv, datafileStr, datafile.Version);
-                    // load the collection
-                    DataService.Instance.Collection.AddRange(deserializeCollection.Collection, true);
+                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(Encoding.UTF8.GetBytes(NewPassword), iv, datafileStr, datafile.Version);
                 }
                 else
                 {
                     // check the current password, if the file can be decrypted
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(CurrentPassword, iv, datafileStr, datafile.Version);
+                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(Encoding.UTF8.GetBytes(CurrentPassword), iv, datafileStr, datafile.Version);
                 }
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception exc)
             {
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                 ShowError = true;
                 if (InvalidPassword)
                 {
@@ -204,8 +210,6 @@ namespace Project2FA.ViewModels
                 {
                     CurrentPassword = string.Empty;
                 }
-
-
                 return false;
             }
         }
@@ -278,7 +282,11 @@ namespace Project2FA.ViewModels
                     IsPrimaryBTNEnable = false;
                 }
             }
+        }
 
+        public bool PasswordIsNotInvalid
+        {
+            get => !InvalidPassword;
         }
 
         public bool IsPrimaryBTNEnable
@@ -295,7 +303,13 @@ namespace Project2FA.ViewModels
         public bool InvalidPassword
         { 
             get => _invalidPassword;
-            set => SetProperty(ref _invalidPassword, value);
+            set
+            {
+                if(SetProperty(ref _invalidPassword, value))
+                {
+                    OnPropertyChanged(nameof(PasswordIsNotInvalid));
+                }
+            }
         }
         public bool PasswordChanged 
         { 

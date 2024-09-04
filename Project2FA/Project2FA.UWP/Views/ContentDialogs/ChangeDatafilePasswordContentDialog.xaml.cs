@@ -28,25 +28,42 @@ namespace Project2FA.UWP.Views
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             string hash = await ViewModel.GetCurrentPasswordHash();
+            // prevent the close of this ContentDialog
+            args.Cancel = true;
             // first check if the given current password matches with the datafile
-            if (hash == CryptoService.CreateStringHash(ViewModel.CurrentPassword))
+            if (ViewModel.InvalidPassword)
             {
                 if (await ViewModel.TestPassword())
                 {
                     await ViewModel.ChangePasswordInFileAndDB();
+                    this.Hide();
                 }
                 else
                 {
-                    // prevent the close of this ContentDialog
-                    args.Cancel = true;
+                    
                     ViewModel.ShowError = true;
                 }
             }
             else
             {
-                // prevent the close of this ContentDialog
-                args.Cancel = true;
-                ViewModel.ShowError = true;
+                if (hash == CryptoService.CreateStringHash(ViewModel.CurrentPassword))
+                {
+                    if (await ViewModel.TestPassword())
+                    {
+                        await ViewModel.ChangePasswordInFileAndDB();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        // prevent the close of this ContentDialog
+                        ViewModel.ShowError = true;
+                    }
+                }
+                else
+                {
+                    // prevent the close of this ContentDialog
+                    ViewModel.ShowError = true;
+                }
             }
         }
 

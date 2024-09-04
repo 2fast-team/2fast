@@ -1358,4 +1358,7 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>![Primi passi](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+    <value>La nuova password inserita non è corretta.</value>
+  </data>
 </root>

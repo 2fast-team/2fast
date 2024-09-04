@@ -14,7 +14,7 @@ namespace Project2FA.Repository.Database
         }
         public async Task DeleteAsync()
         {
-            await _db.Password.FirstOrDefaultAsync();
+            _db.Password.Remove(await _db.Password.FirstOrDefaultAsync());
         }
 
         public async Task<DBPasswordHashModel> GetAsync()

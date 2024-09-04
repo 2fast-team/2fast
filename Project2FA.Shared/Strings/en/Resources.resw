@@ -229,7 +229,7 @@
     <value>Change datafile password</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogPasswordError.Text" xml:space="preserve">
-    <value>The entered password is not correct.</value>
+    <value>The current password entered is not correct.</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
@@ -1353,5 +1353,8 @@ The application supports an MDM configuration for centralised management of the 
   </data>
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>![First steps](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+    <value>The new password entered is not correct.</value>
   </data>
 </root>

@@ -66,44 +66,44 @@ namespace Project2FA.Core.Services.JSON
             }
         }
 
-        public string SerializeEncrypt(string key, byte[] initVectorArray, object value, int encryptionVersion)
-        {
-            byte[] byteArrayKey;
-            if (encryptionVersion == 1 || encryptionVersion == 0)
-            {
-                byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
-            }
-            else if (encryptionVersion == 2)
-            {
-                byteArrayKey = CryptoService.CreateByteArrayKeyV2(key);
-            }
-            else
-            {
-                byteArrayKey = CryptoService.CreateByteArrayKeyV2(key, 80000);
-            }
+        //public string SerializeEncrypt(string key, byte[] initVectorArray, object value, int encryptionVersion)
+        //{
+        //    byte[] byteArrayKey;
+        //    if (encryptionVersion == 1 || encryptionVersion == 0)
+        //    {
+        //        byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
+        //    }
+        //    else if (encryptionVersion == 2)
+        //    {
+        //        byteArrayKey = CryptoService.CreateByteArrayKeyV2(key);
+        //    }
+        //    else
+        //    {
+        //        byteArrayKey = CryptoService.CreateByteArrayKeyV2(key, 80000);
+        //    }
 
-            var serializer = new JsonSerializer
-            {
-                ContractResolver = _encryptionFactory.GetContractResolver()
-            };
+        //    var serializer = new JsonSerializer
+        //    {
+        //        ContractResolver = _encryptionFactory.GetContractResolver()
+        //    };
 
-            string serialized;
+        //    string serialized;
 
-            // per serialize session
-            Aes algorithm = Aes.Create();
-            algorithm.Key = byteArrayKey;
-            algorithm.IV = initVectorArray;
+        //    // per serialize session
+        //    Aes algorithm = Aes.Create();
+        //    algorithm.Key = byteArrayKey;
+        //    algorithm.IV = initVectorArray;
 
-            using (_encryptionFactory.GetEncryptSession(algorithm))
-            {
-                StringBuilder builder = new StringBuilder();
-                using (StringWriter writer = new StringWriter(builder))
-                {
-                    serializer.Serialize(writer, value);
-                }
-                return serialized = builder.ToString();
-            }
-        }
+        //    using (_encryptionFactory.GetEncryptSession(algorithm))
+        //    {
+        //        StringBuilder builder = new StringBuilder();
+        //        using (StringWriter writer = new StringWriter(builder))
+        //        {
+        //            serializer.Serialize(writer, value);
+        //        }
+        //        return serialized = builder.ToString();
+        //    }
+        //}
 
         public string SerializeEncrypt(byte[] keyArray, byte[] initVectorArray, object value, int encryptionVersion)
         {
@@ -209,35 +209,35 @@ namespace Project2FA.Core.Services.JSON
             }
         }
 
-        public T DeserializeDecrypt<T>(string key, byte[] initVector, string value, int encryptionVersion)
-        {
-            byte[] byteArrayKey;
-            if (encryptionVersion == 1 || encryptionVersion == 0)
-            {
-                byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
-            }
-            else
-            {
-                byteArrayKey = CryptoService.CreateByteArrayKeyV2(key);
-            }
+        //public T DeserializeDecrypt<T>(string key, byte[] initVector, string value, int encryptionVersion)
+        //{
+        //    byte[] byteArrayKey;
+        //    if (encryptionVersion == 1 || encryptionVersion == 0)
+        //    {
+        //        byteArrayKey = CryptoService.CreateByteArrayKeyV1(key);
+        //    }
+        //    else
+        //    {
+        //        byteArrayKey = CryptoService.CreateByteArrayKeyV2(key);
+        //    }
 
 
-            var serializer = new JsonSerializer
-            {
-                ContractResolver = _encryptionFactory.GetContractResolver()
-            };
+        //    var serializer = new JsonSerializer
+        //    {
+        //        ContractResolver = _encryptionFactory.GetContractResolver()
+        //    };
 
-            Aes algorithm = Aes.Create();
-            algorithm.Key = byteArrayKey;
-            algorithm.IV = initVector;
+        //    Aes algorithm = Aes.Create();
+        //    algorithm.Key = byteArrayKey;
+        //    algorithm.IV = initVector;
 
-            using (_encryptionFactory.GetDecryptSession(algorithm))
-            using (var stringReader = new StringReader(value))
-            using (var jsonReader = new JsonTextReader(stringReader))
-            {
-                return serializer.Deserialize<T>(jsonReader);
-            }
-        }
+        //    using (_encryptionFactory.GetDecryptSession(algorithm))
+        //    using (var stringReader = new StringReader(value))
+        //    using (var jsonReader = new JsonTextReader(stringReader))
+        //    {
+        //        return serializer.Deserialize<T>(jsonReader);
+        //    }
+        //}
 
         public T DeserializeDecrypt<T>(byte[] keyArray, byte[] initVector, string value, int encryptionVersion)
         {

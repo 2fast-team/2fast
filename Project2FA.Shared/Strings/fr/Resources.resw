@@ -735,7 +735,8 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Mise à jour des bibliothèques tierces
 - D'autres langues ont été ajoutées : espagnol, français, italien, japonais, chinois.
-- Les catégories peuvent désormais être définies directement dans les nouveaux comptes (fonction Pro)</value>
+- Les catégories peuvent désormais être définies directement dans les nouveaux comptes (fonction Pro)
+- Correction d'un bogue qui empêchait la modification du mot de passe si le mot de passe actuellement enregistré n'était pas valide.</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Nouvelles fonctionnalités et changements</value>
@@ -1357,7 +1358,7 @@ L'application prend en charge une configuration MDM pour une gestion centralisé
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>![Premiers pas](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Le nouveau mot de passe introduit n'est pas correct.</value>
   </data>
 </root>

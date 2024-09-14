@@ -6,7 +6,7 @@
          xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
          IgnorableNamespaces="uap mp rescap uap6">
 	<Identity Name="38343JanPhilippWeber.2fastBeta" Publisher="CN=31DBFF9D-D4FF-4E73-808A-7B49119D08D3" Version="1.3.1.0" />
-	<mp:PhoneIdentity PhoneProductId="ab3ff8b2-0244-4555-87a9-9ba796af1437" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+	<mp:PhoneIdentity PhoneProductId="370d1e8a-eeda-4285-9f6c-0d90b9006e18" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 	<Properties>
 		<DisplayName>2fast (Beta)</DisplayName>
 		<PublisherDisplayName>Jan Philipp Weber</PublisherDisplayName>

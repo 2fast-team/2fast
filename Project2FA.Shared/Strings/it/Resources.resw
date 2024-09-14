@@ -735,7 +735,8 @@ Sincronizzare l'ora nelle impostazioni.</value>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aggiornamento delle librerie di terze parti
 - Sono state aggiunte altre lingue: spagnolo, francese, italiano, giapponese e cinese.
-- Le categorie possono ora essere impostate direttamente nei nuovi account (funzione Pro)</value>
+- Le categorie possono ora essere impostate direttamente nei nuovi account (funzione Pro)
+- Corretto un bug per cui non era possibile modificare la password se quella attualmente salvata non era valida</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1358,7 +1359,7 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>![Primi passi](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>La nuova password inserita non è corretta.</value>
   </data>
 </root>

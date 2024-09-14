@@ -772,12 +772,9 @@ namespace Project2FA.ViewModels
                     NotifyPasswordChanged = false;
                 }
                 var result = await _dialogService.ShowDialogAsync(dialog, param);
-                if (result == ContentDialogResult.Primary)
+                if (dialog.ViewModel.PasswordChanged)
                 {
-                    if (dialog.ViewModel.PasswordChanged)
-                    {
-                        NotifyPasswordChanged = true;
-                    }
+                    NotifyPasswordChanged = true;
                 }
             });
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates

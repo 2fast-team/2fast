@@ -735,7 +735,8 @@
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- サードパーティ製ライブラリの更新
 - スペイン語、フランス語、イタリア語、日本語、中国語が追加されました。
-- 新しいアカウントでカテゴリーを直接設定できるようになりました。</value>
+- 新しいアカウントでカテゴリを直接設定できるようになりました。
+- 現在保存されているパスワードが無効な場合、パスワードを変更できないバグを修正しました。</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1358,7 +1359,7 @@
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>ファーストステップ](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>入力された新しいパスワードが正しくありません。</value>
   </data>
 </root>

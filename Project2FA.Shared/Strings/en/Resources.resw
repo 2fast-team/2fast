@@ -732,7 +732,8 @@ Please synchronize the time in the settings.</value>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Update of third-party libraries
 - Further languages have been added: Spanish, French, Italian, Japanese, Chinese
-- Categories can now be set directly in new accounts (Pro function)</value>
+- Categories can now be set directly in new accounts (Pro function)
+- Fixed a bug where the password could not be changed if the currently saved password is invalid</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1354,7 +1355,7 @@ The application supports an MDM configuration for centralised management of the 
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>![First steps](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>The new password entered is not correct.</value>
   </data>
 </root>

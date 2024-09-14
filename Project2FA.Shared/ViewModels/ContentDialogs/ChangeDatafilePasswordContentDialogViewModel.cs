@@ -115,14 +115,17 @@ namespace Project2FA.ViewModels
                 hash = model.Hash;
                 // save new pw in the secret vault
                 SecretService.Helper.WriteSecret(Constants.ContainerName, hash, NewPassword);
-                // reload collection
-                await DataService.Instance.ReloadDatafile();
             }
 
             //datafile must not changed when password was invalid (written already by other app)
             if (InvalidPassword == false)
             {
                 await DataService.Instance.WriteLocalDatafile();
+            }
+            else
+            {
+                // reload collection
+                await DataService.Instance.ReloadDatafile();
             }
             PasswordChanged = true;
         }

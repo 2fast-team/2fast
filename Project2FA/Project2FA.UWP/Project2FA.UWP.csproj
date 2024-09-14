@@ -366,7 +366,7 @@
       <Version>8.1.97</Version>
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3">
-      <Version>2.1.9</Version>
+      <Version>2.1.10</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net">
       <Version>0.16.9</Version>

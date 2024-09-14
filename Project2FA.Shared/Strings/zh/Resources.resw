@@ -734,7 +734,8 @@
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- 更新第三方库
 - 新增语言：西班牙语、法语、意大利语、日语和中文
-- 现在可直接在新账户中设置类别（专业版功能）</value>
+- 现在可直接在新账户中设置类别（专业版功能）
+- 修正了一个错误，即如果当前保存的密码无效，则无法更改密码</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1357,7 +1358,7 @@
   <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
     <value>第一步](ms-appx://Assets/Images/firstSteps_EN.png)</value>
   </data>
-  <data name="ChangeDatafilePasswordContentDialogNewPasswordError" xml:space="preserve">
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>输入的新密码不正确。</value>
   </data>
 </root>

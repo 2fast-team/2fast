@@ -80,7 +80,7 @@
         </Setter>
     </android:Style>
 
-    <!--<Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
+    <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Padding" Value="2,16,2,0"/>
         <Setter Property="Template">
@@ -106,7 +106,7 @@
                                 <VisualState x:Name="PointerOver">
 
                                     <Storyboard>
-                                        --><!--<DoubleAnimation Storyboard.TargetName="BorderBackground"
+                                        <DoubleAnimation Storyboard.TargetName="BorderBackground"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0"
                                             To="1" />
@@ -121,14 +121,14 @@
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MultiSelectCheck" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListViewItemForegroundPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>--><!--
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
 
                                     <Storyboard>
-                                        --><!--<DoubleAnimation Storyboard.TargetName="BorderBackground"
+                                        <DoubleAnimation Storyboard.TargetName="BorderBackground"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0"
                                             To="1" />
@@ -143,22 +143,22 @@
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MultiSelectCheck" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListViewItemForegroundPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>--><!--
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
 
                                 <VisualState x:Name="Selected">
 
                                     <Storyboard>
-                                        --><!--<DoubleAnimation Storyboard.TargetName="MultiSelectCheck"
+                                        <DoubleAnimation Storyboard.TargetName="MultiSelectCheck"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0:0:0"
                                             To="1" />
                                         <DoubleAnimation Storyboard.TargetName="BorderBackground"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0"
-                                            To="1" />-->
-                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
+                                            To="1" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListViewItemBackgroundSelected}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
@@ -169,14 +169,14 @@
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MultiSelectCheck" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListViewItemForegroundSelected}" />
-                                        </ObjectAnimationUsingKeyFrames>--><!--
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
 
                                 <VisualState x:Name="PointerOverSelected">
 
                                     <Storyboard>
-                                        --><!--<DoubleAnimation Storyboard.TargetName="MultiSelectCheck"
+                                        <DoubleAnimation Storyboard.TargetName="MultiSelectCheck"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0:0:0"
                                             To="1" />
@@ -195,14 +195,14 @@
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MultiSelectCheck" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListViewItemForegroundSelectedPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>--><!--
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
 
                                 <VisualState x:Name="PressedSelected">
 
                                     <Storyboard>
-                                        --><!--<DoubleAnimation Storyboard.TargetName="MultiSelectCheck"
+                                        <DoubleAnimation Storyboard.TargetName="MultiSelectCheck"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0:0:0"
                                             To="1" />
@@ -221,7 +221,7 @@
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MultiSelectCheck" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ListViewItemForegroundSelectedPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>--><!--
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
 
@@ -367,8 +367,8 @@
                                 <VisualState x:Name="MultipleDraggingPrimary">
 
                                     <Storyboard>
-                                        --><!-- These two Opacity animations are required - the FadeInThemeAnimations
-                                             on the same elements animate an internal Opacity. --><!--
+                                         These two Opacity animations are required - the FadeInThemeAnimations
+                                             on the same elements animate an internal Opacity. 
                                         <DoubleAnimation Storyboard.TargetName="MultiArrangeOverlayText"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0"
@@ -430,8 +430,8 @@
                                 <VisualState x:Name="MultipleReorderingPrimary">
 
                                     <Storyboard>
-                                        --><!-- These two Opacity animations are required - the FadeInThemeAnimations
-                                             on the same elements animate an internal Opacity. --><!--
+                                         These two Opacity animations are required - the FadeInThemeAnimations
+                                             on the same elements animate an internal Opacity. 
                                         <DoubleAnimation Storyboard.TargetName="MultiArrangeOverlayText"
                                             Storyboard.TargetProperty="Opacity"
                                             Duration="0"
@@ -487,7 +487,7 @@
                             <Grid.RenderTransform>
                                 <TranslateTransform x:Name="ContentPresenterTranslateTransform" />
                             </Grid.RenderTransform>
-                            --><!-- Uno workaround: template-bind ContentTemplateSelector because it's not automatically propagated from the ContentControl --><!--
+                             Uno workaround: template-bind ContentTemplateSelector because it's not automatically propagated from the ContentControl 
                             <ContentPresenter x:Name="ContentPresenter"
                                 ContentTransitions="{TemplateBinding ContentTransitions}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -498,9 +498,9 @@
                                 Margin="{TemplateBinding Padding}" />
 
                         </Grid>
-                        --><!-- The 'Xg' text simulates the amount of space one line of text will occupy.
+                         The 'Xg' text simulates the amount of space one line of text will occupy.
                              In the DataPlaceholder state, the Content is not loaded yet so we
-                             approximate the size of the item using placeholder text. --><!--
+                             approximate the size of the item using placeholder text. 
                         <TextBlock x:Name="PlaceholderTextBlock"
                             Opacity="0"
                             Text="Xg"
@@ -562,5 +562,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>-->
+    </Style>
 </ResourceDictionary>

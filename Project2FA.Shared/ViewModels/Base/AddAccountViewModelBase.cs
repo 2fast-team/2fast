@@ -30,11 +30,7 @@ using System.Web;
 using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
 using Prism.Ioc;
-using UNOversal.Navigation;
 using UNOversal.Services.Logging;
-
-
-
 
 
 #if WINDOWS_UWP
@@ -102,7 +98,6 @@ namespace Project2FA.ViewModels
         private Direct3D11CaptureFramePool _framePool;
         private CanvasDevice _canvasDevice;
         private GraphicsCaptureSession _session;
-        private GraphicsCaptureItem _item;
 #endif
 
         public AddAccountViewModelBase()
@@ -340,7 +335,6 @@ namespace Project2FA.ViewModels
         {
             _session?.Dispose();
             _framePool?.Dispose();
-            _item = null;
             _session = null;
             _framePool = null;
         }

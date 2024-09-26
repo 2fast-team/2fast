@@ -13,8 +13,10 @@
     xmlns:strings="using:Project2FA.Strings"
     xmlns:helpers="using:Project2FA.Helpers"
     xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:not_ios="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:ios="http://uno.ui/ios"
     x:Name="Page"
-    mc:Ignorable="d"
+    mc:Ignorable="d not_mobile ios not_ios"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
@@ -148,13 +150,13 @@
                         <ColumnDefinition Width="30" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <FontIcon
+                    <!--<FontIcon
                         FontSize="16"
                         Margin="4,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource SimpleIcons}"
-                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
+                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>-->
                     <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
@@ -192,7 +194,8 @@
             DisplayName="{x:Bind Model, 
             Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
             Mode=OneWay}"
-            FontSize="40"
+            not_ios:FontSize="38"
+            ios:FontSize="34"
             Margin="8,10,20,0"
             Grid.Column="1"
             Grid.Row="0"
@@ -472,7 +475,8 @@
             Background="{ThemeResource SystemAccentColor}"
             BorderBrush="{ThemeResource SystemAccentColor}"
             Foreground="White"
-            FontSize="40"
+            not_ios:FontSize="38"
+            ios:FontSize="34"
             DisplayName="{x:Bind Model, 
             Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
             Mode=OneWay}"
@@ -802,10 +806,9 @@
             </utu:NavigationBar.SecondaryCommands>-->
         </utu:NavigationBar>
 
-        <Grid Grid.Row="1">
-
-            <AutoSuggestBox 
+        <AutoSuggestBox 
             x:Name="MobileAutoSuggestBox"
+            Grid.Row="1"
             Height="48"
             QueryIcon="Find"
             ItemTemplate="{StaticResource SuggestBoxDataTemplate}"
@@ -820,46 +823,10 @@
             TextMemberPath="Name"
             GotFocus="AutoSuggestBox_GotFocus"
             Margin="4,0,4,4" >
-                <!--<AutoSuggestBox.ItemTemplate>
-                    <DataTemplate x:DataType="models:TwoFACodeModel">
-                        <Grid
-                            HorizontalAlignment="Stretch"
-                            Background="Transparent"
-                            ToolTipService.ToolTip="{x:Bind Label}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <FontIcon
-                                FontSize="16"
-                                Margin="4,0,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                FontFamily="{StaticResource SimpleIcons}"
-                                Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
-                            <TextBlock
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Text="{x:Bind Label, Mode=OneWay}"
-                                TextTrimming="CharacterEllipsis" />
-                        </Grid>
-                    </DataTemplate>
-                </AutoSuggestBox.ItemTemplate>-->
-            </AutoSuggestBox>
-            <!--<Storyboard x:Name="FadeOutStoryboard">
-                <DoubleAnimation
-                Storyboard.TargetName="MobileAutoSuggestBox"
-                Storyboard.TargetProperty="Opacity"
-                From="1.0" To="0.0" Duration="0:0:1"/>
-            </Storyboard>
-            <Storyboard x:Name="FadeInStoryboard">
-                <DoubleAnimation
-                Storyboard.TargetName="MobileAutoSuggestBox"
-                Storyboard.TargetProperty="Opacity"
-                From="0.0" To="1.0" Duration="0:0:1"/>
-            </Storyboard>-->
-        </Grid>
+        </AutoSuggestBox>
 
+
+        <!--ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"-->
         <Grid 
         x:Name="MainGrid"
         Grid.Row="2"
@@ -868,34 +835,35 @@
             <!--<ListView 
             x:Name="LV_AccountCollection"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
-                ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
             IsItemClickEnabled="False"
             HorizontalContentAlignment="Stretch"
-                ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}"
+            ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}"
             HorizontalAlignment="Stretch">
-                -->
-            <!--<ListView.ItemContainerStyle>
+
+                <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="Padding" Value="2,16,2,0"/>
+                        <Setter Property="Padding" Value="2,0,2,0"/>
                     </Style>
-                </ListView.ItemContainerStyle>-->
-            <!--
+                </ListView.ItemContainerStyle>
+            
             </ListView>-->
-            <!--<ItemsRepeaterScrollHost>
+            
+            <ItemsRepeaterScrollHost>
                 <ScrollViewer>
                     <ItemsRepeater 
                         ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}">
                         <ItemsRepeater.ItemTemplate>
-                            <helpers:AccountAvatarTemplateSelector 
-                            x:Key="AccountAvatarTemplateSelector"
+                            <helpers:AccountAvatarTemplateSelector
                             Normal="{StaticResource TwoFACodeCustomTemplate}" 
                             Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
                         </ItemsRepeater.ItemTemplate>
                     </ItemsRepeater>
                 </ScrollViewer>
-            </ItemsRepeaterScrollHost>-->
-            <ScrollViewer>
+            </ItemsRepeaterScrollHost>
+            
+            
+            <!--<ScrollViewer>
                 <ItemsView 
                     ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}">
                     <ItemsView.ItemTemplate>
@@ -908,7 +876,7 @@
                         <StackLayout Spacing="5"/>
                     </ItemsView.Layout>
                 </ItemsView>
-            </ScrollViewer>
+            </ScrollViewer>-->
 
 
 

@@ -96,6 +96,10 @@ namespace Project2FA.UNO
             WinUIWindow.Current.EnableHotReload();
 #endif
 
+#if __ANDROID__ || __IOS__
+            Uno.UI.FeatureConfiguration.ListViewBase.AnimateScrollIntoView = false;
+#endif
+
 #if MAUI_EMBEDDING
             this.UseMauiEmbedding<MauiControls.App>(MainWindow,
                 maui => maui.UseMauiControls());

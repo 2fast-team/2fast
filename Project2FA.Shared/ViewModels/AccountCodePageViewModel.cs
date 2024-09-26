@@ -85,9 +85,7 @@ namespace Project2FA.ViewModels
         private bool _datafileWebDAVUpToDate;
         private bool _datafileWebDAVUpdated;
         private bool _datafileNoInternetConnection;
-        private bool _isFirstStart = true;
         private bool _codeVisibilityOptionEnabled;
-        private bool _filterIsActive;
         private bool _proFeatureRequest;
 
 
@@ -492,6 +490,11 @@ namespace Project2FA.ViewModels
             // only reload, when the collection loading is not in progress
             if (TwoFADataService.CollectionAccessSemaphore.CurrentCount > 0)
             {
+                if (!string.IsNullOrWhiteSpace(SearchedAccountLabel))
+                {
+                    SearchedAccountLabel = string.Empty;
+                    TwoFADataService.ACVCollection.Filter = null;
+                }
                 await TwoFADataService.ReloadDatafile();
             }
         }
@@ -722,15 +725,13 @@ namespace Project2FA.ViewModels
             }
         }
 
+        /// <summary>
+        /// The text currently entered for the search of accounts
+        /// </summary>
         public string SearchedAccountLabel 
         { 
             get => _searchedAccountLabel; 
             set => SetProperty(ref _searchedAccountLabel, value);
-        }
-        public bool FilterIsActive 
-        { 
-            get => _filterIsActive; 
-            set => SetProperty(ref _filterIsActive, value);
         }
         public int SelectedIndex
         { 

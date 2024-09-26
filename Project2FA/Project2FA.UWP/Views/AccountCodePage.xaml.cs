@@ -244,7 +244,6 @@ namespace Project2FA.UWP.Views
 
         private void ABB_SearchFilter_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.FilterIsActive = false;
             if (sender is AppBarButton abbtn)
             {
                 //abbtn.Flyout ??= new Flyout();

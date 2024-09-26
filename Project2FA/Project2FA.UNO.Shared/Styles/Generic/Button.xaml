@@ -193,7 +193,7 @@
 
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver" />
+                                        <!--<Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver" />-->
                                         <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
                                         <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundPointerOver}" />
@@ -206,7 +206,7 @@
 
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed" />
+                                        <!--<Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed" />-->
                                         <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPressed}" />
                                         <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundPressed}" />
@@ -366,7 +366,7 @@
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="ContentPresenter.(media:RevealBrush.State)" Value="PointerOver" />
+                                        <!--<Setter Target="ContentPresenter.(media:RevealBrush.State)" Value="PointerOver" />-->
                                         <Setter Target="ContentPresenter.Background" Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPointerOver}" />
                                         <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPointerOver}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarEllipsisButtonForegroundPointerOver}" />
@@ -377,7 +377,7 @@
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <Setter Target="ContentPresenter.(media:RevealBrush.State)" Value="Pressed" />
+                                        <!--<Setter Target="ContentPresenter.(media:RevealBrush.State)" Value="Pressed" />-->
                                         <Setter Target="ContentPresenter.Background" Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPressed}" />
                                         <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPressed}" />
                                         <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarEllipsisButtonForegroundPressed}" />

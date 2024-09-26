@@ -1,14 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Project2FA.Core.Utils;
-using Project2FA.Helpers;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.Serialization;
 

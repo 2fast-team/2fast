@@ -117,7 +117,9 @@ namespace Project2FA.Utils
                     
                     if (!dialog.ViewModel.PasswordChanged)
                     {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         ShowPasswordError();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     }
                 }),
 #pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
@@ -145,7 +147,9 @@ namespace Project2FA.Utils
             ContentDialogResult result = await dialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.None)
             {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 ShowPasswordError();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 
@@ -319,7 +323,9 @@ namespace Project2FA.Utils
             var result = await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.None)
             {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 ShowUnexpectedError(exc);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 
@@ -419,7 +425,9 @@ namespace Project2FA.Utils
             {
                 if (!isNewFile)
                 {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     DataService.Instance.WriteLocalDatafile();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
             });
             dialog.PrimaryButtonText = Resources.WriteDatafileErrorBTNRetry;

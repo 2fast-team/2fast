@@ -37,12 +37,6 @@ using System.Web;
 using UNOversal.Services.Logging;
 using System.Text;
 
-
-
-
-
-
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -160,7 +154,7 @@ namespace Project2FA.Services
             }
             catch (Exception exc)
             {
-                LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(LoadFontIconList), exc);
 #endif

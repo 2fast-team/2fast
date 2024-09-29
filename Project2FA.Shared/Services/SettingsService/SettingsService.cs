@@ -1,5 +1,5 @@
 ﻿using System;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using UNOversal.Services.Settings;
 using Project2FA.Services.Enums;
 using Project2FA.Core;

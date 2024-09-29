@@ -1,0 +1,1363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountCodePageAddEntry.Label" xml:space="preserve">
+    <value>Lisää tili</value>
+  </data>
+  <data name="AccountCodePageCopied" xml:space="preserve">
+    <value>Kopioitu leikepöydälle</value>
+  </data>
+  <data name="AccountCodePageDeleteEntry.Text" xml:space="preserve">
+    <value>Poista</value>
+  </data>
+  <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
+    <value>Muokkaa</value>
+  </data>
+  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+    <value>Näytä vaihtoehdot</value>
+  </data>
+  <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
+    <value>Lataa datatiedosto uudelleen</value>
+  </data>
+  <data name="AccountCodePageViewModelDeleteAccept" xml:space="preserve">
+    <value>Kyllä</value>
+  </data>
+  <data name="AccountCodePageViewModelDeleteCancel" xml:space="preserve">
+    <value>Ei</value>
+  </data>
+  <data name="DeleteDatafileContentDialogDeleteDescription" xml:space="preserve">
+    <value>Oletko varma, että haluat poistaa tämän tilin peruuttamattomasti?</value>
+  </data>
+  <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
+    <value>Vahvista poisto</value>
+  </data>
+  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+    <value>Kopioi koodi</value>
+  </data>
+  <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="AddAccountContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Luo tili</value>
+  </data>
+  <data name="AddAccountContentDialog.Title" xml:space="preserve">
+    <value>Luo uusi tili</value>
+  </data>
+  <data name="AddAccountContentDialogAccountName.Header" xml:space="preserve">
+    <value>Tilin nimi</value>
+  </data>
+  <data name="AddAccountContentDialogAccountName.PlaceholderText" xml:space="preserve">
+    <value>Lähinnä postiosoite</value>
+  </data>
+  <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
+    <value>Luodaksesi uuden tilin kaksitekijätunnistautumista varten tarvitset QR-koodin tai ulkoisen palvelun avaimen (salatun tekstin).
+
+# Miten avain olisi tuotava?
+</value>
+  </data>
+  <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
+    <value>Tulot</value>
+  </data>
+  <data name="AddAccountContentDialogInputType.Header" xml:space="preserve">
+    <value>Syöttötyyppi</value>
+  </data>
+  <data name="AddAccountContentDialogLabel.Header" xml:space="preserve">
+    <value>Tarra</value>
+  </data>
+  <data name="AddAccountContentDialogLabel.PlaceholderText" xml:space="preserve">
+    <value>Näytettävä nimi</value>
+  </data>
+  <data name="AddAccountContentDialogManualInput.Text" xml:space="preserve">
+    <value>Manuaalinen syöttö</value>
+  </data>
+  <data name="AddAccountContentDialogManualInputCheckbox.Content" xml:space="preserve">
+    <value>Manuaalinen syöttö</value>
+  </data>
+  <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
+    <value>QR-koodista ei saa tietoja. Yritä uudelleen tai lisää salainen avain manuaalisesti.</value>
+  </data>
+  <data name="AddAccountContentDialogReadQRCode.Text" xml:space="preserve">
+    <value>Skannaa avain-QR-koodi</value>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo" xml:space="preserve">
+    <value>Skannaustyökalu avautuu pian</value>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTip.Title" xml:space="preserve">
+    <value>Siirry QR-koodiin</value>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.Header" xml:space="preserve">
+    <value>Salainen avain</value>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.PlaceholderText" xml:space="preserve">
+    <value>Lisää salainen avainmerkkijono tähän</value>
+  </data>
+  <data name="BTNConfirm.Content" xml:space="preserve">
+    <value>Vahvista</value>
+  </data>
+  <data name="BTNTryAgain.Content" xml:space="preserve">
+    <value>Yritä uudelleen</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header" xml:space="preserve">
+    <value>Paikallinen datatiedosto</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogIntroText.Text" xml:space="preserve">
+    <value>Tässä valintaikkunassa voit vaihtaa nykyisen käytetyn tiedoston salasanan.</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText" xml:space="preserve">
+    <value>Vaihda salasana</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.Title" xml:space="preserve">
+    <value>Vaihda datatiedoston salasana</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogPasswordError.Text" xml:space="preserve">
+    <value>Nykyinen salasana ei ole oikea.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Vahvista</value>
+  </data>
+  <data name="CurrentPassword.Header" xml:space="preserve">
+    <value>Nykyinen salasana</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Poista</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Muokkaa</value>
+  </data>
+  <data name="EditAccountContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Vahvista</value>
+  </data>
+  <data name="EditAccountContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="EditAccountContentDialog.Title" xml:space="preserve">
+    <value>Muokkaa tiliä</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Virhe</value>
+  </data>
+  <data name="LoginPageLoginButton.Content" xml:space="preserve">
+    <value>Kirjaudu sisään</value>
+  </data>
+  <data name="LoginPageLoginWindowsHelloButton.Content" xml:space="preserve">
+    <value>Kirjautuminen Windows Hello -palvelun avulla</value>
+  </data>
+  <data name="LoginPagePassword.Header" xml:space="preserve">
+    <value>Salasana</value>
+  </data>
+  <data name="LoginPagePassword.PlaceholderText" xml:space="preserve">
+    <value>Syötä salasana</value>
+  </data>
+  <data name="LoginPagePasswordMismatch" xml:space="preserve">
+    <value>Salasana ei vastaa datatiedoston salasanaa.</value>
+  </data>
+  <data name="NewDatafileContentDialogChangePath.Content" xml:space="preserve">
+    <value>Vaihda polku</value>
+  </data>
+  <data name="NewDatafileContentDialogCreateInfo.Text" xml:space="preserve">
+    <value>Tiedoston luomista varten sinun on valittava nimi ja salasana.
+Tärkeää: Sinun on kirjoitettava salasana joka kerta, kun käynnistät sovelluksen!</value>
+  </data>
+  <data name="NewDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
+    <value>Datatiedosto</value>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.Header" xml:space="preserve">
+    <value>Tiedostonimi</value>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.PlaceholderText" xml:space="preserve">
+    <value>esimerkiksi tiedosto</value>
+  </data>
+  <data name="NewDatafileContentDialogLocalPath.Text" xml:space="preserve">
+    <value>Valitse paikallinen polku</value>
+  </data>
+  <data name="NewDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="NewDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
+    <value>Luo datatiedosto</value>
+  </data>
+  <data name="NewDatafileContentDialogMain.Title" xml:space="preserve">
+    <value>Luo datatiedosto</value>
+  </data>
+  <data name="NewDatafileContentDialogPath.Header" xml:space="preserve">
+    <value>Polku</value>
+  </data>
+  <data name="NewDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
+    <value>Varastointi</value>
+  </data>
+  <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
+    <value>Valitse WebDAV</value>
+  </data>
+  <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
+    <value>WebDAV</value>
+  </data>
+  <data name="NewDatafileLocalFolder.Header" xml:space="preserve">
+    <value>Tiedostonimi</value>
+  </data>
+  <data name="NewDatafileLocalFolder.PlaceholderText" xml:space="preserve">
+    <value>Kirjoita tiedostonimi</value>
+  </data>
+  <data name="NewDatefileContentDialogFolderName.Header" xml:space="preserve">
+    <value>Foldername</value>
+  </data>
+  <data name="NewLocalDatafileInfo.Text" xml:space="preserve">
+    <value>Käyttääksesi tätä sovellusta sinun on luotava datatiedosto kerran. Kaikki tilit tallennetaan salattuna tähän tiedostoon.
+Jos aiot käyttää tätä sovellusta useilla laitteilla, on järkevää tallentaa tämä tiedosto ulkoiseen tallennustilaan (esim. pilvipalveluun).</value>
+  </data>
+  <data name="NewPasswordContentDialog.Header" xml:space="preserve">
+    <value>Uusi salasana</value>
+  </data>
+  <data name="NewPasswordRepeatContentDialog.Header" xml:space="preserve">
+    <value>Toista uusi salasana</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ei</value>
+  </data>
+  <data name="Password.Header" xml:space="preserve">
+    <value>Salasana</value>
+  </data>
+  <data name="Password.PlaceholderText" xml:space="preserve">
+    <value>Syötä salasana</value>
+  </data>
+  <data name="PasswordRepeat.Header" xml:space="preserve">
+    <value>Toista salasana</value>
+  </data>
+  <data name="PasswordRepeat.PlaceholderText" xml:space="preserve">
+    <value>salasanan syöttäminen</value>
+  </data>
+  <data name="SettingsActionRequiredRestart" xml:space="preserve">
+    <value>Tämä muutos tulee voimaan sovelluksen uudelleenkäynnistyksen jälkeen.</value>
+  </data>
+  <data name="SettingsBackButtonCard.Header" xml:space="preserve">
+    <value>Takaisin-painikkeen sijoittaminen</value>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
+    <value>Navigointivalikossa</value>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OnContent" xml:space="preserve">
+    <value>Otsikkorivillä</value>
+  </data>
+  <data name="SettingsChangePassword.Text" xml:space="preserve">
+    <value>Vaihda salasana</value>
+  </data>
+  <data name="SettingsDatafileFilePath.Text" xml:space="preserve">
+    <value>Tiedoston polku:</value>
+  </data>
+  <data name="SettingsDatafileName.Text" xml:space="preserve">
+    <value>Tiedoston nimi:</value>
+  </data>
+  <data name="SettingsDatafileTitle.Text" xml:space="preserve">
+    <value>Tietoja nykyisestä käytetystä datatiedostosta</value>
+  </data>
+  <data name="SettingsFactoryResetMessage" xml:space="preserve">
+    <value>Oletko varma, että haluat palauttaa sovelluksen tehdasasetukset? **Tätä prosessia ei voi perua!**
+Datatiedostoa **ei** poisteta palautuksen edetessä.</value>
+    <comment>[ReswT:manually]</comment>
+  </data>
+  <data name="SettingsGiveFeedback.Text" xml:space="preserve">
+    <value>Anna palautetta</value>
+  </data>
+  <data name="SettingsGiveFeedbackText" xml:space="preserve">
+    <value>Anna palautetta</value>
+  </data>
+  <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
+    <value>Suunnittelu</value>
+  </data>
+  <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
+    <value>Sovelluksen palauttaminen tehdasasetuksiin</value>
+  </data>
+  <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
+    <value>Toiminnot</value>
+  </data>
+  <data name="SettingsPageName.Text" xml:space="preserve">
+    <value>Asetukset</value>
+  </data>
+  <data name="SettingsPivotItemAbout.Header" xml:space="preserve">
+    <value>Tietoja sovelluksesta</value>
+  </data>
+  <data name="SettingsPivotItemDependencies.Header" xml:space="preserve">
+    <value>Riippuvuudet</value>
+  </data>
+  <data name="SettingsPivotItemOption.Header" xml:space="preserve">
+    <value>Vaihtoehdot</value>
+  </data>
+  <data name="SettingsRateApp.Header" xml:space="preserve">
+    <value>Arvioi sovellus kaupassa</value>
+  </data>
+  <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
+    <value>Oletko varma, että haluat poistaa tiedoston pysyvästi? Menetät kaikki lisätyt tilisi.</value>
+  </data>
+  <data name="SettingsThemeDark.Content" xml:space="preserve">
+    <value>Tumma</value>
+  </data>
+  <data name="SettingsThemeLight.Content" xml:space="preserve">
+    <value>Valo</value>
+  </data>
+  <data name="SettingsThemeSelectMode.Text" xml:space="preserve">
+    <value>Valitse tila</value>
+  </data>
+  <data name="SettingsThemeSystem.Content" xml:space="preserve">
+    <value>Käytä järjestelmäasetuksia</value>
+  </data>
+  <data name="SettingsTitleBarToggleSwtich.Header" xml:space="preserve">
+    <value>Käyttäjän määrittelemä otsikkopalkki (vaalea/tumma)</value>
+  </data>
+  <data name="SettingsWindowsColor.Content" xml:space="preserve">
+    <value>Järjestelmän väriasetukset</value>
+  </data>
+  <data name="SettingsWindowsHelloPrefer.Header" xml:space="preserve">
+    <value>Suosikaa Windows Hello -kirjautumista</value>
+  </data>
+  <data name="ShellPageAccountsNavigation.Content" xml:space="preserve">
+    <value>Tilit</value>
+  </data>
+  <data name="ShellPageDatafileNavigation.Content" xml:space="preserve">
+    <value>Datatiedosto</value>
+  </data>
+  <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
+    <value>Palaute</value>
+  </data>
+  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+    <value>Anna palautetta (Github)</value>
+  </data>
+  <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
+    <value>Valitse toinen tiedosto</value>
+  </data>
+  <data name="UseDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
+    <value>Datatiedosto</value>
+  </data>
+  <data name="UseDatafileContentDialogFilename.Header" xml:space="preserve">
+    <value>Tiedostonimi</value>
+  </data>
+  <data name="UseDatafileContentDialogFolderPath.Header" xml:space="preserve">
+    <value>Kansion polku</value>
+  </data>
+  <data name="UseDatafileContentDialogInfo.Text" xml:space="preserve">
+    <value>Jos olet käyttänyt sovellusta aiemmin, valitse, haluatko ladata olemassa olevan datatiedoston paikallisesta tallennustilasta vai WebDAV:n kautta.</value>
+  </data>
+  <data name="UseDatafileContentDialogLoadInfo.Text" xml:space="preserve">
+    <value>Valitse olemassa oleva tiedosto ja anna salasana.</value>
+  </data>
+  <data name="UseDatafileContentDialogLocalPath.Text" xml:space="preserve">
+    <value>Valitse paikallinen polku</value>
+  </data>
+  <data name="UseDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="UseDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
+    <value>Lataa datatiedosto</value>
+  </data>
+  <data name="UseDatafileContentDialogMain.Title" xml:space="preserve">
+    <value>Lataa datatiedosto</value>
+  </data>
+  <data name="UseDatafileContentDialogPasswordError.Text" xml:space="preserve">
+    <value>Tiedostoa ei voi purkaa salasanalla.</value>
+  </data>
+  <data name="UseDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
+    <value>Varastointi</value>
+  </data>
+  <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
+    <value>Valitse WebDAV</value>
+  </data>
+  <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
+    <value>WebDAV</value>
+  </data>
+  <data name="WelcomePageCreateDatafile.Content" xml:space="preserve">
+    <value>Luo uusi tiedosto (ensimmäinen käynnistys)</value>
+  </data>
+  <data name="WelcomePageFirstSteps.Text" xml:space="preserve">
+    <value>Ensimmäiset askeleet kohti turvallisuutta ...</value>
+  </data>
+  <data name="WelcomePageIntro.Text" xml:space="preserve">
+    <value>Tervetuloa!
+
+Aloita toisesta turvallisuustekijästä jokapäiväisessä elämässäsi.</value>
+  </data>
+  <data name="WelcomePageLoadDatafile.Content" xml:space="preserve">
+    <value>Lataa olemassa oleva tiedosto</value>
+  </data>
+  <data name="WindowsHelloLoginMessage" xml:space="preserve">
+    <value>Vahvista nyt määritetyllä Windows Hello -tunnuksellasi.</value>
+  </data>
+  <data name="WindowsHelloPreferMessage" xml:space="preserve">
+    <value>Sisäänkirjautuminen Windows Hello -palvelun avulla on mahdollista. Haluatko suosia tätä kirjautumistapaa tulevaisuudessa? Voit muuttaa tämän vaihtoehdon asetuksissa milloin tahansa.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Kyllä</value>
+  </data>
+  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+    <value>Sekuntia päivitykseen</value>
+  </data>
+  <data name="ButtonTextCancel" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="ButtonTextConfirm" xml:space="preserve">
+    <value>Vahvista</value>
+  </data>
+  <data name="ButtonTextNo" xml:space="preserve">
+    <value>Ei</value>
+  </data>
+  <data name="ButtonTextYes" xml:space="preserve">
+    <value>Kyllä</value>
+  </data>
+  <data name="RateAppContentDialogLaterButton" xml:space="preserve">
+    <value>Muistuta myöhemmin</value>
+  </data>
+  <data name="RateAppContentDialogNoButton" xml:space="preserve">
+    <value>Ei, kiitos.</value>
+  </data>
+  <data name="RateAppContentDialogQuestion" xml:space="preserve">
+    <value>Olet käyttänyt tätä sovellusta jo jonkin aikaa, käy myymälässä arvioimassa se ja kirjoittamassa arvostelu. Voit myös käyttää Windows Feedback -sovellusta milloin tahansa lähettääksesi palautetta suoraan meille.</value>
+  </data>
+  <data name="RateAppContentDialogYesButton" xml:space="preserve">
+    <value>Arvioi nyt</value>
+  </data>
+  <data name="RateAppContentDialogTitle" xml:space="preserve">
+    <value>Pidätkö tästä sovelluksesta?</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header" xml:space="preserve">
+    <value>Nykyinen salasana</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText" xml:space="preserve">
+    <value>Syötä salasana</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
+    <value>Sovelluksella ei ole tällä hetkellä tarvittavia käyttöoikeuksia tiedostoa varten. Oikeuksien asettaminen edellyttää kuitenkin sovelluksen sulkemista.
+Anna tarvittavat oikeudet asetuksissa ja käynnistä sovellus uudelleen.
+
+Ohjeet oikeuksien asettamiseen:
+![Ohjeet valtuutuksen asettamiseen](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogPrimaryBTN" xml:space="preserve">
+    <value>Aseta valtuutus</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogSecondaryBTN" xml:space="preserve">
+    <value>Peruuta (sulje sovellus)</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogTitle" xml:space="preserve">
+    <value>Valtuutusvirhe</value>
+  </data>
+  <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
+    <value>Lukitse sovellus</value>
+  </data>
+  <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
+    <value>Näppäin kopioitu leikepöydälle</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Vaihda salasana</value>
+  </data>
+  <data name="CloseApp" xml:space="preserve">
+    <value>Sulje sovellus</value>
+  </data>
+  <data name="DeleteAccountContentDialogDescription" xml:space="preserve">
+    <value>Haluatko varmasti poistaa tilin? Poiston jälkeen sinulla on **30 sekuntia** aikaa peruuttaa poisto.</value>
+  </data>
+  <data name="DeleteAccountContentDialogTitle" xml:space="preserve">
+    <value>Poista tili</value>
+  </data>
+  <data name="ErrorHandle" xml:space="preserve">
+    <value>Virheenkäsittely</value>
+  </data>
+  <data name="ErrorHandleDescription" xml:space="preserve">
+    <value>On tapahtunut käsittelemätön virhe, lähetä kentässä näkyvät virheen tiedot uuden ongelman kautta Githubissa.</value>
+  </data>
+  <data name="PasswordInvalidHeader" xml:space="preserve">
+    <value>Salasana on virheellinen</value>
+  </data>
+  <data name="SettingsQRScanningHeader" xml:space="preserve">
+    <value>Viive QR-koodin lukemisen aloittamiselle</value>
+  </data>
+  <data name="SettingsQRScanningSecondsRange" xml:space="preserve">
+    <value>Määritetään sekunteina (3-10s sallittu).</value>
+  </data>
+  <data name="ShellPageAboutAppNavigation.Content" xml:space="preserve">
+    <value>Tietoja sovelluksesta</value>
+  </data>
+  <data name="ExceptionDatafileNotFound" xml:space="preserve">
+    <value>Nykyisen datatiedoston polkua ei löytynyt. Mahdollisesti olet itse siirtänyt datatiedoston.
+**Tahdotko muokata polkua?**</value>
+  </data>
+  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+    <value>Lukitse sovellus</value>
+  </data>
+  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+    <value>Lisää tili</value>
+  </data>
+  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+    <value>Lataa datatiedosto uudelleen</value>
+  </data>
+  <data name="PasswordInvalidMessage" xml:space="preserve">
+    <value>Tässä sovelluksessa tallennettu salasana ei kelpaa datatiedostoon. Olet ehkä vaihtanut salasanan toisessa koneessa datatiedostoa varten.
+**Tahdotko vaihtaa salasanan nyt?</value>
+  </data>
+  <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
+    <value>Tehdasasetusten palautus</value>
+  </data>
+  <data name="SettingsSourceCode.Header" xml:space="preserve">
+    <value>Näytä sovelluksen lähdekoodi</value>
+  </data>
+  <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
+    <value>Tiedosto</value>
+  </data>
+  <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
+    <value>Peruuta poisto</value>
+  </data>
+  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+    <value>Peruuta poisto</value>
+  </data>
+  <data name="SettingsDatafileName.Header" xml:space="preserve">
+    <value>Tiedoston nimi</value>
+  </data>
+  <data name="SettingsDatafilePath.Header" xml:space="preserve">
+    <value>Tiedoston polku</value>
+  </data>
+  <data name="NewDatafileContentDialogDatafileExistsError" xml:space="preserve">
+    <value>Kansiossa on jo olemassa tämän niminen tiedosto. Vaihda kansiota tai tiedoston nimeä.</value>
+  </data>
+  <data name="SettingsDatafileBTNChangePassword.Content" xml:space="preserve">
+    <value>vaihda salasana</value>
+  </data>
+  <data name="ErrorHandleSendError" xml:space="preserve">
+    <value>Lähetä virhe</value>
+  </data>
+  <data name="FactoryReset" xml:space="preserve">
+    <value>Tehdasasetusten palautus</value>
+  </data>
+  <data name="ChangeDatafilePath" xml:space="preserve">
+    <value>Muuta tiedostopolku</value>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Subtitle" xml:space="preserve">
+    <value>Lisää uusia tilejä</value>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Title" xml:space="preserve">
+    <value>Tyhjä luettelo</value>
+  </data>
+  <data name="AccountCodePageWrongTimeBTN" xml:space="preserve">
+    <value>Aukioloajan asetukset</value>
+  </data>
+  <data name="AccountCodePageWrongTimeContent" xml:space="preserve">
+    <value>Laitteen nykyinen aikanäyttö on virheellinen, joten tilien koodeja ei voida luoda oikein.
+Synkronoi aika asetuksissa.</value>
+  </data>
+  <data name="AccountCodePageWrongTimeTitle" xml:space="preserve">
+    <value>Virheellinen ajan näyttö</value>
+  </data>
+  <data name="PasswordAdvancedHashOption.Header" xml:space="preserve">
+    <value>Lisäasetukset</value>
+  </data>
+  <data name="PasswordAdvancedHashOptionText.Content" xml:space="preserve">
+    <value>Tällä asetuksella Argon2id:tä käytetään SHA-512:n sijasta salasanakyselyn hash-tuotannossa.</value>
+  </data>
+  <data name="SettingsDatafileChangePasswordInfoTitle" xml:space="preserve">
+    <value>Salasana on vaihdettu onnistuneesti</value>
+  </data>
+  <data name="ShellPagePaneTitle" xml:space="preserve">
+    <value>Navigointivalikko</value>
+  </data>
+  <data name="SettingsAuthorLogo.Content" xml:space="preserve">
+    <value>Logon tekijä: Freepik</value>
+  </data>
+  <data name="AccountCodePageAutoSuggestBoxPlaceholder" xml:space="preserve">
+    <value>Etsi</value>
+  </data>
+  <data name="AccountCodePageSearchNotFound" xml:space="preserve">
+    <value>Tuloksia ei löytynyt</value>
+  </data>
+  <data name="SettingsDependencyGroupAssets" xml:space="preserve">
+    <value>Varat</value>
+  </data>
+  <data name="SettingsDependencyGroupPackages" xml:space="preserve">
+    <value>Paketit</value>
+  </data>
+  <data name="SettingsDependencies.Header" xml:space="preserve">
+    <value>Sovelluksen riippuvuudet</value>
+  </data>
+  <data name="SettingsDependencyAuthor.Text" xml:space="preserve">
+    <value>Kirjoittaja:</value>
+  </data>
+  <data name="SettingsDependencyLicence.Text" xml:space="preserve">
+    <value>Lisenssi:</value>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>Käynnistä sovellus uudelleen</value>
+  </data>
+  <data name="ErrorCopyToClipboard" xml:space="preserve">
+    <value>Kopioi raportti leikepöydälle</value>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
+    <value>NTP-palvelimen osoite on voimassa ja se voidaan tallentaa painamalla sitä.</value>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
+    <value>Säästäminen?</value>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
+    <value>NTP-palvelimen osoitteen tallentaminen ei ole mahdollista, koska palvelinta ei löydetty.</value>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
+    <value>Virhe</value>
+  </data>
+  <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
+    <value>Käytä aikapalvelinta järjestelmän ajan tarkistamiseen</value>
+  </data>
+  <data name="SettingsSaveNTPServer.Label" xml:space="preserve">
+    <value>Tallenna</value>
+  </data>
+  <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
+    <value>Kun sovellusta käytettiin viimeksi, tapahtui käsittelemätön virhe, lähetä kentässä näkyvät virheen tiedot uuden ongelman kautta Githubissa.</value>
+  </data>
+  <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
+    <value>NTP-palvelimen asettaminen manuaalisesti</value>
+  </data>
+  <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
+    <value>NTP-palvelinta voidaan käyttää järjestelmän oikean ajan tarkistamiseen. Jos kellonajassa on suurempi poikkeama, tilien koodien luominen ei ole enää oikein. Jos poikkeama on suurempi kuin 30 sekuntia, tulee ilmoitus, ja koodit luodaan NTP-palvelimen ajan mukaan.</value>
+  </data>
+  <data name="NewAppFeaturesContent" xml:space="preserve">
+    <value>- Kolmannen osapuolen kirjastojen päivitys
+- Lisätty uusia kieliä: espanja, ranska, italia, japani, kiina
+- Kategoriat voidaan nyt asettaa suoraan uusissa tileissä (Pro-toiminto).
+- Korjattu virhe, jonka vuoksi salasanaa ei voinut vaihtaa, jos tällä hetkellä tallennettu salasana on virheellinen.</value>
+    <comment>[ReswT:always]</comment>
+  </data>
+  <data name="NewAppFeaturesTitle" xml:space="preserve">
+    <value>Uudet ominaisuudet ja muutokset</value>
+  </data>
+  <data name="WelcomePageTitle" xml:space="preserve">
+    <value>Tervetuloa</value>
+  </data>
+  <data name="UseDataFilePageName.Text" xml:space="preserve">
+    <value>Lataa olemassa oleva tiedosto</value>
+  </data>
+  <data name="CreateDatafile" xml:space="preserve">
+    <value>Luo datatiedosto</value>
+  </data>
+  <data name="LoadDatafile" xml:space="preserve">
+    <value>Lataa olemassa oleva tiedosto</value>
+  </data>
+  <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
+    <value>Ensimmäiset vaiheet</value>
+  </data>
+  <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
+    <value>Lataa datatiedosto</value>
+  </data>
+  <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
+    <value>Kirjaudu sisään</value>
+  </data>
+  <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
+    <value>Palvelimen osoite</value>
+  </data>
+  <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
+    <value>Käyttäjätunnus</value>
+  </data>
+  <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
+    <value>Tiedosto</value>
+  </data>
+  <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
+    <value>Palvelun kirjautuminen</value>
+  </data>
+  <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
+    <value>Pyöreät kulmat</value>
+  </data>
+  <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
+    <value>Jos vaihtoehto on käytössä, ohjainten kulmat pyöristetään.</value>
+  </data>
+  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
+    <value>Sovelluksen värimaailma</value>
+  </data>
+  <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
+    <value>Tehdasasetusten palautus</value>
+  </data>
+  <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
+    <value>Sovelluksen nollaaminen painamalla ja vahvistamalla</value>
+  </data>
+  <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
+    <value>QR-koodin skannaus</value>
+  </data>
+  <data name="UseDatafilePasswordInfo" xml:space="preserve">
+    <value>Jos haluat ladata datatiedoston, sinun on syötettävä salasana, joka määritettiin tiedostoa luotaessa.</value>
+  </data>
+  <data name="ToolTipShowHelp" xml:space="preserve">
+    <value>Näytä apu</value>
+  </data>
+  <data name="SettingsAutoLogoutDesc" xml:space="preserve">
+    <value>Automaattinen uloskirjautuminen käyttämättömyyden jälkeen</value>
+  </data>
+  <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
+    <value>Minuutin toimettomuus</value>
+  </data>
+  <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
+    <value>Automaattinen lukitus</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Sulje</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
+    <value>Kun QR-koodin skannaus on valittu, avautuu uusi ikkuna, jossa on valittava ohjelma, joka sisältää skannattavan QR-koodin. Tämä on esimerkiksi selain.</value>
+  </data>
+  <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
+    <value>Näytä QR-koodi</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogTitle" xml:space="preserve">
+    <value>QR-koodin näyttö</value>
+  </data>
+  <data name="AddAccountCodeContentDialogInputSecretKeyHelp" xml:space="preserve">
+    <value>Syöttö perustuu Base32:een, joten se sallii vain kirjaimet A-Z ja numerot 2-7.</value>
+  </data>
+  <data name="AccountCodePageTooltipDeleteFavourite" xml:space="preserve">
+    <value>Kumoa suosikki</value>
+  </data>
+  <data name="AccountCodePageTooltipSetFavourite" xml:space="preserve">
+    <value>Aseta suosikiksi</value>
+  </data>
+  <data name="AccountCodePageTooltipHideTOTP" xml:space="preserve">
+    <value>Piilota avain</value>
+  </data>
+  <data name="AccountCodePageTooltipShowTOTP" xml:space="preserve">
+    <value>Näytä avain</value>
+  </data>
+  <data name="SettingsPreferHiddenTOTP.Header" xml:space="preserve">
+    <value>Piilota näppäimet</value>
+  </data>
+  <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
+    <value>Luodut avaimet on piilotettu ja ne voidaan halutessaan häivyttää.</value>
+  </data>
+  <data name="AddAccountContentDialogExpertExpander.Header" xml:space="preserve">
+    <value>Asiantuntija-asetukset</value>
+  </data>
+  <data name="AddAccountContentDialogHashAlgo.Header" xml:space="preserve">
+    <value>Hash-algoritmi</value>
+  </data>
+  <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
+    <value>Numeroiden määrä</value>
+  </data>
+  <data name="ButtonTextRetry" xml:space="preserve">
+    <value>Yritä uudelleen</value>
+  </data>
+  <data name="ErrorClipboardTask" xml:space="preserve">
+    <value>Leikepöytä on varattu toiselle ohjelmalle, yritä uudelleen.</value>
+  </data>
+  <data name="AddAccountContentDialogDeleteAccountIcon.Text" xml:space="preserve">
+    <value>Poista</value>
+  </data>
+  <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
+    <value>Tilin kuvake</value>
+  </data>
+  <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Lisää muistiinpanoja</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Huomautukset</value>
+  </data>
+  <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
+    <value>Etsi tilin kuva</value>
+  </data>
+  <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
+    <value>Muuta näitä asetuksia vain, jos olet varma, että palvelu vaatii niitä.</value>
+  </data>
+  <data name="NewDataFilePageTitle.Text" xml:space="preserve">
+    <value>Uusi tiedosto</value>
+  </data>
+  <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
+    <value>Suodatin</value>
+  </data>
+  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+    <value>Suodatin</value>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
+    <value>Valitse tiedosto</value>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFolder" xml:space="preserve">
+    <value>Valitse kansio</value>
+  </data>
+  <data name="SettingsPageAboDesc.Text" xml:space="preserve">
+    <value>Tue sovelluksen kehittämistä toistuvilla maksuilla.</value>
+  </data>
+  <data name="WebDAVEmptyFolderMessage.Text" xml:space="preserve">
+    <value>Tämä kansio ei sisällä valittavia tiedostoja.</value>
+  </data>
+  <data name="NewDatafileCreateDatafile.Content" xml:space="preserve">
+    <value>Luo datatiedosto</value>
+  </data>
+  <data name="NewDatafilehangeDatafile.Content" xml:space="preserve">
+    <value>Vaihda kansio</value>
+  </data>
+  <data name="SettingsAppPrideMonthDesign.Header" xml:space="preserve">
+    <value>Sateenkaaren värit kirjautumisikkunoissa</value>
+  </data>
+  <data name="SettingsAppPrideMonthDesignDesc.Text" xml:space="preserve">
+    <value>Sateenkaaren värien asettaminen kirjautumisikkunaan</value>
+  </data>
+  <data name="SettingsMailSupportApp.Text" xml:space="preserve">
+    <value>Sähköpostituki</value>
+  </data>
+  <data name="SettingsCustomDesign.Header" xml:space="preserve">
+    <value>Erityiset suunnitteluasetukset</value>
+  </data>
+  <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
+    <value>Tuo varmuuskopio</value>
+  </data>
+  <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
+    <value>Luo datatiedosto</value>
+  </data>
+  <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
+    <value>Avoin opetusohjelma</value>
+  </data>
+  <data name="WelcomePageTutorialDesc" xml:space="preserve">
+    <value>Haluatko avata sovelluksen opetusohjelman?</value>
+  </data>
+  <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
+    <value>**2fast**-sovellus (lyhenne sanoista **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) on [autentikointiohjelma](https://en.wikipedia.org/wiki/Authenticator) kaksitekijätodennusta (2FA) varten, joka käyttää standardoitua "**T**ime-based **O**ne-**t**ime **P**assword algorithm"/ aikapohjaista kertakäyttösalasanaa (TOTP) standardoinnin [RFC 6238](https://tools.ietf.org/html/rfc6238) mukaisesti. Tämän sovelluksen kanssa voidaan käyttää palveluja, jotka perustuvat TOTP-standardiin toisen tekijän osalta. Esimerkiksi Microsoft, Google ja PayPal tukevat TOTP:tä käyttävää kaksitekijätodennusta:</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
+    <value>Datatiedoston luomiseksi on ensin valittava kansio, johon tiedosto tallennetaan. Suositeltavaa on tallentaa tiedosto paikkaan, joka on suojattu tietojen häviämiseltä (esim. pilvitallennustila, kuten One-Drive, DropBox jne.). Tämän jälkeen valitaan nimi ja salasana tiedoston salausta varten. On suositeltavaa tallentaa salasana salasanahallintaan katoamisen estämiseksi.</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
+    <value>Datatiedoston lataaminen edellyttää ensin datatiedoston valitsemista. Tämän jälkeen valitaan salasana, jolla datatiedosto on salattu.</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
+    <value>Tilin luominen</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
+    <value>Datatiedoston luominen</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
+    <value>Datatiedoston lataaminen</value>
+  </data>
+  <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
+    <value>Automaattinen uloskirjautuminen</value>
+  </data>
+  <data name="FunctionNotAvailable" xml:space="preserve">
+    <value>Toiminto ei ole käytettävissä</value>
+  </data>
+  <data name="WindowsHelloNotAvailable" xml:space="preserve">
+    <value>Windows Hello -ohjelmaa ei voida suorittaa, koska suojatussa muistissa olevalle tiedostolle ei ole tallennettu salasanaa.</value>
+  </data>
+  <data name="ErrorGenerateTOTPCode" xml:space="preserve">
+    <value>Tilin {0} salainen avain on tyhjä tai lukukelvoton. Käynnistä sovellus uudelleen. Jos ongelma jatkuu, tyhjennä tili {0} ja lisää se uudelleen.</value>
+  </data>
+  <data name="TextFormatterBoldToolTip" xml:space="preserve">
+    <value>Rohkea</value>
+  </data>
+  <data name="TextFormatterItalicToolTip" xml:space="preserve">
+    <value>Kursivointi</value>
+  </data>
+  <data name="TextFormatterStrikeToolTip" xml:space="preserve">
+    <value>Yliviivaus</value>
+  </data>
+  <data name="TextFormatterUnderlineToolTip" xml:space="preserve">
+    <value>Alleviivaa</value>
+  </data>
+  <data name="TextFormatterListToolTip" xml:space="preserve">
+    <value>Luettelo</value>
+  </data>
+  <data name="TextFormatterOrderedToolTip" xml:space="preserve">
+    <value>Tilattu luettelo</value>
+  </data>
+  <data name="WriteDatafileErrorBTNCancel" xml:space="preserve">
+    <value>Hylkää muutokset</value>
+  </data>
+  <data name="WriteDatafileErrorBTNRetry" xml:space="preserve">
+    <value>Tallenna uudelleen</value>
+  </data>
+  <data name="WriteDatafileErrorDesc" xml:space="preserve">
+    <value>Muutoksia ei voitu tallentaa. Haluatko tallentaa ne uudelleen?</value>
+  </data>
+  <data name="SettingsCBNotStorePassword.Content" xml:space="preserve">
+    <value>Älä tallenna salasanaa valtakirjojen hallintaan (Windows Hello ei ole käytettävissä).</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFound" xml:space="preserve">
+    <value>Osoitetta ei löydy</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFoundDesc" xml:space="preserve">
+    <value>WebDAV-palvelun osoitetta ei löytynyt.</value>
+  </data>
+  <data name="WebDAVAppPasswordInfo" xml:space="preserve">
+    <value>WebDAV-palveluun kirjautumiseen tarvitaan sovelluksen salasana, joka voidaan luoda WebDAV-palvelun asetuksissa.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsError" xml:space="preserve">
+    <value>Kirjautumisvirhe</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsErrorDesc" xml:space="preserve">
+    <value>Käyttäjätunnuksesi tai salasanasi on virheellinen.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceError" xml:space="preserve">
+    <value>Palvelin ylläpitotilassa</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc" xml:space="preserve">
+    <value>Sisäänkirjautuminen ei ole tällä hetkellä mahdollista, koska WebDAV-palvelu on parhaillaan ylläpitotilassa.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledError" xml:space="preserve">
+    <value>Palvelinta ei ole asennettu</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
+    <value>WebDAV-palvelua ei ole tällä hetkellä asennettu oikein.</value>
+  </data>
+  <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
+    <value>Tarjoa Windows Hello kirjautumisvaihtoehtona</value>
+  </data>
+  <data name="InfoBarDatafileNoInternet" xml:space="preserve">
+    <value>Tällä hetkellä synkronointia varten ei ole käytettävissä internet-yhteyttä. Ole hyvä ja muodosta yhteys ja vahvista "Lataa datatiedosto uudelleen".</value>
+  </data>
+  <data name="InfoBarDatafileTitleNoInternet" xml:space="preserve">
+    <value>Ei internet-yhteyttä</value>
+  </data>
+  <data name="InfoBarDatafileTitleUpdated" xml:space="preserve">
+    <value>Datatiedosto päivitetty</value>
+  </data>
+  <data name="InfoBarDatafileUpdated" xml:space="preserve">
+    <value>Tiedosto on päivitetty onnistuneesti.</value>
+  </data>
+  <data name="AddAccountContentDialogCameraScan.Header" xml:space="preserve">
+    <value>Kamera</value>
+  </data>
+  <data name="AddAccountContentDialogCameraScanBTN.Text" xml:space="preserve">
+    <value>Kamera</value>
+  </data>
+  <data name="AddAccountContentDialogBTNCamRetry.Content" xml:space="preserve">
+    <value>Lataa uudelleen</value>
+  </data>
+  <data name="AddAccountContentDialogNoCamFound.Text" xml:space="preserve">
+    <value>Kameraa ei ole käytettävissä.</value>
+  </data>
+  <data name="AddAccountContentDialogNoCamPermission.Text" xml:space="preserve">
+    <value>Kameran näyttämiseen ei ole annettu suostumusta.</value>
+  </data>
+  <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
+    <value>Avaa asetukset</value>
+  </data>
+  <data name="ShellPageWarnInfo" xml:space="preserve">
+    <value>Näytön tallennussuojaus ei ole aktiivinen</value>
+  </data>
+  <data name="NewDatafileFolderPath.Header" xml:space="preserve">
+    <value>WebDAV-kansion polku</value>
+  </data>
+  <data name="AccountCodePageTitle" xml:space="preserve">
+    <value>Tilit</value>
+  </data>
+  <data name="AccoundCodePageImportEntry.Label" xml:space="preserve">
+    <value>Tuo tilejä</value>
+  </data>
+  <data name="AccoundCodePageImportCamera.Text" xml:space="preserve">
+    <value>Suorita kameran tuonti</value>
+  </data>
+  <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
+    <value>Käytä tiedostoa/kuvaa tuontia varten</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>2fast - kahden tekijän todentaja</value>
+  </data>
+  <data name="TutorialPageBackButton.Text" xml:space="preserve">
+    <value>Takaisin</value>
+  </data>
+  <data name="TutorialPageForwardButton.Text" xml:space="preserve">
+    <value>Eteenpäin</value>
+  </data>
+  <data name="TutorialPageSkipButton.Content" xml:space="preserve">
+    <value>Ohita</value>
+  </data>
+  <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
+    <value>Viimeistele opetusohjelma</value>
+  </data>
+  <data name="NewDatafilePasswordInfo" xml:space="preserve">
+    <value>Tiedoston salausta varten on määritettävä salasana. On erittäin suositeltavaa säilyttää tämä salasana turvallisesti salasanahallinnassa.</value>
+  </data>
+  <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
+    <value>Salasana salausta varten</value>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
+    <value>Avain kopioidaan leikepöydälle.</value>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
+    <value>Kopioi näppäin</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
+    <value>Kun asetat suosikin, tili näytetään sovelluksen korostusvärillä ja asetetaan näyttöjärjestyksessä päällimmäiseksi.</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
+    <value>Aseta suosikki</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
+    <value>Tilin lisäasetukset näkyvät tässä</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNTitle" xml:space="preserve">
+    <value>Lisää vaihtoehtoja</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
+    <value>Valinnaisesti näppäimet voidaan piilottaa ja näyttää uudelleen.</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
+    <value>Piilota/näytä näppäin</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
+    <value>Luoduille tileille on erilaisia vuorovaikutusvaihtoehtoja, jotka selitetään tarkemmin esimerkkitilin avulla sen jälkeen, kun ne on aktivoitu.</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
+    <value>Vuorovaikutusvaihtoehdot tilejä varten</value>
+  </data>
+  <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
+    <value>Sovelluksen pääsy kansioon on estetty, yritä uudelleen tai valitse toinen kansio.</value>
+  </data>
+  <data name="NewDatafileAccessErrorTitle" xml:space="preserve">
+    <value>Pääsy evätty</value>
+  </data>
+  <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
+    <value>Luo luokkia</value>
+  </data>
+  <data name="ManageCategoriesContentDialogIcon.Header" xml:space="preserve">
+    <value>Valitse kuvake</value>
+  </data>
+  <data name="ManageCategoriesContentDialogLabel.Header" xml:space="preserve">
+    <value>Luokan nimi</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText" xml:space="preserve">
+    <value>Tallenna</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.Title" xml:space="preserve">
+    <value>Hallitse luokkia</value>
+  </data>
+  <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
+    <value>Luo luokka</value>
+  </data>
+  <data name="ShellPageSearchNavigation.Content" xml:space="preserve">
+    <value>Etsi</value>
+  </data>
+  <data name="ShellPageSettingsNavigation.Content" xml:space="preserve">
+    <value>Asetukset</value>
+  </data>
+  <data name="BiometricFacePreferMessage" xml:space="preserve">
+    <value>Sinulla on mahdollisuus kirjautua sisään kasvojentunnistuksen avulla. Haluatko suosia tätä kirjautumistapaa tulevaisuudessa? Voit muuttaa tämän vaihtoehdon asetuksissa milloin tahansa.</value>
+  </data>
+  <data name="BiometricFingerPreferMessage" xml:space="preserve">
+    <value>Sinulla on mahdollisuus kirjautua sisään sormenjäljelläsi. Haluatko suosia tätä kirjautumistapaa tulevaisuudessa? Voit muuttaa tämän vaihtoehdon asetuksissa milloin tahansa.</value>
+  </data>
+  <data name="BiometricLoginSubtitle" xml:space="preserve">
+    <value>Kirjaudu sovellukseen sormenjäljen tai kasvojentunnistuksen avulla.</value>
+  </data>
+  <data name="BiometricLoginTitle" xml:space="preserve">
+    <value>Kirjaudu sisään</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.Content" xml:space="preserve">
+    <value>Tutorial</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Avoin opetusohjelma</value>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
+    <value>Toisen tekijän [todennus] (https://en.wikipedia.org/wiki/Authentication) toiminnallisuus toteutetaan aikapohjaisen kertakäyttösalasanan avulla. Tätä varten palvelun kirjautumispalvelimen ja käyttäjän välillä sovitaan salaisesta asennusavaimesta, joka tallennetaan paikallisesti sovellukseen. Näin varmistetaan, että jos asetusavain on sovittu, sovellusta voidaan aina käyttää offline-tilassa.
+
+
+
+Toisin kuin muissa tunnistautumisohjelmissa, tässä sovelluksessa eri palveluiden asennusavaimet tallennetaan tiedostoon, joka on suojattu salasanalla tiedoston luomisvaiheessa sen salaamiseksi. Tiedoston tallentamiseen suositellaan tässä tapauksessa pilvitallennustilaa, kuten Nextcloudia, ownCloudia, Onedrivea jne., jotta saadaan versiointi ja varmuus katoamisen varalta.
+
+
+
+Tämän sovelluksen toiminnot selitetään tarkemmin seuraavissa kohdissa.</value>
+    <comment>[ReswT:manually]</comment>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
+    <value>**Sovelluksen toimivuus**</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
+    <value>Hallitse tilauksia</value>
+  </data>
+  <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
+    <value>Seuraavissa vaiheissa selitetään sovelluksen toiminnot.</value>
+  </data>
+  <data name="BTNBack.Content" xml:space="preserve">
+    <value>Takaisin</value>
+  </data>
+  <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
+    <value>Valitse kansiopolku</value>
+  </data>
+  <data name="SettingsInAppPayment.Header" xml:space="preserve">
+    <value>Tilaukset ja kertaluonteiset ostot</value>
+  </data>
+  <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
+    <value>Tilauksella tuet sovelluksen jatkokehitystä. Tulevaisuudessa lisättävät ***Pro+***-ominaisuudet ovat käytettävissä tällä tilauksella ja saatavilla.
+***
+### 2,49€ kuukausittain</value>
+  </data>
+  <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Tilaa / osta</value>
+  </data>
+  <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
+    <value>Tilaukset ja ostot</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
+    <value>Tuo tili toiselle laitteelle avaamalla kaksitekijätodennussovellus halutulla laitteella ja lisäämällä tili kameralla.</value>
+  </data>
+  <data name="SettingsCardExternalAction" xml:space="preserve">
+    <value>Soita ulkoisesti (selain)</value>
+  </data>
+  <data name="SettingsInAppPayment.Description" xml:space="preserve">
+    <value>Tee tilauksia ja ostoja lisäominaisuuksia varten</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
+    <value>Hallitse tilauksia Microsoft-tililläsi</value>
+  </data>
+  <data name="InAppPaymentContentDialogSubscriptionItemSelect" xml:space="preserve">
+    <value>Valitse tilaus</value>
+  </data>
+  <data name="AddAccountContentDialogTitle" xml:space="preserve">
+    <value>Luo uusi tili</value>
+  </data>
+  <data name="CategoryFilterFlyoutNoCategories.Text" xml:space="preserve">
+    <value>Tällä hetkellä ei ole käytettävissä luokkia, luo uusia luokkia tämän valintaikkunan asetusten avulla.</value>
+  </data>
+  <data name="ManageCategoriesAddGlobalCategories.Header" xml:space="preserve">
+    <value>Lisää luokka</value>
+  </data>
+  <data name="LoginPageTitle.Text" xml:space="preserve">
+    <value>Kirjaudu sisään</value>
+  </data>
+  <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
+    <value>Luokkien hallinta &amp; suodattimien asettaminen</value>
+  </data>
+  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+    <value>Luokkien hallinta &amp; suodattimien asettaminen</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
+    <value>Nollaa suodatin</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Settings.Label" xml:space="preserve">
+    <value>Hallitse luokkia</value>
+  </data>
+  <data name="EditAccountContentDialogAccountCategories.Header" xml:space="preserve">
+    <value>Aseta luokat</value>
+  </data>
+  <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
+    <value>Valitse ostettavaksi</value>
+  </data>
+  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+    <value>Toiminto saatavilla vain ostamalla tai tilaamalla.</value>
+  </data>
+  <data name="InAppBuyOnce" xml:space="preserve">
+    <value>Oston myötä Pro+:n toiminnot ovat pysyvästi käytettävissä ja käyttökelpoisia, mikä tukee sovelluksen jatkokehitystä.
+Tällä hetkellä saatavilla:
+
+- Luokat ja suodatin
+- Mobiililaitteiden hallinta (MDM)
+***
+### 34,99€ kertaluonteisesti</value>
+  </data>
+  <data name="InAppSubscriptionYear" xml:space="preserve">
+    <value>Tilauksen avulla ***Pro+***-toiminnot ovat käytettävissä ja käyttökelpoisia, ja tuet sovelluksen jatkokehitystä.
+Tällä hetkellä saatavilla:
+
+- Luokat ja suodatin
+- Mobiililaitteiden hallinta (MDM)
+***
+### 6,49€ vuodessa</value>
+  </data>
+  <data name="InAppPaymentContentDialogBuyItemSelect" xml:space="preserve">
+    <value>Valitse ostamista varten</value>
+  </data>
+  <data name="AccountCodePageManageFilterInfo.Label" xml:space="preserve">
+    <value>Kategoriat &amp; suodatin</value>
+  </data>
+  <data name="ProFeatureContentInfo" xml:space="preserve">
+    <value>Toiminto on saatavilla vain tilaamalla tai ostamalla. Haluaisitko tutustua vaihtoehtoihin?</value>
+  </data>
+  <data name="ProFeatureTitleInfo" xml:space="preserve">
+    <value>Maksullinen toiminto</value>
+  </data>
+  <data name="TutorialContentDialogForgettenPassword.Text" xml:space="preserve">
+    <value>Unohditko salasanan?</value>
+  </data>
+  <data name="TutorialPagePasswordInfo" xml:space="preserve">
+    <value>Jos olet unohtanut salasanan ja olet aiemmin poistanut sovelluksen tai palauttanut sen, voit tarkastella salasanaa samassa tietokoneessa Windowsin [Credential Manager] (https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) -ohjelmassa. Merkintä on asetettu tässä "Project2FA" -kohdassa verkkokirjautumistietojen alle.</value>
+  </data>
+  <data name="LoginPageWindowsHelloError" xml:space="preserve">
+    <value>Windows Hellossa on ongelma. Jos haluat käyttää toiminnallisuutta sovelluksessa, ratkaise ongelma Windowsin asetuksissa.</value>
+  </data>
+  <data name="EditAccountContentDialogAccountCategoryInfoText" xml:space="preserve">
+    <value>Klikkaamalla olemassa olevia luokkia voit määrittää tilille yhden tai useamman luokan, jolloin voit tehdä suodatettuja hakuja myöhemmin. Luokkia hallitaan ja luodaan pääsivulla ylävalikkopalkin "Luokkien ja suodattimien asettaminen" -painikkeella.</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
+    <value>Tällä hetkellä ei ole luokkia käytettävissä, luo uusia luokkia käyttämällä ylävalikkopalkin painiketta "Luokkien ja suodattimien asettaminen".</value>
+  </data>
+  <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
+    <value>Virheiden kirjaaminen</value>
+  </data>
+  <data name="SettingsLoggingFull.Content" xml:space="preserve">
+    <value>Täydellinen</value>
+  </data>
+  <data name="SettingsLoggingNone.Content" xml:space="preserve">
+    <value>Ei</value>
+  </data>
+  <data name="SettingsLoggingSimple.Content" xml:space="preserve">
+    <value>Ainoa poikkeus</value>
+  </data>
+  <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
+    <value>Näytä virheloki</value>
+  </data>
+  <data name="SettingsPageNoLogDialogContent" xml:space="preserve">
+    <value>Virheraporttia ei ole luotu tällä hetkellä.</value>
+  </data>
+  <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
+    <value>Virheraporttia ei ole saatavilla</value>
+  </data>
+  <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
+    <value>Haku suoritetaan asetettujen luokkien avulla OR-haun avulla.</value>
+  </data>
+  <data name="EditAccountPageTitle" xml:space="preserve">
+    <value>Muokkaa tiliä</value>
+  </data>
+  <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
+    <value>Mitään ikkunaa QR-koodin skannausta varten ei ole valittu.</value>
+  </data>
+  <data name="LoginPageIOSBiometricReason" xml:space="preserve">
+    <value>Biometriikan avulla kirjautuminen tapahtuu ilman salasanaa.</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeatures.Header" xml:space="preserve">
+    <value>Pro-toimintojen näyttö</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeaturessDesc.Text" xml:space="preserve">
+    <value>Tällä asetuksella voit kytkeä Pro-toimintojen paikannussalpaajien näkyvyyden päälle tai pois.</value>
+  </data>
+  <data name="SettingsMDMInfo.Text" xml:space="preserve">
+    <value>*Joitakin asetuksia hallinnoi organisaatiosi.</value>
+  </data>
+  <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
+    <value># Kategoriat ja suodattimet
+Käyttäjän määrittämiä luokkia voidaan luoda kuvakkeella ja tileille voidaan luoda määrityksiä. Suodatinvalinnassa on mahdollista suodattaa tilejä määrityksen perusteella. Tilien suodattamista kategorian mukaan voidaan myös rajata tarkemmin vakiohaun avulla.
+
+![Kategoriat ja suodattimet](ms-appx:///Assets/Images/categories_EN.png)
+
+# Yrityssovellusten hallinta | Mobiililaitteiden hallinta (MDM)
+Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yrityksessä; esimerkiksi sovelluksen tai kirjautumisnäytön automaattinen esto voidaan määrittää keskitetysti. Yleiskatsaus käytettävissä olevista määrityksistä on nähtävissä [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+  </data>
+  <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
+    <value>Pro-Funktions</value>
+  </data>
+  <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
+    <value>![Ensimmäiset askeleet](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
+    <value>Uusi salasana ei ole oikea.</value>
+  </data>
+</root>

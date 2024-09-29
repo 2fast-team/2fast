@@ -29,7 +29,7 @@ using Project2FA.Core.Utils;
 using System.Web;
 using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using UNOversal.Services.Logging;
 
 

@@ -260,7 +260,6 @@
   </data>
   <data name="LoginPageLoginWindowsHelloButton.Content" xml:space="preserve">
     <value>Se connecter avec Windows Hello</value>
-    <comment>[ReswT:manually]</comment>
   </data>
   <data name="LoginPagePassword.Header" xml:space="preserve">
     <value>Mot de passe</value>

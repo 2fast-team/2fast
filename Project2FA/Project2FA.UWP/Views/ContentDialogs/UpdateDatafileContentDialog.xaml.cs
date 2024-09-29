@@ -42,7 +42,7 @@ namespace Project2FA.UWP.Views
             //first check if the given password matches with the datafile
             if (await ViewModel.TestPassword())
             {
-                ViewModel.UpdateLocalFileDB();
+                await ViewModel.UpdateLocalFileDB();
                 Hide();
             }
             else

@@ -734,8 +734,9 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aktualisierung der Bibliotheken von Drittanbietern
-- Weitere Sprachen wurden hinzugefügt: Spanisch, Französisch, Italienisch, Japanisch, Chinesisch
-- Kategorien können nun in neuen Konten direkt gesetzt werden (Pro-Funktion)</value>
+- Weitere Sprachen wurden hinzugefügt: Griechisch, Finnisch, Estnisch, Norwegisch, Schwedisch, Portugiesisch (Brasilianisch), Portugiesisch (Europäisch)
+- Die Übersetzung für die Spanische Sprache wurde erneuert
+- Fehlerbehebung, dass die chinesische Sprache nicht mit dem Sprachcode angewendet werden konnte</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>

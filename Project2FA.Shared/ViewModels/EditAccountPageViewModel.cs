@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Prism.Common;
 using Project2FA.Helpers;
 using Project2FA.Repository.Models;
 using Project2FA.Services;

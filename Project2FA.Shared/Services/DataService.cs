@@ -1,7 +1,7 @@
 ﻿using Project2FA.Repository.Models;
 using System;
 using System.Collections.ObjectModel;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using Project2FA.Core.Services.JSON;
 using Windows.Storage;
 using System.Collections.Specialized;

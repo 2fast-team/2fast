@@ -1,0 +1,1758 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountCodePageAddEntry.Label">
+    <value>Tilføj konto</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageCopied">
+    <value>Kopieret til udklipsholder</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageDeleteEntry.Text">
+    <value>Sletning</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageEditEntry.Text">
+    <value>Rediger</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageItemMoreBTNToolTip">
+    <value>Vis indstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageReloadDatafile.Label">
+    <value>Genindlæs datafil</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageViewModelDeleteAccept">
+    <value>Ja</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageViewModelDeleteCancel">
+    <value>Nej</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteDatafileContentDialogDeleteDescription">
+    <value>Er du sikker på, at du vil slette denne konto uigenkaldeligt?</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteDatafileContentDialogTitle">
+    <value>Bekræft sletning</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCopyCodeButtonToolTip">
+    <value>Kopier koden</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialog.SecondaryButtonText">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialog.PrimaryButtonText">
+    <value>Opret konto</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialog.Title">
+    <value>Opret en ny konto</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountName.Header">
+    <value>Kontonavn</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountName.PlaceholderText">
+    <value>Oftest mailadresse</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogInfo.Text">
+    <value>For at oprette en ny konto til to-faktor-autentificering skal du bruge en QR-kode eller en nøgle (kryptisk tekst) fra den eksterne tjeneste.
+
+# Hvordan skal nøglen importeres?
+</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogInputs.Header">
+    <value>Indgange</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogInputType.Header">
+    <value>Indgangstype</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogLabel.Header">
+    <value>Etiket</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogLabel.PlaceholderText">
+    <value>Navn, der skal vises</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogManualInput.Text">
+    <value>Manuelt input</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogManualInputCheckbox.Content">
+    <value>Manuelt input</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogQRCodeContentError">
+    <value>Kan ikke få oplysninger fra QR-koden. Prøv igen, eller tilføj den hemmelige nøgle manuelt.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogReadQRCode.Text">
+    <value>Scan nøgle-QR-kode</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo">
+    <value>Et scanningsværktøj åbner snart</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTip.Title">
+    <value>Skift til QR-koden</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.Header">
+    <value>Hemmelig nøgle</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.PlaceholderText">
+    <value>Tilføj venligst den hemmelige nøglestreng her</value>
+    <comment></comment>
+  </data>
+  <data name="BTNConfirm.Content">
+    <value>Bekræft</value>
+    <comment></comment>
+  </data>
+  <data name="BTNTryAgain.Content">
+    <value>Prøv igen</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header">
+    <value>Lokal datafil</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogIntroText.Text">
+    <value>I denne dialog kan du ændre adgangskoden til den aktuelt anvendte datafil.</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText">
+    <value>Skift adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.Title">
+    <value>Skift adgangskode til datafil</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogPasswordError.Text">
+    <value>Den aktuelt indtastede adgangskode er ikke korrekt.</value>
+    <comment></comment>
+  </data>
+  <data name="Confirm">
+    <value>Bekræft</value>
+    <comment></comment>
+  </data>
+  <data name="CurrentPassword.Header">
+    <value>Nuværende adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="Delete">
+    <value>Sletning</value>
+    <comment></comment>
+  </data>
+  <data name="Edit">
+    <value>Rediger</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialog.PrimaryButtonText">
+    <value>Bekræft</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialog.SecondaryButtonText">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialog.Title">
+    <value>Rediger konto</value>
+    <comment></comment>
+  </data>
+  <data name="Error">
+    <value>Fejl</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageLoginButton.Content">
+    <value>Login</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageLoginWindowsHelloButton.Content">
+    <value>Log ind med Windows Hello</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPagePassword.Header">
+    <value>Adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPagePassword.PlaceholderText">
+    <value>Indtast adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPagePasswordMismatch">
+    <value>Adgangskoden stemmer ikke overens med adgangskoden til datafilen.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogChangePath.Content">
+    <value>Skift sti</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogCreateInfo.Text">
+    <value>For at oprette en datafil skal du vælge et navn og en adgangskode.
+Vigtigt: Du skal indtaste adgangskoden, hver gang du starter appen!</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogDatafilePivotItem.Header">
+    <value>Datafil</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.Header">
+    <value>Filnavn</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.PlaceholderText">
+    <value>for eksempel datafil</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogLocalPath.Text">
+    <value>Vælg lokal sti</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogMain.CloseButtonText">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogMain.PrimaryButtonText">
+    <value>Opret datafil</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogMain.Title">
+    <value>Opret datafil</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogPath.Header">
+    <value>Sti</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogPivotItemKind.Header">
+    <value>Opbevaring</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogWebDAV.Text">
+    <value>Vælg WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogWebDAVPivotItem.Header">
+    <value>WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileLocalFolder.Header">
+    <value>Filnavn</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileLocalFolder.PlaceholderText">
+    <value>Indtast filnavn</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatefileContentDialogFolderName.Header">
+    <value>Foldername</value>
+    <comment></comment>
+  </data>
+  <data name="NewLocalDatafileInfo.Text">
+    <value>For at bruge denne app skal du oprette en datafil én gang. Alle konti gemmes krypteret i denne fil.
+Hvis du planlægger at bruge denne applikation på flere enheder, er det fornuftigt at gemme denne fil på et eksternt lager (f.eks. i skyen).</value>
+    <comment></comment>
+  </data>
+  <data name="NewPasswordContentDialog.Header">
+    <value>Ny adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="NewPasswordRepeatContentDialog.Header">
+    <value>Gentag ny adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="No">
+    <value>Nej</value>
+    <comment></comment>
+  </data>
+  <data name="Password.Header">
+    <value>Adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="Password.PlaceholderText">
+    <value>Indtast adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordRepeat.Header">
+    <value>Gentag adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordRepeat.PlaceholderText">
+    <value>Indtast adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsActionRequiredRestart">
+    <value>Denne ændring træder i kraft efter genstart af appen.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsBackButtonCard.Header">
+    <value>Placering af tilbage-knap</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OffContent">
+    <value>I navigationsmenuen</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OnContent">
+    <value>I titellinjen</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsChangePassword.Text">
+    <value>Skift adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileFilePath.Text">
+    <value>Stien til datafilen:</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileName.Text">
+    <value>Navn på datafil:</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileTitle.Text">
+    <value>Oplysninger om den aktuelt anvendte datafil</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsFactoryResetMessage">
+    <value>Er du sikker på, at du vil nulstille appen til fabriksindstillingerne? **Denne proces kan ikke fortrydes!
+Datafilen vil **ikke** blive fjernet under nulstillingen.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsGiveFeedback.Text">
+    <value>Giv feedback</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsGiveFeedbackText">
+    <value>Giv feedback</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsDesignTitle.Header">
+    <value>Design</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFactoryResetButton.Text">
+    <value>Nulstil app til fabriksindstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFunctionsTitle.Header">
+    <value>Funktioner</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageName.Text">
+    <value>Indstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemAbout.Header">
+    <value>Om appen</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemDependencies.Header">
+    <value>Afhængigheder</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemOption.Header">
+    <value>Valgmuligheder</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsRateApp.Header">
+    <value>Bedøm appen i butikken</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsRemoveDatafileMessage">
+    <value>Er du sikker på, at du vil slette datafilen permanent? Du vil miste alle dine tilføjede konti.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeDark.Content">
+    <value>Mørk</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeLight.Content">
+    <value>Lys</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeSelectMode.Text">
+    <value>Vælg en tilstand</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeSystem.Content">
+    <value>Brug systemindstillingerne</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsTitleBarToggleSwtich.Header">
+    <value>Brugerdefineret titellinje (i lys/mørk)</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsWindowsColor.Content">
+    <value>Systemets farveindstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsWindowsHelloPrefer.Header">
+    <value>Foretrækker Windows Hello til login</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageAccountsNavigation.Content">
+    <value>Regnskaber</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageDatafileNavigation.Content">
+    <value>Datafil</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageFeedbackNavigation.Content">
+    <value>Feedback</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageFeedbackNavigationToolTip">
+    <value>Giv feedback (Github)</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogChangeDatafile.Content">
+    <value>Vælg en anden datafil</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogDatafilePivotItem.Header">
+    <value>Datafil</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogFilename.Header">
+    <value>Filnavn</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogFolderPath.Header">
+    <value>Sti til mappe</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogInfo.Text">
+    <value>Hvis du har brugt appen før, skal du vælge, om du vil indlæse den eksisterende datafil fra dit lokale lager eller via WebDAV.</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogLoadInfo.Text">
+    <value>Vælg den eksisterende datafil, og indtast adgangskoden.</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogLocalPath.Text">
+    <value>Vælg lokal sti</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogMain.CloseButtonText">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogMain.PrimaryButtonText">
+    <value>Indlæs datafil</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogMain.Title">
+    <value>Indlæs datafil</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogPasswordError.Text">
+    <value>Datafilen kan ikke dekrypteres med adgangskoden.</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogPivotItemKind.Header">
+    <value>Opbevaring</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWebDAV.Text">
+    <value>Vælg WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWebDAVPivotItem.Header">
+    <value>WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageCreateDatafile.Content">
+    <value>Opret ny datafil (første start)</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageFirstSteps.Text">
+    <value>Første skridt mod sikkerhed ...</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageIntro.Text">
+    <value>Velkommen!
+
+Start med en anden sikkerhedsfaktor i din hverdag.</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageLoadDatafile.Content">
+    <value>Indlæs eksisterende datafil</value>
+    <comment></comment>
+  </data>
+  <data name="WindowsHelloLoginMessage">
+    <value>Bekræft nu med dit konfigurerede Windows Hello-login.</value>
+    <comment></comment>
+  </data>
+  <data name="WindowsHelloPreferMessage">
+    <value>Det er muligt at logge ind med Windows Hello. Vil du gerne foretrække dette login i fremtiden? Du kan til enhver tid ændre denne indstilling i indstillingerne.</value>
+    <comment></comment>
+  </data>
+  <data name="Yes">
+    <value>Ja</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageRemainingSecondsToolTip">
+    <value>Sekunder til opdatering</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextCancel">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextConfirm">
+    <value>Bekræft</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextNo">
+    <value>Nej</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextYes">
+    <value>Ja</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogLaterButton">
+    <value>Genkald senere</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogNoButton">
+    <value>Nej, tak.</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogQuestion">
+    <value>Du har brugt denne app i et stykke tid nu, så besøg butikken for at bedømme den og skrive en anmeldelse. Du kan også til enhver tid bruge Windows Feedback-appen til at sende os din feedback direkte.</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogYesButton">
+    <value>Bedøm nu</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogTitle">
+    <value>Kan du lide denne app?</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header">
+    <value>Nuværende adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText">
+    <value>Indtast adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogDescription">
+    <value>Programmet har i øjeblikket ikke de nødvendige adgangsrettigheder til at få adgang til datafilen. For at indstille rettighederne skal applikationen dog lukkes.
+Giv venligst de nødvendige rettigheder i indstillingerne, og genstart applikationen.
+
+Instruktioner til indstilling af autorisationen:
+![Instruktioner til indstilling af autorisationen](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogPrimaryBTN">
+    <value>Indstil autorisation</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogSecondaryBTN">
+    <value>Annuller (luk applikationen)</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogTitle">
+    <value>Autorisationsfejl</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBLogout.Label">
+    <value>Lås app</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageCopyCodeTeachingTip">
+    <value>Nøgle kopieret til udklipsholder</value>
+    <comment></comment>
+  </data>
+  <data name="ChangePassword">
+    <value>Skift adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="CloseApp">
+    <value>Luk app'en</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteAccountContentDialogDescription">
+    <value>Er du sikker på, at du vil slette kontoen? Efter sletningen har du **30 sekunder** til at fortryde sletningen.</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteAccountContentDialogTitle">
+    <value>Slet konto</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandle">
+    <value>Håndtering af fejl</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandleDescription">
+    <value>Der er opstået en ubehandlet fejl, send venligst fejloplysningerne, som kan ses i feltet, via et nyt problem i Github.</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordInvalidHeader">
+    <value>Ugyldig adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsQRScanningHeader">
+    <value>Tidsforsinkelse for at begynde at læse QR-koden</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsQRScanningSecondsRange">
+    <value>Angives i sekunder (3-10s tilladt)</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageAboutAppNavigation.Content">
+    <value>Om appen</value>
+    <comment></comment>
+  </data>
+  <data name="ExceptionDatafileNotFound">
+    <value>Stien til den aktuelle datafil kunne ikke findes. Muligvis er datafilen blevet flyttet af dig.
+**Vil du redigere stien?</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBLogoutToolTip">
+    <value>Lås app</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageAddEntryToolTip">
+    <value>Tilføj konto</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageReloadDatafileToolTip">
+    <value>Genindlæs datafil</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordInvalidMessage">
+    <value>Den adgangskode, der er gemt i denne app, er ugyldig for datafilen. Du har måske ændret adgangskoden til datafilen på en anden maskine.
+**Vil du ændre adgangskoden nu?</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsFactoryResetDialogTitle">
+    <value>Fabriksindstilling</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsSourceCode.Header">
+    <value>Vis appens kildekode</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemDatafile.Header">
+    <value>Datafil</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBUndoDelete.Label">
+    <value>Fortryd sletning</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBUndoDeleteToolTip">
+    <value>Fortryd sletning</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileName.Header">
+    <value>Navnet på datafilen</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafilePath.Header">
+    <value>Sti til datafilen</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogDatafileExistsError">
+    <value>Der findes allerede en datafil med dette navn i mappen. Ændr venligst mappen eller navnet på filen.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileBTNChangePassword.Content">
+    <value>Skift adgangskode</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandleSendError">
+    <value>Send fejl</value>
+    <comment></comment>
+  </data>
+  <data name="FactoryReset">
+    <value>Fabriksindstilling</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePath">
+    <value>Skift filsti</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Subtitle">
+    <value>Tilføj nye konti</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Title">
+    <value>Tom liste</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageWrongTimeBTN">
+    <value>Indstillinger for åben tid</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageWrongTimeContent">
+    <value>Den aktuelle tidsvisning på enheden er forkert, så koderne til kontiene kan ikke genereres korrekt.
+Synkroniser venligst tiden i indstillingerne.</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageWrongTimeTitle">
+    <value>Forkert tidsvisning</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordAdvancedHashOption.Header">
+    <value>Avancerede muligheder</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordAdvancedHashOptionText.Content">
+    <value>Med denne indstilling bruges Argon2id i stedet for SHA-512 til hash-generering af adgangskodeforespørgslen.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileChangePasswordInfoTitle">
+    <value>Adgangskoden er blevet ændret med succes</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPagePaneTitle">
+    <value>Navigationsmenu</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAuthorLogo.Content">
+    <value>Forfatter af logoet: Freepik</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageAutoSuggestBoxPlaceholder">
+    <value>Søg efter</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageSearchNotFound">
+    <value>Ingen resultater fundet</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyGroupAssets">
+    <value>Aktiver</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyGroupPackages">
+    <value>Pakker</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencies.Header">
+    <value>Appens afhængigheder</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyAuthor.Text">
+    <value>Forfatter:</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyLicence.Text">
+    <value>Licens:</value>
+    <comment></comment>
+  </data>
+  <data name="RestartApp">
+    <value>Genstart appen</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorCopyToClipboard">
+    <value>Kopier rapporten til udklipsholderen</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Subtitle">
+    <value>NTP-serverens adresse er gyldig og kan gemmes ved at trykke på den.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Title">
+    <value>At spare?</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Subtitle">
+    <value>Det er ikke muligt at gemme NTP-serveradressen, fordi serveren ikke blev fundet.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Title">
+    <value>Fejl</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsUseNTPTimeCorrection.Header">
+    <value>Brug tidsserveren til at tjekke systemtiden</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsSaveNTPServer.Label">
+    <value>Gemme</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandleDescriptionLastSession">
+    <value>Der opstod en ubehandlet fejl sidste gang, appen blev brugt, send venligst fejloplysningerne, som kan ses i feltet, via et nyt problem i Github.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsNTPServerCheckBoxText.Content">
+    <value>Indstil NTP-serveren manuelt</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsNTPServerDescribtion.Text">
+    <value>En NTP-server kan bruges til at kontrollere systemets korrekte tid. Hvis der er en større afvigelse i tiden, vil oprettelsen af koderne til kontiene ikke længere være korrekt. Hvis der er en afvigelse på mere end 30 sekunder, vises der en meddelelse, og koderne oprettes med NTP-serverens tid.</value>
+    <comment></comment>
+  </data>
+  <data name="NewAppFeaturesContent">
+    <value>- Opdatering af tredjepartsbiblioteker
+- Flere sprog er tilføjet: spansk, fransk, italiensk, japansk, kinesisk
+- Kategorier kan nu indstilles direkte i nye konti (Pro-funktion)
+- Rettet en fejl, hvor adgangskoden ikke kunne ændres, hvis den aktuelt gemte adgangskode er ugyldig</value>
+    <comment>[ReswT:always]</comment>
+  </data>
+  <data name="NewAppFeaturesTitle">
+    <value>Nye funktioner og ændringer</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageTitle">
+    <value>Velkommen</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageName.Text">
+    <value>Indlæs eksisterende datafil</value>
+    <comment></comment>
+  </data>
+  <data name="CreateDatafile">
+    <value>Opret datafil</value>
+    <comment></comment>
+  </data>
+  <data name="LoadDatafile">
+    <value>Indlæs eksisterende datafil</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageABBTutorial.Label">
+    <value>De første skridt</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageLoadDatafile.Content">
+    <value>Indlæs datafil</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWDLogin.Content">
+    <value>Login</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWDServerAddress.Header">
+    <value>Serverens adresse</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWDUsername.Header">
+    <value>Brugernavn</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageDatafileExpander.Header">
+    <value>Datafil</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageLoginExpander.Header">
+    <value>Service-login</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppCornorRadius.Header">
+    <value>Runde hjørner</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppCornorRadiusDesc.Text">
+    <value>Hvis indstillingen er aktiveret, vil hjørnerne på kontrolelementerne blive afrundet.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppThemeMode.Header">
+    <value>Appens farveskema</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFactoryReset.Header">
+    <value>Fabriksindstilling</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFactoryResetDesc.Text">
+    <value>Tryk og bekræft for at nulstille appen</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsQRScan.Header">
+    <value>Scanning af QR-kode</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafilePasswordInfo">
+    <value>For at indlæse datafilen skal du indtaste den adgangskode, der blev konfigureret, da filen blev oprettet.</value>
+    <comment></comment>
+  </data>
+  <data name="ToolTipShowHelp">
+    <value>Vis hjælp</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAutoLogoutDesc">
+    <value>Automatisk logout efter inaktivitet</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAutoLogoutMinutes">
+    <value>Minutter med inaktivitet</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsAutoLogout.Header">
+    <value>Automatisk lås</value>
+    <comment></comment>
+  </data>
+  <data name="Close">
+    <value>Luk</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelp">
+    <value>Når QR-kodescanning er valgt, åbnes et nyt vindue, hvor man skal vælge det program, der indeholder den QR-kode, der skal scannes. Dette er f.eks. browseren.</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageShowQRCode.Text">
+    <value>Vis QR-kode</value>
+    <comment></comment>
+  </data>
+  <data name="DisplayQRCodeContentDialogTitle">
+    <value>Visning af QR-kode</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogInputSecretKeyHelp">
+    <value>Input er baseret på Base32 og tillader derfor kun bogstaverne A-Z og tallene fra 2-7.</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipDeleteFavourite">
+    <value>Fortryd favorit</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipSetFavourite">
+    <value>Indstil som favorit</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipHideTOTP">
+    <value>Skjul nøgle</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipShowTOTP">
+    <value>Vis nøgle</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPreferHiddenTOTP.Header">
+    <value>Skjul nøgler</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPreferHiddenTOTPDesc.Text">
+    <value>De genererede nøgler er skjulte og kan eventuelt fades ind.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogExpertExpander.Header">
+    <value>Ekspertindstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogHashAlgo.Header">
+    <value>Hash-algoritme</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogTotpSize.Header">
+    <value>Antal cifre</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextRetry">
+    <value>Prøv igen</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorClipboardTask">
+    <value>Udklipsholderen er blevet optaget af et andet program, prøv venligst igen.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogDeleteAccountIcon.Text">
+    <value>Sletning</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountIcon.Header">
+    <value>Konto-ikon</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountNotes.Header">
+    <value>Tilføj noter</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountNotes.Header">
+    <value>Noter</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogSuggestionBox.Header">
+    <value>Søg efter kontobillede</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogExpertSettingsHelp">
+    <value>Ændr kun disse indstillinger, hvis du er sikker på, at tjenesten kræver dem.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDataFilePageTitle.Text">
+    <value>Ny datafil</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageSearchFilter.Label">
+    <value>Filter</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageSearchFilterToolTip">
+    <value>Filter</value>
+    <comment></comment>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFile">
+    <value>Vælg fil</value>
+    <comment></comment>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFolder">
+    <value>Vælg mappe</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageAboDesc.Text">
+    <value>Støt udviklingen af appen med tilbagevendende betalinger.</value>
+    <comment></comment>
+  </data>
+  <data name="WebDAVEmptyFolderMessage.Text">
+    <value>Denne mappe indeholder ingen filer, der kan vælges.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileCreateDatafile.Content">
+    <value>Opret datafil</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilehangeDatafile.Content">
+    <value>Skift mappe</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppPrideMonthDesign.Header">
+    <value>Regnbuefarver til login-vinduer</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppPrideMonthDesignDesc.Text">
+    <value>Indstilling af regnbuefarver til login-vinduet</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsMailSupportApp.Text">
+    <value>Support via e-mail</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsCustomDesign.Header">
+    <value>Særlige designindstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogImportBackup.Header">
+    <value>Importer backup</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilePageCreateFileBTN.Content">
+    <value>Opret datafil</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageTutorialTipOpen">
+    <value>Åben vejledning</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageTutorialDesc">
+    <value>Vil du gerne åbne vejledningen til programmet?</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogFirstSteps.Text">
+    <value>Applikationen **2fast** (akronym for **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) er en [authenticator](https://en.wikipedia.org/wiki/Authenticator) til tofaktorautentificering (2FA), der bruger standarden "**T**time-based **O**ne-**t**ime **P**assword algorithm"/ tidsbaseret engangsadgangskode (TOTP) i henhold til standardisering [RFC 6238](https://tools.ietf.org/html/rfc6238). Tjenester, der er afhængige af TOTP-standarden for den anden faktor, kan bruges med denne applikation. For eksempel understøtter Microsoft, Google og PayPal to-faktor-autentificering ved hjælp af TOTP:</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogCreateMethod.Text">
+    <value>For at oprette en datafil er det første skridt at vælge en mappe, hvor filen skal gemmes. Det anbefales at vælge en lagringsplads, der er beskyttet mod datatab (f.eks. cloud storage som One-Drive, DropBox osv.). Herefter følger navnet og adgangskoden til kryptering af filen. Det anbefales at gemme adgangskoden i en adgangskodeadministrator for at forhindre tab.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogLoadMethod.Text">
+    <value>For at indlæse datafilen er det første skridt at vælge datafilen. Herefter følger den adgangskode, som datafilen er krypteret med.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text">
+    <value>Oprettelse af konto</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogCreateMethodHeader.Text">
+    <value>Oprettelse af en datafil</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogLoadMethodHeader.Text">
+    <value>Indlæsning af en datafil</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsUseAutoLogout.Header">
+    <value>Automatisk logout</value>
+    <comment></comment>
+  </data>
+  <data name="FunctionNotAvailable">
+    <value>Funktionen er ikke tilgængelig</value>
+    <comment></comment>
+  </data>
+  <data name="WindowsHelloNotAvailable">
+    <value>Windows Hello kan ikke udføres, fordi der ikke er gemt nogen adgangskode til datafilen i den beskyttede hukommelse.</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorGenerateTOTPCode">
+    <value>Den hemmelige nøgle til kontoen {0} er tom eller ulæselig. Genstart venligst appen. Hvis problemet fortsætter, skal du rydde op i konto {0} og tilføje den igen.</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterBoldToolTip">
+    <value>Fed skrift</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterItalicToolTip">
+    <value>Kursiv skrift</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterStrikeToolTip">
+    <value>Gennemstreget</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterUnderlineToolTip">
+    <value>Understregning</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterListToolTip">
+    <value>Liste</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterOrderedToolTip">
+    <value>Bestilt liste</value>
+    <comment></comment>
+  </data>
+  <data name="WriteDatafileErrorBTNCancel">
+    <value>Kassér ændringer</value>
+    <comment></comment>
+  </data>
+  <data name="WriteDatafileErrorBTNRetry">
+    <value>Gem igen</value>
+    <comment></comment>
+  </data>
+  <data name="WriteDatafileErrorDesc">
+    <value>Ændringerne kunne ikke gemmes. Vil du gemme dem igen?</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsCBNotStorePassword.Content">
+    <value>Gem ikke adgangskoden i credential manager (Windows Hello er ikke tilgængelig)</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFound">
+    <value>Adresse ikke fundet</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFoundDesc">
+    <value>Adressen til WebDAV-tjenesten kunne ikke findes.</value>
+    <comment></comment>
+  </data>
+  <data name="WebDAVAppPasswordInfo">
+    <value>Der kræves en app-adgangskode for at logge ind på WebDAV-tjenesten. Den kan oprettes i indstillingerne for WebDAV-tjenesten.</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsError">
+    <value>Fejl ved login</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsErrorDesc">
+    <value>Dit brugernavn eller din adgangskode er ugyldig.</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceError">
+    <value>Server i vedligeholdelsestilstand</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc">
+    <value>Det er i øjeblikket ikke muligt at logge ind, fordi WebDAV-tjenesten er i vedligeholdelsestilstand.</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledError">
+    <value>Serveren er ikke installeret</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc">
+    <value>WebDAV-tjenesten er i øjeblikket ikke korrekt installeret.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsUseWindowsHello.Header">
+    <value>Tilbyd Windows Hello som login-mulighed</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileNoInternet">
+    <value>Der er i øjeblikket ingen internetforbindelse til rådighed for synkronisering. Opret venligst forbindelse, og bekræft "Genindlæs datafil".</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileTitleNoInternet">
+    <value>Ingen internetforbindelse</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileTitleUpdated">
+    <value>Datafil opdateret</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileUpdated">
+    <value>Datafilen er blevet opdateret med succes.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogCameraScan.Header">
+    <value>Kamera</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogCameraScanBTN.Text">
+    <value>Kamera</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogBTNCamRetry.Content">
+    <value>Genindlæsning</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogNoCamFound.Text">
+    <value>Der er ikke noget kamera til rådighed.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogNoCamPermission.Text">
+    <value>Der er ikke givet samtykke til, at kameraet må vises.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogPrivacyWebcam.Content">
+    <value>Åbn indstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageWarnInfo">
+    <value>Beskyttelse mod skærmoptagelse ikke aktiv</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileFolderPath.Header">
+    <value>Sti til WebDAV-mappe</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTitle">
+    <value>Regnskaber</value>
+    <comment></comment>
+  </data>
+  <data name="AccoundCodePageImportEntry.Label">
+    <value>Importer konti</value>
+    <comment></comment>
+  </data>
+  <data name="AccoundCodePageImportCamera.Text">
+    <value>Udfør kameraimport</value>
+    <comment></comment>
+  </data>
+  <data name="AccoundCodePageImportDocument.Text">
+    <value>Brug fil/billede til import</value>
+    <comment></comment>
+  </data>
+  <data name="ApplicationName">
+    <value>2fast - to-faktor-autentificering</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageBackButton.Text">
+    <value>Tilbage</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageForwardButton.Text">
+    <value>Fremadrettet</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageSkipButton.Content">
+    <value>Spring over</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageFinishpButton.Content">
+    <value>Afslut tutorial</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilePasswordInfo">
+    <value>Der skal tildeles en adgangskode til kryptering af datafilen. Det anbefales på det kraftigste at gemme denne adgangskode sikkert i en adgangskodeadministrator.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilePasswordInfoTitle">
+    <value>Adgangskode til kryptering</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNDesc">
+    <value>Nøglen kopieres til udklipsholderen.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNTitle">
+    <value>Kopieringstast</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTDesc">
+    <value>Når man indstiller en favorit, vises kontoen i applikationens accentfarve og placeres øverst i visningsrækkefølgen.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTitle">
+    <value>Sæt favorit</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemMoreBTNDesc">
+    <value>Yderligere muligheder for kontoen vises her</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemMoreBTNTitle">
+    <value>Flere muligheder</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNDesc">
+    <value>Eventuelt kan nøgler skjules og vises igen</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNTitle">
+    <value>Skjul/vis nøgle</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogInteractionAccount.Text">
+    <value>Der er forskellige interaktionsmuligheder for oprettede konti, som forklares mere detaljeret ved hjælp af en eksempelkonto, efter at de er blevet aktiveret.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogInteractionAccountHeader.Text">
+    <value>Interaktionsmuligheder for konti</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileAccessErrorDesc">
+    <value>Adgang til mappen er blokeret for programmet, prøv igen, eller vælg en anden mappe.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileAccessErrorTitle">
+    <value>Adgang nægtet</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAddGlobalCategories.Header">
+    <value>Opret kategorier</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogIcon.Header">
+    <value>Vælg et ikon</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogLabel.Header">
+    <value>Navn på katagorien</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText">
+    <value>Gemme</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.Title">
+    <value>Administrer kategorier</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogIconCreateBTN.Content">
+    <value>Opret kategori</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageSearchNavigation.Content">
+    <value>Søg efter</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageSettingsNavigation.Content">
+    <value>Indstillinger</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricFacePreferMessage">
+    <value>Du har mulighed for at logge ind med ansigtsgenkendelse. Vil du foretrække dette login i fremtiden? Du kan til enhver tid ændre denne mulighed i indstillingerne.</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricFingerPreferMessage">
+    <value>Du har mulighed for at logge ind med dit fingeraftryk. Vil du foretrække dette login i fremtiden? Du kan til enhver tid ændre denne mulighed i indstillingerne.</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricLoginSubtitle">
+    <value>Log ind på appen med fingeraftryk eller ansigtsgenkendelse.</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricLoginTitle">
+    <value>Login</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageTutorialNavigation.Content">
+    <value>Vejledning</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip">
+    <value>Åben vejledning</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorks.Text">
+    <value>Funktionaliteten for [Authentication] (https://en.wikipedia.org/wiki/Authentication) af den anden faktor sker ved hjælp af den tidsbaserede engangsadgangskode. Til dette formål aftales en hemmelig opsætningsnøgle mellem tjenestens logon-server og brugeren, som gemmes lokalt i applikationen. Dette sikrer, at hvis opsætningsnøglen er aftalt, kan applikationen altid betjenes offline.
+
+
+
+Opbevaringen af opsætningsnøglerne for de forskellige tjenester i denne applikation gemmes, i modsætning til andre autentifikatorer, i en fil, som er beskyttet med en adgangskode ved oprettelsen for at kryptere filen. Til opbevaring af filen anbefales i dette tilfælde et cloud-lager som Nextcloud, ownCloud, Onedrive osv. for at opnå versionering og sikkerhed mod tab.
+
+
+
+Funktionaliteten af denne applikation forklares mere detaljeret i de følgende afsnit.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorksHeader.Text">
+    <value>**Applikationens funktionalitet**.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsManageSubscriptions.Header">
+    <value>Administrer abonnementer</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogFirstStepAppending.Text">
+    <value>I de følgende trin vil applikationens funktionalitet blive forklaret.</value>
+    <comment></comment>
+  </data>
+  <data name="BTNBack.Content">
+    <value>Tilbage</value>
+    <comment></comment>
+  </data>
+  <data name="NewDataFilePageChangePath.Content">
+    <value>Vælg mappesti</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsInAppPayment.Header">
+    <value>Abonnementer og engangskøb</value>
+    <comment></comment>
+  </data>
+  <data name="InAppSubscriptionMonthSupport">
+    <value>Med abonnementet støtter du den videre udvikling af applikationen. ***Pro+*** funktioner, der vil blive tilføjet i fremtiden, kan bruges med dette abonnement og er tilgængelige.
+***
+### 2,49€ månedligt</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialog.PrimaryButtonText">
+    <value>Abonner / køb</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialog.SecondaryButtonText">
+    <value>Annuller</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialog.Title">
+    <value>Abonnementer og køb</value>
+    <comment></comment>
+  </data>
+  <data name="DisplayQRCodeContentDialogDesc.Text">
+    <value>Importer kontoen til en anden enhed ved at åbne en to-faktor-godkendelsesapp med den ønskede enhed og tilføje en konto med kameraet.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsCardExternalAction">
+    <value>Ring eksternt (browser)</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsInAppPayment.Description">
+    <value>Opret abonnementer og køb af avancerede funktioner</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsManageSubscriptions.Description">
+    <value>Administrer abonnementer i din Microsoft-konto</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialogSubscriptionItemSelect">
+    <value>Vælg abonnement</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogTitle">
+    <value>Opret en ny konto</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutNoCategories.Text">
+    <value>Der er i øjeblikket ingen tilgængelige kategorier, opret nye kategorier via indstillingerne i denne dialog.</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesAddGlobalCategories.Header">
+    <value>Tilføj kategori</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageTitle.Text">
+    <value>Login</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageManageFilter.Label">
+    <value>Administrer kategorier og indstil filtre</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageManageFilterToolTip">
+    <value>Administrer kategorier og indstil filtre</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Reset.Label">
+    <value>Nulstil filter</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Settings.Label">
+    <value>Administrer kategorier</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountCategories.Header">
+    <value>Indstil kategorier</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialogPurchaseItemSelect">
+    <value>Vælg til køb</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageProFeatureToolTip">
+    <value>Funktionen er kun tilgængelig ved køb eller abonnement.</value>
+    <comment></comment>
+  </data>
+  <data name="InAppBuyOnce">
+    <value>Med købet bliver Pro+-funktionerne permanent tilgængelige og brugbare og understøtter dermed den videre udvikling af applikationen.
+Tilgængelig i øjeblikket:
+
+- Kategorier &amp; filter
+- Håndtering af mobile enheder (MDM)
+***
+### 34,99€ én gang</value>
+    <comment></comment>
+  </data>
+  <data name="InAppSubscriptionYear">
+    <value>Med abonnementet bliver ***Pro+***-funktionerne tilgængelige og brugbare, og du støtter den videre udvikling af applikationen.
+Tilgængelig i øjeblikket:
+
+- Kategorier &amp; filter
+- Håndtering af mobile enheder (MDM)
+***
+### 6,49€ årligt</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialogBuyItemSelect">
+    <value>Vælg for at købe</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageManageFilterInfo.Label">
+    <value>Kategorier og filter</value>
+    <comment></comment>
+  </data>
+  <data name="ProFeatureContentInfo">
+    <value>Funktionaliteten er kun tilgængelig via abonnement eller køb. Vil du gerne se på varianterne?</value>
+    <comment></comment>
+  </data>
+  <data name="ProFeatureTitleInfo">
+    <value>Betalt funktion</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogForgettenPassword.Text">
+    <value>Har du glemt din adgangskode?</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPagePasswordInfo">
+    <value>Hvis du har glemt adgangskoden og tidligere har afinstalleret eller nulstillet programmet, kan du se adgangskoden på den samme computer i [Credential Manager] (https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) i Windows. Posten er her angivet som "Project2FA" under web-loginoplysninger.</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageWindowsHelloError">
+    <value>Der er et problem med Windows Hello. For at bruge funktionaliteten i applikationen skal du løse problemet i Windows-indstillingerne.</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountCategoryInfoText">
+    <value>Ved at klikke på de eksisterende kategorier kan du tildele en eller flere kategorier til kontoen, så du senere kan foretage filtrerede søgninger. Kategorierne administreres og oprettes på hovedsiden ved hjælp af knappen "Indstil kategorier og filtre" i den øverste menulinje.</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text">
+    <value>Der er i øjeblikket ingen tilgængelige kategorier, opret nye kategorier ved hjælp af knappen i den øverste menulinje "Indstil kategorier og filtre".</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppLoggingMode.Header">
+    <value>Logning af fejl</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsLoggingFull.Content">
+    <value>Komplet</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsLoggingNone.Content">
+    <value>Nej</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsLoggingSimple.Content">
+    <value>Eneste undtagelse</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOpenLogBTN.Content">
+    <value>Vis fejlloggen</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageNoLogDialogContent">
+    <value>Der er ikke oprettet nogen fejlrapport på nuværende tidspunkt.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageNoLogDialogTitle">
+    <value>Ingen tilgængelig fejlrapport</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutCategoriesInfo.Text">
+    <value>Søgningen udføres med de indstillede kategorier via en OR-søgning.</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountPageTitle">
+    <value>Rediger konto</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogNoCaptureContentError">
+    <value>Der er ikke valgt noget vindue til scanning af en QR-kode.</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageIOSBiometricReason">
+    <value>Ved hjælp af biometri kan man logge ind uden adgangskode.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppShowAvailableProFeatures.Header">
+    <value>Visning af Pro-funktioner</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppShowAvailableProFeaturessDesc.Text">
+    <value>Denne indstilling kan bruges til at slå synligheden af pladsholdere for Pro-funktioner til eller fra.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsMDMInfo.Text">
+    <value>*Nogle indstillinger administreres af din organisation.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogProFeature.Text">
+    <value># Kategorier og filtre
+Brugerdefinerede kategorier kan oprettes med et ikon, og der kan oprettes opgaver for konti. I filtervalget er det muligt at filtrere efter konti baseret på konfigurationen. Filtrering af konti efter kategori kan også indsnævres yderligere ved hjælp af standardsøgningen.
+
+![Kategorier og filtre](ms-appx:///Assets/Images/categories_EN.png)
+
+# Enterprise App Management | Mobile Device Management (MDM)
+Applikationen understøtter en MDM-konfiguration til central styring af applikationen i virksomheden; f.eks. kan den automatiske blokering af applikationen eller login-skærmen konfigureres centralt. Oversigten over de tilgængelige konfigurationer kan ses i [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogProFeatureHeader.Text">
+    <value>Pro-Funktions</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogCreateOrLoad.Text">
+    <value>![Første skridt](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text">
+    <value>Den nye adgangskode, der er indtastet, er ikke korrekt.</value>
+    <comment></comment>
+  </data>
+</root>

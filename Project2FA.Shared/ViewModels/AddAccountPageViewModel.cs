@@ -1,4 +1,5 @@
 ﻿using Project2FA.Services.Parser;
+using UNOversal.Common;
 using System;
 using UNOversal.Logging;
 using UNOversal.Navigation;
@@ -8,7 +9,6 @@ using Project2FA.Repository.Models;
 using OtpNet;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Prism.Commands;
 using CommunityToolkit.Mvvm.Input;
 
 #if !WINDOWS_UWP
@@ -44,7 +44,7 @@ namespace Project2FA.ViewModels
 
             //ErrorsChanged += Validation_ErrorsChanged;
 
-#if ANDROID || IOS
+#if __ANDROID__ || __IOS__
             App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
 #endif
         }

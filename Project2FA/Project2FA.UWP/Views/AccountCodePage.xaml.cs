@@ -1,5 +1,4 @@
-﻿using Prism.Ioc;
-using Project2FA.Repository.Models;
+﻿using Project2FA.Repository.Models;
 using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
 using System.Threading.Tasks;
@@ -12,12 +11,12 @@ using UNOversal.Services.Dialogs;
 using CommunityToolkit.Mvvm.Input;
 using Project2FA.Services;
 using Windows.UI.Xaml.Controls.Primitives;
+using UNOversal.Ioc;
 
 namespace Project2FA.UWP.Views
 {
     public sealed partial class AccountCodePage : Page
     {
-        private bool _menuKeyPressed = false;
         private string _tempNumber = string.Empty;
         AccountCodePageViewModel ViewModel => DataContext as AccountCodePageViewModel;
 
@@ -155,7 +154,7 @@ namespace Project2FA.UWP.Views
         }
 
         /// <summary>
-        /// Copy the account code from selected item via Tab and Enter
+        /// Copy the account code from selected item via Tab & Enter and number pad
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

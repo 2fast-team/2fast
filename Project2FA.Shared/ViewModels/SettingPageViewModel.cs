@@ -2,7 +2,7 @@
 using Windows.Storage;
 using System.Windows.Input;
 using Project2FA.Strings;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using Project2FA.Repository.Models;
 using System.Linq;
 using Project2FA.Core.Services.NTP;

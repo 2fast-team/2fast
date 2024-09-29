@@ -1,0 +1,1363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountCodePageAddEntry.Label" xml:space="preserve">
+    <value>Lägg till konto</value>
+  </data>
+  <data name="AccountCodePageCopied" xml:space="preserve">
+    <value>Kopieras till urklipp</value>
+  </data>
+  <data name="AccountCodePageDeleteEntry.Text" xml:space="preserve">
+    <value>Radera</value>
+  </data>
+  <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
+    <value>Redigera</value>
+  </data>
+  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+    <value>Visa alternativ</value>
+  </data>
+  <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
+    <value>Ladda om datafilen</value>
+  </data>
+  <data name="AccountCodePageViewModelDeleteAccept" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="AccountCodePageViewModelDeleteCancel" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="DeleteDatafileContentDialogDeleteDescription" xml:space="preserve">
+    <value>Är du säker på att du vill radera det här kontot oåterkalleligt?</value>
+  </data>
+  <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
+    <value>Bekräfta borttagningen</value>
+  </data>
+  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+    <value>Kopiera kod</value>
+  </data>
+  <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="AddAccountContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Skapa konto</value>
+  </data>
+  <data name="AddAccountContentDialog.Title" xml:space="preserve">
+    <value>Skapa ett nytt konto</value>
+  </data>
+  <data name="AddAccountContentDialogAccountName.Header" xml:space="preserve">
+    <value>Kontots namn</value>
+  </data>
+  <data name="AddAccountContentDialogAccountName.PlaceholderText" xml:space="preserve">
+    <value>Mestadels e-postadress</value>
+  </data>
+  <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
+    <value>För att skapa ett nytt konto för tvåfaktorsautentisering behöver du en QR-kod eller en nyckel (kryptisk text) från den externa tjänsten.
+
+# Hur ska nyckeln importeras?
+</value>
+  </data>
+  <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
+    <value>Ingångar</value>
+  </data>
+  <data name="AddAccountContentDialogInputType.Header" xml:space="preserve">
+    <value>Typ av ingång</value>
+  </data>
+  <data name="AddAccountContentDialogLabel.Header" xml:space="preserve">
+    <value>Etikett</value>
+  </data>
+  <data name="AddAccountContentDialogLabel.PlaceholderText" xml:space="preserve">
+    <value>Namn som ska visas</value>
+  </data>
+  <data name="AddAccountContentDialogManualInput.Text" xml:space="preserve">
+    <value>Manuell inmatning</value>
+  </data>
+  <data name="AddAccountContentDialogManualInputCheckbox.Content" xml:space="preserve">
+    <value>Manuell inmatning</value>
+  </data>
+  <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
+    <value>Kan inte få information från QR-koden. Försök igen eller lägg till den hemliga nyckeln manuellt.</value>
+  </data>
+  <data name="AddAccountContentDialogReadQRCode.Text" xml:space="preserve">
+    <value>Skanna nyckel-QR-kod</value>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo" xml:space="preserve">
+    <value>Ett skanningsverktyg kommer att öppnas snart</value>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTip.Title" xml:space="preserve">
+    <value>Byt till QR-koden</value>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.Header" xml:space="preserve">
+    <value>Hemlig nyckel</value>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.PlaceholderText" xml:space="preserve">
+    <value>Lägg till strängen för hemlig nyckel här</value>
+  </data>
+  <data name="BTNConfirm.Content" xml:space="preserve">
+    <value>Bekräfta</value>
+  </data>
+  <data name="BTNTryAgain.Content" xml:space="preserve">
+    <value>Försök igen</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header" xml:space="preserve">
+    <value>Lokal datafil</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogIntroText.Text" xml:space="preserve">
+    <value>I den här dialogen kan du ändra lösenordet för den datafil som används för tillfället.</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText" xml:space="preserve">
+    <value>Ändra lösenord</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.Title" xml:space="preserve">
+    <value>Ändra lösenord för datafilen</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogPasswordError.Text" xml:space="preserve">
+    <value>Det aktuella lösenordet som angetts är inte korrekt.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Bekräfta</value>
+  </data>
+  <data name="CurrentPassword.Header" xml:space="preserve">
+    <value>Aktuellt lösenord</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Radera</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Redigera</value>
+  </data>
+  <data name="EditAccountContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Bekräfta</value>
+  </data>
+  <data name="EditAccountContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="EditAccountContentDialog.Title" xml:space="preserve">
+    <value>Redigera konto</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fel</value>
+  </data>
+  <data name="LoginPageLoginButton.Content" xml:space="preserve">
+    <value>Logga in</value>
+  </data>
+  <data name="LoginPageLoginWindowsHelloButton.Content" xml:space="preserve">
+    <value>Logga in med Windows Hello</value>
+  </data>
+  <data name="LoginPagePassword.Header" xml:space="preserve">
+    <value>Lösenord</value>
+  </data>
+  <data name="LoginPagePassword.PlaceholderText" xml:space="preserve">
+    <value>Ange lösenord</value>
+  </data>
+  <data name="LoginPagePasswordMismatch" xml:space="preserve">
+    <value>Lösenordet stämmer inte överens med lösenordet för datafilen.</value>
+  </data>
+  <data name="NewDatafileContentDialogChangePath.Content" xml:space="preserve">
+    <value>Ändra sökväg</value>
+  </data>
+  <data name="NewDatafileContentDialogCreateInfo.Text" xml:space="preserve">
+    <value>För att skapa en datafil måste du välja ett namn och ett lösenord.
+Viktigt: Du måste skriva in lösenordet varje gång du startar appen!</value>
+  </data>
+  <data name="NewDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
+    <value>Datafil</value>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.Header" xml:space="preserve">
+    <value>Filnamn</value>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.PlaceholderText" xml:space="preserve">
+    <value>till exempel datafil</value>
+  </data>
+  <data name="NewDatafileContentDialogLocalPath.Text" xml:space="preserve">
+    <value>Välj lokal väg</value>
+  </data>
+  <data name="NewDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="NewDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
+    <value>Skapa datafil</value>
+  </data>
+  <data name="NewDatafileContentDialogMain.Title" xml:space="preserve">
+    <value>Skapa datafil</value>
+  </data>
+  <data name="NewDatafileContentDialogPath.Header" xml:space="preserve">
+    <value>Väg</value>
+  </data>
+  <data name="NewDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
+    <value>Förvaring</value>
+  </data>
+  <data name="NewDatafileContentDialogWebDAV.Text" xml:space="preserve">
+    <value>Välj WebDAV</value>
+  </data>
+  <data name="NewDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
+    <value>WebDAV</value>
+  </data>
+  <data name="NewDatafileLocalFolder.Header" xml:space="preserve">
+    <value>Filnamn</value>
+  </data>
+  <data name="NewDatafileLocalFolder.PlaceholderText" xml:space="preserve">
+    <value>Ange filnamn</value>
+  </data>
+  <data name="NewDatefileContentDialogFolderName.Header" xml:space="preserve">
+    <value>Foldernamn</value>
+  </data>
+  <data name="NewLocalDatafileInfo.Text" xml:space="preserve">
+    <value>För att använda den här appen måste du skapa en datafil en gång. Alla konton kommer att lagras krypterade i denna fil.
+Om du planerar att använda den här applikationen på flera enheter är det klokt att lagra den här filen på en extern lagringsplats (t.ex. molnet).</value>
+  </data>
+  <data name="NewPasswordContentDialog.Header" xml:space="preserve">
+    <value>Nytt lösenord</value>
+  </data>
+  <data name="NewPasswordRepeatContentDialog.Header" xml:space="preserve">
+    <value>Upprepa nytt lösenord</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="Password.Header" xml:space="preserve">
+    <value>Lösenord</value>
+  </data>
+  <data name="Password.PlaceholderText" xml:space="preserve">
+    <value>Ange lösenord</value>
+  </data>
+  <data name="PasswordRepeat.Header" xml:space="preserve">
+    <value>Upprepa lösenord</value>
+  </data>
+  <data name="PasswordRepeat.PlaceholderText" xml:space="preserve">
+    <value>ange lösenord</value>
+  </data>
+  <data name="SettingsActionRequiredRestart" xml:space="preserve">
+    <value>Denna ändring träder i kraft efter omstart av appen.</value>
+  </data>
+  <data name="SettingsBackButtonCard.Header" xml:space="preserve">
+    <value>Placering av bakåtknappen</value>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OffContent" xml:space="preserve">
+    <value>I navigeringsmenyn</value>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OnContent" xml:space="preserve">
+    <value>I titelraden</value>
+  </data>
+  <data name="SettingsChangePassword.Text" xml:space="preserve">
+    <value>Ändra lösenord</value>
+  </data>
+  <data name="SettingsDatafileFilePath.Text" xml:space="preserve">
+    <value>Sökväg för datafil:</value>
+  </data>
+  <data name="SettingsDatafileName.Text" xml:space="preserve">
+    <value>Datafilens namn:</value>
+  </data>
+  <data name="SettingsDatafileTitle.Text" xml:space="preserve">
+    <value>Information om den aktuella datafilen som används</value>
+  </data>
+  <data name="SettingsFactoryResetMessage" xml:space="preserve">
+    <value>Är du säker på att du vill återställa appen till fabriksinställningarna? **Den här processen kan inte ångras!** **
+Datafilen kommer **inte** att tas bort under återställningen.</value>
+    <comment>[ReswT:manually]</comment>
+  </data>
+  <data name="SettingsGiveFeedback.Text" xml:space="preserve">
+    <value>Ge feedback</value>
+  </data>
+  <data name="SettingsGiveFeedbackText" xml:space="preserve">
+    <value>Ge feedback</value>
+  </data>
+  <data name="SettingsOptionsDesignTitle.Header" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="SettingsOptionsFactoryResetButton.Text" xml:space="preserve">
+    <value>Återställ appen till fabriksinställningarna</value>
+  </data>
+  <data name="SettingsOptionsFunctionsTitle.Header" xml:space="preserve">
+    <value>Funktioner</value>
+  </data>
+  <data name="SettingsPageName.Text" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
+  <data name="SettingsPivotItemAbout.Header" xml:space="preserve">
+    <value>Om appen</value>
+  </data>
+  <data name="SettingsPivotItemDependencies.Header" xml:space="preserve">
+    <value>Beroenden</value>
+  </data>
+  <data name="SettingsPivotItemOption.Header" xml:space="preserve">
+    <value>Alternativ</value>
+  </data>
+  <data name="SettingsRateApp.Header" xml:space="preserve">
+    <value>Betygsätt app i butik</value>
+  </data>
+  <data name="SettingsRemoveDatafileMessage" xml:space="preserve">
+    <value>Är du säker på att du vill radera datafilen permanent? Du kommer att förlora alla dina tillagda konton.</value>
+  </data>
+  <data name="SettingsThemeDark.Content" xml:space="preserve">
+    <value>Mörk</value>
+  </data>
+  <data name="SettingsThemeLight.Content" xml:space="preserve">
+    <value>Ljus</value>
+  </data>
+  <data name="SettingsThemeSelectMode.Text" xml:space="preserve">
+    <value>Välj ett läge</value>
+  </data>
+  <data name="SettingsThemeSystem.Content" xml:space="preserve">
+    <value>Använda systeminställningarna</value>
+  </data>
+  <data name="SettingsTitleBarToggleSwtich.Header" xml:space="preserve">
+    <value>Användardefinierad titelfält (i ljus/mörk)</value>
+  </data>
+  <data name="SettingsWindowsColor.Content" xml:space="preserve">
+    <value>Systemets färginställningar</value>
+  </data>
+  <data name="SettingsWindowsHelloPrefer.Header" xml:space="preserve">
+    <value>Föredrar Windows Hello för inloggning</value>
+  </data>
+  <data name="ShellPageAccountsNavigation.Content" xml:space="preserve">
+    <value>Konton</value>
+  </data>
+  <data name="ShellPageDatafileNavigation.Content" xml:space="preserve">
+    <value>Datafil</value>
+  </data>
+  <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
+    <value>Återkoppling</value>
+  </data>
+  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+    <value>Ge feedback (Github)</value>
+  </data>
+  <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
+    <value>Välj en annan datafil</value>
+  </data>
+  <data name="UseDatafileContentDialogDatafilePivotItem.Header" xml:space="preserve">
+    <value>Datafil</value>
+  </data>
+  <data name="UseDatafileContentDialogFilename.Header" xml:space="preserve">
+    <value>Filnamn</value>
+  </data>
+  <data name="UseDatafileContentDialogFolderPath.Header" xml:space="preserve">
+    <value>Mappens sökväg</value>
+  </data>
+  <data name="UseDatafileContentDialogInfo.Text" xml:space="preserve">
+    <value>Om du har använt appen tidigare kan du välja om du vill ladda den befintliga datafilen från din lokala lagring eller via WebDAV.</value>
+  </data>
+  <data name="UseDatafileContentDialogLoadInfo.Text" xml:space="preserve">
+    <value>Välj den befintliga datafilen och ange lösenordet.</value>
+  </data>
+  <data name="UseDatafileContentDialogLocalPath.Text" xml:space="preserve">
+    <value>Välj lokal väg</value>
+  </data>
+  <data name="UseDatafileContentDialogMain.CloseButtonText" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="UseDatafileContentDialogMain.PrimaryButtonText" xml:space="preserve">
+    <value>Ladda datafil</value>
+  </data>
+  <data name="UseDatafileContentDialogMain.Title" xml:space="preserve">
+    <value>Ladda datafil</value>
+  </data>
+  <data name="UseDatafileContentDialogPasswordError.Text" xml:space="preserve">
+    <value>Datafilen kan inte dekrypteras med lösenordet.</value>
+  </data>
+  <data name="UseDatafileContentDialogPivotItemKind.Header" xml:space="preserve">
+    <value>Förvaring</value>
+  </data>
+  <data name="UseDatafileContentDialogWebDAV.Text" xml:space="preserve">
+    <value>Välj WebDAV</value>
+  </data>
+  <data name="UseDatafileContentDialogWebDAVPivotItem.Header" xml:space="preserve">
+    <value>WebDAV</value>
+  </data>
+  <data name="WelcomePageCreateDatafile.Content" xml:space="preserve">
+    <value>Skapa ny datafil (första starten)</value>
+  </data>
+  <data name="WelcomePageFirstSteps.Text" xml:space="preserve">
+    <value>Första steget mot säkerhet ...</value>
+  </data>
+  <data name="WelcomePageIntro.Text" xml:space="preserve">
+    <value>Välkommen!
+
+Börja med en annan säkerhetsfaktor i ditt dagliga liv.</value>
+  </data>
+  <data name="WelcomePageLoadDatafile.Content" xml:space="preserve">
+    <value>Ladda befintlig datafil</value>
+  </data>
+  <data name="WindowsHelloLoginMessage" xml:space="preserve">
+    <value>Vänligen verifiera nu med din konfigurerade Windows Hello-inloggning.</value>
+  </data>
+  <data name="WindowsHelloPreferMessage" xml:space="preserve">
+    <value>Det är möjligt att logga in med Windows Hello. Skulle du vilja föredra denna inloggning i framtiden? Du kan när som helst ändra detta alternativ i inställningarna.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+    <value>Sekunder till uppdatering</value>
+  </data>
+  <data name="ButtonTextCancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="ButtonTextConfirm" xml:space="preserve">
+    <value>Bekräfta</value>
+  </data>
+  <data name="ButtonTextNo" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="ButtonTextYes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="RateAppContentDialogLaterButton" xml:space="preserve">
+    <value>Återkallelse senare</value>
+  </data>
+  <data name="RateAppContentDialogNoButton" xml:space="preserve">
+    <value>Nej, tack.</value>
+  </data>
+  <data name="RateAppContentDialogQuestion" xml:space="preserve">
+    <value>Du har använt den här appen under en tid nu, besök butiken för att betygsätta den och skriva en recension. Du kan också använda Windows Feedback App när som helst för att skicka din feedback direkt till oss.</value>
+  </data>
+  <data name="RateAppContentDialogYesButton" xml:space="preserve">
+    <value>Betygsätt nu</value>
+  </data>
+  <data name="RateAppContentDialogTitle" xml:space="preserve">
+    <value>Tycker du om den här appen?</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header" xml:space="preserve">
+    <value>Aktuellt lösenord</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText" xml:space="preserve">
+    <value>Ange lösenord</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
+    <value>Applikationen har för närvarande inte de nödvändiga åtkomsträttigheterna för att komma åt datafilen. För att ställa in rättigheterna måste dock applikationen stängas.
+Ge de nödvändiga rättigheterna i inställningarna och starta om applikationen.
+
+Anvisningar för inställning av behörigheten:
+![Instruktioner för inställning av behörighet](ms-appx:///Assets/Infoelements/AuthSystemstorageEN.png)</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogPrimaryBTN" xml:space="preserve">
+    <value>Ställ in auktorisering</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogSecondaryBTN" xml:space="preserve">
+    <value>Avbryt (stäng programmet)</value>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogTitle" xml:space="preserve">
+    <value>Fel vid auktorisering</value>
+  </data>
+  <data name="AccountCodePageABBLogout.Label" xml:space="preserve">
+    <value>Lås app</value>
+  </data>
+  <data name="AccountCodePageCopyCodeTeachingTip" xml:space="preserve">
+    <value>Nyckel kopierad till urklipp</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Ändra lösenord</value>
+  </data>
+  <data name="CloseApp" xml:space="preserve">
+    <value>Stäng appen</value>
+  </data>
+  <data name="DeleteAccountContentDialogDescription" xml:space="preserve">
+    <value>Är du säker på att du vill radera kontot? Efter borttagningen har du **30 sekunder** på dig att ångra borttagningen.</value>
+  </data>
+  <data name="DeleteAccountContentDialogTitle" xml:space="preserve">
+    <value>Ta bort konto</value>
+  </data>
+  <data name="ErrorHandle" xml:space="preserve">
+    <value>Felhantering</value>
+  </data>
+  <data name="ErrorHandleDescription" xml:space="preserve">
+    <value>Ett obehandlat fel har inträffat, vänligen skicka felinformationen som kan ses i fältet via en ny fråga i Github.</value>
+  </data>
+  <data name="PasswordInvalidHeader" xml:space="preserve">
+    <value>Lösenordet är ogiltigt</value>
+  </data>
+  <data name="SettingsQRScanningHeader" xml:space="preserve">
+    <value>Tidsfördröjning för att börja läsa QR-koden</value>
+  </data>
+  <data name="SettingsQRScanningSecondsRange" xml:space="preserve">
+    <value>Anges i sekunder (3-10s tillåtet)</value>
+  </data>
+  <data name="ShellPageAboutAppNavigation.Content" xml:space="preserve">
+    <value>Om appen</value>
+  </data>
+  <data name="ExceptionDatafileNotFound" xml:space="preserve">
+    <value>Sökvägen till den aktuella datafilen kunde inte hittas. Möjligen har datafilen flyttats av dig.
+**Vill du redigera sökvägen? **</value>
+  </data>
+  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+    <value>Lås app</value>
+  </data>
+  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+    <value>Lägg till konto</value>
+  </data>
+  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+    <value>Ladda om datafilen</value>
+  </data>
+  <data name="PasswordInvalidMessage" xml:space="preserve">
+    <value>Det lösenord som sparats i den här appen är ogiltigt för datafilen. Du kan ha ändrat lösenordet i en annan maskin för datafilen.
+**Vill du ändra lösenordet nu?</value>
+  </data>
+  <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
+    <value>Fabriksåterställning</value>
+  </data>
+  <data name="SettingsSourceCode.Header" xml:space="preserve">
+    <value>Visa källkoden för appen</value>
+  </data>
+  <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
+    <value>Datafil</value>
+  </data>
+  <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
+    <value>Ångra radering</value>
+  </data>
+  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+    <value>Ångra radering</value>
+  </data>
+  <data name="SettingsDatafileName.Header" xml:space="preserve">
+    <value>Namn på datafilen</value>
+  </data>
+  <data name="SettingsDatafilePath.Header" xml:space="preserve">
+    <value>Sökväg till datafilen</value>
+  </data>
+  <data name="NewDatafileContentDialogDatafileExistsError" xml:space="preserve">
+    <value>En datafil med det här namnet finns redan i mappen. Vänligen ändra mappen eller namnet på filen.</value>
+  </data>
+  <data name="SettingsDatafileBTNChangePassword.Content" xml:space="preserve">
+    <value>ändra lösenord</value>
+  </data>
+  <data name="ErrorHandleSendError" xml:space="preserve">
+    <value>Skicka fel</value>
+  </data>
+  <data name="FactoryReset" xml:space="preserve">
+    <value>Fabriksåterställning</value>
+  </data>
+  <data name="ChangeDatafilePath" xml:space="preserve">
+    <value>Ändra filens sökväg</value>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Subtitle" xml:space="preserve">
+    <value>Lägga till nya konton</value>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Title" xml:space="preserve">
+    <value>Tom lista</value>
+  </data>
+  <data name="AccountCodePageWrongTimeBTN" xml:space="preserve">
+    <value>Inställningar för öppen tid</value>
+  </data>
+  <data name="AccountCodePageWrongTimeContent" xml:space="preserve">
+    <value>Den aktuella tidsvisningen på enheten är felaktig, så koderna för kontona kan inte genereras korrekt.
+Vänligen synkronisera tiden i inställningarna.</value>
+  </data>
+  <data name="AccountCodePageWrongTimeTitle" xml:space="preserve">
+    <value>Felaktig tidsvisning</value>
+  </data>
+  <data name="PasswordAdvancedHashOption.Header" xml:space="preserve">
+    <value>Avancerade alternativ</value>
+  </data>
+  <data name="PasswordAdvancedHashOptionText.Content" xml:space="preserve">
+    <value>Med den här inställningen används Argon2id i stället för SHA-512 för hashgenerering av lösenordsförfrågan.</value>
+  </data>
+  <data name="SettingsDatafileChangePasswordInfoTitle" xml:space="preserve">
+    <value>Lösenordet har ändrats framgångsrikt</value>
+  </data>
+  <data name="ShellPagePaneTitle" xml:space="preserve">
+    <value>Navigationsmeny</value>
+  </data>
+  <data name="SettingsAuthorLogo.Content" xml:space="preserve">
+    <value>Författare av logotypen: Freepik</value>
+  </data>
+  <data name="AccountCodePageAutoSuggestBoxPlaceholder" xml:space="preserve">
+    <value>Sök</value>
+  </data>
+  <data name="AccountCodePageSearchNotFound" xml:space="preserve">
+    <value>Inga resultat hittades</value>
+  </data>
+  <data name="SettingsDependencyGroupAssets" xml:space="preserve">
+    <value>Tillgångar</value>
+  </data>
+  <data name="SettingsDependencyGroupPackages" xml:space="preserve">
+    <value>Paket</value>
+  </data>
+  <data name="SettingsDependencies.Header" xml:space="preserve">
+    <value>Beroenden av appen</value>
+  </data>
+  <data name="SettingsDependencyAuthor.Text" xml:space="preserve">
+    <value>Författare:</value>
+  </data>
+  <data name="SettingsDependencyLicence.Text" xml:space="preserve">
+    <value>Licens:</value>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>Starta om appen</value>
+  </data>
+  <data name="ErrorCopyToClipboard" xml:space="preserve">
+    <value>Kopiera rapporten till urklipp</value>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
+    <value>NTP-serverns adress är giltig och kan sparas genom att trycka på den.</value>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
+    <value>Sparar?</value>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
+    <value>Det går inte att spara NTP-serverns adress eftersom servern inte hittades.</value>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
+    <value>Fel</value>
+  </data>
+  <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
+    <value>Använd tidsserver för att kontrollera systemtiden</value>
+  </data>
+  <data name="SettingsSaveNTPServer.Label" xml:space="preserve">
+    <value>Spara</value>
+  </data>
+  <data name="ErrorHandleDescriptionLastSession" xml:space="preserve">
+    <value>Ett obehandlat fel inträffade förra gången appen användes, vänligen skicka felinformationen som kan ses i fältet via ett nytt problem i Github.</value>
+  </data>
+  <data name="SettingsNTPServerCheckBoxText.Content" xml:space="preserve">
+    <value>Ställ in NTP-servern manuellt</value>
+  </data>
+  <data name="SettingsNTPServerDescribtion.Text" xml:space="preserve">
+    <value>En NTP-server kan användas för att kontrollera systemets korrekta tid. Om det finns en större avvikelse i tiden skulle skapandet av koderna för kontona inte längre vara korrekt. Om avvikelsen är större än trettio sekunder visas ett meddelande och skapandet av koderna görs med NTP-serverns tid.</value>
+  </data>
+  <data name="NewAppFeaturesContent" xml:space="preserve">
+    <value>- Uppdatering av tredjepartsbibliotek
+- Ytterligare språk har lagts till: spanska, franska, italienska, japanska, kinesiska
+- Kategorier kan nu ställas in direkt i nya konton (Pro-funktion)
+- Åtgärdat en bugg där lösenordet inte kunde ändras om det aktuella sparade lösenordet var ogiltigt</value>
+    <comment>[ReswT:always]</comment>
+  </data>
+  <data name="NewAppFeaturesTitle" xml:space="preserve">
+    <value>Nya funktioner och ändringar</value>
+  </data>
+  <data name="WelcomePageTitle" xml:space="preserve">
+    <value>Välkommen</value>
+  </data>
+  <data name="UseDataFilePageName.Text" xml:space="preserve">
+    <value>Ladda befintlig datafil</value>
+  </data>
+  <data name="CreateDatafile" xml:space="preserve">
+    <value>Skapa datafil</value>
+  </data>
+  <data name="LoadDatafile" xml:space="preserve">
+    <value>Ladda befintlig datafil</value>
+  </data>
+  <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
+    <value>De första stegen</value>
+  </data>
+  <data name="UseDataFilePageLoadDatafile.Content" xml:space="preserve">
+    <value>Ladda datafil</value>
+  </data>
+  <data name="UseDatafileContentDialogWDLogin.Content" xml:space="preserve">
+    <value>Logga in</value>
+  </data>
+  <data name="UseDatafileContentDialogWDServerAddress.Header" xml:space="preserve">
+    <value>Serveradress</value>
+  </data>
+  <data name="UseDatafileContentDialogWDUsername.Header" xml:space="preserve">
+    <value>Användarnamn</value>
+  </data>
+  <data name="UseDataFilePageDatafileExpander.Header" xml:space="preserve">
+    <value>Datafil</value>
+  </data>
+  <data name="UseDataFilePageLoginExpander.Header" xml:space="preserve">
+    <value>Logga in på tjänsten</value>
+  </data>
+  <data name="SettingsAppCornorRadius.Header" xml:space="preserve">
+    <value>Runda hörn</value>
+  </data>
+  <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
+    <value>Om alternativet är aktiverat kommer kontrollernas hörn att avrundas</value>
+  </data>
+  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
+    <value>Appens färgschema</value>
+  </data>
+  <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
+    <value>Fabriksåterställning</value>
+  </data>
+  <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
+    <value>Tryck på och bekräfta för att återställa appen</value>
+  </data>
+  <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
+    <value>Skanna QR-kod</value>
+  </data>
+  <data name="UseDatafilePasswordInfo" xml:space="preserve">
+    <value>För att ladda datafilen måste du ange det lösenord som konfigurerades när filen skapades.</value>
+  </data>
+  <data name="ToolTipShowHelp" xml:space="preserve">
+    <value>Visa hjälp</value>
+  </data>
+  <data name="SettingsAutoLogoutDesc" xml:space="preserve">
+    <value>Automatisk utloggning efter inaktivitet</value>
+  </data>
+  <data name="SettingsAutoLogoutMinutes" xml:space="preserve">
+    <value>Minuter av inaktivitet</value>
+  </data>
+  <data name="SettingsOptionsAutoLogout.Header" xml:space="preserve">
+    <value>Automatiskt lås</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Nära</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelp" xml:space="preserve">
+    <value>När QR-kodskanning väljs öppnas ett nytt fönster där det program som innehåller den QR-kod som ska skannas måste väljas. Detta är t.ex. webbläsaren.</value>
+  </data>
+  <data name="AccountCodePageShowQRCode.Text" xml:space="preserve">
+    <value>Visa QR-kod</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogTitle" xml:space="preserve">
+    <value>Visning av QR-kod</value>
+  </data>
+  <data name="AddAccountCodeContentDialogInputSecretKeyHelp" xml:space="preserve">
+    <value>Inmatningen är baserad på Base32 och tillåter därför endast bokstäverna A-Z och siffrorna 2-7.</value>
+  </data>
+  <data name="AccountCodePageTooltipDeleteFavourite" xml:space="preserve">
+    <value>Ångra favorit</value>
+  </data>
+  <data name="AccountCodePageTooltipSetFavourite" xml:space="preserve">
+    <value>Ställ in som favorit</value>
+  </data>
+  <data name="AccountCodePageTooltipHideTOTP" xml:space="preserve">
+    <value>Dölj tangent</value>
+  </data>
+  <data name="AccountCodePageTooltipShowTOTP" xml:space="preserve">
+    <value>Visa tangent</value>
+  </data>
+  <data name="SettingsPreferHiddenTOTP.Header" xml:space="preserve">
+    <value>Dölj nycklar</value>
+  </data>
+  <data name="SettingsPreferHiddenTOTPDesc.Text" xml:space="preserve">
+    <value>De genererade nycklarna är dolda och kan eventuellt tonas in.</value>
+  </data>
+  <data name="AddAccountContentDialogExpertExpander.Header" xml:space="preserve">
+    <value>Expertinställningar</value>
+  </data>
+  <data name="AddAccountContentDialogHashAlgo.Header" xml:space="preserve">
+    <value>Hash-algoritm</value>
+  </data>
+  <data name="AddAccountContentDialogTotpSize.Header" xml:space="preserve">
+    <value>Antal siffror</value>
+  </data>
+  <data name="ButtonTextRetry" xml:space="preserve">
+    <value>Försök igen</value>
+  </data>
+  <data name="ErrorClipboardTask" xml:space="preserve">
+    <value>Urklippet har tagits upp av ett annat program, försök igen.</value>
+  </data>
+  <data name="AddAccountContentDialogDeleteAccountIcon.Text" xml:space="preserve">
+    <value>Radera</value>
+  </data>
+  <data name="AddAccountContentDialogAccountIcon.Header" xml:space="preserve">
+    <value>Ikon för konto</value>
+  </data>
+  <data name="AddAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Lägg till anteckningar</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNotes.Header" xml:space="preserve">
+    <value>Anteckningar</value>
+  </data>
+  <data name="AddAccountContentDialogSuggestionBox.Header" xml:space="preserve">
+    <value>Sök kontobild</value>
+  </data>
+  <data name="AddAccountCodeContentDialogExpertSettingsHelp" xml:space="preserve">
+    <value>Ändra endast dessa inställningar om du är säker på att tjänsten kräver det.</value>
+  </data>
+  <data name="NewDataFilePageTitle.Text" xml:space="preserve">
+    <value>Ny datafil</value>
+  </data>
+  <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
+    <value>Välj fil</value>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFolder" xml:space="preserve">
+    <value>Välj mapp</value>
+  </data>
+  <data name="SettingsPageAboDesc.Text" xml:space="preserve">
+    <value>Stöd utvecklingen av appen med återkommande betalningar.</value>
+  </data>
+  <data name="WebDAVEmptyFolderMessage.Text" xml:space="preserve">
+    <value>Den här mappen innehåller inga filer som kan väljas.</value>
+  </data>
+  <data name="NewDatafileCreateDatafile.Content" xml:space="preserve">
+    <value>Skapa datafil</value>
+  </data>
+  <data name="NewDatafilehangeDatafile.Content" xml:space="preserve">
+    <value>Ändra mapp</value>
+  </data>
+  <data name="SettingsAppPrideMonthDesign.Header" xml:space="preserve">
+    <value>Regnbågsfärger för inloggningsfönster</value>
+  </data>
+  <data name="SettingsAppPrideMonthDesignDesc.Text" xml:space="preserve">
+    <value>Ställa in regnbågsfärger för inloggningsfönstret</value>
+  </data>
+  <data name="SettingsMailSupportApp.Text" xml:space="preserve">
+    <value>Support via e-post</value>
+  </data>
+  <data name="SettingsCustomDesign.Header" xml:space="preserve">
+    <value>Särskilda designinställningar</value>
+  </data>
+  <data name="AddAccountContentDialogImportBackup.Header" xml:space="preserve">
+    <value>Importera säkerhetskopia</value>
+  </data>
+  <data name="NewDatafilePageCreateFileBTN.Content" xml:space="preserve">
+    <value>Skapa datafil</value>
+  </data>
+  <data name="WelcomePageTutorialTipOpen" xml:space="preserve">
+    <value>Öppen handledning</value>
+  </data>
+  <data name="WelcomePageTutorialDesc" xml:space="preserve">
+    <value>Vill du öppna handledningen för applikationen?</value>
+  </data>
+  <data name="TutorialContentDialogFirstSteps.Text" xml:space="preserve">
+    <value>Applikationen **2fast** (akronym för **t**wo **f**actor **a**uthenticator **s**upporting **T**OTP) är en [authenticator](https://en.wikipedia.org/wiki/Authenticator) för tvåfaktorsautentisering (2FA) som använder standarden "**T**ime-based **O**ne-**t**ime **P**assword algorithm"/ tidsbaserat engångslösenord (TOTP) enligt standardisering [RFC 6238](https://tools.ietf.org/html/rfc6238). Tjänster som förlitar sig på TOTP-standarden för den andra faktorn kan användas med denna applikation. Till exempel stöder Microsoft, Google och PayPal tvåfaktorsautentisering med TOTP:</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethod.Text" xml:space="preserve">
+    <value>För att skapa en datafil är det första steget att välja en mapp där filen ska sparas. Vi rekommenderar en lagringsplats som är skyddad mot dataförlust (t.ex. molnlagring som One-Drive, DropBox etc.). Därefter följer namn och lösenord för kryptering av filen. Vi rekommenderar att du sparar lösenordet i en lösenordshanterare för att förhindra förlust.</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethod.Text" xml:space="preserve">
+    <value>För att ladda datafilen måste du först välja datafil. Därefter följer det lösenord som datafilen har krypterats med.</value>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text" xml:space="preserve">
+    <value>Skapa konto</value>
+  </data>
+  <data name="TutorialContentDialogCreateMethodHeader.Text" xml:space="preserve">
+    <value>Skapande av en datafil</value>
+  </data>
+  <data name="TutorialContentDialogLoadMethodHeader.Text" xml:space="preserve">
+    <value>Läsa in en datafil</value>
+  </data>
+  <data name="SettingsUseAutoLogout.Header" xml:space="preserve">
+    <value>Automatisk utloggning</value>
+  </data>
+  <data name="FunctionNotAvailable" xml:space="preserve">
+    <value>Funktionen är inte tillgänglig</value>
+  </data>
+  <data name="WindowsHelloNotAvailable" xml:space="preserve">
+    <value>Windows Hello kan inte köras eftersom inget lösenord har lagrats för datafilen i det skyddade minnet.</value>
+  </data>
+  <data name="ErrorGenerateTOTPCode" xml:space="preserve">
+    <value>Den hemliga nyckeln för kontot {0} är tom eller oläslig. Vänligen starta om appen. Om problemet kvarstår, rensa kontot {0} och lägg till det igen.</value>
+  </data>
+  <data name="TextFormatterBoldToolTip" xml:space="preserve">
+    <value>Fet stil</value>
+  </data>
+  <data name="TextFormatterItalicToolTip" xml:space="preserve">
+    <value>Kursiv stil</value>
+  </data>
+  <data name="TextFormatterStrikeToolTip" xml:space="preserve">
+    <value>Genomstruken</value>
+  </data>
+  <data name="TextFormatterUnderlineToolTip" xml:space="preserve">
+    <value>Understrykning</value>
+  </data>
+  <data name="TextFormatterListToolTip" xml:space="preserve">
+    <value>Lista</value>
+  </data>
+  <data name="TextFormatterOrderedToolTip" xml:space="preserve">
+    <value>Ordnad lista</value>
+  </data>
+  <data name="WriteDatafileErrorBTNCancel" xml:space="preserve">
+    <value>Kassera ändringar</value>
+  </data>
+  <data name="WriteDatafileErrorBTNRetry" xml:space="preserve">
+    <value>Spara igen</value>
+  </data>
+  <data name="WriteDatafileErrorDesc" xml:space="preserve">
+    <value>Ändringarna kunde inte sparas. Vill du spara dem igen?</value>
+  </data>
+  <data name="SettingsCBNotStorePassword.Content" xml:space="preserve">
+    <value>Spara inte lösenordet i referenshanteraren (Windows Hello är inte tillgängligt)</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFound" xml:space="preserve">
+    <value>Adressen hittades inte</value>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFoundDesc" xml:space="preserve">
+    <value>Adressen till WebDAV-tjänsten kunde inte hittas.</value>
+  </data>
+  <data name="WebDAVAppPasswordInfo" xml:space="preserve">
+    <value>Ett app-lösenord krävs för att logga in på WebDAV-tjänsten, detta kan skapas i inställningarna för WebDAV-tjänsten.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsError" xml:space="preserve">
+    <value>Fel vid inloggning</value>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsErrorDesc" xml:space="preserve">
+    <value>Ditt användarnamn eller lösenord är ogiltigt.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceError" xml:space="preserve">
+    <value>Server i underhållsläge</value>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc" xml:space="preserve">
+    <value>Inloggning är för närvarande inte möjlig eftersom WebDAV-tjänsten för närvarande är i underhållsläge.</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledError" xml:space="preserve">
+    <value>Servern är inte installerad</value>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc" xml:space="preserve">
+    <value>WebDAV-tjänsten är för närvarande inte korrekt installerad.</value>
+  </data>
+  <data name="SettingsUseWindowsHello.Header" xml:space="preserve">
+    <value>Erbjuda Windows Hello som inloggningsalternativ</value>
+  </data>
+  <data name="InfoBarDatafileNoInternet" xml:space="preserve">
+    <value>För närvarande är ingen internetanslutning tillgänglig för synkronisering. Vänligen anslut och bekräfta "Ladda om datafil".</value>
+  </data>
+  <data name="InfoBarDatafileTitleNoInternet" xml:space="preserve">
+    <value>Ingen internetanslutning</value>
+  </data>
+  <data name="InfoBarDatafileTitleUpdated" xml:space="preserve">
+    <value>Datafilen uppdaterad</value>
+  </data>
+  <data name="InfoBarDatafileUpdated" xml:space="preserve">
+    <value>Datafilen har uppdaterats på ett framgångsrikt sätt.</value>
+  </data>
+  <data name="AddAccountContentDialogCameraScan.Header" xml:space="preserve">
+    <value>Kamera</value>
+  </data>
+  <data name="AddAccountContentDialogCameraScanBTN.Text" xml:space="preserve">
+    <value>Kamera</value>
+  </data>
+  <data name="AddAccountContentDialogBTNCamRetry.Content" xml:space="preserve">
+    <value>Ladda om</value>
+  </data>
+  <data name="AddAccountContentDialogNoCamFound.Text" xml:space="preserve">
+    <value>Ingen kamera finns tillgänglig.</value>
+  </data>
+  <data name="AddAccountContentDialogNoCamPermission.Text" xml:space="preserve">
+    <value>Inget samtycke har getts till att kameran visas.</value>
+  </data>
+  <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
+    <value>Öppna inställningar</value>
+  </data>
+  <data name="ShellPageWarnInfo" xml:space="preserve">
+    <value>Skyddet för skärminspelning är inte aktivt</value>
+  </data>
+  <data name="NewDatafileFolderPath.Header" xml:space="preserve">
+    <value>Sökväg till WebDAV-mapp</value>
+  </data>
+  <data name="AccountCodePageTitle" xml:space="preserve">
+    <value>Konton</value>
+  </data>
+  <data name="AccoundCodePageImportEntry.Label" xml:space="preserve">
+    <value>Importera konton</value>
+  </data>
+  <data name="AccoundCodePageImportCamera.Text" xml:space="preserve">
+    <value>Utför kameraimport</value>
+  </data>
+  <data name="AccoundCodePageImportDocument.Text" xml:space="preserve">
+    <value>Använd fil/bild för import</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>2fast - tvåfaktorsautentisering</value>
+  </data>
+  <data name="TutorialPageBackButton.Text" xml:space="preserve">
+    <value>Tillbaka</value>
+  </data>
+  <data name="TutorialPageForwardButton.Text" xml:space="preserve">
+    <value>Framåt</value>
+  </data>
+  <data name="TutorialPageSkipButton.Content" xml:space="preserve">
+    <value>Hoppa över</value>
+  </data>
+  <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
+    <value>Avsluta handledning</value>
+  </data>
+  <data name="NewDatafilePasswordInfo" xml:space="preserve">
+    <value>Ett lösenord måste tilldelas för kryptering av datafilen. Vi rekommenderar starkt att du lagrar detta lösenord på ett säkert sätt i en lösenordshanterare.</value>
+  </data>
+  <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
+    <value>Lösenord för kryptering</value>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNDesc" xml:space="preserve">
+    <value>Nyckeln kopieras till urklipp.</value>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
+    <value>Kopiera tangent</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
+    <value>Om du väljer en favorit visas kontot i applikationens accentfärg och placeras överst i visningsordningen.</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
+    <value>Ställ in favorit</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
+    <value>Ytterligare alternativ för kontot visas här</value>
+  </data>
+  <data name="TutorialPageItemMoreBTNTitle" xml:space="preserve">
+    <value>Fler alternativ</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
+    <value>Som tillval kan nycklar döljas och visas igen</value>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
+    <value>Dölj/visa tangent</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
+    <value>Det finns olika interaktionsalternativ för skapade konton, som förklaras mer i detalj med hjälp av ett exempelkonto efter att de har aktiverats.</value>
+  </data>
+  <data name="TutorialContentDialogInteractionAccountHeader.Text" xml:space="preserve">
+    <value>Interaktionsalternativ för konton</value>
+  </data>
+  <data name="NewDatafileAccessErrorDesc" xml:space="preserve">
+    <value>Åtkomst till mappen är blockerad för programmet, försök igen eller välj en annan mapp.</value>
+  </data>
+  <data name="NewDatafileAccessErrorTitle" xml:space="preserve">
+    <value>Åtkomst nekad</value>
+  </data>
+  <data name="EditAccountContentDialogAddGlobalCategories.Header" xml:space="preserve">
+    <value>Skapa kategorier</value>
+  </data>
+  <data name="ManageCategoriesContentDialogIcon.Header" xml:space="preserve">
+    <value>Välj ikon</value>
+  </data>
+  <data name="ManageCategoriesContentDialogLabel.Header" xml:space="preserve">
+    <value>Namn på kategorin</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText" xml:space="preserve">
+    <value>Spara</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.Title" xml:space="preserve">
+    <value>Hantera kategorier</value>
+  </data>
+  <data name="ManageCategoriesContentDialogIconCreateBTN.Content" xml:space="preserve">
+    <value>Skapa kategori</value>
+  </data>
+  <data name="ShellPageSearchNavigation.Content" xml:space="preserve">
+    <value>Sök</value>
+  </data>
+  <data name="ShellPageSettingsNavigation.Content" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
+  <data name="BiometricFacePreferMessage" xml:space="preserve">
+    <value>Du har möjlighet att logga in med ansiktsigenkänning. Skulle du vilja föredra denna inloggning i framtiden? Du kan när som helst ändra detta alternativ i inställningarna.</value>
+  </data>
+  <data name="BiometricFingerPreferMessage" xml:space="preserve">
+    <value>Du har möjlighet att logga in med ditt fingeravtryck. Skulle du vilja föredra denna inloggning i framtiden? Du kan när som helst ändra detta alternativ i inställningarna.</value>
+  </data>
+  <data name="BiometricLoginSubtitle" xml:space="preserve">
+    <value>Logga in i appen med fingeravtryck eller ansiktsigenkänning.</value>
+  </data>
+  <data name="BiometricLoginTitle" xml:space="preserve">
+    <value>Logga in</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.Content" xml:space="preserve">
+    <value>Handledning</value>
+  </data>
+  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Öppen handledning</value>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
+    <value>Funktionaliteten för [Authentication](https://en.wikipedia.org/wiki/Authentication) för den andra faktorn sker med hjälp av det tidsbaserade engångslösenordet. För detta ändamål avtalas en hemlig installationsnyckel mellan tjänstens inloggningsserver och användaren, som lagras lokalt i applikationen. Detta säkerställer att applikationen alltid kan användas offline om installationsnyckeln är överenskommen.
+
+
+
+Lagringen av installationsnycklarna för de olika tjänsterna i denna applikation, till skillnad från i andra autentiserare, lagras i en fil som är lösenordsskyddad vid skapandet för att kryptera filen. För att lagra filen rekommenderas i detta fall en molnlagring som Nextcloud, ownCloud, Onedrive etc. för att få versionshantering och säkerhet mot förlust.
+
+
+
+Funktionerna i denna applikation förklaras mer i detalj i följande avsnitt.</value>
+    <comment>[ReswT:manually]</comment>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
+    <value>**Funktionalitet i applikationen**</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Header" xml:space="preserve">
+    <value>Hantera prenumerationer</value>
+  </data>
+  <data name="TutorialContentDialogFirstStepAppending.Text" xml:space="preserve">
+    <value>I de följande stegen kommer applikationens funktionalitet att förklaras.</value>
+  </data>
+  <data name="BTNBack.Content" xml:space="preserve">
+    <value>Tillbaka</value>
+  </data>
+  <data name="NewDataFilePageChangePath.Content" xml:space="preserve">
+    <value>Välj sökväg till mappen</value>
+  </data>
+  <data name="SettingsInAppPayment.Header" xml:space="preserve">
+    <value>Prenumerationer och engångsköp</value>
+  </data>
+  <data name="InAppSubscriptionMonthSupport" xml:space="preserve">
+    <value>Med prenumerationen stöder du den fortsatta utvecklingen av applikationen. ***Pro+*** funktioner som kommer att läggas till i framtiden är användbara med denna prenumeration och tillgängliga.
+***
+### 2,49 € per månad</value>
+  </data>
+  <data name="InAppPaymentContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Prenumerera / köp</value>
+  </data>
+  <data name="InAppPaymentContentDialog.SecondaryButtonText" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="InAppPaymentContentDialog.Title" xml:space="preserve">
+    <value>Prenumerationer &amp; inköp</value>
+  </data>
+  <data name="DisplayQRCodeContentDialogDesc.Text" xml:space="preserve">
+    <value>Importera kontot för en annan enhet genom att öppna en app för tvåfaktorsautentisering med den önskade enheten och lägga till ett konto med kameran.</value>
+  </data>
+  <data name="SettingsCardExternalAction" xml:space="preserve">
+    <value>Ringa externt (webbläsare)</value>
+  </data>
+  <data name="SettingsInAppPayment.Description" xml:space="preserve">
+    <value>Gör prenumerationer och köp för avancerade funktioner</value>
+  </data>
+  <data name="SettingsManageSubscriptions.Description" xml:space="preserve">
+    <value>Hantera prenumerationer i ditt Microsoft-konto</value>
+  </data>
+  <data name="InAppPaymentContentDialogSubscriptionItemSelect" xml:space="preserve">
+    <value>Välj abonnemang</value>
+  </data>
+  <data name="AddAccountContentDialogTitle" xml:space="preserve">
+    <value>Skapa ett nytt konto</value>
+  </data>
+  <data name="CategoryFilterFlyoutNoCategories.Text" xml:space="preserve">
+    <value>Det finns för närvarande inga kategorier tillgängliga, skapa nya kategorier via inställningarna i den här dialogen.</value>
+  </data>
+  <data name="ManageCategoriesAddGlobalCategories.Header" xml:space="preserve">
+    <value>Lägg till kategori</value>
+  </data>
+  <data name="LoginPageTitle.Text" xml:space="preserve">
+    <value>Logga in</value>
+  </data>
+  <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
+    <value>Hantera kategorier och ställ in filter</value>
+  </data>
+  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+    <value>Hantera kategorier och ställ in filter</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
+    <value>Återställ filter</value>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Settings.Label" xml:space="preserve">
+    <value>Hantera kategorier</value>
+  </data>
+  <data name="EditAccountContentDialogAccountCategories.Header" xml:space="preserve">
+    <value>Ange kategorier</value>
+  </data>
+  <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
+    <value>Välj för inköp</value>
+  </data>
+  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+    <value>Funktionen är endast tillgänglig genom köp eller prenumeration.</value>
+  </data>
+  <data name="InAppBuyOnce" xml:space="preserve">
+    <value>Med köpet blir Pro+-funktioner permanent tillgängliga och användbara, vilket stöder den fortsatta utvecklingen av applikationen.
+För närvarande tillgänglig:
+
+- Kategorier &amp; filter
+- Hantering av mobila enheter (MDM)
+***
+### 34,99€ engångskostnad</value>
+  </data>
+  <data name="InAppSubscriptionYear" xml:space="preserve">
+    <value>Med prenumerationen blir ***Pro+***-funktionerna tillgängliga och användbara och du stöder den fortsatta utvecklingen av applikationen.
+För närvarande tillgänglig:
+
+- Kategorier &amp; filter
+- Hantering av mobila enheter (MDM)
+***
+### 6,49 € per år</value>
+  </data>
+  <data name="InAppPaymentContentDialogBuyItemSelect" xml:space="preserve">
+    <value>Välj för köp</value>
+  </data>
+  <data name="AccountCodePageManageFilterInfo.Label" xml:space="preserve">
+    <value>Kategorier &amp; filter</value>
+  </data>
+  <data name="ProFeatureContentInfo" xml:space="preserve">
+    <value>Funktionaliteten är endast tillgänglig genom prenumeration eller köp. Vill du ta en titt på varianterna?</value>
+  </data>
+  <data name="ProFeatureTitleInfo" xml:space="preserve">
+    <value>Betald funktion</value>
+  </data>
+  <data name="TutorialContentDialogForgettenPassword.Text" xml:space="preserve">
+    <value>Har du glömt ditt lösenord?</value>
+  </data>
+  <data name="TutorialPagePasswordInfo" xml:space="preserve">
+    <value>Om du har glömt lösenordet och tidigare avinstallerat eller återställt programmet, kan du se lösenordet på samma dator i [Credential Manager] (https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) i Windows. Här anges posten "Project2FA" under inloggningsuppgifter för webben.</value>
+  </data>
+  <data name="LoginPageWindowsHelloError" xml:space="preserve">
+    <value>Det finns ett problem med Windows Hello. För att använda funktionaliteten i applikationen måste du lösa problemet i Windows-inställningarna.</value>
+  </data>
+  <data name="EditAccountContentDialogAccountCategoryInfoText" xml:space="preserve">
+    <value>Genom att klicka på de befintliga kategorierna kan du tilldela kontot en eller flera kategorier, vilket gör att du senare kan göra filtrerade sökningar. Kategorierna hanteras och skapas på huvudsidan med hjälp av knappen "Ange kategorier och filter" i den övre menyraden.</value>
+  </data>
+  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text" xml:space="preserve">
+    <value>Det finns för närvarande inga kategorier tillgängliga, skapa nya kategorier med hjälp av knappen i det övre menyfältet "Ange kategorier och filter".</value>
+  </data>
+  <data name="SettingsAppLoggingMode.Header" xml:space="preserve">
+    <value>Loggning av fel</value>
+  </data>
+  <data name="SettingsLoggingFull.Content" xml:space="preserve">
+    <value>Komplett</value>
+  </data>
+  <data name="SettingsLoggingNone.Content" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="SettingsLoggingSimple.Content" xml:space="preserve">
+    <value>Enda undantaget</value>
+  </data>
+  <data name="SettingsOpenLogBTN.Content" xml:space="preserve">
+    <value>Visa fellogg</value>
+  </data>
+  <data name="SettingsPageNoLogDialogContent" xml:space="preserve">
+    <value>Ingen felrapport har skapats vid denna tidpunkt.</value>
+  </data>
+  <data name="SettingsPageNoLogDialogTitle" xml:space="preserve">
+    <value>Ingen felrapport tillgänglig</value>
+  </data>
+  <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
+    <value>Sökningen utförs med de angivna kategorierna via en OR-sökning.</value>
+  </data>
+  <data name="EditAccountPageTitle" xml:space="preserve">
+    <value>Redigera konto</value>
+  </data>
+  <data name="AddAccountContentDialogNoCaptureContentError" xml:space="preserve">
+    <value>Inget fönster för att skanna en QR-kod har valts.</value>
+  </data>
+  <data name="LoginPageIOSBiometricReason" xml:space="preserve">
+    <value>Med hjälp av biometri kan inloggning ske utan lösenord.</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeatures.Header" xml:space="preserve">
+    <value>Visning av Pro-funktioner</value>
+  </data>
+  <data name="SettingsAppShowAvailableProFeaturessDesc.Text" xml:space="preserve">
+    <value>Den här inställningen kan användas för att aktivera eller inaktivera synligheten för platshållare för Pro-funktioner.</value>
+  </data>
+  <data name="SettingsMDMInfo.Text" xml:space="preserve">
+    <value>*Vissa inställningar hanteras av din organisation.</value>
+  </data>
+  <data name="TutorialContentDialogProFeature.Text" xml:space="preserve">
+    <value># Kategorier och filter
+Användardefinierade kategorier kan skapas med en ikon och tilldelningar kan skapas för konton. I filtervalet är det möjligt att filtrera konton baserat på konfigurationen. Filtrering av konton per kategori kan också begränsas ytterligare med hjälp av standardsökning.
+
+![Kategorier och filter](ms-appx:///Assets/Images/categories_EN.png)
+
+# Enterprise App Management | Hantering av mobila enheter (MDM)
+Applikationen stöder en MDM-konfiguration för centraliserad hantering av applikationen i företaget; till exempel kan den automatiska blockeringen av applikationen eller inloggningsskärmen konfigureras centralt. En översikt över tillgängliga konfigurationer kan visas i [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+  </data>
+  <data name="TutorialContentDialogProFeatureHeader.Text" xml:space="preserve">
+    <value>Pro-Funktioner</value>
+  </data>
+  <data name="TutorialContentDialogCreateOrLoad.Text" xml:space="preserve">
+    <value>![Första stegen](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
+    <value>Det nya lösenordet som angetts är inte korrekt.</value>
+  </data>
+</root>

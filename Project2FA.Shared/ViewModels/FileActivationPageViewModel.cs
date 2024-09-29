@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Project2FA.Core.Services;

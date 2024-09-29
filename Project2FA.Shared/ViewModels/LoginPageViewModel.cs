@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using System;
 using System.Threading.Tasks;
 using UNOversal.Services.Dialogs;

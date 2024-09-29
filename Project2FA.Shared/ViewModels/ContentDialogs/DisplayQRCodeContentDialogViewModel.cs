@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using OtpNet;
-using Prism.Mvvm;
 using Project2FA.Repository.Models;
 using System;
 using System.Text;

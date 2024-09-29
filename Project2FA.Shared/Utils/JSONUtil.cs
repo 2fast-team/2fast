@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using UNOversal.Services.Serialization;
 #if WINDOWS_UWP
 using Project2FA.UWP;

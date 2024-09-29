@@ -47,7 +47,7 @@
                 <TextBlock 
                 Margin="10,0,0,0"
                 Visibility="{x:Bind ViewModel.IsScreenCaptureEnabled,Mode=OneWay}"
-                Text="{x:Bind strings:Resources.ShellPageWarnInfo,Mode=OneWay}"
+                Text="{x:Bind strings:Resources.ShellPageWarnInfo}"
                 VerticalAlignment="Center"
                 Foreground="Red"
                 Style="{StaticResource CaptionTextBlockStyle}" />

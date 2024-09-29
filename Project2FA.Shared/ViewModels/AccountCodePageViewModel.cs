@@ -12,7 +12,7 @@ using UNOversal.Navigation;
 using UNOversal.Services.Dialogs;
 using UNOversal.Logging;
 using Project2FA.Services;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using Windows.ApplicationModel.DataTransfer;
 using Project2FA.Core;
 using System.Collections.ObjectModel;

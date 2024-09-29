@@ -731,9 +731,9 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Update of third-party libraries
-- Further languages have been added: Spanish, French, Italian, Japanese, Chinese
-- Categories can now be set directly in new accounts (Pro function)
-- Fixed a bug where the password could not be changed if the currently saved password is invalid</value>
+- Further languages have been added: Greek, Finnish, Estonian, Norwegian, Swedish, Portuguese (Brazilian), Portuguese (European)
+- The translation for the Spanish language has been updated
+- Fixed a bug where the Chinese language could not be used with the language code</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

@@ -9,7 +9,7 @@ using NavigationViewItem = Microsoft.UI.Xaml.Controls.NavigationViewItem;
 using NavigationViewBackButtonVisible = Microsoft.UI.Xaml.Controls.NavigationViewBackButtonVisible;
 using System.Collections.Generic;
 using System.Linq;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using Windows.ApplicationModel.Core;
 using System.Threading.Tasks;
 using Project2FA.Services.Enums;

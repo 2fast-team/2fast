@@ -1,6 +1,4 @@
-﻿using Prism.Ioc;
-using Prism.Commands;
-using Project2FA.Core.Services;
+﻿using Project2FA.Core.Services;
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using CommunityToolkit.Mvvm.Input;
@@ -10,6 +8,8 @@ using UNOversal.Services.File;
 using System.Threading.Tasks;
 using Project2FA.Services;
 using Project2FA.Core.Services.Crypto;
+using UNOversal.Ioc;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;

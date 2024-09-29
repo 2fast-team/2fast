@@ -1,0 +1,1758 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountCodePageAddEntry.Label">
+    <value>Lisa konto</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageCopied">
+    <value>Kopeeritud lõikelauale</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageDeleteEntry.Text">
+    <value>Kustuta</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageEditEntry.Text">
+    <value>Muuda</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageItemMoreBTNToolTip">
+    <value>Näita valikuid</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageReloadDatafile.Label">
+    <value>Andmefaili uuesti laadimine</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageViewModelDeleteAccept">
+    <value>Jah</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageViewModelDeleteCancel">
+    <value>Ei</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteDatafileContentDialogDeleteDescription">
+    <value>Kas olete kindel, et soovite selle konto lõplikult kustutada?</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteDatafileContentDialogTitle">
+    <value>Kinnitage kustutamine</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCopyCodeButtonToolTip">
+    <value>Kopeeri kood</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialog.SecondaryButtonText">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialog.PrimaryButtonText">
+    <value>Konto loomine</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialog.Title">
+    <value>Uue konto loomine</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountName.Header">
+    <value>Konto nimi</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountName.PlaceholderText">
+    <value>Enamasti postiaadress</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogInfo.Text">
+    <value>Uue konto loomiseks kahefaktorilise autentimise jaoks on vaja QR-koodi või välise teenuse võtit (krüptograafilist teksti).
+
+# Kuidas tuleks võti importida?
+</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogInputs.Header">
+    <value>Sisendid</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogInputType.Header">
+    <value>Sisendi tüüp</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogLabel.Header">
+    <value>Silt</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogLabel.PlaceholderText">
+    <value>Kuvatav nimi</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogManualInput.Text">
+    <value>Käsitsi sisestamine</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogManualInputCheckbox.Content">
+    <value>Käsitsi sisestamine</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogQRCodeContentError">
+    <value>QR-koodist ei saa teavet. Palun proovige uuesti või lisage salajane võti käsitsi.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogReadQRCode.Text">
+    <value>Skaneeri võtme-QR-kood</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTeachingTipInfo">
+    <value>Peagi avaneb skaneerimisvahend</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogReadQRCodeTip.Title">
+    <value>Üleminek QR-koodile</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.Header">
+    <value>Salajane võti</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogSecretKey.PlaceholderText">
+    <value>Palun lisage siia salajase võtme string</value>
+    <comment></comment>
+  </data>
+  <data name="BTNConfirm.Content">
+    <value>Kinnitage</value>
+    <comment></comment>
+  </data>
+  <data name="BTNTryAgain.Content">
+    <value>Proovi uuesti</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogDatafilePivotItem.Header">
+    <value>Kohalik andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogIntroText.Text">
+    <value>Selles dialoogis saate muuta praeguse kasutatava andmefaili parooli.</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.PrimaryButtonText">
+    <value>Muuda parooli</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogMain.Title">
+    <value>Andmefaili parooli muutmine</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogPasswordError.Text">
+    <value>Praegune sisestatud parool ei ole õige.</value>
+    <comment></comment>
+  </data>
+  <data name="Confirm">
+    <value>Kinnitage</value>
+    <comment></comment>
+  </data>
+  <data name="CurrentPassword.Header">
+    <value>Praegune parool</value>
+    <comment></comment>
+  </data>
+  <data name="Delete">
+    <value>Kustuta</value>
+    <comment></comment>
+  </data>
+  <data name="Edit">
+    <value>Muuda</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialog.PrimaryButtonText">
+    <value>Kinnitage</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialog.SecondaryButtonText">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialog.Title">
+    <value>Konto muutmine</value>
+    <comment></comment>
+  </data>
+  <data name="Error">
+    <value>Viga</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageLoginButton.Content">
+    <value>Logi sisse</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageLoginWindowsHelloButton.Content">
+    <value>Sisselogimine Windows Hello abil</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPagePassword.Header">
+    <value>Parool</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPagePassword.PlaceholderText">
+    <value>Sisestage parool</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPagePasswordMismatch">
+    <value>Parool ei vasta andmefaili paroolile.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogChangePath.Content">
+    <value>Muuda teed</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogCreateInfo.Text">
+    <value>Andmefaili loomiseks tuleb valida nimi ja parool.
+Oluline: Te peate sisestama parooli iga kord, kui te rakendust käivitate!</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogDatafilePivotItem.Header">
+    <value>Andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.Header">
+    <value>Failinimi</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogLocalFolder.PlaceholderText">
+    <value>näiteks andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogLocalPath.Text">
+    <value>Valige kohalik tee</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogMain.CloseButtonText">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogMain.PrimaryButtonText">
+    <value>Andmefaili loomine</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogMain.Title">
+    <value>Andmefaili loomine</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogPath.Header">
+    <value>Tee</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogPivotItemKind.Header">
+    <value>Ladustamine</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogWebDAV.Text">
+    <value>Valige WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogWebDAVPivotItem.Header">
+    <value>WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileLocalFolder.Header">
+    <value>Failinimi</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileLocalFolder.PlaceholderText">
+    <value>Sisestage failinimi</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatefileContentDialogFolderName.Header">
+    <value>Foldername</value>
+    <comment></comment>
+  </data>
+  <data name="NewLocalDatafileInfo.Text">
+    <value>Selle rakenduse kasutamiseks tuleb üks kord luua andmefail. Kõik kontod salvestatakse sellesse faili krüpteeritult.
+Kui kavatsete seda rakendust kasutada mitmes seadmes, on mõistlik salvestada see fail välisesse salvestusseadmesse (nt pilve).</value>
+    <comment></comment>
+  </data>
+  <data name="NewPasswordContentDialog.Header">
+    <value>Uus parool</value>
+    <comment></comment>
+  </data>
+  <data name="NewPasswordRepeatContentDialog.Header">
+    <value>Korda uut salasõna</value>
+    <comment></comment>
+  </data>
+  <data name="No">
+    <value>Ei</value>
+    <comment></comment>
+  </data>
+  <data name="Password.Header">
+    <value>Parool</value>
+    <comment></comment>
+  </data>
+  <data name="Password.PlaceholderText">
+    <value>Sisestage parool</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordRepeat.Header">
+    <value>Korrake parooli</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordRepeat.PlaceholderText">
+    <value>sisestatud parool</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsActionRequiredRestart">
+    <value>See muudatus jõustub pärast rakenduse taaskäivitamist.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsBackButtonCard.Header">
+    <value>Tagasi nupu paigutus</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OffContent">
+    <value>Navigatsioonimenüüs</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsBackButtonToggleSwtich.OnContent">
+    <value>Pealkirjaribal</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsChangePassword.Text">
+    <value>Muuda salasõna</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileFilePath.Text">
+    <value>Andmefaili tee:</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileName.Text">
+    <value>Andmefaili nimi:</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileTitle.Text">
+    <value>Teave hetkel kasutatava andmefaili kohta</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsFactoryResetMessage">
+    <value>Kas olete kindel, et soovite rakenduse tehaseseadete lähtestamist? **Seda protsessi ei saa tagasi võtta!**
+Andmefaili **ei** eemaldata lähtestamise käigus.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsGiveFeedback.Text">
+    <value>Andke tagasisidet</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsGiveFeedbackText">
+    <value>Andke tagasisidet</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsDesignTitle.Header">
+    <value>Disain</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFactoryResetButton.Text">
+    <value>Rakenduse lähtestamine tehaseseadetele</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFunctionsTitle.Header">
+    <value>Funktsioonid</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageName.Text">
+    <value>Seaded</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemAbout.Header">
+    <value>Rakenduse kohta</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemDependencies.Header">
+    <value>Sõltuvused</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemOption.Header">
+    <value>Valikud</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsRateApp.Header">
+    <value>Hinda rakendust poes</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsRemoveDatafileMessage">
+    <value>Kas olete kindel, et soovite andmefaili lõplikult kustutada? Te kaotate kõik oma lisatud kontod.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeDark.Content">
+    <value>Tume</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeLight.Content">
+    <value>Valgus</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeSelectMode.Text">
+    <value>Valige režiim</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsThemeSystem.Content">
+    <value>Kasutage süsteemi seadeid</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsTitleBarToggleSwtich.Header">
+    <value>Kasutaja poolt määratud tiitliriba (heledas/tumedas)</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsWindowsColor.Content">
+    <value>Süsteemi värvi seaded</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsWindowsHelloPrefer.Header">
+    <value>Eelistage sisselogimiseks Windows Hello</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageAccountsNavigation.Content">
+    <value>Kontod</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageDatafileNavigation.Content">
+    <value>Andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageFeedbackNavigation.Content">
+    <value>Tagasiside</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageFeedbackNavigationToolTip">
+    <value>Anna tagasisidet (Github)</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogChangeDatafile.Content">
+    <value>Valige teine andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogDatafilePivotItem.Header">
+    <value>Andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogFilename.Header">
+    <value>Failinimi</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogFolderPath.Header">
+    <value>Kausta tee</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogInfo.Text">
+    <value>Kui olete rakendust varem kasutanud, valige, kas soovite olemasoleva andmefaili laadida kohalikust salvestusruumist või WebDAV-i kaudu.</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogLoadInfo.Text">
+    <value>Palun valige olemasolev andmefail ja sisestage parool.</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogLocalPath.Text">
+    <value>Valige kohalik tee</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogMain.CloseButtonText">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogMain.PrimaryButtonText">
+    <value>Laadige andmefaili</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogMain.Title">
+    <value>Laadige andmefaili</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogPasswordError.Text">
+    <value>Parooliga ei saa andmefaili dekrüpteerida.</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogPivotItemKind.Header">
+    <value>Ladustamine</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWebDAV.Text">
+    <value>Valige WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWebDAVPivotItem.Header">
+    <value>WebDAV</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageCreateDatafile.Content">
+    <value>Uue andmefaili loomine (esimene käivitamine)</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageFirstSteps.Text">
+    <value>Esimesed sammud ohutuse suunas ...</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageIntro.Text">
+    <value>Tere tulemast!
+
+Alustage oma igapäevaelus veel ühest turvategurist.</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageLoadDatafile.Content">
+    <value>Olemasoleva andmefaili laadimine</value>
+    <comment></comment>
+  </data>
+  <data name="WindowsHelloLoginMessage">
+    <value>Palun kontrollige nüüd oma konfigureeritud Windows Hello sisselogimise abil.</value>
+    <comment></comment>
+  </data>
+  <data name="WindowsHelloPreferMessage">
+    <value>Windows Hello abil on võimalik sisse logida. Kas soovite seda sisselogimist tulevikus eelistada? Saate seda valikut seadetes igal ajal muuta.</value>
+    <comment></comment>
+  </data>
+  <data name="Yes">
+    <value>Jah</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageRemainingSecondsToolTip">
+    <value>Sekundid värskendamiseks</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextCancel">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextConfirm">
+    <value>Kinnitage</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextNo">
+    <value>Ei</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextYes">
+    <value>Jah</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogLaterButton">
+    <value>Tagasi kutsuda hiljem</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogNoButton">
+    <value>Ei, aitäh.</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogQuestion">
+    <value>Olete seda rakendust juba mõnda aega kasutanud, palun külastage kauplust, et seda hinnata ja kirjutada arvustus. Samuti võite igal ajal kasutada Windowsi tagasiside rakendust, et saata meile oma tagasiside otse.</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogYesButton">
+    <value>Hinda nüüd</value>
+    <comment></comment>
+  </data>
+  <data name="RateAppContentDialogTitle">
+    <value>Kas sulle meeldib see rakendus?</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header">
+    <value>Praegune parool</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogCurrentPassword.PlaceholderText">
+    <value>Sisestage parool</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogDescription">
+    <value>Rakendusel ei ole praegu vajalikke juurdepääsuõigusi andmefailile juurdepääsuks. Õiguste määramiseks tuleb rakendus siiski sulgeda.
+Andke vajalikud õigused seadetes ja käivitage rakendus uuesti.
+
+Juhised õiguste seadmiseks:
+![Juhised volituste seadmiseks](ms-appx:///Assets/Infoelemendid/AuthSystemstorageEN.png)</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogPrimaryBTN">
+    <value>Autoriseerimise määramine</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogSecondaryBTN">
+    <value>Tühista (rakenduse sulgemine)</value>
+    <comment></comment>
+  </data>
+  <data name="AuthorizationFileSystemContentDialogTitle">
+    <value>Autoriseerimisviga</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBLogout.Label">
+    <value>Lock app</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageCopyCodeTeachingTip">
+    <value>Klahv kopeeritakse lõikelauale</value>
+    <comment></comment>
+  </data>
+  <data name="ChangePassword">
+    <value>Muuda parooli</value>
+    <comment></comment>
+  </data>
+  <data name="CloseApp">
+    <value>Sulge rakendus</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteAccountContentDialogDescription">
+    <value>Kas olete kindel, et soovite konto kustutada? Pärast kustutamist on teil **30 sekundit** aega kustutamise tühistamiseks.</value>
+    <comment></comment>
+  </data>
+  <data name="DeleteAccountContentDialogTitle">
+    <value>Konto kustutamine</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandle">
+    <value>Veakäepide</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandleDescription">
+    <value>Tekkinud on käitlemata viga, palun saatke vea üksikasjad, mis on näha väljal uue probleemi kaudu Githubis.</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordInvalidHeader">
+    <value>Salasõna kehtetu</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsQRScanningHeader">
+    <value>QR-koodi lugemise alustamise viivitus</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsQRScanningSecondsRange">
+    <value>Määratud sekundites (lubatud 3-10s)</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageAboutAppNavigation.Content">
+    <value>Rakenduse kohta</value>
+    <comment></comment>
+  </data>
+  <data name="ExceptionDatafileNotFound">
+    <value>Praeguse andmefaili polku ei leitud. Võimalik, et te olete andmefaili ümber paigutanud.
+**Kuidas te soovite teekonda muuta?**</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBLogoutToolTip">
+    <value>Lock app</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageAddEntryToolTip">
+    <value>Lisa konto</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageReloadDatafileToolTip">
+    <value>Andmefaili uuesti laadimine</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordInvalidMessage">
+    <value>Selles rakenduses salvestatud parool on andmefaili jaoks kehtetu. Võimalik, et olete muutnud andmefaili parooli mõnes teises masinas.
+**Kas soovite parooli nüüd muuta?</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsFactoryResetDialogTitle">
+    <value>Tehase lähtestamine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsSourceCode.Header">
+    <value>Näita rakenduse lähtekoodi</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPivotItemDatafile.Header">
+    <value>Andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBUndoDelete.Label">
+    <value>Kustutamise tühistamine</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageABBUndoDeleteToolTip">
+    <value>Kustutamise tühistamine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileName.Header">
+    <value>Andmefaili nimi</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafilePath.Header">
+    <value>Andmefaili tee</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileContentDialogDatafileExistsError">
+    <value>Selle nimega andmefail on kaustas juba olemas. Palun muutke kausta või faili nime.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileBTNChangePassword.Content">
+    <value>Muuda parool</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandleSendError">
+    <value>Saada viga</value>
+    <comment></comment>
+  </data>
+  <data name="FactoryReset">
+    <value>Tehase lähtestamine</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePath">
+    <value>Muuda faili teekonda</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Subtitle">
+    <value>Uute kontode lisamine</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageEmptyCollectionTip.Title">
+    <value>Tühi nimekiri</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageWrongTimeBTN">
+    <value>Avatud aja seaded</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageWrongTimeContent">
+    <value>Seadme praegune kellaaja näidik on vale, mistõttu ei saa kontode koode õigesti genereerida.
+Palun sünkroonige kellaaeg seadetes.</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageWrongTimeTitle">
+    <value>Vale aja kuvamine</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordAdvancedHashOption.Header">
+    <value>Täiustatud valikud</value>
+    <comment></comment>
+  </data>
+  <data name="PasswordAdvancedHashOptionText.Content">
+    <value>Selle seadistuse puhul kasutatakse SHA-512 asemel Argon2id parooli päringu genereerimiseks.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDatafileChangePasswordInfoTitle">
+    <value>Parool on edukalt muudetud</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPagePaneTitle">
+    <value>Navigatsioonimenüü</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAuthorLogo.Content">
+    <value>Logo autor: Freepik</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageAutoSuggestBoxPlaceholder">
+    <value>Otsi</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageSearchNotFound">
+    <value>Tulemusi ei leitud</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyGroupAssets">
+    <value>Varad</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyGroupPackages">
+    <value>Pakendid</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencies.Header">
+    <value>Rakenduse sõltuvused</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyAuthor.Text">
+    <value>Autor:</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsDependencyLicence.Text">
+    <value>Litsents:</value>
+    <comment></comment>
+  </data>
+  <data name="RestartApp">
+    <value>Rakenduse taaskäivitamine</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorCopyToClipboard">
+    <value>Aruande kopeerimine lõikelauale</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Subtitle">
+    <value>NTP-serveri aadress on kehtiv ja selle saab salvestada, kui vajutada seda.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveIsPossibleTip.Title">
+    <value>Säästmine?</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Subtitle">
+    <value>NTP-serveri aadressi salvestamine ei ole võimalik, sest serverit ei leitud.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageSaveNotPossibleTip.Title">
+    <value>Viga</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsUseNTPTimeCorrection.Header">
+    <value>Kasutage ajaserverit, et kontrollida süsteemi aega</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsSaveNTPServer.Label">
+    <value>Salvesta</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorHandleDescriptionLastSession">
+    <value>Rakenduse viimasel kasutuskorral tekkis käitlemata viga, palun saatke vea üksikasjad, mida saab näha väljal uue probleemi kaudu Githubis.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsNTPServerCheckBoxText.Content">
+    <value>NTP-serveri seadistamine käsitsi</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsNTPServerDescribtion.Text">
+    <value>Süsteemi õige aja kontrollimiseks saab kasutada NTP-serverit. Kui kellaaeg erineb rohkem, ei ole kontode koodide loomine enam korrektne. Kui kõrvalekaldumine on suurem kui kolmkümmend sekundit, ilmub teade ja koodide loomine toimub NTP-serveri aja järgi.</value>
+    <comment></comment>
+  </data>
+  <data name="NewAppFeaturesContent">
+    <value>- Kolmanda osapoole raamatukogude ajakohastamine
+- Lisandunud on järgmised keeled: hispaania, prantsuse, itaalia, jaapani, hiina keel
+- Kategooriaid saab nüüd määrata otse uutes kontodes (Pro-funktsioon)
+- Parandatud viga, mille tõttu parooli ei saanud muuta, kui hetkel salvestatud parool on kehtetu</value>
+    <comment>[ReswT:always]</comment>
+  </data>
+  <data name="NewAppFeaturesTitle">
+    <value>Uued funktsioonid ja muudatused</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageTitle">
+    <value>Tere tulemast</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageName.Text">
+    <value>Olemasoleva andmefaili laadimine</value>
+    <comment></comment>
+  </data>
+  <data name="CreateDatafile">
+    <value>Andmefaili loomine</value>
+    <comment></comment>
+  </data>
+  <data name="LoadDatafile">
+    <value>Olemasoleva andmefaili laadimine</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageABBTutorial.Label">
+    <value>Esimesed sammud</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageLoadDatafile.Content">
+    <value>Laadige andmefaili</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWDLogin.Content">
+    <value>Logi sisse</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWDServerAddress.Header">
+    <value>Serveri aadress</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafileContentDialogWDUsername.Header">
+    <value>Kasutajanimi</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageDatafileExpander.Header">
+    <value>Andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="UseDataFilePageLoginExpander.Header">
+    <value>Teenuse sisselogimine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppCornorRadius.Header">
+    <value>Ümmargused nurgad</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppCornorRadiusDesc.Text">
+    <value>Kui see valik on lubatud, ümardatakse juhtimisseadiste nurgad.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppThemeMode.Header">
+    <value>Rakenduse värviskeem</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFactoryReset.Header">
+    <value>Tehase lähtestamine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsFactoryResetDesc.Text">
+    <value>Vajutamine ja kinnitamine lähtestab rakenduse</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsQRScan.Header">
+    <value>QR-koodi skaneerimine</value>
+    <comment></comment>
+  </data>
+  <data name="UseDatafilePasswordInfo">
+    <value>Andmefaili laadimiseks peate sisestama parooli, mis konfigureeriti faili loomisel.</value>
+    <comment></comment>
+  </data>
+  <data name="ToolTipShowHelp">
+    <value>Näita abi</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAutoLogoutDesc">
+    <value>Automaatne välja logimine pärast mitteaktiivsust</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAutoLogoutMinutes">
+    <value>Inaktiivsuse minutid</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOptionsAutoLogout.Header">
+    <value>Automaatne lukustus</value>
+    <comment></comment>
+  </data>
+  <data name="Close">
+    <value>Sulge</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelp">
+    <value>Kui QR-koodi skannimine on valitud, avaneb uus aken, milles tuleb valida programm, mis sisaldab skaneeritavat QR-koodi. See on näiteks brauser.</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageShowQRCode.Text">
+    <value>QR-koodi kuvamine</value>
+    <comment></comment>
+  </data>
+  <data name="DisplayQRCodeContentDialogTitle">
+    <value>QR-koodi kuvamine</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogInputSecretKeyHelp">
+    <value>Sisend põhineb Base32-l ja lubab seetõttu ainult tähti A-Z ja numbreid 2-7.</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipDeleteFavourite">
+    <value>Lemmiku tühistamine</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipSetFavourite">
+    <value>Määrake lemmikuks</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipHideTOTP">
+    <value>Peida võti</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTooltipShowTOTP">
+    <value>Näita võtit</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPreferHiddenTOTP.Header">
+    <value>Peida võtmed</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPreferHiddenTOTPDesc.Text">
+    <value>Genereeritud võtmed on peidetud ja neid saab valikuliselt hämardada.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogExpertExpander.Header">
+    <value>Eksperdi seaded</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogHashAlgo.Header">
+    <value>Hash algoritm</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogTotpSize.Header">
+    <value>Numbrite arv</value>
+    <comment></comment>
+  </data>
+  <data name="ButtonTextRetry">
+    <value>Proovi uuesti</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorClipboardTask">
+    <value>Lõikeplaat on hõivatud teise programmiga, palun proovige uuesti.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogDeleteAccountIcon.Text">
+    <value>Kustuta</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountIcon.Header">
+    <value>Konto ikoon</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogAccountNotes.Header">
+    <value>Lisa märkmeid</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountNotes.Header">
+    <value>Märkused</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogSuggestionBox.Header">
+    <value>Otsi konto pilti</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogExpertSettingsHelp">
+    <value>Muutke neid seadeid ainult siis, kui olete kindel, et teenus nõuab neid.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDataFilePageTitle.Text">
+    <value>Uus andmefail</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageSearchFilter.Label">
+    <value>Filter</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageSearchFilterToolTip">
+    <value>Filter</value>
+    <comment></comment>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFile">
+    <value>Vali fail</value>
+    <comment></comment>
+  </data>
+  <data name="WebViewDatafileContentDialogChooseFolder">
+    <value>Vali kaust</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageAboDesc.Text">
+    <value>Toetage rakenduse arendamist korduvate maksetega.</value>
+    <comment></comment>
+  </data>
+  <data name="WebDAVEmptyFolderMessage.Text">
+    <value>See kaust ei sisalda ühtegi faili, mida saaks valida.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileCreateDatafile.Content">
+    <value>Andmefaili loomine</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilehangeDatafile.Content">
+    <value>Muuda kausta</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppPrideMonthDesign.Header">
+    <value>Vikerkaarevärvid sisselogimisakende jaoks</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppPrideMonthDesignDesc.Text">
+    <value>Sisselogimisakna vikerkaarevärvide seadistamine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsMailSupportApp.Text">
+    <value>E-posti tugi</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsCustomDesign.Header">
+    <value>Spetsiaalsed disaini seaded</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogImportBackup.Header">
+    <value>Impordi varukoopia</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilePageCreateFileBTN.Content">
+    <value>Andmefaili loomine</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageTutorialTipOpen">
+    <value>Avatud õpetus</value>
+    <comment></comment>
+  </data>
+  <data name="WelcomePageTutorialDesc">
+    <value>Kas soovite avada rakenduse õpetuse?</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogFirstSteps.Text">
+    <value>Rakendus **2fast** (akronüüm **t**wo **f**actor **a**autentikaator **s**toetab **T**OTP) on [autentikaator](https://en.wikipedia.org/wiki/Authenticator) kahefaktorilise autentimise (2FA) jaoks, mis kasutab standardset "**T** ajapõhist **O**ne-**t**time **P**assword algoritmi"/ ajapõhist ühekordset parooli (TOTP) vastavalt standardile [RFC 6238](https://tools.ietf.org/html/rfc6238). Selle rakendusega saab kasutada teenuseid, mis tuginevad teise teguri puhul TOTP-standardile. Näiteks Microsoft, Google ja PayPal toetavad kahefaktorilist autentimist TOTPi abil:</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogCreateMethod.Text">
+    <value>Andmefaili loomiseks tuleb kõigepealt valida kaust, kuhu fail salvestatakse. Soovitatav on andmete kaotsimineku eest kaitstud salvestuskoht (nt pilvesalvestus, nt One-Drive, DropBox jne). Sellele järgneb nimi ja parool faili krüpteerimiseks. Parool on soovitatav salvestada paroolihaldurisse, et vältida selle kadumist.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogLoadMethod.Text">
+    <value>Andmefaili laadimiseks tuleb kõigepealt valida andmefail. Sellele järgneb parool, millega andmefail on krüpteeritud.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountCodeContentDialogQRCodeHelpHeader.Text">
+    <value>Konto loomine</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogCreateMethodHeader.Text">
+    <value>Andmefaili loomine</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogLoadMethodHeader.Text">
+    <value>Andmefaili laadimine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsUseAutoLogout.Header">
+    <value>Automaatne välja logimine</value>
+    <comment></comment>
+  </data>
+  <data name="FunctionNotAvailable">
+    <value>Funktsioon ei ole saadaval</value>
+    <comment></comment>
+  </data>
+  <data name="WindowsHelloNotAvailable">
+    <value>Windows Hello ei ole võimalik käivitada, sest kaitstud mälus oleva andmefaili jaoks ei ole parooli salvestatud.</value>
+    <comment></comment>
+  </data>
+  <data name="ErrorGenerateTOTPCode">
+    <value>Konto {0} salajane võti on tühi või loetamatu. Palun käivitage rakendus uuesti. Kui probleem püsib, puhastage konto {0} ja lisage see uuesti.</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterBoldToolTip">
+    <value>Bold</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterItalicToolTip">
+    <value>Kursiivis</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterStrikeToolTip">
+    <value>Ülestriigitud</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterUnderlineToolTip">
+    <value>Rõhutage</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterListToolTip">
+    <value>Loetelu</value>
+    <comment></comment>
+  </data>
+  <data name="TextFormatterOrderedToolTip">
+    <value>Tellitud nimekiri</value>
+    <comment></comment>
+  </data>
+  <data name="WriteDatafileErrorBTNCancel">
+    <value>Muudatuste äraviskamine</value>
+    <comment></comment>
+  </data>
+  <data name="WriteDatafileErrorBTNRetry">
+    <value>Salvesta uuesti</value>
+    <comment></comment>
+  </data>
+  <data name="WriteDatafileErrorDesc">
+    <value>Muudatusi ei saanud salvestada. Kas soovite neid uuesti salvestada?</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsCBNotStorePassword.Content">
+    <value>Ära salvesta salasõna mandaadihaldurisse (Windows Hello ei ole saadaval).</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFound">
+    <value>Aadressi ei leitud</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVServerNotFoundDesc">
+    <value>WebDAV-teenuse aadressi ei leitud.</value>
+    <comment></comment>
+  </data>
+  <data name="WebDAVAppPasswordInfo">
+    <value>WebDAV-teenusesse sisselogimiseks on vaja rakenduse parooli, mille saab luua WebDAV-teenuse seadetes.</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsError">
+    <value>Sisselogimise viga</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVCredentialsErrorDesc">
+    <value>Teie kasutajanimi või parool on kehtetu.</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceError">
+    <value>Server on hooldusrežiimis</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVMaintenanceErrorDesc">
+    <value>Sisselogimine ei ole praegu võimalik, sest WebDAV teenus on praegu hooldusrežiimis.</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledError">
+    <value>Server ei ole paigaldatud</value>
+    <comment></comment>
+  </data>
+  <data name="DatafileViewModelWebDAVNotInstalledErrorDesc">
+    <value>WebDAV teenus ei ole praegu korralikult paigaldatud.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsUseWindowsHello.Header">
+    <value>Pakkuda Windows Hello sisselogimisvõimalust</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileNoInternet">
+    <value>Praegu ei ole sünkroniseerimiseks internetiühendust võimalik kasutada. Palun ühenduge ja kinnitage "Laadige andmefail uuesti".</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileTitleNoInternet">
+    <value>Internetiühendus puudub</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileTitleUpdated">
+    <value>Andmefaili ajakohastatud</value>
+    <comment></comment>
+  </data>
+  <data name="InfoBarDatafileUpdated">
+    <value>Andmefaili on edukalt uuendatud.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogCameraScan.Header">
+    <value>Kaamera</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogCameraScanBTN.Text">
+    <value>Kaamera</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogBTNCamRetry.Content">
+    <value>Laadige uuesti</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogNoCamFound.Text">
+    <value>Kaamera ei ole saadaval.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogNoCamPermission.Text">
+    <value>Kaamera kuvamiseks ei ole nõusolekut antud.</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogPrivacyWebcam.Content">
+    <value>Avatud seaded</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageWarnInfo">
+    <value>Ekraani salvestamise kaitse ei ole aktiivne</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileFolderPath.Header">
+    <value>WebDAV kausta tee</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageTitle">
+    <value>Kontod</value>
+    <comment></comment>
+  </data>
+  <data name="AccoundCodePageImportEntry.Label">
+    <value>Kontode importimine</value>
+    <comment></comment>
+  </data>
+  <data name="AccoundCodePageImportCamera.Text">
+    <value>Kaamera importimine</value>
+    <comment></comment>
+  </data>
+  <data name="AccoundCodePageImportDocument.Text">
+    <value>Kasutage faili/pilti importimiseks</value>
+    <comment></comment>
+  </data>
+  <data name="ApplicationName">
+    <value>2fast - kaheteguriline autentimine</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageBackButton.Text">
+    <value>Tagasi</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageForwardButton.Text">
+    <value>Edasi</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageSkipButton.Content">
+    <value>Jäta  vahele.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageFinishpButton.Content">
+    <value>Lõpeta õpetus</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilePasswordInfo">
+    <value>Andmefaili krüpteerimiseks tuleb määrata parool. Seda parooli on tungivalt soovitatav turvaliselt salvestada paroolihalduris.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafilePasswordInfoTitle">
+    <value>Krüpteerimise salasõna</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNDesc">
+    <value>Võti kopeeritakse lõikelauale.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemCopyCodeBTNTitle">
+    <value>Koopia võti</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTDesc">
+    <value>Lemmiku määramisel kuvatakse kontot rakenduse aktsendivärviga ja see paigutatakse kuvamisjärjekorras ülevalpool.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTitle">
+    <value>Set lemmik</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemMoreBTNDesc">
+    <value>Konto lisavõimalused kuvatakse siin</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemMoreBTNTitle">
+    <value>Rohkem võimalusi</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNDesc">
+    <value>Valikuliselt saab klahve peita ja uuesti kuvada.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPageItemShowCodeBTNTitle">
+    <value>Peida/näidata klahvi</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogInteractionAccount.Text">
+    <value>Loodud kontode jaoks on olemas mitmesugused interaktsioonivõimalused, mida selgitatakse üksikasjalikumalt ühe näidiskonto abil pärast nende aktiveerimist.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogInteractionAccountHeader.Text">
+    <value>Kontode koostoimimisvõimalused</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileAccessErrorDesc">
+    <value>Rakenduse juurdepääs kaustale on blokeeritud, proovige uuesti või valige teine kaust.</value>
+    <comment></comment>
+  </data>
+  <data name="NewDatafileAccessErrorTitle">
+    <value>Juurdepääs keelatud</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAddGlobalCategories.Header">
+    <value>Kategooriate loomine</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogIcon.Header">
+    <value>Vali ikoon</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogLabel.Header">
+    <value>Kategooria nimi</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.PrimaryButtonText">
+    <value>Salvesta</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.SecondaryButtonText">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogHeader.Title">
+    <value>Kategooriate haldamine</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesContentDialogIconCreateBTN.Content">
+    <value>Loo kategooria</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageSearchNavigation.Content">
+    <value>Otsi</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageSettingsNavigation.Content">
+    <value>Seaded</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricFacePreferMessage">
+    <value>Teil on võimalus logida sisse näotuvastusega. Kas soovite seda sisselogimist tulevikus eelistada? Saate seda valikut seadetes igal ajal muuta.</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricFingerPreferMessage">
+    <value>Teil on võimalus logida sisse oma sõrmejäljega. Kas soovite seda sisselogimist tulevikus eelistada? Saate seda valikut seadetes igal ajal muuta.</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricLoginSubtitle">
+    <value>Logi rakendusse sisse sõrmejälje või näotuvastuse abil.</value>
+    <comment></comment>
+  </data>
+  <data name="BiometricLoginTitle">
+    <value>Logi sisse</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageTutorialNavigation.Content">
+    <value>Tutorial</value>
+    <comment></comment>
+  </data>
+  <data name="ShellPageTutorialNavigation.ToolTipService.ToolTip">
+    <value>Avatud õpetus</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorks.Text">
+    <value>Teise teguri [Autentimine] (https://en.wikipedia.org/wiki/Authentication) funktsionaalsus toimub ajapõhise ühekordse parooli abil. Selleks lepitakse teenuse sisselogimisserveri ja kasutaja vahel kokku salajane seadistusvõti, mida hoitakse lokaalselt rakenduses. See tagab, et kui seadistamisvõtmes on kokku lepitud, saab rakendust alati kasutada võrguühenduseta.
+
+
+
+Erinevalt teistest autentimisvahenditest salvestatakse selles rakenduses erinevate teenuste häälestusvõtmeid failis, mis on loomisel parooliga kaitstud, et faili krüpteerida. Faili salvestamiseks soovitatakse sel juhul kasutada pilvepuhvrit, nagu Nextcloud, ownCloud, Onedrive jne, et saada versioonide ja kadumise vastu kaitset.
+
+
+
+Selle rakenduse funktsionaalsust selgitatakse üksikasjalikumalt järgmistes jaotistes.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogHowTheAppWorksHeader.Text">
+    <value>**Rakenduse funktsionaalsus**</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsManageSubscriptions.Header">
+    <value>Tellimuste haldamine</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogFirstStepAppending.Text">
+    <value>Järgnevalt selgitatakse rakenduse funktsionaalsust.</value>
+    <comment></comment>
+  </data>
+  <data name="BTNBack.Content">
+    <value>Tagasi</value>
+    <comment></comment>
+  </data>
+  <data name="NewDataFilePageChangePath.Content">
+    <value>Vali kausta tee</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsInAppPayment.Header">
+    <value>Tellimused ja ühekordsed ostud</value>
+    <comment></comment>
+  </data>
+  <data name="InAppSubscriptionMonthSupport">
+    <value>Tellimusega toetate rakenduse edasist arendamist. Tulevikus lisanduvad ***Pro+*** funktsioonid on selle tellimusega kasutatavad ja kättesaadavad.
+***
+### 2,49€ kuus</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialog.PrimaryButtonText">
+    <value>Telli / osta</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialog.SecondaryButtonText">
+    <value>Tühista</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialog.Title">
+    <value>Tellimused ja ostud</value>
+    <comment></comment>
+  </data>
+  <data name="DisplayQRCodeContentDialogDesc.Text">
+    <value>Importige konto teise seadme jaoks, avades soovitud seadmega kahefaktorilise autentimise rakenduse ja lisades kaameraga konto.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsCardExternalAction">
+    <value>Helista väljastpoolt (brauser)</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsInAppPayment.Description">
+    <value>Täiustatud funktsioonide tellimine ja ostmine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsManageSubscriptions.Description">
+    <value>Tellimuste haldamine oma Microsofti kontol</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialogSubscriptionItemSelect">
+    <value>Valige tellimus</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogTitle">
+    <value>Uue konto loomine</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutNoCategories.Text">
+    <value>Praegu ei ole kategooriaid saadaval, looge uusi kategooriaid selle dialoogi seadete kaudu.</value>
+    <comment></comment>
+  </data>
+  <data name="ManageCategoriesAddGlobalCategories.Header">
+    <value>Lisa kategooria</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageTitle.Text">
+    <value>Logi sisse</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageManageFilter.Label">
+    <value>Kategooriate haldamine ja filtrite määramine</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageManageFilterToolTip">
+    <value>Kategooriate haldamine ja filtrite määramine</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Reset.Label">
+    <value>Filtri lähtestamine</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutABBTN_Settings.Label">
+    <value>Kategooriate haldamine</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountCategories.Header">
+    <value>Kategooriate määramine</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialogPurchaseItemSelect">
+    <value>Valige ostmiseks</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageProFeatureToolTip">
+    <value>Funktsioon on saadaval ainult ostu või tellimuse alusel.</value>
+    <comment></comment>
+  </data>
+  <data name="InAppBuyOnce">
+    <value>Ostuga muutuvad Pro+ funktsioonid püsivalt kättesaadavaks ja kasutatavaks, toetades seega rakenduse edasist arengut.
+Praegu saadaval:
+
+- Kategooriad ja filter
+- Mobiilseadmete haldamine (MDM)
+***
+### 34,99€ ühekordne</value>
+    <comment></comment>
+  </data>
+  <data name="InAppSubscriptionYear">
+    <value>Tellimusega muutuvad ***Pro+*** funktsioonid kättesaadavaks ja kasutatavaks ning te toetate rakenduse edasist arendamist.
+Praegu saadaval:
+
+- Kategooriad ja filtrid
+- Mobiilseadmete haldamine (MDM)
+***
+### 6,49€ aastas</value>
+    <comment></comment>
+  </data>
+  <data name="InAppPaymentContentDialogBuyItemSelect">
+    <value>Valige ostmiseks</value>
+    <comment></comment>
+  </data>
+  <data name="AccountCodePageManageFilterInfo.Label">
+    <value>Kategooriad &amp; filter</value>
+    <comment></comment>
+  </data>
+  <data name="ProFeatureContentInfo">
+    <value>Funktsioon on saadaval ainult tellimise või ostu teel. Kas soovite tutvuda variantidega?</value>
+    <comment></comment>
+  </data>
+  <data name="ProFeatureTitleInfo">
+    <value>Tasuline funktsioon</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogForgettenPassword.Text">
+    <value>Unustasid salasõna?</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialPagePasswordInfo">
+    <value>Kui olete unustanud parooli ja eelnevalt rakenduse deinstalleerinud või lähtestanud, saate parooli vaadata samas arvutis Windowsi [Credential Manager] (https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) kaudu. Siin on veebi sisselogimise teabe all kirjeks "Project2FA".</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageWindowsHelloError">
+    <value>Windows Hello'ga on probleem. Rakenduse funktsionaalsuse kasutamiseks lahendage probleem Windowsi seadetes.</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountCategoryInfoText">
+    <value>Olemasolevatele kategooriatele klõpsates saate määrata kontole ühe või mitu kategooriat, mis võimaldab hiljem filtreeritud otsinguid teha. Kategooriaid hallatakse ja luuakse pealehel, kasutades ülemise menüüriba nuppu "Kategooriate ja filtrite määramine".</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountContentDialogAccountNoCategoryInfo.Text">
+    <value>Praegu ei ole kategooriaid saadaval, looge uusi kategooriaid, kasutades ülemise menüüriba nuppu "Kategooriate ja filtrite määramine".</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppLoggingMode.Header">
+    <value>Vea logimine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsLoggingFull.Content">
+    <value>Täielik</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsLoggingNone.Content">
+    <value>Ei</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsLoggingSimple.Content">
+    <value>Ainus erand</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsOpenLogBTN.Content">
+    <value>Näita vealogi</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageNoLogDialogContent">
+    <value>Praegu ei ole veateadet loodud.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsPageNoLogDialogTitle">
+    <value>Veateade puudub</value>
+    <comment></comment>
+  </data>
+  <data name="CategoryFilterFlyoutCategoriesInfo.Text">
+    <value>Otsing toimub seatud kategooriate abil OR-otsinguga.</value>
+    <comment></comment>
+  </data>
+  <data name="EditAccountPageTitle">
+    <value>Konto muutmine</value>
+    <comment></comment>
+  </data>
+  <data name="AddAccountContentDialogNoCaptureContentError">
+    <value>QR-koodi skaneerimise akent ei ole valitud.</value>
+    <comment></comment>
+  </data>
+  <data name="LoginPageIOSBiometricReason">
+    <value>Biomeetria kasutamisega toimub sisselogimine ilma paroolita.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppShowAvailableProFeatures.Header">
+    <value>Pro funktsioonide kuvamine</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsAppShowAvailableProFeaturessDesc.Text">
+    <value>Selle seadistuse abil saab Pro-funktsioonide paigutussalvestite nähtavuse sisse või välja lülitada.</value>
+    <comment></comment>
+  </data>
+  <data name="SettingsMDMInfo.Text">
+    <value>* Mõnda seadistust haldab teie organisatsioon.</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogProFeature.Text">
+    <value># Kategooriad ja filtrid
+Kasutaja määratud kategooriaid saab luua ikooniga ja kontodele saab luua määranguid. Filtrite valikus on võimalik kontode filtreerimine konfiguratsiooni alusel. Kontode filtreerimist kategooriate järgi saab ka standardotsingu abil veelgi kitsendada.
+
+![Kategooriad ja filtrid](ms-appx:///Assets/Images/categories_EN.png)
+
+# Enterprise App Management | Mobile Device Management (MDM)
+Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ettevõttes; näiteks saab tsentraalselt konfigureerida rakenduse või sisselogimisekraani automaatse blokeerimise. Ülevaadet olemasolevatest konfiguratsioonidest saab vaadata [Wiki](https://github.com/2fast-team/2fast/wiki/Enterprise-app-management-%7C-mobile-device-management-(MDM)).</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogProFeatureHeader.Text">
+    <value>Pro-Funktions</value>
+    <comment></comment>
+  </data>
+  <data name="TutorialContentDialogCreateOrLoad.Text">
+    <value>![Esimesed sammud](ms-appx:///Assets/Images/firstSteps_EN.png)</value>
+    <comment></comment>
+  </data>
+  <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text">
+    <value>Uus sisestatud salasõna ei ole õige.</value>
+    <comment></comment>
+  </data>
+</root>

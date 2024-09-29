@@ -179,13 +179,21 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Splashcreen\splash_screen.svg" />
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\da\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\el\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\es\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\et\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\fi\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\fr\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\it\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\ja\Resources.resw" />
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\zh\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\nb\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\pt-BR\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\pt-PT\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\sv\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\zh-cn\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\schluessel.svg" />
@@ -216,5 +224,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\android_schluessel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Strings\da\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\el\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\es\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\et\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\fi\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\fr\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\it\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\ja\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\nb\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\pt-BR\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\pt-PT\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\sv\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\zh-cn\Resources.md" />
   </ItemGroup>
 </Project>

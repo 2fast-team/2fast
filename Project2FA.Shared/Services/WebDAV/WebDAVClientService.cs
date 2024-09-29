@@ -1,5 +1,5 @@
 ﻿using System;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using WebDAVClient;
 using Project2FA.Core;
 using UNOversal.Services.Secrets;

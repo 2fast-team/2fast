@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Uwp.Helpers;
-using Prism.Ioc;
+using UNOversal.Ioc;
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;

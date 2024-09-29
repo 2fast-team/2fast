@@ -1,5 +1,4 @@
 ﻿
-using Prism.Commands;
 using Project2FA.Repository.Models;
 using System;
 using System.Security.Cryptography;
@@ -82,7 +81,7 @@ namespace Project2FA.ViewModels
 
             CheckServerAddressCommand = new AsyncRelayCommand(CheckServerStatus);
 
-            ConfirmErrorCommand = new DelegateCommand(() =>
+            ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
             });

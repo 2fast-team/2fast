@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Security.Cryptography;
 using System.Text;
 using UNOversal.Logging;
-using Prism.Ioc;
+using UNOversal.Ioc;
 
 
 #if WINDOWS_UWP

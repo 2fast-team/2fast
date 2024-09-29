@@ -733,9 +733,9 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Mise à jour des bibliothèques tierces
-- D'autres langues ont été ajoutées : espagnol, français, italien, japonais, chinois.
-- Les catégories peuvent désormais être définies directement dans les nouveaux comptes (fonction Pro)
-- Correction d'un bogue qui empêchait la modification du mot de passe si le mot de passe actuellement enregistré n'était pas valide.</value>
+- D'autres langues ont été ajoutées : grec, danois, finnois, estonien, norvégien, suédois, portugais (brésilien), portugais (européen).
+- La traduction pour la langue espagnole a été mise à jour
+- Correction d'un problème où la langue chinoise ne pouvait pas être utilisée avec le code de langue.</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Nouvelles fonctionnalités et changements</value>

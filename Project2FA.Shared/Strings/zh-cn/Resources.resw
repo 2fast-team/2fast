@@ -733,9 +733,9 @@
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- 更新第三方库
-- 新增语言：西班牙语、法语、意大利语、日语和中文
-- 现在可直接在新账户中设置类别（专业版功能）
-- 修正了一个错误，即如果当前保存的密码无效，则无法更改密码</value>
+- 新增语言：希腊语、丹麦语、芬兰语、爱沙尼亚语、挪威语、瑞典语、葡萄牙语（巴西）、葡萄牙语（欧洲）。
+- 更新了西班牙语的翻译
+- 修正了一个无法使用中文语言代码的错误</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

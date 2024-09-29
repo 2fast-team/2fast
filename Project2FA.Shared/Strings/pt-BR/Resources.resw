@@ -732,9 +732,9 @@ Sincronize a hora nas configurações.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Atualização de bibliotecas de terceiros
-- Outros idiomas foram adicionados: espanhol, francês, italiano, japonês e chinês
-- As categorias agora podem ser definidas diretamente em novas contas (função Pro)
-- Correção de um bug em que a senha não podia ser alterada se a senha salva atualmente fosse inválida</value>
+- Outros idiomas foram adicionados: grego, dinamarquês, finlandês, estoniano, norueguês, sueco, português (brasileiro), português (europeu)
+- A tradução para o idioma espanhol foi atualizada
+- Correção de um erro em que o idioma chinês não podia ser usado com o código de idioma</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

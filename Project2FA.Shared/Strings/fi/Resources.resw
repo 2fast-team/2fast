@@ -732,9 +732,9 @@ Synkronoi aika asetuksissa.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmannen osapuolen kirjastojen päivitys
-- Lisätty uusia kieliä: espanja, ranska, italia, japani, kiina
-- Kategoriat voidaan nyt asettaa suoraan uusissa tileissä (Pro-toiminto).
-- Korjattu virhe, jonka vuoksi salasanaa ei voinut vaihtaa, jos tällä hetkellä tallennettu salasana on virheellinen.</value>
+- Uusia kieliä on lisätty: kreikka, tanska, suomi, viro, norja, ruotsi, portugali (brasilialainen), portugali (eurooppalainen), tanska, suomi, viro.
+- Espanjan kielen käännös on päivitetty
+- Korjattu virhe, jonka vuoksi kiinan kieltä ei voinut käyttää kielikoodin kanssa</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

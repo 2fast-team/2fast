@@ -732,9 +732,9 @@ Vennligst synkroniser tiden i innstillingene.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Oppdatering av tredjepartsbiblioteker
-- Flere språk er lagt til: spansk, fransk, italiensk, japansk, kinesisk
-- Kategorier kan nå angis direkte i nye kontoer (Pro-funksjon)
-- Fikset en feil der passordet ikke kunne endres hvis det lagrede passordet var ugyldig</value>
+- Flere språk er lagt til: gresk, dansk, finsk, estisk, norsk, svensk, portugisisk (brasiliansk), portugisisk (europeisk)
+- Oversettelsen for det spanske språket er oppdatert
+- Fikset en feil der det kinesiske språket ikke kunne brukes med språkkoden</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

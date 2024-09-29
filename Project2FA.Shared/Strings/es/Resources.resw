@@ -731,9 +731,9 @@ Por favor, sincronice la hora en los ajustes.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Actualización de las bibliotecas de terceros
-- Se han añadido más idiomas: español, francés, italiano, japonés, chino
-- Ahora se pueden establecer categorías directamente en las cuentas nuevas (función Pro)
-- Se ha corregido un error que impedía cambiar la contraseña si la contraseña guardada no era válida.</value>
+- Se han añadido más idiomas: griego, danés, finés, estonio, noruego, sueco, portugués (brasileño) y portugués (europeo).
+- Se ha actualizado la traducción para el idioma español
+- Se ha corregido un error por el que no se podía utilizar el idioma chino con el código de idioma</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

@@ -7,7 +7,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:oldtoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mediaSourceType="using:Windows.Media.Capture.Frames"
     xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
@@ -92,7 +92,7 @@
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
                         <StackPanel Margin="0,0,16,0">
-                            <toolkit:MarkdownTextBlock 
+                            <oldtoolkit:MarkdownTextBlock 
                             Text="~AddAccountContentDialogInfo.Text" 
                             TextWrapping="Wrap" 
                             x:Uid="AddAccountContentDialogInfo"
@@ -458,16 +458,16 @@
                                     </appcontrols:CardControl>
                                 </appcontrols:CardExpanderControl.Header>
                                 <StackPanel>
-                                    <toolkit:TextToolbar 
+                                    <oldtoolkit:TextToolbar 
                             x:Name="Toolbar"
                             Editor="{Binding ElementName=REB_Notes}"
                             UseURIChecker="True"
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                        <toolkit:TextToolbar.Formatter>
+                                        <oldtoolkit:TextToolbar.Formatter>
                                             <utils:CustomRichTextFormatter/>
-                                        </toolkit:TextToolbar.Formatter>
-                                    </toolkit:TextToolbar>
+                                        </oldtoolkit:TextToolbar.Formatter>
+                                    </oldtoolkit:TextToolbar>
                                     <RichEditBox
                             x:Name="REB_Notes"
                             Margin="0,0,0,8"

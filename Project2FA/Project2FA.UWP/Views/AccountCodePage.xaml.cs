@@ -12,6 +12,7 @@ using CommunityToolkit.Mvvm.Input;
 using Project2FA.Services;
 using Windows.UI.Xaml.Controls.Primitives;
 using UNOversal.Ioc;
+using UNOversal.Services.Logging;
 
 namespace Project2FA.UWP.Views
 {
@@ -57,7 +58,7 @@ namespace Project2FA.UWP.Views
                 Clipboard.SetContent(dataPackage);
                 return true;
             }
-            catch (System.Exception)
+            catch (System.Exception exc)
             {
                 ContentDialog dialog = new ContentDialog();
                 dialog.Title = Strings.Resources.ErrorHandle;
@@ -69,6 +70,7 @@ namespace Project2FA.UWP.Views
                     await Copy2FACodeToClipboard(model);
                 });
                 dialog.SecondaryButtonText = Strings.Resources.ButtonTextCancel;
+                await App.Current.Container.Resolve<ILoggingService>().LogException(exc, SettingsService.Instance.LoggingSetting);
                 await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
                 return false;
             }

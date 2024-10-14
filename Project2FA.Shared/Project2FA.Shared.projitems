@@ -190,8 +190,8 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\it\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\ja\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\nb\Resources.resw" />
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\pt-BR\Resources.resw" />
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\pt-PT\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\pt-br\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\pt-pt\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\sv\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\zh-cn\Resources.resw" />
   </ItemGroup>
@@ -235,8 +235,8 @@
     <None Include="$(MSBuildThisFileDirectory)Strings\it\Resources.md" />
     <None Include="$(MSBuildThisFileDirectory)Strings\ja\Resources.md" />
     <None Include="$(MSBuildThisFileDirectory)Strings\nb\Resources.md" />
-    <None Include="$(MSBuildThisFileDirectory)Strings\pt-BR\Resources.md" />
-    <None Include="$(MSBuildThisFileDirectory)Strings\pt-PT\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\pt-br\Resources.md" />
+    <None Include="$(MSBuildThisFileDirectory)Strings\pt-pt\Resources.md" />
     <None Include="$(MSBuildThisFileDirectory)Strings\sv\Resources.md" />
     <None Include="$(MSBuildThisFileDirectory)Strings\zh-cn\Resources.md" />
   </ItemGroup>

@@ -30,7 +30,7 @@ namespace Project2FA.ViewModels
     public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
         public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
-        public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
+
 
         /// <summary>
         /// Constructor

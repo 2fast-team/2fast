@@ -6,7 +6,6 @@ using System;
 using Prism;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Prism.Ioc;
 using Project2FA.UNO.Views;
 using Project2FA.ViewModels;
 using Project2FA.Repository.Database;

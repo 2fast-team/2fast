@@ -61,6 +61,7 @@ namespace Project2FA.ViewModels
     {
         public ObservableCollection<TwoFACodeModel> OTPList { get; internal set; } = new ObservableCollection<TwoFACodeModel>();
         public ObservableCollection<MediaFrameSourceGroup> CameraSourceGroup { get; internal set; } = new ObservableCollection<MediaFrameSourceGroup>();
+        public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         private Windows.Media.Playback.MediaPlayer _mediaPlayer;
         private MediaPlayerElement _mediaPlayerElementControl;
         private CameraHelper _cameraHelper;
@@ -190,6 +191,8 @@ namespace Project2FA.ViewModels
             }
             else
             {
+                Model.SelectedCategories ??= new ObservableCollection<CategoryModel>();
+                Model.SelectedCategories.AddRange(GlobalTempCategories.Where(x => x.IsSelected == true), true);
                 DataService.Instance.Collection.Add(Model);
             }
 #if __ANDROID__ || _IOS__

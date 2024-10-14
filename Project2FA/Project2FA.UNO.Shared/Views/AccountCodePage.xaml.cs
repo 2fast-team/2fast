@@ -8,6 +8,7 @@ using Windows.UI;
 using Project2FA.Repository.Models;
 using UNOversal.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Controls.Primitives;
 
 namespace Project2FA.UNO.Views
 {
@@ -171,6 +172,14 @@ namespace Project2FA.UNO.Views
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
             {
                 await ViewModel.ExportQRCode(model);
+            }
+        }
+        private void ABB_ShowActions_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is AppBarButton abbtn)
+            {
+                FlyoutBase.ShowAttachedFlyout(abbtn);
+                //ViewModel.SendCategoryFilterUpdatate();
             }
         }
 

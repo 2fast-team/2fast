@@ -46,13 +46,10 @@ namespace Project2FA.ViewModels
 #endif
     public class FileActivationPageViewModel : CredentialViewModelBase
     {
-        private string _password;
         private ISecretService SecretService { get; }
         private IFileService FileService { get; }
         private ILoggingService LoggingService { get; }
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
-        private string _applicationTitle;
-        private bool _isScreenCaptureEnabled;
 
         public FileActivationPageViewModel()
         {

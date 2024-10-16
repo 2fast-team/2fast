@@ -217,7 +217,7 @@
     <value>Archivo de datos local</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogIntroText.Text" xml:space="preserve">
-    <value>En este diálogo puede cambiar la contraseña del archivo de datos utilizado actualmente.</value>
+    <value>En este diálogo puedes cambiar la contraseña del archivo de datos utilizado actualmente.</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogMain.CloseButtonText" xml:space="preserve">
     <value>Cancelar</value>
@@ -1037,7 +1037,7 @@ Por favor, sincroniza la hora en los ajustes.</value>
     <value>No hay cámara disponible.</value>
   </data>
   <data name="AddAccountContentDialogNoCamPermission.Text" xml:space="preserve">
-    <value>No se ha permitido que se utilice la cámara.</value>
+    <value>No se ha concedido permiso para utilizar la cámara.</value>
   </data>
   <data name="AddAccountContentDialogPrivacyWebcam.Content" xml:space="preserve">
     <value>Abrir ajustes</value>
@@ -1167,7 +1167,7 @@ Por favor, sincroniza la hora en los ajustes.</value>
 
 
 
-Las contraseñas usadas entre la aplicación y los servicios de credenciales se almacena en un archivo local, a diferencia de otros autenticadores. Este archivo se protege con contraseña desde el momento de su creación, permaneciendo cifrado. Se recomienda almacenar el archivo en un almacenamiento en la nube como Nextcloud, ownCloud, Onedrive, etc., para obtener versionado y seguridad contra pérdidas.
+A diferencia de otros autenticadores, 2fast almacena las claves internas que se utilizan para configurar los servicios de credenciales en un archivo local. Este archivo se protege con contraseña desde el momento de su creación, permaneciendo cifrado. Se recomienda almacenar el archivo en un almacenamiento en la nube como Nextcloud, ownCloud, Onedrive, etc., para obtener versionado y seguridad contra pérdidas.
 
 
 
@@ -1320,7 +1320,7 @@ Actualmente disponible:
     <value>No hay ningún informe de error disponible</value>
   </data>
   <data name="CategoryFilterFlyoutCategoriesInfo.Text" xml:space="preserve">
-    <value>La búsqueda devolverá resultados que contengan cualquiera de las categorías escogidas.</value>
+    <value>La búsqueda devolverá resultados que pertenezcan a cualquiera de las categorías escogidas.</value>
   </data>
   <data name="EditAccountPageTitle" xml:space="preserve">
     <value>Editar cuenta</value>

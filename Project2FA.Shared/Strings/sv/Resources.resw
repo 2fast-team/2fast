@@ -703,18 +703,6 @@ Vänligen synkronisera tiden i inställningarna.</value>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Kopiera rapporten till urklipp</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>NTP-serverns adress är giltig och kan sparas genom att trycka på den.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Sparar?</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>Det går inte att spara NTP-serverns adress eftersom servern inte hittades.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Fel</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Använd tidsserver för att kontrollera systemtiden</value>
   </data>

@@ -704,18 +704,6 @@
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>将报告复制到剪贴板</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>NTP 服务器地址是有效的，可以通过按键保存。</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>储蓄？</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>由于未找到服务器，无法保存 NTP 服务器地址。</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>错误</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>使用时间服务器检查系统时间</value>
   </data>

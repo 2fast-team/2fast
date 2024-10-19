@@ -703,18 +703,6 @@ Synkronoi aika asetuksissa.</value>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Kopioi raportti leikepöydälle</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>NTP-palvelimen osoite on voimassa ja se voidaan tallentaa painamalla sitä.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Säästäminen?</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>NTP-palvelimen osoitteen tallentaminen ei ole mahdollista, koska palvelinta ei löydetty.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Virhe</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Käytä aikapalvelinta järjestelmän ajan tarkistamiseen</value>
   </data>

@@ -705,18 +705,6 @@ Sincronizzare l'ora nelle impostazioni.</value>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Copiare il rapporto negli appunti</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>L'indirizzo del server NTP è valido e può essere salvato premendolo.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Risparmiare?</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>Il salvataggio dell'indirizzo del server NTP non è possibile perché il server non è stato trovato.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Errore</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Utilizzare il time server per controllare l'ora del sistema</value>
   </data>

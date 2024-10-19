@@ -702,18 +702,6 @@ Please synchronize the time in the settings.</value>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Copy report to clipboard</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>The address of the NTP server is valid and can be saved by pressing it.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Saving?</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>The save of the NTP server address is not possible because the server was not found.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Error</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Use time server to check the system time</value>
   </data>

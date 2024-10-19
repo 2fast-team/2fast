@@ -702,18 +702,6 @@ Por favor, sincronice la hora en los ajustes.</value>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Copiar informe al portapapeles</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>La dirección del servidor NTP es válida y puede guardarse pulsándola.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>¿Ahorrar?</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>No es posible guardar la dirección del servidor NTP porque no se ha encontrado el servidor.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Error</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Utilizar el servidor horario para comprobar la hora del sistema</value>
   </data>

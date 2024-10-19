@@ -704,18 +704,6 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Copier le rapport dans le presse-papiers</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>L'adresse du serveur NTP est valide et peut être sauvegardée en appuyant dessus.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Sauver ?</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>L'enregistrement de l'adresse du serveur NTP n'est pas possible car le serveur n'a pas été trouvé.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Erreur</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Utiliser le serveur de temps pour vérifier l'heure du système</value>
   </data>

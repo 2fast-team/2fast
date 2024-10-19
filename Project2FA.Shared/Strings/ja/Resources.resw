@@ -705,18 +705,6 @@
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>レポートをクリップボードにコピーする</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>NTPサーバーのアドレスは有効であり、これを押すことで保存できる。</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>節約？</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>サーバーが見つからなかったため、NTPサーバーアドレスの保存ができません。</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>エラー</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>タイムサーバーを使用してシステム時間をチェックする</value>
   </data>

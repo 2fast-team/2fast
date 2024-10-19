@@ -703,18 +703,6 @@
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Αντιγραφή αναφοράς στο πρόχειρο</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>Η διεύθυνση του διακομιστή NTP είναι έγκυρη και μπορεί να αποθηκευτεί πατώντας το.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Αποταμίευση;</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>Η αποθήκευση της διεύθυνσης του διακομιστή NTP δεν είναι δυνατή επειδή ο διακομιστής δεν βρέθηκε.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Σφάλμα</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Χρήση διακομιστή ώρας για τον έλεγχο της ώρας του συστήματος</value>
   </data>

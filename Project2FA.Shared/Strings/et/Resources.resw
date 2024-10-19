@@ -702,18 +702,6 @@ Palun sünkroonige kellaaeg seadetes.</value>
   <data name="ErrorCopyToClipboard" xml:space="preserve">
     <value>Aruande kopeerimine lõikelauale</value>
   </data>
-  <data name="SettingsPageSaveIsPossibleTip.Subtitle" xml:space="preserve">
-    <value>NTP-serveri aadress on kehtiv ja selle saab salvestada, kui vajutada seda.</value>
-  </data>
-  <data name="SettingsPageSaveIsPossibleTip.Title" xml:space="preserve">
-    <value>Säästmine?</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Subtitle" xml:space="preserve">
-    <value>NTP-serveri aadressi salvestamine ei ole võimalik, sest serverit ei leitud.</value>
-  </data>
-  <data name="SettingsPageSaveNotPossibleTip.Title" xml:space="preserve">
-    <value>Viga</value>
-  </data>
   <data name="SettingsUseNTPTimeCorrection.Header" xml:space="preserve">
     <value>Kasutage ajaserverit, et kontrollida süsteemi aega</value>
   </data>

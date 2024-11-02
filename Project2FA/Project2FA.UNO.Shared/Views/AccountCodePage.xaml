@@ -29,10 +29,10 @@
             </utu:ShadowCollection>
             
             
-            <!--<helpers:AccountAvatarTemplateSelector 
+            <helpers:AccountAvatarTemplateSelector 
                 x:Key="AccountAvatarTemplateSelector"
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
-                Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>-->
+                Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
 
             <!--<DataTemplate x:Name="ShimmerTemplate">
                 <UserControl
@@ -782,31 +782,62 @@
                 </AppBarButton>
 
             </utu:NavigationBar.PrimaryCommands>
-            <!--<utu:NavigationBar.SecondaryCommands>
-                <AppBarButton 
-                    x:Name="ABB_Logout"
-                    x:Uid="AccountCodePageABBLogout" 
-                    Foreground="{ThemeResource ButtonForeground}"
-                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
-                    Command="{x:Bind ViewModel.LogoutCommand}">
+        </utu:NavigationBar>
+
+        <StackPanel Grid.Row="1">
+            <CommandBar 
+                OverflowButtonVisibility="Collapsed"
+                DefaultLabelPosition="Collapsed">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton>
                     <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE1F6;"/>
+                        <FontIcon FontSize="28" Glyph="&#xE710;"/>
+                    </AppBarButton.Icon>
+                    <AppBarButton.Flyout>
+                        <MenuFlyout 
+                            UseNativePopup="True" 
+                            toolkit:MenuFlyoutExtensions.CancelTextIosOverride="{x:Bind strings:Resources.ButtonTextCancel}"
+                            Placement="Top">
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddCamera"
+                                Command="{x:Bind ViewModel.CameraCommand}"
+                                Text="AccountCodePageAddCamera.Text~">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE960;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem 
+                                x:Uid="AccountCodePageAddManual"
+                                Text="AccountCodePageAddManual.Text~">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE70F;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+                <AppBarButton 
+
+    Foreground="{ThemeResource ButtonForeground}"
+    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
+    Command="{x:Bind ViewModel.LogoutCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE72E;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton 
-                    x:Name="ABB_Refresh"
-                    Foreground="{ThemeResource ButtonForeground}"
-                    x:Uid="AccountCodePageReloadDatafile"
-                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
-                    Command="{x:Bind ViewModel.RefreshCommand}">
+    Foreground="{ThemeResource ButtonForeground}"
+    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
+    Command="{x:Bind ViewModel.RefreshCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE895;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-            </utu:NavigationBar.SecondaryCommands>-->
-        </utu:NavigationBar>
 
-        <AutoSuggestBox 
+                </CommandBar.PrimaryCommands>
+            </CommandBar>
+
+            <AutoSuggestBox 
             x:Name="MobileAutoSuggestBox"
             Grid.Row="1"
             Height="48"
@@ -823,7 +854,10 @@
             TextMemberPath="Name"
             GotFocus="AutoSuggestBox_GotFocus"
             Margin="4,0,4,4" >
-        </AutoSuggestBox>
+            </AutoSuggestBox>
+        </StackPanel>
+
+
 
 
         <!--ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"-->
@@ -832,24 +866,25 @@
         Grid.Row="2"
         Margin="2,0,0,0"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <!--<ListView 
+            <ListView 
             x:Name="LV_AccountCollection"
+            ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
             IsItemClickEnabled="False"
             HorizontalContentAlignment="Stretch"
             ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}"
             HorizontalAlignment="Stretch">
 
-                <ListView.ItemContainerStyle>
+                <!--<ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="2,0,2,0"/>
                     </Style>
-                </ListView.ItemContainerStyle>
+                </ListView.ItemContainerStyle>-->
             
-            </ListView>-->
+            </ListView>
             
-            <ItemsRepeaterScrollHost>
+            <!--<ItemsRepeaterScrollHost>
                 <ScrollViewer>
                     <ItemsRepeater 
                         ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}">
@@ -860,7 +895,7 @@
                         </ItemsRepeater.ItemTemplate>
                     </ItemsRepeater>
                 </ScrollViewer>
-            </ItemsRepeaterScrollHost>
+            </ItemsRepeaterScrollHost>-->
             
             
             <!--<ScrollViewer>

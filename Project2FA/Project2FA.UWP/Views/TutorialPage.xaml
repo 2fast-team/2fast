@@ -253,7 +253,7 @@
         
         <muxc:ParallaxView 
                 VerticalShift="50">
-            <toolkit:ImageEx 
+            <unocontrols:ImageEx 
                     Source="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
                     Stretch="UniformToFill" />
         </muxc:ParallaxView>

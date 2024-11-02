@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:msct="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
+    xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI"
@@ -347,58 +348,64 @@
             </Grid>
         </Border>
 
-       
-        <msct:Loading 
+        <ctwc:SwitchPresenter 
             Grid.ColumnSpan="3"
-            IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
+            >
+            <ctwc:Case Value="GeneralError">
+                <Grid
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
-            <StackPanel>
-                <muxc:AnimatedVisualPlayer 
+                    <StackPanel>
+                        <muxc:AnimatedVisualPlayer 
                     MaxHeight="120"
                     PlaybackRate="0.5"
                     AutoPlay="True">
-                    <lottie:LottieVisualSource  
+                            <lottie:LottieVisualSource  
                         UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
-                </muxc:AnimatedVisualPlayer>
-                <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
-                <Button 
+                        </muxc:AnimatedVisualPlayer>
+                        <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
+                        <Button 
                     x:Uid="BTNTryAgain" 
                     Margin="0,10,0,0" 
                     Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
                     HorizontalAlignment="Center"/>
-            </StackPanel>
-        </msct:Loading>
-
-        <msct:Loading 
-            Grid.ColumnSpan="3"
-            IsLoading="{x:Bind ViewModel.WebDAVLoginError,Mode=OneWay}" 
+                    </StackPanel>
+                </Grid>
+            </ctwc:Case>
+            <ctwc:Case Value="WebDAVLoginError">
+                <Grid
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
-            <StackPanel>
-                <muxc:AnimatedVisualPlayer 
+                    <StackPanel>
+                        <muxc:AnimatedVisualPlayer 
                                 MaxHeight="120"
                                 PlaybackRate="0.5"
                                 AutoPlay="True">
-                    <lottie:LottieVisualSource  
+                            <lottie:LottieVisualSource  
                                     UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
-                </muxc:AnimatedVisualPlayer>
-                <TextBlock x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
-                <Button 
+                        </muxc:AnimatedVisualPlayer>
+                        <TextBlock x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
+                        <Button 
                     x:Uid="BTNTryAgain" 
                     Margin="0,10,0,0" 
                     Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
                     HorizontalAlignment="Center"/>
-            </StackPanel>
-        </msct:Loading>
-        <mtuc:Loading 
-            Grid.ColumnSpan="3"
-            IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
+                    </StackPanel>
+                </Grid>
+            </ctwc:Case>
+            <ctwc:Case Value="Loading">
+                <Grid 
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
-            <muxc:ProgressRing 
+                    <muxc:ProgressRing 
                 IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
                 Foreground="{ThemeResource SystemAccentColor}" 
                 Width="80" 
                 Height="80"/>
-        </mtuc:Loading>
+                </Grid>
+            </ctwc:Case>
+        </ctwc:SwitchPresenter>
+
+
+
+
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

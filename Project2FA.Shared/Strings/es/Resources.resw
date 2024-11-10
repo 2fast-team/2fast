@@ -790,11 +790,8 @@ Por favor, sincroniza la hora en los ajustes.</value>
     <comment>[ReswT:manually]</comment>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Actualización de las bibliotecas de terceros
-- Se han añadido más idiomas: griego, danés, finés, estonio, noruego, sueco, portugués (brasileño) y portugués (europeo).
-- Se ha actualizado la traducción para el idioma español
-- Se ha corregido un error por el que no se podía utilizar el idioma chino con el código de idioma</value>
-    <comment>[ReswT:always]</comment>
+    <value>- Actualización de bibliotecas de terceros
+- La traducción al español ha sido actualizada por un hablante nativo</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Novedades y cambios</value>

@@ -721,9 +721,7 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Mise à jour des bibliothèques tierces
-- D'autres langues ont été ajoutées : grec, danois, finnois, estonien, norvégien, suédois, portugais (brésilien), portugais (européen).
-- La traduction pour la langue espagnole a été mise à jour
-- Correction d'un problème où la langue chinoise ne pouvait pas être utilisée avec le code de langue.</value>
+- La traduction pour la langue espagnole a été mise à jour par un locuteur natif</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Nouvelles fonctionnalités et changements</value>

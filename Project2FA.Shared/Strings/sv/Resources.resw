@@ -720,9 +720,7 @@ Vänligen synkronisera tiden i inställningarna.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Uppdatering av tredjepartsbibliotek
-- Ytterligare språk har lagts till: grekiska, danska, finska, estniska, norska, svenska, portugisiska (brasiliansk), portugisiska (europeisk)
-- Översättningen för spanska språket har uppdaterats
-- Åtgärdat en bugg där det kinesiska språket inte kunde användas med språkkoden</value>
+- Översättningen till spanska har uppdaterats av en person med spanska som modersmål</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

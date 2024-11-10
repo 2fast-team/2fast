@@ -719,9 +719,7 @@ Palun sünkroonige kellaaeg seadetes.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmanda osapoole raamatukogude ajakohastamine
-- Lisati järgmised keeled: kreeka, taani, soome, eesti, norra, rootsi, portugali (brasiilia), portugali (Euroopa).
-- Hispaania keele tõlge on uuendatud
-- Parandatud viga, mille tõttu ei saanud hiina keelt kasutada keelekoodiga</value>
+- Hispaania keele tõlge on uuendatud emakeeleõpetaja poolt</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

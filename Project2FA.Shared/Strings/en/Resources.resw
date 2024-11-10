@@ -719,9 +719,7 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Update of third-party libraries
-- Further languages have been added: Greek, Danish, Finnish, Estonian, Norwegian, Swedish, Portuguese (Brazilian), Portuguese (European)
-- The translation for the Spanish language has been updated
-- Fixed a bug where the Chinese language could not be used with the language code</value>
+- The translation for the Spanish language has been updated by a native speaker</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

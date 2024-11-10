@@ -722,9 +722,7 @@ Sincronizzare l'ora nelle impostazioni.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aggiornamento delle librerie di terze parti
-- Sono state aggiunte altre lingue: greco, danese, finlandese, estone, norvegese, svedese, portoghese (brasiliano), portoghese (europeo).
-- È stata aggiornata la traduzione per la lingua spagnola
-- Corretto un bug per cui la lingua cinese non poteva essere utilizzata con il codice lingua</value>
+- La traduzione per la lingua spagnola è stata aggiornata da un madrelingua</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

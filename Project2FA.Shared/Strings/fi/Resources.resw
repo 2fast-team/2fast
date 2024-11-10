@@ -720,9 +720,7 @@ Synkronoi aika asetuksissa.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmannen osapuolen kirjastojen päivitys
-- Uusia kieliä on lisätty: kreikka, tanska, suomi, viro, norja, ruotsi, portugali (brasilialainen), portugali (eurooppalainen), tanska, suomi, viro.
-- Espanjan kielen käännös on päivitetty
-- Korjattu virhe, jonka vuoksi kiinan kieltä ei voinut käyttää kielikoodin kanssa</value>
+- Äidinkielenään puhuva henkilö on päivittänyt espanjan kielen käännöksen</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

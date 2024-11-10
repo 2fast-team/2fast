@@ -34,6 +34,8 @@
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <EnableLLVM>True</EnableLLVM>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <RunAOTCompilation>False</RunAOTCompilation>
+    <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|ARM64'">
     <AndroidUseAapt2>True</AndroidUseAapt2>
@@ -41,20 +43,26 @@
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <EnableLLVM>True</EnableLLVM>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <RunAOTCompilation>False</RunAOTCompilation>
+    <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-    <AndroidPackageFormat>apk</AndroidPackageFormat>
-	<AndroidStripILAfterAOT>false</AndroidStripILAfterAOT>
-	<AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <EnableLLVM>True</EnableLLVM>
-    <RunAOTCompilation>False</RunAOTCompilation>
+	<AndroidUseAapt2>True</AndroidUseAapt2>
+	<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	<AndroidPackageFormat>apk</AndroidPackageFormat>
+	<EnableLLVM>True</EnableLLVM>
+	<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	<RunAOTCompilation>False</RunAOTCompilation>
+	<PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|ARM64'">
-    <AndroidPackageFormat>apk</AndroidPackageFormat>
-    <AndroidStripILAfterAOT>false</AndroidStripILAfterAOT>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <EnableLLVM>True</EnableLLVM>
-    <RunAOTCompilation>False</RunAOTCompilation>
+	<AndroidUseAapt2>True</AndroidUseAapt2>
+	<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	<AndroidPackageFormat>apk</AndroidPackageFormat>
+	<EnableLLVM>True</EnableLLVM>
+	<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	<RunAOTCompilation>False</RunAOTCompilation>
+	<PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Platforms\Android\SoftwareBitmap.Android.cs" />
@@ -73,14 +81,14 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240916" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240916" />
     <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240916" />
-	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.92" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.92" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.93" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.93" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Svg.Skia" Version="2.0.0.2" />
     <PackageReference Include="Uno.Cupertino.WinUI" Version="5.3.1" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
     <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="5.1.2" />
-    <PackageReference Include="Uno.Resizetizer" Version="1.6.0">
+    <PackageReference Include="Uno.Resizetizer" Version="1.6.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

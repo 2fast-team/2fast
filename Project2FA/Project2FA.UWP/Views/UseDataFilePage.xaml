@@ -350,8 +350,9 @@
 
         <ctwc:SwitchPresenter 
             Grid.ColumnSpan="3"
-            >
-            <ctwc:Case Value="GeneralError">
+            TargetType="x:Boolean"
+            Value="{x:Bind ViewModel.ShowError, Mode=OneWay}">
+            <ctwc:Case Value="True">
                 <Grid
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
                     <StackPanel>
@@ -371,7 +372,14 @@
                     </StackPanel>
                 </Grid>
             </ctwc:Case>
-            <ctwc:Case Value="WebDAVLoginError">
+        </ctwc:SwitchPresenter>
+
+        <ctwc:SwitchPresenter 
+            Grid.ColumnSpan="3"
+            TargetType="x:Boolean"
+            Value="{x:Bind ViewModel.WebDAVLoginError, Mode=OneWay}">
+
+            <ctwc:Case Value="True">
                 <Grid
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
                     <StackPanel>
@@ -391,7 +399,14 @@
                     </StackPanel>
                 </Grid>
             </ctwc:Case>
-            <ctwc:Case Value="Loading">
+
+        </ctwc:SwitchPresenter>
+
+        <ctwc:SwitchPresenter 
+            Grid.ColumnSpan="3"
+            TargetType="x:Boolean"
+            Value="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
+            <ctwc:Case Value="True">
                 <Grid 
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
                     <muxc:ProgressRing 
@@ -402,9 +417,6 @@
                 </Grid>
             </ctwc:Case>
         </ctwc:SwitchPresenter>
-
-
-
 
 
         <VisualStateManager.VisualStateGroups>

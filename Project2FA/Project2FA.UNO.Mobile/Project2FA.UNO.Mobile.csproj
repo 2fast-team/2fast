@@ -1,26 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst;</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst;</TargetFrameworks>
     <SingleProject>true</SingleProject>
     <OutputType>Exe</OutputType>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-ios'">iossimulator-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-macos'">osx-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net9.0-ios'">iossimulator-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net9.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net9.0-macos'">osx-x64</RuntimeIdentifier>
 	  <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
 	  <!-- <MtouchExtraArgs Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
 	  <!-- Required for C# Hot Reload -->
 	  <UseInterpreter Condition="'$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
     <IsUnoHead>true</IsUnoHead>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">14.2</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">29.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net8.0-macos'">10.14</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-android'">29.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net9.0-macos'">10.14</SupportedOSPlatformVersion>
     <PackageIcon>splash.png</PackageIcon>
     <PublishTrimmed>False</PublishTrimmed>
     <PublishAot>False</PublishAot>
-    <Platforms>AnyCPU;ARM64</Platforms>
+    <Platforms>AnyCPU;ARM64;x64</Platforms>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
     <CodesignKey>Apple Development: Created via API (CB3KSUCNGR)</CodesignKey>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
   </PropertyGroup>
@@ -28,7 +28,7 @@
 	    <!-- PublishAot=true indicates NativeAOT, while omitting this property would use Mono's AOT -->
 	    <!--<PublishAot>true</PublishAot>-->
     </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
     <AndroidUseAapt2>True</AndroidUseAapt2>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
@@ -37,7 +37,7 @@
     <RunAOTCompilation>False</RunAOTCompilation>
     <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|ARM64'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|x64'">
     <AndroidUseAapt2>True</AndroidUseAapt2>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
@@ -46,7 +46,16 @@
     <RunAOTCompilation>False</RunAOTCompilation>
     <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|ARM64'">
+    <AndroidUseAapt2>True</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <EnableLLVM>True</EnableLLVM>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <RunAOTCompilation>False</RunAOTCompilation>
+    <PublishTrimmed>False</PublishTrimmed>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
 	<AndroidUseAapt2>True</AndroidUseAapt2>
 	<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	<AndroidPackageFormat>apk</AndroidPackageFormat>
@@ -55,7 +64,16 @@
 	<RunAOTCompilation>False</RunAOTCompilation>
 	<PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|ARM64'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|x64'">
+    <AndroidUseAapt2>True</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <EnableLLVM>True</EnableLLVM>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <RunAOTCompilation>False</RunAOTCompilation>
+    <PublishTrimmed>False</PublishTrimmed>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|ARM64'">
 	<AndroidUseAapt2>True</AndroidUseAapt2>
 	<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	<AndroidPackageFormat>apk</AndroidPackageFormat>
@@ -81,10 +99,12 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240916" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.1.240916" />
     <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.1.240916" />
-	<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.93" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.93" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.10" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.10" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Svg.Skia" Version="2.0.0.2" />
+    <PackageReference Include="System.Private.Uri" Version="4.3.2" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageReference Include="Uno.Cupertino.WinUI" Version="5.3.1" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
     <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="5.1.2" />
@@ -92,19 +112,19 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.3.5" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.3.5" />
-    <PackageReference Include="Uno.WinUI" Version="5.5.37" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.5.37" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.5.37" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.5.37" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.5.37" />
+    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.3.6" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.3.6" />
+    <PackageReference Include="Uno.WinUI" Version="5.5.66" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.5.66" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.5.66" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.5.66" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.5.66" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>
-    <When Condition="'$(TargetFramework)'=='net8.0-ios'">
-      <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+    <When Condition="'$(TargetFramework)'=='net9.0-ios'">
+      <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
 		  <!--to be able to use EF core dynamic stuff-->
         <MtouchExtraArgs>--interpreter</MtouchExtraArgs>
 		<NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
@@ -117,7 +137,7 @@
       </PropertyGroup>
     </When>
 
-    <When Condition="'$(TargetFramework)'=='net8.0-maccatalyst'">
+    <When Condition="'$(TargetFramework)'=='net9.0-maccatalyst'">
       <PropertyGroup>
         <!-- Configure the GC -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
@@ -132,7 +152,7 @@
         <!--<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />-->
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)'=='net8.0-macos'">
+    <When Condition="'$(TargetFramework)'=='net9.0-macos'">
       <PropertyGroup>
       </PropertyGroup>
     </When>
@@ -157,17 +177,18 @@
     <ProjectReference Include="..\..\Project2FA.UNO.MauiControls\Project2FA.UNO.MauiControls.csproj" />
     <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+    <PackageReference Include="Xamarin.AndroidX.Collection.Jvm">
+      <Version>1.4.5.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core">
-      <Version>2.8.5.1</Version>
+      <Version>2.8.7.1</Version>
     </PackageReference>
 	  <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.3" />
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.UI" Version="2.8.0" />
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.Fragment" Version="2.8.0" />
+	  <!--<PackageReference Include="Xamarin.AndroidX.Navigation.UI" Version="2.8.0" />-->
+	  <!--<PackageReference Include="Xamarin.AndroidX.Navigation.Fragment" Version="2.8.0" />
 	  <PackageReference Include="Xamarin.AndroidX.Navigation.Runtime" Version="2.8.0" />
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.8.0" />
-	  <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.4" />
-	  <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.4" />
+	  <PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.8.0" />-->
 	  <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.37" />
 
 	  <AndroidEnvironment Include="Platforms\Android\environment.conf" />

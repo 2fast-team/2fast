@@ -65,8 +65,12 @@ namespace Project2FA.Repository.Models
         }
 
         //default seconds for renew the 2fa code
-        //no need for SetProperty, because no UI binding(refresh)
-        public int Period { get; set; } = 30;
+        private int _period = 30;
+        public int Period 
+        {
+            get => _period;
+            set => SetProperty(ref _period, value);
+        } 
 
         //no need for SetProperty, because no UI binding
         public OtpHashMode HashMode { get; set; } = OtpHashMode.Sha1;

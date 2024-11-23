@@ -29,13 +29,13 @@ using WinUIWindow = Microsoft.UI.Xaml.Window;
 
 namespace Project2FA.Utils
 {
-    public static class ErrorDialogs
+    internal static class ErrorDialogs
     {
         /// <summary>
         /// Displays that the system time is not correct
         /// </summary>
         /// <returns></returns>
-        public static Task SystemTimeNotCorrectError()
+        internal static Task SystemTimeNotCorrectError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
@@ -55,7 +55,7 @@ namespace Project2FA.Utils
             return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
-        public static async Task ShowUnauthorizedAccessError()
+        internal static async Task ShowUnauthorizedAccessError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
@@ -97,7 +97,7 @@ namespace Project2FA.Utils
         /// <summary>
         /// Displays a wrong password error message and option to change the password
         /// </summary>
-        public static async Task ShowPasswordError()
+        internal static async Task ShowPasswordError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
 
@@ -153,7 +153,7 @@ namespace Project2FA.Utils
             }
         }
 
-        public static Task UnauthorizedAccessDialog()
+        internal static Task UnauthorizedAccessDialog()
         {
             var dialog = new ContentDialog
             {
@@ -191,7 +191,7 @@ namespace Project2FA.Utils
             return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
-        public static Task UnauthorizedAccessUseLocalFileDialog()
+        internal static Task UnauthorizedAccessUseLocalFileDialog()
         {
             var dialog = new ContentDialog
             {
@@ -234,7 +234,7 @@ namespace Project2FA.Utils
             return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
-        public async static Task ShowUnexpectedError(Exception exc)
+        internal async static Task ShowUnexpectedError(Exception exc)
         {
             var dialog = new ContentDialog
             {
@@ -405,7 +405,7 @@ namespace Project2FA.Utils
             SettingsService.Instance.UnhandledExceptionStr = string.Empty;
         }
 
-        public async static Task<ContentDialogResult> WritingDatafileError(bool isNewFile)
+        internal async static Task<ContentDialogResult> WritingDatafileError(bool isNewFile)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
@@ -440,7 +440,7 @@ namespace Project2FA.Utils
             return await dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
-        public async static Task SecretKeyError(string label)
+        internal async static Task SecretKeyError(string label)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             ContentDialog dialog = new ContentDialog();
@@ -476,7 +476,7 @@ namespace Project2FA.Utils
         /// <summary>
         /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
         /// </summary>
-        public async static Task ShowFileOrFolderNotFoundError(DBDatafileModel datafileModel = null)
+        internal async static Task ShowFileOrFolderNotFoundError(DBDatafileModel datafileModel = null)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             // check if the app has file system access to load the file
@@ -582,7 +582,7 @@ namespace Project2FA.Utils
             }
         }
 
-        public async static Task ShowLogNotFound()
+        internal async static Task ShowLogNotFound()
         {
             var dialog = new ContentDialog
             {
@@ -601,6 +601,36 @@ namespace Project2FA.Utils
         {
             // TODO generate
             throw new NotImplementedException();
+        }
+
+        internal async static Task CorruptDataFileError()
+        {
+            var dialog = new ContentDialog
+            {
+                Title = Resources.ErrorHandle,
+                Content = Resources.FileActivationPageViewModelCorruptDatafile,
+                PrimaryButtonText = Strings.Resources.Confirm
+            };
+#if !WINDOWS_UWP
+                dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
+
+            await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        internal async static Task EmptyDataFileError()
+        {
+            var dialog = new ContentDialog
+            {
+                Title = Resources.ErrorHandle,
+                Content = Resources.FileActivationPageViewModelEmptyDatafile,
+                PrimaryButtonText = Strings.Resources.Confirm
+            };
+#if !WINDOWS_UWP
+                dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
+
+            await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
         }
     }
 }

@@ -417,18 +417,19 @@ namespace Project2FA.Services
                             DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
                             byte[] iv = datafile.IV;
 
+                            // app is started via double click on .2fa file
                             if (ActivatedDatafile != null)
                             {
 #if WINDOWS_UWP
                                 // only Windows can use the ProtectData class to encrypt the password for the activated file
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
+                                    ProtectData.Unprotect(Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
                                     iv,
                                     datafileStr,
                                     datafile.Version);
 #else
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
+                                    Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
                                     iv,
                                     datafileStr,
                                     datafile.Version);

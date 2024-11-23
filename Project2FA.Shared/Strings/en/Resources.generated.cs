@@ -2041,6 +2041,26 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region FileActivationPageViewModelEmptyDatafile
+        public static string FileActivationPageViewModelEmptyDatafile
+        {
+            get
+            {
+                return _resourceLoader.GetString("FileActivationPageViewModelEmptyDatafile");
+            }
+        }
+        #endregion
+
+        #region FileActivationPageViewModelCorruptDatafile
+        public static string FileActivationPageViewModelCorruptDatafile
+        {
+            get
+            {
+                return _resourceLoader.GetString("FileActivationPageViewModelCorruptDatafile");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2205,7 +2225,9 @@ namespace Project2FA.Strings{
             EditAccountContentDialogAccountCategoryInfoText,
             EditAccountPageTitle,
             AddAccountContentDialogNoCaptureContentError,
-            LoginPageIOSBiometricReason
+            LoginPageIOSBiometricReason,
+            FileActivationPageViewModelEmptyDatafile,
+            FileActivationPageViewModelCorruptDatafile
         }
 
         private static ResourceLoader _resourceLoader;

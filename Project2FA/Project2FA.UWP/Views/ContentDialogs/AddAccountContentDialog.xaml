@@ -325,73 +325,7 @@
 
                                 </ctwc:SettingsCard.Content>-->
                             </ctwc:SettingsCard>
-                            <!--<appcontrols:CardControl
-                                x:Uid="AddAccountContentDialogAccountIcon"
-                                Header="~AddAccountContentDialogAccountIcon.Header">
-                                <appcontrols:CardControl.Description>
-                                    <Grid 
-                            Margin="0,10,0,0" 
-                            MinWidth="120" 
-                            MinHeight="100">
-                                        <muxc:PersonPicture
-                            Height="110"
-                            Width="110"
-                            DisplayName="{x:Bind ViewModel.TempIconLabel, Mode=OneWay}"
-                            Margin="0,10,20,0"
-                            Tag="{x:Bind ViewModel.Model.AccountSVGIcon, Mode=OneWay}">
-                                        </muxc:PersonPicture>
-                                        <Button 
-                                CornerRadius="32"
-                                Width="44"
-                                Height="44"
-                                Command="{x:Bind ViewModel.EditAccountIconCommand}"
-                                VerticalAlignment="Bottom" 
-                                HorizontalAlignment="Right">
-                                            <FontIcon
-                            FontSize="18"
-                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                            Glyph="&#xE104;" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                                        </Button>
-                                    </Grid>
-                                </appcontrols:CardControl.Description>
-                                <appcontrols:CardControl.ActionContent>
-                                    <StackPanel 
-                                Visibility="{x:Bind ViewModel.IsEditBoxVisible, Mode=OneWay}">
-                                        <AutoSuggestBox 
-                                Header="~AddAccountContentDialogSuggestionBox.Header" 
-                                x:Uid="AddAccountContentDialogSuggestionBox"
-                                Width="200"
-                                QueryIcon="Find"
-                                VerticalAlignment="Center"
-                                PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
-                                TextChanged="AutoSuggestBox_TextChanged" 
-                                VerticalContentAlignment="Center"
-                                SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
-                                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                            <Button 
-                                    Command="{x:Bind ViewModel.DeleteAccountIconCommand}"
-                                    Margin="0,0,10,0">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <SymbolIcon Symbol="Delete"/>
-                                                    <TextBlock 
-                                    Text="~AddAccountContentDialogDeleteAccountIcon.Text" 
-                                    Margin="8,0,0,0" 
-                                    HorizontalAlignment="Stretch" 
-                                    VerticalAlignment="Center" 
-                                    x:Uid="AddAccountContentDialogDeleteAccountIcon" 
-                                    FontFamily="Segoe UI" />
-                                                </StackPanel>
-                                            </Button>
-                                        </StackPanel>
-                                        <animations:Implicit.ShowAnimations>
-                                            <animations:OpacityAnimation Duration="0:0:1" From="0" To="1.0"/>
-                                        </animations:Implicit.ShowAnimations>
-                                        --><!--<animations:Implicit.HideAnimations>
-                                <animations:OpacityAnimation Duration="0:0:1" From="1" To="0.0"/>
-                            </animations:Implicit.HideAnimations>--><!--
-                                    </StackPanel>
-                                </appcontrols:CardControl.ActionContent>
-                            </appcontrols:CardControl>-->
+                            
 
                             <TextBox 
                                 Header="~AddAccountContentDialogLabel.Header" 
@@ -427,24 +361,32 @@
                                 Header="~AddAccountContentDialogAccountNotes.Header">
                                 
                                 <ctwc:SettingsExpander.Items>
-                                    <toolkit:TextToolbar 
-                                        x:Name="Toolbar"
-                                        Editor="{Binding ElementName=REB_Notes}"
-                                        UseURIChecker="True"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                        <toolkit:TextToolbar.Formatter>
-                                            <utils:CustomRichTextFormatter/>
-                                        </toolkit:TextToolbar.Formatter>
-                                    </toolkit:TextToolbar>
-                                    <RichEditBox
+                                    <ctwc:SettingsCard Padding="0" Margin="0" HorizontalContentAlignment="Stretch">
+                                        <ctwc:SettingsCard.Content>
+                                            <StackPanel HorizontalAlignment="Stretch">
+                                                <oldtoolkit:TextToolbar 
+                            x:Name="Toolbar"
+                            Editor="{Binding ElementName=REB_Notes}"
+                            UseURIChecker="True"
+                                                    
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                                    <oldtoolkit:TextToolbar.Formatter>
+                                                        <utils:CustomRichTextFormatter/>
+                                                    </oldtoolkit:TextToolbar.Formatter>
+                                                </oldtoolkit:TextToolbar>
+                                                <RichEditBox
                                         x:Name="REB_Notes"
                                         Margin="0,0,0,8"
                                         MinHeight="120"
                                         SelectionFlyout="{x:Null}"
                                         IsColorFontEnabled="False"
                                         TextChanged="REB_Notes_TextChanged">
-                                    </RichEditBox>
+                                                </RichEditBox>
+                                            </StackPanel>
+
+                                        </ctwc:SettingsCard.Content>
+                                    </ctwc:SettingsCard>
                                 </ctwc:SettingsExpander.Items>
                             </ctwc:SettingsExpander>-->
 
@@ -671,6 +613,19 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                                                 Maximum="8" 
                                                 Value="{x:Bind ViewModel.Model.TotpSize, Mode=TwoWay}"
                                                 SpinButtonPlacementMode="Inline"/>
+                                        </appcontrols:CardControl.ActionContent>
+                                    </appcontrols:CardControl>
+                                    <appcontrols:CardControl 
+                                        x:Uid="AddAccountContentDialogPeriod"
+                                        BorderBrush="Transparent"
+                                        Header="~AddAccountContentDialogPeriod.Header">
+                                        <appcontrols:CardControl.ActionContent>
+                                            <ComboBox 
+                                            SelectedIndex="{x:Bind ViewModel.PeriodIndex, Mode=TwoWay}" 
+                                            MinWidth="{StaticResource CardActionControlMinWidth}">
+                                                <ComboBoxItem Content="30" />
+                                                <ComboBoxItem Content="60"/>
+                                            </ComboBox>
                                         </appcontrols:CardControl.ActionContent>
                                     </appcontrols:CardControl>
                                 </StackPanel>

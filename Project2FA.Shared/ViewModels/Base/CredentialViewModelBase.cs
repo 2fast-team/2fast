@@ -30,16 +30,17 @@ namespace Project2FA.ViewModels
         public IDialogService DialogService { get; internal set; }
         private string _applicationTitle;
         private bool _isScreenCaptureEnabled;
+
         /// <summary>
         /// Shows a wrong password error to the user
         /// </summary>
-        public Task ShowLoginError()
+        public async Task ShowLoginError()
         {
             var dialog = new ContentDialog();
             dialog.Title = Resources.Error;
             dialog.Content = Resources.LoginPagePasswordMismatch;
             dialog.PrimaryButtonText = Resources.Confirm;
-            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
+            await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         public bool IsMDMLoginScreenWallpaperAvailable

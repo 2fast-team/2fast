@@ -918,6 +918,31 @@ namespace Project2FA.ViewModels
             }
         }
 
+        public int PeriodIndex
+        {
+            get => Model.Period switch
+            {
+                30 => 0,
+                60 => 1,
+                _ => 0,
+            };
+            set
+            {
+                switch (value)
+                {
+                    case 0:
+                        Model.Period = 30;
+                        break;
+                    case 1:
+                        Model.Period = 60;
+                        break;
+                    default:
+                        Model.Period = 30;
+                        break;
+                }
+            }
+        }
+
         public TwoFACodeModel Model
         {
             get => _model;

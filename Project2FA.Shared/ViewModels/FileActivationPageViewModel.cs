@@ -19,8 +19,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Project2FA.Core.Messenger;
 using Project2FA.Core.Services.Crypto;
 using UNOversal.Services.Logging;
-
-
+using Project2FA.Utils;
 
 #if WINDOWS_UWP
 using Windows.Security.Cryptography;
@@ -58,7 +57,7 @@ namespace Project2FA.ViewModels
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             FileService = App.Current.Container.Resolve<IFileService>();
             LoggingService = App.Current.Container.Resolve<ILoggingService>();
-            LoginCommand = new RelayCommand(CheckLogin);
+            LoginCommand = new AsyncRelayCommand(CheckLoginTask);
             App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
@@ -70,26 +69,22 @@ namespace Project2FA.ViewModels
         /// Make a login with hitting 'Enter' key possible
         /// </summary>
         /// <param name="e"></param>
-        public void LoginWithEnterKeyDown(KeyRoutedEventArgs e)
+        public async void LoginWithEnterKeyDown(KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                CheckLogin();
+                await CheckLoginTask();
             }
         }
 
         /// <summary>
         /// Checks the password for the login
         /// </summary>
-        private async void CheckLogin()
+        private async Task CheckLoginTask()
         {
             if (!string.IsNullOrEmpty(Password))
             {
-                if (!await CheckNavigationRequest())
-                {
-                    Password = string.Empty;
-                    await ShowLoginError();
-                }
+                await CheckNavigationRequest();
             }
         }
 
@@ -100,23 +95,20 @@ namespace Project2FA.ViewModels
         /// else decryption not working</returns>
         private async Task<bool> CheckNavigationRequest()
         {
-            if (await TestPassword(DataService.Instance.ActivatedDatafile))
+            var (succesful, noerror) = await TestPassword(DataService.Instance.ActivatedDatafile);
+            if (succesful && noerror)
             {
-                byte[] encryptedBytes;
-
-                encryptedBytes = Encoding.UTF8.GetBytes(Password);
-
 #if WINDOWS_UWP
                 SecretService.Helper.WriteSecret(
                     Constants.ContainerName, 
                     Constants.ActivatedDatafileHashName,
-                    NewtonsoftJSONService.Serialize(ProtectData.Protect(encryptedBytes)));
+                    Encoding.UTF8.GetString(ProtectData.Protect(Encoding.UTF8.GetBytes(Password))));
                 App.ShellPageInstance.SetTitleBarAsDraggable();
 #else
                 SecretService.Helper.WriteSecret(
                     Constants.ContainerName,
                     Constants.ActivatedDatafileHashName,
-                    NewtonsoftJSONService.Serialize(encryptedBytes));
+                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(Password)));
 #endif
                 App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
@@ -125,11 +117,17 @@ namespace Project2FA.ViewModels
             }
             else
             {
+                Password = string.Empty;
+                // Only display password error if no other error has occurred
+                if (noerror)
+                {
+                    await ShowLoginError();
+                }
                 return false;
             }
         }
 
-        private async Task<bool> TestPassword(StorageFile storageFile)
+        private async Task<(bool succesful,bool noerror)> TestPassword(StorageFile storageFile)
         {
             try
             {
@@ -149,44 +147,40 @@ namespace Project2FA.ViewModels
                     DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
                     if (datafile.IV == null)
                     {
-                        //TODO add error dialog for corrupt datafile
-                        return false;
+                        // file is not valid
+                        await ErrorDialogs.CorruptDataFileError();
+                        return (false, false);
                     }
                     else
                     {
                         byte[] iv = datafile.IV;
-                        DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
+                        if (datafile.Collection.Count > 0)
+                        {
+                            DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
                             (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
-                        return true;
+                        }
+                        else
+                        {
+                            // file have no accounts added
+                            await ErrorDialogs.EmptyDataFileError();
+                            return (false, false);
+                        }
+
+                        return (true, true);
                     }
                 }
                 else
                 {
                     await Utils.ErrorDialogs.ShowUnauthorizedAccessError();
-                    return false;
+                    return (false, false);
                 }
             }
             catch (Exception exc)
             {
                 await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
-                //Error = exc.Message;
-                //ShowError = true;
-                //Password = string.Empty;
 
-                return false;
+                return (false, false);
             }
-        }
-
-        /// <summary>
-        /// Shows a wrong password error to the user
-        /// </summary>
-        private Task ShowLoginError()
-        {
-            var dialog = new ContentDialog();
-            dialog.Title = Resources.Error;
-            dialog.Content = Resources.LoginPagePasswordMismatch;
-            dialog.PrimaryButtonText = Resources.Confirm;
-            return DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
         public string DatafileName

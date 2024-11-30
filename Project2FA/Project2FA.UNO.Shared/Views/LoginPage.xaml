@@ -6,7 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
-    mc:Ignorable="d"
+    xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:not_ios="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:ios="http://uno.ui/ios"
+    xmlns:android="http://uno.ui/android"
+    mc:Ignorable="d not_mobile not_ios ios android"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -105,11 +109,18 @@
                         MinWidth="120"
                         Margin="0,10,10,0" 
                         HorizontalAlignment="Center"/>
-                    <Button 
-                        x:Uid="LoginPageLoginWindowsHelloButton" 
-                        Content="~LoginPageLoginWindowsHelloButton.Content" 
+                    <ios:Button 
+                        x:Uid="LoginPageLoginiOSBiometricButton" 
+                        Content="~LoginPageLoginiOSBiometricButton.Content" 
                         Margin="0,10,0,0"
-                            
+                        Visibility="{x:Bind ViewModel.BiometricIsUsable, Mode=OneWay}"
+                        Command="{x:Bind ViewModel.BiometricoLoginCommand}" 
+                        MinWidth="200" 
+                        HorizontalAlignment="Center" />
+                    <android:Button 
+                        x:Uid="LoginPageLoginAndroidBiometricButton" 
+                        Content="~LoginPageLoginAndroidBiometricButton.Content" 
+                        Margin="0,10,0,0"
                         Visibility="{x:Bind ViewModel.BiometricIsUsable, Mode=OneWay}"
                         Command="{x:Bind ViewModel.BiometricoLoginCommand}" 
                         MinWidth="200" 

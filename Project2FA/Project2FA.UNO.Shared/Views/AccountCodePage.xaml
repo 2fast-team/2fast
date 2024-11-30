@@ -754,6 +754,7 @@
                             </MenuFlyoutItem>
                             <MenuFlyoutItem 
                                 x:Uid="AccountCodePageAddManual"
+                                Command="{x:Bind ViewModel.AddAccountCommand}"
                                 Text="AccountCodePageAddManual.Text~">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xE70F;"/>
@@ -808,6 +809,7 @@
                             </MenuFlyoutItem>
                             <MenuFlyoutItem 
                                 x:Uid="AccountCodePageAddManual"
+                                Command="{x:Bind ViewModel.AddAccountCommand}"
                                 Text="AccountCodePageAddManual.Text~">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xE70F;"/>

@@ -3,10 +3,12 @@ using OtpNet;
 using Project2FA.Repository.Models;
 using System;
 using System.Text;
-using System.Web;
 using UNOversal.Services.Dialogs;
-using ZXing;
-using ZXing.QrCode;
+using Windows.Storage.Streams;
+using QRCoder;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices.WindowsRuntime;
+
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Windows.UI.Xaml.Media.Imaging;
@@ -21,44 +23,48 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class DisplayQRCodeContentDialogViewModel : ObservableObject, IDialogInitialize
+    public class DisplayQRCodeContentDialogViewModel : ObservableObject, IDialogInitializeAsync
     {
         private string _header;
-        private WriteableBitmap _qrImage;
-        public WriteableBitmap QRImage { get => _qrImage; set => SetProperty(ref _qrImage, value); }
+        private BitmapImage _qrImage;
+        public BitmapImage QRImage { get => _qrImage; set => SetProperty(ref _qrImage, value); }
         public string Header { get => _header; set => SetProperty(ref _header, value); }
 
-        private void CreateQRCode(TwoFACodeModel model)
+        private async Task CreateQRCode(TwoFACodeModel model)
         {
             Header = model.Label;
             StringBuilder uriBuilder = new StringBuilder("otpauth://");
             uriBuilder.Append("totp/");
-            uriBuilder.Append(model.Label + ":");
-            uriBuilder.Append(model.Issuer + "?");
+            uriBuilder.Append(Uri.EscapeDataString(model.Label) + ":");
+            uriBuilder.Append(Uri.EscapeDataString(model.Issuer) + "?");
             uriBuilder.Append("secret=" + Base32Encoding.ToString(model.SecretByteArray));
-            uriBuilder.Append("&issuer=" + model.Label);
+            uriBuilder.Append("&issuer=" + Uri.EscapeDataString(model.Label));
             uriBuilder.Append("&algorithm=" + model.HashMode.ToString().ToUpper());
             uriBuilder.Append("&digits=" + model.TotpSize);
             uriBuilder.Append("&period=" + model.Period);
-            //DisableECI = true,
-            var options = new QrCodeEncodingOptions()
-            {
-                CharacterSet = "UTF-8",
-                Width = 250,
-                Height = 250
-            };
 
-            Project2FA.ZXing.BarcodeWriter writer = new Project2FA.ZXing.BarcodeWriter();
-            writer.Format = BarcodeFormat.QR_CODE;
-            writer.Options = options;
-            QRImage = writer.Write(uriBuilder.ToString());
+            // generate QR code
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(uriBuilder.ToString(), QRCodeGenerator.ECCLevel.Q,true);
+            BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData);
+            byte[] qrCodeAsBitmapByteArr = qrCode.GetGraphic(20);
+
+            // create image of the QR code
+            BitmapImage bitmapImage = new BitmapImage();
+            using (InMemoryRandomAccessStream randomAccessStream = new InMemoryRandomAccessStream())
+            {
+                await randomAccessStream.WriteAsync(qrCodeAsBitmapByteArr.AsBuffer());
+                randomAccessStream.Seek(0);
+                await bitmapImage.SetSourceAsync(randomAccessStream);
+                QRImage = bitmapImage;
+            }
         }
 
-        public void Initialize(IDialogParameters parameters)
+        public async Task InitializeAsync(IDialogParameters parameters)
         {
-            if(parameters.TryGetValue<TwoFACodeModel>("Model", out TwoFACodeModel twoFACodeModel))
+            if (parameters.TryGetValue<TwoFACodeModel>("Model", out TwoFACodeModel twoFACodeModel))
             {
-                CreateQRCode(twoFACodeModel);
+                await CreateQRCode(twoFACodeModel);
             }
         }
     }

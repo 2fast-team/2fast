@@ -423,13 +423,13 @@ namespace Project2FA.Services
 #if WINDOWS_UWP
                                 // only Windows can use the ProtectData class to encrypt the password for the activated file
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    ProtectData.Unprotect(Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
+                                    ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
                                     iv,
                                     datafileStr,
                                     datafile.Version);
 #else
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
+                                    SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
                                     iv,
                                     datafileStr,
                                     datafile.Version);
@@ -712,7 +712,7 @@ namespace Project2FA.Services
 
                 // backup the last version before write
                 string datafileStr = await FileService.ReadStringAsync(fileName, folder);
-                datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
 
 
                 if (ActivatedDatafile != null)
@@ -721,14 +721,14 @@ namespace Project2FA.Services
                     await FileService.WriteStringAsync(
                         fileName,
                         NewtonsoftJSONService.SerializeEncrypt(
-                            ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
+                            ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
                             iv,
                             fileModel,
                             fileModel.Version),
                         folder);
 #else
                     string content = NewtonsoftJSONService.SerializeEncrypt(
-                            NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
+                            SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
                             iv,
                             fileModel,
                             fileModel.Version);

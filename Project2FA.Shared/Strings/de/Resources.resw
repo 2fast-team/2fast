@@ -1355,4 +1355,16 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Die geöffnete Datendatei ist nicht valide. Für die Entschlüsselung fehlt der gespeicherte Initialisierungsvektor (IV).</value>
   </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>QR-Code scannen</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Konto manuell eintragen</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Anmeldung mit Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Anmeldung mit Biometrie</value>
+  </data>
 </root>

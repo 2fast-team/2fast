@@ -68,15 +68,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVDirectoryService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeReader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ErrorDialogs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\JSONUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\WindowDisplayInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\WindowDisplayMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BitmapLuminanceSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\SoftwareBitmapLuminanceSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\WriteableBitmapRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountCodePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountCameraPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountPageViewModel.cs" />

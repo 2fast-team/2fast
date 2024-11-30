@@ -189,6 +189,9 @@ namespace Project2FA.ViewModels
             {
                 TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
             }
+#if !WINDOWS_UWP
+            await NavigationService.NavigateAsync(nameof(AddAccountPage));
+#else
             AddAccountContentDialog dialog = new AddAccountContentDialog();
             var result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.None)
@@ -197,6 +200,7 @@ namespace Project2FA.ViewModels
                 await dialog.ViewModel.CleanUpCamera();
 #endif
             }
+#endif
         }
 
         private async Task LogoutCommandTask()
@@ -678,7 +682,7 @@ namespace Project2FA.ViewModels
             Messenger.Send(new CategoriesChangedMessage(true));
         }
 #endif
-        #region Getter_Setter
+#region Getter_Setter
 
 #if WINDOWS_UWP
         public bool ShowAvailableProFeatures
@@ -744,6 +748,6 @@ namespace Project2FA.ViewModels
             get => App.ShellPageInstance.ViewModel;
         }
 #endif
-        #endregion
+#endregion
     }
 }

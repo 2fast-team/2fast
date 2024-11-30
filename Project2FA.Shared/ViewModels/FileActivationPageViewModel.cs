@@ -20,6 +20,9 @@ using Project2FA.Core.Messenger;
 using Project2FA.Core.Services.Crypto;
 using UNOversal.Services.Logging;
 using Project2FA.Utils;
+using Newtonsoft.Json;
+using UNOversal.Services.Serialization;
+
 
 #if WINDOWS_UWP
 using Windows.Security.Cryptography;
@@ -49,6 +52,7 @@ namespace Project2FA.ViewModels
         private IFileService FileService { get; }
         private ILoggingService LoggingService { get; }
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
+        private ISerializationService SerializationService { get; }
 
         public FileActivationPageViewModel()
         {
@@ -57,6 +61,7 @@ namespace Project2FA.ViewModels
             NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             FileService = App.Current.Container.Resolve<IFileService>();
             LoggingService = App.Current.Container.Resolve<ILoggingService>();
+            SerializationService = App.Current.Container.Resolve<ISerializationService>();
             LoginCommand = new AsyncRelayCommand(CheckLoginTask);
             App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
@@ -102,13 +107,13 @@ namespace Project2FA.ViewModels
                 SecretService.Helper.WriteSecret(
                     Constants.ContainerName, 
                     Constants.ActivatedDatafileHashName,
-                    Encoding.UTF8.GetString(ProtectData.Protect(Encoding.UTF8.GetBytes(Password))));
+                    SerializationService.Serialize(ProtectData.Protect(Encoding.UTF8.GetBytes(Password))));
                 App.ShellPageInstance.SetTitleBarAsDraggable();
 #else
                 SecretService.Helper.WriteSecret(
                     Constants.ContainerName,
                     Constants.ActivatedDatafileHashName,
-                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(Password)));
+                    SerializationService.Serialize(Encoding.UTF8.GetBytes(Password)));
 #endif
                 App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                 await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));

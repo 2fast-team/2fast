@@ -1353,4 +1353,16 @@ The application supports an MDM configuration for centralised management of the 
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>The opened data file is not valid. The stored initialisation vector (IV) is missing for decryption.</value>
   </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Scan QR code</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Manually enter account</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Login with Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Login with Biometrics</value>
+  </data>
 </root>

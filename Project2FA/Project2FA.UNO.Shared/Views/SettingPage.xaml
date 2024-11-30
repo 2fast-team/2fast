@@ -153,7 +153,6 @@
 
                 <controls:SettingsCard
                     x:Uid="SettingsOptionsFactoryReset"
-                    HeaderIcon="{ui:FontIcon Glyph=&#xE74D;}"
                     Header="~SettingsOptionsFactoryReset.Header"
                     ios:Style="{StaticResource SettingsCardiOSStyle}">
                     <controls:SettingsCard.Description>
@@ -176,7 +175,6 @@
 
                 <controls:SettingsCard 
                     x:Uid="SettingsAppLoggingMode"
-                    HeaderIcon="{ui:FontIcon Glyph=&#xEADF;}"
                     Header="~SettingsAppLoggingMode.Header"
                     ios:Style="{StaticResource SettingsCardiOSStyle}">
                     <controls:SettingsCard.Description>

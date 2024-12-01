@@ -31,6 +31,8 @@ using System.Linq;
 using CommunityToolkit.WinUI.Helpers;
 using UNOversal.Ioc;
 using UNOversal.Services.Logging;
+using Project2FA.Utils;
+
 
 
 #if WINDOWS_UWP
@@ -211,46 +213,54 @@ namespace Project2FA.ViewModels
         /// </summary>
         private async Task ScanScreenQRCode()
         {
-            // set Window for compact overlay
-            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
-            var size = new Size(192, 150);
-            ApplicationView.GetForCurrentView().TryResizeView(size);
-            _canvasDevice = new CanvasDevice();
-
-            // create picker for graphic capture
-            var picker = new GraphicsCapturePicker();
-            GraphicsCaptureItem item = await picker.PickSingleItemAsync();
-
-            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
-            // The item may be null if the user dismissed the
-            // control without making a selection or hit Cancel.
-            if (item != null)
+            try
             {
-                //_item = item;
-                // Stop the previous capture if we had one.
-                StopWindowScreenCapture();
+                // set Window for compact overlay
+                await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+                var size = new Size(192, 150);
+                ApplicationView.GetForCurrentView().TryResizeView(size);
+                _canvasDevice = new CanvasDevice();
 
-                _framePool = Direct3D11CaptureFramePool.Create(
-                    _canvasDevice, // D3D device
-                    DirectXPixelFormat.B8G8R8A8UIntNormalized, // Pixel format
-                    2, // Number of frames
-                    item.Size); // Size of the buffers
+                // create picker for graphic capture
+                var picker = new GraphicsCapturePicker();
+                GraphicsCaptureItem item = await picker.PickSingleItemAsync();
 
-                _session = _framePool.CreateCaptureSession(item);
+                await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
+                // The item may be null if the user dismissed the
+                // control without making a selection or hit Cancel.
+                if (item != null)
+                {
+                    // Stop the previous capture if we had one.
+                    StopWindowScreenCapture();
 
-                _framePool.FrameArrived -= FramePool_WindowFrameArrived;
-                _framePool.FrameArrived += FramePool_WindowFrameArrived;
+                    _framePool = Direct3D11CaptureFramePool.Create(
+                        _canvasDevice, // D3D device
+                        DirectXPixelFormat.B8G8R8A8UIntNormalized, // Pixel format
+                        2, // Number of frames
+                        item.Size); // Size of the buffers
+
+                    _session = _framePool.CreateCaptureSession(item);
+
+                    _framePool.FrameArrived -= FramePool_WindowFrameArrived;
+                    _framePool.FrameArrived += FramePool_WindowFrameArrived;
 
 
-                _session.StartCapture();
+                    _session.StartCapture();
 
+                }
+                else
+                {
+                    MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogNoCaptureContentError, Strings.Resources.Error);
+                    await dialog.ShowAsync();
+                }
             }
-            else
+            catch (Exception exc)
             {
-                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogNoCaptureContentError, Strings.Resources.Error);
-                await dialog.ShowAsync();
+                await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
+                TrackingManager.TrackExceptionCatched(nameof(ScanScreenQRCode), exc);
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+                await ErrorDialogs.ShowUnexpectedError(exc.ToString());
             }
-
         }
 
         /// <summary>

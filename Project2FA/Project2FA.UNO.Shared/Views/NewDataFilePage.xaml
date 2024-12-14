@@ -195,28 +195,7 @@ x:Uid="NewDatafileContentDialogDatafilePivotItem">
                 HorizontalAlignment="Center"/>
                             </StackPanel>
                         </ScrollViewer>
-                        <!--<mtuc:Loading 
-        IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
-        Background="{ThemeResource TranslucentBackgroundHighBrush}">
-                                <StackPanel>
-                                    <AnimatedVisualPlayer 
-                MaxHeight="120"
-                x:Name="LottiePlayer" 
-                PlaybackRate="0.5"
-                AutoPlay="True">
-                                        <lottie:LottieVisualSource  
-                UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
-                                    </AnimatedVisualPlayer>
-                                    <TextBlock 
-                Text="{x:Bind ViewModel.ErrorText,Mode=OneWay}" 
-                TextWrapping="WrapWholeWords"/>
-                                    <Button 
-                Content="{x:Bind strings:Resources.Confirm}" 
-                Command="{x:Bind ViewModel.ConfirmErrorCommand}"
-                Style="{StaticResource AccentButtonStyle}"
-                HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </mtuc:Loading>-->
+
                     </Grid>
                 </PivotItem>
                 <PivotItem 

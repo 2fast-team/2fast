@@ -24,6 +24,7 @@ using Project2FA.UWP.Services;
 using Project2FA.Core;
 using UNOversal.Services.Network;
 using UNOversal.Services.Gesture;
+using UNOversal.Services.Logging;
 
 namespace Project2FA.UWP.Views
 {
@@ -55,7 +56,6 @@ namespace Project2FA.UWP.Views
             {
                 AppTitleBar.Visibility = Visibility.Collapsed;
             }
-
 
             ShellViewInternal = ShellView;
             ShellView.Content = MainFrame = new Frame();
@@ -157,6 +157,8 @@ namespace Project2FA.UWP.Views
             // open error dialog for last session
             if (!string.IsNullOrEmpty(SettingsService.Instance.UnhandledExceptionStr))
             {
+                // always write the last exception string in log
+                await App.Current.Container.Resolve<ILoggingService>().Log(SettingsService.Instance.UnhandledExceptionStr, LoggingPreferEnum.Full);
                 await CheckUnhandledExceptionLastSession();
             }
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
@@ -240,8 +242,6 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            // If this is the first run, activate the ntp server checks
-            // else => UseNTPServerCorrection is false
             if (SystemInformation.Instance.IsFirstRun)
             {
                 if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
@@ -249,11 +249,13 @@ namespace Project2FA.UWP.Views
                     // set the round corner for Windows 11+
                     SettingsService.Instance.UseRoundCorner = true;
                 }
-                CheckInAppSubscriptionStatus(true);
+                // not run on UI thread
+                await CheckInAppSubscriptionStatus(true).ConfigureAwait(false);
             }
             else
             {
-                CheckInAppSubscriptionStatus(false);
+                // not run on UI thread
+                await CheckInAppSubscriptionStatus(false).ConfigureAwait(false);
             }
 
 
@@ -349,6 +351,14 @@ namespace Project2FA.UWP.Views
                         }
                     }
                 }
+            }
+            else
+            {
+                if (isFirstStart)
+                {
+                    // TODO give feedback that addons cannot be set, if no internet connection is available
+                }
+
             }
         }
 

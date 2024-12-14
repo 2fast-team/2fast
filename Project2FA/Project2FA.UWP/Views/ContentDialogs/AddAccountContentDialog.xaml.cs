@@ -1,10 +1,12 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Project2FA.Extensions;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
 using UNOversal.Extensions;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -185,11 +187,11 @@ namespace Project2FA.UWP.Views
             RootGrid.Children.Add(teachingTip);
         }
 
-        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                ViewModel.SearchAccountFonts(sender.Text);
+                await ViewModel.SearchAccountFonts(sender.Text);
             }
         }
 
@@ -285,6 +287,11 @@ namespace Project2FA.UWP.Views
             {
                 model.IsSelected = !model.IsSelected;
             }
+        }
+
+        private void SettingsExpander_Expanded(object sender, System.EventArgs e)
+        {
+            SV_AccountInput.ScrollToElement(sender as FrameworkElement);
         }
     }
 }

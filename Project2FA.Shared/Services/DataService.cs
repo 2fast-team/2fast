@@ -912,7 +912,7 @@ namespace Project2FA.Services
                 {
                     // track if the creation finally failed
 #if WINDOWS_UWP
-                    TrackingManager.TrackExceptionUnhandled(nameof(GenerateTOTP), exc);
+                    TrackingManager.TrackException(nameof(GenerateTOTP), exc);
 #endif
                     Collection[i].TwoFACode = string.Empty;
                     await ErrorDialogs.SecretKeyError(Collection[i].Label).ConfigureAwait(false);

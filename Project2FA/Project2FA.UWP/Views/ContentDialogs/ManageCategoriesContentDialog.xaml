@@ -7,8 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:strings="using:Project2FA.Strings"
     x:Name="Page"
     Style="{StaticResource MyContentDialogStyle}"
@@ -24,6 +26,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
@@ -45,18 +48,17 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <FontIcon
-                        Margin="4,0,0,0"
-                        FontSize="16"
-                        FontFamily="{StaticResource SegoeFluentIconsFilled}"
-                        Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+            Margin="4,0,0,0"
+            FontSize="16"
+            FontFamily="{StaticResource SegoeFluentIconsFilled}"
+            Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
                     <TextBlock 
-                        Grid.Column="1"
-                        Text="{x:Bind Name,Mode=OneWay}" 
-                        Margin="0,0,10,0"/>
+            Grid.Column="1"
+            Text="{x:Bind Name,Mode=OneWay}" 
+            Margin="0,0,10,0"/>
                 </Grid>
             </DataTemplate>
         </ResourceDictionary>
-  
     </ContentDialog.Resources>
 
     <Grid 
@@ -64,41 +66,42 @@
         MinHeight="450">
         <ScrollViewer>
             <StackPanel>
-                <appcontrols:CardExpanderControl 
-                        IsExpanded="True"
-                        Margin="0,15,0,8">
-                    <appcontrols:CardExpanderControl.Header>
-                        <appcontrols:CardControl
-                            Icon="&#xE713;"
-                            x:Uid="ManageCategoriesAddGlobalCategories"
-                            Header="~ManageCategoriesAddGlobalCategories.Header">
-                        </appcontrols:CardControl>
-                    </appcontrols:CardExpanderControl.Header>
-                    <StackPanel>
-                        <TextBox 
-                            Header="~ManageCategoriesContentDialogLabel.Header"
-                            x:Uid="ManageCategoriesContentDialogLabel"
-                            Text="{x:Bind ViewModel.Label,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ComboBox 
-                            VerticalAlignment="Stretch"
-                            Margin="0,10,0,20"
-                            HorizontalAlignment="Stretch"
-                            x:Uid="ManageCategoriesContentDialogIcon"
-                            ItemTemplate="{StaticResource SymbolListTemplate}"
-                            SelectedItem="{x:Bind ViewModel.SelectedIconItem, Mode=TwoWay}"
-                            ItemsSource="{x:Bind ViewModel.IconSourceCollection, Mode=OneWay}"
-                            Header="~ManageCategoriesContentDialogIcon.Header">
-                        </ComboBox>
-                        <Button 
-                            Command="{x:Bind ViewModel.CreateCategoryCommand}"
-                            x:Uid="ManageCategoriesContentDialogIconCreateBTN"
-                            Margin="0,10,0,20"
-                            Style="{StaticResource AccentButtonStyle}"
-                            IsEnabled="{x:Bind ViewModel.CanCreate,Mode=OneWay}"
-                            Content="~ManageCategoriesContentDialogIconCreateBTN.Content">
-                        </Button>
-                    </StackPanel>
-                </appcontrols:CardExpanderControl>
+                <ctwc:SettingsExpander
+                    HeaderIcon="{ui:FontIcon Glyph=&#xE713;}"
+                    x:Uid="ManageCategoriesAddGlobalCategories"
+                    Header="~ManageCategoriesAddGlobalCategories.Header">
+                    <ctwc:SettingsExpander.Items>
+                        <ctwc:SettingsCard>
+                            <ctwc:SettingsCard.Description>
+                                <StackPanel>
+                                    <TextBox 
+                                        Header="~ManageCategoriesContentDialogLabel.Header"
+                                        x:Uid="ManageCategoriesContentDialogLabel"
+                                        Text="{x:Bind ViewModel.Label,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ComboBox 
+                                        VerticalAlignment="Stretch"
+                                        Margin="0,10,0,20"
+                                        HorizontalAlignment="Stretch"
+                                        x:Uid="ManageCategoriesContentDialogIcon"
+                                        MaxDropDownHeight="210"
+                                        ItemTemplate="{StaticResource SymbolListTemplate}"
+                                        SelectedItem="{x:Bind ViewModel.SelectedIconItem, Mode=TwoWay}"
+                                        ItemsSource="{x:Bind ViewModel.IconSourceCollection, Mode=OneWay}"
+                                        Header="~ManageCategoriesContentDialogIcon.Header">
+                                    </ComboBox>
+                                    <Button 
+                                        Command="{x:Bind ViewModel.CreateCategoryCommand}"
+                                        x:Uid="ManageCategoriesContentDialogIconCreateBTN"
+                                        Margin="0,10,0,20"
+                                        Style="{StaticResource AccentButtonStyle}"
+                                        IsEnabled="{x:Bind ViewModel.CanCreate,Mode=OneWay}"
+                                        Content="~ManageCategoriesContentDialogIconCreateBTN.Content">
+                                    </Button>
+                                </StackPanel>
+                            </ctwc:SettingsCard.Description>
+                        </ctwc:SettingsCard>
+                    </ctwc:SettingsExpander.Items>
+                </ctwc:SettingsExpander>
 
                 <ListView 
                     x:Name="LV_Categories"
@@ -140,6 +143,7 @@
                                                         HorizontalAlignment="Stretch"
                                                         MinHeight="34"
                                                         SelectedValuePath="UnicodeIndex"
+                                                        MaxDropDownHeight="250"
                                                         SelectedItem="{Binding DataContext.SelectedComboBoxItem, ElementName=Page,Mode=TwoWay}"
                                                         ItemTemplate="{StaticResource SymbolListTemplate}"
                                                         ItemsSource="{Binding DataContext.ACVCollection, ElementName=Page, Mode=OneWay}" 

@@ -844,7 +844,7 @@ namespace Project2FA.ViewModels
                     item.Category = Resources.SettingsDependencyGroupAssets;
                 }
             }
-            var grouped = depList.GroupBy(x => x.Category).OrderBy(g => g.Key);
+            var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
             var contactsSource = new ObservableGroupedCollection<string, DependencyModel>(grouped);
             DependencyCollectionViewSource.Source = contactsSource;
             DependencyCollectionViewSource.IsSourceGrouped = true;

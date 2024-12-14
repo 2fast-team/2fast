@@ -4,11 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:controls="using:Project2FA.Controls"
-    xmlns:mstoolkitcontrols="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Uno.UI.Toolkit"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:animations="using:CommunityToolkit.WinUI.Animations"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:models="using:Project2FA.Repository.Models"
     xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -36,16 +39,226 @@
                     Foreground="{ThemeResource  SystemAccentColor}" />
             </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>
-        <Grid Grid.Row="1">
+
+        <Grid 
+            Grid.Row="1" 
+            x:Name="RootGrid">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel 
+            MinHeight="650" 
+            MinWidth="400"
+            Margin="0,0,16,0">
+                    <ctwc:SettingsCard 
+                Header="~AddAccountContentDialogAccountIcon.Header"
+                x:Uid="AddAccountContentDialogAccountIcon">
+                        <ctwc:SettingsCard.Description>
+                            <Grid 
+        Margin="0,10,0,0" 
+        MinWidth="120" 
+        MinHeight="100">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <PersonPicture
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Height="110"
+            Width="110"
+            DisplayName="{x:Bind ViewModel.Model, 
+                Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                Mode=OneWay}"
+            FontSize="60"
+            Tag="{x:Bind ViewModel.Model.AccountIconName, Mode=OneWay}">
+                                </PersonPicture>
+                                <Button 
+            CornerRadius="32"
+            Grid.Column="1"
+            Width="44"
+            Height="44"
+            Command="{x:Bind ViewModel.DeleteAccountIconCommand}" 
+            VerticalAlignment="Bottom">
+                                    <SymbolIcon Symbol="Delete"/>
+                                </Button>
+                                <Button 
+                            CornerRadius="32"
+                            Width="44"
+                            Height="44"
+                            Grid.Column="2"
+                            Command="{x:Bind ViewModel.EditAccountIconCommand}"
+                            VerticalAlignment="Bottom" 
+                            HorizontalAlignment="Right">
+                                    <!--<FlyoutBase.AttachedFlyout>
+                                        <CommandBarFlyout Placement="Bottom">
+                                            <CommandBarFlyout.PrimaryCommands>
+                                                <AppBarElementContainer>
+                                                    <AutoSuggestBox 
+                            Header="~AddAccountContentDialogSuggestionBox.Header" 
+                            x:Uid="AddAccountContentDialogSuggestionBox"
+                            Width="200"
+                            QueryIcon="Find"
+                            Text="{x:Bind ViewModel.AccountIconName,Mode=OneWay}"
+                            VerticalAlignment="Center"
+                            PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                            TextChanged="AutoSuggestBox_TextChanged" 
+                            VerticalContentAlignment="Center"
+                            UpdateTextOnSelect="False"
+                            TextMemberPath="Name"
+                            GotFocus="AutoSuggestBox_GotFocus"
+                            ItemContainerStyle="{StaticResource AutoSuggestBoxItemContainerStyle}"
+                            ItemsSource="{x:Bind ViewModel.FontIdentifikationCollection, Mode=OneWay}"
+                            SuggestionChosen="AutoSuggestBox_SuggestionChosen" >
+                                                        <AutoSuggestBox.RenderTransform>
+                                                            <CompositeTransform />
+                                                        </AutoSuggestBox.RenderTransform>
+                                                        <AutoSuggestBox.ItemTemplate>
+                                                            <DataTemplate x:DataType="models:FontIdentifikationModel">
+                                                                <Grid
+                                        HorizontalAlignment="Stretch"
+                                        Background="Transparent"
+                                        ToolTipService.ToolTip="{x:Bind Name}">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="30" />
+                                                                        <ColumnDefinition Width="*" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <FontIcon
+                                            FontSize="16"
+                                            Margin="4,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            FontFamily="{StaticResource SimpleIcons}"
+                                            Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
+                                                                    <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Text="{x:Bind Name, Mode=OneWay}"
+                                            TextTrimming="CharacterEllipsis" />
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </AutoSuggestBox.ItemTemplate>
+                                                    </AutoSuggestBox>
+                                                </AppBarElementContainer>
+                                            </CommandBarFlyout.PrimaryCommands>
+                                        </CommandBarFlyout>
+                                    </FlyoutBase.AttachedFlyout>-->
+                                    <FontIcon
+                FontSize="18"
+                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                Glyph="&#xE104;" />
+                                </Button>
+                            </Grid>
+                        </ctwc:SettingsCard.Description>
+                        <!--<ctwc:SettingsCard.Content>
+
+</ctwc:SettingsCard.Content>-->
+                    </ctwc:SettingsCard>
+                    <TextBox 
+            Header="~AddAccountContentDialogLabel.Header" 
+            x:Uid="AddAccountContentDialogLabel"
+            Text="{x:Bind ViewModel.Label,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox
+            Header="~AddAccountContentDialogAccountName.Header"
+            x:Uid="AddAccountContentDialogAccountName"
+            Text="{x:Bind ViewModel.Issuer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+            Margin="0,10,0,20"/>
+
+                    <ctwc:SettingsExpander
+                IsExpanded="{x:Bind ViewModel.NotesExpanded,Mode=OneWay}"
+                Margin="0,15,0,8"
+                Expanded="SettingsExpander_Expanded"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE104;}"
+                x:Uid="AddAccountContentDialogAccountNotes" 
+                Header="~AddAccountContentDialogAccountNotes.Header">
+                        <!--<ctwc:SettingsExpander.ItemsHeader>
+                            <oldtoolkit:TextToolbar 
+                        x:Name="Toolbar"
+                        Editor="{Binding ElementName=REB_Notes}"
+                        UseURIChecker="True"
+                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                <oldtoolkit:TextToolbar.Formatter>
+                                    <utils:CustomRichTextFormatter/>
+                                </oldtoolkit:TextToolbar.Formatter>
+                            </oldtoolkit:TextToolbar>
+                        </ctwc:SettingsExpander.ItemsHeader>-->
+                        <ctwc:SettingsExpander.ItemsFooter>
+                            <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                <RichEditBox
+                            x:Name="REB_Notes"
+                            Margin="0,0,0,4"
+                            MinHeight="120"
+                            SelectionFlyout="{x:Null}"
+                            IsColorFontEnabled="False"
+                            TextChanged="REB_Notes_TextChanged">
+                                </RichEditBox>
+                            </Grid>
+                        </ctwc:SettingsExpander.ItemsFooter>
+                    </ctwc:SettingsExpander>
+
+                    <ctwc:SettingsExpander
+                IsExpanded="True"
+                Margin="0,15,0,8"
+                Expanded="SettingsExpander_Expanded"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE912;}"
+                x:Uid="EditAccountContentDialogAccountCategories" 
+                Header="~EditAccountContentDialogAccountCategories.Header">
+                        <Button
+                    Grid.Column="1"
+                    Height="36"
+                    Width="48"
+                    Padding="4,4,4,4"
+                    Style="{StaticResource TransparentButtonStyle}"
+                    x:Name="BTN_Cateory_Help"
+                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp,FallbackValue=''}"
+                    VerticalAlignment="Bottom" 
+                    Click="HLBTN_CategoryInfo" >
+                            <FontIcon
+                        FontSize="20"
+                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                        Glyph="&#xE946;"/>
+                        </Button>
+                        <ctwc:SettingsExpander.ItemsHeader>
+                            <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                <!--<labs:TokenView 
+                            x:Name="TV_Categories"  
+                            Margin="0,15,0,8"
+                            Visibility="{x:Bind ViewModel.CategoriesExists,Mode=OneWay}"
+                            ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
+                            IsItemClickEnabled="True"
+                            SelectionMode="Multiple" 
+                            ItemClick="TokenView_ItemClick">
+                                    <labs:TokenView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:CategoryModel">
+                                            <StackPanel Orientation="Horizontal">
+                                                <FontIcon 
+                                            FontFamily="{StaticResource SegoeFluentIconsFilled}"
+                                            Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"
+                                            Margin="0,0,10,0"/>
+                                                <TextBlock 
+                                            Text="{x:Bind Name,Mode=OneWay}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </labs:TokenView.ItemTemplate>
+                                </labs:TokenView>-->
+                            </Grid>
+                        </ctwc:SettingsExpander.ItemsHeader>
+                    </ctwc:SettingsExpander>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!--<Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel 
                 MinHeight="650"
                 Margin="8,0,8,0">
 
-                    <mstoolkitcontrols:SettingsCard
+                    <ctwc:SettingsCard
                     Header="~AddAccountContentDialogAccountIcon.Header"
                     x:Uid="AddAccountContentDialogAccountIcon">
-                        <mstoolkitcontrols:SettingsCard.Description>
+                        <ctwc:SettingsCard.Description>
                             <Grid 
                             Margin="0,10,0,0" 
                             MinWidth="120" 
@@ -62,7 +275,7 @@
                                     Style="{StaticResource DefaultPersonPictureStyle}"
                                     Tag="{x:Bind ViewModel.AccountIconName, Mode=OneWay}">
                                 </PersonPicture>
-                                <!--<Button 
+                                --><!--<Button 
                                 CornerRadius="32"
                                 Width="44"
                                 Height="44"
@@ -73,12 +286,12 @@
                             FontSize="18"
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Glyph="&#xE104;" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                                </Button>-->
+                                </Button>--><!--
                             </Grid>
-                        </mstoolkitcontrols:SettingsCard.Description>
+                        </ctwc:SettingsCard.Description>
                         
-                    </mstoolkitcontrols:SettingsCard>
-                    <!--<controls:CardControl 
+                    </ctwc:SettingsCard>
+                    --><!--<controls:CardControl 
                     Header="~AddAccountContentDialogAccountIcon.Header"
                     x:Uid="AddAccountContentDialogAccountIcon">
                         <controls:CardControl.DescriptionContent>
@@ -143,7 +356,7 @@
                                 
                             </StackPanel>
                         </controls:CardControl.ActionContent>
-                    </controls:CardControl>-->
+                    </controls:CardControl>--><!--
                     <TextBox 
                 Header="~AddAccountContentDialogLabel.Header" 
                 x:Uid="AddAccountContentDialogLabel"  
@@ -154,7 +367,7 @@
                 Text="{x:Bind ViewModel.Issuer,Mode=TwoWay}" 
                 Margin="0,10,0,20"/>
 
-                    <!--<labs:SettingsExpander 
+                    --><!--<labs:SettingsExpander 
                     IsExpanded="True"
                     Margin="0,15,0,8">
                         --><!--<labs:SettingsCard.Header>
@@ -232,13 +445,13 @@
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Glyph="&#xE946;"/>
                     </Button>
-                </Grid>-->
+                </Grid>--><!--
 
 
                 </StackPanel>
             </ScrollViewer>
 
-        </Grid>
+        </Grid>-->
         <Grid 
 			Grid.Row="2"
 			HorizontalAlignment="Stretch"

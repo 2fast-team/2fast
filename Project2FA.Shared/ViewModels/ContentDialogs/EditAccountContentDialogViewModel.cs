@@ -29,7 +29,6 @@ namespace Project2FA.ViewModels
 #endif
     public class EditAccountContentDialogViewModel : EditAccountViewModelBase, IDialogInitialize
     {
-        public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
         public EditAccountContentDialogViewModel(ISerializationService serializationService)
         {
             SerializationService = serializationService;
@@ -73,42 +72,7 @@ namespace Project2FA.ViewModels
             }
         }
 
-        /// <summary>
-        /// Search the account list by the search term
-        /// </summary>
-        /// <param name="senderText">Input search text</param>
-        /// <returns></returns>
-        public Task<bool> SearchAccountFonts(string senderText)
-        {
-            if (string.IsNullOrEmpty(senderText) == false && senderText.Length >= 2 && senderText != Strings.Resources.AccountCodePageSearchNotFound)
-            {
-                var tempList = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(senderText, System.StringComparison.OrdinalIgnoreCase)).ToList();
-                FontIdentifikationCollection.AddRange(tempList, true);
-                try
-                {
-                    if (FontIdentifikationCollection.Count == 0)
-                    {
-                        FontIdentifikationCollection.Add(new FontIdentifikationModel { Name = Strings.Resources.AccountCodePageSearchNotFound });
-                        return Task.FromResult(true);
-                    }
-                    return Task.FromResult(true);
-                }
-                catch (Exception exc)
-                {
-#if WINDOWS_UWP
-                    TrackingManager.TrackExceptionCatched(nameof(SearchAccountFonts), exc);
-#endif
-                    FontIdentifikationCollection.Clear();
-                    return Task.FromResult(false);
-                }
 
-            }
-            else
-            {
-                FontIdentifikationCollection.Clear();
-                return Task.FromResult(false);
-            }
-        }
 
         public bool NoCategoriesExists
         {

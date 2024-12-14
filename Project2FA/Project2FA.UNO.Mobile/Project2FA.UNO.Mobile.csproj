@@ -92,15 +92,16 @@
     <None Remove="Platforms\Android\Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0-preview3" />
-    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.241127-build.1271" />
-    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.241127-build.1271" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.241127-build.1271" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.241127-build.1271" />
-    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.241127-build.1271" />
-    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.241127-build.1271" />
-	<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.10" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.10" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.5.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.241204-build.1297" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.241204-build.1297" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.241204-build.1297" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.241204-build.1297" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.241204-build.1297" />
+    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.241204-build.1297" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.21" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="QRCoder" Version="1.6.0" />
     <PackageReference Include="Svg.Skia" Version="2.0.0.4" />
@@ -113,14 +114,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.3.7" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.3.7" />
-    <PackageReference Include="Uno.WinUI" Version="5.5.76" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.5.76" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.5.76" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.5.76" />
+    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.4.0-dev.65" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.4.0-dev.65" />
+    <PackageReference Include="Uno.WinUI" Version="5.5.87" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.5.87" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.5.87" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.5.87" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.5.76" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.5.87" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>

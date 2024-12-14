@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Uwp.Helpers;
-using UNOversal.Ioc;
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
@@ -37,6 +36,7 @@ using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Project2FA.Services.Importer;
 
 namespace Project2FA.UWP
 {
@@ -70,19 +70,15 @@ namespace Project2FA.UWP
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            TrackingManager.TrackExceptionUnhandled("UnobservedTaskException", e.Exception);
-            SettingsService.Instance.UnhandledExceptionStr += e.Exception + "\n"
-            + e.Exception.InnerException;
-            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception, SettingsService.Instance.LoggingSetting);
+            TrackingManager.TrackUnobservedTaskException("UnobservedTaskException", e);
+            SettingsService.Instance.UnhandledExceptionStr += e.Exception.ToString() + e.Exception.InnerException + e.Exception.StackTrace;
             // let the app crash...
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
-            TrackingManager.TrackExceptionUnhandled(nameof(App_UnhandledException), e.Exception);
-            SettingsService.Instance.UnhandledExceptionStr += e.Exception + "\n"
-            + e.Exception.InnerException;
-            App.Current.Container.Resolve<ILoggingService>().LogException(e.Exception, SettingsService.Instance.LoggingSetting);
+            TrackingManager.TrackUnhandledException(nameof(App_UnhandledException), e);
+            SettingsService.Instance.UnhandledExceptionStr += e.Exception.ToString() + e.Exception.InnerException + e.Exception.StackTrace + e.Message;
             // let the app crash...
         }
 
@@ -112,6 +108,7 @@ namespace Project2FA.UWP
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
             container.RegisterSingleton<IPurchaseAddOnService, PurchaseAddOnService>();
             container.RegisterSingleton<ILoggingService, LoggingService>();
+            container.RegisterSingleton<IBackupImporterService, BackupImporterService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();

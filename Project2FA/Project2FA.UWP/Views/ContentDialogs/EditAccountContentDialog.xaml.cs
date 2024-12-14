@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
 using UNOversal.Extensions;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Project2FA.UWP.Views
 {
@@ -100,11 +101,11 @@ namespace Project2FA.UWP.Views
             ViewModel.Notes = Toolbar.Formatter?.Text;
         }
 
-        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                ViewModel.SearchAccountFonts(sender.Text);
+                await ViewModel.SearchAccountFonts(sender.Text);
             }
         }
 
@@ -114,11 +115,11 @@ namespace Project2FA.UWP.Views
             {
                 if (selectedItem.Name != Strings.Resources.AccountCodePageSearchNotFound)
                 {
-                    ViewModel.AccountIconName = selectedItem.Name;
+                    ViewModel.TempModel.AccountIconName = selectedItem.Name;
                 }
                 else
                 {
-                    ViewModel.AccountIconName = string.Empty;
+                    sender.Text = string.Empty;
                 }
             }
         }
@@ -141,9 +142,9 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
+        private async void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            ViewModel.SearchAccountFonts(ViewModel.AccountIconName);
+            await ViewModel.SearchAccountFonts(ViewModel.TempModel.AccountIconName);
         }
 
         private void HLBTN_CategoryInfo(object sender, RoutedEventArgs e)
@@ -158,6 +159,19 @@ namespace Project2FA.UWP.Views
                 IsOpen = true
             };
             RootGrid.Children.Add(teachingTip);
+        }
+
+        private void SettingsExpander_Expanded(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BTN_SearchIcon_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                FlyoutBase.ShowAttachedFlyout(btn);
+            }
         }
     }
 }

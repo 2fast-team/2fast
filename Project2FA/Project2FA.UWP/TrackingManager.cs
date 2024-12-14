@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using Microsoft.Services.Store.Engagement;
 
 namespace Project2FA.UWP
@@ -26,13 +27,28 @@ namespace Project2FA.UWP
             }
         }
 
-        public static void TrackExceptionUnhandled(string method, Exception ex)
+        public static void TrackUnhandledException(string method, Windows.UI.Xaml.UnhandledExceptionEventArgs ex)
         {
             try
             {
                 if (!_debugMode)
                 {
-                    _logger.Log($"crit {method}-{ex.Message}-{ex.StackTrace}");
+                    _logger.Log($"crit {method}-{ex.Message}-{ex.Exception.StackTrace}-{ex.Exception.InnerException}-{ex.Exception.Source}");
+                }
+            }
+            catch
+            {
+                // Ignore error
+            }
+        }
+
+        public static void TrackUnobservedTaskException(string method, UnobservedTaskExceptionEventArgs ex)
+        {
+            try
+            {
+                if (!_debugMode)
+                {
+                    _logger.Log($"crit {method}-{ex.Exception.Message}-{ex.Exception.StackTrace}-{ex.Exception.Source}");
                 }
             }
             catch

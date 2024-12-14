@@ -709,7 +709,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <utu:NavigationBar             
+        <utu:NavigationBar
             Grid.Row="0"
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
@@ -786,59 +786,6 @@
         </utu:NavigationBar>
 
         <StackPanel Grid.Row="1">
-            <CommandBar 
-                OverflowButtonVisibility="Collapsed"
-                DefaultLabelPosition="Collapsed">
-                <CommandBar.PrimaryCommands>
-                    <AppBarButton>
-                    <AppBarButton.Icon>
-                        <FontIcon FontSize="28" Glyph="&#xE710;"/>
-                    </AppBarButton.Icon>
-                    <AppBarButton.Flyout>
-                        <MenuFlyout 
-                            UseNativePopup="True" 
-                            toolkit:MenuFlyoutExtensions.CancelTextIosOverride="{x:Bind strings:Resources.ButtonTextCancel}"
-                            Placement="Top">
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddCamera"
-                                Command="{x:Bind ViewModel.CameraCommand}"
-                                Text="AccountCodePageAddCamera.Text~">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE960;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem 
-                                x:Uid="AccountCodePageAddManual"
-                                Command="{x:Bind ViewModel.AddAccountCommand}"
-                                Text="AccountCodePageAddManual.Text~">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE70F;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-                <AppBarButton 
-
-    Foreground="{ThemeResource ButtonForeground}"
-    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
-    Command="{x:Bind ViewModel.LogoutCommand}">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE72E;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton 
-    Foreground="{ThemeResource ButtonForeground}"
-    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
-    Command="{x:Bind ViewModel.RefreshCommand}">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE895;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-
-                </CommandBar.PrimaryCommands>
-            </CommandBar>
-
             <AutoSuggestBox 
             x:Name="MobileAutoSuggestBox"
             Grid.Row="1"

@@ -1,4 +1,6 @@
-﻿using Project2FA.ViewModels;
+﻿using Project2FA.Extensions;
+using Project2FA.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Project2FA.UWP.Views
@@ -16,6 +18,11 @@ namespace Project2FA.UWP.Views
         {
             App.ShellPageInstance.ShellViewInternal.Header = string.Empty;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
+        }
+
+        private void SettingsExpander_Expanded(object sender, System.EventArgs e)
+        {
+            SV_SettingsOptions.ScrollToElement(sender as FrameworkElement);
         }
     }
 }

@@ -1,9 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Project2FA.Core.Utils;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.Serialization;
+using UNOversal.Services.Logging;
+using UNOversal.Ioc;
+
+
+
+#if WINDOWS_UWP
+using Project2FA.UWP;
+using Windows.UI.Xaml.Controls;
+#else
+using Project2FA.UNO;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
+#endif
 
 namespace Project2FA.ViewModels
 {
@@ -14,6 +31,8 @@ namespace Project2FA.ViewModels
         private bool _isEditBoxVisible;
         private bool _notesExpanded = true;
         private bool _isPrimaryBTNEnabled;
+
+        public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
         public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         public ICommand CancelButtonCommand { get; internal set; }
         public ICommand PrimaryButtonCommand { get; internal set; }
@@ -28,6 +47,45 @@ namespace Project2FA.ViewModels
             NotesExpanded = !IsProVersion;
 #endif
         }
+
+        /// <summary>
+        /// Search the account list by the search term
+        /// </summary>
+        /// <param name="senderText">Input search text</param>
+        /// <returns></returns>
+        public async Task<bool> SearchAccountFonts(string senderText)
+        {
+            if (string.IsNullOrEmpty(senderText) == false && senderText.Length >= 2 && senderText != Strings.Resources.AccountCodePageSearchNotFound)
+            {
+                var tempList = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(senderText, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                FontIdentifikationCollection.AddRange(tempList, true);
+                try
+                {
+                    if (FontIdentifikationCollection.Count == 0)
+                    {
+                        FontIdentifikationCollection.Add(new FontIdentifikationModel { Name = Strings.Resources.AccountCodePageSearchNotFound });
+                        return true;
+                    }
+                    return true;
+                }
+                catch (Exception exc)
+                {
+                    await App.Current.Container.Resolve<ILoggingService>().LogException(exc, SettingsService.Instance.LoggingSetting);
+#if WINDOWS_UWP
+                    UWP.TrackingManager.TrackExceptionCatched(nameof(SearchAccountFonts), exc);
+#endif
+                    FontIdentifikationCollection.Clear();
+                    return false;
+                }
+
+            }
+            else
+            {
+                FontIdentifikationCollection.Clear();
+                return false;
+            }
+        }
+
         public TwoFACodeModel Model
         {
             get => _twoFACodeModel;

@@ -5,13 +5,14 @@
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:unoVersalControls="using:Project2FA.Controls"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:ui="using:CommunityToolkit.WinUI"
@@ -41,7 +42,7 @@
                 <Grid
                     x:Name="Root" 
                     CornerRadius="{ThemeResource ControlCornerRadius}"
-                    Background="{ThemeResource TwoFABackgroundBrush}"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     Width="450">
                     <Grid.RowDefinitions>
@@ -53,10 +54,11 @@
                         Text="{x:Bind Name, Mode=OneWay}"
                         FontSize="16"
                         Foreground="{ThemeResource SystemAccentColor}"
+                        Margin="8,0,0,0"
                         Padding="0,0,0,8"/>
                     <StackPanel
                         Grid.Row="1" 
-                        Margin="0,8,0,0"
+                        Margin="8,8,0,0"
                         Orientation="Horizontal">
                         <TextBlock
                             x:Uid="SettingsDependencyAuthor"
@@ -76,7 +78,7 @@
 
                     <StackPanel
                         Grid.Row="2" 
-                        Margin="0,8,0,0"
+                        Margin="8,8,0,0"
                         Orientation="Horizontal">
                         <TextBlock
                             x:Uid="SettingsDependencyLicence"
@@ -119,6 +121,7 @@
                             Visibility="{x:Bind ViewModel.SettingsPartViewModel.IsMDMActive, Mode=OneWay}"
                             Foreground="{ThemeResource ApplicationWarnHighlightForegroundBrush}"/>
                     <ScrollViewer
+                        x:Name="SV_SettingsOptions"
                         Grid.Row="1"
                         VerticalScrollMode="Auto" 
                         Margin="0,10,0,0">
@@ -391,7 +394,7 @@
                                         IsExpanded="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=OneWay}"
                                         HeaderIcon="{ui:FontIcon Glyph=&#xEE93;}"
                                         x:Uid="SettingsUseNTPTimeCorrection" 
-                                        Header="~SettingsUseNTPTimeCorrection.Header">
+                                        Header="~SettingsUseNTPTimeCorrection.Header" Expanded="SettingsExpander_Expanded">
                                         <ctwc:SettingsExpander.Content>
                                             <ToggleSwitch
                                                 IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseNTPServerCorrection,Mode=TwoWay}"/>
@@ -402,6 +405,7 @@
                                                 <ctwc:SettingsCard.Description>
                                                     <TextBlock 
                                                         x:Uid="SettingsNTPServerDescribtion"
+                                                        MaxWidth="450"
                                                         TextWrapping="WrapWholeWords"
                                                         Text="~SettingsNTPServerDescribtion.Text"/>
 
@@ -510,7 +514,7 @@
                 x:Uid="SettingsPivotItemAbout" 
                 Header="~SPIAbout.Header" 
                 Margin="8,0,0,0">
-                
+
                 <UserControl>
                     <Grid Margin="0,10,0,0">
                         <RelativePanel>
@@ -520,8 +524,7 @@
                                         <ctwc:SettingsCard 
             Background="{ThemeResource SystemAccentColor}"
             Foreground="White"
-            Header="Jan Philipp Weber &amp; Malte Hellmeier"
-            HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/Square44x44Logo.targetsize-256.png}">
+            Header="Jan Philipp Weber &amp; Malte Hellmeier">
                                             <ctwc:SettingsCard.Description>
                                                 <TextBlock 
                     FontSize="20" 
@@ -573,122 +576,61 @@
                                 </Grid>
                             </ScrollViewer>
 
-                            <!--<unoVersalControls:SettingsGroup 
-                                x:Name="LV_Dependencies" >
-                                <ctwc:SettingsExpander 
-                                    IsExpanded="True"
-                                     Header="~SettingsDependencies.Header"
-                                     
-                                     x:Uid="SettingsDependencies">
-                                    <ctwc:SettingsExpander.Content>
-                                        <SemanticZoom
-                                            MaxWidth="480"
-                                            CanChangeViews="False">
-                                            <SemanticZoom.ZoomedInView>
-                                                <GridView
-                                                    SelectionMode="None"
-                                                    IsSynchronizedWithCurrentItem="False"
-                                                    ItemTemplate="{StaticResource DependenciesListViewTemplate}"
-                                                    ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
-                                                    IsTabStop="False"
-                                                    IsItemClickEnabled="True">
-                                                    <GridView.GroupStyle>
-                                                        <GroupStyle>
-                                                            <GroupStyle.HeaderTemplate>
-                                                                <DataTemplate >
-                                                                    <TextBlock 
-                                                                        Text="{Binding Key}" 
-                                                                        FontSize="20"/>
-                                                                </DataTemplate>
-                                                            </GroupStyle.HeaderTemplate>
-                                                            <GroupStyle.Panel>
-                                                                <ItemsPanelTemplate>
-                                                                    <ctwc:WrapPanel/>
-                                                                </ItemsPanelTemplate>
-                                                            </GroupStyle.Panel>
-                                                        </GroupStyle>
-                                                    </GridView.GroupStyle>
-                                                    <GridView.ItemContainerStyle>
-                                                        <Style TargetType="GridViewItem">
-                                                            <Setter Property="Margin" Value="0,0,8,16" />
+                            <Grid 
+                            x:Name="Grid_Dependencies"
+                        Background="{ThemeResource CardBackgroundBrush}" 
+                        CornerRadius="{ThemeResource OverlayCornerRadius}">
+                                <SemanticZoom CanChangeViews="False">
+                                    <SemanticZoom.ZoomedInView>
+                                        <GridView
+x:Uid="SettingsDependencies"
+SelectionMode="None"
+IsSynchronizedWithCurrentItem="False"
+ItemTemplate="{StaticResource DependenciesListViewTemplate}"
+ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
+IsTabStop="False"
+IsItemClickEnabled="True">
+                                            <GridView.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,0,0,15">
+                                                        <interactivity:Interaction.Behaviors>
+                                                            <behaviors:StickyHeaderBehavior />
+                                                        </interactivity:Interaction.Behaviors>
+                                                        <TextBlock FontSize="24" HorizontalAlignment="Center"
+         VerticalAlignment="Center"
+         Text="{Binding}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </GridView.HeaderTemplate>
+                                            <GridView.GroupStyle>
+                                                <GroupStyle>
+                                                    <GroupStyle.HeaderTemplate>
+                                                        <DataTemplate >
+                                                            <TextBlock 
+                    Text="{Binding Key}" 
+                    FontSize="20"/>
+                                                        </DataTemplate>
+                                                    </GroupStyle.HeaderTemplate>
+                                                    <GroupStyle.Panel>
+                                                        <ItemsPanelTemplate>
+                                                            <ctwc:WrapPanel/>
+                                                        </ItemsPanelTemplate>
+                                                    </GroupStyle.Panel>
+                                                </GroupStyle>
+                                            </GridView.GroupStyle>
+                                            <GridView.ItemContainerStyle>
+                                                <Style TargetType="GridViewItem">
+                                                    <Setter Property="Margin" Value="0,0,8,16" />
 
-                                                            <Setter Property="animations:Implicit.Animations" 
-                                                                    Value="{StaticResource ImplicitOffset}"/>
-                                                        </Style>
-                                                    </GridView.ItemContainerStyle>
-                                                </GridView>
-                                            </SemanticZoom.ZoomedInView>
-                                        </SemanticZoom>
-                                    </ctwc:SettingsExpander.Content>
-                                </ctwc:SettingsExpander>
-                            </unoVersalControls:SettingsGroup>-->
-                            
-                            <appcontrols:CardExpanderControl 
-                                IsExpanded="True"
-                                Header="~SettingsDependencies.Header"
-                                x:Name="LV_Dependencies" 
-                                x:Uid="SettingsDependencies">
-                                <appcontrols:CardExpanderControl.Content>
-                                    <SemanticZoom 
-                            CanChangeViews="False">
-                                        <SemanticZoom.ZoomedInView>
-                                            <GridView
-                                SelectionMode="None"
-                                IsSynchronizedWithCurrentItem="False"
-                                ItemTemplate="{StaticResource DependenciesListViewTemplate}"
-                                ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
-                                IsTabStop="False"
-                                IsItemClickEnabled="True">
-                                                <GridView.GroupStyle>
-                                                    <GroupStyle>
-                                                        <GroupStyle.HeaderTemplate>
-                                                            <DataTemplate >
-                                                                <TextBlock 
-                                                                Text="{Binding Key}" 
-                                                                FontSize="20"/>
-                                                            </DataTemplate>
-                                                        </GroupStyle.HeaderTemplate>
-                                                        <GroupStyle.Panel>
-                                                            <ItemsPanelTemplate>
-                                                                <ctwc:WrapPanel/>
-                                                            </ItemsPanelTemplate>
-                                                        </GroupStyle.Panel>
-                                                    </GroupStyle>
-                                                </GridView.GroupStyle>
-                                                <GridView.ItemContainerStyle>
-                                                    <Style TargetType="GridViewItem">
-                                                        <Setter Property="Margin" Value="0,0,8,16" />
-
-                                                        <Setter Property="animations:Implicit.Animations" 
-                                                            Value="{StaticResource ImplicitOffset}"/>
-                                                    </Style>
-                                                </GridView.ItemContainerStyle>
-                                            </GridView>
-                                        </SemanticZoom.ZoomedInView>
-                                    </SemanticZoom>
-                                </appcontrols:CardExpanderControl.Content>
-                                
-                            </appcontrols:CardExpanderControl>
-
-                            <!--<controls:HeaderedContentControl 
-                                x:Name="LV_Dependencies" 
-                                x:Uid="SettingsDependencies"
-                                Margin="0,10,0,0"
-                                Header="~SettingsDependencies.Header">
-                                <controls:HeaderedContentControl.HeaderTemplate>
-                                    <DataTemplate>
-                                        <Border 
-                                            Background="{ThemeResource CardBackgroundBrush}"
-                                            BorderBrush="{ThemeResource SystemControlDisabledChromeDisabledLowBrush}">
-                                            <TextBlock Text="{Binding}" FontSize="20"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </controls:HeaderedContentControl.HeaderTemplate>
-                                
-                            </controls:HeaderedContentControl>-->
+                                                    <Setter Property="animations:Implicit.Animations" 
+                Value="{StaticResource ImplicitOffset}"/>
+                                                </Style>
+                                            </GridView.ItemContainerStyle>
+                                        </GridView>
+                                    </SemanticZoom.ZoomedInView>
+                                </SemanticZoom>
+                            </Grid>
                         </RelativePanel>
-
-
                     </Grid>
                 </UserControl>
             </PivotItem>
@@ -701,8 +643,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--<Setter Target="TB_QRCode_Description.MaxWidth" Value="100"/>-->
-                        <Setter Target="LV_Dependencies.Margin" Value="0,0,0,0"/>
-                        <Setter Target="LV_Dependencies.(RelativePanel.Below)" Value="SV_AboutTheApp"/>
+                        <Setter Target="Grid_Dependencies.Margin" Value="0,0,0,0"/>
+                        <Setter Target="Grid_Dependencies.(RelativePanel.Below)" Value="SV_AboutTheApp"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="MediumState">
@@ -711,8 +653,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--<Setter Target="TB_QRCode_Description.MaxWidth" Value="auto"/>-->
-                        <Setter Target="LV_Dependencies.Margin" Value="20,0,0,0"/>
-                        <Setter Target="LV_Dependencies.(RelativePanel.RightOf)" Value="SV_AboutTheApp"/>
+                        <Setter Target="Grid_Dependencies.Margin" Value="20,0,0,0"/>
+                        <Setter Target="Grid_Dependencies.(RelativePanel.RightOf)" Value="SV_AboutTheApp"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

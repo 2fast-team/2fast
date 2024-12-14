@@ -1,5 +1,12 @@
 ﻿[
   {
+    "Name": "BouncyCastle.Cryptography",
+    "Authors": "Legion of the Bouncy Castle Inc.",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/bcgit/bc-csharp/blob/master/LICENSE.md"
+  },
+  {
     "Name": "CommunityToolkit.*",
     "LicenseName": "MIT",
     "Authors": "Microsoft",
@@ -68,13 +75,6 @@
     "LicenseName": "MIT",
     "CategoryUid": "Package",
     "StringLicenseURL": "https://github.com/dotnet/standard/blob/master/LICENSE.TXT"
-  },
-  {
-    "Name": "Prism.*",
-    "Authors": "Brian Lagunas & Dan Siegel",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/PrismLibrary/Prism/blob/master/LICENSE"
   },
   {
     "Name": "PortableWebDavLibrary",

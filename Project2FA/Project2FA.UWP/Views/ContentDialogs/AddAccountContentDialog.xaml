@@ -30,7 +30,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <Thickness x:Key="SettingsExpanderItemPadding">16,0,16,0</Thickness>
 
             <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
                 <UserControl
@@ -216,7 +219,9 @@
                 Header="#inputs" 
                 x:Name="PI_AccountInput"
                 x:Uid="AddAccountContentDialogInputs">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer 
+                    x:Name="SV_AccountInput"
+                    VerticalScrollBarVisibility="Auto">
                     <Grid >
                         <StackPanel Margin="0,10,16,0">
                             <ctwc:SettingsCard 
@@ -354,52 +359,13 @@
                                 </Interactivity:Interaction.Behaviors>-->
                             </TextBox>
 
-                            <!--<ctwc:SettingsExpander
+                            <ctwc:SettingsExpander
                                 Margin="0,15,0,8"
+                                Expanded="SettingsExpander_Expanded"
                                 HeaderIcon="{ui:FontIcon Glyph=&#xE104;}"
                                 x:Uid="AddAccountContentDialogAccountNotes" 
                                 Header="~AddAccountContentDialogAccountNotes.Header">
-                                
-                                <ctwc:SettingsExpander.Items>
-                                    <ctwc:SettingsCard Padding="0" Margin="0" HorizontalContentAlignment="Stretch">
-                                        <ctwc:SettingsCard.Content>
-                                            <StackPanel HorizontalAlignment="Stretch">
-                                                <oldtoolkit:TextToolbar 
-                            x:Name="Toolbar"
-                            Editor="{Binding ElementName=REB_Notes}"
-                            UseURIChecker="True"
-                                                    
-                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                                    <oldtoolkit:TextToolbar.Formatter>
-                                                        <utils:CustomRichTextFormatter/>
-                                                    </oldtoolkit:TextToolbar.Formatter>
-                                                </oldtoolkit:TextToolbar>
-                                                <RichEditBox
-                                        x:Name="REB_Notes"
-                                        Margin="0,0,0,8"
-                                        MinHeight="120"
-                                        SelectionFlyout="{x:Null}"
-                                        IsColorFontEnabled="False"
-                                        TextChanged="REB_Notes_TextChanged">
-                                                </RichEditBox>
-                                            </StackPanel>
-
-                                        </ctwc:SettingsCard.Content>
-                                    </ctwc:SettingsCard>
-                                </ctwc:SettingsExpander.Items>
-                            </ctwc:SettingsExpander>-->
-
-                            <appcontrols:CardExpanderControl 
-                                Margin="0,15,0,8">
-                                <appcontrols:CardExpanderControl.Header>
-                                    <appcontrols:CardControl
-                                                Icon="&#xE104;"
-                                                x:Uid="AddAccountContentDialogAccountNotes" 
-                                                Header="~AddAccountContentDialogAccountNotes.Header">
-                                    </appcontrols:CardControl>
-                                </appcontrols:CardExpanderControl.Header>
-                                <StackPanel>
+                                <ctwc:SettingsExpander.ItemsHeader>
                                     <oldtoolkit:TextToolbar 
                             x:Name="Toolbar"
                             Editor="{Binding ElementName=REB_Notes}"
@@ -410,18 +376,75 @@
                                             <utils:CustomRichTextFormatter/>
                                         </oldtoolkit:TextToolbar.Formatter>
                                     </oldtoolkit:TextToolbar>
-                                    <RichEditBox
-                            x:Name="REB_Notes"
-                            Margin="0,0,0,8"
-                            MinHeight="120"
-                            SelectionFlyout="{x:Null}"
-                            IsColorFontEnabled="False"
-                            TextChanged="REB_Notes_TextChanged">
-                                    </RichEditBox>
-                                </StackPanel>
-                            </appcontrols:CardExpanderControl>
+                                </ctwc:SettingsExpander.ItemsHeader>
+                                <ctwc:SettingsExpander.ItemsFooter>
+                                    <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                        <RichEditBox
+                                        x:Name="REB_Notes"
+                                        Margin="0,0,0,4"
+                                        MinHeight="120"
+                                        SelectionFlyout="{x:Null}"
+                                        IsColorFontEnabled="False"
+                                        TextChanged="REB_Notes_TextChanged">
+                                        </RichEditBox>
+                                    </Grid>
 
-                            <appcontrols:CardExpanderControl
+                                </ctwc:SettingsExpander.ItemsFooter>
+                            </ctwc:SettingsExpander>
+
+                            <ctwc:SettingsExpander
+                                Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
+                                IsExpanded="True"
+                                Margin="0,15,0,8"
+                                Expanded="SettingsExpander_Expanded"
+                                HeaderIcon="{ui:FontIcon Glyph=&#xE912;}"
+                                x:Uid="EditAccountContentDialogAccountCategories" 
+                                Header="~EditAccountContentDialogAccountCategories.Header">
+                                <Button
+                                    Grid.Column="1"
+                                    Height="36"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    Style="{StaticResource TransparentButtonStyle}"
+                                    x:Name="BTN_Cateory_Help"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp,FallbackValue=''}"
+                                    VerticalAlignment="Bottom" 
+                                    Click="HLBTN_CategoryInfo" >
+                                    <FontIcon
+                                        FontSize="20"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE946;"/>
+                                </Button>
+                                <ctwc:SettingsExpander.ItemsHeader>
+                                    <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                        <labs:TokenView 
+                                         x:Name="TV_Categories"
+                                        
+                                         Margin="0,15,0,8"
+                                         Visibility="{x:Bind ViewModel.CategoriesExists,Mode=OneWay}"
+                                         ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
+                                         IsItemClickEnabled="True"
+                                         SelectionMode="Multiple" 
+                                         ItemClick="TokenView_ItemClick">
+                                            <labs:TokenView.ItemTemplate>
+                                                <DataTemplate x:DataType="models:CategoryModel">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <FontIcon 
+                                                        FontFamily="{StaticResource SegoeFluentIconsFilled}"
+                                                        Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"
+                                                        Margin="0,0,10,0"/>
+                                                        <TextBlock 
+                                                        Text="{x:Bind Name,Mode=OneWay}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </labs:TokenView.ItemTemplate>
+                                        </labs:TokenView>
+                                    </Grid>
+
+                                </ctwc:SettingsExpander.ItemsHeader>
+                            </ctwc:SettingsExpander>
+
+                            <!--<appcontrols:CardExpanderControl
                     Visibility="{x:Bind ViewModel.IsProVersion,Mode=OneWay}"
                     IsExpanded="True"
                     Margin="0,15,0,8">
@@ -480,7 +503,7 @@
                                     </StackPanel>
                                 </Grid>
 
-                            </appcontrols:CardExpanderControl>
+                            </appcontrols:CardExpanderControl>-->
 
                             <CheckBox 
                                 x:Name="CB_ManualInput"
@@ -507,19 +530,19 @@
 
 
 
-                            <!--<ctwc:SettingsExpander
+                            <ctwc:SettingsExpander
                                 HeaderIcon="{ui:FontIcon Glyph=&#xEF58;}"
-x:Uid="AddAccountContentDialogExpertExpander" 
-Header="~AddAccountContentDialogExpertExpander.Header"
+                                x:Uid="AddAccountContentDialogExpertExpander" 
+                                Header="~AddAccountContentDialogExpertExpander.Header"
                                 IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
-                                Margin="0,15,0,0">
+                                Margin="0,15,0,0" 
+                                Expanded="SettingsExpander_Expanded">
                                 <Button
                                     Grid.Column="1"
                                     Height="36"
                                     Width="48"
                                     Padding="4,4,4,4"
                                     Style="{StaticResource TransparentButtonStyle}"
-                                    x:Name="BTN_Expertsettings_Help"
                                     ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                                     VerticalAlignment="Bottom" 
                                     Click="BTN_Expertsettings_Help_Click">
@@ -528,10 +551,10 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                                         Glyph="&#xE946;"/>
                                 </Button>
                                 <ctwc:SettingsExpander.Items>
-                                    <Border 
+                                    <!--<Border 
                                         Height="1.5" 
                                         ui:Effects.Shadow="{StaticResource SignShadow}"
-                                        Background="{StaticResource SystemAccentColor}" />
+                                        Background="{StaticResource SystemAccentColor}" />-->
                                     <ctwc:SettingsCard 
                                         x:Uid="AddAccountContentDialogHashAlgo"
                                         BorderBrush="Transparent"
@@ -544,10 +567,10 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                                             <ComboBoxItem Content="SHA512"/>
                                         </ComboBox>
                                     </ctwc:SettingsCard>
-                                    <Border 
+                                    <!--<Border 
                                         Height="1.5" 
                                         ui:Effects.Shadow="{StaticResource SignShadow}"
-                                        Background="{StaticResource SystemAccentColor}" />
+                                        Background="{StaticResource SystemAccentColor}" />-->
                                     <ctwc:SettingsCard 
                                         x:Uid="AddAccountContentDialogTotpSize"
                                         BorderBrush="Transparent"
@@ -559,10 +582,22 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                                             Value="{x:Bind ViewModel.Model.TotpSize, Mode=TwoWay}"
                                             SpinButtonPlacementMode="Inline"/>
                                     </ctwc:SettingsCard>
+                                    <ctwc:SettingsCard 
+                                        x:Uid="AddAccountContentDialogPeriod"
+                                        BorderBrush="Transparent"
+                                        Header="~AddAccountContentDialogPeriod.Header">
+                                        <ComboBox 
+                                            SelectedIndex="{x:Bind ViewModel.PeriodIndex, Mode=TwoWay}" 
+                                            MinWidth="{StaticResource CardActionControlMinWidth}">
+                                            <ComboBoxItem Content="30" />
+                                            <ComboBoxItem Content="60"/>
+                                        </ComboBox>
+                                    </ctwc:SettingsCard>
                                 </ctwc:SettingsExpander.Items>
-                            </ctwc:SettingsExpander>-->
+                            </ctwc:SettingsExpander>
 
-                            <appcontrols:CardExpanderControl 
+                            <!--<appcontrols:CardExpanderControl 
+                                Expanding="CardExpanderControl_Expanding"
                                 IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
                                 Margin="0,15,0,0">
                                 <appcontrols:CardExpanderControl.Header>
@@ -629,7 +664,7 @@ Header="~AddAccountContentDialogExpertExpander.Header"
                                         </appcontrols:CardControl.ActionContent>
                                     </appcontrols:CardControl>
                                 </StackPanel>
-                            </appcontrols:CardExpanderControl>
+                            </appcontrols:CardExpanderControl>-->
 
                         </StackPanel>
                     </Grid>

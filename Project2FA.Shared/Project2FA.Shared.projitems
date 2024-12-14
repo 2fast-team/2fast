@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\SVGImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TOTPVisibilityTooltipConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\VisibleWhenFalseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ScrollToElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Data.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Properties.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\IsScreenCaptureEnabledChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\PasswordStatusChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\WebDAVStatusChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AegisBackupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
@@ -58,6 +60,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentItemModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\BackupImporterService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IBackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />

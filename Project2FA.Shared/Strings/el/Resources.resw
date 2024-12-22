@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>Επεξεργασία</value>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTN.ToolTipService.ToolTip" xml:space="preserve">
     <value>Εμφάνιση επιλογών</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Επιβεβαίωση διαγραφής</value>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Αντιγραφή κώδικα</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -436,7 +436,7 @@
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Ανατροφοδότηση</value>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.ToolTipService.ToolTip" xml:space="preserve">
     <value>Δώστε ανατροφοδότηση (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -504,7 +504,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Ναι</value>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSeconds.ToolTipService.ToolTip" xml:space="preserve">
     <value>Δευτερόλεπτα για ανανέωση</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -596,13 +596,13 @@
     <value>Η διαδρομή προς το τρέχον αρχείο δεδομένων δεν βρέθηκε. Ενδεχομένως το αρχείο δεδομένων μετακινήθηκε από εσάς.
 **Θέλετε να επεξεργαστείτε τη διαδρομή; **</value>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Εφαρμογή κλειδώματος</value>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.ToolTipService.ToolTip" xml:space="preserve">
     <value>Προσθήκη λογαριασμού</value>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.ToolTipService.ToolTip" xml:space="preserve">
     <value>Επαναφόρτωση αρχείου δεδομένων</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -621,7 +621,7 @@
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Αναίρεση διαγραφής</value>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.ToolTipService.ToolTip" xml:space="preserve">
     <value>Αναίρεση διαγραφής</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -864,7 +864,7 @@
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Φίλτρο</value>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Φίλτρο</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -1223,7 +1223,7 @@
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
     <value>Διαχείριση κατηγοριών &amp; ρύθμιση φίλτρων</value>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Διαχείριση κατηγοριών &amp; ρύθμιση φίλτρων</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
@@ -1238,7 +1238,7 @@
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Επιλέξτε για αγορά</value>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
     <value>Λειτουργία διαθέσιμη μόνο με αγορά ή συνδρομή.</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">

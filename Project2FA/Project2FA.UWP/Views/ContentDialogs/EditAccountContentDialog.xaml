@@ -108,7 +108,7 @@
                                                             <Grid
                                     HorizontalAlignment="Stretch"
                                     Background="Transparent"
-                                    ToolTipService.ToolTip="{x:Bind Name, FallbackValue=''}">
+                                    ToolTipService.ToolTip="{x:Bind Name, Mode=OneWay}">
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="30" />
                                                                     <ColumnDefinition Width="*" />

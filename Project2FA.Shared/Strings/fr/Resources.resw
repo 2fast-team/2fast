@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>Editer</value>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTN.ToolTipService.ToolTip" xml:space="preserve">
     <value>Afficher les options</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Confirmer la suppression</value>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Copier le code</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -436,7 +436,7 @@ Le fichier de données ne sera **pas** supprimé lors de la réinitialisation.</
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Retour d'information</value>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.ToolTipService.ToolTip" xml:space="preserve">
     <value>Donner son avis (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -504,7 +504,7 @@ Commencez par un autre facteur de sécurité dans votre vie quotidienne.</value>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSeconds.ToolTipService.ToolTip" xml:space="preserve">
     <value>Secondes pour rafraîchir</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -596,13 +596,13 @@ Instructions pour la définition de l'autorisation :
     <value>Le chemin d'accès au fichier de données actuel n'a pas été trouvé. Il est possible que vous ayez déplacé le fichier de données.
 **Voulez-vous modifier le chemin d'accès ?</value>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Verrouiller l'application</value>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.ToolTipService.ToolTip" xml:space="preserve">
     <value>Ajouter un compte</value>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.ToolTipService.ToolTip" xml:space="preserve">
     <value>Recharger le fichier de données</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -622,7 +622,7 @@ Instructions pour la définition de l'autorisation :
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Annuler la suppression</value>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.ToolTipService.ToolTip" xml:space="preserve">
     <value>Annuler la suppression</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -864,7 +864,7 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Filtre</value>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Filtre</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -1223,7 +1223,7 @@ La fonctionnalité de cette application est expliquée plus en détail dans les 
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
     <value>Gérer les catégories et définir des filtres</value>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Gérer les catégories et définir des filtres</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
@@ -1238,7 +1238,7 @@ La fonctionnalité de cette application est expliquée plus en détail dans les 
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Sélectionner pour l'achat</value>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
     <value>Fonction disponible uniquement par achat ou abonnement.</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">

@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>Muokkaa</value>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTN.ToolTipService.ToolTip" xml:space="preserve">
     <value>Näytä vaihtoehdot</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Vahvista poisto</value>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Kopioi koodi</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -436,7 +436,7 @@ Datatiedostoa **ei** poisteta palautuksen edetessä.</value>
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Palaute</value>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.ToolTipService.ToolTip" xml:space="preserve">
     <value>Anna palautetta (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -504,7 +504,7 @@ Aloita toisesta turvallisuustekijästä jokapäiväisessä elämässäsi.</value
   <data name="Yes" xml:space="preserve">
     <value>Kyllä</value>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSeconds.ToolTipService.ToolTip" xml:space="preserve">
     <value>Sekuntia päivitykseen</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -596,13 +596,13 @@ Ohjeet oikeuksien asettamiseen:
     <value>Nykyisen datatiedoston polkua ei löytynyt. Mahdollisesti olet itse siirtänyt datatiedoston.
 **Tahdotko muokata polkua?**</value>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Lukitse sovellus</value>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.ToolTipService.ToolTip" xml:space="preserve">
     <value>Lisää tili</value>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.ToolTipService.ToolTip" xml:space="preserve">
     <value>Lataa datatiedosto uudelleen</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -621,7 +621,7 @@ Ohjeet oikeuksien asettamiseen:
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Peruuta poisto</value>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.ToolTipService.ToolTip" xml:space="preserve">
     <value>Peruuta poisto</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -864,7 +864,7 @@ Synkronoi aika asetuksissa.</value>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Suodatin</value>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Suodatin</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -1223,7 +1223,7 @@ Tämän sovelluksen toiminnot selitetään tarkemmin seuraavissa kohdissa.</valu
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
     <value>Luokkien hallinta &amp; suodattimien asettaminen</value>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Luokkien hallinta &amp; suodattimien asettaminen</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
@@ -1238,7 +1238,7 @@ Tämän sovelluksen toiminnot selitetään tarkemmin seuraavissa kohdissa.</valu
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Valitse ostettavaksi</value>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
     <value>Toiminto saatavilla vain ostamalla tai tilaamalla.</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">

@@ -34,19 +34,6 @@ namespace Project2FA.Strings{
         }
         #endregion
 
-        #region AccountCodePageItemMoreBTNToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: Show options
-        /// </summary>
-        public static string AccountCodePageItemMoreBTNToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageItemMoreBTNToolTip");
-            }
-        }
-        #endregion
-
         #region AccountCodePageViewModelDeleteAccept
         /// <summary>
         ///   Looks up a localized string similar to: Yes
@@ -99,18 +86,6 @@ namespace Project2FA.Strings{
         }
         #endregion
 
-        #region AccountCopyCodeButtonToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: copy code
-        /// </summary>
-        public static string AccountCopyCodeButtonToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCopyCodeButtonToolTip");
-            }
-        }
-        #endregion
 
         #region AddAccountContentDialogQRCodeContentError
         /// <summary>
@@ -316,19 +291,6 @@ namespace Project2FA.Strings{
             get
             {
                 return _resourceLoader.GetString("Yes");
-            }
-        }
-        #endregion
-
-        #region AccountCodePageRemainingSecondsToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: Seconds to refresh
-        /// </summary>
-        public static string AccountCodePageRemainingSecondsToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageRemainingSecondsToolTip");
             }
         }
         #endregion
@@ -645,45 +607,6 @@ namespace Project2FA.Strings{
         }
         #endregion
 
-        #region AccountCodePageABBLogoutToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: lock app
-        /// </summary>
-        public static string AccountCodePageABBLogoutToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageABBLogoutToolTip");
-            }
-        }
-        #endregion
-
-        #region AccountCodePageAddEntryToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: Add account
-        /// </summary>
-        public static string AccountCodePageAddEntryToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageAddEntryToolTip");
-            }
-        }
-        #endregion
-
-        #region AccountCodePageReloadDatafileToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: Reload datafile
-        /// </summary>
-        public static string AccountCodePageReloadDatafileToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageReloadDatafileToolTip");
-            }
-        }
-        #endregion
-
         #region PasswordInvalidMessage
         /// <summary>
         ///   Looks up a localized string similar to: The password saved in this app is invalid for the data file. You may have changed the password in another machine for the data file. **Do you want to change the password now?
@@ -706,19 +629,6 @@ namespace Project2FA.Strings{
             get
             {
                 return _resourceLoader.GetString("SettingsFactoryResetDialogTitle");
-            }
-        }
-        #endregion
-
-        #region AccountCodePageABBUndoDeleteToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: Undo delete
-        /// </summary>
-        public static string AccountCodePageABBUndoDeleteToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageABBUndoDeleteToolTip");
             }
         }
         #endregion
@@ -1187,19 +1097,6 @@ namespace Project2FA.Strings{
             get
             {
                 return _resourceLoader.GetString("AddAccountCodeContentDialogExpertSettingsHelp");
-            }
-        }
-        #endregion
-
-        #region AccountCodePageSearchFilterToolTip
-        /// <summary>
-        ///   Looks up a localized string similar to: Filter
-        /// </summary>
-        public static string AccountCodePageSearchFilterToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageSearchFilterToolTip");
             }
         }
         #endregion
@@ -1871,16 +1768,6 @@ namespace Project2FA.Strings{
         }
         #endregion
 
-        #region AccountCodePageManageFilterToolTip
-        public static string AccountCodePageManageFilterToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageManageFilterToolTip");
-            }
-        }
-        #endregion
-
         #region InAppPaymentContentDialogPurchaseItemSelect
         public static string InAppPaymentContentDialogPurchaseItemSelect
         {
@@ -1897,16 +1784,6 @@ namespace Project2FA.Strings{
             get
             {
                 return _resourceLoader.GetString("InAppPaymentContentDialogSubscriptionItemSelect");
-            }
-        }
-        #endregion
-
-        #region AccountCodePageProFeatureToolTip
-        public static string AccountCodePageProFeatureToolTip
-        {
-            get
-            {
-                return _resourceLoader.GetString("AccountCodePageProFeatureToolTip");
             }
         }
         #endregion
@@ -2073,12 +1950,10 @@ namespace Project2FA.Strings{
         {
             __Undefined = 0,
             AccountCodePageCopied,
-            AccountCodePageItemMoreBTNToolTip,
             AccountCodePageViewModelDeleteAccept,
             AccountCodePageViewModelDeleteCancel,
             DeleteDatafileContentDialogDeleteDescription,
             DeleteDatafileContentDialogTitle,
-            AccountCopyCodeButtonToolTip,
             AddAccountContentDialogQRCodeContentError,
             AddAccountContentDialogReadQRCodeTeachingTipInfo,
             Confirm,
@@ -2095,7 +1970,6 @@ namespace Project2FA.Strings{
             WindowsHelloLoginMessage,
             WindowsHelloPreferMessage,
             Yes,
-            AccountCodePageRemainingSecondsToolTip,
             ButtonTextCancel,
             ButtonTextConfirm,
             ButtonTextNo,
@@ -2120,12 +1994,8 @@ namespace Project2FA.Strings{
             SettingsQRScanningHeader,
             SettingsQRScanningSecondsRange,
             ExceptionDatafileNotFound,
-            AccountCodePageABBLogoutToolTip,
-            AccountCodePageAddEntryToolTip,
-            AccountCodePageReloadDatafileToolTip,
             PasswordInvalidMessage,
             SettingsFactoryResetDialogTitle,
-            AccountCodePageABBUndoDeleteToolTip,
             NewDatafileContentDialogDatafileExistsError,
             ErrorHandleSendError,
             FactoryReset,
@@ -2162,7 +2032,6 @@ namespace Project2FA.Strings{
             ButtonTextRetry,
             ErrorClipboardTask,
             AddAccountCodeContentDialogExpertSettingsHelp,
-            AccountCodePageSearchFilterToolTip,
             WebViewDatafileContentDialogChooseFile,
             WebViewDatafileContentDialogChooseFolder,
             WelcomePageTutorialTipOpen,
@@ -2213,8 +2082,6 @@ namespace Project2FA.Strings{
             BiometricLoginSubtitle,
             BiometricLoginTitle,
             AddAccountContentDialogTitle,
-            AccountCodePageManageFilterToolTip,
-            AccountCodePageProFeatureToolTip,
             InAppSubscriptionYear,
             InAppBuyOnce,
             InAppPaymentContentDialogBuyItemSelect,

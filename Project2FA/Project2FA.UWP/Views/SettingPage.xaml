@@ -38,7 +38,7 @@
                 </Grid>
             </DataTemplate>
 
-            <DataTemplate x:Name="DependenciesListViewTemplate" x:DataType="models:DependencyModel">
+            <DataTemplate x:Key="DependenciesListViewTemplate" x:DataType="models:DependencyModel">
                 <Grid
                     x:Name="Root" 
                     CornerRadius="{ThemeResource ControlCornerRadius}"
@@ -412,8 +412,7 @@
                                                 </ctwc:SettingsCard.Description>
                                                 <ctwc:SettingsCard.Content>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBox 
-                                        Margin="0,8,0,0"
+                                                        <TextBox
                                         Width="280"
                                         FontSize="16"
                                         Text="{x:Bind ViewModel.SettingsPartViewModel.NTPServerStr, Mode=TwoWay}"/>

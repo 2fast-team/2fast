@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>Rediger</value>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTN.ToolTipService.ToolTip" xml:space="preserve">
     <value>Vis alternativer</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Bekreft sletting</value>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Kopier kode</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -436,7 +436,7 @@ Datafilen vil **ikke** bli fjernet under tilbakestillingen.</value>
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Tilbakemeldinger</value>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.ToolTipService.ToolTip" xml:space="preserve">
     <value>Gi tilbakemelding (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -504,7 +504,7 @@ Begynn med en annen sikkerhetsfaktor i hverdagen din.</value>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSeconds.ToolTipService.ToolTip" xml:space="preserve">
     <value>Sekunder til oppdatering</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -596,13 +596,13 @@ Instruksjoner for innstilling av autorisasjon:
     <value>Banen til den aktuelle datafilen ble ikke funnet. Det er mulig at du har flyttet datafilen.
 **Vil du redigere stien?</value>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Lås app</value>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.ToolTipService.ToolTip" xml:space="preserve">
     <value>Legg til konto</value>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.ToolTipService.ToolTip" xml:space="preserve">
     <value>Last inn datafilen på nytt</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -621,7 +621,7 @@ Instruksjoner for innstilling av autorisasjon:
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Angre sletting</value>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.ToolTipService.ToolTip" xml:space="preserve">
     <value>Angre sletting</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -864,7 +864,7 @@ Vennligst synkroniser tiden i innstillingene.</value>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Filter</value>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Filter</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -1223,7 +1223,7 @@ Funksjonaliteten til denne applikasjonen forklares mer detaljert i de følgende 
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
     <value>Administrer kategorier og angi filtre</value>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Administrer kategorier og angi filtre</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
@@ -1238,7 +1238,7 @@ Funksjonaliteten til denne applikasjonen forklares mer detaljert i de følgende 
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Velg for kjøp</value>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
     <value>Funksjonen er kun tilgjengelig ved kjøp eller abonnement.</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">

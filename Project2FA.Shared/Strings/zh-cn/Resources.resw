@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>编辑</value>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTN.ToolTipService.ToolTip" xml:space="preserve">
     <value>显示选项</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>确认删除</value>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>复制代码</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -436,7 +436,7 @@
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>反馈意见</value>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.ToolTipService.ToolTip" xml:space="preserve">
     <value>提供反馈（Github）</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -504,7 +504,7 @@
   <data name="Yes" xml:space="preserve">
     <value>是</value>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSeconds.ToolTipService.ToolTip" xml:space="preserve">
     <value>刷新秒数</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -596,13 +596,13 @@
     <value>无法找到当前数据文件的路径。可能是您移动了数据文件。
 **您要编辑路径吗？</value>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>锁定应用程序</value>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.ToolTipService.ToolTip" xml:space="preserve">
     <value>添加账户</value>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.ToolTipService.ToolTip" xml:space="preserve">
     <value>重新加载数据文件</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -622,7 +622,7 @@
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>撤销删除</value>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.ToolTipService.ToolTip" xml:space="preserve">
     <value>撤销删除</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -866,7 +866,7 @@
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>过滤器</value>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>过滤器</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -1225,7 +1225,7 @@
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
     <value>管理类别和设置筛选器</value>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>管理类别和设置筛选器</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
@@ -1240,7 +1240,7 @@
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>选择购买</value>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
     <value>仅通过购买或订阅才可使用该功能。</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">

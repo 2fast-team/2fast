@@ -32,7 +32,7 @@
                 <Grid
                     HorizontalAlignment="Stretch"
                     Background="Transparent"
-                    ToolTipService.ToolTip="{x:Bind Label, FallbackValue=''}">
+                    ToolTipService.ToolTip="{x:Bind Label, Mode=OneWay}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30" />
                         <ColumnDefinition Width="*" />
@@ -85,7 +85,6 @@
                                         <AppBarButton 
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
-                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip, FallbackValue=''}"
                                         Command="{x:Bind AddAccountCommand}">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE710;"/>
@@ -162,7 +161,6 @@
                                             <AppBarButton  
                                             x:Name="ABB_UndoDelete"
                                             x:Uid="AccountCodePageABBUndoDelete" 
-                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip, FallbackValue=''}"
                                             Command="{x:Bind UndoDeleteCommand}"  >
                                                 <AppBarButton.Icon>
                                                     <FontIcon Glyph="&#xE7A7;"/>
@@ -204,7 +202,6 @@
                                 <AppBarButton 
                                     x:Name="ABB_ManageFilter"
                                     x:Uid="AccountCodePageManageFilter"
-                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageManageFilterToolTip, FallbackValue=''}"
                                     Click="ABB_SearchFilter_Click" >
                                     <AppBarButton.Content>
                                         <StackPanel Orientation="Horizontal">
@@ -225,7 +222,6 @@
                                     x:Name="ABB_SearchFilter"
                                     IsEnabled="{x:Bind TwoFADataService.IsFilterEnabled,Mode=OneWay}"
                                     IsChecked="{x:Bind TwoFADataService.IsFilterChecked,Mode=TwoWay}"
-                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageSearchFilterToolTip, FallbackValue=''}"
                                     x:Uid="AccountCodePageSearchFilter">
                                     <AppBarToggleButton.Icon>
                                         <FontIcon Glyph="&#xE16E;"/>
@@ -234,7 +230,6 @@
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
                                 x:Uid="AccountCodePageABBLogout" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
                                 Command="{x:Bind LogoutCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE1F6;"/>
@@ -243,7 +238,6 @@
                                 <AppBarButton 
                                 x:Name="ABB_Refresh"
                                 x:Uid="AccountCodePageReloadDatafile"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
                                 Command="{x:Bind RefreshCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE895;"/>
@@ -305,7 +299,6 @@
                                         <AppBarButton 
                                         x:Name="ABB_AddAccount"
                                         x:Uid="AccountCodePageAddEntry"
-                                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageAddEntryToolTip, FallbackValue=''}" 
                                         Command="{x:Bind AddAccountCommand}">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE710;"/>
@@ -376,7 +369,6 @@
                                             <AppBarButton  
                                             x:Name="ABB_UndoDelete"
                                             x:Uid="AccountCodePageABBUndoDelete" 
-                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBUndoDeleteToolTip, FallbackValue=''}"
                                             Command="{x:Bind UndoDeleteCommand}">
                                                 <AppBarButton.Icon>
                                                     <FontIcon Glyph="&#xE7A7;"/>
@@ -411,7 +403,6 @@
                                     x:Name="ABB_ManageFilterInfo"
                                     Visibility="{x:Bind ShowAvailableProFeatures}"
                                     Command="{x:Bind ShowProFeatureCommand}"
-                                    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}"
                                     x:Uid="AccountCodePageManageFilterInfo">
                                     <AppBarButton.Content>
                                         <StackPanel Orientation="Horizontal">
@@ -441,8 +432,7 @@
                                 </AppBarToggleButton>-->
                                 <AppBarButton 
                                 x:Name="ABB_Logout"
-                                x:Uid="AccountCodePageABBLogout" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
+                                x:Uid="AccountCodePageABBLogout"
                                 Command="{x:Bind LogoutCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE1F6;"/>
@@ -451,7 +441,6 @@
                                 <AppBarButton 
                                 x:Name="ABB_Refresh"
                                 x:Uid="AccountCodePageReloadDatafile"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
                                 Command="{x:Bind RefreshCommand}">
                                     <AppBarButton.Icon>
                                         <FontIcon Glyph="&#xE895;"/>
@@ -484,7 +473,7 @@
                 </UserControl>
             </DataTemplate>
             
-            <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
+            <DataTemplate x:Key="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
                 <UserControl
                     x:Name="Root" 
                     MaxWidth="660"
@@ -599,26 +588,22 @@
                                 Height="48"
                                 Click="BTN_CopyCode_Click"
                                 Style="{StaticResource TransparentButtonStyle}"
-                                Margin="8,0,4,0" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip, FallbackValue=''}"
+                                Margin="8,0,4,0"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
                             <Grid VerticalAlignment="Center">
                                 <unocontrols:RadialProgressBar
-                                Value="{x:Bind Seconds,Mode=OneWay}" 
-                                Maximum="{x:Bind Period,Mode=OneWay}" 
-                                    
+                                Value="{x:Bind Seconds,Mode=OneWay}"
+                                Maximum="{x:Bind Period,Mode=OneWay}"
                                 Minimum="0"
                                 IsIndeterminate="False"
                                 Width="42"
                                 Height="42"
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Opacity="0.6"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
@@ -649,8 +634,7 @@
                             Grid.Column="4" 
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" 
-                            Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip, FallbackValue=''}">
+                            Style="{StaticResource TransparentButtonStyle}">
                             <FontIcon Glyph="&#xE712;"/>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">
@@ -710,7 +694,7 @@
                 </UserControl>
             </DataTemplate>
 
-            <DataTemplate x:Name="TwoFACodeCustomAccentTemplate" x:DataType="models:TwoFACodeModel">
+            <DataTemplate x:Key="TwoFACodeCustomAccentTemplate" x:DataType="models:TwoFACodeModel">
                 <UserControl
                     x:Name="Root" 
                     MaxWidth="660"
@@ -828,27 +812,23 @@
                                 Height="48"
                                 Click="BTN_CopyCode_Click"
                                 Style="{StaticResource TransparentButtonStyle}"
-                                Margin="8,0,4,0" 
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip, FallbackValue=''}"
+                                Margin="8,0,4,0"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
                             </Button>
                             <Grid VerticalAlignment="Center">
                                 <unocontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 
-                                Maximum="{x:Bind Period,Mode=OneWay}" 
-                                    
+                                Maximum="{x:Bind Period,Mode=OneWay}"
                                 Minimum="0"
                                 IsIndeterminate="False"
                                 Width="42"
                                 Height="42"
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
                                 Opacity="0.6"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip, FallbackValue=''}"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
                                 VerticalAlignment="Center" 
@@ -878,8 +858,7 @@
                             Grid.Column="4" 
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" 
-                            Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip, FallbackValue=''}">
+                            Style="{StaticResource TransparentButtonStyle}">
                             <FontIcon Glyph="&#xE712;"/>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">

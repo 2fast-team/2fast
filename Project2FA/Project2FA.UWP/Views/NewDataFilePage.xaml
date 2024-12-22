@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:extensions="using:Project2FA.Extensions"
+    xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:mtuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
@@ -201,28 +202,33 @@
                         HorizontalAlignment="Center"/>
                                         </StackPanel>
                                     </ScrollViewer>
-                                    <mtuc:Loading 
-                IsLoading="{x:Bind ViewModel.ShowError,Mode=OneWay}" 
-                Background="{ThemeResource TranslucentBackgroundHighBrush}">
-                                        <StackPanel>
-                                            <muxc:AnimatedVisualPlayer 
-                        MaxHeight="120"
-                        x:Name="LottiePlayer" 
-                        PlaybackRate="0.5"
-                        AutoPlay="True">
-                                                <lottie:LottieVisualSource  
+                                    <ctwc:SwitchPresenter 
+                                        TargetType="x:Boolean"
+                                        Value="{x:Bind ViewModel.ShowError, Mode=OneWay}">
+                                        <ctwc:Case Value="True">
+                                            <Grid
+                                                Background="{ThemeResource TranslucentBackgroundHighBrush}">
+                                                <StackPanel>
+                                                    <muxc:AnimatedVisualPlayer 
+                                                MaxHeight="120"
+                                                x:Name="LottiePlayer" 
+                                                PlaybackRate="0.5"
+                                                AutoPlay="True">
+                                                        <lottie:LottieVisualSource  
                         UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
-                                            </muxc:AnimatedVisualPlayer>
-                                            <TextBlock 
+                                                    </muxc:AnimatedVisualPlayer>
+                                                    <TextBlock 
                         Text="{x:Bind ViewModel.ErrorText,Mode=OneWay}" 
                         TextWrapping="WrapWholeWords"/>
-                                            <Button 
+                                                    <Button 
                         Content="{x:Bind strings:Resources.Confirm}" 
                         Command="{x:Bind ViewModel.ConfirmErrorCommand}"
                         Style="{StaticResource AccentButtonStyle}"
                         HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </mtuc:Loading>
+                                                </StackPanel>
+                                            </Grid>
+                                        </ctwc:Case>
+                                    </ctwc:SwitchPresenter>
                                 </Grid>
                             </PivotItem>
                             <PivotItem 
@@ -392,36 +398,50 @@
             </Grid>
         </Border>
 
-        <mtuc:Loading 
+        <ctwc:SwitchPresenter 
             Grid.ColumnSpan="3"
-            IsLoading="{x:Bind ViewModel.WebDAVLoginError,Mode=OneWay}" 
+            TargetType="x:Boolean"
+            Value="{x:Bind ViewModel.WebDAVLoginError, Mode=OneWay}">
+
+            <ctwc:Case Value="True">
+                <Grid
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
-            <StackPanel>
-                <muxc:AnimatedVisualPlayer 
+                    <StackPanel>
+                        <muxc:AnimatedVisualPlayer 
                                 MaxHeight="120"
                                 PlaybackRate="0.5"
                                 AutoPlay="True">
-                    <lottie:LottieVisualSource  
+                            <lottie:LottieVisualSource  
                                     UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
-                </muxc:AnimatedVisualPlayer>
-                <TextBlock x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
-                <Button 
+                        </muxc:AnimatedVisualPlayer>
+                        <TextBlock x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
+                        <Button 
                     x:Uid="BTNTryAgain" 
                     Margin="0,10,0,0" 
                     Command="{x:Bind ViewModel.ConfirmErrorCommand}" 
                     HorizontalAlignment="Center"/>
-            </StackPanel>
-        </mtuc:Loading>
-        <mtuc:Loading 
+                    </StackPanel>
+                </Grid>
+            </ctwc:Case>
+
+        </ctwc:SwitchPresenter>
+
+        <ctwc:SwitchPresenter 
             Grid.ColumnSpan="3"
-            IsLoading="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
+            TargetType="x:Boolean"
+            Value="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
+            <ctwc:Case Value="True">
+                <Grid 
             Background="{ThemeResource TranslucentBackgroundHighBrush}">
-            <muxc:ProgressRing 
+                    <muxc:ProgressRing 
                 IsActive="{x:Bind ViewModel.IsLoading,Mode=OneWay}" 
                 Foreground="{ThemeResource SystemAccentColor}" 
                 Width="80" 
                 Height="80"/>
-        </mtuc:Loading>
+                </Grid>
+            </ctwc:Case>
+        </ctwc:SwitchPresenter>
+
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

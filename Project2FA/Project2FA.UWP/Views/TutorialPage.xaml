@@ -133,9 +133,9 @@
                             Width="48"
                             Height="48"
                             Style="{StaticResource TransparentButtonStyle}"
-                            Margin="8,0,4,0" 
-                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCopyCodeButtonToolTip}"
-                            HorizontalAlignment="Stretch" Click="BTN_CopyCode_Click" >
+                            Margin="8,0,4,0"
+                            HorizontalAlignment="Stretch" 
+                            Click="BTN_CopyCode_Click" >
                             <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
                         </Button>
                         <Grid VerticalAlignment="Center">
@@ -148,11 +148,9 @@
                                 Width="42"
                                 Height="42"
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
                                 Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
                             <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
-                                ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageRemainingSecondsToolTip}"
                                 Opacity="0.6"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
@@ -183,7 +181,6 @@
                         Margin="8,0,0,0" 
                         VerticalAlignment="Top" 
                         Style="{StaticResource TransparentButtonStyle}"
-                        ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageItemMoreBTNToolTip}" 
                         Click="TutorialPageItemMoreBTN_Click">
                         <FontIcon Glyph="&#xE712;"/>
                         <!--<Button.Flyout>

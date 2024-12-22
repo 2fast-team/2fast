@@ -294,7 +294,7 @@
                                                                         <Grid
                                                                             HorizontalAlignment="Stretch"
                                                                             Background="Transparent"
-                                                                            ToolTipService.ToolTip="{x:Bind Name, FallbackValue=''}">
+                                                                            ToolTipService.ToolTip="{x:Bind Name, Mode=OneWay}">
                                                                             <Grid.ColumnDefinitions>
                                                                                 <ColumnDefinition Width="30" />
                                                                                 <ColumnDefinition Width="*" />
@@ -407,7 +407,7 @@
                                     Padding="4,4,4,4"
                                     Style="{StaticResource TransparentButtonStyle}"
                                     x:Name="BTN_Cateory_Help"
-                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp,FallbackValue=''}"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                                     VerticalAlignment="Bottom" 
                                     Click="HLBTN_CategoryInfo" >
                                     <FontIcon

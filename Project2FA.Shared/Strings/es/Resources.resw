@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>Editar</value>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTN.ToolTipService.ToolTip" xml:space="preserve">
     <value>Mostrar opciones</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -149,7 +149,7 @@
     <value>Confirmar eliminación</value>
     <comment>[ReswT:manually]</comment>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Copiar código</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -469,7 +469,7 @@ El archivo de datos **no** se eliminará en el proceso de restablecimiento.</val
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Comentarios</value>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.ToolTipService.ToolTip" xml:space="preserve">
     <value>Dar feedback (Github)</value>
     <comment>[ReswT:manually]</comment>
   </data>
@@ -550,7 +550,7 @@ Añade otro factor de seguridad a tu vida diaria.</value>
   <data name="Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSeconds.ToolTipService.ToolTip" xml:space="preserve">
     <value>Segundos para actualizar</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -654,14 +654,14 @@ Instrucciones para conceder los permisos:
 **¿Desea editar la ruta?</value>
     <comment>[ReswT:manually]</comment>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Bloquear aplicación</value>
     <comment>[ReswT:manually]</comment>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.ToolTipService.ToolTip" xml:space="preserve">
     <value>Añadir cuenta</value>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.ToolTipService.ToolTip" xml:space="preserve">
     <value>Recargar archivo de datos</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -682,7 +682,7 @@ Instrucciones para conceder los permisos:
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Deshacer la eliminación</value>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.ToolTipService.ToolTip" xml:space="preserve">
     <value>Deshacer la eliminación</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -952,7 +952,7 @@ Por favor, sincroniza la hora en los ajustes.</value>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Filtro</value>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Filtro</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -1353,7 +1353,7 @@ La funcionalidad de esta aplicación se explica con más detalle en las siguient
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
     <value>Gestión de categorías y filtros</value>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Gestión de categorías y filtros</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
@@ -1368,7 +1368,7 @@ La funcionalidad de esta aplicación se explica con más detalle en las siguient
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Seleccionar para compra</value>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
     <value>Función sólo disponible mediante compra o suscripción.</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">

@@ -129,7 +129,7 @@
   <data name="AccountCodePageEditEntry.Text" xml:space="preserve">
     <value>Bearbeiten</value>
   </data>
-  <data name="AccountCodePageItemMoreBTNToolTip" xml:space="preserve">
+  <data name="AccountCodePageItemMoreBTN.ToolTipService.ToolTip" xml:space="preserve">
     <value>Optionen anzeigen</value>
   </data>
   <data name="AccountCodePageReloadDatafile.Label" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="DeleteDatafileContentDialogTitle" xml:space="preserve">
     <value>Löschen bestätigen</value>
   </data>
-  <data name="AccountCopyCodeButtonToolTip" xml:space="preserve">
+  <data name="AccountCopyCodeButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Schlüssel kopieren</value>
   </data>
   <data name="AddAccountContentDialog.SecondaryButtonText" xml:space="preserve">
@@ -438,7 +438,7 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="ShellPageFeedbackNavigation.Content" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <data name="ShellPageFeedbackNavigationToolTip" xml:space="preserve">
+  <data name="ShellPageFeedbackNavigation.ToolTipService.ToolTip" xml:space="preserve">
     <value>Feedback geben (Github)</value>
   </data>
   <data name="UseDatafileContentDialogChangeDatafile.Content" xml:space="preserve">
@@ -506,7 +506,7 @@ Starten Sie direkt durch und bringen Sie mehr Sicherheit durch einen zweiten Fak
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="AccountCodePageRemainingSecondsToolTip" xml:space="preserve">
+  <data name="AccountCodePageRemainingSeconds.ToolTipService.ToolTip" xml:space="preserve">
     <value>Sekunden bis zur Neugenerierung</value>
   </data>
   <data name="ButtonTextCancel" xml:space="preserve">
@@ -601,13 +601,13 @@ Anleitung zum setzen der Berechtigung:
 
 **Möchten Sie den Pfad der Datendatei editieren oder möchten Sie die App zu den Werkseinstellungen zurücksetzen?**</value>
   </data>
-  <data name="AccountCodePageABBLogoutToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Sperren</value>
   </data>
-  <data name="AccountCodePageAddEntryToolTip" xml:space="preserve">
+  <data name="AccountCodePageAddEntry.ToolTipService.ToolTip" xml:space="preserve">
     <value>Konto hinzufügen</value>
   </data>
-  <data name="AccountCodePageReloadDatafileToolTip" xml:space="preserve">
+  <data name="AccountCodePageReloadDatafile.ToolTipService.ToolTip" xml:space="preserve">
     <value>Datendatei neu einlesen</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
@@ -623,7 +623,7 @@ Anleitung zum setzen der Berechtigung:
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Rückgängig (Löschung)</value>
   </data>
-  <data name="AccountCodePageABBUndoDeleteToolTip" xml:space="preserve">
+  <data name="AccountCodePageABBUndoDelete.ToolTipService.ToolTip" xml:space="preserve">
     <value>Rückgängig (Löschung)</value>
   </data>
   <data name="SettingsDatafileName.Header" xml:space="preserve">
@@ -866,7 +866,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="AccountCodePageSearchFilter.Label" xml:space="preserve">
     <value>Filtern</value>
   </data>
-  <data name="AccountCodePageSearchFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageSearchFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Filtern</value>
   </data>
   <data name="WebViewDatafileContentDialogChooseFile" xml:space="preserve">
@@ -1224,7 +1224,7 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="AccountCodePageManageFilter.Label" xml:space="preserve">
     <value>Kategorien &amp; Filter setzen</value>
   </data>
-  <data name="AccountCodePageManageFilterToolTip" xml:space="preserve">
+  <data name="AccountCodePageManageFilter.ToolTipService.ToolTip" xml:space="preserve">
     <value>Kategorien &amp; Filter setzen</value>
   </data>
   <data name="CategoryFilterFlyoutABBTN_Reset.Label" xml:space="preserve">
@@ -1239,7 +1239,7 @@ In den nachfolgenden Abschnitten wird die Funktionalität dieser Anwendung detai
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Zum Kauf auswählen</value>
   </data>
-  <data name="AccountCodePageProFeatureToolTip" xml:space="preserve">
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
     <value>Funktion nur durch Kauf oder Abonnement verfügbar.</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">

@@ -29,7 +29,7 @@
                 <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate x:Name="CategoryTemplate" x:DataType="models:CategoryModel">
+            <DataTemplate x:Key="CategoryTemplate" x:DataType="models:CategoryModel">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon  
                         Glyph="{x:Bind UnicodeIndex,Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}" 
@@ -41,7 +41,7 @@
                 </StackPanel>
             </DataTemplate>
 
-            <DataTemplate x:Name="SymbolListTemplate" x:DataType="models:FontIdentifikationModel">
+            <DataTemplate x:Key="SymbolListTemplate" x:DataType="models:FontIdentifikationModel">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30" />

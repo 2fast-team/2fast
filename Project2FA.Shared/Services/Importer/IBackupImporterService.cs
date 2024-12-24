@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2FA.Repository.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Project2FA.Services.Importer
 {
     public interface IBackupImporterService
     {
-        Task ImportAegisBackup(StorageFile storageFile, string password);
+        Task<(List<TwoFACodeModel> accountList, bool successful)> ImportAegisBackup(StorageFile storageFile, string password);
     }
 }

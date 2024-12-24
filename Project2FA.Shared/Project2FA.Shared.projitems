@@ -60,7 +60,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentItemModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AegisBackupService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\BackupImporterService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAegisBackupService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IBackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />

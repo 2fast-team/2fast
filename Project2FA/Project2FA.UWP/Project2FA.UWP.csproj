@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64|arm64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>D17FB9F254A915E499415F614115D6D86A448B38</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>EC297F96AE888F353BF8EA4C989F7192EF4AB4DB</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -285,6 +285,7 @@
     <Content Include="Assets\AnimatedVisuals\10223-search-empty.json" />
     <Content Include="Assets\AnimatedVisuals\21398-online-tutorial.json" />
     <Content Include="Assets\Fonts\Segoe Fluent Icons.ttf" />
+    <Content Include="Assets\aegis.encrypted.json" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

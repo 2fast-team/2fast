@@ -149,7 +149,6 @@ namespace Project2FA.ViewModels
 #if WINDOWS_UWP
         private async Task ScanQRCodeCommandTask()
         {
-
             await CleanUpCamera();
             OTPList.Clear();
             _dispatcherTimer.Tick -= OnTimedEvent;
@@ -352,8 +351,6 @@ namespace Project2FA.ViewModels
             _framePool = null;
         }
 #endif
-
-
 
         private void OnTimedEvent(object sender, object e)
         {

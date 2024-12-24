@@ -104,8 +104,33 @@ namespace Project2FA.Repository.Models
         [JsonPropertyName("secret")]
         public string Secret { get; set; }
 
+        private string _algorithm;
+
         [JsonPropertyName("algo")]
-        public string Algorithm { get; set; }
+        public string Algorithm
+        {
+            get => _algorithm;
+            set
+            {
+                _algorithm = value;
+                switch (value.ToLower())
+                {
+                    case "sha1":
+                        HashMode = OtpHashMode.Sha1;
+                        break;
+                    case "sha256":
+                        HashMode = OtpHashMode.Sha256;
+                        break;
+                    case "sha512":
+                        HashMode = OtpHashMode.Sha512;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public OtpHashMode HashMode { get; set; }
 
         [JsonPropertyName("digits")]
         public int Digits { get; set; }

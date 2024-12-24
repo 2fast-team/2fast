@@ -109,6 +109,7 @@ namespace Project2FA.UWP
             container.RegisterSingleton<IPurchaseAddOnService, PurchaseAddOnService>();
             container.RegisterSingleton<ILoggingService, LoggingService>();
             container.RegisterSingleton<IBackupImporterService, BackupImporterService>();
+            container.RegisterSingleton<IAegisBackupService, AegisBackupService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();
@@ -121,6 +122,7 @@ namespace Project2FA.UWP
             container.RegisterForNavigation<TutorialPage, TutorialPageViewModel>();
             //contentdialogs and view-models
             container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
+            container.RegisterDialog<ImportAccountContentDialog, ImportAccountContentDialogViewModel>();
             container.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();
             container.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
             container.RegisterDialog<RateAppContentDialog>();

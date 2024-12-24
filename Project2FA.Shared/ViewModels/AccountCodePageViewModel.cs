@@ -62,6 +62,8 @@ namespace Project2FA.ViewModels
         private ILoggerFacade Logger { get; }
         private INavigationService NavigationService { get; }
         public ICommand AddAccountCommand { get; }
+
+        public ICommand ImportAccountCommand { get; }
         public ICommand EditAccountCommand { get; }
         public ICommand DeleteAccountCommand { get; }
         public ICommand LogoutCommand { get; }
@@ -106,6 +108,7 @@ namespace Project2FA.ViewModels
 
 
             AddAccountCommand = new AsyncRelayCommand(AddAccountCommandTask);
+            ImportAccountCommand = new AsyncRelayCommand(ImportAccountCommandTask);
             RefreshCommand = new AsyncRelayCommand(ReloadDatafileAndUpdateCollection);
             LogoutCommand = new AsyncRelayCommand(LogoutCommandTask);
 
@@ -200,6 +203,16 @@ namespace Project2FA.ViewModels
                 await dialog.ViewModel.CleanUpCamera();
 #endif
             }
+#endif
+        }
+
+        private async Task ImportAccountCommandTask()
+        {
+#if WINDOWS_UWP
+            
+            await DialogService.ShowDialogAsync(new ImportAccountContentDialog(), new DialogParameters());
+#else
+            await Task.CompletedTask;
 #endif
         }
 

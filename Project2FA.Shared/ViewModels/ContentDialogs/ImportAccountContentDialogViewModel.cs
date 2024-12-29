@@ -18,8 +18,8 @@ namespace Project2FA.ViewModels
 
         public async Task InitializeAsync(IDialogParameters parameters)
         {
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/aegis.encrypted.json"));
-            await BackupImporterService.ImportAegisBackup(file, "test");
+            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/aegis.encrypted.json"));
+            //await BackupImporterService.ImportAegisBackup(file, "test");
         }
     }
 

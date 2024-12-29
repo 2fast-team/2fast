@@ -5,6 +5,8 @@
     xmlns:local="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:strings="using:Project2FA.Strings"
+    xmlns:oldtoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     Title="TITLE"
@@ -13,6 +15,123 @@
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
+    <ContentDialog.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentDialog.Resources>
+
     <Grid>
+        <Pivot>
+            <PivotItem>
+                <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
+                    <ScrollViewer>
+                        <StackPanel Margin="0,0,16,0">
+                            <oldtoolkit:MarkdownTextBlock 
+            Text="~AddAccountContentDialogInfo.Text" 
+            TextWrapping="Wrap" 
+            x:Uid="AddAccountContentDialogInfo"
+            Margin="0,10,0,10"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button 
+            x:Name="BTN_QRCodeScan" 
+            Margin="0,10,0,10" 
+            HorizontalContentAlignment="Left"
+            Style="{StaticResource AccentButtonStyle}"
+            Command="{x:Bind ViewModel.ScanQRCodeCommand}"
+            MinWidth="255">
+                                    <StackPanel 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Left">
+                                        <FontIcon Glyph="&#xED14;" FontSize="30"/>
+                                        <TextBlock 
+                    Text="~AddAccountContentDialogReadQRCode.Text" 
+                    Margin="8,0,0,0" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Center" 
+                    x:Uid="AddAccountContentDialogReadQRCode" />
+                                    </StackPanel>
+                                    <!--<Button.Resources>
+                        <muxc:TeachingTip
+                        x:Name="QRCodeScanTip"
+                        x:Uid="AddAccountContentDialogReadQRCodeTip"
+                        Target="{x:Bind BTN_QRCodeScan}"
+                        IsLightDismissEnabled="True">
+                            <muxc:TeachingTip.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid>
+                                        <unocontrols:RadialProgressBar
+                                Value="{x:Bind ViewModel.Seconds,Mode=OneWay}" 
+                                Maximum="{x:Bind ViewModel.OpeningSeconds,Mode=OneWay}" 
+                                Width="50"
+                                Height="50"
+                                IsIndeterminate="False"
+                                Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
+                                        <TextBlock 
+                                Opacity="0.6"
+                                Text="{x:Bind ViewModel.Seconds, Mode=OneWay}"
+                                FontSize="16"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"/>
+                                    </Grid>
+                                    <TextBlock 
+                                Margin="12,0,0,0"
+                                Text="{x:Bind strings:Resources.AddAccountContentDialogReadQRCodeTeachingTipInfo}"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </muxc:TeachingTip.Content>
+                        </muxc:TeachingTip>
+                    </Button.Resources>-->
+                                </Button>
+                                <Button
+                    Height="48"
+                    Width="48"
+                    Padding="4,4,4,4"
+                    Click="HLBTN_QRCodeInfo"
+                    Style="{StaticResource TransparentButtonStyle}"
+                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
+                    VerticalAlignment="Center">
+                                    <FontIcon
+                    FontSize="20"
+                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                    Glyph="&#xE946;"  />
+                                </Button>
+                            </StackPanel>
+
+
+                            <Button 
+            x:Name="BTN_QRCodeCameraScan"
+            Margin="0,10,0,10" 
+            HorizontalContentAlignment="Left"
+            Style="{StaticResource AccentButtonStyle}"
+            Command="{x:Bind ViewModel.CameraScanCommand}"
+            MinWidth="255" >
+                                <StackPanel 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Left">
+                                    <FontIcon 
+                    FontSize="30"
+                    Glyph="" />
+                                    <TextBlock 
+                    Text="~AddAccountContentDialogCameraScanBTN.Text" 
+                    Margin="8,0,0,0" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Center" 
+                    x:Uid="AddAccountContentDialogCameraScanBTN" 
+                    FontFamily="Segoe UI" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </PivotItem>
+            <PivotItem>
+
+            </PivotItem>
+        </Pivot>
     </Grid>
 </ContentDialog>

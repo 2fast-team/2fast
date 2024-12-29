@@ -145,7 +145,7 @@
                 <Grid
                     HorizontalAlignment="Stretch"
                     Background="Transparent"
-                    ToolTipService.ToolTip="{x:Bind Label, FallbackValue=''}">
+                    ToolTipService.ToolTip="{x:Bind Label, Mode=OneWay}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30" />
                         <ColumnDefinition Width="*" />
@@ -766,7 +766,6 @@
                 <AppBarButton 
     x:Name="ABB_Logout"
     Foreground="{ThemeResource ButtonForeground}"
-    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageABBLogoutToolTip, FallbackValue=''}"
     Command="{x:Bind ViewModel.LogoutCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE72E;"/>
@@ -775,7 +774,6 @@
                 <AppBarButton 
     x:Name="ABB_Refresh"
     Foreground="{ThemeResource ButtonForeground}"
-    ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageReloadDatafileToolTip, FallbackValue=''}"
     Command="{x:Bind ViewModel.RefreshCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE895;"/>

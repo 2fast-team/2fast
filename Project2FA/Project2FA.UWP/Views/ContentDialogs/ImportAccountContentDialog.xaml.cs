@@ -31,5 +31,10 @@ namespace Project2FA.UWP.Views
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
         }
+
+        private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

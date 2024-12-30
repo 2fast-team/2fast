@@ -11,7 +11,7 @@
     <AssemblyName>Project2FA.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.26100.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64|arm64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>EC297F96AE888F353BF8EA4C989F7192EF4AB4DB</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>D17FB9F254A915E499415F614115D6D86A448B38</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -312,28 +312,28 @@
       <Version>0.1.241129-build.1830</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Animations">
-      <Version>8.2.241204-build.1297</Version>
+      <Version>8.2.241226-build.1371</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Behaviors">
-      <Version>8.2.241204-build.1297</Version>
+      <Version>8.2.241226-build.1371</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Collections">
-      <Version>8.2.241204-build.1297</Version>
+      <Version>8.2.241226-build.1371</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
-      <Version>8.2.241204-build.1297</Version>
+      <Version>8.2.241226-build.1371</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
-      <Version>8.2.241204-build.1297</Version>
+      <Version>8.2.241226-build.1371</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Extensions">
-      <Version>8.2.241204-build.1297</Version>
+      <Version>8.2.241226-build.1371</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Lottie">
       <Version>8.1.240821</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Media">
-      <Version>8.2.241204-build.1297</Version>
+      <Version>8.2.241226-build.1371</Version>
     </PackageReference>
     <PackageReference Include="DryIoc.dll">
       <Version>5.4.3</Version>
@@ -357,7 +357,7 @@
       <Version>1.0.2903.40</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
-      <Version>2.0.1</Version>
+      <Version>3.0.0-preview2</Version>
     </PackageReference>
     <PackageReference Include="QRCoder">
       <Version>1.6.0</Version>

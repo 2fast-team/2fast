@@ -20,6 +20,14 @@ using CommunityToolkit.Mvvm.Collections;
 using Windows.System;
 using UNOversal.Services.Logging;
 using Windows.Globalization;
+using System.IO;
+
+using Windows.Storage.Streams;
+using UNOversal.Services.Serialization;
+using System.Collections.Generic;
+
+
+
 
 
 #if WINDOWS_UWP
@@ -57,6 +65,9 @@ namespace Project2FA.ViewModels
         public AboutPartViewModel AboutPartViewModel { get; }
         public DatafilePartViewModel DatafilePartViewModel { get; }
         public INavigationService NavigationService { get; }
+        private ISerializationService SerializationService { get; }
+
+        public ILoggingService LoggingService { get; }
 
         public ICommand RateAppCommand { get; }
         public ICommand SendMailCommand { get; }
@@ -68,17 +79,20 @@ namespace Project2FA.ViewModels
         private int _selectedItem;
         public SettingPageViewModel(IDialogService dialogService, 
             ISecretService secretService,
-            INavigationService navigationService)
+            INavigationService navigationService,
+            ILoggingService loggingService,
+            ISerializationService serializationService)
         {
+            
 #if WINDOWS_UWP
             IMarketplaceService marketplaceService = App.Current.Container.Resolve<IMarketplaceService>();
 #endif
             SettingsPartViewModel = new SettingsPartViewModel(dialogService);
             DatafilePartViewModel = new DatafilePartViewModel(dialogService, secretService);
 #if WINDOWS_UWP
-            AboutPartViewModel  = new AboutPartViewModel(marketplaceService);
+            AboutPartViewModel  = new AboutPartViewModel(marketplaceService,loggingService,serializationService);
 #else
-            AboutPartViewModel = new AboutPartViewModel();
+            AboutPartViewModel  = new AboutPartViewModel(loggingService,serializationService);
 #endif
             RateAppCommand = new RelayCommand(() =>
             {
@@ -122,6 +136,8 @@ namespace Project2FA.ViewModels
             });
 #endif
             NavigationService = navigationService;
+            LoggingService = loggingService;
+            SerializationService = serializationService;
             NavigateBackCommand = new AsyncRelayCommand(NavigateBackCommandTask);
             //SendMailCommand = new AsyncRelayCommand(SendMail);
         }
@@ -817,37 +833,54 @@ namespace Project2FA.ViewModels
     {
 #if WINDOWS_UWP
         private IMarketplaceService _marketplaceService { get; }
-
-        public AboutPartViewModel(IMarketplaceService marketplaceService)
-        {
-            _marketplaceService = marketplaceService;
-            LoadDependencyList();
-        }
-#else
-        public AboutPartViewModel()
-        {
-            LoadDependencyList();
-        }
 #endif
+        private ILoggingService LoggingService { get; }
+        private ISerializationService SerializationService { get; }
 
-        private async void LoadDependencyList()
+        public AboutPartViewModel(
+#if WINDOWS_UWP
+            IMarketplaceService marketplaceService,
+#endif
+            ILoggingService loggingService, 
+            ISerializationService serializationService)
         {
-            var depList = await new JSONUtil<DependencyModel>().GetJSONDataAsync(new Uri($"ms-appx:///Assets/JSONs/Dependencies.json"));
-            foreach (var item in depList)
+#if WINDOWS_UWP
+            _marketplaceService = marketplaceService;
+#endif
+            LoggingService = loggingService;
+            SerializationService = serializationService;
+            LoadDependencyList();
+        }
+
+        private async Task LoadDependencyList()
+        {
+            try
             {
-                if (item.CategoryUid == "Package")
+                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/Dependencies.json"));
+                IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
+                using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
+                var depList = SerializationService.Deserialize<List<DependencyModel>>(await r.ReadToEndAsync());
+                foreach (var item in depList)
                 {
-                    item.Category = Resources.SettingsDependencyGroupPackages;
+                    if (item.CategoryUid == "Package")
+                    {
+                        item.Category = Resources.SettingsDependencyGroupPackages;
+                    }
+                    else
+                    {
+                        item.Category = Resources.SettingsDependencyGroupAssets;
+                    }
                 }
-                else
-                {
-                    item.Category = Resources.SettingsDependencyGroupAssets;
-                }
+                var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
+                var contactsSource = new ObservableGroupedCollection<string, DependencyModel>(grouped);
+                DependencyCollectionViewSource.Source = contactsSource;
+                DependencyCollectionViewSource.IsSourceGrouped = true;
             }
-            var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
-            var contactsSource = new ObservableGroupedCollection<string, DependencyModel>(grouped);
-            DependencyCollectionViewSource.Source = contactsSource;
-            DependencyCollectionViewSource.IsSourceGrouped = true;
+            catch (Exception exc)
+            {
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+            }
+
         }
         public CollectionViewSource DependencyCollectionViewSource { get; } = new CollectionViewSource();
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;

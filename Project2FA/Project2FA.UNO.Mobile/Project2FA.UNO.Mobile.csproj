@@ -94,12 +94,13 @@
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.5.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.241204-build.1297" />
-    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.241204-build.1297" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.241204-build.1297" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.241204-build.1297" />
-    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.241204-build.1297" />
-    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.241204-build.1297" />
+    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.241226-build.1371" />
+    <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.241226-build.1371" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.241226-build.1371" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.241226-build.1371" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.241226-build.1371" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.241226-build.1371" />
+    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.241226-build.1371" />
 	<!--<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />
 	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.21" />-->
     <PackageReference Include="DryIoc" Version="5.4.3" />

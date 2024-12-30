@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -722,7 +722,8 @@ Sincronizzare l'ora nelle impostazioni.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aggiornamento delle librerie di terze parti
-- La traduzione per la lingua spagnola è stata aggiornata da un madrelingua</value>
+- Correzioni di bug e registrazione degli errori più dettagliata
+- Estensione delle impostazioni per i nuovi account in modalità esperto</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1347,5 +1348,26 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>La nuova password inserita non è corretta.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Periodo</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Il file di dati aperto non ha conti salvati che possono essere decriptati. Aggiungere conti al file di dati avviando il file tramite il menu di avvio.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Il file di dati aperto non è valido. Manca il vettore di inizializzazione (IV) memorizzato per la decodifica.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Scansione del codice QR</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Inserire manualmente il conto</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Accesso con Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Accesso con la biometria</value>
   </data>
 </root>

@@ -719,7 +719,8 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Update of third-party libraries
-- The translation for the Spanish language has been updated by a native speaker</value>
+- Bug fixes and more detailed error logging
+- Extension of the settings for new accounts in expert mode</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

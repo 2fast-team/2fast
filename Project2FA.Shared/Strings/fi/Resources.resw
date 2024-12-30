@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -720,7 +720,8 @@ Synkronoi aika asetuksissa.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmannen osapuolen kirjastojen päivitys
-- Äidinkielenään puhuva henkilö on päivittänyt espanjan kielen käännöksen</value>
+- Virheiden korjaukset ja yksityiskohtaisempi virheiden kirjaaminen
+- Asiantuntijatilassa olevien uusien tilien asetusten laajentaminen</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1345,5 +1346,26 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Uusi salasana ei ole oikea.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Jakso</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Avoimessa datatiedostossa ei ole tallennettuja tilejä, jotka voidaan purkaa. Lisää tilejä datatiedostoon käynnistämällä tiedosto käynnistysvalikon kautta.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Avattu tiedosto ei ole kelvollinen. Tallennettu alustusvektori (IV) puuttuu salauksen purkamista varten.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Skannaa QR-koodi</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Kirjoita tili manuaalisesti</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Sisäänkirjautuminen Face ID:llä</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Kirjaudu sisään biometristen tunnisteiden avulla</value>
   </data>
 </root>

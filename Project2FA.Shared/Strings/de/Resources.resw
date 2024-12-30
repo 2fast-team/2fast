@@ -722,7 +722,8 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aktualisierung der Bibliotheken von Drittanbietern
-- Die Übersetzung für die spanische Sprache wurde von einem Muttersprachler aktualisiert</value>
+- Fehlerbehebungen und detailliertere Fehlerprotokollierung
+- Erweiterung der Einstellungen für neue Konten im Expertenmodus</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -1049,7 +1050,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
     <value>Datei/Bild zum Import verwenden</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - Zwei-Faktor-Authentifikator</value>
+    <value>2fast - Zwei-Faktor-Authentifikator</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Zurück</value>

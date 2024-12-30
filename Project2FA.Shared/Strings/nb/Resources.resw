@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -720,7 +720,8 @@ Vennligst synkroniser tiden i innstillingene.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Oppdatering av tredjepartsbiblioteker
-- Oversettelsen til spansk har blitt oppdatert av en morsmålstalende</value>
+- Feilrettinger og mer detaljert feillogging
+- Utvidelse av innstillingene for nye kontoer i ekspertmodus</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1345,5 +1346,26 @@ Applikasjonen støtter en MDM-konfigurasjon for sentralisert administrasjon av a
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Det nye passordet som er angitt, er ikke riktig.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Periode</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Den åpne datafilen har ingen lagrede kontoer som kan dekrypteres. Legg til kontoer i datafilen ved å starte filen via startmenyen.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Den åpnede datafilen er ikke gyldig. Den lagrede initialiseringsvektoren (IV) mangler for dekryptering.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Skann QR-koden</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Angi konto manuelt</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Logg inn med Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Innlogging med biometri</value>
   </data>
 </root>

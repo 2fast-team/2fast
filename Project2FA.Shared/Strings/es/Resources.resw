@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -791,7 +791,8 @@ Por favor, sincroniza la hora en los ajustes.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Actualización de bibliotecas de terceros
-- La traducción al español ha sido actualizada por un hablante nativo</value>
+- Corrección de errores y registro de errores más detallado
+- Ampliación de la configuración de nuevas cuentas en modo experto</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Novedades y cambios</value>
@@ -1493,5 +1494,26 @@ La aplicación soporta configuración MDM para la gestión centralizada en empre
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>La nueva contraseña introducida no es correcta.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Periodo</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>El archivo de datos abierto no tiene cuentas guardadas que se puedan descifrar. Añade cuentas al archivo de datos iniciando el archivo a través del menú de inicio.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>El archivo de datos abierto no es válido. Falta el vector de inicialización (IV) almacenado para el descifrado.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Escanear código QR</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Introducir manualmente la cuenta</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Iniciar sesión con Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Inicio de sesión con datos biométricos</value>
   </data>
 </root>

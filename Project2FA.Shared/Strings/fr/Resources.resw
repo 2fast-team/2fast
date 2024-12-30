@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -721,7 +721,8 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Mise à jour des bibliothèques tierces
-- La traduction pour la langue espagnole a été mise à jour par un locuteur natif</value>
+- Correction de bugs et enregistrement plus détaillé des erreurs
+- Extension des paramètres pour les nouveaux comptes en mode expert</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Nouvelles fonctionnalités et changements</value>
@@ -1345,5 +1346,26 @@ L'application prend en charge une configuration MDM pour une gestion centralisé
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Le nouveau mot de passe introduit n'est pas correct.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Période</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Le fichier de données ouvert ne contient pas de comptes enregistrés pouvant être décryptés. Ajoutez des comptes au fichier de données en lançant le fichier via le menu de démarrage.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Le fichier de données ouvert n'est pas valide. Le vecteur d'initialisation (IV) stocké est manquant pour le décryptage.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Scanner le code QR</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Saisir manuellement le compte</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Connexion avec Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Se connecter avec des données biométriques</value>
   </data>
 </root>

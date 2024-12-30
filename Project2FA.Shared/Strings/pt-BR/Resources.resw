@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -720,7 +720,8 @@ Sincronize a hora nas configurações.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Atualização de bibliotecas de terceiros
-- A tradução para o idioma espanhol foi atualizada por um falante nativo</value>
+- Correções de bugs e registro de erros mais detalhado
+- Extensão das configurações para novas contas no modo especialista</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1345,5 +1346,26 @@ O aplicativo suporta uma configuração de MDM para o gerenciamento centralizado
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>A nova senha inserida não está correta.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Período</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>O arquivo de dados aberto não tem contas salvas que possam ser descriptografadas. Adicione contas ao arquivo de dados iniciando o arquivo pelo menu Iniciar.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>O arquivo de dados aberto não é válido. O vetor de inicialização (IV) armazenado está faltando para a descriptografia.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Escanear o código QR</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Inserir manualmente a conta</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Login com o Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Login com biometria</value>
   </data>
 </root>

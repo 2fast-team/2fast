@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -721,7 +721,8 @@
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- 更新第三方库
-- 西班牙语翻译已由母语人士更新</value>
+- 错误修正和更详细的错误记录
+- 扩展专家模式下的新账户设置</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1346,5 +1347,26 @@
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>输入的新密码不正确。</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>期间</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>打开的数据文件没有可解密的已保存账户。通过开始菜单启动文件，在数据文件中添加账户。</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>打开的数据文件无效。解密时缺少存储的初始化向量 (IV)。</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>扫描 QR 码</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>手动输入账户</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>使用 Face ID 登录</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>使用生物识别技术登录</value>
   </data>
 </root>

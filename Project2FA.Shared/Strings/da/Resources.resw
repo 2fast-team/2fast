@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1343,5 +1343,26 @@ Applikationen understøtter en MDM-konfiguration til central styring af applikat
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Den nye adgangskode, der er indtastet, er ikke korrekt.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Periode</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Den åbne datafil har ingen gemte konti, der kan dekrypteres. Tilføj konti til datafilen ved at starte appen via startmenuen.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Den åbnede datafil er ikke gyldig. Den gemte initialiseringsvektor (IV) mangler til dekryptering.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Scan QR-kode</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Indtast konto manuelt</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Login med Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Login med biometri</value>
   </data>
 </root>

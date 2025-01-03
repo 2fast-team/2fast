@@ -720,7 +720,8 @@
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Ενημέρωση βιβλιοθηκών τρίτων
-- Η μετάφραση για την ισπανική γλώσσα έχει ενημερωθεί από έναν φυσικό ομιλητή</value>
+- Διορθώσεις σφαλμάτων και λεπτομερέστερη καταγραφή σφαλμάτων
+- Επέκταση των ρυθμίσεων για νέους λογαριασμούς στη λειτουργία εμπειρογνωμόνων</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1345,5 +1346,26 @@
   </data>
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Ο νέος κωδικός πρόσβασης που εισήχθη δεν είναι σωστός.</value>
+  </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Περίοδος</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Το ανοικτό αρχείο δεδομένων δεν έχει αποθηκευμένους λογαριασμούς που μπορούν να αποκρυπτογραφηθούν. Προσθέστε λογαριασμούς στο αρχείο δεδομένων ξεκινώντας την εφαρμογή μέσω του μενού εκκίνησης.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Το αρχείο δεδομένων που ανοίχτηκε δεν είναι έγκυρο. Το αποθηκευμένο διάνυσμα αρχικοποίησης (IV) λείπει για την αποκρυπτογράφηση.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Σάρωση κώδικα QR</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Χειροκίνητη εισαγωγή λογαριασμού</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Σύνδεση με Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Σύνδεση με βιομετρικά στοιχεία</value>
   </data>
 </root>

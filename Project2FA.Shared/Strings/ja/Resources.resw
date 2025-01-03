@@ -1348,4 +1348,25 @@
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>入力された新しいパスワードが正しくありません。</value>
   </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>期間</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>開いているデータファイルには、復号化できるアカウントが保存されていません。スタートメニューからアプリを起動して、データファイルにアカウントを追加してください。</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>オープンされたデータファイルが有効でない。復号化のために保存された初期化ベクトル（IV）がありません。</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>QRコードをスキャン</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>手動でアカウントを入力</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Face IDでログイン</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>生体認証によるログイン</value>
+  </data>
 </root>

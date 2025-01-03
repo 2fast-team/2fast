@@ -1346,4 +1346,25 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Uusi salasana ei ole oikea.</value>
   </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Jakso</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Avoimessa datatiedostossa ei ole tallennettuja tilejä, jotka voidaan purkaa. Lisää tilejä datatiedostoon käynnistämällä sovellus käynnistysvalikosta.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Avattu tiedosto ei ole kelvollinen. Tallennettu alustusvektori (IV) puuttuu salauksen purkamista varten.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Skannaa QR-koodi</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Kirjoita tili manuaalisesti</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Sisäänkirjautuminen Face ID:llä</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Kirjaudu sisään biometristen tunnisteiden avulla</value>
+  </data>
 </root>

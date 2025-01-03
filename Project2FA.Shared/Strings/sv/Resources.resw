@@ -1346,4 +1346,25 @@ Applikationen stöder en MDM-konfiguration för centraliserad hantering av appli
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Det nya lösenordet som angetts är inte korrekt.</value>
   </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Den öppna datafilen har inga sparade konton som kan dekrypteras. Lägg till konton i datafilen genom att starta appen via startmenyn.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Den öppnade datafilen är inte giltig. Den lagrade initialiseringsvektorn (IV) saknas för dekryptering.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Skanna QR-kod</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Ange konto manuellt</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Logga in med Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Logga in med biometri</value>
+  </data>
 </root>

@@ -1348,4 +1348,25 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>La nuova password inserita non è corretta.</value>
   </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Periodo</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Il file di dati aperto non ha conti salvati che possono essere decriptati. Per aggiungere conti al file di dati, avviare l'applicazione dal menu di avvio.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Il file di dati aperto non è valido. Manca il vettore di inizializzazione (IV) memorizzato per la decodifica.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Scansione del codice QR</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Inserire manualmente il conto</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Accesso con Face ID</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Accesso con la biometria</value>
+  </data>
 </root>

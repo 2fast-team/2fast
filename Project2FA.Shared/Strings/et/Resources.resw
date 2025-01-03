@@ -1344,4 +1344,25 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
   <data name="ChangeDatafilePasswordContentDialogNewPasswordError.Text" xml:space="preserve">
     <value>Uus sisestatud salasõna ei ole õige.</value>
   </data>
+  <data name="AddAccountContentDialogPeriod.Header" xml:space="preserve">
+    <value>Ajavahemik</value>
+  </data>
+  <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
+    <value>Avatud andmefailis ei ole salvestatud kontosid, mida saaks dekrüpteerida. Lisage kontod andmefaili, käivitades rakenduse stardimenüü kaudu.</value>
+  </data>
+  <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
+    <value>Avatud andmefail ei ole kehtiv. Salvestatud initsialiseerimisvektor (IV) on dekrüpteerimiseks puudu.</value>
+  </data>
+  <data name="AccountCodePageAddCamera.Text" xml:space="preserve">
+    <value>Skaneeri QR-koodi</value>
+  </data>
+  <data name="AccountCodePageAddManual.Text" xml:space="preserve">
+    <value>Manuaalselt sisestada konto</value>
+  </data>
+  <data name="LoginPageLoginiOSBiometricButton.Content" xml:space="preserve">
+    <value>Sisselogimine Face ID-ga</value>
+  </data>
+  <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
+    <value>Biomeetriline sisselogimine</value>
+  </data>
 </root>

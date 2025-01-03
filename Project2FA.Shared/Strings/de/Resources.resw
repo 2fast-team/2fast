@@ -1351,7 +1351,7 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
     <value>Zeitraum</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>Die geöffnete Datendatei hat keine gespeicherten Konten, die entschlüsselt werden können. Fügen Sie der Datendatei Konten hinzu, indem Sie die Datei über das Startmenü starten.</value>
+    <value>Die geöffnete Datendatei hat keine gespeicherten Konten, die entschlüsselt werden können. Fügen Sie der Datendatei Konten hinzu, indem Sie die App über das Startmenü starten.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Die geöffnete Datendatei ist nicht valide. Für die Entschlüsselung fehlt der gespeicherte Initialisierungsvektor (IV).</value>

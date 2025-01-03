@@ -1351,7 +1351,7 @@ O aplicativo suporta uma configuração de MDM para o gerenciamento centralizado
     <value>Período</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>O arquivo de dados aberto não tem contas salvas que possam ser descriptografadas. Adicione contas ao arquivo de dados iniciando o arquivo pelo menu Iniciar.</value>
+    <value>O arquivo de dados aberto não tem contas salvas que possam ser descriptografadas. Adicione contas ao arquivo de dados iniciando o aplicativo pelo menu Iniciar.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>O arquivo de dados aberto não é válido. O vetor de inicialização (IV) armazenado está faltando para a descriptografia.</value>

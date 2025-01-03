@@ -1239,9 +1239,6 @@ A funcionalidade desta aplicação é explicada em mais pormenor nas secções s
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Selecionar para compra</value>
   </data>
-  <data name="AccountCodePageProFeatureT.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Função disponível apenas por compra ou subscrição.</value>
-  </data>
   <data name="InAppBuyOnce" xml:space="preserve">
     <value>Com a compra, as funções Pro+ tornam-se permanentemente acessíveis e utilizáveis, apoiando assim o desenvolvimento futuro da aplicação.
 Atualmente disponível:
@@ -1351,7 +1348,7 @@ A aplicação suporta uma configuração MDM para uma gestão centralizada da ap
     <value>Período</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>O ficheiro de dados aberto não tem contas guardadas que possam ser desencriptadas. Adicione contas ao ficheiro de dados iniciando o ficheiro através do menu Iniciar.</value>
+    <value>O ficheiro de dados aberto não tem contas guardadas que possam ser desencriptadas. Adicione contas ao ficheiro de dados iniciando a aplicação através do menu Iniciar.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>O ficheiro de dados aberto não é válido. O vetor de inicialização (IV) armazenado está em falta para a desencriptação.</value>
@@ -1367,5 +1364,8 @@ A aplicação suporta uma configuração MDM para uma gestão centralizada da ap
   </data>
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Iniciar sessão com biometria</value>
+  </data>
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Função disponível apenas por compra ou subscrição.</value>
   </data>
 </root>

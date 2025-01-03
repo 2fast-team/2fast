@@ -229,7 +229,7 @@
     <value>更改数据文件密码</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogPasswordError.Text" xml:space="preserve">
-    <value>输入的密码不正确。</value>
+    <value>当前输入的密码不正确。</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>确认</value>
@@ -260,7 +260,6 @@
   </data>
   <data name="LoginPageLoginWindowsHelloButton.Content" xml:space="preserve">
     <value>使用 Windows Hello 登录</value>
-    <comment>[ReswT:manually]</comment>
   </data>
   <data name="LoginPagePassword.Header" xml:space="preserve">
     <value>密码</value>
@@ -499,7 +498,7 @@
     <value>请立即使用已配置的 Windows Hello 登录进行验证。</value>
   </data>
   <data name="WindowsHelloPreferMessage" xml:space="preserve">
-    <value>可以使用 Windows Hello 登录。您是否希望以后也使用这种登录方式？您可以随时在设置中更改此选项。</value>
+    <value>可以使用 Windows Hello 登录。您是否希望将来使用这种登录方式？您可以随时在设置中更改此选项。</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>是</value>
@@ -545,7 +544,7 @@
 请在设置中授予所需的权限，然后重新启动应用程序。
 
 设置授权的说明：
-[设置授权的说明](ms-appx://Assets/Infoelements/AuthSystemstorageEN.png)</value>
+设置授权的说明](ms-appx://Assets/Infoelements/AuthSystemstorageEN.png)</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogPrimaryBTN" xml:space="preserve">
     <value>设置授权</value>
@@ -729,7 +728,7 @@
     <value>新功能和新变化</value>
   </data>
   <data name="WelcomePageTitle" xml:space="preserve">
-    <value>欢迎</value>
+    <value>欢迎光临</value>
   </data>
   <data name="UseDataFilePageName.Text" xml:space="preserve">
     <value>加载现有数据文件</value>
@@ -1065,7 +1064,7 @@
     <value>完成教程</value>
   </data>
   <data name="NewDatafilePasswordInfo" xml:space="preserve">
-    <value>必须为数据文件加密指定一个密码。强烈建议将该密码安全地保存在密码管理器中。</value>
+    <value>必须为数据文件加密指定一个密码。强烈建议将此密码安全地保存在密码管理器中。</value>
   </data>
   <data name="NewDatafilePasswordInfoTitle" xml:space="preserve">
     <value>加密密码</value>
@@ -1080,7 +1079,7 @@
     <value>设置收藏夹后，账户将以应用程序的主色调显示，并在显示顺序中排在最前面。</value>
   </data>
   <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
-    <value>设置最爱</value>
+    <value>最喜欢的套餐</value>
   </data>
   <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
     <value>此处显示账户的其他选项</value>
@@ -1089,7 +1088,7 @@
     <value>更多选择</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNDesc" xml:space="preserve">
-    <value>可选择隐藏和重新显示按键</value>
+    <value>按键可以选择隐藏或重新显示</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
     <value>隐藏/显示按键</value>
@@ -1152,7 +1151,7 @@
     <value>开放式教程</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
-    <value>第二个因素的[身份验证](https://zh.wikipedia.org/wiki/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81) 功能是通过基于时间的一次性口令实现的。为此，服务的登录服务器和用户之间会商定一个秘密设置密钥，该密钥存储在应用程序的本地。这样可以确保在设置密钥达成一致的情况下，应用程序始终可以离线操作。
+    <value>第二个因素的[身份验证](https://zh.wikipedia.org/wiki/身份验证) 功能是通过基于时间的一次性口令实现的。为此，服务的登录服务器和用户之间会商定一个秘密设置密钥，该密钥存储在应用程序的本地。这样可以确保在设置密钥达成一致的情况下，应用程序始终可以离线操作。
 
 
 
@@ -1161,7 +1160,6 @@
 
 
 本应用程序的功能将在以下章节中详细介绍。</value>
-    <comment>[ReswT:manually]</comment>
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
     <value>**应用程序的功能**</value>
@@ -1241,7 +1239,7 @@
     <value>选择购买</value>
   </data>
   <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
-    <value>仅通过购买或订阅才可使用该功能。</value>
+    <value>只需购买或订阅即可使用该功能。</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">
     <value>购买后，Pro+ 功能可永久访问和使用，从而支持应用程序的进一步开发。
@@ -1277,7 +1275,7 @@
     <value>忘记密码？</value>
   </data>
   <data name="TutorialPagePasswordInfo" xml:space="preserve">
-    <value>如果忘记密码并卸载或重置了应用程序，可在 Windows 的[凭证管理器](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) 中查看同一台计算机上的密码。这里的条目设置为 Web 登录信息下的 "Project2FA"。</value>
+    <value>如果忘记密码并卸载或重置了应用程序，可在 Windows 的[凭证管理器](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) 中查看同一台计算机上的密码。这里的条目设置为网络登录信息下的 "Project2FA"。</value>
   </data>
   <data name="LoginPageWindowsHelloError" xml:space="preserve">
     <value>Windows Hello 存在问题。要使用应用程序中的功能，请在 Windows 设置中解决问题。</value>
@@ -1352,7 +1350,8 @@
     <value>期间</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>打开的数据文件没有可解密的已保存账户。通过开始菜单启动文件，在数据文件中添加账户。</value>
+    <value>打开的数据文件中没有可解密的已保存账户。通过开始菜单启动应用程序，在数据文件中添加账户。</value>
+    <comment>[ReswT:always]</comment>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>打开的数据文件无效。解密时缺少存储的初始化向量 (IV)。</value>

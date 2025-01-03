@@ -1349,7 +1349,7 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
     <value>Ajavahemik</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>Avatud andmefailis ei ole salvestatud kontosid, mida saaks dekrüpteerida. Lisage kontod andmefaili, käivitades faili stardimenüü kaudu.</value>
+    <value>Avatud andmefailis ei ole salvestatud kontosid, mida saaks dekrüpteerida. Lisage kontod andmefaili, käivitades rakenduse stardimenüü kaudu.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Avatud andmefail ei ole kehtiv. Salvestatud initsialiseerimisvektor (IV) on dekrüpteerimiseks puudu.</value>

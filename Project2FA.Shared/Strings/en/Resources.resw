@@ -1349,7 +1349,8 @@ The application supports an MDM configuration for centralised management of the 
     <value>Period</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>The open data file has no saved accounts that can be decrypted. Add accounts to the data file by starting the file via the start menu.</value>
+    <value>The open data file has no saved accounts that can be decrypted. Add accounts to the data file by starting the app via the start menu.</value>
+    <comment>[ReswT:always]</comment>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>The opened data file is not valid. The stored initialisation vector (IV) is missing for decryption.</value>

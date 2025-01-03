@@ -1351,7 +1351,7 @@ Applikasjonen støtter en MDM-konfigurasjon for sentralisert administrasjon av a
     <value>Periode</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>Den åpne datafilen har ingen lagrede kontoer som kan dekrypteres. Legg til kontoer i datafilen ved å starte filen via startmenyen.</value>
+    <value>Den åpne datafilen har ingen lagrede kontoer som kan dekrypteres. Legg til kontoer i datafilen ved å starte appen via startmenyen.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Den åpnede datafilen er ikke gyldig. Den lagrede initialiseringsvektoren (IV) mangler for dekryptering.</value>

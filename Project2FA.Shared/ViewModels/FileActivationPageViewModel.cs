@@ -123,11 +123,6 @@ namespace Project2FA.ViewModels
             else
             {
                 Password = string.Empty;
-                // Only display password error if no other error has occurred
-                if (noerror)
-                {
-                    await ShowLoginError();
-                }
                 return false;
             }
         }
@@ -161,8 +156,17 @@ namespace Project2FA.ViewModels
                         byte[] iv = datafile.IV;
                         if (datafile.Collection.Count > 0)
                         {
-                            DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                            (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
+                            try
+                            {
+                                DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
+                                (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
+                            }
+                            catch (Exception exc)
+                            {
+                                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+                                await ShowLoginError();
+                                return (false, false);
+                            }
                         }
                         else
                         {

@@ -1353,7 +1353,7 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
     <value>Periodo</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>Il file di dati aperto non ha conti salvati che possono essere decriptati. Aggiungere conti al file di dati avviando il file tramite il menu di avvio.</value>
+    <value>Il file di dati aperto non ha conti salvati che possono essere decriptati. Per aggiungere conti al file di dati, avviare l'applicazione dal menu di avvio.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Il file di dati aperto non è valido. Manca il vettore di inizializzazione (IV) memorizzato per la decodifica.</value>

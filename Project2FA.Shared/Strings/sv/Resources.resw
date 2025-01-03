@@ -1351,7 +1351,7 @@ Applikationen stöder en MDM-konfiguration för centraliserad hantering av appli
     <value>Period</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>Den öppna datafilen har inga sparade konton som kan dekrypteras. Lägg till konton i datafilen genom att starta filen via startmenyn.</value>
+    <value>Den öppna datafilen har inga sparade konton som kan dekrypteras. Lägg till konton i datafilen genom att starta appen via startmenyn.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Den öppnade datafilen är inte giltig. Den lagrade initialiseringsvektorn (IV) saknas för dekryptering.</value>

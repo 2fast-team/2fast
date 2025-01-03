@@ -1351,7 +1351,7 @@ L'application prend en charge une configuration MDM pour une gestion centralisé
     <value>Période</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>Le fichier de données ouvert ne contient pas de comptes enregistrés pouvant être décryptés. Ajoutez des comptes au fichier de données en lançant le fichier via le menu de démarrage.</value>
+    <value>Le fichier de données ouvert ne contient pas de comptes enregistrés pouvant être décryptés. Ajoutez des comptes au fichier de données en lançant l'application via le menu Démarrer.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Le fichier de données ouvert n'est pas valide. Le vecteur d'initialisation (IV) stocké est manquant pour le décryptage.</value>

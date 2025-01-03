@@ -1351,7 +1351,7 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
     <value>Jakso</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>Avoimessa datatiedostossa ei ole tallennettuja tilejä, jotka voidaan purkaa. Lisää tilejä datatiedostoon käynnistämällä tiedosto käynnistysvalikon kautta.</value>
+    <value>Avoimessa datatiedostossa ei ole tallennettuja tilejä, jotka voidaan purkaa. Lisää tilejä datatiedostoon käynnistämällä sovellus käynnistysvalikosta.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>Avattu tiedosto ei ole kelvollinen. Tallennettu alustusvektori (IV) puuttuu salauksen purkamista varten.</value>

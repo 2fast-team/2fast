@@ -1499,7 +1499,7 @@ La aplicación soporta configuración MDM para la gestión centralizada en empre
     <value>Periodo</value>
   </data>
   <data name="FileActivationPageViewModelEmptyDatafile" xml:space="preserve">
-    <value>El archivo de datos abierto no tiene cuentas guardadas que se puedan descifrar. Añade cuentas al archivo de datos iniciando el archivo a través del menú de inicio.</value>
+    <value>El archivo de datos abierto no tiene cuentas guardadas que se puedan descifrar. Añade cuentas al archivo de datos iniciando la app a través del menú de inicio.</value>
   </data>
   <data name="FileActivationPageViewModelCorruptDatafile" xml:space="preserve">
     <value>El archivo de datos abierto no es válido. Falta el vector de inicialización (IV) almacenado para el descifrado.</value>

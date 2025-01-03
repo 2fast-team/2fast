@@ -111,6 +111,14 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
+                                        <AppBarButton
+                                            x:Name="ABB_ImportAccount"
+                                            Command="{x:Bind ImportAccountCommand}"
+                                            x:Uid="AccoundCodePageImportEntry">
+                                            <AppBarButton.Icon>
+                                                <FontIcon Glyph="&#xE8B5;"/>
+                                            </AppBarButton.Icon>
+                                        </AppBarButton>
                                         <!--<AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
@@ -325,24 +333,14 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <!--<AppBarButton
+                                        <AppBarButton
                                             x:Name="ABB_ImportAccount"
+                                            Command="{x:Bind ImportAccountCommand}"
                                             x:Uid="AccoundCodePageImportEntry">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE8B5;"/>
                                             </AppBarButton.Icon>
-                                            <AppBarButton.Flyout>
-                                                <MenuFlyout Placement="Bottom">
-                                                    <MenuFlyoutItem 
-                    x:Uid="AccoundCodePageImportDocument"
-                                                        Command="{x:Bind ImportAccountCommand}"
-                    Icon="Document"/>
-                                                    <MenuFlyoutItem
-                    x:Uid="AccoundCodePageImportCamera"
-                    Icon="Camera"/>
-                                                </MenuFlyout>
-                                            </AppBarButton.Flyout>
-                                        </AppBarButton>-->
+                                        </AppBarButton>
                                         <!--<AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             x:Uid="AccoundCodePageImportEntry"
@@ -599,17 +597,19 @@
                                 Foreground="{ThemeResource SystemAccentColor}" />
                             </Grid>
 
-                            <Button
+                            <appcontrols:CopyButton
                                 x:Name="BTN_CopyCode"
                                 x:Uid="AccountCopyCodeButton"
                                 Width="48"
                                 Height="48"
                                 Click="BTN_CopyCode_Click"
-                                Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0"
                                 HorizontalAlignment="Stretch" >
-                                <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
-                            </Button>
+                                <FontIcon 
+                                    Style="{StaticResource DefaultFontIconStyle}" 
+                                    Glyph="&#xE8C8;" 
+                                    FontSize="20"/>
+                            </appcontrols:CopyButton>
                             <Grid VerticalAlignment="Center">
                                 <unocontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}"
@@ -823,17 +823,19 @@
                                 Foreground="{ThemeResource SystemAccentColor}" />
                             </Grid>
 
-                            <Button
+                            <appcontrols:CopyButton
                                 x:Name="BTN_CopyCode"
                                 x:Uid="AccountCopyCodeButton"
                                 Width="48"
                                 Height="48"
                                 Click="BTN_CopyCode_Click"
-                                Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0"
                                 HorizontalAlignment="Stretch" >
-                                <FontIcon Style="{StaticResource DefaultFontIconStyle}" Glyph="&#xE8C8;" FontSize="20"/>
-                            </Button>
+                                <FontIcon 
+                                    Style="{StaticResource DefaultFontIconStyle}" 
+                                    Glyph="&#xE8C8;" 
+                                    FontSize="20"/>
+                            </appcontrols:CopyButton>
                             <Grid VerticalAlignment="Center">
                                 <unocontrols:RadialProgressBar
                                 Value="{x:Bind Seconds,Mode=OneWay}" 

@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
 
     <AcrylicBrush 
         x:Key="ShellAcrylicWindowBrush" 
@@ -12,7 +11,13 @@
     <SolidColorBrush x:Name="TranslucentBackgroundHighBrush" Opacity="0.9" Color="White"/>
     <SolidColorBrush x:Name="TranslucentBackgroundMediumBrush" Opacity="0.75" Color="White"/>
     <SolidColorBrush x:Name="TranslucentBackgroundLowBrush" Opacity="0.55" Color="White"/>
+    
     <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="White"/>
+    <!--<SolidColorBrush x:Name="ApplicationContentDialogBackgroundThemeBrush"  Color="White"/>-->
+
+    <StaticResource x:Key="SettingsCardBackground" ResourceKey="CardBackgroundFillColorDefaultBrush" />
+    <SolidColorBrush x:Name="SettingsCardItemsBackground" Color="#171717"/>
+    <StaticResource x:Key="SettingsCardBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
 
     <SolidColorBrush x:Name="ApplicationWarnHighlightForegroundBrush" Color="#C50500"/>
 

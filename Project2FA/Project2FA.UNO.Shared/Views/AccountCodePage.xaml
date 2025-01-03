@@ -5,11 +5,12 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wctc="using:CommunityToolkit.WinUI.Controls"
     xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:toolkit="using:Uno.UI.Toolkit"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations"
-    xmlns:appcontrols="using:Project2FA.Controls"
+    xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:helpers="using:Project2FA.Helpers"
     xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -34,7 +35,7 @@
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
 
-            <!--<DataTemplate x:Name="ShimmerTemplate">
+            <DataTemplate x:Key="ShimmerTemplate">
                 <UserControl
         x:Name="Root" 
         MaxWidth="660"
@@ -63,7 +64,7 @@
 
                         </Grid>
 
-                        <appcontrols:Shimmer 
+                        <unocontrols:Shimmer 
             Height="48"
             Width="48"
             CornerRadius="96"
@@ -71,7 +72,7 @@
             Grid.Column="1"
             Grid.Row="0"
             Grid.RowSpan="2">
-                        </appcontrols:Shimmer>
+                        </unocontrols:Shimmer>
 
 
                         <RelativePanel 
@@ -80,13 +81,13 @@
                 Grid.ColumnSpan="2"
                 Margin="0,0,0,8">
 
-                            <appcontrols:Shimmer 
+                            <unocontrols:Shimmer 
                 x:Name="AccountName" 
                 Width="200"
                 Height="18"
                 Margin="0,10,10,0" />
 
-                            <appcontrols:Shimmer 
+                            <unocontrols:Shimmer 
                 x:Name="IssuerName" 
                 Width="200"
                 Height="18"
@@ -99,14 +100,14 @@
                 Grid.Column="2"
                 Margin="0,0,0,4">
 
-                            <appcontrols:Shimmer Width="120"  />
+                            <unocontrols:Shimmer Width="120"  />
 
-                            <appcontrols:Shimmer 
+                            <unocontrols:Shimmer 
                 Width="48"
                 Height="32" 
                 Margin="8,0,4,0"/>
 
-                            <appcontrols:Shimmer 
+                            <unocontrols:Shimmer 
                 Width="48"
                 Height="32" 
                 Margin="8,0,4,0"/>
@@ -139,7 +140,7 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                 </UserControl>
-            </DataTemplate>-->
+            </DataTemplate>
 
             <DataTemplate x:Key="SuggestBoxDataTemplate" x:DataType="models:TwoFACodeModel">
                 <Grid
@@ -311,7 +312,7 @@
                                 </Button>
 
                                 <Grid VerticalAlignment="Center">
-                                    <appcontrols:RadialProgressBar
+                                    <unocontrols:RadialProgressBar
                 Value="{x:Bind Seconds,Mode=OneWay}" 
                 Maximum="{x:Bind Period,Mode=OneWay}" 
                     
@@ -595,7 +596,7 @@
                                 </Button>
 
                                 <Grid VerticalAlignment="Center">
-                                    <appcontrols:RadialProgressBar
+                                    <unocontrols:RadialProgressBar
                 Value="{x:Bind Seconds,Mode=OneWay}" 
                 Maximum="{x:Bind Period,Mode=OneWay}" 
                     
@@ -830,7 +831,28 @@
                 </ListView.ItemContainerStyle>-->
             
             </ListView>
-            
+            <ListView 
+            Visibility="{x:Bind ViewModel.TwoFADataService.IsLoading, Mode=OneWay}"
+            ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
+            ItemTemplate="{StaticResource ShimmerTemplate}">
+                <!--<ListView.ItemContainerStyle>
+
+                    <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Padding" Value="2,16,20,0"/>
+                </ListView.ItemContainerStyle>-->
+                <!--<ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <wctc:WrapPanel 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>-->
+                <Grid></Grid>
+                <Grid></Grid>
+                <Grid></Grid>
+            </ListView>
+
             <!--<ItemsRepeaterScrollHost>
                 <ScrollViewer>
                     <ItemsRepeater 

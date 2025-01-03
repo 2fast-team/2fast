@@ -13,6 +13,11 @@
     <SolidColorBrush x:Name="TranslucentBackgroundLowBrush" Opacity="0.65" Color="Black"/>
     
     <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="Black"/>
+    <!--<SolidColorBrush x:Name="ApplicationContentDialogBackgroundThemeBrush"  Color="#1E1E1E"/>-->
+
+    <SolidColorBrush x:Name="SettingsCardBackground" Color="#32312F"/>
+    <SolidColorBrush x:Name="SettingsCardItemsBackground" Color="#171717"/>
+    <SolidColorBrush x:Name="SettingsCardBorderBrush" Color="#474644"/>
 
     <SolidColorBrush x:Name="ApplicationWarnHighlightForegroundBrush" Color="#FFF000"/>
 
@@ -123,7 +128,7 @@
     <StaticResource x:Key="TwoFABackgroundBrush" ResourceKey="SystemChromeAltHighColor"/>
 
     <StaticResource x:Key="ExpanderHeaderBackground" ResourceKey="SystemChromeAltMediumHighColor" />
-    <StaticResource x:Key="CardBackgroundBrush" ResourceKey="SystemChromeAltMediumHighColor" />
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#1E1E1E" />
     <StaticResource x:Key="CardBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
     <StaticResource x:Key="CardPrimaryForegroundBrush" ResourceKey="TextFillColorPrimaryBrush" />
 

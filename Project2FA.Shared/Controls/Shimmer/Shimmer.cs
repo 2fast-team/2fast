@@ -3,9 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Numerics;
-
-
-
 using System.Xml.Linq;
 using System;
 using Windows.UI;
@@ -197,7 +194,6 @@ namespace Project2FA.Controls
             _shapeVisual.StartAnimation(nameof(ShapeVisual.Size), _sizeAnimation);
             _rectangleGeometry.StartAnimation(nameof(CompositionRoundedRectangleGeometry.Size), _sizeAnimation);
 
-#if WINDOWS_UWP
             _gradientStartPointAnimation = rootVisual.Compositor.CreateVector2KeyFrameAnimation();
             _gradientStartPointAnimation.Duration = Duration;
             _gradientStartPointAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
@@ -211,7 +207,7 @@ namespace Project2FA.Controls
             _gradientEndPointAnimation.InsertKeyFrame(0.0f, new Vector2(1.0f, 0.0f)); //Vector2.One
             _gradientEndPointAnimation.InsertKeyFrame(1.0f, new Vector2(-InitialStartPointX, 1.0f));
             _shimmerMaskGradient.StartAnimation(nameof(CompositionLinearGradientBrush.EndPoint), _gradientEndPointAnimation);
-#endif
+
             _animationStarted = true;
         }
 

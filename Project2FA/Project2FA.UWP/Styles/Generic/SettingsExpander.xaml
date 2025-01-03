@@ -24,6 +24,7 @@
            BasedOn="{StaticResource DefaultSettingsCardStyle}"
            TargetType="local:SettingsCard">
         <Style.Setters>
+            <Setter Property="Background" Value="{ThemeResource SettingsCardItemsBackground}"/>
             <Setter Property="BorderThickness" Value="{ThemeResource SettingsExpanderItemBorderThickness}" />
             <Setter Property="MinHeight" Value="48" />
             <Setter Property="Padding" Value="{ThemeResource SettingsExpanderItemPadding}" />

@@ -5,6 +5,7 @@
         <!--custom controls-->
         <ResourceDictionary Source="/Controls/Shimmer/Shimmer.xaml" />
         <ResourceDictionary Source="/Controls/ImageEx/ImageEx.xaml" />
+        <ResourceDictionary Source="ms-appx:///Controls/CopyButton/CopyButton.xaml" />
         <ResourceDictionary Source="/Controls/RadialProgressBar/RadialProgressBar.xaml" />
         <ResourceDictionary Source="ms-appx:///Controls/Carousel/Carousel.xaml" />
         <ResourceDictionary Source="/Controls/SettingsGroup/SettingsGroup.xaml" />

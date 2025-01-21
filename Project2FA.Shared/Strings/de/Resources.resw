@@ -1368,4 +1368,7 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Anmeldung mit Biometrie</value>
   </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>QR-Code scannen</value>
+  </data>
 </root>

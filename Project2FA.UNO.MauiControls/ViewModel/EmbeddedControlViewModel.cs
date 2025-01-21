@@ -12,7 +12,7 @@ public class EmbeddedControlViewModel : ObservableRecipient
 
     public EmbeddedControlViewModel()
     {
-        Messenger.Register<EmbeddedControlViewModel, ControlDisposeMessage>(this, (r, m) => r.DisconnectHandler = m.Value);
+        Messenger.Register<EmbeddedControlViewModel, ControlDisposeMessage>(this, (r, m) => r.Disconnected = m.Value);
     }
 
     public string Parameter
@@ -36,7 +36,7 @@ public class EmbeddedControlViewModel : ObservableRecipient
         get => _cameraReader;
         set => _cameraReader = value;
     }
-    public bool DisconnectHandler 
+    public bool Disconnected 
     { 
         get => _disconnectHandler; 
         set

@@ -1045,9 +1045,6 @@
                 </UserControl>
             </DataTemplate>
 
-            <!--<Flyout x:Key="CategoryFilterFlyout">
-                <views:CategoryFilterFlyout/>
-            </Flyout>-->
         </ResourceDictionary>
     </Page.Resources>
 

@@ -201,6 +201,22 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _notesExpanded, value); 
         }
 
+        public bool NoCategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count == 0;
+            }
+        }
+
+        public bool CategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count > 0;
+            }
+        }
+
 #if WINDOWS_UWP
         public bool IsProVersion
         {

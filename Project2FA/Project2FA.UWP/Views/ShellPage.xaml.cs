@@ -446,8 +446,16 @@ namespace Project2FA.UWP.Views
 
         private async void FeedbackItem_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Uri uri = new Uri("https://github.com/2fast-team/2fast/discussions");
-            await Launcher.LaunchUriAsync(uri);
+            try
+            {
+                Uri uri = new Uri("https://github.com/2fast-team/2fast/discussions");
+                await Launcher.LaunchUriAsync(uri);
+            }
+            catch (Exception exc)
+            {
+                await App.Current.Container.Resolve<ILoggingService>().LogException(exc, SettingsService.Instance.LoggingSetting);
+            }
+
             // https://docs.microsoft.com/en-us/windows/uwp/monetize/launch-feedback-hub-from-your-app
             //Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
             //await launcher.LaunchAsync();

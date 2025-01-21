@@ -22,9 +22,15 @@
             <utu:NavigationBar.Content>
                 <TextBlock 
                     VerticalAlignment="Center"
-                    Text="#QR code scanning"
+                    Text="~AddAccountCameraContentDialogTitle.Text"
+                    x:Uid="AddAccountCameraContentDialogTitle"
                     Style="{StaticResource ShellHeaderTitleTextBlockStyle}"/>
             </utu:NavigationBar.Content>
+            <utu:NavigationBar.MainCommand>
+                <AppBarButton 
+                    x:Uid="BTNBack"
+                    Foreground="{ThemeResource SystemAccentColor}" />
+            </utu:NavigationBar.MainCommand>
         </utu:NavigationBar>
 
         <embed:MauiHost x:Name="MauiHostElement"

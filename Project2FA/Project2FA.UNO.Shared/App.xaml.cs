@@ -1,16 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using Prism;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Project2FA.UNO.Views;
 using Project2FA.ViewModels;
 using Project2FA.Repository.Database;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
 using Project2FA.Core;
 using Windows.Storage;
 using UNOversal.Services.Dialogs;
@@ -22,25 +17,18 @@ using UNOversal.Services.Serialization;
 using Project2FA.Core.Services.JSON;
 using UNOversal.Ioc;
 using UNOversal.DryIoc;
-using System.Linq;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
 using WindowActivatedEventArgs = Microsoft.UI.Xaml.WindowActivatedEventArgs;
 using UNOversal;
 using Project2FA.Services;
 using Project2FA.Core.Services.NTP;
-using CommunityToolkit.WinUI.Helpers;
 using Windows.UI.Core;
 using Uno.UI;
 using Uno.Extensions.Maui;
 using Project2FA.UNO.MauiControls;
 using Project2FA.Services.Parser;
-using UNOversal.Navigation;
 using UNOversal.Services.Logging;
-using Microsoft.Maui.Platform;
-using Uno.Extensions;
-using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.UNO
 {
@@ -156,7 +144,7 @@ namespace Project2FA.UNO
                     }
                     else
                     {
-                        await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(WelcomePage));
+                        await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(TutorialPage));
                     }
                 }
             }
@@ -430,6 +418,7 @@ namespace Project2FA.UNO
 
             containerRegistry.RegisterSingleton<ShellPage>();
             containerRegistry.RegisterForNavigation<BlankPage, BlankPageViewModel>();
+            containerRegistry.RegisterForNavigation<TutorialPage, TutorialPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<FileActivationPage, FileActivationPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();

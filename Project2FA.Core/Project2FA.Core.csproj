@@ -36,7 +36,7 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
     <PackageReference Include="protobuf-net" Version="3.2.45" />
-    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.0" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>

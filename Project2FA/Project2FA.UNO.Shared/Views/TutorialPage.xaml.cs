@@ -1,19 +1,20 @@
-﻿using CommunityToolkit.WinUI;
+﻿using Windows.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Project2FA.UWP.Controls;
-using Project2FA.ViewModels;
-using System;
+using Microsoft.UI.Xaml.Media;
 using System.Threading.Tasks;
-using Windows.System;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+using Project2FA.ViewModels;
+using CommunityToolkit.WinUI;
 
-namespace Project2FA.UWP.Views
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
+namespace Project2FA.UNO.Views
 {
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
     public sealed partial class TutorialPage : Page
-    {
+	{
         public TutorialPageViewModel ViewModel => DataContext as TutorialPageViewModel;
         public TutorialPage()
         {
@@ -23,8 +24,10 @@ namespace Project2FA.UWP.Views
 
         private void TutorialPage_Loaded(object sender, RoutedEventArgs e)
         {
+#if !__MOBILE__
             App.ShellPageInstance.ShellViewInternal.Header = string.Empty;
             App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
+#endif
         }
 
         /// <summary>
@@ -34,7 +37,7 @@ namespace Project2FA.UWP.Views
         /// <param name="title"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        private async Task CreateTeachingTip(FrameworkElement element,string title, string content)
+        private async Task CreateTeachingTip(FrameworkElement element, string title, string content)
         {
             var control = MainGrid.FindDescendant(nameof(TeachingTip));
             if (control != null)
@@ -116,31 +119,30 @@ namespace Project2FA.UWP.Views
             }
         }
 
-        private async void MarkdownTextBlock_LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
-        {
-            if (Uri.TryCreate(e.Link, UriKind.Absolute, out Uri link))
-            {
-                await Launcher.LaunchUriAsync(link);
-            }
-
-        }
+        //private async void MarkdownTextBlock_LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
+        //{
+        //    if (Uri.TryCreate(e.Link, UriKind.Absolute, out Uri link))
+        //    {
+        //        await Launcher.LaunchUriAsync(link);
+        //    }
+        //}
 
         private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
         {
-            var markdownText = new Microsoft.Toolkit.Uwp.UI.Controls.MarkdownTextBlock();
-            markdownText.Margin = new Thickness(8,8,8,8);
-            markdownText.Text = Strings.Resources.TutorialPagePasswordInfo;
-            markdownText.LinkClicked += MarkdownTextBlock_LinkClicked;
-            AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
-            {
-                Target = sender as FrameworkElement,
-                HeroContent = markdownText,
-                AutoCloseInterval = 8000,
-                IsLightDismissEnabled = true,
-                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
-                IsOpen = true,
-            };
-            MainGrid.Children.Add(teachingTip);
+            //var markdownText = new MarkdownTextBlock();
+            //markdownText.Margin = new Thickness(8, 8, 8, 8);
+            //markdownText.Text = Strings.Resources.TutorialPagePasswordInfo;
+            //markdownText.LinkClicked += MarkdownTextBlock_LinkClicked;
+            //AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
+            //{
+            //    Target = sender as FrameworkElement,
+            //    HeroContent = markdownText,
+            //    AutoCloseInterval = 8000,
+            //    IsLightDismissEnabled = true,
+            //    BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+            //    IsOpen = true,
+            //};
+            //MainGrid.Children.Add(teachingTip);
         }
     }
 }

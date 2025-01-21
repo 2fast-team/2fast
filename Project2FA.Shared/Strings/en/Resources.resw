@@ -1367,4 +1367,7 @@ The application supports an MDM configuration for centralised management of the 
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Login with Biometrics</value>
   </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>Scan QR code</value>
+  </data>
 </root>

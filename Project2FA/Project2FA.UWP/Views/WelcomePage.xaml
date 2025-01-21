@@ -15,8 +15,8 @@
 
     <Page.Resources>
         
-        <DataTemplate 
-            x:Name="ShellHeaderTemplate" 
+        <DataTemplate
+            x:Name="ShellHeaderTemplate"
             x:DataType="viewmodels:WelcomePageViewModel">
             <UserControl>
                 <Grid>

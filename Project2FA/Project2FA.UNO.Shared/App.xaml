@@ -27,6 +27,7 @@
             <Converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
             <Converters:BoolToCommandBarVisibilityConverter x:Key="BoolToCommandBarVisibilityConverter"/>
             <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <Converters:ShowCodeToIconConverter x:Key="ShowCodeToIconConverter"/>
             <Converters:FavouriteToIconConverter x:Key="FavouriteToIconConverter"/>
             <Converters:VisibleWhenFalseConverter x:Key="VisibleWhenFalseConverter"/>
             <Converters:FavouriteTooltipConverter x:Key="FavouriteTooltipConverter"/>

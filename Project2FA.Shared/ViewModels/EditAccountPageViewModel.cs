@@ -77,7 +77,7 @@ namespace Project2FA.ViewModels
             {
                 Model = model;
                 TempModel = (TwoFACodeModel)Model.Clone();
-                AccountIconName = Model.AccountIconName;
+                AccountIconName = TempModel.AccountIconName;
             }
         }
     }

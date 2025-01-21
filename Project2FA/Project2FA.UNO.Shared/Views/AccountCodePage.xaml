@@ -258,23 +258,24 @@
             Grid.ColumnSpan="4"
             Margin="8,0,0,4">
 
-                                <Button
-                x:Name="BTN_ShowCode"
-                Style="{StaticResource TransparentButtonStyle}"
-                Width="48"
-                Height="48"
-                Margin="0,0,4,0"
-                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
-                CommandParameter="{Binding}"
-                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
-
-                HorizontalAlignment="Stretch" >
+                            <Button
+                                x:Name="BTN_ShowCode"
+                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                                Width="48"
+                                Height="48"
+                                Margin="0,0,4,0"
+                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                HorizontalAlignment="Stretch" >
                                     <FontIcon 
-                    Glyph="&#xE18B;"
-                    FontSize="20"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-                                </Button>
+                                    Glyph="{x:Bind HideTOTPCode, Converter={StaticResource ShowCodeToIconConverter},Mode=OneWay}"
+                                    FontSize="24"
+                                    Style="{StaticResource FullFluentFontIconStyle}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
 
                                 <Grid>
                                     <TextBlock
@@ -541,23 +542,24 @@
             Grid.ColumnSpan="4"
             Margin="8,0,0,4">
 
-                                <Button
-                x:Name="BTN_ShowCode"
-                Style="{StaticResource TransparentButtonStyle}"
-                Width="48"
-                Height="48"
-                Margin="0,0,4,0"
-                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
-                CommandParameter="{Binding}"
-                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
-
-                HorizontalAlignment="Stretch" >
+                            <Button
+                                x:Name="BTN_ShowCode"
+                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                                Width="48"
+                                Height="48"
+                                Margin="0,0,4,0"
+                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                HorizontalAlignment="Stretch" >
                                     <FontIcon 
-                    Glyph="&#xE18B;"
-                    FontSize="20"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-                                </Button>
+                                    Glyph="{x:Bind HideTOTPCode, Converter={StaticResource ShowCodeToIconConverter},Mode=OneWay}"
+                                    FontSize="24"
+                                    Style="{StaticResource FullFluentFontIconStyle}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Button>
 
                                 <Grid>
                                     <TextBlock

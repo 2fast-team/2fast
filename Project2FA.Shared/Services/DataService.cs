@@ -347,9 +347,8 @@ namespace Project2FA.Services
 
 #if __ANDROID__
                     // create new thread for buggy Android, else NetworkOnMainThreadException 
-                    await Task.Run(async () =>
+                    await Task.Run(() =>
                     {
-                        
                         Android.Net.Uri androidUri = Android.Net.Uri.Parse(path);
 
                         file = StorageFile.GetFromSafUri(androidUri);
@@ -501,9 +500,18 @@ namespace Project2FA.Services
 #if WINDOWS_UWP
                         TrackingManager.TrackExceptionCatched(nameof(CheckLocalDatafile) + " PW", exc);
 #endif
+#if __ANDROID__
+                        if (exc is Java.Lang.NullPointerException)
+                        {
+
+                        }
+#else
                         await ErrorDialogs.ShowPasswordError();
+#endif
+
+
                         //CheckLocalDatafile();
-                        
+
                     }
                     finally
                     {

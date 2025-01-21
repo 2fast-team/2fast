@@ -65,8 +65,13 @@ namespace Project2FA.ViewModels
             //{
             //    Messenger.Send(new ControlDisposeMessage(true));
             //}
-            Messenger.Send(new ControlDisposeMessage(true));
+            DisposeCameraControl();
             return true;
+        }
+
+        public void DisposeCameraControl()
+        {
+            Messenger.Send(new ControlDisposeMessage(true));
         }
     }
 }

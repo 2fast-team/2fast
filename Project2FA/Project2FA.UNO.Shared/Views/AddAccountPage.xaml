@@ -17,6 +17,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
         <utu:NavigationBar             
             Grid.Row="0"
             Background="{ThemeResource TwoFABackgroundBrush}"
@@ -27,9 +28,10 @@
                     Style="{StaticResource ShellHeaderTitleTextBlockStyle}" />
             </utu:NavigationBar.Content>
         </utu:NavigationBar>
+        
         <Grid  Grid.Row="1">
             <ScrollViewer>
-                <StackPanel Margin="0,0,16,0">
+                <StackPanel Margin="8,0,8,0">
                     <PersonPicture
             Height="110"
             Width="110"
@@ -74,6 +76,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+        
         <Grid 
 			Grid.Row="2"
 			HorizontalAlignment="Stretch"

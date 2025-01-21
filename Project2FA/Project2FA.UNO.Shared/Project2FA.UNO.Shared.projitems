@@ -78,6 +78,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ContentDialog\ManageCategoriesContentDialog.xaml.cs">
       <DependentUpon>ManageCategoriesContentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\TutorialPage.xaml.cs">
+      <DependentUpon>TutorialPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\UseDataFilePage.xaml.cs">
       <DependentUpon>UseDataFilePage.xaml</DependentUpon>
     </Compile>
@@ -215,6 +218,10 @@
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\ContentDialog\ManageCategoriesContentDialog.xaml">
       <XamlRuntime>WinUI</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\TutorialPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

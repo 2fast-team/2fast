@@ -74,20 +74,6 @@ namespace Project2FA.ViewModels
 
 
 
-        public bool NoCategoriesExists
-        {
-            get
-            {
-                return DataService.Instance.GlobalCategories.Count == 0;
-            }
-        }
 
-        public bool CategoriesExists
-        {
-            get
-            {
-                return DataService.Instance.GlobalCategories.Count > 0;
-            }
-        }
     }
 }

@@ -42,7 +42,7 @@
     </Style>
 
     <!-- Default native Pivot styles (for both Android and iOS) -->
-    <not_win:Style x:Key="NativeDefaultPivot"
+    <!--<not_win:Style x:Key="NativeDefaultPivot"
                 TargetType="Pivot">
         <Setter Property="Template">
             <Setter.Value>
@@ -51,9 +51,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </not_win:Style>
+    </not_win:Style>-->
 
-    <ios:Style TargetType="NativePivotPresenter">
+    <!--<ios:Style TargetType="NativePivotPresenter">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Pivot">
@@ -80,12 +80,12 @@
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
                     <Border Background="red">
-                        <!--<SlidingTabLayout></SlidingTabLayout>-->
+                        --><!--<SlidingTabLayout></SlidingTabLayout>--><!--
                     </Border>
                 </Grid>
             </ControlTemplate>
         </Setter>
-    </android:Style>
+    </android:Style>-->
 
     <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

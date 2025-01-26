@@ -15,7 +15,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <DataTemplate x:Name="ShellHeaderTemplate">
+        <DataTemplate x:Key="ShellHeaderTemplate">
             <Grid 
                 Background="{ThemeResource ShellAcrylicWindowBrush}" 
                 Height="40">
@@ -241,15 +241,18 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <utu:NavigationBar
             Grid.Row="0"
+            utu:SafeArea.Insets="Top"
             MainCommandMode="Action"
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
             <utu:NavigationBar.Content>
-                <TextBlock 
+                <TextBlock
+                    VerticalAlignment="Center"
                     Text="~TutorialPageTitle.Text"
                     x:Uid="TutorialPageTitle"
                     Style="{StaticResource ShellHeaderTitleTextBlockStyle}" />
@@ -340,7 +343,7 @@
                             <PersonPicture
                             Height="70"
                             Width="70"
-                            FontSize="46"
+                            FontSize="40"
                             Margin="0,10,20,0"
                             Style="{StaticResource UnicodeIndexPersonPictureStyle}"
                             Tag="&#xEFCC;">
@@ -348,7 +351,7 @@
                             <PersonPicture
                             Height="70"
                             Width="70"
-                            FontSize="46"
+                            FontSize="40"
                             Margin="0,10,20,0"
                             Style="{StaticResource UnicodeIndexPersonPictureStyle}"
                             Tag="&#xEDB3;">
@@ -356,7 +359,7 @@
                             <PersonPicture
                             Height="70"
                             Width="70"
-                            FontSize="46"
+                            FontSize="40"
                             Margin="0,10,20,0"
                             Style="{StaticResource UnicodeIndexPersonPictureStyle}"
                             Tag="&#xF0DD;">
@@ -607,20 +610,31 @@
             </FlipView>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <PipsPager 
+        x:Name="FlipViewPipsPager"
+        Grid.Row="2"
+        HorizontalAlignment="Center"
+        VerticalContentAlignment="Bottom"
+        NumberOfPages="6"
+        SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
+
+        <Grid 
+            Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+            Padding="0,12,0,12"
+            Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Border
+            <!--<Border
             Grid.ColumnSpan="2" 
             Background="{ThemeResource TranslucentBackgroundMediumBrush}">
-                <!--<Border>
+                --><!--<Border>
                     <Border.Background>
                         <media:BackdropBlurBrush Amount="2" />
                     </Border.Background>
-                </Border>-->
-            </Border>
+                </Border>--><!--
+            </Border>-->
             <Button 
             Visibility="{x:Bind ViewModel.BackButtonVisible,Mode=OneWay}"
             Command="{x:Bind ViewModel.BackButtonCommand}"
@@ -638,9 +652,10 @@
                 </StackPanel>
             </Button>
             <StackPanel 
-            Orientation="Horizontal" 
-            Grid.Column="1"
-            HorizontalAlignment="Right">
+                Background="Transparent"
+                Orientation="Horizontal" 
+                Grid.Column="1"
+                HorizontalAlignment="Right">
                 <Button 
                 Command="{x:Bind ViewModel.FinishButtonCommand}"
                 Visibility="{x:Bind ViewModel.FinishButtonVisible,Mode=OneWay}"
@@ -670,14 +685,6 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-
         </Grid>
-        <PipsPager 
-        x:Name="FlipViewPipsPager"
-        Grid.Row="2"
-        HorizontalAlignment="Center"
-        VerticalContentAlignment="Bottom"
-        NumberOfPages="6"
-        SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
     </Grid>
 </Page>

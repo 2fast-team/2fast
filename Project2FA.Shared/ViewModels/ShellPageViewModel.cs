@@ -179,20 +179,6 @@ namespace Project2FA.ViewModels
             get => _isMobileSearchActive; 
             set => SetProperty(ref _isMobileSearchActive, value);
         }
-
-
-        public Thickness GetTabBarMargin
-        {
-            get
-            {
-                return new Thickness(0, 0, 0, 4);
-#if IOS
-                //return new Thickness(0, 0, 0, 30);
-#else
-                //return new Thickness(0, 0, 0, 4);
-#endif
-            }
-        }
 #endif
     }
 }

@@ -127,7 +127,7 @@ namespace Project2FA.ViewModels
             DeleteAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
             SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
             CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
-#if !WINDOWS_UWP
+#if __ANDROID__ || __IOS__
             // custom commands for Uno platform project
             CameraCommand = new AsyncRelayCommand(CameraCommandTask);
 #endif
@@ -179,10 +179,29 @@ namespace Project2FA.ViewModels
 
         }
 
-#if !WINDOWS_UWP
+#if __ANDROID__ || __IOS__
         private async Task CameraCommandTask()
         {
+#if __ANDROID__
+            // This will only check if the permission is granted but will not prompt the user.
+            bool isGranted = await Windows.Extensions.PermissionsHelper.CheckPermission(new System.Threading.CancellationToken(), Android.Manifest.Permission.Camera);
+
+            if (!isGranted)
+            {
+                // This will prompt the user with the native permission dialog if needed. If already granted it will simply return true.
+                bool isPermissionGranted = await Windows.Extensions.PermissionsHelper.TryGetPermission(new System.Threading.CancellationToken(), Android.Manifest.Permission.Camera);
+                if (isPermissionGranted)
+                {
+                    await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
+                }
+            }
+            else
+            {
+                await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
+            }
+#else
             await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
+#endif
         }
 #endif
 

@@ -5,7 +5,7 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:extensions="using:CommunityToolkit.Common.Extensions"
     xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
@@ -20,16 +20,20 @@
         
         <utu:NavigationBar             
             Grid.Row="0"
+            utu:SafeArea.Insets="Top"
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
             <utu:NavigationBar.Content>
                 <TextBlock 
+                    VerticalAlignment="Center"
                     Text="{x:Bind strings:Resources.AddAccountContentDialogTitle}"
                     Style="{StaticResource ShellHeaderTitleTextBlockStyle}" />
             </utu:NavigationBar.Content>
         </utu:NavigationBar>
         
-        <Grid  Grid.Row="1">
+        <Grid  
+            utu:SafeArea.Insets="SoftInput"
+            Grid.Row="1">
             <ScrollViewer>
                 <StackPanel Margin="8,0,8,0">
                     <PersonPicture

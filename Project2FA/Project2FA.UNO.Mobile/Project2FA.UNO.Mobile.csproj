@@ -83,15 +83,6 @@
 	<PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Platforms\Android\SoftwareBitmap.Android.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Platforms\Android\Resources\drawable\splash.png" />
-    <None Remove="Platforms\Android\Resources\drawable\Splash.xml" />
-    <None Remove="Platforms\Android\Resources\values-night\colors.xml" />
-    <None Remove="Platforms\Android\Resources\values\colors.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.5.0" />
     <PackageReference Include="CommunityToolkit.Labs.WinUI.TokenView" Version="0.1.250103-build.1988" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
@@ -103,8 +94,6 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250106-build.1380" />
     <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250106-build.1380" />
     <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.250106-build.1380" />
-	<!--<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />
-	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.21" />-->
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="QRCoder" Version="1.6.0" />
     <PackageReference Include="Svg.Skia" Version="2.0.0.4" />
@@ -112,19 +101,19 @@
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageReference Include="Uno.Cupertino.WinUI" Version="5.5.0-dev.89.gf0dd9a65ba" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.9.0-dev.2" />
-    <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="5.3.0-dev.104" />
+    <PackageReference Include="Uno.Extensions.Maui.WinUI" Version="5.3.0-dev.110" />
     <PackageReference Include="Uno.Resizetizer" Version="1.8.0-dev.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.5.0-dev.88" />
     <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.5.0-dev.88" />
-    <PackageReference Include="Uno.WinUI" Version="5.7.0-dev.192" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.7.0-dev.192" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.7.0-dev.192" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.7.0-dev.192" />
+    <PackageReference Include="Uno.WinUI" Version="5.7.0-dev.292" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.7.0-dev.292" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.7.0-dev.292" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.7.0-dev.292" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.7.0-dev.192" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.7.0-dev.292" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <Choose>
@@ -196,12 +185,7 @@
       <Version>2.8.7.1</Version>
     </PackageReference>
 	  <PackageReference Include="Xamarin.Google.Android.Material" Version="1.12.0.1" />
-	  <!--<PackageReference Include="Xamarin.AndroidX.Navigation.UI" Version="2.8.0" />-->
-	  <!--<PackageReference Include="Xamarin.AndroidX.Navigation.Fragment" Version="2.8.0" />
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.Runtime" Version="2.8.0" />
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.8.0" />-->
 	  <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.37" />
-
 	  <AndroidEnvironment Include="Platforms\Android\environment.conf" />
   </ItemGroup>
 </Project>

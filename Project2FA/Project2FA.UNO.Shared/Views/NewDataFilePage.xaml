@@ -5,7 +5,7 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:not_win="http://uno.ui/not_win"
     xmlns:extensions="using:Project2FA.Extensions"
@@ -19,10 +19,20 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar 
             Grid.Row="0"
+            utu:SafeArea.Insets="Top"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-            Background="{ThemeResource TwoFABackgroundBrush}"/>
+            Background="{ThemeResource TwoFABackgroundBrush}">
+            <utu:NavigationBar.Content>
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Text="~NewDataFilePageTitle.Text"
+                    x:Uid="NewDataFilePageTitle"
+                    Style="{StaticResource ShellHeaderTitleTextBlockStyle}" />
+            </utu:NavigationBar.Content>
+        </utu:NavigationBar>
+        
 
-        <!--for debug-->
+            <!--for debug-->
         <Border 
             x:Name="PageStaticBackgroundBorder" 
             Grid.Row="1"

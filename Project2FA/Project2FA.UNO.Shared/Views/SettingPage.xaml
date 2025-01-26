@@ -8,7 +8,7 @@
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:toolkit="using:Uno.UI.Toolkit"
     xmlns:ui="using:CommunityToolkit.WinUI"
-    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:strings="using:Project2FA.Strings"
     xmlns:toolkitcontrols="using:CommunityToolkit.WinUI.Controls"
     xmlns:android="http://uno.ui/android"
@@ -26,6 +26,7 @@
             x:Name="PageNavigationbar"
             MainCommandMode="Back"
             Grid.Row="0"
+            utu:SafeArea.Insets="Top"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
             Background="{ThemeResource TwoFABackgroundBrush}">
             <utu:NavigationBar.Content>

@@ -5,7 +5,7 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:not_ios="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:ios="http://uno.ui/ios"
@@ -20,6 +20,7 @@
         </Grid.RowDefinitions>
         <utu:NavigationBar 
             Grid.Row="0"
+            utu:SafeArea.Insets="Top"
             MainCommandMode="Action"
             Background="{ThemeResource TwoFABackgroundBrush}"
             Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}">
@@ -69,6 +70,7 @@
         </Border>
         <Grid 
             x:Name="MainGrid"
+            utu:SafeArea.Insets="SoftInput"
             Grid.Row="1">
             <Border 
                 Background="{ThemeResource TranslucentBackgroundMediumBrush}"

@@ -5,7 +5,7 @@
     xmlns:local="using:Project2FA.UNO.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:ios="http://uno.ui/ios"
     xmlns:android="http://uno.ui/android"
     xmlns:wasm="http://uno.ui/wasm"
@@ -189,14 +189,15 @@
             Grid.Row="1"
             Visibility="{x:Bind ViewModel.IsMobile, Mode=OneWay}">
             <utu:TabBar 
-    x:Name="MobileTabBar"
-    IsEnabled="{x:Bind ViewModel.NavigationIsAllowed, Mode=OneWay}"
-    Visibility="{x:Bind ViewModel.TabBarIsVisible,Mode=OneWay}"
-    Margin="{x:Bind ViewModel.GetTabBarMargin, Mode=OneWay}"
-    ItemContainerStyle="{StaticResource CupertinoBottomTabBarItemStyle}"
-    SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
-    SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
-    Style="{StaticResource CupertinoBottomTabBarStyle}">
+                x:Name="MobileTabBar"
+                utu:SafeArea.Insets="Bottom"
+                utu:SafeArea.Mode="Margin"
+                IsEnabled="{x:Bind ViewModel.NavigationIsAllowed, Mode=OneWay}"
+                Visibility="{x:Bind ViewModel.TabBarIsVisible,Mode=OneWay}"
+                ItemContainerStyle="{StaticResource CupertinoBottomTabBarItemStyle}"
+                SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
+                SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
+                Style="{StaticResource CupertinoBottomTabBarStyle}">
                 <utu:TabBar.Items>
                     <utu:TabBarItem 
             x:Uid="ShellPageAccountsNavigation"

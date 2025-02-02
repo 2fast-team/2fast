@@ -1,4 +1,4 @@
-﻿namespace Template10.Services.Compression
+﻿namespace Project2FA.UWP.Services.Compression
 {
     public interface ICompressionService
     {

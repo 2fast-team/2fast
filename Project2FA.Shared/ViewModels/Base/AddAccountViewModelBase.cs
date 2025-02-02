@@ -63,6 +63,8 @@ namespace Project2FA.ViewModels
     {
         public ObservableCollection<TwoFACodeModel> OTPList { get; internal set; } = new ObservableCollection<TwoFACodeModel>();
         public ObservableCollection<MediaFrameSourceGroup> CameraSourceGroup { get; internal set; } = new ObservableCollection<MediaFrameSourceGroup>();
+
+        public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
         public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         private Windows.Media.Playback.MediaPlayer _mediaPlayer;
         private MediaPlayerElement _mediaPlayerElementControl;
@@ -715,10 +717,38 @@ namespace Project2FA.ViewModels
             }
         }
 
+        public Task<bool> SearchAccountFonts(string senderText)
+        {
+            if (string.IsNullOrEmpty(senderText) == false && senderText.Length >= 2 && senderText != Strings.Resources.AccountCodePageSearchNotFound)
+            {
+                var tempList = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(senderText, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                FontIdentifikationCollection.AddRange(tempList, true);
+                try
+                {
+                    if (FontIdentifikationCollection.Count == 0)
+                    {
+                        FontIdentifikationCollection.Add(new FontIdentifikationModel { Name = Strings.Resources.AccountCodePageSearchNotFound });
+                        return Task.FromResult(true);
+                    }
+                    return Task.FromResult(true);
+                }
+                catch (System.Exception)
+                {
+                    FontIdentifikationCollection.Clear();
+                    return Task.FromResult(false);
+                }
+            }
+            else
+            {
+                FontIdentifikationCollection.Clear();
+                return Task.FromResult(false);
+            }
+        }
 
 
 
-#region CameraRegion
+
+        #region CameraRegion
 
         private void SetMediaPlayerSource()
         {
@@ -1117,7 +1147,23 @@ namespace Project2FA.ViewModels
             get => _cameraSuccessfullyLoaded;
             set => SetProperty(ref _cameraSuccessfullyLoaded, value);
         }
-#endregion
+
+        public bool NoCategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count == 0;
+            }
+        }
+
+        public bool CategoriesExists
+        {
+            get
+            {
+                return DataService.Instance.GlobalCategories.Count > 0;
+            }
+        }
+        #endregion
 
         public void Dispose()
         {

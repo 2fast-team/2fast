@@ -129,7 +129,7 @@ namespace Project2FA.UWP.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                ViewModel.SetSuggestionList(sender.Text);
+                ViewModel.SetSuggestionList(sender.Text,true);
             }
         }
 
@@ -258,7 +258,7 @@ namespace Project2FA.UWP.Views
 
         private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel);
+            ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel, true);
         }
     }
 }

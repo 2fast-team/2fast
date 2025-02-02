@@ -18,8 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\AddAccountCameraPage.xaml.cs">
-      <DependentUpon>AddAccountCameraPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml.cs">
+      <DependentUpon>CameraPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\AddAccountPage.xaml.cs">
       <DependentUpon>AddAccountPage.xaml</DependentUpon>
@@ -101,7 +101,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\AddAccountCameraPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

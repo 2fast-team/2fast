@@ -21,7 +21,7 @@ namespace Project2FA.UNO.Views
             // Refresh x:Bind when the DataContext changes.
             DataContextChanged += (s, e) => Bindings.Update();
             // Evcnt for the native back behavior which currently skips the framework extension
-#if ANDROID || IOS
+#if __ANDROID__ || __IOS__
             App.ShellPageInstance.MainFrame.Navigated -= MainFrame_Navigated;
             App.ShellPageInstance.MainFrame.Navigated += MainFrame_Navigated;
             PropertyChangedCallback callback = new PropertyChangedCallback(SelectedTabBarIndexChanged);
@@ -51,6 +51,7 @@ namespace Project2FA.UNO.Views
                     Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
                     fadeInStoryboard.Children.Add(fadeInAnimation);
                     fadeInStoryboard.Begin();
+                    MobileAutoSuggestBox.Focus(FocusState.Programmatic);
                     break;
                 default:
                     break;
@@ -131,7 +132,7 @@ namespace Project2FA.UNO.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                ViewModel.SetSuggestionList(sender.Text);
+                ViewModel.SetSuggestionList(sender.Text,true);
             }
         }
 
@@ -193,7 +194,7 @@ namespace Project2FA.UNO.Views
 
         private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel);
+            ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel, false);
         }
     }
 }

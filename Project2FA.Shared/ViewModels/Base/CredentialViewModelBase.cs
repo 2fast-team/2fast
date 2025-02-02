@@ -16,13 +16,14 @@ using Windows.UI.Xaml.Controls;
 using Project2FA.UNO;
 using Project2FA.UNO.Views;
 using Microsoft.UI.Xaml.Controls;
+using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
 
 namespace Project2FA.ViewModels
 {
     public class CredentialViewModelBase : ObservableRecipient
     {
-        private bool _windowsHelloIsUsable, _isLogout;
+        private bool _windowsHelloIsUsable, _isLogout, _isLoading;
         private string _password;
         public ICommand LoginCommand { get; internal set; }
         public ICommand WindowsHelloLoginCommand { get; internal set; }
@@ -40,6 +41,9 @@ namespace Project2FA.ViewModels
             dialog.Title = Resources.Error;
             dialog.Content = Resources.LoginPagePasswordMismatch;
             dialog.PrimaryButtonText = Resources.Confirm;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
             await DialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
@@ -122,6 +126,11 @@ namespace Project2FA.ViewModels
         {
             get => _isScreenCaptureEnabled;
             set => SetProperty(ref _isScreenCaptureEnabled, value);
+        }
+        public bool IsLoading 
+        { 
+            get => _isLoading; 
+            set => SetProperty(ref _isLoading, value);
         }
     }
 }

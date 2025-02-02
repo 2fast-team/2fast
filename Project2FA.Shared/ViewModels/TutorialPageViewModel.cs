@@ -23,6 +23,9 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Project2FA.ViewModels
 {
+#if !WINDOWS_UWP
+    [Bindable]
+#endif
     public class TutorialPageViewModel : ObservableObject, IInitialize
     {
         private int _selectedIndex = 0;

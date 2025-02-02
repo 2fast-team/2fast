@@ -20,19 +20,19 @@ using Project2FA.UNO.MauiControls.Messenger;
 namespace Project2FA.ViewModels
 {
     [Bindable]
-    public class AddAccountCameraPageViewModel : ObservableRecipient, IInitialize, IConfirmNavigation
+    public class CameraPageViewModel : ObservableRecipient, IInitialize, IConfirmNavigation
     {
         private INavigationService NavigationService { get; }
         private IProject2FAParser Project2FAParser { get; }
         private IDialogService DialogService { get; }
         private bool _foundAccount = false;
-        public AddAccountCameraPageViewModel(INavigationService navigationService, IProject2FAParser project2FAParser, IDialogService dialogService)
+        public CameraPageViewModel(INavigationService navigationService, IProject2FAParser project2FAParser, IDialogService dialogService)
         {
             NavigationService = navigationService;
             Project2FAParser = project2FAParser;
             DialogService = dialogService;
 
-            Messenger.Register<AddAccountCameraPageViewModel, QRCodeScannedMessage>(this, async (viewmodel, message) =>
+            Messenger.Register<CameraPageViewModel, QRCodeScannedMessage>(this, async (viewmodel, message) =>
             {
                 List<KeyValuePair<string, string>> valuePair = Project2FAParser.ParseQRCodeStr(HttpUtility.UrlDecode(message.Value));
                 if (valuePair.FirstOrDefault().Value == "totp")

@@ -129,6 +129,19 @@
                         HorizontalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
+            <Border 
+                Visibility="{x:Bind ViewModel.IsLoading,Mode=OneWay}"
+                Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+                <ProgressRing 
+                x:Name="PR_Loading"
+                IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                Foreground="{ThemeResource SystemAccentColor}"
+                Width="50" 
+                Height="50" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" />
+            </Border>
+
         </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

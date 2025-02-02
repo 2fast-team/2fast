@@ -26,10 +26,6 @@ using Windows.Storage.Streams;
 using UNOversal.Services.Serialization;
 using System.Collections.Generic;
 
-
-
-
-
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
 using Windows.UI.Xaml.Controls;

@@ -7,6 +7,7 @@ using Project2FA.Helpers;
 using Project2FA.Repository.Database;
 using Project2FA.Services;
 using Project2FA.Services.Marketplace;
+using Project2FA.UWP.Services.Compression;
 using Project2FA.Services.Parser;
 using Project2FA.Services.Web;
 using Project2FA.Utils;
@@ -17,7 +18,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using Template10.Services.Compression;
 using UNOversal;
 using UNOversal.DryIoc;
 using UNOversal.Ioc;
@@ -37,6 +37,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Project2FA.Services.Importer;
+
 
 namespace Project2FA.UWP
 {

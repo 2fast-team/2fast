@@ -53,7 +53,6 @@ namespace Project2FA.ViewModels
 #else
     public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync
 #endif
-
     {
         public ObservableCollection<TwoFACodeModel> SearchAccountCollection { get; } = new ObservableCollection<TwoFACodeModel>();
         private DispatcherTimer _dispatcherTOTPTimer;
@@ -168,7 +167,7 @@ namespace Project2FA.ViewModels
             });
             Messenger.Register<AccountCodePageViewModel, FilteringChangedMessage>(this, (r, m) =>
             {
-                SetSuggestionList(string.Empty);
+                SetSuggestionList(string.Empty, false);
             });
             //TODO only for Android and iOS
 #if !WINDOWS_UWP
@@ -192,15 +191,15 @@ namespace Project2FA.ViewModels
                 bool isPermissionGranted = await Windows.Extensions.PermissionsHelper.TryGetPermission(new System.Threading.CancellationToken(), Android.Manifest.Permission.Camera);
                 if (isPermissionGranted)
                 {
-                    await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
+                    await NavigationService.NavigateAsync(nameof(CameraPage));
                 }
             }
             else
             {
-                await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
+                await NavigationService.NavigateAsync(nameof(CameraPage));
             }
 #else
-            await NavigationService.NavigateAsync(nameof(AddAccountCameraPage));
+            await NavigationService.NavigateAsync(nameof(CameraPage));
 #endif
         }
 #endif
@@ -606,7 +605,7 @@ namespace Project2FA.ViewModels
         }
 
 
-        public void SetSuggestionList(string searchText)
+        public void SetSuggestionList(string searchText, bool showpoup)
         {
             if (string.IsNullOrWhiteSpace(searchText) == false)
             {
@@ -616,7 +615,10 @@ namespace Project2FA.ViewModels
                     var listSuggestion = TwoFADataService.Collection.Where(x => x.Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase)).ToList();
                     if (listSuggestion.Count == 0)
                     {
-                        listSuggestion.Add(new TwoFACodeModel { Label = Strings.Resources.AccountCodePageSearchNotFound });
+                        if (showpoup)
+                        {
+                            listSuggestion.Add(new TwoFACodeModel { Label = Strings.Resources.AccountCodePageSearchNotFound });
+                        }
                     }
                     //else
                     //{
@@ -657,7 +659,11 @@ namespace Project2FA.ViewModels
                         {
                             TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase);
                             // add filtered collection to suggestion list
-                            SearchAccountCollection.AddRange(listSuggestion, true);
+                            if (showpoup)
+                            {
+                                SearchAccountCollection.AddRange(listSuggestion, true);
+                            }
+
                         }
                     }
                     // no categories set
@@ -665,7 +671,10 @@ namespace Project2FA.ViewModels
                     {
                         TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase);
                         // add filtered collection to suggestion list
-                        SearchAccountCollection.AddRange(listSuggestion, true);
+                        if (showpoup)
+                        {
+                            SearchAccountCollection.AddRange(listSuggestion, true);
+                        }
                     }
 
 

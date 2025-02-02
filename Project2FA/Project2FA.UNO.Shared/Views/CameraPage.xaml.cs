@@ -17,16 +17,16 @@ using Project2FA.ViewModels;
 namespace Project2FA.UNO.Views
 {
 
-	public sealed partial class AddAccountCameraPage : Page
+	public sealed partial class CameraPage : Page
 	{
-		public AddAccountCameraPageViewModel ViewModel => DataContext as AddAccountCameraPageViewModel;
-        public AddAccountCameraPage()
+		public CameraPageViewModel ViewModel => DataContext as CameraPageViewModel;
+        public CameraPage()
 		{
 			this.InitializeComponent();
-            this.Loaded += AddAccountCameraPage_Loaded;
+            this.Loaded += CameraPage_Loaded;
 		}
 
-        private void AddAccountCameraPage_Loaded(object sender, RoutedEventArgs e)
+        private void CameraPage_Loaded(object sender, RoutedEventArgs e)
         {
             
         }

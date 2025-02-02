@@ -29,9 +29,6 @@ namespace Project2FA.ViewModels
     /// </summary>
     public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
-        public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
-
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -67,49 +64,7 @@ namespace Project2FA.ViewModels
             }
         }
 
-        public Task<bool> SearchAccountFonts(string senderText)
-        {
-            if (string.IsNullOrEmpty(senderText) == false && senderText.Length >= 2 && senderText != Strings.Resources.AccountCodePageSearchNotFound)
-            {
-                var tempList = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(senderText, System.StringComparison.OrdinalIgnoreCase)).ToList();
-                FontIdentifikationCollection.AddRange(tempList, true);
-                try
-                {
-                    if (FontIdentifikationCollection.Count == 0)
-                    {
-                        FontIdentifikationCollection.Add(new FontIdentifikationModel { Name = Strings.Resources.AccountCodePageSearchNotFound });
-                        return Task.FromResult(true);
-                    }
-                    return Task.FromResult(true);
-                }
-                catch (System.Exception)
-                {
-                    FontIdentifikationCollection.Clear();
-                    return Task.FromResult(false);
-                }
-            }
-            else
-            {
-                FontIdentifikationCollection.Clear();
-                return Task.FromResult(false);
-            }
-        }
 
-        public bool NoCategoriesExists
-        {
-            get
-            {
-                return DataService.Instance.GlobalCategories.Count == 0;
-            }
-        }
-
-        public bool CategoriesExists
-        {
-            get
-            {
-                return DataService.Instance.GlobalCategories.Count > 0;
-            }
-        }
 #if WINDOWS_UWP
         public bool IsProVersion
         {

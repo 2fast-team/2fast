@@ -37,16 +37,15 @@
 
             <DataTemplate x:Key="ShimmerTemplate">
                 <UserControl
-        x:Name="Root" 
-        MaxWidth="660"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch"
-        HorizontalContentAlignment="Stretch"
-        VerticalContentAlignment="Stretch" >
+                    x:Name="Root" 
+                    MaxWidth="660"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
                     <Grid 
-            HorizontalAlignment="Stretch"
-            CornerRadius="{ThemeResource ControlCornerRadius}"
-            >
+                    HorizontalAlignment="Stretch"
+                    CornerRadius="{ThemeResource ControlCornerRadius}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
@@ -60,57 +59,57 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.RowSpan="3" >
+                        <!--<Grid Grid.RowSpan="3" >
 
-                        </Grid>
+                        </Grid>-->
 
                         <unocontrols:Shimmer 
-            Height="48"
-            Width="48"
-            CornerRadius="96"
-            Margin="15,10,20,0"
-            Grid.Column="1"
-            Grid.Row="0"
-            Grid.RowSpan="2">
+                            Height="48"
+                            Width="48"
+                            CornerRadius="96"
+                            Margin="15,10,20,0"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="2">
                         </unocontrols:Shimmer>
 
 
                         <RelativePanel 
-                Grid.Column="2" 
-                Grid.RowSpan="2" 
-                Grid.ColumnSpan="2"
-                Margin="0,0,0,8">
+                            Grid.Column="2" 
+                            Grid.RowSpan="2" 
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,8">
 
                             <unocontrols:Shimmer 
-                x:Name="AccountName" 
-                Width="200"
-                Height="18"
-                Margin="0,10,10,0" />
+                                x:Name="AccountName" 
+                                Width="200"
+                                Height="18"
+                                Margin="0,10,10,0" />
 
                             <unocontrols:Shimmer 
-                x:Name="IssuerName" 
-                Width="200"
-                Height="18"
-                Margin="0,10,10,0" />
+                                x:Name="IssuerName" 
+                                Width="200"
+                                Height="18"
+                                Margin="0,10,10,0" />
                         </RelativePanel>
 
                         <StackPanel
-                Orientation="Horizontal"
-                Grid.Row="3"
-                Grid.Column="2"
-                Margin="0,0,0,4">
+                            Orientation="Horizontal"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="0,0,0,4">
 
                             <unocontrols:Shimmer Width="120"  />
 
                             <unocontrols:Shimmer 
-                Width="48"
-                Height="32" 
-                Margin="8,0,4,0"/>
+                                Width="48"
+                                Height="32" 
+                                Margin="8,0,4,0"/>
 
                             <unocontrols:Shimmer 
-                Width="48"
-                Height="32" 
-                Margin="8,0,4,0"/>
+                                Width="48"
+                                Height="32" 
+                                Margin="8,0,4,0"/>
 
                         </StackPanel>
 
@@ -151,13 +150,13 @@
                         <ColumnDefinition Width="30" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <!--<FontIcon
+                    <FontIcon
                         FontSize="16"
                         Margin="4,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource SimpleIcons}"
-                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>-->
+                        Glyph="{x:Bind AccountIconName, Mode=OneWay, Converter={StaticResource FontIconNameToGlyphConverter}}"/>
                     <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
@@ -789,23 +788,28 @@
         </utu:NavigationBar>
 
         <StackPanel Grid.Row="1">
-            <AutoSuggestBox 
-            x:Name="MobileAutoSuggestBox"
-            Grid.Row="1"
-            Height="48"
-            QueryIcon="Find"
-            ItemTemplate="{StaticResource SuggestBoxDataTemplate}"
-            Text="{x:Bind ViewModel.SearchedAccountLabel,Mode=TwoWay}"
-            Visibility="{x:Bind ViewModel.ShellViewModel.IsMobileSearchActive, Mode=OneWay}"
-            VerticalAlignment="Center"
-            PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
-            TextChanged="AutoSuggestBox_TextChanged" 
-            VerticalContentAlignment="Center"
-            SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
-            UpdateTextOnSelect="False"
-            TextMemberPath="Name"
-            GotFocus="AutoSuggestBox_GotFocus"
-            Margin="4,0,4,4" >
+            <AutoSuggestBox
+                x:Name="MobileAutoSuggestBox"
+                Height="40"
+                VerticalAlignment="Center"
+                Text="{x:Bind ViewModel.SearchedAccountLabel,Mode=TwoWay}"
+                Visibility="{x:Bind ViewModel.ShellViewModel.IsMobileSearchActive, Mode=OneWay}"
+                ItemsSource="{x:Bind ViewModel.SearchAccountCollection,Mode=OneWay}"
+                PlaceholderText="{x:Bind strings:Resources.AccountCodePageAutoSuggestBoxPlaceholder}" 
+                ItemTemplate="{StaticResource SuggestBoxDataTemplate}"
+                ItemContainerStyle="{StaticResource AutoSuggestBoxItemContainerStyle}"
+                MaxSuggestionListHeight="120"
+                TextChanged="AutoSuggestBox_TextChanged" 
+                VerticalContentAlignment="Center"
+                SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                UpdateTextOnSelect="False"
+                TextMemberPath="Name"
+                GotFocus="AutoSuggestBox_GotFocus"
+                AllowFocusOnInteraction="True"
+                Margin="4,0,4,0" >
+                <AutoSuggestBox.QueryIcon>
+                    <FontIcon Glyph="&#xE721;" FontSize="18"/>
+                </AutoSuggestBox.QueryIcon>
             </AutoSuggestBox>
         </StackPanel>
 

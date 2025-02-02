@@ -227,12 +227,11 @@ namespace Project2FA.ViewModels
 
 
 #if ANDROID || IOS
-
-
         private async Task BiometricoLoginCommandTask()
         {
             try
             {
+                IsLoading = true;
                 await BiometryService.ScanBiometry(_cancellationToken);
                 // Authentication Passed
                 var dbHash = await App.Repository.Password.GetAsync();
@@ -240,19 +239,19 @@ namespace Project2FA.ViewModels
                 if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash)))
                 {
                     await ShowLoginError();
+                    IsLoading = false;
                 }
-
             }
             catch (BiometryException biometryException)
             {
-                // TxtAuthenticationStatus.Text = ParseBiometryException(biometryException);
+                IsLoading = false;
+                await LoggingService.LogException(biometryException, SettingsService.Instance.LoggingSetting);
             }
             catch (Exception exc)
             {
-                LoggingService.LogException(exc,SettingsService.Instance.LoggingSetting);
+                IsLoading = false;
+                await LoggingService.LogException(exc,SettingsService.Instance.LoggingSetting);
             }
-           
-
         }
         /// <summary>
         /// Checks and starts biometric login, if possible and desired
@@ -313,7 +312,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
-                LoggingService.LogException(exc,SettingsService.Instance.LoggingSetting);
+                await LoggingService.LogException(exc,SettingsService.Instance.LoggingSetting);
             }
             
         }

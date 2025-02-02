@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Template10.Services.Compression
+namespace Project2FA.UWP.Services.Compression
 {
     public class CompressionService : ICompressionService
     {

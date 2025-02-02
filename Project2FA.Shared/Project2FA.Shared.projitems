@@ -82,7 +82,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BitmapLuminanceSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\SoftwareBitmapLuminanceSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountCodePageViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountCameraPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CameraPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\AddAccountViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\CredentialViewModelBase.cs" />

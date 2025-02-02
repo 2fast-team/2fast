@@ -22,6 +22,8 @@ using UNOversal.Services.Logging;
 using Project2FA.Utils;
 using Newtonsoft.Json;
 using UNOversal.Services.Serialization;
+using UNOversal.Navigation;
+
 
 
 #if WINDOWS_UWP
@@ -46,7 +48,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class FileActivationPageViewModel : CredentialViewModelBase
+    public class FileActivationPageViewModel : CredentialViewModelBase, IInitialize
     {
         private ISecretService SecretService { get; }
         private IFileService FileService { get; }
@@ -190,6 +192,13 @@ namespace Project2FA.ViewModels
 
                 return (false, false);
             }
+        }
+
+        public void Initialize(INavigationParameters parameters)
+        {
+#if ANDROID || IOS
+            App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
+#endif
         }
 
         public string DatafileName

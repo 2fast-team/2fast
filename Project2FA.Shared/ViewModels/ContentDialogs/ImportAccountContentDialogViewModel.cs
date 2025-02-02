@@ -9,7 +9,6 @@ namespace Project2FA.ViewModels
 {
     public class ImportAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitializeAsync
     {
-    
         private IBackupImporterService BackupImporterService { get; }
         public ImportAccountContentDialogViewModel(IBackupImporterService backupImporterService)
         {

@@ -180,6 +180,7 @@ namespace Project2FA.ViewModels
             set
             {
                 TempModel.AccountIconName = value;
+                OnPropertyChanged(nameof(TempModel));
                 OnPropertyChanged(nameof(AccountIconName));
                 CheckInputs();
             }

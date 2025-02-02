@@ -428,11 +428,11 @@ namespace Project2FA.UNO
             containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
 
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
-            //AddAccountCameraPageViewModel
+            // fullscreen pages instead of dialogs
 #if __IOS__ || __ANDROID__
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddAccountCameraPage, AddAccountCameraPageViewModel>();
+            containerRegistry.RegisterForNavigation<CameraPage, CameraPageViewModel>();
 #else
             containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountContentDialog, AddAccountContentDialogViewModel>();

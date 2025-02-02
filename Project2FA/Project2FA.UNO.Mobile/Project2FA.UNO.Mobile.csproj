@@ -84,16 +84,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.5.0" />
-    <PackageReference Include="CommunityToolkit.Labs.WinUI.TokenView" Version="0.1.250103-build.1988" />
+    <PackageReference Include="CommunityToolkit.Labs.WinUI.TokenView" Version="0.1.250129-build.2033" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.250106-build.1380" />
-    <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.250106-build.1380" />
-    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.250106-build.1380" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250106-build.1380" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250106-build.1380" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250106-build.1380" />
-    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250106-build.1380" />
-    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.250106-build.1380" />
+    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.250129-preview2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.250129-preview2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.250129-preview2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250129-preview2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250129-preview2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250129-preview2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250129-preview2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.250129-preview2" />
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="QRCoder" Version="1.6.0" />
     <PackageReference Include="Svg.Skia" Version="2.0.0.4" />
@@ -106,15 +106,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.5.0-dev.88" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.5.0-dev.88" />
-    <PackageReference Include="Uno.WinUI" Version="5.7.0-dev.292" />
-    <PackageReference Include="Uno.WinUI.Lottie" Version="5.7.0-dev.292" />
-	<PackageReference Include="Uno.WinUI.DevServer" Version="5.7.0-dev.292" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.7.0-dev.292" />
+    <PackageReference Include="Uno.Toolkit.Skia.WinUI" Version="6.5.0-dev.94" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Cupertino" Version="6.5.0-dev.94" />
+    <PackageReference Include="Uno.WinUI" Version="5.7.0-dev.383" />
+    <PackageReference Include="Uno.WinUI.Lottie" Version="5.7.0-dev.383" />
+	<PackageReference Include="Uno.WinUI.DevServer" Version="5.7.0-dev.383" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.7.0-dev.383" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
-    <PackageReference Include="Uno.WinUI.Svg" Version="5.7.0-dev.292" />
-    <PackageReference Include="ZXing.Net" Version="0.16.9" />
+    <PackageReference Include="Uno.WinUI.Svg" Version="5.7.0-dev.383" />
+    <PackageReference Include="ZXing.Net" Version="0.16.10" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(TargetFramework)'=='net9.0-ios'">
@@ -158,7 +158,7 @@
   <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.Core\UNOversalTemplate.Core.projitems" Label="Shared" />
   <ItemGroup>
 	<UnoIcon Include="..\..\Project2FA.Shared\Assets\Icons\schluessel.svg" Color="#FF009BC1" ForegroundScale="0.5" />
-	<UnoSplashScreen Include="..\..\Project2FA.Shared\Assets\Splashcreen\splash_screen.svg" ForegroundScale="0.5" BaseSize="128,128" Color="#FF009BC1" />
+	<UnoSplashScreen Include="..\..\Project2FA.Shared\Assets\Splashcreen\splash_screen.svg" ForegroundScale="0.6" BaseSize="128,128" Color="#FF009BC1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BiometryService\src\BiometryService\BiometryService.csproj" />

@@ -15,6 +15,10 @@ using WebDAVClient.Exceptions;
 using UNOversal.Services.Network;
 using Project2FA.Strings;
 using Project2FA.Core.Services.Crypto;
+using UNOversal.Services.Logging;
+using Project2FA.Services;
+
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -69,6 +73,8 @@ namespace Project2FA.ViewModels
 
         private IDialogService DialogService { get; }
 
+        private ILoggingService LoggingService { get; }
+
         //public DatafileViewModelBase(ISecretService secretService, IFileService fileService, IDialogService dialogService)
         //{
         //    SecretService = secretService;
@@ -82,6 +88,7 @@ namespace Project2FA.ViewModels
             SecretService = App.Current.Container.Resolve<ISecretService>();
             FileService = App.Current.Container.Resolve<IFileService>();
             DialogService = App.Current.Container.Resolve<IDialogService>();
+            LoggingService = App.Current.Container.Resolve<ILoggingService>();
             //ErrorsChanged += Model_ErrorsChanged;
         }
 
@@ -255,6 +262,7 @@ namespace Project2FA.ViewModels
                 }
                 catch (ResponseError e)
                 {
+                    await LoggingService.LogException(e, SettingsService.Instance.LoggingSetting);
                     if (e.Message.Equals("The certificate authority is invalid or incorrect"))
                     {
                         //TODO Error Message: The certificate authority is invalid or incorrect
@@ -288,8 +296,9 @@ namespace Project2FA.ViewModels
                         return response;
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    await LoggingService.LogException(e, SettingsService.Instance.LoggingSetting);
                     await ShowServerAddressNotFoundError();
                     return null;
                 }

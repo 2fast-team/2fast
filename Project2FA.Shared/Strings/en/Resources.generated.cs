@@ -1938,6 +1938,17 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region SettingsPageProVersionActivated
+        public static string SettingsPageProVersionActivated
+        {
+            get
+            {
+                return _resourceLoader.GetString("SettingsPageProVersionActivated");
+            }
+        }
+        #endregion
+
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2094,7 +2105,8 @@ namespace Project2FA.Strings{
             AddAccountContentDialogNoCaptureContentError,
             LoginPageIOSBiometricReason,
             FileActivationPageViewModelEmptyDatafile,
-            FileActivationPageViewModelCorruptDatafile
+            FileActivationPageViewModelCorruptDatafile,
+            SettingsPageProVersionActivated
         }
 
         private static ResourceLoader _resourceLoader;

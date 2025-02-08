@@ -1371,4 +1371,7 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
     <value>QR-Code scannen</value>
   </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>Die Pro-Version wurde erfolgreich aktiviert.</value>
+  </data>
 </root>

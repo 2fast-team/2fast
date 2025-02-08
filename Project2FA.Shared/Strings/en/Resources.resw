@@ -1370,4 +1370,7 @@ The application supports an MDM configuration for centralised management of the 
   <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
     <value>Scan QR code</value>
   </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>The Pro version has been successfully activated.</value>
+  </data>
 </root>

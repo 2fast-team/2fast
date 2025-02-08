@@ -15,9 +15,9 @@
     <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="Black"/>
     <!--<SolidColorBrush x:Name="ApplicationContentDialogBackgroundThemeBrush"  Color="#1E1E1E"/>-->
 
-    <SolidColorBrush x:Name="SettingsCardBackground" Color="#32312F"/>
+    <!--<SolidColorBrush x:Name="SettingsCardBackground" Color="#32312F"/>
     <SolidColorBrush x:Name="SettingsCardItemsBackground" Color="#171717"/>
-    <SolidColorBrush x:Name="SettingsCardBorderBrush" Color="#474644"/>
+    <SolidColorBrush x:Name="SettingsCardBorderBrush" Color="#474644"/>-->
 
     <SolidColorBrush x:Name="ApplicationWarnHighlightForegroundBrush" Color="#FFF000"/>
 

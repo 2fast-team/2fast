@@ -630,6 +630,11 @@ IsItemClickEnabled="True">
                                 </SemanticZoom>
                             </Grid>
                         </RelativePanel>
+                        <muxc:InfoBar 
+                        IsOpen="{x:Bind ViewModel.ActivatedProVersion, Mode=OneWay}" 
+                        MaxWidth="520"
+                        Severity="Success"
+                        Title="{x:Bind strings:Resources.SettingsPageProVersionActivated}"/>
                     </Grid>
                 </UserControl>
             </PivotItem>

@@ -111,32 +111,14 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <AppBarButton
+                                        <!--1.3.6 release-->
+                                        <!--<AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             Command="{x:Bind ImportAccountCommand}"
                                             x:Uid="AccoundCodePageImportEntry">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE8B5;"/>
                                             </AppBarButton.Icon>
-                                        </AppBarButton>
-                                        <!--<AppBarButton
-                                            x:Name="ABB_ImportAccount"
-                                            x:Uid="AccoundCodePageImportEntry"
-                                            IsEnabled="False"
-                                            ToolTipService.ToolTip="#todo">
-                                            <AppBarButton.Icon>
-                                                <FontIcon Glyph="&#xE8B5;"/>
-                                            </AppBarButton.Icon>
-                                            <AppBarButton.Flyout>
-                                                <MenuFlyout Placement="Bottom">
-                                                    <MenuFlyoutItem 
-                                                        x:Uid="AccoundCodePageImportDocument"
-                                                        Icon="Document"/>
-                                                    <MenuFlyoutItem
-                                                        x:Uid="AccoundCodePageImportCamera"
-                                                        Icon="Camera"/>
-                                                </MenuFlyout>
-                                            </AppBarButton.Flyout>
                                         </AppBarButton>-->
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
@@ -333,26 +315,14 @@
                                                 </appcontrols:AutoCloseTeachingTip>
                                             </AppBarButton.Resources>
                                         </AppBarButton>
-                                        <AppBarButton
+                                        <!--1.3.6 release-->
+                                        <!--<AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             Command="{x:Bind ImportAccountCommand}"
                                             x:Uid="AccoundCodePageImportEntry">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE8B5;"/>
                                             </AppBarButton.Icon>
-                                        </AppBarButton>
-                                        <!--<AppBarButton
-                                            x:Name="ABB_ImportAccount"
-                                            x:Uid="AccoundCodePageImportEntry"
-                                            Visibility="{x:Bind ShowAvailableProFeatures}"
-                                            Command="{x:Bind ShowProFeatureCommand}"
-                                            ToolTipService.ToolTip="{x:Bind strings:Resources.AccountCodePageProFeatureToolTip, FallbackValue=''}">
-                                            <AppBarButton.Content>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <SymbolIcon Symbol="Import" Margin="0,0, 4,0"/>
-                                                    <FontIcon Glyph="&#xE946;"/>
-                                                </StackPanel>
-                                            </AppBarButton.Content>
                                         </AppBarButton>-->
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>

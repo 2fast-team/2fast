@@ -65,6 +65,9 @@ namespace Project2FA.ViewModels
 
         public ILoggingService LoggingService { get; }
 
+#if WINDOWS_UWP
+        public IPurchaseAddOnService PurchaseAddOnService { get; }
+#endif
         public ICommand RateAppCommand { get; }
         public ICommand SendMailCommand { get; }
         public ICommand NavigateBackCommand { get; }
@@ -73,6 +76,7 @@ namespace Project2FA.ViewModels
         public ICommand ManageSubscriptionsCommand { get; }
 
         private int _selectedItem;
+        private bool _activatedProVersion;
         public SettingPageViewModel(IDialogService dialogService, 
             ISecretService secretService,
             INavigationService navigationService,
@@ -87,6 +91,7 @@ namespace Project2FA.ViewModels
             DatafilePartViewModel = new DatafilePartViewModel(dialogService, secretService);
 #if WINDOWS_UWP
             AboutPartViewModel  = new AboutPartViewModel(marketplaceService,loggingService,serializationService);
+            PurchaseAddOnService = new PurchaseAddOnService(loggingService);
 #else
             AboutPartViewModel  = new AboutPartViewModel(loggingService,serializationService);
 #endif
@@ -109,18 +114,19 @@ namespace Project2FA.ViewModels
                 var result = await dialogService.ShowDialogAsync(inAppPaymentDialog, new DialogParameters());
                 if (result == ContentDialogResult.Primary)
                 {
-                    var service = App.Current.Container.Resolve<IPurchaseAddOnService>();
                     var selectedPurchaseItem = inAppPaymentDialog.ViewModel.Items.Where(x => x.IsChecked == true).FirstOrDefault();
-                    service.Initialize(selectedPurchaseItem.StoreId);
-
-                    var purchaseInfo = await service.PromptUserToPurchaseAsync();
-                    (bool isActive, StoreLicense storeLicense) = await service.SetupPurchaseAddOnInfoAsync();
-                    if (purchaseInfo && isActive)
+                    PurchaseAddOnService.Initialize(selectedPurchaseItem.StoreId);
+                    (bool isActive, StoreLicense storeLicense) = await PurchaseAddOnService.SetupPurchaseAddOnInfoAsync();
+                    var purchaseInfo = await PurchaseAddOnService.PromptUserToPurchaseAsync();
+                    
+                    if (purchaseInfo)
                     {
+                        (bool newisActive, StoreLicense newstoreLicense) = await PurchaseAddOnService.SetupPurchaseAddOnInfoAsync();
                         SettingsService.Instance.IsProVersion = true;
-                        SettingsService.Instance.PurchasedStoreId = storeLicense.SkuStoreId;
+                        ActivatedProVersion = true;
+                        SettingsService.Instance.PurchasedStoreId = newstoreLicense.SkuStoreId;
                         SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
-                        SettingsService.Instance.NextCheckedInPurchaseAddon = storeLicense.ExpirationDate;
+                        SettingsService.Instance.NextCheckedInPurchaseAddon = newstoreLicense.ExpirationDate;
                     }
                 }
             });
@@ -179,7 +185,9 @@ namespace Project2FA.ViewModels
             get => _selectedItem;
             set => SetProperty(ref _selectedItem, value);
         }
-        
+
+        public bool ActivatedProVersion { get => _activatedProVersion; set => SetProperty(ref _activatedProVersion, value); }
+
     }
 
     /// <summary>

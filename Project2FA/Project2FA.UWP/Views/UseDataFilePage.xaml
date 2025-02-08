@@ -363,7 +363,9 @@
                             <lottie:LottieVisualSource  
                         UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
                         </muxc:AnimatedVisualPlayer>
-                        <TextBlock x:Uid="UseDatafileContentDialogPasswordError"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            x:Uid="UseDatafileContentDialogPasswordError"/>
                         <Button 
                     x:Uid="BTNTryAgain" 
                     Margin="0,10,0,0" 
@@ -390,7 +392,9 @@
                             <lottie:LottieVisualSource  
                                     UriSource="ms-appx:///Assets/AnimatedVisuals/3932-error-cross.json"/>
                         </muxc:AnimatedVisualPlayer>
-                        <TextBlock x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            x:Uid="UseDatafileContentDialogWebDAVPasswordError"/>
                         <Button 
                     x:Uid="BTNTryAgain" 
                     Margin="0,10,0,0" 

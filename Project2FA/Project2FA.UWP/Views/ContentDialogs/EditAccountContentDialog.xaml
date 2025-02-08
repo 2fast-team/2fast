@@ -80,7 +80,6 @@
                         <AutoSuggestBox 
                             Header="~AddAccountContentDialogSuggestionBox.Header" 
                             x:Uid="AddAccountContentDialogSuggestionBox"
-                            Width="200"
                             QueryIcon="Find"
                             Text="{x:Bind ViewModel.TempModel.AccountIconName,Mode=OneWay}"
                             VerticalAlignment="Center"

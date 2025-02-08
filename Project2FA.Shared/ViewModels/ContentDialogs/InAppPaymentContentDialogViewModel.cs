@@ -117,11 +117,11 @@ namespace Project2FA.ViewModels
             bool inAppSubscriptionMonthCanSubscribe = !IsActiveMonthSubscription && infoMonth == null;
             monthlySupportModel.IsEnabled = inAppSubscriptionMonthCanSubscribe;
             monthlySupportModel.IsChecked = IsActiveMonthSubscription;
-            
+
 
             PurchaseService.Initialize(Constants.OneYearSubscriptionId);
             (bool IsActiveYearSubscription, StoreLicense infoYear) = await PurchaseService.SetupPurchaseAddOnInfoAsync();
-            bool inAppSubscriptionYearCanSubscribe = !IsActiveMonthSubscription && infoYear == null;
+            bool inAppSubscriptionYearCanSubscribe = !IsActiveYearSubscription && infoYear == null;
             if (IsActiveYearSubscription)
             {
                 SelectedItem = yearSubscriptionModel;

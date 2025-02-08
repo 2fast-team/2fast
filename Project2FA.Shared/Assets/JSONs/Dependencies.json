@@ -7,6 +7,13 @@
     "StringLicenseURL": "https://github.com/bcgit/bc-csharp/blob/master/LICENSE.md"
   },
   {
+    "Name": "QRCoder",
+    "Authors": "Raffael Herrmann",
+    "LicenseName": "MIT",
+    "CategoryUid": "Package",
+    "StringLicenseURL": "https://github.com/codebude/QRCoder/blob/master/LICENSE.txt"
+  },
+  {
     "Name": "CommunityToolkit.*",
     "LicenseName": "MIT",
     "Authors": "Microsoft",

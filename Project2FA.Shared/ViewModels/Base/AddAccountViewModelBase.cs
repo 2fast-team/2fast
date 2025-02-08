@@ -17,9 +17,7 @@ using Windows.Graphics.Imaging;
 using Windows.UI.Popups;
 using Project2FA.Core.ProtoModels;
 using OtpNet;
-using ZXing.QrCode;
 using ZXing;
-using ZXing.Common;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Windows.Media.Core;
@@ -32,6 +30,7 @@ using CommunityToolkit.WinUI.Helpers;
 using UNOversal.Ioc;
 using UNOversal.Services.Logging;
 using Project2FA.Utils;
+using Windows.UI.Core;
 
 
 
@@ -115,7 +114,9 @@ namespace Project2FA.ViewModels
             {
                 PivotViewSelectionName = "NormalInputAccount";
 
+#if WINDOWS_UWP
                 CleanUpCamera();
+#endif
 
                 SelectedPivotIndex = 1;
                 ManualInput = true;
@@ -143,7 +144,9 @@ namespace Project2FA.ViewModels
 
             SecondayButtonCommand = new AsyncRelayCommand(SecondayButtonCommandTask);
 
+#if WINDOWS_UWP
             ReloadCameraCommand = new AsyncRelayCommand(InitializeCameraAsync);
+#endif
 
             LoggingService = App.Current.Container.Resolve<ILoggingService>();
         }
@@ -163,10 +166,11 @@ namespace Project2FA.ViewModels
 
         private async Task CameraScanCommandTask()
         {
-            _cameraHelper = new CameraHelper();
 #if WINDOWS_UWP
+            _cameraHelper = new CameraHelper();
+
             CameraSourceGroup.AddRange(await CameraHelper.GetFrameSourceGroupsAsync());
-#endif
+
             PivotViewSelectionName = "CameraInputAccount";
             if (CameraSourceGroup.Count > 0)
             {
@@ -176,11 +180,14 @@ namespace Project2FA.ViewModels
             {
                 NoCameraFound = true;
             }
+#endif
         }
 
         private async Task PrimaryButtonCommandTask()
         {
+#if WINDOWS_UWP
             await CleanUpCamera();
+#endif
 
             if (OTPList.Count > 0)
             {
@@ -205,7 +212,9 @@ namespace Project2FA.ViewModels
 
         private async Task SecondayButtonCommandTask()
         {
+#if WINDOWS_UWP
             await CleanUpCamera();
+#endif
         }
 
 #if WINDOWS_UWP
@@ -310,10 +319,10 @@ namespace Project2FA.ViewModels
 
                 StopWindowScreenCapture();
 
-                var luminanceSource = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(softwareBitmap);
+                var luminanceSource = new SoftwareBitmapLuminanceSource(softwareBitmap);
                 if (luminanceSource != null)
                 {
-                    var barcodeReader = new Project2FA.ZXing.BarcodeReader
+                    var barcodeReader = new BarcodeReader
                     {
                         AutoRotate = true,
                         Options = { TryHarder = true }
@@ -323,7 +332,6 @@ namespace Project2FA.ViewModels
                     {
                         if (decodedStr.Text.StartsWith("otpauth") || decodedStr.Text.StartsWith("otpauth-migration"))
                         {
-
                             _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
                             await ReadAuthenticationFromString();
                         }
@@ -366,83 +374,6 @@ namespace Project2FA.ViewModels
                 --Seconds;
             }
         }
-
-#if WINDOWS_UWP
-        /// <summary>
-        /// Read the image (QR-code) from the clipboard
-        /// </summary>
-        private async Task ReadQRCodeFromClipboard()
-        {
-            DataPackageView dataPackageView = Clipboard.GetContent();
-            if (dataPackageView.Contains(StandardDataFormats.Bitmap))
-            {
-                IRandomAccessStreamReference imageReceived = null;
-                try
-                {
-                    imageReceived = await dataPackageView.GetBitmapAsync();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log(ex.Message, Category.Exception, Priority.Medium);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (imageReceived != null)
-                        {
-                            using IRandomAccessStreamWithContentType imageStream = await imageReceived.OpenReadAsync();
-                            BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(imageStream);
-                            SoftwareBitmap softwareBitmap = await bitmapDecoder.GetSoftwareBitmapAsync();
-
-                            string result = ReadQRCodeFromBitmap(softwareBitmap);
-                            _qrCodeStr = HttpUtility.UrlDecode(result);
-                            if (!string.IsNullOrEmpty(_qrCodeStr))
-                            {
-                                //clear the clipboard, if the image is read as TOTP
-                                try
-                                {
-                                    Clipboard.Clear();
-                                }
-                                catch (Exception exc)
-                                {
-                                    TrackingManager.TrackExceptionCatched("Clipboard.Clear: ", exc);
-                                }
-                                await ReadAuthenticationFromString();
-                            }
-                            else
-                            {
-                                MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
-                                await dialog.ShowAsync();
-                            }
-                        }
-                        else
-                        {
-                            //TODO add error: empty Clipboard?
-                            //ContentDialog dialog = new ContentDialog();
-                            //dialog.Title = Strings.Resources.ErrorHandle;
-                            //dialog.Content = Strings.Resources.ErrorClipboardTask;
-                            //dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
-                            //dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
-                            //dialog.PrimaryButtonCommand = new AsyncRelayCommand(async () =>
-                            //{
-                            //    await ReadQRCodeFromClipboard();
-                            //});
-                            //dialog.SecondaryButtonText = Strings.Resources.ButtonTextCancel;
-                            //await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
-                        }
-                    }
-                    catch (Exception exc)
-                    {
-
-                        TrackingManager.TrackExceptionCatched(nameof(ReadQRCodeFromClipboard), exc);
-
-                        // TODO error by processing the image
-                    }
-                }
-            }
-        }
-#endif
 
         private async Task ReadAuthenticationFromString()
         {
@@ -637,42 +568,7 @@ namespace Project2FA.ViewModels
                 }
             }
 
-
             return true;
-        }
-
-        public Task CheckLabelForIcon()
-        {
-            var transformName = Model.Label.ToLower();
-            transformName = transformName.Replace(" ", string.Empty);
-            transformName = transformName.Replace("-", string.Empty);
-
-            try
-            {
-                if (DataService.Instance.FontIconCollection.Where(x => x.Name == transformName).Any())
-                {
-                    Model.AccountIconName = transformName;
-                    AccountIconName = transformName;
-                }
-                else
-                {
-                    // fallback: check if one IconNameCollectionModel name fits into the label name
-
-                    var list = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(transformName));
-                    if (list.Count() == 1)
-                    {
-                        Model.AccountIconName = list.FirstOrDefault().Name;
-                        AccountIconName = list.FirstOrDefault().Name;
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-#if WINDOWS_UWP
-                TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
-#endif
-            }
-            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -690,33 +586,12 @@ namespace Project2FA.ViewModels
             }
         }
 
+        #region FontIconRegion
         /// <summary>
-        /// Read QR code from writeble bitmap  
+        /// Search the account fonts for the sender text
         /// </summary>
-        /// <param name="bitmap"></param>
-        /// <returns>decoded result</returns>
-        private string ReadQRCodeFromBitmap(SoftwareBitmap bitmap)
-        {
-            try
-            {
-                QRCodeReader qrReader = new QRCodeReader();
-                LuminanceSource luminance = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(bitmap);
-                BinaryBitmap bbmap = new BinaryBitmap(new HybridBinarizer(luminance));
-                Result result = qrReader.decode(bbmap);
-
-                return result == null ? string.Empty : result.Text;
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex.Message, Category.Exception, Priority.Medium);
-#if WINDOWS_UWP
-                TrackingManager.TrackException(nameof(ReadQRCodeFromBitmap), ex);
-#endif
-                return string.Empty;
-            }
-        }
-
+        /// <param name="senderText"></param>
+        /// <returns></returns>
         public Task<bool> SearchAccountFonts(string senderText)
         {
             if (string.IsNullOrEmpty(senderText) == false && senderText.Length >= 2 && senderText != Strings.Resources.AccountCodePageSearchNotFound)
@@ -745,11 +620,50 @@ namespace Project2FA.ViewModels
             }
         }
 
+        /// <summary>
+        /// Search the label for an icon in font collection
+        /// </summary>
+        /// <returns></returns>
+        public Task CheckLabelForIcon()
+        {
+            var transformName = Model.Label.ToLower();
+            transformName = transformName.Replace(" ", string.Empty);
+            transformName = transformName.Replace("-", string.Empty);
+
+            try
+            {
+                if (DataService.Instance.FontIconCollection.Where(x => x.Name == transformName).Any())
+                {
+                    Model.AccountIconName = transformName;
+                    AccountIconName = transformName;
+                }
+                else
+                {
+                    // fallback: check if one IconNameCollectionModel name fits into the label name
+
+                    var list = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(transformName));
+                    if (list.Count() == 1)
+                    {
+                        Model.AccountIconName = list.FirstOrDefault().Name;
+                        AccountIconName = list.FirstOrDefault().Name;
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+#if WINDOWS_UWP
+                TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
+#endif
+            }
+            return Task.CompletedTask;
+        }
+        #endregion
 
 
 
         #region CameraRegion
-
+#if WINDOWS_UWP
         private void SetMediaPlayerSource()
         {
             try
@@ -763,21 +677,24 @@ namespace Project2FA.ViewModels
                         {
                             AutoPlay = true
                         };
-#if WINDOWS_UWP
+
                         _mediaPlayer.RealTimePlayback = true;
-#endif
                     }
 
                     _mediaPlayer.Source = MediaSource.CreateFromMediaFrameSource(frameSource);
                     MediaPlayerElementControl.SetMediaPlayer(_mediaPlayer);
                 }
             }
-            catch (Exception ex)
+            catch (Exception exc)
             {
-                //InvokePreviewFailed(ex.Message);
+                LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
             }
         }
 
+        /// <summary>
+        /// Clean up the camera
+        /// </summary>
+        /// <returns></returns>
         public async Task CleanUpCamera()
         {
             if (_cameraHelper != null)
@@ -789,6 +706,11 @@ namespace Project2FA.ViewModels
                 _cameraHelper = null;
             }
         }
+
+        /// <summary>
+        /// Initialize the camera
+        /// </summary>
+        /// <returns></returns>
         private async Task InitializeCameraAsync()
         {
             if (CameraSourceGroup[SelectedCameraSource] is MediaFrameSourceGroup selectedGroup)
@@ -824,6 +746,11 @@ namespace Project2FA.ViewModels
             }
         }
 
+        /// <summary>
+        /// Analyse the frame for QR codes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void CameraHelper_FrameArrived(object sender, FrameEventArgs e)
         {
             try
@@ -833,36 +760,61 @@ namespace Project2FA.ViewModels
                 // analyse only every _vidioFrameDivider value
                 if (_videoFrameCounter % _vidioFrameDivider == 0 && SelectedPivotIndex == 1)
                 {
-                    var luminanceSource = new Project2FA.ZXing.SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
-                    if (luminanceSource != null)
+                    await App.ShellPageInstance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                     {
-                        var barcodeReader = new Project2FA.ZXing.BarcodeReader
+                        var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
+                        if (luminanceSource != null)
                         {
-                            AutoRotate = true,
-                            Options = { TryHarder = true }
-                        };
-                        var decodedStr = barcodeReader.Decode(luminanceSource);
-                        if (decodedStr != null)
-                        {
-                            if (decodedStr.Text.StartsWith("otpauth"))
+                            var barcodeReader = new BarcodeReader
                             {
-                                await CleanUpCamera();
-                                _qrCodeStr = decodedStr.Text;
-                                await ReadAuthenticationFromString();
+                                AutoRotate = true,
+                                Options = { TryHarder = true }
+                            };
+                            var decodedStr = barcodeReader.Decode(luminanceSource);
+                            if (decodedStr != null)
+                            {
+                                if (decodedStr.Text.StartsWith("otpauth") || decodedStr.Text.StartsWith("otpauth-migration"))
+                                {
+                                    await CleanUpCamera();
+                                    _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
+                                    await ReadAuthenticationFromString();
+                                }
                             }
                         }
-                    }
+                    });
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                // ignore errors
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
             }
             finally
             {
                 _videoFrameCounter++;
             }
         }
+
+        //private async Task<string> ReadQRCodeFromSoftwareBitmap(SoftwareBitmap softwareBitmap)
+        //{
+        //    try
+        //    {
+        //        var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
+        //        if (luminanceSource != null)
+        //        {
+        //            var barcodeReader = new BarcodeReader
+        //            {
+        //                AutoRotate = true,
+        //                Options = { TryHarder = true }
+        //            };
+        //            var decodedStr = barcodeReader.Decode(luminanceSource);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
 
 
         //async Task SetupCameraAutoFocus()
@@ -903,7 +855,8 @@ namespace Project2FA.ViewModels
         //        }
         //    }
         //}
-#endregion
+#endif
+        #endregion
 
 
         //private void Validation_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
@@ -911,7 +864,7 @@ namespace Project2FA.ViewModels
         //    OnPropertyChanged(nameof(Errors)); // Update Errors on every Error change, so I can bind to it.
         //}
 
-#region GetSet
+        #region GetSet
 
         //public List<(string name, string message)> Errors
         //{
@@ -1121,7 +1074,9 @@ namespace Project2FA.ViewModels
             {
                 if (SetProperty(ref _selectedCameraSource, value))
                 {
+#if WINDOWS_UWP
                     InitializeCameraAsync();
+#endif
                 }
             }
         }
@@ -1148,21 +1103,9 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _cameraSuccessfullyLoaded, value);
         }
 
-        public bool NoCategoriesExists
-        {
-            get
-            {
-                return DataService.Instance.GlobalCategories.Count == 0;
-            }
-        }
+        public bool NoCategoriesExists => DataService.Instance.GlobalCategories.Count == 0;
 
-        public bool CategoriesExists
-        {
-            get
-            {
-                return DataService.Instance.GlobalCategories.Count > 0;
-            }
-        }
+        public bool CategoriesExists => DataService.Instance.GlobalCategories.Count > 0;
         #endregion
 
         public void Dispose()

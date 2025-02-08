@@ -112,7 +112,7 @@ namespace Project2FA.ViewModels
                     var service = App.Current.Container.Resolve<IPurchaseAddOnService>();
                     var selectedPurchaseItem = inAppPaymentDialog.ViewModel.Items.Where(x => x.IsChecked == true).FirstOrDefault();
                     service.Initialize(selectedPurchaseItem.StoreId);
-                    //
+
                     var purchaseInfo = await service.PromptUserToPurchaseAsync();
                     (bool isActive, StoreLicense storeLicense) = await service.SetupPurchaseAddOnInfoAsync();
                     if (purchaseInfo && isActive)

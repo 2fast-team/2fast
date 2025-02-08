@@ -78,9 +78,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\JSONUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\WindowDisplayInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\WindowDisplayMode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BarcodeReader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\BitmapLuminanceSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\ZXing\SoftwareBitmapLuminanceSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AccountCodePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CameraPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddAccountPageViewModel.cs" />

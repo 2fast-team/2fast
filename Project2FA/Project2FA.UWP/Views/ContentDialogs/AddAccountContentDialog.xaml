@@ -265,7 +265,6 @@
                                     <AutoSuggestBox 
                                         Header="~AddAccountContentDialogSuggestionBox.Header" 
                                         x:Uid="AddAccountContentDialogSuggestionBox"
-                                        Width="200"
                                         QueryIcon="Find"
                                         Text="{x:Bind ViewModel.AccountIconName,Mode=OneWay}"
                                         VerticalAlignment="Center"
@@ -608,7 +607,10 @@
                         </StackPanel>
                     </Border>
                     <MediaPlayerElement 
+                        
         x:Name="CameraPlayerElement" 
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
         Visibility="{x:Bind ViewModel.CameraSuccessfullyLoaded, Mode=OneWay}"
         Grid.Row="1">
                     </MediaPlayerElement>

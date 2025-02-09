@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -720,7 +719,8 @@ Sincronize a hora nas configurações.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Atualização de bibliotecas de terceiros
-- A tradução para o idioma espanhol foi atualizada por um falante nativo</value>
+- Correções de bugs e registro de erros mais detalhado
+- Extensão das configurações para novas contas no modo especialista</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1366,5 +1366,11 @@ O aplicativo suporta uma configuração de MDM para o gerenciamento centralizado
   </data>
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Login com biometria</value>
+  </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>Escanear o código QR</value>
+  </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>A versão Pro foi ativada com sucesso.</value>
   </data>
 </root>

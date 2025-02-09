@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -720,7 +719,8 @@ Synkronoi aika asetuksissa.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmannen osapuolen kirjastojen päivitys
-- Äidinkielenään puhuva henkilö on päivittänyt espanjan kielen käännöksen</value>
+- Virheiden korjaukset ja yksityiskohtaisempi virheiden kirjaaminen
+- Asiantuntijatilassa olevien uusien tilien asetusten laajentaminen</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1366,5 +1366,11 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
   </data>
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Kirjaudu sisään biometristen tunnisteiden avulla</value>
+  </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>Skannaa QR-koodi</value>
+  </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>Pro-versio on onnistuneesti aktivoitu.</value>
   </data>
 </root>

@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -719,7 +718,8 @@ Palun sünkroonige kellaaeg seadetes.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmanda osapoole raamatukogude ajakohastamine
-- Hispaania keele tõlge on uuendatud emakeeleõpetaja poolt</value>
+- Vigade parandamine ja üksikasjalikum vigade logimine
+- Uute kontode seadete laiendamine eksperdirežiimis</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1364,5 +1364,11 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
   </data>
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Biomeetriline sisselogimine</value>
+  </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>Skaneeri QR-koodi</value>
+  </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>Pro-versioon on edukalt aktiveeritud.</value>
   </data>
 </root>

@@ -342,7 +342,6 @@ namespace Project2FA.ViewModels
                     WebDAVDatafilePropertiesEnabled = true;
                     WebDAVDatafilePropertiesExpanded = true;
 
-
                     var dialog = new WebViewDatafileContentDialog();
                     var param = new DialogParameters();
                     param.Add("CreateDatafileCase", createDatafileCase);

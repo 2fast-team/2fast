@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -791,7 +790,8 @@ Por favor, sincroniza la hora en los ajustes.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Actualización de bibliotecas de terceros
-- La traducción al español ha sido actualizada por un hablante nativo</value>
+- Corrección de errores y registro de errores más detallado
+- Ampliación de la configuración de nuevas cuentas en modo experto</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Novedades y cambios</value>
@@ -1514,5 +1514,11 @@ La aplicación soporta configuración MDM para la gestión centralizada en empre
   </data>
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Inicio de sesión con datos biométricos</value>
+  </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>Escanear código QR</value>
+  </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>La versión Pro se ha activado correctamente.</value>
   </data>
 </root>

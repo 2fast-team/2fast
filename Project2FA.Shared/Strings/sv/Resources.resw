@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -720,7 +719,8 @@ Vänligen synkronisera tiden i inställningarna.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Uppdatering av tredjepartsbibliotek
-- Översättningen till spanska har uppdaterats av en person med spanska som modersmål</value>
+- Buggfixar och mer detaljerad felloggning
+- Utökning av inställningarna för nya konton i expertläget</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1366,5 +1366,11 @@ Applikationen stöder en MDM-konfiguration för centraliserad hantering av appli
   </data>
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Logga in med biometri</value>
+  </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>Skanna QR-kod</value>
+  </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>Pro-versionen har aktiverats framgångsrikt.</value>
   </data>
 </root>

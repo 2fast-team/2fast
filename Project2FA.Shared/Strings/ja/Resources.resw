@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -721,8 +720,9 @@
     <value>NTPサーバーを使用して、システムの正しい時刻をチェックすることができる。時刻にそれ以上のずれがある場合、アカウントのコード作成はもはや正しくない。30秒以上のずれがある場合、通知が表示され、NTPサーバーの時刻でコードの作成が行われる。</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- サードパーティ製ライブラリの更新
-- スペイン語の翻訳がネイティブスピーカーによって更新されました。</value>
+    <value>- サードパーティライブラリの更新
+- バグ修正とより詳細なエラーログ
+- エキスパートモードでの新規アカウント設定の拡張</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1368,5 +1368,11 @@
   </data>
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>生体認証によるログイン</value>
+  </data>
+  <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
+    <value>QRコードをスキャン</value>
+  </data>
+  <data name="SettingsPageProVersionActivated" xml:space="preserve">
+    <value>Proバージョンは正常にアクティベートされました。</value>
   </data>
 </root>

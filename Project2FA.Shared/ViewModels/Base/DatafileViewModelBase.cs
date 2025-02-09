@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Project2FA.Core.Services;
 using Project2FA.Repository.Models;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.File;
@@ -17,8 +16,7 @@ using Project2FA.Strings;
 using Project2FA.Core.Services.Crypto;
 using UNOversal.Services.Logging;
 using Project2FA.Services;
-
-
+using System.Net;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -218,10 +216,11 @@ namespace Project2FA.ViewModels
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exc)
                 {
+                    await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
-                    TrackingManager.TrackException(nameof(CheckServerStatus), ex);
+                    TrackingManager.TrackException(nameof(CheckServerStatus), exc);
 #endif
                     return (false, null);
                 }
@@ -250,20 +249,29 @@ namespace Project2FA.ViewModels
 
                 try
                 {
-                    Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
+                    (Status response, System.Net.HttpStatusCode statusCode) = await WebDAVClient.Client.GetServerStatus(ServerAddress);
                     if (response == null)
                     {
                         ServerAddress = ServerAddress.Replace("https:", "http:");
+                    }
+                    else if(statusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        (Status newResponse, System.Net.HttpStatusCode newStatusCode) = await WebDAVClient.Client.GetServerStatus(ServerAddress, 
+                            networkCredential:new NetworkCredential(Username,Password));
+                        if (newResponse != null)
+                        {
+                            return newResponse;
+                        }
                     }
                     else
                     {
                         return response;
                     }
                 }
-                catch (ResponseError e)
+                catch (ResponseError exc)
                 {
-                    await LoggingService.LogException(e, SettingsService.Instance.LoggingSetting);
-                    if (e.Message.Equals("The certificate authority is invalid or incorrect"))
+                    await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+                    if (exc.Message.Equals("The certificate authority is invalid or incorrect"))
                     {
                         //TODO Error Message: The certificate authority is invalid or incorrect
                     }
@@ -272,7 +280,8 @@ namespace Project2FA.ViewModels
 
                 if (ignoreServerCertificateErrors)
                 {
-                    Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress, ignoreServerCertificateErrors);
+                    (Status response, System.Net.HttpStatusCode statusCode) = await WebDAVClient.Client.GetServerStatus(ServerAddress, 
+                        ignoreServerCertificateErrors:ignoreServerCertificateErrors);
                     if (response == null)
                     {
                         ServerAddress = ServerAddress.Replace("https:", "http:");
@@ -285,7 +294,7 @@ namespace Project2FA.ViewModels
 
                 try
                 {
-                    Status response = await WebDAVClient.Client.GetServerStatus(ServerAddress);
+                    (Status response, System.Net.HttpStatusCode statusCode) = await WebDAVClient.Client.GetServerStatus(ServerAddress);
                     if (response == null)
                     {
                         await ShowServerAddressNotFoundError();
@@ -416,10 +425,12 @@ namespace Project2FA.ViewModels
             if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(WebDAVPassword) && !string.IsNullOrEmpty(ServerAddress))
             {
                 WebDAVCredentialsEntered = true;
+                IsWebDAVCreationButtonEnable = true;
             }
             else
             {
                 WebDAVCredentialsEntered = false;
+                IsWebDAVCreationButtonEnable = false;
             }
         }
 
@@ -503,8 +514,10 @@ namespace Project2FA.ViewModels
             get => _password;
             set
             {
-                SetProperty(ref _password, value);
-                CheckInputs();
+                if(SetProperty(ref _password, value))
+                {
+                    CheckInputs();
+                }
             }
         }
 

@@ -18,6 +18,10 @@ using UNOversal.Services.Secrets;
 using Project2FA.Utils;
 using Project2FA.Services.WebDAV;
 using System.Text;
+using UNOversal.Services.Logging;
+using Project2FA.Services;
+
+
 
 
 
@@ -52,6 +56,7 @@ namespace Project2FA.ViewModels
         private IDialogService DialogService { get; }
         private INavigationService NaviationService { get; }
         private ISecretService SecretService { get; }
+        private ILoggingService LoggingService { get; }
 
         private INewtonsoftJSONService NewtonsoftJSONService { get; }
 
@@ -64,7 +69,8 @@ namespace Project2FA.ViewModels
             INetworkService networkService,
             INavigationService navigationService,
             ISecretService secretService,
-            IDialogService dialogService) : base()
+            IDialogService dialogService,
+            ILoggingService loggingService) : base()
         {
             NaviationService = navigationService;
             DialogService = dialogService;
@@ -74,6 +80,7 @@ namespace Project2FA.ViewModels
             WebDAVLoginRequiered = true;
             WebDAVDatafilePropertiesEnabled = false;
             SecretService =secretService;
+            LoggingService = loggingService;
 
             ConfirmErrorCommand = new RelayCommand(() =>
             {
@@ -265,6 +272,7 @@ namespace Project2FA.ViewModels
             }
             catch (Exception exc)
             {
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
                 TrackingManager.TrackException(nameof(DownloadWebDAVFile),exc);
 #endif

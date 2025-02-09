@@ -310,31 +310,31 @@
       <Version>2.5.1</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Labs.Uwp.TokenView">
-      <Version>0.1.250129-build.2033</Version>
+      <Version>0.1.250206-build.2040</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Animations">
-      <Version>8.2.250129-preview2</Version>
+      <Version>8.2.250206-build.1405</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Behaviors">
-      <Version>8.2.250129-preview2</Version>
+      <Version>8.2.250206-build.1405</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Collections">
-      <Version>8.2.250129-preview2</Version>
+      <Version>8.2.250206-build.1405</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
-      <Version>8.2.250129-preview2</Version>
+      <Version>8.2.250206-build.1405</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
-      <Version>8.2.250129-preview2</Version>
+      <Version>8.2.250206-build.1405</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Extensions">
-      <Version>8.2.250129-preview2</Version>
+      <Version>8.2.250206-build.1405</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Lottie">
       <Version>8.1.240821</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Media">
-      <Version>8.2.250129-preview2</Version>
+      <Version>8.2.250206-build.1405</Version>
     </PackageReference>
     <PackageReference Include="DryIoc.dll">
       <Version>5.4.3</Version>

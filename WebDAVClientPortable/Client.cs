@@ -19,7 +19,6 @@ using System.Net.Http;
 using System.Net;
 using DecaTec.WebDav.Headers;
 using System.Globalization;
-using System.Net.Http.Headers;
 
 //fork from https://github.com/nextcloud/windows-universal
 
@@ -654,21 +653,23 @@ namespace WebDAVClient
         /// </summary>
         /// <param name="serverUrl">The server URL.</param>
         /// <param name="ignoreServerCertificateErrors">if set to <c>true</c> [ignore server certificate errors].</param>
+        /// <param name="networkCredential">The user credentials.</param>
         /// <returns></returns>
         /// <exception cref="ResponseError">The certificate authority is invalid or incorrect
         /// or
         /// The remote server returned an error: (401) Unauthorized. - 401
         /// or</exception>
-        public static async Task<Status> GetServerStatus(string serverUrl, bool ignoreServerCertificateErrors = false)
+        public static async Task<(Status, HttpStatusCode)> GetServerStatus(string serverUrl, bool ignoreServerCertificateErrors = false, NetworkCredential networkCredential = null)
         {
             serverUrl = serverUrl.TrimEnd('/');
             if (serverUrl.EndsWith("owncloud") || serverUrl.EndsWith("nextcloud") || serverUrl.EndsWith("ownCloud"))
             {
                 serverUrl += "/status.php";
             }
-            else if (serverUrl.EndsWith("remote.php/webdav"))
+            else if (serverUrl.Contains("remote.php"))
             {
-                serverUrl = serverUrl.Replace("remote.php/webdav", "status.php");
+                int index = serverUrl.IndexOf("remote.php");
+                serverUrl = serverUrl.Substring(0, index + "remote.php".Length).Replace("remote.php", "status.php");
             }
             else
             {
@@ -681,7 +682,7 @@ namespace WebDAVClient
             }
             else
             {
-                return null;
+                return (null, HttpStatusCode.NotFound);
             }
 
             HttpClientHandler httpClientHandler = new HttpClientHandler
@@ -718,6 +719,11 @@ namespace WebDAVClient
                 }
             };
 
+            if (networkCredential != null)
+            {
+                httpClientHandler.Credentials = networkCredential;
+            }
+
             HttpClient client = new HttpClient(httpClientHandler);
 
             client.DefaultRequestHeaders.Add("Pragma", "no-cache");
@@ -737,12 +743,13 @@ namespace WebDAVClient
 
             if (response == null)
             {
-                return null;
+                return (null, HttpStatusCode.NotFound);
             }
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new ResponseError("The remote server returned an error: (401) Unauthorized.", "401");
+                return (null, HttpStatusCode.Unauthorized);
+                //throw new ResponseError("The remote server returned an error: (401) Unauthorized.", "401");
             }
 
             string content = await response.Content.ReadAsStringAsync();
@@ -753,11 +760,11 @@ namespace WebDAVClient
 
             try
             {
-                return JsonSerializer.Deserialize<Status>(content, _jsonSettings);
+                return (JsonSerializer.Deserialize<Status>(content, _jsonSettings), HttpStatusCode.OK);
             }
             catch
             {
-                return null;
+                return (null, HttpStatusCode.PartialContent);
             }
         }
         /// <summary>
@@ -803,7 +810,7 @@ namespace WebDAVClient
             {
                 user = await client.GetUserAttributes(userId);
             }
-            catch(Exception ex)
+            catch(Exception exc)
             {
                 // ignored
             }

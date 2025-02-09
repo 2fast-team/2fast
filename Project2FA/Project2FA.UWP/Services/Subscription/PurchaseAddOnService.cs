@@ -36,7 +36,6 @@ namespace Project2FA.UWP.Services
             }
             purchaseAddOnProduct = await GetSubscriptionProductAsync();
             return await CheckIfUserHasAddOnAsync();
-
         }
 
         private async Task<(bool IsActive, StoreLicense info)> CheckIfUserHasAddOnAsync()

@@ -33,7 +33,6 @@ using Project2FA.Core.Services.Crypto;
 using CommunityToolkit.WinUI.Helpers;
 using CommunityToolkit.WinUI.Collections;
 using UNOversal.Services.Serialization;
-using System.Web;
 using UNOversal.Services.Logging;
 using System.Text;
 

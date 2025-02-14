@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Project2FA.NUWP": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

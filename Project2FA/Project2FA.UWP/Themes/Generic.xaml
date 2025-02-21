@@ -8,6 +8,8 @@
         <ResourceDictionary Source="ms-appx:///Controls/CopyButton/CopyButton.xaml" />
         <ResourceDictionary Source="/Controls/RadialProgressBar/RadialProgressBar.xaml" />
         <ResourceDictionary Source="ms-appx:///Controls/Carousel/Carousel.xaml" />
+        <ResourceDictionary Source="/Controls/MarkdownTextBlock/MarkdownTextBlock.xaml" />
         <ResourceDictionary Source="/Controls/SettingsGroup/SettingsGroup.xaml" />
+        <ResourceDictionary Source="/Controls/TextToolbar/TextToolbar.xaml" /> 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

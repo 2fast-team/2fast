@@ -1,6 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats.RichText;
+﻿using Project2FA.UWP.Controls.TextToolbarButtons;
+using Project2FA.UWP.Controls.TextToolbarFormats;
 using Windows.UI.Text;
 
 namespace Project2FA.UWP.Utils

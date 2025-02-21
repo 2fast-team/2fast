@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:markdown="using:CommunityToolkit.Labs.WinUI.MarkdownTextBlock"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:media="using:CommunityToolkit.WinUI.Media"
@@ -289,15 +290,13 @@
                                 </Image>
                             </Grid>
 
-                            <toolkit:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock 
                                 Grid.Column="1"
                                 x:Uid="TutorialContentDialogFirstSteps"
                                 Text="~TutorialContentDialogFirstSteps.Text"
                                 FontSize="20"
-                                
                                 FontFamily="Calibri"
-                                TextWrapping="WrapWholeWords" 
-                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
 
                             <StackPanel 
                                 Orientation="Horizontal" 
@@ -374,22 +373,20 @@
                             </Border>
                         </Border>
                         <StackPanel Margin="24,12,24,0">
-                            <toolkit:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock
                                 x:Uid="TutorialContentDialogHowTheAppWorksHeader"
                                 Text="~TutorialContentDialogHowTheAppWorksHeader.Text"
                                 FontSize="20"
                                 FontStretch="ExtraCondensed"
-                                FontFamily="Calibri"
-                                TextWrapping="WrapWholeWords"/>
-                            <toolkit:MarkdownTextBlock 
+                                FontFamily="Calibri"/>
+                            <markdown:MarkdownTextBlock
                                 Margin="0,12,0,0"
                                 x:Uid="TutorialContentDialogHowTheAppWorks"
                                 Text="~TutorialContentDialogHowTheAppWorks.Text"
                                 FontSize="20"
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
-                                TextWrapping="WrapWholeWords" 
-                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
                             <Image 
                                 Margin="0,12,0,0"
                                 Source="/Assets/Images/appoverview.png"/>
@@ -416,15 +413,14 @@
                             </Border>
                         </Border>
                         <StackPanel Margin="12,12,12,0">
-                            <toolkit:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock
                                 Margin="0,12,0,0"
                                 x:Uid="TutorialContentDialogCreateOrLoad"
                                 Text="~TutorialContentDialogCreateOrLoad.Text"
                                 FontSize="20"
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
-                                TextWrapping="WrapWholeWords" 
-                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
                             <TextBlock 
                                 x:Uid="TutorialContentDialogCreateMethodHeader"
                                 Text="~TutorialContentDialogCreateMethodHeader.Text"
@@ -482,13 +478,12 @@
                                 FontWeight="Bold"
                                 TextWrapping="WrapWholeWords"
                                 Margin="0,0,0,12"/>
-                            <toolkit:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock
                                 Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
                                 FontSize="20"
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
-                                TextWrapping="WrapWholeWords"
-                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
                             <!--<TextBlock 
                             Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
                             FontSize="16"
@@ -519,14 +514,13 @@
                                 FontWeight="Bold"
                                 TextWrapping="WrapWholeWords"
                                 Margin="0,0,0,12"/>
-                            <toolkit:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock
                                 x:Uid="TutorialContentDialogInteractionAccount"
                                 Text="~TutorialContentDialogInteractionAccount.Text"
                                 FontSize="20"
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
-                                TextWrapping="WrapWholeWords"
-                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
                             <!--<TextBlock 
                             x:Uid="TutorialContentDialogInteractionAccount"
                             Text="~TutorialContentDialogInteractionAccount.Text"
@@ -562,15 +556,13 @@
                                 FontWeight="Bold"
                                 TextWrapping="WrapWholeWords"
                                 Margin="0,0,0,12"/>
-                            <toolkit:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock
                                 x:Uid="TutorialContentDialogProFeature"
                                 Text="~TutorialContentDialogProFeature.Text"
                                 FontSize="20"
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
-                                TextWrapping="WrapWholeWords"
-                                LinkClicked="MarkdownTextBlock_LinkClicked"/>
-
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
                         </StackPanel>
                     </Grid>
                 </FlipViewItem>

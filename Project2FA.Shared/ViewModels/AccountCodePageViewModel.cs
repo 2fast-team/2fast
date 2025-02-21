@@ -21,7 +21,6 @@ using System.Linq;
 using Project2FA.Core.Utils;
 using UNOversal.Services.Logging;
 
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -29,8 +28,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Data;
-using Microsoft.Toolkit.Uwp.UI.Controls;
-using Microsoft.Toolkit.Uwp.Helpers;
+using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using WinUIWindow = Windows.UI.Xaml.Window;
 #else
 using Project2FA.UNO;

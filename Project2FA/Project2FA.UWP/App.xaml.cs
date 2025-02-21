@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Toolkit.Uwp.Helpers;
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
@@ -37,7 +36,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Project2FA.Services.Importer;
-
+using UNOversal.Helpers;
 
 namespace Project2FA.UWP
 {
@@ -161,7 +160,7 @@ namespace Project2FA.UWP
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
-                    SystemInformation.Instance.TrackAppUse(e as LaunchActivatedEventArgs);
+                    SystemInformationHelper.Instance.TrackAppUse(e as LaunchActivatedEventArgs);
                     // set custom splash screen page
                     //Window.Current.Content = new SplashPage(e.SplashScreen);
                 }

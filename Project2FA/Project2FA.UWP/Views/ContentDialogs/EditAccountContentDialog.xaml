@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:oldtoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations"
     xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
@@ -271,16 +270,16 @@
                     x:Uid="AddAccountContentDialogAccountNotes" 
                     Header="~AddAccountContentDialogAccountNotes.Header">
                     <ctwc:SettingsExpander.ItemsHeader>
-                        <oldtoolkit:TextToolbar 
+                        <appcontrols:TextToolbar 
                             x:Name="Toolbar"
                             Editor="{Binding ElementName=REB_Notes}"
                             UseURIChecker="True"
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                            <oldtoolkit:TextToolbar.Formatter>
+                            <appcontrols:TextToolbar.Formatter>
                                 <utils:CustomRichTextFormatter/>
-                            </oldtoolkit:TextToolbar.Formatter>
-                        </oldtoolkit:TextToolbar>
+                            </appcontrols:TextToolbar.Formatter>
+                        </appcontrols:TextToolbar>
                     </ctwc:SettingsExpander.ItemsHeader>
                     <ctwc:SettingsExpander.ItemsFooter>
                         <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">

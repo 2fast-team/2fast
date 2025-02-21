@@ -1367,4 +1367,10 @@
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>使用生物识别技术登录</value>
   </data>
+  <data name="CloseAppDialogTitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CloseAppDialogContent" xml:space="preserve">
+    <value />
+  </data>
 </root>

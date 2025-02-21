@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:wctc="using:CommunityToolkit.WinUI.Controls"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations" 
     xmlns:ui="using:CommunityToolkit.WinUI"
@@ -186,10 +185,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="toolkit:MarkdownTextBlock">
+    <!--<Style TargetType="toolkit:MarkdownTextBlock">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontSize" Value="16"/>
-    </Style>
+    </Style>-->
 
     <Style x:Key="HighlightTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
         <Setter Property="BorderBrush" Value="Red" />

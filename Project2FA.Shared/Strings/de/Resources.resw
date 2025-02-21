@@ -393,9 +393,6 @@ Die Datendatei wird bei der Zurücksetzung **nicht** entfernt.</value>
   <data name="SettingsPivotItemAbout.Header" xml:space="preserve">
     <value>Über die App</value>
   </data>
-  <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
-    <value>Datendatei</value>
-  </data>
   <data name="SettingsPivotItemDependencies.Header" xml:space="preserve">
     <value>Abhängigkeiten</value>
   </data>
@@ -530,11 +527,11 @@ Starten Sie direkt durch und bringen Sie mehr Sicherheit durch einen zweiten Fak
   <data name="RateAppContentDialogQuestion" xml:space="preserve">
     <value>Seit einiger Zeit benutzen Sie nun diese App, bitte besuchen Sie den Store, um sie zu bewerten und eine Rezension zu schreiben. Sie können auch jederzeit die Windows Feedback-App nutzen, um uns Ihr Feedback direkt zu senden.</value>
   </data>
-  <data name="RateAppContentDialogTitle" xml:space="preserve">
-    <value>Gefällt Ihnen diese App?</value>
-  </data>
   <data name="RateAppContentDialogYesButton" xml:space="preserve">
     <value>Jetzt bewerten</value>
+  </data>
+  <data name="RateAppContentDialogTitle" xml:space="preserve">
+    <value>Gefällt Ihnen diese App?</value>
   </data>
   <data name="ChangeDatafilePasswordContentDialogCurrentPassword.Header" xml:space="preserve">
     <value>Aktuelles Passwort</value>
@@ -619,6 +616,9 @@ Anleitung zum setzen der Berechtigung:
   </data>
   <data name="SettingsSourceCode.Header" xml:space="preserve">
     <value>Quellcode der App anzeigen</value>
+  </data>
+  <data name="SettingsPivotItemDatafile.Header" xml:space="preserve">
+    <value>Datendatei</value>
   </data>
   <data name="AccountCodePageABBUndoDelete.Label" xml:space="preserve">
     <value>Rückgängig (Löschung)</value>
@@ -734,11 +734,11 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="UseDataFilePageName.Text" xml:space="preserve">
     <value>Vorhandene Datendatei laden</value>
   </data>
-  <data name="LoadDatafile" xml:space="preserve">
-    <value>Vorhandene Datendatei laden</value>
-  </data>
   <data name="CreateDatafile" xml:space="preserve">
     <value>Datendatei erstellen</value>
+  </data>
+  <data name="LoadDatafile" xml:space="preserve">
+    <value>Vorhandene Datendatei laden</value>
   </data>
   <data name="WelcomePageABBTutorial.Label" xml:space="preserve">
     <value>Erste Schritte</value>
@@ -767,14 +767,14 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="SettingsAppCornorRadiusDesc.Text" xml:space="preserve">
     <value>Wenn die Option aktiviert ist, werden die Ecken der Steuerelemente abgerundet</value>
   </data>
+  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
+    <value>App-Farbschema</value>
+  </data>
   <data name="SettingsOptionsFactoryReset.Header" xml:space="preserve">
     <value>Werkseinstellungen</value>
   </data>
   <data name="SettingsOptionsFactoryResetDesc.Text" xml:space="preserve">
     <value>Mit der Betätigung und der Bestätigung wird die App zurückgesetzt</value>
-  </data>
-  <data name="SettingsAppThemeMode.Header" xml:space="preserve">
-    <value>App-Farbschema</value>
   </data>
   <data name="SettingsOptionsQRScan.Header" xml:space="preserve">
     <value>QR-Code lesen</value>
@@ -1076,6 +1076,12 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="TutorialPageItemCopyCodeBTNTitle" xml:space="preserve">
     <value>Schlüssel kopieren</value>
   </data>
+  <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
+    <value>Durch die Setzung eines Favoriten wird das Konto in der Akzentfarbe der Anwendung dargestellt und in der Reihenfolge der Anzeige nach oben gesetzt.</value>
+  </data>
+  <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
+    <value>Favorit setzen</value>
+  </data>
   <data name="TutorialPageItemMoreBTNDesc" xml:space="preserve">
     <value>Hier werden weitere Optionen für das Konto angezeigt</value>
   </data>
@@ -1087,12 +1093,6 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="TutorialPageItemShowCodeBTNTitle" xml:space="preserve">
     <value>Schlüssel verstecken/anzeigen</value>
-  </data>
-  <data name="TutorialPageItemFavouriteBTNTDesc" xml:space="preserve">
-    <value>Durch die Setzung eines Favoriten wird das Konto in der Akzentfarbe der Anwendung dargestellt und in der Reihenfolge der Anzeige nach oben gesetzt.</value>
-  </data>
-  <data name="TutorialPageItemFavouriteBTNTitle" xml:space="preserve">
-    <value>Favorit setzen</value>
   </data>
   <data name="TutorialContentDialogInteractionAccount.Text" xml:space="preserve">
     <value>Für angelegte Konten gibt es verschiedenste Interaktionsmöglichkeiten, die anhand eines Beispielkontos nach deren Betätigung weitergehender erklärt werden.</value>
@@ -1373,5 +1373,11 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   </data>
   <data name="SettingsPageProVersionActivated" xml:space="preserve">
     <value>Die Pro-Version wurde erfolgreich aktiviert.</value>
+  </data>
+  <data name="CloseAppDialogTitle" xml:space="preserve">
+    <value>Speicheurng im Gange</value>
+  </data>
+  <data name="CloseAppDialogContent" xml:space="preserve">
+    <value>Das Schließen der Anwendung ist während der Speicherung nicht möglich. Probieren Sie es in Kürze erneut.</value>
   </data>
 </root>

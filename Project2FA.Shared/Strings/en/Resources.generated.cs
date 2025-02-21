@@ -1948,6 +1948,25 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region CloseAppDialogContent
+        public static string CloseAppDialogContent
+        {
+            get
+            {
+                return _resourceLoader.GetString("CloseAppDialogContent");
+            }
+        }
+        #endregion
+
+        #region CloseAppDialogTitle
+        public static string CloseAppDialogTitle
+        {
+            get
+            {
+                return _resourceLoader.GetString("CloseAppDialogTitle");
+            }
+        }
+        #endregion
 
     }
 
@@ -2106,7 +2125,9 @@ namespace Project2FA.Strings{
             LoginPageIOSBiometricReason,
             FileActivationPageViewModelEmptyDatafile,
             FileActivationPageViewModelCorruptDatafile,
-            SettingsPageProVersionActivated
+            SettingsPageProVersionActivated,
+            CloseAppDialogContent,
+            CloseAppDialogTitle
         }
 
         private static ResourceLoader _resourceLoader;

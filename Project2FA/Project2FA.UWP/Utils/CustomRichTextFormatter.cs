@@ -1,7 +1,7 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarButtons.Common;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarFormats;
+﻿using Project2FA.UWP.Controls;
+using Project2FA.UWP.Controls.TextToolbarButtons;
+using Project2FA.UWP.Controls.TextToolbarButtons.Common;
+using Project2FA.UWP.Controls.TextToolbarFormats;
 using Windows.System;
 using Windows.UI.Text;
 using Windows.UI.Xaml.Controls;

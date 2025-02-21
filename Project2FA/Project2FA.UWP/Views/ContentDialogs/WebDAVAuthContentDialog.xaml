@@ -16,7 +16,7 @@
     <Grid>
         <muxc:WebView2 
             x:Name="LoginWebView" 
-            Source="{x:Bind ViewModel.Source, Mode=OneWay}"
+            Source="{x:Bind ViewModel.URL, Mode=OneWay}"
             MinHeight="600" 
             MinWidth="500">
             

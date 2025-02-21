@@ -6,15 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:strings="using:Project2FA.Strings"
-    xmlns:oldtoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:markdown="using:CommunityToolkit.Labs.WinUI.MarkdownTextBlock"
     xmlns:models="using:Project2FA.Repository.Models"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
-    Title="TITLE"
-    PrimaryButtonText="Button1"
-    SecondaryButtonText="Button2"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    Title="~ImportAccountsContentDialog.Title"
+    x:Uid="ImportAccountsContentDialog"
+    PrimaryButtonText="~ImportAccountsContentDialog.PrimaryButtonText"
+    SecondaryButtonText="~ImportAccountsContentDialog.SecondaryButtonText"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
+    SecondaryButtonStyle="{StaticResource ButtonRevealStyle}"
+    SecondaryButtonCommand="{x:Bind ViewModel.SecondayButtonCommand}"
+    PrimaryButtonCommand="{x:Bind ViewModel.PrimaryButtonCommand}"
+    PrimaryButtonStyle="{StaticResource AccentButtonStyle}">
 
     <ContentDialog.Resources>
         <ResourceDictionary>
@@ -83,11 +87,33 @@
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
                         <StackPanel Margin="0,0,16,0">
-                            <oldtoolkit:MarkdownTextBlock 
-            Text="~ImportAccountsContentDialogInfo.Text" 
-            TextWrapping="Wrap" 
-            x:Uid="ImportAccountsContentDialogInfo"
-            Margin="0,10,0,10"/>
+                            <markdown:MarkdownTextBlock 
+                                Text="~ImportAccountsContentDialogInfo.Text" 
+                                x:Uid="ImportAccountsContentDialogInfo"
+                                Margin="0,10,0,10"/>
+                            <Button 
+x:Name="BTN_FileImport"
+Margin="0,10,0,10" 
+HorizontalContentAlignment="Left"
+Style="{StaticResource AccentButtonStyle}"
+Command="{x:Bind ViewModel.CameraScanCommand}"
+MinWidth="255" >
+                                <StackPanel 
+        Orientation="Horizontal" 
+        HorizontalAlignment="Left">
+                                    <FontIcon 
+                                        FontSize="30" 
+                                        FontFamily="{StaticResource SegoeFluentIcons}" 
+                                        Glyph="&#xE8E5;" />
+                                    <TextBlock 
+        Text="~ImportAccountsContentDialogFileBTN.Text" 
+        Margin="8,0,0,0" 
+        HorizontalAlignment="Stretch" 
+        VerticalAlignment="Center" 
+        x:Uid="ImportAccountsContentDialogFileBTN" 
+        FontFamily="Segoe UI" />
+                                </StackPanel>
+                            </Button>
                             <StackPanel Orientation="Horizontal">
                                 <Button 
             x:Name="BTN_QRCodeScan" 
@@ -97,7 +123,7 @@
             Command="{x:Bind ViewModel.ScanQRCodeCommand}"
             MinWidth="255">
                                     <StackPanel 
-                        Orientation="Horizontal" 
+                        Orientation="Horizontal"
                         HorizontalAlignment="Left">
                                         <FontIcon Glyph="&#xED14;" FontSize="30"/>
                                         <TextBlock

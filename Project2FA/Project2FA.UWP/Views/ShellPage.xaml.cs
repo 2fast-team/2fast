@@ -1,5 +1,4 @@
-﻿using Microsoft.Toolkit.Uwp.Helpers;
-using Project2FA.Services;
+﻿using Project2FA.Services;
 using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -18,13 +17,16 @@ using Project2FA.Utils;
 using UNOversal.Services.Dialogs;
 using Project2FA.ViewModels;
 using Windows.System;
-using Microsoft.Toolkit.Uwp.UI.Controls;
 using Windows.Services.Store;
 using Project2FA.UWP.Services;
 using Project2FA.Core;
 using UNOversal.Services.Network;
 using UNOversal.Services.Gesture;
 using UNOversal.Services.Logging;
+using Windows.UI.Core.Preview;
+using UNOversal.Helpers;
+using CommunityToolkit.WinUI.Helpers;
+using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 
 namespace Project2FA.UWP.Views
 {
@@ -41,6 +43,8 @@ namespace Project2FA.UWP.Views
             InitializeComponent();
             _navManager = SystemNavigationManager.GetForCurrentView();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
+
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += App_CloseRequested;
 
             // determine and set if the app is started in debug mode
             ViewModel.Title = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + Strings.Resources.ApplicationName : Strings.Resources.ApplicationName;
@@ -117,6 +121,23 @@ namespace Project2FA.UWP.Views
             Loaded += ShellPage_Loaded;
         }
 
+        private async void App_CloseRequested(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        {
+            var deferral = e.GetDeferral();
+            if (DataService.Instance.CollectionAccessSemaphore.CurrentCount == 0)
+            {
+                e.Handled = true;
+                var dialogService = App.Current.Container.Resolve<IDialogService>();
+                var dialog = new ContentDialog();
+                dialog.Title = Strings.Resources.CloseAppDialogTitle;
+                dialog.Content = Strings.Resources.CloseAppDialogContent;
+                dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                dialog.PrimaryButtonText = Strings.Resources.Confirm;
+                await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            }
+            deferral.Complete();
+        }
+
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
             // set the corner radius for the controls
@@ -163,9 +184,9 @@ namespace Project2FA.UWP.Views
             }
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             //Rate information for the user
-            if (SystemInformation.Instance.LaunchCount == 5 || 
-                SystemInformation.Instance.LaunchCount == 15 || 
-                SystemInformation.Instance.LaunchCount == 45)
+            if (SystemInformationHelper.Instance.LaunchCount == 5 || 
+                SystemInformationHelper.Instance.LaunchCount == 15 || 
+                SystemInformationHelper.Instance.LaunchCount == 45)
             {
                 if (!SettingsService.Instance.AppRated && (MainFrame.Content as FrameworkElement).GetType() != typeof(WelcomePage))
                 {
@@ -174,18 +195,18 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            if (SystemInformation.Instance.IsAppUpdated)
+            if (SystemInformationHelper.Instance.IsAppUpdated)
             {
-                //if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
+                //if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
                 //{
-                //    if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+                //    if (SystemInformationHelper.Instance.OperatingSystemVersion.Build >= 22000)
                 //    {
                 //        // set the round corner for Windows 11+
                 //        SettingsService.Instance.UseRoundCorner = true;
                 //    }
                 //}
 
-                if (SystemInformation.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.2.7.0")))
+                if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.2.7.0")))
                 {
                     //check after update, if the user already have a subscription
                     var purchaseService = App.Current.Container.Resolve<IPurchaseAddOnService>();
@@ -210,7 +231,7 @@ namespace Project2FA.UWP.Views
                 dialog.Title = Strings.Resources.NewAppFeaturesTitle;
                 var markdown = new MarkdownTextBlock();
                 markdown.Text = Strings.Resources.NewAppFeaturesContent;
-                markdown.LinkClicked += Markdown_LinkClicked;
+                markdown.OnLinkClicked += Markdown_LinkClicked;
                 dialog.Content = markdown;
                 dialog.PrimaryButtonText = Strings.Resources.Confirm;
                 dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
@@ -227,10 +248,10 @@ namespace Project2FA.UWP.Views
                 // if a link is clicked, the dialog will be close for in app navigation parameters
                 async void Markdown_LinkClicked(object sender, LinkClickedEventArgs e)
                 {
-                    clickedLink = e.Link;
+                    clickedLink = e.Uri.ToString();
                     if(clickedLink.StartsWith("http"))
                     {
-                        if (Uri.TryCreate(e.Link, UriKind.Absolute, out Uri link))
+                        if (Uri.TryCreate(e.Uri.ToString(), UriKind.Absolute, out Uri link))
                         {
                             await Launcher.LaunchUriAsync(link);
                         }
@@ -242,9 +263,9 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            if (SystemInformation.Instance.IsFirstRun)
+            if (SystemInformationHelper.Instance.IsFirstRun)
             {
-                if (SystemInformation.Instance.OperatingSystemVersion.Build >= 22000)
+                if (SystemInformationHelper.Instance.OperatingSystemVersion.Build >= 22000)
                 {
                     // set the round corner for Windows 11+
                     SettingsService.Instance.UseRoundCorner = true;

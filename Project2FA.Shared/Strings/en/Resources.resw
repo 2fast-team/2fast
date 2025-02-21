@@ -1373,4 +1373,10 @@ The application supports an MDM configuration for centralised management of the 
   <data name="SettingsPageProVersionActivated" xml:space="preserve">
     <value>The Pro version has been successfully activated.</value>
   </data>
+  <data name="CloseAppDialogTitle" xml:space="preserve">
+    <value>Storage in progress</value>
+  </data>
+  <data name="CloseAppDialogContent" xml:space="preserve">
+    <value>It is not possible to close the application while it is being saved. Try again shortly.</value>
+  </data>
 </root>

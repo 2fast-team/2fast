@@ -49,6 +49,7 @@
 		</Application>
 	</Applications>
 	<Capabilities>
+		<rescap:Capability Name="confirmAppClose" />
 		<rescap:Capability Name="broadFileSystemAccess"/>
 		<uap:Capability Name="removableStorage"/>
 		<Capability Name="privateNetworkClientServer"/>

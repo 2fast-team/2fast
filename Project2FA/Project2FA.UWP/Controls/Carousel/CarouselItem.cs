@@ -3,13 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Microsoft.Toolkit.Uwp.UI.Automation.Peers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 
-namespace Microsoft.Toolkit.Uwp.UI.Controls
+namespace Project2FA.UWP.Controls
 {
     /// <summary>
     /// Represents the container for an item in a Carousel control.

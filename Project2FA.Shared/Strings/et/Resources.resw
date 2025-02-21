@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1370,5 +1371,11 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
   </data>
   <data name="SettingsPageProVersionActivated" xml:space="preserve">
     <value>Pro-versioon on edukalt aktiveeritud.</value>
+  </data>
+  <data name="CloseAppDialogTitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CloseAppDialogContent" xml:space="preserve">
+    <value />
   </data>
 </root>

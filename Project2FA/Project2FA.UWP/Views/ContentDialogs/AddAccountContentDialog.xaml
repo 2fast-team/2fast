@@ -7,7 +7,6 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:animations="using:CommunityToolkit.WinUI.Animations"
-    xmlns:oldtoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mediaSourceType="using:Windows.Media.Capture.Frames"
     xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:ctwc="using:CommunityToolkit.WinUI.Controls"
@@ -16,6 +15,7 @@
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:markdown="using:CommunityToolkit.Labs.WinUI.MarkdownTextBlock"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     x:Uid="AddAccountContentDialog"
@@ -95,9 +95,8 @@
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
                         <StackPanel Margin="0,0,16,0">
-                            <oldtoolkit:MarkdownTextBlock 
+                            <markdown:MarkdownTextBlock 
                             Text="~AddAccountContentDialogInfo.Text" 
-                            TextWrapping="Wrap" 
                             x:Uid="AddAccountContentDialogInfo"
                             Margin="0,10,0,10"/>
                             <StackPanel Orientation="Horizontal">
@@ -367,16 +366,16 @@
                                 x:Uid="AddAccountContentDialogAccountNotes" 
                                 Header="~AddAccountContentDialogAccountNotes.Header">
                                 <ctwc:SettingsExpander.ItemsHeader>
-                                    <oldtoolkit:TextToolbar 
+                                    <appcontrols:TextToolbar 
                             x:Name="Toolbar"
                             Editor="{Binding ElementName=REB_Notes}"
                             UseURIChecker="True"
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                        <oldtoolkit:TextToolbar.Formatter>
+                                        <appcontrols:TextToolbar.Formatter>
                                             <utils:CustomRichTextFormatter/>
-                                        </oldtoolkit:TextToolbar.Formatter>
-                                    </oldtoolkit:TextToolbar>
+                                        </appcontrols:TextToolbar.Formatter>
+                                    </appcontrols:TextToolbar>
                                 </ctwc:SettingsExpander.ItemsHeader>
                                 <ctwc:SettingsExpander.ItemsFooter>
                                     <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">

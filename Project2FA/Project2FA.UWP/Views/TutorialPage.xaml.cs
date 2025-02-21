@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.WinUI;
+﻿using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
+using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml.Controls;
 using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
@@ -116,9 +117,9 @@ namespace Project2FA.UWP.Views
             }
         }
 
-        private async void MarkdownTextBlock_LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
+        private async void MarkdownTextBlock_LinkClicked(object sender, LinkClickedEventArgs e)
         {
-            if (Uri.TryCreate(e.Link, UriKind.Absolute, out Uri link))
+            if (Uri.TryCreate(e.Uri.ToString(), UriKind.Absolute, out Uri link))
             {
                 await Launcher.LaunchUriAsync(link);
             }
@@ -127,10 +128,10 @@ namespace Project2FA.UWP.Views
 
         private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
         {
-            var markdownText = new Microsoft.Toolkit.Uwp.UI.Controls.MarkdownTextBlock();
+            var markdownText = new MarkdownTextBlock();
             markdownText.Margin = new Thickness(8,8,8,8);
             markdownText.Text = Strings.Resources.TutorialPagePasswordInfo;
-            markdownText.LinkClicked += MarkdownTextBlock_LinkClicked;
+            markdownText.OnLinkClicked += MarkdownTextBlock_LinkClicked;
             AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
             {
                 Target = sender as FrameworkElement,

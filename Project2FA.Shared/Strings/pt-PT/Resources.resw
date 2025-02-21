@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1238,6 +1239,9 @@ A funcionalidade desta aplicação é explicada em mais pormenor nas secções s
   <data name="InAppPaymentContentDialogPurchaseItemSelect" xml:space="preserve">
     <value>Selecionar para compra</value>
   </data>
+  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Função disponível apenas por compra ou subscrição.</value>
+  </data>
   <data name="InAppBuyOnce" xml:space="preserve">
     <value>Com a compra, as funções Pro+ tornam-se permanentemente acessíveis e utilizáveis, apoiando assim o desenvolvimento futuro da aplicação.
 Atualmente disponível:
@@ -1364,13 +1368,16 @@ A aplicação suporta uma configuração MDM para uma gestão centralizada da ap
   <data name="LoginPageLoginAndroidBiometricButton.Content" xml:space="preserve">
     <value>Iniciar sessão com biometria</value>
   </data>
-  <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Função disponível apenas por compra ou subscrição.</value>
-  </data>
   <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
     <value>Ler o código QR</value>
   </data>
   <data name="SettingsPageProVersionActivated" xml:space="preserve">
     <value>A versão Pro foi activada com sucesso.</value>
+  </data>
+  <data name="CloseAppDialogTitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CloseAppDialogContent" xml:space="preserve">
+    <value />
   </data>
 </root>

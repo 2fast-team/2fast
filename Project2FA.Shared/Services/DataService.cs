@@ -35,6 +35,8 @@ using CommunityToolkit.WinUI.Collections;
 using UNOversal.Services.Serialization;
 using UNOversal.Services.Logging;
 using System.Text;
+using UNOversal.Helpers;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -662,12 +664,8 @@ namespace Project2FA.Services
                     dbHash.Hash;
 
                 // set new template version for data file
-#if WINDOWS_UWP
-                var prevíousVersion = new Version(Microsoft.Toolkit.Uwp.Helpers.SystemInformation.Instance.ApplicationVersion.ToFormattedString());
-#else
-                // TODO Uno release
-                var prevíousVersion = new Version("1.3.0.0");
-#endif
+
+                var prevíousVersion = new Version(SystemInformationHelper.Instance.ApplicationVersion.ToFormattedString());
 
                 var compareVersion = new Version("1.3.0.0");
                 var result = prevíousVersion.CompareTo(compareVersion);

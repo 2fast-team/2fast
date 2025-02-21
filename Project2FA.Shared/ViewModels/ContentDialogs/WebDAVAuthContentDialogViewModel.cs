@@ -8,7 +8,7 @@ namespace Project2FA.ViewModels
 {
     public class WebDAVAuthContentDialogViewModel : ObservableObject, IDialogInitialize
     {
-        private Uri _source;
+        private Uri _url;
 
 
 
@@ -16,14 +16,14 @@ namespace Project2FA.ViewModels
         {
             if (parameters.TryGetValue<string>("url", out var url))
             {
-                Source = new Uri(url);
+                URL = new Uri(url);
             }
         }
 
-        public Uri Source 
+        public Uri URL 
         { 
-            get => _source; 
-            set => SetProperty(ref _source, value);
+            get => _url; 
+            set => SetProperty(ref _url, value);
         }
     }
 }

@@ -112,14 +112,14 @@
                                             </AppBarButton.Resources>
                                         </AppBarButton>
                                         <!--1.3.6 release-->
-                                        <!--<AppBarButton
+                                        <AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             Command="{x:Bind ImportAccountCommand}"
                                             x:Uid="AccoundCodePageImportEntry">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE8B5;"/>
                                             </AppBarButton.Icon>
-                                        </AppBarButton>-->
+                                        </AppBarButton>
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>
@@ -316,14 +316,14 @@
                                             </AppBarButton.Resources>
                                         </AppBarButton>
                                         <!--1.3.6 release-->
-                                        <!--<AppBarButton
+                                        <AppBarButton
                                             x:Name="ABB_ImportAccount"
                                             Command="{x:Bind ImportAccountCommand}"
                                             x:Uid="AccoundCodePageImportEntry">
                                             <AppBarButton.Icon>
                                                 <FontIcon Glyph="&#xE8B5;"/>
                                             </AppBarButton.Icon>
-                                        </AppBarButton>-->
+                                        </AppBarButton>
                                     </CommandBar.PrimaryCommands>
                                 </CommandBar>
                             </CommandBar.Content>

@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:strings="using:Project2FA.Strings"
-    xmlns:mtc="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI.MarkdownTextBlock"
+    xmlns:appControls="using:Project2FA.UWP.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:models="using:Project2FA.Repository.Models"
     Style="{StaticResource MyContentDialogStyle}"
@@ -208,10 +209,10 @@
                         Source="{x:Bind Url,Mode=OneWay}"
                         Height="100"></Image>
                     <StackPanel Grid.Row="1" >
-                        <mtc:MarkdownTextBlock
+                        <labs:MarkdownTextBlock
                             Foreground="{ThemeResource AppBarItemForegroundThemeBrush}"
                             Text="{x:Bind Description,Mode=OneWay}">
-                        </mtc:MarkdownTextBlock>
+                        </labs:MarkdownTextBlock>
                         <CheckBox 
                             HorizontalAlignment="Center"
                             Content="{x:Bind UidCheckBox, Mode=OneWay}"
@@ -225,17 +226,17 @@
 
     <Grid>
         <StackPanel>
-            <mtc:Carousel
+            <appControls:Carousel
             x:Name="Carousel_Main"
             ItemTemplate="{StaticResource InAppPurchaseItem}"
             ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
             SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}"
             SelectedItem="{x:Bind ViewModel.SelectedItem,Mode=TwoWay}"
             ItemMargin="8">
-                <mtc:Carousel.EasingFunction>
+                <appControls:Carousel.EasingFunction>
                     <CubicEase EasingMode="EaseOut" />
-                </mtc:Carousel.EasingFunction>
-            </mtc:Carousel>
+                </appControls:Carousel.EasingFunction>
+            </appControls:Carousel>
             <muxc:PipsPager 
                 HorizontalAlignment="Center"
                 NumberOfPages="{x:Bind ViewModel.Items.Count,Mode=OneWay}"

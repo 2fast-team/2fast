@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1520,5 +1521,11 @@ La aplicación soporta configuración MDM para la gestión centralizada en empre
   </data>
   <data name="SettingsPageProVersionActivated" xml:space="preserve">
     <value>La versión Pro se ha activado correctamente.</value>
+  </data>
+  <data name="CloseAppDialogTitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CloseAppDialogContent" xml:space="preserve">
+    <value />
   </data>
 </root>

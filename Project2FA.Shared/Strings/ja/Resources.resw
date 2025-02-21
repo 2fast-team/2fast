@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1374,5 +1375,11 @@
   </data>
   <data name="SettingsPageProVersionActivated" xml:space="preserve">
     <value>Proバージョンは正常にアクティベートされました。</value>
+  </data>
+  <data name="CloseAppDialogTitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CloseAppDialogContent" xml:space="preserve">
+    <value />
   </data>
 </root>

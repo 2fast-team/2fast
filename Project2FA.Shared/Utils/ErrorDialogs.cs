@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
-using Microsoft.Toolkit.Uwp.UI.Controls;
+using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 #else
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;

@@ -17,7 +17,6 @@ using Windows.ApplicationModel.DataTransfer;
 using UNOversal.Navigation;
 using UNOversal.Services.Logging;
 
-
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -27,7 +26,7 @@ using WinUIWindow = Windows.UI.Xaml.Window;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.UI.Xaml;
-using Microsoft.Toolkit.Uwp.UI.Controls;
+using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 #else
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;

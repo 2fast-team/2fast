@@ -36,7 +36,11 @@ namespace Project2FA.UWP.Controls
         /// Identifies the <see cref="SelectedItem"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(Carousel), new PropertyMetadata(null, OnCarouselPropertyChanged));
+            DependencyProperty.Register(
+                nameof(SelectedItem), 
+                typeof(object), 
+                typeof(Carousel), 
+                new PropertyMetadata(null, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets the index of the selected item.
@@ -59,7 +63,11 @@ namespace Project2FA.UWP.Controls
         /// Identifies the <see cref="SelectedIndex"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(Carousel), new PropertyMetadata(-1, OnCarouselPropertyChanged));
+            DependencyProperty.Register(
+                nameof(SelectedIndex), 
+                typeof(int), 
+                typeof(Carousel),
+                new PropertyMetadata(-1, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets duration of the easing function animation (ms).
@@ -87,7 +95,12 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Identifies the <see cref="ItemDepth"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty ItemDepthProperty = DependencyProperty.Register("ItemDepth", typeof(int), typeof(Carousel), new PropertyMetadata(0, OnCarouselPropertyChanged));
+        public static readonly DependencyProperty ItemDepthProperty = 
+            DependencyProperty.Register(
+                nameof(ItemDepth), 
+                typeof(int), 
+                typeof(Carousel), 
+                new PropertyMetadata(0, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets easing function to apply for each transition.
@@ -101,7 +114,12 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Identifies the <see cref="EasingFunction"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register("EasingFunction", typeof(EasingFunctionBase), typeof(Carousel), new PropertyMetadata(null));
+        public static readonly DependencyProperty EasingFunctionProperty = 
+            DependencyProperty.Register(
+                nameof(EasingFunction), 
+                typeof(EasingFunctionBase), 
+                typeof(Carousel), 
+                new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets the margin for items.
@@ -115,7 +133,12 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Identifies the <see cref="ItemMargin"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty ItemMarginProperty = DependencyProperty.Register("ItemMargin", typeof(int), typeof(Carousel), new PropertyMetadata(0, OnCarouselPropertyChanged));
+        public static readonly DependencyProperty ItemMarginProperty = 
+            DependencyProperty.Register(
+                nameof(ItemMargin), 
+                typeof(int), 
+                typeof(Carousel), 
+                new PropertyMetadata(0, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets a value indicating whether the items rendered transformations should be opposite compared to the selected item
@@ -132,7 +155,11 @@ namespace Project2FA.UWP.Controls
         /// Identifies the <see cref="InvertPositive"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty InvertPositiveProperty =
-            DependencyProperty.Register("InvertPositive", typeof(bool), typeof(Carousel), new PropertyMetadata(true, OnCarouselPropertyChanged));
+            DependencyProperty.Register(
+                nameof(InvertPositive), 
+                typeof(bool), 
+                typeof(Carousel), 
+                new PropertyMetadata(true, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets rotation angle on X
@@ -146,7 +173,12 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Identifies the <see cref="ItemRotationX"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty ItemRotationXProperty = DependencyProperty.Register("ItemRotationX", typeof(double), typeof(Carousel), new PropertyMetadata(0d, OnCarouselPropertyChanged));
+        public static readonly DependencyProperty ItemRotationXProperty = 
+            DependencyProperty.Register(
+                nameof(ItemRotationX), 
+                typeof(double), 
+                typeof(Carousel), 
+                new PropertyMetadata(0d, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets rotation angle on Y
@@ -160,7 +192,12 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Identifies the <see cref="ItemRotationY"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty ItemRotationYProperty = DependencyProperty.Register("ItemRotationY", typeof(double), typeof(Carousel), new PropertyMetadata(0d, OnCarouselPropertyChanged));
+        public static readonly DependencyProperty ItemRotationYProperty = 
+            DependencyProperty.Register(
+                nameof(ItemRotationY), 
+                typeof(double), 
+                typeof(Carousel), 
+                new PropertyMetadata(0d, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets rotation angle on Z
@@ -174,7 +211,12 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Identifies the <see cref="ItemRotationZ"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty ItemRotationZProperty = DependencyProperty.Register("ItemRotationZ", typeof(double), typeof(Carousel), new PropertyMetadata(0d, OnCarouselPropertyChanged));
+        public static readonly DependencyProperty ItemRotationZProperty = 
+            DependencyProperty.Register(
+                nameof(ItemRotationZ), 
+                typeof(double), 
+                typeof(Carousel), 
+                new PropertyMetadata(0d, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Gets or sets the Carousel orientation. Horizontal or Vertical
@@ -188,7 +230,12 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Identifies the <see cref="Orientation"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register("Orientation", typeof(Orientation), typeof(Carousel), new PropertyMetadata(Orientation.Horizontal, OnCarouselPropertyChanged));
+        public static readonly DependencyProperty OrientationProperty = 
+            DependencyProperty.Register(
+                nameof(Orientation), 
+                typeof(Orientation), 
+                typeof(Carousel), 
+                new PropertyMetadata(Orientation.Horizontal, OnCarouselPropertyChanged));
 
         /// <summary>
         /// Each time a property change, we have to reposition
@@ -317,7 +364,7 @@ namespace Project2FA.UWP.Controls
         {
             // Set style
             DefaultStyleKey = typeof(Carousel);
-            SetValue(AutomationProperties.NameProperty, "Carousel");
+            SetValue(AutomationProperties.NameProperty, nameof(Carousel));
             IsHitTestVisible = true;
 
             IsTabStop = false;

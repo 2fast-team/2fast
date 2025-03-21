@@ -36,19 +36,19 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock
                         if (node.ChildNodes.Any(n => n.Name != "#text"))
                         {
                             var myHyperlinkButton = new MyHyperlinkButton(node, renderer.Config.BaseUrl);
-                            myHyperlinkButton.ClickEvent += (sender, e) =>
-                            {
-                                renderer.MarkdownTextBlock.RaiseLinkClickedEvent(((HyperlinkButton)sender).NavigateUri);
-                            };
+                            //myHyperlinkButton.ClickEvent += (sender, e) =>
+                            //{
+                            //    //renderer.MarkdownTextBlock.RaiseLinkClickedEvent(((HyperlinkButton)sender).NavigateUri);
+                            //};
                             hyperLink = myHyperlinkButton;
                         }
                         else
                         {
                             var myHyperlink = new MyHyperlink(node, renderer.Config.BaseUrl);
-                            myHyperlink.ClickEvent += (sender, e) =>
-                            {
-                                renderer.MarkdownTextBlock.RaiseLinkClickedEvent(sender.NavigateUri);
-                            };
+                            //myHyperlink.ClickEvent += (sender, e) =>
+                            //{
+                            //    renderer.MarkdownTextBlock.RaiseLinkClickedEvent(sender.NavigateUri);
+                            //};
                             hyperLink = myHyperlink;
                         }
                         renderer.Push(hyperLink);

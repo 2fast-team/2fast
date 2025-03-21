@@ -21,7 +21,7 @@
     </PackageReference>
     <PackageReference Include="PortableWebDavLibrary" Version="1.1.9" />
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
-    <PackageReference Include="System.Text.Json" Version="9.0.2" />
+    <PackageReference Include="System.Text.Json" Version="9.0.3" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
 

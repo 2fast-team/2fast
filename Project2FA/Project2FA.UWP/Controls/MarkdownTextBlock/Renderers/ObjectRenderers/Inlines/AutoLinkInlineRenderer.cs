@@ -21,16 +21,16 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.Renderers.ObjectRenderer
                 url = "mailto:" + url;
             }
 
-            if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
-            {
-                url = "#";
-            }
+            //if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
+            //{
+            //    url = "#";
+            //}
 
             var autolink = new MyAutolinkInline(link);
-            autolink.ClickEvent += (sender, e) =>
-            {
-                renderer.MarkdownTextBlock.RaiseLinkClickedEvent(sender.NavigateUri);
-            };
+            //autolink.ClickEvent += (sender, e) =>
+            //{
+            //    renderer.MarkdownTextBlock.RaiseLinkClickedEvent(sender.NavigateUri);
+            //};
 
             renderer.Push(autolink);
 

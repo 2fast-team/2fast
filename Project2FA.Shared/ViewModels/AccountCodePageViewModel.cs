@@ -3,7 +3,6 @@ using System;
 using System.Windows.Input;
 using Project2FA.Strings;
 using System.Threading.Tasks;
-using Project2FA.Helpers;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core.Messenger;
@@ -56,7 +55,6 @@ namespace Project2FA.ViewModels
         private DispatcherTimer _dispatcherTOTPTimer;
         private DispatcherTimer _dispatcherTimerDeletedModel;
         private IDialogService DialogService { get; }
-        private ILoggerFacade Logger { get; }
         private INavigationService NavigationService { get; }
         public ICommand AddAccountCommand { get; }
 
@@ -88,10 +86,9 @@ namespace Project2FA.ViewModels
         private bool _proFeatureRequest;
 
 
-        public AccountCodePageViewModel(IDialogService dialogService, ILoggerFacade loggerFacade, INavigationService navigationService, ILoggingService loggingService)
+        public AccountCodePageViewModel(IDialogService dialogService, INavigationService navigationService, ILoggingService loggingService)
         {
             DialogService = dialogService;
-            Logger = loggerFacade;
             NavigationService = navigationService;
             LoggingService = loggingService;
 
@@ -274,7 +271,6 @@ namespace Project2FA.ViewModels
 
         private async Task ShowProFeatureCommandTask()
         {
-            string clickedLink = string.Empty; // save the clicked link
             var dialog = new ContentDialog();
             dialog.Title = Strings.Resources.ProFeatureTitleInfo;
             dialog.Content = Strings.Resources.ProFeatureContentInfo;
@@ -293,10 +289,9 @@ namespace Project2FA.ViewModels
 
         private async Task StartTOTPLogic()
         {
-            if (DataService.Instance.ActivatedDatafile != null) // && DataService.Instance.IsFirstActivatedDatafileStart
+            if (DataService.Instance.ActivatedDatafile != null)
             {
                 await DataService.Instance.StartService();
-                //DataService.Instance.IsFirstActivatedDatafileStart = false;
             }
             else
             {
@@ -618,10 +613,6 @@ namespace Project2FA.ViewModels
                             listSuggestion.Add(new TwoFACodeModel { Label = Strings.Resources.AccountCodePageSearchNotFound });
                         }
                     }
-                    //else
-                    //{
-                    //    SearchAccountCollection.AddRange(listSuggestion, false);
-                    //}
 
                     // filter the selected categories
                     if (TwoFADataService.GlobalCategories != null && TwoFADataService.IsFilterChecked)
@@ -641,16 +632,6 @@ namespace Project2FA.ViewModels
 
                             // add filtered collection to suggestion list
                             SearchAccountCollection.AddRange(listSuggestion, true);
-
-
-                            //selectedGlobalCategories.Where(c => ViewModel.TwoFADataService.Collection.Where(x => x.SelectedCategories.Where(y => y.Guid == c.Guid).Any()).Any());
-                            //ViewModel.TwoFADataService.ACVCollection.Filter = x => 
-                            ////((TwoFACodeModel)x).Label.Contains(sender.Text, System.StringComparison.OrdinalIgnoreCase) ||
-                            //selectedCategories.Where(c => ((TwoFACodeModel)x).SelectedCategories.Where(y => y.Guid == c.Guid).Any());
-
-                            //works for categories
-                            //ViewModel.TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
-                            //selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
                         }
                         // no categories selected
                         else
@@ -661,7 +642,6 @@ namespace Project2FA.ViewModels
                             {
                                 SearchAccountCollection.AddRange(listSuggestion, true);
                             }
-
                         }
                     }
                     // no categories set
@@ -674,45 +654,45 @@ namespace Project2FA.ViewModels
                             SearchAccountCollection.AddRange(listSuggestion, true);
                         }
                     }
-
-
                 }
                 catch (System.Exception exc)
                 {
                     LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                     TwoFADataService.ACVCollection.Filter = null;
 #if WINDOWS_UWP
-                    TrackingManager.TrackExceptionCatched(nameof(SetSuggestionList), exc);
+                    TrackingManager.TrackExceptionCatched(nameof(SetSuggestionList) + " " + searchText, exc);
 #endif
                 }
             }
             else
             {
-                //sender.ItemsSource = null;
-                if (TwoFADataService.GlobalCategories != null && TwoFADataService.IsFilterChecked)
+                try
                 {
-                    var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true).ToList();
-                    //var filteredCollection = TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
-                    //    selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any());
-
-                    TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).SelectedCategories.Where(sc =>
-                        selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
-                    // categories are selected
-                    //if (selectedGlobalCategories.Any())
-                    //{
-                    //    SearchAccountCollection.AddRange(filteredCollection, true);
-                    //}
-                }
-                else
-                {
-                    SearchAccountCollection.Clear();
-                    if (TwoFADataService.ACVCollection.Filter != null)
+                    if (TwoFADataService.GlobalCategories != null && TwoFADataService.IsFilterChecked)
                     {
-                        TwoFADataService.ACVCollection.Filter = null;
+                        var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true).ToList();
+
+                        // categories are selected and no search text
+                        TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).SelectedCategories.Where(sc =>
+                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
                     }
-
+                    else
+                    {
+                        SearchAccountCollection.Clear();
+                        if (TwoFADataService.ACVCollection.Filter != null)
+                        {
+                            TwoFADataService.ACVCollection.Filter = null;
+                        }
+                    }
                 }
-
+                catch (Exception exc)
+                {
+                    LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+                    TwoFADataService.ACVCollection.Filter = null;
+#if WINDOWS_UWP
+                    TrackingManager.TrackExceptionCatched(nameof(SetSuggestionList) + " " + searchText, exc);
+#endif
+                }
             }
         }
 #if WINDOWS_UWP

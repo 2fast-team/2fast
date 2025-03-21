@@ -33,19 +33,19 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.Renderers.ObjectRenderer
                 if (link.FirstChild is LinkInline linkInlineChild && linkInlineChild.IsImage)
                 {
                     var myHyperlinkButton = new MyHyperlinkButton(link, renderer.Config.BaseUrl);
-                    myHyperlinkButton.ClickEvent += (sender, e) =>
-                    {
-                        renderer.MarkdownTextBlock.RaiseLinkClickedEvent(((HyperlinkButton)sender).NavigateUri);
-                    };
+                    //myHyperlinkButton.ClickEvent += (sender, e) =>
+                    //{
+                    //    renderer.MarkdownTextBlock.RaiseLinkClickedEvent(((HyperlinkButton)sender).NavigateUri);
+                    //};
                     renderer.Push(myHyperlinkButton);
                 }
                 else
                 {
                     var hyperlink = new MyHyperlink(link, renderer.Config.BaseUrl);
-                    hyperlink.ClickEvent += (sender, e) =>
-                    {
-                        renderer.MarkdownTextBlock.RaiseLinkClickedEvent(sender.NavigateUri);
-                    };
+                    //hyperlink.ClickEvent += (sender, e) =>
+                    //{
+                    //    renderer.MarkdownTextBlock.RaiseLinkClickedEvent(sender.NavigateUri);
+                    //};
 
                     renderer.Push(hyperlink);
                 }

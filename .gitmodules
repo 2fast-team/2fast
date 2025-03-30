@@ -8,6 +8,6 @@
 	path = BiometryService
 	url = https://github.com/jp-weber/BiometryService.git
 
-[submodule "ZXing.Net.Maui"]
-	path = ZXing.Net.Maui
-	url = https://github.com/2fast-team/ZXing.Net.Maui.git
+[submodule "ZXing.Net.Uno"]
+	path = ZXing.Net.Uno
+	url = https://github.com/2fast-team/ZXing.Net.Uno.git

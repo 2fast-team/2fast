@@ -1,7 +1,8 @@
 ﻿using Foundation;
+using Project2FA.UnoApp;
 using UIKit;
 
-namespace Project2FA.UNO
+namespace Project2FA.Uno
 {
     public class EntryPoint
     {

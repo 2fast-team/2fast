@@ -47,13 +47,13 @@ using Windows.Graphics.DirectX;
 using Microsoft.Graphics.Canvas;
 using Windows.UI.Xaml.Media.Imaging;
 #else
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using WindowActivatedEventArgs = Microsoft.UI.Xaml.WindowActivatedEventArgs;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
-using Project2FA.UNO.Views;
+using Project2FA.Uno.Views;
 #endif
 
 namespace Project2FA.ViewModels

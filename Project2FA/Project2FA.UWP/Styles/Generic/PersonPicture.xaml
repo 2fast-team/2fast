@@ -3,22 +3,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:media="using:CommunityToolkit.WinUI.Media"
     xmlns:ui="using:CommunityToolkit.WinUI"
-    xmlns:toolkitcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:Windows10version1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 8)"
     xmlns:Windows10versionOlder1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,8)"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
     <media:AttachedCardShadow 
         x:Key="PersonPictureShadow" 
-        BlurRadius="32" 
+        BlurRadius="16"
         Color="{ThemeResource SystemAccentColor}"
         CornerRadius="32"/>
 
     <media:AttachedCardShadow 
         x:Key="SignShadow" 
-        BlurRadius="16"
-        Offset="0,0"
-        Color="{ThemeResource SystemAccentColor}"
+        BlurRadius="12"
+        Offset="1,0"
+        Color="{ThemeResource SystemAccentColorDark1}"
         CornerRadius="0"/>
     <Style TargetType="muxc:PersonPicture" BasedOn="{StaticResource DefaultPersonPictureStyle}"></Style>
 

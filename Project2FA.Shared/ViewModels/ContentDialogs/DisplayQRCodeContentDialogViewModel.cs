@@ -13,7 +13,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Project2FA.UWP;
 using Windows.UI.Xaml.Media.Imaging;
 #else
-using Project2FA.UNO;
+using Project2FA.Uno;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Data;
 #endif

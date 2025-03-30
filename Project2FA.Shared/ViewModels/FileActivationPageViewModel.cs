@@ -35,8 +35,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 #else
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;

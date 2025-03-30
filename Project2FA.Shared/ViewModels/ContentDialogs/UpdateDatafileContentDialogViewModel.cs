@@ -14,7 +14,7 @@ using UNOversal.Ioc;
 #if WINDOWS_UWP
 using Project2FA.UWP;
 #else
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 using Microsoft.UI.Xaml.Data;
 #endif
 

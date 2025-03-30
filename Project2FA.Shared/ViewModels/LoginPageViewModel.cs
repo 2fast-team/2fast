@@ -32,8 +32,8 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml;
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
 
@@ -46,8 +46,9 @@ using BiometryService;
 #if ANDROID
 using AndroidX.Biometric;
 using BiometryService;
-using Microsoft.Maui.ApplicationModel;
 using AndroidX.Lifecycle;
+using Project2FA.Uno;
+using Project2FA.Uno.Droid;
 #endif
 
 namespace Project2FA.ViewModels

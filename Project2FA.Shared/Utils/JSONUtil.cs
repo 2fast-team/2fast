@@ -9,7 +9,7 @@ using UNOversal.Services.Serialization;
 #if WINDOWS_UWP
 using Project2FA.UWP;
 #else
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 #endif
 
 

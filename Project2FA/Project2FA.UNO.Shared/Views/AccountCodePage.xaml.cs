@@ -10,7 +10,7 @@ using UNOversal.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Controls.Primitives;
 
-namespace Project2FA.UNO.Views
+namespace Project2FA.Uno.Views
 {
     public sealed partial class AccountCodePage : Page
     {

@@ -3,9 +3,7 @@ using Project2FA.ViewModels;
 using Microsoft.UI.Xaml;
 using Project2FA.Services;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace Project2FA.UNO.Views
+namespace Project2FA.Uno.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

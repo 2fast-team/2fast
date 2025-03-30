@@ -22,8 +22,8 @@ using Project2FA.UWP.Views;
 using Windows.UI.Xaml;
 
 #else
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 
 #endif

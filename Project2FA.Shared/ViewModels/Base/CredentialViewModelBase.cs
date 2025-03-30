@@ -13,8 +13,8 @@ using Project2FA.UWP;
 using Project2FA.UWP.Views;
 using Windows.UI.Xaml.Controls;
 #else
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.Uno;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml.Controls;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif

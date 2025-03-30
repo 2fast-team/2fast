@@ -14,7 +14,7 @@ using Project2FA.UWP;
 #else
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Data;
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 #endif
 
 namespace Project2FA.Converters

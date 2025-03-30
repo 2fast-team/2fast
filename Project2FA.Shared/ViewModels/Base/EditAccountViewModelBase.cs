@@ -17,7 +17,7 @@ using UNOversal.Ioc;
 using Project2FA.UWP;
 using Windows.UI.Xaml.Controls;
 #else
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 #endif

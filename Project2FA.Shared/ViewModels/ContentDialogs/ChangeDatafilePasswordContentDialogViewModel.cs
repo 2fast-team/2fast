@@ -21,7 +21,7 @@ using Project2FA.UWP;
 using Windows.Security.Cryptography;
 using Windows.Storage.Streams;
 #else
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 using Microsoft.UI.Xaml.Data;
 #endif
 

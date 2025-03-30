@@ -14,7 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Project2FA.ViewModels;
 
-namespace Project2FA.UNO.Views
+namespace Project2FA.Uno.Views
 {
 
 	public sealed partial class CameraPage : Page

@@ -13,8 +13,8 @@ using CommunityToolkit.Mvvm.Input;
 
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 #endif
 
 namespace Project2FA.ViewModels

@@ -46,10 +46,8 @@ using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Utils;
 using Windows.Security.Authorization.AppCapabilityAccess;
 #else
-
-
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
@@ -375,7 +373,7 @@ namespace Project2FA.Services
 #if __ANDROID__ || __IOS__
                 if (file != null)
 #endif
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
                 {
@@ -406,7 +404,7 @@ namespace Project2FA.Services
                             }
                         }
 #endif
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
                         datafileStr = await FileService.ReadStringAsync(datafilename, folder);
 #endif
 
@@ -420,7 +418,7 @@ namespace Project2FA.Services
                             // app is started via double click on .2fa file
                             if (ActivatedDatafile != null)
                             {
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
                                 // only Windows can use the ProtectData class to encrypt the password for the activated file
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                     ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),

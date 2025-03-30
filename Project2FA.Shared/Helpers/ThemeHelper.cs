@@ -6,7 +6,7 @@ using Project2FA.UWP;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 #else
-using Project2FA.UNO;
+using Project2FA.Uno;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 #endif

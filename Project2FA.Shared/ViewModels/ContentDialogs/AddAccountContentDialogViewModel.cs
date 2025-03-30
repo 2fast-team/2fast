@@ -14,7 +14,7 @@ using System.Collections.Generic;
 #if WINDOWS_UWP
 using Project2FA.UWP;
 #else
-using Project2FA.UNO;
+using Project2FA.Uno;
 using Microsoft.UI.Xaml.Data;
 #endif
 

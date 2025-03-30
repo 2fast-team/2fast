@@ -1,4 +1,5 @@
-﻿using Project2FA.Repository.Models;
+﻿using Microsoft.UI.Xaml.Controls;
+using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.ViewModels;
@@ -10,6 +11,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UNOversal.Extensions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -66,7 +68,16 @@ namespace Project2FA.UWP.Views
 
         private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)
         {
-
+            TeachingTip teachingTip = new TeachingTip
+            {
+                Target = sender as FrameworkElement,
+                MaxWidth = 400,
+                Subtitle = Strings.Resources.AddAccountCodeContentDialogQRCodeHelp,
+                IsLightDismissEnabled = true,
+                BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
+                IsOpen = true
+            };
+            RootGrid.Children.Add(teachingTip);
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)

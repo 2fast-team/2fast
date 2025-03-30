@@ -21,12 +21,9 @@ using Windows.System;
 using UNOversal.Services.Logging;
 using Windows.Globalization;
 using System.IO;
-
 using Windows.Storage.Streams;
 using UNOversal.Services.Serialization;
 using System.Collections.Generic;
-
-
 
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
@@ -44,8 +41,8 @@ using Windows.ApplicationModel.Core;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
-using Project2FA.UNO.Views;
-using Project2FA.UNO;
+using Project2FA.Uno.Views;
+using Project2FA.UnoApp;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
 

@@ -80,8 +80,8 @@
        
     </ContentDialog.Resources>
 
-    <Grid>
-        <Pivot>
+    <Grid x:Name="RootGrid">
+        <Pivot SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex, Mode=TwoWay}">
             <PivotItem
                 Header="#selection">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
@@ -92,120 +92,125 @@
                                 x:Uid="ImportAccountsContentDialogInfo"
                                 Margin="0,10,0,10"/>
                             <Button 
-x:Name="BTN_FileImport"
-Margin="0,10,0,10" 
-HorizontalContentAlignment="Left"
-Style="{StaticResource AccentButtonStyle}"
-Command="{x:Bind ViewModel.CameraScanCommand}"
-MinWidth="255" >
+                                x:Name="BTN_FileImport"
+                                Margin="0,10,0,10" 
+                                HorizontalContentAlignment="Left"
+                                Style="{StaticResource AccentButtonStyle}"
+                                Command="{x:Bind ViewModel.FileImportCommand}"
+                                MinWidth="255" >
                                 <StackPanel 
-        Orientation="Horizontal" 
-        HorizontalAlignment="Left">
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
                                     <FontIcon 
                                         FontSize="30" 
                                         FontFamily="{StaticResource SegoeFluentIcons}" 
                                         Glyph="&#xE8E5;" />
                                     <TextBlock 
-        Text="~ImportAccountsContentDialogFileBTN.Text" 
-        Margin="8,0,0,0" 
-        HorizontalAlignment="Stretch" 
-        VerticalAlignment="Center" 
-        x:Uid="ImportAccountsContentDialogFileBTN" 
-        FontFamily="Segoe UI" />
+                                        Text="~ImportAccountsContentDialogFileBTN.Text" 
+                                        Margin="8,0,0,0" 
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Center" 
+                                        x:Uid="ImportAccountsContentDialogFileBTN" 
+                                        FontFamily="Segoe UI" />
                                 </StackPanel>
                             </Button>
                             <StackPanel Orientation="Horizontal">
                                 <Button 
-            x:Name="BTN_QRCodeScan" 
-            Margin="0,10,0,10" 
-            HorizontalContentAlignment="Left"
-            Style="{StaticResource AccentButtonStyle}"
-            Command="{x:Bind ViewModel.ScanQRCodeCommand}"
-            MinWidth="255">
+                                    x:Name="BTN_QRCodeScan" 
+                                    Margin="0,10,0,10" 
+                                    HorizontalContentAlignment="Left"
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    Command="{x:Bind ViewModel.ScanQRCodeCommand}"
+                                    MinWidth="255">
                                     <StackPanel 
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Left">
-                                        <FontIcon Glyph="&#xED14;" FontSize="30"/>
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+                                        <FontIcon 
+                                            Glyph="&#xED14;" 
+                                            FontSize="30"/>
                                         <TextBlock
-                    Text="~ImportAccountsContentDialogReadQRCode.Text" 
-                    Margin="8,0,0,0" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" 
-                    x:Uid="ImportAccountsContentDialogReadQRCode" />
+                                            Text="~ImportAccountsContentDialogReadQRCode.Text" 
+                                            Margin="8,0,0,0" 
+                                            HorizontalAlignment="Stretch" 
+                                            VerticalAlignment="Center" 
+                                            x:Uid="ImportAccountsContentDialogReadQRCode" />
                                     </StackPanel>
-                                    <!--<Button.Resources>
-                        <muxc:TeachingTip
-                        x:Name="QRCodeScanTip"
-                        x:Uid="AddAccountContentDialogReadQRCodeTip"
-                        Target="{x:Bind BTN_QRCodeScan}"
-                        IsLightDismissEnabled="True">
-                            <muxc:TeachingTip.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Grid>
-                                        <unocontrols:RadialProgressBar
-                                Value="{x:Bind ViewModel.Seconds,Mode=OneWay}" 
-                                Maximum="{x:Bind ViewModel.OpeningSeconds,Mode=OneWay}" 
-                                Width="50"
-                                Height="50"
-                                IsIndeterminate="False"
-                                Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
-                                        <TextBlock 
-                                Opacity="0.6"
-                                Text="{x:Bind ViewModel.Seconds, Mode=OneWay}"
-                                FontSize="16"
-                                VerticalAlignment="Center" 
-                                HorizontalAlignment="Center"/>
-                                    </Grid>
-                                    <TextBlock 
-                                Margin="12,0,0,0"
-                                Text="{x:Bind strings:Resources.AddAccountContentDialogReadQRCodeTeachingTipInfo}"
-                                VerticalAlignment="Center" 
-                                HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </muxc:TeachingTip.Content>
-                        </muxc:TeachingTip>
-                    </Button.Resources>-->
                                 </Button>
                                 <Button
-                    Height="48"
-                    Width="48"
-                    Padding="4,4,4,4"
-                    Click="HLBTN_QRCodeInfo"
-                    Style="{StaticResource TransparentButtonStyle}"
-                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
-                    VerticalAlignment="Center">
+                                    Height="48"
+                                    Width="48"
+                                    Padding="4,4,4,4"
+                                    Click="HLBTN_QRCodeInfo"
+                                    Style="{StaticResource TransparentButtonStyle}"
+                                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
+                                    VerticalAlignment="Center">
                                     <FontIcon
-                    FontSize="20"
-                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                    Glyph="&#xE946;"  />
+                                        FontSize="20"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE946;"  />
                                 </Button>
                             </StackPanel>
 
 
                             <Button 
-            x:Name="BTN_QRCodeCameraScan"
-            Margin="0,10,0,10" 
-            HorizontalContentAlignment="Left"
-            Style="{StaticResource AccentButtonStyle}"
-            Command="{x:Bind ViewModel.CameraScanCommand}"
-            MinWidth="255" >
+                                x:Name="BTN_QRCodeCameraScan"
+                                Margin="0,10,0,10" 
+                                HorizontalContentAlignment="Left"
+                                Style="{StaticResource AccentButtonStyle}"
+                                Command="{x:Bind ViewModel.CameraScanCommand}"
+                                MinWidth="255" >
                                 <StackPanel 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Left">
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
                                     <FontIcon 
-                    FontSize="30"
-                    Glyph="" />
+                                        FontSize="30"
+                                        Glyph="" />
                                     <TextBlock 
-                    Text="~AddAccountContentDialogCameraScanBTN.Text" 
-                    Margin="8,0,0,0" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" 
-                    x:Uid="AddAccountContentDialogCameraScanBTN" 
-                    FontFamily="Segoe UI" />
+                                        Text="~AddAccountContentDialogCameraScanBTN.Text" 
+                                        Margin="8,0,0,0" 
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Center" 
+                                        x:Uid="AddAccountContentDialogCameraScanBTN" 
+                                        FontFamily="Segoe UI" />
                                 </StackPanel>
                             </Button>
                         </StackPanel>
                     </ScrollViewer>
+                </Grid>
+            </PivotItem>
+            <PivotItem 
+                Header="#file import">
+                <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock
+                            Text="~ImportAccountsContentDialogFileImportInfo.Text" 
+                            x:Uid="ImportAccountsContentDialogFileImportInfo"
+                            Margin="0,10,0,10"/>
+                            <ComboBox 
+                                
+                                MinWidth="{StaticResource CardActionControlMinWidth}">
+                                <ComboBoxItem Content="AEGIS" />
+                            </ComboBox>
+                            <!--SelectedIndex="{x:Bind ViewModel.PeriodIndex, Mode=TwoWay}"-->
+
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                Text="~ImportAccountsContentDialogLoadInfo.Text"
+                                x:Uid="ImportAccountsContentDialogLoadInfo"
+                                Margin="0,10,0,10" />
+                            <TextBox 
+                                Text="{x:Bind ViewModel.ImportStorageFile.DisplayName,Mode=OneWay}"
+                                x:Uid="ImportAccountsContentDialogFilename"
+                                IsEnabled="False"
+                                IsReadOnly="True"
+                                Header="#File name"
+                                Margin="0,5,0,5"/>
+                            
+
+                        </StackPanel>
+                    </ScrollViewer>
+                    
                 </Grid>
             </PivotItem>
             <PivotItem 

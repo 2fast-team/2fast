@@ -11,7 +11,7 @@ using Project2FA.UWP;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 #else
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 #endif

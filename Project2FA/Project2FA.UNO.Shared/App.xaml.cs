@@ -25,12 +25,10 @@ using Project2FA.Services;
 using Project2FA.Core.Services.NTP;
 using Windows.UI.Core;
 using Uno.UI;
-using Uno.Extensions.Maui;
-using Project2FA.UNO.MauiControls;
 using Project2FA.Services.Parser;
 using UNOversal.Services.Logging;
 
-namespace Project2FA.UNO
+namespace Project2FA.UnoApp
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

@@ -5,7 +5,7 @@ using Microsoft.UI.Xaml.Media;
 using Project2FA.ViewModels;
 using Project2FA.Repository.Models;
 
-namespace Project2FA.UNO.Views
+namespace Project2FA.Uno.Views
 {
 
     public sealed partial class AddAccountPage : Page

@@ -21,10 +21,6 @@ using System.Text;
 using UNOversal.Services.Logging;
 using Project2FA.Services;
 
-
-
-
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -33,11 +29,12 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using Windows.Security.Authorization.AppCapabilityAccess;
 #else
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
+using Uno.UI;
 #endif
 
 namespace Project2FA.ViewModels
@@ -232,7 +229,7 @@ namespace Project2FA.ViewModels
 #if __ANDROID__
                 //Uno.UI.ContextHelper.Current.GrantUriPermission("com.jpwtechnology.Project2FA.UNO", Android.Net.Uri.Parse(LocalStorageFile.Path), androidFlags);
                 // save the file path for persistable URI permission
-                Uno.UI.ContextHelper.Current.ContentResolver.TakePersistableUriPermission(
+                ContextHelper.Current.ContentResolver.TakePersistableUriPermission(
                     Android.Net.Uri.Parse(LocalStorageFile.Path),
                     Android.Content.ActivityFlags.GrantReadUriPermission | Android.Content.ActivityFlags.GrantWriteUriPermission);
 #endif

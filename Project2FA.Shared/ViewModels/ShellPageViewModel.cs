@@ -16,8 +16,8 @@ using Project2FA.UWP;
 using Windows.UI.Xaml.Controls;
 #else
 using Uno.Toolkit.UI;
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
 #endif

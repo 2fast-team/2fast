@@ -8,7 +8,7 @@ using UNOversal.Services.Secrets;
 #if WINDOWS_UWP
     using Project2FA.UWP;
 #else
-    using Project2FA.UNO;
+    using Project2FA.UnoApp;
 #endif
 
 namespace Project2FA.Services.WebDAV

@@ -19,7 +19,7 @@ using System.Linq;
 
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
-using Project2FA.UNO;
+using Project2FA.UnoApp;
 #endif
 
 namespace Project2FA.ViewModels

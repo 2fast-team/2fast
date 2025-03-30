@@ -11,7 +11,7 @@ using UNOversal.Navigation;
 using Windows.UI.Core;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
 
-namespace Project2FA.UNO.Views
+namespace Project2FA.Uno.Views
 {
     public sealed partial class ShellPage : Page
     {

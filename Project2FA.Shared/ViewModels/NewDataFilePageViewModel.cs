@@ -24,8 +24,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 #else
 using Microsoft.UI.Xaml.Data;
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 #endif

@@ -30,8 +30,8 @@ using Windows.UI.Xaml.Data;
 using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using WinUIWindow = Windows.UI.Xaml.Window;
 #else
-using Project2FA.UNO;
-using Project2FA.UNO.Views;
+using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -447,7 +447,7 @@ namespace Project2FA.ViewModels
 #endif
         }
 
-#if __IOS__ || __ANDROID__
+#if HAS_UNO_WINUI || WINUI_WINDOWING
         public async Task AddAccountManual()
         {
             await NavigateToAddAccountPage(true);
@@ -586,10 +586,6 @@ namespace Project2FA.ViewModels
             {
                 TwoFADataService.ACVCollection.Filter = null;
             }
-
-#if __ANDROID__ || __IOS__
-            Messenger.Send(new Project2FA.UNO.MauiControls.ControlDisposeMessage(true));
-#endif
 
             //Start the app logic
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed

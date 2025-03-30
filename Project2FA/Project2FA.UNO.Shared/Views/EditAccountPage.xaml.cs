@@ -6,7 +6,7 @@ using Project2FA.ViewModels;
 using System;
 using Windows.UI;
 
-namespace Project2FA.UNO.Views
+namespace Project2FA.Uno.Views
 {
     public sealed partial class EditAccountPage : Page
     {

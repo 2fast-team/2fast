@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-	<color name="MaterialPrimaryColor">#FF009BC1</color>
-	<!-- A variant of OnSurfaceMediumColor without alpha opacity (can't use alphas with android colors)  -->
-	<color name="MaterialSurfaceVariantColor">#808080</color>
-</resources>

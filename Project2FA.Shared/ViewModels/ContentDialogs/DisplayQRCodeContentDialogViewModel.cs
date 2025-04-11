@@ -5,9 +5,10 @@ using System;
 using System.Text;
 using UNOversal.Services.Dialogs;
 using Windows.Storage.Streams;
-using QRCoder;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
+using QRCoder;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;

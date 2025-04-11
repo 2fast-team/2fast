@@ -525,9 +525,6 @@
                 Header="#camera"
                 x:Uid="AddAccountContentDialogCameraScan"
                 x:Name="PI_ScanQRCodeCamera">
-                <!--<RelativePanel>
-                    
-                </RelativePanel>-->
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>

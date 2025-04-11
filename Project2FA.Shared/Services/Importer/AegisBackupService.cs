@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UNOversal.Services.Serialization;
 
+// based on
+// https://github.com/stratumauth/app/blob/1f74c5fbfd88eb81a58b1ba71dc3423ac779dc06/Stratum.Core/src/Converter/AegisBackupConverter.cs
+
 namespace Project2FA.Services.Importer
 {
     public class AegisBackupService : IAegisBackupService
@@ -66,11 +69,36 @@ namespace Project2FA.Services.Importer
                             accountList.Add(new TwoFACodeModel
                             {
                                 Label = database.Entries[i].Name,
+                                TotpSize = database.Entries[i].Info.Digits,
                                 Issuer = database.Entries[i].Issuer,
                                 Period = database.Entries[i].Info.Period,
                                 HashMode = database.Entries[i].Info.HashMode,
                                 SecretByteArray = Encoding.UTF8.GetBytes(database.Entries[i].Info.Secret),
-                                AccountIconName = CheckLabelForIcon(database.Entries[i].Name)
+                                AccountIconName = CheckLabelForIcon(database.Entries[i].Name.ToLower())
+                            });
+                        }
+                        else if (database.Entries[i].Type == "steam")
+                        {
+                            accountList.Add(new TwoFACodeModel
+                            {
+                                Label = database.Entries[i].Name,
+                                TotpSize = database.Entries[i].Info.Digits,
+                                Issuer = database.Entries[i].Issuer,
+                                Period = database.Entries[i].Info.Period,
+                                HashMode = database.Entries[i].Info.HashMode,
+                                SecretByteArray = Encoding.UTF8.GetBytes(database.Entries[i].Info.Secret),
+                                AccountIconName = CheckLabelForIcon(database.Entries[i].Name.ToLower())
+                            });
+                        }
+                        else
+                        {
+                            accountList.Add(new TwoFACodeModel
+                            {
+                                Label = database.Entries[i].Name,
+                                Issuer = database.Entries[i].Issuer,
+                                AccountIconName = CheckLabelForIcon(database.Entries[i].Name.ToLower()),
+                                IsEnabled = false,
+                                IsChecked = false
                             });
                         }
                     }

@@ -37,7 +37,6 @@ using UNOversal.Services.Logging;
 using System.Text;
 using UNOversal.Helpers;
 
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -51,6 +50,9 @@ using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
+#endif
+#if WINDOWS
+using Windows.Security.Authorization.AppCapabilityAccess;
 #endif
 
 namespace Project2FA.Services
@@ -219,10 +221,9 @@ namespace Project2FA.Services
                     {
                         if (e.Action == NotifyCollectionChangedAction.Add)
                         {
-                            var useHiddenTOTP = SettingsService.Instance.UseHiddenTOTP;
                             // initialize the newest (last) item
                             int i = (sender as ObservableCollection<TwoFACodeModel>).Count - 1;
-                            Collection[i].HideTOTPCode = useHiddenTOTP;
+                            Collection[i].HideTOTPCode = SettingsService.Instance.UseHiddenTOTP;
                             await InitializeItem(i);
                         }
                     }
@@ -294,7 +295,7 @@ namespace Project2FA.Services
 
                 if (ActivatedDatafile != null)
                 {
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
                     // check if the app has file system access to load the file
                     var checkFileSystemAccess = AppCapability.Create(Constants.BroadFileSystemAccessName).CheckAccess();
                     switch (checkFileSystemAccess)
@@ -316,7 +317,7 @@ namespace Project2FA.Services
                     dbHash = null;
                     passwordHashName = Constants.ActivatedDatafileHashName;
                     datafilename = ActivatedDatafile.Name;
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
                     folder = await ActivatedDatafile.GetParentAsync();
 #endif
 #if __IOS__
@@ -328,7 +329,7 @@ namespace Project2FA.Services
                 }
                 else
                 {
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
                     folder = dbDatafile.IsWebDAV ?
                     ApplicationData.Current.LocalFolder :
                     await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
@@ -451,21 +452,26 @@ namespace Project2FA.Services
                         }
                         if (deserializeCollection != null)
                         {
-                            if (Collection.AddRange(deserializeCollection, true) == 0) // clear the current items and add the new
+                            // It skips any performance heavy logic while it's in use, and automatically calls the method when disposed.
+                            using (ACVCollection.DeferRefresh())
                             {
-                                // if no error has occured
-                                if (!_errorOccurred)
+                                if (Collection.AddRange(deserializeCollection, true) == 0) // clear the current items and add the new
                                 {
-                                    EmptyAccountCollectionTipIsOpen = true;
+                                    // if no error has occured
+                                    if (!_errorOccurred)
+                                    {
+                                        EmptyAccountCollectionTipIsOpen = true;
+                                    }
+                                }
+                                else
+                                {
+                                    if (EmptyAccountCollectionTipIsOpen)
+                                    {
+                                        EmptyAccountCollectionTipIsOpen = false;
+                                    }
                                 }
                             }
-                            else
-                            {
-                                if (EmptyAccountCollectionTipIsOpen)
-                                {
-                                    EmptyAccountCollectionTipIsOpen = false;
-                                }
-                            }
+
                             
 
                             //if (_queryResult == null)

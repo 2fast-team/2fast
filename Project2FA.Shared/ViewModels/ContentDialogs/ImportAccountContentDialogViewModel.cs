@@ -1,7 +1,13 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
+using Project2FA.Core.Utils;
+using Project2FA.Repository.Models;
+using Project2FA.Services;
 using Project2FA.Services.Importer;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.Dialogs;
@@ -16,22 +22,52 @@ namespace Project2FA.ViewModels
         private int _selectedPivotIndex = 0;
         private StorageFile _importStorageFile;
         private bool _isLoading = false;
+        private bool _isCheckedInputs = true;
         public ICommand FileImportCommand { get; }
+        private string _password = string.Empty;
+        private string _lastPivotItemName = string.Empty;
 
+        public ICommand ImportAccountCommand { get; }
+
+        public ObservableCollection<TwoFACodeModel> ImportCollection { get; } = new ObservableCollection<TwoFACodeModel>();
 
         public ImportAccountContentDialogViewModel(IBackupImporterService backupImporterService)
         {
             BackupImporterService = backupImporterService;
             FileImportCommand = new AsyncRelayCommand(FileImportCommandTask);
+            ImportAccountCommand = new RelayCommand(ImportAccountsToCollection);
         }
 
-        private async Task FileImportCommandTask()
+        private void ImportAccountsToCollection()
+        {
+            var accountsToImport = ImportCollection.Where(x => x.IsChecked);
+            DataService.Instance.Collection.AddRange(accountsToImport);
+        }
+
+        public async Task<bool> ConfirmImportTask()
+        {
+            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/aegis.encrypted.json"));
+            (List<TwoFACodeModel> accountList, bool successful)  = await BackupImporterService.ImportAegisBackup(ImportStorageFile, Password);
+            if (successful)
+            {
+                ImportCollection.AddRange(accountList, true);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<StorageFile> FileImportCommandTask()
         {
             FileOpenPicker filePicker = new FileOpenPicker
             {
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
             filePicker.FileTypeFilter.Add(".json");
+
+            // TODO : Set file types for Android and iOS
 #if __IOS__
             // mapping the filter type to definied UTType
             //Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToUTTypeMapping.Add(".2fa", "com.jpwtechnology.2fa");
@@ -50,12 +86,13 @@ namespace Project2FA.ViewModels
 #endif
 
             IsLoading = true;
-            ImportStorageFile = await filePicker.PickSingleFileAsync();
-            if (ImportStorageFile != null)
+            var file = await filePicker.PickSingleFileAsync();
+            if (file != null)
             {
-                SelectedPivotIndex = 1;
+                ImportStorageFile = file;
             }
-            
+            IsLoading = false;
+            return ImportStorageFile;
         }
 
         public async Task InitializeAsync(IDialogParameters parameters)
@@ -63,6 +100,8 @@ namespace Project2FA.ViewModels
             //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/aegis.encrypted.json"));
             //await BackupImporterService.ImportAegisBackup(file, "test");
         }
+
+        
 
         public new int SelectedPivotIndex
         { 
@@ -79,6 +118,21 @@ namespace Project2FA.ViewModels
         { 
             get => _isLoading; 
             set => SetProperty(ref _isLoading, value);
+        }
+        public string Password 
+        { 
+            get => _password; 
+            set => SetProperty(ref _password, value);
+        }
+        public bool IsCheckedInputs
+        { 
+            get => _isCheckedInputs; 
+            set => SetProperty(ref _isCheckedInputs, value);
+        }
+        public string LastPivotItemName 
+        { 
+            get => _lastPivotItemName; 
+            set => SetProperty(ref _lastPivotItemName, value);
         }
     }
 

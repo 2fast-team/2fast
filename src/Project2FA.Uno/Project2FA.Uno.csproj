@@ -74,6 +74,7 @@
 		<PackageReference Include="QRCoder" Version="1.6.0" />
 		<PackageReference Include="Svg.Skia" Version="2.0.0.4" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
+		
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 		<PackageReference Include="ZXing.Net" Version="0.16.10" />
 	</ItemGroup>
@@ -97,6 +98,10 @@
 		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData">
 			<Version>2.8.7.2</Version>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-windows10.0.26100'">
+		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>

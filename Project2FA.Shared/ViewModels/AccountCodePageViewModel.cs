@@ -223,7 +223,7 @@ namespace Project2FA.ViewModels
         {
 #if WINDOWS_UWP
             
-            await DialogService.ShowDialogAsync(new ImportAccountContentDialog(), new DialogParameters());
+            await DialogService.ShowDialogAsync(new ImportBackupContentDialog(), new DialogParameters());
 #else
             await Task.CompletedTask;
 #endif

@@ -64,7 +64,7 @@ namespace Project2FA.Services.Importer
                 }
                 else
                 {
-                    return (null, false);
+                    return (new List<TwoFACodeModel>(), false);
                 }
             }
             catch (Exception exc)
@@ -74,7 +74,7 @@ namespace Project2FA.Services.Importer
                     // TODO wrong password
                 }
                 await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
-                return (null, false);
+                return (new List<TwoFACodeModel>(), false);
             }
         }
     }

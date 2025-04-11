@@ -122,7 +122,7 @@ namespace Project2FA.UWP
             container.RegisterForNavigation<TutorialPage, TutorialPageViewModel>();
             //contentdialogs and view-models
             container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
-            container.RegisterDialog<ImportAccountContentDialog, ImportAccountContentDialogViewModel>();
+            container.RegisterDialog<ImportBackupContentDialog, ImportAccountContentDialogViewModel>();
             container.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();
             container.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
             container.RegisterDialog<RateAppContentDialog>();

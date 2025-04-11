@@ -28,55 +28,6 @@
 
     <Grid>
         <Pivot x:Name="MainPivot" SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}">
-            <!--<PivotItem 
-                Header="#Auswahl" 
-                MinHeight="400" 
-                x:Uid="UseDatafileContentDialogPivotItemKind">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock
-                            TextWrapping="Wrap"
-                            Text="~UseDatafileContentDialogInfo.Text"
-                            x:Uid="UseDatafileContentDialogInfo"
-                            Margin="0,10,0,10" />
-                        <Button 
-                            x:Name="BTN_LocalFile"
-                            Margin="0,10,0,10"
-                            Style="{StaticResource AccentButtonStyle}"
-                            Click="BTN_LocalFile_Click"
-                            MinWidth="200">
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Glyph="&#xE8F4;" 
-                                          FontSize="30"/>
-                                <TextBlock
-                                    Margin="8,0,0,0" 
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Center" 
-                                    x:Uid="UseDatafileContentDialogLocalPath"
-                                    Text="~UseDatafileContentDialogLocalPath.Text"/>
-                            </StackPanel>
-                        </Button>
-                        <Button 
-                            x:Name="BTN_WebDAV" 
-                            Style="{StaticResource AccentButtonStyle}"
-                            Margin="0,10,0,10"
-                            IsEnabled="False"
-                            Command="{x:Bind ViewModel.UseWebDAVCommand}"
-                            MinWidth="200">
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Left">
-                                <FontIcon Glyph="&#xE753;" FontSize="30"/>
-                                <TextBlock 
-                                    Margin="8,0,0,0" 
-                                    HorizontalAlignment="Stretch" 
-                                    VerticalAlignment="Center" 
-                                    x:Uid="UseDatafileContentDialogWebDAV"
-                                    Text="~UseDatafileContentDialogWebDAV.Text"/>
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </ScrollViewer>
-            </PivotItem>-->
             <PivotItem 
                 x:Name="FolderPivotItem"
                 Header="#Datendatei"
@@ -135,7 +86,7 @@
                                     x:Uid="PasswordAdvancedHashOptionText"
                                     IsChecked="{x:Bind ViewModel.UseExtendedHash,Mode=TwoWay}"/>
                             </toolkit:Expander>-->
-                            
+
                         </StackPanel>
                     </ScrollViewer>
 
@@ -210,83 +161,6 @@
                     </ctwc:SwitchPresenter>
                 </Grid>
             </PivotItem>
-            <!--<PivotItem 
-                x:Name="WebDAVPivotItem" 
-                Header="#WebDAV" 
-                MinHeight="400" 
-                x:Uid="UseDatafileContentDialogWebDAVPivotItem">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <Frame Visibility="Collapsed"/>
-                    <ScrollViewer
-                        HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Stretch"
-                        VerticalScrollBarVisibility="Hidden">
-                        <StackPanel 
-                            HorizontalAlignment="Stretch" 
-                            VerticalAlignment="Stretch" >
-                            <TextBox 
-                                x:Uid="ServerAddress"
-                                Header="Server address"
-                                PlaceholderText="https://..."
-                                InputScope="Url"
-                                Text="{x:Bind ViewModel.ServerAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Background="Transparent"
-                                Margin="0,0,0,20"/>
-
-                            <TextBox 
-                                x:Name="TB_Username"
-                                x:Uid="Username"
-                                Header="Username" 
-                                InputScope="Default"
-                                Text="{x:Bind ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Background="Transparent"
-                                Margin="0,0,0,20"/>
-
-                            <PasswordBox 
-                                x:Name="PB_WebDAVPassword"
-                                x:Uid="Password" 
-                                Header="Password" 
-                                Password="{x:Bind ViewModel.WebDAVPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Background="Transparent"
-                                Margin="0,0,0,32" />
-
-                            <Button
-                                x:Uid="Connect" 
-                                Content="#Connect" 
-                                Style="{StaticResource AccentButtonStyle}"
-                                HorizontalAlignment="Stretch"
-                                Command="{x:Bind ViewModel.WebDAVLoginCommand}"/>
-                        </StackPanel>
-                    </ScrollViewer>
-                    <CommandBar Grid.Row="1">
-                        <CommandBar.PrimaryCommands>
-                            <AppBarButton Label="#akzeptieren" Icon="Accept"/>
-                        </CommandBar.PrimaryCommands>
-                    </CommandBar>
-                    --><!--<Grid Grid.Row="1" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Content="#bestätigen"></Button>
-                        <Button Grid.Column="1" HorizontalAlignment="Right">BTN1</Button>
-                    </Grid>--><!--
-                </Grid>
-            </PivotItem>-->
-            <!--<PivotItem x:Name="WebDAVFolderPivotItem" Header="#Datendatei" MinHeight="400">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Text="{x:Bind ViewModel.LocalStorageFolder.DisplayName,Mode=OneWay}"/>
-                        <TextBlock Text="{x:Bind ViewModel.LocalStorageFolder.Path,Mode=OneWay}"/>
-                        <TextBlock Text="{x:Bind ViewModel.LocalStorageFolder.DateCreated,Mode=OneWay}"/>
-                    </StackPanel>
-                </ScrollViewer>
-
-            </PivotItem>-->
         </Pivot>
     </Grid>
 </ContentDialog>

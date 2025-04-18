@@ -33,11 +33,11 @@ namespace Project2FA.Services.Importer
     {
         private ILoggingService LoggingService { get; }
         //private ISerializationService SerializationService { get; }
-        private IAegisBackupService AegisBackupService { get; }
+        private IAegisBackupImportService AegisBackupService { get; }
         public BackupImporterService(
             ILoggingService loggingService, 
             //ISerializationService serializationService,
-            IAegisBackupService aegisBackupService) 
+            IAegisBackupImportService aegisBackupService) 
         {
             LoggingService = loggingService;
             //SerializationService = serializationService;
@@ -45,7 +45,7 @@ namespace Project2FA.Services.Importer
         }
 
         /// <summary>
-        /// 
+        /// Imports the Aegis backup file.
         /// </summary>
         /// <param name="storageFile"></param>
         /// <param name="password"></param>

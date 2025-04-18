@@ -68,8 +68,6 @@ namespace Project2FA.ViewModels
             App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
             var title = Windows.ApplicationModel.Package.Current.DisplayName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
-            //register the messenger calls
-            Messenger.Register<FileActivationPageViewModel, IsScreenCaptureEnabledChangedMessage>(this, (r, m) => r.IsScreenCaptureEnabled = m.Value);
         }
 
         /// <summary>

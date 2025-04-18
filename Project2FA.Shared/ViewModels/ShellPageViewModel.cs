@@ -31,7 +31,6 @@ namespace Project2FA.ViewModels
     {
         private bool _navigationIsAllowed = true;
         private string _title;
-        private bool _isScreenCaptureEnabled;
         public ICommand AccountCodePageCommand { get; }
         public ICommand SearchPageCommand { get; }
         public ICommand SettingsPageCommand { get; }
@@ -107,15 +106,7 @@ namespace Project2FA.ViewModels
         
         public bool IsScreenCaptureEnabled
         {
-            get => _isScreenCaptureEnabled;
-            set
-            {
-                if (SetProperty(ref _isScreenCaptureEnabled, value))
-                {
-                    Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = value;
-                    Messenger.Send(new IsScreenCaptureEnabledChangedMessage(value));
-                }
-            }
+            get => SettingsService.Instance.IsScreenCaptureEnabled;
         }
 
 #if !WINDOWS_UWP

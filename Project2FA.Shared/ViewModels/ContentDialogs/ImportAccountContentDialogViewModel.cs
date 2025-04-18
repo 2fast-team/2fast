@@ -26,7 +26,7 @@ namespace Project2FA.ViewModels
         public ICommand FileImportCommand { get; }
         private string _password = string.Empty;
         private string _lastPivotItemName = string.Empty;
-
+        private bool _passwordGivenChecked = true;
         public ICommand ImportAccountCommand { get; }
 
         public ObservableCollection<TwoFACodeModel> ImportCollection { get; } = new ObservableCollection<TwoFACodeModel>();
@@ -133,6 +133,11 @@ namespace Project2FA.ViewModels
         { 
             get => _lastPivotItemName; 
             set => SetProperty(ref _lastPivotItemName, value);
+        }
+        public bool PasswordGivenChecked 
+        { 
+            get => _passwordGivenChecked; 
+            set => SetProperty(ref _passwordGivenChecked, value);
         }
     }
 

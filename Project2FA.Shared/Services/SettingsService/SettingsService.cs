@@ -457,5 +457,21 @@ namespace Project2FA.Services
             get => _helper.SafeRead(nameof(NextCheckedInPurchaseAddon), new DateTimeOffset());
             set => _helper.TryWrite(nameof(NextCheckedInPurchaseAddon), value);
         }
+
+        /// <summary>
+        /// Indicates whether the screen capture is possible (temp)
+        /// </summary>
+        private bool _isScreenCaptureEnabled = false;
+        public bool IsScreenCaptureEnabled
+        {
+            get => _isScreenCaptureEnabled;
+            internal set
+            {
+                _isScreenCaptureEnabled = value;
+#if WINDOWS_UWP || WINDOWS
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = value;
+#endif
+            }
+        }
     }
 }

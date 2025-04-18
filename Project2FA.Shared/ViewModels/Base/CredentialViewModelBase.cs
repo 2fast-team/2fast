@@ -30,7 +30,6 @@ namespace Project2FA.ViewModels
         public ICommand BiometricoLoginCommand { get; internal set; }
         public IDialogService DialogService { get; internal set; }
         private string _applicationTitle;
-        private bool _isScreenCaptureEnabled;
 
         /// <summary>
         /// Shows a wrong password error to the user
@@ -124,8 +123,7 @@ namespace Project2FA.ViewModels
 
         internal bool IsScreenCaptureEnabled
         {
-            get => _isScreenCaptureEnabled;
-            set => SetProperty(ref _isScreenCaptureEnabled, value);
+            get => SettingsService.Instance.IsScreenCaptureEnabled;
         }
         public bool IsLoading 
         { 

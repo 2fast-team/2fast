@@ -34,64 +34,15 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Thickness x:Key="SettingsExpanderItemPadding">16,0,16,0</Thickness>
-
-            <DataTemplate x:Name="TwoFACodeCustomTemplate" x:DataType="models:TwoFACodeModel">
-                <UserControl
-                    x:Name="Root" 
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch">
-                    <Grid 
-                        HorizontalAlignment="Stretch"
-                        CornerRadius="{ThemeResource ControlCornerRadius}"
-                        Background="{ThemeResource TwoFABackgroundBrush}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MaxWidth="48"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <CheckBox 
-                            IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
-                            IsEnabled="{x:Bind IsEnabled, Mode=OneWay}"
-                            Grid.Row="0"
-                            Grid.RowSpan="2">
-                        </CheckBox>
-
-                        <StackPanel 
-                            Grid.Column="1" 
-                            Margin="0,0,0,15">
-                            <TextBlock
-                                x:Name="AccountName"
-                                FontSize="22"
-                                Margin="0,10,10,0" 
-                                TextWrapping="WrapWholeWords"
-                                VerticalAlignment="Center">
-                                <Bold>
-                                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
-                                </Bold>
-                            </TextBlock>
-                            <TextBlock 
-                                x:Name="IssuerName"
-                                FontWeight="Thin"
-                                Margin="0,10,10,0"
-                                Text="{x:Bind Issuer,Mode=OneWay}" 
-                                FontSize="22"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
-                </UserControl>
-            </DataTemplate>
-
         </ResourceDictionary>
     </ContentDialog.Resources>
 
     <Grid x:Name="RootGrid">
         <Pivot x:Name="MainPivot"
-               Tag="{x:Bind ViewModel.PivotViewSelectionName,Mode=OneWay}"
                SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex,Mode=TwoWay}">
-            <PivotItem Header="#Optionen" x:Uid="AddAccountContentDialogInputType">
+            <PivotItem 
+                Header="#Optionen" 
+                x:Uid="AddAccountContentDialogInputType">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
                         <StackPanel Margin="0,0,16,0">
@@ -135,12 +86,14 @@
                             </StackPanel>
 
 
-                            <Button 
-                            Margin="0,10,0,10" 
-                            Style="{StaticResource AccentButtonStyle}"
-                            Command="{x:Bind ViewModel.ManualInputCommand}"
-                            HorizontalContentAlignment="Left"
-                            MinWidth="255">
+                            <Button
+                                x:Name="BTN_ManualInput"
+                                Margin="0,10,0,10" 
+                                Style="{StaticResource AccentButtonStyle}"
+                                Command="{x:Bind ViewModel.ManualInputCommand}"
+                                HorizontalContentAlignment="Left"
+                                MinWidth="255" 
+                                Click="BTN_ManualInput_Click">
                                 <StackPanel 
                                     Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
@@ -162,7 +115,7 @@
                             HorizontalContentAlignment="Left"
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.CameraScanCommand}"
-                            MinWidth="255" >
+                            MinWidth="255" Click="BTN_QRCodeCameraScan_Click" >
                                 <StackPanel 
                                     Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
@@ -180,6 +133,69 @@
                             </Button>
                         </StackPanel>
                     </ScrollViewer>
+                </Grid>
+            </PivotItem>
+            <PivotItem
+            Header="#camera"
+            x:Uid="AddAccountContentDialogCameraScan"
+            x:Name="PI_ScanQRCodeCamera">
+                <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ComboBox 
+    MinWidth="250"
+    Margin="0,12,0,12"
+    ItemsSource="{x:Bind ViewModel.CameraSourceGroup,Mode=OneWay}"
+    SelectedIndex="{x:Bind ViewModel.SelectedCameraSource,Mode=TwoWay}"
+    VerticalContentAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="mediaSourceType:MediaFrameSourceGroup">
+                                <TextBlock Text="{x:Bind DisplayName}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Border 
+    Margin="0,10,0,0"
+    Visibility="{x:Bind ViewModel.NoCameraFound, Mode=OneWay}" 
+    Grid.Row="1">
+                        <StackPanel>
+                            <TextBlock 
+            x:Uid="AddAccountContentDialogNoCamFound"
+            Text="~AddAccountContentDialogNoCamFound.Text"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border 
+    Margin="0,10,0,0"
+    Visibility="{x:Bind ViewModel.NoCameraPermission, Mode=OneWay}" 
+    Grid.Row="1">
+                        <StackPanel>
+                            <TextBlock
+            x:Uid="AddAccountContentDialogNoCamPermission"
+            Text="~AddAccountContentDialogNoCamPermission.Text"></TextBlock>
+                            <HyperlinkButton 
+            x:Uid="AddAccountContentDialogPrivacyWebcam"
+            Content="~AddAccountContentDialogPrivacyWebcam.Content" 
+            NavigateUri="ms-settings:privacy-webcam"/>
+                            <Button 
+            Command="{x:Bind ViewModel.ReloadCameraCommand}"
+            x:Uid="AddAccountContentDialogBTNCamRetry"
+            Content="~AddAccountContentDialogBTNCamRetry.Content" />
+                        </StackPanel>
+                    </Border>
+                    <MediaPlayerElement 
+                    
+    x:Name="CameraPlayerElement" 
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+    Visibility="{x:Bind ViewModel.CameraSuccessfullyLoaded, Mode=OneWay}"
+    Grid.Row="1">
+                    </MediaPlayerElement>
+
+                    <!--<Canvas Grid.Row="1">
+    <Canvas Name="QRCodeCanvas" RenderTransformOrigin="0.5,0.5"/>
+</Canvas>-->
                 </Grid>
             </PivotItem>
             <PivotItem 
@@ -264,7 +280,7 @@
                                                         VerticalAlignment="Center"
                                                         FontFamily="{StaticResource SimpleIcons}"
                                                         Glyph="{x:Bind UnicodeIndex, Mode=OneWay, Converter={StaticResource FontIconUnicodeIndexToGlyphConverter}}"/>
-                                                        <TextBlock
+                                                    <TextBlock
                                                             Grid.Column="1"
                                                             VerticalAlignment="Center"
                                                             Text="{x:Bind Name, Mode=OneWay}"
@@ -307,7 +323,7 @@
                                 Text="{x:Bind ViewModel.Label,Mode=TwoWay, 
                                 UpdateSourceTrigger=PropertyChanged}" 
                                 Margin="0,0,0,8">
-                            <!--<Interactivity:Interaction.Behaviors>
+                                <!--<Interactivity:Interaction.Behaviors>
                                     <behaviors:HighlightFormFieldOnErrors 
                                         PropertyName="Label"
                                         PropertyErrors="{x:Bind ViewModel.Model.Errors, Mode=OneWay}"/>
@@ -505,85 +521,7 @@
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
-            <PivotItem
-                Header="#import google backup" 
-                x:Uid="AddAccountContentDialogImportBackup"
-                x:Name="PI_ImportAccountBackup">
-                <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
-                    <ListView
-                        ItemsSource="{x:Bind ViewModel.OTPList, Mode=OneWay}"
-                        ItemTemplate="{StaticResource TwoFACodeCustomTemplate}" 
-                        IsItemClickEnabled="True"
-                        ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
-                        HorizontalContentAlignment="Stretch"
-                        HorizontalAlignment="Stretch" 
-                        ItemClick="ListView_ItemClick"/>
-                </Grid>
-                
-            </PivotItem>
-            <PivotItem
-                Header="#camera"
-                x:Uid="AddAccountContentDialogCameraScan"
-                x:Name="PI_ScanQRCodeCamera">
-                <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <ComboBox 
-        MinWidth="250"
-        Margin="0,12,0,12"
-        ItemsSource="{x:Bind ViewModel.CameraSourceGroup,Mode=OneWay}"
-        SelectedIndex="{x:Bind ViewModel.SelectedCameraSource,Mode=TwoWay}"
-        VerticalContentAlignment="Center">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="mediaSourceType:MediaFrameSourceGroup">
-                                <TextBlock Text="{x:Bind DisplayName}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <Border 
-        Margin="0,10,0,0"
-        Visibility="{x:Bind ViewModel.NoCameraFound, Mode=OneWay}" 
-        Grid.Row="1">
-                        <StackPanel>
-                            <TextBlock 
-                x:Uid="AddAccountContentDialogNoCamFound"
-                Text="~AddAccountContentDialogNoCamFound.Text"></TextBlock>
-                        </StackPanel>
-                    </Border>
-                    <Border 
-        Margin="0,10,0,0"
-        Visibility="{x:Bind ViewModel.NoCameraPermission, Mode=OneWay}" 
-        Grid.Row="1">
-                        <StackPanel>
-                            <TextBlock
-                x:Uid="AddAccountContentDialogNoCamPermission"
-                Text="~AddAccountContentDialogNoCamPermission.Text"></TextBlock>
-                            <HyperlinkButton 
-                x:Uid="AddAccountContentDialogPrivacyWebcam"
-                Content="~AddAccountContentDialogPrivacyWebcam.Content" 
-                NavigateUri="ms-settings:privacy-webcam"/>
-                            <Button 
-                Command="{x:Bind ViewModel.ReloadCameraCommand}"
-                x:Uid="AddAccountContentDialogBTNCamRetry"
-                Content="~AddAccountContentDialogBTNCamRetry.Content" />
-                        </StackPanel>
-                    </Border>
-                    <MediaPlayerElement 
-                        
-        x:Name="CameraPlayerElement" 
-                        VerticalAlignment="Center"
-                        VerticalContentAlignment="Center"
-        Visibility="{x:Bind ViewModel.CameraSuccessfullyLoaded, Mode=OneWay}"
-        Grid.Row="1">
-                    </MediaPlayerElement>
-
-                    <!--<Canvas Grid.Row="1">
-        <Canvas Name="QRCodeCanvas" RenderTransformOrigin="0.5,0.5"/>
-    </Canvas>-->
-                </Grid>
-            </PivotItem>
+            
         </Pivot>
     </Grid>
 </ContentDialog>

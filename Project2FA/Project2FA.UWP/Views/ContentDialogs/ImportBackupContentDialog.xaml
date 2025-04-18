@@ -232,10 +232,17 @@
                                 x:Uid="ImportBackupCDLoadInfo"
                                 Margin="0,10,0,10" />
 
+                            <CheckBox
+                                x:Name="CB_PasswordGiven"
+                                Content="~ImportBackupCDPasswordGiven.Content"
+                                x:Uid="ImportBackupCDPasswordGiven"
+                                IsChecked="{x:Bind ViewModel.PasswordGivenChecked,Mode=TwoWay}"/>
+
                             <PasswordBox
                                 x:Uid="ImportBackupCDPassword"
                                 Header="~ImportBackupCDPassword.Header"
                                 PlaceholderText="~ImportBackupCDPassword.PlaceholderText"
+                                IsEnabled="{Binding IsChecked,ElementName=CB_NoPasswordGiven}"
                                 Password="{x:Bind ViewModel.Password, Mode=TwoWay}"/>
 
                             <Button

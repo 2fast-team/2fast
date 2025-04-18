@@ -25,8 +25,6 @@ namespace Project2FA.UWP.Views
 
             //register an event for the changed Tag property of the input textbox (for validation)
             TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
-            // register the change of the input
-            MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
             Loaded += AddAccountContentDialog_Loaded;
         }
 
@@ -58,12 +56,51 @@ namespace Project2FA.UWP.Views
                     break;
             }
 
-            // remove custom PivotItems
-            MainPivot.Items.Remove(PI_ImportAccountBackup);
-            MainPivot.Items.Remove(PI_ScanQRCodeCamera);
+            // remove PivotItems
+            RemovePivotItems(null);
 
             // initialize the camera control
             ViewModel.MediaPlayerElementControl = CameraPlayerElement;
+        }
+
+        private void RemovePivotItems(UIElement element)
+        {
+            switch (element)
+            {
+                case PivotItem item when item.Name == nameof(PI_AccountInput):
+                    if (!MainPivot.Items.Contains(PI_AccountInput))
+                    {
+                        MainPivot.Items.Add(PI_AccountInput);
+                    }
+                    if (MainPivot.Items.Contains(PI_ScanQRCodeCamera))
+                    {
+                        MainPivot.Items.Remove(PI_ScanQRCodeCamera);
+                    }
+                    ViewModel.LastPivotItemName = nameof(PI_AccountInput);
+                    break;
+                case PivotItem item when item.Name == nameof(PI_ScanQRCodeCamera):
+                    if (MainPivot.Items.Contains(PI_AccountInput))
+                    {
+                        MainPivot.Items.Remove(PI_AccountInput);
+                    }
+                    if (!MainPivot.Items.Contains(PI_ScanQRCodeCamera))
+                    {
+                        MainPivot.Items.Add(PI_ScanQRCodeCamera);
+                    }
+                    ViewModel.LastPivotItemName = nameof(PI_ScanQRCodeCamera);
+                    break;
+                default:
+                    if (MainPivot.Items.Contains(PI_AccountInput))
+                    {
+                        MainPivot.Items.Remove(PI_AccountInput);
+                    }
+                    if (MainPivot.Items.Contains(PI_ScanQRCodeCamera))
+                    {
+                        MainPivot.Items.Remove(PI_ScanQRCodeCamera);
+                    }
+                    ViewModel.LastPivotItemName = string.Empty;
+                    break;
+            }
         }
 
         private void TBTagChangedCallback(DependencyObject sender, DependencyProperty dp)
@@ -85,69 +122,6 @@ namespace Project2FA.UWP.Views
                             IsOpen = true,
                         };
                         RootGrid.Children.Add(teachingTip);
-                    }
-                }
-            }
-        }
-
-        private void PivotItemChangedCallback(DependencyObject sender, DependencyProperty dp)
-        {
-            if(dp == Pivot.TagProperty)
-            {
-                if (((Pivot)sender).Tag is string tag)
-                {
-                    if (tag == "ImportBackupAccounts")
-                    {
-                        if (!MainPivot.Items.Contains(PI_ImportAccountBackup))
-                        {
-                            MainPivot.Items.Add(PI_ImportAccountBackup);
-                        }
-                        if (MainPivot.Items.Contains(PI_AccountInput))
-                        {
-                            MainPivot.Items.Remove(PI_AccountInput);
-                        }
-                        if (MainPivot.Items.Contains(PI_ScanQRCodeCamera))
-                        {
-                            MainPivot.Items.Remove(PI_ScanQRCodeCamera);
-                        }
-                    }
-                    if (tag == "NormalInputAccount")
-                    {
-                        if (!MainPivot.Items.Contains(PI_AccountInput))
-                        {
-                            MainPivot.Items.Add(PI_AccountInput);
-                        }
-                        if (MainPivot.Items.Contains(PI_ImportAccountBackup))
-                        {
-                            MainPivot.Items.Remove(PI_ImportAccountBackup);
-                        }
-                        if (MainPivot.Items.Contains(PI_ScanQRCodeCamera))
-                        {
-                            MainPivot.Items.Remove(PI_ScanQRCodeCamera);
-                        }
-                    }
-                    if (tag == "CameraInputAccount")
-                    {
-                        if (!MainPivot.Items.Contains(PI_ScanQRCodeCamera))
-                        {
-                            MainPivot.Items.Add(PI_ScanQRCodeCamera);
-                        }
-                        if (MainPivot.Items.Contains(PI_ImportAccountBackup))
-                        {
-                            MainPivot.Items.Remove(PI_ImportAccountBackup);
-                        }
-                        if (MainPivot.Items.Contains(PI_AccountInput))
-                        {
-                            MainPivot.Items.Remove(PI_AccountInput);
-                        }
-                    }
-                    if (tag == "Overview")
-                    {
-                        ViewModel.SelectedPivotIndex = 0;
-                    }
-                    else
-                    {
-                        ViewModel.SelectedPivotIndex = 1;
                     }
                 }
             }
@@ -292,6 +266,30 @@ namespace Project2FA.UWP.Views
         private void SettingsExpander_Expanded(object sender, System.EventArgs e)
         {
             SV_AccountInput.ScrollToElement(sender as FrameworkElement);
+        }
+
+        private void BTN_ManualInput_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                RemovePivotItems(PI_AccountInput);
+                if (MainPivot.Items.Count > 1)
+                {
+                    ViewModel.SelectedPivotIndex = 1;
+                }
+            }
+        }
+
+        private void BTN_QRCodeCameraScan_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                RemovePivotItems(PI_ScanQRCodeCamera);
+                if (MainPivot.Items.Count > 1)
+                {
+                    ViewModel.SelectedPivotIndex = 1;
+                }
+            }
         }
     }
 }

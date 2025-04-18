@@ -60,7 +60,7 @@ namespace Project2FA.ViewModels
 {
     public class AddAccountViewModelBase : ObservableObject, IDisposable
     {
-        public ObservableCollection<TwoFACodeModel> OTPList { get; internal set; } = new ObservableCollection<TwoFACodeModel>();
+
         public ObservableCollection<MediaFrameSourceGroup> CameraSourceGroup { get; internal set; } = new ObservableCollection<MediaFrameSourceGroup>();
 
         public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
@@ -112,7 +112,6 @@ namespace Project2FA.ViewModels
             Model = new TwoFACodeModel();
             ManualInputCommand = new RelayCommand(() =>
             {
-                PivotViewSelectionName = "NormalInputAccount";
 
 #if WINDOWS_UWP
                 CleanUpCamera();
@@ -155,7 +154,7 @@ namespace Project2FA.ViewModels
         private async Task ScanQRCodeCommandTask()
         {
             await CleanUpCamera();
-            OTPList.Clear();
+            //OTPList.Clear();
             _dispatcherTimer.Tick -= OnTimedEvent;
             _dispatcherTimer.Tick += OnTimedEvent;
             _dispatcherTimer.Start();
@@ -171,7 +170,6 @@ namespace Project2FA.ViewModels
 
             CameraSourceGroup.AddRange(await CameraHelper.GetFrameSourceGroupsAsync());
 
-            PivotViewSelectionName = "CameraInputAccount";
             if (CameraSourceGroup.Count > 0)
             {
                 await InitializeCameraAsync();
@@ -189,22 +187,9 @@ namespace Project2FA.ViewModels
             await CleanUpCamera();
 #endif
 
-            if (OTPList.Count > 0)
-            {
-                for (int i = 0; i < OTPList.Count; i++)
-                {
-                    if (OTPList[i].IsChecked)
-                    {
-                        DataService.Instance.Collection.Add(OTPList[i]);
-                    }
-                }
-            }
-            else
-            {
-                Model.SelectedCategories ??= new ObservableCollection<CategoryModel>();
-                Model.SelectedCategories.AddRange(GlobalTempCategories.Where(x => x.IsSelected == true), true);
-                DataService.Instance.Collection.Add(Model);
-            }
+            Model.SelectedCategories ??= new ObservableCollection<CategoryModel>();
+            Model.SelectedCategories.AddRange(GlobalTempCategories.Where(x => x.IsSelected == true), true);
+            DataService.Instance.Collection.Add(Model);
 #if __ANDROID__ || _IOS__
             await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(AccountCodePage));
 #endif
@@ -381,40 +366,40 @@ namespace Project2FA.ViewModels
             Issuer = string.Empty;
 
             //migrate code import (Google)
-            if (_qrCodeStr.StartsWith("otpauth-migration://"))
+            //if (_qrCodeStr.StartsWith("otpauth-migration://"))
+            //{
+            //    if (await ParseMigrationQRCode())
+            //    {
+            //        PivotViewSelectionName = "ImportBackupAccounts";
+            //        CheckInputs();
+            //    }
+            //    else
+            //    {
+            //        await QRReadError();
+            //        PivotViewSelectionName = "Overview";
+            //        //move to the selection dialog
+            //        SelectedPivotIndex = 0;
+            //    }
+            //}
+            //// normal otpauth import
+            //else
+            //{
+            //    //move to the input dialog
+            //    PivotViewSelectionName = "NormalInputAccount";
+
+            //}
+            SelectedPivotIndex = 1;
+
+            if (await ParseQRCode() && !string.IsNullOrEmpty(SecretKey)
+               && !string.IsNullOrEmpty(Issuer))
             {
-                if (await ParseMigrationQRCode())
-                {
-                    PivotViewSelectionName = "ImportBackupAccounts";
-                    CheckInputs();
-                }
-                else
-                {
-                    await QRReadError();
-                    PivotViewSelectionName = "Overview";
-                    //move to the selection dialog
-                    SelectedPivotIndex = 0;
-                }
+                IsPrimaryBTNEnable = true;
             }
-            // normal otpauth import
             else
             {
-                //move to the input dialog
-                PivotViewSelectionName = "NormalInputAccount";
-                SelectedPivotIndex = 1;
-
-                if (await ParseQRCode() && !string.IsNullOrEmpty(SecretKey)
-                   && !string.IsNullOrEmpty(Issuer))
-                {
-                    IsPrimaryBTNEnable = true;
-                }
-                else
-                {
-                    await QRReadError();
-                    PivotViewSelectionName = "Overview";
-                    //move to the selection dialog
-                    SelectedPivotIndex = 0;
-                }
+                await QRReadError();
+                //move to the selection dialog
+                SelectedPivotIndex = 0;
             }
         }
 
@@ -424,91 +409,7 @@ namespace Project2FA.ViewModels
             await dialog.ShowAsync();
         }
 
-        /// <summary>
-        /// Parse the protobuf data to TwoFACodeModel list
-        /// </summary>
-        /// <returns></returns>
-        private Task<bool> ParseMigrationQRCode()
-        {
-            try
-            {
-                var otpmm = new OTPMigrationModel();
-                var query = new Uri(_qrCodeStr).Query.Replace("?data=", string.Empty);
-                var dataByteArray = Convert.FromBase64String(query);
-                using (var memoryStream = new MemoryStream())
-                {
-                    memoryStream.Write(dataByteArray, 0, dataByteArray.Length);
-                    memoryStream.Position = 0;
-                    otpmm = ProtoBuf.Serializer.Deserialize<OTPMigrationModel>(memoryStream);
-                    for (int i = 0; i < otpmm.otp_parameters.Count; i++)
-                    {
-                        if (otpmm.otp_parameters[i].Type == OTPMigrationModel.OtpType.OtpTypeTotp)
-                        {
-                            string label = string.Empty, issuer = string.Empty;
-                            if (otpmm.otp_parameters[i].Name.Contains(":"))
-                            {
-                                string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
-                                label = issuerArray[0];
-                                issuer = issuerArray[1];
-                            }
-                            else
-                            {
-                                label = otpmm.otp_parameters[i].Name;
-                                issuer = otpmm.otp_parameters[i].Issuer;
-                            }
-                            int hashMode = 0;
-                            switch (otpmm.otp_parameters[i].Algorithm)
-                            {
-                                case OTPMigrationModel.Algorithm.AlgorithmSha1:
-                                    hashMode = 0;
-                                    break;
-                                case OTPMigrationModel.Algorithm.AlgorithmSha256:
-                                    hashMode = 1;
-                                    break;
-                                case OTPMigrationModel.Algorithm.AlgorithmSha512:
-                                    hashMode = 2;
-                                    break;
-                            }
-                            OTPList.Add(new TwoFACodeModel
-                            {
-                                Label = label,
-                                Issuer = issuer,
-                                SecretByteArray = otpmm.otp_parameters[i].Secret,
-                                HashMode = (OtpHashMode)hashMode
-                            });
-                        }
-                        else
-                        {
-                            // no TOTP, not supported
-                            string label = string.Empty, issuer = string.Empty;
-                            if (otpmm.otp_parameters[i].Name.Contains(":"))
-                            {
-                                string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
-                                label = issuerArray[0];
-                                issuer = issuerArray[1];
-                            }
-                            else
-                            {
-                                label = otpmm.otp_parameters[i].Name;
-                                issuer = otpmm.otp_parameters[i].Issuer;
-                            }
-                            OTPList.Add(new TwoFACodeModel
-                            {
-                                Label = label,
-                                Issuer = issuer,
-                                IsChecked = false,
-                                IsEnabled = false
-                            });
-                        }
-                    }
-                }
-                return Task.FromResult(true);
-            }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
-        }
+
 
         /// <summary>
         /// Parses the QR code by splitting the different parts
@@ -576,14 +477,7 @@ namespace Project2FA.ViewModels
         /// </summary>
         private void CheckInputs()
         {
-            if (OTPList.Count > 0)
-            {
-                IsPrimaryBTNEnable = true;
-            }
-            else
-            {
-                IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(SecretKey) && !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrWhiteSpace(Issuer);
-            }
+            IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(SecretKey) && !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrWhiteSpace(Issuer);
         }
 
         #region FontIconRegion
@@ -794,67 +688,6 @@ namespace Project2FA.ViewModels
             }
         }
 
-        //private async Task<string> ReadQRCodeFromSoftwareBitmap(SoftwareBitmap softwareBitmap)
-        //{
-        //    try
-        //    {
-        //        var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
-        //        if (luminanceSource != null)
-        //        {
-        //            var barcodeReader = new BarcodeReader
-        //            {
-        //                AutoRotate = true,
-        //                Options = { TryHarder = true }
-        //            };
-        //            var decodedStr = barcodeReader.Decode(luminanceSource);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
-
-        //async Task SetupCameraAutoFocus()
-        //{
-        //    if (IsFocusSupported)
-        //    {
-        //        var focusControl = _mediaCapture.VideoDeviceController.FocusControl;
-
-        //        var focusSettings = new FocusSettings();
-
-        //        //if (ScanningOptions.DisableAutofocus)
-        //        //{
-        //        //    focusSettings.Mode = FocusMode.Manual;
-        //        //    focusSettings.Distance = ManualFocusDistance.Nearest;
-        //        //    focusControl.Configure(focusSettings);
-        //        //    return;
-        //        //}
-
-        //        focusSettings.AutoFocusRange = focusControl.SupportedFocusRanges.Contains(AutoFocusRange.FullRange)
-        //            ? AutoFocusRange.FullRange
-        //            : focusControl.SupportedFocusRanges.FirstOrDefault();
-
-        //        var supportedFocusModes = focusControl.SupportedFocusModes;
-        //        if (supportedFocusModes.Contains(FocusMode.Continuous))
-        //        {
-        //            focusSettings.Mode = FocusMode.Continuous;
-        //        }
-        //        else if (supportedFocusModes.Contains(FocusMode.Auto))
-        //        {
-        //            focusSettings.Mode = FocusMode.Auto;
-        //        }
-
-        //        if (focusSettings.Mode == FocusMode.Continuous || focusSettings.Mode == FocusMode.Auto)
-        //        {
-        //            focusSettings.WaitForFocus = false;
-        //            focusControl.Configure(focusSettings);
-        //            await focusControl.FocusAsync();
-        //        }
-        //    }
-        //}
 #endif
         #endregion
 
@@ -943,18 +776,7 @@ namespace Project2FA.ViewModels
             get => _selectedPivotIndex;
             set
             {
-                if (SetProperty(ref _selectedPivotIndex, value))
-                {
-                    if (value == 0)
-                    {
-                        PivotViewSelectionName = "Overview";
-                    }
-                    //OnPropertyChanged(nameof(PivotViewSelectionName));
-                    //if(value== 0)
-                    //{
-                    //    PivotViewSelectionName = "NormalInputAccount";
-                    //}
-                }
+                SetProperty(ref _selectedPivotIndex, value);
             }
         }
         public bool IsPrimaryBTNEnable
@@ -1061,11 +883,6 @@ namespace Project2FA.ViewModels
         {
             get => _tempIconLabel;
             set => SetProperty(ref _tempIconLabel, value);
-        }
-        public string PivotViewSelectionName
-        {
-            get => _pivotViewSelectionName;
-            set => SetProperty(ref _pivotViewSelectionName, value);
         }
         public int SelectedCameraSource
         {

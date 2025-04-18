@@ -29,6 +29,7 @@ namespace Project2FA.ViewModels
     /// </summary>
     public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
+        private string _lastPivotItemName;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -51,9 +52,7 @@ namespace Project2FA.ViewModels
             if (parameters.TryGetValue<List<KeyValuePair<string, string>>>("account", out var account))
             {
                 ParseQRCode(account);
-                PivotViewSelectionName = "NormalInputAccount";
             }
-            OTPList.Clear();
             if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
             {
                 GlobalTempCategories.Clear();
@@ -69,6 +68,11 @@ namespace Project2FA.ViewModels
         public bool IsProVersion
         {
             get => SettingsService.Instance.IsProVersion;
+        }
+        public string LastPivotItemName 
+        { 
+            get => _lastPivotItemName; 
+            set => _lastPivotItemName = value; 
         }
 #endif
     }

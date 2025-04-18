@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Project2FA.Services.Importer
 {
-    public interface IAegisBackupService
+    public interface IAegisBackupImportService
     {
         public Task<(List<TwoFACodeModel> accountList, bool successful)> ImportBackup(string content, byte[] bytePassword);
     }

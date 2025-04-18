@@ -111,12 +111,12 @@ namespace Project2FA.UWP.Views
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = ViewModel.IsScreenCaptureEnabled = true;
+                SettingsService.Instance.IsScreenCaptureEnabled = true;
             }
             else
             {
                 //prevent screenshot capture for the app
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsScreenCaptureEnabled = ViewModel.IsScreenCaptureEnabled = false;
+                SettingsService.Instance.IsScreenCaptureEnabled = false;
             }
             Loaded += ShellPage_Loaded;
         }

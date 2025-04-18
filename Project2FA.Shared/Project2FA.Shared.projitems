@@ -48,10 +48,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\DatafileWriteStatusChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\FilteringChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\InAppItemChangedMessage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Messenger\IsScreenCaptureEnabledChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\PasswordStatusChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\WebDAVStatusChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AegisBackupModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AndOTPBackupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
@@ -60,9 +60,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentItemModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AegisBackupService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WebDAVStatusEnums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AegisBackupImportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AndOtpBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\BackupImporterService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAegisBackupService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAndOTPBackupImportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAegisBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IBackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />

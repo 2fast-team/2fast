@@ -109,7 +109,7 @@ namespace Project2FA.UWP
             container.RegisterSingleton<IPurchaseAddOnService, PurchaseAddOnService>();
             container.RegisterSingleton<ILoggingService, LoggingService>();
             container.RegisterSingleton<IBackupImporterService, BackupImporterService>();
-            container.RegisterSingleton<IAegisBackupService, AegisBackupService>();
+            container.RegisterSingleton<IAegisBackupImportService, AegisBackupImportService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();
@@ -176,7 +176,7 @@ namespace Project2FA.UWP
                         {
                             if (bool.TryParse(cmdlist[i].Value, out bool value))
                             {
-                                ShellPageInstance.ViewModel.IsScreenCaptureEnabled = value;
+                                SettingsService.Instance.IsScreenCaptureEnabled = value;
                             }
                             break;
                         }

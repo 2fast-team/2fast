@@ -135,8 +135,6 @@ namespace Project2FA.ViewModels
 
             var title = Strings.Resources.ApplicationName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
-            //register the messenger calls
-            Messenger.Register<LoginPageViewModel, IsScreenCaptureEnabledChangedMessage>(this, (r, m) => r.IsScreenCaptureEnabled = m.Value);
         }
 
 #if WINDOWS_UWP

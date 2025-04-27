@@ -129,7 +129,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
-                    <ListViewItemPresenter 
+                    <ListViewItemPresenter
+                        x:Name="Root"
                         CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
                         ContentMargin="{TemplateBinding Padding}" 
                         CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" 
@@ -146,7 +147,37 @@
                         ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
                         SelectionCheckMarkVisualEnabled="True"
                         SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" 
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="Root" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="Root" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverSelected">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="Root" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="Root" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="Root" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </ListViewItemPresenter>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

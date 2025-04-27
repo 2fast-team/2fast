@@ -6,6 +6,8 @@
     xmlns:wctc="using:CommunityToolkit.WinUI.Controls"
     xmlns:appcontrols="using:Project2FA.UWP.Controls"
     xmlns:unocontrols="using:Project2FA.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactivity"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:views="using:Project2FA.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,7 +19,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:Project2FA.Helpers"
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     x:Name="Page"
     mc:Ignorable="d">
 
@@ -552,12 +553,44 @@
                             </Button>
                             <Grid>
                                 <TextBlock
+                                    x:Name="TwoFACodeTextBlock"
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
                                 FontSize="28"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                                 VerticalAlignment="Center"
                                 CharacterSpacing="60"
-                                Foreground="{ThemeResource SystemAccentColor}" />
+                                Foreground="{ThemeResource SystemAccentColor}" >
+                                    <TextBlock.Resources>
+                                        <Storyboard x:Name="TextChangeAnimation" >
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="TwoFACodeTextBlock"
+                                                Storyboard.TargetProperty="Opacity" 
+                                                From="1" 
+                                                To="0" 
+                                                AutoReverse="True" 
+                                                Duration="0:0:0.5" 
+                                                RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                        <Storyboard x:Name="TextChangeNormal" >
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="TwoFACodeTextBlock"
+                                                Storyboard.TargetProperty="Opacity" 
+                                                To="1" 
+                                                Duration="0:0:0.1"  />
+                                        </Storyboard>
+                                    </TextBlock.Resources>
+                                    <TextBlock.RenderTransform>
+                                        <CompositeTransform/>
+                                    </TextBlock.RenderTransform>
+                                    <interactivity:Interaction.Behaviors>
+                                        <interactivity:DataTriggerBehavior Binding="{x:Bind Seconds,Mode=OneWay}" ComparisonCondition="LessThan" Value="3">
+                                            <interactivity:ControlStoryboardAction Storyboard="{StaticResource TextChangeAnimation}"/>
+                                        </interactivity:DataTriggerBehavior>
+                                        <interactivity:DataTriggerBehavior Binding="{x:Bind Seconds,Mode=OneWay}" ComparisonCondition="GreaterThan" Value="3">
+                                            <interactivity:ControlStoryboardAction Storyboard="{StaticResource TextChangeNormal}"/>
+                                        </interactivity:DataTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </TextBlock>
                                 <TextBlock
                                 Text="______"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
@@ -778,12 +811,44 @@
                             </Button>
                             <Grid>
                                 <TextBlock
+                                x:Name="TwoFACodeTextBlock"
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
                                 FontSize="28"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                                 VerticalAlignment="Center"
                                 CharacterSpacing="60"
-                                Foreground="{ThemeResource SystemAccentColor}" />
+                                Foreground="{ThemeResource SystemAccentColor}" >
+                                    <TextBlock.Resources>
+                                        <Storyboard x:Name="TextChangeAnimation" >
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="TwoFACodeTextBlock"
+                                                Storyboard.TargetProperty="Opacity" 
+                                                From="1" 
+                                                To="0" 
+                                                AutoReverse="True" 
+                                                Duration="0:0:0.5" 
+                                                RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                        <Storyboard x:Name="TextChangeNormal" >
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="TwoFACodeTextBlock"
+                                                Storyboard.TargetProperty="Opacity" 
+                                                To="1" 
+                                                Duration="0:0:0.1"  />
+                                        </Storyboard>
+                                    </TextBlock.Resources>
+                                    <TextBlock.RenderTransform>
+                                        <CompositeTransform/>
+                                    </TextBlock.RenderTransform>
+                                    <interactivity:Interaction.Behaviors>
+                                        <interactivity:DataTriggerBehavior Binding="{x:Bind Seconds,Mode=OneWay}" ComparisonCondition="LessThan" Value="3">
+                                            <interactivity:ControlStoryboardAction Storyboard="{StaticResource TextChangeAnimation}"/>
+                                        </interactivity:DataTriggerBehavior>
+                                        <interactivity:DataTriggerBehavior Binding="{x:Bind Seconds,Mode=OneWay}" ComparisonCondition="GreaterThan" Value="3">
+                                            <interactivity:ControlStoryboardAction Storyboard="{StaticResource TextChangeNormal}"/>
+                                        </interactivity:DataTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </TextBlock>
                                 <TextBlock
                                 Text="______"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
@@ -1042,6 +1107,8 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <wctc:WrapPanel 
+                        HorizontalSpacing="10"
+                        VerticalSpacing="10"
                         Orientation="Horizontal" 
                         HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
@@ -1052,7 +1119,6 @@
             ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
             ItemTemplate="{StaticResource ShimmerTemplate}">
             <!--<ListView.ItemContainerStyle>
-
                     <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="Padding" Value="2,16,20,0"/>

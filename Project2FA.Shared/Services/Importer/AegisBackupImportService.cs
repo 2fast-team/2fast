@@ -3,6 +3,7 @@ using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.Encoders;
 using Project2FA.Repository.Models;
+using Project2FA.Repository.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,9 +88,10 @@ namespace Project2FA.Services.Importer
             List<TwoFACodeModel> accountList = new List<TwoFACodeModel>();
             for (int i = 0; i < database.Entries.Count; i++)
             {
-                if (database.Entries[i].Type == "totp") // || database.Entries[i].Type == "steam"
+                if (database.Entries[i].Type == "totp" || database.Entries[i].Type == "steam")
                 {
-                    accountList.Add(new TwoFACodeModel
+
+                    var model = new TwoFACodeModel
                     {
                         Label = database.Entries[i].Name,
                         TotpSize = database.Entries[i].Info.Digits,
@@ -98,7 +100,12 @@ namespace Project2FA.Services.Importer
                         HashMode = database.Entries[i].Info.HashMode,
                         SecretByteArray = Encoding.UTF8.GetBytes(database.Entries[i].Info.Secret),
                         AccountIconName = CheckLabelForIcon(database.Entries[i].Name.ToLower())
-                    });
+                    };
+                    if (database.Entries[i].Type == "steam")
+                    {
+                        model.OTPType = "steam";
+                    }
+                    accountList.Add(model);
                 }
                 else
                 {

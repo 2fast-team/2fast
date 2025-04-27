@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System;
 using Windows.UI.WebUI;
+using Project2FA.Repository.Models.Enums;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -74,6 +75,9 @@ namespace Project2FA.Repository.Models
 
         //no need for SetProperty, because no UI binding
         public OtpHashMode HashMode { get; set; } = OtpHashMode.Sha1;
+
+        [Encrypt]
+        public string OTPType { get; set; } = "totp";
 
         //no need for SetProperty, because no UI binding
         public int TotpSize { get; set; } = 6;

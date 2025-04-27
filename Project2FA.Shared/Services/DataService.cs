@@ -419,7 +419,7 @@ namespace Project2FA.Services
                             // app is started via double click on .2fa file
                             if (ActivatedDatafile != null)
                             {
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS_UWP
                                 // only Windows can use the ProtectData class to encrypt the password for the activated file
                                 datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
                                     ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
@@ -511,7 +511,15 @@ namespace Project2FA.Services
 
                         }
 #else
-                        await ErrorDialogs.ShowPasswordError();
+                        if (exc.Message == "Padding is invalid and cannot be removed.")
+                        {
+                            await ErrorDialogs.ShowPasswordError();
+                        }
+                        else
+                        {
+                            await ErrorDialogs.ShowUnexpectedError(exc);
+                        }
+                        
 #endif
 
 
@@ -879,22 +887,43 @@ namespace Project2FA.Services
             {
                 if (Collection[i].SecretByteArray != null)
                 {
-                    Totp totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
-                    int remainingTime;
+                    int remainingTime = 0;
+                    Enum.TryParse<OTPType>(Collection[i].OTPType, out OTPType oTPResult);
+                    if (oTPResult == OTPType.totp)
+                    {
+                        Totp totp = new Totp(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
+                        if (_checkedTimeSynchronisation && _ntpServerTimeDifference.TotalMilliseconds > 0)
+                        {
+                            Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
+                            //calc the remaining time for the TOTP code with the time correction
+                            remainingTime = Collection[i].Period -
+                                (int)((DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds).Ticks - unixEpochTicks)
+                                / ticksToSeconds % Collection[i].Period);
+                        }
+                        else
+                        {
+                            Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
+                            remainingTime = totp.RemainingSeconds();
+                        }
+                    }
+                    if (oTPResult == OTPType.steam)
+                    {
+                        Steam otp = new Steam(Collection[i].SecretByteArray, Collection[i].Period, Collection[i].HashMode, Collection[i].TotpSize);
+                        if (_checkedTimeSynchronisation && _ntpServerTimeDifference.TotalMilliseconds > 0)
+                        {
+                            Collection[i].TwoFACode = otp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
+                            //calc the remaining time for the TOTP code with the time correction
+                            remainingTime = Collection[i].Period -
+                                (int)((DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds).Ticks - unixEpochTicks)
+                                / ticksToSeconds % Collection[i].Period);
+                        }
+                        else
+                        {
+                            Collection[i].TwoFACode = otp.ComputeTotp(DateTime.UtcNow);
+                            remainingTime = otp.RemainingSeconds();
+                        }
+                    }
 
-                    if (_checkedTimeSynchronisation && _ntpServerTimeDifference != null)
-                    {
-                        Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds));
-                        //calc the remaining time for the TOTP code with the time correction
-                        remainingTime = Collection[i].Period -
-                            (int)((DateTime.UtcNow.AddMilliseconds(_ntpServerTimeDifference.TotalMilliseconds).Ticks - unixEpochTicks)
-                            / ticksToSeconds % Collection[i].Period);
-                    }
-                    else
-                    {
-                        Collection[i].TwoFACode = totp.ComputeTotp(DateTime.UtcNow);
-                        remainingTime = totp.RemainingSeconds();
-                    }
                     Logger.Log("TOTP remaining Time: " + remainingTime.ToString(), Category.Debug, Priority.None);
                     Collection[i].Seconds = remainingTime;
                 }

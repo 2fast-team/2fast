@@ -521,10 +521,6 @@ namespace Project2FA.Services
                         }
                         
 #endif
-
-
-                        //CheckLocalDatafile();
-
                     }
                     finally
                     {

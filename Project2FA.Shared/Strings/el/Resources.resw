@@ -1380,4 +1380,52 @@
   <data name="CloseAppDialogContent" xml:space="preserve">
     <value />
   </data>
+  <data name="ImportBackupCDFileBTN.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupContentDialogFilename.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDChangeDatafile.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDPassword.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDPasswordGiven.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDConfirmFileImport.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDCameraPI.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDImportAccountsPI.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDImportBackupFilePI.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCD.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
+    <value />
+  </data>
 </root>

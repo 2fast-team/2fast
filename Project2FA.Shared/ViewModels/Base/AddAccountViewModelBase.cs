@@ -315,7 +315,7 @@ namespace Project2FA.ViewModels
                     var decodedStr = barcodeReader.Decode(luminanceSource);
                     if (decodedStr != null)
                     {
-                        if (decodedStr.Text.StartsWith("otpauth") || decodedStr.Text.StartsWith("otpauth-migration"))
+                        if (decodedStr.Text.StartsWith("otpauth") || decodedStr.Text.StartsWith("steam"))// || decodedStr.Text.StartsWith("otpauth-migration"))
                         {
                             _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
                             await ReadAuthenticationFromString();

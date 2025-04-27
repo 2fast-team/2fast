@@ -16,7 +16,7 @@
     Title="~ImportBackupCD.Title"
     x:Uid="ImportBackupCD"
     PrimaryButtonText="~ImportBackupCD.PrimaryButtonText"
-    SecondaryButtonText="~ImportBackupCD.SecondaryButtonText"
+    SecondaryButtonText="{x:Bind strings:Resources.ButtonTextCancel}"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
     SecondaryButtonStyle="{StaticResource ButtonRevealStyle}"
     SecondaryButtonCommand="{x:Bind ViewModel.SecondayButtonCommand}"
@@ -201,7 +201,7 @@
                 </Grid>
             </PivotItem>
             <PivotItem
-                x:Uid="ImportBackupContentDialogImportBackupFile"
+                x:Uid="ImportBackupCDImportBackupFilePI"
                 Header="#file import"
                 x:Name="PI_ImportBackupFile">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
@@ -214,13 +214,15 @@
                                 Text="{x:Bind ViewModel.ImportStorageFile.DisplayName,Mode=OneWay}"
                                 x:Uid="ImportBackupContentDialogFilename"
                                 IsReadOnly="True"
-                                Header="#File name"/>
+                                Header="~ImportBackupContentDialogFilename.Header"/>
                             <Button 
                                 x:Uid="ImportBackupCDChangeDatafile" 
                                 Command="{x:Bind ViewModel.FileImportCommand}"
                                 Content="~ImportBackupCDChangeDatafile.Content"/>
                             <ComboBox 
-                                
+                                x:Uid="ImportBackupCDCBImportFormat"
+                                Header="~ImportBackupCDCBImportFormat.Header"
+                                PlaceholderText="~ImportBackupCDCBSelectImportFormat.PlaceholderText"
                                 MinWidth="{StaticResource CardActionControlMinWidth}">
                                 <ComboBoxItem Content="AEGIS" />
                             </ComboBox>
@@ -260,6 +262,7 @@
             </PivotItem>
             <PivotItem 
                 Header="#camera"
+                x:Uid="ImportBackupCDCameraPI"
                 x:Name="PI_ImportBackupCamera">
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <Grid.RowDefinitions>
@@ -317,7 +320,7 @@
             </PivotItem>
             <PivotItem
                 Header="#import accounts"
-                x:Uid="ImportBackupContentDialogImportAccounts"
+                x:Uid="ImportBackupCDImportAccountsPI"
                 x:Name="PI_ImportAccountList">
                 <Grid >
                     <Grid.RowDefinitions>

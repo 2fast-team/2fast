@@ -2,11 +2,9 @@
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Project2FA.Core.ProtoModels;
 using OtpNet;
@@ -18,6 +16,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 #else
 using Project2FA.UnoApp;
+using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;

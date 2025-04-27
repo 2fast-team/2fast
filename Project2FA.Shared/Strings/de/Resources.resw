@@ -166,10 +166,8 @@
     <value>Meist E-Mail Adresse</value>
   </data>
   <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
-    <value>Um ein neues Konto für die Zwei-Faktor-Authentifizierung einzurichten, muss vom gewünschten Dienst ein QR-Code oder ein Schlüssel (kryptischer Text) vorhanden sein.
-
-# Mit welcher Funktion wollen Sie ein Konto hinzufügen?
-</value>
+    <value>Um ein neues Konto für die Zwei-Faktor-Authentifizierung einzurichten, muss vom gewünschten Dienst ein QR-Code oder ein Schlüssel (kryptischer Text) vorhanden sein.&lt;br&gt;
+# Mit welcher Funktion wollen Sie ein Konto hinzufügen?</value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
     <value>Eingaben</value>
@@ -540,13 +538,11 @@ Starten Sie direkt durch und bringen Sie mehr Sicherheit durch einen zweiten Fak
     <value>Passwort eingeben</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogDescription" xml:space="preserve">
-    <value>Die Anwendung besitzt derzeit **nicht** die erforderlichen Zugriffsrechte, um auf die vorhandene Datendatei zuzugreifen.  
-Für das setzen der Rechte muss die Anwendung jedoch geschlossen werden.  
-  
-Bitte erteilen Sie die erforderlichen Rechte in den Einstellungen und starten Sie die Anwendung erneut, um die existierende Datendatei zu laden.  
-  
-Anleitung zum setzen der Berechtigung:
-![Anleitung zum setzen der Berechtigung](ms-appx:///Assets/Infoelements/AuthSystemstorageDE.png)</value>
+    <value>Die Anwendung besitzt derzeit **nicht** die erforderlichen Zugriffsrechte, um auf die vorhandene Datendatei zuzugreifen.&lt;br&gt; Für das setzen der Rechte muss die Anwendung jedoch geschlossen werden.&lt;br&gt;&lt;br&gt;
+Bitte erteilen Sie die erforderlichen Rechte in den Einstellungen und starten Sie die Anwendung erneut, um die existierende Datendatei zu laden.&lt;br&gt;&lt;br&gt;
+Anleitung zum setzen der Berechtigung:&lt;br&gt;
+
+![image](ms-appx:///Assets/Infoelements/AuthSystemstorageDE.png)</value>
   </data>
   <data name="AuthorizationFileSystemContentDialogPrimaryBTN" xml:space="preserve">
     <value>Berechtigung setzen</value>
@@ -1375,9 +1371,57 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
     <value>Die Pro-Version wurde erfolgreich aktiviert.</value>
   </data>
   <data name="CloseAppDialogTitle" xml:space="preserve">
-    <value>Speicheurng im Gange</value>
+    <value>Speicheurng läuft</value>
   </data>
   <data name="CloseAppDialogContent" xml:space="preserve">
     <value>Das Schließen der Anwendung ist während der Speicherung nicht möglich. Probieren Sie es in Kürze erneut.</value>
+  </data>
+  <data name="ImportBackupCDFileBTN.Text" xml:space="preserve">
+    <value>Datei laden</value>
+  </data>
+  <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
+    <value>QR Code scannen</value>
+  </data>
+  <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
+    <value>Auswahl</value>
+  </data>
+  <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="ImportBackupContentDialogFilename.Header" xml:space="preserve">
+    <value>Dateiname</value>
+  </data>
+  <data name="ImportBackupCDChangeDatafile.Content" xml:space="preserve">
+    <value>Datei ändern</value>
+  </data>
+  <data name="ImportBackupCDPassword.Header" xml:space="preserve">
+    <value>Passwort für Entschlüsselung</value>
+  </data>
+  <data name="ImportBackupCDPasswordGiven.Content" xml:space="preserve">
+    <value>Backup mit Passwort verschlüsselt</value>
+  </data>
+  <data name="ImportBackupCDConfirmFileImport.Content" xml:space="preserve">
+    <value>Backup einlesen</value>
+  </data>
+  <data name="ImportBackupCDCameraPI.Header" xml:space="preserve">
+    <value>Kamera</value>
+  </data>
+  <data name="ImportBackupCDImportAccountsPI.Header" xml:space="preserve">
+    <value>Kontenübersicht</value>
+  </data>
+  <data name="ImportBackupCDImportBackupFilePI.Header" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="ImportBackupCD.Title" xml:space="preserve">
+    <value>Konten importieren</value>
+  </data>
+  <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
+    <value>Passwort...</value>
+  </data>
+  <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
+    <value>Ursprungsformat</value>
+  </data>
+  <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
+    <value>Format des Dienstes</value>
   </data>
 </root>

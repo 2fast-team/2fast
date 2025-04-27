@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.17763;uap10.0.22621;net9.0</TargetFrameworks>
+    <TargetFrameworks>uap10.0.17763;uap10.0.26100;net9.0</TargetFrameworks>
     <LangVersion>10.0</LangVersion>
     <Title>WebDAVClientPortable</Title>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>

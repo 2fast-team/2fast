@@ -135,10 +135,11 @@
     <Compile Include="Controls\Carousel\CarouselItemAutomationPeer.cs" />
     <Compile Include="Controls\Carousel\CarouselPanel.cs" />
     <Compile Include="Controls\CopyButton\CopyButton.cs" />
-    <Compile Include="Controls\MarkdownTextBlock\DefaultSVGRenderer.cs" />
+    <Compile Include="Controls\MarkdownTextBlock\Renderers\DefaultImageProvider.cs" />
+    <Compile Include="Controls\MarkdownTextBlock\Renderers\DefaultSVGRenderer.cs" />
     <Compile Include="Controls\MarkdownTextBlock\Extensions.cs" />
     <Compile Include="Controls\MarkdownTextBlock\HtmlWriter.cs" />
-    <Compile Include="Controls\MarkdownTextBlock\ImageProvider.cs" />
+    <Compile Include="Controls\MarkdownTextBlock\IImageProvider.cs" />
     <Compile Include="Controls\MarkdownTextBlock\ISVGRenderer.cs" />
     <Compile Include="Controls\MarkdownTextBlock\LinkClickedEventArgs.cs" />
     <Compile Include="Controls\MarkdownTextBlock\MarkdownConfig.cs" />

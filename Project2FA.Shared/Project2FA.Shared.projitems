@@ -58,6 +58,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationCollectionModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OTPTypeEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WebDAVStatusEnums.cs" />

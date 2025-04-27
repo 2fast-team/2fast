@@ -2,19 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Markdig.Syntax;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
-using Markdig.Extensions.TaskLists;
-using Windows.UI.Xaml.Media.Media3D;
 using Windows.UI.Xaml.Controls;
-using System.Collections.Generic;
-using Windows.Foundation;
 using System;
-using System.Linq;
 using System.Globalization;
 using Markdig.Syntax.Inlines;
 using HtmlAgilityPack;
@@ -22,6 +13,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Net.Http;
+using Project2FA.UWP.Controls.MarkdownTextBlock;
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -47,7 +39,7 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
         {
             _linkInline = linkInline;
             _uri = uri;
-            _imageProvider = config.ImageProvider;
+            _imageProvider = config.ImageProvider == null ? new DefaultImageProvider() : config.ImageProvider;
             _svgRenderer = config.SVGRenderer == null ? new DefaultSVGRenderer() : config.SVGRenderer;
             Init();
             var size = Extensions.GetMarkdownImageSize(linkInline);
@@ -167,7 +159,10 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
                     _image.Height = _precedentHeight;
                 }
             }
-            catch (Exception) { }
+            catch (Exception exc) 
+            { 
+
+            }
         }
 
         public void AddChild(IAddChild child) {}

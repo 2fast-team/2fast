@@ -1428,4 +1428,7 @@ A aplicação suporta uma configuração MDM para uma gestão centralizada da ap
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
     <value />
   </data>
+  <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
+    <value />
+  </data>
 </root>

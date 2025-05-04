@@ -291,5 +291,17 @@ namespace Project2FA.UWP.Views
                 }
             }
         }
+
+        private void BTN_QRCodeScan_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                RemovePivotItems(PI_AccountInput);
+                if (MainPivot.Items.Count > 1)
+                {
+                    ViewModel.SelectedPivotIndex = 1;
+                }
+            }
+        }
     }
 }

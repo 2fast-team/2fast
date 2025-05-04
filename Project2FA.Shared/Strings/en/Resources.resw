@@ -1381,7 +1381,7 @@ The application supports an MDM configuration for centralised management of the 
     <value>Load file</value>
   </data>
   <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
-    <value>Scan QR code</value>
+    <value>Scan Google backup code</value>
   </data>
   <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
     <value>Selection</value>
@@ -1417,12 +1417,15 @@ The application supports an MDM configuration for centralised management of the 
     <value>Import accounts</value>
   </data>
   <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
-    <value>Password...</value>
+    <value>Input password</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
-    <value>Original format</value>
+    <value>Original format of the backup</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
-    <value>Format of the service</value>
+    <value>Choose format</value>
+  </data>
+  <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
+    <value>Adding an individual account is only possible via the ‘Add account’ function and not via the import function.</value>
   </data>
 </root>

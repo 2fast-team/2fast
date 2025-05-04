@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using Project2FA.Repository.Models;
 using Project2FA.Core.Utils;
 using System.Collections.Generic;
+using Project2FA.Utils;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -27,7 +29,7 @@ namespace Project2FA.ViewModels
     /// <summary>
     /// View model for adding an account countent dialog
     /// </summary>
-    public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
+    public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitializeAsync
     {
         private string _lastPivotItemName;
         /// <summary>
@@ -47,11 +49,13 @@ namespace Project2FA.ViewModels
 
         }
 
-        public void Initialize(IDialogParameters parameters)
+
+        public async Task InitializeAsync(IDialogParameters parameters)
         {
+            this.EntryEnum = Repository.Models.Enums.AccountEntryEnum.Add;
             if (parameters.TryGetValue<List<KeyValuePair<string, string>>>("account", out var account))
             {
-                ParseQRCode(account);
+                await ParseQRCode(account);
             }
             if (DataService.Instance.GlobalCategories != null && DataService.Instance.GlobalCategories.Count > 0)
             {

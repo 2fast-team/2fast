@@ -9,6 +9,8 @@ using Project2FA.Repository.Models;
 using UNOversal.Services.Logging;
 using System.Collections.Generic;
 using Org.BouncyCastle.Crypto;
+using Project2FA.Shared.Models;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -34,14 +36,29 @@ namespace Project2FA.Services.Importer
         private ILoggingService LoggingService { get; }
         //private ISerializationService SerializationService { get; }
         private IAegisBackupImportService AegisBackupService { get; }
+        private IAndOTPBackupImportService AndOTPBackupService { get; }
         public BackupImporterService(
             ILoggingService loggingService, 
             //ISerializationService serializationService,
-            IAegisBackupImportService aegisBackupService) 
+            IAegisBackupImportService aegisBackupService,
+            IAndOTPBackupImportService andOTPBackupService) 
         {
             LoggingService = loggingService;
             //SerializationService = serializationService;
             AegisBackupService = aegisBackupService;
+            AndOTPBackupService = andOTPBackupService;
+        }
+
+        /// <summary>
+        /// Gets the file content as string.
+        /// </summary>
+        /// <param name="storageFile"></param>
+        /// <returns></returns>
+        private async Task<string> GetFileContent(StorageFile storageFile)
+        {
+            IRandomAccessStreamWithContentType randomStream = await storageFile.OpenReadAsync();
+            using StreamReader streamReader = new StreamReader(randomStream.AsStreamForRead());
+            return await streamReader.ReadToEndAsync();
         }
 
         /// <summary>
@@ -50,21 +67,31 @@ namespace Project2FA.Services.Importer
         /// <param name="storageFile"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<(List<TwoFACodeModel> accountList,bool successful)> ImportAegisBackup(StorageFile storageFile, string password)
+        public async Task<(List<TwoFACodeModel> accountList,bool successful, Exception? exc)> ImportBackup(StorageFile storageFile, string password, BackupServiceEnum backupServiceEnum)
         {
             try
             {
-                IRandomAccessStreamWithContentType randomStream = await storageFile.OpenReadAsync();
-                using StreamReader streamReader = new StreamReader(randomStream.AsStreamForRead());
-                (var accountList, bool successful) = await AegisBackupService.ImportBackup(await streamReader.ReadToEndAsync(), Encoding.UTF8.GetBytes(password));
+                List<TwoFACodeModel> accountList = new List<TwoFACodeModel>();
+                bool successful = false;
+                switch (backupServiceEnum)
+                {
+                    case BackupServiceEnum.Aegis:
+                        (accountList, successful) = await AegisBackupService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
+                        break;
+                    case BackupServiceEnum.AndOTP:
+                        (accountList, successful) = await AndOTPBackupService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
+                        break;
+                    default:
+                        break;
+                }
 
                 if (successful)
                 {
-                    return (accountList, true);
+                    return (accountList, true, null);
                 }
                 else
                 {
-                    return (new List<TwoFACodeModel>(), false);
+                    return (new List<TwoFACodeModel>(), false, null);
                 }
             }
             catch (Exception exc)
@@ -74,7 +101,7 @@ namespace Project2FA.Services.Importer
                     // TODO wrong password
                 }
                 await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
-                return (new List<TwoFACodeModel>(), false);
+                return (new List<TwoFACodeModel>(), false, exc);
             }
         }
     }

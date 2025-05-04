@@ -31,8 +31,7 @@ using UNOversal.Ioc;
 using UNOversal.Services.Logging;
 using Project2FA.Utils;
 using Windows.UI.Core;
-
-
+using Project2FA.Repository.Models.Enums;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -60,15 +59,14 @@ namespace Project2FA.ViewModels
 {
     public class AddAccountViewModelBase : ObservableObject, IDisposable
     {
-
+        public ObservableCollection<TwoFACodeModel> ImportCollection { get; } = new ObservableCollection<TwoFACodeModel>();
         public ObservableCollection<MediaFrameSourceGroup> CameraSourceGroup { get; internal set; } = new ObservableCollection<MediaFrameSourceGroup>();
-
         public ObservableCollection<FontIdentifikationModel> FontIdentifikationCollection { get; } = new ObservableCollection<FontIdentifikationModel>();
         public ObservableCollection<CategoryModel> GlobalTempCategories { get; } = new ObservableCollection<CategoryModel>();
         private Windows.Media.Playback.MediaPlayer _mediaPlayer;
         private MediaPlayerElement _mediaPlayerElementControl;
         private CameraHelper _cameraHelper;
-
+        public AccountEntryEnum EntryEnum { get; set; } = AccountEntryEnum.None;
         private string _qrCodeStr;
         private bool _isButtonEnable;
         private bool _manualInput;
@@ -80,8 +78,6 @@ namespace Project2FA.ViewModels
         private string _secretKey;
         private bool _isEditBoxVisible;
         private bool _noCameraFound, _noCameraPermission, _cameraSuccessfullyLoaded;
-        private string _pivotViewSelectionName;
-        private DispatcherTimer _dispatcherTimer;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
@@ -106,9 +102,6 @@ namespace Project2FA.ViewModels
 
         public AddAccountViewModelBase()
         {
-            _dispatcherTimer = new DispatcherTimer();
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //every second   
-
             Model = new TwoFACodeModel();
             ManualInputCommand = new RelayCommand(() =>
             {
@@ -155,9 +148,6 @@ namespace Project2FA.ViewModels
         {
             await CleanUpCamera();
             //OTPList.Clear();
-            _dispatcherTimer.Tick -= OnTimedEvent;
-            _dispatcherTimer.Tick += OnTimedEvent;
-            _dispatcherTimer.Start();
             await ScanScreenQRCode();
         }
 #endif
@@ -315,26 +305,23 @@ namespace Project2FA.ViewModels
                     var decodedStr = barcodeReader.Decode(luminanceSource);
                     if (decodedStr != null)
                     {
-                        if (decodedStr.Text.StartsWith("otpauth") || decodedStr.Text.StartsWith("steam"))// || decodedStr.Text.StartsWith("otpauth-migration"))
-                        {
-                            _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
-                            await ReadAuthenticationFromString();
-                        }
+                        _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
+                        await ReadAuthenticationFromString();
                     }
                     else
                     {
-                        await QRReadError();
+                        await ErrorDialogs.QRReadError();
                     }
                 }
                 else
                 {
-                    await QRReadError();
+                    await ErrorDialogs.QRReadError();
                 }
             }
             catch (Exception exc)
             {
                 await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
-                await QRReadError();
+                await ErrorDialogs.QRReadError();
             }
         }
 
@@ -347,69 +334,61 @@ namespace Project2FA.ViewModels
         }
 #endif
 
-        private void OnTimedEvent(object sender, object e)
-        {
-            if (Seconds == 0)
-            {
-                _dispatcherTimer.Stop();
-                _dispatcherTimer.Tick -= OnTimedEvent;
-            }
-            else
-            {
-                --Seconds;
-            }
-        }
-
         private async Task ReadAuthenticationFromString()
         {
             SecretKey = string.Empty;
             Issuer = string.Empty;
 
-            //migrate code import (Google)
-            //if (_qrCodeStr.StartsWith("otpauth-migration://"))
-            //{
-            //    if (await ParseMigrationQRCode())
-            //    {
-            //        PivotViewSelectionName = "ImportBackupAccounts";
-            //        CheckInputs();
-            //    }
-            //    else
-            //    {
-            //        await QRReadError();
-            //        PivotViewSelectionName = "Overview";
-            //        //move to the selection dialog
-            //        SelectedPivotIndex = 0;
-            //    }
-            //}
-            //// normal otpauth import
-            //else
-            //{
-            //    //move to the input dialog
-            //    PivotViewSelectionName = "NormalInputAccount";
-
-            //}
-            SelectedPivotIndex = 1;
-
-            if (await ParseQRCode() && !string.IsNullOrEmpty(SecretKey)
-               && !string.IsNullOrEmpty(Issuer))
+            switch (EntryEnum)
             {
-                IsPrimaryBTNEnable = true;
-            }
-            else
-            {
-                await QRReadError();
-                //move to the selection dialog
-                SelectedPivotIndex = 0;
+                case AccountEntryEnum.None:
+                    break;
+                case AccountEntryEnum.Add:
+                    if (_qrCodeStr.StartsWith("otpauth") || _qrCodeStr.StartsWith("steam"))
+                    {
+                        if (await ParseQRCode() && CheckInputs())
+                        {
+                            IsPrimaryBTNEnable = true;
+                            SelectedPivotIndex = 1;
+                        }
+                        else
+                        {
+                            await ErrorDialogs.QRReadError();
+                            //move to the selection dialog
+                            SelectedPivotIndex = 0;
+                        }
+                    }
+                    break;
+                case AccountEntryEnum.Import:
+                    if (_qrCodeStr.StartsWith("otpauth-migration"))
+                    {
+                        //migrate code import (Google)
+                        if (await ParseMigrationQRCode(_qrCodeStr))
+                        {
+                            CheckInputs();
+                        }
+                        else
+                        {
+                            await ErrorDialogs.QRReadError();
+                            //move to the selection dialog
+                            SelectedPivotIndex = 0;
+                        }
+                        // imported account pivot item
+                        SelectedPivotIndex = 2;
+                    }
+                    else
+                    {
+                        _qrCodeStr = string.Empty;
+                        // error dialog only Google Import code supported
+                        MessageDialog dialog = new MessageDialog(Strings.Resources.ImportBackupQRCodeNotSupportedError, Strings.Resources.Error);
+                        await dialog.ShowAsync();
+                    }
+                    break;
+                default:
+                    _qrCodeStr = string.Empty;
+                    break;
             }
         }
-
-        private async Task QRReadError()
-        {
-            MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
-            await dialog.ShowAsync();
-        }
-
-
 
         /// <summary>
         /// Parses the QR code by splitting the different parts
@@ -417,7 +396,7 @@ namespace Project2FA.ViewModels
         /// <returns>true if TOTP</returns>
         public async Task<bool> ParseQRCode(List<KeyValuePair<string, string>> accountValuePair = null)
         {
-            List<KeyValuePair<string, string>> valuePair = accountValuePair == null ? Project2FAParser.ParseQRCodeStr(_qrCodeStr) : accountValuePair;
+            List<KeyValuePair<string, string>> valuePair = accountValuePair ?? Project2FAParser.ParseQRCodeStr(_qrCodeStr);
 
             if (valuePair.Count == 0)
             {
@@ -473,11 +452,99 @@ namespace Project2FA.ViewModels
         }
 
         /// <summary>
+        /// Parse the protobuf data to TwoFACodeModel list
+        /// </summary>
+        /// <returns></returns>
+        private Task<bool> ParseMigrationQRCode(string qrCodeStr)
+        {
+            try
+            {
+                var otpmm = new OTPMigrationModel();
+                var query = new Uri(qrCodeStr).Query.Replace("?data=", string.Empty);
+                var dataByteArray = Convert.FromBase64String(query);
+                using (var memoryStream = new MemoryStream())
+                {
+                    memoryStream.Write(dataByteArray, 0, dataByteArray.Length);
+                    memoryStream.Position = 0;
+                    otpmm = ProtoBuf.Serializer.Deserialize<OTPMigrationModel>(memoryStream);
+                    for (int i = 0; i < otpmm.otp_parameters.Count; i++)
+                    {
+                        if (otpmm.otp_parameters[i].Type == OTPMigrationModel.OtpType.OtpTypeTotp)
+                        {
+                            string label = string.Empty, issuer = string.Empty;
+                            if (otpmm.otp_parameters[i].Name.Contains(":"))
+                            {
+                                string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
+                                label = issuerArray[0];
+                                issuer = issuerArray[1];
+                            }
+                            else
+                            {
+                                label = otpmm.otp_parameters[i].Name;
+                                issuer = otpmm.otp_parameters[i].Issuer;
+                            }
+                            int hashMode = 0;
+                            switch (otpmm.otp_parameters[i].Algorithm)
+                            {
+                                case OTPMigrationModel.Algorithm.AlgorithmSha1:
+                                    hashMode = 0;
+                                    break;
+                                case OTPMigrationModel.Algorithm.AlgorithmSha256:
+                                    hashMode = 1;
+                                    break;
+                                case OTPMigrationModel.Algorithm.AlgorithmSha512:
+                                    hashMode = 2;
+                                    break;
+                            }
+                            ImportCollection.Add(new TwoFACodeModel
+                            {
+                                Label = label,
+                                AccountIconName = DataService.Instance.GetIconForLabel(label),
+                                Issuer = issuer,
+                                SecretByteArray = otpmm.otp_parameters[i].Secret,
+                                HashMode = (OtpHashMode)hashMode
+                            });
+                        }
+                        else
+                        {
+                            // no TOTP, not supported
+                            string label = string.Empty, issuer = string.Empty;
+                            if (otpmm.otp_parameters[i].Name.Contains(":"))
+                            {
+                                string[] issuerArray = otpmm.otp_parameters[i].Name.Split(':');
+                                label = issuerArray[0];
+                                issuer = issuerArray[1];
+                            }
+                            else
+                            {
+                                label = otpmm.otp_parameters[i].Name;
+                                issuer = otpmm.otp_parameters[i].Issuer;
+                            }
+                            ImportCollection.Add(new TwoFACodeModel
+                            {
+                                Label = label,
+                                AccountIconName = DataService.Instance.GetIconForLabel(label),
+                                Issuer = issuer,
+                                IsChecked = false,
+                                IsEnabled = false
+                            });
+                        }
+                    }
+                }
+                return Task.FromResult(true);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
+        }
+
+        /// <summary>
         /// Checks if the inputs are correct and enables / disables the submit button
         /// </summary>
-        private void CheckInputs()
+        private bool CheckInputs()
         {
-            IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(SecretKey) && !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrWhiteSpace(Issuer);
+            return IsPrimaryBTNEnable = !string.IsNullOrWhiteSpace(SecretKey) && !string.IsNullOrWhiteSpace(Label) && !string.IsNullOrWhiteSpace(Issuer);
         }
 
         #region FontIconRegion
@@ -667,12 +734,9 @@ namespace Project2FA.ViewModels
                             var decodedStr = barcodeReader.Decode(luminanceSource);
                             if (decodedStr != null)
                             {
-                                if (decodedStr.Text.StartsWith("otpauth") || decodedStr.Text.StartsWith("otpauth-migration"))
-                                {
-                                    await CleanUpCamera();
-                                    _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
-                                    await ReadAuthenticationFromString();
-                                }
+                                await CleanUpCamera();
+                                _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
+                                await ReadAuthenticationFromString();
                             }
                         }
                     });

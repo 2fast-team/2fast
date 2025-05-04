@@ -1380,10 +1380,10 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
     <value>Datei laden</value>
   </data>
   <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
-    <value>QR Code scannen</value>
+    <value>Google Backup Code scannen</value>
   </data>
   <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
-    <value>Auswahl</value>
+    <value>Eingabetyp</value>
   </data>
   <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
     <value>Importieren</value>
@@ -1416,12 +1416,15 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
     <value>Konten importieren</value>
   </data>
   <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
-    <value>Passwort...</value>
+    <value>Passwort eingeben</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
-    <value>Ursprungsformat</value>
+    <value>Ursprungsformat des Backups</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
-    <value>Format des Dienstes</value>
+    <value>Format auswählen</value>
+  </data>
+  <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
+    <value>Das Hinzufügen eines einzelnen Kontos ist nur über die Funktion "Konto hinzufügen" möglich und nicht über die Importfunktion.</value>
   </data>
 </root>

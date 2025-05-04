@@ -1426,4 +1426,7 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
     <value />
   </data>
+  <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
+    <value />
+  </data>
 </root>

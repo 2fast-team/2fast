@@ -14,7 +14,7 @@ namespace Project2FA.UWP.Views
 {
     public sealed partial class ImportBackupContentDialog : ContentDialog
     {
-        public ImportAccountContentDialogViewModel ViewModel => DataContext as ImportAccountContentDialogViewModel;
+        public ImportBackupContentDialogViewModel ViewModel => DataContext as ImportBackupContentDialogViewModel;
         public ImportBackupContentDialog()
         {
             this.InitializeComponent();
@@ -116,14 +116,6 @@ namespace Project2FA.UWP.Views
                     ViewModel.LastPivotItemName = string.Empty;
                     break;
             }
-        }
-
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
         }
 
         private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)

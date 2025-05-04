@@ -8,7 +8,7 @@ using Windows.Storage.Streams;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using QRCoder;
-
+using Project2FA.Repository.Models.Enums;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -35,7 +35,14 @@ namespace Project2FA.ViewModels
         {
             Header = model.Label;
             StringBuilder uriBuilder = new StringBuilder("otpauth://");
-            uriBuilder.Append("totp/");
+            if (model.OTPType == OTPType.steam.ToString())
+            {
+                uriBuilder.Append("steam://");
+            }
+            else
+            {
+                uriBuilder.Append("totp/");
+            }
             uriBuilder.Append(Uri.EscapeDataString(model.Label) + ":");
             uriBuilder.Append(Uri.EscapeDataString(model.Issuer) + "?");
             uriBuilder.Append("secret=" + Base32Encoding.ToString(model.SecretByteArray));

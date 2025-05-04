@@ -1428,4 +1428,7 @@ Applikasjonen støtter en MDM-konfigurasjon for sentralisert administrasjon av a
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
     <value />
   </data>
+  <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
+    <value />
+  </data>
 </root>

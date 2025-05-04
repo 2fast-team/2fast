@@ -77,8 +77,8 @@
                         </StackPanel>
                         <muxc:PersonPicture 
                             Grid.Column="2"
-                                Height="48"
-                                Width="48"
+                                Height="64"
+                                Width="64"
                             Margin="0,0,15,0"
                                 DisplayName="{x:Bind Model, 
                                 Converter={StaticResource PersonalPictureInitialsVisibilityConverter},

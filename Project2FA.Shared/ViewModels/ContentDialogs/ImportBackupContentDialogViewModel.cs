@@ -16,7 +16,7 @@ using Windows.Storage.Pickers;
 
 namespace Project2FA.ViewModels
 {
-    public class ImportAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitializeAsync
+    public class ImportBackupContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
         private IBackupImporterService BackupImporterService { get; }
         private int _selectedPivotIndex = 0;
@@ -29,9 +29,9 @@ namespace Project2FA.ViewModels
         private bool _passwordGivenChecked = true;
         public ICommand ImportAccountCommand { get; }
 
-        public ObservableCollection<TwoFACodeModel> ImportCollection { get; } = new ObservableCollection<TwoFACodeModel>();
 
-        public ImportAccountContentDialogViewModel(IBackupImporterService backupImporterService)
+
+        public ImportBackupContentDialogViewModel(IBackupImporterService backupImporterService)
         {
             BackupImporterService = backupImporterService;
             FileImportCommand = new AsyncRelayCommand(FileImportCommandTask);
@@ -46,8 +46,11 @@ namespace Project2FA.ViewModels
 
         public async Task<bool> ConfirmImportTask()
         {
+            List<TwoFACodeModel> accountList;
+            bool successful;
+            Exception exc = null;
             //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/aegis.encrypted.json"));
-            (List<TwoFACodeModel> accountList, bool successful)  = await BackupImporterService.ImportAegisBackup(ImportStorageFile, Password);
+            (accountList, successful, exc) = await BackupImporterService.ImportAegisBackup(ImportStorageFile, Password);
             if (successful)
             {
                 ImportCollection.AddRange(accountList, true);
@@ -95,13 +98,10 @@ namespace Project2FA.ViewModels
             return ImportStorageFile;
         }
 
-        public async Task InitializeAsync(IDialogParameters parameters)
+        public void Initialize(IDialogParameters parameters)
         {
-            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/aegis.encrypted.json"));
-            //await BackupImporterService.ImportAegisBackup(file, "test");
+            this.EntryEnum = Repository.Models.Enums.AccountEntryEnum.Import;
         }
-
-        
 
         public new int SelectedPivotIndex
         { 

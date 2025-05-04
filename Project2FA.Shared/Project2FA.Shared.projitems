@@ -50,8 +50,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\InAppItemChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\PasswordStatusChangedMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messenger\WebDAVStatusChangedMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AccountEntryEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AegisBackupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AndOTPBackupModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BackupServiceEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
@@ -94,14 +96,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ChangeDatafilePasswordContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\DisplayQRCodeContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\EditAccountContentDialogViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ImportAccountContentDialogViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ImportBackupContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UpdateDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\UseDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\WebViewDatafileContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\DatafileViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileActivationPageViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImportAccountPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImportBackupPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\InAppPaymentContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ManageCategoriesContentDialogViewModel.cs" />

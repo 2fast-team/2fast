@@ -29,7 +29,7 @@ namespace Project2FA.Repository.Models
         public string Thumbnail { get; set; }
 
         [JsonProperty(PropertyName = "period")]
-        public int? Period { get; set; }
+        public int Period { get; set; }
 
         [JsonProperty(PropertyName = "counter")]
         public int Counter { get; set; }

@@ -1430,4 +1430,7 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
     <value />
   </data>
+  <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
+    <value />
+  </data>
 </root>

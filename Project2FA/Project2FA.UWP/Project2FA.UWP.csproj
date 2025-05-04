@@ -427,7 +427,7 @@
       <Version>1.12.1</Version>
     </PackageReference>
     <PackageReference Include="Markdig">
-      <Version>0.41.0</Version>
+      <Version>0.41.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
       <Version>9.0.0</Version>

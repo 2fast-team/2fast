@@ -10,6 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UNOversal.Services.Serialization;
+using System;
+using OtpNet;
+using Project2FA.Core;
+
+// based on
+// https://github.com/stratumauth/app/blob/48db7ed40cefa6e3d20b32172cb18da29da78503/Stratum.Core/src/Converter/AndOtpBackupConverter.cs
 
 namespace Project2FA.Services.Importer
 {
@@ -31,28 +37,73 @@ namespace Project2FA.Services.Importer
             SerializationService = serializationService;
         }
 
-        public Task<(List<TwoFACodeModel> accountList, bool successful)> ImportBackup(string content, byte[] bytePassword)
+        public async Task<(List<TwoFACodeModel> accountList, bool successful)> ImportBackup(string content, byte[] bytePassword)
         {
-            AndOTPModel<string> encryptedModel = SerializationService.Deserialize<AndOTPModel<string>>(content);
-            return Task.FromResult((new List<TwoFACodeModel>(), false));
+            string json;
+
+            if (bytePassword is null)
+            {
+                json = content;
+            }
+            else
+            {
+                json = Decrypt(Encoding.UTF8.GetBytes(content), bytePassword);
+            }
+
+            List<AndOTPModel<string>> decryptedModel = SerializationService.Deserialize<List<AndOTPModel<string>>>(json);
+            List<TwoFACodeModel> accountList = new List<TwoFACodeModel>();
+
+            for (int i = 0; i < decryptedModel.Count; i++)
+            {
+                if (decryptedModel[i].Type == Constants.OTPTypeTOTP.ToUpper() || decryptedModel[i].Type == Constants.OTPTypeSteam.ToUpper())
+                {
+                    OtpHashMode algorithm = decryptedModel[i].Algorithm switch
+                    {
+                        "SHA1" => OtpHashMode.Sha1,
+                        "SHA256" => OtpHashMode.Sha256,
+                        "SHA512" => OtpHashMode.Sha512,
+                        _ => throw new ArgumentException($"Algorithm '{decryptedModel[i].Algorithm}' not supported")
+                    };
+
+                    var model = new TwoFACodeModel
+                    {
+                        Label = decryptedModel[i].Label,
+                        TotpSize = decryptedModel[i].Digits,
+                        Issuer = decryptedModel[i].Issuer,
+                        Period = decryptedModel[i].Period,
+                        HashMode = algorithm,
+                        SecretByteArray = Encoding.UTF8.GetBytes(decryptedModel[i].Secret),
+                        AccountIconName = DataService.Instance.GetIconForLabel(decryptedModel[i].Label.ToLower())
+                    };
+                    if (string.IsNullOrWhiteSpace(model.Issuer))
+                    {
+                        model.Issuer = decryptedModel[i].Label;
+                    }
+                    if (decryptedModel[i].Type == Constants.OTPTypeSteam.ToUpper())
+                    {
+                        model.OTPType = Constants.OTPTypeSteam;
+                    }
+                }
+            }
+
+            return (new List<TwoFACodeModel>(), false);
         }
 
-        private static KeyParameter DeriveKey(string password, byte[] salt, uint iterations)
+        private KeyParameter DeriveKey(byte[] passwordBytes, byte[] salt, uint iterations)
         {
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
             var generator = new Pkcs5S2ParametersGenerator(new Sha1Digest());
             generator.Init(passwordBytes, salt, (int)iterations);
             return (KeyParameter)generator.GenerateDerivedParameters(BaseAlgorithm, KeyLength * 8);
         }
 
-        private static string Decrypt(byte[] data, string password)
+        private string Decrypt(byte[] data, byte[] passwordBytes)
         {
             var iterations = BinaryPrimitives.ReadUInt32BigEndian(data.Take(IterationsLength).ToArray());
             var salt = data.Skip(IterationsLength).Take(SaltLength).ToArray();
             var iv = data.Skip(IterationsLength + SaltLength).Take(IvLength).ToArray();
             var payload = data.Skip(IterationsLength + SaltLength + IvLength).ToArray();
 
-            var key = DeriveKey(password, salt, iterations);
+            var key = DeriveKey(passwordBytes, salt, iterations);
 
             var keyParameter = new ParametersWithIV(key, iv);
             var cipher = CipherUtilities.GetCipher(AlgorithmDescription);
@@ -60,17 +111,20 @@ namespace Project2FA.Services.Importer
 
             byte[] decrypted;
 
-            try
-            {
-                decrypted = cipher.DoFinal(payload);
-                return Encoding.UTF8.GetString(decrypted);
-            }
-            catch (InvalidCipherTextException e)
-            {
-                //throw new BackupPasswordException("The password is incorrect", e);
-            }
+            decrypted = cipher.DoFinal(payload);
+            return Encoding.UTF8.GetString(decrypted);
 
-            return string.Empty;
+            //try
+            //{
+            //    decrypted = cipher.DoFinal(payload);
+            //    return Encoding.UTF8.GetString(decrypted);
+            //}
+            //catch (InvalidCipherTextException e)
+            //{
+            //    //throw new BackupPasswordException("The password is incorrect", e);
+            //}
+
+            //return string.Empty;
 
 
         }

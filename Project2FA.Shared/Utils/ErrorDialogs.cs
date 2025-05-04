@@ -12,6 +12,8 @@ using Project2FA.Core;
 using Project2FA.Repository.Models;
 using UNOversal.Services.Secrets;
 using Windows.Security.Authorization.AppCapabilityAccess;
+using Windows.UI.Popups;
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -631,6 +633,12 @@ namespace Project2FA.Utils
 #endif
 
             await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
+        }
+
+        internal async static Task QRReadError()
+        {
+            MessageDialog dialog = new MessageDialog(Strings.Resources.AddAccountContentDialogQRCodeContentError, Strings.Resources.Error);
+            await dialog.ShowAsync();
         }
     }
 }

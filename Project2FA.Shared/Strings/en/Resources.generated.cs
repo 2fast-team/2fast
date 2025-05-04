@@ -1968,6 +1968,16 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region ImportBackupQRCodeNotSupportedError
+        public static string ImportBackupQRCodeNotSupportedError
+        {
+            get
+            {
+                return _resourceLoader.GetString("ImportBackupQRCodeNotSupportedError");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2127,7 +2137,8 @@ namespace Project2FA.Strings{
             FileActivationPageViewModelCorruptDatafile,
             SettingsPageProVersionActivated,
             CloseAppDialogContent,
-            CloseAppDialogTitle
+            CloseAppDialogTitle,
+            ImportBackupQRCodeNotSupportedError
         }
 
         private static ResourceLoader _resourceLoader;

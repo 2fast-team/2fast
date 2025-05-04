@@ -36,6 +36,8 @@ using UNOversal.Services.Serialization;
 using UNOversal.Services.Logging;
 using System.Text;
 using UNOversal.Helpers;
+using System.Linq;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -954,7 +956,43 @@ namespace Project2FA.Services
             }
         }
 
-#region WebDAV
+        public string GetIconForLabel(string label)
+        {
+            var transformName = label;
+            transformName = transformName.Replace(" ", string.Empty);
+            transformName = transformName.Replace("-", string.Empty);
+
+            try
+            {
+                if (FontIconCollection.Where(x => x.Name == transformName).Any())
+                {
+                    return transformName;
+                }
+                else
+                {
+                    // fallback: check if one IconNameCollectionModel name fits into the label name
+
+                    var list = FontIconCollection.Where(x => x.Name.Contains(transformName));
+                    if (list.Count() == 1)
+                    {
+                        return transformName;
+                    }
+                    else
+                    {
+                        return string.Empty;
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+#if WINDOWS_UWP
+                Project2FA.UWP.TrackingManager.TrackExceptionCatched(nameof(GetIconForLabel), exc);
+#endif
+                return string.Empty;
+            }
+        }
+
+        #region WebDAV
         /// <summary>
         /// Upload the data file with custom WebDAV header
         /// </summary>

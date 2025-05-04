@@ -2,6 +2,7 @@
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.Encoders;
+using Project2FA.Core;
 using Project2FA.Repository.Models;
 using Project2FA.Repository.Models.Enums;
 using System;
@@ -88,9 +89,8 @@ namespace Project2FA.Services.Importer
             List<TwoFACodeModel> accountList = new List<TwoFACodeModel>();
             for (int i = 0; i < database.Entries.Count; i++)
             {
-                if (database.Entries[i].Type == "totp" || database.Entries[i].Type == "steam")
+                if (database.Entries[i].Type == Constants.OTPTypeTOTP || database.Entries[i].Type == Constants.OTPTypeSteam)
                 {
-
                     var model = new TwoFACodeModel
                     {
                         Label = database.Entries[i].Name,
@@ -99,11 +99,15 @@ namespace Project2FA.Services.Importer
                         Period = database.Entries[i].Info.Period,
                         HashMode = database.Entries[i].Info.HashMode,
                         SecretByteArray = Encoding.UTF8.GetBytes(database.Entries[i].Info.Secret),
-                        AccountIconName = CheckLabelForIcon(database.Entries[i].Name.ToLower())
+                        AccountIconName = DataService.Instance.GetIconForLabel(database.Entries[i].Name.ToLower())
                     };
-                    if (database.Entries[i].Type == "steam")
+                    if (string.IsNullOrWhiteSpace(model.Issuer))
                     {
-                        model.OTPType = "steam";
+                        model.Issuer = database.Entries[i].Name;
+                    }
+                    if (database.Entries[i].Type == Constants.OTPTypeSteam)
+                    {
+                        model.OTPType = Constants.OTPTypeSteam;
                     }
                     accountList.Add(model);
                 }
@@ -113,7 +117,7 @@ namespace Project2FA.Services.Importer
                     {
                         Label = database.Entries[i].Name,
                         Issuer = database.Entries[i].Issuer,
-                        AccountIconName = CheckLabelForIcon(database.Entries[i].Name.ToLower()),
+                        AccountIconName = DataService.Instance.GetIconForLabel(database.Entries[i].Name.ToLower()),
                         IsEnabled = false,
                         IsChecked = false
                     });
@@ -162,42 +166,6 @@ namespace Project2FA.Services.Importer
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
             }
             return bytes;
-        }
-
-        private string CheckLabelForIcon(string label)
-        {
-            var transformName = label;
-            transformName = transformName.Replace(" ", string.Empty);
-            transformName = transformName.Replace("-", string.Empty);
-
-            try
-            {
-                if (DataService.Instance.FontIconCollection.Where(x => x.Name == transformName).Any())
-                {
-                    return transformName;
-                }
-                else
-                {
-                    // fallback: check if one IconNameCollectionModel name fits into the label name
-
-                    var list = DataService.Instance.FontIconCollection.Where(x => x.Name.Contains(transformName));
-                    if (list.Count() == 1)
-                    {
-                        return transformName;
-                    }
-                    else
-                    {
-                        return string.Empty;
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-#if WINDOWS_UWP
-                Project2FA.UWP.TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
-#endif
-                return string.Empty;
-            }
         }
     }
 }

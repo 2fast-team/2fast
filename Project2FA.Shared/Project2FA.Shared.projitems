@@ -65,7 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WebDAVStatusEnums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AegisBackupImportService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AndOtpBackupImportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AndOTPBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\BackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAndOTPBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAegisBackupImportService.cs" />

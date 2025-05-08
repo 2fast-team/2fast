@@ -13,7 +13,5 @@
         public const string LifeTimeId = "9PCLBSQW4DLN";
         public const string EnterpriseAppManagementContainer = "Managed.App.Settings";
         public const string LogName = "AppLog.log";
-        public const string OTPTypeTOTP = "totp";
-        public const string OTPTypeSteam = "steam";
     }
 }

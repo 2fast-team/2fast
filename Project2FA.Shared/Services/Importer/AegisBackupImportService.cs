@@ -89,7 +89,7 @@ namespace Project2FA.Services.Importer
             List<TwoFACodeModel> accountList = new List<TwoFACodeModel>();
             for (int i = 0; i < database.Entries.Count; i++)
             {
-                if (database.Entries[i].Type == Constants.OTPTypeTOTP || database.Entries[i].Type == Constants.OTPTypeSteam)
+                if (database.Entries[i].Type == OTPType.totp.ToString() || database.Entries[i].Type == OTPType.steam.ToString())
                 {
                     var model = new TwoFACodeModel
                     {
@@ -105,9 +105,9 @@ namespace Project2FA.Services.Importer
                     {
                         model.Issuer = database.Entries[i].Name;
                     }
-                    if (database.Entries[i].Type == Constants.OTPTypeSteam)
+                    if (database.Entries[i].Type == OTPType.steam.ToString())
                     {
-                        model.OTPType = Constants.OTPTypeSteam;
+                        model.OTPType = OTPType.steam.ToString();
                     }
                     accountList.Add(model);
                 }

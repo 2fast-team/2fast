@@ -13,13 +13,14 @@ using UNOversal.Services.Serialization;
 using System;
 using OtpNet;
 using Project2FA.Core;
+using Project2FA.Repository.Models.Enums;
 
 // based on
 // https://github.com/stratumauth/app/blob/48db7ed40cefa6e3d20b32172cb18da29da78503/Stratum.Core/src/Converter/AndOtpBackupConverter.cs
 
 namespace Project2FA.Services.Importer
 {
-    public class AndOtpBackupImportService : IAndOTPBackupImportService
+    public class AndOTPBackupImportService : IAndOTPBackupImportService
     {
         private const string BaseAlgorithm = "AES";
         private const string Mode = "GCM";
@@ -32,7 +33,7 @@ namespace Project2FA.Services.Importer
         private const int KeyLength = 32;
 
         ISerializationService SerializationService { get; }
-        public AndOtpBackupImportService(ISerializationService serializationService)
+        public AndOTPBackupImportService(ISerializationService serializationService)
         {
             SerializationService = serializationService;
         }
@@ -55,7 +56,8 @@ namespace Project2FA.Services.Importer
 
             for (int i = 0; i < decryptedModel.Count; i++)
             {
-                if (decryptedModel[i].Type == Constants.OTPTypeTOTP.ToUpper() || decryptedModel[i].Type == Constants.OTPTypeSteam.ToUpper())
+                // check if the authentication methode is supported
+                if (decryptedModel[i].Type == OTPType.totp.ToString().ToUpper() || decryptedModel[i].Type == OTPType.steam.ToString().ToUpper())
                 {
                     OtpHashMode algorithm = decryptedModel[i].Algorithm switch
                     {
@@ -79,10 +81,21 @@ namespace Project2FA.Services.Importer
                     {
                         model.Issuer = decryptedModel[i].Label;
                     }
-                    if (decryptedModel[i].Type == Constants.OTPTypeSteam.ToUpper())
+                    if (decryptedModel[i].Type == OTPType.steam.ToString().ToUpper())
                     {
-                        model.OTPType = Constants.OTPTypeSteam;
+                        model.OTPType = OTPType.steam.ToString();
                     }
+                }
+                else
+                {
+                    accountList.Add(new TwoFACodeModel
+                    {
+                        Label = decryptedModel[i].Label,
+                        Issuer = decryptedModel[i].Issuer,
+                        AccountIconName = DataService.Instance.GetIconForLabel(decryptedModel[i].Label.ToLower()),
+                        IsEnabled = false,
+                        IsChecked = false
+                    });
                 }
             }
 

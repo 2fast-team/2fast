@@ -110,6 +110,7 @@ namespace Project2FA.UWP
             container.RegisterSingleton<ILoggingService, LoggingService>();
             container.RegisterSingleton<IBackupImporterService, BackupImporterService>();
             container.RegisterSingleton<IAegisBackupImportService, AegisBackupImportService>();
+            container.RegisterSingleton<IAndOTPBackupImportService, AndOTPBackupImportService>();
             // pages and view-models
             container.RegisterSingleton<ShellPage, ShellPage>();
             container.RegisterSingleton<LoginPage, LoginPage>();

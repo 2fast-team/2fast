@@ -27,6 +27,7 @@ using UNOversal.Services.Logging;
 using Project2FA.Repository.Database;
 using Microsoft.EntityFrameworkCore;
 using Project2FA.Core;
+using Project2FA.Services.Importer;
 
 namespace Project2FA.UnoApp
 {
@@ -215,6 +216,9 @@ namespace Project2FA.UnoApp
         /// <param name="e"></param>
         private void Current_Activated(object sender, WindowActivatedEventArgs e)
         {
+
+            // TODO commented out for now. Will be fixed
+            
             //if (e.WindowActivationState == WindowActivationState.Deactivated)
             //{
             //    if (MainWindow.Content is ShellPage)
@@ -414,6 +418,9 @@ namespace Project2FA.UnoApp
             containerRegistry.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
             containerRegistry.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
+            containerRegistry.RegisterSingleton<IBackupImporterService, BackupImporterService>();
+            containerRegistry.RegisterSingleton<IAegisBackupImportService, AegisBackupImportService>();
+            containerRegistry.RegisterSingleton<IAndOTPBackupImportService, AndOTPBackupImportService>();
 
             containerRegistry.RegisterSingleton<ShellPage>();
             containerRegistry.RegisterForNavigation<BlankPage, BlankPageViewModel>();

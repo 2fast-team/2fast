@@ -344,7 +344,7 @@ namespace Project2FA.ViewModels
                 case AccountEntryEnum.None:
                     break;
                 case AccountEntryEnum.Add:
-                    if (_qrCodeStr.StartsWith("otpauth") || _qrCodeStr.StartsWith("steam"))
+                    if (_qrCodeStr.StartsWith("otpauth://") || _qrCodeStr.StartsWith("steam"))
                     {
                         if (await ParseQRCode() && CheckInputs())
                         {
@@ -358,7 +358,13 @@ namespace Project2FA.ViewModels
                             SelectedPivotIndex = 0;
                         }
                     }
-                    break;
+                    else
+                    {
+                        MessageDialog dialog = new MessageDialog(Strings.Resources.AddQRCodeNotSupportedError, Strings.Resources.Error);
+                        //move to the selection dialog
+                        SelectedPivotIndex = 0;
+                    }
+                        break;
                 case AccountEntryEnum.Import:
                     if (_qrCodeStr.StartsWith("otpauth-migration"))
                     {

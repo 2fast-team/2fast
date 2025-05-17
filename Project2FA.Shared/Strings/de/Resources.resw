@@ -718,8 +718,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aktualisierung der Bibliotheken von Drittanbietern
-- Fehlerbehebungen und detailiertere Fehlerprotokollierung
-- Erweiterung der Einstellungen für neue Konten im Expertenmodus</value>
+- Importfunktion von Backups von Apps (AEGIS &amp; AndOTP) hinzugefügt</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -1426,5 +1425,11 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   </data>
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
     <value>Das Hinzufügen eines einzelnen Kontos ist nur über die Funktion "Konto hinzufügen" möglich und nicht über die Importfunktion.</value>
+  </data>
+  <data name="ImportBackupPasswordError" xml:space="preserve">
+    <value>Das eingegebene Passwort oder das Backup-Format ist ungültig.</value>
+  </data>
+  <data name="AddQRCodeNotSupportedError" xml:space="preserve">
+    <value>Das Hinzufügen bzw. das Importieren von mehreren Konten ist nur über die Funktion "Konten importieren" möglich.</value>
   </data>
 </root>

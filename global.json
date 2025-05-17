@@ -1,11 +1,11 @@
 {
 	"sdk": {
-		"version": "9.0.203",
-		"allowPrerelease": true,
+		"version": "9.0.300",
+		"allowPrerelease": false,
 		"rollForward": "latestPatch"
 	},
 	"tools": {
-		"dotnet": "9.0.203"
+		"dotnet": "9.0.300"
 	},
 	"msbuild-sdks": {
 		"MSBuild.Sdk.Extras": "3.0.44",

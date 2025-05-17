@@ -875,6 +875,30 @@ namespace Project2FA.Services
             }
         }
 
+        public async Task<bool> AddAccountsToCollection(List<TwoFACodeModel> accountList)
+        {
+            try
+            {
+                await CollectionAccessSemaphore.WaitAsync();
+                _initialization = true;
+                this.Collection.AddRange(accountList);
+                return true;
+            }
+            catch (Exception exc)
+            {
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+#if WINDOWS_UWP
+                TrackingManager.TrackExceptionCatched(nameof(AddAccountsToCollection), exc);
+#endif
+                return false;
+            }
+            finally
+            {
+                _initialization = false;
+                CollectionAccessSemaphore.Release();
+            }
+        }
+
         /// <summary>
         /// Generates a TOTP code for the i'th entry of a collection
         /// </summary>

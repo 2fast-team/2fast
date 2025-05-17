@@ -1431,4 +1431,10 @@ L'application prend en charge une configuration MDM pour une gestion centralisé
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
     <value />
   </data>
+  <data name="ImportBackupPasswordError" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddQRCodeNotSupportedError" xml:space="preserve">
+    <value />
+  </data>
 </root>

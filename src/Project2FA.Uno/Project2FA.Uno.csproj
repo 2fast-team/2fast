@@ -59,8 +59,8 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BouncyCastle.Cryptography" Version="2.5.1" />
-		<PackageReference Include="CommunityToolkit.Labs.WinUI.TokenView" Version="0.1.250319-build.2093" />
+		<PackageReference Include="BouncyCastle.Cryptography" Version="2.6.0" />
+		<PackageReference Include="CommunityToolkit.Labs.WinUI.TokenView" Version="0.1.250513-build.2126" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.250402" />
 		<PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.250402" />
@@ -71,8 +71,7 @@
 		<PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250402" />
 		<PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.250402" />
 		<PackageReference Include="DryIoc" Version="5.4.3" />
-		<PackageReference Include="QRCoder" Version="1.6.0" />
-		<PackageReference Include="Svg.Skia" Version="3.0.0" />
+		<PackageReference Include="Svg.Skia" Version="3.0.2" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
 		
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
@@ -81,27 +80,30 @@
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
 		<PackageReference Include="Xamarin.AndroidX.Activity">
-			<Version>1.10.1</Version>
+			<Version>1.10.1.1</Version>
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Activity.Ktx">
-			<Version>1.10.1</Version>
+			<Version>1.10.1.1</Version>
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Collection.Jvm">
-			<Version>1.4.5.2</Version>
+			<Version>1.5.0.1</Version>
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx">
-			<Version>1.4.5.2</Version>
+			<Version>1.5.0.1</Version>
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Fragment.Ktx">
-			<Version>1.8.6</Version>
+			<Version>1.8.6.1</Version>
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData">
-			<Version>2.8.7.2</Version>
+			<Version>2.8.7.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.AndroidX.AppCompat">
+			<Version>1.7.0.6</Version>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-windows10.0.26100'">
-		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.4" />
+		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>

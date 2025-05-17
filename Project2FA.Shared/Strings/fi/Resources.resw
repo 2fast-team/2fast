@@ -1431,4 +1431,10 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
     <value />
   </data>
+  <data name="ImportBackupPasswordError" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddQRCodeNotSupportedError" xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -7,10 +7,11 @@ using UNOversal.Services.Dialogs;
 using Windows.Storage.Streams;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
-using QRCoder;
 using Project2FA.Repository.Models.Enums;
 
 #if WINDOWS_UWP
+using QRCoder;
+using static QRCoder.PayloadGenerator;
 using Project2FA.UWP;
 using Windows.UI.Xaml.Media.Imaging;
 #else
@@ -29,7 +30,12 @@ namespace Project2FA.ViewModels
         private string _header;
         private BitmapImage _qrImage;
         public BitmapImage QRImage { get => _qrImage; set => SetProperty(ref _qrImage, value); }
+
+        private string _url;
+
+        public string Url { get => _url; set => SetProperty(ref _url, value); }
         public string Header { get => _header; set => SetProperty(ref _header, value); }
+        
 
         private async Task CreateQRCode(TwoFACodeModel model)
         {
@@ -51,6 +57,9 @@ namespace Project2FA.ViewModels
             uriBuilder.Append("&digits=" + model.TotpSize);
             uriBuilder.Append("&period=" + model.Period);
 
+            Url = uriBuilder.ToString();
+
+#if WINDOWS_UWP
             // generate QR code
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(uriBuilder.ToString(), QRCodeGenerator.ECCLevel.Q,true);
@@ -66,6 +75,7 @@ namespace Project2FA.ViewModels
                 await bitmapImage.SetSourceAsync(randomAccessStream);
                 QRImage = bitmapImage;
             }
+#endif
         }
 
         public async Task InitializeAsync(IDialogParameters parameters)

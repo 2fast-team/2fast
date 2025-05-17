@@ -181,6 +181,10 @@ namespace Project2FA.UWP.Views
                 }
                 SetPrimaryBTNEnable();
             }
+            else
+            {
+                RemovePivotItems(PI_ImportBackupFile);
+            }
         }
 
         private void SetPrimaryBTNEnable()

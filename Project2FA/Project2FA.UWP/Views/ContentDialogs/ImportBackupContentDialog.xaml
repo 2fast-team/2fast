@@ -87,9 +87,7 @@
                         <Border 
                             Visibility="{x:Bind IsEnabled, Converter={StaticResource VisibleWhenFalseConverter}, Mode=OneWay}"
                             Grid.ColumnSpan="3" 
-                            Background="{ThemeResource TranslucentBackgroundLowBrush}" >
-                            
-                        </Border>
+                            Background="{ThemeResource TranslucentBackgroundLowBrush}" />
                     </Grid>
                 </UserControl>
             </DataTemplate>
@@ -222,9 +220,11 @@
                             <ComboBox 
                                 x:Uid="ImportBackupCDCBImportFormat"
                                 Header="~ImportBackupCDCBImportFormat.Header"
+                                SelectedIndex="{x:Bind ViewModel.SelectedImportFormatIndex, Mode=TwoWay}"
+                                ItemsSource="{x:Bind ViewModel.BackupServiceEnumList, Mode=OneWay}"
                                 PlaceholderText="~ImportBackupCDCBSelectImportFormat.PlaceholderText"
                                 MinWidth="{StaticResource CardActionControlMinWidth}">
-                                <ComboBoxItem Content="AEGIS" />
+                                <!--<ComboBoxItem Content="AEGIS" />-->
                             </ComboBox>
                             <!--SelectedIndex="{x:Bind ViewModel.PeriodIndex, Mode=TwoWay}"-->
 
@@ -244,7 +244,7 @@
                                 x:Uid="ImportBackupCDPassword"
                                 Header="~ImportBackupCDPassword.Header"
                                 PlaceholderText="~ImportBackupCDPassword.PlaceholderText"
-                                IsEnabled="{Binding IsChecked,ElementName=CB_NoPasswordGiven}"
+                                IsEnabled="{x:Bind ViewModel.PasswordGivenChecked, Mode=OneWay}"
                                 Password="{x:Bind ViewModel.Password, Mode=TwoWay}"/>
 
                             <Button

@@ -717,8 +717,7 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Update of third-party libraries
-- Bug fixes and more detailed error logging
-- Extension of the settings for new accounts in expert mode</value>
+- Import function for backups of apps (AEGIS &amp; AndOTP) added</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1427,5 +1426,11 @@ The application supports an MDM configuration for centralised management of the 
   </data>
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
     <value>Adding an individual account is only possible via the ‘Add account’ function and not via the import function.</value>
+  </data>
+  <data name="ImportBackupPasswordError" xml:space="preserve">
+    <value>The password entered or the backup format is invalid.</value>
+  </data>
+  <data name="AddQRCodeNotSupportedError" xml:space="preserve">
+    <value>Adding or importing multiple accounts is only possible via the ‘Import accounts’ function.</value>
   </data>
 </root>

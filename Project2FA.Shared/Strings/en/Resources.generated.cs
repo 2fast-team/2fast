@@ -1978,6 +1978,26 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region ImportBackupPasswordError
+        public static string ImportBackupPasswordError
+        {
+            get
+            {
+                return _resourceLoader.GetString("ImportBackupPasswordError");
+            }
+        }
+        #endregion
+
+        #region AddQRCodeNotSupportedError
+        public static string AddQRCodeNotSupportedError
+        {
+            get
+            {
+                return _resourceLoader.GetString("AddQRCodeNotSupportedError");
+            }
+        }
+        #endregion
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2138,7 +2158,9 @@ namespace Project2FA.Strings{
             SettingsPageProVersionActivated,
             CloseAppDialogContent,
             CloseAppDialogTitle,
-            ImportBackupQRCodeNotSupportedError
+            ImportBackupQRCodeNotSupportedError,
+            ImportBackupPasswordError,
+            AddQRCodeNotSupportedError
         }
 
         private static ResourceLoader _resourceLoader;

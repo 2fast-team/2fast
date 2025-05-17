@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:zxingcontrols="using:ZXing.Net.Uno.Controls"
     xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -20,7 +21,10 @@
             Foreground="{ThemeResource SystemAccentColor}"
             HorizontalAlignment="Center" 
             Margin="0,12,0,12"/>
-        <Image MaxWidth="250" Source="{x:Bind ViewModel.QRImage,Mode=OneWay}"/>
+        <zxingcontrols:BarcodeGeneratorControl
+            Width="250"
+            Height="250"
+            Value="{x:Bind ViewModel.Url, Mode=OneWay}"/>
         <TextBlock 
             Margin="0,12,0,12"
             x:Uid="DisplayQRCodeContentDialogDesc"

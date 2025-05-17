@@ -14,44 +14,59 @@ using System.Windows.Input;
 using UNOversal.Services.Dialogs;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI.Popups;
+
+#if WINDOWS_UWP
+using Windows.UI.Xaml.Controls;
+#else
+using Microsoft.UI.Xaml.Controls;
+#endif
 
 namespace Project2FA.ViewModels
 {
     public class ImportBackupContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
         private IBackupImporterService BackupImporterService { get; }
+        private IDialogService DialogService { get; }
         private int _selectedPivotIndex = 0;
         private StorageFile _importStorageFile;
         private bool _isLoading = false;
-        private bool _isCheckedInputs = true;
+        private bool _isCheckedInputs = false;
         public ICommand FileImportCommand { get; }
         private string _password = string.Empty;
         private string _lastPivotItemName = string.Empty;
         private bool _passwordGivenChecked = true;
+        private int _selectedImportFormatIndex = -1;
         public ICommand ImportAccountCommand { get; }
+        public ObservableCollection<BackupServiceEnum> BackupServiceEnumList { get; } = new ObservableCollection<BackupServiceEnum>();
 
 
-        public ImportBackupContentDialogViewModel(IBackupImporterService backupImporterService)
+        public ImportBackupContentDialogViewModel(IBackupImporterService backupImporterService, IDialogService dialogService)
         {
             BackupImporterService = backupImporterService;
+            DialogService = dialogService;
             FileImportCommand = new AsyncRelayCommand(FileImportCommandTask);
-            ImportAccountCommand = new RelayCommand(ImportAccountsToCollection);
+            ImportAccountCommand = new AsyncRelayCommand(ImportAccountCommandTask);
         }
 
-        private void ImportAccountsToCollection()
+        private async Task ImportAccountCommandTask()
         {
             var accountsToImport = ImportCollection.Where(x => x.IsChecked);
-            DataService.Instance.Collection.AddRange(accountsToImport);
+            var result = await DataService.Instance.AddAccountsToCollection(accountsToImport.ToList());
+            if (result)
+            {
+                await DataService.Instance.WriteLocalDatafile();
+            }
         }
 
         public async Task<bool> ConfirmImportTask()
         {
-            List<TwoFACodeModel> accountList;
-            bool successful;
+            List<TwoFACodeModel> accountList = null;
+            bool successful = false;
             Exception exc = null;
-            // StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/aegis.encrypted.json"));
-            // TOTO switch case for BackupServiceEnum
-            (accountList, successful, exc) = await BackupImporterService.ImportBackup(ImportStorageFile, Password, BackupServiceEnum.Aegis);
+
+            (accountList, successful, exc) = await BackupImporterService.ImportBackup(ImportStorageFile, Password, (BackupServiceEnum)SelectedImportFormatIndex);
+
             if (successful)
             {
                 ImportCollection.AddRange(accountList, true);
@@ -59,6 +74,8 @@ namespace Project2FA.ViewModels
             }
             else
             {
+                MessageDialog dialog = new MessageDialog(Strings.Resources.ImportBackupPasswordError, Strings.Resources.Error);
+                await dialog.ShowAsync();
                 return false;
             }
         }
@@ -90,6 +107,23 @@ namespace Project2FA.ViewModels
         public void Initialize(IDialogParameters parameters)
         {
             this.EntryEnum = Repository.Models.Enums.AccountEntryEnum.Import;
+            var importList = Enum.GetValues(typeof(BackupServiceEnum)).Cast<BackupServiceEnum>();
+            BackupServiceEnumList.AddRange(importList.Where(x => x != BackupServiceEnum.None));
+        }
+
+        public void CheckInputs()
+        {
+            if (string.IsNullOrEmpty(Password) && PasswordGivenChecked)
+            {
+                IsCheckedInputs = false;
+                return;
+            }
+            if (ImportStorageFile == null || SelectedImportFormatIndex == -1)
+            {
+                IsCheckedInputs = false;
+                return;
+            }
+            IsCheckedInputs = true;
         }
 
         public new int SelectedPivotIndex
@@ -110,8 +144,14 @@ namespace Project2FA.ViewModels
         }
         public string Password 
         { 
-            get => _password; 
-            set => SetProperty(ref _password, value);
+            get => _password;
+            set
+            {
+                if(SetProperty(ref _password, value))
+                {
+                    CheckInputs();
+                }
+            }
         }
         public bool IsCheckedInputs
         { 
@@ -120,13 +160,37 @@ namespace Project2FA.ViewModels
         }
         public string LastPivotItemName 
         { 
-            get => _lastPivotItemName; 
-            set => SetProperty(ref _lastPivotItemName, value);
+            get => _lastPivotItemName;
+            set
+            {
+                if(SetProperty(ref _lastPivotItemName, value))
+                {
+                    CheckInputs();
+                }
+            }
         }
         public bool PasswordGivenChecked 
         { 
-            get => _passwordGivenChecked; 
-            set => SetProperty(ref _passwordGivenChecked, value);
+            get => _passwordGivenChecked;
+            set
+            {
+                if(SetProperty(ref _passwordGivenChecked, value))
+                {
+                    CheckInputs();
+                }
+            }
+        }
+
+        public int SelectedImportFormatIndex 
+        { 
+            get => _selectedImportFormatIndex;
+            set
+            {
+                if(SetProperty(ref _selectedImportFormatIndex, value))
+                {
+                    CheckInputs();
+                }
+            }
         }
     }
 

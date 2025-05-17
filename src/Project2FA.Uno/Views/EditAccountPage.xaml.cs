@@ -87,13 +87,13 @@ namespace Project2FA.Uno.Views
             TeachingTip teachingTip = new TeachingTip
             {
                 Target = sender as FrameworkElement,
-                MaxWidth = 400,
+                MaxWidth = 250,
                 Subtitle = Strings.Resources.EditAccountContentDialogAccountCategoryInfoText,
-                IsLightDismissEnabled = true,
+                IsLightDismissEnabled = false,
                 BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
                 IsOpen = true
             };
-            //RootGrid.Children.Add(teachingTip);
+            RootGrid.Children.Add(teachingTip);
         }
 
         private void SettingsExpander_Expanded(object sender, EventArgs e)

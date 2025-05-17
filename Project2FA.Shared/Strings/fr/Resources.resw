@@ -721,8 +721,7 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Mise à jour des bibliothèques tierces
-- Correction de bugs et enregistrement plus détaillé des erreurs
-- Extension des paramètres pour les nouveaux comptes en mode expert</value>
+- Ajout d'une fonction d'importation pour les sauvegardes d'applications (AEGIS &amp; AndOTP)</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Nouvelles fonctionnalités et changements</value>
@@ -1375,66 +1374,66 @@ L'application prend en charge une configuration MDM pour une gestion centralisé
     <value>La version Pro a été activée avec succès.</value>
   </data>
   <data name="CloseAppDialogTitle" xml:space="preserve">
-    <value />
+    <value>Stockage en cours</value>
   </data>
   <data name="CloseAppDialogContent" xml:space="preserve">
-    <value />
+    <value>Il n'est pas possible de fermer l'application pendant qu'elle est sauvegardée. Réessayez dans quelques instants.</value>
   </data>
   <data name="ImportBackupCDFileBTN.Text" xml:space="preserve">
-    <value />
+    <value>Charger le fichier</value>
   </data>
   <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
-    <value />
+    <value>Scanner le code de sauvegarde de Google</value>
   </data>
   <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
-    <value />
+    <value>La sélection</value>
   </data>
   <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
-    <value />
+    <value>Importation</value>
   </data>
   <data name="ImportBackupContentDialogFilename.Header" xml:space="preserve">
-    <value />
+    <value>Nom du fichier</value>
   </data>
   <data name="ImportBackupCDChangeDatafile.Content" xml:space="preserve">
-    <value />
+    <value>Modifier le fichier</value>
   </data>
   <data name="ImportBackupCDPassword.Header" xml:space="preserve">
-    <value />
+    <value>Mot de passe pour le décryptage</value>
   </data>
   <data name="ImportBackupCDPasswordGiven.Content" xml:space="preserve">
-    <value />
+    <value>Sauvegarde cryptée avec mot de passe</value>
   </data>
   <data name="ImportBackupCDConfirmFileImport.Content" xml:space="preserve">
-    <value />
+    <value>Lire la sauvegarde</value>
   </data>
   <data name="ImportBackupCDCameraPI.Header" xml:space="preserve">
-    <value />
+    <value>Appareil photo</value>
   </data>
   <data name="ImportBackupCDImportAccountsPI.Header" xml:space="preserve">
-    <value />
+    <value>Aperçu des comptes</value>
   </data>
   <data name="ImportBackupCDImportBackupFilePI.Header" xml:space="preserve">
-    <value />
+    <value>Fichier</value>
   </data>
   <data name="ImportBackupCD.Title" xml:space="preserve">
-    <value />
+    <value>Importer des comptes</value>
   </data>
   <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>Saisie du mot de passe</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
-    <value />
+    <value>Format original de la sauvegarde</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>Choisir le format</value>
   </data>
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>L'ajout d'un compte individuel n'est possible que via la fonction "Ajouter un compte" et non via la fonction d'importation.</value>
   </data>
   <data name="ImportBackupPasswordError" xml:space="preserve">
-    <value />
+    <value>Le mot de passe saisi ou le format de sauvegarde n'est pas valide.</value>
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>L'ajout ou l'importation de plusieurs comptes n'est possible que via la fonction "Importer des comptes".</value>
   </data>
 </root>

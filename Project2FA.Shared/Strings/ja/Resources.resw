@@ -721,9 +721,8 @@
     <value>NTPサーバーを使用して、システムの正しい時刻をチェックすることができる。時刻にそれ以上のずれがある場合、アカウントのコード作成はもはや正しくない。30秒以上のずれがある場合、通知が表示され、NTPサーバーの時刻でコードの作成が行われる。</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- サードパーティライブラリの更新
-- バグ修正とより詳細なエラーログ
-- エキスパートモードでの新規アカウント設定の拡張</value>
+    <value>- サードパーティ製ライブラリのアップデート
+- アプリ(AEGIS &amp; AndOTP)のバックアップ用インポート機能追加</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1377,66 +1376,66 @@
     <value>Proバージョンは正常にアクティベートされました。</value>
   </data>
   <data name="CloseAppDialogTitle" xml:space="preserve">
-    <value />
+    <value>保管中</value>
   </data>
   <data name="CloseAppDialogContent" xml:space="preserve">
-    <value />
+    <value>保存中にアプリケーションを閉じることはできません。すぐに再試行してください。</value>
   </data>
   <data name="ImportBackupCDFileBTN.Text" xml:space="preserve">
-    <value />
+    <value>ファイルを読み込む</value>
   </data>
   <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
-    <value />
+    <value>Googleバックアップコードをスキャン</value>
   </data>
   <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
-    <value />
+    <value>セレクション</value>
   </data>
   <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
-    <value />
+    <value>輸入</value>
   </data>
   <data name="ImportBackupContentDialogFilename.Header" xml:space="preserve">
-    <value />
+    <value>ファイル名</value>
   </data>
   <data name="ImportBackupCDChangeDatafile.Content" xml:space="preserve">
-    <value />
+    <value>変更ファイル</value>
   </data>
   <data name="ImportBackupCDPassword.Header" xml:space="preserve">
-    <value />
+    <value>復号用パスワード</value>
   </data>
   <data name="ImportBackupCDPasswordGiven.Content" xml:space="preserve">
-    <value />
+    <value>パスワードで暗号化されたバックアップ</value>
   </data>
   <data name="ImportBackupCDConfirmFileImport.Content" xml:space="preserve">
-    <value />
+    <value>バックアップを読む</value>
   </data>
   <data name="ImportBackupCDCameraPI.Header" xml:space="preserve">
-    <value />
+    <value>カメラ</value>
   </data>
   <data name="ImportBackupCDImportAccountsPI.Header" xml:space="preserve">
-    <value />
+    <value>会計の概要</value>
   </data>
   <data name="ImportBackupCDImportBackupFilePI.Header" xml:space="preserve">
-    <value />
+    <value>ファイル</value>
   </data>
   <data name="ImportBackupCD.Title" xml:space="preserve">
-    <value />
+    <value>アカウントのインポート</value>
   </data>
   <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>パスワード入力</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
-    <value />
+    <value>バックアップのオリジナルフォーマット</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>フォーマットを選択</value>
   </data>
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>個人口座の追加は、インポート機能ではなく、「口座の追加」機能によってのみ可能です。</value>
   </data>
   <data name="ImportBackupPasswordError" xml:space="preserve">
-    <value />
+    <value>入力されたパスワードまたはバックアップ形式が無効です。</value>
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>複数アカウントの追加またはインポートは、「アカウントのインポート」機能でのみ可能です。</value>
   </data>
 </root>

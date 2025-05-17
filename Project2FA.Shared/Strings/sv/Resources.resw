@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -720,8 +719,7 @@ Vänligen synkronisera tiden i inställningarna.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Uppdatering av tredjepartsbibliotek
-- Buggfixar och mer detaljerad felloggning
-- Utökning av inställningarna för nya konton i expertläget</value>
+- Importfunktion för säkerhetskopior av appar (AEGIS &amp; AndOTP) tillagd</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1375,66 +1373,66 @@ Applikationen stöder en MDM-konfiguration för centraliserad hantering av appli
     <value>Pro-versionen har aktiverats framgångsrikt.</value>
   </data>
   <data name="CloseAppDialogTitle" xml:space="preserve">
-    <value />
+    <value>Pågående lagring</value>
   </data>
   <data name="CloseAppDialogContent" xml:space="preserve">
-    <value />
+    <value>Det går inte att stänga programmet medan det sparas. Försök igen inom kort.</value>
   </data>
   <data name="ImportBackupCDFileBTN.Text" xml:space="preserve">
-    <value />
+    <value>Ladda fil</value>
   </data>
   <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
-    <value />
+    <value>Skanna Google backup-kod</value>
   </data>
   <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
-    <value />
+    <value>Urval</value>
   </data>
   <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
-    <value />
+    <value>Import</value>
   </data>
   <data name="ImportBackupContentDialogFilename.Header" xml:space="preserve">
-    <value />
+    <value>Filens namn</value>
   </data>
   <data name="ImportBackupCDChangeDatafile.Content" xml:space="preserve">
-    <value />
+    <value>Ändra fil</value>
   </data>
   <data name="ImportBackupCDPassword.Header" xml:space="preserve">
-    <value />
+    <value>Lösenord för dekryptering</value>
   </data>
   <data name="ImportBackupCDPasswordGiven.Content" xml:space="preserve">
-    <value />
+    <value>Säkerhetskopiering krypterad med lösenord</value>
   </data>
   <data name="ImportBackupCDConfirmFileImport.Content" xml:space="preserve">
-    <value />
+    <value>Läs backup</value>
   </data>
   <data name="ImportBackupCDCameraPI.Header" xml:space="preserve">
-    <value />
+    <value>Kamera</value>
   </data>
   <data name="ImportBackupCDImportAccountsPI.Header" xml:space="preserve">
-    <value />
+    <value>Översikt över konton</value>
   </data>
   <data name="ImportBackupCDImportBackupFilePI.Header" xml:space="preserve">
-    <value />
+    <value>Fil</value>
   </data>
   <data name="ImportBackupCD.Title" xml:space="preserve">
-    <value />
+    <value>Importera konton</value>
   </data>
   <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>Ange lösenord</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
-    <value />
+    <value>Originalformat för säkerhetskopian</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>Välj format</value>
   </data>
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>Att lägga till ett enskilt konto är endast möjligt via funktionen "Lägg till konto" och inte via importfunktionen.</value>
   </data>
   <data name="ImportBackupPasswordError" xml:space="preserve">
-    <value />
+    <value>Det angivna lösenordet eller säkerhetskopieringsformatet är ogiltigt.</value>
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>Att lägga till eller importera flera konton är endast möjligt via funktionen "Importera konton".</value>
   </data>
 </root>

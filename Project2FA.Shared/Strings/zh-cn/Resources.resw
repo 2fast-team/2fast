@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -167,9 +166,7 @@
   </data>
   <data name="AddAccountContentDialogInfo.Text" xml:space="preserve">
     <value>要为双因素身份验证创建新账户，您需要一个 QR 码或来自外部服务的密钥（加密文本）。
-
-# 如何导入密钥？
-</value>
+# 如何导入密钥？</value>
   </data>
   <data name="AddAccountContentDialogInputs.Header" xml:space="preserve">
     <value>输入</value>
@@ -190,7 +187,7 @@
     <value>手动输入</value>
   </data>
   <data name="AddAccountContentDialogQRCodeContentError" xml:space="preserve">
-    <value>无法从 QR 码中获取信息。请重试或手动添加秘钥。</value>
+    <value>无法从 QR 代码中获取信息。请重试或手动添加秘钥。</value>
   </data>
   <data name="AddAccountContentDialogReadQRCode.Text" xml:space="preserve">
     <value>扫描关键 QR 代码</value>
@@ -605,9 +602,8 @@
     <value>重新加载数据文件</value>
   </data>
   <data name="PasswordInvalidMessage" xml:space="preserve">
-    <value>此应用程序中保存的数据文件密码无效。您可能已在另一台机器上更改了数据文件的密码。
-**您现在要更改密码吗？**</value>
-    <comment>[ReswT:manually]</comment>
+    <value>此应用程序中保存的数据文件密码无效。您可能在另一台机器上更改了数据文件的密码。
+**您现在要更改密码吗？</value>
   </data>
   <data name="SettingsFactoryResetDialogTitle" xml:space="preserve">
     <value>出厂重置</value>
@@ -719,8 +715,8 @@
     <value>可以使用 NTP 服务器来检查系统时间是否正确。如果时间偏差较大，则创建的账户代码将不再正确。如果偏差超过 30 秒，系统将发出通知，并按照 NTP 服务器的时间创建代码。</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- 更新第三方库
-- 西班牙语翻译已由母语人士更新</value>
+    <value>- 更新第三方程序库
+- 添加应用程序（AEGIS 和 AndOTP）备份的导入功能</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1048,7 +1044,7 @@
     <value>使用文件/图像导入</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - 双因素验证器</value>
+    <value>[Beta] 2fast - 双因素验证器</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>返回</value>
@@ -1150,7 +1146,7 @@
     <value>开放式教程</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorks.Text" xml:space="preserve">
-    <value>第二个因素的[身份验证](https://zh.wikipedia.org/wiki/身份验证) 功能是通过基于时间的一次性口令实现的。为此，服务的登录服务器和用户之间会商定一个秘密设置密钥，该密钥存储在应用程序的本地。这样可以确保在设置密钥达成一致的情况下，应用程序始终可以离线操作。
+    <value>第二个因素的[身份验证](https://en.wikipedia.org/wiki/Authentication) 功能是通过基于时间的一次性口令实现的。为此，服务的登录服务器和用户之间会商定一个秘密设置密钥，该密钥存储在应用程序的本地。这样可以确保在设置密钥达成一致的情况下，应用程序始终可以离线操作。
 
 
 
@@ -1158,7 +1154,7 @@
 
 
 
-本应用程序的功能将在以下章节中详细介绍。</value>
+下文将详细介绍该应用程序的功能。</value>
   </data>
   <data name="TutorialContentDialogHowTheAppWorksHeader.Text" xml:space="preserve">
     <value>**应用程序的功能**</value>
@@ -1238,7 +1234,7 @@
     <value>选择购买</value>
   </data>
   <data name="AccountCodePageProFeature.ToolTipService.ToolTip" xml:space="preserve">
-    <value>只需购买或订阅即可使用该功能。</value>
+    <value>仅通过购买或订阅才可使用该功能。</value>
   </data>
   <data name="InAppBuyOnce" xml:space="preserve">
     <value>购买后，Pro+ 功能可永久访问和使用，从而支持应用程序的进一步开发。
@@ -1274,7 +1270,7 @@
     <value>忘记密码？</value>
   </data>
   <data name="TutorialPagePasswordInfo" xml:space="preserve">
-    <value>如果忘记密码并卸载或重置了应用程序，可在 Windows 的[凭证管理器](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) 中查看同一台计算机上的密码。这里的条目设置为网络登录信息下的 "Project2FA"。</value>
+    <value>如果忘记密码并卸载或重置了应用程序，可在 Windows 的[凭证管理器](https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0) 中查看同一台计算机上的密码。这里的条目设置为 Web 登录信息下的 "Project2FA"。</value>
   </data>
   <data name="LoginPageWindowsHelloError" xml:space="preserve">
     <value>Windows Hello 存在问题。要使用应用程序中的功能，请在 Windows 设置中解决问题。</value>
@@ -1368,72 +1364,72 @@
     <value>使用生物识别技术登录</value>
   </data>
   <data name="AddAccountCameraContentDialogTitle.Text" xml:space="preserve">
-    <value>扫描二维码</value>
+    <value>扫描 QR 码</value>
   </data>
   <data name="SettingsPageProVersionActivated" xml:space="preserve">
     <value>专业版已成功激活。</value>
   </data>
   <data name="CloseAppDialogTitle" xml:space="preserve">
-    <value />
+    <value>存储中</value>
   </data>
   <data name="CloseAppDialogContent" xml:space="preserve">
-    <value />
+    <value>保存应用程序时无法关闭。请稍后再试。</value>
   </data>
   <data name="ImportBackupCDFileBTN.Text" xml:space="preserve">
-    <value />
+    <value>加载文件</value>
   </data>
   <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
-    <value />
+    <value>扫描 Google 备份代码</value>
   </data>
   <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
-    <value />
+    <value>选择</value>
   </data>
   <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
-    <value />
+    <value>进口</value>
   </data>
   <data name="ImportBackupContentDialogFilename.Header" xml:space="preserve">
-    <value />
+    <value>文件名</value>
   </data>
   <data name="ImportBackupCDChangeDatafile.Content" xml:space="preserve">
-    <value />
+    <value>更改文件</value>
   </data>
   <data name="ImportBackupCDPassword.Header" xml:space="preserve">
-    <value />
+    <value>解密密码</value>
   </data>
   <data name="ImportBackupCDPasswordGiven.Content" xml:space="preserve">
-    <value />
+    <value>用密码加密备份</value>
   </data>
   <data name="ImportBackupCDConfirmFileImport.Content" xml:space="preserve">
-    <value />
+    <value>阅读备份</value>
   </data>
   <data name="ImportBackupCDCameraPI.Header" xml:space="preserve">
-    <value />
+    <value>照相机</value>
   </data>
   <data name="ImportBackupCDImportAccountsPI.Header" xml:space="preserve">
-    <value />
+    <value>账户概览</value>
   </data>
   <data name="ImportBackupCDImportBackupFilePI.Header" xml:space="preserve">
-    <value />
+    <value>文件</value>
   </data>
   <data name="ImportBackupCD.Title" xml:space="preserve">
-    <value />
+    <value>导入账户</value>
   </data>
   <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>输入密码</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
-    <value />
+    <value>备份的原始格式</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>选择格式</value>
   </data>
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>添加个人账户只能通过 "添加账户 "功能，而不能通过导入功能。</value>
   </data>
   <data name="ImportBackupPasswordError" xml:space="preserve">
-    <value />
+    <value>输入的密码或备份格式无效。</value>
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>只有通过 "导入账户 "功能才能添加或导入多个账户。</value>
   </data>
 </root>

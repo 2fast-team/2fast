@@ -720,8 +720,7 @@ Synkronoi aika asetuksissa.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmannen osapuolen kirjastojen päivitys
-- Virheiden korjaukset ja yksityiskohtaisempi virheiden kirjaaminen
-- Asiantuntijatilassa olevien uusien tilien asetusten laajentaminen</value>
+- Sovellusten varmuuskopioiden (AEGIS &amp; AndOTP) tuontitoiminto lisätty.</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1375,66 +1374,66 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
     <value>Pro-versio on onnistuneesti aktivoitu.</value>
   </data>
   <data name="CloseAppDialogTitle" xml:space="preserve">
-    <value />
+    <value>Varastointi käynnissä</value>
   </data>
   <data name="CloseAppDialogContent" xml:space="preserve">
-    <value />
+    <value>Sovellusta ei voi sulkea tallennuksen aikana. Yritä pian uudelleen.</value>
   </data>
   <data name="ImportBackupCDFileBTN.Text" xml:space="preserve">
-    <value />
+    <value>Lataa tiedosto</value>
   </data>
   <data name="ImportBackupCDReadQRCode.Text" xml:space="preserve">
-    <value />
+    <value>Skannaa Googlen varmuuskopiointikoodi</value>
   </data>
   <data name="ImportBackupCDImportSelection.Header" xml:space="preserve">
-    <value />
+    <value>Valinta</value>
   </data>
   <data name="ImportBackupCD.PrimaryButtonText" xml:space="preserve">
-    <value />
+    <value>Tuo</value>
   </data>
   <data name="ImportBackupContentDialogFilename.Header" xml:space="preserve">
-    <value />
+    <value>Tiedoston nimi</value>
   </data>
   <data name="ImportBackupCDChangeDatafile.Content" xml:space="preserve">
-    <value />
+    <value>Vaihda tiedosto</value>
   </data>
   <data name="ImportBackupCDPassword.Header" xml:space="preserve">
-    <value />
+    <value>Salasana salauksen purkamista varten</value>
   </data>
   <data name="ImportBackupCDPasswordGiven.Content" xml:space="preserve">
-    <value />
+    <value>Salasanalla salattu varmuuskopiointi</value>
   </data>
   <data name="ImportBackupCDConfirmFileImport.Content" xml:space="preserve">
-    <value />
+    <value>Lue varmuuskopio</value>
   </data>
   <data name="ImportBackupCDCameraPI.Header" xml:space="preserve">
-    <value />
+    <value>Kamera</value>
   </data>
   <data name="ImportBackupCDImportAccountsPI.Header" xml:space="preserve">
-    <value />
+    <value>Yleiskatsaus tileihin</value>
   </data>
   <data name="ImportBackupCDImportBackupFilePI.Header" xml:space="preserve">
-    <value />
+    <value>Tiedosto</value>
   </data>
   <data name="ImportBackupCD.Title" xml:space="preserve">
-    <value />
+    <value>Tuo tilejä</value>
   </data>
   <data name="ImportBackupCDPassword.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>Syötä salasana</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.Header" xml:space="preserve">
-    <value />
+    <value>Varmuuskopion alkuperäinen muoto</value>
   </data>
   <data name="ImportBackupCDCBImportFormat.PlaceholderText" xml:space="preserve">
-    <value />
+    <value>Valitse muoto</value>
   </data>
   <data name="ImportBackupQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>Yksittäisen tilin lisääminen on mahdollista vain "Lisää tili" -toiminnon kautta eikä tuontitoiminnon kautta.</value>
   </data>
   <data name="ImportBackupPasswordError" xml:space="preserve">
-    <value />
+    <value>Syötetty salasana tai varmuuskopiointimuoto on virheellinen.</value>
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
-    <value />
+    <value>Useiden tilien lisääminen tai tuominen on mahdollista vain 'Tuo tilit' -toiminnolla.</value>
   </data>
 </root>

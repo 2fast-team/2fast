@@ -16,8 +16,6 @@ using Windows.Foundation;
 using System;
 using System.Linq;
 
-using Markdig.Syntax;
-
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
     internal class MyParagraph : IAddChild

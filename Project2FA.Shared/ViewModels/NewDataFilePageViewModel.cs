@@ -181,8 +181,8 @@ namespace Project2FA.ViewModels
                     SerializationService.Serialize(file),
                     await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
 
-                var result = await CreateLocalFileDB(isWebDAV);
-                if (result != null)
+                var result = await CreateDataFileSettings(isWebDAV);
+                if (result)
                 {
                     App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
                     await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));

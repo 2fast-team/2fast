@@ -25,13 +25,15 @@ namespace Project2FA.Uno.Droid
         public static MainActivity Instance { get; private set; }
         protected override void OnCreate(Bundle? savedInstanceState)
         {
+            global::AndroidX.Core.SplashScreen.SplashScreen.InstallSplashScreen(this);
+
             base.OnCreate(savedInstanceState);
 
             Instance = this;
             // disable screenshot capture
             if (!System.Diagnostics.Debugger.IsAttached)
             {
-                Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
+                Window?.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
             }
             Intent intent = this.Intent;
             var action = intent.Action;

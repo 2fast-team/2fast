@@ -29,6 +29,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using Windows.Security.Authorization.AppCapabilityAccess;
 #else
+#if __ANDROID__ || __IOS__
+using static Uno.WinRTFeatureConfiguration;
+#endif
 using Project2FA.UnoApp;
 using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
@@ -174,9 +177,16 @@ namespace Project2FA.ViewModels
             if (await TestPassword())
 #endif
             {
-                await CreateLocalFileDB(isWebDAV);
-                App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
-                await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+                if (await CreateDataFileSettings(isWebDAV))
+                {
+                    App.ShellPageInstance.ViewModel.NavigationIsAllowed = true;
+                    await NaviationService.NavigateAsync("/" + nameof(AccountCodePage));
+                }
+                else
+                {
+                    // TODO error dialog
+                }
+
             }
             IsLoading = false;
         }
@@ -198,7 +208,8 @@ namespace Project2FA.ViewModels
             filePicker.FileTypeFilter.Add(".2fa");
 #if __IOS__
             // mapping the filter type to definied UTType
-            Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToUTTypeMapping.Add(".2fa", "com.jpwtechnology.2fa");
+            
+            FileTypes.FileTypeToUTTypeMapping.Add(".2fa", "com.jpwtechnology.2fa");
 #endif
 
 #if ANDROID
@@ -286,7 +297,7 @@ namespace Project2FA.ViewModels
         {
             if (ChoosenOneWebDAVFile != null)
             {
-                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+                StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 LocalStorageFile = await DownloadWebDAVFile(storageFolder);
                 return await TestPasswordInternal();
             }

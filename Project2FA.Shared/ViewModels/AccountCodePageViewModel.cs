@@ -69,7 +69,6 @@ namespace Project2FA.ViewModels
         public ICommand HideOrShowTOTPCodeCommand {get;}
         public ICommand CopyCodeToClipboardCommand { get; }
         public ICommand NavigateToSettingsCommand { get; }
-        public ICommand SetFilterCommand { get; }
         public ICommand CameraCommand { get; }
         private ILoggingService LoggingService { get; }
 
@@ -125,7 +124,6 @@ namespace Project2FA.ViewModels
             // custom commands for Uno platform project
             CameraCommand = new AsyncRelayCommand(CameraCommandTask);
 #endif
-            //SetFilterCommand = new AsyncRelayCommand(SetFilterCommandTask);
 
             NavigateToSettingsCommand = new AsyncRelayCommand(NavigateToSettingsCommandTask);
             ShowProFeatureCommand = new AsyncRelayCommand(ShowProFeatureCommandTask);

@@ -10,7 +10,6 @@ using Project2FA.Core.ProtoModels;
 using OtpNet;
 using UNOversal.Navigation;
 
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;

@@ -81,7 +81,8 @@ namespace Project2FA.ViewModels
             LoginCommand = new RelayCommand(CheckLogin);
 #if WINDOWS_UWP
             WindowsHelloLoginCommand = new RelayCommand(WindowsHelloLoginCommandTask);
-#else
+#endif
+
 #if IOS
 			var laContext = new LAContext
 			{
@@ -131,7 +132,7 @@ namespace Project2FA.ViewModels
             BiometricoLoginCommand = new AsyncRelayCommand(BiometricoLoginCommandTask);
 #endif
 
-#endif
+
 
             var title = Strings.Resources.ApplicationName;
             ApplicationTitle = System.Diagnostics.Debugger.IsAttached ? "[Debug] " + title : title;
@@ -194,10 +195,9 @@ namespace Project2FA.ViewModels
                 UserConsentVerificationResult consentResult = await UserConsentVerifier.RequestVerificationAsync(Resources.WindowsHelloLoginMessage);
                 if (consentResult == UserConsentVerificationResult.Verified)
                 {
-                    var dbHash = await App.Repository.Password.GetAsync();
                     var secretService = App.Current.Container.Resolve<ISecretService>();
 
-                    if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash)))
+                    if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName, SettingsService.Instance.DataFilePasswordHash)))
                     {
                         await ShowLoginError();
                     }
@@ -232,9 +232,8 @@ namespace Project2FA.ViewModels
                 IsLoading = true;
                 await BiometryService.ScanBiometry(_cancellationToken);
                 // Authentication Passed
-                var dbHash = await App.Repository.Password.GetAsync();
                 var secretService = App.Current.Container.Resolve<ISecretService>();
-                if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName, dbHash.Hash)))
+                if (!await CheckNavigationRequest(secretService.Helper.ReadSecret(Constants.ContainerName, SettingsService.Instance.DataFilePasswordHash)))
                 {
                     await ShowLoginError();
                     IsLoading = false;
@@ -352,10 +351,8 @@ namespace Project2FA.ViewModels
         /// else when the hash is not equal to the saved password</returns>
         private async Task<bool> CheckNavigationRequest(string password)
         {
-            var dbHash = await App.Repository.Password.GetAsync();
-
             string pwdhash = CryptoService.CreateStringHash(password);
-            if (dbHash.Hash == pwdhash)
+            if (!string.IsNullOrWhiteSpace(SettingsService.Instance.DataFilePasswordHash) && SettingsService.Instance.DataFilePasswordHash == pwdhash)
             {
                 //var navigationParameters = new NavigationParameters();
                 //navigationParameters.Add("pwd", password);

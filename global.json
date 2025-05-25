@@ -1,14 +1,14 @@
 {
-	"sdk": {
-		"version": "9.0.300",
-		"allowPrerelease": false,
-		"rollForward": "latestPatch"
-	},
-	"tools": {
-		"dotnet": "9.0.300"
-	},
-	"msbuild-sdks": {
-		"MSBuild.Sdk.Extras": "3.0.44",
-		"Uno.Sdk": "6.0.67"
-	}
+  "sdk": {
+    "version": "9.0.300",
+    "allowPrerelease": false,
+    "rollForward": "latestPatch"
+  },
+  "tools": {
+    "dotnet": "9.0.300"
+  },
+  "msbuild-sdks": {
+    "MSBuild.Sdk.Extras": "3.0.44",
+    "Uno.Sdk": "6.0.96"
+  }
 }

@@ -1,4 +1,5 @@
-﻿using Project2FA.ViewModels;
+﻿using Project2FA.Services;
+using Project2FA.ViewModels;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,10 +19,9 @@ namespace Project2FA.UWP.Views
             SetPivotItem();
         }
 
-        private async void SetPivotItem()
+        private void SetPivotItem()
         {
-            var dbAppFile = await App.Repository.Datafile.GetAsync();
-            if(dbAppFile.IsWebDAV)
+            if(SettingsService.Instance.DataFileWebDAVEnabled)
             {
                 MainPivot.Items.Remove(FolderPivotItem);
             }
@@ -42,7 +42,7 @@ namespace Project2FA.UWP.Views
             //first check if the given password matches with the datafile
             if (await ViewModel.TestPassword())
             {
-                await ViewModel.UpdateLocalFileDB();
+                ViewModel.UpdateLocalFileSettings();
                 Hide();
             }
             else

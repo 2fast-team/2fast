@@ -70,7 +70,7 @@ public sealed partial class AccountCodePage : Page
         if (e.NavigationMode == Microsoft.UI.Xaml.Navigation.NavigationMode.Back)
         {
             ViewModel.Initialize(new NavigationParameters());
-            
+
             //set current index for TabBar on smartphones
 #if __ANDROID__ || __IOS__
             if (App.ShellPageInstance.MainFrame.Content is UIElement uIElement)

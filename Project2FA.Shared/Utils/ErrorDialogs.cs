@@ -478,17 +478,17 @@ namespace Project2FA.Utils
         /// <summary>
         /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
         /// </summary>
-        internal async static Task ShowFileOrFolderNotFoundError(DBDatafileModel datafileModel = null)
+        internal async static Task ShowFileOrFolderNotFoundError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             // check if the app has file system access to load the file
             var checkFileSystemAccess = AppCapability.Create(Constants.BroadFileSystemAccessName).CheckAccess();
             if (checkFileSystemAccess == AppCapabilityAccessStatus.Allowed)
             {
-                if (datafileModel != null && datafileModel.IsWebDAV)
-                {
-                    // TODO WebDav case
-                }
+                //if (datafileModel != null && datafileModel.IsWebDAV)
+                //{
+                //    // TODO WebDav case
+                //}
                 // disable shell navigation
                 App.ShellPageInstance.ViewModel.NavigationIsAllowed = false;
                 //Logger.Log("no datafile found", Category.Exception, Priority.High);
@@ -543,9 +543,12 @@ namespace Project2FA.Utils
                 factoryResetBTN.Command = new RelayCommand(async () =>
                 {
                     ISecretService _secretService = App.Current.Container.Resolve<ISecretService>();
-                    DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
                     //delete password in the secret vault
-                    _secretService.Helper.RemoveSecret(Constants.ContainerName, passwordHash.Hash);
+                    _secretService.Helper.RemoveSecret(Constants.ContainerName, SettingsService.Instance.DataFilePasswordHash);
+                    SettingsService.Instance.DataFilePasswordHash = string.Empty;
+                    SettingsService.Instance.DataFilePath = string.Empty;
+                    SettingsService.Instance.DataFileName = string.Empty;
+                    SettingsService.Instance.DataFileWebDAVEnabled = false;
                     // reset data and restart app
                     await ApplicationData.Current.ClearAsync();
                     await CoreApplication.RequestRestartAsync("Factory reset");

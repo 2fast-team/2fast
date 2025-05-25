@@ -131,7 +131,7 @@ namespace Project2FA.ViewModels
             if (SelectedIndex == 1)
             {
                 IsLoading = true;
-                await CreateLocalFileDB(false);
+                await CreateDataFileSettings(false);
             }
         }
 

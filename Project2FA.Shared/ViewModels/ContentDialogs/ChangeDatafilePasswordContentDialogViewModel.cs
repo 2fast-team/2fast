@@ -81,8 +81,7 @@ namespace Project2FA.ViewModels
         /// </summary>
         public async Task ChangePasswordInFileAndDB()
         {
-            DBPasswordHashModel passwordHashDB;
-            string hash;
+            string hash = string.Empty;
             if (DataService.Instance.ActivatedDatafile != null)
             {
                 SecretService.Helper.RemoveSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName);
@@ -103,16 +102,12 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                passwordHashDB = await App.Repository.Password.GetAsync();
                 //delete password in the secret vault
-                SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordHashDB.Hash);
-                // delete the hash in DB
-                await App.Repository.Password.DeleteAsync();
+                SecretService.Helper.RemoveSecret(Constants.ContainerName, SettingsService.Instance.DataFilePasswordHash);
                 //set new hash
-                passwordHashDB.Hash = CryptoService.CreateStringHash(NewPassword);
-                // update db with new pw hash
-                var model = await App.Repository.Password.UpsertAsync(passwordHashDB);
-                hash = model.Hash;
+                hash = CryptoService.CreateStringHash(NewPassword);
+                // update setting with new pw hash
+                SettingsService.Instance.DataFilePasswordHash = hash;
                 // save new pw in the secret vault
                 SecretService.Helper.WriteSecret(Constants.ContainerName, hash, NewPassword);
             }
@@ -144,18 +139,17 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                DBDatafileModel dbDatafile = await App.Repository.Datafile.GetAsync();
-                StorageFolder folder = dbDatafile.IsWebDAV ?
+                StorageFolder folder = SettingsService.Instance.DataFileWebDAVEnabled ?
                                     ApplicationData.Current.LocalFolder :
-                                    await StorageFolder.GetFolderFromPathAsync(dbDatafile.Path);
-                StorageFile file = await folder.GetFileAsync(dbDatafile.Name);
+                                    await StorageFolder.GetFolderFromPathAsync(SettingsService.Instance.DataFilePath);
+                StorageFile file = await folder.GetFileAsync(SettingsService.Instance.DataFileName);
                 return await TestPassword(file, folder);
             }
         }
 
         public async Task<string> GetCurrentPasswordHash()
         {
-            string hash;
+            string hash = string.Empty;
             if (DataService.Instance.ActivatedDatafile != null)
             {
 #if WINDOWS_UWP
@@ -167,7 +161,7 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                hash = (await App.Repository.Password.GetAsync()).Hash;
+                hash = SettingsService.Instance.DataFilePasswordHash;
             }
             return hash;
         }

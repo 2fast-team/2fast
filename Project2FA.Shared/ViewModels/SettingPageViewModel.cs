@@ -73,6 +73,7 @@ namespace Project2FA.ViewModels
         public ICommand InAppPaymentCommand { get; }
         public ICommand SeeSourceCodeCommand { get; }
         public ICommand ManageSubscriptionsCommand { get; }
+        public ICommand BackCommand { get; }
 
         private int _selectedItem;
         private bool _activatedProVersion;
@@ -103,6 +104,11 @@ namespace Project2FA.ViewModels
             {
                 Uri uri = new Uri("https://github.com/2fast-team/2fast");
                 await Launcher.LaunchUriAsync(uri);
+            });
+
+            BackCommand = new AsyncRelayCommand(async() =>
+            {
+                await NavigationService.GoBackAsync();
             });
 
 #if WINDOWS_UWP
@@ -293,17 +299,14 @@ namespace Project2FA.ViewModels
             switch (result)
             {
                 case ContentDialogResult.Secondary:
-                    DBPasswordHashModel passwordHash = await App.Repository.Password.GetAsync();
                     var secretHelper = App.Current.Container.Resolve<ISecretService>();
                     //delete password in the secret vault
-                    secretHelper.Helper.RemoveSecret(passwordHash.Hash);
-                    // delete password hash in DB
-                    await App.Repository.Password.DeleteAsync();
+                    secretHelper.Helper.RemoveSecret(Constants.ContainerName, SettingsService.Instance.DataFilePasswordHash);
                     //remove WebDAV login
-                    secretHelper.Helper.RemoveSecret("WDServerAddress");
-                    secretHelper.Helper.RemoveSecret("WDUsername");
-                    secretHelper.Helper.RemoveSecret("WDPassword");
-                    secretHelper.Helper.RemoveSecret(Constants.ActivatedDatafileHashName);
+                    secretHelper.Helper.RemoveSecret(Constants.ContainerName, "WDServerAddress");
+                    secretHelper.Helper.RemoveSecret(Constants.ContainerName, "WDUsername");
+                    secretHelper.Helper.RemoveSecret(Constants.ContainerName, "WDPassword");
+                    secretHelper.Helper.RemoveSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName);
 
                     // reset data and restart app
 #if WINDOWS_UWP
@@ -807,7 +810,6 @@ namespace Project2FA.ViewModels
         /// <returns></returns>
         private async Task InitializeDataFileAttributes()
         {
-            var dbDatafile = await App.Repository.Datafile.GetAsync();
             if (DataService.Instance.ActivatedDatafile != null)
             {
                 DatafilePath = DataService.Instance.ActivatedDatafile.Path;
@@ -815,8 +817,8 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                DatafileName = dbDatafile.Name;
-                DatafilePath = dbDatafile.IsWebDAV? SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + dbDatafile.Path : dbDatafile.Path;
+                DatafileName = SettingsService.Instance.DataFileName;
+                DatafilePath = SettingsService.Instance.DataFileWebDAVEnabled ? SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress") + SettingsService.Instance.DataFilePath : SettingsService.Instance.DataFilePath;
             }
         }
 

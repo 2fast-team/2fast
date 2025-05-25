@@ -2,7 +2,6 @@
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-      <DisableImplicitUnoPackages>false</DisableImplicitUnoPackages>
 
     <!--
       Adding NoWarn to remove build warnings

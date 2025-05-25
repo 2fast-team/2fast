@@ -1,33 +1,26 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.UI.Xaml;
-using System;
-using Windows.ApplicationModel.Activation;
+using Project2FA.Core;
+using Project2FA.Core.Services.JSON;
+using Project2FA.Core.Services.NTP;
+using Project2FA.Repository.Database;
+using Project2FA.Services;
+using Project2FA.Services.Importer;
+using Project2FA.Services.Parser;
 using Project2FA.Uno.Views;
 using Project2FA.ViewModels;
-using Windows.Storage;
+using Uno.Resizetizer;
+using UNOversal;
+using UNOversal.DryIoc;
+using UNOversal.Ioc;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.File;
+using UNOversal.Services.Logging;
 using UNOversal.Services.Network;
 using UNOversal.Services.Secrets;
-using UNOversal.Services.Settings;
 using UNOversal.Services.Serialization;
-using Project2FA.Core.Services.JSON;
-using UNOversal.Ioc;
-using UNOversal.DryIoc;
-using System.Threading.Tasks;
+using UNOversal.Services.Settings;
+using Windows.ApplicationModel.Activation;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
-using CoreWindowActivationState = Windows.UI.Core.CoreWindowActivationState;
-using WindowActivationState = Microsoft.UI.Xaml.WindowActivationState;
-using UNOversal;
-using Project2FA.Services;
-using Project2FA.Core.Services.NTP;
-using Uno.UI;
-using Project2FA.Services.Parser;
-using UNOversal.Services.Logging;
-using Project2FA.Repository.Database;
-using Microsoft.EntityFrameworkCore;
-using Project2FA.Core;
-using Project2FA.Services.Importer;
 
 namespace Project2FA.UnoApp
 {
@@ -43,11 +36,6 @@ namespace Project2FA.UnoApp
         /// Creates the access of the static instance of the ShellPage
         /// </summary>
         internal static ShellPage ShellPageInstance { get; private set; }
-
-        /// <summary>
-        /// Pipeline for interacting with database.
-        /// </summary>
-        public static IProject2FARepository Repository { get; private set; }
 
         /// <summary>
         /// Gets the main window of the app.
@@ -82,15 +70,12 @@ namespace Project2FA.UnoApp
             //WinUIWindow.Current.EnableHotReload(); // obsolete
             MainWindow.UseStudio();
 #endif
+            MainWindow.SetWindowIcon();
 
 #if __ANDROID__ || __IOS__
-            FeatureConfiguration.ListViewBase.AnimateScrollIntoView = false;
+            //FeatureConfiguration.ListViewBase.AnimateScrollIntoView = false;
 #endif
 
-#if MAUI_EMBEDDING
-            this.UseMauiEmbedding<MauiControls.App>(MainWindow,
-                maui => maui.UseMauiControls());
-#endif
             if (MainWindow.Content == null)
             {
                 MainWindow.Content = ShellPageInstance;
@@ -105,13 +90,6 @@ namespace Project2FA.UnoApp
 
                 WinUIWindow.Current.Activated -= Current_Activated;
                 WinUIWindow.Current.Activated += Current_Activated;
-                // set DB
-                if (Repository is null)
-                {
-                    string databasePath = ApplicationData.Current.LocalFolder.Path + string.Format(@"\{0}.db", Constants.ContainerName);
-                    var dbOptions = new DbContextOptionsBuilder<Project2FAContext>().UseSqlite("Data Source=" + databasePath);
-                    Repository = new DBProject2FARepository(dbOptions);
-                }
 
                 // LoadIconNames(); //only for development
                 // handle startup
@@ -138,7 +116,7 @@ namespace Project2FA.UnoApp
                 }
                 else
                 {
-                    if (await Repository.Password.GetAsync() is not null)
+                    if (!string.IsNullOrWhiteSpace(SettingsService.Instance.DataFilePasswordHash))
                     {
                         await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(LoginPage));
                     }
@@ -216,41 +194,49 @@ namespace Project2FA.UnoApp
         /// <param name="e"></param>
         private void Current_Activated(object sender, WindowActivatedEventArgs e)
         {
-
-            // TODO commented out for now. Will be fixed
-            
-            //if (e.WindowActivationState == WindowActivationState.Deactivated)
-            //{
-            //    if (MainWindow.Content is ShellPage)
-            //    {
-            //        if (_focusLostTimer == null)
-            //        {
-            //            _focusLostTimer = new DispatcherTimer();
-            //            _focusLostTimer.Interval = new TimeSpan(0, 1, 0); //every minute
-            //        }
-            //        _focusLostTimer.Tick -= FocusLostTimer_Tick;
-            //        _focusLostTimer.Tick += FocusLostTimer_Tick;
-            //        _focusLostTimer.Start();
-            //        _focusLostTime = DateTime.Now;
-            //    }
-            //}
-            //if (e.WindowActivationState == WindowActivationState.CodeActivated)
-            //{
-            //    if (_focusLostTimer == null)
-            //    {
-            //        return;
-            //    }
-            //    if (_focusLostTimer.IsEnabled)
-            //    {
-            //        _focusLostTimer.Stop();
-            //    }
-            //}
+            // reference https://github.com/unoplatform/uno/discussions/17625#discussioncomment-10114134
+#if WINDOWS
+    // For WinUI, use WindowActivationState
+    if (e.WindowActivationState == WindowActivationState.CodeActivated ||
+        e.WindowActivationState == WindowActivationState.PointerActivated)
+#else
+            // You can check it on other platforms with Windows.UI.Core.CoreWindowActivationState
+            if (e.WindowActivationState == Windows.UI.Core.CoreWindowActivationState.CodeActivated ||
+                e.WindowActivationState == Windows.UI.Core.CoreWindowActivationState.PointerActivated)
+#endif
+            {
+                // Focused
+                if (_focusLostTimer == null)
+                {
+                    return;
+                }
+                if (_focusLostTimer.IsEnabled)
+                {
+                    _focusLostTimer.Stop();
+                }
+            }
+            else
+            {
+                // Not focused
+                if (MainWindow.Content is ShellPage)
+                {
+                    if (_focusLostTimer == null)
+                    {
+                        _focusLostTimer = new DispatcherTimer();
+                        _focusLostTimer.Interval = new TimeSpan(0, 1, 0); //every minute
+                    }
+                    _focusLostTimer.Tick -= FocusLostTimer_Tick;
+                    _focusLostTimer.Tick += FocusLostTimer_Tick;
+                    _focusLostTimer.Start();
+                    _focusLostTime = DateTime.Now;
+                }
+            }
         }
 
 
         private async void FocusLostTimer_Tick(object sender, object e)
         {
-            if (await Repository.Password.GetAsync() is null)
+            if (string.IsNullOrWhiteSpace(SettingsService.Instance.DataFilePasswordHash))
             {
                 _focusLostTimer.Stop();
                 return;
@@ -293,35 +279,35 @@ namespace Project2FA.UnoApp
         }
 
 #if __IOS__
-        public override bool OpenUrl(UIKit.UIApplication app, Foundation.NSUrl url, Foundation.NSDictionary options)
-        {
-            string urlPath = url.Path;
-            if (_activeDatafileUrl != null)
-            {
-                //release the access
-                _activeDatafileUrl.StopAccessingSecurityScopedResource();
-            }
-            _activeDatafileUrl = url;
+        //public override bool OpenUrl(UIKit.UIApplication app, Foundation.NSUrl url, Foundation.NSDictionary options)
+        //{
+        //    string urlPath = url.Path;
+        //    if (_activeDatafileUrl != null)
+        //    {
+        //        //release the access
+        //        _activeDatafileUrl.StopAccessingSecurityScopedResource();
+        //    }
+        //    _activeDatafileUrl = url;
 
-            if (Foundation.NSFileManager.DefaultManager.IsReadableFile(urlPath))
-            {
-                LoadStorageFile(url,urlPath);
-                //openedFile = new StorageFile(new );//await StorageFile.GetFileFromPathAsync(urlPath);
-                //data = Foundation.NSData.FromFile(urlPath);
-            }
-            else
-            {
-                if (url.StartAccessingSecurityScopedResource())
-                {
-                    //data = Foundation.NSData.FromFile(urlPath);
-                    LoadStorageFile(url,urlPath);
+        //    if (Foundation.NSFileManager.DefaultManager.IsReadableFile(urlPath))
+        //    {
+        //        LoadStorageFile(url,urlPath);
+        //        //openedFile = new StorageFile(new );//await StorageFile.GetFileFromPathAsync(urlPath);
+        //        //data = Foundation.NSData.FromFile(urlPath);
+        //    }
+        //    else
+        //    {
+        //        if (url.StartAccessingSecurityScopedResource())
+        //        {
+        //            //data = Foundation.NSData.FromFile(urlPath);
+        //            LoadStorageFile(url,urlPath);
                     
-                }
-            }
+        //        }
+        //    }
 
-            DataService.Instance.OpenDatefileUrl = url;
-            return base.OpenUrl(app, url, options);
-        }
+        //    DataService.Instance.OpenDatefileUrl = url;
+        //    return base.OpenUrl(app, url, options);
+        //}
 
         private async Task LoadStorageFile(Foundation.NSUrl url, string path)
         {
@@ -333,7 +319,7 @@ namespace Project2FA.UnoApp
         /// <summary>
         /// Configures global Uno Platform logging
         /// </summary>
-        private static void InitializeLogging()
+        public static void InitializeLogging()
         {
 #if DEBUG
             // Logging is disabled by default for release builds, as it incurs a significant

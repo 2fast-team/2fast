@@ -50,22 +50,18 @@ namespace Project2FA.ViewModels
             ChangeDatafile = true;
         }
 
-        public async Task UpdateLocalFileDB()
+        public void UpdateLocalFileSettings()
         {
             var hash = CryptoService.CreateStringHash(Password);
-            var passwordRepo = await App.Repository.Password.GetAsync();
             //delete password in the secret vault
-            SecretService.Helper.RemoveSecret(Constants.ContainerName, passwordRepo.Hash);
-            passwordRepo.Hash = hash;
+            SecretService.Helper.RemoveSecret(Constants.ContainerName, SettingsService.Instance.DataFilePasswordHash);
+            SettingsService.Instance.DataFilePasswordHash = hash;
 
             //writes the hash in the db and the secret vault
-            SecretService.Helper.WriteSecret(Constants.ContainerName, passwordRepo.Hash, Password);
-            await App.Repository.Password.UpsertAsync(passwordRepo);
+            SecretService.Helper.WriteSecret(Constants.ContainerName, SettingsService.Instance.DataFilePasswordHash, Password);
 
-            var datafileDB = await App.Repository.Datafile.GetAsync();
-            datafileDB.Path = LocalStorageFolder.Path;
-            datafileDB.Name = DateFileName;
-            await App.Repository.Datafile.UpsertAsync(datafileDB);
+            SettingsService.Instance.DataFilePath = LocalStorageFolder.Path;
+            SettingsService.Instance.DataFileName = DateFileName;
         }
     }
 }

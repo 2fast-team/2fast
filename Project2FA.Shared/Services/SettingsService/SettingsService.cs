@@ -296,6 +296,33 @@ namespace Project2FA.Services
             set => _helper.TryWrite(nameof(NTPServerString), value);
         }
 
+#region DataFileSettings
+
+        public string DataFilePasswordHash
+        {
+            get => _helper.SafeRead(nameof(DataFilePasswordHash), string.Empty);
+            set => _helper.TryWrite(nameof(DataFilePasswordHash), value);
+        }
+
+        public string DataFileName
+        {
+            get => _helper.SafeRead(nameof(DataFileName), string.Empty);
+            set => _helper.TryWrite(nameof(DataFileName), value);
+        }
+
+        public string DataFilePath
+        {
+            get => _helper.SafeRead(nameof(DataFilePath), string.Empty);
+            set => _helper.TryWrite(nameof(DataFilePath), value);
+        }
+
+        public bool DataFileWebDAVEnabled
+        {
+            get => _helper.SafeRead(nameof(DataFileWebDAVEnabled), false);
+            set => _helper.TryWrite(nameof(DataFileWebDAVEnabled), value);
+        }
+#endregion
+
         public string UnhandledExceptionStr
         {
             get => _helper.SafeRead(nameof(UnhandledExceptionStr), string.Empty);

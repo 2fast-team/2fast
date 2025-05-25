@@ -150,14 +150,27 @@ namespace Project2FA.UWP
                 Window.Current.Activated -= Current_Activated;
                 Window.Current.Activated += Current_Activated;
                 // set DB
-                if (Repository is null)
+                if (Repository is null && string.IsNullOrWhiteSpace(SettingsService.Instance.DataFileName))
                 {
-                    string databasePath = ApplicationData.Current.LocalFolder.Path + string.Format(@"\{0}.db", Constants.ContainerName);
-                    var dbOptions = new DbContextOptionsBuilder<Project2FAContext>().UseSqlite("Data Source=" + databasePath);
-                    Repository = new DBProject2FARepository(dbOptions);
+                    var fileService = Current.Container.Resolve<IFileService>();
+                    if (await fileService.FileExistsAsync(Constants.ContainerName + ".db"))
+                    {
+                        string dbName = string.Format(@"\{0}.db", Constants.ContainerName);
+                        string databasePath = ApplicationData.Current.LocalFolder.Path + dbName;
+                        var dbOptions = new DbContextOptionsBuilder<Project2FAContext>().UseSqlite("Data Source=" + databasePath);
+                        Repository = new DBProject2FARepository(dbOptions);
+
+                        if(await MigrateDB())
+                        {
+                            await fileService.DeleteFileAsync(Constants.ContainerName + ".db");
+                        }
+                        else
+                        {
+                            // TODO: handle error
+                        }
+                    }
                 }
 
-                //await LoadIconNames(); // for development only
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
@@ -228,7 +241,7 @@ namespace Project2FA.UWP
                 }
                 else
                 {
-                    if (!(await Repository.Password.GetAsync() is null))
+                    if (!string.IsNullOrWhiteSpace(SettingsService.Instance.DataFilePasswordHash))
                     {
                         LoginPage loginPage = Container.Resolve<LoginPage>();
                         Window.Current.Content = loginPage;
@@ -297,6 +310,26 @@ namespace Project2FA.UWP
             Window.Current.Activate();
         }
 
+        private async Task<bool> MigrateDB()
+        {
+            try
+            {
+                var pwDB = await Repository.Password.GetAsync();
+                SettingsService.Instance.DataFilePasswordHash = pwDB.Hash;
+                var datafileDB = await Repository.Datafile.GetAsync();
+                SettingsService.Instance.DataFileName = datafileDB.Name;
+                SettingsService.Instance.DataFilePath = datafileDB.Path;
+                SettingsService.Instance.DataFileWebDAVEnabled = datafileDB.IsWebDAV;
+                return true;
+            }
+            catch (Exception exc)
+            {
+                await this.Container.Resolve<ILoggingService>().LogException(exc, LoggingPreferEnum.Simple);
+                return false;
+            }
+
+        }
+
         #region AutoLogout
         /// <summary>
         /// Detects if the focus is lost for the app and start the timer for auto logout
@@ -335,7 +368,7 @@ namespace Project2FA.UWP
 
         private async void FocusLostTimer_Tick(object sender, object e)
         {
-            if (await Repository.Password.GetAsync() is null)
+            if (string.IsNullOrWhiteSpace(SettingsService.Instance.DataFilePasswordHash))
             {
                 _focusLostTimer.Stop();
                 return;

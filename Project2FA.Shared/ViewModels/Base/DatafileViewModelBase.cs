@@ -102,20 +102,17 @@ namespace Project2FA.ViewModels
         /// Creates a local DB with the data from the datafile
         /// </summary>
         /// <param name="isWebDAV"></param>
-        public async Task<DBDatafileModel> CreateLocalFileDB(bool isWebDAV)
+        public async Task<bool> CreateDataFileSettings(bool isWebDAV)
         {
-            DBDatafileModel model;
             try
             {
                 string hash = CryptoService.CreateStringHash(Password);
                 
-                DBPasswordHashModel passwordModel = await App.Repository.Password.UpsertAsync(new DBPasswordHashModel { Hash = hash });
-                string tempDataFileName;
+                SettingsService.Instance.DataFilePasswordHash = hash;
                 if (!DateFileName.Contains(".2fa"))
                 {
                     DateFileName += ".2fa";
                 }
-                tempDataFileName = DateFileName;
 
                 //save the file path for persistent access on iOS 
 #if __IOS__
@@ -125,39 +122,25 @@ namespace Project2FA.ViewModels
                 Foundation.NSUserDefaults.StandardUserDefaults[Constants.ContainerName] = bookmark;
                 Foundation.NSUserDefaults.StandardUserDefaults.Synchronize();
 #endif
-
 #if WINDOWS_UWP
-                model = new DBDatafileModel
-                {
-                    DBPasswordHashModel = passwordModel,
-                    IsWebDAV = isWebDAV,
-                    Path = ChoosenOneWebDAVFile == null ? LocalStorageFolder.Path : ChoosenOneWebDAVFile.Path,
-                    Name = tempDataFileName
-                };
+                SettingsService.Instance.DataFilePath = ChoosenOneWebDAVFile == null ? LocalStorageFolder.Path : ChoosenOneWebDAVFile.Path;
 #else
-                model = new DBDatafileModel
-                {
-                    DBPasswordHashModel = passwordModel,
-                    IsWebDAV = isWebDAV,
-                    Path = ChoosenOneWebDAVFile == null ? LocalStorageFile.Path : ChoosenOneWebDAVFile.Path,
-                    Name = tempDataFileName
-                };
+                SettingsService.Instance.DataFilePath = ChoosenOneWebDAVFile == null ? LocalStorageFile.Path : ChoosenOneWebDAVFile.Path;
 #endif
-
-                await App.Repository.Datafile.UpsertAsync(model);
-
+                SettingsService.Instance.DataFileName = DateFileName;
+                SettingsService.Instance.DataFileWebDAVEnabled = isWebDAV;
 
                 // write the password with the hash(key) in the secret vault
                 SecretService.Helper.WriteSecret(Constants.ContainerName, hash, Password);
-                return model;
+                return true;
             }
             catch (Exception exc)
             {
+                await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
 #if WINDOWS_UWP
-                await App.Repository.Password.DeleteAsync();
-                TrackingManager.TrackExceptionCatched(nameof(CreateLocalFileDB), exc);
+                TrackingManager.TrackExceptionCatched(nameof(CreateDataFileSettings), exc);
 #endif
-                return null;
+                return false;
             }
 
 

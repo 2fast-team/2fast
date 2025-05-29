@@ -1050,7 +1050,7 @@
     <value>インポートにファイル/画像を使用する</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - 二要素認証</value>
+    <value>[Beta] 2fast - 二要素認証</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>バック</value>

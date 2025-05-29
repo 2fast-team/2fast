@@ -1048,7 +1048,7 @@ Por favor, sincronize a hora nas definições.</value>
     <value>Utilizar ficheiro/imagem para importação</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - autenticador de dois factores</value>
+    <value>[Beta] 2fast - autenticador de dois factores</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Voltar</value>

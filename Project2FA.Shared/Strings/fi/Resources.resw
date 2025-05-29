@@ -1048,7 +1048,7 @@ Synkronoi aika asetuksissa.</value>
     <value>Käytä tiedostoa/kuvaa tuontia varten</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - kahden tekijän todentaja</value>
+    <value>[Beta] 2fast - kahden tekijän todentaja</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Takaisin</value>

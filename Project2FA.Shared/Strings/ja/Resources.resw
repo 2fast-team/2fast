@@ -1438,4 +1438,10 @@
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>複数アカウントの追加またはインポートは、「アカウントのインポート」機能でのみ可能です。</value>
   </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

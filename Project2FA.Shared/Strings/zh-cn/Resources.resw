@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1431,5 +1432,11 @@
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>只有通过 "导入账户 "功能才能添加或导入多个账户。</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value />
   </data>
 </root>

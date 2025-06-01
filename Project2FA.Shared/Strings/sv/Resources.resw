@@ -1436,4 +1436,10 @@ Applikationen stöder en MDM-konfiguration för centraliserad hantering av appli
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Att lägga till eller importera flera konton är endast möjligt via funktionen "Importera konton".</value>
   </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

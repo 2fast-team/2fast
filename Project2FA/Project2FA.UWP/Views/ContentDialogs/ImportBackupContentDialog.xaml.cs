@@ -166,6 +166,11 @@ namespace Project2FA.UWP.Views
                 {
                     ViewModel.SelectedPivotIndex = 1;
                 }
+                else
+                {
+                    // remove PivotItems
+                    RemovePivotItems(null);
+                }
             }
         }
 

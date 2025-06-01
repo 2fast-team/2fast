@@ -1434,4 +1434,10 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Mitme konto lisamine või importimine on võimalik ainult funktsiooni "Kontode importimine" kaudu.</value>
   </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

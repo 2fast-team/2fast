@@ -175,6 +175,11 @@
                                         <PointerUpThemeAnimation Storyboard.TargetName="Root" />
                                     </Storyboard>
                                 </VisualState>
+                                <VisualState x:Name="PressedSelected">
+                                    <Storyboard>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="Root" />
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </ListViewItemPresenter>

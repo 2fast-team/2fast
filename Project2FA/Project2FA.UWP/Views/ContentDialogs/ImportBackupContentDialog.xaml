@@ -205,9 +205,9 @@
                 <Grid MinHeight="{ThemeResource ContentDialogMaxHeight}">
                     <ScrollViewer>
                         <StackPanel Spacing="20">
-                            <TextBlock
+                            <!--<TextBlock
                             Text="~ImportBackupCDFileImportInfo.Text" 
-                            x:Uid="ImportBackupCDFileImportInfo"/>
+                            x:Uid="ImportBackupCDFileImportInfo"/>-->
                             <TextBox
                                 Text="{x:Bind ViewModel.ImportStorageFile.DisplayName,Mode=OneWay}"
                                 x:Uid="ImportBackupContentDialogFilename"
@@ -217,6 +217,11 @@
                                 x:Uid="ImportBackupCDChangeDatafile" 
                                 Command="{x:Bind ViewModel.FileImportCommand}"
                                 Content="~ImportBackupCDChangeDatafile.Content"/>
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                Text="~ImportBackupCDLoadInfo.Text"
+                                x:Uid="ImportBackupCDLoadInfo"
+                                Margin="0,10,0,10" />
                             <ComboBox 
                                 x:Uid="ImportBackupCDCBImportFormat"
                                 Header="~ImportBackupCDCBImportFormat.Header"
@@ -228,11 +233,7 @@
                             </ComboBox>
                             <!--SelectedIndex="{x:Bind ViewModel.PeriodIndex, Mode=TwoWay}"-->
 
-                            <TextBlock
-                                TextWrapping="Wrap"
-                                Text="~ImportBackupCDLoadInfo.Text"
-                                x:Uid="ImportBackupCDLoadInfo"
-                                Margin="0,10,0,10" />
+
 
                             <CheckBox
                                 x:Name="CB_PasswordGiven"

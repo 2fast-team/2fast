@@ -1438,4 +1438,10 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>L'aggiunta o l'importazione di più conti è possibile solo tramite la funzione "Importa conti".</value>
   </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

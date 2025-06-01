@@ -1436,4 +1436,10 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Useiden tilien lisääminen tai tuominen on mahdollista vain 'Tuo tilit' -toiminnolla.</value>
   </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

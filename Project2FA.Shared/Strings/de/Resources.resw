@@ -590,9 +590,7 @@ Anleitung zum setzen der Berechtigung:&lt;br&gt;
     <value>Über die Anwendung</value>
   </data>
   <data name="ExceptionDatafileNotFound" xml:space="preserve">
-    <value>Der Pfad zur aktuellen Datendatei konnte nicht gefunden werden. Möglicherweise wurde die Datendatei von Ihnen verschoben. 
-
-**Möchten Sie den Pfad der Datendatei editieren oder möchten Sie die App zu den Werkseinstellungen zurücksetzen?**</value>
+    <value>Der Pfad zur aktuellen Datendatei konnte nicht gefunden werden. Möglicherweise wurde die Datendatei von Ihnen verschoben.&lt;br&gt;&lt;br&gt;**Möchten Sie den Pfad der Datendatei editieren oder möchten Sie die App zu den Werkseinstellungen zurücksetzen?**</value>
   </data>
   <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Sperren</value>
@@ -1431,5 +1429,12 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Das Hinzufügen bzw. das Importieren von mehreren Konten ist nur über die Funktion "Konten importieren" möglich.</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>Um Konten für die Zwei-Faktor-Authentifizierung zu importieren, muss vom gewünschten Dienst ein QR-Code (Google Authenticator) oder Backupdatei vorhanden sein.&lt;br&gt;
+# Mit welcher Funktion wollen Sie Konten importieren?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Wählen Sie nun das Format des Backups aus, von dem das einzuspielende Backup erstellt wurde.</value>
   </data>
 </root>

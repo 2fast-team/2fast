@@ -1436,4 +1436,10 @@
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Η προσθήκη ή η εισαγωγή πολλαπλών λογαριασμών είναι δυνατή μόνο μέσω της λειτουργίας "Εισαγωγή λογαριασμών".</value>
   </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

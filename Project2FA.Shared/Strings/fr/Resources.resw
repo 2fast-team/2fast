@@ -1437,9 +1437,13 @@ L'application prend en charge une configuration MDM pour une gestion centralisé
     <value>L'ajout ou l'importation de plusieurs comptes n'est possible que via la fonction "Importer des comptes".</value>
   </data>
   <data name="ImportBackupCDInfo.Text" xml:space="preserve">
-    <value />
+    <value>Pour importer des comptes pour l'authentification à deux facteurs, un code QR (Google Authenticator) ou un fichier de sauvegarde doit être disponible auprès du service souhaité.
+# Avec quelle fonction voulez-vous importer des comptes ?</value>
   </data>
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
-    <value />
+    <value>Sélectionnez ensuite le format de la sauvegarde à partir de laquelle la sauvegarde à importer a été créée.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Les comptes qui ne sont pas marqués et qui ne peuvent pas être sélectionnés ne peuvent pas être importés.</value>
   </data>
 </root>

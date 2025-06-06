@@ -1437,9 +1437,13 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
     <value>Useiden tilien lisääminen tai tuominen on mahdollista vain 'Tuo tilit' -toiminnolla.</value>
   </data>
   <data name="ImportBackupCDInfo.Text" xml:space="preserve">
-    <value />
+    <value>Jotta voit tuoda tilejä kaksitekijätodennusta varten, halutusta palvelusta on oltava saatavilla QR-koodi (Google Authenticator) tai varmuuskopiotiedosto.&lt;br&gt;
+# Millä toiminnolla haluat tuoda tilejä?</value>
   </data>
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
-    <value />
+    <value>Valitse nyt sen varmuuskopion muoto, josta tuotava varmuuskopio on luotu.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Tilejä, joita ei ole merkitty ja joita ei voi valita, ei voida tuoda.</value>
   </data>
 </root>

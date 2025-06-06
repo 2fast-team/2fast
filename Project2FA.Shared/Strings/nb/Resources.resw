@@ -1437,9 +1437,13 @@ Applikasjonen støtter en MDM-konfigurasjon for sentralisert administrasjon av a
     <value>Det er bare mulig å legge til eller importere flere kontoer via funksjonen "Importer kontoer".</value>
   </data>
   <data name="ImportBackupCDInfo.Text" xml:space="preserve">
-    <value />
+    <value>For å importere kontoer for tofaktorautentisering må en QR-kode (Google Authenticator) eller en sikkerhetskopifil være tilgjengelig fra ønsket tjeneste.
+# Med hvilken funksjon vil du importere kontoer?</value>
   </data>
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
-    <value />
+    <value>Velg nå formatet på sikkerhetskopien som sikkerhetskopien som skal importeres, ble opprettet fra.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Kontoer som ikke er merket og ikke kan velges, kan ikke importeres.</value>
   </data>
 </root>

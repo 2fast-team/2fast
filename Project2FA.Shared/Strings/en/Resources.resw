@@ -1439,4 +1439,7 @@ The application supports an MDM configuration for centralised management of the 
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
     <value>Now select the format of the backup from which the backup to be imported was created.</value>
   </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Accounts that are not marked and cannot be selected cannot be imported.</value>
+  </data>
 </root>

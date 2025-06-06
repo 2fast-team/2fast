@@ -330,7 +330,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock
                         x:Uid="ImportBackupCDSupportedTypesTxt"
-                        Text="~ImportBackupCDSupportedTypesTxt.Text"/>
+                        Text="~ImportBackupCDSupportedTypesTxt.Text"
+                        TextWrapping="WrapWholeWords"/>
                     <ListView
                         ItemsSource="{x:Bind ViewModel.ImportCollection, Mode=OneWay}"
                         ItemTemplate="{StaticResource TwoFAAccountImportTemplate}" 

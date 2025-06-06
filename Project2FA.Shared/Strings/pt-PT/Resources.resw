@@ -1437,9 +1437,13 @@ A aplicação suporta uma configuração MDM para uma gestão centralizada da ap
     <value>A adição ou importação de várias contas só é possível através da função "Importar contas".</value>
   </data>
   <data name="ImportBackupCDInfo.Text" xml:space="preserve">
-    <value />
+    <value>Para importar contas para a autenticação de dois factores, deve estar disponível um código QR (Google Authenticator) ou um ficheiro de cópia de segurança do serviço pretendido.&lt;br&gt;
+# Com que função pretende importar contas?</value>
   </data>
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
-    <value />
+    <value>Agora selecione o formato da cópia de segurança a partir da qual foi criada a cópia de segurança a importar.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>As contas que não estão marcadas e não podem ser selecionadas não podem ser importadas.</value>
   </data>
 </root>

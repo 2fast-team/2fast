@@ -315,10 +315,10 @@ namespace Project2FA.ViewModels
         }
 #endif
 
-        /// <summary>
-        /// Make a login with hitting 'Enter' key possible
-        /// </summary>
-        /// <param name="e"></param>
+                /// <summary>
+                /// Make a login with hitting 'Enter' key possible
+                /// </summary>
+                /// <param name="e"></param>
         public void LoginWithEnterKeyDown(KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)

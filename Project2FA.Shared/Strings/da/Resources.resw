@@ -1435,9 +1435,13 @@ Applikationen understøtter en MDM-konfiguration til central styring af applikat
     <value>Det er kun muligt at tilføje eller importere flere konti via funktionen "Importer konti".</value>
   </data>
   <data name="ImportBackupCDInfo.Text" xml:space="preserve">
-    <value />
+    <value>For at importere konti til tofaktorgodkendelse skal der være en QR-kode (Google Authenticator) eller en backup-fil tilgængelig fra den ønskede tjeneste.&lt;br&gt;
+# Med hvilken funktion vil du importere konti?</value>
   </data>
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
-    <value />
+    <value>Vælg nu formatet på den backup, som den backup, der skal importeres, blev oprettet fra.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Konti, der ikke er markeret og ikke kan vælges, kan ikke importeres.</value>
   </data>
 </root>

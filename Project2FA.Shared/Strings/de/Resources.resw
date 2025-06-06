@@ -1437,4 +1437,7 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
     <value>Wählen Sie nun das Format des Backups aus, von dem das einzuspielende Backup erstellt wurde.</value>
   </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Konten, die nicht markiert sind und nicht ausgewählt werden können, können nicht importiert werden.</value>
+  </data>
 </root>

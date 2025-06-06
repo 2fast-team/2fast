@@ -1439,9 +1439,13 @@
     <value>複数アカウントの追加またはインポートは、「アカウントのインポート」機能でのみ可能です。</value>
   </data>
   <data name="ImportBackupCDInfo.Text" xml:space="preserve">
-    <value />
+    <value>二要素認証用のアカウントをインポートするには、QRコード（Google Authenticator）またはバックアップファイルが必要です。
+# どの機能でアカウントをインポートしますか?</value>
   </data>
   <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
-    <value />
+    <value>ここで、インポートするバックアップが作成されたバックアップの形式を選択します。</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>マークされておらず、選択できない口座はインポートできません。</value>
   </data>
 </root>

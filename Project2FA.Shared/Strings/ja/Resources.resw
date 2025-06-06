@@ -1050,7 +1050,7 @@
     <value>インポートにファイル/画像を使用する</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - 二要素認証</value>
+    <value>[Beta] 2fast - 二要素認証</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>バック</value>
@@ -1437,5 +1437,15 @@
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>複数アカウントの追加またはインポートは、「アカウントのインポート」機能でのみ可能です。</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>二要素認証用のアカウントをインポートするには、QRコード（Google Authenticator）またはバックアップファイルが必要です。
+# どの機能でアカウントをインポートしますか?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>ここで、インポートするバックアップが作成されたバックアップの形式を選択します。</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>マークされておらず、選択できない口座はインポートできません。</value>
   </data>
 </root>

@@ -42,13 +42,6 @@
     "StringLicenseURL": "https://github.com/dotnet/roslyn-analyzers/blob/master/License.txt"
   },
   {
-    "Name": "Microsoft.Toolkit.*",
-    "Authors": "Microsoft.Toolkit",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/windows-toolkit/WindowsCommunityToolkit/blob/master/license.md"
-  },
-  {
     "Name": "Microsoft.UI.Xaml",
     "Authors": "Microsoft",
     "LicenseName": "MIT",

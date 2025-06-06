@@ -1048,7 +1048,7 @@
     <value>Χρήση αρχείου/εικόνας για εισαγωγή</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - αυθεντικοποιητής δύο παραγόντων</value>
+    <value>[Beta] 2fast - αυθεντικοποιητής δύο παραγόντων</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Πίσω</value>
@@ -1435,5 +1435,15 @@
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Η προσθήκη ή η εισαγωγή πολλαπλών λογαριασμών είναι δυνατή μόνο μέσω της λειτουργίας "Εισαγωγή λογαριασμών".</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>Για να εισαγάγετε λογαριασμούς για έλεγχο ταυτότητας δύο παραγόντων, πρέπει να είναι διαθέσιμος ένας κωδικός QR (Google Authenticator) ή ένα αρχείο αντιγράφου ασφαλείας από την επιθυμητή υπηρεσία.&lt;br&gt;
+# Με ποια λειτουργία θέλετε να εισαγάγετε λογαριασμούς;</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Τώρα επιλέξτε τη μορφή του αντιγράφου ασφαλείας από το οποίο δημιουργήθηκε το προς εισαγωγή αντίγραφο ασφαλείας.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Οι λογαριασμοί που δεν έχουν επισημανθεί και δεν μπορούν να επιλεγούν δεν μπορούν να εισαχθούν.</value>
   </data>
 </root>

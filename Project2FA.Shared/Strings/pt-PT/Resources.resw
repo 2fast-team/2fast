@@ -1048,7 +1048,7 @@ Por favor, sincronize a hora nas definições.</value>
     <value>Utilizar ficheiro/imagem para importação</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - autenticador de dois factores</value>
+    <value>[Beta] 2fast - autenticador de dois factores</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Voltar</value>
@@ -1435,5 +1435,15 @@ A aplicação suporta uma configuração MDM para uma gestão centralizada da ap
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>A adição ou importação de várias contas só é possível através da função "Importar contas".</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>Para importar contas para a autenticação de dois factores, deve estar disponível um código QR (Google Authenticator) ou um ficheiro de cópia de segurança do serviço pretendido.&lt;br&gt;
+# Com que função pretende importar contas?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Agora selecione o formato da cópia de segurança a partir da qual foi criada a cópia de segurança a importar.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>As contas que não estão marcadas e não podem ser selecionadas não podem ser importadas.</value>
   </data>
 </root>

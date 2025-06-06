@@ -1048,7 +1048,7 @@ Synkronoi aika asetuksissa.</value>
     <value>Käytä tiedostoa/kuvaa tuontia varten</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - kahden tekijän todentaja</value>
+    <value>[Beta] 2fast - kahden tekijän todentaja</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Takaisin</value>
@@ -1435,5 +1435,15 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Useiden tilien lisääminen tai tuominen on mahdollista vain 'Tuo tilit' -toiminnolla.</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>Jotta voit tuoda tilejä kaksitekijätodennusta varten, halutusta palvelusta on oltava saatavilla QR-koodi (Google Authenticator) tai varmuuskopiotiedosto.&lt;br&gt;
+# Millä toiminnolla haluat tuoda tilejä?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Valitse nyt sen varmuuskopion muoto, josta tuotava varmuuskopio on luotu.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Tilejä, joita ei ole merkitty ja joita ei voi valita, ei voida tuoda.</value>
   </data>
 </root>

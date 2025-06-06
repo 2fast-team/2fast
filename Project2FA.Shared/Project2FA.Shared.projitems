@@ -186,7 +186,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Splashcreen\splash_screen.svg" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\da\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\da\Resources.resw"/>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\el\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />

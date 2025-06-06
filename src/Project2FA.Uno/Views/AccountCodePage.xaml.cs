@@ -1,9 +1,4 @@
-﻿using System;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Project2FA.ViewModels;
+﻿using Project2FA.ViewModels;
 using Windows.UI;
 using Project2FA.Repository.Models;
 using UNOversal.Navigation;

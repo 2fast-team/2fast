@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#if !NET9_0_OR_GREATER
+using Microsoft.EntityFrameworkCore;
+#endif
+
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
@@ -149,6 +152,7 @@ namespace Project2FA.UWP
                 }
                 Window.Current.Activated -= Current_Activated;
                 Window.Current.Activated += Current_Activated;
+#if !NET9_0_OR_GREATER
                 // set DB
                 if (Repository is null && string.IsNullOrWhiteSpace(SettingsService.Instance.DataFileName))
                 {
@@ -170,6 +174,7 @@ namespace Project2FA.UWP
                         }
                     }
                 }
+#endif
 
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
@@ -310,6 +315,7 @@ namespace Project2FA.UWP
             Window.Current.Activate();
         }
 
+#if !NET9_0_OR_GREATER
         private async Task<bool> MigrateDB()
         {
             try
@@ -327,8 +333,8 @@ namespace Project2FA.UWP
                 await this.Container.Resolve<ILoggingService>().LogException(exc, LoggingPreferEnum.Simple);
                 return false;
             }
-
         }
+#endif
 
         #region AutoLogout
         /// <summary>

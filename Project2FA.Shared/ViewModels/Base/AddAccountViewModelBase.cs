@@ -619,7 +619,7 @@ namespace Project2FA.ViewModels
             catch (Exception exc)
             {
                 LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
-#if WINDOWS_UWP
+#if WINDOWS_UWP && !NET9_0_OR_GREATER
                 TrackingManager.TrackExceptionCatched(nameof(CheckLabelForIcon), exc);
 #endif
             }

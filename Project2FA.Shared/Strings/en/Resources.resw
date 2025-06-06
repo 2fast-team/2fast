@@ -590,8 +590,7 @@ Instructions for setting the authorisation:
     <value>About the app</value>
   </data>
   <data name="ExceptionDatafileNotFound" xml:space="preserve">
-    <value>The path to the current data file could not be found. Possibly the data file was moved by you. 
-**Do you want to edit the path?**</value>
+    <value>The path to the current data file could not be found. You may have moved the data file.&lt;br&gt;&lt;br&gt;**Would you like to edit the path to the data file or reset the app to the factory settings?**</value>
   </data>
   <data name="AccountCodePageABBLogout.ToolTipService.ToolTip" xml:space="preserve">
     <value>Lock app</value>
@@ -1432,5 +1431,15 @@ The application supports an MDM configuration for centralised management of the 
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Adding or importing multiple accounts is only possible via the ‘Import accounts’ function.</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>To import accounts for two-factor authentication, a QR code (Google Authenticator) or backup file must be available from the desired service.&lt;br&gt;
+# With which function do you want to import accounts?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Now select the format of the backup from which the backup to be imported was created.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Accounts that are not marked and cannot be selected cannot be imported.</value>
   </data>
 </root>

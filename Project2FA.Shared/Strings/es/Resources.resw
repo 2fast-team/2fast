@@ -1158,7 +1158,7 @@ Por favor, sincroniza la hora en los ajustes.</value>
     <comment>[ReswT:manually]</comment>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - autenticador de doble factor</value>
+    <value>[Beta] 2fast - autenticador de doble factor</value>
     <comment>[ReswT:manually]</comment>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
@@ -1583,5 +1583,15 @@ La aplicación soporta configuración MDM para la gestión centralizada en empre
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Añadir o importar varias cuentas sólo es posible a través de la función "Importar cuentas".</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>Para importar cuentas para la autenticación de dos factores, se debe disponer de un código QR (Google Authenticator) o de un archivo de copia de seguridad del servicio deseado.&lt;br&gt;
+# ¿Con qué función desea importar cuentas?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Seleccione ahora el formato de la copia de seguridad a partir de la cual se creó la copia de seguridad que desea importar.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Las cuentas que no estén marcadas y no puedan seleccionarse no podrán importarse.</value>
   </data>
 </root>

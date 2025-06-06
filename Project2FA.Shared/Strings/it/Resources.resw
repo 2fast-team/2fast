@@ -1050,7 +1050,7 @@ Sincronizzare l'ora nelle impostazioni.</value>
     <value>Utilizzare file/immagine per l'importazione</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - Autenticatore a due fattori</value>
+    <value>[Beta] 2fast - Autenticatore a due fattori</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Indietro</value>
@@ -1437,5 +1437,15 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>L'aggiunta o l'importazione di più conti è possibile solo tramite la funzione "Importa conti".</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>Per importare gli account per l'autenticazione a due fattori, deve essere disponibile un codice QR (Google Authenticator) o un file di backup dal servizio desiderato.&lt;br&gt;
+# Con quale funzione si desidera importare gli account?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Selezionare ora il formato del backup da cui è stato creato il backup da importare.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>I conti non contrassegnati e non selezionabili non possono essere importati.</value>
   </data>
 </root>

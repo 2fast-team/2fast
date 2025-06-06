@@ -35,9 +35,13 @@ namespace Project2FA.ViewModels
 
         public string Url { get => _url; set => SetProperty(ref _url, value); }
         public string Header { get => _header; set => SetProperty(ref _header, value); }
-        
 
+
+#if WINDOWS_UWP
         private async Task CreateQRCode(TwoFACodeModel model)
+#else
+        private void CreateQRCode(TwoFACodeModel model)
+#endif
         {
             Header = model.Label;
             StringBuilder uriBuilder = new StringBuilder("otpauth://");
@@ -82,7 +86,11 @@ namespace Project2FA.ViewModels
         {
             if (parameters.TryGetValue<TwoFACodeModel>("Model", out TwoFACodeModel twoFACodeModel))
             {
+#if WINDOWS_UWP
                 await CreateQRCode(twoFACodeModel);
+#else
+                CreateQRCode(twoFACodeModel);
+#endif
             }
         }
     }

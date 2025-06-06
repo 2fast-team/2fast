@@ -1047,7 +1047,7 @@ Palun sünkroonige kellaaeg seadetes.</value>
     <value>Kasutage faili/pilti importimiseks</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>2fast - kaheteguriline autentimine</value>
+    <value>[Beta] 2fast - kaheteguriline autentimine</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Tagasi</value>
@@ -1433,5 +1433,15 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
   </data>
   <data name="AddQRCodeNotSupportedError" xml:space="preserve">
     <value>Mitme konto lisamine või importimine on võimalik ainult funktsiooni "Kontode importimine" kaudu.</value>
+  </data>
+  <data name="ImportBackupCDInfo.Text" xml:space="preserve">
+    <value>Kontode importimiseks kahefaktorilise autentimise jaoks peab soovitud teenuselt olema saadaval QR-kood (Google Authenticator) või varukoopiafail.&lt;br&gt;
+# Millise funktsiooniga soovite kontosid importida?</value>
+  </data>
+  <data name="ImportBackupCDLoadInfo.Text" xml:space="preserve">
+    <value>Nüüd valige selle varukoopia vorming, millest imporditav varukoopia loodi.</value>
+  </data>
+  <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
+    <value>Kontosid, mis ei ole märgitud ja mida ei saa valida, ei saa importida.</value>
   </data>
 </root>

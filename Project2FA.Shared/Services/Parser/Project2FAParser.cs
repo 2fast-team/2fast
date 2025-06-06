@@ -118,7 +118,7 @@ namespace Project2FA.Services.Parser
                 TrackingManager.TrackExceptionCatched(nameof(ParseQRCodeStr), exc);
 #endif
             }
-            
+
             //else return empty parameter list => no otpauth
 
             return qrParams;

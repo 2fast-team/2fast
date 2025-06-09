@@ -1048,7 +1048,7 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
     <value>Utiliser un fichier/une image pour l'importation</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - authentificateur à deux facteurs</value>
+    <value>2fast - authentificateur à deux facteurs</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Retour</value>

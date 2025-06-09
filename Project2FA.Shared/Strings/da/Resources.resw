@@ -1047,7 +1047,7 @@ Synkroniser venligst tiden i indstillingerne.</value>
     <value>Brug fil/billede til import</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - to-faktor-autentificering</value>
+    <value>2fast - to-faktor-autentificering</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Tilbage</value>

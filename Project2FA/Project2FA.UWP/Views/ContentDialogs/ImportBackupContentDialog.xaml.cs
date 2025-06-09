@@ -3,6 +3,7 @@ using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.ViewModels;
+using System;
 using System.Linq;
 using UNOversal.Extensions;
 using Windows.UI;
@@ -19,6 +20,24 @@ namespace Project2FA.UWP.Views
         {
             this.InitializeComponent();
             this.Loaded += ImportAccountContentDialog_Loaded;
+
+            // register the change of the input
+            MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
+        }
+
+        private void PivotItemChangedCallback(DependencyObject sender, DependencyProperty dp)
+        {
+            if (dp == Pivot.TagProperty)
+            {
+                if (((Pivot)sender).Tag is string tag)
+                {
+                    if (tag == "PI_ImportAccountList")
+                    {
+                        RemovePivotItems(PI_ImportAccountList);
+                        tag = string.Empty;
+                    }
+                }
+            }
         }
 
         private void ImportAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
@@ -49,6 +68,9 @@ namespace Project2FA.UWP.Views
 
             // remove PivotItems
             RemovePivotItems(null);
+
+            // initialize the camera control
+            ViewModel.MediaPlayerElementControl = CameraPlayerElement;
         }
 
         private void RemovePivotItems(UIElement element)
@@ -90,13 +112,19 @@ namespace Project2FA.UWP.Views
                     {
                         MainPivot.Items.Remove(PI_ImportBackupFile);
                     }
-                    if (MainPivot.Items.Contains(PI_ImportBackupCamera) && ViewModel.LastPivotItemName != "PI_ImportBackupCamera")
+                    if (MainPivot.Items.Contains(PI_ImportBackupCamera))
                     {
                         MainPivot.Items.Remove(PI_ImportBackupCamera);
                     }
                     if (!MainPivot.Items.Contains(PI_ImportAccountList))
                     {
                         MainPivot.Items.Add(PI_ImportAccountList);
+                    }
+                    // Check if the last pivot item was the camera scan
+                    if (ViewModel.LastPivotItemName == "PI_ImportBackupCamera")
+                    {
+                        ViewModel.SelectedPivotIndex = 1;
+                        ViewModel.SetPrimaryBTNStatus();
                     }
                     ViewModel.LastPivotItemName = nameof(PI_ImportAccountList);
                     break;
@@ -139,7 +167,7 @@ namespace Project2FA.UWP.Views
                 if (model.IsEnabled)
                 {
                     model.IsChecked = !model.IsChecked;
-                    SetPrimaryBTNEnable();
+                    ViewModel.SetPrimaryBTNStatus();
                 }
             }
         }
@@ -184,7 +212,7 @@ namespace Project2FA.UWP.Views
                 {
                     ViewModel.SelectedPivotIndex = 2;
                 }
-                SetPrimaryBTNEnable();
+                ViewModel.SetPrimaryBTNStatus();
             }
             else
             {
@@ -192,24 +220,11 @@ namespace Project2FA.UWP.Views
             }
         }
 
-        private void SetPrimaryBTNEnable()
-        {
-            var debug1 = ViewModel.ImportCollection.Where(x => x.IsEnabled).Any();
-            var debug2 = ViewModel.ImportCollection.Where(x => x.IsChecked).Any();
 
-            if (ViewModel.ImportCollection.Where(x => x.IsEnabled).Any() && ViewModel.ImportCollection.Where(x => x.IsChecked).Any())
-            {
-                ViewModel.IsPrimaryBTNEnable = true;
-            }
-            else
-            {
-                ViewModel.IsPrimaryBTNEnable = false;
-            }
-        }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            SetPrimaryBTNEnable();
+            ViewModel.SetPrimaryBTNStatus();
         }
     }
 }

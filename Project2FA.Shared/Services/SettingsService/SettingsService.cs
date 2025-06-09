@@ -293,27 +293,27 @@ namespace Project2FA.Services
                     return _helper.SafeRead(nameof(NTPServerString), "time.windows.com");
                 }
             }
-            set => _helper.TryWrite(nameof(NTPServerString), value);
+            set => _helper.WriteString(nameof(NTPServerString), value);
         }
 
 #region DataFileSettings
 
         public string DataFilePasswordHash
         {
-            get => _helper.SafeRead(nameof(DataFilePasswordHash), string.Empty);
-            set => _helper.TryWrite(nameof(DataFilePasswordHash), value);
+            get => _helper.ReadString(nameof(DataFilePasswordHash), string.Empty);
+            set => _helper.WriteString(nameof(DataFilePasswordHash), value);
         }
 
         public string DataFileName
         {
-            get => _helper.SafeRead(nameof(DataFileName), string.Empty);
-            set => _helper.TryWrite(nameof(DataFileName), value);
+            get => _helper.ReadString(nameof(DataFileName), string.Empty);
+            set => _helper.WriteString(nameof(DataFileName), value);
         }
 
         public string DataFilePath
         {
-            get => _helper.SafeRead(nameof(DataFilePath), string.Empty);
-            set => _helper.TryWrite(nameof(DataFilePath), value);
+            get => _helper.ReadString(nameof(DataFilePath), string.Empty);
+            set => _helper.WriteString(nameof(DataFilePath), value);
         }
 
         public bool DataFileWebDAVEnabled
@@ -325,8 +325,8 @@ namespace Project2FA.Services
 
         public string UnhandledExceptionStr
         {
-            get => _helper.SafeRead(nameof(UnhandledExceptionStr), string.Empty);
-            set => _helper.TryWrite(nameof(UnhandledExceptionStr), value);
+            get => _helper.ReadString(nameof(UnhandledExceptionStr), string.Empty);
+            set => _helper.WriteString(nameof(UnhandledExceptionStr), value);
         }
 
         public bool ActivateWindowsHelloIsMDMManaged
@@ -364,13 +364,13 @@ namespace Project2FA.Services
         public BiometricPreferEnum PreferWindowsHello
         {
             get => _helper.SafeReadEnum(nameof(PreferWindowsHello), BiometricPreferEnum.None);
-            set => _helper.TryWrite(nameof(PreferWindowsHello), value);
+            set => _helper.WriteEnum(nameof(PreferWindowsHello), value);
         }
 
         public BiometricPreferEnum PreferBiometricLogin
         {
             get => _helper.SafeReadEnum(nameof(PreferBiometricLogin), BiometricPreferEnum.None);
-            set => _helper.TryWrite(nameof(PreferBiometricLogin), value);
+            set => _helper.WriteEnum(nameof(PreferBiometricLogin), value);
         }
 
         public Theme AppTheme
@@ -378,7 +378,7 @@ namespace Project2FA.Services
             get => _helper.SafeReadEnum(nameof(AppTheme), Theme.System);
             set
             {
-                _helper.TryWrite(nameof(AppTheme), value);
+                _helper.WriteEnum(nameof(AppTheme), value);
                 switch (value)
                 {
                     default:
@@ -423,7 +423,7 @@ namespace Project2FA.Services
         public ApplicationTheme OriginalAppTheme
         {
             get => _helper.SafeReadEnum(nameof(OriginalAppTheme), ApplicationTheme.Light);
-            set => _helper.TryWrite(nameof(OriginalAppTheme), value);
+            set => _helper.WriteEnum(nameof(OriginalAppTheme), value);
         }
 
         public void ResetSystemTheme(ApplicationTheme theme)
@@ -452,18 +452,18 @@ namespace Project2FA.Services
                 }
                 return string.Empty;
             }
-            set => _helper.TryWrite(nameof(LoginScreenWallpaper), value);
+            set => _helper.WriteString(nameof(LoginScreenWallpaper), value);
         }
 
         public LoggingPreferEnum LoggingSetting
         {
             get => _helper.SafeReadEnum(nameof(LoggingSetting), LoggingPreferEnum.Simple);
-            set => _helper.TryWrite(nameof(LoggingSetting), value);
+            set => _helper.WriteEnum(nameof(LoggingSetting), value);
         }
 
         public string PurchasedStoreId
         {
-            get => _helper.SafeRead(nameof(PurchasedStoreId), string.Empty);
+            get => _helper.ReadString(nameof(PurchasedStoreId), string.Empty);
             set => _helper.TryWrite(nameof(PurchasedStoreId), value);
         }
 

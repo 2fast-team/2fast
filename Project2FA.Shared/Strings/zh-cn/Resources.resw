@@ -1045,7 +1045,7 @@
     <value>使用文件/图像导入</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - 双因素验证器</value>
+    <value>2fast - 双因素验证器</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>返回</value>

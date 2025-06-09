@@ -53,12 +53,14 @@ namespace Project2FA.UWP
         /// <summary>
         /// Creates the access of the static instance of the ShellPage
         /// </summary>
-        public static ShellPage ShellPageInstance { get; private set; }
+        public static ShellPage? ShellPageInstance { get; private set; }
 
+#if !NET9_0_OR_GREATER
         /// <summary>
         /// Pipeline for interacting with database.
         /// </summary>
         public static IProject2FARepository Repository { get; private set; }
+#endif
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

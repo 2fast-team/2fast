@@ -99,6 +99,7 @@
     <Grid x:Name="RootGrid">
         <Pivot 
             x:Name="MainPivot"
+            Tag="{x:Bind ViewModel.PivotViewSelectionName,Mode=OneWay}"
             SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex, Mode=TwoWay}">
             <PivotItem
                 x:Uid="ImportBackupCDImportSelection"

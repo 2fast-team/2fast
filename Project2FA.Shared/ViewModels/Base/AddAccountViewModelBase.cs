@@ -67,7 +67,7 @@ namespace Project2FA.ViewModels
         private MediaPlayerElement _mediaPlayerElementControl;
         private CameraHelper _cameraHelper;
         public AccountEntryEnum EntryEnum { get; set; } = AccountEntryEnum.None;
-        private string _qrCodeStr;
+        private string _qrCodeStr = string.Empty;
         private bool _isButtonEnable;
         private bool _manualInput;
         private bool _isCameraActive;
@@ -78,6 +78,7 @@ namespace Project2FA.ViewModels
         private string _secretKey;
         private bool _isEditBoxVisible;
         private bool _noCameraFound, _noCameraPermission, _cameraSuccessfullyLoaded;
+        private string _pivotViewSelectionName = string.Empty;
         public ICommand ManualInputCommand { get; }
         public ICommand ScanQRCodeCommand { get; }
         public ICommand PrimaryButtonCommand { get; }
@@ -94,10 +95,12 @@ namespace Project2FA.ViewModels
         private VideoFrame _currentVideoFrame;
         private long _videoFrameCounter;
         private const int _vidioFrameDivider = 20; // every X frame for analyzing
+        private string _lastPivotItemName;
 #if WINDOWS_UWP
-        private Direct3D11CaptureFramePool _framePool;
+        private Direct3D11CaptureFramePool? _framePool;
         private CanvasDevice _canvasDevice;
-        private GraphicsCaptureSession _session;
+        private GraphicsCaptureSession? _session;
+        
 #endif
 
         public AddAccountViewModelBase()
@@ -129,8 +132,8 @@ namespace Project2FA.ViewModels
 
             DeleteAccountIconCommand = new RelayCommand(() =>
             {
-                Model.AccountIconName = null;
-                AccountIconName = null;
+                Model.AccountIconName = string.Empty;
+                AccountIconName = string.Empty;
                 OnPropertyChanged(nameof(Model));
             });
 
@@ -313,10 +316,6 @@ namespace Project2FA.ViewModels
                         await ErrorDialogs.QRReadError();
                     }
                 }
-                else
-                {
-                    await ErrorDialogs.QRReadError();
-                }
             }
             catch (Exception exc)
             {
@@ -346,10 +345,12 @@ namespace Project2FA.ViewModels
                 case AccountEntryEnum.Add:
                     if (_qrCodeStr.StartsWith("otpauth://") || _qrCodeStr.StartsWith("steam"))
                     {
-                        if (await ParseQRCode() && CheckInputs())
+                        if (await ParseQRCode())
                         {
-                            IsPrimaryBTNEnable = true;
-                            SelectedPivotIndex = 1;
+                            // change the string to the named pivot item to trigger the real change in the code behind of the view
+                            PivotViewSelectionName = "PI_AccountInput";
+                            CheckInputs(); // the primary button enable state
+
                         }
                         else
                         {
@@ -379,8 +380,9 @@ namespace Project2FA.ViewModels
                             //move to the selection dialog
                             SelectedPivotIndex = 0;
                         }
-                        // imported account pivot item
-                        SelectedPivotIndex = 2;
+                        // change the string to the named pivot item to trigger the real change in the code behind of the view
+                        PivotViewSelectionName = "PI_ImportAccountList";
+
                     }
                     else
                     {
@@ -725,26 +727,34 @@ namespace Project2FA.ViewModels
                 _currentVideoFrame = e.VideoFrame;
 
                 // analyse only every _vidioFrameDivider value
-                if (_videoFrameCounter % _vidioFrameDivider == 0 && SelectedPivotIndex == 1)
+                if (_videoFrameCounter % _vidioFrameDivider == 0)
                 {
                     await App.ShellPageInstance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                     {
-                        var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
-                        if (luminanceSource != null)
+                        try
                         {
-                            var barcodeReader = new BarcodeReader
+                            var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
+                            if (luminanceSource != null)
                             {
-                                AutoRotate = true,
-                                Options = { TryHarder = true }
-                            };
-                            var decodedStr = barcodeReader.Decode(luminanceSource);
-                            if (decodedStr != null)
-                            {
-                                await CleanUpCamera();
-                                _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
-                                await ReadAuthenticationFromString();
+                                var barcodeReader = new BarcodeReader
+                                {
+                                    AutoRotate = true,
+                                    Options = { TryHarder = true }
+                                };
+                                var decodedStr = barcodeReader.Decode(luminanceSource);
+                                if (decodedStr != null)
+                                {
+                                    await CleanUpCamera();
+                                    _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
+                                    await ReadAuthenticationFromString();
+                                }
                             }
                         }
+                        catch (Exception exc)
+                        {
+                            await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+                        }
+
                     });
                 }
             }
@@ -847,6 +857,18 @@ namespace Project2FA.ViewModels
             set
             {
                 SetProperty(ref _selectedPivotIndex, value);
+            }
+        }
+
+        public string LastPivotItemName
+        {
+            get => _lastPivotItemName;
+            set
+            {
+                if (SetProperty(ref _lastPivotItemName, value))
+                {
+                    CheckInputs();
+                }
             }
         }
         public bool IsPrimaryBTNEnable
@@ -993,6 +1015,8 @@ namespace Project2FA.ViewModels
         public bool NoCategoriesExists => DataService.Instance.GlobalCategories.Count == 0;
 
         public bool CategoriesExists => DataService.Instance.GlobalCategories.Count > 0;
+
+        public string PivotViewSelectionName { get => _pivotViewSelectionName; set => SetProperty(ref _pivotViewSelectionName, value); }
         #endregion
 
         public void Dispose()

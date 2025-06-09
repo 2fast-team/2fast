@@ -1050,7 +1050,7 @@ Sincronizzare l'ora nelle impostazioni.</value>
     <value>Utilizzare file/immagine per l'importazione</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - Autenticatore a due fattori</value>
+    <value>2fast - Autenticatore a due fattori</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Indietro</value>

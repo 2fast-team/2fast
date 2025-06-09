@@ -14,7 +14,7 @@ namespace Project2FA.UWP.Helpers
     /// Used to Track Changes of a Dependency Property
     /// </summary>
     /// <typeparam name="T">Value of Dependency Property</typeparam>
-    public sealed class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
+    public sealed partial class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
     {
         /// <summary>
         /// Value of Value Property

@@ -10,7 +10,6 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:unocontrols="using:Project2FA.Controls"
     xmlns:media="using:CommunityToolkit.WinUI.Media"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:viewmodels="using:Project2FA.ViewModels"
     xmlns:strings="using:Project2FA.Strings"
@@ -239,11 +238,6 @@
     </Page.Resources>
 
     <Grid x:Name="MainGrid">
-        <!--<Grid.Background>
-            <ImageBrush
-                ImageSource="ms-appx:///Assets/Background/mhellmeier_blue-hills.jpg"
-                Stretch="UniformToFill" />
-        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
@@ -390,13 +384,6 @@
                             <Image 
                                 Margin="0,12,0,0"
                                 Source="/Assets/Images/appoverview.png"/>
-                            <!--TutorialContentDialogHowTheAppWorks.Text-->
-                            <!--<toolkit:MarkdownTextBlock 
-                                x:Uid="TutorialContentDialogFirstSteps"
-                                Text="~TutorialContentDialogFirstSteps.Text"
-                                FontSize="16"
-                                TextWrapping="WrapWholeWords" 
-                                LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
 
                         </StackPanel>
                     </Grid>
@@ -453,7 +440,6 @@
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
                                 TextWrapping="WrapWholeWords"/>
-                            <!--<Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />-->
                         </StackPanel>
                     </Grid>
                 </FlipViewItem>
@@ -484,10 +470,6 @@
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
                                 OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
-                            <!--<TextBlock 
-                            Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
-                            FontSize="16"
-                            TextWrapping="WrapWholeWords"/>-->
                             <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
                         </StackPanel>
                     </Grid>
@@ -521,11 +503,6 @@
                                 FontStretch="ExtraCondensed"
                                 FontFamily="Calibri"
                                 OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
-                            <!--<TextBlock 
-                            x:Uid="TutorialContentDialogInteractionAccount"
-                            Text="~TutorialContentDialogInteractionAccount.Text"
-                            FontSize="16"
-                            TextWrapping="WrapWholeWords"/>-->
                             <ListView 
                                     ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
                                     ItemTemplate="{StaticResource TwoFACodeCustomTemplate}"

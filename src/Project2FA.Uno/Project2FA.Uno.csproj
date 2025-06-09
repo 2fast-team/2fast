@@ -32,7 +32,9 @@
 	</UnoFeatures>
     <PackageCertificateThumbprint>D17FB9F254A915E499415F614115D6D86A448B38</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+	<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
+    <Platforms>AnyCPU;ARM64;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
@@ -40,7 +42,16 @@
     <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|ARM64'">
+    <RunAOTCompilation>True</RunAOTCompilation>
+    <PublishTrimmed>False</PublishTrimmed>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
+    <PublishTrimmed>False</PublishTrimmed>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|ARM64'">
     <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
   <Import Project="..\..\UNOversalTemplate\UNOversalTemplate.Services\UNOversalTemplate.Services.projitems" Label="Shared" />

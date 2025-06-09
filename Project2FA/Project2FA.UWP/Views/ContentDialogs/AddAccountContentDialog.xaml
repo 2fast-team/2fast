@@ -39,6 +39,7 @@
 
     <Grid x:Name="RootGrid">
         <Pivot x:Name="MainPivot"
+               Tag="{x:Bind ViewModel.PivotViewSelectionName,Mode=OneWay}"
                SelectedIndex="{x:Bind ViewModel.SelectedPivotIndex,Mode=TwoWay}">
             <PivotItem 
                 Header="#Optionen" 
@@ -116,7 +117,8 @@
                             HorizontalContentAlignment="Left"
                             Style="{StaticResource AccentButtonStyle}"
                             Command="{x:Bind ViewModel.CameraScanCommand}"
-                            MinWidth="255" Click="BTN_QRCodeCameraScan_Click" >
+                            MinWidth="255" 
+                            Click="BTN_QRCodeCameraScan_Click" >
                                 <StackPanel 
                                     Orientation="Horizontal" 
                                     HorizontalAlignment="Left">

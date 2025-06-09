@@ -202,7 +202,7 @@ namespace Project2FA.ViewModels
                 catch (Exception exc)
                 {
                     await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
-#if WINDOWS_UWP && !NET9_0_OR_GREATER
+#if WINDOWS_UWP
                     TrackingManager.TrackException(nameof(CheckServerStatus), exc);
 #endif
                     return (false, null);

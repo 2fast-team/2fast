@@ -5,6 +5,7 @@ using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
+using System;
 using UNOversal.Extensions;
 using Windows.Foundation;
 using Windows.UI;
@@ -25,10 +26,25 @@ namespace Project2FA.UWP.Views
 
             //register an event for the changed Tag property of the input textbox (for validation)
             TB_AddAccountContentDialogSecretKey.RegisterPropertyChangedCallback(TagProperty, TBTagChangedCallback);
+            // register the change of the input
+            MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
             Loaded += AddAccountContentDialog_Loaded;
         }
 
-
+        private void PivotItemChangedCallback(DependencyObject sender, DependencyProperty dp)
+        {
+            if (dp == Pivot.TagProperty)
+            {
+                if (((Pivot)sender).Tag is string tag)
+                {
+                    if (tag == "PI_AccountInput")
+                    {
+                        RemovePivotItems(PI_AccountInput);
+                        tag = string.Empty;
+                    }
+                }
+            }
+        }
 
         private void AddAccountContentDialog_Loaded(object sender, RoutedEventArgs e)
         {
@@ -75,6 +91,10 @@ namespace Project2FA.UWP.Views
                     if (MainPivot.Items.Contains(PI_ScanQRCodeCamera))
                     {
                         MainPivot.Items.Remove(PI_ScanQRCodeCamera);
+                    }
+                    if(ViewModel.LastPivotItemName == "PI_ScanQRCodeCamera")
+                    {
+                        ViewModel.SelectedPivotIndex = 1;
                     }
                     ViewModel.LastPivotItemName = nameof(PI_AccountInput);
                     break;

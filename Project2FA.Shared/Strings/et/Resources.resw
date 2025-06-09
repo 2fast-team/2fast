@@ -1047,7 +1047,7 @@ Palun sünkroonige kellaaeg seadetes.</value>
     <value>Kasutage faili/pilti importimiseks</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - kaheteguriline autentimine</value>
+    <value>2fast - kaheteguriline autentimine</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Tagasi</value>

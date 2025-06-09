@@ -1048,7 +1048,7 @@ Vennligst synkroniser tiden i innstillingene.</value>
     <value>Bruk fil/bilde for import</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>[Beta] 2fast - tofaktorautentisering</value>
+    <value>2fast - tofaktorautentisering</value>
   </data>
   <data name="TutorialPageBackButton.Text" xml:space="preserve">
     <value>Tilbake</value>

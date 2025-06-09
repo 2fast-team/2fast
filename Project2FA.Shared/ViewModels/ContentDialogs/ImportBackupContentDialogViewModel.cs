@@ -34,7 +34,6 @@ namespace Project2FA.ViewModels
         private bool _isCheckedInputs = false;
         public ICommand FileImportCommand { get; }
         private string _password = string.Empty;
-        private string _lastPivotItemName = string.Empty;
         private bool _passwordGivenChecked = true;
         private int _selectedImportFormatIndex = -1;
         public ICommand ImportAccountCommand { get; }
@@ -126,6 +125,18 @@ namespace Project2FA.ViewModels
             IsCheckedInputs = true;
         }
 
+        public void SetPrimaryBTNStatus()
+        {
+            if (ImportCollection.Where(x => x.IsEnabled).Any() && ImportCollection.Where(x => x.IsChecked).Any())
+            {
+                IsPrimaryBTNEnable = true;
+            }
+            else
+            {
+                IsPrimaryBTNEnable = false;
+            }
+        }
+
         public new int SelectedPivotIndex
         { 
             get => _selectedPivotIndex; 
@@ -158,17 +169,7 @@ namespace Project2FA.ViewModels
             get => _isCheckedInputs; 
             set => SetProperty(ref _isCheckedInputs, value);
         }
-        public string LastPivotItemName 
-        { 
-            get => _lastPivotItemName;
-            set
-            {
-                if(SetProperty(ref _lastPivotItemName, value))
-                {
-                    CheckInputs();
-                }
-            }
-        }
+
         public bool PasswordGivenChecked 
         { 
             get => _passwordGivenChecked;

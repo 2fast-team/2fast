@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+	<Nullable>enable</Nullable>
     <UseUwp>true</UseUwp>
     <Platforms>x64;arm64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
@@ -12,7 +13,9 @@
     <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
     <EnableMsixTooling>true</EnableMsixTooling>
 	<CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
-	<Nullable>enable</Nullable>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<CsWinRTIncludes>Microsoft.Services.Store.Engagement</CsWinRTIncludes>
+	<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants>$(DefineConstants);WINDOWS_UWP</DefineConstants>
@@ -27,16 +30,23 @@
     <DefineConstants>$(DefineConstants);WINDOWS_UWP</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Properties\AssemblyInfo.cs" />
-    <Compile Remove="TrackingManager.cs" />
+    <Compile Remove="AppPackages\**" />
+    <Compile Remove="BundleArtifacts\**" />
+    <EmbeddedResource Remove="AppPackages\**" />
+    <EmbeddedResource Remove="BundleArtifacts\**" />
+    <None Remove="AppPackages\**" />
+    <None Remove="BundleArtifacts\**" />
+    <Page Remove="AppPackages\**" />
+    <Page Remove="BundleArtifacts\**" />
+	<None Remove="Properties\Default.rd.xml" />
+	<Compile Remove="Properties\AssemblyInfo.cs" />
+	<PRIResource Remove="AppPackages\**" />
+	<PRIResource Remove="BundleArtifacts\**" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Properties\Default.rd.xml" />
-  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
-		<PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.26100.4188" />
+		<PackageReference Include="Microsoft.Services.Store.Engagement" Version="10.2307.3001" />
 		<PackageReference Include="BouncyCastle.Cryptography">
 			<Version>2.6.1</Version>
 		</PackageReference>
@@ -70,20 +80,18 @@
 		<PackageReference Include="DryIoc.dll">
 			<Version>5.4.3</Version>
 		</PackageReference>
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
+		<!--<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
 			<Version>9.0.0</Version>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Services.Store.Engagement">
-			<Version>10.2307.3001</Version>
-		</PackageReference>
+		</PackageReference>-->
 		<PackageReference Include="HtmlAgilityPack">
 			<Version>1.12.1</Version>
 		</PackageReference>
 		<PackageReference Include="Markdig">
 			<Version>0.41.2</Version>
 		</PackageReference>
+		<PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
 		<PackageReference Include="Roman-Numerals">
 			<Version>2.0.1</Version>
 		</PackageReference>

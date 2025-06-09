@@ -22,7 +22,7 @@ namespace Project2FA.Repository.Models
 #endif
     public class TwoFACodeModel : ObservableObject, ICloneable
     {
-        private string _label;
+        private string _label = string.Empty;
         [Encrypt]
         [Required(ErrorMessage = "Required")]
         public string Label
@@ -37,7 +37,7 @@ namespace Project2FA.Repository.Models
             }
         }
 
-        private string _issuer;
+        private string _issuer = string.Empty;
         [Encrypt]
         [Required(ErrorMessage = "Required")]
         public string Issuer
@@ -115,7 +115,7 @@ namespace Project2FA.Repository.Models
             }
         }
 
-        private string _twoFACode;
+        private string _twoFACode = string.Empty;
         [JsonIgnore]
         public string TwoFACode
         {
@@ -131,7 +131,7 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _hideTOTPCode, value);
         }
 
-        private string _accountIconName;
+        private string _accountIconName = string.Empty;
         [Encrypt]
         public string AccountIconName
         {
@@ -145,7 +145,7 @@ namespace Project2FA.Repository.Models
             }
         }
 
-        private string _notes;
+        private string _notes = string.Empty;
         [Encrypt]
         public string Notes
         {

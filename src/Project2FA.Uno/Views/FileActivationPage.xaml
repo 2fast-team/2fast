@@ -79,19 +79,20 @@
                     </media:PipelineBrush>
                 </Border.Background>-->
             </Border>
-            <StackPanel 
+            <ScrollViewer>
+                <StackPanel 
             x:Name="MainStackPanel"
             MaxWidth="320" 
             MinHeight="500" >
-                <Image 
+                    <Image 
                     Source="ms-appx:///Assets/Images/FileLogo.png"
                     MaxHeight="80" 
                     Margin="0,30,0,10"/>
-                <TextBlock
+                    <TextBlock
                     Margin="0,5,0,0"
                     Text="{x:Bind ViewModel.DatafileName, Mode=OneWay}" 
                     FontSize="24"/>
-                <PasswordBox 
+                    <PasswordBox 
                         x:Uid="LoginPagePassword"    
                         Header="~LoginPagePassword.Header" 
                         PlaceholderText="~LoginPagePassword.PlaceholderText" 
@@ -99,11 +100,11 @@
                         Margin="0,5,0,10" 
                         
                         InputScope="Password" />
-                <StackPanel 
+                    <StackPanel 
                         x:Name="SP_LoginBTNs"
                         Orientation="Horizontal" 
                         HorizontalAlignment="Center">
-                    <Button 
+                        <Button 
                             x:Uid="LoginPageLoginButton"
                             Content="~LoginPageLoginButton.Content" 
                             Command="{x:Bind ViewModel.LoginCommand}" 
@@ -111,8 +112,10 @@
                             MinWidth="100"
                             Margin="0,10,10,0" 
                             HorizontalAlignment="Center"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
+
         </Grid>
     </Grid>
 

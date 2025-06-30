@@ -512,6 +512,10 @@ namespace Project2FA.Services
                         {
 
                         }
+                        else
+                        {
+                            await ErrorDialogs.ShowUnexpectedError(exc);
+                        }
 #else
                         if (exc.Message == "Padding is invalid and cannot be removed.")
                         {

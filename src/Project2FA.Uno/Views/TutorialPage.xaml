@@ -241,7 +241,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <utu:NavigationBar
@@ -610,81 +609,85 @@
             </FlipView>
         </Grid>
 
-        <PipsPager 
-        x:Name="FlipViewPipsPager"
-        Grid.Row="2"
-        HorizontalAlignment="Center"
-        VerticalContentAlignment="Bottom"
-        NumberOfPages="6"
-        SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
+        <utu:SafeArea Insets="Bottom" Grid.Row="2" >
+            <StackPanel>
+                <PipsPager 
+x:Name="FlipViewPipsPager"
+HorizontalAlignment="Center"
+VerticalContentAlignment="Bottom"
+NumberOfPages="6"
+SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
 
-        <Grid 
-            Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
-            Padding="0,12,0,12"
-            Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <!--<Border
-            Grid.ColumnSpan="2" 
-            Background="{ThemeResource TranslucentBackgroundMediumBrush}">
-                --><!--<Border>
-                    <Border.Background>
-                        <media:BackdropBlurBrush Amount="2" />
-                    </Border.Background>
-                </Border>--><!--
-            </Border>-->
-            <Button 
-            Visibility="{x:Bind ViewModel.BackButtonVisible,Mode=OneWay}"
-            Command="{x:Bind ViewModel.BackButtonCommand}"
-            HorizontalAlignment="Left" >
-                <StackPanel 
-                Orientation="Horizontal" 
-                HorizontalAlignment="Left">
-                    <FontIcon Glyph="&#xE76B;" FontSize="20"/>
-                    <TextBlock 
-                    Text="~TutorialPageBackButton.Text" 
-                    Margin="8,0,0,0" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" 
-                    x:Uid="TutorialPageBackButton" />
-                </StackPanel>
-            </Button>
-            <StackPanel 
-                Background="Transparent"
-                Orientation="Horizontal" 
-                Grid.Column="1"
-                HorizontalAlignment="Right">
-                <Button 
-                Command="{x:Bind ViewModel.FinishButtonCommand}"
-                Visibility="{x:Bind ViewModel.FinishButtonVisible,Mode=OneWay}"
-                Style="{StaticResource AccentButtonStyle}"
-                x:Uid="TutorialPageFinishpButton" 
-                Content="~TutorialPageFinishpButton.Content" />
-                <Button 
-                Command="{x:Bind ViewModel.SkipButtonCommand}"
-                Visibility="{x:Bind ViewModel.SkipButtonVisible,Mode=OneWay}"
-                x:Uid="TutorialPageSkipButton" 
-                Content="~TutorialPageSkipButton.Content" />
-                <Button 
-                Margin="8,0,0,0"
-                Command="{x:Bind ViewModel.FordwardButtonCommand}"
-                Visibility="{x:Bind ViewModel.ForwardButtonVisible,Mode=OneWay}"
-                Style="{StaticResource AccentButtonStyle}">
+                <Grid 
+    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+    Padding="0,12,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <!--<Border
+    Grid.ColumnSpan="2" 
+    Background="{ThemeResource TranslucentBackgroundMediumBrush}">
+        -->
+                    <!--<Border>
+            <Border.Background>
+                <media:BackdropBlurBrush Amount="2" />
+            </Border.Background>
+        </Border>-->
+                    <!--
+    </Border>-->
+                    <Button 
+    Visibility="{x:Bind ViewModel.BackButtonVisible,Mode=OneWay}"
+    Command="{x:Bind ViewModel.BackButtonCommand}"
+    HorizontalAlignment="Left" >
+                        <StackPanel 
+        Orientation="Horizontal" 
+        HorizontalAlignment="Left">
+                            <FontIcon Glyph="&#xE76B;" FontSize="20"/>
+                            <TextBlock 
+            Text="~TutorialPageBackButton.Text" 
+            Margin="8,0,0,0" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center" 
+            x:Uid="TutorialPageBackButton" />
+                        </StackPanel>
+                    </Button>
                     <StackPanel 
-                Orientation="Horizontal" 
-                HorizontalAlignment="Left">
-                        <TextBlock 
-                    Text="~TutorialPageForwardButton.Text" 
-                    Margin="8,0,0,0" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" 
-                    x:Uid="TutorialPageForwardButton" />
-                        <FontIcon Glyph="&#xE76C;" FontSize="20"/>
+        Background="Transparent"
+        Orientation="Horizontal" 
+        Grid.Column="1"
+        HorizontalAlignment="Right">
+                        <Button 
+        Command="{x:Bind ViewModel.FinishButtonCommand}"
+        Visibility="{x:Bind ViewModel.FinishButtonVisible,Mode=OneWay}"
+        Style="{StaticResource AccentButtonStyle}"
+        x:Uid="TutorialPageFinishpButton" 
+        Content="~TutorialPageFinishpButton.Content" />
+                        <Button 
+        Command="{x:Bind ViewModel.SkipButtonCommand}"
+        Visibility="{x:Bind ViewModel.SkipButtonVisible,Mode=OneWay}"
+        x:Uid="TutorialPageSkipButton" 
+        Content="~TutorialPageSkipButton.Content" />
+                        <Button 
+        Margin="8,0,0,0"
+        Command="{x:Bind ViewModel.FordwardButtonCommand}"
+        Visibility="{x:Bind ViewModel.ForwardButtonVisible,Mode=OneWay}"
+        Style="{StaticResource AccentButtonStyle}">
+                            <StackPanel 
+        Orientation="Horizontal" 
+        HorizontalAlignment="Left">
+                                <TextBlock 
+            Text="~TutorialPageForwardButton.Text" 
+            Margin="8,0,0,0" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center" 
+            x:Uid="TutorialPageForwardButton" />
+                                <FontIcon Glyph="&#xE76C;" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-                </Button>
+                </Grid>
             </StackPanel>
-        </Grid>
+        </utu:SafeArea>
     </Grid>
 </Page>

@@ -457,17 +457,19 @@
             </ScrollViewer>
 
         </Grid>-->
-        <Grid 
-			Grid.Row="2"
+        <utu:SafeArea 
+            Insets="Bottom" 
+            Grid.Row="2" 
+        	VerticalAlignment="Bottom">
+            <Grid 
 			HorizontalAlignment="Stretch"
-			VerticalAlignment="Bottom"
             Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
             Padding="0,12,0,12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Button 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button 
                 x:Name="PrimaryButton"
 				Content="{x:Bind strings:Resources.ButtonTextConfirm}"
                 Command="{x:Bind ViewModel.PrimaryButtonCommand}"
@@ -475,7 +477,7 @@
 				VerticalAlignment="Stretch"
 				Margin="0,0,2,0"
 				Grid.Column="0" />
-            <Button 
+                <Button 
                 x:Name="SecondaryButton"
                 Command="{x:Bind ViewModel.CancelButtonCommand}"
 				Content="{x:Bind strings:Resources.ButtonTextCancel}"
@@ -483,7 +485,7 @@
 				VerticalAlignment="Stretch"
 				Margin="2,0,0,0"
 				Grid.Column="1"/>
-            <!--<Button 
+                <!--<Button 
                 x:Name="CloseButton"
 				Content="Close"
 				ElementSoundMode="FocusOnly"
@@ -491,6 +493,8 @@
 				VerticalAlignment="Stretch"
 				Margin="2,0,0,0"
 				Grid.Column="3" />-->
-        </Grid>
+            </Grid>
+        </utu:SafeArea>
+
     </Grid>
 </Page>

@@ -4,8 +4,9 @@
     <ResourceDictionary.MergedDictionaries>
         <!--custom controls-->
         <!--<ResourceDictionary Source="/Controls/Shimmer/Shimmer.xaml" />-->
+        <ResourceDictionary Source="ms-appx:///Controls/Shimmer/Shimmer.xaml" />
         
-        <ResourceDictionary Source="..\..\Project2FA.Shared/Controls/Shimmer/Shimmer.xaml" />
+        <!--<ResourceDictionary Source="..\..\Project2FA.Shared/Controls/Shimmer/Shimmer.xaml" />-->
     </ResourceDictionary.MergedDictionaries>
     
     

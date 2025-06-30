@@ -2,13 +2,11 @@
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
-using Project2FA.Repository.Database;
 using Project2FA.Services;
 using Project2FA.Services.Importer;
 using Project2FA.Services.Parser;
 using Project2FA.Uno.Views;
 using Project2FA.ViewModels;
-using Uno.Resizetizer;
 using UNOversal;
 using UNOversal.DryIoc;
 using UNOversal.Ioc;
@@ -70,7 +68,7 @@ namespace Project2FA.UnoApp
             //WinUIWindow.Current.EnableHotReload(); // obsolete
             MainWindow.UseStudio();
 #endif
-            MainWindow.SetWindowIcon();
+            //MainWindow.SetWindowIcon();
 
 #if __ANDROID__ || __IOS__
             //FeatureConfiguration.ListViewBase.AnimateScrollIntoView = false;
@@ -173,7 +171,7 @@ namespace Project2FA.UnoApp
             //                        new ExtendedViewPager(ContextHelper.Current)
             //                        {
             //                            OffscreenPageLimit = 1,
-            //                            PageMargin = (int)Android.Util.TypedValue.ApplyDimension(Android.Util.ComplexUnitType.Dip, 4, ContextHelper.Current.Resources.DisplayMetrics),
+            //                            PageMargin = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 4, ContextHelper.Current.Resources.DisplayMetrics),
             //                            SwipeEnabled = true,
             //                        }
             //                        .Apply(v => Grid.SetRow(v, 1))
@@ -183,7 +181,7 @@ namespace Project2FA.UnoApp
             //    }
             //};
 
-            //Style.RegisterDefaultStyleForType(typeof(NativePivotPresenter), style, true);
+            //Style.RegisterDefaultStyleForType(typeof(NativePivotPresenter), style);
 #endif
         }
 
@@ -397,7 +395,6 @@ namespace Project2FA.UnoApp
             containerRegistry.RegisterSingleton<ISecretService, SecretService>();
             containerRegistry.RegisterSingleton<ISettingsHelper, SettingsHelper>();
             containerRegistry.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
-            containerRegistry.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
             containerRegistry.RegisterSingleton<ISerializationService, SerializationService>();
             containerRegistry.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>();
             containerRegistry.RegisterSingleton<INetworkTimeService, NetworkTimeService>();

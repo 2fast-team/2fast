@@ -70,7 +70,7 @@
         </Border>
         <Grid 
             x:Name="MainGrid"
-            
+            utu:SafeArea.Insets="SoftInput"
             Grid.Row="1">
             <Border 
                 Background="{ThemeResource TranslucentBackgroundMediumBrush}"
@@ -81,7 +81,7 @@
                     </media:PipelineBrush>
                 </Border.Background>-->
             </Border>
-            <ScrollViewer utu:SafeArea.Insets="SoftInput">
+            <ScrollViewer>
                 <StackPanel 
             
             x:Name="MainStackPanel"

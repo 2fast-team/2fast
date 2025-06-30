@@ -114,8 +114,8 @@ namespace Project2FA.ViewModels
                     DateFileName += ".2fa";
                 }
 
-                //save the file path for persistent access on iOS 
 #if __IOS__
+                //save the file path for persistent access on iOS 
                 Foundation.NSError error;
                 Foundation.NSUrl url = Foundation.NSUrl.FromFilename(LocalStorageFile.Path);
                 Foundation.NSData bookmark = url.CreateBookmarkData(Foundation.NSUrlBookmarkCreationOptions.WithSecurityScope, null, null, out error);

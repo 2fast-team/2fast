@@ -845,13 +845,23 @@
             ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}"
             HorizontalAlignment="Stretch">
 
-                <ListView.ItemContainerStyle>
+                <!--<ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
+                        <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="2,0,2,0"/>
                     </Style>
-                </ListView.ItemContainerStyle>
-            
+                </ListView.ItemContainerStyle>-->
+                <!--<ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <wctc:WrapPanel 
+            HorizontalSpacing="10"
+            VerticalSpacing="10"
+            Orientation="Horizontal" 
+            HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>-->
+
             </ListView>
             
             <ListView 

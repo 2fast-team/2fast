@@ -103,6 +103,7 @@ namespace Project2FA.Services
         int _reloadCollectionCounter = 0;
         private bool _isFilterEnabled;
         private bool _isFilterChecked;
+        private bool _newAppUpdateDialogDisplayed = false;
 #if __IOS__
         private Foundation.NSUrl _openDatefileUrl = null;
 #endif
@@ -1205,10 +1206,16 @@ namespace Project2FA.Services
             }
         }
 
+        public bool NewAppUpdateDialogDisplayed 
+        { 
+            get => _newAppUpdateDialogDisplayed; 
+            set => _newAppUpdateDialogDisplayed = value; 
+        }
+
 #if __IOS__
         public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }
 #endif
-#endregion
+        #endregion
 
         public void Dispose()
         {

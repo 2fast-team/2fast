@@ -195,7 +195,7 @@ namespace Project2FA.UWP.Views
                 }
             }
 
-            if (SystemInformationHelper.Instance.IsAppUpdated)
+            if (SystemInformationHelper.Instance.IsAppUpdated && !DataService.Instance.NewAppUpdateDialogDisplayed)
             {
                 //if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
                 //{
@@ -226,6 +226,7 @@ namespace Project2FA.UWP.Views
                     }
                 }
 
+                DataService.Instance.NewAppUpdateDialogDisplayed = true;
                 ContentDialog dialog = new ContentDialog();
                 string clickedLink = string.Empty; // save the clicked link
                 dialog.Title = Strings.Resources.NewAppFeaturesTitle;

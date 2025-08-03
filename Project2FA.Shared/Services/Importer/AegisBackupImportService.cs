@@ -2,6 +2,7 @@
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.Encoders;
+using OtpNet;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
 using Project2FA.Repository.Models.Enums;
@@ -14,6 +15,8 @@ using UNOversal.Services.Serialization;
 
 // based on
 // https://github.com/stratumauth/app/blob/1f74c5fbfd88eb81a58b1ba71dc3423ac779dc06/Stratum.Core/src/Converter/AegisBackupConverter.cs
+// Copyright (C) 2022 jmh
+// SPDX-License-Identifier: GPL-3.0-only
 
 namespace Project2FA.Services.Importer
 {
@@ -31,11 +34,11 @@ namespace Project2FA.Services.Importer
             const string Padding = "NoPadding";
             const string AlgorithmDescription = BaseAlgorithm + "/" + Mode + "/" + Padding;
 
-            if (bytePassword is null)
+            if (bytePassword is null || bytePassword.Length == 0)
             {
-                var database = SerializationService.Deserialize<AegisDecryptedDatabase>(content);
+                var model = SerializationService.Deserialize<AegisModel<AegisDecryptedDatabase>>(content);
 
-                return Task.FromResult((CreateAccountCollection(database), true));
+                return Task.FromResult((CreateAccountCollection(model.Database.Entries), true));
             }
             else
             {
@@ -70,7 +73,7 @@ namespace Project2FA.Services.Importer
                         var json = Encoding.UTF8.GetString(decryptedBytes);
                         var database = SerializationService.Deserialize<AegisDecryptedDatabase>(json);
 
-                        return Task.FromResult((CreateAccountCollection(database), true));
+                        return Task.FromResult((CreateAccountCollection(database.Entries), true));
                     }
                     else
                     {
@@ -84,28 +87,28 @@ namespace Project2FA.Services.Importer
             }
         }
 
-        private List<TwoFACodeModel> CreateAccountCollection(AegisDecryptedDatabase database)
+        private List<TwoFACodeModel> CreateAccountCollection(List<AegisEntry> entries)
         {
             List<TwoFACodeModel> accountList = new List<TwoFACodeModel>();
-            for (int i = 0; i < database.Entries.Count; i++)
+            for (int i = 0; i < entries.Count; i++)
             {
-                if (database.Entries[i].Type == OTPType.totp.ToString() || database.Entries[i].Type == OTPType.steam.ToString())
+                if (entries[i].Type == OTPType.totp.ToString() || entries[i].Type == OTPType.steam.ToString())
                 {
                     var model = new TwoFACodeModel
                     {
-                        Label = database.Entries[i].Name,
-                        TotpSize = database.Entries[i].Info.Digits,
-                        Issuer = database.Entries[i].Issuer,
-                        Period = database.Entries[i].Info.Period,
-                        HashMode = database.Entries[i].Info.HashMode,
-                        SecretByteArray = Encoding.UTF8.GetBytes(database.Entries[i].Info.Secret),
-                        AccountIconName = DataService.Instance.GetIconForLabel(database.Entries[i].Name.ToLower())
+                        Label = entries[i].Name,
+                        TotpSize = entries[i].Info.Digits,
+                        Issuer = entries[i].Issuer,
+                        Period = entries[i].Info.Period,
+                        HashMode = entries[i].Info.HashMode,
+                        SecretByteArray = Base32Encoding.ToBytes(entries[i].Info.Secret),
+                        AccountIconName = DataService.Instance.GetIconForLabel(entries[i].Name.ToLower())
                     };
                     if (string.IsNullOrWhiteSpace(model.Issuer))
                     {
-                        model.Issuer = database.Entries[i].Name;
+                        model.Issuer = entries[i].Name;
                     }
-                    if (database.Entries[i].Type == OTPType.steam.ToString())
+                    if (entries[i].Type == OTPType.steam.ToString())
                     {
                         model.OTPType = OTPType.steam.ToString();
                     }
@@ -115,9 +118,9 @@ namespace Project2FA.Services.Importer
                 {
                     accountList.Add(new TwoFACodeModel
                     {
-                        Label = database.Entries[i].Name,
-                        Issuer = database.Entries[i].Issuer,
-                        AccountIconName = DataService.Instance.GetIconForLabel(database.Entries[i].Name.ToLower()),
+                        Label = entries[i].Name,
+                        Issuer = entries[i].Issuer,
+                        AccountIconName = DataService.Instance.GetIconForLabel(entries[i].Name.ToLower()),
                         IsEnabled = false,
                         IsChecked = false
                     });

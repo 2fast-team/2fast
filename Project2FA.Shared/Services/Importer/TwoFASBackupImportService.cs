@@ -10,6 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UNOversal.Services.Serialization;
 
+// based on
+// https://github.com/stratumauth/app/blob/f79d5f3349ce223232d490ebca3959ea5f72cc71/Stratum.Core/src/Converter/TwoFasBackupConverter.cs
+// Copyright (C) 2022 jmh
+// SPDX-License-Identifier: GPL-3.0-only
+
 namespace Project2FA.Services.Importer
 {
     public class TwoFASBackupImportService : ITwoFASBackupImportService
@@ -34,7 +39,7 @@ namespace Project2FA.Services.Importer
 
             if (backup.ServicesEncrypted != null)
             {
-                if (bytePassword == null)
+                if (bytePassword is null || bytePassword.Length == 0)
                 {
                     //throw new ArgumentException("Password required but not provided");
                     return Task.FromResult((new List<TwoFACodeModel>(), false));
@@ -58,7 +63,7 @@ namespace Project2FA.Services.Importer
             }
             else
             {
-
+                // without password
             }
             return Task.FromResult((new List<TwoFACodeModel>(), false));
         }

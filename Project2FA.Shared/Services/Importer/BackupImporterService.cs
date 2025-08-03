@@ -26,9 +26,6 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
 #endif
 
-// based on
-// https://github.com/stratumauth/app/blob/master/Stratum.Core/src/Converter/
-
 namespace Project2FA.Services.Importer
 {
     public class BackupImporterService : IBackupImporterService

@@ -42,7 +42,7 @@ namespace Project2FA.Services.Importer
         {
             string json;
 
-            if (bytePassword is null)
+            if (bytePassword is null || bytePassword.Length == 0)
             {
                 json = content;
             }
@@ -76,7 +76,7 @@ namespace Project2FA.Services.Importer
                             Issuer = decryptedModel[i].Issuer,
                             Period = decryptedModel[i].Period,
                             HashMode = algorithm,
-                            SecretByteArray = Encoding.UTF8.GetBytes(decryptedModel[i].Secret),
+                            SecretByteArray = Base32Encoding.ToBytes(decryptedModel[i].Secret),
                             AccountIconName = DataService.Instance.GetIconForLabel(decryptedModel[i].Label.ToLower())
                         };
                         if (string.IsNullOrWhiteSpace(model.Issuer))

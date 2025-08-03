@@ -25,10 +25,11 @@
 
     <ContentDialog.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <!--<ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Themes/AppColors.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>-->
+            <x:Double x:Key="SettingsCardWrapThreshold">350</x:Double>
         </ResourceDictionary>
     </ContentDialog.Resources>
 

@@ -10,14 +10,18 @@ using UNOversal.Navigation;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Project2FA.Services;
+using Project2FA.Services.Enums;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 #else
 using Uno.Toolkit.UI;
 using Project2FA.UnoApp;
 using Project2FA.Uno.Views;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
 #endif
@@ -83,6 +87,36 @@ namespace Project2FA.ViewModels
             }
         }
 #endif
+
+        public void RefreshThemeForResources()
+        {
+            // workaround for switching the resources...
+            switch (SettingsService.Instance.AppTheme)
+            {
+                case Theme.System:
+                    if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
+                    {
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    }
+                    else
+                    {
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    }
+                    break;
+                case Theme.Dark:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    break;
+                case Theme.Light:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         public INavigationService NavigationService { get; internal set; }
         public bool NavigationIsAllowed

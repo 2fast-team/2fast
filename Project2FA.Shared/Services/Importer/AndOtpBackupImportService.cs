@@ -1,7 +1,6 @@
 ﻿using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
 using Project2FA.Repository.Models;
 using System.Buffers.Binary;
@@ -12,11 +11,12 @@ using System.Threading.Tasks;
 using UNOversal.Services.Serialization;
 using System;
 using OtpNet;
-using Project2FA.Core;
 using Project2FA.Repository.Models.Enums;
 
 // based on
 // https://github.com/stratumauth/app/blob/48db7ed40cefa6e3d20b32172cb18da29da78503/Stratum.Core/src/Converter/AndOtpBackupConverter.cs
+// Copyright (C) 2022 jmh
+// SPDX-License-Identifier: GPL-3.0-only
 
 namespace Project2FA.Services.Importer
 {
@@ -38,7 +38,7 @@ namespace Project2FA.Services.Importer
             SerializationService = serializationService;
         }
 
-        public async Task<(List<TwoFACodeModel> accountList, bool successful)> ImportBackup(string content, byte[] bytePassword)
+        public Task<(List<TwoFACodeModel> accountList, bool successful)> ImportBackup(string content, byte[] bytePassword)
         {
             string json;
 
@@ -101,9 +101,9 @@ namespace Project2FA.Services.Importer
                         });
                     }
                 }
-                return (accountList, true);
+                return Task.FromResult((accountList, true));
             }
-            return (new List<TwoFACodeModel>(), false);
+            return Task.FromResult((new List<TwoFACodeModel>(), false));
         }
 
         private KeyParameter DeriveKey(byte[] passwordBytes, byte[] salt, uint iterations)
@@ -137,22 +137,6 @@ namespace Project2FA.Services.Importer
                 // assume that backup format is incorrect and iterations are too high
                 return string.Empty;
             }
-
-
-
-            //try
-            //{
-            //    decrypted = cipher.DoFinal(payload);
-            //    return Encoding.UTF8.GetString(decrypted);
-            //}
-            //catch (InvalidCipherTextException e)
-            //{
-            //    //throw new BackupPasswordException("The password is incorrect", e);
-            //}
-
-            //return string.Empty;
-
-
         }
     }
 }

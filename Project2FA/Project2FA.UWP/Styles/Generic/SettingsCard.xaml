@@ -8,6 +8,20 @@
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
+            <Thickness x:Key="SettingsCardBorderThickness">1</Thickness>
+            <Thickness x:Key="SettingsCardPadding">16,16,16,16</Thickness>
+            <x:Double x:Key="SettingsCardMinWidth">148</x:Double>
+            <x:Double x:Key="SettingsCardMinHeight">68</x:Double>
+            <x:Double x:Key="SettingsCardDescriptionFontSize">12</x:Double>
+            <x:Double x:Key="SettingsCardHeaderIconMaxSize">20</x:Double>
+            <x:Double x:Key="SettingsCardLeftIndention">0</x:Double>
+            <x:Double x:Key="SettingsCardContentMinWidth">120</x:Double>
+            <Thickness x:Key="SettingsCardHeaderIconMargin">2,0,20,0</Thickness>
+            <Thickness x:Key="SettingsCardActionIconMargin">14,0,0,0</Thickness>
+            <x:Double x:Key="SettingsCardActionIconMaxSize">13</x:Double>
+            <x:Double x:Key="SettingsCardVerticalHeaderContentSpacing">8</x:Double>
+            <x:Double x:Key="SettingsCardWrapThreshold">476</x:Double>
+            <x:Double x:Key="SettingsCardWrapNoIconThreshold">286</x:Double>
             <SolidColorBrush x:Name="SettingsCardBackground" Color="#32312F"/>
             <StaticResource x:Key="SettingsCardBackgroundPointerOver"
                             ResourceKey="ControlFillColorSecondaryBrush" />
@@ -35,6 +49,20 @@
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
+            <Thickness x:Key="SettingsCardBorderThickness">1</Thickness>
+            <Thickness x:Key="SettingsCardPadding">16,16,16,16</Thickness>
+            <x:Double x:Key="SettingsCardMinWidth">148</x:Double>
+            <x:Double x:Key="SettingsCardMinHeight">68</x:Double>
+            <x:Double x:Key="SettingsCardDescriptionFontSize">12</x:Double>
+            <x:Double x:Key="SettingsCardHeaderIconMaxSize">20</x:Double>
+            <x:Double x:Key="SettingsCardLeftIndention">0</x:Double>
+            <x:Double x:Key="SettingsCardContentMinWidth">120</x:Double>
+            <Thickness x:Key="SettingsCardHeaderIconMargin">2,0,20,0</Thickness>
+            <Thickness x:Key="SettingsCardActionIconMargin">14,0,0,0</Thickness>
+            <x:Double x:Key="SettingsCardActionIconMaxSize">13</x:Double>
+            <x:Double x:Key="SettingsCardVerticalHeaderContentSpacing">8</x:Double>
+            <x:Double x:Key="SettingsCardWrapThreshold">476</x:Double>
+            <x:Double x:Key="SettingsCardWrapNoIconThreshold">286</x:Double>
             <StaticResource x:Key="SettingsCardBackground"
                             ResourceKey="CardBackgroundFillColorDefaultBrush" />
             <StaticResource x:Key="SettingsCardBackgroundPointerOver"
@@ -64,6 +92,20 @@
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">
+            <Thickness x:Key="SettingsCardBorderThickness">1</Thickness>
+            <Thickness x:Key="SettingsCardPadding">16,16,16,16</Thickness>
+            <x:Double x:Key="SettingsCardMinWidth">148</x:Double>
+            <x:Double x:Key="SettingsCardMinHeight">68</x:Double>
+            <x:Double x:Key="SettingsCardDescriptionFontSize">12</x:Double>
+            <x:Double x:Key="SettingsCardHeaderIconMaxSize">20</x:Double>
+            <x:Double x:Key="SettingsCardLeftIndention">0</x:Double>
+            <x:Double x:Key="SettingsCardContentMinWidth">120</x:Double>
+            <Thickness x:Key="SettingsCardHeaderIconMargin">2,0,20,0</Thickness>
+            <Thickness x:Key="SettingsCardActionIconMargin">14,0,0,0</Thickness>
+            <x:Double x:Key="SettingsCardActionIconMaxSize">13</x:Double>
+            <x:Double x:Key="SettingsCardVerticalHeaderContentSpacing">8</x:Double>
+            <x:Double x:Key="SettingsCardWrapThreshold">476</x:Double>
+            <x:Double x:Key="SettingsCardWrapNoIconThreshold">286</x:Double>
             <StaticResource x:Key="SettingsCardBackground"
                             ResourceKey="SystemColorButtonFaceColorBrush" />
             <StaticResource x:Key="SettingsCardBackgroundPointerOver"
@@ -93,20 +135,7 @@
         </ResourceDictionary>
 
     </ResourceDictionary.ThemeDictionaries>
-    <Thickness x:Key="SettingsCardBorderThickness">1</Thickness>
-    <Thickness x:Key="SettingsCardPadding">16,16,16,16</Thickness>
-    <x:Double x:Key="SettingsCardMinWidth">148</x:Double>
-    <x:Double x:Key="SettingsCardMinHeight">68</x:Double>
-    <x:Double x:Key="SettingsCardDescriptionFontSize">12</x:Double>
-    <x:Double x:Key="SettingsCardHeaderIconMaxSize">20</x:Double>
-    <x:Double x:Key="SettingsCardLeftIndention">0</x:Double>
-    <x:Double x:Key="SettingsCardContentMinWidth">120</x:Double>
-    <Thickness x:Key="SettingsCardHeaderIconMargin">2,0,20,0</Thickness>
-    <Thickness x:Key="SettingsCardActionIconMargin">14,0,0,0</Thickness>
-    <x:Double x:Key="SettingsCardActionIconMaxSize">13</x:Double>
-    <x:Double x:Key="SettingsCardVerticalHeaderContentSpacing">8</x:Double>
-    <x:Double x:Key="SettingsCardWrapThreshold">476</x:Double>
-    <x:Double x:Key="SettingsCardWrapNoIconThreshold">286</x:Double>
+
 
     <Style BasedOn="{StaticResource DefaultSettingsCardStyle}"
            TargetType="local:SettingsCard" />

@@ -63,14 +63,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\OTPTypeEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SymbolModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFASBackupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WebDAVStatusEnums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AegisBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AndOTPBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\BackupImporterService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\ITwoFASBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAndOTPBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAegisBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IBackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\TwoFASBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SerializationService.cs" />
@@ -186,7 +189,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Splashcreen\splash_screen.svg" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\da\Resources.resw"/>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\da\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\el\Resources.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />

@@ -13,6 +13,10 @@
     <SolidColorBrush x:Name="TranslucentBackgroundLowBrush" Opacity="0.55" Color="White"/>
     
     <SolidColorBrush x:Name="ApplicationPageBackgroundThemeBrush" Color="White"/>
+
+    <x:Double x:Key="HeaderContentThemeFontSize">24</x:Double>
+    <x:Double x:Key="ItemContentThemeFontSize">22</x:Double>
+    <x:Double x:Key="AccountListSpacing">8</x:Double>
     <!--<SolidColorBrush x:Name="ApplicationContentDialogBackgroundThemeBrush"  Color="White"/>-->
 
     <!--<StaticResource x:Key="SettingsCardBackground" ResourceKey="CardBackgroundFillColorDefaultBrush" />

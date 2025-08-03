@@ -74,7 +74,8 @@
             ItemsSource="{x:Bind ViewModel.GlobalTempCategories,Mode=OneWay}"
             IsItemClickEnabled="True"
             SelectionMode="Multiple" 
-            ItemClick="TokenView_ItemClick" Loaded="TV_Categories_Loaded">
+            ItemClick="TokenView_ItemClick" 
+            Loaded="TV_Categories_Loaded">
                 <labs:TokenView.ItemTemplate>
                     <DataTemplate x:DataType="models:CategoryModel">
                         <StackPanel Orientation="Horizontal">

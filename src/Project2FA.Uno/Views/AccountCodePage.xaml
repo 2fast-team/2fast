@@ -227,26 +227,33 @@
         </StackPanel>-->
 
                             <RelativePanel 
-            MinHeight="80"
-            Grid.Column="2" 
-            Grid.RowSpan="2" 
-            Grid.ColumnSpan="2">
+                            Grid.Column="2" 
+                            Grid.RowSpan="2" 
+                            Grid.ColumnSpan="2">
                                 <TextBlock
-                x:Name="AccountName"
-                FontSize="20"
-                Margin="0,10,10,0" 
-                VerticalAlignment="Center">
-                <Bold>
-                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
-                </Bold>
+                                x:Name="AccountName"
+                                MaxWidth="400"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                ToolTipService.ToolTip="{x:Bind Label,Mode=OneWay}"
+                                Margin="0,10,10,0" 
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap"
+                                MaxLines="1"
+                                VerticalAlignment="Center">
+                                <Bold>
+                                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
+                                </Bold>
                                 </TextBlock>
                                 <TextBlock 
-                x:Name="IssuerName"
-                FontWeight="Thin"
-                Text="{x:Bind Issuer,Mode=OneWay}" 
-                FontSize="20"
-                TextWrapping="Wrap"
-                VerticalAlignment="Center"/>
+                                x:Name="IssuerName"
+                                FontWeight="Thin"
+                                Text="{x:Bind Issuer,Mode=OneWay}" 
+                                ToolTipService.ToolTip="{x:Bind Issuer,Mode=OneWay}"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap"
+                                MaxLines="2"
+                                VerticalAlignment="Center"/>
                             </RelativePanel>
 
                             <StackPanel
@@ -511,26 +518,33 @@
         </StackPanel>-->
 
                             <RelativePanel 
-            MinHeight="80"
-            Grid.Column="2" 
-            Grid.RowSpan="2" 
-            Grid.ColumnSpan="2">
+                            Grid.Column="2" 
+                            Grid.RowSpan="2" 
+                            Grid.ColumnSpan="2">
                                 <TextBlock
-                x:Name="AccountName"
-                FontSize="20"
-                Margin="0,10,10,0" 
-                VerticalAlignment="Center">
-                <Bold>
-                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
-                </Bold>
+                                x:Name="AccountName"
+                                MaxWidth="400"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                ToolTipService.ToolTip="{x:Bind Label,Mode=OneWay}"
+                                Margin="0,10,10,0" 
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap"
+                                MaxLines="1"
+                                VerticalAlignment="Center">
+                                <Bold>
+                                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
+                                </Bold>
                                 </TextBlock>
                                 <TextBlock 
-                x:Name="IssuerName"
-                FontWeight="Thin"
-                Text="{x:Bind Issuer,Mode=OneWay}" 
-                FontSize="20"
-                TextWrapping="Wrap"
-                VerticalAlignment="Center"/>
+                                x:Name="IssuerName"
+                                FontWeight="Thin"
+                                Text="{x:Bind Issuer,Mode=OneWay}" 
+                                ToolTipService.ToolTip="{x:Bind Issuer,Mode=OneWay}"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap"
+                                MaxLines="2"
+                                VerticalAlignment="Center"/>
                             </RelativePanel>
 
                             <StackPanel

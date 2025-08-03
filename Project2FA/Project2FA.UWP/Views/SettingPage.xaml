@@ -135,7 +135,7 @@
                                 CornerRadius="{ThemeResource OverlayCornerRadius}"
                                 Margin="0,0,0,12">
                                 <unoVersalControls:SettingsGroup
-                                    Margin="12,0, 12, 12"
+                                    Margin="12,0,12,12"
                                     Header="~SettingsOptionsDesignTitle.Header"
                                     x:Uid="SettingsOptionsDesignTitle">
                                     <ctwc:SettingsCard 
@@ -245,6 +245,48 @@
                                                     <Grid>
                                                         <ToggleSwitch
                                                             IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseRoundCorner, Mode=TwoWay}"/>
+                                                    </Grid>
+                                                </ctwc:SettingsCard.Content>
+                                            </ctwc:SettingsCard>
+                                            <ctwc:SettingsCard 
+                                            x:Uid="SettingsAppCompactDesign"
+                                            HeaderIcon="{ui:FontIcon Glyph=&#xE92C;}"
+                                            Header="~SettingsAppCompactDesign.Header">
+                                                <ctwc:SettingsCard.Description>
+                                                    <TextBlock 
+                                                         x:Uid="SettingsAppCompactDesignDesc"
+                                                         Text="~SettingsAppCompactDesignDesc.Text" 
+                                                         VerticalAlignment="Stretch" 
+                                                         HorizontalAlignment="Stretch"/>
+                                                </ctwc:SettingsCard.Description>
+                                                <ctwc:SettingsCard.Content>
+                                                    <Grid>
+                                                        <ToggleSwitch
+                                                            IsOn="{x:Bind ViewModel.SettingsPartViewModel.UseCompactDesign, Mode=TwoWay}"/>
+                                                    </Grid>
+                                                </ctwc:SettingsCard.Content>
+                                            </ctwc:SettingsCard>
+                                            <ctwc:SettingsCard
+                                            x:Uid="SettingsAppFontSize"
+                                            HeaderIcon="{ui:FontIcon Glyph=&#xE8D2;}"
+                                            Header="~SettingsAppFontSize.Header">
+                                                <ctwc:SettingsCard.Description>
+                                                    <TextBlock 
+                                                         x:Uid="SettingsAppFontSizeDesc"
+                                                         Text="~SettingsAppFontSizeDesc.Text" 
+                                                         VerticalAlignment="Stretch" 
+                                                         HorizontalAlignment="Stretch"/>
+                                                </ctwc:SettingsCard.Description>
+                                                <ctwc:SettingsCard.Content>
+                                                    <Grid>
+                                                        <ComboBox
+                                                            SelectedIndex="{x:Bind ViewModel.SettingsPartViewModel.FontSizeIndex, Mode=TwoWay}" 
+                                                            MinWidth="{StaticResource CardActionControlMinWidth}">
+                                                            <ComboBoxItem x:Uid="SettingsFontSizeVerySamll" Content="#Very small"/>
+                                                            <ComboBoxItem x:Uid="SettingsFontSizeSamll" Content="#Small"/>
+                                                            <ComboBoxItem x:Uid="SettingsFontSizeNormal" Content="#Normal"/>
+                                                            <ComboBoxItem x:Uid="SettingsFontSizeLarge" Content="#Large"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </ctwc:SettingsCard.Content>
                                             </ctwc:SettingsCard>

@@ -140,6 +140,8 @@ namespace Project2FA.UWP.Views
 
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
+            bool changedResources = false;
+            SettingsService.Instance.IsProVersion = true;
             // set the corner radius for the controls
             if (!SettingsService.Instance.UseRoundCorner)
             {
@@ -148,32 +150,49 @@ namespace Project2FA.UWP.Views
                 App.Current.Resources["ComboBoxItemCornerRadius"] = new CornerRadius(0);
                 App.Current.Resources["ComboBoxItemPillCornerRadius"] = new CornerRadius(0);
                 App.Current.Resources["TokenItemCornerRadius"] = new CornerRadius(0);
-                switch (SettingsService.Instance.AppTheme)
-                {
-                    case Theme.System:
-                        if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
-                        {
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        }
-                        else
-                        {
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        }
-                        break;
-                    case Theme.Dark:
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        break;
-                    case Theme.Light:
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        break;
-                    default:
-                        break;
-                }
+                changedResources = true;
             }
+
+            if(SettingsService.Instance.UseCompactDesign)
+            {
+                App.Current.Resources["ControlContentThemeFontSize"] = 14;
+                App.Current.Resources["TextControlThemeMinHeight"] = 24;
+                App.Current.Resources["TextControlThemePadding"] = new Thickness(2, 2, 6, 1);
+                App.Current.Resources["ListViewItemMinHeight"] = 32;
+                App.Current.Resources["TreeViewItemMinHeight"] = 24;
+                App.Current.Resources["TreeViewItemMultiSelectCheckBoxMinHeight"] = 24;
+                App.Current.Resources["TreeViewItemPresenterMargin"] = 0;
+                App.Current.Resources["TreeViewItemPresenterPadding"] = 0;
+                App.Current.Resources["TimePickerHostPadding"] = new Thickness(0, 1, 0, 2);
+                App.Current.Resources["DatePickerHostPadding"] = new Thickness(0, 1, 0, 2);
+                App.Current.Resources["DatePickerHostMonthPadding"] = new Thickness(9, 0, 0, 1);
+                App.Current.Resources["ComboBoxEditableTextPadding"] = new Thickness(10, 0, 30, 0);
+                App.Current.Resources["ComboBoxMinHeight"] = 24;
+                App.Current.Resources["ComboBoxPadding"] = new Thickness(12, 1, 0, 3);
+
+                App.Current.Resources["AccountListSpacing"] = 6;
+
+                App.Current.Resources["NavigationViewItemOnLeftMinHeight"] = 32;
+
+                App.Current.Resources["SettingsCardMinHeight"] = 56;
+                App.Current.Resources["SettingsCardPadding"] = new Thickness(12, 12, 12, 12);
+                App.Current.Resources["SettingsCardHeaderIconMargin"] = new Thickness(2, 0, 14, 0);
+                App.Current.Resources["SettingsCardActionIconMargin"] = new Thickness(10, 0, 0, 0);
+
+                App.Current.Resources["ButtonPadding"] = new Thickness(6, 2, 6, 3);
+
+                // Font sizes
+                App.Current.Resources["HeaderContentThemeFontSize"] = 20;
+                //App.Current.Resources["ItemContentThemeFontSize"] = 16;
+                //ItemContentThemeFontSize
+                changedResources = true;
+            }
+
+            if(changedResources)
+            {
+                ViewModel.RefreshThemeForResources();
+            }
+
 
             // open error dialog for last session
             if (!string.IsNullOrEmpty(SettingsService.Instance.UnhandledExceptionStr))

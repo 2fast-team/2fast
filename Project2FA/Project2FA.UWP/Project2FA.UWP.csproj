@@ -11,7 +11,7 @@
     <AssemblyName>Project2FA.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.26100.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -424,7 +424,7 @@
       <Version>5.4.3</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.12.1</Version>
+      <Version>1.12.2</Version>
     </PackageReference>
     <PackageReference Include="Markdig">
       <Version>0.41.3</Version>

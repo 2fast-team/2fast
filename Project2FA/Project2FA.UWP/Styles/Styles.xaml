@@ -125,7 +125,7 @@
     <Style x:Name="TwoFASelectionListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="2,16,20,0"/>
+        <Setter Property="Padding" Value="2,0,0,0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
@@ -238,8 +238,9 @@
 
     <Style x:Key="ShellHeaderTitleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontWeight" Value="SemiLight" />
-        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontSize" Value="{ThemeResource HeaderContentThemeFontSize}" />
         <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
 
     <Style TargetType="ContentDialog" BasedOn="{StaticResource MyContentDialogStyle}" />

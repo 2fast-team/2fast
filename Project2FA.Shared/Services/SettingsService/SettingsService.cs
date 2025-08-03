@@ -43,32 +43,47 @@ namespace Project2FA.Services
             set
             {
                 _helper.TryWrite(nameof(UseRoundCorner), value);
-                // workaround for switching the resources...
-                switch (AppTheme)
-                {
-                    case Theme.System:
-                        if (OriginalAppTheme == ApplicationTheme.Dark)
-                        {
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        }
-                        else
-                        {
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                            (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        }
-                        break;
-                    case Theme.Dark:
+                RefreshThemeForResources();
+            }
+        }
+
+        public bool UseCompactDesign
+        {
+            get => _helper.SafeRead(nameof(UseCompactDesign), false);
+            set
+            {
+                _helper.TryWrite(nameof(UseCompactDesign), value);
+                RefreshThemeForResources();
+            }
+        }
+
+        private void RefreshThemeForResources()
+        {
+            // workaround for switching the resources...
+            switch (AppTheme)
+            {
+                case Theme.System:
+                    if (OriginalAppTheme == ApplicationTheme.Dark)
+                    {
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        break;
-                    case Theme.Light:
+                    }
+                    else
+                    {
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
                         (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        break;
-                    default:
-                        break;
-                }
+                    }
+                    break;
+                case Theme.Dark:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    break;
+                case Theme.Light:
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -114,6 +129,12 @@ namespace Project2FA.Services
                 }
             }
             set => _helper.TryWrite(nameof(AutoLogoutMinutes), value);
+        }
+
+        public int FontSizeIndex
+        {
+            get => _helper.SafeRead(nameof(FontSizeIndex), 2);
+            set => _helper.TryWrite(nameof(FontSizeIndex), value);
         }
 
         /// <summary>

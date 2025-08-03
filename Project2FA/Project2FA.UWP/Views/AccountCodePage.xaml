@@ -24,7 +24,7 @@
 
     <Page.Resources>
         <ResourceDictionary>
-            <helpers:AccountAvatarTemplateSelector 
+            <helpers:AccountAvatarTemplateSelector
                 x:Key="AccountAvatarTemplateSelector"
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
@@ -243,12 +243,12 @@
                                         <AdaptiveTrigger MinWindowWidth="0" />
                                     </VisualState.StateTriggers>
                                     <VisualState.Setters>
-                                        <!--<Setter Target="ABB_ImportAccount.LabelPosition" Value="Collapsed"/>-->
                                         <Setter Target="ABB_Logout.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_SearchFilter.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_ManageFilter.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="ABB_ImportAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
                                     </VisualState.Setters>
                                 </VisualState>
@@ -446,6 +446,7 @@
                                         <Setter Target="ABB_Refresh.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_ManageFilterInfo.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_AddAccount.LabelPosition" Value="Collapsed"/>
+                                        <Setter Target="ABB_ImportAccount.LabelPosition" Value="Collapsed"/>
                                         <Setter Target="ABB_UndoDelete.LabelPosition" Value="Collapsed"/>
                                     </VisualState.Setters>
                                 </VisualState>
@@ -511,8 +512,13 @@
                             Grid.ColumnSpan="2">
                             <TextBlock
                                 x:Name="AccountName"
-                                FontSize="22"
+                                MaxWidth="400"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                ToolTipService.ToolTip="{x:Bind Label,Mode=OneWay}"
                                 Margin="0,10,10,0" 
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap"
+                                MaxLines="1"
                                 VerticalAlignment="Center">
                                 <Bold>
                                     <Run Text="{x:Bind Label,Mode=OneWay}"/>
@@ -522,8 +528,11 @@
                                 x:Name="IssuerName"
                                 FontWeight="Thin"
                                 Text="{x:Bind Issuer,Mode=OneWay}" 
-                                FontSize="22"
+                                ToolTipService.ToolTip="{x:Bind Issuer,Mode=OneWay}"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                TextTrimming="CharacterEllipsis"
                                 TextWrapping="Wrap"
+                                MaxLines="2"
                                 VerticalAlignment="Center"/>
                         </RelativePanel>
 
@@ -555,7 +564,7 @@
                                 <TextBlock
                                     x:Name="TwoFACodeTextBlock"
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
-                                FontSize="28"
+                                FontSize="{ThemeResource PivotHeaderItemFontSize}"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                                 VerticalAlignment="Center"
                                 CharacterSpacing="60"
@@ -626,6 +635,7 @@
                                 <TextBlock 
                                 x:Uid="AccountCodePageRemainingSeconds"
                                 Opacity="0.6"
+                                IsTextScaleFactorEnabled="False"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
                                 VerticalAlignment="Center" 
@@ -769,8 +779,13 @@
                             Grid.ColumnSpan="2">
                             <TextBlock
                                 x:Name="AccountName"
-                                FontSize="22"
-                                Margin="0,10,10,0" 
+                                MaxWidth="400"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                ToolTipService.ToolTip="{x:Bind Label,Mode=OneWay}"
+                                Margin="0,10,10,0"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap"
+                                MaxLines="1"
                                 VerticalAlignment="Center">
                                 <Bold>
                                     <Run Text="{x:Bind Label,Mode=OneWay}"/>
@@ -780,8 +795,11 @@
                                 x:Name="IssuerName"
                                 FontWeight="Thin"
                                 Text="{x:Bind Issuer,Mode=OneWay}" 
-                                FontSize="22"
+                                ToolTipService.ToolTip="{x:Bind Issuer,Mode=OneWay}"
+                                FontSize="{ThemeResource HubSectionHeaderThemeFontSize}"
+                                TextTrimming="CharacterEllipsis"
                                 TextWrapping="Wrap"
+                                MaxLines="2"
                                 VerticalAlignment="Center"/>
                         </RelativePanel>
 
@@ -813,7 +831,7 @@
                                 <TextBlock
                                 x:Name="TwoFACodeTextBlock"
                                 Text="{x:Bind TwoFACode,Mode=OneWay}"
-                                FontSize="28"
+                                FontSize="{ThemeResource PivotHeaderItemFontSize}"
                                 Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
                                 VerticalAlignment="Center"
                                 CharacterSpacing="60"
@@ -886,6 +904,7 @@
                                 Opacity="0.6"
                                 Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
                                 FontSize="16"
+                                IsTextScaleFactorEnabled="False"
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center"/>
                             </Grid>
@@ -1094,6 +1113,7 @@
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView 
             x:Name="LV_AccountCollection"
+            AutomationProperties.Name="Accounts"
             ItemsSource="{x:Bind ViewModel.TwoFADataService.ACVCollection, Mode=OneWay}"
             SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
             ItemTemplateSelector="{StaticResource AccountAvatarTemplateSelector}" 
@@ -1102,13 +1122,13 @@
             HorizontalContentAlignment="Stretch"
             helpers:TemplateSelector.ChangedItem="{x:Bind ViewModel.ChangedItem, Mode=OneWay}"
             HorizontalAlignment="Stretch" 
-            Margin="0,0,0,12"
+            Margin="0,8,0,12"
             KeyUp="LV_AccountCollection_KeyUp">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <wctc:WrapPanel 
-                        HorizontalSpacing="10"
-                        VerticalSpacing="10"
+                        HorizontalSpacing="16"
+                        VerticalSpacing="16"
                         Orientation="Horizontal" 
                         HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>

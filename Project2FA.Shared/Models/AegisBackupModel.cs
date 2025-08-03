@@ -91,10 +91,6 @@ namespace Project2FA.Repository.Models
         [JsonPropertyName("group")]
         public string Group { get; set; }
 
-        //[JsonPropertyName("icon")]
-        //[JsonConverter(typeof(ByteArrayConverter))]
-        //public byte[] Icon { get; set; }
-
         [JsonPropertyName("info")]
         public AegisEntryInfo Info { get; set; }
     }

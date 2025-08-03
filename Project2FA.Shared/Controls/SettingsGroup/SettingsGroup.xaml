@@ -36,7 +36,7 @@
                         <TextBlock
                             x:Name="HeaderPresenter"
                             Grid.Row="0"
-                            Margin="1,32,0,0"
+                            Margin="4,32,0,24"
                             AutomationProperties.HeadingLevel="Level2"
                             Style="{ThemeResource BodyStrongTextBlockStyle}"
                             Text="{TemplateBinding Header}" />
@@ -44,7 +44,7 @@
                         <ContentPresenter
                             x:Name="DescriptionPresenter"
                             Grid.Row="1"
-                            Margin="1,0,0,0"
+                            Margin="4,0,0,0"
                             Content="{TemplateBinding Description}"
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             TextWrapping="WrapWholeWords">
@@ -61,7 +61,7 @@
                                 </Style>
                             </ContentPresenter.Resources>
                         </ContentPresenter>
-                        <ItemsPresenter Grid.Row="2" Margin="0,8,0,0" />
+                        <ItemsPresenter Grid.Row="2"  AutomationProperties.Name="Setting options"/>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />

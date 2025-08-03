@@ -15,15 +15,14 @@ using UNOversal.Services.Dialogs;
 using UNOversal.Services.Secrets;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
-using Project2FA.Utils;
 using CommunityToolkit.Mvvm.Collections;
 using Windows.System;
 using UNOversal.Services.Logging;
-using Windows.Globalization;
 using System.IO;
 using Windows.Storage.Streams;
 using UNOversal.Services.Serialization;
 using System.Collections.Generic;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
@@ -54,11 +53,11 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class SettingPageViewModel : ObservableObject, IInitialize, IConfirmNavigationAsync
+    public class SettingPageViewModel : ObservableObject, IInitialize, IConfirmNavigationAsync, IDisposable
     {
-        public SettingsPartViewModel SettingsPartViewModel { get; }
-        public AboutPartViewModel AboutPartViewModel { get; }
-        public DatafilePartViewModel DatafilePartViewModel { get; }
+        public SettingsPartViewModel SettingsPartViewModel { get; private set; }
+        public AboutPartViewModel AboutPartViewModel { get; private set; }
+        public DatafilePartViewModel DatafilePartViewModel { get; private set; }
         public INavigationService NavigationService { get; }
         private ISerializationService SerializationService { get; }
 
@@ -183,6 +182,20 @@ namespace Project2FA.ViewModels
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
             return !await dialogService.IsDialogRunning();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                AboutPartViewModel = null;
+            }
         }
 
         public int SelectedItem
@@ -579,6 +592,99 @@ namespace Project2FA.ViewModels
             }
         }
 
+        public bool UseCompactDesign
+        {
+            get => _settings.UseCompactDesign;
+            set
+            {
+                if (_settings.UseCompactDesign != value)
+                {
+                    RefreshThemeSize(value);
+                    _settings.UseCompactDesign = value;
+                    OnPropertyChanged(nameof(UseCompactDesign));
+                }
+            }
+        }
+        private void RefreshThemeSize(bool compact)
+        {
+            if (compact)
+            {
+                //var debug = App.Current.Resources.MergedDictionaries.
+                //var test = App.Current.Resources.ContainsKey("ItemContentThemeFontSize");
+                //var bla = (int)App.Current.Resources["ItemContentThemeFontSize"];
+
+                App.Current.Resources["ControlContentThemeFontSize"] = 14;
+                App.Current.Resources["TextControlThemeMinHeight"] = 24;
+                App.Current.Resources["TextControlThemePadding"] = new Thickness(2, 2, 6, 1);
+                App.Current.Resources["ListViewItemMinHeight"] = 32;
+                App.Current.Resources["TreeViewItemMinHeight"] = 24;
+                App.Current.Resources["TreeViewItemMultiSelectCheckBoxMinHeight"] = 24;
+                App.Current.Resources["TreeViewItemPresenterMargin"] = 0;
+                App.Current.Resources["TreeViewItemPresenterPadding"] = 0;
+                App.Current.Resources["TimePickerHostPadding"] = new Thickness(0, 1, 0, 2);
+                App.Current.Resources["DatePickerHostPadding"] = new Thickness(0, 1, 0, 2);
+                App.Current.Resources["DatePickerHostMonthPadding"] = new Thickness(9, 0, 0, 1);
+                App.Current.Resources["ComboBoxEditableTextPadding"] = new Thickness(10, 0, 30, 0);
+                App.Current.Resources["ComboBoxMinHeight"] = 24;
+                App.Current.Resources["ComboBoxPadding"] = new Thickness(12, 1, 0, 3);
+
+                App.Current.Resources.TryGetValue("AccountListSpacing", out object spacing);
+                App.Current.Resources["AccountListSpacing"] = 6;
+                spacing = 6;
+
+                App.Current.Resources["NavigationViewItemOnLeftMinHeight"] = 32;
+
+                App.Current.Resources["SettingsCardMinHeight"] = 40;
+                App.Current.Resources["SettingsCardPadding"] = new Thickness(8, 8, 8, 8);
+                App.Current.Resources["SettingsCardHeaderIconMargin"] = new Thickness(2, 0, 14, 0);
+                App.Current.Resources["SettingsCardActionIconMargin"] = new Thickness(10, 0, 0, 0);
+
+                App.Current.Resources["ButtonPadding"] = new Thickness(6, 2, 6, 3);
+
+                // Font sizes
+                App.Current.Resources["HeaderContentThemeFontSize"] = 20;
+                //App.Current.Resources["HubSectionHeaderThemeFontSize"] = 16;
+            }
+            else
+            {
+                //var test = App.Current.Resources.ContainsKey("ItemContentThemeFontSize");
+                //var bla = (int)App.Current.Resources["ItemContentThemeFontSize"];
+
+                App.Current.Resources["ControlContentThemeFontSize"] = 14;
+                App.Current.Resources["TextControlThemeMinHeight"] = 32;
+                App.Current.Resources["TextControlThemePadding"] = new Thickness(10, 3, 6, 6);
+                App.Current.Resources["ListViewItemMinHeight"] = 40;
+                App.Current.Resources["TreeViewItemMinHeight"] = 32;
+                App.Current.Resources["TreeViewItemMultiSelectCheckBoxMinHeight"] = 32;
+                App.Current.Resources["TreeViewItemPresenterMargin"] = new Thickness(4, 2, 4, 2);
+                App.Current.Resources["TreeViewItemPresenterPadding"] = new Thickness(0, 3, 0, 5);
+                App.Current.Resources["TimePickerHostPadding"] = new Thickness(0, 3, 0, 6);
+                App.Current.Resources["DatePickerHostPadding"] = new Thickness(0, 3, 0, 6);
+                App.Current.Resources["DatePickerHostMonthPadding"] = new Thickness(9, 3, 0, 6);
+                App.Current.Resources["ComboBoxEditableTextPadding"] = new Thickness(11, 5, 38, 6);
+                App.Current.Resources["ComboBoxMinHeight"] = 32;
+                App.Current.Resources["ComboBoxPadding"] = new Thickness(12, 5, 0, 7);
+
+                App.Current.Resources["AccountListSpacing"] = 10;
+
+                App.Current.Resources["NavigationViewItemOnLeftMinHeight"] = 36;
+
+                App.Current.Resources["SettingsCardMinHeight"] = 68;
+                App.Current.Resources["SettingsCardPadding"] = new Thickness(16, 16, 16, 16);
+                App.Current.Resources["SettingsCardHeaderIconMargin"] = new Thickness(2, 0, 20, 0);
+                App.Current.Resources["SettingsCardActionIconMargin"] = new Thickness(14, 0, 0, 0);
+
+                App.Current.Resources["ButtonPadding"] = new Thickness(8, 4, 8, 5);
+
+                // Font sizes
+                App.Current.Resources["HeaderContentThemeFontSize"] = 24;
+                App.Current.Resources["HubSectionHeaderThemeFontSize"] = 20;
+
+
+
+            }
+        }
+
         public bool ShowAvailableProFeatures
         {
             get => _settings.ShowAvailableProFeatures;
@@ -607,6 +713,16 @@ namespace Project2FA.ViewModels
                     case 1: ThemeAsDark = true; break;
                     case 2: ThemeAsSystem = true; break;
                 }
+            }
+        }
+
+        public int FontSizeIndex
+        {
+            get => _settings.FontSizeIndex;
+            set
+            {
+                _settings.FontSizeIndex = value;
+                OnPropertyChanged(nameof(FontSizeIndex));
             }
         }
 

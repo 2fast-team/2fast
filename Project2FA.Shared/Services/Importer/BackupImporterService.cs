@@ -37,16 +37,19 @@ namespace Project2FA.Services.Importer
         //private ISerializationService SerializationService { get; }
         private IAegisBackupImportService AegisBackupService { get; }
         private IAndOTPBackupImportService AndOTPBackupService { get; }
+        private ITwoFASBackupImportService TwoFASBackupImportService { get; }
         public BackupImporterService(
             ILoggingService loggingService, 
             //ISerializationService serializationService,
             IAegisBackupImportService aegisBackupService,
-            IAndOTPBackupImportService andOTPBackupService) 
+            IAndOTPBackupImportService andOTPBackupService,
+            ITwoFASBackupImportService twoFASBackupImportService) 
         {
             LoggingService = loggingService;
             //SerializationService = serializationService;
             AegisBackupService = aegisBackupService;
             AndOTPBackupService = andOTPBackupService;
+            TwoFASBackupImportService = twoFASBackupImportService;
         }
 
         /// <summary>
@@ -80,6 +83,9 @@ namespace Project2FA.Services.Importer
                         break;
                     case BackupServiceEnum.AndOTP:
                         (accountList, successful) = await AndOTPBackupService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
+                        break;
+                    case BackupServiceEnum.TwoFAS:
+                        (accountList, successful) = await TwoFASBackupImportService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
                         break;
                     default:
                         break;

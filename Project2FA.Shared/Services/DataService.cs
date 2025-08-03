@@ -104,6 +104,7 @@ namespace Project2FA.Services
         private bool _isFilterEnabled;
         private bool _isFilterChecked;
         private bool _newAppUpdateDialogDisplayed = false;
+        private ResourceDictionary _compactDict;
 #if __IOS__
         private Foundation.NSUrl _openDatefileUrl = null;
 #endif
@@ -1211,6 +1212,8 @@ namespace Project2FA.Services
             get => _newAppUpdateDialogDisplayed; 
             set => _newAppUpdateDialogDisplayed = value; 
         }
+
+        public ResourceDictionary CompactDict { get => _compactDict; set => _compactDict = value; }
 
 #if __IOS__
         public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }

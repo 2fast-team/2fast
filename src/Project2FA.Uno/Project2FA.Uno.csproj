@@ -80,7 +80,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BouncyCastle.Cryptography" Version="2.6.1" />
+		<PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
 		<PackageReference Include="CommunityToolkit.Labs.WinUI.TokenView" Version="0.1.250513-build.2126" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.250402" />
@@ -92,7 +92,7 @@
 		<PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250402" />
 		<PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.250402" />
 		<PackageReference Include="DryIoc" Version="5.4.3" />
-		<PackageReference Include="Svg.Skia" Version="3.0.4" />
+		<PackageReference Include="Svg.Skia" Version="3.0.5" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 		<PackageReference Include="ZXing.Net" Version="0.16.10" />

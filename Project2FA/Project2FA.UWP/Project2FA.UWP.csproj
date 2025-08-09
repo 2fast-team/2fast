@@ -391,7 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography">
-      <Version>2.6.1</Version>
+      <Version>2.6.2</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Labs.Uwp.TokenView">
       <Version>0.1.250513-build.2126</Version>

@@ -1448,4 +1448,28 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
     <value>I conti non contrassegnati e non selezionabili non possono essere importati.</value>
   </data>
+  <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsAppFontSize.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
+    <value />
+  </data>
 </root>

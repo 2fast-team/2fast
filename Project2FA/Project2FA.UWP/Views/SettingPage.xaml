@@ -175,16 +175,6 @@
                                         </ctwc:SettingsCard.Content>
                                     </ctwc:SettingsCard>
 
-                                    <!--<ctwc:SettingsCard 
-                                        Header="~SettingsAppFontSize.Header">
-                                        <ctwc:SettingsCard.Content>
-                                            <muxc:NumberBox
-                                                SpinButtonPlacementMode="Inline"
-                                                Minimum="-5"
-                                                Maximum="5"/>
-                                        </ctwc:SettingsCard.Content>
-                                    </ctwc:SettingsCard>-->
-
                                     <ctwc:SettingsCard 
                                         x:Uid="SettingsAppShowAvailableProFeatures"
                                         HeaderIcon="{ui:FontIcon Glyph=&#xE82F;}"
@@ -248,7 +238,7 @@
                                                     </Grid>
                                                 </ctwc:SettingsCard.Content>
                                             </ctwc:SettingsCard>
-                                            <ctwc:SettingsCard 
+                                            <!--<ctwc:SettingsCard 
                                             x:Uid="SettingsAppCompactDesign"
                                             HeaderIcon="{ui:FontIcon Glyph=&#xE92C;}"
                                             Header="~SettingsAppCompactDesign.Header">
@@ -289,7 +279,7 @@
                                                         </ComboBox>
                                                     </Grid>
                                                 </ctwc:SettingsCard.Content>
-                                            </ctwc:SettingsCard>
+                                            </ctwc:SettingsCard>-->
                                         </ctwc:SettingsExpander.Items>
                                     </ctwc:SettingsExpander>
                                 </unoVersalControls:SettingsGroup>

@@ -183,7 +183,6 @@ namespace Project2FA.UWP.Views
 
                 // Font sizes
                 App.Current.Resources["HeaderContentThemeFontSize"] = 20;
-                //App.Current.Resources["ItemContentThemeFontSize"] = 16;
                 //ItemContentThemeFontSize
                 changedResources = true;
             }
@@ -225,25 +224,25 @@ namespace Project2FA.UWP.Views
                 //    }
                 //}
 
-                if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.2.7.0")))
-                {
-                    //check after update, if the user already have a subscription
-                    var purchaseService = App.Current.Container.Resolve<IPurchaseAddOnService>();
-                    var networkService = App.Current.Container.Resolve<INetworkService>();
-                    if (await networkService.GetIsInternetAvailableAsync())
-                    {
-                        purchaseService.Initialize(Constants.SupportSubscriptionId);
-                        (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await purchaseService.SetupPurchaseAddOnInfoAsync();
+                //if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.2.7.0")))
+                //{
+                //    //check after update, if the user already have a subscription
+                //    var purchaseService = App.Current.Container.Resolve<IPurchaseAddOnService>();
+                //    var networkService = App.Current.Container.Resolve<INetworkService>();
+                //    if (await networkService.GetIsInternetAvailableAsync())
+                //    {
+                //        purchaseService.Initialize(Constants.SupportSubscriptionId);
+                //        (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await purchaseService.SetupPurchaseAddOnInfoAsync();
 
-                        if (IsActiveMonthSubscription)
-                        {
-                            // set new expiration date and last check time
-                            SettingsService.Instance.IsProVersion = true;
-                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
-                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoMonth.ExpirationDate;
-                        }
-                    }
-                }
+                //        if (IsActiveMonthSubscription)
+                //        {
+                //            // set new expiration date and last check time
+                //            SettingsService.Instance.IsProVersion = true;
+                //            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                //            SettingsService.Instance.NextCheckedInPurchaseAddon = infoMonth.ExpirationDate;
+                //        }
+                //    }
+                //}
 
                 DataService.Instance.NewAppUpdateDialogDisplayed = true;
                 ContentDialog dialog = new ContentDialog();

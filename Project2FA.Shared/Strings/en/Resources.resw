@@ -715,8 +715,8 @@ Please synchronize the time in the settings.</value>
     <value>An NTP server can be used to check the correct time of the system. If there is a greater deviation in the time, the creation of the codes for the accounts would no longer be correct. If there is a deviation greater than thirty seconds, a notification would appear and the creation of the codes would be done with the time of the NTP server.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Update of third-party libraries
-- Import function for backups of apps (AEGIS &amp; AndOTP) added</value>
+    <value>- Updating third-party libraries
+- Bug fixes and optimisation</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1441,5 +1441,29 @@ The application supports an MDM configuration for centralised management of the 
   </data>
   <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
     <value>Accounts that are not marked and cannot be selected cannot be imported.</value>
+  </data>
+  <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
+    <value>The compact design switching on or off</value>
+  </data>
+  <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
+    <value>Compact design</value>
+  </data>
+  <data name="SettingsAppFontSize.Header" xml:space="preserve">
+    <value>Font size</value>
+  </data>
+  <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
+    <value>Change font size</value>
+  </data>
+  <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
+    <value>Very small</value>
+  </data>
+  <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
+    <value>Big</value>
   </data>
 </root>

@@ -12,7 +12,7 @@
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
     <EnableMsixTooling>true</EnableMsixTooling>
-	<CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
+	<CsWinRTAotWarningLevel>3</CsWinRTAotWarningLevel>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<CsWinRTIncludes>Microsoft.Services.Store.Engagement</CsWinRTIncludes>
 	<EnableTrimAnalyzer>true</EnableTrimAnalyzer>

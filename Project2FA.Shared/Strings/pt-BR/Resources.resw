@@ -1446,4 +1446,28 @@ O aplicativo suporta uma configuração de MDM para o gerenciamento centralizado
   <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
     <value>As contas que não estiverem marcadas e não puderem ser selecionadas não poderão ser importadas.</value>
   </data>
+  <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsAppFontSize.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
+    <value />
+  </data>
 </root>

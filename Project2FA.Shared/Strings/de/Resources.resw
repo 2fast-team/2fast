@@ -716,7 +716,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aktualisierung der Bibliotheken von Drittanbietern
-- Importfunktion von Backups von Apps (AEGIS &amp; AndOTP) hinzugefügt</value>
+- Fehlerbehebungen und Optimierung</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>
@@ -1439,5 +1439,29 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   </data>
   <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
     <value>Konten, die nicht markiert sind und nicht ausgewählt werden können, können nicht importiert werden.</value>
+  </data>
+  <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
+    <value>Das Kompakte-Design Ein- oder Ausschalten</value>
+  </data>
+  <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
+    <value>Kompaktes-Design</value>
+  </data>
+  <data name="SettingsAppFontSize.Header" xml:space="preserve">
+    <value>Schriftgröße</value>
+  </data>
+  <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
+    <value>Änderung der Schriftgröße</value>
+  </data>
+  <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
+    <value>Sehr klein</value>
+  </data>
+  <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
+    <value>Klein</value>
+  </data>
+  <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
+    <value>Groß</value>
   </data>
 </root>

@@ -721,7 +721,7 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Mise à jour des bibliothèques tierces
-- Ajout d'une fonction d'importation pour les sauvegardes d'applications (AEGIS &amp; AndOTP)</value>
+- Corrections de bogues et optimisation</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Nouvelles fonctionnalités et changements</value>
@@ -1445,5 +1445,29 @@ L'application prend en charge une configuration MDM pour une gestion centralisé
   </data>
   <data name="ImportBackupCDSupportedTypesTxt.Text" xml:space="preserve">
     <value>Les comptes qui ne sont pas marqués et qui ne peuvent pas être sélectionnés ne peuvent pas être importés.</value>
+  </data>
+  <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
+    <value>La conception compacte permettant d'allumer ou d'éteindre</value>
+  </data>
+  <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
+    <value>Conception compacte</value>
+  </data>
+  <data name="SettingsAppFontSize.Header" xml:space="preserve">
+    <value>Taille de la police</value>
+  </data>
+  <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
+    <value>Modifier la taille de la police</value>
+  </data>
+  <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
+    <value>Très petit</value>
+  </data>
+  <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
+    <value>Petit</value>
+  </data>
+  <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
+    <value>Grand</value>
   </data>
 </root>

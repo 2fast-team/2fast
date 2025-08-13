@@ -106,7 +106,8 @@
                 <ListView 
                     x:Name="LV_Categories"
                     ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
-                    ItemsSource="{x:Bind ViewModel.TempGlobalCategories, Mode=OneWay}">
+                    ItemsSource="{x:Bind ViewModel.TempGlobalCategories, Mode=OneWay}"
+                    Margin="0,10,0,0">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:CategoryModel">
                             <Grid>

@@ -141,7 +141,6 @@ namespace Project2FA.UWP.Views
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
             bool changedResources = false;
-            SettingsService.Instance.IsProVersion = true;
             // set the corner radius for the controls
             if (!SettingsService.Instance.UseRoundCorner)
             {

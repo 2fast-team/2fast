@@ -720,7 +720,7 @@ Vennligst synkroniser tiden i innstillingene.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Oppdatering av tredjepartsbiblioteker
-- Importfunksjon for sikkerhetskopier av apper (AEGIS &amp; AndOTP) lagt til</value>
+- Feilrettinger og optimalisering</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1459,15 +1459,15 @@ Applikasjonen støtter en MDM-konfigurasjon for sentralisert administrasjon av a
     <value />
   </data>
   <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
-    <value />
+    <value>Svært liten</value>
   </data>
   <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
-    <value />
+    <value>Liten</value>
   </data>
   <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
-    <value />
+    <value>Normal</value>
   </data>
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
-    <value />
+    <value>Stor</value>
   </data>
 </root>

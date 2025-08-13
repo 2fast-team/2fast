@@ -718,8 +718,8 @@ Palun sünkroonige kellaaeg seadetes.</value>
     <value>Süsteemi õige aja kontrollimiseks saab kasutada NTP-serverit. Kui kellaaeg erineb rohkem, ei ole kontode koodide loomine enam korrektne. Kui kõrvalekaldumine on suurem kui kolmkümmend sekundit, ilmub teade ja koodide loomine toimub NTP-serveri aja järgi.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Kolmanda osapoole raamatukogude ajakohastamine
-- Lisatud rakenduste (AEGIS &amp; AndOTP) varukoopiate importimise funktsioon</value>
+    <value>- Kolmandate osapoolte raamatukogude uuendamine
+- Vigade parandamine ja optimeerimine</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1445,27 +1445,27 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
     <value>Kontosid, mis ei ole märgitud ja mida ei saa valida, ei saa importida.</value>
   </data>
   <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
-    <value />
+    <value>Kompaktne disain sisse- või väljalülitamine</value>
   </data>
   <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
-    <value />
+    <value>Kompaktne disain</value>
   </data>
   <data name="SettingsAppFontSize.Header" xml:space="preserve">
-    <value />
+    <value>Kirjasuurus</value>
   </data>
   <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
-    <value />
+    <value>Kirjasuuruse muutmine</value>
   </data>
   <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
-    <value />
+    <value>Väga väike</value>
   </data>
   <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
-    <value />
+    <value>Väike</value>
   </data>
   <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
-    <value />
+    <value>Tavaline</value>
   </data>
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
-    <value />
+    <value>Suur</value>
   </data>
 </root>

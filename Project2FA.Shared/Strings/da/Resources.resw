@@ -719,7 +719,7 @@ Synkroniser venligst tiden i indstillingerne.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Opdatering af tredjepartsbiblioteker
-- Importfunktion til sikkerhedskopier af apps (AEGIS &amp; AndOTP) tilføjet</value>
+- Fejlrettelser og optimering</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1445,27 +1445,27 @@ Applikationen understøtter en MDM-konfiguration til central styring af applikat
     <value>Konti, der ikke er markeret og ikke kan vælges, kan ikke importeres.</value>
   </data>
   <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
-    <value />
+    <value>Det kompakte design tænder eller slukker</value>
   </data>
   <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
-    <value />
+    <value>Kompakt design</value>
   </data>
   <data name="SettingsAppFontSize.Header" xml:space="preserve">
-    <value />
+    <value>Skriftstørrelse</value>
   </data>
   <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
-    <value />
+    <value>Skift skriftstørrelse</value>
   </data>
   <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
-    <value />
+    <value>Meget lille</value>
   </data>
   <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
-    <value />
+    <value>Lille</value>
   </data>
   <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
-    <value />
+    <value>Normal</value>
   </data>
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
-    <value />
+    <value>Stor</value>
   </data>
 </root>

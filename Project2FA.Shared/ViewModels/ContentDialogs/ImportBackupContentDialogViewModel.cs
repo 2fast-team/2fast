@@ -86,8 +86,8 @@ namespace Project2FA.ViewModels
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
             filePicker.FileTypeFilter.Add(".json");
-            filePicker.FileTypeFilter.Add(".2fa");
-            filePicker.FileTypeFilter.Add(".2fas");
+            //filePicker.FileTypeFilter.Add(".2fa");
+            //filePicker.FileTypeFilter.Add(".2fas");
             // TODO : Set file types for Android and iOS
 #if __IOS__
             // mapping the filter type to definied UTType

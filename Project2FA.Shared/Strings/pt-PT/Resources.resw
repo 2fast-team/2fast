@@ -720,7 +720,7 @@ Por favor, sincronize a hora nas definições.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Atualização de bibliotecas de terceiros
-- Função de importação para cópias de segurança de aplicações (AEGIS e AndOTP) adicionada</value>
+- Correções de bugs e otimização</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

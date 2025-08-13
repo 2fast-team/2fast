@@ -720,7 +720,7 @@ Vänligen synkronisera tiden i inställningarna.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Uppdatering av tredjepartsbibliotek
-- Importfunktion för säkerhetskopior av appar (AEGIS &amp; AndOTP) tillagd</value>
+- Bugfixar och optimering</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

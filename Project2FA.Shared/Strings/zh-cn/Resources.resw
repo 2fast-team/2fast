@@ -716,8 +716,8 @@
     <value>可以使用 NTP 服务器来检查系统时间是否正确。如果时间偏差较大，则创建的账户代码将不再正确。如果偏差超过 30 秒，系统将发出通知，并按照 NTP 服务器的时间创建代码。</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- 更新第三方程序库
-- 添加应用程序（AEGIS 和 AndOTP）备份的导入功能</value>
+    <value>- 更新第三方库
+- 修复漏洞和优化</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

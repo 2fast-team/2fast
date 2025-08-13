@@ -722,7 +722,7 @@
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- サードパーティ製ライブラリのアップデート
-- アプリ(AEGIS &amp; AndOTP)のバックアップ用インポート機能追加</value>
+- バグ修正と最適化</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1449,27 +1449,27 @@
     <value>マークされておらず、選択できない口座はインポートできません。</value>
   </data>
   <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
-    <value />
+    <value>オン/オフ切り替えが可能なコンパクト設計</value>
   </data>
   <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
-    <value />
+    <value>コンパクト設計</value>
   </data>
   <data name="SettingsAppFontSize.Header" xml:space="preserve">
-    <value />
+    <value>文字サイズ</value>
   </data>
   <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
-    <value />
+    <value>フォントサイズの変更</value>
   </data>
   <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
-    <value />
+    <value>非常に小さい</value>
   </data>
   <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
-    <value />
+    <value>小さい</value>
   </data>
   <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
-    <value />
+    <value>ノーマル</value>
   </data>
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
-    <value />
+    <value>大きい</value>
   </data>
 </root>

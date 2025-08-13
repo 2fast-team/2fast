@@ -719,8 +719,8 @@ Synkronoi aika asetuksissa.</value>
     <value>NTP-palvelinta voidaan käyttää järjestelmän oikean ajan tarkistamiseen. Jos kellonajassa on suurempi poikkeama, tilien koodien luominen ei ole enää oikein. Jos poikkeama on suurempi kuin 30 sekuntia, tulee ilmoitus, ja koodit luodaan NTP-palvelimen ajan mukaan.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- Kolmannen osapuolen kirjastojen päivitys
-- Sovellusten varmuuskopioiden (AEGIS &amp; AndOTP) tuontitoiminto lisätty.</value>
+    <value>- Kolmannen osapuolen kirjastojen päivittäminen
+- Vikojen korjaukset ja optimointi</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
@@ -1447,27 +1447,27 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
     <value>Tilejä, joita ei ole merkitty ja joita ei voi valita, ei voida tuoda.</value>
   </data>
   <data name="SettingsAppCompactDesignDesc.Text" xml:space="preserve">
-    <value />
+    <value>Kompakti muotoilu kytkee päälle tai pois päältä</value>
   </data>
   <data name="SettingsAppCompactDesign.Header" xml:space="preserve">
-    <value />
+    <value>Kompakti rakenne</value>
   </data>
   <data name="SettingsAppFontSize.Header" xml:space="preserve">
-    <value />
+    <value>Kirjasinkoko</value>
   </data>
   <data name="SettingsAppFontSizeDesc.Text" xml:space="preserve">
-    <value />
+    <value>Muuta fonttikokoa</value>
   </data>
   <data name="SettingsFontSizeVerySamll.Content" xml:space="preserve">
-    <value />
+    <value>Hyvin pieni</value>
   </data>
   <data name="SettingsFontSizeSamll.Content" xml:space="preserve">
-    <value />
+    <value>Pieni</value>
   </data>
   <data name="SettingsFontSizeNormal.Content" xml:space="preserve">
-    <value />
+    <value>Normaali</value>
   </data>
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
-    <value />
+    <value>Iso</value>
   </data>
 </root>

@@ -9,7 +9,7 @@ namespace Project2FA.Shared.Models
         None = -1,
         Aegis = 0,
         AndOTP = 1,
-        TwoFAS = 3,
+        //TwoFAS = 3,
 
     }
 }

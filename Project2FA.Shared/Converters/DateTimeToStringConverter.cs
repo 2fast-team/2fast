@@ -10,7 +10,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.Converters
 {
-    public class DateTimeToStringConverter : IValueConverter
+    public partial class DateTimeToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

@@ -9,7 +9,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.Converters
 {
-    public class FontIconUnicodeIndexToGlyphConverter : IValueConverter
+    public partial class FontIconUnicodeIndexToGlyphConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

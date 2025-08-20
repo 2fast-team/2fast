@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System;
 using Windows.UI.WebUI;
 using Project2FA.Repository.Models.Enums;
+using System.Windows.Input;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -20,7 +21,7 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class TwoFACodeModel : ObservableObject, ICloneable
+    public partial class TwoFACodeModel : ObservableObject, ICloneable
     {
         private string _label = string.Empty;
         [Encrypt]

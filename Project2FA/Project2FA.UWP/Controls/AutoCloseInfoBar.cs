@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 
 namespace Project2FA.UWP.Controls
 {
-    public class AutoCloseInfoBar : Microsoft.UI.Xaml.Controls.InfoBar
+    public partial class AutoCloseInfoBar : Microsoft.UI.Xaml.Controls.InfoBar
     {
         private DispatcherTimer _timer;
         private long _token;

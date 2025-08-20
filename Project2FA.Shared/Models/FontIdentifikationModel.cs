@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project2FA.Repository.Models
 {
-    public class FontIdentifikationModel : ObservableObject
+    public partial class FontIdentifikationModel : ObservableObject
     {
         private uint _unicodeIndex;
         private string _unicodeString;

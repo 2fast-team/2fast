@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Project2FA.Repository.Models
 {
-    public class InAppPaymentItemModel : ObservableRecipient
+    public partial class InAppPaymentItemModel : ObservableRecipient
     {
         private string _storeId;
         public string StoreId 

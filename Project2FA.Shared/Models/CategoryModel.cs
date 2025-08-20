@@ -14,7 +14,7 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class CategoryModel : ObservableObject, ICloneable
+    public partial class CategoryModel : ObservableObject, ICloneable
     {
         private string _unicodeString;
         [Encrypt]

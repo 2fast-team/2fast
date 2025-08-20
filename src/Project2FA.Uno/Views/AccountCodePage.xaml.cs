@@ -120,7 +120,7 @@ public sealed partial class AccountCodePage : Page
     {
         if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
         {
-            await ViewModel.EditAccountFromCollection(model);
+            await ViewModel.EditAccountCommandTask(model);
         }
     }
 
@@ -168,7 +168,7 @@ public sealed partial class AccountCodePage : Page
     {
         if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
         {
-            await ViewModel.ExportQRCode(model);
+            await ViewModel.ExportQRCodeCommandTask(model);
         }
     }
     private void ABB_ShowActions_Click(object sender, RoutedEventArgs e)
@@ -184,7 +184,7 @@ public sealed partial class AccountCodePage : Page
     {
         if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
         {
-            await ViewModel.DeleteAccountFromCollection(model);   
+            await ViewModel.DeleteAccountCommandTask(model);   
         }
     }
 

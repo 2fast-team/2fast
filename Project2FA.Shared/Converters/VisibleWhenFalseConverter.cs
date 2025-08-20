@@ -9,7 +9,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.Converters
 {
-    public class VisibleWhenFalseConverter : IValueConverter
+    public partial class VisibleWhenFalseConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

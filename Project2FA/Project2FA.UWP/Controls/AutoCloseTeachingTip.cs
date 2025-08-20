@@ -6,9 +6,9 @@ namespace Project2FA.UWP.Controls
     /// <summary>
     /// A teaching tip that closes itself after an interval.
     /// </summary>
-    public class AutoCloseTeachingTip : Microsoft.UI.Xaml.Controls.TeachingTip
+    public partial class AutoCloseTeachingTip : Microsoft.UI.Xaml.Controls.TeachingTip
     {
-        private DispatcherTimer _timer;
+        private DispatcherTimer? _timer;
         private long _token;
 
         public AutoCloseTeachingTip() : base()

@@ -60,10 +60,10 @@ namespace Project2FA.ViewModels
 
         public async Task<bool> ConfirmImportTask()
         {
-            List<TwoFACodeModel> accountList = null;
             bool successful = false;
-            Exception exc = null;
+            Exception? exc = null;
 
+            List<TwoFACodeModel> accountList;
             (accountList, successful, exc) = await BackupImporterService.ImportBackup(ImportStorageFile, Password, (BackupServiceEnum)SelectedImportFormatIndex);
 
             if (successful)

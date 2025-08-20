@@ -11,7 +11,7 @@ using Microsoft.UI.Xaml;
 
 namespace Project2FA.Helpers
 {
-    public class AccountAvatarTemplateSelector : DataTemplateSelector
+    public partial class AccountAvatarTemplateSelector : DataTemplateSelector
     {
         public DataTemplate Normal { get; set; }
         public DataTemplate Accent { get; set; }

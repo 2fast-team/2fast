@@ -17,6 +17,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Project2FA.Core.Utils;
 using UNOversal.Services.Logging;
+using WinRT;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -72,7 +74,7 @@ namespace Project2FA.ViewModels
 
         public ICommand ShowProFeatureCommand { get; }
 
-        private TwoFACodeModel _changedItem = null;
+        private TwoFACodeModel? _changedItem = null;
         private int _selectedIndex;
         private string _searchedAccountLabel;
         private bool _datafileUpdated;
@@ -111,12 +113,12 @@ namespace Project2FA.ViewModels
                 OnPropertyChanged(nameof(IsAccountNotDeleted));
             });
 
-            ExportAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(ExportQRCode);
+            ExportAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(ExportQRCodeCommandTask);
 
-            EditAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(EditAccountFromCollection);
-            HideOrShowTOTPCodeCommand = new RelayCommand<TwoFACodeModel>(HideOrShowTOTPCode);
-            DeleteAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(DeleteAccountFromCollection);
-            SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteForModel);
+            EditAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(EditAccountCommandTask);
+            HideOrShowTOTPCodeCommand = new RelayCommand<TwoFACodeModel>(HideOrShowTOTPCodeCommandTask);
+            DeleteAccountCommand = new AsyncRelayCommand<TwoFACodeModel>(DeleteAccountCommandTask);
+            SetFavouriteCommand = new AsyncRelayCommand<TwoFACodeModel>(SetFavouriteCommandTask);
             CopyCodeToClipboardCommand = new AsyncRelayCommand<TwoFACodeModel>(CopyCodeToClipboardCommandTask);
 #if __ANDROID__ || __IOS__
             // custom commands for Uno platform project
@@ -357,7 +359,7 @@ namespace Project2FA.ViewModels
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        private async Task SetFavouriteForModel(object parameter)
+        public async Task SetFavouriteCommandTask(object parameter)
         {
             if (parameter is TwoFACodeModel model)
             {
@@ -414,7 +416,7 @@ namespace Project2FA.ViewModels
         /// Show or hide the TOTP code
         /// </summary>
         /// <param name="obj"></param>
-        private void HideOrShowTOTPCode(TwoFACodeModel obj)
+        public void HideOrShowTOTPCodeCommandTask(TwoFACodeModel obj)
         {
             obj.HideTOTPCode = !obj.HideTOTPCode;
         }
@@ -424,10 +426,9 @@ namespace Project2FA.ViewModels
         /// </summary>
         /// <param name="model"></param>
 #if WINDOWS_UWP
-        private async Task EditAccountFromCollection(TwoFACodeModel model)
-#else
-        public async Task EditAccountFromCollection(TwoFACodeModel model)
+        [DynamicWindowsRuntimeCast(typeof(Style))]
 #endif
+        public async Task EditAccountCommandTask(TwoFACodeModel model)
         {
 #if __IOS__ || __ANDROID__
             var param = new NavigationParameters();
@@ -467,11 +468,9 @@ namespace Project2FA.ViewModels
         /// </summary>
         /// <param name="model"></param>
 #if WINDOWS_UWP
-        private async Task DeleteAccountFromCollection(TwoFACodeModel model)
-#else
-        public async Task DeleteAccountFromCollection(TwoFACodeModel model)
+        [DynamicWindowsRuntimeCast(typeof(Style))]
 #endif
-
+        public async Task DeleteAccountCommandTask(TwoFACodeModel model)
         {
             ContentDialog dialog = new ContentDialog();
             dialog.Title = Resources.DeleteAccountContentDialogTitle;
@@ -557,11 +556,7 @@ namespace Project2FA.ViewModels
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-#if WINDOWS_UWP
-        private async Task ExportQRCode(TwoFACodeModel model)
-#else
-        public async Task ExportQRCode(TwoFACodeModel model)
-#endif
+        public async Task ExportQRCodeCommandTask(TwoFACodeModel model)
         {
             var param = new DialogParameters();
             param.Add("Model", model);
@@ -730,7 +725,7 @@ namespace Project2FA.ViewModels
             get => _datafileWebDAVUpdated; 
             set => SetProperty(ref _datafileWebDAVUpdated, value); 
         }
-        public TwoFACodeModel ChangedItem
+        public TwoFACodeModel? ChangedItem
         {
             get => _changedItem;
             set

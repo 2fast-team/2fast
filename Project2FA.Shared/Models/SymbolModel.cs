@@ -13,7 +13,7 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class SymbolModel : ObservableObject
+    public partial class SymbolModel : ObservableObject
     {
         private Symbol _symbol;
 

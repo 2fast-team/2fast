@@ -11,7 +11,7 @@ namespace Project2FA.Converters
     /// <summary>
     /// Called twice because of two PersonPicture controls (binding):/
     /// </summary>
-    public class PersonalPictureInitialsVisibilityConverter : IValueConverter
+    public partial class PersonalPictureInitialsVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

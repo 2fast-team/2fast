@@ -7,7 +7,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.Converters
 {
-    public class TOTPVisibilityTooltipConverter : IValueConverter
+    public partial class TOTPVisibilityTooltipConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

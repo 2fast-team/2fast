@@ -7,7 +7,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.Converters
 {
-    public class DoubleToInt32ToStringConverter : IValueConverter
+    public partial class DoubleToInt32ToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

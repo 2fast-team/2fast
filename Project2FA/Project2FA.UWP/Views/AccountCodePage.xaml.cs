@@ -1,25 +1,26 @@
-﻿using Project2FA.Repository.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using Project2FA.Repository.Models;
+using Project2FA.Services;
 using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
 using System.Threading.Tasks;
+using UNOversal.Ioc;
+using UNOversal.Services.Dialogs;
+using UNOversal.Services.Logging;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using UNOversal.Services.Dialogs;
-using CommunityToolkit.Mvvm.Input;
-using Project2FA.Services;
 using Windows.UI.Xaml.Controls.Primitives;
-using UNOversal.Ioc;
-using UNOversal.Services.Logging;
+using Windows.UI.Xaml.Media;
+using WinRT;
 
 namespace Project2FA.UWP.Views
 {
     public sealed partial class AccountCodePage : Page
     {
         private string _tempNumber = string.Empty;
-        AccountCodePageViewModel ViewModel => DataContext as AccountCodePageViewModel;
+        AccountCodePageViewModel? ViewModel => DataContext as AccountCodePageViewModel;
 
         public AccountCodePage()
         {
@@ -46,6 +47,7 @@ namespace Project2FA.UWP.Views
         /// Copy the 2fa code to clipboard and create a user dialog
         /// </summary>
         /// <param name="model"></param>
+        [DynamicWindowsRuntimeCast(typeof(Style))]
         private async Task<bool> Copy2FACodeToClipboard(TwoFACodeModel model)
         {
             try
@@ -94,6 +96,7 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
         private async void BTN_CopyCode_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
@@ -110,6 +113,7 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
         private async void TwoFACodeItem_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
         {
             e.Handled = true;
@@ -160,6 +164,7 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
         private async void LV_AccountCollection_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
@@ -243,6 +248,7 @@ namespace Project2FA.UWP.Views
             }
         }
 
+        [DynamicWindowsRuntimeCast(typeof(AppBarButton))]
         private void ABB_SearchFilter_Click(object sender, RoutedEventArgs e)
         {
             if (sender is AppBarButton abbtn)
@@ -259,6 +265,43 @@ namespace Project2FA.UWP.Views
         private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
         {
             ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel, true);
+        }
+
+
+        [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+        private async void MFI_ExportAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+            {
+                await ViewModel.ExportQRCodeCommandTask(model);
+            }
+        }
+
+        [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+        private async void MFI_EditAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+            {
+                await ViewModel.EditAccountCommandTask(model);
+            }
+        }
+
+        [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+        private async void MFI_DeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+            {
+                await ViewModel.DeleteAccountCommandTask(model);
+            }
+        }
+
+        [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+        private async void BTN_SetFavourite_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+            {
+                await ViewModel.SetFavouriteCommandTask(model);
+            }
         }
     }
 }

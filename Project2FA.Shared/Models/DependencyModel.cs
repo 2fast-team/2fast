@@ -9,7 +9,7 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class DependencyModel : ObservableObject
+    public partial class DependencyModel : ObservableObject
     {
         private string _name;
 

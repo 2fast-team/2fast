@@ -7,7 +7,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.Converters
 {
-    public class ShowCodeToIconConverter : IValueConverter
+    public partial class ShowCodeToIconConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

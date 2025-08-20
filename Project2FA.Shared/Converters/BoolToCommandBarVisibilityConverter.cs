@@ -9,7 +9,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.Converters
 {
-    public class BoolToCommandBarVisibilityConverter : IValueConverter
+    public partial class BoolToCommandBarVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

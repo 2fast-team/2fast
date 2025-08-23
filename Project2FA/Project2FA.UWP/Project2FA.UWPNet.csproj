@@ -15,6 +15,7 @@
 	<CsWinRTAotWarningLevel>3</CsWinRTAotWarningLevel>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<CsWinRTIncludes>Microsoft.Services.Store.Engagement</CsWinRTIncludes>
+	<TrimMode>link</TrimMode>
 	<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -543,15 +543,14 @@
                             Grid.Column="2"
                             Margin="0,0,0,4">
 
-                            <!--<Button
+                            <Button
                                 x:Name="BTN_ShowCode"
+                                Click="BTN_ShowCode_Click"
                                 ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
-                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
-                                CommandParameter="{x:Bind}"
-                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                
                                 Style="{StaticResource TransparentButtonStyle}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
@@ -560,16 +559,17 @@
                                     Style="{StaticResource FullFluentFontIconStyle}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
-                            </Button>-->
+                            </Button>
+                            <!--Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"-->
                             <Grid>
                                 <TextBlock
                                     x:Name="TwoFACodeTextBlock"
-                                Text="{x:Bind TwoFACode,Mode=OneWay}"
-                                FontSize="{ThemeResource PivotHeaderItemFontSize}"
-                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
-                                VerticalAlignment="Center"
-                                CharacterSpacing="60"
-                                Foreground="{ThemeResource SystemAccentColor}" >
+                                    Text="{x:Bind TwoFACode,Mode=OneWay}"
+                                    FontSize="{ThemeResource PivotHeaderItemFontSize}"
+                                    Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
+                                    VerticalAlignment="Center"
+                                    CharacterSpacing="60"
+                                    Foreground="{ThemeResource SystemAccentColor}" >
                                     <TextBlock.Resources>
                                         <Storyboard x:Name="TextChangeAnimation" >
                                             <DoubleAnimation 
@@ -680,14 +680,13 @@
                                     <MenuFlyoutItem 
                                         x:Name="MFI_DeleteAccount"
                                         x:Uid="AccountCodePageDeleteEntry"
-                                        IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"
-                                        Click="MFI_DeleteAccount_Click"
-                                        CommandParameter="{x:Bind}"
-                                        Command="{Binding DataContext.DeleteAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        
+                                        Click="MFI_DeleteAccount_Click">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE107;"/>
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
+                                    <!--IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"-->
                                     <MenuFlyoutItem
                                         x:Name="MFI_ExportAccount"
                                         x:Uid="AccountCodePageShowQRCode"

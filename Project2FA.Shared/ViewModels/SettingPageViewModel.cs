@@ -22,7 +22,8 @@ using System.IO;
 using Windows.Storage.Streams;
 using UNOversal.Services.Serialization;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
+using Project2FA.Core.Utils;
 
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
@@ -53,7 +54,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class SettingPageViewModel : ObservableObject, IInitialize, IConfirmNavigationAsync, IDisposable
+    public partial class SettingPageViewModel : ObservableObject, IInitialize, IConfirmNavigationAsync, IDisposable
     {
         public SettingsPartViewModel SettingsPartViewModel { get; private set; }
         public AboutPartViewModel AboutPartViewModel { get; private set; }
@@ -215,7 +216,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class SettingsPartViewModel : ObservableObject
+    public partial class SettingsPartViewModel : ObservableObject
     {
         private SettingsService _settings;
         private IDialogService DialogService { get; }
@@ -647,9 +648,6 @@ namespace Project2FA.ViewModels
             }
             else
             {
-                //var test = App.Current.Resources.ContainsKey("ItemContentThemeFontSize");
-                //var bla = (int)App.Current.Resources["ItemContentThemeFontSize"];
-
                 App.Current.Resources["ControlContentThemeFontSize"] = 14;
                 App.Current.Resources["TextControlThemeMinHeight"] = 32;
                 App.Current.Resources["TextControlThemePadding"] = new Thickness(10, 3, 6, 6);
@@ -875,7 +873,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class DatafilePartViewModel : ObservableObject
+    public partial class DatafilePartViewModel : ObservableObject
     {
         private IDialogService _dialogService { get; }
 
@@ -950,7 +948,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class AboutPartViewModel : ObservableObject
+    public partial class AboutPartViewModel : ObservableObject
     {
 #if WINDOWS_UWP
         private IMarketplaceService _marketplaceService { get; }
@@ -996,15 +994,19 @@ namespace Project2FA.ViewModels
                 var contactsSource = new ObservableGroupedCollection<string, DependencyModel>(grouped);
                 DependencyCollectionViewSource.Source = contactsSource;
                 DependencyCollectionViewSource.IsSourceGrouped = true;
+                OnPropertyChanged(nameof(DependencyCollectionViewSource));
             }
             catch (Exception exc)
             {
                 await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
             }
-
         }
+
+
         public CollectionViewSource DependencyCollectionViewSource { get; } = new CollectionViewSource();
+#if WINDOWS_UWP
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
+#endif
 
         public string DisplayName => Strings.Resources.ApplicationName;
 

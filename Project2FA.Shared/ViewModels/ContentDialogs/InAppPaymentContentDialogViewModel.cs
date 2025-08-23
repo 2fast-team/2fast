@@ -16,7 +16,7 @@ using System;
 
 namespace Project2FA.ViewModels
 {
-    public class InAppPaymentContentDialogViewModel : ObservableObject, IDialogInitialize, IRecipient<InAppItemChangedMessage>
+    public partial class InAppPaymentContentDialogViewModel : ObservableObject, IDialogInitialize, IRecipient<InAppItemChangedMessage>
     {
         private bool _primaryButtonCanClick;
         private int _selectedIndex = -1;

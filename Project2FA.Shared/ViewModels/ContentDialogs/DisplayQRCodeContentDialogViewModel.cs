@@ -25,7 +25,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class DisplayQRCodeContentDialogViewModel : ObservableObject, IDialogInitializeAsync
+    public partial class DisplayQRCodeContentDialogViewModel : ObservableObject, IDialogInitializeAsync
     {
         private string _header;
         private BitmapImage _qrImage;

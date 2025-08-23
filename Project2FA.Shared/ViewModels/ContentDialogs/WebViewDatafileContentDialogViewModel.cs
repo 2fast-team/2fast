@@ -23,7 +23,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class WebViewDatafileContentDialogViewModel : ObservableObject, IDialogInitialize
+    public partial class WebViewDatafileContentDialogViewModel : ObservableObject, IDialogInitialize
     {
         private string _webDAVServerBackgroundUrl;
         private bool _isLoading;

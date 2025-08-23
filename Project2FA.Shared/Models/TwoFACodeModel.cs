@@ -210,7 +210,13 @@ namespace Project2FA.Repository.Models
 
         public object Clone()
         {
-            return new TwoFACodeModel {  Label = Label, Issuer = Issuer, SelectedCategories = SelectedCategories, Notes = Notes, AccountIconName = AccountIconName };
+            return new TwoFACodeModel {  
+                Label = Label, 
+                Issuer = Issuer, 
+                SelectedCategories = SelectedCategories, 
+                Notes = Notes, 
+                AccountIconName = AccountIconName, 
+                SecretByteArray = SecretByteArray };
         }
     }
 }

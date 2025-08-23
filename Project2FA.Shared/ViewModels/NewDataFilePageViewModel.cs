@@ -35,7 +35,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class NewDataFilePageViewModel : DatafileViewModelBase
+    public partial class NewDataFilePageViewModel : DatafileViewModelBase
     {
         private IFileService FileService { get; }
 

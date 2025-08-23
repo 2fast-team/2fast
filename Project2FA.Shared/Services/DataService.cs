@@ -62,7 +62,7 @@ namespace Project2FA.Services
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class DataService : ObservableRecipient, IDisposable
+    public partial class DataService : ObservableRecipient, IDisposable
     {
         private SemaphoreSlim _collectionAccessSemaphore;
         public SemaphoreSlim CollectionAccessSemaphore 
@@ -452,7 +452,6 @@ namespace Project2FA.Services
                             {
                                 GlobalCategories.AddRange(datafile.GlobalCategories, true);
                             }
-          
                         }
                         if (deserializeCollection != null)
                         {

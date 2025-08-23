@@ -22,9 +22,11 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class AddAccountPageViewModel : AddAccountViewModelBase, IInitializeAsync
+    public partial class AddAccountPageViewModel : AddAccountViewModelBase, IInitializeAsync
     {
+#if __ANDROID__ || __IOS__
         public ICommand CancelButtonCommand { get; }
+#endif
         public AddAccountPageViewModel(
             ISerializationService serializationService,
             ILoggerFacade loggerFacade,

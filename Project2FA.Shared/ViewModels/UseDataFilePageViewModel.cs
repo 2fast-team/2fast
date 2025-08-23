@@ -45,7 +45,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class UseDataFilePageViewModel : DatafileViewModelBase, IConfirmNavigationAsync
+    public partial class UseDataFilePageViewModel : DatafileViewModelBase, IConfirmNavigationAsync
     {
         public ICommand UseDatafileCommand { get;}
         public ICommand SetAndCheckLocalDatafileCommand { get; }

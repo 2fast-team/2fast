@@ -6,11 +6,9 @@ using UNOversal.Services.Dialogs;
 
 namespace Project2FA.ViewModels
 {
-    public class WebDAVAuthContentDialogViewModel : ObservableObject, IDialogInitialize
+    public partial class WebDAVAuthContentDialogViewModel : ObservableObject, IDialogInitialize
     {
-        private Uri _url;
-
-
+        private Uri? _url;
 
         public void Initialize(IDialogParameters parameters)
         {

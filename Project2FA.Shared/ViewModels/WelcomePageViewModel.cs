@@ -24,7 +24,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class WelcomePageViewModel : ObservableObject
+    public partial class WelcomePageViewModel : ObservableObject
     {
         IDialogService _dialogService { get; }
         INavigationService _navigationService { get; }

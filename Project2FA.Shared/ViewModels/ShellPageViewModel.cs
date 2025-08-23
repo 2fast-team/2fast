@@ -31,7 +31,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class ShellPageViewModel : ObservableRecipient
+    public partial class ShellPageViewModel : ObservableRecipient
     {
         private bool _navigationIsAllowed = true;
         private string _title;

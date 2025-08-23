@@ -21,7 +21,7 @@ using WinUIWindow = Microsoft.UI.Xaml.Window;
 
 namespace Project2FA.ViewModels
 {
-    public class CredentialViewModelBase : ObservableRecipient
+    public partial class CredentialViewModelBase : ObservableRecipient
     {
         private bool _windowsHelloIsUsable, _isLogout, _isLoading;
         private string _password;

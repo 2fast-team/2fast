@@ -29,7 +29,7 @@ namespace Project2FA.ViewModels
     /// <summary>
     /// View model for adding an account countent dialog
     /// </summary>
-    public class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitializeAsync
+    public partial class AddAccountContentDialogViewModel : AddAccountViewModelBase, IDialogInitializeAsync
     {
         private string _lastPivotItemName;
         /// <summary>

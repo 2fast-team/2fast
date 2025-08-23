@@ -1,20 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Project2FA.Helpers;
+﻿using CommunityToolkit.Mvvm.Input;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Navigation;
 using UNOversal.Services.Serialization;
-using Windows.Storage;
-using Windows.Storage.Streams;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 
 #if !WINDOWS_UWP
@@ -27,7 +17,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class EditAccountPageViewModel : EditAccountViewModelBase, IInitialize
+    public partial class EditAccountPageViewModel : EditAccountViewModelBase, IInitialize
     {
         private INavigationService NavigationService { get; }
 

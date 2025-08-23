@@ -13,7 +13,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
+#if NET9_0_OR_GREATER
 using WinRT;
+#endif
 
 namespace Project2FA.UWP.Views
 {
@@ -47,7 +49,9 @@ namespace Project2FA.UWP.Views
         /// Copy the 2fa code to clipboard and create a user dialog
         /// </summary>
         /// <param name="model"></param>
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         private async Task<bool> Copy2FACodeToClipboard(TwoFACodeModel model)
         {
             try
@@ -96,7 +100,9 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private async void BTN_CopyCode_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
@@ -113,7 +119,9 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private async void TwoFACodeItem_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
         {
             e.Handled = true;
@@ -164,7 +172,9 @@ namespace Project2FA.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private async void LV_AccountCollection_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
@@ -248,7 +258,9 @@ namespace Project2FA.UWP.Views
             }
         }
 
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(AppBarButton))]
+#endif
         private void ABB_SearchFilter_Click(object sender, RoutedEventArgs e)
         {
             if (sender is AppBarButton abbtn)
@@ -267,8 +279,9 @@ namespace Project2FA.UWP.Views
             ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel, true);
         }
 
-
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+#endif
         private async void MFI_ExportAccount_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
@@ -277,7 +290,9 @@ namespace Project2FA.UWP.Views
             }
         }
 
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+#endif
         private async void MFI_EditAccount_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
@@ -286,7 +301,9 @@ namespace Project2FA.UWP.Views
             }
         }
 
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+#endif
         private async void MFI_DeleteAccount_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
@@ -295,12 +312,25 @@ namespace Project2FA.UWP.Views
             }
         }
 
+#if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+#endif
         private async void BTN_SetFavourite_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
             {
                 await ViewModel.SetFavouriteCommandTask(model);
+            }
+        }
+
+#if NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Button))]
+#endif
+        private void BTN_ShowCode_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.DataContext is TwoFACodeModel model)
+            {
+                ViewModel.HideOrShowTOTPCodeCommandTask(model);
             }
         }
     }

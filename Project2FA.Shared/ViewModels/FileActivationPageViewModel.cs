@@ -48,7 +48,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class FileActivationPageViewModel : CredentialViewModelBase, IInitialize
+    public partial class FileActivationPageViewModel : CredentialViewModelBase, IInitialize
     {
         private ISecretService SecretService { get; }
         private IFileService FileService { get; }

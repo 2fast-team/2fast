@@ -25,7 +25,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.ViewModels
 {
-    public class ImportBackupPageViewModel : AddAccountViewModelBase, IInitialize
+    public partial class ImportBackupPageViewModel : AddAccountViewModelBase, IInitialize
     {
         public void Initialize(INavigationParameters parameters)
         {

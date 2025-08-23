@@ -61,9 +61,9 @@ namespace Project2FA.ViewModels
 #endif
 
 #if WINDOWS_UWP
-    public class LoginPageViewModel : CredentialViewModelBase
+    public partial class LoginPageViewModel : CredentialViewModelBase
 #else
-    public class LoginPageViewModel : CredentialViewModelBase, IInitialize
+    public partial class LoginPageViewModel : CredentialViewModelBase, IInitialize
 #endif
     {
         private ILoggingService LoggingService { get; }

@@ -30,7 +30,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Project2FA.ViewModels
 {
-    public class ManageCategoriesContentDialogViewModel : ObservableRecipient, IDialogInitializeAsync
+    public partial class ManageCategoriesContentDialogViewModel : ObservableRecipient, IDialogInitializeAsync
     {
         public ICommand CreateCategoryCommand { get; }
         public ICommand PrimaryCommand { get; }

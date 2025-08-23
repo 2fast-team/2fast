@@ -20,7 +20,7 @@ namespace Project2FA.ViewModels
     /// <summary>
     /// View model for the content dialog to use an existing datafile
     /// </summary>
-    public class UseDatafileContentDialogViewModel : DatafileViewModelBase
+    public partial class UseDatafileContentDialogViewModel : DatafileViewModelBase
     {
         public ICommand UseDatafileCommand { get; set; }
         private ISecretService SecretService { get; }

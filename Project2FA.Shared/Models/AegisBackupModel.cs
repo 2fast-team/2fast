@@ -10,7 +10,7 @@ using OtpNet;
 
 namespace Project2FA.Repository.Models
 {
-    internal sealed class AegisModel<T>
+    public sealed class AegisModel<T>
     {
         [JsonPropertyName("version")]
         public int Version { get; set; }
@@ -22,7 +22,7 @@ namespace Project2FA.Repository.Models
         public T Database { get; set; }
     }
 
-    internal sealed class AegisKeyParams
+    public sealed class AegisKeyParams
     {
         [JsonPropertyName("nonce")]
         public string Nonce { get; set; }
@@ -31,7 +31,7 @@ namespace Project2FA.Repository.Models
         public string Tag { get; set; }
     }
 
-    internal sealed class AegisHeader
+    public sealed class AegisHeader
     {
         [JsonPropertyName("slots")]
         public List<AegisSlot> Slots { get; set; }
@@ -40,14 +40,14 @@ namespace Project2FA.Repository.Models
         public AegisKeyParams Params { get; set; }
     }
 
-    internal enum AegisSlotType
+    public enum AegisSlotType
     {
         Raw = 0,
         Password = 1,
         Biometric = 2
     }
 
-    internal sealed class AegisSlot
+    public sealed class AegisSlot
     {
         [JsonPropertyName("type")]
         public AegisSlotType Type { get; set; }
@@ -71,13 +71,13 @@ namespace Project2FA.Repository.Models
         public int P { get; set; }
     }
 
-    internal sealed class AegisDecryptedDatabase
+    public sealed class AegisDecryptedDatabase
     {
         [JsonPropertyName("entries")]
         public List<AegisEntry> Entries { get; set; }
     }
 
-    internal sealed class AegisEntry
+    public sealed class AegisEntry
     {
         [JsonPropertyName("type")]
         public string Type { get; set; }
@@ -95,7 +95,7 @@ namespace Project2FA.Repository.Models
         public AegisEntryInfo Info { get; set; }
     }
 
-    internal sealed class AegisEntryInfo
+    public sealed class AegisEntryInfo
     {
         [JsonPropertyName("secret")]
         public string Secret { get; set; }

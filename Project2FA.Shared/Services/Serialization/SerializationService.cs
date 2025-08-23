@@ -1,10 +1,13 @@
-﻿using UNOversal.Services.Serialization;
+﻿using Project2FA.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
+using UNOversal.Services.Serialization;
 
 namespace Project2FA.Services
 {
@@ -14,7 +17,8 @@ namespace Project2FA.Services
         {
             Settings = new JsonSerializerOptions()
             {
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true,
+                TypeInfoResolver = SerializationContext.Default
             };
         }
 
@@ -73,14 +77,18 @@ namespace Project2FA.Services
         /// </summary>
         public T Deserialize<T>(string value)
         {
+            JsonTypeInfo<T>? typeInfo = Settings.GetTypeInfo(typeof(T)) as JsonTypeInfo<T>;
+            if (typeInfo == null)
+                throw new InvalidOperationException($"Type {typeof(T)} not supported by source generator.");
+
             if (value == null)
                 return default(T);
 
             if (string.IsNullOrEmpty(value))
                 return default(T);
-
+            
             // Deserialize from json
-            return JsonSerializer.Deserialize<T>(value, Settings);
+            return JsonSerializer.Deserialize<T>(value, typeInfo);
         }
 
         public async Task<T> DeserializeAsync<T>(Stream utf8Json)

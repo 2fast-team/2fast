@@ -24,7 +24,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Project2FA.ViewModels
 {
-    public class ImportBackupContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
+    public partial class ImportBackupContentDialogViewModel : AddAccountViewModelBase, IDialogInitialize
     {
         private IBackupImporterService BackupImporterService { get; }
         private IDialogService DialogService { get; }

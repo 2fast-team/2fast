@@ -27,7 +27,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class EditAccountContentDialogViewModel : EditAccountViewModelBase, IDialogInitialize
+    public partial class EditAccountContentDialogViewModel : EditAccountViewModelBase, IDialogInitialize
     {
         public EditAccountContentDialogViewModel(ISerializationService serializationService)
         {

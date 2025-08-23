@@ -26,7 +26,7 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-    public class TutorialPageViewModel : ObservableObject, IInitialize
+    public partial class TutorialPageViewModel : ObservableObject, IInitialize
     {
         private int _selectedIndex = 0;
         private int _maxIndex = 5;

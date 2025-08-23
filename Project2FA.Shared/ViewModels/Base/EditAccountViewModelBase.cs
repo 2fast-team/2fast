@@ -24,7 +24,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace Project2FA.ViewModels
 {
-    public class EditAccountViewModelBase : ObservableObject
+    public partial class EditAccountViewModelBase : ObservableObject
     {
         private TwoFACodeModel _twoFACodeModel, _tempModel;
         private FontIdentifikationCollectionModel _iconNameCollectionModel;

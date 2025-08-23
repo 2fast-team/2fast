@@ -370,7 +370,6 @@
     <Content Include="Assets\AnimatedVisuals\10223-search-empty.json" />
     <Content Include="Assets\AnimatedVisuals\21398-online-tutorial.json" />
     <Content Include="Assets\Fonts\Segoe Fluent Icons.ttf" />
-    <Content Include="Assets\aegis.encrypted.json" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

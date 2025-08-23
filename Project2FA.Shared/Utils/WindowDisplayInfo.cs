@@ -3,6 +3,9 @@ using Windows.ApplicationModel.LockScreen;
 using Windows.ApplicationModel.Preview.Holographic;
 using Windows.Foundation.Metadata;
 using Windows.UI.ViewManagement;
+using Project2FA.Services;
+using UNOversal.Services.Logging;
+using UNOversal.Ioc;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -139,6 +142,7 @@ namespace Project2FA.Utils
             {
 #if WINDOWS_UWP
                 TrackingManager.TrackExceptionCatched(nameof(GetForCurrentView), exc);
+                App.Current.Container.Resolve<ILoggingService>().LogException(exc, SettingsService.Instance.LoggingSetting);
 #endif
                 return WindowDisplayMode.Unknown;
             }

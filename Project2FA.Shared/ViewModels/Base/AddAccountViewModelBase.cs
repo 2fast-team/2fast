@@ -45,6 +45,8 @@ using Windows.Foundation;
 using Windows.Graphics.DirectX;
 using Microsoft.Graphics.Canvas;
 using Windows.UI.Xaml.Media.Imaging;
+using ZXing.Net.UWP;
+using ZXing.Net.UWP.Readers;
 #else
 using Project2FA.UnoApp;
 using Microsoft.UI.Xaml;
@@ -297,27 +299,28 @@ namespace Project2FA.ViewModels
 
                 StopWindowScreenCapture();
 
-
-                // TODO commented out because WIP with ZXing.Net.Uno
-                //var luminanceSource = new SoftwareBitmapLuminanceSource(softwareBitmap);
-                //if (luminanceSource != null)
-                //{
-                //    var barcodeReader = new BarcodeReader
-                //    {
-                //        AutoRotate = true,
-                //        Options = { TryHarder = true }
-                //    };
-                //    var decodedStr = barcodeReader.Decode(luminanceSource);
-                //    if (decodedStr != null)
-                //    {
-                //        _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
-                //        await ReadAuthenticationFromString();
-                //    }
-                //    else
-                //    {
-                //        await ErrorDialogs.QRReadError();
-                //    }
-                //}
+                var luminanceSource = new SoftwareBitmapLuminanceSource(softwareBitmap);
+                if (luminanceSource != null)
+                {
+                    var barcodeReader = new BarcodeReader
+                    {
+                        Options = new BarcodeReaderOptions
+                        {
+                            TryHarder = true,
+                            AutoRotate = true
+                        }
+                    };
+                    var decodedStr = barcodeReader.Decode(luminanceSource);
+                    if (decodedStr != null)
+                    {
+                        _qrCodeStr = HttpUtility.UrlDecode(decodedStr[0].Value);
+                        await ReadAuthenticationFromString();
+                    }
+                    else
+                    {
+                        await ErrorDialogs.QRReadError();
+                    }
+                }
             }
             catch (Exception exc)
             {
@@ -735,23 +738,25 @@ namespace Project2FA.ViewModels
                     {
                         try
                         {
-                            // TODO commented out because WIP with ZXing.Net.Uno
-                            //var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
-                            //if (luminanceSource != null)
-                            //{
-                            //    var barcodeReader = new BarcodeReader
-                            //    {
-                            //        AutoRotate = true,
-                            //        Options = { TryHarder = true }
-                            //    };
-                            //    var decodedStr = barcodeReader.Decode(luminanceSource);
-                            //    if (decodedStr != null)
-                            //    {
-                            //        await CleanUpCamera();
-                            //        _qrCodeStr = HttpUtility.UrlDecode(decodedStr.Text);
-                            //        await ReadAuthenticationFromString();
-                            //    }
-                            //}
+                           var luminanceSource = new SoftwareBitmapLuminanceSource(_currentVideoFrame.SoftwareBitmap);
+                            if (luminanceSource != null)
+                            {
+                                var barcodeReader = new BarcodeReader
+                                {
+                                    Options = new BarcodeReaderOptions
+                                    {
+                                        TryHarder = true,
+                                        AutoRotate = true
+                                    }
+                                };
+                                var decodedStr = barcodeReader.Decode(luminanceSource);
+                                if (decodedStr != null)
+                                {
+                                    await CleanUpCamera();
+                                    _qrCodeStr = HttpUtility.UrlDecode(decodedStr[0].Value);
+                                    await ReadAuthenticationFromString();
+                                }
+                            }
                         }
                         catch (Exception exc)
                         {

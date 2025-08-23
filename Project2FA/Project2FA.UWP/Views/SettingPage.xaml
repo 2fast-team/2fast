@@ -15,6 +15,7 @@
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:unoVersalControls="using:Project2FA.Controls"
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
+    xmlns:collections="using:CommunityToolkit.Mvvm.Collections"
     xmlns:ui="using:CommunityToolkit.WinUI"
     x:Name="Page"
     mc:Ignorable="d">
@@ -621,25 +622,26 @@ ItemTemplate="{StaticResource DependenciesListViewTemplate}"
 ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
 IsTabStop="False"
 IsItemClickEnabled="True">
-                                            <GridView.HeaderTemplate>
-                                                <DataTemplate>
+                                            <!--<GridView.HeaderTemplate>
+                                                <DataTemplate x:DataType="models:DependencyModel">
                                                     <Grid Margin="0,0,0,15">
                                                         <interactivity:Interaction.Behaviors>
                                                             <behaviors:StickyHeaderBehavior />
                                                         </interactivity:Interaction.Behaviors>
                                                         <TextBlock FontSize="24" HorizontalAlignment="Center"
          VerticalAlignment="Center"
-         Text="{Binding}" />
+         Text="{x:Bind }" />
                                                     </Grid>
                                                 </DataTemplate>
-                                            </GridView.HeaderTemplate>
+                                            </GridView.HeaderTemplate>-->
+
                                             <GridView.GroupStyle>
                                                 <GroupStyle>
                                                     <GroupStyle.HeaderTemplate>
-                                                        <DataTemplate >
+                                                        <DataTemplate x:DataType="collections:IReadOnlyObservableGroup">
                                                             <TextBlock 
-                    Text="{Binding Key}" 
-                    FontSize="20"/>
+                                                                Text="{x:Bind Key}" 
+                                                                FontSize="20"/>
                                                         </DataTemplate>
                                                     </GroupStyle.HeaderTemplate>
                                                     <GroupStyle.Panel>

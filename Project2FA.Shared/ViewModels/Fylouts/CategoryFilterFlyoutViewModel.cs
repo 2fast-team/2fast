@@ -28,7 +28,7 @@ using Microsoft.UI.Xaml;
 namespace Project2FA.ViewModels
 {
 
-    public class CategoryFilterFlyoutViewModel : ObservableRecipient
+    public partial class CategoryFilterFlyoutViewModel : ObservableRecipient
     {
         public ICommand ManageCategoriesCommand { get; }
         private bool _canSaveFilter, _canResetFilter;

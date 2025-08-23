@@ -13,6 +13,9 @@ using Project2FA.Repository.Models;
 using UNOversal.Services.Secrets;
 using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.UI.Popups;
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+using WinRT;
+#endif
 
 
 #if WINDOWS_UWP
@@ -56,7 +59,9 @@ namespace Project2FA.Utils
             dialog.SecondaryButtonText = Resources.Confirm;
             return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
-
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal static async Task ShowUnauthorizedAccessError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
@@ -99,6 +104,9 @@ namespace Project2FA.Utils
         /// <summary>
         /// Displays a wrong password error message and option to change the password
         /// </summary>
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal static async Task ShowPasswordError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
@@ -155,6 +163,9 @@ namespace Project2FA.Utils
             }
         }
 
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal static Task UnauthorizedAccessDialog()
         {
             var dialog = new ContentDialog
@@ -193,6 +204,9 @@ namespace Project2FA.Utils
             return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal static Task UnauthorizedAccessUseLocalFileDialog()
         {
             var dialog = new ContentDialog
@@ -236,6 +250,9 @@ namespace Project2FA.Utils
             return dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal async static Task ShowUnexpectedError(Exception exc)
         {
             var dialog = new ContentDialog
@@ -331,6 +348,9 @@ namespace Project2FA.Utils
             }
         }
 
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         public async static Task ShowUnexpectedError(string errorDetail)
         {
             var dialog = new ContentDialog
@@ -407,6 +427,9 @@ namespace Project2FA.Utils
             SettingsService.Instance.UnhandledExceptionStr = string.Empty;
         }
 
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal async static Task<ContentDialogResult> WritingDatafileError(bool isNewFile)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
@@ -442,6 +465,9 @@ namespace Project2FA.Utils
             return await dialogService.ShowDialogAsync(dialog, new DialogParameters());
         }
 
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal async static Task SecretKeyError(string label)
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
@@ -478,6 +504,9 @@ namespace Project2FA.Utils
         /// <summary>
         /// Displays a FileNotFoundException message and the option for factory reset or correcting the path
         /// </summary>
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         internal async static Task ShowFileOrFolderNotFoundError()
         {
             IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();

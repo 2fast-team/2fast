@@ -17,7 +17,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Project2FA.Core.Utils;
 using UNOversal.Services.Logging;
+#if WINDOWS_UWP && NET9_0_OR_GREATER
 using WinRT;
+#endif
 
 
 #if WINDOWS_UWP
@@ -46,7 +48,7 @@ namespace Project2FA.ViewModels
 #endif
 
 #if WINDOWS_UWP || !__MOBILE__
-    public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync, IInitialize
+    public partial class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync, IInitialize
 #else
     public class AccountCodePageViewModel : ObservableRecipient, IConfirmNavigationAsync
 #endif
@@ -425,7 +427,7 @@ namespace Project2FA.ViewModels
         /// Starts the dialog to edit an existing account
         /// </summary>
         /// <param name="model"></param>
-#if WINDOWS_UWP
+#if WINDOWS_UWP && NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(Style))]
 #endif
         public async Task EditAccountCommandTask(TwoFACodeModel model)
@@ -467,7 +469,7 @@ namespace Project2FA.ViewModels
         /// Deletes an account from the collection
         /// </summary>
         /// <param name="model"></param>
-#if WINDOWS_UWP
+#if WINDOWS_UWP && NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(Style))]
 #endif
         public async Task DeleteAccountCommandTask(TwoFACodeModel model)
@@ -492,11 +494,11 @@ namespace Project2FA.ViewModels
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.Confirm;
             dialog.SecondaryButtonText = Resources.ButtonTextCancel;
-            dialog.SecondaryButtonStyle = App.Current.Resources[Project2FA.Core.Constants.AccentButtonStyleName] as Style;
+            dialog.SecondaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
             ContentDialogResult result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.Primary)
             {
-                TwoFADataService.TempDeletedTFAModel = model;
+                TwoFADataService.TempDeletedTFAModel = (TwoFACodeModel)model.Clone();
                 TwoFADataService.TempDeletedTFAModel.Seconds = 30;
                 TwoFADataService.Collection.Remove(model);
                 OnPropertyChanged(nameof(IsAccountDeleted));

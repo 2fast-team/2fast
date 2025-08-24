@@ -762,7 +762,6 @@ namespace Project2FA.ViewModels
                         {
                             await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                         }
-
                     });
                 }
             }

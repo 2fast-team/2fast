@@ -303,21 +303,35 @@ namespace Project2FA.UWP.Views
 
 #if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+        [DynamicWindowsRuntimeCast(typeof(Style))]
 #endif
         private async void MFI_DeleteAccount_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+            if (ViewModel.IsAccountNotDeleted)
             {
-                await ViewModel.DeleteAccountCommandTask(model);
+                if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+                {
+                    await ViewModel.DeleteAccountCommandTask(model);
+                }
             }
+            else
+            {
+                //ContentDialog dialog = new ContentDialog();
+                //dialog.Title = Strings.Resources.ErrorHandle;
+                //dialog.Content = Strings.Resources.AccountCodePageOnlyOneDeleteAccountTxt;
+                //dialog.PrimaryButtonText = Strings.Resources.ButtonTextConfirm;
+                //dialog.CloseButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+                //await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
+            }
+
         }
 
 #if NET9_0_OR_GREATER
-        [DynamicWindowsRuntimeCast(typeof(MenuFlyoutItem))]
+        [DynamicWindowsRuntimeCast(typeof(Button))]
 #endif
         private async void BTN_SetFavourite_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+            if (sender is Button mfi && mfi.DataContext is TwoFACodeModel model)
             {
                 await ViewModel.SetFavouriteCommandTask(model);
             }

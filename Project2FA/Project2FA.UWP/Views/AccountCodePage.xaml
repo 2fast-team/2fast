@@ -550,7 +550,7 @@
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
-                                
+                                Visibility="{x:Bind CodeVisibilityOptionEnabled, Mode=OneWay}"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
@@ -560,7 +560,6 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
                             </Button>
-                            <!--Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"-->
                             <Grid>
                                 <TextBlock
                                     x:Name="TwoFACodeTextBlock"
@@ -810,15 +809,14 @@
                             Grid.Column="2"
                             Margin="0,0,0,4">
 
-                            <!--<Button
+                            <Button
                                 x:Name="BTN_ShowCode"
-                                ToolTipService.ToolTip="{Binding HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
+                                Click="BTN_ShowCode_Click"
+                                ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
-                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
-                                CommandParameter="{x:Bind}"
-                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                Visibility="{x:Bind CodeVisibilityOptionEnabled, Mode=OneWay}"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 HorizontalAlignment="Stretch" >
                                 <FontIcon 
@@ -827,7 +825,7 @@
                                     Style="{StaticResource FullFluentFontIconStyle}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
-                            </Button>-->
+                            </Button>
                             <Grid>
                                 <TextBlock
                                 x:Name="TwoFACodeTextBlock"
@@ -909,12 +907,11 @@
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center"/>
                             </Grid>
-                            <!--<Button
+                            <Button
                                 x:Name="BTN_SetFavourite"
                                 Width="48"
                                 Height="48"
-                                CommandParameter="{x:Bind}"
-                                Command="{Binding DataContext.SetFavouriteCommand, ElementName=Page, Mode=OneTime}"
+                                Click="BTN_SetFavourite_Click"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 Margin="8,0,4,0"
                                 ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
@@ -925,7 +922,7 @@
                                     Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
-                            </Button>-->
+                            </Button>
                         </StackPanel>
 
                         <Button
@@ -935,35 +932,36 @@
                             VerticalAlignment="Top" 
                             Style="{StaticResource TransparentButtonStyle}">
                             <FontIcon Glyph="&#xE712;"/>
-                            <!--<Button.Flyout>
+                            <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">
                                     <MenuFlyoutItem 
+                                        x:Name="MFI_EditAccount"
                                         x:Uid="AccountCodePageEditEntry"
-                                        CommandParameter="{x:Bind}"
-                                        Command="{Binding DataContext.EditAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        Click="MFI_EditAccount_Click">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE70F;"/>
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
                                     <MenuFlyoutItem 
+                                        x:Name="MFI_DeleteAccount"
                                         x:Uid="AccountCodePageDeleteEntry"
-                                        IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"
-                                        CommandParameter="{x:Bind}"
-                                        Command="{Binding DataContext.DeleteAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        
+                                        Click="MFI_DeleteAccount_Click">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE107;"/>
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
+                                    <!--IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"-->
                                     <MenuFlyoutItem
+                                        x:Name="MFI_ExportAccount"
                                         x:Uid="AccountCodePageShowQRCode"
-                                        CommandParameter="{Binding}"
-                                        Command="{Binding DataContext.ExportAccountCommand, ElementName=Page, Mode=OneTime}">
+                                        Click="MFI_ExportAccount_Click">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE72D;"/>
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
                                 </MenuFlyout>
-                            </Button.Flyout>-->
+                            </Button.Flyout>
                         </Button>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="WindowStates">

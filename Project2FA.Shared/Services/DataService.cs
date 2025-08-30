@@ -231,6 +231,10 @@ namespace Project2FA.Services
                             {
                                 int i = count - 1;
                                 Collection[i].HideTOTPCode = SettingsService.Instance.UseHiddenTOTP;
+                                if (SettingsService.Instance.UseHiddenTOTP)
+                                {
+                                    Collection[i].CodeVisibilityOptionEnabled = true;
+                                }
                                 await InitializeItem(i);
                             }
                         }
@@ -251,6 +255,7 @@ namespace Project2FA.Services
             for (int i = 0; i < Collection.Count; i++)
             {
                 Collection[i].HideTOTPCode = useHiddenTOTP;
+                Collection[i].CodeVisibilityOptionEnabled = useHiddenTOTP;
                 await InitializeItem(i);
             }
             TOTPEventStopwatch.Restart();

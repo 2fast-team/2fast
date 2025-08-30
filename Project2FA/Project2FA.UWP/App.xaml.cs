@@ -1,12 +1,12 @@
 ﻿#if !NET9_0_OR_GREATER
 using Microsoft.EntityFrameworkCore;
+using Project2FA.Repository.Database;
 #endif
 
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
 using Project2FA.Helpers;
-using Project2FA.Repository.Database;
 using Project2FA.Services;
 using Project2FA.Services.Marketplace;
 using Project2FA.UWP.Services.Compression;
@@ -37,9 +37,9 @@ using Windows.Storage;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Project2FA.Services.Importer;
 using UNOversal.Helpers;
+using WinRT;
 
 namespace Project2FA.UWP
 {
@@ -105,7 +105,9 @@ namespace Project2FA.UWP
             container.RegisterSingleton<ISettingsHelper, SettingsHelper>();
             container.RegisterSingleton<IWebApiService, WebApiService>();
             container.RegisterSingleton<IGestureService, GestureService>();
+#if !NET9_0_OR_GREATER
             container.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
+#endif
             container.RegisterSingleton<ISerializationService, SerializationService>(); //for internal uwp services
             container.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>(); //netstandard for general access
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
@@ -142,6 +144,12 @@ namespace Project2FA.UWP
             container.RegisterDialog<WebDAVAuthContentDialog, WebDAVAuthContentDialogViewModel>();
         }
 
+#if NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FileActivatedEventArgs))]
+        [DynamicWindowsRuntimeCast(typeof(ProtocolActivatedEventArgs))]
+        [DynamicWindowsRuntimeCast(typeof(StorageFile))]
+        [DynamicWindowsRuntimeCast(typeof(LaunchActivatedEventArgs))]
+#endif
         public override async Task OnStartAsync(IApplicationArgs args)
         {
             if (Window.Current.Content == null)

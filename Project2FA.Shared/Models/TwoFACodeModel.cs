@@ -132,6 +132,14 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _hideTOTPCode, value);
         }
 
+        private bool _codeVisibilityOptionEnabled;
+        [JsonIgnore]
+        public bool CodeVisibilityOptionEnabled 
+        { 
+            get => _codeVisibilityOptionEnabled; 
+            set => SetProperty(ref _codeVisibilityOptionEnabled, value);
+        }
+
         private string _accountIconName = string.Empty;
         [Encrypt]
         public string AccountIconName
@@ -180,6 +188,7 @@ namespace Project2FA.Repository.Models
 
 
         public ObservableCollection<CategoryModel> SelectedCategories { get; set; }
+
 
         //[JsonIgnore]
         //public List<(string name, string message)> Errors

@@ -125,7 +125,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Otp.NET\src\Otp.NET\Otp.NET.csproj" />
 	  <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
-	  <ProjectReference Include="..\..\Project2FA.Repository\Project2FA.Repository.csproj" />
 	  <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
 	</ItemGroup>
 	<ItemGroup>

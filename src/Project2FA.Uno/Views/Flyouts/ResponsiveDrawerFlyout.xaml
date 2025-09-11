@@ -1,0 +1,26 @@
+﻿<Flyout
+    x:Class="Project2FA.Uno.Views.Flyouts.ResponsiveDrawerFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project2FA.Uno.Views.Flyouts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+	xmlns:toolkit="using:Uno.UI.Toolkit"
+	xmlns:ut="using:Uno.Themes"
+	xmlns:utu="using:Uno.Toolkit.UI"
+	x:Name="Root"
+	Opening="OnOpening"
+	Placement="Full"
+	FlyoutPresenterStyle="{StaticResource BottomDrawerFlyoutPresenterStyle}"
+	mc:Ignorable="d">
+
+    <Grid x:Name="MainLayout">
+        <Frame 
+            x:Name="FlyoutFrame"
+            HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch"
+			HorizontalContentAlignment="Stretch"
+			VerticalContentAlignment="Stretch"/>
+    </Grid>
+</Flyout>

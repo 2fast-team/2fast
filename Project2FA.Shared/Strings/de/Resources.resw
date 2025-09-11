@@ -684,7 +684,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>Pakete</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>Abhängigkeiten der App</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZXing.Net.UWP.Readers;
-
-public interface IBarcodeReader
+namespace ZXing.Net.UWP.Readers
 {
-	BarcodeReaderOptions Options { get; set; }
+    public interface IBarcodeReader
+    {
+    	BarcodeReaderOptions Options { get; set; }
 
-	BarcodeResult[] Decode(PixelBufferHolder image);
+    	BarcodeResult[] Decode(PixelBufferHolder image);
+    }
 }

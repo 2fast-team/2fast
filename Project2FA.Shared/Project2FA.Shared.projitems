@@ -9,6 +9,7 @@
     <Import_RootNamespace>Project2FA.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AutoCloseTeachingTip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageEx.Members.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Base\DatafileViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileActivationPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Fylouts\ResponsiveDrawerFlyoutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImportBackupPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\InAppPaymentContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
@@ -229,9 +231,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\JSONs\simpleicons.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Fylouts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\android_schluessel.svg" />

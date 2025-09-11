@@ -101,6 +101,14 @@
                     </StackPanel>
                 </Grid>
             </DataTemplate>
+
+            <!--  SemanticZoom grouped sourc  -->
+            <CollectionViewSource
+            x:Name="DependencyCollectionViewSource"
+            IsSourceGrouped="True"
+            Source="{x:Bind ViewModel.AboutPartViewModel.DependencyCollection, Mode=OneWay}" />
+
+
         </ResourceDictionary>
     </Page.Resources>
 
@@ -615,25 +623,23 @@
                                 <SemanticZoom CanChangeViews="False">
                                     <SemanticZoom.ZoomedInView>
                                         <GridView
-x:Uid="SettingsDependencies"
-SelectionMode="None"
-IsSynchronizedWithCurrentItem="False"
-ItemTemplate="{StaticResource DependenciesListViewTemplate}"
-ItemsSource="{x:Bind ViewModel.AboutPartViewModel.DependencyCollectionViewSource.View,Mode=OneWay}"
-IsTabStop="False"
-IsItemClickEnabled="True">
-                                            <!--<GridView.HeaderTemplate>
-                                                <DataTemplate x:DataType="models:DependencyModel">
-                                                    <Grid Margin="0,0,0,15">
-                                                        <interactivity:Interaction.Behaviors>
-                                                            <behaviors:StickyHeaderBehavior />
-                                                        </interactivity:Interaction.Behaviors>
-                                                        <TextBlock FontSize="24" HorizontalAlignment="Center"
-         VerticalAlignment="Center"
-         Text="{x:Bind }" />
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </GridView.HeaderTemplate>-->
+                                            ItemTemplate="{StaticResource DependenciesListViewTemplate}"
+                                            ItemsSource="{x:Bind DependencyCollectionViewSource.View,Mode=OneWay}"
+                                            IsItemClickEnabled="True"
+                                            SelectionMode="None">
+                                            <GridView.Header>
+                                                <Grid Margin="0,0,0,15">
+                                                    <interactivity:Interaction.Behaviors>
+                                                        <behaviors:StickyHeaderBehavior />
+                                                    </interactivity:Interaction.Behaviors>
+                                                    <TextBlock 
+                                                        Text="{x:Bind strings:Resources.SettingsDependencies}"
+                                                        FontSize="24" 
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center" />
+                                                </Grid>
+                                            </GridView.Header>
+
 
                                             <GridView.GroupStyle>
                                                 <GroupStyle>
@@ -662,6 +668,11 @@ IsItemClickEnabled="True">
                                         </GridView>
                                     </SemanticZoom.ZoomedInView>
                                 </SemanticZoom>
+                                <!--<GridView
+                                    ItemTemplate="{StaticResource DependenciesListViewTemplate}"
+                                    ItemsSource="{x:Bind ViewModel.AboutPartViewModel.TempDependencyCollection,Mode=OneWay}"
+                                    IsTabStop="False"
+                                    IsItemClickEnabled="True"/>-->
                             </Grid>
                         </RelativePanel>
                         <muxc:InfoBar 

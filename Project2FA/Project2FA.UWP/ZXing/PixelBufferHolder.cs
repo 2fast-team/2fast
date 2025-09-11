@@ -1,22 +1,23 @@
 ﻿using Windows.Foundation;
 
-namespace ZXing.Net.UWP.Readers;
-
-public record PixelBufferHolder
+namespace ZXing.Net.UWP.Readers
 {
-	public Size Size { get; init; }
+    public record PixelBufferHolder
+    {
+    	public Size Size { get; set; }
 
-	public
+    	public
 
 #if ANDROID
-	Java.Nio.ByteBuffer
+    	Java.Nio.ByteBuffer
 #elif IOS || MACCATALYST
-	CoreVideo.CVPixelBuffer
-#elif WINDOWS
-	Windows.Graphics.Imaging.SoftwareBitmap
+    	CoreVideo.CVPixelBuffer
+#elif WINDOWS_UWP
+    	Windows.Graphics.Imaging.SoftwareBitmap
 #else
-	byte[]
+    	byte[]
 #endif
 
-	Data { get; init; }
+    	Data { get; set; }
+    }
 }

@@ -690,7 +690,7 @@
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>パッケージ</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>アプリの依存関係</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

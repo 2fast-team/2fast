@@ -103,11 +103,5 @@ namespace Project2FA.Repository.Models
             get => _describtion;
             set => SetProperty(ref _describtion, value);
         }
-
-        public DependencyModel()
-        {
-
-        }
-        
     }
 }

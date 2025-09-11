@@ -690,7 +690,7 @@ Sincronizzare l'ora nelle impostazioni.</value>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>Pacchetti</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>Dipendenze dell'applicazione</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

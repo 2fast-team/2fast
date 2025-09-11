@@ -687,7 +687,7 @@ Palun sünkroonige kellaaeg seadetes.</value>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>Pakendid</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>Rakenduse sõltuvused</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

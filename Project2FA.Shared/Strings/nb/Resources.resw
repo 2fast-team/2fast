@@ -688,7 +688,7 @@ Vennligst synkroniser tiden i innstillingene.</value>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>Pakker</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>Appens avhengigheter</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

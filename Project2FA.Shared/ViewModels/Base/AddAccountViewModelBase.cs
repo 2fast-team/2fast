@@ -17,7 +17,6 @@ using Windows.Graphics.Imaging;
 using Windows.UI.Popups;
 using Project2FA.Core.ProtoModels;
 using OtpNet;
-using ZXing;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Windows.Media.Core;
@@ -47,6 +46,8 @@ using Microsoft.Graphics.Canvas;
 using Windows.UI.Xaml.Media.Imaging;
 using ZXing.Net.UWP;
 using ZXing.Net.UWP.Readers;
+using BarcodeReader = ZXing.Net.UWP.Readers.BarcodeReader;
+using SoftwareBitmapLuminanceSource = ZXing.Net.UWP.SoftwareBitmapLuminanceSource;
 #else
 using Project2FA.UnoApp;
 using Microsoft.UI.Xaml;

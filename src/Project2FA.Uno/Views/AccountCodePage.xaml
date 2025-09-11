@@ -34,6 +34,36 @@
                 Normal="{StaticResource TwoFACodeCustomTemplate}" 
                 Accent="{StaticResource TwoFACodeCustomAccentTemplate}"/>
 
+            <MenuFlyout 
+                x:Key="MF_AccountMoreOptionsFlyout"  
+                Placement="Bottom">
+                <MenuFlyoutItem 
+                    x:Name="MFI_EditAccount"
+                    x:Uid="AccountCodePageEditEntry"
+                    Click="MFI_EditAccount_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE70F;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem 
+                    x:Name="MFI_DeleteAccount"
+                    x:Uid="AccountCodePageDeleteEntry"
+                    IsEnabled="{x:Bind ViewModel.IsAccountNotDeleted, Mode=OneWay}" 
+                    Click="MFI_DeleteAccount_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE107;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem
+                    x:Name="MFI_ExportAccount"
+                    x:Uid="AccountCodePageShowQRCode"
+                    Click="MFI_ExportAccount_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE72D;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+
             <DataTemplate x:Key="ShimmerTemplate">
                 <UserControl
                     x:Name="Root" 
@@ -182,49 +212,26 @@
                             </Grid.ColumnDefinitions>
 
                             <Border
-					    Grid.RowSpan="3"
-            Width="2.5"
-            Margin="0,0,0,8"
-            Background="{ThemeResource  SystemAccentColor}" />
+					            Grid.RowSpan="3"
+                                Width="2.5"
+                                Margin="0,0,0,8"
+                                Background="{ThemeResource  SystemAccentColor}" />
 
                             <PersonPicture 
-            Height="52"
-            Width="52"
-            DisplayName="{x:Bind Model, 
-            Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
-            Mode=OneWay}"
-            not_ios:FontSize="30"
-            ios:FontSize="30"
-            Margin="8,10,20,0"
-            Grid.Column="1"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Style="{StaticResource DefaultPersonPictureStyle}"
-            Tag="{x:Bind AccountIconName, Mode=OneWay}">
+                                Height="52"
+                                Width="52"
+                                DisplayName="{x:Bind Model, 
+                                Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
+                                Mode=OneWay}"
+                                not_ios:FontSize="30"
+                                ios:FontSize="30"
+                                Margin="8,10,20,0"
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Style="{StaticResource DefaultPersonPictureStyle}"
+                                Tag="{x:Bind AccountIconName, Mode=OneWay}">
                             </PersonPicture>
-
-                            <!--<StackPanel
-            MinHeight="80"
-            Grid.Column="2" 
-            Grid.RowSpan="2" 
-            Grid.ColumnSpan="2">
-            <TextBlock
-                x:Name="AccountName"
-                FontSize="20"
-                Margin="0,10,10,0" 
-                VerticalAlignment="Center">
-                <Bold>
-                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
-                </Bold>
-            </TextBlock>
-            <TextBlock 
-                x:Name="IssuerName"
-                FontWeight="Thin"
-                Text="{x:Bind Issuer,Mode=OneWay}" 
-                FontSize="20"
-                TextWrapping="Wrap"
-                VerticalAlignment="Center"/>
-        </StackPanel>-->
 
                             <RelativePanel 
                             Grid.Column="2" 
@@ -257,21 +264,20 @@
                             </RelativePanel>
 
                             <StackPanel
-            Orientation="Horizontal"
-            Grid.Row="2"
-            Grid.Column="1"
-            Grid.ColumnSpan="4"
-            Margin="8,0,0,4">
+                                Orientation="Horizontal"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="4"
+                                Margin="8,0,0,4">
 
-                            <Button
+                                <Button
                                 x:Name="BTN_ShowCode"
+                                Click="BTN_ShowCode_Click"
                                 ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
-                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
-                                CommandParameter="{Binding}"
-                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                Visibility="{x:Bind CodeVisibilityOptionEnabled, Mode=OneWay}"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 HorizontalAlignment="Stretch" >
                                     <FontIcon 
@@ -280,118 +286,84 @@
                                     Style="{StaticResource FullFluentFontIconStyle}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
-                            </Button>
+                                </Button>
 
                                 <Grid>
                                     <TextBlock
-                Text="{x:Bind TwoFACode,Mode=OneWay}"
-                FontSize="24"
-                Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
-                VerticalAlignment="Center"
-                CharacterSpacing="60"
-                Foreground="{ThemeResource SystemAccentColor}" />
+                                Text="{x:Bind TwoFACode,Mode=OneWay}"
+                                FontSize="24"
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"
+                                VerticalAlignment="Center"
+                                CharacterSpacing="60"
+                                Foreground="{ThemeResource SystemAccentColor}" />
                                     <TextBlock
-                Text="______"
-                Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
-                FontSize="24"
-                CharacterSpacing="200"
-                VerticalAlignment="Center" 
-                Foreground="{ThemeResource SystemAccentColor}" />
+                                Text="______"
+                                Visibility="{x:Bind HideTOTPCode, Mode=OneWay}"
+                                FontSize="24"
+                                CharacterSpacing="200"
+                                VerticalAlignment="Center" 
+                                Foreground="{ThemeResource SystemAccentColor}" />
                                 </Grid>
 
                                 <Button
-                x:Name="BTN_CopyCode"
-                Style="{StaticResource TransparentButtonStyle}"
-                x:Uid="AccountCopyCodeButton"
-                Width="48"
-                Height="48"
-                CommandParameter="{Binding}"
-                Command="{Binding DataContext.CopyCodeToClipboardCommand, ElementName=Page, Mode=OneTime}"
-                Margin="8,0,4,0" 
-                HorizontalAlignment="Stretch" >
+                                x:Name="BTN_CopyCode"
+                                x:Uid="AccountCopyCodeButton"
+                                Width="48"
+                                Height="48"
+                                Click="BTN_CopyCode_Click"
+                                Margin="8,0,4,0"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                HorizontalAlignment="Stretch" >
                                     <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
-                                    <Button.Flyout>
-                                        <Flyout>
-                                            <TextBlock Text="{x:Bind strings:Resources.AccountCodePageCopyCodeTeachingTip}"/>
-                                        </Flyout>
-                                    </Button.Flyout>
                                 </Button>
 
                                 <Grid VerticalAlignment="Center">
                                     <ProgressRing
-                Value="{x:Bind Seconds,Mode=OneWay}" 
-                Maximum="{x:Bind Period,Mode=OneWay}" 
+                                        Value="{x:Bind Seconds,Mode=OneWay}" 
+                                        Maximum="{x:Bind Period,Mode=OneWay}" 
                     
-                Minimum="0"
-                IsIndeterminate="False"
-                Width="42"
-                Height="42"
-                x:Uid="AccountCodePageRemainingSeconds"
+                                        Minimum="0"
+                                        IsIndeterminate="False"
+                                        Width="42"
+                                        Height="42"
+                                        x:Uid="AccountCodePageRemainingSeconds"
                 
-                Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
+                                        Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/>
 
                                     <TextBlock 
-                x:Uid="AccountCodePageRemainingSeconds"
-                Opacity="0.6"
-                Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
-                FontSize="16"
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center"/>
+                                x:Uid="AccountCodePageRemainingSeconds"
+                                Opacity="0.6"
+                                Text="{x:Bind Seconds, Mode=OneWay, Converter={StaticResource DoubleToInt32ToStringConverter}}"
+                                FontSize="16"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"/>
                                 </Grid>
                                 <Button
-                x:Name="BTN_SetFavourite"
-                Width="48"
-                Height="48"
-                CommandParameter="{Binding}"
-                Command="{Binding DataContext.SetFavouriteCommand, ElementName=Page, Mode=OneTime}"
-                Style="{StaticResource TransparentButtonStyle}"
-                Margin="8,0,4,0"
-                ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
-                HorizontalAlignment="Stretch" >
+                                    x:Name="BTN_SetFavourite"
+                                    Width="48"
+                                    Height="48"
+                                    Click="BTN_SetFavourite_Click"
+                                    Style="{StaticResource TransparentButtonStyle}"
+                                    Margin="8,0,4,0"
+                                    ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
+                                    HorizontalAlignment="Stretch" >
                                     <FontIcon 
-                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
-                    FontSize="20"
-                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
+                                        Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                        FontSize="20"
+                                        Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
                                 </Button>
                             </StackPanel>
 
                             <Button
-            x:Uid="AccountCodePageItemMoreBTN"
-            Style="{StaticResource TransparentButtonStyle}"
-            Grid.Column="4" 
-            Margin="8,0,0,0" 
-            VerticalAlignment="Top" >
+                            x:Uid="AccountCodePageItemMoreBTN"
+                            Grid.Column="4" 
+                            Margin="8,0,0,0" 
+                            VerticalAlignment="Top"
+                            Flyout="{StaticResource MF_AccountMoreOptionsFlyout}"
+                            Style="{StaticResource TransparentButtonStyle}">
                                 <FontIcon Glyph="&#xE712;"/>
-                                <Button.Flyout>
-                                    <MenuFlyout 
-                    UseNativePopup="True" 
-                    toolkit:MenuFlyoutExtensions.CancelTextIosOverride="{x:Bind strings:Resources.ButtonTextCancel}">
-                                        <MenuFlyoutItem 
-                        x:Uid="AccountCodePageEditEntry"
-                        Click="BTN_EditItem_Click">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE70F;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </MenuFlyoutItem>
-                                        <MenuFlyoutItem 
-                        x:Uid="AccountCodePageDeleteEntry"
-                        IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"
-                        Click="BTN_DeleteItem_Click">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE107;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </MenuFlyoutItem>
-                                        <not_mobile:MenuFlyoutItem
-                        x:Uid="AccountCodePageShowQRCode"
-                        Click="BTN_ShareItem_Click">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE72D;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </not_mobile:MenuFlyoutItem>
-                                    </MenuFlyout>
-                                </Button.Flyout>
                             </Button>
                         </Grid>
                         <VisualStateManager.VisualStateGroups>
@@ -440,8 +412,6 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-
-
                             <Border
 					    Grid.RowSpan="3"
             Width="2.5"
@@ -492,31 +462,6 @@
             Tag="{x:Bind AccountIconName, Mode=OneWay}">
                             </PersonPicture>
 
-
-
-                            <!--<StackPanel
-            MinHeight="80"
-            Grid.Column="2" 
-            Grid.RowSpan="2" 
-            Grid.ColumnSpan="2">
-            <TextBlock
-                x:Name="AccountName"
-                FontSize="20"
-                Margin="0,10,10,0" 
-                VerticalAlignment="Center">
-                <Bold>
-                    <Run Text="{x:Bind Label,Mode=OneWay}"/>
-                </Bold>
-            </TextBlock>
-            <TextBlock 
-                x:Name="IssuerName"
-                FontWeight="Thin"
-                Text="{x:Bind Issuer,Mode=OneWay}" 
-                FontSize="20"
-                TextWrapping="Wrap"
-                VerticalAlignment="Center"/>
-        </StackPanel>-->
-
                             <RelativePanel 
                             Grid.Column="2" 
                             Grid.RowSpan="2" 
@@ -548,21 +493,20 @@
                             </RelativePanel>
 
                             <StackPanel
-            Orientation="Horizontal"
-            Grid.Row="2"
-            Grid.Column="1"
-            Grid.ColumnSpan="4"
-            Margin="8,0,0,4">
+                            Orientation="Horizontal"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="4"
+                            Margin="8,0,0,4">
 
-                            <Button
+                                <Button
                                 x:Name="BTN_ShowCode"
+                                Click="BTN_ShowCode_Click"
                                 ToolTipService.ToolTip="{x:Bind HideTOTPCode, Mode=OneWay, Converter={StaticResource TOTPVisibilityTooltipConverter}}"
                                 Width="48"
                                 Height="48"
                                 Margin="0,0,4,0"
-                                Visibility="{Binding DataContext.CodeVisibilityOptionEnabled, ElementName=Page}"
-                                CommandParameter="{Binding}"
-                                Command="{Binding DataContext.HideOrShowTOTPCodeCommand, ElementName=Page, Mode=OneTime}"
+                                Visibility="{x:Bind CodeVisibilityOptionEnabled, Mode=OneWay}"
                                 Style="{StaticResource TransparentButtonStyle}"
                                 HorizontalAlignment="Stretch" >
                                     <FontIcon 
@@ -571,7 +515,7 @@
                                     Style="{StaticResource FullFluentFontIconStyle}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"/>
-                            </Button>
+                                </Button>
 
                                 <Grid>
                                     <TextBlock
@@ -592,21 +536,15 @@
                                 </Grid>
 
                                 <Button
-                x:Name="BTN_CopyCode"
-                Style="{StaticResource TransparentButtonStyle}"
-                x:Uid="AccountCopyCodeButton"
-                Width="48"
-                Height="48"
-                CommandParameter="{Binding}"
-                Command="{Binding DataContext.CopyCodeToClipboardCommand, ElementName=Page, Mode=OneTime}"
-                Margin="8,0,4,0" 
-                HorizontalAlignment="Stretch" >
+                                x:Name="BTN_CopyCode"
+                                x:Uid="AccountCopyCodeButton"
+                                Width="48"
+                                Height="48"
+                                Click="BTN_CopyCode_Click"
+                                Margin="8,0,4,0"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                HorizontalAlignment="Stretch" >
                                     <FontIcon Glyph="&#xE8C8;" FontSize="20"/>
-                                    <Button.Flyout>
-                                        <Flyout>
-                                            <TextBlock Text="{x:Bind strings:Resources.AccountCodePageCopyCodeTeachingTip}"/>
-                                        </Flyout>
-                                    </Button.Flyout>
                                 </Button>
 
                                 <Grid VerticalAlignment="Center">
@@ -632,59 +570,32 @@
                                 </Grid>
 
                                 <Button
-                x:Name="BTN_SetFavourite"
-                Width="48"
-                Height="48"
-                CommandParameter="{Binding}"
-                Command="{Binding DataContext.SetFavouriteCommand, ElementName=Page, Mode=OneTime}"
-                Style="{StaticResource TransparentButtonStyle}"
-                Margin="8,0,4,0"
-                HorizontalAlignment="Stretch" >
+                                x:Name="BTN_SetFavourite"
+                                Width="48"
+                                Height="48"
+                                Click="BTN_SetFavourite_Click"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                Margin="8,0,4,0"
+                                ToolTipService.ToolTip="{x:Bind IsFavourite, Mode=OneWay, Converter={StaticResource FavouriteTooltipConverter}}"
+                                HorizontalAlignment="Stretch" >
                                     <FontIcon 
-                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
-                    FontSize="20"
-                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
+                                    Glyph="{x:Bind IsFavourite, Converter={StaticResource FavouriteToIconConverter},Mode=OneWay}"
+                                    FontSize="20"
+                                    Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
                                 </Button>
 
                             </StackPanel>
 
                             <Button
-            x:Uid="AccountCodePageItemMoreBTN"
-            Grid.Column="4" 
-            Style="{StaticResource TransparentButtonStyle}"
-            Margin="8,0,0,0" 
-            VerticalAlignment="Top" >
+                                x:Uid="AccountCodePageItemMoreBTN"
+                                Grid.Column="4" 
+                                Margin="8,0,0,0" 
+                                VerticalAlignment="Top"
+                                Flyout="{StaticResource MF_AccountMoreOptionsFlyout}"
+                                Style="{StaticResource TransparentButtonStyle}">
                                 <FontIcon Glyph="&#xE712;"/>
-                                <Button.Flyout>
-                                    <MenuFlyout 
-                    UseNativePopup="True" 
-                    toolkit:MenuFlyoutExtensions.CancelTextIosOverride="{x:Bind strings:Resources.ButtonTextCancel}">
-                                        <MenuFlyoutItem 
-                        x:Uid="AccountCodePageEditEntry"
-                        Click="BTN_EditItem_Click">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE70F;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </MenuFlyoutItem>
-                                        <MenuFlyoutItem 
-                        x:Uid="AccountCodePageDeleteEntry"
-                        IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"
-                        Click="BTN_DeleteItem_Click">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE107;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </MenuFlyoutItem>
-                                        <not_mobile:MenuFlyoutItem
-                        x:Uid="AccountCodePageShowQRCode"
-                        Click="BTN_ShareItem_Click">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE72D;"/>
-                                            </MenuFlyoutItem.Icon>
-                                        </not_mobile:MenuFlyoutItem>
-                                    </MenuFlyout>
-                                </Button.Flyout>
                             </Button>
                         </Grid>
                         <VisualStateManager.VisualStateGroups>

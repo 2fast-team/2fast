@@ -308,6 +308,15 @@
     <Compile Include="Views\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ZXing\BarcodeFormats.cs" />
+    <Compile Include="ZXing\BarcodeReader.cs" />
+    <Compile Include="ZXing\BarcodeReaderOptions.cs" />
+    <Compile Include="ZXing\BarcodeResult.cs" />
+    <Compile Include="ZXing\IBarcodeReader.cs" />
+    <Compile Include="ZXing\MetadataType.cs" />
+    <Compile Include="ZXing\PixelBufferHolder.cs" />
+    <Compile Include="ZXing\SoftwareBitmapLuminanceSource.Windows.cs" />
+    <Compile Include="ZXing\ZXingNetExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

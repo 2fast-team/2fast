@@ -137,4 +137,10 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Views\Flyouts\ResponsiveDrawerFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
 </Project>

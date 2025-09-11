@@ -990,20 +990,22 @@ namespace Project2FA.ViewModels
                         item.Category = Resources.SettingsDependencyGroupAssets;
                     }
                 }
+                TempDependencyCollection.AddRange(depList);
+
                 var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
-                var contactsSource = new ObservableGroupedCollection<string, DependencyModel>(grouped);
-                DependencyCollectionViewSource.Source = contactsSource;
-                DependencyCollectionViewSource.IsSourceGrouped = true;
-                OnPropertyChanged(nameof(DependencyCollectionViewSource));
+                //var grouped = depList.GroupBy(x => x.Category).OrderBy(g => g.Key);
+                //DependencyCollection.AddRange(grouped, true);
+                DependencyCollection = new ObservableGroupedCollection<string, DependencyModel>(grouped);
+                OnPropertyChanged(nameof(DependencyCollection));
             }
             catch (Exception exc)
             {
                 await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
             }
         }
+        public ObservableCollection<DependencyModel> TempDependencyCollection { get; private set; } = new ObservableCollection<DependencyModel>();
 
-
-        public CollectionViewSource DependencyCollectionViewSource { get; } = new CollectionViewSource();
+        public ObservableGroupedCollection<string, DependencyModel> DependencyCollection { get; private set; } = new ObservableGroupedCollection<string, DependencyModel>();
 #if WINDOWS_UWP
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 #endif

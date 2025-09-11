@@ -685,7 +685,7 @@
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>套餐</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>应用程序的依赖关系</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

@@ -688,7 +688,7 @@ Synkronoi aika asetuksissa.</value>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>Paketit</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>Sovelluksen riippuvuudet</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

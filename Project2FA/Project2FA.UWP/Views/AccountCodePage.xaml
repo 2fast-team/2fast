@@ -54,6 +54,36 @@
                 </Grid>
             </DataTemplate>
 
+            <MenuFlyout 
+                x:Key="MF_AccountMoreOptionsFlyout"  
+                Placement="Bottom">
+                <MenuFlyoutItem 
+                    x:Name="MFI_EditAccount"
+                    x:Uid="AccountCodePageEditEntry"
+                    Click="MFI_EditAccount_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE70F;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem 
+                    x:Name="MFI_DeleteAccount"
+                    x:Uid="AccountCodePageDeleteEntry"
+                    IsEnabled="{x:Bind ViewModel.IsAccountNotDeleted, Mode=OneWay}" 
+                    Click="MFI_DeleteAccount_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE107;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem
+                    x:Name="MFI_ExportAccount"
+                    x:Uid="AccountCodePageShowQRCode"
+                    Click="MFI_ExportAccount_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE72D;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+
 
             <DataTemplate x:Name="ShellHeaderTemplatePro" x:DataType="viewmodels:AccountCodePageViewModel">
                 <UserControl>
@@ -663,39 +693,10 @@
                             x:Uid="AccountCodePageItemMoreBTN"
                             Grid.Column="4" 
                             Margin="8,0,0,0" 
-                            VerticalAlignment="Top" 
+                            VerticalAlignment="Top"
+                            Flyout="{StaticResource MF_AccountMoreOptionsFlyout}"
                             Style="{StaticResource TransparentButtonStyle}">
                             <FontIcon Glyph="&#xE712;"/>
-                            <Button.Flyout>
-                                <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem 
-                                        x:Name="MFI_EditAccount"
-                                        x:Uid="AccountCodePageEditEntry"
-                                        Click="MFI_EditAccount_Click">
-                                        <MenuFlyoutItem.Icon>
-                                            <FontIcon Glyph="&#xE70F;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
-                                    <MenuFlyoutItem 
-                                        x:Name="MFI_DeleteAccount"
-                                        x:Uid="AccountCodePageDeleteEntry"
-                                        
-                                        Click="MFI_DeleteAccount_Click">
-                                        <MenuFlyoutItem.Icon>
-                                            <FontIcon Glyph="&#xE107;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
-                                    <!--IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"-->
-                                    <MenuFlyoutItem
-                                        x:Name="MFI_ExportAccount"
-                                        x:Uid="AccountCodePageShowQRCode"
-                                        Click="MFI_ExportAccount_Click">
-                                        <MenuFlyoutItem.Icon>
-                                            <FontIcon Glyph="&#xE72D;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
-                                </MenuFlyout>
-                            </Button.Flyout>
                         </Button>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="WindowStates">
@@ -930,38 +931,9 @@
                             Grid.Column="4" 
                             Margin="8,0,0,0" 
                             VerticalAlignment="Top" 
+                            Flyout="{StaticResource MF_AccountMoreOptionsFlyout}"
                             Style="{StaticResource TransparentButtonStyle}">
                             <FontIcon Glyph="&#xE712;"/>
-                            <Button.Flyout>
-                                <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem 
-                                        x:Name="MFI_EditAccount"
-                                        x:Uid="AccountCodePageEditEntry"
-                                        Click="MFI_EditAccount_Click">
-                                        <MenuFlyoutItem.Icon>
-                                            <FontIcon Glyph="&#xE70F;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
-                                    <MenuFlyoutItem 
-                                        x:Name="MFI_DeleteAccount"
-                                        x:Uid="AccountCodePageDeleteEntry"
-                                        
-                                        Click="MFI_DeleteAccount_Click">
-                                        <MenuFlyoutItem.Icon>
-                                            <FontIcon Glyph="&#xE107;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
-                                    <!--IsEnabled="{Binding DataContext.IsAccountNotDeleted, ElementName=Page, Mode=OneWay}"-->
-                                    <MenuFlyoutItem
-                                        x:Name="MFI_ExportAccount"
-                                        x:Uid="AccountCodePageShowQRCode"
-                                        Click="MFI_ExportAccount_Click">
-                                        <MenuFlyoutItem.Icon>
-                                            <FontIcon Glyph="&#xE72D;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
-                                </MenuFlyout>
-                            </Button.Flyout>
                         </Button>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="WindowStates">

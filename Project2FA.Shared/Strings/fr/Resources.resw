@@ -689,7 +689,7 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   <data name="SettingsDependencyGroupPackages" xml:space="preserve">
     <value>Emballages</value>
   </data>
-  <data name="SettingsDependencies.Header" xml:space="preserve">
+  <data name="SettingsDependencies" xml:space="preserve">
     <value>Dépendances de l'application</value>
   </data>
   <data name="SettingsDependencyAuthor.Text" xml:space="preserve">

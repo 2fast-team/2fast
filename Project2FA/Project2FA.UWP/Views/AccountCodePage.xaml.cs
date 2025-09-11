@@ -307,23 +307,10 @@ namespace Project2FA.UWP.Views
 #endif
         private async void MFI_DeleteAccount_Click(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.IsAccountNotDeleted)
+            if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
             {
-                if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
-                {
-                    await ViewModel.DeleteAccountCommandTask(model);
-                }
+                await ViewModel.DeleteAccountCommandTask(model);
             }
-            else
-            {
-                //ContentDialog dialog = new ContentDialog();
-                //dialog.Title = Strings.Resources.ErrorHandle;
-                //dialog.Content = Strings.Resources.AccountCodePageOnlyOneDeleteAccountTxt;
-                //dialog.PrimaryButtonText = Strings.Resources.ButtonTextConfirm;
-                //dialog.CloseButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-                //await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
-            }
-
         }
 
 #if NET9_0_OR_GREATER

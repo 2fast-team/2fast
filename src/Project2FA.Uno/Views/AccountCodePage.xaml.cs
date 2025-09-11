@@ -1,10 +1,14 @@
-﻿using Project2FA.ViewModels;
-using Windows.UI;
-using Project2FA.Repository.Models;
-using UNOversal.Navigation;
-using Microsoft.UI.Xaml.Media.Animation;
+﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Media.Animation;
+using Project2FA.Controls;
+using Project2FA.Repository.Models;
 using Project2FA.UnoApp;
+using Project2FA.ViewModels;
+using UNOversal.Ioc;
+using UNOversal.Navigation;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.UI;
 
 namespace Project2FA.Uno.Views;
 
@@ -86,13 +90,43 @@ public sealed partial class AccountCodePage : Page
         }
     }
 
+    private async Task<bool> Copy2FACodeToClipboard(TwoFACodeModel model)
+    {
+        try
+        {
+            DataPackage dataPackage = new DataPackage
+            {
+                RequestedOperation = DataPackageOperation.Copy
+            };
+            dataPackage.SetText(model.TwoFACode);
+            Clipboard.SetContent(dataPackage);
+            return true;
+        }
+        catch (System.Exception exc)
+        {
+            //ContentDialog dialog = new ContentDialog();
+            //dialog.Title = Strings.Resources.ErrorHandle;
+            //dialog.Content = Strings.Resources.ErrorClipboardTask;
+            //dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
+            //dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
+            //dialog.PrimaryButtonCommand = new AsyncRelayCommand(async () =>
+            //{
+            //    await Copy2FACodeToClipboard(model);
+            //});
+            //dialog.SecondaryButtonText = Strings.Resources.ButtonTextCancel;
+            //await App.Current.Container.Resolve<ILoggingService>().LogException(exc, SettingsService.Instance.LoggingSetting);
+            //await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
+            return false;
+        }
+    }
+
     private void CreateTeachingTip(FrameworkElement element)
     {
         TeachingTip teachingTip = new TeachingTip
         {
             Target = element,
             Content = Strings.Resources.AccountCodePageCopyCodeTeachingTip,
-
+            IsLightDismissEnabled = true,
             BorderBrush = new SolidColorBrush((Color)App.Current.Resources["SystemAccentColor"]),
             IsOpen = true,
         };
@@ -108,11 +142,10 @@ public sealed partial class AccountCodePage : Page
     {
         if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
         {
-            //if (await Copy2FACodeToClipboard(model))
-            //{
-            //    CreateTeachingTip(sender as FrameworkElement);
-            //}
-            CreateTeachingTip(sender as FrameworkElement);
+            if (await Copy2FACodeToClipboard(model))
+            {
+                CreateTeachingTip(sender as FrameworkElement);
+            }
         }
     }
 
@@ -188,8 +221,48 @@ public sealed partial class AccountCodePage : Page
         }
     }
 
+    private async void BTN_SetFavourite_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button mfi && mfi.DataContext is TwoFACodeModel model)
+        {
+            await ViewModel.SetFavouriteCommandTask(model);
+        }
+    }
+
     private void AutoSuggestBox_GotFocus(object sender, RoutedEventArgs e)
     {
         ViewModel.SetSuggestionList(ViewModel.SearchedAccountLabel, false);
+    }
+
+    private void BTN_ShowCode_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn && btn.DataContext is TwoFACodeModel model)
+        {
+            ViewModel.HideOrShowTOTPCodeCommandTask(model);
+        }
+    }
+
+    private async void MFI_DeleteAccount_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+        {
+            await ViewModel.DeleteAccountCommandTask(model);
+        }
+    }
+
+    private async void MFI_EditAccount_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+        {
+            await ViewModel.EditAccountCommandTask(model);
+        }
+    }
+
+    private async void MFI_ExportAccount_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
+        {
+            await ViewModel.ExportQRCodeCommandTask(model);
+        }
     }
 }

@@ -39,7 +39,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Project2FA.Services.Importer;
 using UNOversal.Helpers;
-using WinRT;
 
 namespace Project2FA.UWP
 {

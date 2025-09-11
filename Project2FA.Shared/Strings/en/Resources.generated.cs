@@ -1998,6 +1998,17 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region SettingsDependencies
+        public static string SettingsDependencies
+        {
+            get
+            {
+                return _resourceLoader.GetString("SettingsDependencies");
+            }
+        }
+        #endregion
+
+
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("DotNetPlus.ReswPlus", "2.1.3")]
@@ -2160,7 +2171,8 @@ namespace Project2FA.Strings{
             CloseAppDialogTitle,
             ImportBackupQRCodeNotSupportedError,
             ImportBackupPasswordError,
-            AddQRCodeNotSupportedError
+            AddQRCodeNotSupportedError,
+            SettingsDependencies
         }
 
         private static ResourceLoader _resourceLoader;

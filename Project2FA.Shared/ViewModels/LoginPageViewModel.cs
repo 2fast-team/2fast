@@ -374,6 +374,7 @@ namespace Project2FA.ViewModels
 
         public void Initialize(INavigationParameters parameters)
         {
+            IsLoading = false;
             if (parameters.TryGetValue<bool>("isLogout", out var isLogout))
             {
                 IsLogout = isLogout;

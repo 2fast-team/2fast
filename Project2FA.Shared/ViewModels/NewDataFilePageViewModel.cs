@@ -47,7 +47,7 @@ namespace Project2FA.ViewModels
         private ILoggingService LoggingService { get; }
         private bool _selectWebDAV;
 
-        private string _errorText;
+        private string _errorText, _folderPath;
 
         /// <summary>
         /// Constructor
@@ -90,7 +90,11 @@ namespace Project2FA.ViewModels
 
             ChangePathCommand = new AsyncRelayCommand(async () =>
             {
+#if !WINDOWS_UWP
+                await SaveFileAsync();
+#else
                 await SetLocalPath(true); //change path is true
+#endif
             });
 
             WebDAVLoginCommand = new AsyncRelayCommand(WebDAVLoginCommandTask);
@@ -120,7 +124,7 @@ namespace Project2FA.ViewModels
                     {
                         if (!await CheckIfNameExists(DateFileName + ".2fa"))
                         {
-                            if (Password == PasswordRepeat)
+                            if (Password == PasswordRepeat && (LocalStorageFolder != null || LocalStorageFile != null))
                             {
                                 DatafileBTNActive = true;
                             }
@@ -169,17 +173,37 @@ namespace Project2FA.ViewModels
             }
 
             byte[] iv = Aes.Create().IV;
-            DatafileModel file = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
+            DatafileModel model = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
             if (isWebDAV)
             {
                 LocalStorageFolder = ApplicationData.Current.LocalFolder;
             }
             try
             {
-                await FileService.WriteStringAsync(
-                    DateFileName,
-                    SerializationService.Serialize(file),
-                    await StorageFolder.GetFolderFromPathAsync(LocalStorageFolder.Path));
+                bool created;
+                if (LocalStorageFolder != null)
+                {
+                    created = await FileService.WriteStringAsync(
+                        DateFileName,
+                        SerializationService.Serialize(model),
+                        LocalStorageFolder);
+                }
+                else
+                {
+#if __ANDROID__
+                    // create new thread for buggy Android, else NetworkOnMainThreadException 
+                    await Task.Run(async () => {
+                        await FileIO.WriteTextAsync(LocalStorageFile, SerializationService.Serialize(model));
+                    });
+#else
+                    await FileIO.WriteTextAsync(LocalStorageFile, SerializationService.Serialize(model));
+#endif
+                }
+
+#if !WINDOWS_UWP
+                // load file from local folder
+                //LocalStorageFile = await LocalStorageFolder.GetFileAsync(DateFileName);
+#endif
 
                 var result = await CreateDataFileSettings(isWebDAV);
                 if (result)
@@ -219,6 +243,48 @@ namespace Project2FA.ViewModels
             }
         }
 
+        private async Task<bool> SaveFileAsync()
+        {
+            if (!DateFileName.Contains(".2fa"))
+            {
+                DateFileName += ".2fa";
+            }
+
+            var saveFilePicker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                SuggestedFileName = DateFileName
+            };
+#if ANDROID
+            var androidFlags = Android.Content.ActivityFlags.GrantReadUriPermission |
+                Android.Content.ActivityFlags.GrantWriteUriPermission |
+                Android.Content.ActivityFlags.GrantPersistableUriPermission |
+                Android.Content.ActivityFlags.GrantPrefixUriPermission;
+            // set the persistent access to the file
+            FilePickerHelper.RegisterOnBeforeStartActivity(saveFilePicker, (intent) =>
+            {
+                intent.AddFlags(androidFlags);
+            });
+#endif
+            IsLoading = true;
+            var file = await saveFilePicker.PickSaveFileAsync();
+            IsLoading = false;
+            if (file != null)
+            {
+                FolderPath = file.Path.Replace(file.Name, string.Empty);
+                LocalStorageFile = file;
+
+                CheckInputs();
+                return true;
+            }
+            else
+            {
+                //the path, but cancel the dialog 
+                return false;
+            }
+            //saveFilePicker.FileTypeChoices.Add("2FA files", new System.Collections.Generic.List<string>() { ".2fa" });
+        }
+
 
         /// <summary>
         /// Starts a folder picker to pick a datafile from a local path
@@ -233,13 +299,6 @@ namespace Project2FA.ViewModels
             };
             folderPicker.FileTypeFilter.Add("*");
 
-#if ANDROID
-			var intent = new Android.Content.Intent(Android.Content.Intent.ActionOpenDocument);
-			intent.AddFlags(Android.Content.ActivityFlags.GrantPersistableUriPermission);
-            // TODO future uno build
-			//FilePickerHelper.RegisterOnBeforeStartActivity(folderPicker, intent);
-#endif
-
             IsLoading = true;
             var folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
@@ -250,6 +309,8 @@ namespace Project2FA.ViewModels
                 StorageApplicationPermissions.FutureAccessList.Add(folder, "metadata");
 #endif
                 LocalStorageFolder = folder;
+
+                CheckInputs();
                 return true;
             }
             else
@@ -264,6 +325,7 @@ namespace Project2FA.ViewModels
                 return false;
             }
         }
+#region GetSet
 
         public string ErrorText
         {
@@ -279,5 +341,11 @@ namespace Project2FA.ViewModels
             get => _selectWebDAV;
             set => SetProperty(ref _selectWebDAV, value);
         }
+        public string FolderPath 
+        { 
+            get => _folderPath;
+            set => SetProperty(ref _folderPath, value);
+        }
+        #endregion
     }
 }

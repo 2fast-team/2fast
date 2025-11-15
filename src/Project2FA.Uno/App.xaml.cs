@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
 using Project2FA.Services;
@@ -12,6 +11,7 @@ using UNOversal.DryIoc;
 using UNOversal.Ioc;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.File;
+using UNOversal.Services.Gesture;
 using UNOversal.Services.Logging;
 using UNOversal.Services.Network;
 using UNOversal.Services.Secrets;
@@ -53,7 +53,7 @@ namespace Project2FA.UnoApp
 
 #if __IOS__ || __ANDROID__
             //SetStyles();
-            FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+            //FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
 #endif
 
             this.InitializeComponent();
@@ -66,7 +66,7 @@ namespace Project2FA.UnoApp
             MainWindow = WinUIWindow.Current;
 #if DEBUG
             //WinUIWindow.Current.EnableHotReload(); // obsolete
-            MainWindow.UseStudio();
+            //MainWindow.UseStudio();
 #endif
             //MainWindow.SetWindowIcon();
 
@@ -386,56 +386,60 @@ namespace Project2FA.UnoApp
 #endif
         }
 
-        public override void RegisterTypes(IContainerRegistry containerRegistry)
+        public override void RegisterTypes(IContainerRegistry container)
         {
-            //containerRegistry.RegisterSingleton<INavigationService, NavigationService>();
-            containerRegistry.RegisterSingleton<IDialogService, DialogService>();
-            containerRegistry.RegisterSingleton<IFileService, FileService>();
-            containerRegistry.RegisterSingleton<INetworkService, NetworkService>();
-            containerRegistry.RegisterSingleton<ISecretService, SecretService>();
-            containerRegistry.RegisterSingleton<ISettingsHelper, SettingsHelper>();
-            containerRegistry.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
-            containerRegistry.RegisterSingleton<ISerializationService, SerializationService>();
-            containerRegistry.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>();
-            containerRegistry.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
-            containerRegistry.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
-            containerRegistry.RegisterSingleton<IProject2FAParser, Project2FAParser>();
-            containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
-            containerRegistry.RegisterSingleton<IBackupImporterService, BackupImporterService>();
-            containerRegistry.RegisterSingleton<IAegisBackupImportService, AegisBackupImportService>();
-            containerRegistry.RegisterSingleton<IAndOTPBackupImportService, AndOTPBackupImportService>();
+            // custom services
+            container.RegisterSingleton<IDialogService, DialogService>();
+            container.RegisterSingleton<IFileService, FileService>();
+            container.RegisterSingleton<INetworkService, NetworkService>();
+            container.RegisterSingleton<ISecretService, SecretService>();
+            container.RegisterSingleton<ISettingsHelper, SettingsHelper>();
+            container.RegisterSingleton<IGestureService, GestureService>();
+            container.RegisterSingleton<ISerializationService, SerializationService>(); //for internal uwp services
+            container.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>(); //netstandard for general access
+            container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
+            container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
+            container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();
+            //container.RegisterSingleton<IPurchaseAddOnService, PurchaseAddOnService>();
+            container.RegisterSingleton<ILoggingService, LoggingService>();
+            container.RegisterSingleton<IBackupImporterService, BackupImporterService>();
+            container.RegisterSingleton<IAegisBackupImportService, AegisBackupImportService>();
+            container.RegisterSingleton<IAndOTPBackupImportService, AndOTPBackupImportService>();
+            container.RegisterSingleton<ITwoFASBackupImportService, TwoFASBackupImportService>();
+            container.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
 
-            containerRegistry.RegisterSingleton<ShellPage>();
-            containerRegistry.RegisterForNavigation<BlankPage, BlankPageViewModel>();
-            containerRegistry.RegisterForNavigation<TutorialPage, TutorialPageViewModel>();
-            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
-            containerRegistry.RegisterForNavigation<FileActivationPage, FileActivationPageViewModel>();
-            containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
-            containerRegistry.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
-            containerRegistry.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
-            containerRegistry.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
-            containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
+
+            container.RegisterSingleton<ShellPage>();
+            container.RegisterForNavigation<BlankPage, BlankPageViewModel>();
+            container.RegisterForNavigation<TutorialPage, TutorialPageViewModel>();
+            container.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            container.RegisterForNavigation<FileActivationPage, FileActivationPageViewModel>();
+            container.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
+            container.RegisterForNavigation<AccountCodePage, AccountCodePageViewModel>();
+            container.RegisterForNavigation<NewDataFilePage, NewDataFilePageViewModel>();
+            container.RegisterForNavigation<UseDataFilePage, UseDataFilePageViewModel>();
+            container.RegisterForNavigation<SettingPage, SettingPageViewModel>();
 
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
             // fullscreen pages instead of dialogs
 #if __IOS__ || __ANDROID__
-            containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
-            containerRegistry.RegisterForNavigation<CameraPage, CameraPageViewModel>();
+            container.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
+            container.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
+            container.RegisterForNavigation<CameraPage, CameraPageViewModel>();
 #else
             containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
             containerRegistry.RegisterForNavigation<AddAccountContentDialog, AddAccountContentDialogViewModel>();
 #endif
 
             //contentdialogs and view-models
-            containerRegistry.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
-            containerRegistry.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();
-            
-            containerRegistry.RegisterDialog<RateAppContentDialog>();
-            containerRegistry.RegisterDialog<UpdateDatafileContentDialog, UpdateDatafileContentDialogViewModel>();
-            containerRegistry.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();
-            containerRegistry.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
-            containerRegistry.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
+            container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
+            container.RegisterDialog<ChangeDatafilePasswordContentDialog, ChangeDatafilePasswordContentDialogViewModel>();
+
+            container.RegisterDialog<RateAppContentDialog>();
+            container.RegisterDialog<UpdateDatafileContentDialog, UpdateDatafileContentDialogViewModel>();
+            container.RegisterDialog<UseDatafileContentDialog, UseDatafileContentDialogViewModel>();
+            container.RegisterDialog<WebViewDatafileContentDialog, WebViewDatafileContentDialogViewModel>();
+            container.RegisterDialog<DisplayQRCodeContentDialog, DisplayQRCodeContentDialogViewModel>();
             //containerRegistry.RegisterDialog<TutorialContentDialog, TutorialContentDialogViewModel>();
         }
     }

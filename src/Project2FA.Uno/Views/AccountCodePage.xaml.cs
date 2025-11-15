@@ -90,36 +90,6 @@ public sealed partial class AccountCodePage : Page
         }
     }
 
-    private async Task<bool> Copy2FACodeToClipboard(TwoFACodeModel model)
-    {
-        try
-        {
-            DataPackage dataPackage = new DataPackage
-            {
-                RequestedOperation = DataPackageOperation.Copy
-            };
-            dataPackage.SetText(model.TwoFACode);
-            Clipboard.SetContent(dataPackage);
-            return true;
-        }
-        catch (System.Exception exc)
-        {
-            //ContentDialog dialog = new ContentDialog();
-            //dialog.Title = Strings.Resources.ErrorHandle;
-            //dialog.Content = Strings.Resources.ErrorClipboardTask;
-            //dialog.PrimaryButtonText = Strings.Resources.ButtonTextRetry;
-            //dialog.PrimaryButtonStyle = App.Current.Resources["AccentButtonStyle"] as Style;
-            //dialog.PrimaryButtonCommand = new AsyncRelayCommand(async () =>
-            //{
-            //    await Copy2FACodeToClipboard(model);
-            //});
-            //dialog.SecondaryButtonText = Strings.Resources.ButtonTextCancel;
-            //await App.Current.Container.Resolve<ILoggingService>().LogException(exc, SettingsService.Instance.LoggingSetting);
-            //await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
-            return false;
-        }
-    }
-
     private void CreateTeachingTip(FrameworkElement element)
     {
         TeachingTip teachingTip = new TeachingTip
@@ -142,9 +112,10 @@ public sealed partial class AccountCodePage : Page
     {
         if ((sender as FrameworkElement).DataContext is TwoFACodeModel model)
         {
-            if (await Copy2FACodeToClipboard(model))
+            if (await ViewModel.CopyCodeToClipboardCommandTask(model))
             {
-                CreateTeachingTip(sender as FrameworkElement);
+                // via xaml flyout
+                //CreateTeachingTip(sender as FrameworkElement);
             }
         }
     }
@@ -254,6 +225,7 @@ public sealed partial class AccountCodePage : Page
     {
         if (sender is MenuFlyoutItem mfi && mfi.DataContext is TwoFACodeModel model)
         {
+            string test = model.Label;
             await ViewModel.EditAccountCommandTask(model);
         }
     }

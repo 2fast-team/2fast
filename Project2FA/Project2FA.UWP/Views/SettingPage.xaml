@@ -247,7 +247,7 @@
                                                     </Grid>
                                                 </ctwc:SettingsCard.Content>
                                             </ctwc:SettingsCard>
-                                            <!--<ctwc:SettingsCard 
+                                            <ctwc:SettingsCard 
                                             x:Uid="SettingsAppCompactDesign"
                                             HeaderIcon="{ui:FontIcon Glyph=&#xE92C;}"
                                             Header="~SettingsAppCompactDesign.Header">
@@ -288,7 +288,7 @@
                                                         </ComboBox>
                                                     </Grid>
                                                 </ctwc:SettingsCard.Content>
-                                            </ctwc:SettingsCard>-->
+                                            </ctwc:SettingsCard>
                                         </ctwc:SettingsExpander.Items>
                                     </ctwc:SettingsExpander>
                                 </unoVersalControls:SettingsGroup>
@@ -670,7 +670,7 @@
                                 </SemanticZoom>
                                 <!--<GridView
                                     ItemTemplate="{StaticResource DependenciesListViewTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.AboutPartViewModel.TempDependencyCollection,Mode=OneWay}"
+                                    ItemsSource="{x:Bind DependencyCollectionViewSource.View,Mode=OneWay}"
                                     IsTabStop="False"
                                     IsItemClickEnabled="True"/>-->
                             </Grid>

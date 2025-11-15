@@ -217,7 +217,7 @@ namespace Project2FA.ViewModels
                 Android.Content.ActivityFlags.GrantWriteUriPermission |
                 Android.Content.ActivityFlags.GrantPersistableUriPermission |
                 Android.Content.ActivityFlags.GrantPrefixUriPermission;
-            // set the persistent access to the file
+            // set the persistent access request to the picker
             FilePickerHelper.RegisterOnBeforeStartActivity(filePicker, (intent) =>
             {
                 intent.AddFlags(androidFlags);
@@ -229,21 +229,12 @@ namespace Project2FA.ViewModels
             if (LocalStorageFile != null)
             {
                 IsLoading = false;
-
-
 #if WINDOWS_UWP
                 // set folder to the access list
                 LocalStorageFolder = await LocalStorageFile.GetParentAsync();
                 StorageApplicationPermissions.FutureAccessList.Add(LocalStorageFile, "metadata");
 #endif
 
-#if __ANDROID__
-                //Uno.UI.ContextHelper.Current.GrantUriPermission("com.jpwtechnology.Project2FA.UNO", Android.Net.Uri.Parse(LocalStorageFile.Path), androidFlags);
-                // save the file path for persistable URI permission
-                ContextHelper.Current.ContentResolver.TakePersistableUriPermission(
-                    Android.Net.Uri.Parse(LocalStorageFile.Path),
-                    Android.Content.ActivityFlags.GrantReadUriPermission | Android.Content.ActivityFlags.GrantWriteUriPermission);
-#endif
                 DateFileName = LocalStorageFile.Name;
                 return true;
             }

@@ -81,9 +81,12 @@ namespace Project2FA.Services.Importer
                     case BackupServiceEnum.AndOTP:
                         (accountList, successful) = await AndOTPBackupService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
                         break;
-                    //case BackupServiceEnum.TwoFAS:
-                    //    (accountList, successful) = await TwoFASBackupImportService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
-                    //    break;
+                    case BackupServiceEnum.TwoFAS:
+                        (accountList, successful) = await TwoFASBackupImportService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
+                        break;
+                    case BackupServiceEnum.Twofast:
+                        //(accountList, successful) = await TwofastBackupImportService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
+                        break;
                     default:
                         break;
                 }

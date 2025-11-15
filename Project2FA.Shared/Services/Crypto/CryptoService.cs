@@ -24,33 +24,28 @@ namespace Project2FA.Core.Services.Crypto
             }
         }
 
-        public static byte[] CreateByteArrayKeyV1(string secret, int keyByteSize = 32, int iterations = 1000)
-        {
-            byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
-            var keyGenerator = new Rfc2898DeriveBytes(secret, salt, iterations, HashAlgorithmName.SHA1);
-
-            return keyGenerator.GetBytes(keyByteSize);
-        }
-
-        public static byte[] CreateByteArrayKeyV2(string secret, int keyByteSize = 32, int iterations = 25000)
-        {
-            byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
-            var keyGenerator = new Rfc2898DeriveBytes(secret, salt, iterations, HashAlgorithmName.SHA256);
-            return keyGenerator.GetBytes(keyByteSize);
-        }
-
         public static byte[] CreateByteArrayKeyV1(byte[] secretByteArray, int keyByteSize = 32, int iterations = 1000)
         {
+#if NET9_0_OR_GREATER
+            byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
+            return Rfc2898DeriveBytes.Pbkdf2(secretByteArray, salt, iterations, HashAlgorithmName.SHA1, keyByteSize);
+#else
             byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
             var keyGenerator = new Rfc2898DeriveBytes(secretByteArray, salt, iterations, HashAlgorithmName.SHA1);
             return keyGenerator.GetBytes(keyByteSize);
+#endif
         }
 
         public static byte[] CreateByteArrayKeyV2(byte[] secretByteArray, int keyByteSize = 32, int iterations = 25000)
         {
+#if NET9_0_OR_GREATER
+            byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
+            return Rfc2898DeriveBytes.Pbkdf2(secretByteArray, salt, iterations, HashAlgorithmName.SHA256, keyByteSize);
+#else
             byte[] salt = new byte[8] { 14, 223, 35, 197, 93, 242, 239, 8 };
             var keyGenerator = new Rfc2898DeriveBytes(secretByteArray, salt, iterations, HashAlgorithmName.SHA256);
             return keyGenerator.GetBytes(keyByteSize);
+#endif
         }
 
         public static string CreateStringHash(string input)

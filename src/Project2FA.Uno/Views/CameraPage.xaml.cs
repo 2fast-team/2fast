@@ -9,16 +9,14 @@ namespace Project2FA.Uno.Views
         public CameraPage()
 		{
 			this.InitializeComponent();
-            this.Loaded += CameraPage_Loaded;
 		}
-
-        private void CameraPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel.BarcodeReaderControl = BarcodeReaderControl;
-        }
 
         private void CameraBarcodeReaderControl_BarcodesDetected(object sender, ZXing.Net.Uno.BarcodeDetectionEventArgs e)
         {
+            if (ViewModel.BarcodeReaderControl == null)
+            {
+                ViewModel.BarcodeReaderControl = BarcodeReaderControl;
+            }
             ViewModel.ReadBarcode(e);
         }
     }

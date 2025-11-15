@@ -51,7 +51,8 @@
                         <CheckBox 
                             VerticalAlignment="Center"
                             IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
-                            IsEnabled="{x:Bind IsEnabled, Mode=OneWay}" Click="CheckBox_Click"/>
+                            IsEnabled="{x:Bind IsEnabled, Mode=OneWay}" 
+                            Click="CheckBox_Click"/>
 
                         <StackPanel 
                             Grid.Column="1" 
@@ -234,12 +235,11 @@
                             </ComboBox>
                             <!--SelectedIndex="{x:Bind ViewModel.PeriodIndex, Mode=TwoWay}"-->
 
-
-
                             <CheckBox
                                 x:Name="CB_PasswordGiven"
                                 Content="~ImportBackupCDPasswordGiven.Content"
                                 x:Uid="ImportBackupCDPasswordGiven"
+                                IsEnabled="{x:Bind ViewModel.PasswordGivenEnabled, Mode=OneWay}"
                                 IsChecked="{x:Bind ViewModel.PasswordGivenChecked,Mode=TwoWay}"/>
 
                             <PasswordBox

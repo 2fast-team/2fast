@@ -3,7 +3,9 @@ using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.UWP.Controls;
 using Project2FA.ViewModels;
+using System.Linq;
 using System.Threading.Tasks;
+using UNOversal;
 using UNOversal.Ioc;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.Logging;
@@ -41,7 +43,7 @@ namespace Project2FA.UWP.Views
             {
                 App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
             }
-            //App.ShellPageInstance.ShellViewInternal.Focus(FocusState.Unfocused);
+
 
         }
 
@@ -174,6 +176,7 @@ namespace Project2FA.UWP.Views
         /// <param name="e"></param>
 #if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+        [DynamicWindowsRuntimeCast(typeof(AutoSuggestBox))]
 #endif
         private async void LV_AccountCollection_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
@@ -235,6 +238,14 @@ namespace Project2FA.UWP.Views
                             break;
                         default:
                             break;
+                    }
+                }
+                if (e.Key.ToString().ToLower() == "s")
+                {
+                    var suggestbox = App.ShellPageInstance.ShellViewInternal.VisualChildren().Where(x => x is AutoSuggestBox);
+                    if (suggestbox.Any())
+                    {
+                        (suggestbox.First() as AutoSuggestBox).Focus(Windows.UI.Xaml.FocusState.Programmatic);
                     }
                 }
             }
@@ -333,6 +344,13 @@ namespace Project2FA.UWP.Views
             {
                 ViewModel.HideOrShowTOTPCodeCommandTask(model);
             }
+        }
+
+        private void LV_AccountCollection_Loaded(object sender, RoutedEventArgs e)
+        {
+            //App.ShellPageInstance.MainFrame.Focus(FocusState.Programmatic);
+            //LV_AccountCollection.Focus(Windows.UI.Xaml.FocusState.Programmatic);
+            
         }
     }
 }

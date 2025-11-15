@@ -380,7 +380,7 @@ namespace Project2FA.ViewModels
         /// Copy the 2fa code to clipboard and create a user dialog
         /// </summary>
         /// <param name="model"></param>
-        private async Task<bool> CopyCodeToClipboardCommandTask(TwoFACodeModel model)
+        public async Task<bool> CopyCodeToClipboardCommandTask(TwoFACodeModel model)
         {
             try
             {

@@ -66,6 +66,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFASBackupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WebDAVStatusEnums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Crypto\CryptoService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Crypto\ProtectData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AegisBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AndOTPBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\BackupImporterService.cs" />
@@ -75,6 +77,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IBackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\TwoFASBackupImportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\JSON\INewtonsoftJSONService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\JSON\NewtonsoftJSONService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\SerializationService.cs" />

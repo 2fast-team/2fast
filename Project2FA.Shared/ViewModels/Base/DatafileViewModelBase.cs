@@ -122,6 +122,14 @@ namespace Project2FA.ViewModels
                 Foundation.NSUserDefaults.StandardUserDefaults[Constants.ContainerName] = bookmark;
                 Foundation.NSUserDefaults.StandardUserDefaults.Synchronize();
 #endif
+
+#if __ANDROID__
+                // save the file path for persistable URI permission
+                ContextHelper.Current.ContentResolver.TakePersistableUriPermission(
+                    Android.Net.Uri.Parse(LocalStorageFile.Path),
+                    Android.Content.ActivityFlags.GrantReadUriPermission | Android.Content.ActivityFlags.GrantWriteUriPermission);
+#endif
+
 #if WINDOWS_UWP
                 SettingsService.Instance.DataFilePath = ChoosenOneWebDAVFile == null ? LocalStorageFolder.Path : ChoosenOneWebDAVFile.Path;
 #else

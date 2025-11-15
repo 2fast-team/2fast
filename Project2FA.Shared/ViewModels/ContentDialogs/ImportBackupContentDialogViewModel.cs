@@ -1,6 +1,8 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json.Linq;
 using Project2FA.Core.Utils;
+using Project2FA.Extensions;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Importer;
@@ -8,7 +10,9 @@ using Project2FA.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.Dialogs;
@@ -36,8 +40,9 @@ namespace Project2FA.ViewModels
         private string _password = string.Empty;
         private bool _passwordGivenChecked = true;
         private int _selectedImportFormatIndex = -1;
+        private bool _passwordGivenEnabled = true;
         public ICommand ImportAccountCommand { get; }
-        public ObservableCollection<BackupServiceEnum> BackupServiceEnumList { get; } = new ObservableCollection<BackupServiceEnum>();
+        public ObservableCollection<string> BackupServiceEnumList { get; } = new ObservableCollection<string>();
 
 
         public ImportBackupContentDialogViewModel(IBackupImporterService backupImporterService, IDialogService dialogService)
@@ -86,8 +91,8 @@ namespace Project2FA.ViewModels
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
             filePicker.FileTypeFilter.Add(".json");
-            //filePicker.FileTypeFilter.Add(".2fa");
-            //filePicker.FileTypeFilter.Add(".2fas");
+            filePicker.FileTypeFilter.Add(".2fa");
+            filePicker.FileTypeFilter.Add(".2fas");
             // TODO : Set file types for Android and iOS
 #if __IOS__
             // mapping the filter type to definied UTType
@@ -98,7 +103,19 @@ namespace Project2FA.ViewModels
             var file = await filePicker.PickSingleFileAsync();
             if (file != null)
             {
+                PasswordGivenEnabled = true;
+                PasswordGivenChecked = true;
                 ImportStorageFile = file;
+                if (file.FileType == ".2fa") // password is required
+                {
+                    PasswordGivenChecked = true;
+                    PasswordGivenEnabled = false;
+                    SelectedImportFormatIndex = BackupServiceEnumList.IndexOf("2fast");
+                }
+                if (file.FileType == ".2fas")
+                {
+                    SelectedImportFormatIndex = BackupServiceEnumList.IndexOf("2FAS");
+                }
             }
             IsLoading = false;
             return ImportStorageFile;
@@ -107,8 +124,18 @@ namespace Project2FA.ViewModels
         public void Initialize(IDialogParameters parameters)
         {
             this.EntryEnum = Repository.Models.Enums.AccountEntryEnum.Import;
-            var importList = Enum.GetValues(typeof(BackupServiceEnum)).Cast<BackupServiceEnum>();
-            BackupServiceEnumList.AddRange(importList.Where(x => x != BackupServiceEnum.None));
+            var enumList = Enum.GetValues(typeof(BackupServiceEnum)).Cast<BackupServiceEnum>();
+            List<string> importList = new List<string>();
+            for (int i = 0; i < enumList.Count(); i++)
+            {
+                FieldInfo fi = enumList.ElementAt(i).GetType().GetField(enumList.ElementAt(i).ToString());
+                DescriptionAttribute attr = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+                if (attr != null)
+                {
+                    importList.Add(attr.Description);
+                }
+            }
+            BackupServiceEnumList.AddRange(importList);
         }
 
         public void CheckInputs()
@@ -178,9 +205,21 @@ namespace Project2FA.ViewModels
             {
                 if(SetProperty(ref _passwordGivenChecked, value))
                 {
+                    // clear password, if checkbox is unselected
+                    if (!_passwordGivenChecked)
+                    {
+                        Password = string.Empty;
+                    }
                     CheckInputs();
                 }
             }
+        }
+
+        public bool PasswordGivenEnabled
+        {
+            get => _passwordGivenEnabled;
+            set => SetProperty(ref _passwordGivenEnabled, value);
+
         }
 
         public int SelectedImportFormatIndex 

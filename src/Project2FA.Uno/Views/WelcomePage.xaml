@@ -70,11 +70,14 @@
                 TintOpacity="0.8" />
             </Grid.Background>-->
             <Border x:Name="DetailFirstShadowPanel" Background="{ThemeResource TranslucentBackgroundMediumBrush}">
-                <Border>
-                    <!--<Border.Background>
-                        <media:BackdropBlurBrush Amount="2" />
-                    </Border.Background>-->
-                </Border>
+                <!--<Border>
+                    <Border.Background>
+                        <AcrylicBrush 
+                            AlwaysUseFallback="False" 
+                            TintColor="Black" 
+                            TintOpacity="0.8" />
+                    </Border.Background>
+                </Border>-->
             </Border>
 
             <ScrollViewer  Margin="0,40,0,0" VerticalScrollBarVisibility="Auto">

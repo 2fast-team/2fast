@@ -11,7 +11,6 @@ using System.Linq;
 using UNOversal.Ioc;
 using Windows.ApplicationModel.Core;
 using System.Threading.Tasks;
-using Project2FA.Services.Enums;
 using UNOversal.Navigation;
 using Project2FA.Utils;
 using UNOversal.Services.Dialogs;
@@ -25,8 +24,10 @@ using UNOversal.Services.Gesture;
 using UNOversal.Services.Logging;
 using Windows.UI.Core.Preview;
 using UNOversal.Helpers;
-using CommunityToolkit.WinUI.Helpers;
 using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
+#if NET9_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace Project2FA.UWP.Views
 {
@@ -37,7 +38,13 @@ namespace Project2FA.UWP.Views
         public Frame MainFrame { get; }
         public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
         private readonly CoreApplicationViewTitleBar _coreTitleBar;
+        private string _settingsNavigationStr;
+        private object PreviousItem { get; set; }
 
+
+#if NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(NavigationViewItem))]
+#endif
         public ShellPage()
         {
             InitializeComponent();
@@ -121,6 +128,9 @@ namespace Project2FA.UWP.Views
             Loaded += ShellPage_Loaded;
         }
 
+#if NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         private async void App_CloseRequested(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
             var deferral = e.GetDeferral();
@@ -138,6 +148,9 @@ namespace Project2FA.UWP.Views
             deferral.Complete();
         }
 
+#if NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
             bool changedResources = false;
@@ -302,6 +315,17 @@ namespace Project2FA.UWP.Views
 
         }
 
+        /// <summary>
+        /// Checks the current status of in-app subscriptions and updates purchase information as needed based on the
+        /// application's startup state.
+        /// </summary>
+        /// <remarks>This method requires an active internet connection to validate and update
+        /// subscription information. If no connection is available and <paramref name="isFirstStart"/> is <see
+        /// langword="true"/>, add-on status cannot be updated. The method interacts with purchase and network services
+        /// to ensure subscription data is current.</remarks>
+        /// <param name="isFirstStart">Indicates whether this is the first time the application has started. If <see langword="true"/>, all
+        /// available add-ons are checked; otherwise, only relevant subscriptions are validated.</param>
+        /// <returns>A task that represents the asynchronous operation of checking and updating in-app subscription status.</returns>
         private async Task CheckInAppSubscriptionStatus(bool isFirstStart)
         {
             var purchaseService = App.Current.Container.Resolve<IPurchaseAddOnService>();
@@ -318,34 +342,13 @@ namespace Project2FA.UWP.Views
                             if (SettingsService.Instance.PurchasedStoreId == Constants.SupportSubscriptionId)
                             {
                                 purchaseService.Initialize(Constants.SupportSubscriptionId);
-                                (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await purchaseService.SetupPurchaseAddOnInfoAsync();
-
-                                if (IsActiveMonthSubscription)
-                                {
-                                    // set new expiration date and last check time
-                                    SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
-                                    SettingsService.Instance.NextCheckedInPurchaseAddon = infoMonth.ExpirationDate;
-                                }
-                                else
-                                {
-                                    SettingsService.Instance.IsProVersion = false;
-                                }
+                                await PurchaseAddOnInfoAsync(purchaseService, Constants.SupportSubscriptionId, isFirstStart);
                             }
 
                             if (SettingsService.Instance.PurchasedStoreId == Constants.OneYearSubscriptionId)
                             {
                                 purchaseService.Initialize(Constants.OneYearSubscriptionId);
-                                (bool IsActiveYearSubscription, StoreLicense infoYear) = await purchaseService.SetupPurchaseAddOnInfoAsync();
-                                if (IsActiveYearSubscription)
-                                {
-                                    // set new expiration date and last check time
-                                    SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
-                                    SettingsService.Instance.NextCheckedInPurchaseAddon = infoYear.ExpirationDate;
-                                }
-                                else
-                                {
-                                    SettingsService.Instance.IsProVersion = false;
-                                }
+                                await PurchaseAddOnInfoAsync(purchaseService, Constants.OneYearSubscriptionId, isFirstStart);
                             }
                         }
                     }
@@ -356,38 +359,13 @@ namespace Project2FA.UWP.Views
                     if (isFirstStart)
                     {
                         purchaseService.Initialize(Constants.SupportSubscriptionId);
-                        (bool IsActiveMonthSubscription, StoreLicense infoMonth) = await purchaseService.SetupPurchaseAddOnInfoAsync();
-
-                        if (IsActiveMonthSubscription)
-                        {
-                            // set new expiration date and last check time
-                            SettingsService.Instance.IsProVersion = true;
-                            SettingsService.Instance.PurchasedStoreId = Constants.SupportSubscriptionId;
-                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
-                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoMonth.ExpirationDate;
-                        }
+                        await PurchaseAddOnInfoAsync(purchaseService, Constants.SupportSubscriptionId, isFirstStart);
 
                         purchaseService.Initialize(Constants.OneYearSubscriptionId);
-                        (bool IsActiveYearSubscription, StoreLicense infoYear) = await purchaseService.SetupPurchaseAddOnInfoAsync();
-                        if (IsActiveYearSubscription)
-                        {
-                            // set new expiration date and last check time
-                            SettingsService.Instance.IsProVersion = true;
-                            SettingsService.Instance.PurchasedStoreId = Constants.OneYearSubscriptionId;
-                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
-                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoYear.ExpirationDate;
-                        }
+                        await PurchaseAddOnInfoAsync(purchaseService, Constants.OneYearSubscriptionId, isFirstStart);
 
                         purchaseService.Initialize(Constants.LifeTimeId);
-                        (bool IsActiveLifeTimeBuy, StoreLicense infoLifeTime) = await purchaseService.SetupPurchaseAddOnInfoAsync();
-                        if (IsActiveLifeTimeBuy)
-                        {
-                            // set new expiration date and last check time
-                            SettingsService.Instance.IsProVersion = true;
-                            SettingsService.Instance.PurchasedStoreId = Constants.LifeTimeId;
-                            SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
-                            SettingsService.Instance.NextCheckedInPurchaseAddon = infoLifeTime.ExpirationDate;
-                        }
+                        await PurchaseAddOnInfoAsync(purchaseService, Constants.LifeTimeId, isFirstStart);
                     }
                 }
             }
@@ -398,6 +376,39 @@ namespace Project2FA.UWP.Views
                     // TODO give feedback that addons cannot be set, if no internet connection is available
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// Initializes and updates purchase add-on information, including license status and related settings, based on
+        /// the specified add-on and startup context.
+        /// </summary>
+        /// <remarks>If the add-on is active, the method updates expiration and check times, and sets the
+        /// application to pro version on first start. If the add-on is not active, the pro version status is
+        /// disabled.</remarks>
+        /// <param name="purchaseAddOnService">The service used to retrieve and set up purchase add-on license information.</param>
+        /// <param name="AddonID">The identifier of the add-on whose purchase information is being processed.</param>
+        /// <param name="isFirstStart">Indicates whether this is the first application star. If <see langword="true"/>, additional
+        /// settings are updated to reflect the new purchase.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        private async Task PurchaseAddOnInfoAsync(IPurchaseAddOnService purchaseAddOnService, string AddonID, bool isFirstStart)
+        {
+            (bool IsActiveAddon, StoreLicense licenseInfo) = await purchaseAddOnService.SetupPurchaseAddOnInfoAsync();
+
+            if (IsActiveAddon)
+            {
+                // set new expiration date and last check time
+                SettingsService.Instance.LastCheckedInPurchaseAddon = DateTimeOffset.Now;
+                SettingsService.Instance.NextCheckedInPurchaseAddon = licenseInfo.ExpirationDate;
+                if (isFirstStart)
+                {
+                    SettingsService.Instance.IsProVersion = true;
+                    SettingsService.Instance.PurchasedStoreId = AddonID;
+                }
+            }
+            else
+            {
+                SettingsService.Instance.IsProVersion = false;
             }
         }
 
@@ -500,10 +511,21 @@ namespace Project2FA.UWP.Views
             //await launcher.LaunchAsync();
         }
 
-        private string _settingsNavigationStr;
-
-        private object PreviousItem { get; set; }
-
+        /// <summary>
+        /// Sets the selected item in the shell view and optionally performs navigation to the associated page.
+        /// </summary>
+        /// <remarks>If navigation fails, the selection may revert to the previous item or be cleared.
+        /// Selecting the same item consecutively does not trigger navigation or update the selection. When the settings
+        /// item is selected, navigation uses a predefined settings path.</remarks>
+        /// <param name="selectedItem">The item to select in the shell view. Can be a navigation item or the settings item. If null, the selection
+        /// is cleared.</param>
+        /// <param name="withNavigation">Indicates whether navigation to the item's associated page should be performed. If <see langword="true"/>,
+        /// navigation is attempted; otherwise, only the selection is updated.</param>
+        /// <returns>A task that represents the asynchronous operation of setting the selected item and performing navigation if
+        /// requested.</returns>
+#if NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(NavigationViewItem))]
+#endif
         private async Task SetSelectedItem(object selectedItem, bool withNavigation = true)
         {
             if (selectedItem == null)

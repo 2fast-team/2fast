@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Project2FA.Repository.Database;
 #endif
 
+#if NET9_0_OR_GREATER
+using WinRT;
+#endif
+
 using Project2FA.Core;
 using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
@@ -346,7 +350,7 @@ namespace Project2FA.UWP
         }
 #endif
 
-        #region AutoLogout
+#region AutoLogout
         /// <summary>
         /// Detects if the focus is lost for the app and start the timer for auto logout
         /// </summary>
@@ -414,6 +418,6 @@ namespace Project2FA.UWP
                 }
             }
         }
-        #endregion
+#endregion
     }
 }

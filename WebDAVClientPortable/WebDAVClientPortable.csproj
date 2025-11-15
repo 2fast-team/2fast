@@ -1,28 +1,23 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.17763;uap10.0.26100;net9.0</TargetFrameworks>
+    <TargetFrameworks>net9.0;net10.0;netstandard2.0</TargetFrameworks>
     <LangVersion>10.0</LangVersion>
     <Title>WebDAVClientPortable</Title>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <Platforms>x86;x64;ARM;ARM64;AnyCPU</Platforms>
-  
 </PropertyGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.17763' or '$(TargetFramework)'=='uap10.0.22621'">
-		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
-	</ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="PortableWebDavLibrary" Version="1.1.9" />
-    <PackageReference Include="System.Private.Uri" Version="4.3.2" />
-    <PackageReference Include="System.Text.Json" Version="9.0.8" />
-    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+    <PackageReference Include="System.Text.Json" Version="10.0.0" />
+    <!--<PackageReference Include="System.Private.Uri" Version="4.3.2" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />-->
   </ItemGroup>
 
 </Project>

@@ -1,19 +1,13 @@
 ﻿#if !WINDOWS_UWP
-using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Data;
-using CommunityToolkit.Mvvm.Messaging;
 using App = Project2FA.UnoApp.App;
 using UNOversal.Navigation;
 using Project2FA.Uno.Views;
 using Project2FA.Services.Parser;
-using System.Linq;
-using System.Threading.Tasks;
 using UNOversal.Services.Dialogs;
 using System.Web;
 using Windows.UI.Core;
-using Windows.Storage;
-using System;
 using ZXing.Net.Uno;
 using CommunityToolkit.Uno.Camera.Controls;
 
@@ -33,26 +27,6 @@ namespace Project2FA.ViewModels
             NavigationService = navigationService;
             Project2FAParser = project2FAParser;
             DialogService = dialogService;
-
-            //Messenger.Register<CameraPageViewModel, QRCodeScannedMessage>(this, async (viewmodel, message) =>
-            //{
-            //    List<KeyValuePair<string, string>> valuePair = Project2FAParser.ParseQRCodeStr(HttpUtility.UrlDecode(message.Value));
-            //    if (valuePair.FirstOrDefault().Value == "totp")
-            //    {
-            //        var parameter = new NavigationParameters();
-            //        parameter.Add("AccountValuePair", valuePair);
-            //        _foundAccount = true;
-            //        await App.ShellPageInstance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,async () =>
-            //        {
-            //            await NavigationService.NavigateAsync("/" + nameof(AddAccountPage), parameter);
-            //        });
-
-            //    }
-            //    else
-            //    {
-            //        // TODO error dialog
-            //    }
-            //});
         }
         public async Task ReadBarcode(BarcodeDetectionEventArgs barcodeDetectionEventArgs)
         {
@@ -72,6 +46,10 @@ namespace Project2FA.ViewModels
                         await NavigationService.NavigateAsync("/" + nameof(AddAccountPage), parameter);
                     });
                 }
+                else
+                {
+                    // TODO error dialog
+                }
             }
             if (qrcodeStr.StartsWith("otpauth-migration://"))
             {
@@ -79,6 +57,8 @@ namespace Project2FA.ViewModels
                 var parameter = new NavigationParameters();
                 parameter.Add("AccountValuePair", valuePair);
                 parameter.Add("QRCodeStr", qrcodeStr);
+                // TODO migration page
+                
             }
         }
 

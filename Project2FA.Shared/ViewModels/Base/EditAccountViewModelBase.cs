@@ -107,7 +107,14 @@ namespace Project2FA.ViewModels
 
         public TwoFACodeModel TempModel
         {
-            get => _tempModel;
+            get 
+            {
+                if(_tempModel is null)
+                {
+                    _tempModel = new TwoFACodeModel();
+                }
+                return _tempModel;
+            }
             set
             {
                 if(SetProperty(ref _tempModel, value))
@@ -116,7 +123,7 @@ namespace Project2FA.ViewModels
                     OnPropertyChanged(nameof(Label));
                     OnPropertyChanged(nameof(Notes));
                     OnPropertyChanged(nameof(Issuer));
-                    //OnPropertyChanged(nameof(Issuer));
+                    OnPropertyChanged(nameof(AccountIconName));
                 }
             }
 

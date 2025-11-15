@@ -5,18 +5,43 @@
     xmlns:local="using:Project2FA.Uno.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
+    xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <utu:NavigationBar 
-            Grid.Row="0"
-            Background="{ThemeResource TwoFABackgroundBrush}"/>
-
-    </Grid>
+    <StackPanel>
+        <Border Background="{ThemeResource SystemAccentColor}">
+            <TextBlock
+                Text="{x:Bind strings:Resources.RateAppContentDialogTitle}" 
+                VerticalAlignment="Center" 
+                FontFamily="Calibri" 
+                FontSize="32" 
+                Foreground="White"
+                Margin="8,0"/>
+        </Border>
+        <TextBlock
+            FontFamily="Calibri" 
+            FontSize="16"
+            Text="{x:Bind strings:Resources.RateAppContentDialogQuestion}" 
+            Margin="10,12"
+            TextWrapping="WrapWholeWords" />
+        <Button
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" 
+            Content="{x:Bind strings:Resources.RateAppContentDialogYesButton}" 
+            Margin="10,0,10,10" 
+            Click="BTN_RateAppYes_Click" />
+        <Button 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            Content="{x:Bind strings:Resources.RateAppContentDialogNoButton}" 
+            Margin="10,0,10,10" 
+            Click="BTN_RateAppNo_Click"/>
+        <Button
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" 
+            Content="{x:Bind strings:Resources.RateAppContentDialogLaterButton}" 
+            Margin="10,0" 
+            Click="BTN_RateAppLater_Click" />
+    </StackPanel>
 </ContentDialog>

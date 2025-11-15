@@ -301,7 +301,6 @@
             <FlipViewItem>
                 <Grid>
                     <Border 
-                    ui:Effects.Shadow="{StaticResource PageShadow}" 
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                         <!--<Border>
                             <Border.Background>
@@ -387,7 +386,6 @@
                             Padding="4,4,4,4"
                             Click="HLBTN_PasswordInfo"
                             Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp, FallbackValue=''}"
                             VerticalAlignment="Center">
                                 <FontIcon
                             FontSize="20"
@@ -402,7 +400,6 @@
             <FlipViewItem>
                 <Grid>
                     <Border 
-                    ui:Effects.Shadow="{StaticResource PageShadow}" 
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                         <!--<Border>
                             <Border.Background>
@@ -436,7 +433,6 @@
             <FlipViewItem>
                 <Grid MaxWidth="760">
                     <Border 
-                    ui:Effects.Shadow="{StaticResource PageShadow}" 
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                         <!--<Border>
                             <Border.Background>
@@ -496,7 +492,6 @@
             <FlipViewItem>
                 <Grid MaxWidth="760">
                     <Border 
-                    ui:Effects.Shadow="{StaticResource PageShadow}" 
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                         <!--<Border>
                             <Border.Background>
@@ -533,7 +528,6 @@
             <FlipViewItem>
                 <Grid>
                     <Border 
-                    ui:Effects.Shadow="{StaticResource PageShadow}" 
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                         <!--<Border>
                             <Border.Background>
@@ -564,19 +558,17 @@
                     Text="~TutorialContentDialogInteractionAccount.Text"
                     FontSize="16"
                     TextWrapping="WrapWholeWords"/>-->
-                        <ListView 
+                            <ListView 
                             ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
                             ItemTemplate="{StaticResource TwoFACodeCustomTemplate}"
                             ItemsSource="{x:Bind ViewModel.Collection, Mode=OneWay}">
-
-                        </ListView>
+                            </ListView>
                     </StackPanel>
                 </Grid>
             </FlipViewItem>
             <FlipViewItem>
                 <Grid>
                     <Border 
-                    ui:Effects.Shadow="{StaticResource PageShadow}" 
                     Background="{ThemeResource TranslucentBackgroundMediumBrush}">
                         <!--<Border>
                             <Border.Background>

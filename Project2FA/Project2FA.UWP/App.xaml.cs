@@ -8,7 +8,6 @@ using WinRT;
 #endif
 
 using Project2FA.Core;
-using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
 using Project2FA.Helpers;
 using Project2FA.Services;
@@ -111,8 +110,8 @@ namespace Project2FA.UWP
 #if !NET9_0_OR_GREATER
             container.RegisterSingleton<IProject2FARepository, DBProject2FARepository>();
 #endif
-            container.RegisterSingleton<ISerializationService, SerializationService>(); //for internal uwp services
-            container.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>(); //netstandard for general access
+            container.RegisterSingleton<UNOversal.Services.Serialization.ISerializationService, SerializationService>();
+            container.RegisterSingleton<ISerializationCryptoService, SerializationCryptoService>();
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();

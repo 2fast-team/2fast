@@ -1,0 +1,110 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Ad-Hoc" />
+    <BuildType Name="AppStore" />
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM64" />
+    <Platform Name="iPhone" />
+    <Platform Name="iPhoneSimulator" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Platforms/">
+    <Project Path="Project2FA.Shared/Project2FA.Shared.shproj" />
+    <Project Path="Project2FA/Project2FA.UWP/Project2FA.UWP.csproj" Id="f23d0efe-2c91-4976-9dcb-065b91fc2797">
+      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+      <BuildType Solution="AppStore|*" Project="Debug" />
+      <Platform Solution="*|ARM64" Project="ARM64" />
+      <Platform Solution="*|x64" Project="x64" />
+      <Platform Solution="Ad-Hoc|Any CPU" Project="ARM" />
+      <Platform Solution="Ad-Hoc|iPhone" Project="ARM" />
+      <Platform Solution="Ad-Hoc|iPhoneSimulator" Project="ARM" />
+      <Platform Solution="AppStore|Any CPU" Project="ARM" />
+      <Platform Solution="AppStore|iPhone" Project="ARM" />
+      <Platform Solution="AppStore|iPhoneSimulator" Project="ARM" />
+      <Platform Solution="Debug|Any CPU" Project="x64" />
+      <Platform Solution="Debug|iPhone" Project="x64" />
+      <Platform Solution="Debug|iPhoneSimulator" Project="x64" />
+      <Platform Solution="Release|Any CPU" Project="x64" />
+      <Platform Solution="Release|iPhone" Project="x64" />
+      <Platform Solution="Release|iPhoneSimulator" Project="x64" />
+      <Deploy />
+    </Project>
+    <Project Path="Project2FA/Project2FA.UWP/Project2FA.UWPNet.csproj">
+      <BuildType Solution="Ad-Hoc|*" Project="Release" />
+      <BuildType Solution="AppStore|*" Project="Release" />
+      <Platform Solution="*|Any CPU" Project="x64" />
+      <Platform Solution="*|ARM64" Project="arm64" />
+      <Platform Solution="*|iPhone" Project="x64" />
+      <Platform Solution="*|iPhoneSimulator" Project="x64" />
+      <Platform Solution="*|x64" Project="x64" />
+      <Deploy />
+    </Project>
+    <Project Path="src/Project2FA.Uno/Project2FA.Uno.csproj">
+      <BuildType Solution="Ad-Hoc|*" Project="Release" />
+      <BuildType Solution="AppStore|*" Project="Release" />
+      <Platform Solution="Debug|ARM64" Project="ARM64" />
+      <Platform Solution="Debug|x64" Project="x64" />
+      <Platform Solution="Release|x64" Project="x64" />
+      <Deploy />
+    </Project>
+  </Folder>
+  <Folder Name="/UnitTests/" />
+  <Folder Name="/UNOversalTemplate/">
+    <Project Path="UNOversalTemplate/UNOversalTemplate.Core/UNOversalTemplate.Core.shproj" />
+    <Project Path="UNOversalTemplate/UNOversalTemplate.IoC.DryIoC/UNOversalTemplate.IoC.DryIoC.shproj" />
+    <Project Path="UNOversalTemplate/UNOversalTemplate.Services/UNOversalTemplate.Services.shproj" />
+  </Folder>
+  <Project Path="BiometryService/src/BiometryService.Abstractions/BiometryService.Abstractions.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+    <BuildType Solution="AppStore|*" Project="Debug" />
+  </Project>
+  <Project Path="BiometryService/src/BiometryService/BiometryService.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+    <BuildType Solution="AppStore|*" Project="Debug" />
+    <Platform Solution="Debug|ARM64" Project="ARM64" />
+    <Platform Solution="Debug|x64" Project="x64" />
+    <Platform Solution="Release|ARM64" Project="ARM64" />
+    <Platform Solution="Release|x64" Project="x64" />
+  </Project>
+  <Project Path="Otp.NET/src/Otp.NET/Otp.NET.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+    <BuildType Solution="AppStore|*" Project="Debug" />
+    <Platform Solution="Debug|ARM64" Project="ARM64" />
+    <Platform Solution="Debug|x64" Project="x64" />
+    <Platform Solution="Release|ARM64" Project="ARM64" />
+    <Platform Solution="Release|x64" Project="x64" />
+  </Project>
+  <Project Path="Project2FA.Core/Project2FA.Core.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+    <BuildType Solution="AppStore|*" Project="Debug" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="Project2FA.Repository/Project2FA.Repository.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+    <BuildType Solution="AppStore|*" Project="Debug" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="WebDAVClientPortable/WebDAVClientPortable.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+    <BuildType Solution="AppStore|*" Project="Debug" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="ZXing.Net.Uno/src/CommunityToolkit.Uno.Camera/CommunityToolkit.Uno.Camera.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Release" />
+    <BuildType Solution="AppStore|*" Project="Release" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="ZXing.Net.Uno/src/ZXing.Net.Uno/ZXing.Net.Uno.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Release" />
+    <BuildType Solution="AppStore|*" Project="Release" />
+    <Platform Solution="Debug|ARM64" Project="ARM64" />
+    <Platform Solution="Debug|x64" Project="x64" />
+    <Platform Solution="Release|x64" Project="x64" />
+  </Project>
+</Solution>

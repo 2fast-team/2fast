@@ -1,16 +1,17 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Encryption;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using OtpNet;
-using System.ComponentModel.DataAnnotations;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Project2FA.Core;
 using Project2FA.Core.Services.Crypto;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System;
-using Windows.UI.WebUI;
 using Project2FA.Repository.Models.Enums;
+using Project2FA.Services;
+using Project2FA.Services.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Windows.Input;
+using Windows.UI.WebUI;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -24,7 +25,7 @@ namespace Project2FA.Repository.Models
     public partial class TwoFACodeModel : ObservableObject, ICloneable
     {
         private string _label = string.Empty;
-        [Encrypt]
+        [JsonConverter(typeof(EncryptedStringConverter))]
         [Required(ErrorMessage = "Required")]
         public string Label
         {
@@ -39,7 +40,7 @@ namespace Project2FA.Repository.Models
         }
 
         private string _issuer = string.Empty;
-        [Encrypt]
+        [JsonConverter(typeof(EncryptedStringConverter))]
         [Required(ErrorMessage = "Required")]
         public string Issuer
         {
@@ -77,7 +78,7 @@ namespace Project2FA.Repository.Models
         //no need for SetProperty, because no UI binding
         public OtpHashMode HashMode { get; set; } = OtpHashMode.Sha1;
 
-        [Encrypt]
+        [JsonConverter(typeof(EncryptedStringConverter))]
         public string OTPType { get; set; } = "totp";
 
         //no need for SetProperty, because no UI binding
@@ -95,7 +96,7 @@ namespace Project2FA.Repository.Models
         private byte[] _secretByteArray;
         // no need for SetProperty, because no UI binding
         // Android not support ProtectedData
-        [Encrypt]
+        [JsonConverter(typeof(EncryptedBytesConverter))]
         public byte[] SecretByteArray
         {
             get
@@ -141,7 +142,7 @@ namespace Project2FA.Repository.Models
         }
 
         private string _accountIconName = string.Empty;
-        [Encrypt]
+        [JsonConverter(typeof(EncryptedStringConverter))]
         public string AccountIconName
         {
             get => _accountIconName;
@@ -155,7 +156,7 @@ namespace Project2FA.Repository.Models
         }
 
         private string _notes = string.Empty;
-        [Encrypt]
+        [JsonConverter(typeof(EncryptedStringConverter))]
         public string Notes
         {
             get => _notes;

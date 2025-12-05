@@ -48,12 +48,13 @@ other installation method (not maintained by me)
 - Free for desktop OS / fee required for mobile OS
 - Open Source
 - Works on multiple platforms
-	- Currently released for Windows 10+ (UWP) 
-	- under development (with Uno platform):
-		- Android
-		- iOS
-		- Linux
-		- macOS
+	- Currently released for Windows 10+ (UWP .NET native) 
+	- under development:
+		- UWP (.NET (10) AOT)
+		- Android (with Uno platform)
+		- iOS (with Uno platform)
+		- Linux (with Uno platform)
+		- macOS (with Uno platform)
 - Uses the widely accepted TOTP algorithm ([RFC 6238](https://tools.ietf.org/html/rfc6238))
 	- Works with accounts from Google, Microsoft, Facebook, PayPal, etc.
 - Build with [UNOversalTemplate](https://github.com/jp-weber/UNOversalTemplate) as template
@@ -96,13 +97,14 @@ The following steps will help if you want to contribute or work on the applicati
 
 ### Prerequirements
 
-- [Visual Studio 2022](https://visualstudio.microsoft.com/)
+- [Visual Studio 2026](https://visualstudio.microsoft.com/)
 	- Don't forget to select the *Mobile development with .NET* package in the installation process 
 	- .NET Multi-Platform App UI development
 - Windows 10, version >= `1809`, October update 2018 (for the universal Windows application)
 	- The latest Windows 11 SDK is required
 - Android, version >= 10.0 (for the Android application)
 	- Remember to trust 3rd party Apps by enabling this in the Android developer settings if you want to build from source
+- [Uno platform](https://marketplace.visualstudio.com/items?itemName=unoplatform.uno-platform-addin-2022)
 
 
 ### Installation
@@ -111,9 +113,11 @@ The following steps will help if you want to contribute or work on the applicati
 ```shell
 git clone --recurse-submodules https://github.com/2fast-team/2fast.git
 ```
-2. Open the `.sln` file with Visual Studio
+2. Open the `.slnx` file with Visual Studio
 	- The dependencies are automatically loaded by Visual Studio
-3. Start working and debugging!
+3. If you have problems with the dependencies for the Uno project, please check => [uno-check](https://platform.uno/docs/articles/uno-check.html)
+
+4. Start working and debugging!
 	- Remember to select the correct start project and -platform before hitting the play button
   (e.g. `x64` and `UWP` for the Universal Windows Application)
 

@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using Windows.Media.Capture.Frames;
 using System.Windows.Input;
 using UNOversal.Logging;
-using UNOversal.Services.Serialization;
 using Project2FA.Services.Parser;
 using Windows.Media;
 using System.Threading.Tasks;
@@ -31,6 +30,8 @@ using UNOversal.Services.Logging;
 using Project2FA.Utils;
 using Windows.UI.Core;
 using Project2FA.Repository.Models.Enums;
+using UNOversal.Services.Serialization;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;

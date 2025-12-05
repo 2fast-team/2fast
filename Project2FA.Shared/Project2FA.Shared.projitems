@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Data.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Properties.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CryptoHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
@@ -77,10 +78,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IBackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\TwoFASBackupImportService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\JSON\INewtonsoftJSONService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\JSON\NewtonsoftJSONService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\EncryptedBytesConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\EncryptedStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\ISerializationCryptoService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\SerializationCryptoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\SerializationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\SerializationContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\Enums\Theme.cs" />

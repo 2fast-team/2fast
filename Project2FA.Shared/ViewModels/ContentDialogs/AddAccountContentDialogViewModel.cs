@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using UNOversal.Services.Dialogs;
-using UNOversal.Services.Serialization;
 using UNOversal.Logging;
 using UNOversal.Services.File;
 using Project2FA.Services.Parser;
@@ -11,6 +10,8 @@ using Project2FA.Repository.Models;
 using Project2FA.Core.Utils;
 using System.Collections.Generic;
 using Project2FA.Utils;
+using UNOversal.Services.Serialization;
+
 
 
 #if WINDOWS_UWP

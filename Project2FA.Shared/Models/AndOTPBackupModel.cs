@@ -1,40 +1,40 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Project2FA.Repository.Models
 {
     public class AndOTPModel<T>
     {
-        [JsonProperty(PropertyName = "secret")]
+        [JsonPropertyName("secret")]
         public string Secret { get; set; }
 
-        [JsonProperty(PropertyName = "issuer")]
+        [JsonPropertyName("issuer")]
         public string Issuer { get; set; }
 
-        [JsonProperty(PropertyName = "label")]
+        [JsonPropertyName("label")]
         public string Label { get; set; }
 
-        [JsonProperty(PropertyName = "digits")]
+        [JsonPropertyName("digits")]
         public int Digits { get; set; }
 
-        [JsonProperty(PropertyName = "type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonProperty(PropertyName = "algorithm")]
+        [JsonPropertyName("algorithm")]
         public string Algorithm { get; set; }
 
-        [JsonProperty(PropertyName = "thumbnail")]
+        [JsonPropertyName("thumbnail")]
         public string Thumbnail { get; set; }
 
-        [JsonProperty(PropertyName = "period")]
+        [JsonPropertyName("period")]
         public int Period { get; set; }
 
-        [JsonProperty(PropertyName = "counter")]
+        [JsonPropertyName("counter")]
         public int Counter { get; set; }
 
-        [JsonProperty(PropertyName = "tags")]
+        [JsonPropertyName("tags")]
         public List<string> Tags { get; set; }
     }
 }

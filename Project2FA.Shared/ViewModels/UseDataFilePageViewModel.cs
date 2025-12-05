@@ -1,5 +1,4 @@
-﻿using Project2FA.Core.Services.JSON;
-using Project2FA.Repository.Models;
+﻿using Project2FA.Repository.Models;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -20,6 +19,8 @@ using Project2FA.Services.WebDAV;
 using System.Text;
 using UNOversal.Services.Logging;
 using Project2FA.Services;
+using UNOversal.Services.Serialization;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -58,14 +59,16 @@ namespace Project2FA.ViewModels
         private ISecretService SecretService { get; }
         private ILoggingService LoggingService { get; }
 
-        private INewtonsoftJSONService NewtonsoftJSONService { get; }
+        private ISerializationService SerializationService { get; }
+        private ISerializationCryptoService SerializationCryptoService { get; }
 
         /// <summary>
         /// Constructor to start the datafile selector
         /// </summary>
         public UseDataFilePageViewModel(
-            IFileService fileService, 
-            INewtonsoftJSONService newtonsoftJSONService,
+            IFileService fileService,
+            ISerializationService serializationService,
+            ISerializationCryptoService serializationCryptoService,
             INetworkService networkService,
             INavigationService navigationService,
             ISecretService secretService,
@@ -75,7 +78,8 @@ namespace Project2FA.ViewModels
             NaviationService = navigationService;
             DialogService = dialogService;
             NetworkService = networkService;
-            NewtonsoftJSONService = newtonsoftJSONService;
+            SerializationService = serializationService;
+            SerializationCryptoService = serializationCryptoService;
             FileService = fileService;
             WebDAVLoginRequiered = true;
             WebDAVDatafilePropertiesEnabled = false;
@@ -314,12 +318,12 @@ namespace Project2FA.ViewModels
                 datafileStr = await FileIO.ReadTextAsync(LocalStorageFile);
 #endif
                 //read the iv for AES
-                DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                DatafileModel datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
                 byte[] iv = datafile.IV;
 
                 try
                 {
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
+                    DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
                         (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
                     return true;
                 }

@@ -1080,8 +1080,7 @@
     </interactivity:Interaction.Behaviors>-->
 
     <Grid 
-        x:Name="MainGrid"
-        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        x:Name="MainGrid">
         <ListView 
             x:Name="LV_AccountCollection"
             AutomationProperties.Name="Accounts"

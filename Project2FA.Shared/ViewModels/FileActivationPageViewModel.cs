@@ -8,7 +8,6 @@ using Project2FA.Strings;
 using System;
 using Project2FA.Core;
 using Project2FA.Repository.Models;
-using Project2FA.Core.Services.JSON;
 using Windows.Storage;
 using System.Text;
 using UNOversal.Services.Dialogs;
@@ -20,10 +19,8 @@ using Project2FA.Core.Messenger;
 using Project2FA.Core.Services.Crypto;
 using UNOversal.Services.Logging;
 using Project2FA.Utils;
-using Newtonsoft.Json;
-using UNOversal.Services.Serialization;
 using UNOversal.Navigation;
-
+using UNOversal.Services.Serialization;
 
 
 #if WINDOWS_UWP
@@ -53,14 +50,14 @@ namespace Project2FA.ViewModels
         private ISecretService SecretService { get; }
         private IFileService FileService { get; }
         private ILoggingService LoggingService { get; }
-        private INewtonsoftJSONService NewtonsoftJSONService { get; }
+        private ISerializationCryptoService SerializationCryptoService { get; }
         private ISerializationService SerializationService { get; }
 
         public FileActivationPageViewModel()
         {
             SecretService = App.Current.Container.Resolve<ISecretService>();
             DialogService = App.Current.Container.Resolve<IDialogService>();
-            NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
+            SerializationCryptoService = App.Current.Container.Resolve<ISerializationCryptoService>();
             FileService = App.Current.Container.Resolve<IFileService>();
             LoggingService = App.Current.Container.Resolve<ILoggingService>();
             SerializationService = App.Current.Container.Resolve<ISerializationService>();
@@ -144,7 +141,7 @@ namespace Project2FA.ViewModels
                     datafileStr = await FileIO.ReadTextAsync(storageFile);
 #endif
                     //read the iv for AES
-                    DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                    DatafileModel datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
                     if (datafile.IV == null)
                     {
                         // file is not valid
@@ -158,8 +155,8 @@ namespace Project2FA.ViewModels
                         {
                             try
                             {
-                                DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
-                                (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
+                                DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
+                                (CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(Password)), iv, datafileStr, datafile.Version);
                             }
                             catch (Exception exc)
                             {

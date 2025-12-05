@@ -25,6 +25,8 @@ using UNOversal.Services.Logging;
 using Windows.UI.Core.Preview;
 using UNOversal.Helpers;
 using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
+using Windows.UI.Xaml.Media;
+
 #if NET9_0_OR_GREATER
 using WinRT;
 #endif
@@ -50,6 +52,8 @@ namespace Project2FA.UWP.Views
             InitializeComponent();
             _navManager = SystemNavigationManager.GetForCurrentView();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
+
+            SettingsService.Instance.IsProVersion = true; // TODO remove test
 
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += App_CloseRequested;
 
@@ -153,6 +157,12 @@ namespace Project2FA.UWP.Views
 #endif
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if (SystemInformationHelper.Instance.OperatingSystemVersion.Build >= 22000)
+            {
+                // set background transparency for Windows 11+
+                //this.ShellView.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
+            }
+
             bool changedResources = false;
             // set the corner radius for the controls
             if (!SettingsService.Instance.UseRoundCorner)
@@ -227,15 +237,6 @@ namespace Project2FA.UWP.Views
 
             if (SystemInformationHelper.Instance.IsAppUpdated && !DataService.Instance.NewAppUpdateDialogDisplayed)
             {
-                //if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.0.5.0")))
-                //{
-                //    if (SystemInformationHelper.Instance.OperatingSystemVersion.Build >= 22000)
-                //    {
-                //        // set the round corner for Windows 11+
-                //        SettingsService.Instance.UseRoundCorner = true;
-                //    }
-                //}
-
                 //if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.2.7.0")))
                 //{
                 //    //check after update, if the user already have a subscription

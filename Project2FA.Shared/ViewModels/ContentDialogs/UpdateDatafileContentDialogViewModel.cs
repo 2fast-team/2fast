@@ -1,6 +1,5 @@
 ﻿using Project2FA.Core.Services;
 using Project2FA.Core;
-using Project2FA.Core.Services.JSON;
 using CommunityToolkit.Mvvm.Input;
 using UNOversal.Services.Secrets;
 using UNOversal.Services.Dialogs;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 using Project2FA.Services;
 using Project2FA.Core.Services.Crypto;
 using UNOversal.Ioc;
-
+using UNOversal.Services.Serialization;
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -35,8 +34,9 @@ namespace Project2FA.ViewModels
         /// </summary>
         public UpdateDatafileContentDialogViewModel(
             ISecretService secretService,
-            INewtonsoftJSONService newtonsoftJSONService,
-            IFileService fileService) : base(secretService, fileService, newtonsoftJSONService)
+            ISerializationService serializationService,
+            ISerializationCryptoService serializationCryptoService,
+            IFileService fileService) : base(secretService, fileService, serializationService, serializationCryptoService)
         {
             SecretService = App.Current.Container.Resolve<ISecretService>();
             ConfirmErrorCommand = new RelayCommand(() =>

@@ -1,6 +1,5 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
-using Newtonsoft.Json.Linq;
 using Project2FA.Core.Utils;
 using Project2FA.Extensions;
 using Project2FA.Repository.Models;

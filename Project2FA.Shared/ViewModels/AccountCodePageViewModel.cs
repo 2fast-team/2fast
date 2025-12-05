@@ -586,7 +586,6 @@ namespace Project2FA.ViewModels
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
-
         public void SetSuggestionList(string searchText, bool showpoup)
         {
             if (string.IsNullOrWhiteSpace(searchText) == false)
@@ -660,7 +659,6 @@ namespace Project2FA.ViewModels
                     if (TwoFADataService.GlobalCategories != null && TwoFADataService.IsFilterChecked)
                     {
                         var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true).ToList();
-
                         // categories are selected and no search text
                         TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).SelectedCategories.Where(sc =>
                             selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();

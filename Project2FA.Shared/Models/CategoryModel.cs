@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Newtonsoft.Json.Encryption;
+using Project2FA.Services;
 using System;
+using System.Text.Json.Serialization;
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
@@ -17,8 +19,8 @@ namespace Project2FA.Repository.Models
     public partial class CategoryModel : ObservableObject, ICloneable
     {
         private string _unicodeString;
-        [Encrypt]
-        public string UnicodeString 
+        [JsonConverter(typeof(EncryptedStringConverter))]
+        public string UnicodeString
         { 
             get => _unicodeString; 
             set => SetProperty(ref _unicodeString, value);
@@ -26,14 +28,14 @@ namespace Project2FA.Repository.Models
 
         private string _unicodeIndex;
 
-        public string UnicodeIndex 
+        public string UnicodeIndex
         { 
             get => _unicodeIndex; 
             set => SetProperty(ref _unicodeIndex, value);
         }
 
         private string _name;
-        [Encrypt]
+        [JsonConverter(typeof(EncryptedStringConverter))]
         public string Name 
         { 
             get => _name; 
@@ -41,14 +43,14 @@ namespace Project2FA.Repository.Models
         }
 
         private bool _isSelected;
-        public bool IsSelected 
+        public bool IsSelected
         { 
             get => _isSelected;
             set => SetProperty(ref _isSelected, value);
         }
 
         private Guid _guid;
-        public Guid Guid 
+        public Guid Guid
         { 
             get => _guid; 
             set => _guid = value; 

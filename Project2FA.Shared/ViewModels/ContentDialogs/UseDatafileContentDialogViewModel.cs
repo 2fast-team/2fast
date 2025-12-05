@@ -1,13 +1,14 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using Project2FA.Repository.Models;
+using Project2FA.Services;
+using System;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Project2FA.Repository.Models;
-using Windows.Storage.Pickers;
-using Project2FA.Core.Services.JSON;
-using CommunityToolkit.Mvvm.Input;
-using UNOversal.Services.Secrets;
 using UNOversal.Services.File;
-using System.Text;
+using UNOversal.Services.Secrets;
+using UNOversal.Services.Serialization;
+using Windows.Storage.Pickers;
 #if !WINDOWS_UWP
 using Microsoft.UI.Xaml.Data;
 #endif
@@ -27,7 +28,8 @@ namespace Project2FA.ViewModels
 
         private IFileService FileService { get; }
 
-        private INewtonsoftJSONService NewtonsoftJSONService { get; }
+        private ISerializationService SerializationService { get; }
+        private ISerializationCryptoService SerializationCryptoService { get; }
 
         private bool _changeDatafile;
 
@@ -38,12 +40,14 @@ namespace Project2FA.ViewModels
         public UseDatafileContentDialogViewModel(
             ISecretService secretService,
             IFileService fileService,
-            INewtonsoftJSONService newtonsoftJSONService
+            ISerializationService serializationService,
+            ISerializationCryptoService serializationCryptoService
             ) :base()
         {
             SecretService = secretService;
             FileService = fileService;
-            NewtonsoftJSONService = newtonsoftJSONService;
+            SerializationService = serializationService;
+            SerializationCryptoService = serializationCryptoService;
             ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
@@ -146,12 +150,12 @@ namespace Project2FA.ViewModels
             {
                 string datafileStr = await FileService.ReadStringAsync(DateFileName, LocalStorageFolder);
                 //read the iv for AES
-                DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+                DatafileModel datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
                 var iv = datafile.IV;
 
                 try
                 {
-                    var deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>
+                    var deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
                         (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
                     return true;
                 }

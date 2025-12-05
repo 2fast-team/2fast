@@ -11,6 +11,7 @@
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:sys="using:System"
+    xmlns:wctc="using:CommunityToolkit.WinUI.Controls"
     Style="{StaticResource MyContentDialogStyle}"
     mc:Ignorable="d"
     Title="~ImportBackupCD.Title"
@@ -342,6 +343,15 @@
                         HorizontalContentAlignment="Stretch"
                         HorizontalAlignment="Stretch" 
                         ItemClick="ListView_ItemClick">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <wctc:WrapPanel 
+                        HorizontalSpacing="16"
+                        VerticalSpacing="16"
+                        Orientation="Vertical" 
+                        HorizontalAlignment="Stretch"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                     </ListView>
                 </Grid>
 

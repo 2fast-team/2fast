@@ -402,7 +402,7 @@
       <Version>2.6.2</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Labs.Uwp.TokenView">
-      <Version>0.1.250513-build.2126</Version>
+      <Version>0.1.250828-build.2223</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Animations">
       <Version>8.2.250402</Version>

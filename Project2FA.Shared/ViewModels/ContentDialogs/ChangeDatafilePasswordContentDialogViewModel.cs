@@ -4,7 +4,6 @@ using Project2FA.Core;
 using Project2FA.Repository.Models;
 using System;
 using Windows.Storage;
-using Project2FA.Core.Services.JSON;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using UNOversal.Services.Dialogs;
@@ -15,6 +14,8 @@ using Project2FA.Core.Utils;
 using Project2FA.Core.Services.Crypto;
 using System.Text;
 using UNOversal.Services.Logging;
+using UNOversal.Services.Serialization;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -44,7 +45,8 @@ namespace Project2FA.ViewModels
 
         private IFileService FileService { get; }
 
-        private INewtonsoftJSONService NewtonsoftJSONService { get; }
+        private ISerializationService SerializationService { get; }
+        private ISerializationCryptoService SerializationCryptoService { get; }
         private ILoggingService LoggingService { get; }
         public ICommand ConfirmErrorCommand { get; }
 
@@ -53,13 +55,15 @@ namespace Project2FA.ViewModels
         /// </summary>
         public ChangeDatafilePasswordContentDialogViewModel(
             ISecretService secretService, 
-            IFileService fileService, 
-            INewtonsoftJSONService newtonsoftJSONService,
+            IFileService fileService,
+            ISerializationService serializationService,
+            ISerializationCryptoService serializationCryptoService,
             ILoggingService loggingService)
         {
             SecretService = secretService;
             FileService = fileService;
-            NewtonsoftJSONService = newtonsoftJSONService;
+            SerializationService = serializationService;
+            SerializationCryptoService = serializationCryptoService;
             LoggingService = loggingService;
             ConfirmErrorCommand = new RelayCommand(() =>
             {
@@ -92,12 +96,12 @@ namespace Project2FA.ViewModels
                 SecretService.Helper.WriteSecret(
                     Constants.ContainerName,
                     Constants.ActivatedDatafileHashName,
-                    NewtonsoftJSONService.Serialize(ProtectData.Protect(encryptedBytes)));
+                    SerializationService.Serialize(ProtectData.Protect(encryptedBytes)));
 #else
                 SecretService.Helper.WriteSecret(
                     Constants.ContainerName,
                     Constants.ActivatedDatafileHashName,
-                    NewtonsoftJSONService.Serialize(encryptedBytes));
+                    SerializationService.Serialize(encryptedBytes));
 #endif
             }
             else
@@ -153,10 +157,10 @@ namespace Project2FA.ViewModels
             if (DataService.Instance.ActivatedDatafile != null)
             {
 #if WINDOWS_UWP
-                hash = CryptoService.CreateStringHash(ProtectData.Unprotect(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName))));
+                hash = CryptoService.CreateStringHash(ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName))));
 #else
                 // TODO encrypted password via ProtectData is not supported
-                hash = CryptoService.CreateStringHash(NewtonsoftJSONService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName)));
+                hash = CryptoService.CreateStringHash(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, Constants.ActivatedDatafileHashName)));
 #endif
             }
             else
@@ -176,7 +180,7 @@ namespace Project2FA.ViewModels
         {
             string datafileStr = await FileService.ReadStringAsync(storageFile.Name, storageFolder);
             //read the iv for AES
-            DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
+            DatafileModel datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
             byte[] iv = datafile.IV;
 
             try
@@ -184,12 +188,12 @@ namespace Project2FA.ViewModels
                 // if the current password is invalid, try to load the datafile with the new password
                 if (InvalidPassword)
                 {
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(Encoding.UTF8.GetBytes(NewPassword), iv, datafileStr, datafile.Version);
+                    DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>(Encoding.UTF8.GetBytes(NewPassword), iv, datafileStr, datafile.Version);
                 }
                 else
                 {
                     // check the current password, if the file can be decrypted
-                    DatafileModel deserializeCollection = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(Encoding.UTF8.GetBytes(CurrentPassword), iv, datafileStr, datafile.Version);
+                    DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>(Encoding.UTF8.GetBytes(CurrentPassword), iv, datafileStr, datafile.Version);
                 }
 
                 return true;

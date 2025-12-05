@@ -2,16 +2,17 @@
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using OtpNet;
 using Project2FA.Repository.Models;
+using Project2FA.Repository.Models.Enums;
+using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UNOversal.Services.Logging;
 using UNOversal.Services.Serialization;
-using System;
-using OtpNet;
-using Project2FA.Repository.Models.Enums;
 
 // based on
 // https://github.com/stratumauth/app/blob/48db7ed40cefa6e3d20b32172cb18da29da78503/Stratum.Core/src/Converter/AndOtpBackupConverter.cs
@@ -33,12 +34,14 @@ namespace Project2FA.Services.Importer
         private const int KeyLength = 32;
 
         ISerializationService SerializationService { get; }
-        public AndOTPBackupImportService(ISerializationService serializationService)
+        private ILoggingService LoggingService { get; }
+        public AndOTPBackupImportService(ILoggingService loggingService, ISerializationService serializationService)
         {
+            LoggingService = loggingService;
             SerializationService = serializationService;
         }
 
-        public Task<(List<TwoFACodeModel> accountList, bool successful)> ImportBackup(string content, byte[] bytePassword)
+        public async Task<(List<TwoFACodeModel> accountList, bool successful)> ImportBackup(string content, byte[] bytePassword)
         {
             string json;
 
@@ -61,13 +64,23 @@ namespace Project2FA.Services.Importer
                     // check if the authentication methode is supported
                     if (decryptedModel[i].Type == OTPType.totp.ToString().ToUpper() || decryptedModel[i].Type == OTPType.steam.ToString().ToUpper())
                     {
-                        OtpHashMode algorithm = decryptedModel[i].Algorithm switch
+                        OtpHashMode algorithm;
+                        try
                         {
-                            "SHA1" => OtpHashMode.Sha1,
-                            "SHA256" => OtpHashMode.Sha256,
-                            "SHA512" => OtpHashMode.Sha512,
-                            _ => throw new ArgumentException($"Algorithm '{decryptedModel[i].Algorithm}' not supported")
-                        };
+                            algorithm = decryptedModel[i].Algorithm switch
+                            {
+                                "SHA1" => OtpHashMode.Sha1,
+                                "SHA256" => OtpHashMode.Sha256,
+                                "SHA512" => OtpHashMode.Sha512,
+                                _ => throw new ArgumentException($"Algorithm '{decryptedModel[i].Algorithm}' not supported")
+                            };
+
+                        }
+                        catch (Exception exc)
+                        {
+                            await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
+                            throw;
+                        }
 
                         var model = new TwoFACodeModel
                         {
@@ -96,14 +109,15 @@ namespace Project2FA.Services.Importer
                             Label = decryptedModel[i].Label,
                             Issuer = decryptedModel[i].Issuer,
                             AccountIconName = DataService.Instance.GetIconForLabel(decryptedModel[i].Label.ToLower()),
+                            SelectedCategories = new System.Collections.ObjectModel.ObservableCollection<CategoryModel>(),
                             IsEnabled = false,
                             IsChecked = false
                         });
                     }
                 }
-                return Task.FromResult((accountList, true));
+                return (accountList, true);
             }
-            return Task.FromResult((new List<TwoFACodeModel>(), false));
+            return (new List<TwoFACodeModel>(), false);
         }
 
         private KeyParameter DeriveKey(byte[] passwordBytes, byte[] salt, uint iterations)

@@ -1,68 +1,68 @@
 ﻿using CommunityToolkit.Common;
-using Newtonsoft.Json;
 using OtpNet;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Project2FA.Repository.Models
 {
-    internal sealed class TwoFASBackup
+    public sealed class TwoFASBackup
     {
-        [JsonProperty(PropertyName = "services")]
+        [JsonPropertyName("services")]
         public List<TwoFASServiceModel> Services { get; set; }
 
-        [JsonProperty(PropertyName = "groups")]
+        [JsonPropertyName("groups")]
         public List<TwoFASGroupModel> Groups { get; set; }
 
-        [JsonProperty(PropertyName = "servicesEncrypted")]
+        [JsonPropertyName("servicesEncrypted")]
         public string ServicesEncrypted { get; set; }
     }
-    internal sealed class TwoFASOtpModel
+    public sealed class TwoFASOtpModel
     {
-        [JsonProperty(PropertyName = "account")]
+        [JsonPropertyName("account")]
         public string Account { get; set; }
 
-        [JsonProperty(PropertyName = "issuer")]
+        [JsonPropertyName("issuer")]
         public string Issuer { get; set; }
 
-        [JsonProperty(PropertyName = "digits")]
+        [JsonPropertyName("digits")]
         public int Digits { get; set; }
 
-        [JsonProperty(PropertyName = "period")]
+        [JsonPropertyName("period")]
         public int Period { get; set; }
 
-        [JsonProperty(PropertyName = "algorithm")]
+        [JsonPropertyName("algorithm")]
         public string Algorithm { get; set; }
 
-        [JsonProperty(PropertyName = "counter")]
+        [JsonPropertyName("counter")]
         public int Counter { get; set; }
 
-        [JsonProperty(PropertyName = "tokenType")]
+        [JsonPropertyName("tokenType")]
         public string TokenType { get; set; }
     }
 
-    internal sealed class TwoFASGroupModel
+    public sealed class TwoFASGroupModel
     {
-        [JsonProperty(PropertyName = "id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
     }
 
-    internal sealed class TwoFASServiceModel
+    public sealed class TwoFASServiceModel
     {
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "secret")]
+        [JsonPropertyName("secret")]
         public string Secret { get; set; }
 
-        [JsonProperty(PropertyName = "otp")]
-        public OtpHashMode HashMode { get; set; }
+        [JsonPropertyName("otp")]
+        public TwoFASOtpModel Otp { get; set; }
 
-        [JsonProperty(PropertyName = "groupId")]
+        [JsonPropertyName("groupId")]
         public string GroupId { get; set; }
     }
 }

@@ -102,7 +102,8 @@ namespace Project2FA.Services.Importer
                         Period = entries[i].Info.Period,
                         HashMode = entries[i].Info.HashMode,
                         SecretByteArray = Base32Encoding.ToBytes(entries[i].Info.Secret),
-                        AccountIconName = DataService.Instance.GetIconForLabel(entries[i].Name.ToLower())
+                        AccountIconName = DataService.Instance.GetIconForLabel(entries[i].Name.ToLower()),
+                        SelectedCategories = new System.Collections.ObjectModel.ObservableCollection<CategoryModel>(),
                     };
                     if (string.IsNullOrWhiteSpace(model.Issuer))
                     {

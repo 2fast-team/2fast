@@ -1,10 +1,7 @@
-﻿using Project2FA.Repository.Models;
+﻿using Project2FA.Core.Services.Crypto;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
 using UNOversal.Services.Serialization;
@@ -25,7 +22,7 @@ namespace Project2FA.Services
         /// <summary>
         /// JSON serializer settings.
         /// </summary>
-        public JsonSerializerOptions Settings { get; }
+        public JsonSerializerOptions Settings { get;}
 
         /// <summary>
         /// Serializes the value.
@@ -38,8 +35,13 @@ namespace Project2FA.Services
             if (string.IsNullOrEmpty(value.ToString()))
                 return string.Empty;
 
-            // Serialize to json
-            return JsonSerializer.Serialize(value, Settings);
+            // Use JsonTypeInfo for AOT and trimming safety
+            var type = value.GetType();
+            var typeInfo = Settings.GetTypeInfo(type);
+            if (typeInfo == null)
+                throw new InvalidOperationException($"Type {type} not supported by source generator.");
+
+            return JsonSerializer.Serialize(value, typeInfo);
         }
 
         public bool TrySerialize(object parameter, out string result)
@@ -51,7 +53,7 @@ namespace Project2FA.Services
             }
             catch (Exception)
             {
-                result = default(string);
+                result = string.Empty;
                 return false;
             }
         }
@@ -93,6 +95,10 @@ namespace Project2FA.Services
 
         public async Task<T> DeserializeAsync<T>(Stream utf8Json)
         {
+            JsonTypeInfo<T>? typeInfo = Settings.GetTypeInfo(typeof(T)) as JsonTypeInfo<T>;
+            if (typeInfo == null)
+                throw new InvalidOperationException($"Type {typeof(T)} not supported by source generator.");
+
             if (utf8Json == null)
                 return default(T);
 
@@ -100,7 +106,7 @@ namespace Project2FA.Services
             //    return default(Task<T>)
 
             // Deserialize from utf8Json
-            return await JsonSerializer.DeserializeAsync<T>(utf8Json, Settings);
+            return await JsonSerializer.DeserializeAsync<T>(utf8Json, typeInfo);
         }
 
         /// <summary>

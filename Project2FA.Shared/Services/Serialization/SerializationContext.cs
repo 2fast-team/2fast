@@ -6,6 +6,8 @@ using System.Text.Json.Serialization;
 namespace Project2FA.Services
 {
     [JsonSerializable(typeof(DatafileModel))]
+    [JsonSerializable(typeof(TwoFACodeModel))]
+    [JsonSerializable(typeof(CategoryModel))]
     [JsonSerializable(typeof(FontIdentifikationCollectionModel))]
     [JsonSerializable(typeof(DependencyModel))]
     [JsonSerializable(typeof(List<DependencyModel>))]
@@ -13,6 +15,7 @@ namespace Project2FA.Services
     [JsonSerializable(typeof(AegisModel<AegisDecryptedDatabase>))]
     [JsonSerializable(typeof(AegisModel<string>))]
     [JsonSerializable(typeof(List<AndOTPModel<string>>))]
+    [JsonSerializable(typeof(List<TwoFASBackup>))]
 
     public partial class SerializationContext : JsonSerializerContext
     {

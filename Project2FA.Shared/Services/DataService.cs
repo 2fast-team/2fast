@@ -2,7 +2,6 @@
 using System;
 using System.Collections.ObjectModel;
 using UNOversal.Ioc;
-using Project2FA.Core.Services.JSON;
 using Windows.Storage;
 using System.Collections.Specialized;
 using OtpNet;
@@ -38,7 +37,6 @@ using System.Text;
 using UNOversal.Helpers;
 using System.Linq;
 
-
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Project2FA.UWP.Views;
@@ -46,15 +44,14 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Project2FA.UWP.Utils;
 using Windows.Security.Authorization.AppCapabilityAccess;
+using Project2FA.Helpers;
+
 #else
 using Project2FA.UnoApp;
 using Project2FA.Uno.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
-#endif
-#if WINDOWS
-using Windows.Security.Authorization.AppCapabilityAccess;
 #endif
 
 namespace Project2FA.Services
@@ -86,8 +83,8 @@ namespace Project2FA.Services
         private INetworkTimeService NetworkTimeService { get; }
         private INetworkService NetworkService { get; }
         private ISerializationService SerializationService { get; }
+        private ISerializationCryptoService SerializationCryptoService { get; }
         private bool _initialization, _errorOccurred;
-        private INewtonsoftJSONService NewtonsoftJSONService { get; }
         private ILoggingService LoggingService { get; }
         public Stopwatch TOTPEventStopwatch { get; }
         public AdvancedCollectionView ACVCollection { get; }
@@ -127,8 +124,8 @@ namespace Project2FA.Services
             FileService = App.Current.Container.Resolve<IFileService>();
             Logger = App.Current.Container.Resolve<ILoggerFacade>();
             DialogService = App.Current.Container.Resolve<IDialogService>();
-            NewtonsoftJSONService = App.Current.Container.Resolve<INewtonsoftJSONService>();
             SerializationService = App.Current.Container.Resolve<ISerializationService>();
+            SerializationCryptoService = App.Current.Container.Resolve<ISerializationCryptoService>();
             NetworkTimeService = App.Current.Container.Resolve<INetworkTimeService>();
             NetworkService = App.Current.Container.Resolve<INetworkService>();
             LoggingService = App.Current.Container.Resolve<ILoggingService>();
@@ -166,6 +163,7 @@ namespace Project2FA.Services
             }
         }
 
+#region Time Check
         /// <summary>
         /// Check if the current time of the system is correct
         /// </summary>
@@ -198,6 +196,7 @@ namespace Project2FA.Services
                 }
             }
         }
+        #endregion
 
         /// <summary>
         /// Create TOTP code for collection initialization and write the datafile, if an item added or removed from the collection
@@ -392,6 +391,7 @@ namespace Project2FA.Services
                     _initialization = true;
                     try
                     {
+                        // read the datafile content as string
                         string datafileStr = string.Empty;
 
 #if __ANDROID__
@@ -422,35 +422,41 @@ namespace Project2FA.Services
                         if (!string.IsNullOrWhiteSpace(datafileStr))
                         {
                             // read the iv for AES
-                            DatafileModel datafile = NewtonsoftJSONService.Deserialize<DatafileModel>(datafileStr);
-                            byte[] iv = datafile.IV;
+                            DatafileModel datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
+                            Aes algorithm = Aes.Create();
+                            algorithm.IV = datafile.IV;
+
+                            byte[] byteArrayKey;
+
 
                             // app is started via double click on .2fa file
                             if (ActivatedDatafile != null)
                             {
 #if WINDOWS_UWP
                                 // only Windows can use the ProtectData class to encrypt the password for the activated file
-                                datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
-                                    iv,
-                                    datafileStr,
-                                    datafile.Version);
+                                byteArrayKey = ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)));
 #else
-                                datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
-                                    iv,
-                                    datafileStr,
-                                    datafile.Version);
+
+                                byteArrayKey = SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName));
 #endif
                             }
                             else
                             {
-                                datafile = NewtonsoftJSONService.DeserializeDecrypt<DatafileModel>(
-                                    Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
-                                    iv,
-                                    datafileStr,
-                                    datafile.Version);
+                                byteArrayKey = Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName));
                             }
+
+                            
+                            if (datafile.Version == 1 || datafile.Version == 0)
+                            {
+                                algorithm.Key = CryptoService.CreateByteArrayKeyV1(byteArrayKey);
+                            }
+                            else
+                            {
+                                algorithm.Key = CryptoService.CreateByteArrayKeyV2(byteArrayKey);
+                            }
+
+                            // deserialize and decrypt the datafile
+                            datafile = SerializationCryptoService.DeserializeDecrypt<DatafileModel>(algorithm.Key, algorithm.IV,datafileStr, datafile.Version);
 
                             deserializeCollection = datafile.Collection;
                             if (datafile.GlobalCategories != null)
@@ -458,6 +464,7 @@ namespace Project2FA.Services
                                 GlobalCategories.AddRange(datafile.GlobalCategories, true);
                             }
                         }
+
                         if (deserializeCollection != null)
                         {
                             // It skips any performance heavy logic while it's in use, and automatically calls the method when disposed.
@@ -476,6 +483,20 @@ namespace Project2FA.Services
                                     if (EmptyAccountCollectionTipIsOpen)
                                     {
                                         EmptyAccountCollectionTipIsOpen = false;
+                                    }
+
+                                    // check if imported categories from older versions exist and add missing properties
+                                    // bugfix for imported accounts with missing SelectedCategories initialization
+                                    // TODO remove after some versions
+                                    if (SystemInformationHelper.Instance.PreviousVersionInstalled.Equals(PackageVersionHelper.ToPackageVersion("1.4.1.0")))
+                                    {
+                                        for (int i = 0; i < Collection.Count; i++)
+                                        {
+                                            if (Collection[i].Model.SelectedCategories == null)
+                                            {
+                                                Collection[i].Model.SelectedCategories = new ObservableCollection<CategoryModel>();
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -677,7 +698,8 @@ namespace Project2FA.Services
             {
                 await CollectionAccessSemaphore.WaitAsync();
 
-                byte[] iv = Aes.Create().IV;
+                Aes algorithm = Aes.Create();
+
                 string passwordHashName = ActivatedDatafile != null ?
                     Constants.ActivatedDatafileHashName :
                     SettingsService.Instance.DataFilePasswordHash;
@@ -696,7 +718,7 @@ namespace Project2FA.Services
                     tempCategories.Add((CategoryModel)GlobalCategories[i].Clone());
                 }
                 // create the new datafile model
-                DatafileModel fileModel = new DatafileModel() { IV = iv, Collection = Collection, Version = version, GlobalCategories = tempCategories };
+                DatafileModel fileModel = new DatafileModel() { IV = algorithm.IV, Collection = Collection, Version = version, GlobalCategories = tempCategories };
                 
                 if (ActivatedDatafile != null)
                 {
@@ -742,18 +764,20 @@ namespace Project2FA.Services
                 if (ActivatedDatafile != null)
                 {
 #if WINDOWS_UWP
+                    algorithm.Key = CryptoService.CreateByteArrayKeyV2(ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))));
                     await FileService.WriteStringAsync(
                         fileName,
-                        NewtonsoftJSONService.SerializeEncrypt(
-                            ProtectData.Unprotect(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName))),
-                            iv,
+                        SerializationCryptoService.SerializeEncrypt(
+                            algorithm.Key,
+                            algorithm.IV,
                             fileModel,
                             fileModel.Version),
                         folder);
 #else
-                    string content = NewtonsoftJSONService.SerializeEncrypt(
-                            SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
-                            iv,
+                    algorithm.Key = CryptoService.CreateByteArrayKeyV2(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName));
+                    string content = SerializationCryptoService.SerializeEncrypt(
+                            algorithm.Key,
+                            algorithm.IV,
                             fileModel,
                             fileModel.Version);
 #if __ANDROID__
@@ -769,12 +793,13 @@ namespace Project2FA.Services
                 }
                 else
                 {
+                    algorithm.Key = CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)));
 #if WINDOWS_UWP
                     await FileService.WriteStringAsync(
                         fileName,
-                        NewtonsoftJSONService.SerializeEncrypt(
-                            Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)), 
-                            iv, 
+                        SerializationCryptoService.SerializeEncrypt(
+                            algorithm.Key,
+                            algorithm.IV, 
                             fileModel,
                             fileModel.Version),
                         folder);
@@ -786,8 +811,8 @@ namespace Project2FA.Services
                     }
 #endif
                     //var fileStream = await file.OpenStreamForWriteAsync();
-                    string content = NewtonsoftJSONService.SerializeEncrypt(
-                            Encoding.UTF8.GetBytes(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)),
+                    string content = SerializationCryptoService.SerializeEncrypt(
+                            algorithm.Key,
                             iv,
                             fileModel,
                             fileModel.Version);
@@ -866,7 +891,7 @@ namespace Project2FA.Services
                 await CollectionAccessSemaphore.WaitAsync();
                 await FileService.WriteStringAsync(
                     fileName,
-                    NewtonsoftJSONService.Serialize(datafile),
+                    SerializationService.Serialize(datafile),
                     folder);
                 return true;
             }

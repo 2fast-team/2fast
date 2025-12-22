@@ -20,6 +20,8 @@ using System.Text;
 using UNOversal.Services.Logging;
 using Project2FA.Services;
 using UNOversal.Services.Serialization;
+using Project2FA.Core.Services.Crypto;
+
 
 
 #if WINDOWS_UWP
@@ -152,9 +154,9 @@ namespace Project2FA.ViewModels
                     case AppCapabilityAccessStatus.NotDeclaredByApp:
                     case AppCapabilityAccessStatus.DeniedByUser:
                     case AppCapabilityAccessStatus.UserPromptRequired:
+                    default:
                         await ErrorDialogs.UnauthorizedAccessUseLocalFileDialog();
                         break;
-                    default:
                     case AppCapabilityAccessStatus.Allowed:
                         return await SetLocalFile();
                 }
@@ -319,12 +321,11 @@ namespace Project2FA.ViewModels
 #endif
                 //read the iv for AES
                 DatafileModel datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
-                byte[] iv = datafile.IV;
 
                 try
                 {
                     DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
-                        (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
+                        (CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(Password)), datafile.IV, datafileStr, datafile.Version);
                     return true;
                 }
                 catch (Exception)

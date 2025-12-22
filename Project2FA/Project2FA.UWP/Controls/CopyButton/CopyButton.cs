@@ -6,11 +6,16 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+
 #else
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+#endif
+
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
 #endif
 
 namespace Project2FA.UWP.Controls
@@ -22,6 +27,9 @@ namespace Project2FA.UWP.Controls
             this.DefaultStyleKey = typeof(CopyButton);
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Storyboard))]
+#endif
         private void CopyButton_Click(object sender, RoutedEventArgs e)
         {
             if (GetTemplateChild("CopyToClipboardSuccessAnimation") is Storyboard _storyBoard)

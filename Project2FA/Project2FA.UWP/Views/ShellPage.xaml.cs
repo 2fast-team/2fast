@@ -53,8 +53,6 @@ namespace Project2FA.UWP.Views
             _navManager = SystemNavigationManager.GetForCurrentView();
             _settingsNavigationStr = "SettingPage?PivotItem=0";
 
-            SettingsService.Instance.IsProVersion = true; // TODO remove test
-
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += App_CloseRequested;
 
             // determine and set if the app is started in debug mode
@@ -154,6 +152,7 @@ namespace Project2FA.UWP.Views
 
 #if NET9_0_OR_GREATER
         [DynamicWindowsRuntimeCast(typeof(Style))]
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
 #endif
         private async void ShellPage_Loaded(object sender, RoutedEventArgs e)
         {

@@ -12,6 +12,11 @@ using Microsoft.UI.Xaml;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -87,7 +92,9 @@ namespace Project2FA.ViewModels
             }
         }
 #endif
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         public void RefreshThemeForResources()
         {
             // workaround for switching the resources...

@@ -721,8 +721,10 @@
     <value>NTPサーバーを使用して、システムの正しい時刻をチェックすることができる。時刻にそれ以上のずれがある場合、アカウントのコード作成はもはや正しくない。30秒以上のずれがある場合、通知が表示され、NTPサーバーの時刻でコードの作成が行われる。</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
-    <value>- サードパーティ製ライブラリのアップデート
-- バグ修正と最適化</value>
+    <value>- サードパーティ製ライブラリの更新
+- バグ修正と最適化
+- バックアップインポート時の追加サービス対応
+- データファイル（.2fa）の読み込みと保存の効率化</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

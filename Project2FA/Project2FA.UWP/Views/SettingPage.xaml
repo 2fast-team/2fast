@@ -21,95 +21,92 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <ResourceDictionary>
-            <Style TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemExpanded}">
-                <Setter Property="Padding" Value="2,16,20,0"/>
-                <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
-            </Style>
+        <Style TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemExpanded}">
+            <Setter Property="Padding" Value="2,16,20,0"/>
+            <Setter Property="animations:Implicit.Animations" Value="{StaticResource ImplicitOffset}"/>
+        </Style>
 
-            <DataTemplate x:Name="ShellHeaderTemplate">
-                <Grid Background="{ThemeResource ShellAcrylicWindowBrush}" 
+        <DataTemplate x:Name="ShellHeaderTemplate">
+            <Grid Background="{ThemeResource ShellAcrylicWindowBrush}" 
                       Height="40">
-                    <TextBlock 
+                <TextBlock 
                         x:Uid="SettingsPageName"
                         Margin="15,0,0,0"
                         Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
                         TextWrapping="NoWrap" 
                         VerticalAlignment="Top" />
-                </Grid>
-            </DataTemplate>
+            </Grid>
+        </DataTemplate>
 
-            <DataTemplate x:Key="DependenciesListViewTemplate" x:DataType="models:DependencyModel">
-                <Grid
+        <DataTemplate x:Key="DependenciesListViewTemplate" x:DataType="models:DependencyModel">
+            <Grid
                     x:Name="Root" 
                     CornerRadius="{ThemeResource ControlCornerRadius}"
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     Width="450">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock
                         Text="{x:Bind Name, Mode=OneWay}"
                         FontSize="16"
                         Foreground="{ThemeResource SystemAccentColor}"
                         Margin="8,0,0,0"
                         Padding="0,0,0,8"/>
-                    <StackPanel
+                <StackPanel
                         Grid.Row="1" 
                         Margin="8,8,0,0"
                         Orientation="Horizontal">
-                        <TextBlock
+                    <TextBlock
                             x:Uid="SettingsDependencyAuthor"
                             Grid.Row="1" 
                             VerticalAlignment="Center"
                             Margin="0,0,4,0" />
-                        <TextBlock
+                    <TextBlock
                             VerticalAlignment="Center"
                             Text="{x:Bind Authors, Mode=OneWay}"/>
-                        <HyperlinkButton
+                    <HyperlinkButton
                             Content="Link"
                             Margin="4,0,0,0"
                             ToolTipService.ToolTip="{x:Bind URL,Mode=OneWay}"
                             Visibility="{x:Bind URL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
                             NavigateUri="{x:Bind URL,Mode=OneWay}"/>
-                    </StackPanel>
+                </StackPanel>
 
-                    <StackPanel
+                <StackPanel
                         Grid.Row="2" 
                         Margin="8,8,0,0"
                         Orientation="Horizontal">
-                        <TextBlock
+                    <TextBlock
                             x:Uid="SettingsDependencyLicence"
                             Margin="0,0,4,0" 
                             VerticalAlignment="Center"
                             Grid.Row="2" 
                             Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"/>
-                        <TextBlock
+                    <TextBlock
                             VerticalAlignment="Center"
                             Text="{x:Bind LicenseName, Mode=OneWay}" 
                             Visibility="{x:Bind LicenseName,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}" />
-                        <HyperlinkButton
+                    <HyperlinkButton
                             Margin="4,0,0,0"
                             Content="Link"
                             Visibility="{x:Bind LicenseURL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
                             ToolTipService.ToolTip="{x:Bind LicenseURL,Mode=OneWay}"
                             NavigateUri="{x:Bind LicenseURL,Mode=OneWay}" 
                             VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Grid>
-            </DataTemplate>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
 
-            <!--  SemanticZoom grouped sourc  -->
-            <CollectionViewSource
+        <!--  SemanticZoom grouped sourc  -->
+        <CollectionViewSource
             x:Name="DependencyCollectionViewSource"
             IsSourceGrouped="True"
-            Source="{x:Bind ViewModel.AboutPartViewModel.DependencyCollection, Mode=OneWay}" />
-
-
-        </ResourceDictionary>
+            ItemsPath="Items"
+            Source="{x:Bind ViewModel.AboutPartViewModel.Groups, Mode=OneWay}" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="3,0,0,0">
@@ -247,7 +244,7 @@
                                                     </Grid>
                                                 </ctwc:SettingsCard.Content>
                                             </ctwc:SettingsCard>
-                                            <ctwc:SettingsCard 
+                                            <!--<ctwc:SettingsCard 
                                             x:Uid="SettingsAppCompactDesign"
                                             HeaderIcon="{ui:FontIcon Glyph=&#xE92C;}"
                                             Header="~SettingsAppCompactDesign.Header">
@@ -288,7 +285,7 @@
                                                         </ComboBox>
                                                     </Grid>
                                                 </ctwc:SettingsCard.Content>
-                                            </ctwc:SettingsCard>
+                                            </ctwc:SettingsCard>-->
                                         </ctwc:SettingsExpander.Items>
                                     </ctwc:SettingsExpander>
                                 </unoVersalControls:SettingsGroup>
@@ -644,10 +641,11 @@
                                             <GridView.GroupStyle>
                                                 <GroupStyle>
                                                     <GroupStyle.HeaderTemplate>
-                                                        <DataTemplate x:DataType="collections:IReadOnlyObservableGroup">
-                                                            <TextBlock 
-                                                                Text="{x:Bind Key}" 
-                                                                FontSize="20"/>
+                                                        <DataTemplate x:DataType="models:DependencyGroupModel">
+                                                            <TextBlock
+                                                            Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                                                            Style="{StaticResource SubtitleTextBlockStyle}"
+                                                            Text="{x:Bind GroupName}" />
                                                         </DataTemplate>
                                                     </GroupStyle.HeaderTemplate>
                                                     <GroupStyle.Panel>

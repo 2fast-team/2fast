@@ -131,6 +131,8 @@ namespace Project2FA.UWP.Views
                 {
                     if (tag == "ValidationError")
                     {
+                        // set the secret key to empty to update the binding and disable the save button
+                        ViewModel.SecretKey = string.Empty;
                         AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip
                         {
                             Target = TB_AddAccountContentDialogSecretKey as FrameworkElement,

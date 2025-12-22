@@ -719,7 +719,9 @@ Palun sünkroonige kellaaeg seadetes.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmandate osapoolte raamatukogude uuendamine
-- Vigade parandamine ja optimeerimine</value>
+- Veaparandused ja optimeerimine
+- Varunduse importimise ajal toetatakse lisateenuseid
+- Andmefailide (.2fa) tõhusam laadimine ja salvestamine</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

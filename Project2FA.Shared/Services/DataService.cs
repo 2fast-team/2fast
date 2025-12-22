@@ -305,7 +305,7 @@ namespace Project2FA.Services
 
                 if (ActivatedDatafile != null)
                 {
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS_UWP
                     // check if the app has file system access to load the file
                     var checkFileSystemAccess = AppCapability.Create(Constants.BroadFileSystemAccessName).CheckAccess();
                     switch (checkFileSystemAccess)
@@ -326,7 +326,7 @@ namespace Project2FA.Services
                     path = ActivatedDatafile.Path;
                     passwordHashName = Constants.ActivatedDatafileHashName;
                     datafilename = ActivatedDatafile.Name;
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS_UWP
                     folder = await ActivatedDatafile.GetParentAsync();
 #endif
 #if __IOS__
@@ -338,7 +338,7 @@ namespace Project2FA.Services
                 }
                 else
                 {
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS_UWP
                     folder = SettingsService.Instance.DataFileWebDAVEnabled ?
                     ApplicationData.Current.LocalFolder :
                     await StorageFolder.GetFolderFromPathAsync(SettingsService.Instance.DataFilePath);
@@ -382,7 +382,7 @@ namespace Project2FA.Services
 #if __ANDROID__ || __IOS__
                 if (file != null)
 #endif
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS_UWP
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
                 {
@@ -414,7 +414,7 @@ namespace Project2FA.Services
                             }
                         }
 #endif
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS_UWP
                         datafileStr = await FileService.ReadStringAsync(datafilename, folder);
 #endif
 
@@ -774,7 +774,7 @@ namespace Project2FA.Services
                             fileModel.Version),
                         folder);
 #else
-                    algorithm.Key = CryptoService.CreateByteArrayKeyV2(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName));
+                    algorithm.Key = CryptoService.CreateByteArrayKeyV2(SerializationService.Deserialize<byte[]>(SecretService.Helper.ReadSecret(Constants.ContainerName, passwordHashName)));
                     string content = SerializationCryptoService.SerializeEncrypt(
                             algorithm.Key,
                             algorithm.IV,
@@ -813,7 +813,7 @@ namespace Project2FA.Services
                     //var fileStream = await file.OpenStreamForWriteAsync();
                     string content = SerializationCryptoService.SerializeEncrypt(
                             algorithm.Key,
-                            iv,
+                            algorithm.IV,
                             fileModel,
                             fileModel.Version);
 #if __ANDROID__

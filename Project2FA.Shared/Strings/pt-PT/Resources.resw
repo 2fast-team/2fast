@@ -720,7 +720,9 @@ Por favor, sincronize a hora nas definições.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Atualização de bibliotecas de terceiros
-- Correções de bugs e otimização</value>
+- Correções de bugs e otimização
+- Serviços adicionais são suportados durante a importação de backup
+- Carregamento e armazenamento mais eficientes de ficheiros de dados (.2fa)</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

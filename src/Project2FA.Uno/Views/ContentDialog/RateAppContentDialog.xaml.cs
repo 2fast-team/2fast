@@ -31,8 +31,9 @@ public sealed partial class RateAppContentDialog : ContentDialog
 
     private async void BTN_RateAppYes_Click(object sender, RoutedEventArgs e)
     {
+        // TODO for Android and iOS release
 #if __ANDROID__ || __IOS__
-        await Windows.Services.Store.StoreContext.GetDefault().RequestRateAndReviewAppAsync();
+        //await Windows.Services.Store.StoreContext.GetDefault().RequestRateAndReviewAppAsync();
 #endif
         Hide();
     }

@@ -42,7 +42,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Data.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxRegex.Properties.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CryptoHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AccountAvatarTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThemeHelper.cs" />
@@ -58,6 +57,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\BackupServiceEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyGroupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationCollectionModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationModel.cs" />
@@ -77,7 +77,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IAegisBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\IBackupImporterService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\ITwofastBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\TwoFASBackupImportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\TwofastBackupImportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\IProject2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Parser\Project2FAParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Serialization\EncryptedBytesConverter.cs" />

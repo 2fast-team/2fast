@@ -3,13 +3,14 @@ using Project2FA.Repository.Models;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
 using Project2FA.ViewModels;
-using System;
-using System.Linq;
 using UNOversal.Extensions;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace Project2FA.UWP.Views
 {
@@ -24,7 +25,9 @@ namespace Project2FA.UWP.Views
             // register the change of the input
             MainPivot.RegisterPropertyChangedCallback(TagProperty, PivotItemChangedCallback);
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Pivot))]
+#endif
         private void PivotItemChangedCallback(DependencyObject sender, DependencyProperty dp)
         {
             if (dp == Pivot.TagProperty)
@@ -73,6 +76,9 @@ namespace Project2FA.UWP.Views
             ViewModel.MediaPlayerElementControl = CameraPlayerElement;
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(PivotItem))]
+#endif
         private void RemovePivotItems(UIElement element)
         {
             switch (element)
@@ -146,6 +152,9 @@ namespace Project2FA.UWP.Views
             }
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private void HLBTN_QRCodeInfo(object sender, RoutedEventArgs e)
         {
             TeachingTip teachingTip = new TeachingTip
@@ -172,6 +181,9 @@ namespace Project2FA.UWP.Views
             }
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Button))]
+#endif
         private void BTN_QRCodeCameraScan_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.Name == nameof(BTN_QRCodeCameraScan))
@@ -184,6 +196,9 @@ namespace Project2FA.UWP.Views
             }
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Button))]
+#endif
         private async void BTN_FileImport_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.Name == nameof(BTN_FileImport))

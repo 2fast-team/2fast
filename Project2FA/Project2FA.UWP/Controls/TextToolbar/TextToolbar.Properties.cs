@@ -7,6 +7,10 @@ using Project2FA.UWP.Controls.TextToolbarFormats;
 using Project2FA.UWP.Controls.TextToolbarFormats.RichText;
 using Windows.System;
 using Windows.ApplicationModel;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
 
 #if WINDOWS_UWP
 using Windows.UI.Xaml;
@@ -67,6 +71,9 @@ namespace Project2FA.UWP.Controls
         /// </summary>
         public RichEditBox Editor
         {
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+            [DynamicWindowsRuntimeCast(typeof(RichEditBox))]
+#endif
             get { return (RichEditBox)GetValue(EditorProperty); }
             set { SetValue(EditorProperty, value); }
         }

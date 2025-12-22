@@ -791,7 +791,9 @@ Por favor, sincroniza la hora en los ajustes.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Actualización de bibliotecas de terceros
-- Corrección de errores y optimización</value>
+- Corrección de errores y optimización
+- Se admiten servicios adicionales durante la importación de copias de seguridad
+- Carga y almacenamiento más eficientes de archivos de datos (.2fa)</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Novedades y cambios</value>

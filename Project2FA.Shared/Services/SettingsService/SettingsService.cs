@@ -6,6 +6,11 @@ using Project2FA.Core;
 using UNOversal.Services.Logging;
 using UNOversal.Extensions;
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
+
 #if WINDOWS_UWP
 using Project2FA.UWP;
 using Windows.UI.Xaml;
@@ -56,7 +61,9 @@ namespace Project2FA.Services
                 RefreshThemeForResources();
             }
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private void RefreshThemeForResources()
         {
             // workaround for switching the resources...
@@ -394,9 +401,13 @@ namespace Project2FA.Services
             set => _helper.WriteEnum(nameof(PreferBiometricLogin), value);
         }
 
+
         public Theme AppTheme
         {
             get => _helper.SafeReadEnum(nameof(AppTheme), Theme.System);
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+            [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
             set
             {
                 _helper.WriteEnum(nameof(AppTheme), value);
@@ -447,6 +458,9 @@ namespace Project2FA.Services
             set => _helper.WriteEnum(nameof(OriginalAppTheme), value);
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         public void ResetSystemTheme(ApplicationTheme theme)
         {
             OriginalAppTheme = theme;

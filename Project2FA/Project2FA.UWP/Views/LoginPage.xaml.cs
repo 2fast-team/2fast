@@ -6,6 +6,9 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace Project2FA.UWP.Views
 {
@@ -19,7 +22,9 @@ namespace Project2FA.UWP.Views
             _isLogout = isLogout;
             this.Loaded += LoginPage_Loaded;
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private void LoginPage_Loaded(object sender, RoutedEventArgs e)
         {
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
@@ -52,22 +57,22 @@ namespace Project2FA.UWP.Views
                 case Theme.System:
                     if (SettingsService.Instance.OriginalAppTheme == ApplicationTheme.Dark)
                     {
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                        ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Light;
+                        ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Dark;
                     }
                     else
                     {
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                        (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                        ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Dark;
+                        ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Light;
                     }
                     break;
                 case Theme.Dark:
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
+                    ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Light;
+                    ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Dark;
                     break;
                 case Theme.Light:
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Dark;
-                    (Window.Current.Content as FrameworkElement).RequestedTheme = ElementTheme.Light;
+                    ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Dark;
+                    ((FrameworkElement)Window.Current.Content).RequestedTheme = ElementTheme.Light;
                     break;
                 default:
                     break;

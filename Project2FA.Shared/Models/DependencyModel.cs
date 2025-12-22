@@ -9,6 +9,10 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
+
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+    [WinRT.GeneratedBindableCustomPropertyAttribute]
+#endif
     public partial class DependencyModel : ObservableObject
     {
         private string _name;

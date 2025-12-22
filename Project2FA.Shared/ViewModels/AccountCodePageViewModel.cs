@@ -269,6 +269,9 @@ namespace Project2FA.ViewModels
             await NavigationService.NavigateAsync(nameof(SettingPage));
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         private async Task ShowProFeatureCommandTask()
         {
             var dialog = new ContentDialog();
@@ -380,6 +383,9 @@ namespace Project2FA.ViewModels
         /// Copy the 2fa code to clipboard and create a user dialog
         /// </summary>
         /// <param name="model"></param>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         public async Task<bool> CopyCodeToClipboardCommandTask(TwoFACodeModel model)
         {
             try

@@ -89,6 +89,7 @@ namespace Project2FA.Services.Importer
                             Issuer = decryptedModel[i].Issuer,
                             Period = decryptedModel[i].Period,
                             HashMode = algorithm,
+                            SelectedCategories = new System.Collections.ObjectModel.ObservableCollection<CategoryModel>(),
                             SecretByteArray = Base32Encoding.ToBytes(decryptedModel[i].Secret),
                             AccountIconName = DataService.Instance.GetIconForLabel(decryptedModel[i].Label.ToLower())
                         };

@@ -101,9 +101,9 @@ namespace Project2FA.Services.Importer
                         Issuer = entries[i].Issuer,
                         Period = entries[i].Info.Period,
                         HashMode = entries[i].Info.HashMode,
+                        SelectedCategories = new System.Collections.ObjectModel.ObservableCollection<CategoryModel>(),
                         SecretByteArray = Base32Encoding.ToBytes(entries[i].Info.Secret),
                         AccountIconName = DataService.Instance.GetIconForLabel(entries[i].Name.ToLower()),
-                        SelectedCategories = new System.Collections.ObjectModel.ObservableCollection<CategoryModel>(),
                     };
                     if (string.IsNullOrWhiteSpace(model.Issuer))
                     {
@@ -121,6 +121,7 @@ namespace Project2FA.Services.Importer
                     {
                         Label = entries[i].Name,
                         Issuer = entries[i].Issuer,
+                        SelectedCategories = new System.Collections.ObjectModel.ObservableCollection<CategoryModel>(),
                         AccountIconName = DataService.Instance.GetIconForLabel(entries[i].Name.ToLower()),
                         IsEnabled = false,
                         IsChecked = false

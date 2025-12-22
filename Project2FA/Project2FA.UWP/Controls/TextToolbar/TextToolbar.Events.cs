@@ -10,7 +10,6 @@ using Project2FA.UWP.Controls.TextToolbarFormats;
 using Windows.System;
 using Windows.UI.Core;
 
-
 #if WINDOWS_UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,6 +20,10 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Input;
+#endif
+
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
 #endif
 
 namespace Project2FA.UWP.Controls
@@ -35,6 +38,9 @@ namespace Project2FA.UWP.Controls
         /// </summary>
         /// <param name="obj">TextToolbar</param>
         /// <param name="args">Property Changed Args</param>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(RichEditBox))]
+#endif
         private static void OnEditorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             if (InDesignMode)
@@ -104,6 +110,9 @@ namespace Project2FA.UWP.Controls
         /// </summary>
         /// <param name="obj">TextToolbar</param>
         /// <param name="args">Property Changed Args</param>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBar))]
+#endif
         private static void OnButtonMapChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             if (obj is TextToolbar bar)
@@ -140,6 +149,9 @@ namespace Project2FA.UWP.Controls
         /// </summary>
         /// <param name="obj">TextToolbar</param>
         /// <param name="args">Property Changed Args</param>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBar))]
+#endif
         private static void OnDefaultButtonModificationsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             if (obj is TextToolbar bar)
@@ -169,6 +181,9 @@ namespace Project2FA.UWP.Controls
         /// </summary>
         /// <param name="sender">ButtonMap</param>
         /// <param name="e">Collection Changed Args</param>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBar))]
+#endif
         private void OnButtonMapModified(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (GetTemplateChild(RootControl) is CommandBar root)
@@ -233,6 +248,9 @@ namespace Project2FA.UWP.Controls
         /// </summary>
         /// <param name="sender">Toolbar Button</param>
         /// <param name="e">Property Changed Event</param>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBar))]
+#endif
         private void ToolbarItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (GetTemplateChild(RootControl) is CommandBar root)

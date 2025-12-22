@@ -720,7 +720,9 @@ Synkronoi aika asetuksissa.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Kolmannen osapuolen kirjastojen päivittäminen
-- Vikojen korjaukset ja optimointi</value>
+- Virheiden korjaus ja optimointi
+- Lisäpalvelut tuetaan varmuuskopion tuonnin aikana
+- Tehokkaampi datatiedostojen (.2fa) lataaminen ja tallentaminen</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

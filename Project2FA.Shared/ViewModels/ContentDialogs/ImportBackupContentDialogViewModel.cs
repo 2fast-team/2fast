@@ -85,6 +85,7 @@ namespace Project2FA.ViewModels
 
         public async Task<StorageFile> FileImportCommandTask()
         {
+            Password = string.Empty;
             FileOpenPicker filePicker = new FileOpenPicker
             {
                 SuggestedStartLocation = PickerLocationId.ComputerFolder

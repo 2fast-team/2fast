@@ -722,7 +722,9 @@ Sincronizzare l'ora nelle impostazioni.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aggiornamento delle librerie di terze parti
-- Correzione di bug e ottimizzazione</value>
+- Correzioni di bug e ottimizzazione
+- Supporto di servizi aggiuntivi durante l'importazione dei backup
+- Caricamento e archiviazione più efficienti dei file di dati (.2fa)</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

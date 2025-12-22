@@ -10,6 +10,9 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace Project2FA.UWP.Views
 {
@@ -125,7 +128,9 @@ namespace Project2FA.UWP.Views
             }
 
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private void HLBTN_PasswordInfo(object sender, RoutedEventArgs e)
         {
             var markdownText = new MarkdownTextBlock();

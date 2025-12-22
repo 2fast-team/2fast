@@ -38,7 +38,8 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch">
+                    VerticalContentAlignment="Stretch"
+                    MinWidth="420">
                     <Grid 
                         HorizontalAlignment="Stretch"
                         CornerRadius="{ThemeResource ControlCornerRadius}"

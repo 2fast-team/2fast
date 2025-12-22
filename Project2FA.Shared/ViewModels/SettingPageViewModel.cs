@@ -47,6 +47,10 @@ using Project2FA.UnoApp;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
 namespace Project2FA.ViewModels
 {
     /// <summary>
@@ -78,6 +82,8 @@ namespace Project2FA.ViewModels
 
         private int _selectedItem;
         private bool _activatedProVersion;
+
+
         public SettingPageViewModel(IDialogService dialogService, 
             ISecretService secretService,
             INavigationService navigationService,
@@ -290,6 +296,9 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Make a factory reset of the app
         /// </summary>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         private async void MakeFactoryReset()
         {
             ContentDialog dialog = new ContentDialog();
@@ -957,6 +966,8 @@ namespace Project2FA.ViewModels
         private ILoggingService LoggingService { get; }
         private ISerializationService SerializationService { get; }
 
+        private IList<DependencyGroupModel>? _dependencyGroups = new List<DependencyGroupModel>();
+
         public AboutPartViewModel(
 #if WINDOWS_UWP
             IMarketplaceService marketplaceService,
@@ -991,22 +1002,43 @@ namespace Project2FA.ViewModels
                         item.Category = Resources.SettingsDependencyGroupAssets;
                     }
                 }
-                TempDependencyCollection.AddRange(depList);
+                //TempDependencyCollection.AddRange(depList);
+
+
 
                 var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
+
+                foreach (var group in grouped)
+                {
+                    if (!Groups.Any(g => g.GroupName == group.Key))
+                    {
+                        var dependencyGroupModel = new DependencyGroupModel { GroupName = group.Key };
+                        foreach (var item in group)
+                        {
+                            dependencyGroupModel.Items.Add(item);
+                        }
+                        Groups.Add(dependencyGroupModel);
+                    }
+                }
                 //var grouped = depList.GroupBy(x => x.Category).OrderBy(g => g.Key);
                 //DependencyCollection.AddRange(grouped, true);
-                DependencyCollection = new ObservableGroupedCollection<string, DependencyModel>(grouped);
-                OnPropertyChanged(nameof(DependencyCollection));
+                //DependencyCollection = new ObservableGroupedCollection<string, DependencyModel>(grouped);
+                //OnPropertyChanged(nameof(DependencyCollection));
+                OnPropertyChanged(nameof(Groups));
             }
             catch (Exception exc)
             {
                 await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
             }
         }
-        public ObservableCollection<DependencyModel> TempDependencyCollection { get; private set; } = new ObservableCollection<DependencyModel>();
 
-        public ObservableGroupedCollection<string, DependencyModel> DependencyCollection { get; private set; } = new ObservableGroupedCollection<string, DependencyModel>();
+        public IList<DependencyGroupModel>? Groups
+        {
+            get { return this._dependencyGroups; }
+        }
+        //public ObservableCollection<DependencyModel> TempDependencyCollection { get; private set; } = new ObservableCollection<DependencyModel>();
+
+        //public ObservableGroupedCollection<string, DependencyModel> DependencyCollection { get; private set; } = new ObservableGroupedCollection<string, DependencyModel>();
 #if WINDOWS_UWP
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 #endif

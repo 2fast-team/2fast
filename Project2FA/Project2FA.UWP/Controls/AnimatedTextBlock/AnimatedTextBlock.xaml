@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:Project2FA.UWP.Controls"
+                    xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml">
+
+    <Style TargetType="local:AnimatedTextBlock" BasedOn="{StaticResource DefaultAnimatedTextBlockStyle}" />
+
+    <Style x:Key="DefaultAnimatedTextBlockStyle" TargetType="local:AnimatedTextBlock">
+        <Setter Property="FontFamily" Value="XamlAutoFontFamily" />
+        <Setter Property="FontSize" Value="{StaticResource BodyTextBlockFontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:AnimatedTextBlock">
+                    <Grid x:Name="RootGrid" MinHeight="20" MinWidth="80">
+                        <TextBlock 
+                            x:Name="MeasureTextBlock"
+                            Text="{TemplateBinding Text}" 
+                            Foreground="Transparent"
+                            CharacterSpacing="{TemplateBinding CharacterSpacing}"
+                            Visibility="Collapsed"/>
+                        <Border x:Name="ContentBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <win2d:CanvasAnimatedControl 
+                                x:Name="AnimatedCanvas"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </Border>
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using UNOversal.Services.Serialization;
 using Project2FA.Repository.Models;
 using UNOversal.Services.Logging;
 using System.Collections.Generic;
@@ -13,10 +12,6 @@ using Project2FA.Shared.Models;
 
 
 #if WINDOWS_UWP
-using Project2FA.UWP;
-using Project2FA.UWP.Views;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 #else
 
 using Project2FA.Uno;
@@ -35,18 +30,20 @@ namespace Project2FA.Services.Importer
         private IAegisBackupImportService AegisBackupService { get; }
         private IAndOTPBackupImportService AndOTPBackupService { get; }
         private ITwoFASBackupImportService TwoFASBackupImportService { get; }
+
+        public ITwofastBackupImportService TwofastBackupImportService { get; }
         public BackupImporterService(
             ILoggingService loggingService, 
-            //ISerializationService serializationService,
             IAegisBackupImportService aegisBackupService,
             IAndOTPBackupImportService andOTPBackupService,
-            ITwoFASBackupImportService twoFASBackupImportService) 
+            ITwoFASBackupImportService twoFASBackupImportService,
+            ITwofastBackupImportService twofastBackupImportService) 
         {
             LoggingService = loggingService;
-            //SerializationService = serializationService;
             AegisBackupService = aegisBackupService;
             AndOTPBackupService = andOTPBackupService;
             TwoFASBackupImportService = twoFASBackupImportService;
+            TwofastBackupImportService = twofastBackupImportService;
         }
 
         /// <summary>
@@ -85,7 +82,7 @@ namespace Project2FA.Services.Importer
                         (accountList, successful) = await TwoFASBackupImportService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
                         break;
                     case BackupServiceEnum.Twofast:
-                        //(accountList, successful) = await TwofastBackupImportService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
+                        (accountList, successful) = await TwofastBackupImportService.ImportBackup(await GetFileContent(storageFile), Encoding.UTF8.GetBytes(password));
                         break;
                     default:
                         break;

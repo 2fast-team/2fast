@@ -35,12 +35,16 @@
   <ItemGroup>
     <Compile Remove="AppPackages\**" />
     <Compile Remove="BundleArtifacts\**" />
+    <Compile Remove="Controls\AnimatedTextBlock\**" />
     <EmbeddedResource Remove="AppPackages\**" />
     <EmbeddedResource Remove="BundleArtifacts\**" />
+    <EmbeddedResource Remove="Controls\AnimatedTextBlock\**" />
     <None Remove="AppPackages\**" />
     <None Remove="BundleArtifacts\**" />
+    <None Remove="Controls\AnimatedTextBlock\**" />
     <Page Remove="AppPackages\**" />
     <Page Remove="BundleArtifacts\**" />
+    <Page Remove="Controls\AnimatedTextBlock\**" />
 	<None Remove="Properties\Default.rd.xml" />
 	<Compile Remove="Properties\AssemblyInfo.cs" />
 	<PRIResource Remove="AppPackages\**" />
@@ -49,7 +53,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100">
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.101">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -61,28 +65,28 @@
 			<Version>0.1.250828-build.2223</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Animations">
-			<Version>8.2.250402</Version>
+			<Version>8.2.251219</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Behaviors">
-			<Version>8.2.250402</Version>
+			<Version>8.2.251219</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Collections">
-			<Version>8.2.250402</Version>
+			<Version>8.2.251219</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
-			<Version>8.2.250402</Version>
+			<Version>8.2.251219</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
-			<Version>8.2.250402</Version>
+			<Version>8.2.251219</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Extensions">
-			<Version>8.2.250402</Version>
+			<Version>8.2.251219</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Lottie">
 			<Version>8.2.250604</Version>
 		</PackageReference>
 		<PackageReference Include="CommunityToolkit.Uwp.Media">
-			<Version>8.2.250402</Version>
+			<Version>8.2.251219</Version>
 		</PackageReference>
 		<PackageReference Include="DryIoc.dll">
 			<Version>5.4.3</Version>
@@ -106,7 +110,7 @@
 			<Version>2.8.7</Version>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Web.WebView2">
-			<Version>1.0.3595.46</Version>
+			<Version>1.0.3650.58</Version>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
 			<Version>3.0.0</Version>
@@ -114,7 +118,7 @@
 		<PackageReference Include="QRCoder">
 			<Version>1.7.0</Version>
 		</PackageReference>
-		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.1" />
 		<PackageReference Include="ZXing.Net">
 			<Version>0.16.11</Version>
 		</PackageReference>

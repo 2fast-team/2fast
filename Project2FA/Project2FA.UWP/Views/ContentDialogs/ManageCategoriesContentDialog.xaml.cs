@@ -11,6 +11,11 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using CommandBarFlyout = Microsoft.UI.Xaml.Controls.CommandBarFlyout;
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
+
 namespace Project2FA.UWP.Views
 {
     public sealed partial class ManageCategoriesContentDialog : ContentDialog
@@ -89,7 +94,9 @@ namespace Project2FA.UWP.Views
                 FlyoutBase.ShowAttachedFlyout(btn);
             }
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBarFlyout))]
+#endif
         private void CommandBarFlyout_Opening(object sender, object e)
         {
             if (sender is Microsoft.UI.Xaml.Controls.CommandBarFlyout cmdf)

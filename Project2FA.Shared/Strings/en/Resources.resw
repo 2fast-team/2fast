@@ -716,7 +716,9 @@ Please synchronize the time in the settings.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Updating third-party libraries
-- Bug fixes and optimisation</value>
+- Bug fixes and optimisation
+- Additional services are supported during backup import
+- More efficient loading and storage of data files (.2fa)</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

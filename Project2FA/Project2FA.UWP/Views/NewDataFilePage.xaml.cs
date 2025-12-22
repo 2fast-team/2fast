@@ -4,8 +4,11 @@ using System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace Project2FA.UWP.Views
 {
@@ -69,7 +72,9 @@ namespace Project2FA.UWP.Views
             ViewModel.SelectWebDAV = true;
             ViewModel.ChooseWebDAV();
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
         private void HLBTN_WDPasswordInfo(object sender, RoutedEventArgs e)
         {
             AutoCloseTeachingTip teachingTip = new AutoCloseTeachingTip

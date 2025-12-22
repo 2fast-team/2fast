@@ -56,20 +56,6 @@
     "StringLicenseURL": "https://github.com/microsoft/XamlBehaviors/blob/master/LICENSE"
   },
   {
-    "Name": "Newtonsoft.Json",
-    "Authors": "James Newton-King",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md"
-  },
-  {
-    "Name": "Newtonsoft.Json.Encryption",
-    "Authors": "Simon Cropp et al.",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/NServiceBusExtensions/Newtonsoft.Json.Encryption/blob/master/license.txt"
-  },
-  {
     "Name": "NETStandard.Library",
     "Authors": "Microsoft",
     "LicenseName": "MIT",

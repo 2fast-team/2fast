@@ -1,14 +1,11 @@
 {
   "sdk": {
-    "version": "10.0.100",
+
     "allowPrerelease": false,
     "rollForward": "latestPatch"
   },
-  "tools": {
-    "dotnet": "10.0.100"
-  },
   "msbuild-sdks": {
     "MSBuild.Sdk.Extras": "3.0.44",
-    "Uno.Sdk": " 6.4.40"
+    "Uno.Sdk": " 6.4.42"
   }
 }

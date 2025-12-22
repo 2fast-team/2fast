@@ -717,7 +717,9 @@
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- 更新第三方库
-- 修复漏洞和优化</value>
+- 修复错误并优化性能
+- 备份导入过程中支持更多附加服务
+- 更高效地加载和存储数据文件（.2fa）</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

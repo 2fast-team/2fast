@@ -11,6 +11,9 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace Project2FA.UWP.Controls
 {
@@ -379,6 +382,9 @@ namespace Project2FA.UWP.Controls
         /// Calculate a new projection after a manipulation delta
         /// </summary>
         /// <returns>Return the new projection</returns>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CompositeTransform))]
+#endif
         private Proj GetProjectionFromManipulation(UIElement element, double delta)
         {
             CompositeTransform compositeTransform = element.RenderTransform as CompositeTransform;

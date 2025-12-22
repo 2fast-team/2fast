@@ -17,6 +17,11 @@ using Windows.ApplicationModel.DataTransfer;
 using UNOversal.Navigation;
 using UNOversal.Services.Logging;
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
+
 #if WINDOWS_UWP
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -188,6 +193,9 @@ namespace Project2FA.ViewModels
         /// <summary>
         /// Verify login with Windows Hello
         /// </summary>
+        #if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+        #endif
         private async void WindowsHelloLoginCommandTask()
         {
             try

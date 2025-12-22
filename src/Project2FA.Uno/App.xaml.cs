@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Project2FA.Core.Services.JSON;
 using Project2FA.Core.Services.NTP;
 using Project2FA.Services;
 using Project2FA.Services.Importer;
@@ -395,8 +394,8 @@ namespace Project2FA.UnoApp
             container.RegisterSingleton<ISecretService, SecretService>();
             container.RegisterSingleton<ISettingsHelper, SettingsHelper>();
             container.RegisterSingleton<IGestureService, GestureService>();
-            container.RegisterSingleton<ISerializationService, SerializationService>(); //for internal uwp services
-            container.RegisterSingleton<INewtonsoftJSONService, NewtonsoftJSONService>(); //netstandard for general access
+            container.RegisterSingleton<ISerializationService, SerializationService>();
+            container.RegisterSingleton<ISerializationCryptoService, SerializationCryptoService>();
             container.RegisterSingleton<ISettingsAdapter, LocalSettingsAdapter>();
             container.RegisterSingleton<IProject2FAParser, Project2FAParser>();
             container.RegisterSingleton<INetworkTimeService, NetworkTimeService>();

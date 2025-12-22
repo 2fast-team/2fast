@@ -356,8 +356,6 @@ namespace Project2FA.ViewModels
                         {
                             // change the string to the named pivot item to trigger the real change in the code behind of the view
                             PivotViewSelectionName = "PI_AccountInput";
-                            CheckInputs(); // the primary button enable state
-
                         }
                         else
                         {
@@ -365,6 +363,7 @@ namespace Project2FA.ViewModels
                             //move to the selection dialog
                             SelectedPivotIndex = 0;
                         }
+                        CheckInputs(); // the primary button enable state
                     }
                     else
                     {

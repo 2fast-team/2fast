@@ -721,7 +721,9 @@ Veuillez synchroniser l'heure dans les paramètres.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Mise à jour des bibliothèques tierces
-- Corrections de bogues et optimisation</value>
+- Corrections de bogues et optimisation
+- Prise en charge de services supplémentaires lors de l'importation des sauvegardes
+- Chargement et stockage plus efficaces des fichiers de données (.2fa)</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Nouvelles fonctionnalités et changements</value>

@@ -16,6 +16,10 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 #endif
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
 namespace Project2FA.UWP.Controls
 {
     /// <summary>
@@ -28,6 +32,9 @@ namespace Project2FA.UWP.Controls
         /// </summary>
         /// <param name="button">Default Button</param>
         /// <returns>Default Toolbar Button</returns>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBar))]
+#endif
         public ToolbarButton GetDefaultButton(ButtonType button)
         {
             if (GetTemplateChild(RootControl) is CommandBar root)
@@ -42,6 +49,9 @@ namespace Project2FA.UWP.Controls
         /// <summary>
         /// Attaches all of the Default Buttons, Removing any that are to be removed, and inserting Custom buttons.
         /// </summary>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBar))]
+#endif
         private void BuildBar()
         {
             if (GetTemplateChild(RootControl) is CommandBar root)
@@ -130,6 +140,9 @@ namespace Project2FA.UWP.Controls
         /// Removes an Element from the Toolbar
         /// </summary>
         /// <param name="item">Item to Remove</param>
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(CommandBar))]
+#endif
         public void RemoveToolbarItem(IToolbarItem item)
         {
             var root = GetTemplateChild(RootControl) as CommandBar;

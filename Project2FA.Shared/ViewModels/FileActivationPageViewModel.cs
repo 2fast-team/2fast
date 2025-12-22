@@ -150,13 +150,12 @@ namespace Project2FA.ViewModels
                     }
                     else
                     {
-                        byte[] iv = datafile.IV;
                         if (datafile.Collection.Count > 0)
                         {
                             try
                             {
                                 DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
-                                (CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(Password)), iv, datafileStr, datafile.Version);
+                                (CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(Password)), datafile.IV, datafileStr, datafile.Version);
                             }
                             catch (Exception exc)
                             {

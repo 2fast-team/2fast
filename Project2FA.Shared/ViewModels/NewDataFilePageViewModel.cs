@@ -173,8 +173,7 @@ namespace Project2FA.ViewModels
                 DateFileName += ".2fa";
             }
 
-            byte[] iv = Aes.Create().IV;
-            DatafileModel model = new DatafileModel() { IV = iv, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>() };
+            DatafileModel model = new DatafileModel() { IV = Aes.Create().IV, Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>(), Version = 2 };
             if (isWebDAV)
             {
                 LocalStorageFolder = ApplicationData.Current.LocalFolder;

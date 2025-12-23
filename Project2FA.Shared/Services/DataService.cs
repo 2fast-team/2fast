@@ -708,9 +708,11 @@ namespace Project2FA.Services
 
                 var prevíousVersion = new Version(SystemInformationHelper.Instance.ApplicationVersion.ToFormattedString());
 
-                var compareVersion = new Version("1.3.0.0");
-                var result = prevíousVersion.CompareTo(compareVersion);
-                int version = result >= 0 ? 2 : 1;
+                //var compareVersion = new Version("1.3.0.0");
+                //var result = prevíousVersion.CompareTo(compareVersion);
+                // TODO upgrade the version when relevant
+                int version = 2;
+                //result >= 0 ? 2 : 1;
 
                 ObservableCollection<CategoryModel> tempCategories = new ObservableCollection<CategoryModel>();
                 for (int i = 0; i < GlobalCategories.Count; i++)

@@ -41,5 +41,10 @@
             Grid.Row="1"
             IsDetecting="{x:Bind ViewModel.IsDetecting, Mode=OneWay}"
             BarcodesDetected="CameraBarcodeReaderControl_BarcodesDetected"/>
+
+        <!--<StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <FontIcon FontSize="62" Glyph="&#xE960;" />
+            <ProgressRing IsActive="True" Width="50" Height="50" />
+        </StackPanel>-->
     </Grid>
 </Page>

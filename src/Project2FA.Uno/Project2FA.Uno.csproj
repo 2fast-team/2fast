@@ -87,6 +87,19 @@
 		<UnoSplashScreen Include="..\..\Project2FA.Shared\Assets\Splashcreen\splash_screen.svg" ForegroundScale="0.6" BaseSize="128,128" Color="#FF009BC1" />
 	</ItemGroup>
 
+	<PropertyGroup Condition="'$(Configuration)'=='Release' and '$(System_PullRequest_IsFork)'!='True' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'ios' ">
+		<CodesignKey>iPhone Distribution</CodesignKey>
+		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+	</PropertyGroup>
+
+	<ItemGroup Condition=" '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'ios' ">
+		<TrimmerRootDescriptor Include="Platforms/iOS/LinkerConfig.xml"/>
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'android'">
+		<RunAOTCompilation>true</RunAOTCompilation>
+	</PropertyGroup>
+
 	<ItemGroup>
 	  <Page Update="Styles\Generic\RadialProgressBar.xaml">
 	    <SubType>Designer</SubType>

@@ -5,6 +5,9 @@ using Project2FA.Services.Importer;
 using Project2FA.Services.Parser;
 using Project2FA.Uno.Views;
 using Project2FA.ViewModels;
+#if DEBUG
+using Uno.UI.HotDesign;
+#endif
 using UNOversal;
 using UNOversal.DryIoc;
 using UNOversal.Ioc;
@@ -65,9 +68,9 @@ namespace Project2FA.UnoApp
             MainWindow = WinUIWindow.Current;
 #if DEBUG
             //WinUIWindow.Current.EnableHotReload(); // obsolete
-            //MainWindow.UseStudio();
+            MainWindow.UseStudio();
 #endif
-            //MainWindow.SetWindowIcon();
+            MainWindow.SetWindowIcon();
 
 #if __ANDROID__ || __IOS__
             //FeatureConfiguration.ListViewBase.AnimateScrollIntoView = false;

@@ -941,15 +941,17 @@ namespace Project2FA.ViewModels
             {
 
                 Model.AccountIconName = value;
+                OnPropertyChanged(nameof(Model));
                 OnPropertyChanged(nameof(AccountIconName));
-                if (value != null)
-                {
-                    TempIconLabel = string.Empty;
-                }
-                else
-                {
-                    TempIconLabel = Label;
-                }
+
+                //if (value != null)
+                //{
+                //    TempIconLabel = string.Empty;
+                //}
+                //else
+                //{
+                //    TempIconLabel = Label;
+                //}
             }
         }
         public bool ManualInput

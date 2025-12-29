@@ -206,7 +206,9 @@ namespace Project2FA.ViewModels
                 TwoFADataService.EmptyAccountCollectionTipIsOpen = false;
             }
 #if !WINDOWS_UWP
-            await NavigationService.NavigateAsync(nameof(AddAccountPage));
+            var param = new NavigationParameters();
+            param.Add("ManualInput", true);
+            await NavigationService.NavigateAsync(nameof(AddAccountPage), param);
 #else
             AddAccountContentDialog dialog = new AddAccountContentDialog();
             var result = await DialogService.ShowDialogAsync(dialog, new DialogParameters());

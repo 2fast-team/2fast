@@ -1472,4 +1472,7 @@
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>Μεγάλο</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>Ξεκινώντας</value>
+  </data>
 </root>

@@ -1470,4 +1470,7 @@ Applikationen understøtter en MDM-konfiguration til central styring af applikat
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>Stor</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>Kom godt i gang</value>
+  </data>
 </root>

@@ -244,7 +244,6 @@
                 Margin="0,10,10,0" 
                 TextTrimming="CharacterEllipsis"
                 TextWrapping="Wrap"
-                MaxLines="1"
                 VerticalAlignment="Center">
                 <Bold>
                     <Run Text="{x:Bind Label,Mode=OneWay}"/>
@@ -505,7 +504,6 @@ Placement="Bottom">
                         Margin="0,10,10,0" 
                         TextTrimming="CharacterEllipsis"
                         TextWrapping="Wrap"
-                        MaxLines="1"
                         VerticalAlignment="Center">
                         <Bold>
                             <Run Text="{x:Bind Label,Mode=OneWay}"/>

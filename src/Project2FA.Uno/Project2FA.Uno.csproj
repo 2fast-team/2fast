@@ -62,7 +62,7 @@
 		<PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.251219" />
 		<PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.251219" />
 		<PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.251219" />
-		<PackageReference Include="DryIoc.dll" Version="5.4.3" />
+		<PackageReference Include="DryIoc.dll" Version="6.0.0-preview-09" />
 		<!--<PackageReference Include="System.Private.Uri" Version="4.3.2" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />-->
 		<PackageReference Include="Newtonsoft.Json.Encryption" Version="2.2.0" />
@@ -93,7 +93,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition=" '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'ios' ">
-		<TrimmerRootDescriptor Include="Platforms/iOS/LinkerConfig.xml"/>
+		<TrimmerRootDescriptor Include="Platforms/iOS/LinkerConfig.xml" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Release' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'android'">

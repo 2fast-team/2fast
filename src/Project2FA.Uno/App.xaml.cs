@@ -3,6 +3,9 @@ using Project2FA.Core.Services.NTP;
 using Project2FA.Services;
 using Project2FA.Services.Importer;
 using Project2FA.Services.Parser;
+#if RELEASE
+using Project2FA.Uno;
+#endif
 using Project2FA.Uno.Views;
 using Project2FA.ViewModels;
 #if DEBUG
@@ -10,7 +13,9 @@ using Uno.UI.HotDesign;
 #endif
 using UNOversal;
 using UNOversal.DryIoc;
+using UNOversal.Helpers;
 using UNOversal.Ioc;
+using UNOversal.Navigation;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.File;
 using UNOversal.Services.Gesture;
@@ -29,7 +34,6 @@ namespace Project2FA.UnoApp
     /// </summary>
     public sealed partial class App : UNOversalApplication
     {
-        private bool _logoutNavigation = false;
         private DateTime _focusLostTime;
         private DispatcherTimer _focusLostTimer;
         /// <summary>
@@ -95,14 +99,12 @@ namespace Project2FA.UnoApp
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
-                    // TODO Uno release
-                    //SystemInformation.Instance.TrackAppUse(e);
-                    // set custom splash screen page
-                    //Window.Current.Content = new SplashPage(e.SplashScreen);
+                    SystemInformationHelper.Instance.TrackAppUse(e);
                 }
 
                 if (args.Arguments is ProtocolActivatedEventArgs fileStartOnLaunch)
                 {
+                    // TODO not implemented in Android/iOS
                     //var file = fileActivated.Files.FirstOrDefault();
                     //DataService.Instance.ActivatedDatafile = (StorageFile)file;
                     //var dialogService = Current.Container.Resolve<IDialogService>();
@@ -261,12 +263,10 @@ namespace Project2FA.UnoApp
                         }
                         else
                         {
-                            await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(LoginPage));
+                            var navigationParameters = new NavigationParameters();
+                            navigationParameters.Add("isLogout", true);
+                            await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(LoginPage), navigationParameters);
                         }
-                    }
-                    else
-                    {
-                        _logoutNavigation = true;
                     }
                 }
             }

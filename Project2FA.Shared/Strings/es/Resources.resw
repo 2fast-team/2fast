@@ -1620,4 +1620,7 @@ La aplicación soporta configuración MDM para la gestión centralizada en empre
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>Gran</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>Primeros pasos</value>
+  </data>
 </root>

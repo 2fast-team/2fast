@@ -1474,4 +1474,7 @@ L'applicazione supporta una configurazione MDM per la gestione centralizzata del
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>Grande</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>Per iniziare</value>
+  </data>
 </root>

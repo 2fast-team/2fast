@@ -1469,4 +1469,7 @@
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value />
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>入门指南</value>
+  </data>
 </root>

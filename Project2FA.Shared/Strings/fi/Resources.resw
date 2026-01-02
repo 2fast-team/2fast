@@ -1472,4 +1472,7 @@ Sovellus tukee MDM-konfiguraatiota sovelluksen keskitettyä hallintaa varten yri
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>Iso</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>Aloittaminen</value>
+  </data>
 </root>

@@ -408,7 +408,9 @@ namespace Project2FA.UnoApp
             container.RegisterSingleton<IAegisBackupImportService, AegisBackupImportService>();
             container.RegisterSingleton<IAndOTPBackupImportService, AndOTPBackupImportService>();
             container.RegisterSingleton<ITwoFASBackupImportService, TwoFASBackupImportService>();
+#if __IOS__ || __ANDROID__
             container.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
+#endif
 
 
             container.RegisterSingleton<ShellPage>();
@@ -423,14 +425,14 @@ namespace Project2FA.UnoApp
             container.RegisterForNavigation<SettingPage, SettingPageViewModel>();
 
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
-            // fullscreen pages instead of dialogs
+            // fullscreen pages instead of dialogs for mobile devices
 #if __IOS__ || __ANDROID__
             container.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
             container.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
             container.RegisterForNavigation<CameraPage, CameraPageViewModel>();
 #else
-            containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
-            containerRegistry.RegisterForNavigation<AddAccountContentDialog, AddAccountContentDialogViewModel>();
+            container.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
+            container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
 #endif
 
             //contentdialogs and view-models

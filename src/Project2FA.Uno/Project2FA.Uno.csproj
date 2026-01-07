@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-	<TargetFrameworks>net10.0-android;net10.0-ios</TargetFrameworks>
+	<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-desktop</TargetFrameworks>
 
 	<OutputType>Exe</OutputType>
 	<UnoSingleProject>true</UnoSingleProject>
@@ -101,15 +101,30 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Page Update="Styles\Generic\RadialProgressBar.xaml">
-	    <SubType>Designer</SubType>
+		<Page Update="Themes\Generic.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Page Update="Views\Flyouts\ResponsiveDrawerFlyout.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Views\Flyouts\ResponsiveDrawerFlyout.xaml">
-	    <Generator>MSBuild:Compile</Generator>
+	  <Page Update="Controls\RadialProgressBar\RadialProgressBar.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Page Include="Controls\Shimmer\Shimmer.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
 </Project>

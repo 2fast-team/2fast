@@ -382,7 +382,7 @@ namespace Project2FA.Services
 #if __ANDROID__ || __IOS__
                 if (file != null)
 #endif
-#if WINDOWS_UWP
+#if !__ANDROID__ && !__IOS__ || WINDOWS_UWP
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
                 {

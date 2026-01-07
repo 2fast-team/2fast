@@ -5,6 +5,7 @@
         <!--custom controls-->
         <!--<ResourceDictionary Source="/Controls/Shimmer/Shimmer.xaml" />-->
         <ResourceDictionary Source="ms-appx:///Controls/Shimmer/Shimmer.xaml" />
+        <ResourceDictionary Source="/Controls/RadialProgressBar/RadialProgressBar.xaml" />
         
         <!--<ResourceDictionary Source="..\..\Project2FA.Shared/Controls/Shimmer/Shimmer.xaml" />-->
     </ResourceDictionary.MergedDictionaries>

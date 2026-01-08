@@ -104,7 +104,12 @@ The following steps will help if you want to contribute or work on the applicati
 	- The latest Windows 11 SDK is required
 - Android, version >= 10.0 (for the Android application)
 	- Remember to trust 3rd party Apps by enabling this in the Android developer settings if you want to build from source
+- [Windows Store Service SDK](https://marketplace.visualstudio.com/items?itemName=AdMediator.MicrosoftStoreServicesSDK) (UWP only)
 - [Uno platform](https://marketplace.visualstudio.com/items?itemName=unoplatform.uno-platform-addin-2022)
+- Nuget source for [Windows Toolkit Labs](https://github.com/CommunityToolkit/Windows/wiki/Preview-Packages): 
+```
+https://pkgs.dev.azure.com/dotnet/CommunityToolkit/_packaging/CommunityToolkit-Labs/nuget/v3/index.json
+```
 
 
 ### Installation

@@ -3,8 +3,6 @@ using Project2FA.ViewModels;
 using CommunityToolkit.WinUI;
 using Project2FA.UnoApp;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Project2FA.Uno.Views
 {
     /// <summary>
@@ -23,7 +21,7 @@ namespace Project2FA.Uno.Views
         {
 #if !__MOBILE__
             App.ShellPageInstance.ShellViewInternal.Header = string.Empty;
-            App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
+            //App.ShellPageInstance.ShellViewInternal.HeaderTemplate = ShellHeaderTemplate;
 #endif
         }
 

@@ -1,20 +1,20 @@
-using System;
-using Uno.UI.Runtime.Skia;
+using Project2FA.UnoApp;
+using Uno.UI.Hosting;
 
 namespace Project2FA.Uno;
-public class Program
+
+internal class Program
 {
     [STAThread]
     public static void Main(string[] args)
     {
-        App.InitializeLogging();
 
-        var host = SkiaHostBuilder.Create()
+        var host = UnoPlatformHostBuilder.Create()
             .App(() => new App())
             .UseX11()
             .UseLinuxFrameBuffer()
             .UseMacOS()
-            .UseWindows()
+            .UseWin32()
             .Build();
 
         host.Run();

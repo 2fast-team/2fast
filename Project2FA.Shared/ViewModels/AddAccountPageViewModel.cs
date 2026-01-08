@@ -59,6 +59,11 @@ namespace Project2FA.ViewModels
             {
                 Model = new TwoFACodeModel();
                 await ParseQRCode(valuePair);
+                OnPropertyChanged(nameof(Model));
+            }
+            if (parameters.TryGetValue<bool>("ManualInput", out var manualInput))
+            {
+                ManualInput = manualInput;
             }
         }
     }

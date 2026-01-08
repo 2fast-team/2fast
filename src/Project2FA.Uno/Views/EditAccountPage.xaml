@@ -216,7 +216,7 @@
                     Padding="4,4,4,4"
                     Style="{StaticResource TransparentButtonStyle}"
                     x:Name="BTN_Cateory_Help"
-                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp,FallbackValue=''}"
+                    ToolTipService.ToolTip="{x:Bind strings:Resources.ToolTipShowHelp}"
                     VerticalAlignment="Bottom" 
                     Click="HLBTN_CategoryInfo" >
                             <FontIcon
@@ -469,8 +469,9 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button 
+                <Button
                 x:Name="PrimaryButton"
+                IsEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
 				Content="{x:Bind strings:Resources.ButtonTextConfirm}"
                 Command="{x:Bind ViewModel.PrimaryButtonCommand}"
 				HorizontalAlignment="Stretch"

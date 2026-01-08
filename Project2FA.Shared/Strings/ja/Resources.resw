@@ -1474,4 +1474,7 @@
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>大きい</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>はじめに</value>
+  </data>
 </root>

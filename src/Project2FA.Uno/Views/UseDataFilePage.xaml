@@ -22,7 +22,7 @@
             <utu:NavigationBar.Content>
                 <TextBlock 
                     VerticalAlignment="Center"
-                    Text="UseDataFilePage"
+                    x:Uid="UseDataFilePageName"
                     Style="{StaticResource ShellHeaderTitleTextBlockStyle}" />
             </utu:NavigationBar.Content>
             <!--<utu:NavigationBar.MainCommand>

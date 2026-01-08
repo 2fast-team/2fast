@@ -443,7 +443,7 @@
                                 extensions:TextBoxExtensions.ValidationType="Custom"
                                 Header="~AddAccountContentDialogSecretKey.Header" 
                                 PlaceholderText="~AddAccountContentDialogSecretKey.PlaceholderText" 
-                                IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
+                                IsEnabled="{x:Bind ViewModel.ManualInput,Mode=TwoWay}" 
                                 Margin="0,12,0,0"
                                 Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                                 <!--<Interactivity:Interaction.Behaviors>

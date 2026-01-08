@@ -1470,4 +1470,7 @@ Rakendus toetab MDM-konfiguratsiooni rakenduse tsentraliseeritud haldamiseks ett
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>Suur</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>Alustamine</value>
+  </data>
 </root>

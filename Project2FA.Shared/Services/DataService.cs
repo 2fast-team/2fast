@@ -382,7 +382,7 @@ namespace Project2FA.Services
 #if __ANDROID__ || __IOS__
                 if (file != null)
 #endif
-#if WINDOWS_UWP
+#if !__ANDROID__ && !__IOS__ || WINDOWS_UWP
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
                 {
@@ -708,9 +708,11 @@ namespace Project2FA.Services
 
                 var prevíousVersion = new Version(SystemInformationHelper.Instance.ApplicationVersion.ToFormattedString());
 
-                var compareVersion = new Version("1.3.0.0");
-                var result = prevíousVersion.CompareTo(compareVersion);
-                int version = result >= 0 ? 2 : 1;
+                //var compareVersion = new Version("1.3.0.0");
+                //var result = prevíousVersion.CompareTo(compareVersion);
+                // TODO upgrade the version when relevant
+                int version = 2;
+                //result >= 0 ? 2 : 1;
 
                 ObservableCollection<CategoryModel> tempCategories = new ObservableCollection<CategoryModel>();
                 for (int i = 0; i < GlobalCategories.Count; i++)

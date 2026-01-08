@@ -3,11 +3,19 @@ using Project2FA.Core.Services.NTP;
 using Project2FA.Services;
 using Project2FA.Services.Importer;
 using Project2FA.Services.Parser;
+#if RELEASE
+using Project2FA.Uno;
+#endif
 using Project2FA.Uno.Views;
 using Project2FA.ViewModels;
+#if DEBUG
+using Uno.UI.HotDesign;
+#endif
 using UNOversal;
 using UNOversal.DryIoc;
+using UNOversal.Helpers;
 using UNOversal.Ioc;
+using UNOversal.Navigation;
 using UNOversal.Services.Dialogs;
 using UNOversal.Services.File;
 using UNOversal.Services.Gesture;
@@ -26,7 +34,6 @@ namespace Project2FA.UnoApp
     /// </summary>
     public sealed partial class App : UNOversalApplication
     {
-        private bool _logoutNavigation = false;
         private DateTime _focusLostTime;
         private DispatcherTimer _focusLostTimer;
         /// <summary>
@@ -65,9 +72,9 @@ namespace Project2FA.UnoApp
             MainWindow = WinUIWindow.Current;
 #if DEBUG
             //WinUIWindow.Current.EnableHotReload(); // obsolete
-            //MainWindow.UseStudio();
+            MainWindow.UseStudio();
 #endif
-            //MainWindow.SetWindowIcon();
+            MainWindow.SetWindowIcon();
 
 #if __ANDROID__ || __IOS__
             //FeatureConfiguration.ListViewBase.AnimateScrollIntoView = false;
@@ -92,14 +99,12 @@ namespace Project2FA.UnoApp
                 // handle startup
                 if (args?.Arguments is ILaunchActivatedEventArgs e)
                 {
-                    // TODO Uno release
-                    //SystemInformation.Instance.TrackAppUse(e);
-                    // set custom splash screen page
-                    //Window.Current.Content = new SplashPage(e.SplashScreen);
+                    SystemInformationHelper.Instance.TrackAppUse(e);
                 }
 
                 if (args.Arguments is ProtocolActivatedEventArgs fileStartOnLaunch)
                 {
+                    // TODO not implemented in Android/iOS
                     //var file = fileActivated.Files.FirstOrDefault();
                     //DataService.Instance.ActivatedDatafile = (StorageFile)file;
                     //var dialogService = Current.Container.Resolve<IDialogService>();
@@ -258,12 +263,10 @@ namespace Project2FA.UnoApp
                         }
                         else
                         {
-                            await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(LoginPage));
+                            var navigationParameters = new NavigationParameters();
+                            navigationParameters.Add("isLogout", true);
+                            await ShellPageInstance.ViewModel.NavigationService.NavigateAsync("/" + nameof(LoginPage), navigationParameters);
                         }
-                    }
-                    else
-                    {
-                        _logoutNavigation = true;
                     }
                 }
             }
@@ -405,7 +408,9 @@ namespace Project2FA.UnoApp
             container.RegisterSingleton<IAegisBackupImportService, AegisBackupImportService>();
             container.RegisterSingleton<IAndOTPBackupImportService, AndOTPBackupImportService>();
             container.RegisterSingleton<ITwoFASBackupImportService, TwoFASBackupImportService>();
+#if __IOS__ || __ANDROID__
             container.RegisterSingleton<BiometryService.IBiometryService, BiometryService.BiometryService>();
+#endif
 
 
             container.RegisterSingleton<ShellPage>();
@@ -420,14 +425,14 @@ namespace Project2FA.UnoApp
             container.RegisterForNavigation<SettingPage, SettingPageViewModel>();
 
             //containerRegistry.RegisterForNavigation<AppAboutPage, AppAboutPageViewModel>();
-            // fullscreen pages instead of dialogs
+            // fullscreen pages instead of dialogs for mobile devices
 #if __IOS__ || __ANDROID__
             container.RegisterForNavigation<EditAccountPage, EditAccountPageViewModel>();
             container.RegisterForNavigation<AddAccountPage, AddAccountPageViewModel>();
             container.RegisterForNavigation<CameraPage, CameraPageViewModel>();
 #else
-            containerRegistry.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
-            containerRegistry.RegisterForNavigation<AddAccountContentDialog, AddAccountContentDialogViewModel>();
+            container.RegisterDialog<EditAccountContentDialog, EditAccountContentDialogViewModel>();
+            container.RegisterDialog<AddAccountContentDialog, AddAccountContentDialogViewModel>();
 #endif
 
             //contentdialogs and view-models

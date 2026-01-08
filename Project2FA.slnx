@@ -6,8 +6,6 @@
     <BuildType Name="Release" />
     <Platform Name="Any CPU" />
     <Platform Name="ARM64" />
-    <Platform Name="iPhone" />
-    <Platform Name="iPhoneSimulator" />
     <Platform Name="x64" />
   </Configurations>
   <Folder Name="/Platforms/">
@@ -18,17 +16,9 @@
       <Platform Solution="*|ARM64" Project="ARM64" />
       <Platform Solution="*|x64" Project="x64" />
       <Platform Solution="Ad-Hoc|Any CPU" Project="ARM" />
-      <Platform Solution="Ad-Hoc|iPhone" Project="ARM" />
-      <Platform Solution="Ad-Hoc|iPhoneSimulator" Project="ARM" />
       <Platform Solution="AppStore|Any CPU" Project="ARM" />
-      <Platform Solution="AppStore|iPhone" Project="ARM" />
-      <Platform Solution="AppStore|iPhoneSimulator" Project="ARM" />
       <Platform Solution="Debug|Any CPU" Project="x64" />
-      <Platform Solution="Debug|iPhone" Project="x64" />
-      <Platform Solution="Debug|iPhoneSimulator" Project="x64" />
       <Platform Solution="Release|Any CPU" Project="x64" />
-      <Platform Solution="Release|iPhone" Project="x64" />
-      <Platform Solution="Release|iPhoneSimulator" Project="x64" />
       <Deploy />
     </Project>
     <Project Path="Project2FA/Project2FA.UWP/Project2FA.UWPNet.csproj">
@@ -36,8 +26,6 @@
       <BuildType Solution="AppStore|*" Project="Release" />
       <Platform Solution="*|Any CPU" Project="x64" />
       <Platform Solution="*|ARM64" Project="arm64" />
-      <Platform Solution="*|iPhone" Project="x64" />
-      <Platform Solution="*|iPhoneSimulator" Project="x64" />
       <Platform Solution="*|x64" Project="x64" />
       <Deploy />
     </Project>
@@ -46,6 +34,7 @@
       <BuildType Solution="AppStore|*" Project="Release" />
       <Platform Solution="Debug|ARM64" Project="ARM64" />
       <Platform Solution="Debug|x64" Project="x64" />
+      <Platform Solution="Release|ARM64" Project="ARM64" />
       <Platform Solution="Release|x64" Project="x64" />
       <Deploy />
     </Project>
@@ -105,6 +94,7 @@
     <BuildType Solution="AppStore|*" Project="Release" />
     <Platform Solution="Debug|ARM64" Project="ARM64" />
     <Platform Solution="Debug|x64" Project="x64" />
+    <Platform Solution="Release|ARM64" Project="ARM64" />
     <Platform Solution="Release|x64" Project="x64" />
   </Project>
 </Solution>

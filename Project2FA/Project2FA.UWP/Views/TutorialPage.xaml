@@ -22,7 +22,8 @@
                 Background="{ThemeResource ShellAcrylicWindowBrush}" 
                 Height="40">
                 <TextBlock 
-                    Text="Tutorial"
+                    Text="~TutorialPageTitle.Text"
+                    x:Uid="TutorialPageTitle"
                     Margin="15,0,0,0"
                     Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
                     TextWrapping="NoWrap" 
@@ -351,7 +352,6 @@
                                     Glyph="&#xE946;"  />
                                 </Button>
                             </StackPanel>
-
                         </StackPanel>
                     </Grid>
                 </FlipViewItem>

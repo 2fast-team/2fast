@@ -3,11 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <!--custom controls-->
-        <ResourceDictionary Source="/Controls/Shimmer/Shimmer.xaml" />
+        <ResourceDictionary Source="ms-appx:///Controls/Shimmer/Shimmer.xaml" />
         <ResourceDictionary Source="/Controls/ImageEx/ImageEx.xaml" />
         <!--<ResourceDictionary Source="/Controls/AnimatedTextBlock/AnimatedTextBlock.xaml" />-->
         <ResourceDictionary Source="ms-appx:///Controls/CopyButton/CopyButton.xaml" />
-        <ResourceDictionary Source="/Controls/RadialProgressBar/RadialProgressBar.xaml" />
+        <ResourceDictionary Source="ms-appx:///Controls/RadialProgressBar/RadialProgressBar.xaml" />
         <ResourceDictionary Source="ms-appx:///Controls/Carousel/Carousel.xaml" />
         <ResourceDictionary Source="/Controls/MarkdownTextBlock/MarkdownTextBlock.xaml" />
         <ResourceDictionary Source="/Controls/SettingsGroup/SettingsGroup.xaml" />

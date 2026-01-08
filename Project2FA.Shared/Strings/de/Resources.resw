@@ -1466,4 +1466,7 @@ Für die zentrale Verwaltung der Anwendung im Unternehmen unterstützt die Anwen
   <data name="SettingsFontSizeLarge.Content" xml:space="preserve">
     <value>Groß</value>
   </data>
+  <data name="TutorialPageTitle.Text" xml:space="preserve">
+    <value>Erste Schritte</value>
+  </data>
 </root>

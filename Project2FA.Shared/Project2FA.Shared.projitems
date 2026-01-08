@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExBase.Source.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExFailedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageEx\ImageExOpenedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ProgressRing\RingShape\RingShape.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ProgressRing\RingShape\RingShape.Properties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SettingsGroup\SettingsGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SettingsGroup\SettingsGroupAutomationPeer.cs" />
@@ -225,15 +227,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\RadialProgressBar\RadialProgressBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\SettingsGroup\SettingsGroup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\Shimmer\Shimmer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

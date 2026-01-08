@@ -60,7 +60,8 @@
                                 Converter={StaticResource PersonalPictureInitialsVisibilityConverter},
                                 Mode=OneWay}"
                             Margin="0,10,20,0"
-                            Tag="{x:Bind ViewModel.Model.AccountIconName, Mode=OneWay}">
+                            Style="{StaticResource DefaultPersonPictureStyle}"
+                            Tag="{x:Bind ViewModel.AccountIconName, Mode=OneWay}">
                         </PersonPicture>
                         <Button 
                             CornerRadius="32"
@@ -269,9 +270,9 @@ Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                     <TextBox 
     x:Name="TB_AddAccountContentDialogSecretKey"
     x:Uid="AddAccountContentDialogSecretKey"
-    Header="~AddAccountContentDialogSecretKey.Header" 
+    Header="~AddAccountContentDialogSecretKey.Header"
     PlaceholderText="~AddAccountContentDialogSecretKey.PlaceholderText" 
-    IsEnabled="{Binding IsChecked,ElementName=CB_ManualInput}"
+    IsEnabled="{x:Bind ViewModel.ManualInput,Mode=TwoWay}"
     Margin="0,12,0,0"
     Text="{x:Bind ViewModel.SecretKey, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                         <!--<Interactivity:Interaction.Behaviors>
@@ -367,6 +368,7 @@ Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                 <Button 
                 x:Name="PrimaryButton"
                 Style="{StaticResource AccentButtonStyle}"
+                IsEnabled="{x:Bind ViewModel.IsPrimaryBTNEnable, Mode=OneWay}"
 				Content="{x:Bind strings:Resources.ButtonTextConfirm}"
                 Command="{x:Bind ViewModel.PrimaryButtonCommand}"
 				ElementSoundMode="FocusOnly"

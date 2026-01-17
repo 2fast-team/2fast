@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OtpNet;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -44,6 +45,18 @@ namespace Project2FA.Core.Services.Crypto
 
             var encryptor = aes.CreateEncryptor();
             var bytes = Encoding.UTF8.GetBytes(plainText);
+
+            var encrypted = encryptor.TransformFinalBlock(bytes, 0, bytes.Length);
+            return Convert.ToBase64String(encrypted);
+        }
+
+        public static string Encrypt(byte[] bytes)
+        {
+            using var aes = Aes.Create();
+            aes.Key = _key;
+            aes.IV = _iv;
+
+            var encryptor = aes.CreateEncryptor();
 
             var encrypted = encryptor.TransformFinalBlock(bytes, 0, bytes.Length);
             return Convert.ToBase64String(encrypted);

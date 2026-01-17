@@ -1,4 +1,5 @@
-﻿using Project2FA.Core.Services.Crypto;
+﻿using OtpNet;
+using Project2FA.Core.Services.Crypto;
 using Project2FA.Helpers;
 using System;
 using System.Text.Json;
@@ -27,8 +28,7 @@ namespace Project2FA.Services.Serialization
 
         public override void Write(Utf8JsonWriter writer, byte[] value, JsonSerializerOptions options)
         {
-            var plain = Convert.ToBase64String(value);
-            var encrypted = CryptoService.Encrypt(plain);
+            var encrypted = CryptoService.Encrypt(value);
             writer.WriteStringValue(encrypted);
         }
     }

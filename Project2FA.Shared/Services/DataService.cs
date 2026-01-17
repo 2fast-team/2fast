@@ -708,19 +708,13 @@ namespace Project2FA.Services
 
                 var prevíousVersion = new Version(SystemInformationHelper.Instance.ApplicationVersion.ToFormattedString());
 
-                //var compareVersion = new Version("1.3.0.0");
-                //var result = prevíousVersion.CompareTo(compareVersion);
-                // TODO upgrade the version when relevant
-                int version = 2;
-                //result >= 0 ? 2 : 1;
-
                 ObservableCollection<CategoryModel> tempCategories = new ObservableCollection<CategoryModel>();
                 for (int i = 0; i < GlobalCategories.Count; i++)
                 {
                     tempCategories.Add((CategoryModel)GlobalCategories[i].Clone());
                 }
                 // create the new datafile model
-                DatafileModel fileModel = new DatafileModel() { IV = algorithm.IV, Collection = Collection, Version = version, GlobalCategories = tempCategories };
+                DatafileModel fileModel = new DatafileModel() { IV = algorithm.IV, Collection = Collection, Version = 2, GlobalCategories = tempCategories };
                 
                 if (ActivatedDatafile != null)
                 {

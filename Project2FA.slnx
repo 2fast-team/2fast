@@ -8,6 +8,12 @@
     <Platform Name="ARM64" />
     <Platform Name="x64" />
   </Configurations>
+  <Folder Name="/Libs/">
+    <Project Path="src/UnoLibrary.Controls/UnoLibrary.Controls.csproj">
+      <BuildType Solution="Ad-Hoc|*" Project="Release" />
+      <BuildType Solution="AppStore|*" Project="Release" />
+    </Project>
+  </Folder>
   <Folder Name="/Platforms/">
     <Project Path="Project2FA.Shared/Project2FA.Shared.shproj" />
     <Project Path="Project2FA/Project2FA.UWP/Project2FA.UWP.csproj" Id="f23d0efe-2c91-4976-9dcb-065b91fc2797">

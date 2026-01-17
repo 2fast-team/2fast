@@ -30,6 +30,7 @@ using Microsoft.UI.Xaml;
 using Project2FA.UnoApp;
 using Project2FA.Uno.Views;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
+using Symptum.UI.Markdown;
 #endif
 
 namespace Project2FA.Utils
@@ -143,16 +144,9 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-
-#if WINDOWS_UWP
             MarkdownTextBlock markdown = new MarkdownTextBlock();
             markdown.Text = Resources.PasswordInvalidMessage;
             dialog.Content = markdown;
-#else
-            TextBlock txt = new TextBlock();
-            txt.Text = Resources.PasswordInvalidMessage;
-            dialog.Content = txt;
-#endif
 
             ContentDialogResult result = await dialogService.ShowDialogAsync(dialog, new DialogParameters());
             if (result == ContentDialogResult.None)
@@ -175,18 +169,12 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
             var markdown = new MarkdownTextBlock
             {
                 Text = Strings.Resources.AuthorizationFileSystemContentDialogDescription
             };
             dialog.Content = markdown;
-#else
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
-            textBlock.TextWrapping = TextWrapping.WrapWholeWords;
-            dialog.Content = textBlock;
-#endif
+
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
@@ -216,18 +204,12 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
+
             var markdown = new MarkdownTextBlock
             {
                 Text = Strings.Resources.AuthorizationFileSystemContentDialogDescription
             };
             dialog.Content = markdown;
-#else
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = Resources.AuthorizationFileSystemContentDialogDescription;
-            textBlock.TextWrapping = TextWrapping.WrapWholeWords;
-            dialog.Content = textBlock;
-#endif
             dialog.Style = App.Current.Resources[Constants.ContentDialogStyleName] as Style;
             dialog.PrimaryButtonCommand = new RelayCommand(async () =>
             {
@@ -262,7 +244,7 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
+
             var errorTextBlock = new MarkdownTextBlock()
             {
                 Margin = new Thickness(0, 8, 0, 8)
@@ -271,16 +253,7 @@ namespace Project2FA.Utils
                 + exc.Source + "\n"
                 + exc.StackTrace + "\n"
                 + exc.InnerException;
-#else
-            var errorTextBlock = new TextBlock()
-            {
-                Margin = new Thickness(0, 8, 0, 8),
-                TextWrapping = TextWrapping.WrapWholeWords
-            };
-            errorTextBlock.Text = exc.Message
-                + exc.StackTrace
-                + exc.InnerException;
-#endif
+
             var stackpanel = new StackPanel();
             var clipboardButton = new Button();
             clipboardButton.Margin = new Thickness(0, 10, 0, 0);
@@ -360,20 +333,13 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
+
             var errorMarkdownTextBlock = new MarkdownTextBlock()
             {
                 Margin = new Thickness(0, 4, 0, 0)
             };
             errorMarkdownTextBlock.Text = errorDetail;
-#else
-            var errorMarkdownTextBlock = new TextBlock()
-            {
-                Margin = new Thickness(0, 4, 0, 0),
-                TextWrapping = TextWrapping.Wrap
-            };
-            errorMarkdownTextBlock.Text = errorDetail;
-#endif
+
             //errorMarkdownTextBlock.IsReadOnly = true;
             var stackpanel = new StackPanel();
             var clipboardButton = new Button();
@@ -438,12 +404,9 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
+
             MarkdownTextBlock markdown = new MarkdownTextBlock();
-#else
-            TextBlock markdown = new TextBlock();
-            markdown.TextWrapping = TextWrapping.Wrap;
-#endif
+
             markdown.Text = string.Format(Resources.WriteDatafileErrorDesc);
             dialog.Content = markdown;
             dialog.PrimaryButtonCommand = new RelayCommand(() =>
@@ -476,12 +439,9 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
+
             MarkdownTextBlock markdown = new MarkdownTextBlock();
-#else
-            TextBlock markdown = new TextBlock();
-            markdown.TextWrapping = TextWrapping.Wrap;
-#endif
+
             markdown.Text = string.Format(Resources.ErrorGenerateTOTPCode, label);
             dialog.Content = markdown;
 
@@ -530,12 +490,9 @@ namespace Project2FA.Utils
 #if !WINDOWS_UWP
                 dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
+
                 MarkdownTextBlock markdown = new MarkdownTextBlock();
-#else
-                TextBlock markdown = new TextBlock();
-                markdown.TextWrapping = TextWrapping.Wrap;
-#endif
+
                 markdown.Text = Resources.ExceptionDatafileNotFound;
                 stackPanel.Children.Add(markdown);
 

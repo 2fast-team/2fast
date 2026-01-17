@@ -15,6 +15,17 @@ using System.Collections.Generic;
 using Windows.Foundation;
 using System;
 using System.Linq;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+
+#if !WINAPPSDK
+using Block = Windows.UI.Xaml.Documents.Block;
+using Inline = Windows.UI.Xaml.Documents.Inline;
+#else
+using Block = Microsoft.UI.Xaml.Documents.Block;
+using Inline = Microsoft.UI.Xaml.Documents.Inline;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -34,6 +45,10 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
             _paragraph = new Paragraph();
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Inline))]
+        [DynamicWindowsRuntimeCast(typeof(Block))]
+#endif
         public void AddChild(IAddChild child)
         {
             if (child.TextElement is Inline inlineChild)
@@ -41,7 +56,7 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
                 _paragraph.Inlines.Add(inlineChild);
             }
 #if !WINAPPSDK
-            else if (child.TextElement is Windows.UI.Xaml.Documents.Block blockChild)
+            else if (child.TextElement is Block blockChild)
 #else
             else if (child.TextElement is Microsoft.UI.Xaml.Documents.Block blockChild)
 #endif

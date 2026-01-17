@@ -15,16 +15,12 @@ using UNOversal.Services.Dialogs;
 using UNOversal.Services.Secrets;
 using Project2FA.Services;
 using Project2FA.Services.Enums;
-using CommunityToolkit.Mvvm.Collections;
 using Windows.System;
 using UNOversal.Services.Logging;
 using System.IO;
 using Windows.Storage.Streams;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Project2FA.Core.Utils;
 using UNOversal.Services.Serialization;
-
 
 #if WINDOWS_UWP
 using Project2FA.UWP.Services;
@@ -39,6 +35,7 @@ using Windows.Services.Store;
 using Windows.Security.Credentials;
 using Windows.ApplicationModel.Core;
 #else
+using BiometryService;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
@@ -46,6 +43,7 @@ using Project2FA.Uno.Views;
 using Project2FA.UnoApp;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
 #endif
+
 
 #if WINDOWS_UWP && NET10_0_OR_GREATER
 using WinRT;
@@ -228,6 +226,7 @@ namespace Project2FA.ViewModels
         private SettingsService _settings;
         private IDialogService DialogService { get; }
         private bool _isWindowsHelloSupported;
+
         private bool _manualNTPServerConfiurationChecked;
         private bool _progressIsIndeterminate;
         private string _ntpServerStr;
@@ -255,13 +254,14 @@ namespace Project2FA.ViewModels
             });
             OpenLogCommand = new AsyncRelayCommand(OpenLogCommandTask);
 
-#if WINDOWS_UWP
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#if WINDOWS_UWP
+
             CheckWindowsHelloIsSupported();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-#else
-            //App.ShellPageInstance.ViewModel.TabBarIsVisible = false;
+#elif __ANDROID__ || __IOS__
+            CheckBiometricLoginIsSupported();
 #endif
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
 #if WINDOWS_UWP
             // DEBUG MDM settings
@@ -435,8 +435,9 @@ namespace Project2FA.ViewModels
                 }
             }
         }
-#endregion
+        #endregion
 
+#if WINDOWS_UWP
         public bool IsWindowsHelloSupported
         {
             get => _isWindowsHelloSupported;
@@ -453,6 +454,7 @@ namespace Project2FA.ViewModels
 
             }
         }
+#endif
 
         public bool UseHiddenTOTP
         {
@@ -524,6 +526,7 @@ namespace Project2FA.ViewModels
             set => SetProperty(ref _progressIsIndeterminate, value);
         }
 
+#if WINDOWS_UWP
         public bool PreferWindowsHelloLogin
         {
             get
@@ -545,6 +548,7 @@ namespace Project2FA.ViewModels
                 OnPropertyChanged(nameof(PreferWindowsHelloLogin));
             }
         }
+#endif
 
 
 #if WINDOWS_UWP
@@ -831,7 +835,7 @@ namespace Project2FA.ViewModels
                 OnPropertyChanged(nameof(UseProFeatures));
             }
         }
-#endif
+
 
         #region MDMConfigs
         public bool IsMDMActive
@@ -873,6 +877,7 @@ namespace Project2FA.ViewModels
             get => !_settings.UseHiddenTOTPIsMDMManaged;
         }
         #endregion
+#endif
     }
 
 

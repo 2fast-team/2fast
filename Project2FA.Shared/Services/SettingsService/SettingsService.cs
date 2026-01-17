@@ -356,12 +356,13 @@ namespace Project2FA.Services
             get => _helper.ReadString(nameof(UnhandledExceptionStr), string.Empty);
             set => _helper.WriteString(nameof(UnhandledExceptionStr), value);
         }
-
+#if WINDOWS_UWP
         public bool ActivateWindowsHelloIsMDMManaged
         {
             get => _helper.SafeRead(nameof(ActivateWindowsHelloIsMDMManaged), false);
             set => _helper.TryWrite(nameof(ActivateWindowsHelloIsMDMManaged), value);
         }
+
 
         public bool ActivateWindowsHello
         {
@@ -388,6 +389,13 @@ namespace Project2FA.Services
             }
             set => _helper.TryWrite(nameof(ActivateWindowsHello), value);
         }
+#else
+        public bool ActivateBiometricLogin
+        {
+            get => _helper.SafeRead(nameof(ActivateBiometricLogin), true);
+            set => _helper.TryWrite(nameof(ActivateBiometricLogin), value);
+        }
+#endif
 
         public BiometricPreferEnum PreferWindowsHello
         {

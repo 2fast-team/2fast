@@ -18,6 +18,9 @@ using System.Linq;
 using System.Globalization;
 
 using Markdig.Syntax.Inlines;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -31,7 +34,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
         {
             get => _inlineContainer;
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(SolidColorBrush))]
+#endif
         public MyInlineCode(CodeInline codeInline, MarkdownConfig config)
         {
             _codeInline = codeInline;

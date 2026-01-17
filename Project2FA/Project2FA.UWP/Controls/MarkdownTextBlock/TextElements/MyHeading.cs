@@ -6,6 +6,9 @@ using HtmlAgilityPack;
 using Markdig.Syntax;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Documents;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -82,7 +85,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
                 _ => _config.Themes.H6Margin,
             };
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Inline))]
+#endif
         public void AddChild(IAddChild child)
         {
             if (child.TextElement is Inline inlineChild)

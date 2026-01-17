@@ -6,7 +6,9 @@ using HtmlAgilityPack;
 using Markdig.Syntax;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 #if !WINAPPSDK
 using Block = Windows.UI.Xaml.Documents.Block;
@@ -49,7 +51,10 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
         {
             _htmlNode = node;
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Block))]
+        [DynamicWindowsRuntimeCast(typeof(Inline))]
+#endif
         public void AddChild(IAddChild child)
         {
             TextElement element = child.TextElement;

@@ -7,6 +7,9 @@ using System;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Documents;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -29,7 +32,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
             _span = new Span();
             _markdownObject = emphasisInline;
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Run))]
+#endif
         public void AddChild(IAddChild child)
         {
             try

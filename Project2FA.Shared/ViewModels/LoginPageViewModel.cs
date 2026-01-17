@@ -271,7 +271,7 @@ namespace Project2FA.ViewModels
 
                 if (capabilities.IsSupported && capabilities.IsEnabled)
                 {
-                    BiometricIsUsable = SettingsService.Instance.ActivateWindowsHello;
+                    BiometricIsUsable = SettingsService.Instance.ActivateBiometricLogin;
                     var settings = SettingsService.Instance;
                     if (settings.PreferBiometricLogin == Services.Enums.BiometricPreferEnum.None)
                     {

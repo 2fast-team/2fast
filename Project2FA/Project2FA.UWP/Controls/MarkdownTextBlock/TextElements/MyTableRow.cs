@@ -17,6 +17,9 @@ using System;
 using System.Linq;
 
 using Markdig.Extensions.Tables;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -43,6 +46,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
             _paragraph.Inlines.Add(inlineUIContainer);
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Paragraph))]
+#endif
         public void AddChild(IAddChild child)
         {
             if (child is MyTableCell cellChild)

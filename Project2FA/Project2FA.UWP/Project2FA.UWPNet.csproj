@@ -17,7 +17,7 @@
 	<CsWinRTIncludes>Microsoft.Services.Store.Engagement</CsWinRTIncludes>
 	<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 	<SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
-	<PackageCertificateThumbprint>D3B673C33B2F2EE48B9BC30BE56519425CBDB336</PackageCertificateThumbprint>
+	<PackageCertificateThumbprint>7DA25049DA50E7D7FD4733C1801572DC5262D0A9</PackageCertificateThumbprint>
 	<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -48,6 +48,7 @@
     <ProjectReference Include="..\..\Project2FA.Core\Project2FA.Core.csproj" />
     <ProjectReference Include="..\..\WebDAVClientPortable\WebDAVClientPortable.csproj" />
     <ProjectReference Include="..\..\ZXing.Net.Uno\src\CommunityToolkit.Uno.Camera\CommunityToolkit.Uno.Camera.csproj" />
+    <ProjectReference Include="..\UnoLibrary.Controls\UnoLibrary.Controls.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

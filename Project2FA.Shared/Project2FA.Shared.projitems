@@ -125,7 +125,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContentDialogs\ManageCategoriesContentDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewDataFilePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingPageViewModel.Android.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingPageViewModel.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ShellPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TutorialPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UseDataFilePageViewModel.cs" />

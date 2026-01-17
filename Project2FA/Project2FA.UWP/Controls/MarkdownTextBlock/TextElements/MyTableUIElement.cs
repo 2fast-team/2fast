@@ -15,6 +15,9 @@ using System.Collections.Generic;
 using Windows.Foundation;
 using System;
 using System.Linq;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -45,6 +48,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
         // Helper method to enumerate FrameworkElements instead of UIElements.
         private IEnumerable<FrameworkElement> ContentChildren
         {
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+            [DynamicWindowsRuntimeCast(typeof(FrameworkElement))]
+#endif
             get
             {
                 for (int i = _columnCount + _rowCount + 2; i < Children.Count; i++)
@@ -57,6 +63,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
         // Helper method to get table vertical edges.
         private IEnumerable<Rectangle> VerticalLines
         {
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+            [DynamicWindowsRuntimeCast(typeof(Rectangle))]
+#endif
             get
             {
                 for (int i = 0; i < _columnCount + 1; i++)
@@ -69,6 +78,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
         // Helper method to get table horizontal edges.
         private IEnumerable<Rectangle> HorizontalLines
         {
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+            [DynamicWindowsRuntimeCast(typeof(Rectangle))]
+#endif
             get
             {
                 for (int i = _columnCount + 1; i < _columnCount + _rowCount + 2; i++)

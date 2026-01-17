@@ -39,6 +39,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Data;
 using WinUIWindow = Microsoft.UI.Xaml.Window;
+using Symptum.UI.Markdown;
 #endif
 
 namespace Project2FA.ViewModels
@@ -487,18 +488,12 @@ namespace Project2FA.ViewModels
 #if !WINDOWS_UWP
             dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
 #endif
-#if WINDOWS_UWP
+
             var markdown = new MarkdownTextBlock
             {
                 Text = Resources.DeleteAccountContentDialogDescription
             };
-#else
-            var markdown = new TextBlock
-            {
-                Text = Resources.DeleteAccountContentDialogDescription,
-                TextWrapping = TextWrapping.Wrap
-            };
-#endif
+
             dialog.Content = markdown;
             dialog.PrimaryButtonText = Resources.Confirm;
             dialog.SecondaryButtonText = Resources.ButtonTextCancel;

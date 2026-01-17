@@ -6,6 +6,9 @@ using Markdig.Syntax.Inlines;
 using System;
 using Windows.Foundation;
 using Windows.UI.Xaml.Documents;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -17,10 +20,16 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 
         public event TypedEventHandler<Hyperlink, HyperlinkClickEventArgs>? ClickEvent
         {
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+            [DynamicWindowsRuntimeCast(typeof(Hyperlink))]
+#endif
             add
             {
                 ((Hyperlink)TextElement).Click += value;
             }
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+            [DynamicWindowsRuntimeCast(typeof(Hyperlink))]
+#endif
             remove
             {
                 ((Hyperlink)TextElement).Click -= value;
@@ -35,7 +44,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
                 NavigateUri = new Uri(autoLinkInline.Url),
             };
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Hyperlink))]
+#endif
         public void AddChild(IAddChild child)
         {
             try

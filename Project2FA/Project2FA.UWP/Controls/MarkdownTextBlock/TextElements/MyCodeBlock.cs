@@ -8,6 +8,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -21,7 +24,9 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
         {
             get => _paragraph;
         }
-
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Brush))]
+#endif
         public MyCodeBlock(CodeBlock codeBlock, MarkdownConfig config)
         {
             _codeBlock = codeBlock;

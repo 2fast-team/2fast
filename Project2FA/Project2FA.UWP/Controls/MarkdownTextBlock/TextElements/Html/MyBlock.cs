@@ -8,6 +8,9 @@ using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements.Html
 {
@@ -39,6 +42,10 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements.Html
             StyleBlock();
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Block))]
+        [DynamicWindowsRuntimeCast(typeof(Inline))]
+#endif
         public void AddChild(IAddChild child)
         {
             if (child.TextElement is Block blockChild)

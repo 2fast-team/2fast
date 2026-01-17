@@ -152,6 +152,29 @@
                     </controls:SettingsCard.Content>
                 </controls:SettingsCard>
 
+                <controls:SettingsExpander
+                    HeaderIcon="{ui:FontIcon Glyph=&#xF0FB;}"
+                    x:Uid="SettingsUseWindowsHello" 
+                    Header="~SettingsUseWindowsHello.Header">
+                    <controls:SettingsExpander.Content>
+                        <ToggleSwitch
+                            IsOn="{x:Bind ViewModel.SettingsPartViewModel.ActivateBiometricLogin,Mode=TwoWay}" 
+                            IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.IsBiometricLoginSupported,Mode=TwoWay}" />
+                    </controls:SettingsExpander.Content>
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard 
+                            x:Uid="SettingsWindowsHelloPrefer"
+                            Header="~SettingsWindowsHelloPrefer.Header"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xF552;}">
+                            <controls:SettingsCard.Content>
+                                <ToggleSwitch
+                                    IsEnabled="{x:Bind ViewModel.SettingsPartViewModel.ActivateBiometricLogin, Mode=OneWay}" 
+                                    IsOn="{x:Bind ViewModel.SettingsPartViewModel.PreferBiometricLogin, Mode=TwoWay}"/>
+                            </controls:SettingsCard.Content>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
+
                 <controls:SettingsCard
                     x:Uid="SettingsOptionsFactoryReset"
                     Header="~SettingsOptionsFactoryReset.Header"

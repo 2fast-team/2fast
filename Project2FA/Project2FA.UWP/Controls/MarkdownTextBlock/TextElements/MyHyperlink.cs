@@ -6,6 +6,16 @@ using HtmlAgilityPack;
 using Markdig.Syntax.Inlines;
 using Windows.Foundation;
 using Windows.UI.Xaml.Documents;
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+using WinRT;
+#endif
+#if !WINAPPSDK
+using Block = Windows.UI.Xaml.Documents.Block;
+using Inline = Windows.UI.Xaml.Documents.Inline;
+#else
+using Block = Microsoft.UI.Xaml.Documents.Block;
+using Inline = Microsoft.UI.Xaml.Documents.Inline;
+#endif
 
 namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
 {
@@ -57,10 +67,13 @@ namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements
             };
         }
 
+#if WINDOWS_UWP && NET10_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Inline))]
+#endif
         public void AddChild(IAddChild child)
         {
 #if !WINAPPSDK
-            if (child.TextElement is Windows.UI.Xaml.Documents.Inline inlineChild)
+            if (child.TextElement is Inline inlineChild)
             {
                 try
                 {

@@ -51,7 +51,7 @@ other installation method (not maintained by me)
 	- Currently released for Windows 10+ (UWP .NET native) 
 	- under development:
 		- UWP (.NET (10) AOT)
-		- Android (with Uno platform)
+		- Android (with Uno platform): [latest releases](https://github.com/2fast-team/2fast/releases?q=android&expanded=true)
 		- iOS (with Uno platform)
 		- Linux (with Uno platform)
 		- macOS (with Uno platform)

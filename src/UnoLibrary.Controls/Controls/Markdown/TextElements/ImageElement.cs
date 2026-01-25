@@ -4,6 +4,9 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Foundation;
 using HtmlAgilityPack;
 using System.Globalization;
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Symptum.UI.Markdown.Renderers.ObjectRenderers;
 
 namespace Symptum.UI.Markdown.TextElements;
 
@@ -29,7 +32,7 @@ public class ImageElement : IAddChild
     {
         _linkInline = linkInline;
         _uri = uri;
-        _imageProvider = config.ImageProvider;
+        _imageProvider = config.ImageProvider == null ? new DefaultImageProvider() : config.ImageProvider;
         _svgRenderer = config.SVGRenderer ?? new DefaultSVGRenderer();
         Init(linkInline.Label, config);
         Size size = Helper.GetMarkdownImageSize(linkInline);
@@ -99,89 +102,173 @@ public class ImageElement : IAddChild
             _imageCache.TryAdd(_uri, source);
             _altText.Visibility = Visibility.Collapsed;
         }
-
-        if (_imageCache.TryGetValue(_uri, out ImageSource? value))
+        try
         {
-            _image.Source = value;
-            imageLoaded(value);
-        }
-        else
-        {
-            try
+            if (_imageProvider != null && _imageProvider.ShouldUseThisProvider(_uri.AbsoluteUri))
             {
-                if (_imageProvider != null && _imageProvider.ShouldUseThisProvider(_uri.AbsoluteUri))
+                var source = await _imageProvider.GetImageSource(_uri.AbsoluteUri);
+                _image.Source = source;
+                imageLoaded(source);
+            }
+            else
+            {
+                HttpClient client = new HttpClient();
+
+                // Download data from URL
+                HttpResponseMessage response = await client.GetAsync(_uri);
+
+
+                // Get the Content-Type header
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                string contentType = response.Content.Headers.ContentType.MediaType;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+
+                if (contentType == "image/svg+xml")
                 {
-                    var source = await _imageProvider.GetImageSource(_uri.AbsoluteUri);
-                    _image.Source = source;
-                    imageLoaded(source);
-                }
-                else if (_uri.Scheme == "file")
-                {
-                    StorageFile? file = await StorageFile.GetFileFromPathAsync(_uri.LocalPath);
-                    if (file != null)
+                    string? svgString = await response.Content.ReadAsStringAsync();
+                    ImageSource resImage = await _svgRenderer.SvgToImageSource(svgString);
+                    if (resImage != null)
                     {
-                        using IRandomAccessStream? stream = await file.OpenAsync(FileAccessMode.Read);
-                        BitmapImage bitmap = new();
-                        if (stream != null) await bitmap.SetSourceAsync(stream);
-                        _image.Source = bitmap;
-                        _image.Width = bitmap.PixelWidth == 0 ? bitmap.DecodePixelWidth : bitmap.PixelWidth;
-                        _image.Height = bitmap.PixelHeight == 0 ? bitmap.DecodePixelHeight : bitmap.PixelHeight;
-                        imageLoaded(bitmap);
+                        _image.Source = resImage;
+                        Size size = Helper.GetSvgSize(svgString);
+                        if (size.Width > 0) _image.Width = size.Width;
+                        if (size.Height > 0) _image.Height = size.Height;
+                        imageLoaded(resImage);
                     }
                 }
                 else
                 {
-                    HttpClient client = new();
-//#if __WASM__
-//                    client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
-//                    client.DefaultRequestHeaders.Add("Access-Control-Allow-Methods", "*");
-//                    client.DefaultRequestHeaders.Add("Access-Control-Allow-Headers", "*");
-//                    client.DefaultRequestHeaders.Add("Access-Control-Max-Age", "86400");
-//#endif
-                    HttpResponseMessage response = await client.GetAsync(_uri);
-                    if (response != null)
+                    byte[] data = await response.Content.ReadAsByteArrayAsync();
+                    // Create a BitmapImage for other supported formats
+                    BitmapImage bitmap = new BitmapImage();
+                    using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
                     {
-                        string? contentType = response.Content.Headers?.ContentType?.MediaType;
-                        if (contentType == "image/svg+xml")
-                        {
-                            string? svgString = await response.Content.ReadAsStringAsync();
-                            ImageSource resImage = await _svgRenderer.SvgToImageSource(svgString);
-                            if (resImage != null)
-                            {
-                                _image.Source = resImage;
-                                Size size = Helper.GetSvgSize(svgString);
-                                if (size.Width > 0) _image.Width = size.Width;
-                                if (size.Height > 0) _image.Height = size.Height;
-                                imageLoaded(resImage);
-                            }
-                        }
-                        else
-                        {
-                            using Stream? stream = await response.Content.ReadAsStreamAsync();
-                            BitmapImage bitmap = new();
+                        // Write the data to the stream
+                        await stream.WriteAsync(data.AsBuffer());
+                        stream.Seek(0);
 
-                            if (stream != null) await bitmap.SetSourceAsync(stream.AsRandomAccessStream());
-
-                            _image.Source = bitmap;
-                            _image.Width = bitmap.PixelWidth == 0 ? bitmap.DecodePixelWidth : bitmap.PixelWidth;
-                            _image.Height = bitmap.PixelHeight == 0 ? bitmap.DecodePixelHeight : bitmap.PixelHeight;
-                            imageLoaded(bitmap);
-                        }
+                        // Set the source of the BitmapImage
+                        await bitmap.SetSourceAsync(stream);
                     }
-                }
-            }
-            catch (Exception) { }
-        }
+                    _image.Source = bitmap;
+                    _image.Width = bitmap.PixelWidth == 0 ? bitmap.DecodePixelWidth : bitmap.PixelWidth;
+                    _image.Height = bitmap.PixelHeight == 0 ? bitmap.DecodePixelHeight : bitmap.PixelHeight;
 
-        if (_precedentWidth != 0)
-        {
-            _image.Width = _precedentWidth;
+                }
+
+                _loaded = true;
+            }
+
+            if (_precedentWidth != 0)
+            {
+                _image.Width = _precedentWidth;
+            }
+            if (_precedentHeight != 0)
+            {
+                _image.Height = _precedentHeight;
+            }
         }
-        if (_precedentHeight != 0)
+        catch (Exception exc)
         {
-            _image.Height = _precedentHeight;
+
         }
     }
+
+    //    private async void LoadImage(object sender, RoutedEventArgs e)
+    //    {
+    //        if (_loaded) return;
+
+    //        void imageLoaded(ImageSource source)
+    //        {
+    //            _loaded = true;
+    //            _imageCache.TryAdd(_uri, source);
+    //            _altText.Visibility = Visibility.Collapsed;
+    //        }
+
+    //        if (_imageCache.TryGetValue(_uri, out ImageSource? value))
+    //        {
+    //            _image.Source = value;
+    //            imageLoaded(value);
+    //        }
+    //        else
+    //        {
+    //            try
+    //            {
+    //                if (_imageProvider != null && _imageProvider.ShouldUseThisProvider(_uri.AbsoluteUri))
+    //                {
+    //                    var source = await _imageProvider.GetImageSource(_uri.AbsoluteUri);
+    //                    _image.Source = source;
+    //                    imageLoaded(source);
+    //                }
+    //                else if (_uri.Scheme == "file")
+    //                {
+    //                    StorageFile? file = await StorageFile.GetFileFromPathAsync(_uri.LocalPath);
+    //                    if (file != null)
+    //                    {
+    //                        using IRandomAccessStream? stream = await file.OpenAsync(FileAccessMode.Read);
+    //                        BitmapImage bitmap = new();
+    //                        if (stream != null) await bitmap.SetSourceAsync(stream);
+    //                        _image.Source = bitmap;
+    //                        _image.Width = bitmap.PixelWidth == 0 ? bitmap.DecodePixelWidth : bitmap.PixelWidth;
+    //                        _image.Height = bitmap.PixelHeight == 0 ? bitmap.DecodePixelHeight : bitmap.PixelHeight;
+    //                        imageLoaded(bitmap);
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    HttpClient client = new();
+    ////#if __WASM__
+    ////                    client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
+    ////                    client.DefaultRequestHeaders.Add("Access-Control-Allow-Methods", "*");
+    ////                    client.DefaultRequestHeaders.Add("Access-Control-Allow-Headers", "*");
+    ////                    client.DefaultRequestHeaders.Add("Access-Control-Max-Age", "86400");
+    ////#endif
+    //                    HttpResponseMessage response = await client.GetAsync(_uri);
+    //                    if (response != null)
+    //                    {
+    //                        string? contentType = response.Content.Headers?.ContentType?.MediaType;
+    //                        if (contentType == "image/svg+xml")
+    //                        {
+    //                            string? svgString = await response.Content.ReadAsStringAsync();
+    //                            ImageSource resImage = await _svgRenderer.SvgToImageSource(svgString);
+    //                            if (resImage != null)
+    //                            {
+    //                                _image.Source = resImage;
+    //                                Size size = Helper.GetSvgSize(svgString);
+    //                                if (size.Width > 0) _image.Width = size.Width;
+    //                                if (size.Height > 0) _image.Height = size.Height;
+    //                                imageLoaded(resImage);
+    //                            }
+    //                        }
+    //                        else
+    //                        {
+    //                            using Stream? stream = await response.Content.ReadAsStreamAsync();
+    //                            BitmapImage bitmap = new();
+
+    //                            if (stream != null) await bitmap.SetSourceAsync(stream.AsRandomAccessStream());
+
+    //                            _image.Source = bitmap;
+    //                            _image.Width = bitmap.PixelWidth == 0 ? bitmap.DecodePixelWidth : bitmap.PixelWidth;
+    //                            _image.Height = bitmap.PixelHeight == 0 ? bitmap.DecodePixelHeight : bitmap.PixelHeight;
+    //                            imageLoaded(bitmap);
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            catch (Exception) { }
+    //        }
+
+    //        if (_precedentWidth != 0)
+    //        {
+    //            _image.Width = _precedentWidth;
+    //        }
+    //        if (_precedentHeight != 0)
+    //        {
+    //            _image.Height = _precedentHeight;
+    //        }
+    //    }
 
     public void AddChild(IAddChild child)
     {

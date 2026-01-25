@@ -37,10 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ColorCode.Core" Version="2.0.15" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />

@@ -38,7 +38,7 @@ namespace Project2FA.ViewModels
             Logger = loggerFacade;
             Project2FAParser = project2FAParser;
 
-#if __ANDROID__ || __IOS__
+#if __ANDROID__ || __IOS__ || __DESKTOP__
             CancelButtonCommand = new AsyncRelayCommand(async() =>
             {
                 await navigationService.NavigateAsync("/" + nameof(AccountCodePage));

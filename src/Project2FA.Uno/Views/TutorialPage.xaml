@@ -10,6 +10,7 @@
     xmlns:utu="clr-namespace:Uno.Toolkit.UI;assembly=Uno.Toolkit.WinUI"
     xmlns:models="using:Project2FA.Repository.Models"
     xmlns:viewmodels="using:Project2FA.ViewModels"
+    xmlns:markdown="using:Symptum.UI.Markdown"
     xmlns:strings="using:Project2FA.Strings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -308,94 +309,94 @@
                             </Border.Background>
                         </Border>-->
                     </Border>
-                    <StackPanel Margin="24,12,24,0">
-                        <Grid >
-                            <Ellipse 
-                            Height="70" 
-                            Width="70"
-                            Fill="{ThemeResource SystemAccentColor}"/>
-                            <Image 
-                            Margin="0,12,0,12"
-                            Height="60" 
-                            Width="60"
-                            Source="ms-appx:///Assets/Images/FileLogo.png"
-                            Stretch="Fill"
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Center">
-                            </Image>
-                        </Grid>
+                        <ScrollViewer>
+                            <StackPanel Margin="12,6,12,0">
+                                <Grid >
+                                    <Ellipse 
+                                        Height="70" 
+                                        Width="70"
+                                        Fill="{ThemeResource SystemAccentColor}"/>
+                                    <Image 
+                                        Margin="0,12,0,12"
+                                        Height="60" 
+                                        Width="60"
+                                        Source="ms-appx:///Assets/Images/FileLogo.png"
+                                        Stretch="Fill"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center">
+                                    </Image>
+                                </Grid>
 
-                        <!--<toolkit:MarkdownTextBlock 
-                        Grid.Column="1"
-                        x:Uid="TutorialContentDialogFirstSteps"
-                        Text="~TutorialContentDialogFirstSteps.Text"
-                        FontSize="20"
-                            
-                        FontFamily="Calibri"
-                        TextWrapping="WrapWholeWords" 
-                        LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
+                                <markdown:MarkdownTextBlock 
+                                    Grid.Column="1"
+                                    x:Uid="TutorialContentDialogFirstSteps"
+                                    Text="~TutorialContentDialogFirstSteps.Text"
+                                    FontSize="20"
+                                    FontFamily="Calibri"
+                                    OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
 
-                        <StackPanel 
-                        Orientation="Horizontal" 
-                        HorizontalAlignment="Center">
-                            <PersonPicture
-                            Height="70"
-                            Width="70"
-                            FontSize="40"
-                            Margin="0,10,20,0"
-                            Style="{StaticResource UnicodeIndexPersonPictureStyle}"
-                            Tag="&#xEFCC;">
-                            </PersonPicture>
-                            <PersonPicture
-                            Height="70"
-                            Width="70"
-                            FontSize="40"
-                            Margin="0,10,20,0"
-                            Style="{StaticResource UnicodeIndexPersonPictureStyle}"
-                            Tag="&#xEDB3;">
-                            </PersonPicture>
-                            <PersonPicture
-                            Height="70"
-                            Width="70"
-                            FontSize="40"
-                            Margin="0,10,20,0"
-                            Style="{StaticResource UnicodeIndexPersonPictureStyle}"
-                            Tag="&#xF0DD;">
-                            </PersonPicture>
-                        </StackPanel>
+                                <StackPanel 
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Center">
+                                    <PersonPicture
+                                            Height="70"
+                                            Width="70"
+                                            FontSize="40"
+                                            Margin="0,10,20,0"
+                                            Style="{StaticResource UnicodeIndexPersonPictureStyle}"
+                                            Tag="&#xEFCC;">
+                                    </PersonPicture>
+                                    <PersonPicture
+                                        Height="70"
+                                        Width="70"
+                                        FontSize="40"
+                                        Margin="0,10,20,0"
+                                        Style="{StaticResource UnicodeIndexPersonPictureStyle}"
+                                        Tag="&#xEDB3;">
+                                    </PersonPicture>
+                                    <PersonPicture
+                                    Height="70"
+                                    Width="70"
+                                    FontSize="40"
+                                    Margin="0,10,20,0"
+                                    Style="{StaticResource UnicodeIndexPersonPictureStyle}"
+                                    Tag="&#xF0DD;">
+                                    </PersonPicture>
+                                </StackPanel>
 
-                        <TextBlock 
-                        Margin="0,12,0,0"
-                        Text="~TutorialContentDialogFirstStepAppending.Text"
-                        x:Uid="TutorialContentDialogFirstStepAppending"
-                        TextWrapping="WrapWholeWords"
-                        FontSize="20"
-                        FontFamily="Calibri"/>
+                                <TextBlock 
+                                Margin="0,12,0,0"
+                                Text="~TutorialContentDialogFirstStepAppending.Text"
+                                x:Uid="TutorialContentDialogFirstStepAppending"
+                                TextWrapping="WrapWholeWords"
+                                FontSize="20"
+                                FontFamily="Calibri"/>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                            <TextBlock 
-                            Margin="0,12,0,0"
-                            Text="~TutorialContentDialogForgettenPassword.Text"
-                            x:Uid="TutorialContentDialogForgettenPassword"
-                            TextWrapping="WrapWholeWords"
-                            FontSize="20"
-                            FontFamily="Calibri"/>
-                            <Button
-                            Height="48"
-                            Width="48"
-                            Padding="4,4,4,4"
-                            Click="HLBTN_PasswordInfo"
-                            Style="{StaticResource TransparentButtonStyle}"
-                            VerticalAlignment="Center">
-                                <FontIcon
-                            FontSize="20"
-                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                            Glyph="&#xE946;"  />
-                            </Button>
-                        </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                                    <TextBlock 
+                                    Margin="0,12,0,0"
+                                    Text="~TutorialContentDialogForgettenPassword.Text"
+                                    x:Uid="TutorialContentDialogForgettenPassword"
+                                    TextWrapping="WrapWholeWords"
+                                    FontSize="20"
+                                    FontFamily="Calibri"/>
+                                    <Button
+                                        Height="48"
+                                        Width="48"
+                                        Padding="4,4,4,4"
+                                        Click="HLBTN_PasswordInfo"
+                                        Style="{StaticResource TransparentButtonStyle}"
+                                        VerticalAlignment="Center">
+                                        <FontIcon
+                                        FontSize="20"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE946;"  />
+                                    </Button>
+                                </StackPanel>
 
-                    </StackPanel>
-                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
             </FlipViewItem>
             <FlipViewItem>
                 <Grid>
@@ -407,27 +408,29 @@
                             </Border.Background>
                         </Border>-->
                     </Border>
-                    <StackPanel Margin="24,12,24,0">
-                        <!--<toolkit:MarkdownTextBlock 
-                        x:Uid="TutorialContentDialogHowTheAppWorksHeader"
-                        Text="~TutorialContentDialogHowTheAppWorksHeader.Text"
-                        FontSize="20"
-                        FontStretch="ExtraCondensed"
-                        FontFamily="Calibri"
-                        TextWrapping="WrapWholeWords"/>
-                        <toolkit:MarkdownTextBlock 
-                        Margin="0,12,0,0"
-                        x:Uid="TutorialContentDialogHowTheAppWorks"
-                        Text="~TutorialContentDialogHowTheAppWorks.Text"
-                        FontSize="20"
-                        FontStretch="ExtraCondensed"
-                        FontFamily="Calibri"
-                        TextWrapping="WrapWholeWords" 
-                        LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
-                        <Image 
-                        Margin="0,12,0,0"
-                        Source="/Assets/Images/appoverview.png"/>
-                    </StackPanel>
+                        <ScrollViewer>
+                            <StackPanel Margin="24,12,24,0">
+                                <markdown:MarkdownTextBlock
+                                x:Uid="TutorialContentDialogHowTheAppWorksHeader"
+                                Text="~TutorialContentDialogHowTheAppWorksHeader.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"/>
+                                <markdown:MarkdownTextBlock
+                                Margin="0,12,0,0"
+                                x:Uid="TutorialContentDialogHowTheAppWorks"
+                                Text="~TutorialContentDialogHowTheAppWorks.Text"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                <Image 
+                                Margin="0,12,0,0"
+                                Source="/Assets/Images/appoverview.png"/>
+
+                            </StackPanel>
+                        </ScrollViewer>
+
                 </Grid>
             </FlipViewItem>
             <FlipViewItem>
@@ -442,16 +445,15 @@
                     </Border>
                     <ScrollViewer>
                         <StackPanel Margin="12,12,12,0">
-                            <!--<toolkit:MarkdownTextBlock 
+                        <markdown:MarkdownTextBlock
                         Margin="0,12,0,0"
                         x:Uid="TutorialContentDialogCreateOrLoad"
                         Text="~TutorialContentDialogCreateOrLoad.Text"
                         FontSize="20"
                         FontStretch="ExtraCondensed"
                         FontFamily="Calibri"
-                        TextWrapping="WrapWholeWords" 
-                        LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
-                            <TextBlock 
+                        OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                <TextBlock 
                         x:Uid="TutorialContentDialogCreateMethodHeader"
                         Text="~TutorialContentDialogCreateMethodHeader.Text"
                         FontSize="20"
@@ -483,7 +485,7 @@
                         FontStretch="ExtraCondensed"
                         FontFamily="Calibri"
                         TextWrapping="WrapWholeWords"/>
-                            <!--<Image Source="/Assets/Tutorials/2fast_create_datafile.gif" />-->
+                        <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
                         </StackPanel>
                     </ScrollViewer>
 
@@ -499,8 +501,9 @@
                             </Border.Background>
                         </Border>-->
                     </Border>
-                    <StackPanel Margin="12,12,12,0">
-                        <TextBlock 
+                        <ScrollViewer>
+                            <StackPanel Margin="12,12,12,0">
+                                <TextBlock 
                         x:Uid="AddAccountCodeContentDialogQRCodeHelpHeader"
                         Text="~AddAccountCodeContentDialogQRCodeHelpHeader.Text"
                         FontSize="20"
@@ -509,19 +512,16 @@
                         FontWeight="Bold"
                         TextWrapping="WrapWholeWords"
                         Margin="0,0,0,12"/>
-                        <!--<toolkit:MarkdownTextBlock 
-                        Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
-                        FontSize="20"
-                        FontStretch="ExtraCondensed"
-                        FontFamily="Calibri"
-                        TextWrapping="WrapWholeWords"
-                        LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
-                        <!--<TextBlock 
-                    Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
-                    FontSize="16"
-                    TextWrapping="WrapWholeWords"/>-->
-                        <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
-                    </StackPanel>
+                                <markdown:MarkdownTextBlock
+                                Text="{x:Bind strings:Resources.AddAccountCodeContentDialogQRCodeHelp}"
+                                FontSize="20"
+                                FontStretch="ExtraCondensed"
+                                FontFamily="Calibri"
+                                OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                <Image Source="/Assets/Tutorials/2fast_qrcode_scan.gif" />
+                            </StackPanel>
+                        </ScrollViewer>
+
                 </Grid>
 
             </FlipViewItem>
@@ -535,8 +535,9 @@
                             </Border.Background>
                         </Border>-->
                     </Border>
-                    <StackPanel Margin="12,12,12,0">
-                        <TextBlock 
+                        <ScrollViewer>
+                            <StackPanel Margin="12,12,12,0">
+                                <TextBlock 
                         x:Uid="TutorialContentDialogInteractionAccountHeader"
                         Text="~TutorialContentDialogInteractionAccountHeader.Text"
                         FontSize="20"
@@ -545,25 +546,21 @@
                         FontWeight="Bold"
                         TextWrapping="WrapWholeWords"
                         Margin="0,0,0,12"/>
-                        <!--<toolkit:MarkdownTextBlock 
-                        x:Uid="TutorialContentDialogInteractionAccount"
-                        Text="~TutorialContentDialogInteractionAccount.Text"
-                        FontSize="20"
-                        FontStretch="ExtraCondensed"
-                        FontFamily="Calibri"
-                        TextWrapping="WrapWholeWords"
-                        LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
-                        <!--<TextBlock 
-                    x:Uid="TutorialContentDialogInteractionAccount"
-                    Text="~TutorialContentDialogInteractionAccount.Text"
-                    FontSize="16"
-                    TextWrapping="WrapWholeWords"/>-->
-                            <ListView 
+                                <markdown:MarkdownTextBlock
+                            x:Uid="TutorialContentDialogInteractionAccount"
+                            Text="~TutorialContentDialogInteractionAccount.Text"
+                            FontSize="20"
+                            FontStretch="ExtraCondensed"
+                            FontFamily="Calibri"
+                            OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
+                                <ListView 
                             ItemContainerStyle="{StaticResource TwoFASelectionListViewItemStyle}"
                             ItemTemplate="{StaticResource TwoFACodeCustomTemplate}"
                             ItemsSource="{x:Bind ViewModel.Collection, Mode=OneWay}">
-                            </ListView>
-                    </StackPanel>
+                                </ListView>
+                            </StackPanel>
+                        </ScrollViewer>
+
                 </Grid>
             </FlipViewItem>
             <FlipViewItem>
@@ -576,8 +573,9 @@
                             </Border.Background>
                         </Border>-->
                     </Border>
-                    <StackPanel Margin="12,12,12,0">
-                        <TextBlock 
+                        <ScrollViewer>
+                            <StackPanel Margin="12,12,12,0">
+                                <TextBlock 
                         x:Uid="TutorialContentDialogProFeatureHeader"
                         Text="~TutorialContentDialogProFeatureHeader.Text"
                         FontSize="20"
@@ -586,16 +584,17 @@
                         FontWeight="Bold"
                         TextWrapping="WrapWholeWords"
                         Margin="0,0,0,12"/>
-                        <!--<toolkit:MarkdownTextBlock 
-                        x:Uid="TutorialContentDialogProFeature"
-                        Text="~TutorialContentDialogProFeature.Text"
-                        FontSize="20"
-                        FontStretch="ExtraCondensed"
-                        FontFamily="Calibri"
-                        TextWrapping="WrapWholeWords"
-                        LinkClicked="MarkdownTextBlock_LinkClicked"/>-->
+                                <markdown:MarkdownTextBlock
+                            x:Uid="TutorialContentDialogProFeature"
+                            Text="~TutorialContentDialogProFeature.Text"
+                            FontSize="20"
+                            FontStretch="ExtraCondensed"
+                            FontFamily="Calibri"
+                            OnLinkClicked="MarkdownTextBlock_LinkClicked"/>
 
-                    </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+
                 </Grid>
             </FlipViewItem>
             </FlipView>

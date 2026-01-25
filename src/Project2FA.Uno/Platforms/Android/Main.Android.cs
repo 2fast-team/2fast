@@ -1,15 +1,6 @@
-using Android.App;
-using Android.Content;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Microsoft.UI.Xaml.Media;
+using Com.Nostra13.Universalimageloader.Core;
 using Project2FA.UnoApp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Project2FA.Uno.Droid
 {
@@ -28,7 +19,21 @@ namespace Project2FA.Uno.Droid
         public Application(IntPtr javaReference, JniHandleOwnership transfer)
             : base(() => new App(), javaReference, transfer)
         {
-            App.InitializeLogging();
+            // TODO test if logging inti is needed and working in production builds
+            //App.InitializeLogging();
+            ConfigureUniversalImageLoader();
+        }
+
+        private static void ConfigureUniversalImageLoader()
+        {
+            // Create global configuration and initialize ImageLoader with this config
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration
+                .Builder(Context)
+                .Build();
+
+            ImageLoader.Instance.Init(config);
+
+            ImageSource.DefaultImageLoader = ImageLoader.Instance.LoadImageAsync;
         }
     }
 }

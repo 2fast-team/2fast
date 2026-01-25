@@ -815,6 +815,7 @@ namespace Project2FA.ViewModels
                 //OnPropertyChanged(nameof(AutoLogoutMinutesIsMDMManaged));
             }
         }
+
 #if WINDOWS_UWP
         public bool IsProVersion 
         {
@@ -1007,9 +1008,6 @@ namespace Project2FA.ViewModels
                         item.Category = Resources.SettingsDependencyGroupAssets;
                     }
                 }
-                //TempDependencyCollection.AddRange(depList);
-
-
 
                 var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
 
@@ -1025,10 +1023,7 @@ namespace Project2FA.ViewModels
                         Groups.Add(dependencyGroupModel);
                     }
                 }
-                //var grouped = depList.GroupBy(x => x.Category).OrderBy(g => g.Key);
-                //DependencyCollection.AddRange(grouped, true);
-                //DependencyCollection = new ObservableGroupedCollection<string, DependencyModel>(grouped);
-                //OnPropertyChanged(nameof(DependencyCollection));
+
                 OnPropertyChanged(nameof(Groups));
             }
             catch (Exception exc)
@@ -1041,9 +1036,7 @@ namespace Project2FA.ViewModels
         {
             get { return this._dependencyGroups; }
         }
-        //public ObservableCollection<DependencyModel> TempDependencyCollection { get; private set; } = new ObservableCollection<DependencyModel>();
 
-        //public ObservableGroupedCollection<string, DependencyModel> DependencyCollection { get; private set; } = new ObservableGroupedCollection<string, DependencyModel>();
 #if WINDOWS_UWP
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 #endif

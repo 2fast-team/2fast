@@ -67,6 +67,8 @@ public partial class MarkdownTextBlock
 
     #endregion
 
+    internal void RaiseLinkClickedEvent(Uri uri) => OnLinkClicked?.Invoke(this, new LinkClickedEventArgs(uri));
+
     public DocumentOutline DocumentOutline { get; }
 
     public ImportsHandler ImportsHandler { get; }

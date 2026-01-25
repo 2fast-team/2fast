@@ -95,6 +95,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVClientService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebDAV\WebDAVDirectoryService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingPageViewModel.Desktop.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings\en\Resources.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ErrorDialogs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\JSONUtil.cs" />

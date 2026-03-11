@@ -435,10 +435,10 @@
       <Version>1.12.4</Version>
     </PackageReference>
     <PackageReference Include="Markdig">
-      <Version>1.0.0</Version>
+      <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
-      <Version>10.0.103</Version>
+      <Version>10.0.200</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

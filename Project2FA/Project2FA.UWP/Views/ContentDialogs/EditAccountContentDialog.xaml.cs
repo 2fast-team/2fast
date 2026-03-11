@@ -115,7 +115,7 @@ namespace Project2FA.UWP.Views
             {
                 if (selectedItem.Name != Strings.Resources.AccountCodePageSearchNotFound)
                 {
-                    ViewModel.TempModel.AccountIconName = selectedItem.Name;
+                    ViewModel.AccountIconName = selectedItem.Name;
                 }
                 else
                 {

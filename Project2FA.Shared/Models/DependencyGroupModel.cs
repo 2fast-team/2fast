@@ -3,11 +3,14 @@
 namespace Project2FA.Repository.Models
 {
 #if WINDOWS_UWP && NET10_0_OR_GREATER
+    /// <summary>
+    /// Generic group data model.
+    /// </summary>
     [WinRT.GeneratedBindableCustomPropertyAttribute]
 #endif
     public partial class DependencyGroupModel
     {
-        public string GroupName { get; set; }
+        public string GroupName { get; set; } = string.Empty;
         public ObservableCollection<DependencyModel> Items { get; set; } = new ObservableCollection<DependencyModel>();
         public override string ToString()
         {

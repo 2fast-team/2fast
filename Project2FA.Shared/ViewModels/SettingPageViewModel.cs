@@ -34,6 +34,8 @@ using CommunityToolkit.Labs.WinUI.MarkdownTextBlock;
 using Windows.Services.Store;
 using Windows.Security.Credentials;
 using Windows.ApplicationModel.Core;
+
+
 #else
 using BiometryService;
 using Microsoft.UI.Xaml.Controls;
@@ -996,31 +998,26 @@ namespace Project2FA.ViewModels
                 StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/JSONs/Dependencies.json"));
                 IRandomAccessStreamWithContentType randomStream = await file.OpenReadAsync();
                 using StreamReader r = new StreamReader(randomStream.AsStreamForRead());
-                var depList = SerializationService.Deserialize<List<DependencyModel>>(await r.ReadToEndAsync());
-                foreach (var item in depList)
-                {
-                    if (item.CategoryUid == "Package")
-                    {
-                        item.Category = Resources.SettingsDependencyGroupPackages;
-                    }
-                    else
-                    {
-                        item.Category = Resources.SettingsDependencyGroupAssets;
-                    }
-                }
+                var depList = SerializationService.Deserialize<DependencyRootModel>(await r.ReadToEndAsync());
 
-                var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
 
-                foreach (var group in grouped)
+                //var grouped = depList.OrderBy(g => g.Name).GroupBy(x => x.Category);
+                var groups = new List<DependencyGroupModel>();
+
+                foreach (var group in depList.Groups)
                 {
-                    if (!Groups.Any(g => g.GroupName == group.Key))
+                    if (!Groups.Any(g => g.GroupName == group.GroupName))
                     {
-                        var dependencyGroupModel = new DependencyGroupModel { GroupName = group.Key };
-                        foreach (var item in group)
+                        if (group.GroupName == "Package")
                         {
-                            dependencyGroupModel.Items.Add(item);
+                            group.GroupName = Resources.SettingsDependencyGroupPackages;
                         }
-                        Groups.Add(dependencyGroupModel);
+                        else
+                        {
+                            group.GroupName = Resources.SettingsDependencyGroupAssets;
+                        }
+
+                        _dependencyGroups.Add(group);
                     }
                 }
 

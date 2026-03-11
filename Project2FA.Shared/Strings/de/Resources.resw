@@ -716,9 +716,7 @@ Bitte synchronisieren Sie die Uhrzeit in den Einstellungen.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Aktualisierung von Bibliotheken von Drittanbietern
-- Fehlerbehebungen und Optimierungen
-- Zusätzliche Dienste werden beim Importieren von Backups unterstützt
-- Effizienteres Laden und Speichern von Datendateien (.2fa)</value>
+- Fehlerbehebungen und Optimierungen</value>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">
     <value>Neue Funktionen &amp; Änderungen</value>

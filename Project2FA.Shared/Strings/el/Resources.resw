@@ -720,9 +720,7 @@
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Ενημέρωση βιβλιοθηκών τρίτων
-- Διόρθωση σφαλμάτων και βελτιστοποίηση
-- Υποστήριξη πρόσθετων υπηρεσιών κατά την εισαγωγή αντιγράφων ασφαλείας
-- Πιο αποτελεσματική φόρτωση και αποθήκευση αρχείων δεδομένων (.2fa)</value>
+- Διόρθωση σφαλμάτων και βελτιστοποίηση</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

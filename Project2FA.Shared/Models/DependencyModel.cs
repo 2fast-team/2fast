@@ -9,10 +9,6 @@ namespace Project2FA.Repository.Models
 #if !WINDOWS_UWP
     [Bindable]
 #endif
-
-#if WINDOWS_UWP && NET10_0_OR_GREATER
-    [WinRT.GeneratedBindableCustomPropertyAttribute]
-#endif
     public partial class DependencyModel : ObservableObject
     {
         private string _name;
@@ -101,11 +97,9 @@ namespace Project2FA.Repository.Models
             set => SetProperty(ref _category, value);
         }
 
-        private string _describtion;
-        public string Describtion
+        public override string ToString()
         {
-            get => _describtion;
-            set => SetProperty(ref _describtion, value);
+            return this.Name;
         }
     }
 }

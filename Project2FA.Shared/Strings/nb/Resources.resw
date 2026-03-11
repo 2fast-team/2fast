@@ -720,9 +720,7 @@ Vennligst synkroniser tiden i innstillingene.</value>
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- Oppdatering av tredjepartsbiblioteker
-- Feilrettinger og optimalisering
-- Tilleggstjenester støttes under import av sikkerhetskopier
-- Mer effektiv lasting og lagring av datafiler (.2fa)</value>
+- Feilrettinger og optimalisering</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

@@ -62,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\DatafileModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyGroupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DependencyRootModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationCollectionModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FontIdentifikationModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\InAppPaymentItemModel.cs" />

@@ -1,155 +1,160 @@
-﻿[
-  {
-    "Name": "BouncyCastle.Cryptography",
-    "Authors": "Legion of the Bouncy Castle Inc.",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/bcgit/bc-csharp/blob/master/LICENSE.md"
-  },
-  {
-    "Name": "QRCoder",
-    "Authors": "Raffael Herrmann",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/codebude/QRCoder/blob/master/LICENSE.txt"
-  },
-  {
-    "Name": "CommunityToolkit.*",
-    "LicenseName": "MIT",
-    "Authors": "Microsoft",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/CommunityToolkit/dotnet/blob/main/License.md#mit-license-mit"
-  },
-  {
-    "Name": "Otp.NET",
-    "LicenseName": "MIT",
-    "Authors": "Kyle Spearrin",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://raw.githubusercontent.com/kspearrin/Otp.NET/master/LICENSE.txt"
-  },
-  {
-    "Name": "Microsoft.EntityFrameworkCore.Sqlite",
-    "Authors": "Microsoft",
-    "LicenseName": "Apache License 2.0",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/dotnet/efcore/blob/main/LICENSE.txt"
-  },
-  {
-    "Name": "Microsoft.CodeAnalysis.NetAnalyzers",
-    "Authors": "Microsoft",
-    "LicenseName": "Apache License 2.0",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/dotnet/roslyn-analyzers/blob/master/License.txt"
-  },
-  {
-    "Name": "Microsoft.UI.Xaml",
-    "Authors": "Microsoft",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/microsoft/microsoft-ui-xaml/blob/master/LICENSE"
-  },
-  {
-    "Name": "Microsoft.Xaml.Behaviors.Uwp.Managed",
-    "Authors": "Microsoft",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/microsoft/XamlBehaviors/blob/master/LICENSE"
-  },
-  {
-    "Name": "NETStandard.Library",
-    "Authors": "Microsoft",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/dotnet/standard/blob/master/LICENSE.TXT"
-  },
-  {
-    "Name": "PortableWebDavLibrary",
-    "Authors": "DecaTec",
-    "LicenseName": "Microsoft Public License (Ms-PL)",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/DecaTec/Portable-WebDAV-Library/blob/master/LICENSE"
-  },
-  {
-    "Name": "System.Security.Cryptography.ProtectedData",
-    "Authors": "Microsoft",
-    "LicenseName": "MIT",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/dotnet/runtime/blob/master/LICENSE.TXT"
-  },
-  {
-    "Name": "ZXing.Net",
-    "Authors": "Michael Jahn",
-    "LicenseName": "Apache License 2.0",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/micjahn/ZXing.Net/blob/master/COPYING"
-  },
-  {
-    "Name": "protobuf-net",
-    "Authors": "Marc Gravell",
-    "LicenseName": "Apache License 2.0",
-    "CategoryUid": "Package",
-    "StringLicenseURL": "https://github.com/protobuf-net/protobuf-net/blob/main/Licence.txt"
-  },
-  {
-    "Name": "Animation: search empty",
-    "Authors": "0440 Molly @ LottoFiles",
-    "LicenseName": "Creative Commons License 4.0",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "https://lottiefiles.com/page/license",
-    "StringURL": "https://lottiefiles.com/10223-search-empty"
-  },
-  {
-    "Name": "Animation: Error cross",
-    "Authors": "Rodrigo Bernardi @ LottoFiles",
-    "LicenseName": "Creative Commons License 4.0",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "https://lottiefiles.com/page/license",
-    "StringURL": "https://lottiefiles.com/3932-error-cross"
-  },
-  {
-    "Name": "Icon: Gift free icon ",
-    "Authors": "freepik @ flaticon",
-    "LicenseName": "Flaticon license",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
-    "StringURL": "https://www.flaticon.com/free-icon/gift_15193288"
-  },
-  {
-    "Name": "Icon: Key free icon",
-    "Authors": "freepik @ flaticon",
-    "LicenseName": "Flaticon license",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
-    "StringURL": "https://www.flaticon.com/free-icon/key_2786386"
-  },
-  {
-    "Name": "Icon: give-love",
-    "Authors": "freepik @ flaticon",
-    "LicenseName": "Flaticon license",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
-    "StringURL": "https://www.flaticon.com/free-icon/give-love_4478162"
-  },
-  {
-    "Name": "Icon: Price Tag free icon",
-    "Authors": "freepik @ flaticon",
-    "LicenseName": "Flaticon license",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
-    "StringURL": "https://www.flaticon.com/free-icon/price-tag_15193292"
-  },
-  {
-    "Name": "Icon: Online Tutorial",
-    "Authors": "Xero Hub @ flaticon",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "",
-    "StringURL": "https://lottiefiles.com/21398-online-tutorial"
-  },
-  {
-    "Name": "Icons: simple-icons",
-    "Authors": "simple-icons",
-    "LicenseName": "Creative Commons Zero v1.0 Universal",
-    "CategoryUid": "Asset",
-    "StringLicenseURL": "https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md"
-  }
-]
+﻿{
+  "Groups": [
+    {
+      "GroupName": "Package",
+      "Items": [
+        {
+          "Name": "BouncyCastle.Cryptography",
+          "Authors": "Legion of the Bouncy Castle Inc.",
+          "LicenseName": "MIT",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/bcgit/bc-csharp/blob/master/LICENSE.md"
+        },
+        {
+          "Name": "QRCoder",
+          "Authors": "Raffael Herrmann",
+          "LicenseName": "MIT",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/codebude/QRCoder/blob/master/LICENSE.txt"
+        },
+        {
+          "Name": "CommunityToolkit.*",
+          "LicenseName": "MIT",
+          "Authors": "Microsoft",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/CommunityToolkit/dotnet/blob/main/License.md#mit-license-mit"
+        },
+        {
+          "Name": "Otp.NET",
+          "LicenseName": "MIT",
+          "Authors": "Kyle Spearrin",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://raw.githubusercontent.com/kspearrin/Otp.NET/master/LICENSE.txt"
+        },
+        {
+          "Name": "Microsoft.CodeAnalysis.NetAnalyzers",
+          "Authors": "Microsoft",
+          "LicenseName": "Apache License 2.0",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/dotnet/roslyn-analyzers/blob/master/License.txt"
+        },
+        {
+          "Name": "Microsoft.UI.Xaml",
+          "Authors": "Microsoft",
+          "LicenseName": "MIT",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/microsoft/microsoft-ui-xaml/blob/master/LICENSE"
+        },
+        {
+          "Name": "Microsoft.Xaml.Behaviors.Uwp.Managed",
+          "Authors": "Microsoft",
+          "LicenseName": "MIT",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/microsoft/XamlBehaviors/blob/master/LICENSE"
+        },
+        {
+          "Name": "NETStandard.Library",
+          "Authors": "Microsoft",
+          "LicenseName": "MIT",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/dotnet/standard/blob/master/LICENSE.TXT"
+        },
+        {
+          "Name": "PortableWebDavLibrary",
+          "Authors": "DecaTec",
+          "LicenseName": "Microsoft Public License (Ms-PL)",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/DecaTec/Portable-WebDAV-Library/blob/master/LICENSE"
+        },
+        {
+          "Name": "System.Security.Cryptography.ProtectedData",
+          "Authors": "Microsoft",
+          "LicenseName": "MIT",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/dotnet/runtime/blob/master/LICENSE.TXT"
+        },
+        {
+          "Name": "ZXing.Net",
+          "Authors": "Michael Jahn",
+          "LicenseName": "Apache License 2.0",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/micjahn/ZXing.Net/blob/master/COPYING"
+        },
+        {
+          "Name": "protobuf-net",
+          "Authors": "Marc Gravell",
+          "LicenseName": "Apache License 2.0",
+          "CategoryUid": "Package",
+          "StringLicenseURL": "https://github.com/protobuf-net/protobuf-net/blob/main/Licence.txt"
+        }
+      ]
+    },
+    {
+      "GroupName": "Asset",
+      "Items": [
+        {
+          "Name": "Animation: search empty",
+          "Authors": "0440 Molly @ LottoFiles",
+          "LicenseName": "Creative Commons License 4.0",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "https://lottiefiles.com/page/license",
+          "StringURL": "https://lottiefiles.com/10223-search-empty"
+        },
+        {
+          "Name": "Animation: Error cross",
+          "Authors": "Rodrigo Bernardi @ LottoFiles",
+          "LicenseName": "Creative Commons License 4.0",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "https://lottiefiles.com/page/license",
+          "StringURL": "https://lottiefiles.com/3932-error-cross"
+        },
+        {
+          "Name": "Icon: Gift free icon ",
+          "Authors": "freepik @ flaticon",
+          "LicenseName": "Flaticon license",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
+          "StringURL": "https://www.flaticon.com/free-icon/gift_15193288"
+        },
+        {
+          "Name": "Icon: Key free icon",
+          "Authors": "freepik @ flaticon",
+          "LicenseName": "Flaticon license",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
+          "StringURL": "https://www.flaticon.com/free-icon/key_2786386"
+        },
+        {
+          "Name": "Icon: give-love",
+          "Authors": "freepik @ flaticon",
+          "LicenseName": "Flaticon license",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
+          "StringURL": "https://www.flaticon.com/free-icon/give-love_4478162"
+        },
+        {
+          "Name": "Icon: Price Tag free icon",
+          "Authors": "freepik @ flaticon",
+          "LicenseName": "Flaticon license",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "https://www.freepikcompany.com/legal#nav-flaticon-agreement",
+          "StringURL": "https://www.flaticon.com/free-icon/price-tag_15193292"
+        },
+        {
+          "Name": "Icon: Online Tutorial",
+          "Authors": "Xero Hub @ flaticon",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "",
+          "StringURL": "https://lottiefiles.com/21398-online-tutorial"
+        },
+        {
+          "Name": "Icons: simple-icons",
+          "Authors": "simple-icons",
+          "LicenseName": "Creative Commons Zero v1.0 Universal",
+          "CategoryUid": "Asset",
+          "StringLicenseURL": "https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md"
+        }
+      ]
+    }
+  ]
+}

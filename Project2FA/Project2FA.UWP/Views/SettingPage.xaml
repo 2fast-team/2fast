@@ -17,6 +17,7 @@
     xmlns:lottie="using:CommunityToolkit.WinUI.Lottie"
     xmlns:collections="using:CommunityToolkit.Mvvm.Collections"
     xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:wuxdata="using:Windows.UI.Xaml.Data"
     x:Name="Page"
     mc:Ignorable="d">
 
@@ -54,11 +55,10 @@
                         Text="{x:Bind Name, Mode=OneWay}"
                         FontSize="16"
                         Foreground="{ThemeResource SystemAccentColor}"
-                        Margin="8,0,0,0"
-                        Padding="0,0,0,8"/>
+                        Margin="8,0,0,0"/>
                 <StackPanel
                         Grid.Row="1" 
-                        Margin="8,8,0,0"
+                        Margin="8,0,0,0"
                         Orientation="Horizontal">
                     <TextBlock
                             x:Uid="SettingsDependencyAuthor"
@@ -71,6 +71,7 @@
                     <HyperlinkButton
                             Content="Link"
                             Margin="4,0,0,0"
+                            Style="{StaticResource TextButtonStyle}"
                             ToolTipService.ToolTip="{x:Bind URL,Mode=OneWay}"
                             Visibility="{x:Bind URL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
                             NavigateUri="{x:Bind URL,Mode=OneWay}"/>
@@ -78,7 +79,7 @@
 
                 <StackPanel
                         Grid.Row="2" 
-                        Margin="8,8,0,0"
+                        Margin="8,0,0,12"
                         Orientation="Horizontal">
                     <TextBlock
                             x:Uid="SettingsDependencyLicence"
@@ -93,6 +94,7 @@
                     <HyperlinkButton
                             Margin="4,0,0,0"
                             Content="Link"
+                            Style="{StaticResource TextButtonStyle}"
                             Visibility="{x:Bind LicenseURL,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
                             ToolTipService.ToolTip="{x:Bind LicenseURL,Mode=OneWay}"
                             NavigateUri="{x:Bind LicenseURL,Mode=OneWay}" 
@@ -648,23 +650,29 @@
                                                             Text="{x:Bind GroupName}" />
                                                         </DataTemplate>
                                                     </GroupStyle.HeaderTemplate>
-                                                    <GroupStyle.Panel>
+                                                    <!--<GroupStyle.Panel>
                                                         <ItemsPanelTemplate>
                                                             <ctwc:WrapPanel/>
                                                         </ItemsPanelTemplate>
-                                                    </GroupStyle.Panel>
+                                                    </GroupStyle.Panel>-->
                                                 </GroupStyle>
                                             </GridView.GroupStyle>
                                             <GridView.ItemContainerStyle>
                                                 <Style TargetType="GridViewItem">
-                                                    <Setter Property="Margin" Value="0,0,8,16" />
+                                                    <Setter Property="Margin" Value="0,0,8,32" />
 
                                                     <Setter Property="animations:Implicit.Animations" 
-                Value="{StaticResource ImplicitOffset}"/>
+                                                        Value="{StaticResource ImplicitOffset}"/>
                                                 </Style>
                                             </GridView.ItemContainerStyle>
                                         </GridView>
                                     </SemanticZoom.ZoomedInView>
+                                    <!--<SemanticZoom.ZoomedOutView>
+                                        <ListView
+                                            ItemTemplate="{StaticResource ZoomedOutTemplate}"
+                                            ItemsSource="{x:Bind DependencyCollectionViewSource.View.CollectionGroups}"
+                                            SelectionMode="None" />
+                                    </SemanticZoom.ZoomedOutView>-->
                                 </SemanticZoom>
                                 <!--<GridView
                                     ItemTemplate="{StaticResource DependenciesListViewTemplate}"

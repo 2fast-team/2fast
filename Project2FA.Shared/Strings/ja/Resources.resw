@@ -722,9 +722,7 @@
   </data>
   <data name="NewAppFeaturesContent" xml:space="preserve">
     <value>- サードパーティ製ライブラリの更新
-- バグ修正と最適化
-- バックアップインポート時の追加サービス対応
-- データファイル（.2fa）の読み込みと保存の効率化</value>
+- バグ修正と最適化</value>
     <comment>[ReswT:always]</comment>
   </data>
   <data name="NewAppFeaturesTitle" xml:space="preserve">

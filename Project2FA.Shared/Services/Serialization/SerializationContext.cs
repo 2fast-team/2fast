@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Project2FA.Services
 {
+    [JsonSerializable(typeof(Dictionary<string, Dictionary<string, string>>))]
     [JsonSerializable(typeof(DatafileModel))]
     [JsonSerializable(typeof(TwoFACodeModel))]
     [JsonSerializable(typeof(CategoryModel))]

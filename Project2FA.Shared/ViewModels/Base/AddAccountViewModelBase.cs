@@ -175,6 +175,15 @@ namespace Project2FA.ViewModels
             {
                 NoCameraFound = true;
             }
+#elif __ANDROID__ || __IOS__
+            // Camera access on Android and iOS is handled via CommunityToolkit.Uno.Camera
+            // through the CameraPage / CameraPageViewModel; navigation triggers camera use.
+            await App.ShellPageInstance.ViewModel.NavigationService.NavigateAsync(nameof(CameraPage));
+#else
+            // Desktop (Linux/macOS/Windows-Skia): camera capture via CommunityToolkit.Uno.Camera
+            // is not universally available; show "no camera" fallback.
+            NoCameraFound = true;
+            await Task.CompletedTask;
 #endif
         }
 

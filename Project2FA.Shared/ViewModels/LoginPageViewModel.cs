@@ -388,9 +388,9 @@ namespace Project2FA.ViewModels
                 IsLogout = isLogout;
             }
 #if ANDROID || IOS
+            // Biometric login is only available on Android and iOS; not supported on Desktop/Linux
             CheckCapabilityBiometricLogin();
 #endif
-
         }
     }
 }

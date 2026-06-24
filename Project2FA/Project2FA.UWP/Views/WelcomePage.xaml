@@ -19,29 +19,15 @@
             x:Name="ShellHeaderTemplate"
             x:DataType="viewmodels:WelcomePageViewModel">
             <UserControl>
-                <Grid>
-                    <CommandBar 
-                    x:Name="HeaderCommandBar"
-                    OverflowButtonVisibility="Auto"
-                    DefaultLabelPosition="Right"
-                    VerticalAlignment="Top"
-                    Background="{ThemeResource ShellAcrylicWindowBrush}">
-                        <CommandBar.Content>
-                            <CommandBar 
-                                OverflowButtonVisibility="Collapsed"
-                                Background="{ThemeResource ShellAcrylicWindowBrush}"
-                                DefaultLabelPosition="Right">
-                                <CommandBar.Content>
-                                    <TextBlock 
-                                        Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
-                                        Text="{x:Bind strings:Resources.WelcomePageTitle}"
-                                        Margin="15,0,0,11"
-                                        TextWrapping="NoWrap" 
-                                        VerticalAlignment="Top" />
-                                </CommandBar.Content>
-                            </CommandBar>
-                        </CommandBar.Content>
-                    </CommandBar>
+                <Grid 
+                Background="{ThemeResource ShellAcrylicWindowBrush}" 
+                Height="40">
+                    <TextBlock 
+                        Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
+                        Text="{x:Bind strings:Resources.WelcomePageTitle}"
+                        Margin="15,0,0,11"
+                        TextWrapping="NoWrap" 
+                        VerticalAlignment="Top" />
                 </Grid>
             </UserControl>
         </DataTemplate>

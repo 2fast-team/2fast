@@ -1056,7 +1056,7 @@ Please synchronize the time in the settings.</value>
     <value>Skip</value>
   </data>
   <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
-    <value>Finish tutorial</value>
+    <value>Finish</value>
   </data>
   <data name="NewDatafilePasswordInfo" xml:space="preserve">
     <value>A password must be assigned for the encryption of the data file. It is strongly recommended to store this password securely in a password manager.</value>

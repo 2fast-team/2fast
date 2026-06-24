@@ -381,8 +381,8 @@ namespace Project2FA.Services
 
 #if __ANDROID__ || __IOS__
                 if (file != null)
-#endif
-#if !__ANDROID__ && !__IOS__ || WINDOWS_UWP
+#else
+                // WINDOWS_UWP and Desktop: check via FileService
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
                 {
@@ -394,14 +394,14 @@ namespace Project2FA.Services
                         // read the datafile content as string
                         string datafileStr = string.Empty;
 
-#if __ANDROID__
-                        // create new thread for buggy Android, else NetworkOnMainThreadException 
+#if WINDOWS_UWP
+                        datafileStr = await FileService.ReadStringAsync(datafilename, folder);
+#elif __ANDROID__
+                        // create new thread for buggy Android, else NetworkOnMainThreadException
                         await Task.Run(async () => {
                             datafileStr = await FileIO.ReadTextAsync(file);
                         });
-                        
-#endif
-#if __IOS__
+#elif __IOS__
                         if (Foundation.NSFileManager.DefaultManager.IsReadableFile(nsUrl.Path))
                         {
                             datafileStr = await FileIO.ReadTextAsync(file);
@@ -413,8 +413,8 @@ namespace Project2FA.Services
                                 datafileStr = await FileIO.ReadTextAsync(file);
                             }
                         }
-#endif
-#if WINDOWS_UWP
+#else
+                        // Desktop (Linux/macOS/Windows-Skia)
                         datafileStr = await FileService.ReadStringAsync(datafilename, folder);
 #endif
 

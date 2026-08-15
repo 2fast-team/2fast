@@ -71,6 +71,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFACodeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TwoFASBackupModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WebDAVStatusEnums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\NextcloudLoginFlowV2Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Crypto\CryptoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Crypto\ProtectData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Importer\AegisBackupImportService.cs" />

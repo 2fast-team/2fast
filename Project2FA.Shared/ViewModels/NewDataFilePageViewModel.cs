@@ -17,6 +17,8 @@ using Project2FA.Core.Services.Crypto;
 using UNOversal.Services.Logging;
 using Project2FA.Services;
 using UNOversal.Services.Serialization;
+using WinRT;
+
 
 
 #if WINDOWS_UWP
@@ -165,8 +167,9 @@ namespace Project2FA.ViewModels
 //#endif
             await WebDAVLogin(true);
         }
-
-
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
         private async Task SetAndCreateLocalDatafile(bool isWebDAV)
         {
             if (!DateFileName.Contains(".2fa"))
@@ -174,7 +177,11 @@ namespace Project2FA.ViewModels
                 DateFileName += ".2fa";
             }
 
-            DatafileModel model = new DatafileModel() { IV = Aes.Create().IV, Salt = CryptoService.GenerateRandomSalt(), Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>(), Version = 3 };
+            DatafileModel model = new DatafileModel() { 
+                IV = Aes.Create().IV, 
+                Salt = CryptoService.GenerateRandomSalt(),
+                Collection = new System.Collections.ObjectModel.ObservableCollection<TwoFACodeModel>(), 
+                Version = 2 };
             if (isWebDAV)
             {
                 LocalStorageFolder = ApplicationData.Current.LocalFolder;

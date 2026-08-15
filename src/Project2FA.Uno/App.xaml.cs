@@ -8,7 +8,7 @@ using Project2FA.Uno;
 #endif
 using Project2FA.Uno.Views;
 using Project2FA.ViewModels;
-#if DEBUG
+#if DEBUG && !__ANDROID__ && !__IOS__
 using Uno.UI.HotDesign;
 #endif
 using UNOversal;
@@ -70,11 +70,21 @@ namespace Project2FA.UnoApp
         public override async Task OnStartAsync(IApplicationArgs args)
         {
             MainWindow = WinUIWindow.Current;
-#if DEBUG
+#if DEBUG && !(__ANDROID__ || __IOS__ || __MACCATALYST__)
             //WinUIWindow.Current.EnableHotReload(); // obsolete
             MainWindow.UseStudio();
 #endif
-            MainWindow.SetWindowIcon();
+#if !(__ANDROID__ || __IOS__)
+            // Set window icon on desktop platforms only
+            try
+            {
+                global::Uno.Toolkit.UI.WindowExtensions.SetWindowIcon(MainWindow);
+            }
+            catch
+            {
+                // SetWindowIcon may not always be available or necessary
+            }
+#endif
 
 #if __ANDROID__ || __IOS__
             //FeatureConfiguration.ListViewBase.AnimateScrollIntoView = false;

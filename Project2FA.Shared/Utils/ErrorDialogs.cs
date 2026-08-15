@@ -588,10 +588,34 @@ namespace Project2FA.Utils
             await App.Current.Container.Resolve<IDialogService>().ShowDialogAsync(dialog, new DialogParameters());
         }
 
-        internal static Task WritingFatalRestoreError()
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+        [DynamicWindowsRuntimeCast(typeof(Style))]
+#endif
+        internal async static Task WritingFatalRestoreError()
         {
-            // TODO generate
-            throw new NotImplementedException();
+            IDialogService dialogService = App.Current.Container.Resolve<IDialogService>();
+            ContentDialog dialog = new ContentDialog();
+            dialog.Title = Resources.Error;
+#if !WINDOWS_UWP
+            dialog.XamlRoot = WinUIWindow.Current.Content.XamlRoot;
+#endif
+
+            MarkdownTextBlock markdown = new MarkdownTextBlock();
+            markdown.Text = Resources.WriteDatafileErrorDesc;
+            dialog.Content = markdown;
+            dialog.PrimaryButtonText = Resources.Confirm;
+            dialog.PrimaryButtonStyle = App.Current.Resources[Constants.AccentButtonStyleName] as Style;
+            dialog.SecondaryButtonCommand = new RelayCommand(() =>
+            {
+                App.Current.Exit();
+            });
+            dialog.SecondaryButtonText = Resources.CloseApp;
+
+            ContentDialogResult result = await dialogService.ShowDialogAsync(dialog, new DialogParameters());
+            if (result == ContentDialogResult.None)
+            {
+                App.Current.Exit();
+            }
         }
 
         internal async static Task CorruptDataFileError()

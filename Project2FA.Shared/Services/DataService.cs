@@ -131,8 +131,9 @@ namespace Project2FA.Services
             LoggingService = App.Current.Container.Resolve<ILoggingService>();
             ACVCollection = new AdvancedCollectionView(Collection, true);
             TOTPEventStopwatch = new Stopwatch();
-            //ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
             ACVCollection.SortDescriptions.Add(new SortDescription("IsFavouriteText", SortDirection.Ascending));
+            // TODO Community Toolkit 8.3
+            // ACVCollection.SortDescriptions.Add(new SortDescription(<string>("IsFavouriteText"), SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
             CheckTime().ConfigureAwait(false);
         }
@@ -818,20 +819,22 @@ namespace Project2FA.Services
 
                 if (SettingsService.Instance.DataFileWebDAVEnabled && ActivatedDatafile == null)
                 {
-                    // TODO check result
-                    (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder);
-                    if (successful && statusResult)
+                    if (await NetworkService.GetIsInternetAvailableAsync())
                     {
-
+                        (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder);
+                        if (successful && statusResult)
+                        {
+                            Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.UptoDate));
+                        }
+                        else
+                        {
+                            Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.Failed));
+                        }
                     }
                     else
                     {
-
+                        Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.NoInternet));
                     }
-                }
-                else
-                {
-
                 }
                 Messenger.Send(new DatafileWriteStatusChangedMessage(true));
             }
@@ -1274,8 +1277,6 @@ namespace Project2FA.Services
             get => _newAppUpdateDialogDisplayed; 
             set => _newAppUpdateDialogDisplayed = value; 
         }
-
-        public ResourceDictionary CompactDict { get => _compactDict; set => _compactDict = value; }
 
 #if __IOS__
         public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }

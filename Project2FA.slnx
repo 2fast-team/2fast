@@ -12,6 +12,7 @@
     <Project Path="src/UnoLibrary.Controls/UnoLibrary.Controls.csproj">
       <BuildType Solution="Ad-Hoc|*" Project="Release" />
       <BuildType Solution="AppStore|*" Project="Release" />
+      <Platform Solution="Release|ARM64" Project="ARM64" />
     </Project>
   </Folder>
   <Folder Name="/Platforms/">
@@ -38,10 +39,6 @@
     <Project Path="src/Project2FA.Uno/Project2FA.Uno.csproj">
       <BuildType Solution="Ad-Hoc|*" Project="Release" />
       <BuildType Solution="AppStore|*" Project="Release" />
-      <Platform Solution="Debug|ARM64" Project="ARM64" />
-      <Platform Solution="Debug|x64" Project="x64" />
-      <Platform Solution="Release|ARM64" Project="ARM64" />
-      <Platform Solution="Release|x64" Project="x64" />
       <Deploy />
     </Project>
   </Folder>

@@ -2008,6 +2008,40 @@ namespace Project2FA.Strings{
         }
         #endregion
 
+        #region WebDAVAuthServerAddressEmpty
+        public static string WebDAVAuthServerAddressEmpty
+        {
+            get { return _resourceLoader.GetString("WebDAVAuthServerAddressEmpty"); }
+        }
+        #endregion
+
+        #region WebDAVAuthFlowV2InitFailed
+        public static string WebDAVAuthFlowV2InitFailed
+        {
+            get { return _resourceLoader.GetString("WebDAVAuthFlowV2InitFailed"); }
+        }
+        #endregion
+
+        #region WebDAVAuthFlowV2InvalidResponse
+        public static string WebDAVAuthFlowV2InvalidResponse
+        {
+            get { return _resourceLoader.GetString("WebDAVAuthFlowV2InvalidResponse"); }
+        }
+        #endregion
+
+        #region WebDAVAuthFlowV2PollFailed
+        public static string WebDAVAuthFlowV2PollFailed
+        {
+            get { return _resourceLoader.GetString("WebDAVAuthFlowV2PollFailed"); }
+        }
+        #endregion
+
+        #region WebDAVAuthFlowV2Timeout
+        public static string WebDAVAuthFlowV2Timeout
+        {
+            get { return _resourceLoader.GetString("WebDAVAuthFlowV2Timeout"); }
+        }
+        #endregion
 
     }
 
@@ -2172,7 +2206,12 @@ namespace Project2FA.Strings{
             ImportBackupQRCodeNotSupportedError,
             ImportBackupPasswordError,
             AddQRCodeNotSupportedError,
-            SettingsDependencies
+            SettingsDependencies,
+            WebDAVAuthServerAddressEmpty,
+            WebDAVAuthFlowV2InitFailed,
+            WebDAVAuthFlowV2InvalidResponse,
+            WebDAVAuthFlowV2PollFailed,
+            WebDAVAuthFlowV2Timeout
         }
 
         private static ResourceLoader _resourceLoader;

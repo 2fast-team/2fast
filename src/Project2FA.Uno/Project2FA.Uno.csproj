@@ -1,4 +1,10 @@
 ﻿<Project Sdk="Uno.Sdk">
+  <!-- Disable BindableTypeLinkerGenerator for mobile platforms early in the build -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android' or '$(TargetFramework)' == 'net10.0-ios' or '$(TargetFramework)' == 'net10.0-maccatalyst'">
+	<UnoUIDisableBindableTypeLinkGenerator>true</UnoUIDisableBindableTypeLinkGenerator>
+	<BindableTypeLinkerGeneratorSkip>true</BindableTypeLinkerGeneratorSkip>
+  </PropertyGroup>
+
   <PropertyGroup>
 	<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-desktop</TargetFrameworks>
 
@@ -32,26 +38,40 @@
 	</UnoFeatures>
 	<PackageCertificateThumbprint>D17FB9F254A915E499415F614115D6D86A448B38</PackageCertificateThumbprint>
 	<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-	<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 	<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
-	<Platforms>AnyCPU;ARM64;x64</Platforms>
+	<!-- Platforms should only apply to desktop builds, not mobile/cross-platform -->
+	<Platforms Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">AnyCPU;ARM64;x64</Platforms>
   </PropertyGroup>
 
-  <!-- Android AOT and Trimming Configuration -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
-	<!-- Enable Full AOT Compilation for Release builds -->
+	<PropertyGroup>
+		<PublishAot Condition=" $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' ">true</PublishAot>
+		<PublishAot Condition=" $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' ">true</PublishAot>
+		<PublishAot Condition=" $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' ">true</PublishAot>
+		<!-- repeat for any other platforms that Native AOT should be enabled on… -->
+	</PropertyGroup>
+
+	<!-- Android RuntimeIdentifier Configuration for AOT -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<RuntimeIdentifier>android-arm64</RuntimeIdentifier>
+		<!-- Disable HotDesign for Android to avoid NativeAOT compatibility issues with Anthropic.SDK.dll -->
+		<UnoDisableHotDesign>true</UnoDisableHotDesign>
+	</PropertyGroup>
+
+  <!-- Android RuntimeIdentifier Configuration for AOT -->
+  <!--<PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+	--><!-- Enable Full AOT Compilation for Release builds --><!--
 	<RunAOTCompilation Condition="'$(Configuration)' == 'Release'">true</RunAOTCompilation>
-	<!-- Use interpreter for Debug builds for faster development -->
+	--><!-- Use interpreter for Debug builds for faster development --><!--
 	<UseInterpreter Condition="'$(Configuration)' == 'Debug'">true</UseInterpreter>
-	<!-- Enable Trimming for Release builds to reduce APK size -->
+	--><!-- Enable Trimming for Release builds to reduce APK size --><!--
 	<PublishTrimmed Condition="'$(Configuration)' == 'Release'">true</PublishTrimmed>
 	<TrimMode Condition="'$(Configuration)' == 'Release'">full</TrimMode>
-	<!-- Android Linking Mode -->
+	--><!-- Android Linking Mode --><!--
 	<AndroidLinkMode Condition="'$(Configuration)' == 'Release'">Full</AndroidLinkMode>
 	<AndroidLinkMode Condition="'$(Configuration)' == 'Debug'">None</AndroidLinkMode>
-	<!-- Optional: Enable LLVM for better performance (uncomment if needed) -->
+	--><!-- Optional: Enable LLVM for better performance (uncomment if needed) --><!--
 	 <EnableLLVM>true</EnableLLVM> 
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <!-- Trimming Protection: Preserve assemblies that use Reflection -->
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
@@ -76,7 +96,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
+		<PackageReference Include="BouncyCastle.Cryptography" Version="2.7.0" />
 		<PackageReference Include="CommunityToolkit.Labs.WinUI.TokenView" Version="0.1.250828-build.2223" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 		<PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.251219" />
@@ -152,4 +172,19 @@
 		  <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Page Update="Views\ContentDialog\WebDAVAuthContentDialog.xaml">
+		<Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<!-- Override to disable BindableTypeLinkerGenerator for mobile platforms -->
+	<Target Name="DisableBindableTypeLinkerGeneratorForMobile" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net10.0-android' or '$(TargetFramework)' == 'net10.0-ios' or '$(TargetFramework)' == 'net10.0-maccatalyst'">
+	  <PropertyGroup>
+		<BindableTypeLinkerGeneratorSkip>true</BindableTypeLinkerGeneratorSkip>
+		<UnoUIDisableBindableTypeLinkGenerator>true</UnoUIDisableBindableTypeLinkGenerator>
+	  </PropertyGroup>
+	</Target>
 </Project>

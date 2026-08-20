@@ -1171,7 +1171,7 @@ Por favor, sincroniza la hora en los ajustes.</value>
     <value>Saltar</value>
   </data>
   <data name="TutorialPageFinishpButton.Content" xml:space="preserve">
-    <value>Finalizar tutorial</value>
+    <value>Finalizar</value>
     <comment>[ReswT:manually]</comment>
   </data>
   <data name="NewDatafilePasswordInfo" xml:space="preserve">

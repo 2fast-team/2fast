@@ -30,7 +30,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Project2FA.ViewModels
 {
-    public class DatafileViewModelBase : ObservableObject
+    public partial class DatafileViewModelBase : ObservableObject
     {
         private string _serverAddress;
         private string _username;
@@ -324,6 +324,33 @@ namespace Project2FA.ViewModels
         public async Task WebDAVLogin(bool createDatafileCase)
         {
             IsLoading = true;
+
+            // If credentials are not yet set, show the Login Flow v2 dialog first
+            bool hasCredentials =
+                !string.IsNullOrEmpty(SecretService.Helper.ReadSecret(Constants.ContainerName, "WDServerAddress")) &&
+                !string.IsNullOrEmpty(SecretService.Helper.ReadSecret(Constants.ContainerName, "WDUsername"));
+
+            if (!hasCredentials)
+            {
+                var authDialog = new WebDAVAuthContentDialog();
+                var authParams = new DialogParameters();
+                if (!string.IsNullOrWhiteSpace(ServerAddress))
+                    authParams.Add("serverAddress", ServerAddress);
+
+                var authResult = await App.Current.Container.Resolve<IDialogService>()
+                    .ShowDialogAsync(authDialog, authParams);
+
+                if (authResult != ContentDialogResult.Primary || authDialog.ViewModel?.IsSuccessFlag != true)
+                {
+                    IsLoading = false;
+                    return;
+                }
+
+                // Sync the server address that the dialog resolved (may differ from what was typed)
+                if (!string.IsNullOrEmpty(authDialog.ViewModel.ServerAddress))
+                    ServerAddress = authDialog.ViewModel.ServerAddress;
+            }
+
             (bool success, Status result) = await CheckServerStatus();
             if (success)
             {
@@ -365,7 +392,6 @@ namespace Project2FA.ViewModels
                 {
                     await ShowServerAddressNotFoundError();
                 }
-                //Messenger.Send(new UsernameChangedMessage(Username));
             }
             IsLoading = false;
         }

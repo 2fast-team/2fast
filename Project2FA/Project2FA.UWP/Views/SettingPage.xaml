@@ -29,13 +29,13 @@
 
         <DataTemplate x:Name="ShellHeaderTemplate">
             <Grid Background="{ThemeResource ShellAcrylicWindowBrush}" 
-                      Height="40">
+                Height="40">
                 <TextBlock 
-                        x:Uid="SettingsPageName"
-                        Margin="15,0,0,0"
-                        Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
-                        TextWrapping="NoWrap" 
-                        VerticalAlignment="Top" />
+                    x:Uid="SettingsPageName"
+                    Margin="15,0,0,0"
+                    Style="{StaticResource ShellHeaderTitleTextBlockStyle}"
+                    TextWrapping="NoWrap" 
+                    VerticalAlignment="Top" />
             </Grid>
         </DataTemplate>
 

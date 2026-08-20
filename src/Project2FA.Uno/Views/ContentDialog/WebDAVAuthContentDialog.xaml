@@ -1,54 +1,41 @@
 ﻿<ContentDialog
-    x:Class="Project2FA.UWP.Views.WebDAVAuthContentDialog"
+    x:Class="Project2FA.Uno.Views.WebDAVAuthContentDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Project2FA.UWP.Views"
+    xmlns:local="using:Project2FA.Uno.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
-    Style="{StaticResource MyContentDialogStyle}"
-    Title="Nextcloud login"
-    PrimaryButtonText="OK"
+    x:Uid="WebDAVAuthContentDialogMain"
     IsPrimaryButtonEnabled="{x:Bind ViewModel.IsSuccessFlag, Mode=OneWay}"
-    CloseButtonText="Cancel"
-    CloseButtonClick="ContentDialog_CloseButtonClick"
-    x:Uid="WebDAVAuthContentDialogMain">
+    CloseButtonClick="ContentDialog_CloseButtonClick">
 
-    <Grid MinWidth="500" RowSpacing="12">
+    <Grid MinWidth="360" RowSpacing="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Server address + mode toggle (always visible) -->
-        <StackPanel Grid.Row="0" Spacing="8">
-            <TextBox
-                x:Uid="WebDAVAuthServerAddressBox"
-                Header="Server address"
-                Text="{x:Bind ViewModel.ServerAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                PlaceholderText="https://cloud.example.com"
-                IsEnabled="{x:Bind ViewModel.IsPollingInverseFlag, Mode=OneWay}"/>
-            <CheckBox
-                x:Uid="WebDAVAuthUseWebViewCheckBox"
-                Content="Use embedded login (legacy)"
-                IsChecked="{x:Bind ViewModel.UseEmbeddedWebView, Mode=TwoWay}"
-                IsEnabled="{x:Bind ViewModel.IsPollingInverseFlag, Mode=OneWay}"/>
-        </StackPanel>
+        <!-- Server address (always visible, disabled during polling) -->
+        <TextBox
+            Grid.Row="0"
+            x:Uid="WebDAVAuthServerAddressBox"
+            Header="Server address"
+            Text="{x:Bind ViewModel.ServerAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            PlaceholderText="https://cloud.example.com"
+            IsEnabled="{x:Bind ViewModel.IsNotPolling, Mode=OneWay}"/>
 
-        <!-- ── Login Flow v2 panel ── -->
+        <!-- Login Flow v2 panel -->
         <StackPanel
             Grid.Row="1"
-            Spacing="12"
-            Visibility="{x:Bind ViewModel.IsFlowV2, Mode=OneWay}">
+            Spacing="12">
 
             <TextBlock
                 x:Uid="WebDAVAuthLoginFlowV2DescText"
                 Text="Click the button below to open the sign-in page in your browser. Return here once you have logged in."
                 TextWrapping="Wrap"/>
 
-            <!-- Start button (before polling) -->
+            <!-- Start button (only shown before polling starts) -->
             <Button
                 x:Uid="WebDAVAuthStartBrowserLoginButton"
                 HorizontalAlignment="Stretch"
@@ -56,22 +43,27 @@
                 Command="{x:Bind ViewModel.StartLoginFlowV2Command}"
                 Visibility="{x:Bind ViewModel.IsPollingInverse, Mode=OneWay}"/>
 
-            <!-- Polling indicator -->
+            <!-- Polling indicator (shown while waiting for browser login) -->
             <StackPanel
                 Spacing="8"
                 Visibility="{x:Bind ViewModel.IsPolling, Mode=OneWay}">
-                <muxc:ProgressRing 
-                    IsActive="{x:Bind ViewModel.IsPollingFlag, Mode=OneWay}" 
-                    Width="32" Height="32" 
-                    HorizontalAlignment="Center"/>
+                <ProgressRing IsActive="{x:Bind ViewModel.IsPollingFlag, Mode=OneWay}" Width="32" Height="32" HorizontalAlignment="Center"/>
                 <TextBlock
                     x:Uid="WebDAVAuthWaitingText"
                     HorizontalAlignment="Center"
-                    Text="Waiting for login in browser\u2026"/>
+                    Text="Waiting for login in browser..."
+                    TextWrapping="Wrap"/>
+                <!-- Reopen browser link during polling -->
                 <HyperlinkButton
+                    x:Name="OpenBrowserButton"
                     HorizontalAlignment="Center"
-                    NavigateUri="{x:Bind ViewModel.LoginUrl, Mode=OneWay}"
-                    Click="OpenBrowserButton_Click"/>
+                    Click="OpenBrowserButton_Click">
+                    <HyperlinkButton.Content>
+                        <TextBlock
+                            x:Uid="WebDAVAuthStartBrowserLoginButton"
+                            Text="Open login in browser"/>
+                    </HyperlinkButton.Content>
+                </HyperlinkButton>
             </StackPanel>
 
             <!-- Success indicator -->
@@ -86,19 +78,11 @@
             </StackPanel>
 
             <!-- Error message -->
-            <muxc:InfoBar
+            <InfoBar
                 IsOpen="{x:Bind ViewModel.IsError, Mode=OneWay}"
                 Severity="Error"
                 Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
                 IsClosable="False"/>
         </StackPanel>
-
-        <!-- ── Login Flow v1: embedded WebView2 ── -->
-        <muxc:WebView2
-            x:Name="LoginWebView"
-            Grid.Row="2"
-            Source="{x:Bind ViewModel.URL, Mode=OneWay}"
-            MinHeight="540"
-            Visibility="{x:Bind ViewModel.IsFlowV2, Mode=OneWay, Converter={StaticResource VisibleWhenFalseConverter}}"/>
     </Grid>
 </ContentDialog>

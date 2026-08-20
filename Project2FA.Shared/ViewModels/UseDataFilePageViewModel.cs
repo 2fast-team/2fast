@@ -219,6 +219,7 @@ namespace Project2FA.ViewModels
 #endif
 
 #if ANDROID
+            // persistent URI access grant is already set via FilePickerHelper flags
             var androidFlags = Android.Content.ActivityFlags.GrantReadUriPermission |
                 Android.Content.ActivityFlags.GrantWriteUriPermission |
                 Android.Content.ActivityFlags.GrantPersistableUriPermission |

@@ -131,8 +131,9 @@ namespace Project2FA.Services
             LoggingService = App.Current.Container.Resolve<ILoggingService>();
             ACVCollection = new AdvancedCollectionView(Collection, true);
             TOTPEventStopwatch = new Stopwatch();
-            //ACVCollection.SortDescriptions.Add(new SortDescription("Label", SortDirection.Ascending));
             ACVCollection.SortDescriptions.Add(new SortDescription("IsFavouriteText", SortDirection.Ascending));
+            // TODO Community Toolkit 8.3
+            // ACVCollection.SortDescriptions.Add(new SortDescription(<string>("IsFavouriteText"), SortDirection.Ascending));
             Collection.CollectionChanged += Accounts_CollectionChanged;
             CheckTime().ConfigureAwait(false);
         }
@@ -381,8 +382,8 @@ namespace Project2FA.Services
 
 #if __ANDROID__ || __IOS__
                 if (file != null)
-#endif
-#if !__ANDROID__ && !__IOS__ || WINDOWS_UWP
+#else
+                // WINDOWS_UWP and Desktop: check via FileService
                 if (await FileService.FileExistsAsync(datafilename, folder))
 #endif
                 {
@@ -394,14 +395,14 @@ namespace Project2FA.Services
                         // read the datafile content as string
                         string datafileStr = string.Empty;
 
-#if __ANDROID__
-                        // create new thread for buggy Android, else NetworkOnMainThreadException 
+#if WINDOWS_UWP
+                        datafileStr = await FileService.ReadStringAsync(datafilename, folder);
+#elif __ANDROID__
+                        // create new thread for buggy Android, else NetworkOnMainThreadException
                         await Task.Run(async () => {
                             datafileStr = await FileIO.ReadTextAsync(file);
                         });
-                        
-#endif
-#if __IOS__
+#elif __IOS__
                         if (Foundation.NSFileManager.DefaultManager.IsReadableFile(nsUrl.Path))
                         {
                             datafileStr = await FileIO.ReadTextAsync(file);
@@ -413,8 +414,8 @@ namespace Project2FA.Services
                                 datafileStr = await FileIO.ReadTextAsync(file);
                             }
                         }
-#endif
-#if WINDOWS_UWP
+#else
+                        // Desktop (Linux/macOS/Windows-Skia)
                         datafileStr = await FileService.ReadStringAsync(datafilename, folder);
 #endif
 
@@ -818,20 +819,22 @@ namespace Project2FA.Services
 
                 if (SettingsService.Instance.DataFileWebDAVEnabled && ActivatedDatafile == null)
                 {
-                    // TODO check result
-                    (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder);
-                    if (successful && statusResult)
+                    if (await NetworkService.GetIsInternetAvailableAsync())
                     {
-
+                        (bool successful, bool statusResult) = await UploadDatafileWithWebDAV(folder);
+                        if (successful && statusResult)
+                        {
+                            Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.UptoDate));
+                        }
+                        else
+                        {
+                            Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.Failed));
+                        }
                     }
                     else
                     {
-
+                        Messenger.Send(new WebDAVStatusChangedMessage(WebDAVStatus.NoInternet));
                     }
-                }
-                else
-                {
-
                 }
                 Messenger.Send(new DatafileWriteStatusChangedMessage(true));
             }
@@ -1274,8 +1277,6 @@ namespace Project2FA.Services
             get => _newAppUpdateDialogDisplayed; 
             set => _newAppUpdateDialogDisplayed = value; 
         }
-
-        public ResourceDictionary CompactDict { get => _compactDict; set => _compactDict = value; }
 
 #if __IOS__
         public Foundation.NSUrl OpenDatefileUrl { get => _openDatefileUrl; set => _openDatefileUrl = value; }

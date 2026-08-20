@@ -616,7 +616,7 @@
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalContentAlignment="Bottom"
-            NumberOfPages="6"
+            NumberOfPages="{x:Bind Path=FV_Tutorials.Items.Count, Mode=OneWay}"
             SelectedPageIndex="{x:Bind Path=FV_Tutorials.SelectedIndex, Mode=TwoWay}" />
     </Grid>
 </Page>

@@ -4,6 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace Project2FA.Services
 {
+    [JsonSerializable(typeof(Dictionary<string, Dictionary<string, string>>))]
+    [JsonSerializable(typeof(NextcloudLoginFlowV2Response))]
+    [JsonSerializable(typeof(NextcloudLoginFlowV2Poll))]
+    [JsonSerializable(typeof(NextcloudLoginFlowV2Credentials))]
     [JsonSerializable(typeof(DatafileModel))]
     [JsonSerializable(typeof(TwoFACodeModel))]
     [JsonSerializable(typeof(CategoryModel))]
@@ -17,6 +21,8 @@ namespace Project2FA.Services
     [JsonSerializable(typeof(AegisModel<string>))]
     [JsonSerializable(typeof(List<AndOTPModel<string>>))]
     [JsonSerializable(typeof(List<TwoFASBackup>))]
+    [JsonSerializable(typeof(NextcloudLoginFlowV2Response))]
+    [JsonSerializable(typeof(NextcloudLoginFlowV2Credentials))]
 
     public partial class SerializationContext : JsonSerializerContext
     {

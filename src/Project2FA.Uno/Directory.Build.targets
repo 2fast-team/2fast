@@ -1,2 +1,6 @@
 ﻿<Project>
+  <!-- Disable BindableTypeLinkerGenerator for mobile platforms -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android' or '$(TargetFramework)' == 'net10.0-ios' or '$(TargetFramework)' == 'net10.0-maccatalyst'">
+	<UnoUIDisableBindableTypeLinkGenerator>true</UnoUIDisableBindableTypeLinkGenerator>
+  </PropertyGroup>
 </Project>

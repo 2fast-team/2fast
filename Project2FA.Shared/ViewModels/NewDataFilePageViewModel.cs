@@ -17,8 +17,10 @@ using Project2FA.Core.Services.Crypto;
 using UNOversal.Services.Logging;
 using Project2FA.Services;
 using UNOversal.Services.Serialization;
-using WinRT;
 
+#if WINDOWS_UWP && NET9_0_OR_GREATER
+using WinRT;
+#endif
 
 
 #if WINDOWS_UWP

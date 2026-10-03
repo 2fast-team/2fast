@@ -225,6 +225,8 @@ namespace Project2FA.ViewModels
                     return CryptoService.CreateByteArrayKeyV1(Encoding.UTF8.GetBytes(password));
                 case 2:
                     return CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(password));
+                case 3:
+                    return CryptoService.CreateByteArrayKeyV3(Encoding.UTF8.GetBytes(password), datafile.Salt);
             }
         }
 

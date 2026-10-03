@@ -338,6 +338,10 @@ namespace Project2FA.ViewModels
                             deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
                         (CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(Password)), datafile.IV, datafileStr, datafile.Version);
                             break;
+                        case 3:
+                            deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
+                        (CryptoService.CreateByteArrayKeyV3(Encoding.UTF8.GetBytes(Password), datafile.Salt), datafile.IV, datafileStr, datafile.Version);
+                            break;
                     }
                     return true;
                 }

@@ -354,15 +354,15 @@ namespace Project2FA.ViewModels
             for (int i = 0; i < TwoFADataService.Collection.Count; i++)
             {
                 // Calculate remaining seconds directly from UTC epoch boundary — no drift accumulation.
-                double remaining = DataService.Instance.GetRemainingSeconds(TwoFADataService.Collection[i].Period);
-                if (Convert.ToInt32(remaining) <= 0 ||
-                    (Convert.ToInt32(TwoFADataService.Collection[i].Seconds) <= 0 && remaining > TwoFADataService.Collection[i].Period - 1))
+                TwoFACodeModel model = TwoFADataService.Collection[i];
+                double remaining = DataService.Instance.GetRemainingSeconds(model.Period);
+                if (remaining > model.Seconds)
                 {
                     await DataService.Instance.GenerateTOTP(i);
                 }
                 else
                 {
-                    TwoFADataService.Collection[i].Seconds = remaining;
+                    model.Seconds = remaining;
                 }
             }
             TwoFADataService.TOTPEventStopwatch.Restart();

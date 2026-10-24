@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Project2FA.Core.Services.Crypto;
 using Project2FA.Repository.Models;
 using Project2FA.Services;
 using System;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UNOversal.Services.File;
+using UNOversal.Services.Logging;
 using UNOversal.Services.Secrets;
 using UNOversal.Services.Serialization;
 using Windows.Storage.Pickers;
@@ -28,6 +30,8 @@ namespace Project2FA.ViewModels
 
         private IFileService FileService { get; }
 
+        private ILoggingService LoggingService { get; }
+
         private ISerializationService SerializationService { get; }
         private ISerializationCryptoService SerializationCryptoService { get; }
 
@@ -41,13 +45,15 @@ namespace Project2FA.ViewModels
             ISecretService secretService,
             IFileService fileService,
             ISerializationService serializationService,
-            ISerializationCryptoService serializationCryptoService
+            ISerializationCryptoService serializationCryptoService,
+            ILoggingService loggingService
             ) :base()
         {
             SecretService = secretService;
             FileService = fileService;
             SerializationService = serializationService;
             SerializationCryptoService = serializationCryptoService;
+            LoggingService = loggingService;
             ConfirmErrorCommand = new RelayCommand(() =>
             {
                 ShowError = false;
@@ -156,20 +162,22 @@ namespace Project2FA.ViewModels
                 try
                 {
                     var deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
-                        (Encoding.UTF8.GetBytes(Password), iv, datafileStr, datafile.Version);
+                        (CryptoService.CreatePasswordKey(datafile, Encoding.UTF8.GetBytes(Password)), datafile.IV, datafileStr, datafile.Version);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception exc)
                 {
+
                     ShowError = true;
                     Password = string.Empty;
-
+                    await LoggingService.LogException(exc, SettingsService.Instance.LoggingSetting);
                     return false;
                 }
             }
             else
             {
-                //TODO add error, no file found?
+                await LoggingService.Log(nameof(TestPassword) + " File not found", SettingsService.Instance.LoggingSetting);
+                //TODO add error dialog, no file found?
             }
             return false;
         }

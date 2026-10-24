@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2FA.Repository.Models;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -101,6 +102,27 @@ namespace Project2FA.Core.Services.Crypto
             {
                 var hash = sha512.ComputeHash(inputByteArray);
                 return hash;
+            }
+        }
+
+        /// <summary>
+        /// Creates the password key for the specified data file using the version-specific key derivation algorithm.
+        /// </summary>
+        /// <param name="datafile">The data file metadata, including the version and salt used to derive the password key.</param>
+        /// <param name="passwordByte">The password bytes used to derive the key.</param>
+        /// <returns>The derived password key as a byte array.</returns>
+        public static byte[] CreatePasswordKey(DatafileModel datafile, byte[] passwordByte)
+        {
+            switch (datafile.Version)
+            {
+                case 0:
+                case 1:
+                default:
+                    return CreateByteArrayKeyV1(passwordByte);
+                case 2:
+                    return CreateByteArrayKeyV2(passwordByte);
+                case 3:
+                    return CreateByteArrayKeyV3(passwordByte, datafile.Salt);
             }
         }
 

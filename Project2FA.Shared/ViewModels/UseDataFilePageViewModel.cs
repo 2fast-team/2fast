@@ -325,24 +325,8 @@ namespace Project2FA.ViewModels
 
                 try
                 {
-                    DatafileModel deserializeCollection;
-                    switch (datafile.Version)
-                    {
-                        case 0:
-                        case 1:
-                        default:
-                            deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
-                        (CryptoService.CreateByteArrayKeyV1(Encoding.UTF8.GetBytes(Password)), datafile.IV, datafileStr, datafile.Version);
-                            break;
-                        case 2:
-                            deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
-                        (CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(Password)), datafile.IV, datafileStr, datafile.Version);
-                            break;
-                        case 3:
-                            deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
-                        (CryptoService.CreateByteArrayKeyV3(Encoding.UTF8.GetBytes(Password), datafile.Salt), datafile.IV, datafileStr, datafile.Version);
-                            break;
-                    }
+                    var deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>
+                        (CryptoService.CreatePasswordKey(datafile, Encoding.UTF8.GetBytes(Password)), datafile.IV, datafileStr, datafile.Version);
                     return true;
                 }
                 catch (Exception)

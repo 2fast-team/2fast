@@ -9,6 +9,8 @@ using Project2FA.Services;
 using Project2FA.Core.Services.Crypto;
 using UNOversal.Ioc;
 using UNOversal.Services.Serialization;
+using UNOversal.Services.Logging;
+
 
 #if WINDOWS_UWP
 using Project2FA.UWP;
@@ -36,7 +38,8 @@ namespace Project2FA.ViewModels
             ISecretService secretService,
             ISerializationService serializationService,
             ISerializationCryptoService serializationCryptoService,
-            IFileService fileService) : base(secretService, fileService, serializationService, serializationCryptoService)
+            ILoggingService loggingService,
+            IFileService fileService) : base(secretService, fileService, serializationService, serializationCryptoService, loggingService)
         {
             SecretService = App.Current.Container.Resolve<ISecretService>();
             ConfirmErrorCommand = new RelayCommand(() =>

@@ -10,7 +10,6 @@ using UNOversal.Services.Dialogs;
 using UNOversal.Services.Secrets;
 using UNOversal.Services.File;
 using Project2FA.Services;
-using Project2FA.Core.Utils;
 using Project2FA.Core.Services.Crypto;
 using System.Text;
 using UNOversal.Services.Logging;
@@ -18,9 +17,6 @@ using UNOversal.Services.Serialization;
 
 
 #if WINDOWS_UWP
-using Project2FA.UWP;
-using Windows.Security.Cryptography;
-using Windows.Storage.Streams;
 #else
 using Project2FA.UnoApp;
 using Microsoft.UI.Xaml.Data;
@@ -171,16 +167,20 @@ namespace Project2FA.ViewModels
         }
 
         /// <summary>
-        /// Test the new password, if the current password is invalid, or test the current password, if a new password will be set
+        /// Validates the password used to decrypt the selected data file.
         /// </summary>
-        /// <param name="storageFile"></param>
-        /// <param name="storageFolder"></param>
-        /// <returns></returns>
+        /// <remarks>The file is read and deserialized before decryption is attempted. If the current password is
+        /// invalid, the replacement password is tried; otherwise the current password is used. Exceptions are logged and the
+        /// relevant password field is cleared when validation fails.</remarks>
+        /// <param name="storageFile">The encrypted data file to validate.</param>
+        /// <param name="storageFolder">The storage folder containing the data file.</param>
+        /// <returns>true if the file decrypts successfully with the current or replacement password; otherwise, false.</returns>
         private async Task<bool> TestPassword(StorageFile storageFile, StorageFolder storageFolder)
         {
             string datafileStr = await FileService.ReadStringAsync(storageFile.Name, storageFolder);
-            //read the iv for AES
+            
             DatafileModel datafile = SerializationService.Deserialize<DatafileModel>(datafileStr);
+            //read the iv for AES
             byte[] iv = datafile.IV;
 
             try
@@ -188,12 +188,14 @@ namespace Project2FA.ViewModels
                 // if the current password is invalid, try to load the datafile with the new password
                 if (InvalidPassword)
                 {
-                    DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>(CreatePasswordKey(datafile,NewPassword), iv, datafileStr, datafile.Version);
+                    DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>(
+                        CryptoService.CreatePasswordKey(datafile, Encoding.UTF8.GetBytes(NewPassword)), iv, datafileStr, datafile.Version);
                 }
                 else
                 {
                     // check the current password, if the file can be decrypted
-                    DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>(CreatePasswordKey(datafile, CurrentPassword), iv, datafileStr, datafile.Version);
+                    DatafileModel deserializeCollection = SerializationCryptoService.DeserializeDecrypt<DatafileModel>(
+                        CryptoService.CreatePasswordKey(datafile, Encoding.UTF8.GetBytes(CurrentPassword)), iv, datafileStr, datafile.Version);
                 }
 
                 return true;
@@ -212,21 +214,6 @@ namespace Project2FA.ViewModels
                     CurrentPassword = string.Empty;
                 }
                 return false;
-            }
-        }
-
-        private byte[] CreatePasswordKey(DatafileModel datafile, string password)
-        {
-            switch (datafile.Version)
-            {
-                case 0:
-                case 1:
-                default:
-                    return CryptoService.CreateByteArrayKeyV1(Encoding.UTF8.GetBytes(password));
-                case 2:
-                    return CryptoService.CreateByteArrayKeyV2(Encoding.UTF8.GetBytes(password));
-                case 3:
-                    return CryptoService.CreateByteArrayKeyV3(Encoding.UTF8.GetBytes(password), datafile.Salt);
             }
         }
 

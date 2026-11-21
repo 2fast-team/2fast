@@ -188,7 +188,12 @@ namespace Project2FA.Repository.Models
         }
 
 
-        public ObservableCollection<CategoryModel> SelectedCategories { get; set; }
+        private ObservableCollection<CategoryModel> _selectedCategories = new ObservableCollection<CategoryModel>();
+        public ObservableCollection<CategoryModel> SelectedCategories
+        {
+            get => _selectedCategories;
+            set => _selectedCategories = value ?? new ObservableCollection<CategoryModel>();
+        }
 
 
         //[JsonIgnore]

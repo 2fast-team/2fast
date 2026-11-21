@@ -619,12 +619,12 @@ namespace Project2FA.ViewModels
                         if (selectedGlobalCategories.Any())
                         {
                             // filter where the models have the selected categories and the input label
-                            TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories.Where(sc =>
-                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && ((TwoFACodeModel)model).Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase);
+                            TwoFADataService.ACVCollection.Filter = model => ((TwoFACodeModel)model).SelectedCategories?.Any(sc =>
+                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)) == true && ((TwoFACodeModel)model).Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase);
 
                             // set suggetion where the models have the selected categories and the input label
-                            var filteredCollection = TwoFADataService.Collection.Where(model => model.SelectedCategories.Where(sc =>
-                                selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any() && model.Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase));
+                            var filteredCollection = TwoFADataService.Collection.Where(model => model.SelectedCategories?.Any(sc =>
+                                selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)) == true && model.Label.Contains(searchText, System.StringComparison.OrdinalIgnoreCase));
                             listSuggestion = listSuggestion.Where(ls => filteredCollection.Where(fc => fc.Label == ls.Label).Any()).ToList();
 
                             // add filtered collection to suggestion list
@@ -669,8 +669,8 @@ namespace Project2FA.ViewModels
                     {
                         var selectedGlobalCategories = TwoFADataService.GlobalCategories.Where(x => x.IsSelected == true).ToList();
                         // categories are selected and no search text
-                        TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).SelectedCategories.Where(sc =>
-                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)).Any();
+                        TwoFADataService.ACVCollection.Filter = x => ((TwoFACodeModel)x).SelectedCategories?.Any(sc =>
+                            selectedGlobalCategories.Any(gc => gc.Guid == sc.Guid)) == true;
                     }
                     else
                     {
